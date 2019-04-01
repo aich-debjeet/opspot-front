@@ -12,7 +12,7 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a class="mdl-color-text--blue-grey-500" (click)="thumb()" [ngClass]="{'selected': has() }">
-      <i class="material-icons">thumb_up</i>
+      <span class="icon-ops-spot"></span>
       <span class="opspot-counter" *ngIf="object['thumbs:up:count'] > 0">{{object['thumbs:up:count'] | number}}</span>
     </a>
   `,

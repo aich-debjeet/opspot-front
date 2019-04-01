@@ -32,7 +32,7 @@
       <div class="mdl-card__actions">
         <!-- Attachments -->
         <div class="attachment-button" [ngClass]="{ 'mdl-color-text--amber-500': attachment.hasFile() }">
-          <i class="material-icons">attachment</i>
+          <span class="icon-ops-attach"></span>
           <input type="file" id="file" #file name="attachment" (change)="uploadAttachment(file, $event)"/>
         </div>
 

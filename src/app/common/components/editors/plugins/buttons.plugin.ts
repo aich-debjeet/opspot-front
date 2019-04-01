@@ -6,7 +6,7 @@ export class ButtonsPlugin {
   button: HTMLButtonElement;
   options: any = {
     addons: {
-      'images': `<i class="material-icons">photo</i>`,
+      'images': `<span class="icon-ops-img"> </span>`,
       'videos': `<i class="material-icons">camera</i>`
     },
     enabled: true,

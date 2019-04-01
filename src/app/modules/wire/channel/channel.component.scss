@@ -49,7 +49,7 @@ m-wire-channel {
 
       .m-wire-channel--totals-number {
         font-size: 18px;
-        color: #4690D6 !important;
+        color: #00badc !important;
         letter-spacing: 2.5px;
       }
       .m-wire-channel--totals-period {
@@ -146,7 +146,7 @@ m-wire-channel {
 
   .m-wire-channel--reward-send-wire {
     text-align: right;
-    color: #4690d6;
+    color: #00badc;
     & > i {
       //transform: scale(1.6);
     }

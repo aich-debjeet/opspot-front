@@ -102,7 +102,7 @@
             <div class="mdl-card__actions">
               <!-- Attachements -->
               <div class="attachment-button" [ngClass]="{ 'mdl-color-text--amber-500': attachment.hasFile() }">
-                <i class="material-icons">attachment</i>
+                <span class="icon-ops-attach"></span>
                 <input type="file" id="file" #file name="attachment" (change)="uploadAttachment(file, $event)"/>
               </div>
 
@@ -145,7 +145,7 @@
                 [ngClass]="{ 'complete': attachment.getUploadProgress()  == 100 }"
                 ></div>
               <div *ngIf="attachment.getMime() == 'video'" class="attachment-preview video-placeholder mdl-color--blue-grey-600">
-                  <i class="material-icons">videocam</i>
+                  <span class="icon-ops-video"> </span>
               </div>
               <img *ngIf="attachment.getMime() != 'video'" [src]="attachment.getPreview()" class="attachment-preview mdl-shadow--2dp"/>
               <div class="attachment-preview-delete">

@@ -76,7 +76,7 @@
         <div
           (click)="castVote('up')"
         >
-          <i class="material-icons" [ngClass]="{'selected': hasVoted('up') }">thumb_up</i>
+          <span class="icon-ops-spot" [ngClass]="{'selected': hasVoted('up') }"></span>
           <span class="opspot-counter" *ngIf="question['thumbs_up_count'] > 0">{{question['thumbs_up_count'] | number}}</span>
         </div>
         <div

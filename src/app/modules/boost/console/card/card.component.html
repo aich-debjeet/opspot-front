@@ -41,14 +41,18 @@
   <div *ngIf="boost.method == 'points'"
     class="m-boost-card--manager-item"
   >
-    <i class="material-icons">account_balance</i>
+    <span class="icon-ops-wallet">
+                
+                </span>
     <ng-container i18n="@@BOOST__CONSOLE__CARD__POINTS_VALUE">{{ boost.bid | number }} points</ng-container>
   </div>
 
   <div *ngIf="boost.method == 'tokens'"
     class="m-boost-card--manager-item m-boost-card--bid"
   >
-    <i class="material-icons">account_balance</i>
+    <span class="icon-ops-wallet">
+                
+                </span>
     <ng-container i18n="@@BOOST__CONSOLE__CARD__TOKENS_VALUE">{{ boost.bid | token:18 | number }} tokens</ng-container>
   </div>
 

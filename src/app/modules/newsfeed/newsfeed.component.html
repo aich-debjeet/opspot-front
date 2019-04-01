@@ -72,7 +72,9 @@
           routerLink="/plus"
           *ngIf="session.isLoggedIn() && !session.getLoggedInUser().plus && showPlusButton"
         >
-          <i class="material-icons">add_circle</i>
+          <span class="icon-ops-plus">
+                
+                </span>
           <span>Upgrade to Plus</span>
         </a>
 
@@ -80,7 +82,9 @@
           routerLink="/tokens"
           *ngIf="session.isLoggedIn()"
         >
-          <i class="material-icons">shopping_cart</i>
+          <span class="icon-ops-cart">
+                
+                </span>
           <span>Buy Tokens</span>
         </a>
     
@@ -88,7 +92,9 @@
           routerLink="/wallet"
           *ngIf="session.isLoggedIn()"
         >
-          <i class="material-icons">account_balance</i>
+          <span class="icon-ops-wallet">
+                
+                </span>
           <span>Wallet</span>
         </a>
 
