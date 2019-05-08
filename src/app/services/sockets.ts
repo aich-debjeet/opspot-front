@@ -28,10 +28,10 @@ export class SocketsService {
     }
 
     this.socket = io.connect(this.SOCKET_IO_SERVER, {
-      'reconnect': true,
+      // 'reconnect': true,
       'reconnection': true,
       'timeout': 40000,
-      'autoConnect': false
+      'autoConnect': true
     });
 
     this.rooms = [];
