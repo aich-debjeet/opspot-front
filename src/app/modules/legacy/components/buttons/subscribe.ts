@@ -38,7 +38,9 @@ export class SubscribeButton {
 
   @Input('user')
   set user(value: any) {
-    this._user = value;
+    if (value !== null) {
+      this._user = value;
+    }
   }
 
   subscribe(e) {
