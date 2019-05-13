@@ -2,16 +2,16 @@
   <h3 class="m-newsfeedSidebar__header">Suggested groups</h3>
   <ul class="m-suggestionsSidebar__list m-border">
     <li *ngFor="let entity of entities" class="m-suggestionsSidebarList__item">
-      <a [routerLink]="['/', entity.username]">
+      <a [routerLink]="['/', entity?.username]">
         <div
           class="m-suggestionsSidebarListItem__avatar"
-          [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + entity.guid + ')'"
+          [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + entity?.guid + ')'"
         >
         </div>
         <div class="m-suggestionsSidebarListItem__body">
-          <div [title]="entity.briefdescription">
-            <h4>{{ entity.username }}</h4>
-            <span>{{ entity.briefdescription }}</span>
+          <div [title]="entity?.briefdescription">
+            <h4>{{ entity?.username }}</h4>
+            <span>{{ entity?.briefdescription }}</span>
           </div>
           <div class="m-layout__spacer"></div>
           <i class="material-icons m-suggestionsSidebarListItem__passBtn" (click)="remove(entity)">close</i>
