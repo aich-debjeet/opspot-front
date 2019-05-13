@@ -2,9 +2,9 @@
 	"OpspotContext": "app",
 	"LoggedIn": true,
 	"Admin": false,
-	"cdn_url": "https:\/\/localhost:8080\/",
-	"cdn_assets_url": "https:\/\/localhost:8080\/",
-	"site_url": "https:\/\/localhost:8080\/",
+	"cdn_url": "http:\/\/localhost:8080\/",
+	"cdn_assets_url": "http:\/\/localhost:8080\/",
+	"site_url": "http:\/\/localhost:8080\/",
 	"cinemr_url": null,
 	"socket_server": "http:\/\/localhost:8080",
 	"navigation": {
@@ -168,7 +168,7 @@
 	"max_video_length": 60,
 	"features": {},
 	"blockchain": {
-		"network_address": "https:\/\/localhost:8080\/api\/v2\/blockchain\/proxy\/",
+		"network_address": "http:\/\/localhost:8080\/api\/v2\/blockchain\/proxy\/",
 		"client_network": 1,
 		"wallet_address": null,
 		"boost_wallet_address": "0xdd04D9636F1944FE24f1b4E51Ba77a6CD23b6fE3",
