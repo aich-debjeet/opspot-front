@@ -552,7 +552,7 @@ m-announcement {
     width: 100%;
     height: 50px;
     z-index: 9999;
-    background: #00badc;
+    background: #0288D1;
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: row;
@@ -655,13 +655,13 @@ opspot-button {
 .m-btn {
   background: transparent !important;
   border: 1px solid #ececec;
-  border-radius: 18px;
-  font-size: 12px;
-  height: 42px;
-  letter-spacing: 1.25px;
+  border-radius: 4px;
+  font-size: 11px;
+  min-width: 89px;
+  letter-spacing: 0px;
   color: #444;
   box-shadow: none;
-  text-transform: uppercase;
+  text-transform: capitalize;
   padding: 8px 16px;
   font-family: 'Roboto';
   cursor: pointer; }
@@ -6187,7 +6187,7 @@ m-blog-view-infinite {
     text-transform: uppercase; }
 
 .m-boost-button-fat {
-  background: #00badc !important; }
+  background: #0288D1 !important; }
 
 m-boost-console-booster {
   border: 1px solid #e8e8e8;
@@ -8668,24 +8668,24 @@ opspot-form-fb-register {
     padding: 0;
     width: 100%; }
   .m-login-box input {
-    padding: 16px;
-    font-size: 16px;
+    padding: 10px 15px;
+    font-size: 13px;
     width: 100%;
     -webkit-appearance: none;
-    border: 1px solid #ececec;
-    border-radius: 3px;
+    border: 1px solid #90A4AE;
+    border-radius: 4px;
     font-family: Roboto;
-    font-weight: 800; }
+    font-weight: 400; }
     .m-login-box input::-webkit-input-placeholder {
-      font-weight: 800; }
+      font-weight: 400; }
     .m-login-box input::-moz-placeholder {
-      font-weight: 800; }
+      font-weight: 400; }
     .m-login-box input:-ms-input-placeholder {
-      font-weight: 800; }
+      font-weight: 400; }
     .m-login-box input::-ms-input-placeholder {
-      font-weight: 800; }
+      font-weight: 400; }
     .m-login-box input::placeholder {
-      font-weight: 800; }
+      font-weight: 400; }
   .m-login-box .m-reset-password-link {
     padding-left: 16px;
     text-decoration: none; }
@@ -8784,7 +8784,7 @@ opspot-form-register .m-login-box > div {
   overflow: visible; }
 
 opspot-form-register .tooltip-wrapper {
-  bottom: 14px;
+  bottom: 7px;
   position: absolute;
   right: 16px; }
   opspot-form-register .tooltip-wrapper .m-tooltip--bubble {
@@ -10943,26 +10943,27 @@ m-helpdesk--questions .m-blog--image img {
     .m-homepage--hero .m-homepage--signup opspot-form-register .mdl-card__title {
       display: none; }
     .m-homepage--hero .m-homepage--signup opspot-form-register .m-login-box input {
+      padding: 10px 15px;
       border: 0;
-      border-radius: 3px;
-      background: rgba(255, 255, 255, 0.9);
+      border-radius: 4px;
       color: #444;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      font-weight: 600;
+      border: 1px solid #90A4AE;
+      font-weight: 400;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
       font-family: Roboto;
-      letter-spacing: 1px; }
+      letter-spacing: 1px;
+      font-size: 13px; }
       .m-homepage--hero .m-homepage--signup opspot-form-register .m-login-box input::-webkit-input-placeholder {
-        color: #444; }
+        color: #90A4AE; }
       .m-homepage--hero .m-homepage--signup opspot-form-register .m-login-box input::-moz-placeholder {
-        color: #444; }
+        color: #90A4AE; }
       .m-homepage--hero .m-homepage--signup opspot-form-register .m-login-box input:-ms-input-placeholder {
-        color: #444; }
+        color: #90A4AE; }
       .m-homepage--hero .m-homepage--signup opspot-form-register .m-login-box input::-ms-input-placeholder {
-        color: #444; }
+        color: #90A4AE; }
       .m-homepage--hero .m-homepage--signup opspot-form-register .m-login-box input::placeholder {
-        color: #444; }
+        color: #90A4AE; }
     .m-homepage--hero .m-homepage--signup opspot-form-register .m-login-box .mdl-checkbox__box-outline {
       border-color: #FFF; }
     .m-homepage--hero .m-homepage--signup opspot-form-register .m-btn--action {
@@ -11551,7 +11552,7 @@ opspot-button-remind a {
   display: block; }
 
 .selected {
-  color: #00badc !important; }
+  color: #0288D1 !important; }
 
 .opspot-counter {
   font-family: "Roboto", "Helvetica", sans-serif;
@@ -11992,7 +11993,7 @@ opspot-activity.mdl-card, opspot-activity, opspot-activity-preview {
   .tabs > a.opspot-boost-button, .m-action-tabs > a.opspot-boost-button {
     max-width: 40px; }
   .tabs .selected, .m-action-tabs .selected {
-    color: #00badc !important; }
+    color: #0288D1 !important; }
   .tabs i, .m-action-tabs i {
     vertical-align: middle;
     font-size: 22px; }
@@ -15710,7 +15711,7 @@ m-channel--onboarding {
         text-align: center;
         margin-top: 24px; }
         .m-channel--onboarding .m-channelOnboarding__slide p.m-channelOnboardingSlide__info i.material-icons {
-          color: #00badc; }
+          color: #0288D1; }
     .m-channel--onboarding .m-channelOnboarding__slide .m-channelOnboardingSlideRewards__input {
       margin-bottom: 16px;
       text-align: center; }
@@ -15923,7 +15924,7 @@ m-channel--onboarding {
         border-bottom: 1px solid #e8e8e8; }
       .m-channel--onboarding .m-channelOnboarding__slide ul.m-channelOnboardingSlide__frequency i {
         line-height: 1;
-        color: #00badc; }
+        color: #0288D1; }
       .m-channel--onboarding .m-channelOnboarding__slide ul.m-channelOnboardingSlide__frequency p {
         margin-top: 0;
         margin-bottom: 0;

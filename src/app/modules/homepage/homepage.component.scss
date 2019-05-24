@@ -106,19 +106,21 @@
         display:none;
       }
       .m-login-box input{
+        padding:10px 15px;
         border:0;
-        border-radius:3px;
-        background:rgba(255,255,255,0.9);
+        border-radius:4px;
+       // background:rgba(255,255,255,0.9);
         color:#444;
-        border:1px solid rgba(255,255,255,0.25);
-        font-weight: 600;
+        border:1px solid $opspot-grey;
+        font-weight: 400;
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
         font-family: Roboto;
         letter-spacing: 1px;
+        font-size: 13px;
         //box-shadow: 0 0 6px rgba(255,255,255,0.22);
         &::placeholder{
-          color: #444;
+          color: $opspot-grey;
         }
       }
       .m-login-box .mdl-checkbox__box-outline {
