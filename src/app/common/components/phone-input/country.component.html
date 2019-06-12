@@ -1,15 +1,45 @@
 <div class="m-phone-input--selected-flag" (click)="toggleDropdown()" (keyup)="searchList($event)" tabindex="1">
-  <div class="m-phone-input--flag" [ngClass]="selectedCountry.flagClass"></div>
-  <div class="m-phone-input--dial-code">+{{selectedCountry.dialCode}}</div>
-  <div class="m-phone-input--arrow" [ngClass]="{'up': showDropdownMenu}"></div>
+  <div class="o-phone__flag" [ngClass]="selectedCountry.flagClass"></div>
+  <div class="o-phone__country text-md">+{{selectedCountry.dialCode}}</div>
+  <div class="o-phone__dropdown" [ngClass]="{'up': showDropdownMenu}"></div>
 </div>
 
 <ul class="m-phone-input--country-list dropdown-menu" #dropdownMenu [hidden]="!showDropdownMenu">
   <li class="m-phone-input--country" *ngFor="let country of countries" (click)="onCountrySelect(country)">
     <div class="m-phone-input--flag-box">
-      <div class="m-phone-input--flag" [ngClass]="country.flagClass"></div>
+      <div class="o-phone__flag" [ngClass]="country.flagClass"><img src="../../../../assets/flags/flags.png"></div>
     </div>
-    <span class="m-phone-input--country-name">{{country.name}}</span>
-    <span class="m-phone-input--dial-code">+{{country.dialCode}}</span>
+
+    <span class="o-phone__country text-md">{{country.iso2}}</span>
+    <span class="text-md">+{{country.dialCode}}</span>
   </li>
 </ul>
+
+<style>
+.m-phone-input--country-list{
+  list-style: none;
+  width: 50%;
+  position: absolute;
+  background: #fff;
+  z-index: 1;
+  padding: 0px 9px;
+}
+.m-phone-input--country{
+  list-style-type: none;
+  margin: 9px 0px;
+}
+.m-phone-input--flag-box{
+  
+}
+.m-phone-input--flag{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 6px;
+}
+.m-phone-input--country-name{
+  text-transform: uppercase;
+}
+
+</style>

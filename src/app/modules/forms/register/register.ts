@@ -9,7 +9,8 @@ import { ExperimentsService } from '../../experiments/experiments.service';
 @Component({
   moduleId: module.id,
   selector: 'opspot-form-register',
-  templateUrl: 'register.html'
+  templateUrl: 'register.html',
+  styleUrls:['register.scss']
 })
 
 export class RegisterForm {
@@ -22,6 +23,7 @@ export class RegisterForm {
   captcha: string;
   takenUsername: boolean = false;
   usernameValidationTimeout: any;
+  number;
 
   showFbForm: boolean = false;
 

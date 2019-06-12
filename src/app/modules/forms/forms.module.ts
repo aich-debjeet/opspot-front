@@ -23,6 +23,7 @@ import { ExperimentsModule } from '../experiments/experiments.module';
     ReactiveFormsModule,
     CaptchaModule,
     ExperimentsModule,
+
   ],
   declarations: [
     LoginForm,
@@ -30,7 +31,7 @@ import { ExperimentsModule } from '../experiments/experiments.module';
     FbRegisterForm,
     OnboardingForm,
     OnboardingCategoriesSelector,
-    Tutorial
+    Tutorial,
   ],
   exports: [
     LoginForm,

@@ -1,12 +1,134 @@
+<div class="main-content">
+  <section class="o-signup-sec">
+    <div class="container">
+      <div class="o-signup-container">
+        <div class="o-signup o-signup--form">
+          <h2>Welcome, Create an account</h2>
+          <form (submit)="$event.preventDefault()" [formGroup]="form">
+            <div class="form-group">
+              <input type="text" class="form-control form-control-lg" placeholder="Full Name">
+            </div>
+            <div class="form-group">
+              <input type="text"
+               class="form-control form-control-lg"
+               formControlName="username"
+               placeholder="Username"
+               i18n-placeholder="@@M__COMMON__USERNAME"
+               (keyup)="validationTimeoutHandler()"
+               readonly onfocus="this.removeAttribute('readonly');">
+              <!-- <a href="#" class="text-md primary">gowtham_aeione,</a>
+              <a href="#" class="text-md primary">gowtham_aeione49</a> -->
+            </div>
+            <div class="o-phone">
+              <div class="o-phone__code">
+                <!-- <span class="o-phone__flag"><img src="../../../../assets/svg/in.png" alt=""></span>
+                <span class="o-phone__country text-md">IND</span>
+                <a  class="o-phone__dropdown"><img src="../../../../assets/svg/arrow-down.svg" alt="">
+                </a> -->
+              <m-phone-input ></m-phone-input>
+              </div>
+              <div class="o-phone__number">
+                <div class="form-group">
+                  <input type="number" class="form-control form-control-lg" placeholder="Phone Number">
+                </div>
+              </div>
+            </div>
+            
+            <div class="o-otp">
+              <div class="o-otp__title text-md">Enter OTP <a  class="primary">Resend OTP</a></div>
+                <div class="otp">
+                  <fieldset>
+                    <input maxlength="1"/>
+                    <input maxlength="1"/>
+                    <input maxlength="1"/>
+                    <input maxlength="1"/>
+                    <input maxlength="1"/>
+                    <input class="m-0" maxlength="1"/>
+                  </fieldset>
+                </div>
+            </div>
 
-<div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0;" [hidden]="!errorMessage">
+            <div class="o-dob">
+              <div class="o-dob__title text-md">Date of Birth
+                  <div class="tooltip float-right"><span class="o-dob-info"> <img src="../../../../assets/svg/info.svg" alt=""></span>
+                    <span class="tooltiptext">
+                      Lorem ipsum dolor sit
+                      amet, consectetuer adipi
+                      scing elit. Aenean comm
+                      ligula eget dolor. Aenean
+                      massa
+                    </span>
+                  </div>
+              </div>
+              <div class="o-dob__select">
+                <div class="form-group">
+                  <select class="form-control">
+                      <option>Date</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                  </select>
+                </div>
+                <div class="form-group m-l-13">
+                  <select class="form-control">
+                      <option>Month</option>
+                      <option>Jan</option>
+                      <option>Feb</option>
+                      <option>Apr</option>
+                      <option>May</option>
+                  </select>
+                </div>
+                <div class="form-group m-l-13">
+                  <select class="form-control">
+                      <option>Year</option>
+                      <option>1993</option>
+                      <option>1994</option>
+                      <option>1995</option>
+                      <option>1996</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input type="password" class="form-control form-control-lg" placeholder="Create Password">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control form-control-lg" placeholder="Confirm Password">
+            </div>
+
+            <div class="o-terms-condition">
+                <label class="c-checkbox">I agree with the <a href="#" class="primary">terms of use</a> and <a href="#" class="primary">privacy policy</a>
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-block">Get Started</button>
+          </form>
+        </div>
+        <div class="o-signup o-signup--img">
+          <div class="o-signup__img">
+            <img src="../../../../assets/signup.png" alt="">
+          </div>
+          <h2 class="text-center">Empower artists to entertain <br>
+              and inspire the world</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+  
+<!-- <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0;" [hidden]="!errorMessage">
   <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
     {{errorMessage}}
   </div>
-</div>
+</div> -->
 
 <!-- START: Register -->
-<form (submit)="$event.preventDefault()" [formGroup]="form" class="mdl-card mdl-color-text--blue-grey-400 m-form m-login-box" [hidden]="hideLogin" *ngIf="!showFbForm">
+<!-- <form (submit)="$event.preventDefault()" [formGroup]="form" class="mdl-card mdl-color-text--blue-grey-400 m-form m-login-box" [hidden]="hideLogin" *ngIf="!showFbForm">
 
   <div class="mdl-card__supporting-text mdl-grid">
 
@@ -96,5 +218,5 @@
     </button>
   </div>
 
-</form>
+</form> -->
 <!-- END: Register -->

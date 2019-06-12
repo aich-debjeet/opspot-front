@@ -47,50 +47,50 @@ export class Opspot {
     this.name = 'Opspot';
   }
 
-  async ngOnInit() {
-    this.notificationService.getNotifications();
+  // async ngOnInit() {
+  //   this.notificationService.getNotifications();
 
-    this.session.isLoggedIn(async (is) => {
-      if (is) {
-        this.showOnboarding = await this.onboardingService.showModal();
-        if (this.opspot.user.language !== this.opspot.language) {
-          console.log('[app]:: language change', this.opspot.user.language, this.opspot.language);
-          window.location.reload(true);
-        }
-      }
-    });
+  //   this.session.isLoggedIn(async (is) => {
+  //     if (is) {
+  //       this.showOnboarding = await this.onboardingService.showModal();
+  //       if (this.opspot.user.language !== this.opspot.language) {
+  //         console.log('[app]:: language change', this.opspot.user.language, this.opspot.language);
+  //         window.location.reload(true);
+  //       }
+  //     }
+  //   });
 
-    this.onboardingService.onClose.subscribe(() => {
-      this.showOnboarding = false;
-      this.router.navigate(['/newsfeed']);
-    });
+  //   this.onboardingService.onClose.subscribe(() => {
+  //     this.showOnboarding = false;
+  //     this.router.navigate(['/newsfeed']);
+  //   });
 
-    this.onboardingService.onOpen.subscribe(async () => {
-      this.showOnboarding = await this.onboardingService.showModal(true);
-    });
+  //   this.onboardingService.onOpen.subscribe(async () => {
+  //     this.showOnboarding = await this.onboardingService.showModal(true);
+  //   });
 
-    this.loginReferrer
-      .avoid([
-        '/login',
-        '/logout',
-        '/logout/all',
-        '/register',
-        '/forgot-password',
-      ])
-      .listen();
+  //   this.loginReferrer
+  //     .avoid([
+  //       '/login',
+  //       '/logout',
+  //       '/logout/all',
+  //       '/register',
+  //       '/forgot-password',
+  //     ])
+  //     .listen();
 
-    this.scrollToTop.listen();
+  //   this.scrollToTop.listen();
 
-    this.context.listen();
+  //   this.context.listen();
 
-    this.web3Wallet.setUp();
+  //   this.web3Wallet.setUp();
 
-    this.webtorrent.setUp();
-  }
+  //   this.webtorrent.setUp();
+  // }
 
-  ngOnDestroy() {
-    this.loginReferrer.unlisten();
-    this.scrollToTop.unlisten();
-    this.paramsSubscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.loginReferrer.unlisten();
+  //   this.scrollToTop.unlisten();
+  //   this.paramsSubscription.unsubscribe();
+  // }
 }

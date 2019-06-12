@@ -1,0 +1,29 @@
+
+@include mq($from: $tablet, $until: $wide_lg) {
+    .flex-center{
+		display: flex;
+		justify-content:center;
+		align-items:flex-start;
+		flex-direction:column;
+	}
+}
+.hidden-mob{
+	@include mq($from: $mobile_sm, $until: $desktop_sm) {
+		display: none!important;
+	}
+}
+.hidden-desktop{
+	@include mq($from: $desktop_sm, $until: $wide_lg ) {
+		display: none!important;
+	}
+}
+
+.float-left{
+	float: left;
+}
+.float-right{
+	float: right;
+}
+.text-uppercase{
+	text-transform: uppercase!important;
+}

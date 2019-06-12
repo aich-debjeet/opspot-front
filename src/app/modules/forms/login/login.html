@@ -1,4 +1,89 @@
 
+<header>
+  <div class="container">
+      <div class="logo">
+          <img src="../../../assets/ops_logo.png" alt="logo">
+      </div>
+      <form (submit)="$event.preventDefault()" [formGroup]="form" >
+      <div class="o-login hidden-mob">
+          <div class="form-group m-8">
+              <input type="text" class="form-control form-control" 
+              formControlName="username"
+              placeholder="Username"
+              i18n-placeholder="@@M__COMMON__USERNAME"
+              (keydown.enter)="login(); $event.preventDefault();"
+               >
+              <div class="error text-sm">Error Message</div>
+          </div>
+          
+          <div class="form-group c-form_righticon m-8 ">
+              <input
+               type="password"
+               class="form-control"
+               formControlName="password"
+               placeholder="Password"
+               i18n-placeholder="@@M__COMMON__PASSWORD"
+               (keydown.enter)="login(); $event.preventDefault();"
+               >
+              <span class="c-svg_eye"></span>
+              <div class="error text-sm">Error Message</div>
+              <a href="#" class="text-sm grey">Forgot Password?</a>
+          </div>
+          <button type="button" (click)="login()" class="btn btn-outline-primary btn-sm">Login</button>
+      </div>
+    </form>
+      <div class="o-login hidden-desktop">
+          <a class="btn btn-outline-primary btn-sm" (click)= 'showRegister()' > {{regBtn?"Register":"Login"}}</a>
+      </div>
+  </div>
+</header>
+<!-- <header>
+  <div class="container">
+      <div class="logo">
+          <img src="assets/ops_logo.png" alt="logo">
+      </div>
+      <div class="o-login hidden-desktop">
+          <a href="signup.html" class="btn btn-outline-primary btn-sm">Signup</a>
+      </div>
+  </div>
+</header> -->
+  <section class=" hidden-desktop">
+    <div class="o-login-sec" *ngIf='loginHide'>
+      <div class="container" >
+        <div class="o-login-form">
+          <h2>Login to your account</h2>
+          <form (submit)="$event.preventDefault()" [formGroup]="form" >
+            <div class="form-group">
+              <label>Username / Email / Phone Number</label>
+              <input type="text" class="form-control form-control-lg"
+              formControlName="username"
+              placeholder="Username"
+              i18n-placeholder="@@M__COMMON__USERNAME"
+              (keydown.enter)="login(); $event.preventDefault();"
+             >
+              <div class="error text-sm">This email doesn't exist</div>
+            </div>
+            <div class="form-group c-form_righticon-lg">
+              <label>Password</label>
+              <input type="password" class="form-control form-control-lg"
+              formControlName="password"
+              placeholder="Password"
+              i18n-placeholder="@@M__COMMON__PASSWORD"
+              (keydown.enter)="login(); $event.preventDefault();"
+              >
+              <span class="c-svg_eye"></span>
+              <div class="error text-sm float-left">The password looks incorrect</div>
+              <a  class="text-sm primary float-right">Forgot Password?</a>
+            </div> 
+            <button (click)="login()" type="button" class="btn btn-primary btn-block">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- >
+
+
 <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50 m-error-box mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0;" [hidden]="!errorMessage">
   <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
     <ng-container
@@ -45,8 +130,8 @@
   </div>
 </div>
 
-<!-- START: LOGIN -->
-<form (submit)="$event.preventDefault()" [formGroup]="form" class="mdl-card mdl-color-text--blue-grey-400 m-form m-login-box" [hidden]="hideLogin">
+ START: LOGIN -->
+<!-- <form (submit)="$event.preventDefault()" [formGroup]="form" class="mdl-card mdl-color-text--blue-grey-400 m-form m-login-box" [hidden]="hideLogin">
 
   <div class="mdl-card__supporting-text mdl-grid">
 
@@ -82,11 +167,11 @@
     </a>
   </div>
 
-</form>
+</form> -->
 <!-- END: LOGIN -->
 
 <!-- START: TWOFACTOR -->
-<div class="mdl-card mdl-shadow--2dp opspot-login-box" [hidden]="!twofactorToken">
+<!-- <div class="mdl-card mdl-shadow--2dp opspot-login-box" [hidden]="!twofactorToken">
   <div class="mdl-card__title">
     <h2 class="mdl-card__title-text" i18n="@@FORMS__LOGIN__2FA_LOGIN_TITLE">Twofactor Login</h2>
   </div>
@@ -109,4 +194,4 @@
   <button class="m-btn m-btn--action" (click)="twofactorAuth(code)">
     <ng-container i18n="@@M__ACTION__LOGIN">Login</ng-container>
   </button>
-</div>
+</div> --> 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, NgZone } from '@angular/core';
+import { Component, EventEmitter, NgZone, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Client } from '../../../services/api';
@@ -9,7 +9,9 @@ import { Session } from '../../../services/session';
   moduleId: module.id,
   selector: 'opspot-form-login',
   outputs: ['done', 'doneRegistered'],
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+  styleUrls:['login.scss']
+   
 })
 
 export class LoginForm {
@@ -20,12 +22,13 @@ export class LoginForm {
   inProgress: boolean = false;
   referrer: string;
   opspot = window.Opspot;
-
   form: FormGroup;
+  loginHide: boolean = true;
+  @Output()vwLogin=new EventEmitter()
 
   done: EventEmitter<any> = new EventEmitter();
   doneRegistered: EventEmitter<any> = new EventEmitter();
-
+  regBtn=true
   constructor(public session: Session, public client: Client, fb: FormBuilder, private zone: NgZone) {
 
     this.form = fb.group({
@@ -34,7 +37,11 @@ export class LoginForm {
     });
 
   }
-
+  showRegister(){
+    this.loginHide=!this.loginHide;
+    this.vwLogin.emit(true)
+    this.regBtn=!this.regBtn;
+  }
   login() {
     if (this.inProgress)
       return;
@@ -82,7 +89,7 @@ export class LoginForm {
       .catch((e) => {
         this.errorMessage = e.message;
         this.twofactorToken = '';
-        this.hideLogin = false;
+        this.hideLogin = true;
       });
   }
 }

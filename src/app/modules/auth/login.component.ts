@@ -12,7 +12,10 @@ import { OnboardingService } from '../onboarding/onboarding.service';
 
 @Component({
   selector: 'm-login',
-  templateUrl: 'login.component.html'
+  templateUrl: 'login.component.html',
+  styleUrls:['login.component.scss']
+
+
 })
 
 export class LoginComponent {
@@ -40,50 +43,62 @@ export class LoginComponent {
     private loginReferrer: LoginReferrerService,
     public session: Session,
     private onboarding: OnboardingService,
+
   ) { }
+  loginView=false;
+
+  log(e){
+    this.loginView=!this.loginView;
+  }
 
   ngOnInit() {
-    if (this.session.isLoggedIn()) {
-      this.loginReferrer.register('/newsfeed');
-      this.loginReferrer.navigate();
-    }
+  if(window.screen.width>600){
+    this.loginView=true;
+  }  
+ 
 
-    this.title.setTitle('Login');
-    this.redirectTo = localStorage.getItem('redirect');
+  //   if (this.session.isLoggedIn()) {
+  //     this.loginReferrer.register('/newsfeed');
+  //     this.loginReferrer.navigate();
+  //   }
 
-    this.paramsSubscription = this.route.queryParams.subscribe((params) => {
-      if (params['referrer']) {
-        this.referrer = params['referrer'];
-      }
-    });
+  //   this.title.setTitle('Login');
+  //   this.redirectTo = localStorage.getItem('redirect');
 
-    if (/iP(hone|od)/.test(window.navigator.userAgent)) {
-      this.flags.canPlayInlineVideos = false;
-    }
-  }
+  //   this.paramsSubscription = this.route.queryParams.subscribe((params) => {
+  //     if (params['referrer']) {
+  //       this.referrer = params['referrer'];
+  //     }
+  //   });
 
-  ngOnDestroy() {
-    this.paramsSubscription.unsubscribe();
-  }
+  //   if (/iP(hone|od)/.test(window.navigator.userAgent)) {
+  //     this.flags.canPlayInlineVideos = false;
+  //   }
+  // }
 
-  loggedin() {
-    if (this.referrer)
-      this.router.navigateByUrl(this.referrer);
-    else if (this.redirectTo)
-      this.router.navigate([this.redirectTo]);
-    else
-      this.loginReferrer.navigate();
-  }
+  // ngOnDestroy() {
+  //   this.paramsSubscription.unsubscribe();
+  // }
 
-  registered() {
-    if (this.redirectTo)
-      this.router.navigate([this.redirectTo]);
-    else {
-      this.modal.setDisplay('categories').open();
-      this.loginReferrer.navigate({
-        defaultUrl: '/' + this.session.getLoggedInUser().username
-      });
-    }
-  }
+  // loggedin() {
+  //   if (this.referrer)
+  //     this.router.navigateByUrl(this.referrer);
+  //   else if (this.redirectTo)
+  //     this.router.navigate([this.redirectTo]);
+  //   else
+  //     this.loginReferrer.navigate();
+  // }
 
+  // registered() {
+  //   if (this.redirectTo)
+  //     this.router.navigate([this.redirectTo]);
+  //   else {
+  //     this.modal.setDisplay('categories').open();
+  //     this.loginReferrer.navigate({
+  //       defaultUrl: '/' + this.session.getLoggedInUser().username
+  //     });
+  //   }
+  // }
+
+}
 }
