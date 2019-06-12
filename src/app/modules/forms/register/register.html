@@ -19,21 +19,17 @@
               <!-- <a href="#" class="text-md primary">gowtham_aeione,</a>
               <a href="#" class="text-md primary">gowtham_aeione49</a> -->
             </div>
-            <div class="o-phone">
-              <div class="o-phone__code">
-                <!-- <span class="o-phone__flag"><img src="../../../../assets/svg/in.png" alt=""></span>
-                <span class="o-phone__country text-md">IND</span>
-                <a  class="o-phone__dropdown"><img src="../../../../assets/svg/arrow-down.svg" alt="">
-                </a> -->
-              <m-phone-input ></m-phone-input>
+          
+            <div class="form-group">
+              <ngx-intl-tel-input
+                [cssClass]="'custom'"
+                [preferredCountries]="['in','us', 'gb']"
+                [enableAutoCountrySelect]="true"
+                [enablePlaceholder]="true"
+                name="phone"
+                formControlName='mobileNumber'
+                ></ngx-intl-tel-input>
               </div>
-              <div class="o-phone__number">
-                <div class="form-group">
-                  <input type="number" class="form-control form-control-lg" placeholder="Phone Number">
-                </div>
-              </div>
-            </div>
-            
             <div class="o-otp">
               <div class="o-otp__title text-md">Enter OTP <a  class="primary">Resend OTP</a></div>
                 <div class="otp">
@@ -60,32 +56,20 @@
                     </span>
                   </div>
               </div>
-              <div class="o-dob__select">
+              <div class="o-dob__select"formGroupName='dobGroup' >
                 <div class="form-group">
-                  <select class="form-control">
-                      <option>Date</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
+                  <select class="form-control" formControlName="date">
+                      <option *ngFor="let date of dateOfBirth.date">{{date}}</option>
                   </select>
                 </div>
                 <div class="form-group m-l-13">
-                  <select class="form-control">
-                      <option>Month</option>
-                      <option>Jan</option>
-                      <option>Feb</option>
-                      <option>Apr</option>
-                      <option>May</option>
+                  <select class="form-control" formControlName="month">
+                      <option *ngFor="let month of dateOfBirth.month;index as i"  placeholder="month"> {{month}}</option>
                   </select>
                 </div>
-                <div class="form-group m-l-13">
-                  <select class="form-control">
-                      <option>Year</option>
-                      <option>1993</option>
-                      <option>1994</option>
-                      <option>1995</option>
-                      <option>1996</option>
+                <div class="form-group m-l-13" > 
+                  <select class="form-control"  formControlName="year">
+                      <option *ngFor="let year of dateOfBirth.year">{{year}}</option>
                   </select>
                 </div>
               </div>
@@ -105,7 +89,7 @@
                   </label>
             </div>
 
-            <button type="button" class="btn btn-primary btn-block">Get Started</button>
+            <button type="button" (click)="register($event)"  class="btn btn-primary btn-block">Get Started</button>
           </form>
         </div>
         <div class="o-signup o-signup--img">

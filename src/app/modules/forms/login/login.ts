@@ -25,6 +25,7 @@ export class LoginForm {
   form: FormGroup;
   loginHide: boolean = true;
   @Output()vwLogin=new EventEmitter()
+  submitted=false;
 
   done: EventEmitter<any> = new EventEmitter();
   doneRegistered: EventEmitter<any> = new EventEmitter();
@@ -42,7 +43,11 @@ export class LoginForm {
     this.vwLogin.emit(true)
     this.regBtn=!this.regBtn;
   }
+  get f(){
+    return this.form.controls
+  }
   login() {
+    this.submitted=true;
     if (this.inProgress)
       return;
 

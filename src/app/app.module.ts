@@ -56,6 +56,9 @@ import { HelpdeskModule } from './modules/helpdesk/helpdesk.module';
 import { MobileModule } from './modules/mobile/mobile.module';
 import { CanaryModule } from './modules/canary/canary.module';
 import { HttpClientModule } from "@angular/common/http";
+import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
+import { BsDropdownModule } from 'ngx-bootstrap';
+
 
 @NgModule({
   bootstrap: [
@@ -116,6 +119,8 @@ import { HttpClientModule } from "@angular/common/http";
 
     //last due to :username route
     ChannelsModule,
+    BsDropdownModule.forRoot(),
+    NgxIntlTelInputModule
   ],
   providers: [
     OpspotAppRoutingProviders,

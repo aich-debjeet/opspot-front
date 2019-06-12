@@ -21,8 +21,11 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/material-design-lite/dist/material.blue_grey-amber.min.css",
               "node_modules/material-design-icons/iconfont/material-icons.css",
+               "./node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/main.scss"
             ],
             "scripts": [
@@ -84,6 +87,10 @@
             "assets": [
               "src/assets",
               "src/favicon.ico"
+            ],
+            "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
             ]
           }
         },

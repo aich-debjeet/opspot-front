@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CommonModule } from '../../common/common.module';
+import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
 
 import { LoginForm } from './login/login';
 import { RegisterForm } from './register/register';
@@ -23,6 +24,8 @@ import { ExperimentsModule } from '../experiments/experiments.module';
     ReactiveFormsModule,
     CaptchaModule,
     ExperimentsModule,
+    NgxIntlTelInputModule
+
 
   ],
   declarations: [

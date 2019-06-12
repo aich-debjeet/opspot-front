@@ -1,5 +1,5 @@
 import { Component, EventEmitter, ViewChild, Input, Output, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
@@ -48,20 +48,40 @@ export class RegisterForm {
       password: ['', Validators.required],
       password2: ['', Validators.required],
       tos: [false],
+      mobileNumber:['',{updateOn: 'blur'}],
       exclusive_promotions: [false],
       captcha: [''],
       Homepage121118: experiments.getExperimentBucket('Homepage121118'),
+      dobGroup:fb.group({
+        date:'',month:'',year:'',
+      }),
     });
 
-  }
+    //for dob
+   
 
+
+  }
+  dateOfBirth;
+ 
+  //mobile number entered
+  onMobileNumbr(){
+   this.form.controls['mobileNumber'].valueChanges.subscribe(val=>{
+     console.log(val.internationalNumber)
+   })
+  }
+   
   ngOnInit() {
+  
+    this.dateOfBirth=this.dob();
     if (this.reCaptcha) {
       this.reCaptcha.reset();
     }
+    this.onMobileNumbr()
   }
 
   register(e) {
+    console.log(this.form.value)
     e.preventDefault();
     this.errorMessage = '';
     if (!this.form.value.tos) {
@@ -144,4 +164,18 @@ export class RegisterForm {
     this.usernameValidationTimeout = setTimeout(this.validateUsername.bind(this), 500);
   }
 
+  // function to give birth date selection
+  dob(){
+    let date=['Date',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+    let month=['Month','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
+    let year=['Year'];
+    let a =new Date().getFullYear()-13;
+    let ab=a-70;
+      for(let i:any=a; i>=ab; i--){
+         year.push(i)
+      }
+     return {date,month,year}
+  }
+  
 }
+
