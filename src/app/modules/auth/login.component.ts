@@ -57,48 +57,47 @@ export class LoginComponent {
   }  
  
 
-  //   if (this.session.isLoggedIn()) {
-  //     this.loginReferrer.register('/newsfeed');
-  //     this.loginReferrer.navigate();
-  //   }
+    if (this.session.isLoggedIn()) {
+      this.loginReferrer.register('/newsfeed');
+      this.loginReferrer.navigate();
+    }
 
-  //   this.title.setTitle('Login');
-  //   this.redirectTo = localStorage.getItem('redirect');
+    this.title.setTitle('Login');
+    this.redirectTo = localStorage.getItem('redirect');
 
-  //   this.paramsSubscription = this.route.queryParams.subscribe((params) => {
-  //     if (params['referrer']) {
-  //       this.referrer = params['referrer'];
-  //     }
-  //   });
+    this.paramsSubscription = this.route.queryParams.subscribe((params) => {
+      if (params['referrer']) {
+        this.referrer = params['referrer'];
+      }
+    });
 
-  //   if (/iP(hone|od)/.test(window.navigator.userAgent)) {
-  //     this.flags.canPlayInlineVideos = false;
-  //   }
-  // }
+    if (/iP(hone|od)/.test(window.navigator.userAgent)) {
+      this.flags.canPlayInlineVideos = false;
+    }
+  }
 
-  // ngOnDestroy() {
-  //   this.paramsSubscription.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+  }
 
-  // loggedin() {
-  //   if (this.referrer)
-  //     this.router.navigateByUrl(this.referrer);
-  //   else if (this.redirectTo)
-  //     this.router.navigate([this.redirectTo]);
-  //   else
-  //     this.loginReferrer.navigate();
-  // }
+  loggedin() {
+    if (this.referrer)
+      this.router.navigateByUrl(this.referrer);
+    else if (this.redirectTo)
+      this.router.navigate([this.redirectTo]);
+    else
+      this.loginReferrer.navigate();
+  }
 
-  // registered() {
-  //   if (this.redirectTo)
-  //     this.router.navigate([this.redirectTo]);
-  //   else {
-  //     this.modal.setDisplay('categories').open();
-  //     this.loginReferrer.navigate({
-  //       defaultUrl: '/' + this.session.getLoggedInUser().username
-  //     });
-  //   }
-  // }
+  registered() {
+    if (this.redirectTo)
+      this.router.navigate([this.redirectTo]);
+    else {
+      this.modal.setDisplay('categories').open();
+      this.loginReferrer.navigate({
+        defaultUrl: '/' + this.session.getLoggedInUser().username
+      });
+    }
+  }
 
-}
 }

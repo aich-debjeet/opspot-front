@@ -1,5 +1,5 @@
 import { Component, EventEmitter, ViewChild, Input, Output, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl } from '@angular/forms';
 
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
@@ -43,19 +43,23 @@ export class RegisterForm {
     private experiments: ExperimentsService,
   ) {
     this.form = fb.group({
+      fullname:['' ,Validators.required],
       username: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', [Validators.required,this.checkPassword]],
       password2: ['', Validators.required],
+      otp:fb.group({
+        otp1:'',otp2:'',otp3:'',otp4:'',otp5:'',otp6:''
+      }),
       tos: [false],
       mobileNumber:['',{updateOn: 'blur'}],
       exclusive_promotions: [false],
       captcha: [''],
       Homepage121118: experiments.getExperimentBucket('Homepage121118'),
       dobGroup:fb.group({
-        date:'',month:'',year:'',
+        date:['', Validators.required],month:['', Validators.required],year:['', Validators.required],
       }),
-    });
+    },{validator:this.MustMatch('password','password2') } )
 
     //for dob
    
@@ -63,7 +67,6 @@ export class RegisterForm {
 
   }
   dateOfBirth;
- 
   //mobile number entered
   onMobileNumbr(){
    this.form.controls['mobileNumber'].valueChanges.subscribe(val=>{
@@ -176,6 +179,30 @@ export class RegisterForm {
       }
      return {date,month,year}
   }
+  //password controls
+  checkPassword(control:AbstractControl) {
+    let enteredPassword = control.value
+    let passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+    return (!passwordCheck.test(enteredPassword) && enteredPassword) ? { 'requirements': true } : null;
+  }
+  //password error messages
+  getErrorPassword() {
+    return this.form.get('password').hasError('required') ? 'Field is required (at least eight characters, one uppercase letter and one number)' :
+      this.form.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
+  }
+
+  //for confirm password
+  MustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+        const control = formGroup.controls[controlName];
+        const matchingControl = formGroup.controls[matchingControlName];
+        if (matchingControl.errors && !matchingControl.errors.mustMatch) {return;}
+        if (control.value !== matchingControl.value) { matchingControl.setErrors({ mustMatch: true });
+        } else {  matchingControl.setErrors(null);
+        }
+    }
+  }
+
   
 }
 
