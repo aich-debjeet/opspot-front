@@ -190,9 +190,9 @@ export class BlockchainPurchaseComponent implements OnInit {
   onSubmit() {
 
   }
-  async payment() {
+  payment() {
     const formData = new FormData();
-    formData.append('amount','10');
+    formData.append('amount',this.tokens.toString());
     formData.append('purpose','token_purchase');
     formData.append('buyer_name','anup');
     formData.append('redirect_url','https://336a201c.ngrok.io/Instamojo-php-curl/success');
