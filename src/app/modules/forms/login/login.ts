@@ -1,8 +1,11 @@
-import { Component, EventEmitter, NgZone, Output } from '@angular/core';
+import { Component, EventEmitter, NgZone, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
+import Swal from 'sweetalert2'
+import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-password.component';
+
 
 
 @Component({
@@ -15,6 +18,9 @@ import { Session } from '../../../services/session';
 })
 
 export class LoginForm {
+
+  // @ViewChild('#mySwal') private mySwal: ForgotPasswordComponent;
+
 
   errorMessage: string = '';
   twofactorToken: string = '';
@@ -97,4 +103,8 @@ export class LoginForm {
         this.hideLogin = true;
       });
   }
+
+  // openModal(){
+  //   Swal.fire({html: '<m-forgot-password></m-forgot-password>'})
+  // }
 }

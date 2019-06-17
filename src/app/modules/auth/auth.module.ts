@@ -12,6 +12,8 @@ import { LoginComponent } from './login.component';
 import { LogoutComponent } from './logout.component';
 import { RegisterComponent } from './register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 
 
 const routes: Routes = [
@@ -32,18 +34,19 @@ const routes: Routes = [
     LegacyModule,
     ModalsModule,
     OpspotFormsModule,
+    SweetAlert2Module
   ],
   declarations: [
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
-    ForgotPasswordComponent,
+    // ForgotPasswordComponent,
   ],
   entryComponents: [
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
-    ForgotPasswordComponent,
+    // ForgotPasswordComponent,
   ]
 })
 
