@@ -61,17 +61,27 @@ export class RegisterForm {
       }),
     },{validator:this.MustMatch('password','password2') } )
 
-    //for dob
-   
-
-
+    //for dob 
   }
   dateOfBirth;
   //mobile number entered
-  onMobileNumbr(){
+  async onMobileNumbr(){
+    let numbers;
    this.form.controls['mobileNumber'].valueChanges.subscribe(val=>{
      console.log(val.internationalNumber)
-   })
+     numbers=val.internationalNumber;
+      this.getOtp(numbers)
+    })
+  
+  }
+  //for getting otp
+  async getOtp(numbr){
+    let response: any = await this.client.post('api/v2/blockchain/rewards/verify', {
+      number: numbr,  
+    }).then(res=>{
+      console.log(res)
+    })
+
   }
    
   ngOnInit() {
@@ -84,7 +94,7 @@ export class RegisterForm {
   }
 
   register(e) {
-    console.log(this.form.value)
+    // console.log(this.form.value)
     e.preventDefault();
     this.errorMessage = '';
     if (!this.form.value.tos) {
@@ -168,6 +178,8 @@ export class RegisterForm {
   }
 
   // function to give birth date selection
+
+
   dob(){
     let date=['Date',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
     let month=['Month','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']

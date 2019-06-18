@@ -30,27 +30,21 @@
     </div>
   </div>
 </header>
-<!-- <header>
-  <div class="container">
-      <div class="logo">
-          <img src="assets/ops_logo.png" alt="logo">
-      </div>
-      <div class="o-login hidden-desktop">
-          <a href="signup.html" class="btn btn-outline-primary btn-sm">Signup</a>
-      </div>
-  </div>
-</header> -->
-<section class=" hidden-desktop">
-  <div class="o-login-sec" *ngIf='loginHide'>
-    <div class="container">
-      <div class="o-login-form">
-        <h2>Login to your account</h2>
-        <form (submit)="$event.preventDefault()" [formGroup]="form">
-          <div class="form-group">
-            <label>Username / Email / Phone Number</label>
-            <input type="text" class="form-control form-control-lg" formControlName="username" placeholder="Username"
-              i18n-placeholder="@@M__COMMON__USERNAME" (keydown.enter)="login(); $event.preventDefault();">
-            <div *ngIf="submitted && f.username.errors" class="error text-sm">
+  <section class=" hidden-desktop">
+    <div class="o-login-sec" *ngIf='loginHide'>
+      <div class="container" >
+        <div class="o-login-form">
+          <h2>Login to your account</h2>
+          <form (submit)="$event.preventDefault()" [formGroup]="form" >
+            <div class="form-group">
+              <label>Username / Email / Phone Number</label>
+              <input type="text" class="form-control form-control-lg"
+              formControlName="username"
+              placeholder="Username"
+              i18n-placeholder="@@M__COMMON__USERNAME"
+              (keydown.enter)="login(); $event.preventDefault();"
+             >
+             <div *ngIf="submitted && f.username.errors" class="error text-sm">
               <div *ngIf="f.username.errors.required">username /email/password is required</div>
             </div>
           </div>
