@@ -128,13 +128,14 @@ export class ForgotPasswordComponent {
   }
 
 
+  show2Form() {
+    this.step = 2;
+  }
+  
   show3Form() {
     this.step = 3;
   }
 
 
-  show2Form() {
-
-    this.step = 2;
-  }
+  
 }
