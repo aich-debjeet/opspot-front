@@ -57,10 +57,10 @@ export class LoginComponent {
   }  
  
 
-    if (this.session.isLoggedIn()) {
-      this.loginReferrer.register('/newsfeed');
-      this.loginReferrer.navigate();
-    }
+    // if (this.session.isLoggedIn()) {
+    //   this.loginReferrer.register('/newsfeed');
+    //   this.loginReferrer.navigate();
+    // }
 
     this.title.setTitle('Login');
     this.redirectTo = localStorage.getItem('redirect');
@@ -81,23 +81,23 @@ export class LoginComponent {
   }
 
   loggedin() {
-    if (this.referrer)
-      this.router.navigateByUrl(this.referrer);
-    else if (this.redirectTo)
-      this.router.navigate([this.redirectTo]);
-    else
-      this.loginReferrer.navigate();
+    // if (this.referrer)
+    //   this.router.navigateByUrl(this.referrer);
+    // else if (this.redirectTo)
+    //   this.router.navigate([this.redirectTo]);
+    // else
+    //   this.loginReferrer.navigate();
   }
 
   registered() {
-    if (this.redirectTo)
-      this.router.navigate([this.redirectTo]);
-    else {
-      this.modal.setDisplay('categories').open();
-      this.loginReferrer.navigate({
-        defaultUrl: '/' + this.session.getLoggedInUser().username
-      });
-    }
+    // if (this.redirectTo)
+    //   this.router.navigate([this.redirectTo]);
+    // else {
+    //   this.modal.setDisplay('categories').open();
+    //   this.loginReferrer.navigate({
+    //     defaultUrl: '/' + this.session.getLoggedInUser().username
+    //   });
+    // }
   }
 
 }

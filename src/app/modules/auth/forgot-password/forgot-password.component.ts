@@ -9,12 +9,13 @@ import { Session } from '../../../services/session';
 import Swal from 'sweetalert2';
 import { LoginComponent } from '../login.component';
 import { LoginForm } from '../../forms/login/login';
+import { Form, FormGroup } from '@angular/forms';
 
 @Component({
   moduleId: module.id,
   selector: 'm-forgot-password',
   templateUrl: 'forgot-password.component.html',
-  styleUrls:['forgot-password.component.scss']
+  styleUrls: ['forgot-password.component.scss']
 
 })
 
@@ -27,6 +28,16 @@ export class ForgotPasswordComponent {
   step = 1;
   username = '';
   code = '';
+
+  // step1
+  step1Form: FormGroup;
+
+  // step1
+  step2Form: FormGroup;
+
+  // step1
+  step3Form: FormGroup;
+
 
   paramsSubscription: Subscription;
 
@@ -114,5 +125,16 @@ export class ForgotPasswordComponent {
           }, 2000);
         });
     }
+  }
+
+
+  show3Form() {
+    this.step = 3;
+  }
+
+
+  show2Form() {
+
+    this.step = 2;
   }
 }

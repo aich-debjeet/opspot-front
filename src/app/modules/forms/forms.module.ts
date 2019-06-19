@@ -28,7 +28,10 @@ import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password
     CaptchaModule,
     ExperimentsModule,
     NgxIntlTelInputModule,
-    SweetAlert2Module,
+    SweetAlert2Module.forRoot({
+      animation: false,
+      buttonsStyling: false,
+    }),
   ],
   declarations: [
     LoginForm,

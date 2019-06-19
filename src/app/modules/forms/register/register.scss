@@ -296,3 +296,36 @@
   margin: 0px auto 40px auto;
   width: 91%;
 }
+
+::ng-deep .intl-tel-input {
+    position: relative !important;
+    display: block !important;
+}
+
+::ng-deep .intl-tel-input.allow-dropdown .flag-container{
+	left: 1rem;
+}
+
+
+::ng-deep .intl-tel-input.allow-dropdown input, .intl-tel-input.allow-dropdown input[type=text], .intl-tel-input.allow-dropdown input[type=tel], .intl-tel-input.separate-dial-code input, .intl-tel-input.separate-dial-code input[type=text], .intl-tel-input.separate-dial-code input[type=tel] {
+    padding-right: 6px;
+    padding-left: 82px !important;
+    margin-left: 0;
+}
+
+::ng-deep .intl-tel-input input, .intl-tel-input input[type=text], .intl-tel-input input[type=tel] {
+	width: 100%;
+    position: relative;
+    z-index: 0;
+    display: block;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-right: 36px;
+    margin-right: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-clip: padding-box;
+    border: 1px solid grey;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
