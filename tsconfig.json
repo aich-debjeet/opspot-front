@@ -1,6 +1,7 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
+    "watch": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
