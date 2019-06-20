@@ -35,6 +35,7 @@ export class RegisterForm {
 
   @ViewChild('reCaptcha') reCaptcha: ReCaptchaComponent;
 
+
   constructor(
     public session: Session,
     public client: Client,
@@ -45,12 +46,12 @@ export class RegisterForm {
     this.form = fb.group({
       fullname:['' ,Validators.required],
       username: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required,Validators.email]],
       password: ['', [Validators.required,this.checkPassword]],
       password2: ['', Validators.required],
       otp:fb.group({
         otp1:'',otp2:'',otp3:'',otp4:'',otp5:'',otp6:''
-      }),
+      }, {updateOn: 'blur',})  ,
       tos: [false],
       mobileNumber:['',{updateOn: 'blur'}],
       exclusive_promotions: [false],
@@ -59,24 +60,39 @@ export class RegisterForm {
       dobGroup:fb.group({
         date:['', Validators.required],month:['', Validators.required],year:['', Validators.required],
       }),
-    },{validator:this.MustMatch('password','password2') } )
+    },{validator:this.MustMatch('password','password2') },
+     )
 
     //for dob 
   }
   dateOfBirth;
   //mobile number entered
-  async onMobileNumbr(){
+   onMobileNumbr(){
     let numbers;
    this.form.controls['mobileNumber'].valueChanges.subscribe(val=>{
-     console.log(val.internationalNumber)
-     numbers=val.internationalNumber;
+    //  console.log(val)
+    //  console.log(val.internationalNumber.replace(/\s/g,''))
+     numbers=val.internationalNumber.replace(/\s/g,'');
       this.getOtp(numbers)
     })
-  
+
+  }
+  onOtp(){
+    this.form.controls['otp'].valueChanges.subscribe(val=>{
+      let a=Object.values(val)
+      let values=''
+      a.forEach(a=>{
+        values+=a
+      })
+      if(values.length===6){
+        console.log("verify the otp")
+      }
+        
+    })
   }
   //for getting otp
   async getOtp(numbr){
-    let response: any = await this.client.post('api/v2/blockchain/rewards/verify', {
+    let response: any = await this.client.post('api/v3/verification/mobile/verify', {
       number: numbr,  
     }).then(res=>{
       console.log(res)
@@ -84,13 +100,17 @@ export class RegisterForm {
 
   }
    
+
+
+
   ngOnInit() {
-  
+ 
     this.dateOfBirth=this.dob();
     if (this.reCaptcha) {
       this.reCaptcha.reset();
     }
     this.onMobileNumbr()
+    this.onOtp()
   }
 
   register(e) {
@@ -214,6 +234,27 @@ export class RegisterForm {
         }
     }
   }
+
+  //for jumping to next input in otp
+  keytab(event){
+    let nextInput = event.srcElement.nextElementSibling; // get the sibling element
+    let previous=  event.srcElement.previousElementSibling; //get the previous
+    console.log(event)
+    var target = event.target || event.srcElement;
+    var id = target.id
+    
+    if(event.keyCode===8) {
+    if(event.srcElement.previousElementSibling===null){
+      return;
+    }
+      else{ previous.focus();}
+    }
+    else if(nextInput == null)  // check the maxLength from here
+        return;
+     
+    else
+        nextInput.focus();   // focus if not null
+}
 
   
 }
