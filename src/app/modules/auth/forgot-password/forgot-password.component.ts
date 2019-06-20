@@ -9,7 +9,7 @@ import { Session } from '../../../services/session';
 import Swal from 'sweetalert2';
 import { LoginComponent } from '../login.component';
 import { LoginForm } from '../../forms/login/login';
-import { Form, FormGroup } from '@angular/forms';
+import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   moduleId: module.id,
@@ -20,8 +20,6 @@ import { Form, FormGroup } from '@angular/forms';
 })
 
 export class ForgotPasswordComponent {
-  // @ViewChild('mySwal') private mySwal: LoginForm;
-
 
   error = '';
   inProgress = false;
@@ -32,11 +30,13 @@ export class ForgotPasswordComponent {
   // step1
   step1Form: FormGroup;
 
-  // step1
+  // ste2
   step2Form: FormGroup;
 
-  // step1
+  // step3
   step3Form: FormGroup;
+
+
 
 
   paramsSubscription: Subscription;
@@ -46,9 +46,25 @@ export class ForgotPasswordComponent {
     public router: Router,
     public route: ActivatedRoute,
     public title: OpspotTitle,
-    public session: Session
+    public session: Session,
+    public formBuilder: FormBuilder
   ) {
+    this.step1Form = this.formBuilder.group({
+      mobileEmail: ['', [Validators.required]]
+    }),
+      this.step2Form = this.formBuilder.group({
+        otp: this.formBuilder.group({
+          otp1: ['', [Validators.required]], 
+          otp2: ['', [Validators.required]], 
+          otp3: ['', [Validators.required]], 
+          otp4: ['', [Validators.required]], 
+          otp5: ['', [Validators.required]], 
+          otp6: ['', [Validators.required]]
+        })
+      })
   }
+
+
 
   ngOnInit() {
     this.title.setTitle('Forgot Password');
@@ -68,30 +84,34 @@ export class ForgotPasswordComponent {
     this.paramsSubscription.unsubscribe();
   }
 
-  request(username) {
+  submitted1 = false;
+  request() {
     this.error = '';
-    this.inProgress = true;
-    this.client.post('api/v1/forgotpassword/request', {
-      username: username.value
-    })
-      .then((data: any) => {
-        username.value = '';
+    // this.inProgress = true;
+    this.submitted1 = true;
+    if (this.step1Form.valid)
+      this.step = 2;
+    // this.client.post('api/v1/forgotpassword/request', {
+    //   username: username.value
+    // })
+    //   .then((data: any) => {
+    //     username.value = '';
 
-        this.inProgress = false;
-        this.step = 2;
-      })
-      .catch((e) => {
+    //     this.inProgress = false;
+    //     this.step = 2;
+    //   })
+    //   .catch((e) => {
 
-        this.inProgress = false;
-        if (e.status === 'failed') {
-          this.error = 'There was a problem trying to reset your password. Please try again.';
-        }
+    //     this.inProgress = false;
+    //     if (e.status === 'failed') {
+    //       this.error = 'There was a problem trying to reset your password. Please try again.';
+    //     }
 
-        if (e.status === 'error') {
-          this.error = e.message;
-        }
+    //     if (e.status === 'error') {
+    //       this.error = e.message;
+    //     }
 
-      });
+    //   });
   }
 
   setCode(code: string) {
@@ -128,14 +148,12 @@ export class ForgotPasswordComponent {
   }
 
 
-  show2Form() {
-    this.step = 2;
-  }
-  
-  show3Form() {
+  submitted2 = false;
+  showForm3() {
+    this.submitted2 = true;
     this.step = 3;
   }
 
 
-  
+
 }
