@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="18px" viewBox="0 0 22 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>180C996B-CE4C-46D7-B969-65D4CCFCCE9C</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Home" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="home" transform="translate(-1219.000000, -20.000000)" stroke="#90A4AE" stroke-width="1.5">
+            <g id="icons/mail" transform="translate(1220.000000, 21.000000)">
+                <g id="mail">
+                    <path d="M2,0 L18,0 C19.1,0 20,0.9 20,2 L20,14 C20,15.1 19.1,16 18,16 L2,16 C0.9,16 0,15.1 0,14 L0,2 C0,0.9 0.9,0 2,0 Z" id="Shape"></path>
+                    <polyline id="Shape" points="20 2 10 9 0 2"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
