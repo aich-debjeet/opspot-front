@@ -1,7 +1,7 @@
 <div class="m-topbar--row">
 
   <a class="m-topbar--logo" routerLink="/">
-    <img [src]="opspot.cdn_assets_url + 'assets/logos/ops_icon.png'" />
+    <img src="../../../../assets/ops_icon.png"/>
   </a>
 
   <ng-content select="[search]"></ng-content>
@@ -22,7 +22,7 @@
 
   <div class="m-topbar--account" *ngIf="session.isLoggedIn()" #menu>
     <a (click)="menu.value = !menu.value">
-      <img src="/icon/{{session.getLoggedInUser().guid}}/small/{{session.getLoggedInUser().icontime}}" />
+      <img alt="menu" src="../../../../assets/svg/arrow-down.svg" />
     </a>
     <ul class="m-dropdown__list" [hidden]="!menu.value">
       <li class="m-dropdownList__item"
