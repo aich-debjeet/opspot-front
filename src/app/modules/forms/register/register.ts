@@ -65,13 +65,11 @@ export class RegisterForm {
 
     //for dob 
   }
-  dateOfBirth;
+   dateOfBirth;
   //mobile number entered
    onMobileNumbr(){
     let numbers;
    this.form.controls['mobileNumber'].valueChanges.subscribe(val=>{
-    //  console.log(val)
-    //  console.log(val.internationalNumber.replace(/\s/g,''))
      numbers=val.internationalNumber.replace(/\s/g,'');
       this.getOtp(numbers)
     })
@@ -198,7 +196,6 @@ export class RegisterForm {
   }
 
   // function to give birth date selection
-
 
   dob(){
     let date=['Date',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
