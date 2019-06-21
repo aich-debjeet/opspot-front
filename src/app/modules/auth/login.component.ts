@@ -67,6 +67,7 @@ export class LoginComponent {
 
     this.paramsSubscription = this.route.queryParams.subscribe((params) => {
       if (params['referrer']) {
+        console.log(params['referrer'])
         this.referrer = params['referrer'];
       }
     });
@@ -81,12 +82,12 @@ export class LoginComponent {
   }
 
   loggedin() {
-    // if (this.referrer)
-    //   this.router.navigateByUrl(this.referrer);
-    // else if (this.redirectTo)
-    //   this.router.navigate([this.redirectTo]);
-    // else
-    //   this.loginReferrer.navigate();
+    if (this.referrer)
+      this.router.navigateByUrl(this.referrer);
+    else if (this.redirectTo) 
+      this.router.navigate([this.redirectTo]);
+    else
+      this.loginReferrer.navigate();
   }
 
   registered() {
