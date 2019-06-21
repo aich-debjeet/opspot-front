@@ -34,7 +34,6 @@ export class BlockchainPurchaseComponent implements OnInit {
 
   //amount: number = 0.25;
   tokens: number = 500;
-
   address: string = '';
   ofac: boolean = false;
   use: boolean = false;
@@ -195,7 +194,7 @@ export class BlockchainPurchaseComponent implements OnInit {
   }
   payment() {
     const formData = new FormData();
-    formData.append('amount',this.tokens.toString());
+    formData.append('amount',this.amount.toString());
     formData.append('purpose','token_purchase');
     formData.append('buyer_name','anup');
     //formData.append('redirect_url','https://336a201c.ngrok.io/Instamojo-php-curl/success');
