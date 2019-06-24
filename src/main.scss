@@ -5600,15 +5600,15 @@ m-topbar {
     max-width: 1280px; }
   m-topbar .m-topbar--logo {
     background: #FFF;
-    width: 52px;
+    width: 40px;
     height: 100%;
     text-align: center; }
     m-topbar .m-topbar--logo img {
-      max-height: 36px;
-      margin-top: 8px; }
+      max-height: 40px;
+      margin-top: 0px; }
       @media screen and (max-width: 480px) {
         m-topbar .m-topbar--logo img {
-          max-height: 20px;
+          max-height: 40px;
           margin-top: 16px; } }
   m-topbar .m-menu--button {
     display: none; }
@@ -5628,10 +5628,10 @@ m-topbar {
             align-self: stretch;
     -webkit-align-items: center;
             align-items: center;
-    height: 52px;
+    //height: 56px;
     margin: auto;
     width: 100%;
-    padding-right: 16px; }
+    padding:8px 16px 8px 0px; }
   @media screen and (max-width: 1080px) {
     m-topbar m-search--bar {
       max-width: 150px; }
@@ -23556,3 +23556,11 @@ img {
       display:none !important;
     }
   }
+
+.opspot-search{
+  width: 400px !important;
+  padding-right:30px !important;
+  border:1px solid #ECEFF1 !important;
+  color: #333 !important;
+  background: #ECEFF1 !important;
+}
