@@ -113,6 +113,12 @@ export class RegisterForm {
 
   register(e) {
     // console.log(this.form.value)
+    if(this.form.value.dobGroup.month.match(/[a-z]/i)){
+      let month=['Month','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      let ind = month.indexOf(this.form.value.dobGroup.month);
+      this.form.controls['dobGroup'].patchValue({month: ind});
+      // console.log(this.form.value)
+    }
     e.preventDefault();
     this.errorMessage = '';
     if (!this.form.value.tos) {
@@ -122,6 +128,7 @@ export class RegisterForm {
 
     //re-enable cookies
     document.cookie = 'disabled_cookies=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    
 
     if (this.form.value.password !== this.form.value.password2) {
       if (this.reCaptcha) {
@@ -135,36 +142,37 @@ export class RegisterForm {
     this.form.value.referrer = this.referrer;
 
     this.inProgress = true;
-    this.client.post('api/v1/register', this.form.value)
-      .then((data: any) => {
-        // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
+    console.log(this.form.value)
+    // this.client.post('api/v1/register', this.form.value)
+    //   .then((data: any) => {
+    //     // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
 
-        this.inProgress = false;
-        this.session.login(data.user);
+    //     this.inProgress = false;
+    //     this.session.login(data.user);
 
-        this.done.next(data.user);
-      })
-      .catch((e) => {
-        console.log(e);
-        this.inProgress = false;
-        if (this.reCaptcha) {
-          this.reCaptcha.reset();
-        }
+    //     this.done.next(data.user);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //     this.inProgress = false;
+    //     if (this.reCaptcha) {
+    //       this.reCaptcha.reset();
+    //     }
 
-        if (e.status === 'failed') {
-          //incorrect login details
-          this.errorMessage = 'RegisterException::AuthenticationFailed';
-          this.session.logout();
-        } else if (e.status === 'error') {
-          //two factor?
-          this.errorMessage = e.message;
-          this.session.logout();
-        } else {
-          this.errorMessage = "Sorry, there was an error. Please try again.";
-        }
+    //     if (e.status === 'failed') {
+    //       //incorrect login details
+    //       this.errorMessage = 'RegisterException::AuthenticationFailed';
+    //       this.session.logout();
+    //     } else if (e.status === 'error') {
+    //       //two factor?
+    //       this.errorMessage = e.message;
+    //       this.session.logout();
+    //     } else {
+    //       this.errorMessage = "Sorry, there was an error. Please try again.";
+    //     }
 
-        return;
-      });
+    //     return;
+    //   });
   }
 
   validateUsername() {
@@ -199,7 +207,7 @@ export class RegisterForm {
 
   dob(){
     let date=['Date',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
-    let month=['Month','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
+    let month=['Month','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']    
     let year=['Year'];
     let a =new Date().getFullYear()-13;
     let ab=a-70;
