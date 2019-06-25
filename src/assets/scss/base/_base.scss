@@ -17,6 +17,16 @@
 		display: none!important;
 	}
 }
+.hidden-under-tablet{
+	@include mq($from: $mobile_sm, $until: $tablet) {
+		display: none!important;
+	}
+}
+.hidden-above-tablet{
+	@include mq($from: $tablet, $until: $wide_lg) {
+		display: none!important;
+	}
+}
 
 .float-left{
 	float: left;
@@ -26,4 +36,13 @@
 }
 .text-uppercase{
 	text-transform: uppercase!important;
+}
+.f700{
+	font-weight: 700!important;
+}
+.f500{
+	font-weight: 500!important;
+}
+.border-left{
+	border-left: 1px solid $grey-light!important;
 }

@@ -5,7 +5,7 @@
     <m-tooltip icon="notifications" i18n="@@NOTIFICATIONS__NOTIFICATIONS__ALL_FILTER">All</m-tooltip>
     <span class="m-full-label" i18n="@@NOTIFICATIONS__NOTIFICATIONS__ALL_FILTER">All</span>
   </a>
-  <a (click)="changeFilter('tags')" class="mdl-tabs__tab"
+   <!-- <a (click)="changeFilter('tags')" class="mdl-tabs__tab"
     [ngClass]="{ 'is-active': _filter == 'tags' }"
   >
     <m-tooltip icon="face" i18n="@@NOTIFICATIONS__NOTIFICATIONS__TAGS_FILTER">tags</m-tooltip>
@@ -41,8 +41,8 @@
   >
     <m-tooltip icon="repeat" i18n="@@NOTIFICATIONS__NOTIFICATIONS__REMINDS_FILTER">Reminds</m-tooltip>
     <span class="m-full-label" i18n="@@NOTIFICATIONS__NOTIFICATIONS__REMINDS_FILTER">Reminds</span>
-  </a>
-</div>
+  </a>-->
+</div> 
 
 <div class="m-notifications--load-new mdl-color--blue-grey-50" *ngIf="opspot.notifications_count > 0">
   <a *ngIf="!inProgress" (click)="load(true)"> 
