@@ -29,7 +29,7 @@ export class ForgotPasswordComponent {
 
   // step1
   step1Form: FormGroup;
-  mobileNumber
+  mobileOremail
 
   // ste2
   step2Form: FormGroup;
@@ -51,10 +51,10 @@ export class ForgotPasswordComponent {
     public formBuilder: FormBuilder
   ) {
     this.step1Form = this.formBuilder.group({
-      mobileNumber: ['', [Validators.required]]
+      mobileEmail: ['', [Validators.required]]
     }),
       this.step2Form = this.formBuilder.group({
-        // otp: this.formBuilder.group({
+        // otpNum: this.formBuilder.group({
         otpNum1: ['', [Validators.required]],
         otpNum2: ['', [Validators.required]],
         otpNum3: ['', [Validators.required]],
@@ -64,19 +64,20 @@ export class ForgotPasswordComponent {
       })
     // })
     this.step3Form = this.formBuilder.group({
-      newPassword: ['', [Validators.required]],
-      confirmPassword: ['', []]
+      newPassword: [null, [Validators.required]],
+      confirmPassword: [null, []]
     }, { validators: this.passwordConfirmcheck })
   }
 
 
 
-  passwordConfirmcheck(c: AbstractControl): { invalid: boolean } {
-    if (c.get('password').value !== c.get('confirm_password').value) {
-      c.get('confirm_password').setErrors({ 'noMatch': true });
-      return { invalid: true };
+  passwordConfirmcheck(c: AbstractControl): { passwordMismatched: boolean } {
+    if (c.get('newPassword').value !== c.get('confirmPassword').value) {
+      return { passwordMismatched: true };
     }
+    return null;
   }
+
 
   ngOnInit() {
     // this.title.setTitle('Forgot Password');
@@ -98,17 +99,39 @@ export class ForgotPasswordComponent {
 
   submitted1 = false;
   request() {
-    this.error = '';
-    // this.inProgress = true;
     this.submitted1 = true;
-    if (this.step1Form.valid)
-      // this.step = 2;
+    this.mobileOremail = this.step1Form.value.mobileEmail
+    if (isNaN(this.mobileOremail)) {
+      //this.step = 3
+      // this.error = '';
+      // if (this.step1Form.valid)
+      //   this.inProgress = true;
+      // this.client.post('api/v3/verification/mobile/verify', {
+      //   number: this.mobileOremail
+      // })
+      //   .then((data: any) => {
+      //     // username.value = '';
+      //     this.inProgress = false;
+      //     this.step = 3;
+      //   })
+      //   .catch((e) => {
+      //     this.inProgress = false;
+      //     if (e.status === 'failed') {
+      //       this.error = 'There was a problem trying to reset your password. Please try again.';
+      //     }
+      //     if (e.status === 'error') {
+      //       this.error = e.message;
+      //     }
+      //   });
+    } else {
+      this.error = '';
+      if (this.step1Form.valid)
+        this.inProgress = true;
       this.client.post('api/v3/verification/mobile/verify', {
-        number: this.step1Form.value.mobileNumber
+        number: this.mobileOremail
       })
         .then((data: any) => {
           // username.value = '';
-
           this.inProgress = false;
           this.step = 2;
         })
@@ -121,6 +144,48 @@ export class ForgotPasswordComponent {
             this.error = e.message;
           }
         });
+    }
+  }
+
+
+  submitted2 = false;
+  otp
+  validateOtp() {
+    this.otp = this.step2Form.value.otpNum1 + this.step2Form.value.otpNum2 + this.step2Form.value.otpNum3 + this.step2Form.value.otpNum4 + this.step2Form.value.otpNum5 + this.step2Form.value.otpNum6
+    this.submitted2 = true;
+    if (this.step2Form.valid) {
+      this.client.post('api/v3/verification/mobile/confirm', {
+        number: '',
+        code: this.otp
+      })
+    }
+
+    //this.step = 4;
+  }
+
+  submitted3 = false;
+  updatePassword() {
+    this.submitted3 = true;
+    // this.step = 3;
+  }
+
+  nextOtpNum(event) {
+    var keyCode = event.keyCode;
+    if (keyCode > 31 && (keyCode < 48 || keyCode > 57)) {
+      return false;
+    }
+    let nextInput = event.srcElement.nextElementSibling; // get the sibling element
+    let previous = event.srcElement.previousElementSibling; //get the previous
+    if (keyCode === 8) {
+      if (event.srcElement.previousElementSibling === null) {
+        return;
+      }
+      else { previous.focus(); }
+    }
+    else if (nextInput == null)  // check the maxLength from here
+      return;
+    else
+      nextInput.focus();
   }
 
   // setCode(code: string) {
@@ -157,37 +222,6 @@ export class ForgotPasswordComponent {
   // }
 
 
-  submitted2 = false;
-  validateOtp() {
-    this.submitted2 = true;
-    if (this.step2Form.valid)
-      this.step = 3;
-  }
-
-  submitted3 = false;
-  updatePassword() {
-    this.submitted3 = true;
-    this.step = 3;
-  }
-
-  nextOtpNum(event, pos: number) {
-    let nextInput = event.srcElement.nextElementSibling; // get the sibling element
-    let previous = event.srcElement.previousElementSibling; //get the previous
-    console.log(event)
-    var target = event.target || event.srcElement;
-    var id = target.id
-
-    if (event.keyCode === 8) {
-      if (event.srcElement.previousElementSibling === null) {
-        return;
-      }
-      else { previous.focus(); }
-    }
-    else if (nextInput == null)  // check the maxLength from here
-      return;
-    else
-      nextInput.focus();
-  }
 
 
 }
