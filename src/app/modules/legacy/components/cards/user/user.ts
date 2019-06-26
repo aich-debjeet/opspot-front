@@ -19,7 +19,7 @@ export class UserCard {
 
   constructor(public session: Session, public client: Client) {
   }
-
+  
   set object(value: any) {
     this.user = value;
     this.bannerSrc = `${this.opspot.cdn_url}fs/v1/banners/${this.user.guid}/fat/${this.user.icontime}`;

@@ -21,6 +21,9 @@
                readonly onfocus="this.removeAttribute('readonly');">
               <!-- <a href="#" class="text-md primary">gowtham_aeione,</a>
               <a href="#" class="text-md primary">gowtham_aeione49</a> -->
+              <div *ngIf="form.controls['username'].touched && !form.controls['username'].valid" class="error text-sm">
+                <div *ngIf="form.controls['username'].errors.required">Username is required</div>
+            </div>
             </div>
             <div class="form-group">
               <input type="text" formControlName='email' class="form-control form-control-lg" placeholder="Email">
@@ -39,6 +42,9 @@
                 name="phone"
                 formControlName='mobileNumber'
                 ></ngx-intl-tel-input>
+                <div *ngIf="form.controls['mobileNumber'].touched && !form.controls['mobileNumber'].valid" class="error text-sm">
+                  <div *ngIf="form.controls['mobileNumber'].errors.required">Mobile is required</div>
+              </div>
               </div>
             <div class="o-otp">
               <div class="o-otp__title text-md">Enter OTP <a  class="primary">Resend OTP</a></div>
@@ -100,13 +106,13 @@
             </div>
 
             <div class="o-terms-condition">
-                <label class="c-checkbox">I agree with the <a href="#" class="primary">terms of use</a> and <a href="#" class="primary">privacy policy</a>
-                    <input type="checkbox">
+                <label class="c-checkbox">I agree with the <a href="javascript:void(0)" class="primary">terms of use</a> and <a href="javascript:void(0)" class="primary">privacy policy</a>
+                    <input type="checkbox" formControlName="tos">
                     <span class="checkmark"></span>
                   </label>
             </div>
 
-            <button type="button" (click)="register($event)"  class="btn btn-primary btn-block">Get Started</button>
+            <button type="button" (click)="register($event)"  class="btn btn-primary btn-block" [disabled]="!this.form.valid || inProgress">Get Started</button>
           </form>
         </div>
         <div class="o-signup o-signup--img">
@@ -122,11 +128,11 @@
 </div>
 
   
-<!-- <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0;" [hidden]="!errorMessage">
+<div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0;" [hidden]="!errorMessage">
   <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
     {{errorMessage}}
   </div>
-</div> -->
+</div>
 
 <!-- START: Register -->
 <!-- <form (submit)="$event.preventDefault()" [formGroup]="form" class="mdl-card mdl-color-text--blue-grey-400 m-form m-login-box" [hidden]="hideLogin" *ngIf="!showFbForm">

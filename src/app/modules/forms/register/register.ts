@@ -53,7 +53,7 @@ export class RegisterForm {
         otp1:'',otp2:'',otp3:'',otp4:'',otp5:'',otp6:''
       }, {updateOn: 'blur',})  ,
       tos: [false],
-      mobileNumber:['',{updateOn: 'blur'}],
+      mobileNumber:['',{validators: Validators.required, updateOn: 'blur'}],
       exclusive_promotions: [false],
       captcha: [''],
       Homepage121118: experiments.getExperimentBucket('Homepage121118'),
@@ -65,13 +65,11 @@ export class RegisterForm {
 
     //for dob 
   }
-  dateOfBirth;
+   dateOfBirth;
   //mobile number entered
    onMobileNumbr(){
     let numbers;
    this.form.controls['mobileNumber'].valueChanges.subscribe(val=>{
-    //  console.log(val)
-    //  console.log(val.internationalNumber.replace(/\s/g,''))
      numbers=val.internationalNumber.replace(/\s/g,'');
       this.getOtp(numbers)
     })
@@ -121,52 +119,56 @@ export class RegisterForm {
       this.errorMessage = 'To create an account you need to accept terms and conditions.';
       return;
     }
+    // if (this.form.value.password !== this.form.value.password2) {
+    //   if (this.reCaptcha) {
+    //     this.reCaptcha.reset();
+    //   }
 
-    //re-enable cookies
-    document.cookie = 'disabled_cookies=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-
-    if (this.form.value.password !== this.form.value.password2) {
-      if (this.reCaptcha) {
-        this.reCaptcha.reset();
+    //   this.errorMessage = 'Passwords must match.';
+    //   return;
+    // }
+    if(this.form.valid){
+      if(this.form.value.dobGroup.month.match(/[a-z]/i)){
+        let month=['Month','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+        let ind = month.indexOf(this.form.value.dobGroup.month);
+        this.form.controls['dobGroup'].patchValue({month: ind});
       }
+      //re-enable cookies
+      document.cookie = 'disabled_cookies=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      this.form.value.referrer = this.referrer;
 
-      this.errorMessage = 'Passwords must match.';
-      return;
-    }
+      this.inProgress = true;
+      this.client.post('api/v1/register', this.form.value)
+        .then((data: any) => {
+          // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
 
-    this.form.value.referrer = this.referrer;
+          this.inProgress = false;
+          this.session.login(data.user);
 
-    this.inProgress = true;
-    this.client.post('api/v1/register', this.form.value)
-      .then((data: any) => {
-        // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
+          this.done.next(data.user);
+        })
+        .catch((e) => {
+          console.log(e);
+          this.inProgress = false;
+          if (this.reCaptcha) {
+            this.reCaptcha.reset();
+          }
 
-        this.inProgress = false;
-        this.session.login(data.user);
+          if (e.status === 'failed') {
+            //incorrect login details
+            this.errorMessage = 'RegisterException::AuthenticationFailed';
+            this.session.logout();
+          } else if (e.status === 'error') {
+            //two factor?
+            this.errorMessage = e.message;
+            this.session.logout();
+          } else {
+            this.errorMessage = "Sorry, there was an error. Please try again.";
+          }
 
-        this.done.next(data.user);
-      })
-      .catch((e) => {
-        console.log(e);
-        this.inProgress = false;
-        if (this.reCaptcha) {
-          this.reCaptcha.reset();
-        }
-
-        if (e.status === 'failed') {
-          //incorrect login details
-          this.errorMessage = 'RegisterException::AuthenticationFailed';
-          this.session.logout();
-        } else if (e.status === 'error') {
-          //two factor?
-          this.errorMessage = e.message;
-          this.session.logout();
-        } else {
-          this.errorMessage = "Sorry, there was an error. Please try again.";
-        }
-
-        return;
-      });
+          return;
+        });
+      }
   }
 
   validateUsername() {
@@ -199,10 +201,9 @@ export class RegisterForm {
 
   // function to give birth date selection
 
-
   dob(){
     let date=['Date',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
-    let month=['Month','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']
+    let month=['Month','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']    
     let year=['Year'];
     let a =new Date().getFullYear()-13;
     let ab=a-70;

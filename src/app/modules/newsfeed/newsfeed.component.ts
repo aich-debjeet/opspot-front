@@ -101,7 +101,7 @@ export class NewsfeedComponent {
   }
 
   ngOnInit() {
-
+     console.log("from newsfeed")
     if (!this.session.isLoggedIn()) {
       this.router.navigate(['/login']); //force login
     } else {

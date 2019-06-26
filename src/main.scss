@@ -10,6 +10,7 @@
 @import "src/assets/scss/components/flag";
 @import "src/assets/scss/components/radio-checkbox";
 @import "src/assets/scss/components/tootip";
+@import "src/assets/scss/components/common";
 
 
 
@@ -5515,7 +5516,7 @@ m-sidebar {
   border-top: 4px solid #FFF;
   border-bottom: 4px solid #FFF; }
   .m-topbar--navigation--item.m-topbar--navigation--item-active {
-    border-top: 4px solid #4af;
+    border-bottom: 4px solid #4af;
     color: #4690DF; }
     .m-topbar--navigation--item.m-topbar--navigation--item-active i {
       color: #4690DF; }
@@ -5529,7 +5530,11 @@ m-sidebar {
     padding-left: 4px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    position: relative; }
+    position: relative; 
+    margin-top:1;
+    line-height:20px;
+    font-weight:500;
+  }
 
 .m-topbarNavigationItem__text--has-marker::after {
   background: #4690DF;
@@ -5596,15 +5601,15 @@ m-topbar {
     max-width: 1280px; }
   m-topbar .m-topbar--logo {
     background: #FFF;
-    width: 52px;
+    width: 40px;
     height: 100%;
     text-align: center; }
     m-topbar .m-topbar--logo img {
-      max-height: 36px;
-      margin-top: 8px; }
+      max-height: 40px;
+      margin-top: 0px; }
       @media screen and (max-width: 480px) {
         m-topbar .m-topbar--logo img {
-          max-height: 20px;
+          max-height: 40px;
           margin-top: 16px; } }
   m-topbar .m-menu--button {
     display: none; }
@@ -5624,10 +5629,10 @@ m-topbar {
             align-self: stretch;
     -webkit-align-items: center;
             align-items: center;
-    height: 52px;
+    height: 56px;
     margin: auto;
     width: 100%;
-    padding-right: 16px; }
+    padding:8px 16px 8px 0px; }
   @media screen and (max-width: 1080px) {
     m-topbar m-search--bar {
       max-width: 150px; }
@@ -18354,19 +18359,20 @@ m-plus--subscription {
  * Padding, Margins and Offset
  */
 m-search--bar {
-  width: 200px; }
+  width: 400px; }
   m-search--bar .mdl-textfield {
     width: 100%; }
     m-search--bar .mdl-textfield .material-icons {
       position: absolute;
       margin: 6px;
+      left: 18em;
       font-size: 20px; }
     m-search--bar .mdl-textfield input {
       background: #ffffff;
       border: 1px solid rgba(0, 0, 0, 0.12); }
     m-search--bar .mdl-textfield input, m-search--bar .mdl-textfield label {
       padding: 8px 8px 8px 32px;
-      box-sizing: border-box; }
+      box-sizing: border-box; }   
   @media screen and (max-width: 1080px) {
     m-search--bar {
       width: 180px; } }
@@ -18388,7 +18394,7 @@ m-search--bar {
     display: none; }
   m-search--bar .mdl-textfield .mdl-textfield__input {
     height: 32px;
-    border-radius: 18px;
+    border-radius: 0px;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     letter-spacing: 0.5px;
@@ -18432,17 +18438,17 @@ m-search--bar-suggestions {
   display: block; }
   m-search--bar-suggestions .m-search-bar-suggestions-list {
     background: #FFF;
-    border: 1px solid #EEE;
+    border: 1px solid #ECEFF1;
     padding: 0;
     margin: 0;
     position: absolute;
     z-index: 5000;
     box-sizing: border-box;
-    width: 200%; }
+    width: 100%; }
     m-search--bar-suggestions .m-search-bar-suggestions-list .m-search-bar-suggestions-suggestion {
       cursor: pointer;
-      padding: 4px;
-      border-bottom: 1px solid #EEE;
+      padding: 8px;
+      border-bottom: 1px solid #ECEFF1;
       display: block;
       text-decoration: none;
       font-size: 14px;
@@ -18460,7 +18466,7 @@ m-search--bar-suggestions {
   m-search--bar-suggestions .m-search-bar-suggestions-context {
     color: rgba(74, 74, 74, 0.83);
     font-family: 'Roboto', sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 26px;
     letter-spacing: 1.75px;
     font-weight: 500; }
@@ -23543,3 +23549,19 @@ img {
 
 .cf:after {
   clear: both; }
+
+
+
+  @media screen and (max-width:992px){
+    m-search--bar .mdl-textfield .material-icons{
+      display:none !important;
+    }
+  }
+
+.opspot-search{
+  width: 400px !important;
+  padding-right:30px !important;
+  border:1px solid #ECEFF1 !important;
+  color: #333 !important;
+  background: #ECEFF1 !important;
+}

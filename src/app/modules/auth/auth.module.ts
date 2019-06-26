@@ -47,6 +47,8 @@ const routes: Routes = [
     LogoutComponent,
     RegisterComponent,
     // ForgotPasswordComponent,
+  ],exports:[
+    LoginComponent,
   ]
 })
 
