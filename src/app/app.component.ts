@@ -51,7 +51,7 @@ export class Opspot {
   async ngOnInit() {
     this.notificationService.getNotifications();
 
-    this.session.isLoggedIn(async (is) => {
+    this.session.isLoggedIn(async(is) => {
       if (is) {
         this.showOnboarding = await this.onboardingService.showModal();
         if (this.opspot.user.language !== this.opspot.language) {
