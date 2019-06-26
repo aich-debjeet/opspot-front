@@ -10,6 +10,7 @@
 @import "src/assets/scss/components/flag";
 @import "src/assets/scss/components/radio-checkbox";
 @import "src/assets/scss/components/tootip";
+@import "src/assets/scss/components/common";
 
 
 
@@ -5628,7 +5629,7 @@ m-topbar {
             align-self: stretch;
     -webkit-align-items: center;
             align-items: center;
-    //height: 56px;
+    height: 56px;
     margin: auto;
     width: 100%;
     padding:8px 16px 8px 0px; }
@@ -18437,17 +18438,17 @@ m-search--bar-suggestions {
   display: block; }
   m-search--bar-suggestions .m-search-bar-suggestions-list {
     background: #FFF;
-    border: 1px solid #EEE;
+    border: 1px solid #ECEFF1;
     padding: 0;
     margin: 0;
     position: absolute;
     z-index: 5000;
     box-sizing: border-box;
-    width: 200%; }
+    width: 100%; }
     m-search--bar-suggestions .m-search-bar-suggestions-list .m-search-bar-suggestions-suggestion {
       cursor: pointer;
-      padding: 4px;
-      border-bottom: 1px solid #EEE;
+      padding: 8px;
+      border-bottom: 1px solid #ECEFF1;
       display: block;
       text-decoration: none;
       font-size: 14px;
@@ -18465,7 +18466,7 @@ m-search--bar-suggestions {
   m-search--bar-suggestions .m-search-bar-suggestions-context {
     color: rgba(74, 74, 74, 0.83);
     font-family: 'Roboto', sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 26px;
     letter-spacing: 1.75px;
     font-weight: 500; }
