@@ -18,6 +18,7 @@ import { ChannelOnboardingService } from "./modules/onboarding/channel/onboardin
   moduleId: module.id,
   selector: 'm-app',
   templateUrl: 'app.component.html',
+  styleUrls:['app.component.scss']
 })
 export class Opspot {
   name: string;
@@ -50,7 +51,7 @@ export class Opspot {
   async ngOnInit() {
     this.notificationService.getNotifications();
 
-    this.session.isLoggedIn(async (is) => {
+    this.session.isLoggedIn(async(is) => {
       if (is) {
         this.showOnboarding = await this.onboardingService.showModal();
         if (this.opspot.user.language !== this.opspot.language) {

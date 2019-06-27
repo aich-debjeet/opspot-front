@@ -11,6 +11,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
 import { HomepageComponent } from './homepage.component';
 import { MarketingModule } from '../marketing/marketing.module';
 import { ExperimentsModule } from '../experiments/experiments.module';
+import { AuthModule } from '../auth/auth.module';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent }
@@ -28,6 +29,7 @@ const routes: Routes = [
     OpspotFormsModule,
     MarketingModule,
     ExperimentsModule,
+    AuthModule
   ],
   declarations: [
     HomepageComponent,

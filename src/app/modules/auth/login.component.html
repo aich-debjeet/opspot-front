@@ -1,13 +1,36 @@
 
-<div class="m-login">
-  <div>
-    <h3 i18n="@@OPSPOT__HOME__LOGIN__LOGIN">Login to Opspot</h3>
-    <opspot-form-login (done)="loggedin()" (doneRegistered)="registered()"></opspot-form-login>
-  </div>
+<!-- <div class="m-login"> -->
+  <!-- <div> -->
+    <!-- <h3 i18n="@@OPSPOT__HOME__LOGIN__LOGIN">Login to Opspot</h3> -->
+    <div style="background: white">
+    <opspot-form-login (done)="loggedin()" (vwLogin)="log($event)" (doneRegistered)="registered()"></opspot-form-login>
+  <!-- </div> -->
 
-  <div>
-    <h3 i18n="@@M__COMMON__START_A_CHANNEL">Not on Opspot? Start a channel</h3>
-    <opspot-form-register [referrer]="referrer" (done)="registered()"></opspot-form-register>
+    <!-- <h3 i18n="@@M__COMMON__START_A_CHANNEL">Not on Opspot? Start a channel</h3> -->
+ 
+    <opspot-form-register  *ngIf="loginView" [referrer]="referrer"   (done)="registered()"></opspot-form-register> 
+ 
+<!-- </div> -->
+
+<footer>
+  <div class="container">
+      <ul class="o-footer-link">
+          <li class="o-footer-link__item">
+              <a href="#" class="text-md">About</a>
+          </li>
+          <li class="o-footer-link__item">
+              <a href="#" class="text-md">Help</a>
+          </li>
+          <li class="o-footer-link__item">
+              <a href="#" class="text-md">Terms</a>
+          </li>
+          <li class="o-footer-link__item">
+              <a href="#" class="text-md">Privacy</a>
+          </li>
+          <li class="o-footer-link__item">
+              <a href="#" class="text-md">Jobs</a>
+          </li>
+      </ul>
   </div>
+</footer>
 </div>
-

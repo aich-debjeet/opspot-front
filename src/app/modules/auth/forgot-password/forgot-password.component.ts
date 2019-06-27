@@ -1,25 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Subscription } from 'rxjs';
 
 import { OpspotTitle } from '../../../services/ux/title';
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
+import Swal from 'sweetalert2';
+import { LoginComponent } from '../login.component';
+import { LoginForm } from '../../forms/login/login';
+import { Form, FormGroup } from '@angular/forms';
 
 @Component({
   moduleId: module.id,
   selector: 'm-forgot-password',
-  templateUrl: 'forgot-password.component.html'
+  templateUrl: 'forgot-password.component.html',
+  styleUrls: ['forgot-password.component.scss']
+
 })
 
 export class ForgotPasswordComponent {
+  // @ViewChild('mySwal') private mySwal: LoginForm;
 
-  error: string = '';
-  inProgress: boolean = false;
-  step: number = 1;
-  username: string = '';
-  code: string = '';
+
+  error = '';
+  inProgress = false;
+  step = 1;
+  username = '';
+  code = '';
+
+  // step1
+  step1Form: FormGroup;
+
+  // step1
+  step2Form: FormGroup;
+
+  // step1
+  step3Form: FormGroup;
+
 
   paramsSubscription: Subscription;
 
@@ -108,4 +126,16 @@ export class ForgotPasswordComponent {
         });
     }
   }
+
+
+  show2Form() {
+    this.step = 2;
+  }
+  
+  show3Form() {
+    this.step = 3;
+  }
+
+
+  
 }

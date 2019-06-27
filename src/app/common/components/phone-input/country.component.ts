@@ -7,7 +7,8 @@ import { CountryCode } from './countries';
 
 @Component({
   selector: 'm-phone-input--country',
-  templateUrl: 'country.component.html'
+  templateUrl: 'country.component.html',
+  styleUrls:['../../../modules/forms/register/register.scss']
 })
 
 export class PhoneInputCountryComponent {

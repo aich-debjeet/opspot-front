@@ -1,5 +1,5 @@
 import { Component, EventEmitter, ViewChild, Input, Output, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl } from '@angular/forms';
 
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
@@ -9,7 +9,8 @@ import { ExperimentsService } from '../../experiments/experiments.service';
 @Component({
   moduleId: module.id,
   selector: 'opspot-form-register',
-  templateUrl: 'register.html'
+  templateUrl: 'register.html',
+  styleUrls:['register.scss']
 })
 
 export class RegisterForm {
@@ -22,6 +23,7 @@ export class RegisterForm {
   captcha: string;
   takenUsername: boolean = false;
   usernameValidationTimeout: any;
+  number;
 
   showFbForm: boolean = false;
 
@@ -33,6 +35,7 @@ export class RegisterForm {
 
   @ViewChild('reCaptcha') reCaptcha: ReCaptchaComponent;
 
+
   constructor(
     public session: Session,
     public client: Client,
@@ -41,77 +44,131 @@ export class RegisterForm {
     private experiments: ExperimentsService,
   ) {
     this.form = fb.group({
+      fullname:['' ,Validators.required],
       username: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required,Validators.email]],
+      password: ['', [Validators.required,this.checkPassword]],
       password2: ['', Validators.required],
+      otp:fb.group({
+        otp1:'',otp2:'',otp3:'',otp4:'',otp5:'',otp6:''
+      }, {updateOn: 'blur',})  ,
       tos: [false],
+      mobileNumber:['',{validators: Validators.required, updateOn: 'blur'}],
       exclusive_promotions: [false],
       captcha: [''],
       Homepage121118: experiments.getExperimentBucket('Homepage121118'),
-    });
+      dobGroup:fb.group({
+        date:['', Validators.required],month:['', Validators.required],year:['', Validators.required],
+      }),
+    },{validator:this.MustMatch('password','password2') },
+     )
+
+    //for dob 
+  }
+   dateOfBirth;
+  //mobile number entered
+   onMobileNumbr(){
+    let numbers;
+   this.form.controls['mobileNumber'].valueChanges.subscribe(val=>{
+     numbers=val.internationalNumber.replace(/\s/g,'');
+      this.getOtp(numbers)
+    })
 
   }
+  onOtp(){
+    this.form.controls['otp'].valueChanges.subscribe(val=>{
+      let a=Object.values(val)
+      let values=''
+      a.forEach(a=>{
+        values+=a
+      })
+      if(values.length===6){
+        console.log("verify the otp")
+      }
+        
+    })
+  }
+  //for getting otp
+  async getOtp(numbr){
+    let response: any = await this.client.post('api/v3/verification/mobile/verify', {
+      number: numbr,  
+    }).then(res=>{
+      console.log(res)
+    })
+
+  }
+   
+
+
 
   ngOnInit() {
+ 
+    this.dateOfBirth=this.dob();
     if (this.reCaptcha) {
       this.reCaptcha.reset();
     }
+    this.onMobileNumbr()
+    this.onOtp()
   }
 
   register(e) {
+    // console.log(this.form.value)
     e.preventDefault();
     this.errorMessage = '';
     if (!this.form.value.tos) {
       this.errorMessage = 'To create an account you need to accept terms and conditions.';
       return;
     }
+    // if (this.form.value.password !== this.form.value.password2) {
+    //   if (this.reCaptcha) {
+    //     this.reCaptcha.reset();
+    //   }
 
-    //re-enable cookies
-    document.cookie = 'disabled_cookies=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-
-    if (this.form.value.password !== this.form.value.password2) {
-      if (this.reCaptcha) {
-        this.reCaptcha.reset();
+    //   this.errorMessage = 'Passwords must match.';
+    //   return;
+    // }
+    if(this.form.valid){
+      if(this.form.value.dobGroup.month.match(/[a-z]/i)){
+        let month=['Month','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+        let ind = month.indexOf(this.form.value.dobGroup.month);
+        this.form.controls['dobGroup'].patchValue({month: ind});
       }
+      //re-enable cookies
+      document.cookie = 'disabled_cookies=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      this.form.value.referrer = this.referrer;
 
-      this.errorMessage = 'Passwords must match.';
-      return;
-    }
+      this.inProgress = true;
+      this.client.post('api/v1/register', this.form.value)
+        .then((data: any) => {
+          // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
 
-    this.form.value.referrer = this.referrer;
+          this.inProgress = false;
+          this.session.login(data.user);
 
-    this.inProgress = true;
-    this.client.post('api/v1/register', this.form.value)
-      .then((data: any) => {
-        // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
+          this.done.next(data.user);
+        })
+        .catch((e) => {
+          console.log(e);
+          this.inProgress = false;
+          if (this.reCaptcha) {
+            this.reCaptcha.reset();
+          }
 
-        this.inProgress = false;
-        this.session.login(data.user);
+          if (e.status === 'failed') {
+            //incorrect login details
+            this.errorMessage = 'RegisterException::AuthenticationFailed';
+            this.session.logout();
+          } else if (e.status === 'error') {
+            //two factor?
+            this.errorMessage = e.message;
+            this.session.logout();
+          } else {
+            this.errorMessage = "Sorry, there was an error. Please try again.";
+          }
 
-        this.done.next(data.user);
-      })
-      .catch((e) => {
-        console.log(e);
-        this.inProgress = false;
-        if (this.reCaptcha) {
-          this.reCaptcha.reset();
-        }
-
-        if (e.status === 'failed') {
-          //incorrect login details
-          this.errorMessage = 'RegisterException::AuthenticationFailed';
-          this.session.logout();
-        } else if (e.status === 'error') {
-          //two factor?
-          this.errorMessage = e.message;
-          this.session.logout();
-        } else {
-          this.errorMessage = "Sorry, there was an error. Please try again.";
-        }
-
-        return;
-      });
+          return;
+        });
+      }
   }
 
   validateUsername() {
@@ -142,4 +199,64 @@ export class RegisterForm {
     this.usernameValidationTimeout = setTimeout(this.validateUsername.bind(this), 500);
   }
 
+  // function to give birth date selection
+
+  dob(){
+    let date=['Date',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+    let month=['Month','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']    
+    let year=['Year'];
+    let a =new Date().getFullYear()-13;
+    let ab=a-70;
+      for(let i:any=a; i>=ab; i--){
+         year.push(i)
+      }
+     return {date,month,year}
+  }
+  //password controls
+  checkPassword(control:AbstractControl) {
+    let enteredPassword = control.value
+    let passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+    return (!passwordCheck.test(enteredPassword) && enteredPassword) ? { 'requirements': true } : null;
+  }
+  //password error messages
+  getErrorPassword() {
+    return this.form.get('password').hasError('required') ? 'Field is required (at least eight characters, one uppercase letter and one number)' :
+      this.form.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
+  }
+
+  //for confirm password
+  MustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+        const control = formGroup.controls[controlName];
+        const matchingControl = formGroup.controls[matchingControlName];
+        if (matchingControl.errors && !matchingControl.errors.mustMatch) {return;}
+        if (control.value !== matchingControl.value) { matchingControl.setErrors({ mustMatch: true });
+        } else {  matchingControl.setErrors(null);
+        }
+    }
+  }
+
+  //for jumping to next input in otp
+  keytab(event){
+    let nextInput = event.srcElement.nextElementSibling; // get the sibling element
+    let previous=  event.srcElement.previousElementSibling; //get the previous
+    console.log(event)
+    var target = event.target || event.srcElement;
+    var id = target.id
+    
+    if(event.keyCode===8) {
+    if(event.srcElement.previousElementSibling===null){
+      return;
+    }
+      else{ previous.focus();}
+    }
+    else if(nextInput == null)  // check the maxLength from here
+        return;
+     
+    else
+        nextInput.focus();   // focus if not null
 }
+
+  
+}
+

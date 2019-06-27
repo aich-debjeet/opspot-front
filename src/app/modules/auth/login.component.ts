@@ -12,7 +12,10 @@ import { OnboardingService } from '../onboarding/onboarding.service';
 
 @Component({
   selector: 'm-login',
-  templateUrl: 'login.component.html'
+  templateUrl: 'login.component.html',
+  styleUrls:['login.component.scss']
+
+
 })
 
 export class LoginComponent {
@@ -40,19 +43,29 @@ export class LoginComponent {
     private loginReferrer: LoginReferrerService,
     public session: Session,
     private onboarding: OnboardingService,
+
   ) { }
+  loginView=false;
+
+  log(e){
+    this.loginView=!this.loginView;
+  }
 
   ngOnInit() {
     if (this.session.isLoggedIn()) {
       this.loginReferrer.register('/newsfeed');
       // this.loginReferrer.navigate();
     }
-
+    if(window.screen.width>600){
+      this.loginView=true;
+    }
+ 
     this.title.setTitle('Login');
     this.redirectTo = localStorage.getItem('redirect');
 
     this.paramsSubscription = this.route.queryParams.subscribe((params) => {
       if (params['referrer']) {
+        console.log(params['referrer'])
         this.referrer = params['referrer'];
       }
     });
@@ -69,21 +82,21 @@ export class LoginComponent {
   loggedin() {
     if (this.referrer)
       this.router.navigateByUrl(this.referrer);
-    else if (this.redirectTo)
+    else if (this.redirectTo) 
       this.router.navigate([this.redirectTo]);
     else
       this.loginReferrer.navigate();
   }
 
   registered() {
-    if (this.redirectTo)
-      this.router.navigate([this.redirectTo]);
-    else {
-      this.modal.setDisplay('categories').open();
-      this.loginReferrer.navigate({
-        defaultUrl: '/' + this.session.getLoggedInUser().username
-      });
-    }
+    // if (this.redirectTo)
+    //   this.router.navigate([this.redirectTo]);
+    // else {
+    //   this.modal.setDisplay('categories').open();
+    //   this.loginReferrer.navigate({
+    //     defaultUrl: '/' + this.session.getLoggedInUser().username
+    //   });
+    // }
   }
 
 }

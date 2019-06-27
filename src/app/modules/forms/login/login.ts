@@ -1,18 +1,26 @@
-import { Component, EventEmitter, NgZone } from '@angular/core';
+import { Component, EventEmitter, NgZone, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
+import Swal from 'sweetalert2'
+import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-password.component';
+
 
 
 @Component({
   moduleId: module.id,
   selector: 'opspot-form-login',
   outputs: ['done', 'doneRegistered'],
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+  styleUrls:['login.scss']
+   
 })
 
 export class LoginForm {
+
+  // @ViewChild('#mySwal') private mySwal: ForgotPasswordComponent;
+
 
   errorMessage: string = '';
   twofactorToken: string = '';
@@ -20,12 +28,14 @@ export class LoginForm {
   inProgress: boolean = false;
   referrer: string;
   opspot = window.Opspot;
-
   form: FormGroup;
+  loginHide: boolean = true;
+  @Output()vwLogin=new EventEmitter()
+  submitted=false;
 
   done: EventEmitter<any> = new EventEmitter();
   doneRegistered: EventEmitter<any> = new EventEmitter();
-
+  regBtn=true
   constructor(public session: Session, public client: Client, fb: FormBuilder, private zone: NgZone) {
 
     this.form = fb.group({
@@ -34,8 +44,16 @@ export class LoginForm {
     });
 
   }
-
+  showRegister(){
+    this.loginHide=!this.loginHide;
+    this.vwLogin.emit(true)
+    this.regBtn=!this.regBtn;
+  }
+  get f(){
+    return this.form.controls
+  }
   login() {
+    this.submitted=true;
     if (this.inProgress)
       return;
 
@@ -82,7 +100,11 @@ export class LoginForm {
       .catch((e) => {
         this.errorMessage = e.message;
         this.twofactorToken = '';
-        this.hideLogin = false;
+        this.hideLogin = true;
       });
   }
+
+  // openModal(){
+  //   Swal.fire({html: '<m-forgot-password></m-forgot-password>'})
+  // }
 }

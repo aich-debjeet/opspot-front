@@ -1,38 +1,79 @@
-@import "defaults";
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
 
-.m-login-box{
-  margin-top:$opspot-margin*2;
-  width:100% !important;
 
-  h3{
-    margin:0;
-    font-size:24px;
-    line-height:26px;
+header{
+  width: 100%;
+  padding-top:37px;
+  float: left;
+  @include mq($from: $mobile_sm, $until: $mobile) {
+      margin:15px!important;
+      width : calc(100% - 30px);
+      padding: 0px;
   }
-
-  .mdl-grid{
-    padding:0;
-    width:100%;
+}
+.logo{
+  width: 210px;
+  float: left;
+  @include mq($from: $mobile_sm, $until: $mobile) {
+      width: 101px!important;
   }
-
-  input{
-    // padding:$opspot-padding*2;
-    padding: 10px 15px;
-    font-size:13px;
-    width:100%;
-    -webkit-appearance:none;
-    border: 1px solid $opspot-grey;
-    border-radius: 4px;
-    font-family: Roboto;
-    font-weight: 400;
-
-    &::placeholder {
-      font-weight: 400;
-    }
+  img{
+      width: 100%;
   }
+}
+.o-login{
+  float: right;
+  display: flex;
+  align-items: baseline;
+  .m-8{
+      margin: 8px;
+  }
+}
 
-  .m-reset-password-link{
-    padding-left:$opspot-padding*2;
-    text-decoration:none;
+.main-content{
+  min-height: calc(100vh - 130px);
+  margin: 0px auto 40px auto;
+  width: 91%;
+}
+.opspot-components{
+  width: 100%;
+  background: primary-dark ;
+  height: 273px;
+}
+.flex-row-center{    display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 273px;
+  h1, .text-md{
+      color: #fff;
+  }
+  
+}
+@include mq($from: $mobile_sm, $until:$desktop_sm ) {
+  .o-login-sec{
+      width: 100%;
+      display: inline-block;
+      min-height: calc(100vh - 198px);
+      margin: 0px auto 40px auto;
+      width: 100%;
+  }
+  .o-login-form{
+      width: 100%;
+      h2{
+          font-size: 24px!important;
+          font-weight: 300!important;
+          width: 290px;
+          margin: 24px auto 0px auto;
+          text-align: center
+      }
+      form{
+          width: 290px;
+          margin: 24px auto auto;
+          .btn{
+              margin-top: 30px;
+              display: inline-block;
+          }
+      }
   }
 }

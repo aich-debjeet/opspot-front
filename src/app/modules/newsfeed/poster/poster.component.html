@@ -2,8 +2,12 @@
   <div class="mdl-card__supporting-text">
     <div class="opspot-avatar">
       <a [routerLink]="['/', session.getLoggedInUser().username]">
-        <img
+        <!-- <img
           src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/"
+          class="m-border"
+        /> -->
+        <img
+          src="../../../assets/demo/avatar.png"
           class="m-border"
         />
       </a>
