@@ -17,7 +17,7 @@
                formControlName="username"
                placeholder="Username"
                i18n-placeholder="@@M__COMMON__USERNAME"
-               (keyup)="validationTimeoutHandler()"
+               
                readonly onfocus="this.removeAttribute('readonly');">
               <!-- <a href="#" class="text-md primary">gowtham_aeione,</a>
               <a href="#" class="text-md primary">gowtham_aeione49</a> -->
@@ -48,7 +48,7 @@
               </div>
             <div class="o-otp">
               <div class="o-otp__title text-md">Enter OTP <a  class="primary">Resend OTP</a></div>
-                <div class="otp">
+                <!-- <div class="otp">
                   <fieldset formGroupName="otp">
                     <input formControlName="otp1" (keyup)="keytab($event)" maxlength="1"/>
                     <input formControlName="otp2" (keyup)="keytab($event)" maxlength="1"/>
@@ -56,6 +56,16 @@
                     <input formControlName="otp4" (keyup)="keytab($event)" maxlength="1"/>
                     <input formControlName="otp5" (keyup)="keytab($event)" maxlength="1"/>
                     <input formControlName="otp6" (keyup)="keytab($event)" maxlength="1"/>
+                  </fieldset>
+                </div> -->
+                <div class="otp">
+                  <fieldset formGroupName="otp">
+                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp1">
+                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp2">
+                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp3">
+                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp4">
+                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp5">
+                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp6">
                   </fieldset>
                 </div>
             </div>
@@ -80,7 +90,7 @@
                 </div>
                 <div class="form-group m-l-13">
                   <select class="form-control" formControlName="month">
-                      <option *ngFor="let month of dateOfBirth.month;index as i"  placeholder="month"> {{month}}</option>
+                      <option *ngFor="let month of dateOfBirth.month" placeholder="month"> {{month}}</option>
                   </select>
                 </div>
                 <div class="form-group m-l-13" > 
@@ -111,7 +121,9 @@
                     <span class="checkmark"></span>
                   </label>
             </div>
-
+            <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0; margin-bottom:10px;" [hidden]="!errorMessage">
+              <p class="text-white">{{errorMessage}}</p>
+            </div>
             <button type="button" (click)="register($event)"  class="btn btn-primary btn-block" [disabled]="!this.form.valid || inProgress">Get Started</button>
           </form>
         </div>
@@ -128,11 +140,11 @@
 </div>
 
   
-<div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0;" [hidden]="!errorMessage">
+<!-- <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0;" [hidden]="!errorMessage">
   <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
     {{errorMessage}}
   </div>
-</div>
+</div> -->
 
 <!-- START: Register -->
 <!-- <form (submit)="$event.preventDefault()" [formGroup]="form" class="mdl-card mdl-color-text--blue-grey-400 m-form m-login-box" [hidden]="hideLogin" *ngIf="!showFbForm">
