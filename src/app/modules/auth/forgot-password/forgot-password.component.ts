@@ -29,16 +29,19 @@ export class ForgotPasswordComponent {
 
   // step1
   step1Form: FormGroup;
-  mobileOremail
+  mobileOremail;
+  submitted1 = false;
+
 
   // ste2
   step2Form: FormGroup;
+  secret;
+  submitted2 = false;
+  otp
 
   // step3
   step3Form: FormGroup;
-
-
-
+  submitted3 = false;
 
   paramsSubscription: Subscription;
 
@@ -61,113 +64,84 @@ export class ForgotPasswordComponent {
         otpNum4: ['', [Validators.required]],
         otpNum5: ['', [Validators.required]],
         otpNum6: ['', [Validators.required]]
-      })
-    // })
-    this.step3Form = this.formBuilder.group({
-      newPassword: [null, [Validators.required]],
-      confirmPassword: [null, []]
-    }, { validators: this.passwordConfirmcheck })
-  }
-
-
-
-  passwordConfirmcheck(c: AbstractControl): { passwordMismatched: boolean } {
-    if (c.get('newPassword').value !== c.get('confirmPassword').value) {
-      return { passwordMismatched: true };
-    }
-    return null;
+      }),
+      // })
+      this.step3Form = this.formBuilder.group({
+        newPassword: ['', [Validators.required]],
+        confirmPassword: ['', []]
+      }, { validators: this.passwordConfirmcheck })
   }
 
 
   ngOnInit() {
     // this.title.setTitle('Forgot Password');
 
-    // this.paramsSubscription = this.route.params.subscribe((params) => {
-    //   if (params['code']) {
-    //     this.setCode(params['code']);
-    //   }
+    this.paramsSubscription = this.route.params.subscribe((params) => {
+      if (params['code']) {
+        this.setCode(params['code']);
+      }
 
-    //   if (params['username']) {
-    //     this.username = params['username'];
-    //   }
-    // });
+      if (params['username']) {
+        this.username = params['username'];
+      }
+    });
   }
 
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();
   }
 
-  submitted1 = false;
   request() {
     this.submitted1 = true;
     this.mobileOremail = this.step1Form.value.mobileEmail
-    if (isNaN(this.mobileOremail)) {
-      //this.step = 3
-      // this.error = '';
-      // if (this.step1Form.valid)
-      //   this.inProgress = true;
-      // this.client.post('api/v3/verification/mobile/verify', {
-      //   number: this.mobileOremail
-      // })
-      //   .then((data: any) => {
-      //     // username.value = '';
-      //     this.inProgress = false;
-      //     this.step = 3;
-      //   })
-      //   .catch((e) => {
-      //     this.inProgress = false;
-      //     if (e.status === 'failed') {
-      //       this.error = 'There was a problem trying to reset your password. Please try again.';
-      //     }
-      //     if (e.status === 'error') {
-      //       this.error = e.message;
-      //     }
-      //   });
-    } else {
-      this.error = '';
-      if (this.step1Form.valid)
+    if (this.step1Form.valid) {
+      if (isNaN(this.mobileOremail)) {
+        this.error = '';
         this.inProgress = true;
-      this.client.post('api/v3/verification/mobile/verify', {
-        number: this.mobileOremail
-      })
-        .then((data: any) => {
-          // username.value = '';
-          this.inProgress = false;
-          this.step = 2;
+        this.client.post('api/v1/forgotpassword/request', {
+          key: "email",
+          value: this.mobileOremail
         })
-        .catch((e) => {
-          this.inProgress = false;
-          if (e.status === 'failed') {
-            this.error = 'There was a problem trying to reset your password. Please try again.';
-          }
-          if (e.status === 'error') {
-            this.error = e.message;
-          }
-        });
+          .then((data: any) => {
+            // username.value = '';
+            this.inProgress = false;
+            this.step = 3;
+          })
+          .catch((e) => {
+            this.inProgress = false;
+            if (e.status === 'failed') {
+              this.error = 'There was a problem trying to reset your password. Please try again.';
+            }
+            if (e.status === 'error') {
+              this.error = e.message;
+            }
+          });
+      } else {
+        this.error = '';
+        this.inProgress = true;
+        this.client.post('api/v3/verification/mobile/verify', {
+          number: this.mobileOremail
+        })
+          .then((data: any) => {
+            // username.value = '';
+            this.secret = data.secret
+            this.inProgress = false;
+            this.step = 2;
+          })
+          .catch((e) => {
+            this.inProgress = false;
+            if (e.status === 'failed') {
+              this.error = 'There was a problem trying to reset your password. Please try again.';
+            }
+            if (e.status === 'error') {
+              this.error = e.message;
+            }
+          });
+      }
     }
+
   }
 
-
-  submitted2 = false;
-  otp
-  validateOtp() {
-    this.otp = this.step2Form.value.otpNum1 + this.step2Form.value.otpNum2 + this.step2Form.value.otpNum3 + this.step2Form.value.otpNum4 + this.step2Form.value.otpNum5 + this.step2Form.value.otpNum6
-    this.submitted2 = true;
-    if (this.step2Form.valid) {
-      this.client.post('api/v3/verification/mobile/confirm', {
-        number: '',
-        code: this.otp
-      })
-    }
-
-    //this.step = 4;
-  }
-
-  submitted3 = false;
-  updatePassword() {
-    this.submitted3 = true;
-    // this.step = 3;
-  }
 
   nextOtpNum(event) {
     var keyCode = event.keyCode;
@@ -188,10 +162,45 @@ export class ForgotPasswordComponent {
       nextInput.focus();
   }
 
-  // setCode(code: string) {
-  //   this.step = 3;
-  //   this.code = code;
-  // }
+  validateOtp() {
+    this.otp = this.step2Form.value.otpNum1 + this.step2Form.value.otpNum2 + this.step2Form.value.otpNum3 + this.step2Form.value.otpNum4 + this.step2Form.value.otpNum5 + this.step2Form.value.otpNum6
+    this.submitted2 = true;
+    
+    if (this.step2Form.valid) {
+      this.client.post('api/v3/verification/mobile/confirm', {
+        number: this.mobileOremail,
+        code: this.otp,
+        secret: this.secret
+      }).then(
+        data => {
+          if (data) {
+            this.step = 4;
+          }
+        },
+        error => { }
+      )
+    }
+  }
+
+  passwordConfirmcheck(c: AbstractControl) {
+    if (c.get('newPassword').value !== c.get('confirmPassword').value) {
+      return { passwordMismatched: true };
+    }
+    return null;
+  }
+
+  updatePassword() {
+    this.submitted3 = true;
+    if (this.step3Form.valid)
+      this.router.navigate(['/login']);
+  }
+
+
+
+  setCode(code: string) {
+    this.step = 4;
+    this.code = code;
+  }
 
   // validatePassword(password) {
   //   if (/@/.test(password.value)) {
