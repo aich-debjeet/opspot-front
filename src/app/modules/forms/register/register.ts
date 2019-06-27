@@ -212,6 +212,12 @@ export class RegisterForm {
     this.form.patchValue({ captcha: code });
   }
 
+  // validationTimeoutHandler() {
+  //   clearTimeout(this.usernameValidationTimeout);
+  //   this.usernameValidationTimeout = setTimeout(this.validateUsername.bind(this), 500);
+  // }
+
+  
   // function to give birth date selection
 
   dob() {
