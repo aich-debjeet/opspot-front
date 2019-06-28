@@ -32,7 +32,6 @@ export class LoginForm {
   loginHide: boolean = true;
   @Output()vwLogin=new EventEmitter()
   submitted=false;
-
   done: EventEmitter<any> = new EventEmitter();
   doneRegistered: EventEmitter<any> = new EventEmitter();
   regBtn=true

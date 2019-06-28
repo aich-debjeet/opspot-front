@@ -16,7 +16,11 @@ export class Session {
 	 * Return if loggedin, with an optional listener
 	 */
   isLoggedIn(observe: any = null) {
-
+  if(localStorage.getItem('loggedIn')){
+    window.Opspot.LoggedIn=true;
+    window.Opspot.user=JSON.parse(localStorage.getItem('user'))
+    return true;
+  }
     if (observe) {
       this.loggedinEmitter.subscribe({
         next: (is) => {
@@ -67,11 +71,12 @@ export class Session {
 	 */
   login(user: any = null) {
     //clear stale local storage
-    const mobileSecret = localStorage.getItem('phoneNumberSecret');
     window.localStorage.clear();
-    localStorage.setItem('phoneNumberSecret', mobileSecret);
     this.userEmitter.next(user);
     window.Opspot.user = user;
+    localStorage.setItem('user',JSON.stringify(user) );
+    localStorage.setItem('loggedIn','yes')
+
     if (user.admin === true)
       window.Opspot.Admin = true;
     window.Opspot.LoggedIn = true;
@@ -86,9 +91,7 @@ export class Session {
     delete window.Opspot.user;
     window.Opspot.LoggedIn = false;
     window.Opspot.Admin = false;
-    const mobileSecret = localStorage.getItem('phoneNumberSecret');
     window.localStorage.clear();
-    localStorage.setItem('phoneNumberSecret', mobileSecret);
     this.loggedinEmitter.next(false);
   }
 }

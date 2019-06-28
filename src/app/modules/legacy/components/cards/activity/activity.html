@@ -3,14 +3,14 @@
 
    <i class="material-icons selected" *ngIf="activity.remind_object">repeat</i>
 
-	<div class="avatar" [hovercard]="activity.ownerObj.guid">
+	<div class="o-avatar" [hovercard]="activity.ownerObj.guid">
 		<a [routerLink]="['/', activity.ownerObj.username]">
 			<img [src]="opspot.cdn_url + 'icon/' + activity.ownerObj.guid + '/medium/' + getOwnerIconTime()" class="mdl-shadow--2dp"/>
 		</a>
 	</div>
 
   <div class="body">
-    <a [routerLink]="['/', activity.ownerObj.username]">
+    <a class="o-avatar__name" [routerLink]="['/', activity.ownerObj.username]">
       <strong title={{activity.ownerObj.name}}>{{activity.ownerObj.name}}</strong>
       <m-channel--badges class="m-channel--badges-activity" [user]="activity.ownerObj" badges="[ 'verified' ]"></m-channel--badges>
     </a>
@@ -177,7 +177,7 @@
 
 <div class="tabs" *ngIf="!hideTabs">
 	<opspot-button-thumbs-up [object]="activity"></opspot-button-thumbs-up>
-	<opspot-button-thumbs-down [object]="activity"></opspot-button-thumbs-down>
+	<!-- <opspot-button-thumbs-down [object]="activity"></opspot-button-thumbs-down> -->
   <m-wire-button *ngIf="session.getLoggedInUser().guid != (activity.remind_object ? activity.remind_object.owner_guid : activity.owner_guid)"
     [object]="activity.remind_object ? activity.remind_object : activity"
     (done)="wireSubmitted($event)"
