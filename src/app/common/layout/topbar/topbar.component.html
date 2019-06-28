@@ -22,13 +22,131 @@
         <div class="nav-action">
             <ul class="nav-icon-list">
                 <li class="nav-icon__item">
-                    <a class="nav__prof-img" [routerLink]="['/',user.username]">
+
+  <div class="m-topbar--account" *ngIf="session.isLoggedIn()" #menu>
+      <a class="" (click)="menu.value = !menu.value">
+        <img alt="menu" src="assets/demo/avatar.png" />
+      </a>
+      <ul class="m-dropdown__list" [hidden]="!menu.value">
+        <li class="m-dropdownList__item"
+            *ngIf="session.isLoggedIn()"
+            (click)="menu.value = false"
+        >
+          <a
+            [routerLink]="['/', session.getLoggedInUser().username]"
+            i18n="@@OPSPOT__TOPBAR__VIEW_CHANNEL"
+          >
+            <i class="material-icons">people</i>
+            <span>View Channel</span>
+          </a>
+        </li>
+        <li class="m-dropdownList__item"
+            *ngIf="session.isLoggedIn() && session.isAdmin()"
+            (click)="menu.value = false"
+        >
+          <a
+            [routerLink]="['/admin/analytics']"
+            i18n="@@OPSPOT__TOPBAR__ADMIN"
+          >
+            <i class="material-icons">build</i>
+            <span>Admin</span>
+          </a>
+        </li>
+        <li class="m-dropdownList__item"
+            *ngIf="session.isLoggedIn()"
+            (click)="menu.value = false"
+        >
+          <a
+            [routerLink]="['/settings/general']"
+            i18n="@@OPSPOT__TOPBAR__SETTINGS"
+          >
+            <i class="material-icons">settings</i>
+            <span>Settings</span>
+          </a>
+        </li>
+        <ng-container *mIfFeature="'helpdesk'; else faq">
+        </ng-container>
+        <ng-template #faq>
+          <li class="m-dropdownList__item"
+            (click)="menu.value = false"
+          >
+            <a
+              [routerLink]="['/faq']"
+              i18n="@@OPSPOT__TOPBAR__FAQ"
+            >
+              <i class="material-icons">help_outline</i>
+              <span>FAQ</span>
+            </a>
+          </li>
+        </ng-template>
+        <li class="m-dropdownList__item"
+            (click)="menu.value = false"
+        >
+          <ng-container *mIfFeature="'helpdesk'; else helpAndSupport">
+            <a
+              routerLink="/help"
+              i18n="@@OPSPOT__TOPBAR__HELPDESK"
+            >
+              <i class="material-icons">help_outline</i>
+              <span>Help Desk</span>
+            </a>
+          </ng-container>
+          <ng-template #helpAndSupport>
+            <a
+              [routerLink]="['/groups/profile/', '100000000000000681']"
+              i18n="@@OPSPOT__TOPBAR__HS_GROUP"
+            >
+              <i class="material-icons">help_outline</i>
+              <span>Help & Support</span>
+            </a>
+          </ng-template>
+        </li>
+        <li class="m-dropdownList__item"
+        >
+          <a
+            target="_blank"
+            [href]="opspot.cdn_assets_url + 'assets/documents/Whitepaper-v0.3.pdf'"
+          >
+            <i class="material-icons">description</i>
+            <span>Whitepaper</span>
+          </a>
+        </li>
+        <li class="m-dropdownList__item"
+            *ngIf="session.isLoggedIn()"
+            (click)="menu.value = false"
+        >
+          <a
+            [routerLink]="['/canary']"
+            i18n="@@OPSPOT__TOPBAR__MENU__EXPERIMENTS"
+          >
+            <i class="material-icons">new_releases</i>
+            <span *ngIf="!session.getLoggedInUser().canary">Opt-in to Experiments</span>
+            <span *ngIf="session.getLoggedInUser().canary">Canary</span>
+          </a>
+        </li>
+        <li class="m-dropdownList__item"
+            *ngIf="session.isLoggedIn()"
+            (click)="menu.value = false"
+        >
+          <a
+            [routerLink]="['/logout']"
+            i18n="@@OPSPOT__TOPBAR__LOGOUT"
+          >
+            <i class="material-icons">exit_to_app</i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+      <div class="opspot-bg-overlay" (click)="menu.value = !menu.value" [hidden]="!menu.value"></div>
+    </div>
+                    <!-- <a class="nav__prof-img"  >
                         <img src="assets/demo/avatar.png" alt="">
                     </a>
+                     -->
                 </li>
                 <li class="nav-icon__item">
                     <a class="nav__ico" href="#">
-                        <img src="assets/svg/create.svg" alt="">
+                        <img src="assets/svg/create.svg" alt=""> 
                     </a>
                 </li>
                 <li class="nav-icon__item">

@@ -40,7 +40,8 @@
                 formControlName='mobileNumber'
                 ></ngx-intl-tel-input>
               </div>
-            <div class="o-otp">
+              
+            <div *ngIf="otpView" class="o-otp">
               <div class="o-otp__title text-md">Enter OTP <a  class="primary">Resend OTP</a></div>
                 <div class="otp">
                   <fieldset formGroupName="otp">

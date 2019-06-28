@@ -24,7 +24,7 @@ export class RegisterForm {
   takenUsername: boolean = false;
   usernameValidationTimeout: any;
   number;
-
+  otpView=false;
   showFbForm: boolean = false;
 
   form: FormGroup;
@@ -68,7 +68,7 @@ export class RegisterForm {
    dateOfBirth;
   //mobile number entered
    onMobileNumbr(){
-    let numbers;
+   let numbers;
    this.form.controls['mobileNumber'].valueChanges.subscribe(val=>{
      numbers=val.internationalNumber.replace(/\s/g,'');
       this.getOtp(numbers)
@@ -91,9 +91,10 @@ export class RegisterForm {
   //for getting otp
   async getOtp(numbr){
     let response: any = await this.client.post('api/v3/verification/mobile/verify', {
-      number: numbr,  
+    number: numbr,  
     }).then(res=>{
       console.log(res)
+      this.otpView=true;
     })
 
   }
