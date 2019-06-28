@@ -35,6 +35,8 @@ export class ForgotPasswordComponent {
   secret;
   submitted2 = false;
   otp
+  resending = false;
+
 
   // step3
   step3Form: FormGroup;
@@ -192,21 +194,27 @@ export class ForgotPasswordComponent {
     }
   }
 
-  resending = false;
   //resend otp for mobile
   resendOtp() {
     this.resending = true;
     this.client.post('api/v3/verification/mobile/verify', {
       number: this.mobileOremail
     })
+    setTimeout(() => {
+      this.resending = false;
+    }, 1500);
   }
 
   //resend email link
   resentEmail() {
+    this.resending = true;
     this.client.post('api/v1/forgotpassword/request', {
       key: "email",
       value: this.mobileOremail
     })
+    setTimeout(() => {
+      this.resending = false;
+    }, 1500);
   }
 
   //check for confirm password
