@@ -16,7 +16,11 @@ export class Session {
 	 * Return if loggedin, with an optional listener
 	 */
   isLoggedIn(observe: any = null) {
-
+  // if(localStorage.getItem('loggedIn')){
+  //   window.Opspot.LoggedIn=true;
+  //   window.Opspot.user=JSON.parse(localStorage.getItem('user'))
+  //   return true;
+  // }
     if (observe) {
       this.loggedinEmitter.subscribe({
         next: (is) => {
@@ -70,6 +74,9 @@ export class Session {
     window.localStorage.clear();
     this.userEmitter.next(user);
     window.Opspot.user = user;
+    // localStorage.setItem('user',JSON.stringify(user) );
+    // localStorage.setItem('loggedIn','yes')
+
     if (user.admin === true)
       window.Opspot.Admin = true;
     window.Opspot.LoggedIn = true;

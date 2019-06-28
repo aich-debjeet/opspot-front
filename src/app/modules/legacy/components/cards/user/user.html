@@ -52,7 +52,7 @@
 <div class="o-prof-info">
 	<a [routerLink]="['/', user.username]"  >
 		<div class="o-avatar-lg">
-			<img src="../../../assets/demo/avatar.png" alt="">
+                <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}"/>
 		</div> 
 	</a>
 	<div class="o-prof-name">
@@ -60,10 +60,10 @@
 		<span class="text-md grey">@{{user.username}}</span>
 	</div>
 	<div class="o-prof-activity">
-		<a [routerLink]="['/', user.username, 'subscribers']"><div class="caption-bold f700">{{user.subscribers_count | abbr:0}}</div><div class="text-sm grey">Followers</div></a>
-		<a [routerLink]="['/', user.username, 'subscriptions']"><div class="caption-bold f700">{{user.subscriptions_count | abbr:0}}</div><div class="text-sm grey">Following</div></a>
-		<a  [routerLink]="['/', user.username, 'feed']"><div class="caption-bold f700">{{user.impressions | abbr:0}}</div><div class="text-sm grey">Posts</div></a>
-		<a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a>
+		<a [routerLink]="['/', user.username, 'subscribers']"><div class="caption-bold f700">{{user.subscribers_count?user.subscribers_count:'0' | abbr:0}}</div><div class="text-sm grey">Subscribers</div></a>
+		<a [routerLink]="['/', user.username, 'subscriptions']"><div class="caption-bold f700">{{user.subscriptions_count?user.subscriptions_count:'0' | abbr:0}}</div><div class="text-sm grey">Subscribed</div></a>
+		<a  [routerLink]="['/', user.username, 'feed']"><div class="caption-bold f700">{{user.impressions?user.impressions:'0' | abbr:0}}</div><div class="text-sm grey">Posts</div></a>
+		<!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
 	</div>
 </div>
 

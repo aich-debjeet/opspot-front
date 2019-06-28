@@ -9,8 +9,14 @@
           <input type="text" class="form-control form-control" formControlName="username" placeholder="Username"
             i18n-placeholder="@@M__COMMON__USERNAME" (keydown.enter)="login(); $event.preventDefault();">
           <div *ngIf="submitted && f.username.errors" class="error text-sm">
-            <div *ngIf="f.username.errors.required">Email is required</div>
+            <div *ngIf="f.username.errors.required">Username is required</div>
           </div>
+      <div *ngIf="errorMessage&&!f.username.errors&&!f.password.errors" class="error text-sm">
+        <div>
+           Invalid username and password
+        </div>
+      </div>
+
         </div>
 
         <div class="form-group c-form_righticon m-8 ">
@@ -24,6 +30,7 @@
         </div>
         <button type="button" (click)="login()" class="btn btn-outline-primary btn-sm">Login</button>
       </div>
+
     </form>
     <div class="o-login hidden-desktop">
       <a class="btn btn-outline-primary btn-sm" (click)='showRegister()'> {{regBtn?"Register":"Login"}}</a>
@@ -45,7 +52,7 @@
               (keydown.enter)="login(); $event.preventDefault();"
              >
              <div *ngIf="submitted && f.username.errors" class="error text-sm">
-              <div *ngIf="f.username.errors.required">username /email/password is required</div>
+              <div *ngIf="f.username.errors.required">username is required</div>
             </div>
           </div>
           <div class="form-group c-form_righticon-lg">

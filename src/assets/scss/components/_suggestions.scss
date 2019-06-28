@@ -1,0 +1,43 @@
+.o-card-suggestion{
+    padding:13px 16px;
+    float: left;
+}
+
+//suggestion card components style
+
+.o-suggestion{
+    position: relative;
+    width: 168px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 20px;
+    margin: 14px 6px 9px 0px;
+    &__top-bar{
+        height: 58px;
+        width: 100%;	
+        border-radius: 3px 3px 0 0;	
+        background-color: $grey-light; 
+    }
+    &__avatar{
+        box-sizing: border-box;	
+        height: 78px;	
+        width: 78px;	
+        border-radius: 50%;
+        border: 2px solid #FFFFFF;
+        overflow: hidden;
+        margin-top: -38px;
+        img{
+            width: 100%;
+        }
+    }
+    &__name{
+        margin-top: 10px;
+    }
+    &__info{
+        text-align: center;
+        padding:0px 15px;
+        margin: 11px 0px 18px 0px;
+    }
+}

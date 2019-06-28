@@ -1,5 +1,4 @@
 import { Component, ComponentFactoryResolver, ViewChild, OnInit } from '@angular/core';
-
 import { Storage } from '../../../services/storage';
 import { Sidebar } from '../../../services/ui/sidebar';
 import { Session } from '../../../services/session';
@@ -52,8 +51,7 @@ export class TopbarComponent implements OnInit{
   }
 
   hamburgerMenu(){
-    // $(document).ready(function(){
-    //   $('#app-nav').click(function(){
+    
           var x = document.getElementById("app-nav-block");
               if (x.style.display === "block") {
                   x.style.display = "none";

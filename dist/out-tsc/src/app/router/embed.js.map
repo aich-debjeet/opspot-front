@@ -1,0 +1,1 @@
+{"version":3,"file":"embed.js","sourceRoot":"","sources":["../../../../../src/app/router/embed.ts"],"names":[],"mappings":";;AAEA,0CAAgD;AAEhD,uEAA0E;AAE7D,QAAA,iBAAiB,GAAW;IACvC,EAAE,IAAI,EAAE,oBAAoB,EAAE,SAAS,EAAE,mCAAkB,EAAE;CAC9D,CAAC;AAEW,QAAA,2BAA2B,GAAU,CAAC,EAAE,OAAO,EAAE,sBAAa,EAAE,QAAQ,EAAE,GAAG,EAAE,CAAC,CAAC;AACjF,QAAA,iCAAiC,GAAU;IACtD,mCAAkB;CACnB,CAAC"}

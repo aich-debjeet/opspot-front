@@ -11,6 +11,21 @@
 @import "src/assets/scss/components/radio-checkbox";
 @import "src/assets/scss/components/tootip";
 @import "src/assets/scss/components/common";
+@import "src/assets/scss/components/create-post";
+@import "src/assets/scss/components/feed-card";
+@import "src/assets/scss/components/modal";
+@import "src/assets/scss/components/opportunities-sidebar";
+@import "src/assets/scss/components/popular-channel";
+@import "src/assets/scss/components/suggestions";
+@import "src/assets/scss/components/trending-post";
+
+
+
+
+
+
+
+
 
 
 
@@ -2205,7 +2220,7 @@ p {
   box-shadow: 0 0 0 !important; }
 
 .m-border {
-  border: 1px solid #e8e8e8;
+  border: 1px solid #ECEFF1;
   border-radius: 6px; }
 
 opspot-topbar .opspot-logo {
