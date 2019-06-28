@@ -16,6 +16,7 @@ import { Session } from '../../../services/session';
 import { Web3WalletService } from '../web3-wallet.service';
 import { TokenDistributionEventService } from '../contracts/token-distribution-event.service';
 import * as BN from 'bn.js';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Component({
   selector: 'm-blockchain--purchase',
@@ -50,20 +51,23 @@ export class BlockchainPurchaseComponent implements OnInit {
 
   @Input() phase: string = 'presale';
   inProgress: boolean = false;
-  rate: number = 0;
+  rate: number = 100;
 
   constructor(
     protected client: Client,
+    private elementRef: ElementRef,
     protected changeDetectorRef: ChangeDetectorRef,
     protected title: OpspotTitle,
     protected overlayModal: OverlayModalService,
     protected web3Wallet: Web3WalletService,
     protected tde: TokenDistributionEventService,
-    public session: Session
+    public session: Session,
+    public http: HttpClient
   ) { }
 
   ngOnInit() {
-    this.loadWalletAddress();
+    // this.loadWalletAddress();
+    this.loadScript();
     this.load().then(() => {
       this.amount = 0.25;
     });
@@ -76,6 +80,7 @@ export class BlockchainPurchaseComponent implements OnInit {
   }
 
   set amount(value: number) {
+    console.log(value)
     this.tokens = value * this.rate;
   }
   
@@ -91,7 +96,7 @@ export class BlockchainPurchaseComponent implements OnInit {
         requested: response.requested,
         issued: response.issued,
       };
-      this.rate = response.rate;
+      // this.rate = response.rate;
       //this.amount = this.stats.pledged;
     } catch (e) { }
 
@@ -106,6 +111,7 @@ export class BlockchainPurchaseComponent implements OnInit {
     this.detectChanges();
   }
 
+  //on purchase this method was originally called.
   async purchase() {
     await this.load();
     if (this.session.isLoggedIn()) {
@@ -121,6 +127,7 @@ export class BlockchainPurchaseComponent implements OnInit {
   }
 
   async confirm() {
+    alert('confirm');
     this.confirming = true;
     this.detectChanges();
 
@@ -174,4 +181,33 @@ export class BlockchainPurchaseComponent implements OnInit {
     this.changeDetectorRef.detectChanges();
   }
 
+  loadScript() {
+    console.log('loading script')
+    const a = document.createElement('script');
+    a.src = 'https://js.instamojo.com/v1/checkout.js';
+    this.elementRef.nativeElement.appendChild(a);
+  }
+  onSubmit() {
+
+  }
+  payment() {
+    const formData = new FormData();
+    formData.append('amount',this.tokens.toString());
+    formData.append('purpose','token_purchase');
+    formData.append('buyer_name','anup');
+    formData.append('redirect_url','https://336a201c.ngrok.io/Instamojo-php-curl/success');
+    formData.append('email','anup.panwar36@gmail.com');
+    formData.append('phone','7022539494');
+
+
+    this.http.post<any>('http://07bc482a.ngrok.io/api/v3/payment/instamojo', formData).subscribe(
+      (res) => {
+        const s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.innerHTML = "Instamojo.open('" + res.payment_request.longurl + "');";
+      this.elementRef.nativeElement.appendChild(s);
+    },
+      (err) => console.log(err)
+    );
+ }
 }

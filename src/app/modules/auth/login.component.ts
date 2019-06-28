@@ -52,16 +52,14 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-  if(window.screen.width>600){
-    this.loginView=true;
-  }  
+    if (this.session.isLoggedIn()) {
+      this.loginReferrer.register('/newsfeed');
+      // this.loginReferrer.navigate();
+    }
+    if(window.screen.width>600){
+      this.loginView=true;
+    }
  
-
-    // if (this.session.isLoggedIn()) {
-    //   this.loginReferrer.register('/newsfeed');
-    //   this.loginReferrer.navigate();
-    // }
-
     this.title.setTitle('Login');
     this.redirectTo = localStorage.getItem('redirect');
 
