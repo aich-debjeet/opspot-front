@@ -206,7 +206,7 @@ export class ForgotPasswordComponent {
   }
 
   //resend email link
-  resentEmail() {
+  resentEmaillink() {
     this.resending = true;
     this.client.post('api/v1/forgotpassword/request', {
       key: "email",
