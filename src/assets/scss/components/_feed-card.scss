@@ -1,0 +1,334 @@
+.feed{
+    float: left;
+    background: $white;
+}
+.feed-head{
+    width: 100%;
+    padding: 12px 17px 9px 17px;
+    display: flex;
+    flex-wrap: wrap;
+    .o-avatar{
+        order: 1;
+    }
+}
+.o-avatar__info{
+    width: calc(100% - 95px);
+    margin-top: 4px;
+    order: 2;
+    margin-left: 9px;
+    padding-right: 4px;
+}
+.o-avatar-det-block{
+    width: 100%;
+    display: block;
+    float: left;
+}
+.o-avatar__name{
+    color: $grey-dark;
+    font-size: 13px;
+    line-height: 18px;
+    display: inline-block;
+    font-weight: 700;
+    float: left;
+    padding-right: 4px;
+}
+.o-posts-det{
+    width: 100%;
+    float: left;
+    overflow: hidden;
+}
+.o-posts-tym{
+    width: 100%;
+    display: block;
+    margin:4px 0px 0px 0px;
+}
+
+//discription
+
+.o-posts-discription{
+    width: 100%;
+    float: left;
+    margin-top: 13px;
+    order: 4;
+}
+
+// for feed media
+
+.feed-media{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    a{
+        flex:1;
+        max-height: 900px;
+        line-height: 0;
+    }
+    a:nth-child(2) {
+        margin: 0px 1px;
+    }
+}
+.feed-media__link{
+    max-height: 900px;
+    position: relative;
+}
+.feed-media__img{
+    width: 100%;
+    object-fit: contain;
+}
+// video media
+
+.feed-media-overlay{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.feed-media-video__icon{
+    box-sizing: border-box;
+    height: 29px;
+    width: 29px;
+    border: 1px solid #FFFFFF;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+//head action
+
+.o-feed-head-action{
+    width: 46px;
+    order: 3;
+    display: flex;
+}
+.head-action__link{
+    margin-left: 12px;
+}
+.head-action__link:nth-child(1){
+    margin: 0px;
+}
+.head-action__icon{
+    width: 16px;
+}
+
+// for actions
+
+.o-actions{
+    width: 100%;
+    padding: 12px 17px;
+    display: flex;
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        padding: 12px 14px;
+    }
+    &__link{
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            margin-right: 8px;
+        }
+    }
+    .btn--boost{
+        position: absolute;
+        right: 38px;
+        top: 10px;
+    }
+    .o-actions__link--coin{
+        position: absolute;
+        right: 25px;
+        top: 12px;
+    }
+}
+.o-action-icon{
+    width: 18px;
+    height: 18px;
+}
+.o-action-icon--lg{
+    height: 24px;	
+    width: 24px;
+}
+.o-action-count{
+    margin-left: 6px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        margin-left: 4px;
+    }
+}
+.o-add-channel{
+    position: absolute;
+    right: 0;
+}
+
+// comments
+
+.o-comments-compose{
+    width: 100%;
+    padding: 2px 17px 17px;
+    display: flex;
+    &--reply{
+        position: relative;
+        left: 50px !important;
+        width: calc(100% - 35px);
+    }
+}
+.o-comments-composer{
+    width: 94%;
+    margin-left: 8px;
+    textarea{
+        /* box-sizing: padding-box; */
+        overflow:hidden;
+        /* demo only: */
+        width:100%;
+        font-size:11px;
+        line-height: 18px;
+        border:none;
+        font-family: 'Roboto', sans-serif!important;
+        resize: none;
+        background: $grey-light;
+        padding: 9px 13px;
+        border-radius: 2px;
+        &:focus{
+            outline: none;
+        }
+        &::placeholder{
+            color: $grey;
+        }
+    }
+}
+
+
+.o-comments-block{
+    width: 100%;
+    padding: 0px 18px;
+}
+.o-comments{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 13px;
+    .m-l-7{
+        margin-left: 7px;
+    }
+    &--reply{
+        position: relative;
+        left:35px!important;
+        width: calc(100% - 35px);
+    }
+}
+.o-comments__data{
+    width: calc(100% - 28px);
+    order: 2;
+    margin-left: 7px;
+}
+.o-commenter{
+    width: 100%;
+}
+.o-comments__txt{
+    @extend .text-md;
+    width: 100%;
+    margin : 4px 0px 6px 0px;
+}
+.o-comments__action{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    a{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 9px;
+    }
+}
+.o-like-ico{
+    width: 14px;
+    margin-right: 6px;
+    img{
+        width: 100%;
+    }
+}
+
+
+
+// for dropdown
+
+.o-option-drop__btn {
+    cursor: pointer;
+}
+.o-option-drop {
+    position: relative;
+    display: inline-block;
+    margin-left: 12px;
+}
+
+.o-option-drop__block {
+    display: none;
+    position: absolute;
+    overflow: auto;
+    z-index: 1;
+    width: 75px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 10px 0 rgba(144, 164, 174, 0.16), 0 1px 12px 0 rgba(144, 164, 174, 0.18), 0 3px 5px 0 rgba(144, 164, 174, 0.2);
+    left: -48px;
+    top: -2px;
+    padding: 14px 13px 0px 13px;
+}
+
+.o-option-drop__block a {
+    color: black;
+    padding-bottom: 14px;
+    text-decoration: none;
+    display: block;
+    @extend .text-md ;
+}
+
+.show {display: block;}
+
+
+// post action tooltip
+
+.tooltip_coin {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip_coin .tooltip_coin__text {
+    visibility: hidden;
+    width: 53px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 0%;
+    margin-left: -17px;
+}
+.o-action-icon--sm{
+    width:14px;
+    height: 12px;
+}
+
+.tooltip_coin .tooltip_coin__text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip_coin:hover .tooltip_coin__text {
+    visibility: visible;
+}

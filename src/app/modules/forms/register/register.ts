@@ -24,7 +24,7 @@ export class RegisterForm {
   takenUsername: boolean = false;
   usernameValidationTimeout: any;
   number;
-
+  otpView=false;
   showFbForm: boolean = false;
 
   form: FormGroup;
@@ -105,6 +105,7 @@ export class RegisterForm {
       number: numbr,
     }).then((res: any) => {
       console.log(res)
+      this.otpView=true;
       localStorage.setItem('phoneNumberSecret', res.secret);
     });
   }

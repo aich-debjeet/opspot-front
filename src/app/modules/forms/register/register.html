@@ -46,7 +46,8 @@
                   <div *ngIf="form.controls['mobileNumber'].errors.required">Mobile is required</div>
               </div>
               </div>
-            <div class="o-otp">
+              
+            <div *ngIf="otpView" class="o-otp">
               <div class="o-otp__title text-md">Enter OTP <a  class="primary">Resend OTP</a></div>
                 <!-- <div class="otp">
                   <fieldset formGroupName="otp">
