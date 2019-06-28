@@ -51,7 +51,7 @@ export class ForgotPasswordComponent {
     public formBuilder: FormBuilder
   ) {
     this.step1Form = this.formBuilder.group({
-      mobileEmail: ['', [Validators.required]]
+      forgotpInput: ['', [Validators.required]]
     }),
       this.step2Form = this.formBuilder.group({
         // otpNum: this.formBuilder.group({
@@ -88,9 +88,10 @@ export class ForgotPasswordComponent {
     this.paramsSubscription.unsubscribe();
   }
 
+  //step1From request for otp by email or mobilenumber
   request() {
     this.submitted1 = true;
-    this.mobileOremail = this.step1Form.value.mobileEmail
+    this.mobileOremail = this.step1Form.value.forgotpInput
     if (this.step1Form.valid) {
       if (isNaN(this.mobileOremail)) { //forgot password by email
         this.error = '';
@@ -134,7 +135,6 @@ export class ForgotPasswordComponent {
           });
       }
     }
-
   }
 
 
@@ -159,32 +159,57 @@ export class ForgotPasswordComponent {
       //   console.log('currInput.value NOT EMPTY');
       //   currInput.value = '';
       // } else {
-        if (event.srcElement.previousElementSibling === null) {
-          return;
-        } else { prevInput.focus(); }
-      }
+      if (event.srcElement.previousElementSibling === null) {
+        return;
+      } else { prevInput.focus(); }
+    }
     // }
   }
 
+  //step2form otp validation
   validateOtp() {
-    this.otp = this.step2Form.value.otpNum1 + this.step2Form.value.otpNum2 + this.step2Form.value.otpNum3 + this.step2Form.value.otpNum4 + this.step2Form.value.otpNum5 + this.step2Form.value.otpNum6
+    this.otp = this.step2Form.value.otpNum1 + this.step2Form.value.otpNum2 +
+      this.step2Form.value.otpNum3 + this.step2Form.value.otpNum4 + this.step2Form.value.otpNum5 + this.step2Form.value.otpNum6
     this.submitted2 = true;
+    this.error = '';
     if (this.step2Form.valid) {
+      this.inProgress = true;
       this.client.post('api/v3/verification/mobile/confirm', {
         number: this.mobileOremail,
         code: this.otp,
         secret: this.secret
-      }).then(
-        data => {
-          if (data) {
-            this.step = 4;
+      })
+        .then((data: any) => {
+          this.inProgress = false;
+          this.step = 4;
+        })
+        .catch((e) => {
+          this.inProgress = false;
+          if (e.status === 'error') {
+            this.error = e.message;
           }
-        },
-        error => { }
-      )
+        });
     }
   }
 
+  resending = false;
+  //resend otp for mobile
+  resendOtp() {
+    this.resending = true;
+    this.client.post('api/v3/verification/mobile/verify', {
+      number: this.mobileOremail
+    })
+  }
+
+  //resend email link
+  resentEmail() {
+    this.client.post('api/v1/forgotpassword/request', {
+      key: "email",
+      value: this.mobileOremail
+    })
+  }
+
+  //check for confirm password
   passwordConfirmcheck(c: AbstractControl) {
     if (c.get('newPassword').value !== c.get('confirmPassword').value) {
       return { passwordMismatched: true };
@@ -192,18 +217,19 @@ export class ForgotPasswordComponent {
     return null;
   }
 
+  // for updating the password
   updatePassword() {
     this.submitted3 = true;
     if (this.step3Form.valid)
       this.router.navigate(['/login']);
   }
 
-
-
   setCode(code: string) {
     this.step = 4;
     this.code = code;
   }
+
+
 
   // validatePassword(password) {
   //   if (/@/.test(password.value)) {
