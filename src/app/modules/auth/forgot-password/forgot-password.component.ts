@@ -1,12 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Subscription } from 'rxjs';
 
 import { OpspotTitle } from '../../../services/ux/title';
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
-import Swal from 'sweetalert2';
 import { LoginComponent } from '../login.component';
 import { LoginForm } from '../../forms/login/login';
 import { Form, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
@@ -16,7 +14,6 @@ import { Form, FormGroup, FormBuilder, Validators, AbstractControl } from '@angu
   selector: 'm-forgot-password',
   templateUrl: 'forgot-password.component.html',
   styleUrls: ['forgot-password.component.scss']
-
 })
 
 export class ForgotPasswordComponent {
@@ -95,7 +92,7 @@ export class ForgotPasswordComponent {
     this.submitted1 = true;
     this.mobileOremail = this.step1Form.value.mobileEmail
     if (this.step1Form.valid) {
-      if (isNaN(this.mobileOremail)) {
+      if (isNaN(this.mobileOremail)) { //forgot password by email
         this.error = '';
         this.inProgress = true;
         this.client.post('api/v1/forgotpassword/request', {
@@ -103,7 +100,6 @@ export class ForgotPasswordComponent {
           value: this.mobileOremail
         })
           .then((data: any) => {
-            // username.value = '';
             this.inProgress = false;
             this.step = 3;
           })
@@ -116,14 +112,13 @@ export class ForgotPasswordComponent {
               this.error = e.message;
             }
           });
-      } else {
+      } else { // forgot password by moilenumber
         this.error = '';
         this.inProgress = true;
         this.client.post('api/v3/verification/mobile/verify', {
           number: this.mobileOremail
         })
           .then((data: any) => {
-            // username.value = '';
             this.secret = data.secret
             this.inProgress = false;
             this.step = 2;
@@ -149,23 +144,31 @@ export class ForgotPasswordComponent {
       return false;
     }
     let nextInput = event.srcElement.nextElementSibling; // get the sibling element
-    let previous = event.srcElement.previousElementSibling; //get the previous
-    if (keyCode === 8) {
-      if (event.srcElement.previousElementSibling === null) {
-        return;
-      }
-      else { previous.focus(); }
-    }
-    else if (nextInput == null)  // check the maxLength from here
+    if (nextInput == null)  // check the maxLength from here
       return;
     else
       nextInput.focus();
   }
 
+  prevOtpNum(event) {
+    var keyCode = event.keyCode;
+    // let currInput = event.target; // current element
+    let prevInput = event.srcElement.previousElementSibling; // get the previous element
+    if (keyCode === 8) { // keycode 8 is backspace
+      // if (currInput.value !== '') {
+      //   console.log('currInput.value NOT EMPTY');
+      //   currInput.value = '';
+      // } else {
+        if (event.srcElement.previousElementSibling === null) {
+          return;
+        } else { prevInput.focus(); }
+      }
+    // }
+  }
+
   validateOtp() {
     this.otp = this.step2Form.value.otpNum1 + this.step2Form.value.otpNum2 + this.step2Form.value.otpNum3 + this.step2Form.value.otpNum4 + this.step2Form.value.otpNum5 + this.step2Form.value.otpNum6
     this.submitted2 = true;
-    
     if (this.step2Form.valid) {
       this.client.post('api/v3/verification/mobile/confirm', {
         number: this.mobileOremail,

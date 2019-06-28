@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
-import Swal from 'sweetalert2'
 import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-password.component';
 
 
@@ -18,10 +17,6 @@ import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-passw
 })
 
 export class LoginForm {
-
-  // @ViewChild('#mySwal') private mySwal: ForgotPasswordComponent;
-
-
   errorMessage: string = '';
   twofactorToken: string = '';
   hideLogin: boolean = false;
@@ -104,7 +99,4 @@ export class LoginForm {
       });
   }
 
-  // openModal(){
-  //   Swal.fire({html: '<m-forgot-password></m-forgot-password>'})
-  // }
 }
