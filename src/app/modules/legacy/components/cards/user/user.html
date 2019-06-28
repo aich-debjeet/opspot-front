@@ -1,4 +1,4 @@
-<div class="m-card--user--banner">
+<!-- <div class="m-card--user--banner">
 	<div class="m-card--user--banner--img"
     [ngStyle]="{'background-image': 'url(' + bannerSrc + ')'}"
   ></div>
@@ -6,8 +6,9 @@
 </div>
 
 <a [routerLink]="['/', user.username]" class="mdl-card__supporting-text opspot-usercard-block">
-	<div class="avatar">
-			<img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}"/>
+	<div class="avatar"> -->
+			<!-- <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}"/> -->
+			<!-- <img src="../../../assets/demo/avatar.png"/>
 	</div>
 	<div class="body">
 		<h3>{{user.name}}</h3>
@@ -45,4 +46,73 @@
 			<span i18n="@@M__COMMON__VIEWS">Views</span>
 			<b>{{user.impressions | abbr:0}}</b>
 		</a>
+</div> -->
+
+
+<div class="o-prof-info">
+	<a [routerLink]="['/', user.username]"  >
+		<div class="o-avatar-lg">
+                <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}"/>
+		</div> 
+	</a>
+	<div class="o-prof-name">
+		<div class="caption-bold f700">{{user.name}}</div>
+		<span class="text-md grey">@{{user.username}}</span>
+	</div>
+	<div class="o-prof-activity">
+		<a [routerLink]="['/', user.username, 'subscribers']"><div class="caption-bold f700">{{user.subscribers_count?user.subscribers_count:'0' | abbr:0}}</div><div class="text-sm grey">Subscribers</div></a>
+		<a [routerLink]="['/', user.username, 'subscriptions']"><div class="caption-bold f700">{{user.subscriptions_count?user.subscriptions_count:'0' | abbr:0}}</div><div class="text-sm grey">Subscribed</div></a>
+		<a  [routerLink]="['/', user.username, 'feed']"><div class="caption-bold f700">{{user.impressions?user.impressions:'0' | abbr:0}}</div><div class="text-sm grey">Posts</div></a>
+		<!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
+	</div>
 </div>
+
+<style>
+.o-prof-info {
+    width: 100%;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 23px;
+    border: 1px solid #ECEFF1;
+}
+.o-avatar-lg {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+}
+
+.o-prof-name {
+    text-align: center;
+    margin-top: 9px;
+}
+
+
+.o-prof-activity {
+    width: 100%;
+    display: flex;
+    margin-top: 18px;
+}
+.o-prof-activity a div {
+    width: 100%;
+    text-align: center;
+}
+.caption-bold {
+    color: #263238;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+}
+.f700 {
+    font-weight: 700 !important;
+}
+.o-prof-activity a {
+    flex: 1;
+    text-align: center;
+}
+
+</style>

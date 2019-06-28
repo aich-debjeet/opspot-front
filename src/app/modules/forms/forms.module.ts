@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CommonModule } from '../../common/common.module';
+import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
 
 import { LoginForm } from './login/login';
 import { RegisterForm } from './register/register';
@@ -13,6 +14,9 @@ import { OnboardingCategoriesSelector } from './categories-selector/categories-s
 import { Tutorial } from './tutorial/tutorial';
 import { CaptchaModule } from '../captcha/captcha.module';
 import { ExperimentsModule } from '../experiments/experiments.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
+// import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   imports: [
@@ -23,6 +27,11 @@ import { ExperimentsModule } from '../experiments/experiments.module';
     ReactiveFormsModule,
     CaptchaModule,
     ExperimentsModule,
+    NgxIntlTelInputModule,
+    SweetAlert2Module.forRoot({
+      animation: false,
+      buttonsStyling: false,
+    }),
   ],
   declarations: [
     LoginForm,
@@ -30,7 +39,8 @@ import { ExperimentsModule } from '../experiments/experiments.module';
     FbRegisterForm,
     OnboardingForm,
     OnboardingCategoriesSelector,
-    Tutorial
+    Tutorial,
+    ForgotPasswordComponent
   ],
   exports: [
     LoginForm,
@@ -38,7 +48,8 @@ import { ExperimentsModule } from '../experiments/experiments.module';
     FbRegisterForm,
     OnboardingForm,
     OnboardingCategoriesSelector,
-    Tutorial
+    Tutorial,
+    ForgotPasswordComponent
   ]
 })
 export class OpspotFormsModule {

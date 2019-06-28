@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon/chevron-down</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M8,9.05719096 L4.47140452,5.52859548 C4.21105499,5.26824595 3.78894501,5.26824595 3.52859548,5.52859548 C3.26824595,5.78894501 3.26824595,6.21105499 3.52859548,6.47140452 L7.52859548,10.4714045 C7.78894501,10.731754 8.21105499,10.731754 8.47140452,10.4714045 L12.4714045,6.47140452 C12.731754,6.21105499 12.731754,5.78894501 12.4714045,5.52859548 C12.211055,5.26824595 11.788945,5.26824595 11.5285955,5.52859548 L8,9.05719096 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="textinput/standard/WOL/countrycode" transform="translate(-71.000000, -17.000000)">
+            <g id="textinput/emphasized/WOL/default-Copy-3">
+                <g id="Icon/chevron-down" transform="translate(68.000000, 12.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="Colour/Fill/Grey" mask="url(#mask-2)" fill="#90A4AE" fill-rule="nonzero">
+                        <rect x="0" y="0" width="16" height="16" rx="2"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

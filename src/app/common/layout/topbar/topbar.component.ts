@@ -1,5 +1,4 @@
-import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
-
+import { Component, ComponentFactoryResolver, ViewChild, OnInit } from '@angular/core';
 import { Storage } from '../../../services/storage';
 import { Sidebar } from '../../../services/ui/sidebar';
 import { Session } from '../../../services/session';
@@ -9,15 +8,16 @@ import { NotificationsToasterComponent } from '../../../modules/notifications/to
 @Component({
   moduleId: module.id,
   selector: 'm-topbar',
-  templateUrl: 'topbar.component.html'
+  templateUrl: 'topbar.component.html',
+  styleUrls:['topbar.component.scss']
 })
 
-export class TopbarComponent {
+export class TopbarComponent implements OnInit{
 
   @ViewChild(DynamicHostDirective) host: DynamicHostDirective;
 
-  opspot = window.Opspot;
-
+  opspot:any = window.Opspot;
+  user:any={}
   componentRef;
   componentInstance: NotificationsToasterComponent;
 
@@ -25,7 +25,11 @@ export class TopbarComponent {
   }
 
   ngAfterViewInit() {
-    this.loadComponent();
+    // this.loadComponent();
+
+  }
+  ngOnInit(){
+    this.user=this.opspot.user
   }
 
 	/**
@@ -46,4 +50,23 @@ export class TopbarComponent {
     this.componentInstance = this.componentRef.instance;
   }
 
+  hamburgerMenu(){
+    
+          var x = document.getElementById("app-nav-block");
+              if (x.style.display === "block") {
+                  x.style.display = "none";
+              } else {
+                  x.style.display = "block";
+              }
+     }
+
+   closeNav(){
+    var x = document.getElementById("app-nav-block");
+    console.log(x.style)
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+   }   
 }

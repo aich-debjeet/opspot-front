@@ -1,0 +1,82 @@
+//for layout
+
+.o-blocks{
+    width: 100%;
+    display: flex;
+    flex: 1;
+    // div{
+    //     height: 500px;
+    // }
+}
+.o-left-block{
+    width: 265px;
+    order: 1;
+    // background: $grey-light ;
+}
+.o-center-block{
+    flex: 1;
+    order: 2;
+    margin: 0px 10px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        margin:0px;
+    }
+}
+.o-right-block{
+    width: 265px;
+    order: 3;
+    // background: $grey-light ;
+}
+
+//for card
+
+.o-card{
+    width: 100%;
+    border: 1px solid $grey-light;	
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+
+// prof images
+
+.o-avatar-lg{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        width: 100%;
+    }
+}
+.o-avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        width: 100%;
+    }
+}
+.o-avatar-sm{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        width: 100%;
+    }
+}
+
+
+// for dot
+
+.dot{
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: $grey;
+}
+
+

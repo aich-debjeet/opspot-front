@@ -1,87 +1,334 @@
-@import "defaults";
+// @import "defaults";
 
-opspot-form-register{
+// opspot-form-register{
 
-  form {
-    overflow: visible !important;
-  }
+//   form {
+//     overflow: visible !important;
+//   }
 
-  .password-help {
-    padding-left: 4px;
-  }
+//   .password-help {
+//     padding-left: 4px;
+//   }
 
-  .mdl-card__actions{
-    display:flex;
-    padding-left:$opspot-padding*2;
-    align-items:center;
-  }
+//   .mdl-card__actions{
+//     display:flex;
+//     padding-left:$opspot-padding*2;
+//     align-items:center;
+//   }
 
-  .m-register-tac{
-    font-size:11px;
-  }
+//   .m-register-tac{
+//     font-size:11px;
+//   }
 
-  //this is exactly the same as modal.scss
-  .m-fb-register-button{
-    background: #FFF;
-    color: #3b5998;
-    width: 170px;
-    border: 0;
-    cursor:pointer;
-    text-transform: uppercase;
-    text-align: left;
-    padding: 0;
-    margin: 0;
-    margin-left: 8px;
-    border: 1px solid #3b5998;
+//   //this is exactly the same as modal.scss
+//   .m-fb-register-button{
+//     background: #FFF;
+//     color: #3b5998;
+//     width: 170px;
+//     border: 0;
+//     cursor:pointer;
+//     text-transform: uppercase;
+//     text-align: left;
+//     padding: 0;
+//     margin: 0;
+//     margin-left: 8px;
+//     border: 1px solid #3b5998;
 
-    .m-social-icons-icon-inline{
-      fill: #3b5998;
-      vertical-align: middle;
-      display: inline-block;
-    }
+//     .m-social-icons-icon-inline{
+//       fill: #3b5998;
+//       vertical-align: middle;
+//       display: inline-block;
+//     }
 
-    .m-signup-button-text{
-      display: inline-block;
-      vertical-align: middle;
-      font-size: 9px;
-      width: auto;
-      max-width: calc(100% - 60px);
-      letter-spacing: 0.1em;
-      padding-left: 4px;
-      font-weight:600;
-    }
+//     .m-signup-button-text{
+//       display: inline-block;
+//       vertical-align: middle;
+//       font-size: 9px;
+//       width: auto;
+//       max-width: calc(100% - 60px);
+//       letter-spacing: 0.1em;
+//       padding-left: 4px;
+//       font-weight:600;
+//     }
 
-  }
+//   }
 
-  .m-login-box > div {
-    overflow: visible;
-  }
+//   .m-login-box > div {
+//     overflow: visible;
+//   }
 
-  .tooltip-wrapper {
-    bottom: 7px;
-    position: absolute;
-    right: 16px;
+//   .tooltip-wrapper {
+//     bottom: 7px;
+//     position: absolute;
+//     right: 16px;
 
-    .m-tooltip--bubble {
-      width: 280px;
-    }
-  }
+//     .m-tooltip--bubble {
+//       width: 280px;
+//     }
+//   }
 
-  .m-register--username-taken {
-    position: absolute;
-    right: 15px;
-    top: 20px;
-    color: red;
-  }
+//   .m-register--username-taken {
+//     position: absolute;
+//     right: 15px;
+//     top: 20px;
+//     color: red;
+//   }
 
-  .m-register--username-available {
-    position: absolute;
-    right: 15px;
-    top: 20px;
-    color: green;
-  }
+//   .m-register--username-available {
+//     position: absolute;
+//     right: 15px;
+//     top: 20px;
+//     color: green;
+//   }
 
-  .mdl-checkbox {
-    padding-top: 5px;
-  }
+//   .mdl-checkbox {
+//     padding-top: 5px;
+//   }
+// }
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+
+.o-signup-sec{
+	width: 100%;
+	display: inline-block;
+	margin-top: 37px;
+	@include mq($from: $mobile_sm, $until: $mobile) {
+		margin-top: 23px;
+	}
+}
+.o-signup-container{
+	width: 100%;
+	max-width: 1024px;
+	margin: 0px auto;
+	display: flex;
+	overflow: hidden;
+	.o-signup{
+		flex: 1;
+		&--form{
+			h2{
+				margin-bottom: 35px;
+				@include mq($from: $mobile, $until: $desktop_sm) {
+					text-align: center;
+				}
+				@include mq($from: $mobile_sm, $until: $mobile) {
+					text-align: center;
+				}
+			}
+			form{
+				width: 410px;
+				@include mq($from: $mobile_sm, $until: $desktop_sm) {
+					margin:0px auto;
+				}
+				@include mq($from: $mobile_sm, $until: $mobile_lg) {
+					width: 290px;
+				}
+			}
+		}
+		&--img{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			@include mq($from: $mobile_sm, $until: $desktop_sm) {
+				display: none!important;
+			}
+		}
+		&__img{
+			width: 349px;
+			height: 384px;
+			margin-bottom: 52px;
+		}
+	}
+}
+.o-phone{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	&__code{
+		width: 95px;
+		height: 40px;
+		padding:12px;
+		border: 1px solid $grey;	
+		border-radius: 4px;
+	}
+	&__flag{
+		width: 25px;
+		height: 18px;
+		overflow: hidden;
+		border-radius: 50%;
+		float: left;
+	}
+	&__country{
+		text-transform: uppercase;
+		float: left;
+		margin-left: 4px;
+	}
+	&__dropdown{
+		width: 16px;
+		height: 16px;
+		border-radius: 2px;
+		margin-left: 6px;
+	}
+	&__number{
+		width: calc(100% - 109px);
+	}
+}
+.o-otp{
+	width: 100%;
+	&__title{
+		width: 100%;
+		a{
+			float: right;
+		}
+	}
+	/* OTP */
+	.otp fieldset, .otp input {
+		border: none;
+		float: left;
+		width: 100%;
+	}
+	.otp input {
+		width: 51px;
+		margin-right: 20px;
+		border: 1px solid $grey;
+		text-align: center;
+		padding: 0.6rem 0.75rem;
+		font-size: 13px;
+		line-height: 18px;
+		border-radius: 4px;
+		margin-bottom: 24px;
+		margin-top:6px;
+		@include mq($from: $mobile_sm, $until: $mobile_lg) {
+			width: 36px!important;
+			margin-right: 14px;
+		}
+		&:focus{
+			color: #495057;
+			background-color: #fff;
+			border-color: #80bdff;
+			outline: 0;
+			border: 1px solid #333333;
+		}
+	}
+	.otp input:nth-child(6){
+		margin-right: 0px;
+	}
+	.m-0{
+		margin-right:0px!important;
+	}
+}
+.o-dob{
+	width: 100%;
+	&__select{
+		display: flex;
+		width: 100%;
+		div{
+			flex: 1;
+		}
+		.m-l-13{
+			margin-left: 13px;
+		}
+	}
+	&__title{
+		width: 100%;
+		margin-bottom: 6px;
+	}
+}
+.o-terms-condition{
+	margin: 31px 0px 39px 0px;
+	.c-checkbox {
+		display: block;
+		position: relative;
+		padding-left: 27px;
+		margin-bottom: 8px;
+		cursor: pointer;
+		font-size: 13px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		line-height: 15px;
+	  }
+	  
+	  /* Hide the browser's default checkbox */
+	  .c-checkbox input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+	  }
+	  
+	  /* Create a custom checkbox */
+	  .checkmark {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 16px;
+		width: 16px;
+		border-radius: 2px;
+		background-image: url('../../../../assets/svg/checkbox.svg');
+	  }
+	  
+	  /* On mouse-over, add a grey background color */
+	  .c-checkbox:hover input ~ .checkmark {
+		background-image: url(../../../../assets/svg/checkbox.svg);
+	  }
+	  
+	  /* When the checkbox is checked, add a blue background */
+	  .c-checkbox input:checked ~ .checkmark {
+		background-image: url(../../../../assets/svg/checkbox_selected.svg);
+	  }
+	  
+	  /* Create the checkmark/indicator (hidden when not checked) */
+	  .checkmark:after {
+		content: "";
+		position: absolute;
+		display: none;
+	  }
+	  
+	  /* Show the checkmark when checked */
+	  .c-checkbox input:checked ~ .checkmark:after {
+		display: block;
+	  }
+}
+
+.main-content{
+  min-height: calc(100vh - 130px);
+  margin: 0px auto 40px auto;
+  width: 91%;
+}
+
+::ng-deep .intl-tel-input {
+    position: relative !important;
+    display: block !important;
+}
+
+::ng-deep .intl-tel-input.allow-dropdown .flag-container{
+	left: 1rem;
+}
+
+
+::ng-deep .intl-tel-input.allow-dropdown input, .intl-tel-input.allow-dropdown input[type=text], .intl-tel-input.allow-dropdown input[type=tel], .intl-tel-input.separate-dial-code input, .intl-tel-input.separate-dial-code input[type=text], .intl-tel-input.separate-dial-code input[type=tel] {
+    padding-right: 6px;
+    padding-left: 82px !important;
+    margin-left: 0;
+}
+
+::ng-deep .intl-tel-input input, .intl-tel-input input[type=text], .intl-tel-input input[type=tel] {
+	width: 100%;
+    position: relative;
+    z-index: 0;
+    display: block;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-right: 36px;
+    margin-right: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-clip: padding-box;
+    border: 1px solid grey;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

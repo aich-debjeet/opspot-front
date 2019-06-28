@@ -1,5 +1,5 @@
 import { Component, EventEmitter, ViewChild, Input, Output, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl } from '@angular/forms';
 
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
@@ -9,7 +9,8 @@ import { ExperimentsService } from '../../experiments/experiments.service';
 @Component({
   moduleId: module.id,
   selector: 'opspot-form-register',
-  templateUrl: 'register.html'
+  templateUrl: 'register.html',
+  styleUrls: ['register.scss']
 })
 
 export class RegisterForm {
@@ -22,7 +23,8 @@ export class RegisterForm {
   captcha: string;
   takenUsername: boolean = false;
   usernameValidationTimeout: any;
-
+  number;
+  otpView=false;
   showFbForm: boolean = false;
 
   form: FormGroup;
@@ -32,6 +34,7 @@ export class RegisterForm {
   @Output() done: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('reCaptcha') reCaptcha: ReCaptchaComponent;
+  dateOfBirth;
 
   constructor(
     public session: Session,
@@ -41,77 +44,150 @@ export class RegisterForm {
     private experiments: ExperimentsService,
   ) {
     this.form = fb.group({
+      fullname: ['', Validators.required],
       username: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, this.checkPassword]],
       password2: ['', Validators.required],
+      otp: fb.group({
+        otp1: '', otp2: '', otp3: '', otp4: '', otp5: '', otp6: ''
+      }, { updateOn: 'blur', }),
       tos: [false],
+      mobileNumber: ['', { validators: Validators.required, updateOn: 'blur' }],
       exclusive_promotions: [false],
       captcha: [''],
       Homepage121118: experiments.getExperimentBucket('Homepage121118'),
-    });
+      dobGroup: fb.group({
+        date: ['', Validators.required], month: ['', Validators.required], year: ['', Validators.required],
+      }),
+    }, { validator: this.MustMatch('password', 'password2') })
 
+    //for dob 
+  }
+
+  //mobile number entered
+  onMobileNumbr() {
+    let numbers;
+    this.form.controls['mobileNumber'].valueChanges.subscribe(val => {
+      numbers = val.internationalNumber.replace(/\s/g, '');
+      this.getOtp(numbers)
+    });
+  }
+  onOtp() {
+    this.form.controls['otp'].valueChanges.subscribe(val => {
+      let a = Object.values(val);
+      let values = '';
+      a.forEach(a => { values += a });
+      if (values.length === 6) {
+        const phoneNumber = this.form.value.mobileNumber.internationalNumber.replace(/\s/g, '').replace('+', '').replace('-', '');
+        const data = {
+          'number': phoneNumber,
+          'code': values,
+          'secret': localStorage.getItem('phoneNumberSecret')
+        }
+        this.client.post('api/v3/verification/mobile/confirm', data)
+          .then((data: any) => {
+            // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
+            console.log(data);
+          })
+          .catch((e) => {
+            if (e.status === 'error') {
+              this.errorMessage = e.message;
+            }
+          });
+      }
+
+    })
+  }
+  //for getting otp
+  async getOtp(numbr) {
+    let response: any = await this.client.post('api/v3/verification/mobile/verify', {
+      number: numbr,
+    }).then((res: any) => {
+      console.log(res)
+      this.otpView=true;
+      localStorage.setItem('phoneNumberSecret', res.secret);
+    });
   }
 
   ngOnInit() {
+    this.dateOfBirth = this.dob();
     if (this.reCaptcha) {
       this.reCaptcha.reset();
     }
+    this.onMobileNumbr()
+    this.onOtp()
   }
 
   register(e) {
+    // console.log(this.form.value);
     e.preventDefault();
     this.errorMessage = '';
     if (!this.form.value.tos) {
       this.errorMessage = 'To create an account you need to accept terms and conditions.';
       return;
     }
+    // if (this.form.value.password !== this.form.value.password2) {
+    //   if (this.reCaptcha) {
+    //     this.reCaptcha.reset();
+    //   }
 
-    //re-enable cookies
-    document.cookie = 'disabled_cookies=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    //   this.errorMessage = 'Passwords must match.';
+    //   return;
+    // }
+    if (this.form.valid) {
 
-    if (this.form.value.password !== this.form.value.password2) {
-      if (this.reCaptcha) {
-        this.reCaptcha.reset();
+      const otpCode = this.form.value.otp.otp1 + this.form.value.otp.otp2 + this.form.value.otp.otp3 + this.form.value.otp.otp4 + this.form.value.otp.otp5 + this.form.value.otp.otp6;
+      const phoneNumber = this.form.value.mobileNumber.internationalNumber.replace(/\s/g, '').replace('+', '').replace('-', '');
+
+      const form = {
+        'name': this.form.value.fullname,
+        'username': this.form.value.username,
+        'number': phoneNumber,
+        'code': otpCode,
+        'secret': localStorage.getItem('phoneNumberSecret'),
+        'email': this.form.value.email,
+        'date_of_birth': {
+          'year': this.form['controls'].dobGroup['controls'].year.value,
+          'month': this.form['controls'].dobGroup['controls'].month.value,
+          'day': this.form['controls'].dobGroup['controls'].date.value,
+        },
+        'password': this.form.value.password,
+        'password2': this.form.value.password2
       }
+      //re-enable cookies
+      document.cookie = 'disabled_cookies=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      this.form.value.referrer = this.referrer;
 
-      this.errorMessage = 'Passwords must match.';
-      return;
+      this.inProgress = true;
+      this.client.post('api/v1/register', form)
+        .then((data: any) => {
+          // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
+          this.inProgress = false;
+          this.session.login(data.user);
+
+          this.done.next(data.user);
+        })
+        .catch((e) => {
+          // console.log(e);
+          this.inProgress = false;
+          if (this.reCaptcha) {
+            this.reCaptcha.reset();
+          }
+          if (e.status === 'failed') {
+            //incorrect login details
+            this.errorMessage = 'RegisterException::AuthenticationFailed';
+            this.session.logout();
+          } else if (e.status === 'error') {
+            //two factor?
+            this.errorMessage = e.message;
+            this.session.logout();
+          } else {
+            this.errorMessage = "Sorry, there was an error. Please try again.";
+          }
+          return;
+        });
     }
-
-    this.form.value.referrer = this.referrer;
-
-    this.inProgress = true;
-    this.client.post('api/v1/register', this.form.value)
-      .then((data: any) => {
-        // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
-
-        this.inProgress = false;
-        this.session.login(data.user);
-
-        this.done.next(data.user);
-      })
-      .catch((e) => {
-        console.log(e);
-        this.inProgress = false;
-        if (this.reCaptcha) {
-          this.reCaptcha.reset();
-        }
-
-        if (e.status === 'failed') {
-          //incorrect login details
-          this.errorMessage = 'RegisterException::AuthenticationFailed';
-          this.session.logout();
-        } else if (e.status === 'error') {
-          //two factor?
-          this.errorMessage = e.message;
-          this.session.logout();
-        } else {
-          this.errorMessage = "Sorry, there was an error. Please try again.";
-        }
-
-        return;
-      });
   }
 
   validateUsername() {
@@ -137,9 +213,79 @@ export class RegisterForm {
     this.form.patchValue({ captcha: code });
   }
 
-  validationTimeoutHandler() {
-    clearTimeout(this.usernameValidationTimeout);
-    this.usernameValidationTimeout = setTimeout(this.validateUsername.bind(this), 500);
+  // validationTimeoutHandler() {
+  //   clearTimeout(this.usernameValidationTimeout);
+  //   this.usernameValidationTimeout = setTimeout(this.validateUsername.bind(this), 500);
+  // }
+
+  
+  // function to give birth date selection
+
+  dob() {
+    let date = ['Date', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+    let month = ['Month', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    let year = ['Year'];
+    let a = new Date().getFullYear() - 13;
+    let ab = a - 70;
+    for (let i: any = a; i >= ab; i--) {
+      year.push(i)
+    }
+    const val = { date, month, year };
+    return val;
+  }
+
+  //password controls
+  checkPassword(control: AbstractControl) {
+    let enteredPassword = control.value
+    let passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+    return (!passwordCheck.test(enteredPassword) && enteredPassword) ? { 'requirements': true } : null;
+  }
+
+  //password error messages
+  getErrorPassword() {
+    return this.form.get('password').hasError('required') ? 'Field is required (at least eight characters, one uppercase letter and one number)' :
+      this.form.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
+  }
+
+  //for confirm password
+  MustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) { return; }
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    }
+  }
+
+  nextOtpNum(event) {
+    var keyCode = event.keyCode;
+    if (keyCode > 31 && (keyCode < 48 || keyCode > 57)) {
+      return false;
+    }
+    let nextInput = event.srcElement.nextElementSibling; // get the sibling element
+    if (nextInput == null)  // check the maxLength from here
+      return;
+    else
+      nextInput.focus();
+  }
+
+  prevOtpNum(event) {
+    var keyCode = event.keyCode;
+    let currInput = event.target; // current element
+    let prevInput = event.srcElement.previousElementSibling; // get the previous element
+    if (keyCode === 8) { // keycode 8 is backspace
+      if (currInput.value !== '') {
+        currInput.value = '';
+      } else {
+        if (event.srcElement.previousElementSibling === null) {
+          return;
+        } else { prevInput.focus(); }
+      }
+    }
   }
 
 }

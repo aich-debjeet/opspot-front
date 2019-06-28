@@ -46,11 +46,11 @@ export class RegisterComponent {
         this.referrer = params['referrer'];
       }
 
-      if (this.session.isLoggedIn() && this.referrer) {
-        this.loginReferrer.navigate({ defaultUrl: '/' + this.referrer});
-      } else if (this.session.isLoggedIn()) {
-        this.loginReferrer.navigate();
-      }
+      // if (this.session.isLoggedIn() && this.referrer) {
+      //   this.loginReferrer.navigate({ defaultUrl: '/' + this.referrer});
+      // } else if (this.session.isLoggedIn()) {
+      //   this.loginReferrer.navigate();
+      // }
     });
 
     if (/iP(hone|od)/.test(window.navigator.userAgent)) {
@@ -63,9 +63,9 @@ export class RegisterComponent {
   }
 
   registered() {
-    this.loginReferrer.navigate({
-      defaultUrl: '/' + this.session.getLoggedInUser().username
-    });
+    // this.loginReferrer.navigate({
+    //   defaultUrl: '/' + this.session.getLoggedInUser().username
+    // });
   }
 
 }
