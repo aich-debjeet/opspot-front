@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, from } from 'rxjs';
 
 import { OpspotTitle } from '../../../services/ux/title';
 import { Client } from '../../../services/api';
@@ -8,6 +8,7 @@ import { Session } from '../../../services/session';
 import { LoginComponent } from '../login.component';
 import { LoginForm } from '../../forms/login/login';
 import { Form, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { ForgotpasswordService } from './forgotpassword.service'
 
 @Component({
   moduleId: module.id,
@@ -50,7 +51,8 @@ export class ForgotPasswordComponent {
     public route: ActivatedRoute,
     public title: OpspotTitle,
     public session: Session,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private forgotpasswordservice: ForgotpasswordService
   ) {
     this.step1Form = this.formBuilder.group({
       forgotpInput: ['', [Validators.required]]
@@ -98,10 +100,11 @@ export class ForgotPasswordComponent {
       if (isNaN(this.mobileOremail)) { //forgot password by email
         this.error = '';
         this.inProgress = true;
-        this.client.post('api/v1/forgotpassword/request', {
+        let data = ({
           key: "email",
           value: this.mobileOremail
         })
+        this.forgotpasswordservice.sendEmaillink(data)
           .then((data: any) => {
             this.inProgress = false;
             this.step = 3;
@@ -118,9 +121,10 @@ export class ForgotPasswordComponent {
       } else { // forgot password by moilenumber
         this.error = '';
         this.inProgress = true;
-        this.client.post('api/v3/verification/mobile/verify', {
+        let data = ({
           number: this.mobileOremail
         })
+        this.forgotpasswordservice.sendOtp(data)
           .then((data: any) => {
             this.secret = data.secret
             this.inProgress = false;
@@ -176,11 +180,12 @@ export class ForgotPasswordComponent {
     this.error = '';
     if (this.step2Form.valid) {
       this.inProgress = true;
-      this.client.post('api/v3/verification/mobile/confirm', {
+      let data = ({
         number: this.mobileOremail,
         code: this.otp,
         secret: this.secret
       })
+      this.forgotpasswordservice.validateOtp(data)
         .then((data: any) => {
           this.inProgress = false;
           this.step = 4;
@@ -197,9 +202,10 @@ export class ForgotPasswordComponent {
   //resend otp for mobile
   resendOtp() {
     this.resending = true;
-    this.client.post('api/v3/verification/mobile/verify', {
+    let data = ({
       number: this.mobileOremail
     })
+    this.forgotpasswordservice.resendOtp(data)
     setTimeout(() => {
       this.resending = false;
     }, 1500);
