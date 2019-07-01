@@ -5,6 +5,7 @@ import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { ReCaptchaComponent } from '../../../modules/captcha/recaptcha/recaptcha.component';
 import { ExperimentsService } from '../../experiments/experiments.service';
+import { Service } from './service';
 
 @Component({
   moduleId: module.id,
@@ -42,6 +43,8 @@ export class RegisterForm {
     fb: FormBuilder,
     public zone: NgZone,
     private experiments: ExperimentsService,
+    private service: Service
+
   ) {
     this.form = fb.group({
       fullname: ['', Validators.required],
@@ -85,7 +88,7 @@ export class RegisterForm {
           'code': values,
           'secret': localStorage.getItem('phoneNumberSecret')
         }
-        this.client.post('api/v3/verification/mobile/confirm', data)
+        this.service.verifyMobile(data)
           .then((data: any) => {
             // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
             console.log(data);
@@ -100,12 +103,18 @@ export class RegisterForm {
     })
   }
   //for getting otp
-  async getOtp(numbr) {
-    let response: any = await this.client.post('api/v3/verification/mobile/verify', {
-      number: numbr,
-    }).then((res: any) => {
+   getOtp(numbr) {
+    // let response: any = await this.client.post('api/v3/verification/mobile/verify', {
+    //   number: numbr,
+    // }).then((res: any) => {
+    //   console.log(res)
+    //   this.otpView=true;
+    //   localStorage.setItem('phoneNumberSecret', res.secret);
+    // });
+
+    this.service.getOtp(numbr).then((res: any) => {
       console.log(res)
-      this.otpView=true;
+      this.otpView = true;
       localStorage.setItem('phoneNumberSecret', res.secret);
     });
   }
@@ -160,12 +169,11 @@ export class RegisterForm {
       this.form.value.referrer = this.referrer;
 
       this.inProgress = true;
-      this.client.post('api/v1/register', form)
+      this.service.register(form)
         .then((data: any) => {
           // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
           this.inProgress = false;
           this.session.login(data.user);
-
           this.done.next(data.user);
         })
         .catch((e) => {
@@ -192,7 +200,7 @@ export class RegisterForm {
 
   validateUsername() {
     if (this.form.value.username) {
-      this.client.get('api/v1/register/validate/' + this.form.value.username)
+      this.service.validateUsername(this.form.value.username)
         .then((data: any) => {
           if (data.exists) {
             this.form.controls.username.setErrors({ 'exists': true });
