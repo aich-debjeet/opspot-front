@@ -74,7 +74,6 @@ export class LoginForm {
           if (e.message === 'LoginException:BannedUser' || e.message === 'LoginException::AttemptsExceeded') {
             this.session.logout();
           }
-
           //two factor?
           this.twofactorToken = e.message;
           this.hideLogin = true;

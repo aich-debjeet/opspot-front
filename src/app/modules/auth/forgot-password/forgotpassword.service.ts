@@ -18,11 +18,18 @@ export class ForgotpasswordService {
     return this.client.post('api/v3/verification/mobile/verify', data)
   }
 
+  //validate otp 
   validateOtp(data) {
     return this.client.post('api/v3/verification/mobile/confirm', data)
   }
 
-  resendOtp(data){
+  //resend otp for the mobile
+  resendOtp(data) {
     this.client.post('api/v3/verification/mobile/verify', data)
+  }
+
+  //resent email link
+  resentEmaillink(data) {
+    this.client.post('api/v1/forgotpassword/request', data)
   }
 }

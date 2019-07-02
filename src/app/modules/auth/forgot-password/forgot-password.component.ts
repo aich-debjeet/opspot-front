@@ -214,10 +214,11 @@ export class ForgotPasswordComponent {
   //resend email link
   resentEmaillink() {
     this.resending = true;
-    this.client.post('api/v1/forgotpassword/request', {
+    let data = {
       key: "email",
       value: this.mobileOremail
-    })
+    }
+    this.forgotpasswordservice.resentEmaillink(data)
     setTimeout(() => {
       this.resending = false;
     }, 1500);
@@ -237,7 +238,6 @@ export class ForgotPasswordComponent {
     if (this.step3Form.valid)
       this.router.navigate(['/login']);
   }
-
   setCode(code: string) {
     this.step = 4;
     this.code = code;
