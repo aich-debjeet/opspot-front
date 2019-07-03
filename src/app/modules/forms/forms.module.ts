@@ -26,8 +26,12 @@ import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password
     ReactiveFormsModule,
     CaptchaModule,
     ExperimentsModule,
+<<<<<<< HEAD
     NgxIntlTelInputModule,
 
+=======
+    NgxIntlTelInputModule
+>>>>>>> faff98d9c082b3f78ac1c21da171adf60cee0830
   ],
   declarations: [
     LoginForm,

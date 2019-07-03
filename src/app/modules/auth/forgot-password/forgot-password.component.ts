@@ -18,7 +18,6 @@ import { Form, FormGroup } from '@angular/forms';
 })
 
 export class ForgotPasswordComponent {
-  // @ViewChild('mySwal') private mySwal: LoginForm;
 
 
   error = '';

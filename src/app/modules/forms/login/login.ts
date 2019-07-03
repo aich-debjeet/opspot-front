@@ -18,9 +18,6 @@ import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-passw
 
 export class LoginForm {
 
-  // @ViewChild('#mySwal') private mySwal: ForgotPasswordComponent;
-
-
   errorMessage: string = '';
   twofactorToken: string = '';
   hideLogin: boolean = false;
@@ -102,7 +99,5 @@ export class LoginForm {
       });
   }
 
-  // openModal(){
-  //   Swal.fire({html: '<m-forgot-password></m-forgot-password>'})
-  // }
+
 }

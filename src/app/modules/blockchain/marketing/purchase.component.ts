@@ -34,7 +34,6 @@ export class BlockchainPurchaseComponent implements OnInit {
 
   //amount: number = 0.25;
   tokens: number = 500;
-
   address: string = '';
   ofac: boolean = false;
   use: boolean = false;
@@ -62,15 +61,13 @@ export class BlockchainPurchaseComponent implements OnInit {
     protected web3Wallet: Web3WalletService,
     protected tde: TokenDistributionEventService,
     public session: Session,
-    public http: HttpClient
-  ) { }
+    public http: HttpClient) {
+    this.loadScript();
+   }
 
   ngOnInit() {
     // this.loadWalletAddress();
-    this.loadScript();
-    this.load().then(() => {
-      this.amount = 0.25;
-    });
+    //this.loadScript();
   }
 
   get amount() {
@@ -182,7 +179,12 @@ export class BlockchainPurchaseComponent implements OnInit {
   }
 
   loadScript() {
-    console.log('loading script')
+    const location = window.location.href;
+    if(location.split("?").length == 2){
+      this.confirming = false;
+      this.confirmed = true;
+      this.showPledgeModal =true;
+    }
     const a = document.createElement('script');
     a.src = 'https://js.instamojo.com/v1/checkout.js';
     this.elementRef.nativeElement.appendChild(a);
@@ -192,19 +194,22 @@ export class BlockchainPurchaseComponent implements OnInit {
   }
   payment() {
     const formData = new FormData();
-    formData.append('amount',this.tokens.toString());
+    formData.append('amount',this.amount.toString());
     formData.append('purpose','token_purchase');
     formData.append('buyer_name','anup');
-    formData.append('redirect_url','https://336a201c.ngrok.io/Instamojo-php-curl/success');
+    //formData.append('redirect_url','https://336a201c.ngrok.io/Instamojo-php-curl/success');
     formData.append('email','anup.panwar36@gmail.com');
     formData.append('phone','7022539494');
 
 
-    this.http.post<any>('http://07bc482a.ngrok.io/api/v3/payment/instamojo', formData).subscribe(
+    this.http.post<any>('api/v3/payment/instamojo', formData).subscribe(
       (res) => {
         const s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.innerHTML = "Instamojo.open('" + res.payment_request.longurl + "');";
+
+          s.type = 'text/javascript';
+          s.innerHTML = "Instamojo.open('" + res.longurl + "');";
+
+  
       this.elementRef.nativeElement.appendChild(s);
     },
       (err) => console.log(err)

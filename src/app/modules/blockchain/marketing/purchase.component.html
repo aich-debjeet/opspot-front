@@ -2,8 +2,7 @@
   <table class="m-blockchain--marketing--pledges--amounts" *ngIf="!inProgress">
     <ng-container *ngIf="phase === 'presale'">
       <tr>
-        <td class="m-blockchain--marketing--pledges--amounts--label"
-          i18n="@@M__PURCHASE_PLEDGED_AMOUNTS">
+        <td class="m-blockchain--marketing--pledges--amounts--label" i18n="@@M__PURCHASE_PLEDGED_AMOUNTS">
           Pledged
         </td>
         <td class="m-blockchain--marketing--pledges--amounts--value">
@@ -12,8 +11,7 @@
         </td>
       </tr>
       <tr>
-        <td class="m-blockchain--marketing--pledges--amounts--label"
-          i18n="@@M__PURCHASE_PLEDGED_CHANNEL">
+        <td class="m-blockchain--marketing--pledges--amounts--label" i18n="@@M__PURCHASE_PLEDGED_CHANNEL">
           Channels
         </td>
         <td class="m-blockchain--marketing--pledges--amounts--value">
@@ -33,15 +31,11 @@
       <td class="m-blockchain--marketing--pledges--amounts--label">
       </td>
       <td class="m-blockchain--marketing--pledge--input">
-        
-        <input type="number" class="m-input m-border" [(ngModel)]="amount" style="font-size: 18px; padding: 18px; cursor: pointer"
-          #ethInput
-          />
+
+        <input type="number" class="m-input m-border" [(ngModel)]="amount"
+          style="font-size: 18px; padding: 18px; cursor: pointer" #ethInput />
         <span class="m-blockchain--marketing--pledges--eth-label">INR</span>
-        <button
-          class="m-btn m-btn--action"
-          (click)="payment()"
-          i18n="@@M__PURCHASE_PURCHASE_HEADER">
+        <button class="m-btn m-btn--action" (click)="payment()" i18n="@@M__PURCHASE_PURCHASE_HEADER">
           Purchase
         </button>
       </td>
@@ -51,30 +45,19 @@
       </td>
       <td class="m-blockchain--marketing--pledge--input">
         <m-tooltip anchor="left" i18n="@@OPSPOT__TOPBAR__TOP__OPEN_TRENDING_ITEM_TOOLTIP">
-          <span m-tooltip--anchor class="m-blockchain--marketing--pledges--eth-subtext">1 Token = $0.15 USD = {{ 70 / rate}} INR</span>
-
-          <ng-container>
-            ETH amount is based on the current USD/ETH rate and is updated in regular intervals
-          </ng-container>
+          <span m-tooltip--anchor class="m-blockchain--marketing--pledges--eth-subtext">1 Token = $0.15 USD =
+            {{ 70 / rate}} INR</span>
         </m-tooltip>
       </td>
     </tr>
   </table>
 </div>
 
-<m-modal-signup-on-action
-  *ngIf="showLoginModal"
-  open="true"
-  (closed)="closeLoginModal()"
-  action="pledge"
+<m-modal-signup-on-action *ngIf="showLoginModal" open="true" (closed)="closeLoginModal()" action="pledge"
   [overrideOnboarding]="true">
 </m-modal-signup-on-action>
 
-<m-modal
-  open="true"
-  *ngIf="showPledgeModal"
-  (closed)="closePledgeModal()"
-  >
+<m-modal open="true" *ngIf="showPledgeModal" (closed)="closePledgeModal()">
 
   <div class="m-blockchain--marketing--modal">
 
@@ -84,10 +67,12 @@
     </div>
 
     <div *ngIf="session.getLoggedInUser().rewards && !confirmed">
-      <h2 i18n="@@M__PURCHASE_TITLE">Your {{ phase === 'presale' ? 'pledge' : 'purchase'}} for {{tokens | number:'1.0-4'}} Tokens ({{amount | number:'1.0-4'}} ETH)</h2>
+      <h2 i18n="@@M__PURCHASE_TITLE">Your {{ phase === 'presale' ? 'pledge' : 'purchase'}} for
+        {{tokens | number:'1.0-4'}} Tokens ({{amount | number:'1.0-4'}} ETH)</h2>
 
       <p class="m-blockchain--marketing--pledge--note" i18n="@@M__PURCHASE_ETH_MIN_TO_APPROVE" hidden>
-        Token {{ phase === 'presale' ? 'pledges' : 'purchases'}} over 40 ETH need to be approved by Opspot before they can be
+        Token {{ phase === 'presale' ? 'pledges' : 'purchases'}} over 40 ETH need to be approved by Opspot before they
+        can be
         issued.
       </p>
 
@@ -102,9 +87,7 @@
         </tr>
         <tr>
           <td><input id="use-check" type="checkbox" [(ngModel)]="use"></td>
-          <td
-            class="m-blockchain--marketing--pledge--check-label"
-          >
+          <td class="m-blockchain--marketing--pledge--check-label">
             <label for="use-check" i18n="@@M__PURCHASE_INVESTIMENT_INTENT">
               I am purchasing the tokens for use on the Opspot Platform, and not as an investment.
             </label>
@@ -112,11 +95,11 @@
         </tr>
         <tr>
           <td><input id="terms-check" type="checkbox" [(ngModel)]="terms"></td>
-          <td
-            class="m-blockchain--marketing--pledge--check-label"
-          >
+          <td class="m-blockchain--marketing--pledge--check-label">
             <label for="terms-check" i18n="@@M__PURCHASE_TERMS">
-              I have read and accept the <a href="https://cdn-assets.ops.doesntexist.com/front/dist/assets/documents/TermsOfSale-v0.1.pdf" target="_blank">Terms Of Sale</a> for the Opspot Token
+              I have read and accept the <a
+                href="https://cdn-assets.ops.doesntexist.com/front/dist/assets/documents/TermsOfSale-v0.1.pdf"
+                target="_blank">Terms Of Sale</a> for the Opspot Token
             </label>
           </td>
         </tr>
@@ -125,33 +108,24 @@
 
     <div *ngIf="confirmed">
       <h2 i18n="@@M__PURCHASE_COMPLETED_H2">Thank you for your purchase of {{tokens | number:'1.0-4'}} Tokens</h2>
-      <p class="m-blockchain--marketing--pledge--note" i18n="@@M__PURCHASE_COMPLETED_NOTE">Your transaction is processing and we will notify you once the transaction is complete.</p>
+      <p class="m-blockchain--marketing--pledge--note" i18n="@@M__PURCHASE_COMPLETED_NOTE">Your transaction is
+        processing and we will notify you once the transaction is complete.</p>
       <p class="m-blockchain--marketing--pledge--note" i18n="@@M__PURCHASE_COMPLETED_NOTE_REVIEW" *ngIf="amount > 60">
         Because your purchase was over 60 ETH, it may take over 24 hours for the transaction to be completed.
         If you would like to contact us, please reach out to info@ops.doesntexist.com.
-        </p>
-      <br/>
+      </p>
+      <br />
     </div>
 
     <div>
-      <button
-        class="m-btn m-btn--slim m-btn--action"
-        (click)="confirm()"
-        [disabled]="!canConfirm()"
-        *ngIf="!confirming && !confirmed"
-        i18n="@@M__PURCHASE_BUTTON">
+      <button class="m-btn m-btn--slim m-btn--action" (click)="confirm()" [disabled]="!canConfirm()"
+        *ngIf="!confirming && !confirmed" i18n="@@M__PURCHASE_BUTTON">
         Purchase
       </button>
-      <button
-        class="m-btn m-btn--slim"
-        *ngIf="confirming"
-        i18n="@@M__PURCHASE_PLEASE_WAIT_BUTTON">
+      <button class="m-btn m-btn--slim" *ngIf="confirming" i18n="@@M__PURCHASE_PLEASE_WAIT_BUTTON">
         Please wait...
       </button>
-      <button
-        class="m-btn m-btn--slim"
-        *ngIf="confirmed"
-        i18n="@@M__PURCHASE_COMPLETED">
+      <button class="m-btn m-btn--slim" *ngIf="confirmed" i18n="@@M__PURCHASE_COMPLETED">
         Completed
       </button>
 
