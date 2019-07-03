@@ -5,6 +5,7 @@ import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { ReCaptchaComponent } from '../../../modules/captcha/recaptcha/recaptcha.component';
 import { ExperimentsService } from '../../experiments/experiments.service';
+import { Service } from './service';
 
 @Component({
   moduleId: module.id,
@@ -42,6 +43,8 @@ export class RegisterForm {
     fb: FormBuilder,
     public zone: NgZone,
     private experiments: ExperimentsService,
+    private service: Service
+
   ) {
     this.form = fb.group({
       fullname: ['', Validators.required],
@@ -69,7 +72,7 @@ export class RegisterForm {
   onMobileNumbr() {
     let numbers;
     this.form.controls['mobileNumber'].valueChanges.subscribe(val => {
-      numbers = val.internationalNumber.replace(/\s/g, '');
+      numbers = this.removeSpace(val.internationalNumber);
       this.getOtp(numbers)
     });
   }
@@ -79,16 +82,15 @@ export class RegisterForm {
       let values = '';
       a.forEach(a => { values += a });
       if (values.length === 6) {
-        const phoneNumber = this.form.value.mobileNumber.internationalNumber.replace(/\s/g, '').replace('+', '').replace('-', '');
+       const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
         const data = {
           'number': phoneNumber,
           'code': values,
           'secret': localStorage.getItem('phoneNumberSecret')
         }
-        this.client.post('api/v3/verification/mobile/confirm', data)
+        this.service.verifyMobile(data)
           .then((data: any) => {
             // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
-            console.log(data);
           })
           .catch((e) => {
             if (e.status === 'error') {
@@ -100,12 +102,9 @@ export class RegisterForm {
     })
   }
   //for getting otp
-  async getOtp(numbr) {
-    let response: any = await this.client.post('api/v3/verification/mobile/verify', {
-      number: numbr,
-    }).then((res: any) => {
-      console.log(res)
-      this.otpView=true;
+   getOtp(numbr) {
+    this.service.getOtp(numbr).then((res: any) => {
+      this.otpView = true;
       localStorage.setItem('phoneNumberSecret', res.secret);
     });
   }
@@ -127,18 +126,10 @@ export class RegisterForm {
       this.errorMessage = 'To create an account you need to accept terms and conditions.';
       return;
     }
-    // if (this.form.value.password !== this.form.value.password2) {
-    //   if (this.reCaptcha) {
-    //     this.reCaptcha.reset();
-    //   }
-
-    //   this.errorMessage = 'Passwords must match.';
-    //   return;
-    // }
     if (this.form.valid) {
 
-      const otpCode = this.form.value.otp.otp1 + this.form.value.otp.otp2 + this.form.value.otp.otp3 + this.form.value.otp.otp4 + this.form.value.otp.otp5 + this.form.value.otp.otp6;
-      const phoneNumber = this.form.value.mobileNumber.internationalNumber.replace(/\s/g, '').replace('+', '').replace('-', '');
+      const otpCode = `${this.form.value.otp.otp1}${this.form.value.otp.otp2}${this.form.value.otp.otp3}${this.form.value.otp.otp4}${this.form.value.otp.otp5}${this.form.value.otp.otp6}`;
+      const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
 
       const form = {
         'name': this.form.value.fullname,
@@ -160,12 +151,11 @@ export class RegisterForm {
       this.form.value.referrer = this.referrer;
 
       this.inProgress = true;
-      this.client.post('api/v1/register', form)
+      this.service.register(form)
         .then((data: any) => {
           // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
           this.inProgress = false;
           this.session.login(data.user);
-
           this.done.next(data.user);
         })
         .catch((e) => {
@@ -190,24 +180,24 @@ export class RegisterForm {
     }
   }
 
-  validateUsername() {
-    if (this.form.value.username) {
-      this.client.get('api/v1/register/validate/' + this.form.value.username)
-        .then((data: any) => {
-          if (data.exists) {
-            this.form.controls.username.setErrors({ 'exists': true });
-            this.errorMessage = data.message;
-            this.takenUsername = true;
-          } else {
-            this.takenUsername = false;
-            this.errorMessage = '';
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }
-  }
+  // validateUsername() {
+  //   if (this.form.value.username) {
+  //     this.service.validateUsername(this.form.value.username)
+  //       .then((data: any) => {
+  //         if (data.exists) {
+  //           this.form.controls.username.setErrors({ 'exists': true });
+  //           this.errorMessage = data.message;
+  //           this.takenUsername = true;
+  //         } else {
+  //           this.takenUsername = false;
+  //           this.errorMessage = '';
+  //         }
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   }
+  // }
 
   setCaptcha(code) {
     this.form.patchValue({ captcha: code });
@@ -266,8 +256,8 @@ export class RegisterForm {
     if (keyCode > 31 && (keyCode < 48 || keyCode > 57)) {
       return false;
     }
-    let nextInput = event.srcElement.nextElementSibling; // get the sibling element
-    if (nextInput == null)  // check the maxLength from here
+    let nextInput = event.srcElement.nextElementSibling;
+    if (nextInput == null)
       return;
     else
       nextInput.focus();
@@ -275,9 +265,9 @@ export class RegisterForm {
 
   prevOtpNum(event) {
     var keyCode = event.keyCode;
-    let currInput = event.target; // current element
-    let prevInput = event.srcElement.previousElementSibling; // get the previous element
-    if (keyCode === 8) { // keycode 8 is backspace
+    let currInput = event.target;
+    let prevInput = event.srcElement.previousElementSibling;
+    if (keyCode === 8) {
       if (currInput.value !== '') {
         currInput.value = '';
       } else {
@@ -286,6 +276,13 @@ export class RegisterForm {
         } else { prevInput.focus(); }
       }
     }
+  }
+  removeSpace(numb){
+    return numb.replace(/\s/g, '')
+  }
+
+  removeOperators(numb){
+    return numb.replace(/\s/g, '').replace('+', '').replace('-', '');
   }
 
 }
