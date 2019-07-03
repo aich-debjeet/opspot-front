@@ -14,7 +14,6 @@ import { OnboardingCategoriesSelector } from './categories-selector/categories-s
 import { Tutorial } from './tutorial/tutorial';
 import { CaptchaModule } from '../captcha/captcha.module';
 import { ExperimentsModule } from '../experiments/experiments.module';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
 // import { AuthModule } from '../auth/auth.module';
 
@@ -28,10 +27,7 @@ import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password
     CaptchaModule,
     ExperimentsModule,
     NgxIntlTelInputModule,
-    SweetAlert2Module.forRoot({
-      animation: false,
-      buttonsStyling: false,
-    }),
+
   ],
   declarations: [
     LoginForm,

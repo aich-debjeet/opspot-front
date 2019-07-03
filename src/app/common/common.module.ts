@@ -79,7 +79,6 @@ import { UpdateMarkersService } from './services/update-markers.service';
 import { SocketsService } from '../services/sockets';
 import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 @NgModule({
@@ -88,16 +87,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    SweetAlert2Module.forRoot({
-      buttonsStyling: false,
-      customClass: 'modal-content',
-      confirmButtonClass: 'btn btn-primary',
-      cancelButtonClass: 'btn'
-  })
   ],
   declarations: [
     OPSPOT_PIPES,
-
     TopbarComponent,
     SidebarMarkersComponent,
     TopbarNavigationComponent,

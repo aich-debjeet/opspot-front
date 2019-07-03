@@ -25,7 +25,7 @@
 
   <div class="m-topbar--account" *ngIf="session.isLoggedIn()" #menu>
       <a class="" (click)="menu.value = !menu.value">
-        <img alt="menu" src="assets/demo/avatar.png" />
+        <img alt="menu" src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" />
       </a>
       <ul class="m-dropdown__list" [hidden]="!menu.value">
         <li class="m-dropdownList__item"
@@ -181,7 +181,7 @@
     <div id="app-nav-block" class="hidden-above-tablet">
         <div class="app-nav-block__close" id="app-nav-close" (click)="closeNav()"><img src="assets/svg/m_nav_ico/close.svg" alt=""></div>
         <div class="app-nav-head">
-            <a [routerLink]="['/',user.username]" class="o-avatar"><img src="assets/demo/avatar.png" alt=""></a>
+            <a [routerLink]="['/',user.username]" class="o-avatar"><img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}"alt=""></a>
             <div class="app-nav-head__info">
                 <a class="grey-dark app-nav-head__name">{{user.name}}</a>
                 <a [routerLink]="['/',user.username]" class="text-sm primary">View Profile</a>

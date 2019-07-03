@@ -26,7 +26,7 @@
           <div *ngIf="submitted && f.password.errors" class="error text-sm">
             <div *ngIf="f.password.errors.required">password is required</div>
           </div>
-          <a [swal]="mySwal" class="text-sm grey">Forgot Password?</a>
+          <a class="text-sm grey">Forgot Password?</a>
         </div>
         <button type="button" (click)="login()" class="btn btn-outline-primary btn-sm">Login</button>
       </div>
@@ -64,7 +64,7 @@
             <div *ngIf="submitted && f.password.errors" class="error text-sm">
               <div *ngIf="f.password.errors.required">password is required</div>
             </div>
-            <a class="text-sm primary float-right" [swal]="mySwal">Forgot Password?</a>
+            <a class="text-sm primary float-right" >Forgot Password?</a>
           </div>
           <button (click)="login()" type="button" class="btn btn-primary btn-block">Login</button>
         </form>
@@ -74,12 +74,12 @@
 </section>
 
 
-
+<!-- 
 <swal #mySwal [showConfirmButton]="false" [focusCancel]="false">
   <div *swalPartial>
     <m-forgot-password></m-forgot-password>
   </div>
-</swal>
+</swal> -->
 <!-- >
 
   

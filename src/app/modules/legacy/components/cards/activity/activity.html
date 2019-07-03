@@ -175,16 +175,23 @@
 
 <ng-content select="[bottom-content]"></ng-content>
 
-<div class="tabs" *ngIf="!hideTabs">
+<div class="o-actions" *ngIf="!hideTabs">
 	<opspot-button-thumbs-up [object]="activity"></opspot-button-thumbs-up>
 	<!-- <opspot-button-thumbs-down [object]="activity"></opspot-button-thumbs-down> -->
   <m-wire-button *ngIf="session.getLoggedInUser().guid != (activity.remind_object ? activity.remind_object.owner_guid : activity.owner_guid)"
     [object]="activity.remind_object ? activity.remind_object : activity"
     (done)="wireSubmitted($event)"
   ></m-wire-button>
-	<opspot-button-comment [object]="activity" (click)="openComments()"></opspot-button-comment>
+  <opspot-button-comment [object]="activity" (click)="openComments()"></opspot-button-comment>
+  <a class="o-actions__link" >
+    <i class="icon-eye f-15"></i>
+    <span class="o-action-count text-sm grey">
+      <span>{{ activity.impressions | number }}</span>
+    </span>
+  </a>
+
 	<opspot-button-remind [object]="activity"></opspot-button-remind>
-  <a class="mdl-button mdl-color-text--white mdl-button--colored opspot-boost-button"
+  <a class="btn btn-primary btn-xs btn--boost"
     *ngIf ="session.getLoggedInUser().guid == activity.owner_guid"
     id="boost-actions"
     (click)="showBoost()">
@@ -192,7 +199,7 @@
   </a>
 </div>
 
-<div class="impressions-tag m-activity--metrics" [class.m-activity--metrics-wire]="!session.getLoggedInUser() || session.getLoggedInUser().guid != activity.owner_guid" *ngIf="!hideTabs">
+<!-- <div class="impressions-tag m-activity--metrics" [class.m-activity--metrics-wire]="!session.getLoggedInUser() || session.getLoggedInUser().guid != activity.owner_guid" *ngIf="!hideTabs">
   <div class="m-activity--metrics-inner m-border">
     <div class="m-activity--metrics-metric" (click)="showWire()">
   		<i class="ion-icon ion-flash"></i>
@@ -203,7 +210,7 @@
         <span>{{ activity.impressions | number }}</span>
   	</div>
   </div>
-</div>
+</div> -->
 
 <opspot-comments 
   *ngIf="commentsToggle"

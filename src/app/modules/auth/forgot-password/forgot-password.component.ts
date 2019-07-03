@@ -1,12 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Subscription } from 'rxjs';
 
 import { OpspotTitle } from '../../../services/ux/title';
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
-import Swal from 'sweetalert2';
 import { LoginComponent } from '../login.component';
 import { LoginForm } from '../../forms/login/login';
 import { Form, FormGroup } from '@angular/forms';

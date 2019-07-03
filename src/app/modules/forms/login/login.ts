@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
-import Swal from 'sweetalert2'
 import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-password.component';
 
 
