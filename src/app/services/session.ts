@@ -71,7 +71,9 @@ export class Session {
 	 */
   login(user: any = null) {
     //clear stale local storage
+    const mobileSecret = localStorage.getItem('phoneNumberSecret');
     window.localStorage.clear();
+    localStorage.setItem('phoneNumberSecret', mobileSecret);
     this.userEmitter.next(user);
     window.Opspot.user = user;
     // localStorage.setItem('user',JSON.stringify(user) );
@@ -91,7 +93,9 @@ export class Session {
     delete window.Opspot.user;
     window.Opspot.LoggedIn = false;
     window.Opspot.Admin = false;
+    const mobileSecret = localStorage.getItem('phoneNumberSecret');
     window.localStorage.clear();
+    localStorage.setItem('phoneNumberSecret', mobileSecret);
     this.loggedinEmitter.next(false);
   }
 }
