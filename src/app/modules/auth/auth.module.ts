@@ -32,11 +32,7 @@ const routes: Routes = [
     CommonModule,
     LegacyModule,
     ModalsModule,
-<<<<<<< HEAD
-    OpspotFormsModule,
-=======
     OpspotFormsModule
->>>>>>> faff98d9c082b3f78ac1c21da171adf60cee0830
   ],
   declarations: [
     LoginComponent,

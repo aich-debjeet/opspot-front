@@ -86,11 +86,7 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
     NgCommonModule,
     RouterModule,
     FormsModule,
-<<<<<<< HEAD
-    ReactiveFormsModule,
-=======
     ReactiveFormsModule
->>>>>>> faff98d9c082b3f78ac1c21da171adf60cee0830
   ],
   declarations: [
     OPSPOT_PIPES,
