@@ -11,14 +11,17 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
   inputs: ['_object: object'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <a class="mdl-color-text--blue-grey-500" (click)="thumb()" [ngClass]="{'selected': has() }">
-      <span class="icon-ops-spot"></span>
-      <span class="opspot-counter" *ngIf="object['thumbs:up:count'] > 0">{{object['thumbs:up:count'] | number}}</span>
+    <a class="o-actions__link" (click)="thumb()" >
+      <i class='spot-ico' [ngClass]="{'icon-heart-filled': has(),'icon-heart':!has() }"></i>
+      <span class="o-action-count text-sm grey" *ngIf="object['thumbs:up:count'] > 0"><span>{{object['thumbs:up:count'] | number}}</span></span>
     </a>
   `,
   styles: [`
       a {
           cursor: pointer;
+      }
+      .icon-heart-filled{
+        color:red;
       }
   `],
 })

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Session } from '../../../../../services/session';
 import { Client } from '../../../../../services/api';
@@ -10,7 +10,7 @@ import { Client } from '../../../../../services/api';
   templateUrl: 'user.html'
 })
 
-export class UserCard {
+export class UserCard implements OnInit {
 
   user: any;
   opspot = window.Opspot;
@@ -24,5 +24,7 @@ export class UserCard {
     this.user = value;
     this.bannerSrc = `${this.opspot.cdn_url}fs/v1/banners/${this.user.guid}/fat/${this.user.icontime}`;
   }
-
+ngOnInit(){
+  console.log(this.user,window.Opspot)
+}
 }

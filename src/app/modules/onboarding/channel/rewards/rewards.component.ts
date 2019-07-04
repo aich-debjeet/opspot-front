@@ -17,13 +17,7 @@ import { Router } from "@angular/router";
       </p>
 
       <!-- add phone input -->
-      <div class="m-channelOnboardingSlideRewards__input" *ngIf="!confirming; else confirmBlock">
-        <m-phone-input [(ngModel)]="number" ngDefaultControl></m-phone-input>
-        <button class="m-btn m-btn--slim m-btn--action" (click)="verify()" [disabled]="inProgress"
-                i18n="@@WALLET__TOKENS__ONBOARDING__REWARDS__JOIN_ACTION">Join
-        </button>
-        <div *ngIf="inProgress" class="mdl-spinner mdl-js-spinner is-active" [mdl]></div>
-      </div>
+      
 
       <ng-template #confirmBlock>
         <div class="m-channelOnboardingSlideRewards__input">
@@ -39,9 +33,7 @@ import { Router } from "@angular/router";
               i18n-placeholder="@@WALLET__TOKENS__REWARDS__CODE_EXAMPLE_PH"
               class="m-border"
             />
-            <m-tooltip icon="help" i18n="@@WALLET__TOKENS__ONBOARDING__REWARDS__ENTER_CODE_TOOLTIP">
-              Please enter the code we just sent you, to verify that your number is correct
-            </m-tooltip>
+ 
           </div>
 
           <div class="m-channelOnboardingSlideForm__buttons">

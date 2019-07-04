@@ -90,7 +90,6 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
   ],
   declarations: [
     OPSPOT_PIPES,
-
     TopbarComponent,
     SidebarMarkersComponent,
     TopbarNavigationComponent,

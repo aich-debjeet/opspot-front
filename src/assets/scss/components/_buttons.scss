@@ -76,7 +76,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
-  color: $grey-dark;
+  color: $grey;
   background-color: $grey-light;
   border-color: $grey-light;
 }
@@ -159,6 +159,13 @@ fieldset:disabled a.btn {
   border-radius: 4px;
 }
 
+.btn-xs, .btn-group-xs> .btn {
+  padding: 3.5px 9px;
+  font-size: 11px;
+  line-height: 14px;
+  border-radius: 4px;
+}
+
 // button block
 .btn-block {
   display: block;
@@ -211,4 +218,3 @@ fieldset:disabled a.btn {
   background-color: $white;
   border-color: $white;
 }
-
