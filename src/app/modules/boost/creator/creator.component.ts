@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef, OnInit } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import * as BN from 'bn.js';
 
@@ -9,6 +9,7 @@ import { TokenContractService } from '../../blockchain/contracts/token-contract.
 import { BoostContractService } from '../../blockchain/contracts/boost-contract.service';
 import { Web3WalletService } from '../../blockchain/web3-wallet.service';
 import { OffchainPaymentService } from '../../blockchain/offchain-payment.service';
+import { Router } from '@angular/router';
 
 
 type CurrencyType = 'offchain' | 'usd' | 'onchain' | 'creditcard';
@@ -40,7 +41,7 @@ export class VisibleBoostError extends Error {
   selector: 'm-boost--creator',
   templateUrl: 'creator.component.html'
 })
-export class BoostCreatorComponent implements AfterViewInit {
+export class BoostCreatorComponent implements AfterViewInit,OnInit {
 
   object: any = {};
 
@@ -112,12 +113,16 @@ export class BoostCreatorComponent implements AfterViewInit {
     private tokensContract: TokenContractService,
     private boostContract: BoostContractService,
     private web3Wallet: Web3WalletService,
-    private offchainPayment: OffchainPaymentService
+    private offchainPayment: OffchainPaymentService,
+    private overlayService: OverlayModalService,
+    private router: Router
+    
   ) { }
 
   ngOnInit() {
     this.getPreferredPaymentMethod();
     this.load();
+    this.loadBalance()
   }
 
   ngAfterViewInit() {
@@ -645,6 +650,24 @@ export class BoostCreatorComponent implements AfterViewInit {
     }
 
     return { guid, checksum };
+  }
+  
+  balances={offchain:''};
+  async loadBalance(){
+   try{
+    let response: any = await this.client.get(`api/v2/blockchain/wallet/balance`);
+      if(response){
+      this.balances.offchain = response.addresses[1].balance;
+      }
+   }
+   catch{
+     console.log('balance not loaded')
+   }
+  }
+ 
+  buyTokens() {
+    this.overlayService.dismiss();
+    this.router.navigate(['/token']);
   }
 
 }

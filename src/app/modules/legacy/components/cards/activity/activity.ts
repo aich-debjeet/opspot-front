@@ -214,7 +214,7 @@ export class Activity {
   }
 
   showBoost() {
-    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.activity);
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.activity,{class:'modalChanger'});
 
     boostModal.onDidDismiss(() => {
       this.showBoostOptions = false;

@@ -6,6 +6,7 @@
 @import "src/assets/scss/base/reset";
 @import "src/assets/scss/base/typography";
 @import "src/assets/scss/components/buttons";
+@import "src/assets/scss/components/boost";
 @import "src/assets/scss/components/dropdowns";
 @import "src/assets/scss/components/flag";
 @import "src/assets/scss/components/radio-checkbox";
@@ -18,6 +19,7 @@
 @import "src/assets/scss/components/popular-channel";
 @import "src/assets/scss/components/suggestions";
 @import "src/assets/scss/components/trending-post";
+@import "src/stylesheets/ionicons";
 
 
 
@@ -24308,4 +24310,9 @@ img {
   }
   .icon-zoom-out:before {
     content: "\ea1c";
+  }
+
+  .modalChanger{
+    padding: 0 !important;
+    max-width: 524px;
   }

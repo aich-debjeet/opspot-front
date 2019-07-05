@@ -8,9 +8,12 @@ import { Session } from '../../../services/session';
 @Component({
   selector: 'm-wire-button',
   template: `
-    <button class="m-wire-button" (click)="wire()">
-      <i class="ion-icon ion-flash"></i>
-    </button>
+   <a class="o-actions__link" (click)="wire()">
+      <i class="icon-coins f-15"></i>
+      <span class='o-action-count text-sm grey'>
+      <span> </span>
+     </span>
+    </a>
   `
 })
 export class WireButtonComponent {

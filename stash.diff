@@ -1,0 +1,339 @@
+diff --git a/src/app/common/components/overlay-modal/overlay-modal.component.scss b/src/app/common/components/overlay-modal/overlay-modal.component.scss
+index 9cb7554..8071baf 100644
+--- a/src/app/common/components/overlay-modal/overlay-modal.component.scss
++++ b/src/app/common/components/overlay-modal/overlay-modal.component.scss
+@@ -97,7 +97,7 @@
+   }
+ 
+   > i.material-icons {
+-    font-size: 32px;
++    font-size: 19px;
+   }
+ }
+ 
+@@ -114,3 +114,4 @@ body.m-overlay-modal--shown {
+   background: rgba(0,0,0,0.5);
+   z-index: 9999998;
+ }
++
+diff --git a/src/app/common/components/overlay-modal/overlay-modal.component.ts b/src/app/common/components/overlay-modal/overlay-modal.component.ts
+index 84d68de..5d37706 100644
+--- a/src/app/common/components/overlay-modal/overlay-modal.component.ts
++++ b/src/app/common/components/overlay-modal/overlay-modal.component.ts
+@@ -42,6 +42,7 @@ export class OverlayModalComponent implements AfterViewInit {
+     }, ...opts };
+ 
+     this.class = opts.class;
++    console.log(opts.class)
+ 
+     if (!componentClass) {
+       throw new Error('Unknown component class');
+diff --git a/src/app/modules/boost/creator/creator.component.html b/src/app/modules/boost/creator/creator.component.html
+index 02f5492..cdb41f3 100644
+--- a/src/app/modules/boost/creator/creator.component.html
++++ b/src/app/modules/boost/creator/creator.component.html
+@@ -1,12 +1,15 @@
+-<div class="m-boost--creator">
++<div class="o-boost">
+ 
+-  <div class="m-boost--creator--header">
++  <!-- <div class="m-boost--creator--header">
+     <h2 i18n="@@M__FEATURE__BOOST">Boost</h2>
+-  </div>
++  </div> -->
++    <div class="o-boost-head o-boost-head--border">
++        <div class="o-boost__title text-h4 f500">Boost Post</div>
++    </div>
+ 
+-  <span *ngIf="step === 0">
++  <!-- <span *ngIf="step === 0"> -->
+     <!-- Type -->
+-    <section class="m-boost--creator-section m-boost--creator-section-type">
++    <!-- <section class="m-boost--creator-section m-boost--creator-section-type">
+       <h3 class="m-boost--creator-section-title--small" i18n="@@BOOST__CREATOR__BOOST_TYPE_TITLE">Boost Type</h3>
+ 
+       <ul class="m-boost--creator-selector"
+@@ -39,21 +42,37 @@
+           <span class="m-boost--creator-selector--selected-label" i18n="@@M__COMMON__SELECTED">Selected</span>
+         </li>
+       </ul>
+-    </section>
++    </section> -->
+ 
+     <!-- Amount -->
+-    <section class="m-boost--creator-section-row">
+-      <section class="m-boost--creator-section m-boost--creator-section-amount">
+-        <h3 class="m-boost--creator-section-title--small">
+-          <ng-container *ngIf="boost.type != 'p2p'" i18n="@@BOOST__CREATOR__BID_TITLE">How many views do you want?</ng-container>
+-          <ng-container *ngIf="boost.type == 'p2p'" i18n="@@BOOST__CREATOR__OFFER_TITLE">What's your offer?</ng-container>
+-        </h3>
++  <div class="o-boost-body o-boost-body--flex">
++
++      <div class="o-boost-discrptn text-md text-center">
++          Boost helps you to promote your post, increase your reach and
++          reach people with similar interests. <a  class="primary">Learn more</a>
++      </div>
++
++      <div class="o-boost-token">
++          <div class="text-md">Tokens available: <span class="f500">
++          {{ balances.offchain | token:18 | number }}
++          </span></div>
++          <button type="button" (click)="buyTokens()" class="btn btn-outline-primary btn-sm">Buy Tokens</button>
++      </div>
++ 
++  <div class="o-boost-action">
++       
++
++        <div class="o-boost-action__views">
++        <p class="caption-regular">
++            <ng-container *ngIf="boost.type != 'p2p'" i18n="@@BOOST__CREATOR__BID_TITLE">
++                How many views you
++                need for this post?
++            </ng-container>
++            <!-- <ng-container *ngIf="boost.type == 'p2p'" i18n="@@BOOST__CREATOR__OFFER_TITLE">What's your offer?</ng-container> -->
++          </p>
+ 
+-        <div class="m-boost--creator-wide-input m-boost--creator--amount"
+-          [class.m-boost--creator-wide-input--reading]="!editingAmount"
+-        >
+           <input type="text"
+-            class="m-boost--creator-wide-input--edit"
++            class="o-boost-action-input"
+             [ngModel]="boost.amount | number"
+             (ngModelChange)="setBoostAmount($event)"
+             (focus)="amountEditorFocus()"
+@@ -63,18 +82,22 @@
+             #amountEditor
+           />
+ 
+-          <span class="m-boost--creator-wide-input--label"
++          <span 
+             (click)="amountEditorFocus()"
+           >
+-            <ng-container *ngIf="boost.type != 'p2p'" i18n="@@BOOST__CREATOR__VIEWS_INPUT_LABEL">views</ng-container>
++            <ng-container *ngIf="boost.type != 'p2p'" i18n="@@BOOST__CREATOR__VIEWS_INPUT_LABEL"></ng-container>
+           </span>
+         </div>
++        <div class="o-boost-action__separation">
++            <div class="line"></div>
++            <div class="or"><span class="text-sm">or</span></div>
++        </div>
+ 
+-        <div class="m-boost--creator-wide-input--cost">
++        <!-- <div class="m-boost--creator-wide-input--cost">
+           <span class="m-boost--creator-wide-input--cost-label-value">
+             <span class="m-boost--creator-wide-input--cost-label">Cost</span>
+ 
+-            <span class="m-boost--creator-wide-input--cost-value">
++            <span class="o-boost-action-input">
+               <span *ngIf="boost.currency === 'usd'">{{ calcCharges(boost.currency) | currency:'USD':true }}</span>
+               <span *ngIf="boost.currency !== 'usd'">{{ calcCharges(boost.currency) | number:'1.0-4' }}</span>
+             </span>
+@@ -84,19 +107,29 @@
+             <ng-container *ngIf="boost.currency === 'usd'" i18n="@@BOOST__CREATOR__USD_LABEL">USD</ng-container>
+             <ng-container *ngIf="boost.currency !== 'usd'" i18n="@@BOOST__CREATOR__TOKENS_LABEL">Tokens</ng-container>
+           </span>
++        </div> -->
++        <div class="o-boost-action__spend">
++            <p class="caption-regular">
++                How many Tokens you
++                need for this post?
++            </p>
++            <span class="o-boost-action-input">
++                <!-- <span>{{ calcCharges(boost.currency) | currency:'USD':true }}</span> -->
++                <span >{{ calcCharges(boost.currency) | number:'1.0-4' }}</span>
++              </span>
+         </div>
+ 
+         <span class="m-boost--creator-wide-input--estimation" *ngIf="estimatedTime !== -1" i18n="@@BOOST__CREATOR__ESTIMATED_COMPLETION">
+             Estimated completion time: {{ estimatedTime }} hours
+         </span>
+-      </section>
+-
++      
++ 
+       <!-- Payment Method -->
+-      <section class="m-boost--creator-section m-boost--creator-section-payment">
++      <!-- <section class="m-boost--creator-section m-boost--creator-section-payment">
+         <h3 class="m-boost--creator-section-title--small" i18n="@@BOOST__CREATOR__PAYMENT_METHOD_CRYPTO_TITLE">Payment Method</h3>
+         <m-boost--creator-payment-methods [(boost)]="boost" [rates]="rates"></m-boost--creator-payment-methods>
+-      </section>
+-    </section>
++      </section> -->
++    </div>
+ 
+     <!-- Boost Settings -->
+     <!-- General -->
+@@ -151,7 +184,7 @@
+       </section>
+     </ng-container>
+     <!-- / -->
+-  </span>
++  <!-- </span> -->
+ 
+   <ng-container *ngIf="step == 1">
+     <section class="m-boost--creator-section m-boost--creator-section-checkout">
+@@ -187,7 +220,7 @@
+         *ngIf="boost.currency === 'usd' || boost.currency === 'creditcard'"
+       >Back</button>
+ 
+-      <button class="m-boost--creator-button m-boost--creator-button--submit"
++      <button class="btn btn-primary btn-block"
+         [disabled]="!canSubmit() || inProgress || success || criticalError"
+         (click)="submit()"
+         i18n="verb|@@M__ACTION__BOOST"
+@@ -207,3 +240,8 @@
+     </div>
+   </section>
+ </div>
++</div>
++
++
++
++
+diff --git a/src/app/modules/boost/creator/creator.component.ts b/src/app/modules/boost/creator/creator.component.ts
+index 093be3d..1f9ff67 100644
+--- a/src/app/modules/boost/creator/creator.component.ts
++++ b/src/app/modules/boost/creator/creator.component.ts
+@@ -1,4 +1,4 @@
+-import { Component, Input, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
++import { Component, Input, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef, OnInit } from '@angular/core';
+ import { CurrencyPipe } from '@angular/common';
+ import * as BN from 'bn.js';
+ 
+@@ -9,6 +9,7 @@ import { TokenContractService } from '../../blockchain/contracts/token-contract.
+ import { BoostContractService } from '../../blockchain/contracts/boost-contract.service';
+ import { Web3WalletService } from '../../blockchain/web3-wallet.service';
+ import { OffchainPaymentService } from '../../blockchain/offchain-payment.service';
++import { Router } from '@angular/router';
+ 
+ 
+ type CurrencyType = 'offchain' | 'usd' | 'onchain' | 'creditcard';
+@@ -40,7 +41,7 @@ export class VisibleBoostError extends Error {
+   selector: 'm-boost--creator',
+   templateUrl: 'creator.component.html'
+ })
+-export class BoostCreatorComponent implements AfterViewInit {
++export class BoostCreatorComponent implements AfterViewInit,OnInit {
+ 
+   object: any = {};
+ 
+@@ -112,12 +113,16 @@ export class BoostCreatorComponent implements AfterViewInit {
+     private tokensContract: TokenContractService,
+     private boostContract: BoostContractService,
+     private web3Wallet: Web3WalletService,
+-    private offchainPayment: OffchainPaymentService
++    private offchainPayment: OffchainPaymentService,
++    private overlayService: OverlayModalService,
++    private router: Router
++    
+   ) { }
+ 
+   ngOnInit() {
+     this.getPreferredPaymentMethod();
+     this.load();
++    this.loadBalance()
+   }
+ 
+   ngAfterViewInit() {
+@@ -646,5 +651,23 @@ export class BoostCreatorComponent implements AfterViewInit {
+ 
+     return { guid, checksum };
+   }
++  
++  balances={offchain:''};
++  async loadBalance(){
++   try{
++    let response: any = await this.client.get(`api/v2/blockchain/wallet/balance`);
++      if(response){
++      this.balances.offchain = response.addresses[1].balance;
++      }
++   }
++   catch{
++     console.log('balance not loaded')
++   }
++  }
++ 
++  buyTokens() {
++    this.overlayService.dismiss();
++    this.router.navigate(['/token']);
++  }
+ 
+ }
+diff --git a/src/app/modules/legacy/components/cards/activity/activity.html b/src/app/modules/legacy/components/cards/activity/activity.html
+index 7e68b5c..3a18f54 100644
+--- a/src/app/modules/legacy/components/cards/activity/activity.html
++++ b/src/app/modules/legacy/components/cards/activity/activity.html
+@@ -195,7 +195,7 @@
+     *ngIf ="session.getLoggedInUser().guid == activity.owner_guid"
+     id="boost-actions"
+     (click)="showBoost()">
+-    <ng-container i18n="verb|@@M__ACTION__BOOST">Boost</ng-container>
++    <ng-container i18n="verb|@@M__ACTION__BOOST" >Boost</ng-container>
+   </a>
+ </div>
+ 
+diff --git a/src/app/modules/legacy/components/cards/activity/activity.ts b/src/app/modules/legacy/components/cards/activity/activity.ts
+index 94adf5c..1108b32 100644
+--- a/src/app/modules/legacy/components/cards/activity/activity.ts
++++ b/src/app/modules/legacy/components/cards/activity/activity.ts
+@@ -214,7 +214,7 @@ export class Activity {
+   }
+ 
+   showBoost() {
+-    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.activity);
++    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.activity,{class:'modalChanger'});
+ 
+     boostModal.onDidDismiss(() => {
+       this.showBoostOptions = false;
+diff --git a/src/app/modules/wire/button/button.component.ts b/src/app/modules/wire/button/button.component.ts
+index 32bb1a1..d33a8f3 100644
+--- a/src/app/modules/wire/button/button.component.ts
++++ b/src/app/modules/wire/button/button.component.ts
+@@ -8,9 +8,12 @@ import { Session } from '../../../services/session';
+ @Component({
+   selector: 'm-wire-button',
+   template: `
+-    <button class="m-wire-button" (click)="wire()">
+-      <i class="ion-icon ion-flash"></i>
+-    </button>
++   <a class="o-actions__link" (click)="wire()">
++      <i class="icon-coins f-15"></i>
++      <span class='o-action-count text-sm grey'>
++      <span> </span>
++     </span>
++    </a>
+   `
+ })
+ export class WireButtonComponent {
+diff --git a/src/main.scss b/src/main.scss
+index bd5881c..1aa3557 100644
+--- a/src/main.scss
++++ b/src/main.scss
+@@ -6,6 +6,7 @@
+ @import "src/assets/scss/base/reset";
+ @import "src/assets/scss/base/typography";
+ @import "src/assets/scss/components/buttons";
++@import "src/assets/scss/components/boost";
+ @import "src/assets/scss/components/dropdowns";
+ @import "src/assets/scss/components/flag";
+ @import "src/assets/scss/components/radio-checkbox";
+@@ -18,6 +19,7 @@
+ @import "src/assets/scss/components/popular-channel";
+ @import "src/assets/scss/components/suggestions";
+ @import "src/assets/scss/components/trending-post";
++@import "src/stylesheets/ionicons";
+ 
+ 
+ 
+@@ -24308,4 +24310,9 @@ img {
+   }
+   .icon-zoom-out:before {
+     content: "\ea1c";
++  }
++
++  .modalChanger{
++    padding: 0 !important;
++    max-width: 524px;
+   }
+\ No newline at end of file

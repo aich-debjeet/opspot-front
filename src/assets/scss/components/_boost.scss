@@ -1,0 +1,164 @@
+.o-boost{
+    width: 521px;
+    border-radius: 4px;	
+    background-color: #FFFFFF;
+    @include mq($from: $mobile_sm, $until: $mobile  ) {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+	}
+}
+.o-boost-head{
+    width: 100%;
+    padding: 25px 38px;
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $mobile  ) {
+        padding: 14px;
+	}
+    &--border{
+        border-bottom: 1px solid #ECEFF1;
+    }
+    .close{
+        position: absolute;
+        top: 25px;
+        right: 38px;
+        @include mq($from: $mobile_sm, $until: $mobile  ) {
+            top: 14px;
+            right: 14px;
+        }
+    }
+}
+
+// // // boost body part
+
+.o-boost-body{
+    width: 100%;
+    padding: 23px 38px 38px;
+    @include mq($from: $mobile_sm, $until: $mobile  ) {
+        padding: 14px;
+	}
+    &--flex{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+.o-boost-discrptn{
+    width: 253px;
+    margin: 0px auto;
+    @include mq($from: $mobile_sm, $until: $mobile  ) {
+        width: 100%;
+	}
+}
+
+// for boost token part
+
+.o-boost-token{
+    width: 100%;	
+    border-radius: 4px;	
+    background-color: #FFFFFF;	
+    box-shadow: 0 0 2px 0 rgba(144,164,174,0.16), 0 2px 2px 0 rgba(144,164,174,0.16), 0 1px 3px 0 rgba(144,164,174,0.16);
+    padding: 16px;
+    margin-top: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+// for boost action part
+
+.o-boost-action{
+    width: 100%;
+    display: flex;
+    flex: 1;
+    margin-bottom: 86px;
+    @include mq($from: $mobile_sm, $until: $mobile  ) {
+        flex-direction: column;
+    }
+    &__views{
+        width: 48%;
+        order: 1;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        @include mq($from: $mobile_sm, $until: $mobile  ) {
+            width: 100%;
+        }
+        p{
+            width: 141px;
+            text-align: center;
+            @include mq($from: $mobile_sm, $until: $mobile  ) {
+                width: 100%;
+                font-size: 13px!important;
+            }
+        }
+    }
+    &__separation{
+        width: 4%;
+        order: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include mq($from: $mobile_sm, $until: $mobile  ) {
+            width: 100%;
+            height: 23px;
+            margin: 18px auto;
+        }
+        .line{
+            width: 1px;
+            background: $grey-light;
+            height: 120px;
+            @include mq($from: $mobile_sm, $until: $mobile  ) {
+                width: 120px;
+                height: 1px;
+            }
+        }
+        .or{
+            height: 23px;	
+            width: 23px;	
+            border: 1px solid #ECEFF1;	
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+        }
+    }
+    &__spend{
+        width: 48%;
+        order: 3;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        @include mq($from: $mobile_sm, $until: $mobile  ) {
+            width: 100%;
+        }
+        p{
+            width: 141px;
+            text-align: center;
+            @include mq($from: $mobile_sm, $until: $mobile  ) {
+                width: 100%;
+                font-size: 13px!important;
+            }
+        }
+    }
+}
+.o-boost-action-input{
+    width: 146px;	
+    border: 1px solid #90A4AE;	
+    border-radius: 4px;
+    padding: 14px;
+    text-align: center;
+    margin-top: 16px;
+    font-size: 20px;	
+    line-height: 20px;
+    color: $grey-dark;
+    &:focus{
+        outline: none;
+    }
+}
