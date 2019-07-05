@@ -26,6 +26,7 @@ export class RegisterForm {
   usernameValidationTimeout: any;
   number;
   otpView=false;
+  verifiedOtp = false;
   showFbForm: boolean = false;
 
   form: FormGroup;
@@ -90,6 +91,10 @@ export class RegisterForm {
         }
         this.service.verifyMobile(data)
           .then((data: any) => {
+            this.verifiedOtp = true;
+            if(this.errorMessage === 'Confirmation failed'){
+              this.errorMessage = ''
+            }
             // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
           })
           .catch((e) => {
