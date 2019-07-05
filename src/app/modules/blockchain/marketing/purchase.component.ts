@@ -33,7 +33,7 @@ export class BlockchainPurchaseComponent implements OnInit {
   };
 
   //amount: number = 0.25;
-  tokens: number = 500;
+  tokens: number = 1000;
   address: string = '';
   ofac: boolean = false;
   use: boolean = false;
