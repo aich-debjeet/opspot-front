@@ -225,7 +225,7 @@
 
       <div class="m-commentToolbar__buttons" [hidden]="editing">
         <opspot-button-thumbs-up [object]="comment" [class.has-count]="comment['thumbs:up:count'] > 0"></opspot-button-thumbs-up>
-        <opspot-button-thumbs-down [object]="comment"></opspot-button-thumbs-down>
+        <!-- <opspot-button-thumbs-down [object]="comment"></opspot-button-thumbs-down> -->
         <span class="m-clickable"
           [class.selected]="comment.replies_count > 0"
           (click)="toggleReplies();"
