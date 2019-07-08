@@ -9,6 +9,7 @@ import { LoginComponent } from '../login.component';
 import { LoginForm } from '../../forms/login/login';
 import { Form, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ForgotpasswordService } from './forgotpassword.service';
+import {FormValidator } from '../../../helpers/form.validator'
 
 @Component({
   moduleId: module.id,
@@ -56,7 +57,7 @@ export class ForgotPasswordComponent {
   ) {
     this.step1Form = this.formBuilder.group({
       forgotpInput: ['', [Validators.required]]
-    }, { validators: this.emailMobileValidation });
+    }, { validators: FormValidator.emailMobileValidation });
     this.step2Form = this.formBuilder.group({
       otpNum1: [''],
       otpNum2: [''],
@@ -64,63 +65,13 @@ export class ForgotPasswordComponent {
       otpNum4: [''],
       otpNum5: [''],
       otpNum6: ['']
-    }, { validators: this.otpValidation });
+    }, { validators: FormValidator.otpValidation });
     this.step3Form = this.formBuilder.group({
-      newPassword: ['', [Validators.required, this.checkPassword]],
+      newPassword: ['', [Validators.required, FormValidator.checkPassword]],
       confirmPassword: ['']
-    }, { validators: this.passwordConfirmcheck });
+    }, { validators: FormValidator.passwordConfirmcheck });
   }
 
-  checkPassword(ac: AbstractControl) {
-    const password = ac.value;
-    console.log('password: ' + password);
-    if (ac.value === '') {
-      return;
-    }
-    // let passwordRegex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
-    if (!passwordRegex.test(password)) {
-      return { invalidPassword: true };
-    }
-    return null;
-  }
-
-
-  otpValidation(ac: AbstractControl) {
-    if (ac.get('otpNum1').value.length === 0
-      || ac.get('otpNum2').value.length === 0
-      || ac.get('otpNum3').value.length === 0
-      || ac.get('otpNum4').value.length === 0
-      || ac.get('otpNum5').value.length === 0
-      || ac.get('otpNum6').value.length === 0) {
-      return { invalidOtp: true };
-    }
-    return null;
-  }
-
-  emailMobileValidation(input: AbstractControl) {
-    if (input.value === '') {
-      return;
-    }
-    const inputVal = input.get('forgotpInput').value;
-    if (inputVal) {
-      if (isNaN(inputVal)) { // not a number, checking for valid email
-        const email = input.get('forgotpInput').value;
-// tslint:disable-next-line: max-line-length
-        const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!(emailRegex.test(email))) {
-          return { invalidEmail: true };
-        }
-        return null;
-      } else { // checking for valid number (country code + mobile)
-        // let mobileNumber = input.get("forgotpInput").value;
-        // let mobileRegex = /^\+[0-9]{2,3}-[0-9]\d{10}/;
-        // if (!(mobileRegex.test(mobileNumber)))
-        //   return { invalidMobile: true };
-      }
-      return null;
-    }
-  }
 
   ngOnInit() {
     // this.title.setTitle('Forgot Password');
@@ -271,14 +222,6 @@ export class ForgotPasswordComponent {
     setTimeout(() => {
       this.resending = false;
     }, 1500);
-  }
-
-  // check for confirm password
-  passwordConfirmcheck(c: AbstractControl) {
-    if (c.get('newPassword').value !== c.get('confirmPassword').value) {
-      return { passwordMismatched: true };
-    }
-    return null;
   }
 
   // for updating the password
