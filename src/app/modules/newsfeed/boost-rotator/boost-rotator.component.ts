@@ -73,7 +73,6 @@ export class NewsfeedBoostRotatorComponent {
   }
 
   ngOnInit() {
-    console.log('boosts')
     this.rating = this.session.getLoggedInUser().boost_rating;
     this.plus = this.session.getLoggedInUser().plus;
     this.disabled = !this.service.isBoostEnabled();

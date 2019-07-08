@@ -184,50 +184,50 @@
             <a [routerLink]="['/',user.username]" class="o-avatar"><img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}"alt=""></a>
             <div class="app-nav-head__info">
                 <a class="grey-dark app-nav-head__name">{{user.name}}</a>
-                <a [routerLink]="['/',user.username]" class="text-sm primary">View Profile</a>
+                <a [routerLink]="['/',user.username]" (click)='closeNav()' class="text-sm primary">View Profile</a>
             </div>
         </div><!--app nav head end-->
         <div class="app-nav-link">
             <ul class="app-nav-link-block">
                 <li class="app-nav-link_-item">
-                    <a  routerLink="/newsfeed" > 
+                    <a  routerLink="/newsfeed" (click)='closeNav()' > 
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_home.svg" alt=""></div>
                         <div class="app-nav-link__text">Home</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a href="#">
+                    <a >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_explore.svg" alt=""></div>
                         <div class="app-nav-link__text">Explore</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a href="#">
+                    <a >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_bookmark.svg" alt=""></div>
                         <div class="app-nav-link__text">Saved Posts</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a href="#">
+                    <a >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_events.svg" alt=""></div>
                         <div class="app-nav-link__text">Events</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a href="#">
+                    <a >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_jobs.svg" alt=""></div>
                         <div class="app-nav-link__text">Opportunity</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a href="#">
+                    <a routerLink='/settings/general' (click)='closeNav()' >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_settings.svg" alt=""></div>
                         <div class="app-nav-link__text">Settings</div>
                     </a>
                 </li>
             </ul>
             <div class="app-nav-link_-item app-nav-link_-item--logout">
-                <a href="#">
+                <a routerLink="/logout" (click)='closeNav()' >
                     <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_logout.svg" alt=""></div>
                     <div class="app-nav-link__text">logout</div>
                 </a>

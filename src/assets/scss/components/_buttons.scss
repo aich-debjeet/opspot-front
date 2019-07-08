@@ -55,7 +55,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: $white;
+  color: $white !important;
   background-color: $primary;
   border-color: $primary;
 }
