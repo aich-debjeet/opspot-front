@@ -25,7 +25,7 @@ export class RegisterForm {
   takenUsername: boolean = false;
   usernameValidationTimeout: any;
   number;
-  otpView=false;
+  otpView = false;
   showFbForm: boolean = false;
 
   form: FormGroup;
@@ -65,10 +65,10 @@ export class RegisterForm {
       }),
     }, { validator: this.MustMatch('password', 'password2') })
 
-    //for dob 
+    // for dob 
   }
 
-  //mobile number entered
+  // mobile number entered
   onMobileNumbr() {
     let numbers;
     this.form.controls['mobileNumber'].valueChanges.subscribe(val => {
@@ -82,7 +82,7 @@ export class RegisterForm {
       let values = '';
       a.forEach(a => { values += a });
       if (values.length === 6) {
-       const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
+        const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
         const data = {
           'number': phoneNumber,
           'code': values,
@@ -98,11 +98,10 @@ export class RegisterForm {
             }
           });
       }
-
     })
   }
-  //for getting otp
-   getOtp(numbr) {
+  // for getting otp
+  getOtp(numbr) {
     this.service.getOtp(numbr).then((res: any) => {
       this.otpView = true;
       localStorage.setItem('phoneNumberSecret', res.secret);
@@ -146,7 +145,7 @@ export class RegisterForm {
         'password': this.form.value.password,
         'password2': this.form.value.password2
       }
-      //re-enable cookies
+      // re-enable cookies
       document.cookie = 'disabled_cookies=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       this.form.value.referrer = this.referrer;
 
@@ -165,7 +164,7 @@ export class RegisterForm {
             this.reCaptcha.reset();
           }
           if (e.status === 'failed') {
-            //incorrect login details
+            // incorrect login details
             this.errorMessage = 'RegisterException::AuthenticationFailed';
             this.session.logout();
           } else if (e.status === 'error') {
@@ -208,7 +207,7 @@ export class RegisterForm {
   //   this.usernameValidationTimeout = setTimeout(this.validateUsername.bind(this), 500);
   // }
 
-  
+
   // function to give birth date selection
 
   dob() {
@@ -224,7 +223,7 @@ export class RegisterForm {
     return val;
   }
 
-  //password controls
+  // password controls
   checkPassword(control: AbstractControl) {
     let enteredPassword = control.value
     let passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
@@ -237,7 +236,7 @@ export class RegisterForm {
       this.form.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
   }
 
-  //for confirm password
+  // for confirm password
   MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
@@ -277,11 +276,11 @@ export class RegisterForm {
       }
     }
   }
-  removeSpace(numb){
+  removeSpace(numb) {
     return numb.replace(/\s/g, '')
   }
 
-  removeOperators(numb){
+  removeOperators(numb) {
     return numb.replace(/\s/g, '').replace('+', '').replace('-', '');
   }
 
