@@ -178,17 +178,26 @@
 <div class="o-actions" *ngIf="!hideTabs">
 	<opspot-button-thumbs-up [object]="activity"></opspot-button-thumbs-up>
 	<!-- <opspot-button-thumbs-down [object]="activity"></opspot-button-thumbs-down> -->
-  <m-wire-button *ngIf="session.getLoggedInUser().guid != (activity.remind_object ? activity.remind_object.owner_guid : activity.owner_guid)"
-    [object]="activity.remind_object ? activity.remind_object : activity"
-    (done)="wireSubmitted($event)"
-  ></m-wire-button>
+
   <opspot-button-comment [object]="activity" (click)="openComments()"></opspot-button-comment>
-  <a class="o-actions__link" >
+  <a class="o-actions__link"  >
     <i class="icon-eye f-15"></i>
     <span class="o-action-count text-sm grey">
       <span>{{ activity.impressions | number }}</span>
     </span>
   </a>
+  <a class="o-actions__link"  *ngIf ="session.getLoggedInUser().guid == activity.owner_guid" >
+    <i class="icon-coins f-15"></i>
+    <span class="o-action-count text-sm grey">
+      <span *ngIf="activity.wire_totals">{{ activity.wire_totals.tokens | token:18 | abbr }}</span>
+    </span>
+  </a>
+
+
+  <m-wire-button *ngIf="session.getLoggedInUser().guid != (activity.remind_object ? activity.remind_object.owner_guid : activity.owner_guid)"
+  [object]="activity.remind_object ? activity.remind_object : activity"
+  (done)="wireSubmitted($event)"
+></m-wire-button>
 
 	<opspot-button-remind [object]="activity"></opspot-button-remind>
   <a class="btn btn-primary btn-xs btn--boost"

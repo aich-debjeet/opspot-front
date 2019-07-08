@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { SignupModalService } from '../../modals/signup/service';
@@ -8,10 +8,10 @@ import { Session } from '../../../services/session';
 @Component({
   selector: 'm-wire-button',
   template: `
-   <a class="o-actions__link" (click)="wire()">
+   <a class="o-actions__link o-actions__link--coin" (click)="wire()">
       <i class="icon-coins f-15"></i>
       <span class='o-action-count text-sm grey'>
-      <span> </span>
+      <span>{{object.wire_totals.tokens|token:18 | number}}</span>
      </span>
     </a>
   `
