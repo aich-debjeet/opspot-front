@@ -95,6 +95,7 @@ export class ForgotPasswordComponent {
   request() {
     this.submitted1 = true;
     this.mobileOremail = this.step1Form.value.forgotpInput;
+    localStorage.setItem("mobileOremail", this.mobileOremail);
     if (this.step1Form.valid) {
       if (isNaN(this.mobileOremail)) { // forgot password by email
         this.error = '';
@@ -182,7 +183,8 @@ export class ForgotPasswordComponent {
     if (this.step2Form.valid) {
       this.inProgress = true;
       const data = ({
-        number: this.mobileOremail,
+        // number:this.mobileOremail
+        number: localStorage.getItem("mobileOremail"),
         code: this.otp,
         secret: localStorage.getItem('phoneNumberSecret')
       });
@@ -204,7 +206,8 @@ export class ForgotPasswordComponent {
   resendOtp() {
     this.resending = true;
     const data = ({
-      number: this.mobileOremail
+      // number:this.mobileOremail
+      number: localStorage.getItem("mobileOremail")
     });
     this.forgotpasswordservice.resendOtp(data);
     setTimeout(() => {
@@ -217,7 +220,8 @@ export class ForgotPasswordComponent {
     this.resending = true;
     const data = {
       key: 'email',
-      value: this.mobileOremail
+     // value: this.mobileOremail
+      value: localStorage.getItem("mobileOremail")
     };
     this.forgotpasswordservice.resentEmaillink(data);
     setTimeout(() => {
