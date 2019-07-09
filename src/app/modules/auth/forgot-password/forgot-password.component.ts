@@ -9,7 +9,7 @@ import { LoginComponent } from '../login.component';
 import { LoginForm } from '../../forms/login/login';
 import { Form, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ForgotpasswordService } from './forgotpassword.service';
-import {FormValidator } from '../../../helpers/form.validator'
+import { FormValidator } from '../../../helpers/form.validator'
 
 @Component({
   moduleId: module.id,
@@ -125,7 +125,8 @@ export class ForgotPasswordComponent {
         });
         this.forgotpasswordservice.sendOtp(data)
           .then((data: any) => {
-            this.secret = data.secret;
+            // this.secret = data.secret;
+            localStorage.setItem('phoneNumberSecret', data.secret);
             this.inProgress = false;
             this.step = 2;
           })
@@ -183,7 +184,7 @@ export class ForgotPasswordComponent {
       const data = ({
         number: this.mobileOremail,
         code: this.otp,
-        secret: this.secret
+        secret: localStorage.getItem('phoneNumberSecret')
       });
       this.forgotpasswordservice.validateOtp(data)
         .then((data: any) => {
