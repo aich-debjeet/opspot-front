@@ -144,8 +144,9 @@
                     </a>
                      -->
                 </li>
+                
                 <li class="nav-icon__item">
-                    <a class="nav__ico" href="#">
+                    <a  [routerLink]="['/groups/create']" title="Group" class="nav__ico" >
                         <img src="assets/svg/create.svg" alt=""> 
                     </a>
                 </li>
@@ -164,7 +165,7 @@
                     </a>
                 </li>
                 <li class="nav-icon__item">
-                    <a class="nav__ico" href="#">
+                    <a class="nav__ico" title="Blog" [routerLink]="['blog/edit/new']">
                         <img src="assets/svg/create_post.svg" alt="">
                     </a>
                 </li>
@@ -208,15 +209,15 @@
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a >
+                    <a  [routerLink]="['/groups/create']" (click)='closeNav()'  >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_events.svg" alt=""></div>
-                        <div class="app-nav-link__text">Events</div>
+                        <div class="app-nav-link__text">Group</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a >
+                    <a  [routerLink]="['blog/edit/new']" (click)='closeNav()' >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_jobs.svg" alt=""></div>
-                        <div class="app-nav-link__text">Opportunity</div>
+                        <div class="app-nav-link__text">Blog</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
@@ -263,9 +264,9 @@
             <img src="assets/svg/m_nav_ico/home_main.svg" alt="home" class="mobile-nav-icon--lg">
             <img src="assets/svg/m_nav_ico/home_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
         </a>
-        <a class="mobile-nav-icon__item">
-            <img src="assets/svg/m_nav_ico/message_main.svg" alt="home" class="mobile-nav-icon--lg">
-            <img src="assets/svg/m_nav_ico/message_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
+        <!-- wallet/tokens/contributions -->
+        <a [routerLink]="['wallet/tokens/contributions']" class="mobile-nav-icon__item">
+          <i style="color: #999999;" class="material-icons">account_balance</i>
             <!-- <div class="o-noti-count"></div> -->
 
         </a>
