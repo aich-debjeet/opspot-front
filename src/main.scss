@@ -5412,7 +5412,14 @@ m-body {
   margin-top: 52px;
   display: block;
   min-height: 100%; }
-
+  @media only screen and (max-width: 600px) {
+    m-body {
+      margin-top: 112px;
+      display: block;
+      min-height: 100%;
+      //height: 100%;
+    }
+  }
 .m-sidebarMarkers__container {
   right: 0;
   position: fixed;
@@ -23456,6 +23463,28 @@ img {
   -moz-osx-font-smoothing: grayscale; }
 
 
+
+  .icon-hashtag:before {
+    content: "\ea2a";
+  }
+  .icon-NSFW .path1:before {
+    content: "\ea2b";
+    color: rgb(0, 0, 0);
+  }
+  .icon-NSFW .path2:before {
+    content: "\ea2c";
+    margin-left: -1em;
+    color: rgb(252, 252, 252);
+  }
+  .icon-paperclip-2:before {
+    content: "\e904";
+  }
+  .icon-paper-plane-1:before {
+    content: "\ea2d";
+  }
+  .icon-user-21:before {
+    content: "\ea2f";
+  }
   .icon-channels:before {
     content: "\e900";
   }
@@ -23472,7 +23501,7 @@ img {
     content: "\e9f54";
   }
   .icon-activity:before {
-    content: "\e905";
+    content: "\ea6d";
   }
   .icon-airplay:before {
     content: "\e906";

@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, ElementRef, Input, ViewChild } from '@angular/core';
-
 import { Client } from '../../../../../services/api';
 import { Session } from '../../../../../services/session';
 import { ScrollService } from '../../../../../services/ux/scroll';
