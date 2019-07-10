@@ -99,6 +99,7 @@ export class RegisterForm {
           })
           .catch((e) => {
             if (e.status === 'error') {
+              this.verifiedOtp = false;
               this.errorMessage = e.message;
             }
           });
