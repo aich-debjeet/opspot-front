@@ -1209,7 +1209,7 @@ label {
     display: inline-block;
     margin-bottom: 8px;
     font-size: 13px;
-    line-height: 20px;
+    line-height: 8px;
 }
 
 .form-control {
@@ -24345,3 +24345,11 @@ img {
     padding: 0 !important;
     max-width: 524px;
   }
+  @media only screen and (max-width: 600px) {
+  .m-btn{
+    padding: 14px 16px !important;
+  }
+  .myHiddden{
+    display:none !important;
+  }
+} 

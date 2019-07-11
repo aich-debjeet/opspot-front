@@ -4,7 +4,7 @@
     <label
       class="m-btn m-btn--slim m-btn m-btn--with-icon m-wire-threshold-input--toggle"
       [class.m-wire-threshold-input--toggle-enabled]="enabled">
-        <span *ngIf="!enabled" i18n="@@M__FEATURE__PUBLIC">Public</span>
+        <span class="myHiddden" *ngIf="!enabled" i18n="@@M__FEATURE__PUBLIC">Public</span>
         <span *ngIf="enabled" i18n="@@M__FEATURE__TOKENS"> {{threshold.min | number}} Tk</span>
         <m-tooltip>
           <i *ngIf="!enabled" m-tooltip--anchor class="icon-user-21"></i>
