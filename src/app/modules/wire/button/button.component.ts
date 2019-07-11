@@ -11,7 +11,7 @@ import { Session } from '../../../services/session';
    <a class="o-actions__link o-actions__link--coin" (click)="wire()">
       <i class="icon-coins f-15"></i>
       <span class='o-action-count text-sm grey'>
-      <span>{{object.wire_totals?object.wire_totals.tokens:0|token:18 | number}}</span>
+      <span>{{(object.wire_totals?object.wire_totals.tokens:0)|token:18 | number}}</span>
      </span>
     </a>
   `
