@@ -17413,7 +17413,7 @@ m-notifications--flyout {
       width: 100%; }
       m-notifications--flyout .notifications-grid .mdl-cell--12-col opspot-notification {
         margin-bottom: 0;
-        padding: 16px 8px;
+        padding: 6px 6px;
         border-bottom: 1px solid #EFEFEF; }
         m-notifications--flyout .notifications-grid .mdl-cell--12-col opspot-notification .body {
           padding: 0 8px; }
@@ -17465,7 +17465,7 @@ opspot-notification.mdl-card {
             flex-direction: column; }
     opspot-notification.mdl-card .avatar img {
       border-radius: 50%;
-      max-height: 50px; }
+      max-height: 40px; }
   opspot-notification.mdl-card .body {
     padding: 0 16px; }
     opspot-notification.mdl-card .body a {
