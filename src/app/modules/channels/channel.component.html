@@ -51,7 +51,7 @@
     <div class="mdl-card m-channel--subscribers-tabs">
       <div class="mdl-tabs__tab-bar">
         <a [routerLink]="['/', user.username, 'subscribers']" class="mdl-tabs__tab" [ngClass]="{ 'is-active': filter === 'subscribers' }" i18n="@@OPSPOT__CHANNELS__SUBSCRIBERS_WITH_COUNT">Subscribers ({{user.subscribers_count}})</a>
-        <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab" [ngClass]="{ 'is-active': filter === 'subscriptions' }" i18n="@@OPSPOT__CHANNELS__SUBSCRIPTIONS_WITH_COUNT">Subscriptions ({{user.subscriptions_count}})</a>
+        <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab" [ngClass]="{ 'is-active': filter === 'subscriptions' }" i18n="@@OPSPOT__CHANNELS__SUBSCRIPTIONS_WITH_COUNT">Subscriptions ({{user.subscriptions_count-1}})</a>
       </div>
     </div>
 
@@ -65,7 +65,7 @@
     <div class="mdl-card m-channel--subscribers-tabs">
       <div class="mdl-tabs__tab-bar">
         <a [routerLink]="['/', user.username, 'subscribers']" class="mdl-tabs__tab" [ngClass]="{ 'is-active': filter === 'subscribers' }" i18n="@@OPSPOT__CHANNELS__SUBSCRIBERS_WITH_COUNT">Subscribers ({{user.subscribers_count}})</a>
-        <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab" [ngClass]="{ 'is-active': filter === 'subscriptions' }" i18n="@@OPSPOT__CHANNELS__SUBSCRIPTIONS_WITH_COUNT">Subscriptions ({{user.subscriptions_count}})</a>
+        <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab" [ngClass]="{ 'is-active': filter === 'subscriptions' }" i18n="@@OPSPOT__CHANNELS__SUBSCRIPTIONS_WITH_COUNT">Subscriptions ({{user.subscriptions_count-1}})</a>
       </div>
     </div>
 
