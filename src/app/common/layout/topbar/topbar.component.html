@@ -52,6 +52,13 @@
             <span>Admin</span>
           </a>
         </li>
+        <li class="m-dropdownList__item" >
+            <a  [routerLink]="['/boost/console/newsfeed/history']" >
+              <i class="material-icons">trending_up</i>
+                <span>Boost Console</span>
+            </a>
+        </li>
+        <!-- /boost/console/newsfeed/history -->
         <li class="m-dropdownList__item"
             *ngIf="session.isLoggedIn()"
             (click)="menu.value = false"

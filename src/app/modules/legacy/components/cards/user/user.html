@@ -62,8 +62,8 @@
 		<span class="text-md grey">@{{user.username}}</span>
     </div>
     <div class="o-prof-activity">
-        <a [routerLink]="['/', user.username, 'subscribers']"><div class="caption-bold f700">{{subscriberCount}}</div><div class="text-sm grey">Subscribers</div></a>
-        <a [routerLink]="['/', user.username, 'subscriptions']"><div class="caption-bold f700">{{subscriptionCount}}</div><div class="text-sm grey">Subscribed</div></a>
+        <a [routerLink]="['/', user.username, 'subscribers']"><div class="caption-bold f700">{{subscriberCount?subscriberCount:0}}</div><div class="text-sm grey">Subscribers</div></a>
+        <a [routerLink]="['/', user.username, 'subscriptions']"><div class="caption-bold f700">{{subscriptionCount?subscriptionCount:0}}</div><div class="text-sm grey">Subscribed</div></a>
 		<a  [routerLink]="['/', user.username, 'feed']"><div class="caption-bold f700">{{user.impressions?user.impressions:'0' | abbr:0}}</div><div class="text-sm grey">Views</div></a>
         <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
     </div>
