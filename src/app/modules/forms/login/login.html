@@ -28,12 +28,12 @@
           </div>
           <a class="text-sm grey">Forgot Password?</a>
         </div>
-        <button type="button" (click)="login()" class="btn btn-outline-primary btn-sm">Login</button>
+        <button type="button" (click)="login()" class="btn btn-outline-primary btn-sm btn--login">Login</button>
       </div>
 
     </form>
     <div class="o-login hidden-desktop">
-      <a class="btn btn-outline-primary btn-sm" (click)='showRegister()'> {{regBtn?"Register":"Login"}}</a>
+      <a class="btn btn-outline-primary btn-sm btn--login" (click)='showRegister()'> {{regBtn?"Register":"Login"}}</a>
     </div>
   </div>
 </header>
@@ -66,7 +66,7 @@
             </div>
             <a class="text-sm primary float-right">Forgot Password?</a>
           </div>
-          <button (click)="login()" type="button" class="btn btn-primary btn-block">Login</button>
+          <button (click)="login()" type="button" class="btn btn-primary btn-block  ">Login</button>
         </form>
       </div>
     </div>

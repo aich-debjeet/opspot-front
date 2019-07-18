@@ -23,6 +23,9 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
       .icon-heart-filled{
         color:red;
       }
+      .spot-ico{
+        font-size:19px !important;
+      }
   `],
 })
 

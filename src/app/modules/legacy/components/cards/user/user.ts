@@ -28,7 +28,7 @@ export class UserCard implements OnInit {
     this.bannerSrc = `${this.opspot.cdn_url}fs/v1/banners/${this.user.guid}/fat/${this.user.icontime}`;
   }
 ngOnInit(){
-  // console.log(this.user)
+  //  console.log(this.user)
 
   /* 
     @sashi/anup: quick fix TODO:

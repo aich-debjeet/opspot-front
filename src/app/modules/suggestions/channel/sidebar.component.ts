@@ -20,11 +20,12 @@ export class SuggestionsSidebar {
 
   ngOnInit() {
     this.load();
+    console.log(this.suggestions)
   }
 
   async load() {
     this.inProgress = true;
-    let limit: number = 5;
+    let limit: number = 4;
 
     if (this.suggestions.length)
       limit = 1;

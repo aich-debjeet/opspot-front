@@ -22,12 +22,15 @@ header{
       width: 100%;
   }
 }
-.o-login{
+.o-login {
   float: right;
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   .m-8{
       margin: 8px;
+  }
+  .btn--login {
+    margin-top: 6px;
   }
 }
 

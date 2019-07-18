@@ -20,6 +20,8 @@
 @import "src/assets/scss/components/suggestions";
 @import "src/assets/scss/components/trending-post";
 @import "src/stylesheets/ionicons";
+@import "src/assets/scss/components/profile";
+@import "src/assets/scss/components/profile-info";
 
 
 
@@ -1209,7 +1211,7 @@ label {
     display: inline-block;
     margin-bottom: 8px;
     font-size: 13px;
-    line-height: 8px;
+    line-height: 14px;
 }
 
 .form-control {
@@ -18747,12 +18749,13 @@ m-settings--wire .m-settings--wire--paywall-inputs > div {
   m-settings--wire .m-settings--wire--paywall-inputs > div.m-settings--wire--paywall--background input[type=file] {
     width: 100%; }
 
-.m-suggestions__sidebar h3 {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 0 8px;
-  color: #444; }
+.m-suggestions__sidebar  {
+  width: 100%;
+  border: 1px solid #ECEFF1;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  padding: 18px;
+  background: #FFFFFF; }
 
 .m-suggestionsSidebar__empty {
   padding: 8px;
@@ -18766,7 +18769,7 @@ m-settings--wire .m-settings--wire--paywall-inputs > div {
   background: #FFF; }
 
 .m-suggestionsSidebarList__item {
-  border-bottom: 1px solid #e8e8e8; }
+  }
   .m-suggestionsSidebarList__item:last-of-type {
     border-bottom: 0; }
   .m-suggestionsSidebarList__item a {
@@ -24353,3 +24356,19 @@ img {
     display:none !important;
   }
 } 
+
+
+.m-channel-sidebar{
+  width: 265px !important;
+}   
+
+.m-channel--bio{
+  padding: 25px;
+  margin-top: -106px;
+}
+  opspot-avatar{
+    margin:0 !important;
+  }
+.f-15{
+  font-size:15px !important;
+}

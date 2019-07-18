@@ -10,7 +10,7 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
   inputs: ['_object: object'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <a class="o-actions__link o-add-channel" (click)="remind()" [ngClass]="{'selected': object.reminded }">
+    <a class="o-actions__link" (click)="remind()" [ngClass]="{'selected': object.reminded }">
       <i class="icon-channels f-18"></i>
       <span class="opspot-counter" *ngIf="object.reminds > 0">{{object.reminds | number}}</span>
     </a>
