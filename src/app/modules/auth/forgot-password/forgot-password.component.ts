@@ -22,23 +22,25 @@ export class ForgotPasswordComponent {
 
   error = '';
   inProgress = false;
-  step = 1;
+  step = 0;
   username = '';
   code = '';
 
-  // step1
-  step1Form: FormGroup;
-  mobileOremail;
+  // step0
+  emailForm: FormGroup;
+  email;
   submitted1 = false;
 
+  //step1
+  mobileForm: FormGroup;
+  mobile;
 
   // ste2
-  step2Form: FormGroup;
+  otpForm: FormGroup;
   secret;
   submitted2 = false;
   otp;
   resending = false;
-
 
   // step3
   step3Form: FormGroup;
@@ -55,32 +57,16 @@ export class ForgotPasswordComponent {
     public formBuilder: FormBuilder,
     private forgotpasswordservice: ForgotpasswordService
   ) {
-    this.step1Form = this.formBuilder.group({
-      forgotpInput: ['', [Validators.required]]
-    }, { validators: FormValidator.emailMobileValidation });
-    this.step2Form = this.formBuilder.group({
-      otpNum1: [''],
-      otpNum2: [''],
-      otpNum3: [''],
-      otpNum4: [''],
-      otpNum5: [''],
-      otpNum6: ['']
-    }, { validators: FormValidator.otpValidation });
-    this.step3Form = this.formBuilder.group({
-      newPassword: ['', [Validators.required, FormValidator.checkPassword]],
-      confirmPassword: ['']
-    }, { validators: FormValidator.passwordConfirmcheck });
+    this.buildForm('mobile');
   }
 
 
   ngOnInit() {
     // this.title.setTitle('Forgot Password');
-
     this.paramsSubscription = this.route.params.subscribe((params) => {
       if (params['code']) {
         this.setCode(params['code']);
       }
-
       if (params['username']) {
         this.username = params['username'];
       }
@@ -91,59 +77,116 @@ export class ForgotPasswordComponent {
     this.paramsSubscription.unsubscribe();
   }
 
-  // step1From request for otp by email or mobilenumber
-  request() {
-    this.submitted1 = true;
-    this.mobileOremail = this.step1Form.value.forgotpInput;
-    localStorage.setItem("mobileOremail", this.mobileOremail);
-    if (this.step1Form.valid) {
-      if (isNaN(this.mobileOremail)) { // forgot password by email
-        this.error = '';
-        this.inProgress = true;
-        const data = ({
-          key: 'email',
-          value: this.mobileOremail
-        });
-        this.forgotpasswordservice.sendEmaillink(data)
-          .then((data: any) => {
-            this.inProgress = false;
-            this.step = 3;
-          })
-          .catch((e) => {
-            this.inProgress = false;
-            if (e.status === 'failed') {
-              this.error = 'There was a problem trying to reset your password. Please try again.';
-            }
-            if (e.status === 'error') {
-              this.error = e.message;
-            }
-          });
-      } else { // forgot password by moilenumber
-        this.error = '';
-        this.inProgress = true;
-        const data = ({
-          number: this.mobileOremail
-        });
-        this.forgotpasswordservice.sendOtp(data)
-          .then((data: any) => {
-            // this.secret = data.secret;
-            localStorage.setItem('phoneNumberSecret', data.secret);
-            this.inProgress = false;
-            this.step = 2;
-          })
-          .catch((e) => {
-            this.inProgress = false;
-            if (e.status === 'failed') {
-              this.error = 'There was a problem trying to reset your password. Please try again.';
-            }
-            if (e.status === 'error') {
-              this.error = e.message;
-            }
-          });
-      }
+  buildForm(val: string) {
+    if (val === 'email') {
+      this.emailForm = this.formBuilder.group({
+        emailInput: ['', [Validators.required]]
+      }, { validators: FormValidator.validateEmail });
+    } else if (val === 'mobile') {
+      this.mobileForm = this.formBuilder.group({
+        mobileInput: ['', [Validators.required]]
+      });
+    } else if (val === 'otp') {
+      this.otpForm = this.formBuilder.group({
+        otpNum1: [''],
+        otpNum2: [''],
+        otpNum3: [''],
+        otpNum4: [''],
+        otpNum5: [''],
+        otpNum6: ['']
+      }, { validators: FormValidator.otpValidation });
+    } else if (val === 'password') {
+      this.step3Form = this.formBuilder.group({
+        newPassword: ['', [Validators.required, FormValidator.checkPassword]],
+        confirmPassword: ['']
+      }, { validators: FormValidator.passwordConfirmcheck });
     }
   }
 
+
+  showView(stepNum: number) {
+    this.step = stepNum;
+    if (this.step === 1) {
+      this.submitted1 = false;
+      this.buildForm('email');
+    } else if (this.step === 0) {
+      this.submitted1 = false;
+      this.buildForm('mobile');
+    }
+  }
+
+  // step1From request for otp by email or mobilenumber
+  requestEmail() {
+    this.submitted1 = true;
+    this.email = this.emailForm.value.emailInput;
+    localStorage.setItem("email", this.email);
+    console.log(this.emailForm.valid);
+
+    if (this.emailForm.valid) {
+      this.error = '';
+      this.inProgress = true;
+      const data = ({
+        key: 'email',
+        value: this.email
+      });
+      this.forgotpasswordservice.sendEmaillink(data)
+        .then((data: any) => {
+          this.inProgress = false;
+          this.step = 3;
+        })
+        .catch((e) => {
+          this.inProgress = false;
+          if (e.status === 'failed') {
+            this.error = 'There was a problem trying to reset your password. Please try again.';
+          }
+          if (e.status === 'error') {
+            this.error = e.message;
+            setTimeout(() => {
+              this.error = '';
+            }, 5000);
+          }
+        });
+    }
+  }
+
+  requestMobile() {
+    this.submitted1 = true;
+    this.mobile = this.mobileForm.value.mobileInput;
+    if (this.mobileForm.valid) {
+      const mobileNumber = this.removeOperators(this.mobile.internationalNumber);
+      console.log("phoneNumber: " + mobileNumber);
+      localStorage.setItem("mobile", mobileNumber);
+      this.error = '';
+      this.inProgress = true;
+      const data = ({
+        number: mobileNumber
+      });
+      this.forgotpasswordservice.sendOtp(data)
+        .then((data: any) => {
+          // this.secret = data.secret;
+          localStorage.setItem('phoneNumberSecret', data.secret);
+          this.inProgress = false;
+          this.step = 2;
+          this.buildForm('otp');
+        })
+        .catch((e) => {
+          this.inProgress = false;
+          if (e.status === 'failed') {
+            this.error = 'There was a problem trying to reset your password. Please try again.';
+          }
+          if (e.status === 'error') {
+            this.error = e.message;
+            setTimeout(() => {
+              this.error = '';
+            }, 5000);
+          }
+        });
+    }
+  }
+
+  removeOperators(numb) {
+    return numb.replace(/\s/g, '').replace('+', '').replace('-', '');
+  }
 
   nextOtpNum(event) {
     let keyCode = event.keyCode;
@@ -174,17 +217,17 @@ export class ForgotPasswordComponent {
     // }
   }
 
-  // step2form otp validation
+  // otpForm otp validation
   validateOtp() {
-    this.otp = this.step2Form.value.otpNum1 + this.step2Form.value.otpNum2 +
-      this.step2Form.value.otpNum3 + this.step2Form.value.otpNum4 + this.step2Form.value.otpNum5 + this.step2Form.value.otpNum6;
+    this.otp = this.otpForm.value.otpNum1 + this.otpForm.value.otpNum2 +
+      this.otpForm.value.otpNum3 + this.otpForm.value.otpNum4 + this.otpForm.value.otpNum5 + this.otpForm.value.otpNum6;
     this.submitted2 = true;
     this.error = '';
-    if (this.step2Form.valid) {
+    if (this.otpForm.valid) {
       this.inProgress = true;
       const data = ({
-        // number:this.mobileOremail
-        number: localStorage.getItem("mobileOremail"),
+        // number:this.email
+        number: localStorage.getItem("mobile"),
         code: this.otp,
         secret: localStorage.getItem('phoneNumberSecret')
       });
@@ -192,11 +235,15 @@ export class ForgotPasswordComponent {
         .then((data: any) => {
           this.inProgress = false;
           this.step = 4;
+          this.buildForm('password');
         })
         .catch((e) => {
           this.inProgress = false;
           if (e.status === 'error') {
             this.error = e.message;
+            setTimeout(() => {
+              this.error = '';
+            }, 5000);
           }
         });
     }
@@ -206,8 +253,8 @@ export class ForgotPasswordComponent {
   resendOtp() {
     this.resending = true;
     const data = ({
-      // number:this.mobileOremail
-      number: localStorage.getItem("mobileOremail")
+      // number:this.email
+      number: localStorage.getItem("mobile")
     });
     this.forgotpasswordservice.resendOtp(data);
     setTimeout(() => {
@@ -220,8 +267,8 @@ export class ForgotPasswordComponent {
     this.resending = true;
     const data = {
       key: 'email',
-     // value: this.mobileOremail
-      value: localStorage.getItem("mobileOremail")
+      // value: this.email
+      value: localStorage.getItem("email")
     };
     this.forgotpasswordservice.resentEmaillink(data);
     setTimeout(() => {

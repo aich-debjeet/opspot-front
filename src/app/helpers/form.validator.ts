@@ -4,29 +4,32 @@ import { AbstractControl } from "@angular/forms";
 @Injectable()
 export class FormValidator {
 
-    static emailMobileValidation(input: AbstractControl) {
+    static validateEmail(input: AbstractControl) {
         if (input.value === '') {
             return;
         }
-        const inputVal = input.get('forgotpInput').value;
+        const inputVal = input.get('emailInput').value;
         if (inputVal) {
-            if (isNaN(inputVal)) { // not a number, checking for valid email
-                const email = input.get('forgotpInput').value;
-                // tslint:disable-next-line: max-line-length
-                const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                if (!(emailRegex.test(email))) {
-                    return { invalidEmail: true };
-                }
-                return null;
-            } else { // checking for valid number (country code + mobile)
-                // let mobileNumber = input.get("forgotpInput").value;
-                // let mobileRegex = /^\+[0-9]{2,3}-[0-9]\d{10}/;
-                // if (!(mobileRegex.test(mobileNumber)))
-                //   return { invalidMobile: true };
+            // tslint:disable-next-line: max-line-length
+            const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!(emailRegex.test(inputVal))) {
+                return { invalidEmail: true };
             }
             return null;
         }
     }
+
+
+    static mobileValidation(input: AbstractControl) {
+        if (input.value === '') {
+            return;
+        }
+        if (input.value) {
+        }
+        return null;
+    }
+
+
 
     static checkPassword(ac: AbstractControl) {
         const password = ac.value;
@@ -53,8 +56,8 @@ export class FormValidator {
         return null;
     }
 
-      // check for confirm password
-      static passwordConfirmcheck(c: AbstractControl) {
+    // check for confirm password
+    static passwordConfirmcheck(c: AbstractControl) {
         if (c.get('newPassword').value !== c.get('confirmPassword').value) {
             return { passwordMismatched: true };
         }
