@@ -159,7 +159,9 @@ export class ForgotPasswordComponent {
       this.error = '';
       this.inProgress = true;
       const data = ({
-        number: mobileNumber
+        retry: false,
+        key: "phone_number",
+        value: mobileNumber
       });
       this.forgotpasswordservice.sendOtp(data)
         .then((data: any) => {
@@ -226,8 +228,8 @@ export class ForgotPasswordComponent {
     if (this.otpForm.valid) {
       this.inProgress = true;
       const data = ({
-        // number:this.email
-        number: localStorage.getItem("mobile"),
+        key: "phone_number",
+        value: localStorage.getItem("mobile"),
         code: this.otp,
         secret: localStorage.getItem('phoneNumberSecret')
       });
@@ -254,9 +256,29 @@ export class ForgotPasswordComponent {
     this.resending = true;
     const data = ({
       // number:this.email
-      number: localStorage.getItem("mobile")
+      retry: false,
+      key: "phone_number",
+      value: localStorage.getItem("mobile")
     });
-    this.forgotpasswordservice.resendOtp(data);
+    this.forgotpasswordservice.resendOtp(data).then((data: any) => {
+      // this.secret = data.secret;
+      localStorage.setItem('phoneNumberSecret', data.secret);
+      this.inProgress = false;
+      // this.step = 2;
+      // this.buildForm('otp');
+    })
+      .catch((e) => {
+        this.inProgress = false;
+        if (e.status === 'failed') {
+          this.error = 'There was a problem trying to reset your password. Please try again.';
+        }
+        if (e.status === 'error') {
+          this.error = e.message;
+          setTimeout(() => {
+            this.error = '';
+          }, 5000);
+        }
+      });;
     setTimeout(() => {
       this.resending = false;
     }, 1500);
