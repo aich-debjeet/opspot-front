@@ -32,4 +32,9 @@ export class ForgotpasswordService {
   resentEmaillink(data) {
     this.client.post('api/v1/forgotpassword/request', data)
   }
+
+  //reset password
+  reset(data){
+    return this.client.post('api/v1/forgotpassword/reset',data)
+  }
 }

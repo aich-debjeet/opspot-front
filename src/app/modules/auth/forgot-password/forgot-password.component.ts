@@ -45,6 +45,7 @@ export class ForgotPasswordComponent {
   // step3
   step3Form: FormGroup;
   submitted3 = false;
+  password;
 
   paramsSubscription: Subscription;
 
@@ -301,10 +302,29 @@ export class ForgotPasswordComponent {
   // for updating the password
   updatePassword() {
     this.submitted3 = true;
+    this.password = this.step3Form.get('newPassword').value
     if (this.step3Form.valid) {
+      const data = ({
+        password: this.password,
+        code: this.code,
+        username: this.username
+      })
+      this.forgotpasswordservice.reset(data)
+        .then((response: any) => {
+          this.session.login(response.user);
+          this.router.navigate(['/newsfeed']);
+        })
+        .catch((e) => {
+          this.error = e.message;
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2000);
+        });
       this.router.navigate(['/login']);
     }
   }
+
+  
   setCode(code: string) {
     this.step = 4;
     this.code = code;
@@ -320,7 +340,8 @@ export class ForgotPasswordComponent {
   //   }
   // }
 
-  // reset(password) {
+  // reset() {
+  //   submi
   //   if (!this.error) {
   //     this.client.post('api/v1/forgotpassword/reset', {
   //       password: password.value,
