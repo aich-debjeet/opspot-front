@@ -34,6 +34,9 @@
 *::after {
     box-sizing: border-box;
 }
+body{
+  background: #fafafa;
+}
 
 .container {
     width: 100%;
@@ -3599,13 +3602,23 @@ m-cookies-notice {
     top: 150px; }
   @media screen and (max-width: 480px) {
     .m-overlay-modal {
-      padding: 16px 32px; } }
+      padding: 16px 32px;
+      max-height: 100vh;
+      left:0vw;
+      right:0vw;
+     } }
   @media screen and (max-height: 850px) {
     .m-overlay-modal {
-      max-height: 96vh; } }
+      max-height: 100vh;
+      left:0vw;
+      right:0vw;
+     } }
   @media screen and (max-height: 750px) {
     .m-overlay-modal {
-      max-height: 98vh; } }
+      max-height: 100vh;
+      left:0vw;
+      right:0vw;
+    } }
   .m-overlay-modal::-webkit-scrollbar {
     display: none; }
 

@@ -11,10 +11,9 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a class="o-actions__link" (click)="remind()" [ngClass]="{'selected': object.reminded }">
-      <i class="icon-channels f-18"></i>
+      <i class="icon-share-2"></i>
       <span class="opspot-counter" *ngIf="object.reminds > 0">{{object.reminds | number}}</span>
     </a>
-
     <m-modal-remind-composer *ngIf="remindOpen"
     [object]="object"
     [open]="true"
