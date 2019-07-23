@@ -3325,7 +3325,7 @@ opspot-textarea {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-  background: #ffffff;
+  background: #ECEFF1;
   border: 1px solid #dddddd;
   overflow: hidden; }
   opspot-textarea > .m-editor {
@@ -10309,13 +10309,13 @@ opspot-comments, .m-comment-wrapper {
         -webkit-flex: 1;
                 flex: 1;
         margin-bottom: 8px;
-        border-radius: 25px; }
+         }
   opspot-comments .m-comments-composer form opspot-textarea,
   opspot-comments .opspot-editable-container textarea, .m-comment-wrapper .m-comments-composer form opspot-textarea,
   .m-comment-wrapper .opspot-editable-container textarea {
     width: 100%;
     padding: 8px 96px 8px 8px;
-    background: #fff; }
+    background: #ECEFF1; }
   opspot-comments .m-comments-composer .mdl-card__actions, .m-comment-wrapper .m-comments-composer .mdl-card__actions {
     top: 6px;
     right: 8px; }

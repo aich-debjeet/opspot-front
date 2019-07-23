@@ -162,7 +162,7 @@
 
     <a [routerLink]="['/media', activity.entity_guid]">
       <img [src]="activity.custom_data[0].src" style="width:100%"
-      (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/placeholder-bulb.jpg'"
+      (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
         *ngIf="activity.custom_data"
       >
     </a>
