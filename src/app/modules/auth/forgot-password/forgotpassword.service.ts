@@ -18,17 +18,17 @@ export class ForgotpasswordService {
     return this.client.post('api/v1/forgotpassword/request', data)
   }
 
-  //validate otp 
+  // validate otp 
   validateOtp(data) {
     return this.client.post('api/v1/forgotpassword/confirm', data)
   }
 
-  //resend otp for the mobile
+  // resend otp for the mobile
   resendOtp(data) {
    return this.client.post('api/v1/forgotpassword/request', data)
   }
 
-  //resent email link
+  // resent email link
   resentEmaillink(data) {
     this.client.post('api/v1/forgotpassword/request', data)
   }
@@ -37,4 +37,6 @@ export class ForgotpasswordService {
   reset(data){
     return this.client.post('api/v1/forgotpassword/reset',data)
   }
+
+  
 }

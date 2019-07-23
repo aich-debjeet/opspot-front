@@ -43,7 +43,7 @@ export class ForgotPasswordComponent {
   resending = false;
 
   // step3
-  step3Form: FormGroup;
+  updatePasswordForm: FormGroup;
   submitted3 = false;
   password;
 
@@ -66,12 +66,21 @@ export class ForgotPasswordComponent {
     // this.title.setTitle('Forgot Password');
     this.paramsSubscription = this.route.params.subscribe((params) => {
       if (params['code']) {
+        console.log("params['code']: ", params['code']);
         this.setCode(params['code']);
       }
       if (params['username']) {
         this.username = params['username'];
       }
     });
+  }
+
+  setCode(code: string) {
+    this.step = 4;
+    this.buildForm('password');
+    this.code = code;
+    console.log("this.code: ",this.code);
+    
   }
 
   ngOnDestroy() {
@@ -97,7 +106,7 @@ export class ForgotPasswordComponent {
         otpNum6: ['']
       }, { validators: FormValidator.otpValidation });
     } else if (val === 'password') {
-      this.step3Form = this.formBuilder.group({
+      this.updatePasswordForm = this.formBuilder.group({
         newPassword: ['', [Validators.required, FormValidator.checkPassword]],
         confirmPassword: ['']
       }, { validators: FormValidator.passwordConfirmcheck });
@@ -155,8 +164,7 @@ export class ForgotPasswordComponent {
     this.mobile = this.mobileForm.value.mobileInput;
     if (this.mobileForm.valid) {
       const mobileNumber = this.removeOperators(this.mobile.internationalNumber);
-      console.log("phoneNumber: " + mobileNumber);
-      localStorage.setItem("mobile", mobileNumber);
+      localStorage.setItem("mobileNumber", mobileNumber);
       this.error = '';
       this.inProgress = true;
       const data = ({
@@ -230,15 +238,19 @@ export class ForgotPasswordComponent {
       this.inProgress = true;
       const data = ({
         key: "phone_number",
-        value: localStorage.getItem("mobile"),
+        value: localStorage.getItem("mobileNumber"),
         code: this.otp,
         secret: localStorage.getItem('phoneNumberSecret')
       });
       this.forgotpasswordservice.validateOtp(data)
         .then((data: any) => {
+          console.log("data: ", data);
           this.inProgress = false;
-          this.step = 4;
-          this.buildForm('password');
+          if (data) {
+            this.setCodeAndUsername(data.code, data.username)
+          }
+          // this.step = 4;
+          // this.buildForm('password');
         })
         .catch((e) => {
           this.inProgress = false;
@@ -252,21 +264,21 @@ export class ForgotPasswordComponent {
     }
   }
 
+  setCodeAndUsername(code, username) {
+    this.router.navigateByUrl('/forgot-password;username=' + username + ";code=" + code)
+  }
+
   // resend otp for mobile
   resendOtp() {
     this.resending = true;
     const data = ({
-      // number:this.email
-      retry: false,
+      retry: true,
       key: "phone_number",
-      value: localStorage.getItem("mobile")
+      value: localStorage.getItem("mobileNumber")
     });
     this.forgotpasswordservice.resendOtp(data).then((data: any) => {
-      // this.secret = data.secret;
       localStorage.setItem('phoneNumberSecret', data.secret);
       this.inProgress = false;
-      // this.step = 2;
-      // this.buildForm('otp');
     })
       .catch((e) => {
         this.inProgress = false;
@@ -302,13 +314,13 @@ export class ForgotPasswordComponent {
   // for updating the password
   updatePassword() {
     this.submitted3 = true;
-    this.password = this.step3Form.get('newPassword').value
-    if (this.step3Form.valid) {
+    this.password = this.updatePasswordForm.get('newPassword').value;
+    if (this.updatePasswordForm.valid) {
       const data = ({
         password: this.password,
         code: this.code,
         username: this.username
-      })
+      }) 
       this.forgotpasswordservice.reset(data)
         .then((response: any) => {
           this.session.login(response.user);
@@ -324,11 +336,8 @@ export class ForgotPasswordComponent {
     }
   }
 
-  
-  setCode(code: string) {
-    this.step = 4;
-    this.code = code;
-  }
+
+
 
 
 
