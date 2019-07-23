@@ -6,6 +6,7 @@
 @import "src/assets/scss/base/reset";
 @import "src/assets/scss/base/typography";
 @import "src/assets/scss/components/buttons";
+@import "src/assets/scss/components/boost";
 @import "src/assets/scss/components/dropdowns";
 @import "src/assets/scss/components/flag";
 @import "src/assets/scss/components/radio-checkbox";
@@ -18,6 +19,9 @@
 @import "src/assets/scss/components/popular-channel";
 @import "src/assets/scss/components/suggestions";
 @import "src/assets/scss/components/trending-post";
+@import "src/stylesheets/ionicons";
+@import "src/assets/scss/components/profile";
+@import "src/assets/scss/components/profile-info";
 
 
 
@@ -29,6 +33,9 @@
 *::before,
 *::after {
     box-sizing: border-box;
+}
+body{
+  background: #fafafa;
 }
 
 .container {
@@ -1207,7 +1214,7 @@ label {
     display: inline-block;
     margin-bottom: 8px;
     font-size: 13px;
-    line-height: 20px;
+    line-height: 14px;
 }
 
 .form-control {
@@ -3318,7 +3325,7 @@ opspot-textarea {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-  background: #ffffff;
+  background: #ECEFF1;
   border: 1px solid #dddddd;
   overflow: hidden; }
   opspot-textarea > .m-editor {
@@ -3595,13 +3602,23 @@ m-cookies-notice {
     top: 150px; }
   @media screen and (max-width: 480px) {
     .m-overlay-modal {
-      padding: 16px 32px; } }
+      padding: 16px 32px;
+      max-height: 100vh;
+      left:0vw;
+      right:0vw;
+     } }
   @media screen and (max-height: 850px) {
     .m-overlay-modal {
-      max-height: 96vh; } }
+      max-height: 100vh;
+      left:0vw;
+      right:0vw;
+     } }
   @media screen and (max-height: 750px) {
     .m-overlay-modal {
-      max-height: 98vh; } }
+      max-height: 100vh;
+      left:0vw;
+      right:0vw;
+    } }
   .m-overlay-modal::-webkit-scrollbar {
     display: none; }
 
@@ -3623,7 +3640,7 @@ m-cookies-notice {
     .m-overlay-modal--close {
       right: 8px; } }
   .m-overlay-modal--close > i.material-icons {
-    font-size: 32px; }
+    font-size: 18px; }
 
 body.m-overlay-modal--shown {
   overflow: hidden; }
@@ -5407,10 +5424,17 @@ m--tree {
   background: rgba(0, 0, 0, 0.05); }
 
 m-body {
-  margin-top: 52px;
+  margin-top: 60px;
   display: block;
   min-height: 100%; }
-
+  @media only screen and (max-width: 600px) {
+    m-body {
+      margin-top: 112px;
+      display: block;
+      min-height: 100%;
+      //height: 100%;
+    }
+  }
 .m-sidebarMarkers__container {
   right: 0;
   position: fixed;
@@ -10285,13 +10309,13 @@ opspot-comments, .m-comment-wrapper {
         -webkit-flex: 1;
                 flex: 1;
         margin-bottom: 8px;
-        border-radius: 25px; }
+         }
   opspot-comments .m-comments-composer form opspot-textarea,
   opspot-comments .opspot-editable-container textarea, .m-comment-wrapper .m-comments-composer form opspot-textarea,
   .m-comment-wrapper .opspot-editable-container textarea {
     width: 100%;
     padding: 8px 96px 8px 8px;
-    background: #fff; }
+    background: #ECEFF1; }
   opspot-comments .m-comments-composer .mdl-card__actions, .m-comment-wrapper .m-comments-composer .mdl-card__actions {
     top: 6px;
     right: 8px; }
@@ -17404,7 +17428,7 @@ m-notifications--flyout {
       width: 100%; }
       m-notifications--flyout .notifications-grid .mdl-cell--12-col opspot-notification {
         margin-bottom: 0;
-        padding: 16px 8px;
+        padding: 6px 6px;
         border-bottom: 1px solid #EFEFEF; }
         m-notifications--flyout .notifications-grid .mdl-cell--12-col opspot-notification .body {
           padding: 0 8px; }
@@ -17456,7 +17480,7 @@ opspot-notification.mdl-card {
             flex-direction: column; }
     opspot-notification.mdl-card .avatar img {
       border-radius: 50%;
-      max-height: 50px; }
+      max-height: 40px; }
   opspot-notification.mdl-card .body {
     padding: 0 16px; }
     opspot-notification.mdl-card .body a {
@@ -18738,12 +18762,13 @@ m-settings--wire .m-settings--wire--paywall-inputs > div {
   m-settings--wire .m-settings--wire--paywall-inputs > div.m-settings--wire--paywall--background input[type=file] {
     width: 100%; }
 
-.m-suggestions__sidebar h3 {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 0 8px;
-  color: #444; }
+.m-suggestions__sidebar  {
+  width: 100%;
+  border: 1px solid #ECEFF1;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  padding: 18px;
+  background: #FFFFFF; }
 
 .m-suggestionsSidebar__empty {
   padding: 8px;
@@ -18757,7 +18782,7 @@ m-settings--wire .m-settings--wire--paywall-inputs > div {
   background: #FFF; }
 
 .m-suggestionsSidebarList__item {
-  border-bottom: 1px solid #e8e8e8; }
+  }
   .m-suggestionsSidebarList__item:last-of-type {
     border-bottom: 0; }
   .m-suggestionsSidebarList__item a {
@@ -23454,6 +23479,28 @@ img {
   -moz-osx-font-smoothing: grayscale; }
 
 
+
+  .icon-hashtag:before {
+    content: "\ea2a";
+  }
+  .icon-NSFW .path1:before {
+    content: "\ea2b";
+    color: rgb(0, 0, 0);
+  }
+  .icon-NSFW .path2:before {
+    content: "\ea2c";
+    margin-left: -1em;
+    color: rgb(252, 252, 252);
+  }
+  .icon-paperclip-2:before {
+    content: "\e904";
+  }
+  .icon-paper-plane-1:before {
+    content: "\ea2d";
+  }
+  .icon-user-21:before {
+    content: "\ea2f";
+  }
   .icon-channels:before {
     content: "\e900";
   }
@@ -23470,7 +23517,7 @@ img {
     content: "\e9f54";
   }
   .icon-activity:before {
-    content: "\e905";
+    content: "\ea6d";
   }
   .icon-airplay:before {
     content: "\e906";
@@ -24309,3 +24356,32 @@ img {
   .icon-zoom-out:before {
     content: "\ea1c";
   }
+
+  .modalChanger{
+    padding: 0 !important;
+    max-width: 524px;
+  }
+  @media only screen and (max-width: 600px) {
+  .m-btn{
+    padding: 14px 16px !important;
+  }
+  .myHiddden{
+    display:none !important;
+  }
+} 
+
+
+.m-channel-sidebar{
+  width: 265px !important;
+}   
+
+.m-channel--bio{
+  padding: 25px;
+  margin-top: -106px;
+}
+  opspot-avatar{
+    margin:0 !important;
+  }
+.f-15{
+  font-size:15px !important;
+}

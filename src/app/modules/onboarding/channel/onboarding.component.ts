@@ -16,7 +16,7 @@ import { Modal } from "../../../common/components/modal/modal.component";
       class="m-channel--onboarding"
     >
       <div class="m-channelOnboarding__logo">
-        <img [src]="opspot.cdn_assets_url + 'assets/logos/bulb.svg'"/>
+        <img [src]="opspot.cdn_assets_url + 'assets/logos/ops_icon.png'"/>
       </div>
       <ng-template dynamic-host></ng-template>
 

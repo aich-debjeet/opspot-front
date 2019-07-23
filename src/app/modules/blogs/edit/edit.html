@@ -24,7 +24,7 @@
 
       <div class="opspot-avatar" [hovercard]="session.getLoggedInUser().guid">
         <a [routerLink]="['/', session.getLoggedInUser().username]">
-          <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/small/{{session.getLoggedInUser().icontime}}" class="mdl-shadow--2dp"/>
+          <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/" class="mdl-shadow--2dp"/>
         </a>
       </div>
       <div class="opspot-body">

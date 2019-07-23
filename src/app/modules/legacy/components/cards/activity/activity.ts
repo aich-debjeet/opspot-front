@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, ElementRef, Input, ViewChild } from '@angular/core';
-
 import { Client } from '../../../../../services/api';
 import { Session } from '../../../../../services/session';
 import { ScrollService } from '../../../../../services/ux/scroll';
@@ -214,7 +213,7 @@ export class Activity {
   }
 
   showBoost() {
-    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.activity);
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.activity,{class:'modalChanger'});
 
     boostModal.onDidDismiss(() => {
       this.showBoostOptions = false;

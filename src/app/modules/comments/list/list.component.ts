@@ -501,7 +501,9 @@ export class CommentsListComponent {
 
   getAvatar() {
     if(this.session.isLoggedIn()) {
-      return `${this.opspot.cdn_url}icon/${this.session.getLoggedInUser().guid}/small/${this.session.getLoggedInUser().icontime}`;
+      return `${this.opspot.cdn_url}icon/${this.session.getLoggedInUser().guid}/`;
+      // return `${this.opspot.cdn_url}icon/${this.session.getLoggedInUser().guid}/small/${this.session.getLoggedInUser().icontime}`;
+
     } else {
       return `${this.opspot.cdn_assets_url}assets/avatars/default-small.png`
     }

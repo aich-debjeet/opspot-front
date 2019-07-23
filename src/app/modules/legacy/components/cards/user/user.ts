@@ -16,7 +16,10 @@ export class UserCard implements OnInit {
   opspot = window.Opspot;
   avatarSize: string = 'medium';
   bannerSrc: string;
-
+  offset: string = '';
+  subscriptionCount;
+  subscriberCount;
+   
   constructor(public session: Session, public client: Client) {
   }
   
@@ -25,6 +28,22 @@ export class UserCard implements OnInit {
     this.bannerSrc = `${this.opspot.cdn_url}fs/v1/banners/${this.user.guid}/fat/${this.user.icontime}`;
   }
 ngOnInit(){
-  console.log(this.user,window.Opspot)
+  //  console.log(this.user)
+
+  /* 
+    @sashi/anup: quick fix TODO:
+  */
+  this.client.get('api/v1/subscribe/subscriptions/' + this.user.guid, { offset: this.offset })
+  .then(res=>{
+   this.subscriptionCount=Math.abs(res['users'].length-1)
+  })
+  .catch(err=>console.log(err))
+  
+  this.client.get('api/v1/subscribe/subscribers/' + this.user.guid, { offset: this.offset })
+  .then(res=>{
+   this.subscriberCount=Math.abs(res['users'].length)
+  })
+  .catch(err=>console.log(err))
+
 }
 }

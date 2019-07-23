@@ -124,6 +124,8 @@
     padding: 12px 17px;
     display: flex;
     position: relative;
+    justify-content: flex-start;
+    align-items: center;
     @include mq($from: $mobile_sm, $until: $desktop_sm) {
         padding: 12px 14px;
     }
@@ -137,7 +139,7 @@
     }
     .btn--boost{
         position: absolute;
-        right: 38px;
+        right: 18px;
         top: 10px;
     }
     .o-actions__link--coin{
@@ -163,6 +165,7 @@
 .o-add-channel{
     position: absolute;
     right: 0;
+    top:13px;
 }
 
 // comments

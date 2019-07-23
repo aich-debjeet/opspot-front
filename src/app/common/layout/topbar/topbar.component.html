@@ -52,6 +52,13 @@
             <span>Admin</span>
           </a>
         </li>
+        <li class="m-dropdownList__item" >
+            <a  [routerLink]="['/boost/console/newsfeed/history']" >
+              <i class="material-icons">trending_up</i>
+                <span>Boost Console</span>
+            </a>
+        </li>
+        <!-- /boost/console/newsfeed/history -->
         <li class="m-dropdownList__item"
             *ngIf="session.isLoggedIn()"
             (click)="menu.value = false"
@@ -144,8 +151,9 @@
                     </a>
                      -->
                 </li>
+                
                 <li class="nav-icon__item">
-                    <a class="nav__ico" href="#">
+                    <a  [routerLink]="['/groups/create']" title="Group" class="nav__ico" >
                         <img src="assets/svg/create.svg" alt=""> 
                     </a>
                 </li>
@@ -164,7 +172,7 @@
                     </a>
                 </li>
                 <li class="nav-icon__item">
-                    <a class="nav__ico" href="#">
+                    <a class="nav__ico" title="Blog" [routerLink]="['blog/edit/new']">
                         <img src="assets/svg/create_post.svg" alt="">
                     </a>
                 </li>
@@ -184,50 +192,50 @@
             <a [routerLink]="['/',user.username]" class="o-avatar"><img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}"alt=""></a>
             <div class="app-nav-head__info">
                 <a class="grey-dark app-nav-head__name">{{user.name}}</a>
-                <a [routerLink]="['/',user.username]" class="text-sm primary">View Profile</a>
+                <a [routerLink]="['/',user.username]" (click)='closeNav()' class="text-sm primary">View Profile</a>
             </div>
         </div><!--app nav head end-->
         <div class="app-nav-link">
             <ul class="app-nav-link-block">
                 <li class="app-nav-link_-item">
-                    <a  routerLink="/newsfeed" > 
+                    <a  routerLink="/newsfeed" (click)='closeNav()' > 
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_home.svg" alt=""></div>
                         <div class="app-nav-link__text">Home</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a href="#">
+                    <a >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_explore.svg" alt=""></div>
                         <div class="app-nav-link__text">Explore</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a href="#">
+                    <a >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_bookmark.svg" alt=""></div>
                         <div class="app-nav-link__text">Saved Posts</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a href="#">
+                    <a  [routerLink]="['/groups/create']" (click)='closeNav()'  >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_events.svg" alt=""></div>
-                        <div class="app-nav-link__text">Events</div>
+                        <div class="app-nav-link__text">Group</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a href="#">
+                    <a  [routerLink]="['blog/edit/new']" (click)='closeNav()' >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_jobs.svg" alt=""></div>
-                        <div class="app-nav-link__text">Opportunity</div>
+                        <div class="app-nav-link__text">Blog</div>
                     </a>
                 </li>
                 <li class="app-nav-link_-item">
-                    <a href="#">
+                    <a routerLink='/settings/general' (click)='closeNav()' >
                         <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_settings.svg" alt=""></div>
                         <div class="app-nav-link__text">Settings</div>
                     </a>
                 </li>
             </ul>
             <div class="app-nav-link_-item app-nav-link_-item--logout">
-                <a href="#">
+                <a routerLink="/logout" (click)='closeNav()' >
                     <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_logout.svg" alt=""></div>
                     <div class="app-nav-link__text">logout</div>
                 </a>
@@ -263,18 +271,18 @@
             <img src="assets/svg/m_nav_ico/home_main.svg" alt="home" class="mobile-nav-icon--lg">
             <img src="assets/svg/m_nav_ico/home_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
         </a>
-        <a href="#" class="mobile-nav-icon__item">
-            <img src="assets/svg/m_nav_ico/message_main.svg" alt="home" class="mobile-nav-icon--lg">
-            <img src="assets/svg/m_nav_ico/message_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
-            <div class="o-noti-count">12</div>
+        <!-- wallet/tokens/contributions -->
+        <a [routerLink]="['wallet/tokens/contributions']" class="mobile-nav-icon__item">
+          <i style="color: #999999;" class="material-icons">account_balance</i>
+            <!-- <div class="o-noti-count"></div> -->
 
         </a>
         <a [routerLink]="['/notifications']" class="mobile-nav-icon__item">
             <img src="assets/svg/m_nav_ico/notification_main.svg" alt="home" class="mobile-nav-icon--lg">
             <img src="assets/svg/m_nav_ico/notification_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
-            <div class="o-noti-count">12</div>
+            <!-- <div class="o-noti-count"></div> -->
         </a>
-        <a href="#" class="mobile-nav-icon__item">
+        <a class="mobile-nav-icon__item">
             <img src="assets/svg/m_nav_ico/search_main.svg" alt="home" class="mobile-nav-icon--lg">
             <img src="assets/svg/m_nav_ico/search_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
         </a>

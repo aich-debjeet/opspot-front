@@ -29,7 +29,7 @@ export class BoostButton {
   }
 
   boost() {
-    const creator = this.overlayModal.create(BoostCreatorComponent, this.object);
+    const creator = this.overlayModal.create(BoostCreatorComponent, this.object,{class:'modalChanger'});
     creator.present();
   }
 
