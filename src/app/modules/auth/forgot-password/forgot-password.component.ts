@@ -129,7 +129,7 @@ export class ForgotPasswordComponent {
   requestEmail() {
     this.submitted1 = true;
     this.email = this.emailForm.value.emailInput;
-    localStorage.setItem("email", this.email);
+    //localStorage.setItem("email", this.email);
     console.log(this.emailForm.valid);
 
     if (this.emailForm.valid) {
@@ -161,21 +161,20 @@ export class ForgotPasswordComponent {
 
   requestMobile() {
     this.submitted1 = true;
-    this.mobile = this.mobileForm.value.mobileInput;
     if (this.mobileForm.valid) {
-      const mobileNumber = this.removeOperators(this.mobile.internationalNumber);
-      localStorage.setItem("mobileNumber", mobileNumber);
+      this.mobile = this.removeOperators(this.mobileForm.value.mobileInput.internationalNumber);
+      //localStorage.setItem("mobileNumber", mobileNumber);
       this.error = '';
       this.inProgress = true;
       const data = ({
         retry: false,
         key: "phone_number",
-        value: mobileNumber
+        value: this.mobile
       });
       this.forgotpasswordservice.sendOtp(data)
         .then((data: any) => {
-          // this.secret = data.secret;
-          localStorage.setItem('phoneNumberSecret', data.secret);
+          this.secret = data.secret;
+          //localStorage.setItem('phoneNumberSecret', data.secret);
           this.inProgress = false;
           this.step = 2;
           this.buildForm('otp');
@@ -238,9 +237,10 @@ export class ForgotPasswordComponent {
       this.inProgress = true;
       const data = ({
         key: "phone_number",
-        value: localStorage.getItem("mobileNumber"),
+        //value: localStorage.getItem("mobileNumber"), this
+        value: this.mobile,
         code: this.otp,
-        secret: localStorage.getItem('phoneNumberSecret')
+        secret: this.secret
       });
       this.forgotpasswordservice.validateOtp(data)
         .then((data: any) => {
@@ -274,10 +274,11 @@ export class ForgotPasswordComponent {
     const data = ({
       retry: true,
       key: "phone_number",
-      value: localStorage.getItem("mobileNumber")
+      value: this.mobile
     });
     this.forgotpasswordservice.resendOtp(data).then((data: any) => {
-      localStorage.setItem('phoneNumberSecret', data.secret);
+      //localStorage.setItem('phoneNumberSecret', data.secret);
+      this.secret = data.secret;
       this.inProgress = false;
     })
       .catch((e) => {
@@ -302,8 +303,8 @@ export class ForgotPasswordComponent {
     this.resending = true;
     const data = {
       key: 'email',
-      // value: this.email
-      value: localStorage.getItem("email")
+      value: this.email
+      //value: localStorage.getItem("email")
     };
     this.forgotpasswordservice.resentEmaillink(data);
     setTimeout(() => {
@@ -335,12 +336,6 @@ export class ForgotPasswordComponent {
       this.router.navigate(['/login']);
     }
   }
-
-
-
-
-
-
   // validatePassword(password) {
   //   if (/@/.test(password.value)) {
   //     this.error = '@ is not allowed';
