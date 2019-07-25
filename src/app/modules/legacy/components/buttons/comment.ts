@@ -8,7 +8,7 @@ import { Client } from '../../../../services/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a class="o-actions__link" >
-      <i class=" icon-message-square"></i>
+      <i class="f-15 icon-message-square"></i>
       <span class="o-action-count text-sm grey" *ngIf="object['comments:count'] > 0">
        <span>{{object['comments:count'] | number}}</span>
       </span>

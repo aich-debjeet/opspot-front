@@ -26,11 +26,16 @@
 
 .o-pop-channel-avatar{
     height: 40px;	
-    width: 40px;	
+    width: 48px;	
     border-radius: 8px;	
-    background: linear-gradient(233.62deg, #0DB7FF 0%, #0B70CB 100%);
+    background-size:cover;
 }
 .o-pop-channel-name{
     width: calc(100% - 102px);
     margin-left:11px;
+}
+.o-fontRemove{
+    font-size:14px !important;
+    color:#4c4949;
+    padding-right:7px;
 }

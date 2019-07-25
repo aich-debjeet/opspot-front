@@ -21,8 +21,9 @@ import { Client } from '../../../services/api';
   `
 })
 
-export class OpspotAvatar {
-
+export class OpspotAvatar  {
+ 
+ 
   opspot: Opspot = window.Opspot;
   object;
   editing: boolean = false;
@@ -41,9 +42,9 @@ export class OpspotAvatar {
 
     value.icontime = value.icontime ? value.icontime : '';
     this.object = value;
-    this.src = `${this.opspot.cdn_url}fs/v1/avatars/${this.object.guid}/large/${this.object.icontime}`;
+    this.src = `${this.opspot.cdn_url}fs/v1/avatars/${this.object.guid}/medium/${this.object.icontime}`;
     if (this.object.type === 'user')
-      this.src = `${this.opspot.cdn_url}icon/${this.object.guid}/large/${this.object.icontime}`;
+      this.src = `${this.opspot.cdn_url}icon/${this.object.guid}/medium/${this.object.icontime}`;
   }
 
   set _src(value: any) {

@@ -15,7 +15,7 @@
         routerLinkActive="m-topbar--navigation--item-active"
         *ngIf="session.isLoggedIn()"
       >
-        <span i18n="@@OPSPOT__NEWSFEED__TOPBAR__SUBSCRIBED">Subscribed</span>
+        <span i18n="@@OPSPOT__NEWSFEED__TOPBAR__SUBSCRIBED">Following</span>
         <m-tooltip icon="help" i18n="@@OPSPOT__NEWSFEED__TOPBAR__SUBSCRIBED_TOOLTIP">
           Your Newsfeed contains posts from channels that you are subscribed to, as well as boosted posts from the wider network
         </m-tooltip>
@@ -60,13 +60,15 @@
   </div>
 </div>
 
-<div class="mdl-grid m-newsfeed m-page">
 
-    <div class="mdl-cell mdl-cell--4-col m-newsfeed--sidebar m-newsfeed__sidebar">
+<div class="container">
+<div class="o-blocks">
 
-      <opspot-card-user *ngIf="session.isLoggedIn()" [object]="session.getLoggedInUser()" class="mdl-card m-border" style="margin-bottom:16px;"></opspot-card-user>
+    <div class="o-left-block hidden-under-tablet">
 
-      <div class="m-page--sidebar--navigation">
+      <opspot-card-user *ngIf="session.isLoggedIn()" [object]="session.getLoggedInUser()" class="" style="margin-bottom:16px;"></opspot-card-user>
+
+      <!-- <div class="m-page--sidebar--navigation">
 
         <a class="m-page--sidebar--navigation--item"
           routerLink="/plus"
@@ -106,7 +108,29 @@
           <span>Login</span>
         </a>
 
-      </div>
+      </div> -->
+      <ul class="o-side-menu">
+          <li class="o-side-menu__list">
+              <a href="#" class="o-side-menu__link">
+                  <div class="o-side-menu__icon">
+                      <img src="assets/svg/briefcase.svg" alt="">
+                  </div>
+                  <div class="o-side-menu__name text-md">Opportunity</div>
+                  <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
+                  <div class="o-side-menu__count white text-sm">15k</div>
+              </a>
+          </li>
+          <li class="o-side-menu__list">
+              <a href="#" class="o-side-menu__link">
+                  <div class="o-side-menu__icon">
+                      <img src="assets/svg/calendar.svg" alt="">
+                  </div>
+                  <div class="o-side-menu__name text-md">Events</div>
+                  <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
+                  <div class="o-side-menu__count white text-sm">15k</div>
+              </a>
+          </li>
+      </ul>
 
       <div class="opspot-spacer opspot-spacer-2x"></div>
 
@@ -132,13 +156,13 @@
       </div>
     </div>
 
-    <div class="mdl-cell mdl-cell--8-col m-newsfeed--feed"  [ngClass]="{ 'm-newsfeed--logged-out' : !session.getLoggedInUser()}">
+    <div class="o-center-block"  [ngClass]="{ 'm-newsfeed--logged-out' : !session.getLoggedInUser()}">
 
       <router-outlet></router-outlet>
 
     </div>
 
-    <div class="mdl-cell mdl-cell--4-col m-newsfeed--boost-sidebar m-newsfeed__sidebar" *ngIf="showRightSidebar">
+    <div class="o-right-block hidden-mob" *ngIf="showRightSidebar">
       <ng-container *mIfFeature="'suggested-users'">
         <m-suggestions__sidebar></m-suggestions__sidebar>
       </ng-container>
@@ -146,4 +170,5 @@
       <div class="opspot-spacer opspot-spacer-2x"></div>
     </div>
 
+</div>
 </div>

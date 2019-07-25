@@ -139,7 +139,7 @@
             width: 100%;
         }
         p{
-            width: 141px;
+            width: 152px;
             text-align: center;
             @include mq($from: $mobile_sm, $until: $mobile  ) {
                 width: 100%;

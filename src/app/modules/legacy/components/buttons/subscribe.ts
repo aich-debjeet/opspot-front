@@ -7,11 +7,8 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
 @Component({
   selector: 'opspot-button-subscribe',
   template: `
-    <button class="m-btn m-btn--with-icon m-btn--subscribe" *ngIf="!_user.subscribed" (click)="subscribe($event)">
-      <i class="material-icons">person_add</i>
-      <span>
-        <ng-container i18n="@@M__ACTION__SUBSCRIBE">Subscribe</ng-container>
-      </span>
+    <button class="btn btn-outline-primary btn-xs" *ngIf="!_user.subscribed" (click)="subscribe($event)">
+      Follow
     </button>
     <button class="m-btn m-btn--with-icon m-btn--subscribe subscribed" *ngIf="_user.subscribed" (click)="unSubscribe($event)">
       <i class="material-icons">close</i>
@@ -21,6 +18,9 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
     </button>
   `
 })
+// <span>
+      //   <ng-container i18n="@@M__ACTION__SUBSCRIBE">Subscribe</ng-container>
+      // </span>
 
 export class SubscribeButton {
 
