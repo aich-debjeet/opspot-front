@@ -299,6 +299,7 @@ describe('LoginForm',()=>{
   let loginButton: DebugElement;
   let forgotPassword: HTMLElement;
   let errorMessage: DebugElement;
+  let invalidUserErr: DebugElement;
 
   function login(response) {
     username.nativeElement.value = 'username';
@@ -341,7 +342,8 @@ describe('LoginForm',()=>{
           password = fixture.debugElement.query(By.css('input[formControlName=password]'));
           loginButton = fixture.debugElement.query(By.css('button'));
           forgotPassword = fixture.debugElement.query(By.css('a.float-right.text-sm.primary')).nativeElement;
-          errorMessage = fixture.debugElement.query(By.css('error text-sm'))
+          errorMessage = fixture.debugElement.query(By.css('error text-sm'));
+          invalidUserErr = fixture.debugElement.query(By.css('#invalid-user'));
         });
   }))
 
@@ -471,12 +473,61 @@ describe('LoginForm',()=>{
     expect(component.login).toHaveBeenCalled();
   }));
 
-  // it('should spawn error message on incorrect credentials', fakeAsync(() => {
-  //   login({ 'status': 'failed' });
+  it('should be invalid and button should be disabled',()=>{
+    component.form.controls['username'].setValue('');
+    component.form.controls['password'].setValue('');
+    expect(component.form.valid).toBeFalsy();
+    
+    //update view once the values are enterd
 
-  //   tick();
-  //   fixture.detectChanges();
+    fixture.detectChanges();
+    expect(loginButton.nativeElement.disabled).toBeTruthy(); //check if it is disabled
+  })
+  
+  it('should have a valid username, should trigger error msg when username is empty, should not trigger error message if username is not empty',()=>{
+    let errors ={}
+    let userName = component.form.controls['username'];
+    expect(userName.valid).toBeFalsy();
 
-  //   expect(errorMessage.nativeElement.hidden).toBeFalsy();
-  // }));
+    //username field is required
+    errors = userName.errors || {};
+    expect(errors['required']).toBeTruthy();
+
+    //setting value for username should not trigger error msgs
+    userName.setValue("test");
+    errors = userName.errors || {};
+    expect(errors['required']).toBeFalsy();
+  })
+  it('should have a valid password, should trigger error msg when password is empty, should not trigger error message if password is not empty',()=>{
+    let errors ={}
+    let password=component.form.controls['password'];
+    expect(password.valid).toBeFalsy();
+
+    //password required validation
+    errors = password.errors || {}
+    expect(errors['required']).toBeTruthy();
+
+    //setting value for password should not trigger error msgs
+    password.setValue("password");
+    errors = password.errors || {};
+    expect(errors['required']).toBeFalsy();
+  });
+
+  it('should hide error messages by default', ()=>{
+    expect(errorMessage).toBeNull();
+  })
+
+  it('should spawn error message on incorrect credentials', fakeAsync(() => {
+    login({ 'status': 'failed' });
+    tick();
+    fixture.detectChanges();
+    expect(invalidUserErr.nativeElement.hidden).toBeFalsy();
+  }));
+
+  it('login should be successful', fakeAsync(()=>{
+    login({'status': 'success'});
+    tick();
+    fixture.detectChanges();
+    expect(invalidUserErr.nativeElement.hidden).toBeTruthy();
+  }))
 })
