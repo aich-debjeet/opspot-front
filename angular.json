@@ -12,7 +12,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist",
-            "index": "src/index-dev.html",
+            "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
@@ -25,7 +25,7 @@
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "node_modules/material-design-lite/dist/material.blue_grey-amber.min.css",
               "node_modules/material-design-icons/iconfont/material-icons.css",
-              "./node_modules/intl-tel-input/build/css/intlTelInput.css",
+               "./node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/main.scss"
             ],
             "scripts": [
