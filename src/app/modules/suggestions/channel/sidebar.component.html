@@ -3,7 +3,7 @@
   <span *ngIf="!inProgress && !suggestions.length" class="m-suggestionsSidebar__empty">
     You have no suggestions at this time
   </span>
-  <ul class="o-popular-channel " *ngIf="suggestions.length">
+  <ul class="o-popular-channel " *ngIf="suggestions.length>0">
     <li *ngFor="let suggestion of suggestions" class="o-popular-channel__items">
       <a [routerLink]="['/', suggestion?.entity?.username]">
         <div
