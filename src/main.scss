@@ -22,6 +22,10 @@
 @import "src/stylesheets/ionicons";
 @import "src/assets/scss/components/profile";
 @import "src/assets/scss/components/profile-info";
+@import "src/assets/scss/components/profile-edit";
+@import "src/assets/scss/components/homepage";
+
+
 
 
 
@@ -3327,7 +3331,10 @@ opspot-textarea {
   box-sizing: border-box;
   background: #ECEFF1;
   border: 1px solid #dddddd;
-  overflow: hidden; }
+  overflow: hidden;
+  border-radius: 2px;
+  font-size: 11px;
+  line-height: 18px; }
   opspot-textarea > .m-editor {
     display: inline-block;
     padding: 0;
@@ -12167,7 +12174,7 @@ m-hashtags-selector, .m-hashtags-selector {
     right: auto;
     left: 0; }
   .m-hashtags-selector .m-dropdown--list {
-    width: 250px; }
+    width: 150px; }
     .m-hashtags-selector .m-dropdown--list .m-btn--with-icon i {
       margin-right: 0px; }
     .m-hashtags-selector .m-dropdown--list .m-dropdown--list--item {
@@ -24384,4 +24391,11 @@ img {
   }
 .f-15{
   font-size:15px !important;
+}
+
+.opAvatar{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center
 }
