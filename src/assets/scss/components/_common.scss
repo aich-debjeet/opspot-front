@@ -7,11 +7,25 @@
     // div{
     //     height: 500px;
     // }
+    &--flex{
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            flex-direction: column;
+        }
+    }
 }
 .o-left-block{
     width: 265px;
     order: 1;
+    z-index: 1;
     // background: $grey-light ;
+    &--prof{
+        margin-top: -106px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+            margin-top: 0px;
+            position: relative;
+        }
+    }
 }
 .o-center-block{
     flex: 1;
@@ -19,6 +33,7 @@
     margin: 0px 10px;
     @include mq($from: $mobile_sm, $until: $desktop_sm) {
         margin:0px;
+        margin-left: 9px;
     }
 }
 .o-right-block{
@@ -34,10 +49,27 @@
     border: 1px solid $grey-light;	
     border-radius: 4px;
     margin-bottom: 6px;
+    &-padding{
+        padding:16px;
+    }
 }
 
 // prof images
 
+.o-avatar-xl{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    img{
+        width: 100%;
+    }
+    &--prof{
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            border: 2px solid #FFFFFF;
+        }
+    }
+}
 .o-avatar-lg{
     width: 56px;
     height: 56px;
@@ -80,3 +112,25 @@
 }
 
 
+// input inside tag
+
+.input-tag{
+    border-radius: 4px;	
+    background-color: #ECEFF1;
+    padding: 6px 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.input-tag-remove{
+    i{
+        font-size: 13px;
+        margin-left: 6px;
+    }
+}
+
+// width
+
+.w100{
+    width: 100%!important;
+}
