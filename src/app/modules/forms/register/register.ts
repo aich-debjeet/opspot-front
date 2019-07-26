@@ -7,6 +7,7 @@ import { ReCaptchaComponent } from '../../../modules/captcha/recaptcha/recaptcha
 import { ExperimentsService } from '../../experiments/experiments.service';
 import { Service } from './service';
 
+
 @Component({
   moduleId: module.id,
   selector: 'opspot-form-register',

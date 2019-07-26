@@ -196,10 +196,10 @@ export class BlockchainPurchaseComponent implements OnInit {
     const formData = new FormData();
     formData.append('amount',this.amount.toString());
     formData.append('purpose','token_purchase');
-    formData.append('buyer_name','anup');
+    formData.append('buyer_name',window.Opspot.user.name);
     //formData.append('redirect_url','https://336a201c.ngrok.io/Instamojo-php-curl/success');
-    formData.append('email','anup.panwar36@gmail.com');
-    formData.append('phone','7022539494');
+    formData.append('email',window.Opspot.user.email);
+    formData.append('phone',window.Opspot.user.phone);
 
 
     this.http.post<any>('api/v3/payment/instamojo', formData).subscribe(

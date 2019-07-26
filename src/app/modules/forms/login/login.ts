@@ -25,6 +25,7 @@ export class LoginForm {
   opspot = window.Opspot;
   form: FormGroup;
   loginHide: boolean = true;
+  invalidUser: boolean = false;
   @Output()vwLogin=new EventEmitter()
   submitted=false;
   done: EventEmitter<any> = new EventEmitter();
@@ -55,6 +56,7 @@ export class LoginForm {
     document.cookie = 'disabled_cookies=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 
     this.errorMessage = '';
+    this.invalidUser = false;
     this.inProgress = true;
     this.client.post('api/v1/authenticate', { username: this.form.value.username.trim(), password: this.form.value.password })
       .then((data: any) => {
@@ -69,14 +71,15 @@ export class LoginForm {
         if (e.status === 'failed') {
           //incorrect login details
           this.errorMessage = 'LoginException::AuthenticationFailed';
+          this.invalidUser = true;
           this.session.logout();
         } else if (e.status === 'error') {
           if (e.message === 'LoginException:BannedUser' || e.message === 'LoginException::AttemptsExceeded') {
             this.session.logout();
           }
           //two factor?
-          this.twofactorToken = e.message;
-          this.hideLogin = true;
+          // this.twofactorToken = e.message;
+          // this.hideLogin = true;
         } else {
           this.errorMessage = 'LoginException::Unknown';
         }
@@ -84,17 +87,17 @@ export class LoginForm {
       });
   }
 
-  twofactorAuth(code) {
-    this.client.post('api/v1/twofactor/authenticate', { token: this.twofactorToken, code: code.value })
-      .then((data: any) => {
-        this.session.login(data.user);
-        this.done.next(data.user);
-      })
-      .catch((e) => {
-        this.errorMessage = e.message;
-        this.twofactorToken = '';
-        this.hideLogin = true;
-      });
-  }
+  // twofactorAuth(code) {
+  //   this.client.post('api/v1/twofactor/authenticate', { token: this.twofactorToken, code: code.value })
+  //     .then((data: any) => {
+  //       this.session.login(data.user);
+  //       this.done.next(data.user);
+  //     })
+  //     .catch((e) => {
+  //       this.errorMessage = e.message;
+  //       this.twofactorToken = '';
+  //       this.hideLogin = true;
+  //     });
+  // }
 
 }

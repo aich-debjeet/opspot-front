@@ -7,6 +7,10 @@
     flex-direction: column;
     padding: 23px;
     border: 1px solid #ECEFF1;
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        position: unset;
+    }
     &--radius{
         border-radius: 4px;
         overflow: hidden;
@@ -15,11 +19,52 @@
     //     box-shadow: 0 6px 10px 0 rgba(144,164,174,0.16), 0 1px 12px 0 rgba(144,164,174,0.18), 0 3px 5px 0 rgba(144,164,174,0.2);
     // }
 }
+.o-prof-info-edit{
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 18px;
+    right: 14px;
+    i{
+        font-size: 12px;
+    }
+}
 .o-prof-option{
     width: 1px;
     position: absolute;
     top: 16px;
     right: 16px;
+    i{
+        font-size: 16px;
+    }
+}
+// prof img edit
+.o-prof-img-block{
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        position: absolute;
+        display: flex;
+        z-index: 1111111111111111111;
+        top: -62px;
+    }
+}
+.o-prof-img-edit{
+    box-sizing: border-box;	
+    height: 23px;	
+    width: 23px;	
+    border: 1px solid #FFFFFF;	
+    background-color: $primary;
+    position: absolute;
+    bottom: 3px;
+    right: 2px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i{
+        font-size: 13px;
+        color: #fff;
+    }
 }
 .o-prof-name{
     text-align: center;
