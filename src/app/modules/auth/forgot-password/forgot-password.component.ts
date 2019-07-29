@@ -333,7 +333,7 @@ export class ForgotPasswordComponent {
             this.router.navigate(['/login']);
           }, 2000);
         });
-      this.router.navigate(['/login']);
+     // this.router.navigate(['/login']);
     }
   }
   // validatePassword(password) {
