@@ -22,25 +22,25 @@
   }
   
   /* Create a custom checkbox */
-  // .checkmark {
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   height: 16px;
-  //   width: 16px;
-  //   border-radius: 2px;
-  //   background-image: url('../../svg/checkbox.svg');
-  // }
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    border-radius: 2px;
+    background-image: url('/assets/svg/checkbox.svg');
+  }
   
   /* On mouse-over, add a grey background color */
-  //  .c-checkbox:hover input ~ .checkmark {
-  //   background-image: url('../../svg/checkbox.svg');
-  // }
+   .c-checkbox:hover input ~ .checkmark {
+    background-image: url('/assets/svg/checkbox.svg');
+  }
   
   /* When the checkbox is checked, add a blue background */
-  // .c-checkbox input:checked ~ .checkmark {
-  //   background-image:url('../../svg/checkbox_selected.svg');
-  // }
+  .c-checkbox input:checked ~ .checkmark {
+    background-image:url('/assets/svg/checkbox_selected.svg');
+  }
   
   /* Create the checkmark/indicator (hidden when not checked) */
   .checkmark:after {
