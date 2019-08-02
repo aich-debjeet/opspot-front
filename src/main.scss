@@ -25,6 +25,9 @@
 @import "src/assets/scss/components/profile-edit";
 @import "src/assets/scss/components/homepage";
 @import "src/assets/scss/components/footer";
+@import "src/assets/scss/components/notification";
+
+
 
 
 
@@ -17404,11 +17407,11 @@ m-nodes--marketing m-nodes--pre-register {
  */
 m-notifications--flyout {
   z-index: 999;
-  background-color: lightgray;
-  width: 320px;
+  // background-color: lightgray;
+  width: 354px;
   position: absolute;
-  top: 24px;
-  right: -160px; }
+  top: 40px;
+  left: -290px; }
   @media screen and (max-width: 480px) {
     m-notifications--flyout {
       right: -80px; } }
