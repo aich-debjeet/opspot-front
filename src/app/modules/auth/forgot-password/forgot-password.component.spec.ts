@@ -171,6 +171,7 @@ describe('Forgot password component', ()=>{
     let phoneInput: DebugElement;
     let resetMobileButton: DebugElement;
     let emailInput: DebugElement;
+    let resetEmailButton: DebugElement;
 
     beforeEach(async(() => {
 
@@ -198,6 +199,7 @@ describe('Forgot password component', ()=>{
     phoneInput = fixture.debugElement.query(By.css('ngx-intl-tel-input[name=phone]'));
     resetMobileButton = fixture.debugElement.query(By.css('#phone_reset'));
     emailInput = fixture.debugElement.query(By.css('input[name=email]'));
+    resetEmailButton = fixture.debugElement.query(By.css('#email_reset'));
     
   });
 
@@ -241,6 +243,8 @@ describe('Forgot password component', ()=>{
   })
 
   it('click events on phone text should initialize form with phone inputs field for updating password through phone.', ()=>{
+    component.step = 0;
+    expect(component.step).toBe(0);
     spyOn(component,'showView').and.callThrough();
     let textPhone = fixture.debugElement.query(By.css('#textPhone'))
     textPhone.nativeElement.click();
@@ -252,6 +256,8 @@ describe('Forgot password component', ()=>{
   });
 
   it('click events on email text should should initialize form with email inputs field for updating password through email.', ()=>{
+    component.step = 0;
+    expect(component.step).toBe(0);
     spyOn(component,'showView').and.callThrough();
     let textEmail = fixture.debugElement.query(By.css('#textEmail'))
     textEmail.nativeElement.click();
@@ -261,5 +267,157 @@ describe('Forgot password component', ()=>{
       expect(component.step).toBe(1);
     })
   });
+  it('reset button should be invalid initially when resetting password with phone',()=>{
+    spyOn(component, 'buildForm').and.callThrough();
+    component.step = 0;
+    component.buildForm('mobile');
+    fixture.whenStable().then(()=>{
+      expect(component.mobileForm.valid).toBeFalsy();
+      expect(resetMobileButton.nativeElement.disabled).toBeTruthy();
+    })
+  })
 
+  it('reset button should be enabled when phone number field is valid', ()=>{
+    spyOn(component, 'buildForm').and.callThrough();
+    component.step = 0;
+    component.inProgress = false;
+    component.buildForm('mobile');
+    component.mobileForm.controls['mobileInput'].setValue('7022539494');
+    fixture.whenStable().then(()=>{
+      expect(component.mobileForm.valid).toBeTruthy();
+      expect(resetMobileButton.nativeElement.disabled).toBeFalsy();
+    })
+  })
+
+  it('form should be valid on valid fields',()=>{
+    spyOn(component, 'buildForm').and.callThrough();
+    component.step = 0;
+    component.buildForm('mobile');
+    component.mobileForm.controls['mobileInput'].setValue('7022539494');
+    fixture.whenStable().then(()=>{
+      expect(component.mobileForm.valid).toBeTruthy();
+    })
+  })
+
+  it('form should be valid on valid fields and click on reset button should trigger respective methods',fakeAsync(()=>{
+    spyOn(component, 'buildForm').and.callThrough();
+    spyOn(component, 'requestMobile');
+    component.step = 0;
+    component.buildForm('mobile');
+    component.mobileForm.controls['mobileInput'].setValue('7022539494');
+    resetMobileButton.nativeElement.click();
+
+    fixture.whenStable().then(()=>{
+      expect(component.mobileForm.valid).toBeTruthy();
+      expect(component.requestMobile).toHaveBeenCalled();
+    })
+  }))
+  // email form for resetting password
+
+  it('should create a FormGroup for email reset password comprised of FormControls', () => {
+    component.buildForm('email');
+    expect(component.emailForm instanceof FormGroup).toBe(true);
+  });
+
+  it('form should be invalid on absence of data in form for email',()=>{
+    component.buildForm('email');
+    component.emailForm.controls['emailInput'].setValue('');
+    expect(component.mobileForm.valid).toBeFalsy();
+  })
+  it('email field validity',()=>{
+    component.buildForm('email');
+    let errors ={};
+    let email = component.emailForm.controls['emailInput']
+    
+    expect(email.valid).toBeFalsy();
+
+    errors = email.errors || {};
+    expect(errors['required']).toBeTruthy();
+
+    email.setValue('7022539494');
+    errors = email.errors || {};
+    expect(errors['required']).toBeFalsy();
+  })
+
+  it('click events on phone text should initialize form with email inputs field for updating password through email.', ()=>{
+    component.step = 1;
+    expect(component.step).toBe(1);
+    spyOn(component,'showView').and.callThrough();
+    let textPhone = fixture.debugElement.query(By.css('#textPhone'))
+    textPhone.nativeElement.click();
+    component.showView(0);
+    fixture.whenStable().then(()=> {
+      expect(component.showView).toHaveBeenCalled();
+      expect(component.step).toBe(0);
+    })
+  });
+
+  it('click events on email text should should initialize form with email inputs field for updating password through email.', ()=>{
+    component.step = 1;
+    expect(component.step).toBe(1);
+    spyOn(component,'showView').and.callThrough();
+    let textEmail = fixture.debugElement.query(By.css('#textEmail'))
+    textEmail.nativeElement.click();
+    component.showView(1);
+    fixture.whenStable().then(()=> {
+      expect(component.showView).toHaveBeenCalled();
+      expect(component.step).toBe(1);
+    })
+  });
+  it('reset button should be invalid initially when resetting password with email',()=>{
+    spyOn(component, 'buildForm').and.callThrough();
+    component.step = 1;
+    component.buildForm('email');
+    fixture.whenStable().then(()=>{
+      expect(component.emailForm.valid).toBeFalsy();
+      expect(resetEmailButton.nativeElement).toBeTruthy();
+      expect(resetEmailButton.nativeElement.disabled).toBeTruthy();
+    })
+  })
+
+  it('reset button should be valid when email field is valid', ()=>{
+    component.step = 1;
+    spyOn(component, 'buildForm').and.callThrough();
+    component.buildForm('email');
+    component.inProgress = false;
+    component.emailForm.controls['emailInput'].setValue('debjeet.aich@aeione.com');
+    fixture.whenStable().then(()=>{
+      expect(component.emailForm.valid).toBeTruthy();
+      expect(resetEmailButton.nativeElement.disabled).toBeFalsy();
+      expect(resetEmailButton.nativeElement).toBeTruthy();
+    })
+  })
+
+  it('form should be valid on valid fields for email resetting password',()=>{
+    spyOn(component, 'buildForm').and.callThrough();
+    component.step = 1;
+    component.buildForm('email');
+    component.emailForm.controls['emailInput'].setValue('debjeet.aich@aeione.com');
+    fixture.whenStable().then(()=>{
+      expect(component.emailForm.valid).toBeTruthy();
+      expect(resetEmailButton.nativeElement).toBeTruthy();
+    })
+  })
+
+  // it('form should be valid on valid fields and click on reset button should trigger respective methods for email resetting of password',fakeAsync(()=>{
+  //   component.step = 1;
+  //   spyOn(component, 'buildForm').and.callThrough();
+  //   spyOn(component, 'requestEmail');
+  //   component.buildForm('email');
+  //   component.emailForm.controls['emailInput'].setValue('debjeet.aich@aeione.com');
+  //   expect(resetEmailButton.nativeElement).toBeTruthy();
+  //   resetEmailButton.nativeElement.click();
+
+  //   fixture.whenStable().then(()=>{
+  //     expect(component.emailForm.valid).toBeTruthy();
+  //     expect(component.requestEmail).toHaveBeenCalled();
+  //   })
+  // }))
+
+  it('step 3',()=>{
+    component.step = 3;
+    const ele: HTMLElement = fixture.debugElement.query(By.css('#awesome')).nativeElement
+    expect(ele.textContent).toContain('Awesome :)')
+    expect(component.step).toBe(3);
+  })
 })
