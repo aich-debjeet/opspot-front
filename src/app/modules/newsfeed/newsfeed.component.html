@@ -66,7 +66,7 @@
 
     <div class="o-left-block hidden-under-tablet">
 
-      <opspot-card-user *ngIf="session.isLoggedIn()" [object]="session.getLoggedInUser()" class="" style="margin-bottom:16px;"></opspot-card-user>
+      <opspot-card-user *ngIf="session.isLoggedIn()" [object]="session.getLoggedInUser()" ></opspot-card-user>
 
       <!-- <div class="m-page--sidebar--navigation">
 
@@ -129,6 +129,20 @@
                   <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
                   <div class="o-side-menu__count white text-sm">15k</div>
               </a>
+          </li>
+      </ul>
+      <ul class="o-inner-footer">
+          <li class="o-footer-link__item">
+              <a href="#" class="text-sm">About</a>
+          </li>
+          <li class="o-footer-link__item">
+              <a routerLink='/help' class="text-sm">Help</a>
+          </li>
+          <li class="o-footer-link__item">
+              <a href="#" class="text-sm">Terms</a>
+          </li>
+          <li class="o-footer-link__item">
+              <a href="#" class="text-sm">Blogs</a>
           </li>
       </ul>
 
