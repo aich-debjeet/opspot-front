@@ -1,1 +1,0 @@
-{"version":3,"file":"socket-mock.spec.js","sourceRoot":"","sources":["../../../../src/tests/socket-mock.spec.ts"],"names":[],"mappings":";;AAEW,QAAA,UAAU,GAAG,IAAI;IAC1B,IAAI,CAAC,SAAS,GAAG,OAAO,CAAC,SAAS,CAAC,WAAW,CAAC,CAAC,GAAG,CAAC,IAAI,EAAE,CAAC;IAE3D,IAAI,CAAC,IAAI,GAAG,OAAO,CAAC,SAAS,CAAC,MAAM,CAAC,CAAC,GAAG,CAAC,IAAI,EAAE,CAAC;AACnD,CAAC,CAAC"}
