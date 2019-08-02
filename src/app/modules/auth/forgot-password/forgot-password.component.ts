@@ -64,7 +64,7 @@ export class ForgotPasswordComponent {
     // this.title.setTitle('Forgot Password');
     this.paramsSubscription = this.route.params.subscribe((params) => {
       if (params['code']) {
-        console.log("params['code']: ", params['code']);
+        // console.log("params['code']: ", params['code']);
         this.setCode(params['code']);
       }
       if (params['username']) {
@@ -77,7 +77,7 @@ export class ForgotPasswordComponent {
     this.step = 4;
     this.buildForm('password');
     this.code = code;
-    console.log("this.code: ",this.code);
+    // console.log("this.code: ",this.code);
     
   }
 
@@ -242,7 +242,7 @@ export class ForgotPasswordComponent {
       });
       this.forgotpasswordservice.validateOtp(data)
         .then((data: any) => {
-          console.log("data: ", data);
+          // console.log("data: ", data);
           this.inProgress = false;
           if (data) {
             this.setCodeAndUsername(data.code, data.username)
