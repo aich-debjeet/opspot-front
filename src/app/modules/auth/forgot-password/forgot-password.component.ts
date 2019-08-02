@@ -34,6 +34,7 @@ export class ForgotPasswordComponent {
   //step1
   mobileForm: FormGroup;
   mobile;
+  invalidMobileForm: boolean = false;
 
   // ste2
   otpForm: FormGroup;
