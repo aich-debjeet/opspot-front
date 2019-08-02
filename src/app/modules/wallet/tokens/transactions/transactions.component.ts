@@ -37,7 +37,7 @@ export class WalletTokenTransactionsComponent {
   addressesToggle: boolean = false;
 
   @Input() preview: boolean = false; // Preview mode
-
+  @Input('overTrans')overTrans:boolean;
   paramsSubscription;
 
   remote: boolean = false;

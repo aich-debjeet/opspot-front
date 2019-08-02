@@ -20,8 +20,7 @@ export class WalletOverviewComponent {
   type: string = '';
   togglePurchase: boolean = false;
   paramsSubscription: Subscription;
-
-  
+  overviewTrans=true;
   points: Number = 0;
   transactions: Array<any> = [];
   offset: string = '';

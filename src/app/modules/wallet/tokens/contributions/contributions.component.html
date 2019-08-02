@@ -1,8 +1,10 @@
+
+
 <div class="m-token--onboarding" *ngIf="!session.getLoggedInUser().rewards">
   <m-token--onboarding--rewards skippable="false"></m-token--onboarding--rewards>
 </div>
-
-<m-wallet-token--overview></m-wallet-token--overview>
+<div id="overview" class="tab" style="display: block;" >
+<!-- <m-wallet-token--overview></m-wallet-token--overview> -->
 
 <m-wallet-token--chart></m-wallet-token--chart>
 
@@ -45,4 +47,5 @@
       </tr>
     </tbody>
   </table>
+</div>
 </div>

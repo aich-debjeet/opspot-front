@@ -1,0 +1,383 @@
+// wallet style
+
+.o-wallet-sec{
+    width: 100%;
+    float: left;
+    background: #fafafa;
+    min-height: calc(100vh - 68px)
+}
+// topbar
+
+.o-wallet-topbar{
+    max-width: 800px;
+    width: 100%;
+    margin: 0px auto;
+    background: url(/assets/svg/desktop_bar.svg) no-repeat #fff;
+    padding: 34px 47px 34px 34px;
+    display: flex;
+    flex-direction: row;
+	@include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: column;
+        background: url(/assets/svg/mobile_bar.svg) no-repeat #fff;
+        padding: 14px 14px 20px 14px;
+        margin: 15px;
+        width: calc(100% - 30px)
+    }
+    h3{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.o-wallet-topbar-left{
+    flex: 2;
+    .m-t-6{
+        margin-top: 6px;
+    }
+}
+.o-wallet-topbar-right{
+    flex: 1;
+    text-align: right;
+    flex-direction: column;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.o-payout-tym{
+    margin-top: 10px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        margin: 0px;
+    }
+    i{
+        font-size: 13px;
+        color: $grey-dark;
+    }
+}
+.o-btn--wallet-buytoken{
+    margin-top: 16px;
+}
+.o-wallet-token-block{
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        margin-top: 17px;
+    }
+}
+
+// top bar end
+
+// wallet block
+
+.o-wallet-block{
+    width: 100%;
+    max-width: 800px;
+    margin: 14px auto 0px;
+    background: #fff;
+    min-height: 770px;
+    display: flex;
+    flex-direction: row;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: column;
+    }
+    &__tab{
+        width: 176px;
+        padding-top: 32px;
+        border-right: 1px solid $grey-light;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+            padding: 0px;
+        }
+    }
+    &__content{
+        width: calc(100% - 176px);
+        padding: 32px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+        }
+        @include mq($from: $mobile_sm, $until: $mobile) {
+            width: 100%;
+            padding: 15px;
+        }
+    }
+}
+
+//** overview
+
+// scrore and reward
+
+.o-overview-score-reward{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    @include mq($from: $mobile_sm, $until: $mobile_lg) {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}
+.o-score-reward{
+    width: 100%;
+    max-width: 272px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 16px 0px;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 0 rgba(144,164,174,0.16), 0 2px 2px 0 rgba(144,164,174,0.16), 0 1px 3px 0 rgba(144,164,174,0.16);
+    @include mq($from: $mobile_sm, $until: $mobile_lg) {
+        max-width: 100%;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        margin-bottom: 6px;
+    }
+}
+.o-score-reward:nth-child(1){
+    margin-right: 8px;
+    @include mq($from: $mobile_sm, $until: $mobile_lg) {
+        margin-right: 0px;
+    }
+}
+.o-score-reward:nth-child(2){
+    margin-left: 8px;
+    @include mq($from: $mobile_sm, $until: $mobile_lg) {
+        margin-left: 0px;
+    }
+}
+
+// activity
+
+.o-overview-activity{
+    width: 100%;
+    border-radius: 4px;
+    padding: 18px 33px;
+    margin: 18px 0px;
+    box-shadow: 0 0 2px 0 rgba(144,164,174,0.16), 0 2px 2px 0 rgba(144,164,174,0.16), 0 1px 3px 0 rgba(144,164,174,0.16);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    :nth-child(1){
+        padding-left: 0px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            padding-left:11px;
+        }
+    }
+    :nth-child(6){
+        padding-right: 0px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            padding-right:11px;
+        }
+    }
+}
+.o-activity-info{
+    flex: 1;
+    text-align: center;
+    padding: 0px 17px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        padding: 0px 11px;
+        margin-top: 14px;
+    }
+}
+
+
+// transaction history
+
+.o-trans-history{
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 0 rgba(144,164,174,0.16), 0 2px 2px 0 rgba(144,164,174,0.16), 0 1px 3px 0 rgba(144,164,174,0.16);
+    &__title{
+        width: 100%;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        i{
+            font-size: 12px;
+            color: $primary;
+            text-orientation: sideways;
+        }
+    }
+}
+
+// transaction contributed style component
+
+.o-trans-contributed{
+    width: 100%;
+    padding: 15px 20px;
+    border-top: 1px solid $grey-light;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $mobile_lg) {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    &__price{
+        margin-right: 20px;
+        @include mq($from: $mobile_sm, $until: $mobile_lg) {
+            order: 1;
+        }
+    }
+    &__price-info{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        @include mq($from: $mobile_sm, $until: $mobile_lg) {
+            order: 3;
+            margin-top: 12px;
+        }
+        i{
+            font-size: 13px;
+            margin: 0px 15px;
+        }
+        a{
+            margin-left: 16px;
+        }
+    }
+    &__date-tym{
+        position: absolute;
+        right: 20px;
+        @include mq($from: $mobile_sm, $until: $mobile_lg) {
+            order: 2;
+            position: unset;
+            right: 0px;
+        }
+    }
+}
+
+// transcation purchased component style
+
+.o-trans-purchased{
+    width: 100%;
+    padding: 15px 20px;
+    border-top: 1px solid $grey-light;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    &__price{
+        margin-right: 20px;
+    }
+    &__date-tym{
+        position: absolute;
+        right: 20px;
+    }
+}
+
+
+// contribution tab style
+
+.o-contribution-history{
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 0 rgba(144,164,174,0.16), 0 2px 2px 0 rgba(144,164,174,0.16), 0 1px 3px 0 rgba(144,164,174,0.16);
+    &__title{
+        width: 100%;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        i{
+            font-size: 12px;
+            color: $primary;
+            text-orientation: sideways;
+        }
+    }
+}
+
+.o-contribution{
+    width: 100%;
+    padding: 18px 20px;
+    display: flex;
+    border-top: 1px solid $grey-light;
+    &--border-none{
+        border-top: 0px;
+    }
+    &__date{
+        flex: 4;
+    }
+    &__token{
+        flex: 1;
+        text-align: center;
+    }
+    &__score{
+        flex: 1;
+        text-align: center;
+    }
+}
+
+
+// withdraw style
+
+.o-withdraw{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-bottom: 30px;
+    &__dis{
+        margin: 14px 0px 18px;
+        width: 345px;
+        @include mq($from: $mobile_sm, $until: $mobile_lg) {
+            width: 100%;
+        }
+    }
+    &__amount{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
+.o-withdraw-amount-input{
+    width: 194px;	
+    border: 1px solid #90A4AE;	
+    border-radius: 4px;	
+    background-color: #FFFFFF;
+    padding: 10px 15px;
+    margin-right: 11px;
+    @include mq($from: $mobile_sm, $until: $mobile_lg) {
+        width: 146px;
+    }
+}
+
+// withdraw history
+
+.o-withdraw-history{
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 0 rgba(144,164,174,0.16), 0 2px 2px 0 rgba(144,164,174,0.16), 0 1px 3px 0 rgba(144,164,174,0.16);
+    &__title{
+        width: 100%;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        i{
+            font-size: 12px;
+            color: $primary;
+            text-orientation: sideways;
+        }
+    }
+}
+
+.o-withdraw-block{
+    width: 100%;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid $grey-light;
+    &--border-none{
+        border-top: 0px;
+    }
+}
+

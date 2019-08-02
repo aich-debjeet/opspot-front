@@ -1,5 +1,9 @@
 //for layout
-
+// .container{
+//     width: 100%;
+//     max-width: 1170px;
+//     margin: 0px auto;
+// }
 .o-blocks{
     width: 100%;
     display: flex;
@@ -57,10 +61,11 @@
 // prof images
 
 .o-avatar-xl{
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     overflow: hidden;
+    float: left;
     img{
         width: 100%;
     }
@@ -93,6 +98,16 @@
 .o-avatar-sm{
     width: 28px;
     height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        width: 100%;
+    }
+}
+.o-avatar-xs{
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     overflow: hidden;
     float: left;
@@ -133,4 +148,10 @@
 
 .w100{
     width: 100%!important;
+}
+
+// aligning
+
+.center{
+    text-align: center!important;
 }

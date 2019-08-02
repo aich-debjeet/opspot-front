@@ -1,9 +1,11 @@
-<div class="m-token--onboarding" *ngIf="!session.getLoggedInUser().rewards">
+<!-- <div class="m-token--onboarding" *ngIf="!session.getLoggedInUser().rewards">
   <m-token--onboarding--rewards skippable="false"></m-token--onboarding--rewards>
-</div>
-
-<div class="m-border mdl-color--white m-token-withdraw" *ngIf="session.getLoggedInUser().rewards">
-  <p>
+</div> -->
+<div id="withdraw" class="tab" style="display: block;">
+<div class="o-withdraw" *ngIf="session.getLoggedInUser().rewards">
+    <div class="caption-bold">Withdraw</div>
+    <div class="o-withdraw__dis">
+  <p class="text-sm">
     <ng-container i18n="@@WALLET__TOKENS__WITHDRAW__REQUEST_DESC">
       You can request to withdraw your token rewards to your 'onchain' wallet below.
       Note: a small amount of ETH will be charged to cover the transaction fee.
@@ -16,15 +18,15 @@
       payment occurred.
     </ng-container>
   </p>
-
-  <div class="m-token-withdraw--form">
-    <input type="text" class="m-token-withdraw--input"
+</div>
+  <div class="o-withdraw__amount">
+    <input type="text" class="o-withdraw-amount-input"
       [disabled]="inProgress"
       [ngModel]="amount | number"
       (ngModelChange)="setAmount($event)"
     />
 
-    <button class="m-token-withdraw--submit-button"
+    <button class="btn btn-primary btn-lg "
       [disabled]="!canWithdraw()"
       (click)="withdraw()"
       i18n="@@WALLET__TOKENS__WITHDRAW__WITHDRAW_ACTION"
@@ -46,3 +48,4 @@
 <m-wallet-token--withdraw-ledger
   [preview]="true"
 ></m-wallet-token--withdraw-ledger>
+</div>
