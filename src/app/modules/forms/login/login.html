@@ -25,7 +25,7 @@
             <div *ngIf="submitted && f.password.errors" class="error text-sm">
               <div *ngIf="f.password.errors.required">password is required</div>
             </div>
-            <a class="text-sm grey">Forgot Password?</a>
+            <a [routerLink]="['/forgot-password']" class="text-sm grey">Forgot Password?</a>
           </div>
           <button type="submit" class="btn btn-outline-primary btn-sm btn-login" [disabled]= !this.form.valid>Login</button>
         </div>
@@ -62,7 +62,7 @@
               <div *ngIf="submitted && f.password.errors" class="error text-sm">
                 <div *ngIf="f.password.errors.required">password is required</div>
               </div>
-              <a class="text-sm primary float-right">Forgot Password?</a>
+              <a [routerLink]="['/forgot-password']" class="text-sm primary float-right">Forgot Password?</a>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
           </form>
