@@ -334,4 +334,8 @@ export class ForgotPasswordComponent {
      // this.router.navigate(['/login']);
     }
   }
+
+  goHome(){
+    this.router.navigateByUrl('/login');
+  }
 }
