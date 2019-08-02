@@ -17,7 +17,6 @@ import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-passw
 })
 
 export class LoginForm {
-
   errorMessage: string = '';
   twofactorToken: string = '';
   hideLogin: boolean = false;
@@ -78,7 +77,6 @@ export class LoginForm {
           if (e.message === 'LoginException:BannedUser' || e.message === 'LoginException::AttemptsExceeded') {
             this.session.logout();
           }
-
           //two factor?
           // this.twofactorToken = e.message;
           // this.hideLogin = true;
@@ -101,6 +99,5 @@ export class LoginForm {
   //       this.hideLogin = true;
   //     });
   // }
-
 
 }

@@ -81,7 +81,8 @@ export class LoginComponent {
   }
 
   registered() {
-    if (this.redirectTo) this.router.navigate([this.redirectTo]);
+    if (this.redirectTo)
+      this.router.navigate([this.redirectTo]);
     else {
       this.modal.setDisplay('categories').open();
       this.loginReferrer.navigate({
