@@ -1,13 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, from } from 'rxjs';
-
 import { OpspotTitle } from '../../../services/ux/title';
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
-import { LoginComponent } from '../login.component';
-import { LoginForm } from '../../forms/login/login';
-import { Form, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ForgotpasswordService } from './forgotpassword.service';
 import { FormValidator } from '../../../helpers/form.validator'
 
@@ -337,36 +334,4 @@ export class ForgotPasswordComponent {
      // this.router.navigate(['/login']);
     }
   }
-  // validatePassword(password) {
-  //   if (/@/.test(password.value)) {
-  //     this.error = '@ is not allowed';
-  //   } else {
-  //     this.error = null;
-  //   }
-  // }
-
-  // reset() {
-  //   submi
-  //   if (!this.error) {
-  //     this.client.post('api/v1/forgotpassword/reset', {
-  //       password: password.value,
-  //       code: this.code,
-  //       username: this.username
-  //     })
-  //       .then((response: any) => {
-  //         this.session.login(response.user);
-  //         this.router.navigate(['/newsfeed']);
-  //       })
-  //       .catch((e) => {
-  //         this.error = e.message;
-  //         setTimeout(() => {
-  //           this.router.navigate(['/login']);
-  //         }, 2000);
-  //       });
-  //   }
-  // }
-
-
-
-
 }
