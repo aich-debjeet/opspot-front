@@ -28,13 +28,13 @@
   <a (click)="unBlock()" i18n="@@OPSPOT__CHANNELS__UNBLOCK_ACTION">Click to Unblock</a>
 </div>
 
-
-<div class="mdl-grid channel-grid" style="max-width:1190px" *ngIf="user && !user?.blocked">
-  <section class="mdl-cell mdl-cell--4-col m-channel-sidebar">
+<div class="container">
+<div class="o-blocks o-blocks--flex" style="max-width:1190px" *ngIf="user && !user?.blocked">
+  <section class="o-left-block o-left-block--prof">
     <m-channel--sidebar [user]="user" [editing]="editing" (changeEditing)="toggleEditing($event)"></m-channel--sidebar>
   </section>
   <!-- Feed list -->
-  <section class="mdl-cell mdl-cell--8-col m-channel-feed" *ngIf="filter == 'feed'">
+  <section class="o-center-block" *ngIf="filter == 'feed'">
     <m-channel--feed [user]="user" #feed></m-channel--feed>
   </section>
 
@@ -46,7 +46,7 @@
   </section>
 
   <!-- Subscriptions list -->
-  <section class="mdl-cell mdl-cell--8-col" *ngIf="filter == 'subscriptions'">
+  <section class="o-center-block" *ngIf="filter == 'subscriptions'">
 
     <div class="mdl-card m-channel--subscribers-tabs">
       <div class="mdl-tabs__tab-bar">
@@ -60,7 +60,7 @@
   </section>
 
   <!-- Subscriptions list -->
-  <section class="mdl-cell mdl-cell--8-col" *ngIf="filter == 'subscribers'">
+  <section class="o-center-block" *ngIf="filter == 'subscribers'">
 
     <div class="mdl-card m-channel--subscribers-tabs">
       <div class="mdl-tabs__tab-bar">
@@ -74,5 +74,26 @@
   </section>
 
 </div>
+</div>
 
 <m-channel--explicit-overlay [channel]="user"></m-channel--explicit-overlay>
+
+<m-modal open='true' *ngIf="userVerifcation">
+  <h2 class="modalCls">
+    <ng-container *ngIf="successRes" >
+      Thanks for verifing email
+    </ng-container>
+    <ng-container >
+    {{errorRes}}
+    </ng-container>
+  </h2>
+</m-modal>
+
+<style>
+.modalCls{
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+</style>
