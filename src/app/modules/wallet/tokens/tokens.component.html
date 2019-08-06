@@ -82,14 +82,14 @@
     <div class="o-wallet-topbar-left">
         <h3 class="f700">Wallet
             <div class="o-payout-tym hidden-above-tablet">
-                <span class="caption-bold f700">23h : 23m : 00s <i class="icon-info"></i></span>
+                <span class="caption-bold f700">{{ overview.nextPayout | timediff:true }} <i class="icon-info"></i></span>
             </div>
         </h3>
         <div class="text-sm m-t-6">
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.
         </div>
         <div class="o-payout-tym hidden-under-tablet">
-            <span class="caption-bold f700">23h : 23m : 00s <i class="icon-info"></i>
+            <span class="caption-bold f700">{{ overview.nextPayout | timediff:true }} <i class="icon-info"></i>
             
             </span>
         </div>
