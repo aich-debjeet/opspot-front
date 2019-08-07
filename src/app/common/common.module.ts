@@ -79,6 +79,7 @@ import { UpdateMarkersService } from './services/update-markers.service';
 import { SocketsService } from '../services/sockets';
 import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
+import { ImageCroperComponent } from './components/image-croper/image-croper.component';
 
 
 @NgModule({
@@ -86,7 +87,7 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
     NgCommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     OPSPOT_PIPES,
@@ -159,6 +160,7 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
     GraphPoints,
     DynamicFormComponent,
     AndroidAppDownloadComponent,
+    ImageCroperComponent,
   ],
   exports: [
     OPSPOT_PIPES,
@@ -231,6 +233,7 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
     PieGraph,
     DynamicFormComponent,
     AndroidAppDownloadComponent,
+    ImageCroperComponent
   ],
   providers: [
     {

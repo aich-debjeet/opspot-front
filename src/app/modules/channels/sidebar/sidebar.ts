@@ -25,12 +25,13 @@ export class ChannelSidebar {
   amountOfTags: number = 0;
   tooManyTags: boolean = false;
   onboardingProgress: number = -1;
-
+  profEdit=true;
+  sidebarMsg=true;
   @Output() changeEditing = new EventEmitter<boolean>();
 
   //@todo make a re-usable city selection module to avoid duplication here
   cities: Array<any> = [];
-
+  
   constructor(
       public client: Client,
       public upload: Upload,

@@ -7,13 +7,13 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
 @Component({
   selector: 'opspot-button-subscribe',
   template: `
-    <button class="btn btn-outline-primary btn-xs" *ngIf="!_user.subscribed" (click)="subscribe($event)">
+    <button class="btn btn-outline-primary" [ngClass]="{'btn-sm btn--prof':sideBar,' btn-xs':!sideBar}"
+    *ngIf="!_user.subscribed" (click)="subscribe($event)">
       Follow
     </button>
-    <button class="m-btn m-btn--with-icon m-btn--subscribe subscribed" *ngIf="_user.subscribed" (click)="unSubscribe($event)">
-      <i class="material-icons">close</i>
+    <button class="btn btn-outline-primary" [ngClass]="{'btn-sm btn--prof':sideBar,'btn-xs':!sideBar}"  *ngIf="_user.subscribed" (click)="unSubscribe($event)">
       <span>
-        <ng-container i18n="@@OPSPOT__BUTTONS__UNSUBSCRIBE__SUBSCRIBED_LABEL">Unsubscribe</ng-container>
+        <ng-container i18n="@@OPSPOT__BUTTONS__UNSUBSCRIBE__SUBSCRIBED_LABEL">Unfollow</ng-container>
       </span>
     </button>
   `
@@ -32,7 +32,7 @@ export class SubscribeButton {
   _listener: Function;
   showModal: boolean = false;
   @Output('subscribed') onSubscribed: EventEmitter<any> = new EventEmitter();
-
+  @Input('sideBar')sideBar:boolean;
   constructor(public session: Session, public client: Client, public modal: SignupModalService) {
   }
 
