@@ -65,7 +65,6 @@ export class ChannelComponent {
     
 
     this.paramsSubscription = this.route.params.subscribe((params) => {
-      console.log(params)
       this.changed = false;
       this.editing = false;
 

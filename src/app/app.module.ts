@@ -58,6 +58,7 @@ import { CanaryModule } from './modules/canary/canary.module';
 import { HttpClientModule } from "@angular/common/http";
 import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { BookmarkModule } from './modules/bookmark/bookmark.module';
 
 
 @NgModule({
@@ -119,6 +120,7 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 
     //last due to :username route
     ChannelsModule,
+    BookmarkModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule
   ],

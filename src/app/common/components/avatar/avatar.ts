@@ -4,10 +4,10 @@ import { Client } from '../../../services/api';
 
 @Component({
   selector: 'opspot-avatar',
-  inputs: ['_object: object', '_src: src', '_editMode: editMode', 'waitForDoneSignal', 'icon', 'showPrompt'],
+  inputs: ['_object: object', '_src: src', '_editMode: editMode','_profileEdit:profileEdit', 'waitForDoneSignal', 'icon', 'showPrompt'],
   outputs: ['added'],
   template: `
-  <div class="opspot-avatar" [style.background-image]="'url(' + src + ')'">
+  <div *ngIf="!proEdit" class="opspot-avatar" [style.background-image]="'url(' + src + ')'">
     <img *ngIf="!src" src="{{opspot.cdn_assets_url}}assets/avatars/blue/default-large.png" class="mdl-shadow--4dp" />
     <div *ngIf="editing" class="overlay">
       <i class="material-icons">{{icon}}</i>
@@ -18,15 +18,31 @@ import { Client } from '../../../services/api';
     </div>
     <input *ngIf="editing" type="file" #file (change)="add($event)"/>
   </div>
+
+  <div class="o-prof-img-block">
+        <div class="o-avatar-xl o-avatar-xl--prof" [style.background-image]="'url(' + src + ')'" >
+            <img *ngIf="!src" src="{{opspot.cdn_assets_url}}assets/avatars/blue/default-large.png" class="mdl-shadow--4dp" />
+            <a *ngIf="opspot.user.guid===object.guid" class="o-prof-img-edit" (click)="enableEdit()"><i class="icon-edit-profile"></i></a>
+        </div>
+      
+      <input *ngIf="editing" type="file" #file (change)="add($event)"/>
+    </div>
   `
 })
-
+// <div *ngIf="editing" class="overlay">
+// <i class="material-icons">{{icon}}</i>
+// <ng-container *ngIf="showPrompt">
+//   <span *ngIf="src" i18n="@@COMMON__AVATAR__CHANGE">Change avatar</span>
+//   <span *ngIf="!src" i18n="@@COMMON__AVATAR__ADD">Add an avatar</span>
+// </ng-container>
+// </div>
 export class OpspotAvatar  {
  
  
   opspot: Opspot = window.Opspot;
   object;
   editing: boolean = false;
+  proEdit:boolean=false;
   waitForDoneSignal: boolean = true;
   src: string = '';
   index: number = 0;
@@ -57,6 +73,12 @@ export class OpspotAvatar  {
       this.done();
   }
 
+  // profile image edit
+  set _profileEdit(value:boolean){
+    this.proEdit=value;
+    if (!this.editing && this.file)
+    this.done();
+  }
   add(e) {
     if (!this.editing)
       return;
@@ -86,4 +108,10 @@ export class OpspotAvatar  {
     this.file = null;
   }
 
+
+  enableEdit(){
+    this.editing=true;
+  }
+
+  
 }
