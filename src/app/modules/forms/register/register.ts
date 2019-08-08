@@ -56,7 +56,7 @@ export class RegisterForm {
       password2: ['', Validators.required],
       otp: fb.group({
         otp1: '', otp2: '', otp3: '', otp4: '', otp5: '', otp6: ''
-      }, { updateOn: 'blur', }),
+      }, { updateOn: 'change', }),
       tos: [false],
       mobileNumber: ['', { validators: Validators.required, updateOn: 'blur' }],
       exclusive_promotions: [false],

@@ -42,7 +42,28 @@ gulp.task('build.sass', done => {
     });
 });
 
+const workboxBuild = require('workbox-build');
+gulp.task('service-worker', () => {
+  return workboxBuild.generateSW({
+    globDirectory: 'dist',
+    globPatterns: [
+      '**/*.{html,json,js,css}',
+    ],
+    swDest: 'dist/en/sw.js',
+  }).then(({warnings}) => {
+    // In case there are any warnings from workbox-build, log them.
+    for (const warning of warnings) {
+      console.warn(warning);
+    }
+    console.info('Service worker generation completed.');
+  }).catch((error) => {
+    console.warn('Service worker generation failed:', error);
+  });
+});
+
 // --------------
 // i18n
 gulp.task('extract.i18n', require(join(__dirname, 'tasks', 'extract.i18n.xlf'))(gulp));
 gulp.task('import.i18n', require(join(__dirname, 'tasks', 'import.i18n.xlf'))(gulp));
+
+
