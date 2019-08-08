@@ -22,7 +22,7 @@
   <div class="o-prof-activity">
     <a [routerLink]="['/', user.username, 'subscribers']" ><div class="caption-bold f700">{{user.subscribers_count}}</div><div class="text-sm grey">Followers</div></a>
     <a [routerLink]="['/', user.username, 'subscriptions']" ><div class="caption-bold f700">{{user.subscriptions_count-1}}</div><div class="text-sm grey">Following</div></a>
-    <a ><div class="caption-bold f700">{{user.post_count}}</div><div class="text-sm grey">Posts</div></a>
+    <a ><div class="caption-bold f700">{{user.post_count?user.post_count:0}}</div><div class="text-sm grey">Posts</div></a>
     <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
   </div>
   <div [hidden]="editing || !user.tags" class="o-prof-skills" *ngIf="user.tags && !editing" >
