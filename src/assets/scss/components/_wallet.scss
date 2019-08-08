@@ -9,16 +9,16 @@
 // topbar
 
 .o-wallet-topbar{
-    max-width: 800px;
+    max-width: 1053px;
     width: 100%;
     margin: 0px auto;
-    background: url(/assets/svg/desktop_bar.svg) no-repeat #fff;
-    padding: 34px 47px 34px 34px;
+    background: url(/assets/wallet/desktop_bar.svg) no-repeat #fff;
+    padding: 34px 47px 27px 34px;
     display: flex;
     flex-direction: row;
 	@include mq($from: $mobile_sm, $until: $tablet) {
         flex-direction: column;
-        background: url(/assets/svg/mobile_bar.svg) no-repeat #fff;
+        background: url(/assets/wallet/mobile_bar.svg) no-repeat #fff;
         padding: 14px 14px 20px 14px;
         margin: 15px;
         width: calc(100% - 30px)
@@ -30,7 +30,7 @@
     }
 }
 .o-wallet-topbar-left{
-    flex: 2;
+    flex: 1;
     .m-t-6{
         margin-top: 6px;
     }
@@ -71,7 +71,7 @@
 
 .o-wallet-block{
     width: 100%;
-    max-width: 800px;
+    max-width: 1053px;
     margin: 14px auto 0px;
     background: #fff;
     min-height: 770px;
@@ -81,7 +81,7 @@
         flex-direction: column;
     }
     &__tab{
-        width: 176px;
+        width: 219px;
         padding-top: 32px;
         border-right: 1px solid $grey-light;
         @include mq($from: $mobile_sm, $until: $tablet) {
@@ -118,7 +118,7 @@
 }
 .o-score-reward{
     width: 100%;
-    max-width: 272px;
+    max-width: 380px;
     display: flex;
     justify-content: center;
     text-align: center;
