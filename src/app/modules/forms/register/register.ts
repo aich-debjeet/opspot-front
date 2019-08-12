@@ -29,6 +29,8 @@ export class RegisterForm {
   otpView=false;
   verifiedOtp = false;
   showFbForm: boolean = false;
+  enterValidDate: boolean = false;
+  enterOtp: boolean = false;
 
   form: FormGroup;
   fbForm: FormGroup;
@@ -128,13 +130,26 @@ export class RegisterForm {
   register(e) {
     // console.log(this.form.value);
     e.preventDefault();
+    if (this.errorMessage.length > 0)
     this.errorMessage = '';
-    if (!this.form.value.tos) {
-      this.errorMessage = 'To create an account you need to accept terms and conditions.';
+    if(this.enterValidDate)
+    this.enterValidDate = false;
+    if(this.enterOtp)
+    this.enterOtp = false;
+    
+    if((!this.form.value.tos) ||(isNaN(this.form['controls'].dobGroup['controls'].year.value) || this.form['controls'].dobGroup['controls'].month.value == 'Month' || isNaN(this.form['controls'].dobGroup['controls'].date.value)) || (this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == '')){
+      if(isNaN(this.form['controls'].dobGroup['controls'].year.value) || this.form['controls'].dobGroup['controls'].month.value == 'Month' || isNaN(this.form['controls'].dobGroup['controls'].date.value)){
+        this.enterValidDate = true;
+      }
+      if(this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == ''){
+        this.enterOtp = true;
+      }
+      if (!this.form.value.tos) {
+        this.errorMessage = 'To create an account you need to accept terms and conditions.';
+      }
       return;
     }
     if (this.form.valid) {
-
       const otpCode = `${this.form.value.otp.otp1}${this.form.value.otp.otp2}${this.form.value.otp.otp3}${this.form.value.otp.otp4}${this.form.value.otp.otp5}${this.form.value.otp.otp6}`;
       const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
 
