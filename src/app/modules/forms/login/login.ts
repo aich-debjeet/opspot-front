@@ -68,20 +68,22 @@ export class LoginForm {
       .catch((e) => {
 
         this.inProgress = false;
+        this.invalidUser = true;
         if (e.status === 'failed') {
           //incorrect login details
-          this.errorMessage = 'LoginException::AuthenticationFailed';
-          this.invalidUser = true;
+          this.errorMessage = 'Invalid username or password';
           this.session.logout();
         } else if (e.status === 'error') {
           if (e.message === 'LoginException:BannedUser' || e.message === 'LoginException::AttemptsExceeded') {
             this.session.logout();
+            this.errorMessage = 'User has exceeded the maximum number of attempts';
           }
           //two factor?
           // this.twofactorToken = e.message;
           // this.hideLogin = true;
         } else {
-          this.errorMessage = 'LoginException::Unknown';
+          this.errorMessage = 'Unknown error';
+      ;
         }
 
       });

@@ -12,7 +12,7 @@
               <div *ngIf="f.username.errors.required">Username is required</div>
             </div>
               <div id="invalid-user" [hidden]="!invalidUser" class="error text-sm">
-                  Invalid username and password
+                  {{errorMessage}}
               </div>
             
   
