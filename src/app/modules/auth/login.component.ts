@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
@@ -44,6 +44,13 @@ export class LoginComponent {
 
   log(e) {
     this.loginView = !this.loginView;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    if (event.target.screen.width < 600) {
+      this.loginView = false;
+    } else this.loginView = true;
   }
 
   ngOnInit() {
