@@ -26,7 +26,7 @@
     
   </div>
 
-  <p class="m-comments--start-conversation-label"
+  <!-- <p class="m-comments--start-conversation-label"
     *ngIf="!descendingInProgress
       && !ascendingInProgress
       && !error
@@ -35,7 +35,7 @@
     i18n="@@OPSPOT__COMMENTS__START_CONVERSATION"
     >
     Start the conversation!
-  </p>
+  </p> -->
 
   <p class="m-comments--load-error-label" *ngIf="!descendingInProgress && !ascendingInProgress && !!error">
     <i class="material-icons">warning</i>
@@ -76,7 +76,7 @@
 
     <div class="opspot-avatar">
       <a [routerLink]="['/', session.getLoggedInUser().username]">
-        <img [src]="getAvatar()" class="mdl-shadow--2dp"/>
+        <img [src]="getAvatar()" style="height: 28px; width: 28px; margin-top: 5px;" />
       </a>
     </div>
 
