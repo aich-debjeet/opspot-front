@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { BookmarkViewComponent } from './bookmark-view/bookmark-view.component';
+import { LegacyModule } from '../legacy/legacy.module';
 
 
 const bookmarkRoutes:Routes=[{
@@ -13,6 +14,7 @@ const bookmarkRoutes:Routes=[{
   declarations: [BookmarkViewComponent],
   imports: [
     CommonModule,
+    LegacyModule,
     RouterModule.forChild(bookmarkRoutes)
   ]
 })
