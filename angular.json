@@ -26,13 +26,15 @@
               "node_modules/material-design-lite/dist/material.blue_grey-amber.min.css",
               "node_modules/material-design-icons/iconfont/material-icons.css",
                "./node_modules/intl-tel-input/build/css/intlTelInput.css",
-              "src/main.scss"
+              "src/main.scss",
+              "node_modules/croppie/croppie.css"
             ],
             "scripts": [
               "node_modules/material-design-lite/dist/material.min.js",
               "node_modules/medium-editor/dist/js/medium-editor.min.js",
               "src/shims/fontawesome.js",
               "src/shims/jitsi-api.min.js"
+
             ]
           },
           "configurations": {

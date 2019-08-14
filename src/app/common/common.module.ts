@@ -74,12 +74,13 @@ import { PieGraph } from './components/graphs/pie-graph';
 import { GraphSVG } from './components/graphs/svg';
 import { GraphPoints } from './components/graphs/points';
 import { DynamicFormComponent } from './components/forms/dynamic-form/dynamic-form.component';
-
+import {NgxCroppieModule} from 'ngx-croppie';
 import { UpdateMarkersService } from './services/update-markers.service';
 import { SocketsService } from '../services/sockets';
 import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
+import { from } from 'rxjs';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { ImageCroperComponent } from './components/image-croper/image-croper.com
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxCroppieModule
   ],
   declarations: [
     OPSPOT_PIPES,

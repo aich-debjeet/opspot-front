@@ -60,6 +60,7 @@ export interface OpspotUser {
 	supporters_count?: number;
   subscribers_count?: number;
   subscriptions_count?: number;
+  post_count?:number;
   impressions?: number;
   subscribed?: boolean;
   rating?: number;

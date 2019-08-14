@@ -22,7 +22,7 @@ import { NewsfeedService } from '../../../../newsfeed/services/newsfeed.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class Activity {
+export class Activity  {
 
   opspot = window.Opspot;
 
@@ -118,6 +118,9 @@ export class Activity {
     );
   }
 
+  
+
+
   getOwnerIconTime() {
     let session = this.session.getLoggedInUser();
     if(session && session.guid === this.activity.ownerObj.guid) {
@@ -195,20 +198,20 @@ export class Activity {
 
   async togglePin() {
 
-    if (this.session.getLoggedInUser().guid != this.activity.owner_guid) {
-      return;
-    }
+    // if (this.session.getLoggedInUser().guid === this.activity.owner_guid) {
+    //   return;
+    // }
 
-    this.activity.pinned = !this.activity.pinned;
-    const url: string = `api/v2/newsfeed/pin/${this.activity.guid}`;
+    this.activity.bookmark = !this.activity.bookmark;
+    const url: string = `api/v3/bookmark/${this.activity.guid}/image`;
     try {
-      if (this.activity.pinned) {
+      if (this.activity.bookmark) {
         await this.client.post(url);
       } else {
         await this.client.delete(url);
       }
     } catch (e) {
-      this.activity.pinned = !this.activity.pinned;
+      this.activity.bookmark = !this.activity.bookmark;
     }
   }
 
