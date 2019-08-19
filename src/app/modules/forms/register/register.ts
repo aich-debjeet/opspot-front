@@ -29,7 +29,7 @@ export class RegisterForm {
   otpView=false;
   verifiedOtp = false;
   showFbForm: boolean = false;
-  enterValidDate: boolean = false;
+  
   enterOtp: boolean = false;
 
   form: FormGroup;
@@ -50,6 +50,7 @@ export class RegisterForm {
     private service: Service
 
   ) {
+    // this.dateOfBirth = this.dob();
     this.form = fb.group({
       fullname: ['', Validators.required],
       username: ['', Validators.required],
@@ -58,7 +59,7 @@ export class RegisterForm {
       password2: ['', Validators.required],
       otp: fb.group({
         otp1: '', otp2: '', otp3: '', otp4: '', otp5: '', otp6: ''
-      }, { updateOn: 'change', }),
+      }, { updateOn: 'change' }),
       tos: [false],
       mobileNumber: ['', { validators: Validators.required, updateOn: 'blur' }],
       exclusive_promotions: [false],
@@ -71,7 +72,6 @@ export class RegisterForm {
 
     //for dob 
   }
-
   //mobile number entered
   onMobileNumbr() {
     let numbers;
@@ -132,15 +132,10 @@ export class RegisterForm {
     e.preventDefault();
     if (this.errorMessage.length > 0)
     this.errorMessage = '';
-    if(this.enterValidDate)
-    this.enterValidDate = false;
     if(this.enterOtp)
     this.enterOtp = false;
     
-    if((!this.form.value.tos) ||(isNaN(this.form['controls'].dobGroup['controls'].year.value) || this.form['controls'].dobGroup['controls'].month.value == 'Month' || isNaN(this.form['controls'].dobGroup['controls'].date.value)) || (this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == '')){
-      if(isNaN(this.form['controls'].dobGroup['controls'].year.value) || this.form['controls'].dobGroup['controls'].month.value == 'Month' || isNaN(this.form['controls'].dobGroup['controls'].date.value)){
-        this.enterValidDate = true;
-      }
+    if((!this.form.value.tos) || (this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == '')){
       if(this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == ''){
         this.enterOtp = true;
       }
@@ -234,9 +229,9 @@ export class RegisterForm {
   // function to give birth date selection
 
   dob() {
-    let date = ['Date', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-    let month = ['Month', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-    let year = ['Year'];
+    let date = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+    let month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    let year = [];
     let a = new Date().getFullYear() - 13;
     let ab = a - 70;
     for (let i: any = a; i >= ab; i--) {
