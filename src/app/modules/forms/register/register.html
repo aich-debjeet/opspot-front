@@ -93,7 +93,7 @@
                       <option value ="" selected disabled hidden>Date</option>
                       <option *ngFor="let date of dateOfBirth.date">{{date}}</option>
                   </select>
-                  <div *ngIf="form.controls['dobGroup'].controls['date'].touched && form.controls['dobGroup'].controls['date'].errors?.required" class="error text-sm">
+                  <div *ngIf="form.get('dobGroup').get('date').touched && form.get('dobGroup').get('date').errors?.required" class="error text-sm">
                     Date is required
                   </div>
                 </div>
@@ -102,7 +102,7 @@
                       <option value="" selected disabled hidden>Month</option>
                       <option *ngFor="let month of dateOfBirth.month" placeholder="month"> {{month}}</option>
                   </select>
-                  <div *ngIf="form.controls['dobGroup'].controls['month'].touched && form.controls['dobGroup'].controls['month'].errors?.required" class="error text-sm">
+                  <div *ngIf="form.get('dobGroup').get('month').touched && form.get('dobGroup').get('month').errors?.required" class="error text-sm">
                     Month is required
                   </div>
                 </div>
@@ -111,7 +111,7 @@
                       <option value="" selected disabled hidden>Year</option>
                       <option *ngFor="let year of dateOfBirth.year">{{year}}</option>
                   </select>
-                  <div *ngIf="form.controls['dobGroup'].controls['year'].touched && form.controls['dobGroup'].controls['year'].errors?.required" class="error text-sm">
+                  <div *ngIf="form.get('dobGroup').get('year').touched && form.get('dobGroup').get('year').errors?.required" class="error text-sm">
                       Year is required
                     </div>
                 </div>
