@@ -47,7 +47,7 @@
               </div>
             </div>
               
-            <div *ngIf="otpView" class="o-otp">
+            <div [hidden]="noViewOtp" class="o-otp">
               <div class="o-otp__title text-md">Enter OTP <a  class="primary">Resend OTP</a></div>
                 <!-- <div class="otp">
                   <fieldset formGroupName="otp">
@@ -70,7 +70,7 @@
                   </fieldset>
                 </div>
                 
-                <div *ngIf="enterOtp" class="line-err">
+                <div [hidden]="enterOtpError" class="line-err">
                   Please enter the Otp
                 </div>
             </div>
