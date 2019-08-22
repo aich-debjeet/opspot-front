@@ -127,9 +127,8 @@ export class RegisterForm {
     this.onOtp()
   }
 
-  register(e) {
+  register() {
     // console.log(this.form.value);
-    e.preventDefault();
     if (this.errorMessage.length > 0)
     this.errorMessage = '';
     if(this.enterOtp)

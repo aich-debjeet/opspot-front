@@ -4,7 +4,7 @@
       <div class="o-signup-container">
         <div class="o-signup o-signup--form">
           <h2>Welcome, Create an account</h2>
-          <form (submit)="$event.preventDefault()" [formGroup]="form">
+          <form (ngSubmit)="register()" [formGroup]="form">
             <div class="form-group">
               <input type="text" formControlName='fullname' class="form-control form-control-lg" placeholder="Full Name">
               <div *ngIf="form.controls['fullname'].touched && !form.controls['fullname'].valid" class="error text-sm">
@@ -141,7 +141,7 @@
             <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0; margin-bottom:10px;" [hidden]="!errorMessage">
               <p class="text-white">{{errorMessage}}</p>
             </div>
-            <button type="button" (click)="register($event)"  class="btn btn-primary btn-block" [disabled]="!this.form.valid || inProgress || !this.verifiedOtp">Get Started</button>
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="!this.form.valid || inProgress || !this.verifiedOtp">Get Started</button>
           </form>
         </div>
         <div class="o-signup o-signup--img">
