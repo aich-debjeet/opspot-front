@@ -77,7 +77,7 @@
 
             <div class="o-dob">
               <div class="o-dob__title text-md">Date of Birth
-                  <div class="tooltip float-right"><span class="o-dob-info"> <img src="../../../../assets/svg/info.svg" alt=""></span>
+                  <!-- <div class="tooltip float-right"><span class="o-dob-info"> <img src="../../../../assets/svg/info.svg" alt=""></span>
                     <span class="tooltiptext">
                       Lorem ipsum dolor sit
                       amet, consectetuer adipi
@@ -85,7 +85,7 @@
                       ligula eget dolor. Aenean
                       massa
                     </span>
-                  </div>
+                  </div> -->
               </div>
               <div class="o-dob__select" formGroupName='dobGroup' >
                 <div class="form-group">
@@ -113,7 +113,7 @@
                   </select>
                   <div *ngIf="form.get('dobGroup').get('year').touched && form.get('dobGroup').get('year').errors?.required" class="error text-sm">
                       Year is required
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
