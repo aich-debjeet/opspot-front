@@ -6,50 +6,43 @@
           <h2>Welcome, Create an account</h2>
           <form (ngSubmit)="register()" [formGroup]="form">
             <div class="form-group">
-              <input type="text" formControlName='fullname' class="form-control form-control-lg" placeholder="Full Name">
+              <input type="text" formControlName='fullname' class="form-control form-control-lg"
+                placeholder="Full Name">
               <div *ngIf="form.controls['fullname'].touched && !form.controls['fullname'].valid" class="error text-sm">
                 <div *ngIf="form.controls['fullname'].errors.required">Full Name is required</div>
-            </div>
+              </div>
             </div>
             <div class="form-group">
-              <input type="text"
-               class="form-control form-control-lg"
-               formControlName="username"
-               placeholder="Username"
-               i18n-placeholder="@@M__COMMON__USERNAME"
-               
-               readonly onfocus="this.removeAttribute('readonly');">
+              <input type="text" class="form-control form-control-lg" formControlName="username" placeholder="Username"
+                i18n-placeholder="@@M__COMMON__USERNAME" readonly onfocus="this.removeAttribute('readonly');">
               <!-- <a href="#" class="text-md primary">gowtham_aeione,</a>
               <a href="#" class="text-md primary">gowtham_aeione49</a> -->
               <div *ngIf="form.controls['username'].touched && !form.controls['username'].valid" class="error text-sm">
                 <div *ngIf="form.controls['username'].errors.required">Username is required</div>
-            </div>
+              </div>
             </div>
             <div class="form-group">
-              <input type="text" formControlName='email' class="form-control form-control-lg" placeholder="Email">
+              <input type="text" formControlName='email' class="form-control form-control-lg"
+                placeholder="Email Address">
               <div *ngIf="form.controls['email'].touched && !form.controls['email'].valid" class="error text-sm">
                 <div *ngIf="form.controls['email'].errors.required">Email is required</div>
                 <div *ngIf="form.controls['email'].errors.email">Enter a Valid Email Address </div>
-            </div>
-            </div>
-          
-            <div class="form-group">
-              <ngx-intl-tel-input
-                [cssClass]="'custom'"
-                [preferredCountries]="['in','us', 'gb']"
-                [enableAutoCountrySelect]="true"
-                [enablePlaceholder]="false"
-                name="phone"
-                formControlName='mobileNumber'
-                ></ngx-intl-tel-input>
-                <div *ngIf="form.controls['mobileNumber'].touched && !form.controls['mobileNumber'].valid" class="error text-sm">
-                  <div *ngIf="form.controls['mobileNumber'].errors.required">Mobile is required</div>
               </div>
             </div>
-              
+
+            <div class="form-group">
+              <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="['in','us', 'gb']"
+                [enableAutoCountrySelect]="true" [enablePlaceholder]="false" name="phone"
+                formControlName='mobileNumber'></ngx-intl-tel-input>
+              <div *ngIf="form.controls['mobileNumber'].touched && !form.controls['mobileNumber'].valid"
+                class="error text-sm">
+                <div *ngIf="form.controls['mobileNumber'].errors.required">Mobile is required</div>
+              </div>
+            </div>
+
             <div [hidden]="noViewOtp" class="o-otp">
-              <div class="o-otp__title text-md">Enter OTP <a  class="primary">Resend OTP</a></div>
-                <!-- <div class="otp">
+              <div class="o-otp__title text-md">Enter OTP <a class="primary">Resend OTP</a></div>
+              <!-- <div class="otp">
                   <fieldset formGroupName="otp">
                     <input formControlName="otp1" (keyup)="keytab($event)" maxlength="1"/>
                     <input formControlName="otp2" (keyup)="keytab($event)" maxlength="1"/>
@@ -59,26 +52,32 @@
                     <input formControlName="otp6" (keyup)="keytab($event)" maxlength="1"/>
                   </fieldset>
                 </div> -->
-                <div class="otp">
-                  <fieldset formGroupName="otp">
-                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp1">
-                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp2">
-                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp3">
-                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp4">
-                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp5">
-                    <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)" formControlName="otp6">
-                  </fieldset>
-                  <div [hidden]="enterOtpError" class="line-err">
-                      Please enter the Otp
-                    </div>
+              <div class="otp">
+                <fieldset formGroupName="otp">
+                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
+                    formControlName="otp1">
+                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
+                    formControlName="otp2">
+                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
+                    formControlName="otp3">
+                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
+                    formControlName="otp4">
+                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
+                    formControlName="otp5">
+                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
+                    formControlName="otp6">
+                </fieldset>
+                <div [hidden]="enterOtpError" class="line-err">
+                  Please enter the Otp
                 </div>
-                
-                
+              </div>
+
+
             </div>
 
             <div class="o-dob">
               <div class="o-dob__title text-md">Date of Birth
-                  <!-- <div class="tooltip float-right"><span class="o-dob-info"> <img src="../../../../assets/svg/info.svg" alt=""></span>
+                <!-- <div class="tooltip float-right"><span class="o-dob-info"> <img src="../../../../assets/svg/info.svg" alt=""></span>
                     <span class="tooltiptext">
                       Lorem ipsum dolor sit
                       amet, consectetuer adipi
@@ -88,70 +87,79 @@
                     </span>
                   </div> -->
               </div>
-              <div class="o-dob__select w100" formGroupName='dobGroup' >
+              <div class="o-dob__select w100" formGroupName='dobGroup'>
                 <div class="form-group">
                   <select class="form-control" formControlName="date">
-                      <option value ="" selected disabled hidden>Date</option>
-                      <option *ngFor="let date of dateOfBirth.date">{{date}}</option>
+                    <option value="" selected disabled hidden>Date</option>
+                    <option *ngFor="let date of dateOfBirth.date">{{date}}</option>
                   </select>
                 </div>
                 <div class="form-group m-l-13">
                   <select class="form-control" formControlName="month">
-                      <option value="" selected disabled hidden>Month</option>
-                      <option *ngFor="let month of dateOfBirth.month" placeholder="month"> {{month}}</option>
+                    <option value="" selected disabled hidden>Month</option>
+                    <option *ngFor="let month of dateOfBirth.month" placeholder="month"> {{month}}</option>
                   </select>
                 </div>
-                <div class="form-group m-l-13" > 
-                  <select class="form-control"  formControlName="year">
-                      <option value="" selected disabled hidden>Year</option>
-                      <option *ngFor="let year of dateOfBirth.year">{{year}}</option>
+                <div class="form-group m-l-13">
+                  <select class="form-control" formControlName="year">
+                    <option value="" selected disabled hidden>Year</option>
+                    <option *ngFor="let year of dateOfBirth.year">{{year}}</option>
                   </select>
                 </div>
               </div>
-              <div *ngIf="(form.get('dobGroup').get('year').touched && form.get('dobGroup').get('year').errors?.required) || (form.get('dobGroup').get('date').touched && form.get('dobGroup').get('date').errors?.required) || (form.get('dobGroup').get('month').touched && form.get('dobGroup').get('month').errors?.required)" class="w100 error text-sm">
-                  Date is required
+              <div
+                *ngIf="(form.get('dobGroup').get('year').touched && form.get('dobGroup').get('year').errors?.required) || (form.get('dobGroup').get('date').touched && form.get('dobGroup').get('date').errors?.required) || (form.get('dobGroup').get('month').touched && form.get('dobGroup').get('month').errors?.required)"
+                class="w100 error text-sm">
+                Date is required
               </div>
             </div>
 
             <div class="form-group">
-              <input type="password" formControlName="password" class="form-control form-control-lg" placeholder="Create Password">
-              <div  *ngIf="!form.controls['password'].valid && form.controls['password'].touched" class="error text-sm">
+              <input type="password" formControlName="password" class="form-control form-control-lg"
+                placeholder="Create Password">
+              <div *ngIf="!form.controls['password'].valid && form.controls['password'].touched" class="error text-sm">
                 <div> {{ getErrorPassword()}}</div>
               </div>
             </div>
             <div class="form-group">
-              <input type="password" formControlName="password2"  class="form-control form-control-lg" placeholder="Confirm Password">
-              <div *ngIf="form.controls['password2'].touched && !form.controls['password2'].valid" class="error text-sm">
+              <input type="password" formControlName="password2" class="form-control form-control-lg"
+                placeholder="Confirm Password">
+              <div *ngIf="form.controls['password2'].touched && !form.controls['password2'].valid"
+                class="error text-sm">
                 <div *ngIf="form.controls['password2'].errors.required">Confirm Password is required</div>
                 <div *ngIf="form.controls['password2'].errors.mustMatch">Passwords must match</div>
-            </div>
+              </div>
             </div>
 
             <div class="o-terms-condition">
-                <label class="c-checkbox">I agree with the <a href="javascript:void(0)" class="primary">terms of use</a> and <a href="javascript:void(0)" class="primary">privacy policy</a>
-                    <input type="checkbox" formControlName="tos">
-                    <span class="checkmark"></span>
-                  </label>
+              <label class="c-checkbox">I agree to the <a href="javascript:void(0)" class="primary">Terms</a>, <a href="javascript:void(0)" class="primary">Privacy</a> and <a href="javascript:void(0)"
+                  class="primary">Cookie Policy</a>
+                <input type="checkbox" formControlName="tos">
+                <span class="checkmark"></span>
+              </label>
             </div>
-            <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0; margin-bottom:10px;" [hidden]="!errorMessage">
+            <div
+              class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box"
+              style="min-height:0; margin-bottom:10px;" [hidden]="!errorMessage">
               <p class="text-white">{{errorMessage}}</p>
             </div>
-            <button type="submit" class="btn btn-primary btn-block" [disabled]="!this.form.valid || inProgress || !this.verifiedOtp">Get Started</button>
+            <button type="submit" class="btn btn-primary btn-block"
+              [disabled]="!this.form.valid || inProgress || !this.verifiedOtp">Get Started</button>
           </form>
         </div>
         <div class="o-signup o-signup--img">
           <div class="o-signup__img">
             <img src="../../../../assets/signup.png" alt="">
           </div>
-          <h2 class="text-center">Empower artists to entertain <br>
-              and inspire the world</h2>
+          <h2 class="text-center">Empowering artists to Entertain <br>
+            and Inspire the World</h2>
         </div>
       </div>
     </div>
   </section>
 </div>
 
-  
+
 <!-- <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0;" [hidden]="!errorMessage">
   <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
     {{errorMessage}}
