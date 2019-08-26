@@ -26,11 +26,11 @@ export class RegisterForm {
   takenUsername: boolean = false;
   usernameValidationTimeout: any;
   number;
-  otpView=false;
+  noViewOtp=true;
   verifiedOtp = false;
   showFbForm: boolean = false;
   
-  enterOtp: boolean = false;
+  enterOtpError: boolean = true;
 
   form: FormGroup;
   fbForm: FormGroup;
@@ -113,7 +113,7 @@ export class RegisterForm {
   //for getting otp
    getOtp(numbr) {
     this.service.getOtp(numbr).then((res: any) => {
-      this.otpView = true;
+      this.noViewOtp = false;
       localStorage.setItem('phoneNumberSecret', res.secret);
     });
   }
@@ -127,17 +127,16 @@ export class RegisterForm {
     this.onOtp()
   }
 
-  register(e) {
+  register() {
     // console.log(this.form.value);
-    e.preventDefault();
     if (this.errorMessage.length > 0)
     this.errorMessage = '';
-    if(this.enterOtp)
-    this.enterOtp = false;
+    if(!this.enterOtpError)
+    this.enterOtpError = true;
     
     if((!this.form.value.tos) || (this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == '')){
       if(this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == ''){
-        this.enterOtp = true;
+        this.enterOtpError = false;
       }
       if (!this.form.value.tos) {
         this.errorMessage = 'To create an account you need to accept terms and conditions.';
