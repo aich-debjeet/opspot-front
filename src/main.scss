@@ -2785,7 +2785,8 @@ m-date-selector .m-date-selector--input {
           align-items: center;
   background-color: #FFF;
   color: #666;
-  border: 1px solid #DEDEDE; }
+  border: 1px solid #DEDEDE; 
+}
   m-date-selector .m-date-selector--input input {
     font-size: 12px;
     text-transform: uppercase;
@@ -2797,7 +2798,9 @@ m-date-selector .m-date-selector--input {
     width: auto;
     height: auto;
     -webkit-align-self: center;
-            align-self: center; }
+            align-self: center;
+  width: 100%;
+}
   m-date-selector .m-date-selector--input i {
     vertical-align: middle;
     cursor: pointer;
@@ -4773,10 +4776,12 @@ m--tree {
   background-color: rgba(0, 0, 0, 0.541176);
   opacity: 0;
   transition: 200ms ease opacity;
-  will-change: opacity; }
+  will-change: opacity;
+ z-index: 1;
+}
 
 .c-scrim--shown {
-  opacity: 1; }
+  opacity:3; }
 
 .c-datepicker {
   min-height: 610px;
@@ -4795,7 +4800,7 @@ m--tree {
   opacity: 0;
   will-change: opacity;
   transition: 200ms ease-in-out opacity, 200ms ease-in-out top;
-  z-index: 9999; }
+  z-index: 1; }
 
 .c-datepicker--open {
   opacity: 1;
@@ -4820,8 +4825,11 @@ m--tree {
 
 .c-datepicker__header-date {
   background: #00bcd4;
-  height: 150px;
-  padding: 16px 0; }
+  height: 180px;
+  padding: 16px 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center; }
 
 .rd-month-label {
   height: 56px;
@@ -4875,9 +4883,9 @@ m--tree {
   visibility: visible; }
 
 .c-datepicker__header-date span {
-  display: block;
+  // display: block;
   color: white;
-  margin: 0;
+  margin: 7px 0;
   transition: opacity 100ms ease-in-out; }
 
 .c-datepicker__header-date__month {
@@ -4893,7 +4901,12 @@ m--tree {
 
 .c-datepicker__header-date__time {
   font-size: 25px;
-  opacity: 0.6; }
+  opacity: 0.6; 
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+}
 
 .c-datepicker__header-date__time > span {
   display: inline-block; }
@@ -4934,7 +4947,7 @@ m--tree {
   content: "";
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 7px;
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -5302,7 +5315,7 @@ m--tree {
   content: "";
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 7px;
   width: 0%;
   height: 0%;
   border-radius: 50%;
@@ -24421,4 +24434,12 @@ m-login{
   m-login{
     margin-top:-110px !important;
   }
+}
+.container{
+  padding:0 !important;
+}
+
+.ng2-dropdown-menu{
+  top: 420px !important;
+
 }

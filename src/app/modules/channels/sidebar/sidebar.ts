@@ -8,7 +8,7 @@ import { Storage } from '../../../services/storage';
 
 @Component({
   moduleId: module.id,
-  selector: 'm-channel--sidebar',
+  selector: 'm-channel--sidebar',  
   inputs: ['user', 'editing'],
   templateUrl: 'sidebar.html'
 })

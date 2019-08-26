@@ -1,0 +1,24 @@
+<div  class="tab" style="display: block;">
+  <h5 class="o-prof-edit-title">Basic Info</h5>
+  <div class="o-prof-general">
+      <form name="form"    #f="ngForm"  >
+          <div class="form-group form-gorup--general-edit">
+              <label>Full Name</label>
+              <input type="text" name="fullName" required [(ngModel)]="model.fullName"  class="form-control form-control-lg" placeholder="">
+          </div>
+          <div class="form-group form-gorup--general--textarea">
+              <label>Skills</label>
+                <tag-input    style="border:1px solid #959595; padding-bottom: 50px;" [(ngModel)]='model.items' name="d" theme='minimal'>
+                    <tag-input-dropdown [showDropdownIfEmpty]="true" [limitItemsTo]=5 [minimumTextLength]=5 [autocompleteItems]="data">
+
+                    </tag-input-dropdown>
+               </tag-input>
+              <div class="w100 text-sm grey">Use a comma to separate skills, or choose from the list.</div>
+          </div>
+          <div class="o-prof-edit-actions">
+              <button type="button" (click)="onSubmit()" class="btn btn-primary btn-lg">Save Changes</button>
+              <button type="button" class="btn btn-outline-primary btn-lg btn--cancel">Cancel</button>
+          </div><!-- prof edit actions end -->
+      </form>
+  </div>
+</div>

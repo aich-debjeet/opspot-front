@@ -122,7 +122,7 @@ import { BookmarkModule } from './modules/bookmark/bookmark.module';
     ChannelsModule,
     BookmarkModule,
     BsDropdownModule.forRoot(),
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
   ],
   providers: [
     OpspotAppRoutingProviders,

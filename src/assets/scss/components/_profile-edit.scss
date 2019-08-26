@@ -1,11 +1,17 @@
 // profile edit
-
+.o-prof-edit-sec{
+    width :100%;
+    background: #ECEFF1;
+    min-height: 100vh;
+    height: 100%;
+}
 .o-prof-edit{
-    height: 792px;	
-    width: 1073px;	
+    height: 100%;	
+    width: 100%;
+    max-width: 1070px;	
     border-radius: 4px;	
-    background-color: #FFFFFF;
     overflow: hidden;
+    margin: 0px auto;
     @include mq($from: $mobile_sm, $until: $desktop_sm) {
 		width: 100%;
         min-height: 100vh;
@@ -16,8 +22,7 @@
 
 .o-prof-edit-head{
     width: 100%;
-    padding: 20px 25px 20px 46px;
-    border: 1px solid $grey-light;
+    padding: 22px 46px;
     display: flex;
     justify-content: flex-start;
     flex-direction: row;
@@ -31,6 +36,7 @@
         @include mq($from: $mobile_sm, $until: $desktop_sm) {
             width: 100%;
             padding: 15px;
+            background: #fff;
         }
     }
 }
@@ -43,7 +49,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 53px;
     @include mq($from: $mobile_sm, $until: $desktop_sm) {
         width: 100%;
         flex-direction: row;
@@ -59,29 +64,18 @@
 .o-prof-edit-body{
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
+    background: #fff;
+    min-height: calc(100vh - 162px);
     @include mq($from: $mobile_sm, $until: $desktop_sm) {
-        flex-direction: column;
+        
     }
     .form-group{
         margin-bottom: 12px!important;
-    }
-    &__left{
-        width: 227px;
-        border-right: 1px solid $grey-light;
-        height: 700px;
-        @include mq($from: $mobile_sm, $until: $desktop_sm) {
-            width: 100%;
-            border-bottom: 1px solid $grey-light;
-            border-right: 0px;
-            height: 100%;
-        }
-    }
-    &__right{
-        width: calc(100% - 227px);
-        @include mq($from: $mobile_sm, $until: $desktop_sm) {
-            width: 100%;
+        label{
+            display: flex;
+            justify-content: space-between;
         }
     }
 }
@@ -93,10 +87,17 @@
 }
 .o-prof-edit-actions{
     width: 100%;
-    text-align: right;
+    text-align: left;
     padding-right: 52px;
+    margin-top: 50px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 0px;
+    }
     .btn--cancel{
-        margin-right: 12px;
+        margin-left: 12px;
     }
 }
 .w-xl{
@@ -129,10 +130,17 @@
     font-size: 13px;	
     line-height: 20px;
     margin-bottom: 6px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 .o-prof-edit-privacy{
     margin-left: 20px;
     position: relative;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        // display: none;
+    }
 }
 .o-prof-edit-privacy__drop{
     display: none;
@@ -181,6 +189,15 @@
 }
 .form-gorup--general-edit{
     width: 212px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
+}
+.form-gorup--general--textarea{
+    width: 52%;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
 }
 .o-prof-edit-skill{
     height: 153px;	
@@ -188,6 +205,9 @@
     border: 1px solid #90A4AE;	
     border-radius: 4px;
     resize: none;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
     .o-skill-tag{
         padding: 2px 8px;
     }
@@ -258,6 +278,9 @@
     width: 100%;
     margin-top: 25px;
     width: 452px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
 }
 .o-prof-edit-wea{
     width: 100%;
@@ -312,6 +335,9 @@
     top: 0px;
     left: 0px;
     padding: 24px 34px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        padding: 24px 15px;
+    }
 }
 #work{
     position: relative;
@@ -334,11 +360,20 @@
     width: 100%;
     margin-top: 25px;
     display: flex;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: column;
+    }
     &__left{
         width: 315px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+        }
     }
     &__right{
         width: calc(100% - 315px);
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+        }
     }
 }
 .o-toggle-check{
@@ -388,11 +423,34 @@
     }
 }
 .o-wea-logo-img{
-    width: 42px;
-    height: 42px;
-    border: 1.5px solid #90A4AE;
-    border-radius: 50%;
+    height: 118px;	
+    width: 118px;	
+    border: 1px solid #ECEFF1;	
+    border-radius: 2px;
+    margin-top: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    img{
+        width: 118px;
+    }
+    &__edit{
+        box-sizing: border-box;
+        height: 23px;
+        width: 23px;
+        border: 1px solid #FFFFFF;
+        background-color: #0288D1;
+        position: absolute;
+        top: -11px;
+        right: -11px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i{
+            font-size: 13px;
+            color: #fff;
+        }
+    }
 }

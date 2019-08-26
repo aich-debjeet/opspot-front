@@ -23,6 +23,16 @@ import { PosterModule } from '../newsfeed/poster/poster.module';
 import { NewsfeedModule } from '../newsfeed/newsfeed.module';
 import { ExplicitOverlayComponent } from './explicit-overlay/overlay.component';
 import { HashtagsModule } from '../hashtags/hashtags.module';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { GeneralComponent } from './profile-edit/general/general.component';
+import { AboutComponent } from './profile-edit/about/about.component';
+import { ContactComponent } from './profile-edit/contact/contact.component';
+import { WorkComponent } from './profile-edit/work/work.component';
+import { EducationComponent } from './profile-edit/education/education.component';
+import { AwardsComponent } from './profile-edit/awards/awards.component';
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+import { TagInputModule } from 'ngx-chips';
+
 
 const routes: Routes = [
   { path: 'channels/:filter', component: ChannelsListComponent },
@@ -43,7 +53,11 @@ const routes: Routes = [
     PosterModule,
     NewsfeedModule,
     HashtagsModule,
+    NgxUsefulSwiperModule,
+    TagInputModule,
   ],
+
+
   declarations: [
     ChannelModulesComponent,
     ChannelComponent,
@@ -56,6 +70,13 @@ const routes: Routes = [
     ChannelFeedComponent,
     ChannelSidebar,
     ExplicitOverlayComponent,
+    ProfileEditComponent,
+    GeneralComponent,
+    AboutComponent,
+    ContactComponent,
+    WorkComponent,
+    EducationComponent,
+    AwardsComponent,
   ],
   exports: [
     ChannelModulesComponent,
