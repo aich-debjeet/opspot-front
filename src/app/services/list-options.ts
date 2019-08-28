@@ -37,6 +37,16 @@ export const REASONS : Array<any> = [
   { value: 11, label: 'Another reason' }
 ];
 
+export const REPORT_REASONS : Array<any> = [
+  { value: 1 , label: 'Not marked as adult content', description: 'Post shows nudity, sexuality, content not fit for 18 years below, etc.' },
+  { value: 2, label: 'Drug Advocacy', description: "We don't encourage the use of drugs. Post showcasing, about or related to drugs." },
+  { value: 3, label: 'Child Pornography', description: 'Underage nudity or sexual situation including a minor including selfies, etc.' },
+  { value: 4, label: 'Violence or Extremism', description: 'Posts related to violence, radical or extremist, raising concern, promoting hate speech, etc.' },
+  { value: 5, label: 'Copyright Violation', description: 'Violation, piracy or theft of a copyright holder’s content, etc.'},
+  { value: 6, label: 'Trademark Violation', description: 'Unauthorised use of trademarks or service marks on competing or related goods and services.' },
+  { value: 7, label: 'Others', description: 'Inappropriate or disturbing content, hate speech, etc.' }
+];
+
 export const READABLE_REASONS : Array<any> = [
   { value: 1 , label: 'is illegal' },
   { value: 2, label: 'Should be marked as explicit' },
