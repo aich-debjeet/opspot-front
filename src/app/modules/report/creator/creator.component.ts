@@ -3,11 +3,13 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { REASONS } from '../../../services/list-options';
+import { REPORT_REASONS } from '../../../services/list-options'
 
 @Component({
   moduleId: module.id,
   selector: 'm-report--creator',
-  templateUrl: 'creator.component.html'
+  templateUrl: 'creator.component.html',
+  styleUrls: ['creator.component.scss']
 })
 
 export class ReportCreatorComponent implements AfterViewInit {
@@ -21,7 +23,7 @@ export class ReportCreatorComponent implements AfterViewInit {
 
   success: boolean = false;
   error: string = '';
-  subjects = REASONS;
+  subjects = REPORT_REASONS;
 
   next: boolean = false;
 
@@ -47,6 +49,8 @@ export class ReportCreatorComponent implements AfterViewInit {
     if (!this.subject) {
       return false;
       //throw new Error('You cannot report this.');
+    } else if(this.subject === 7 && this.note === ''){ // others note validation
+      return false;
     }
     return true;
   }
@@ -100,6 +104,7 @@ export class ReportCreatorComponent implements AfterViewInit {
         this.inProgress = false;
         if (response.done) {
           this.success = true;
+          this.overlayModal.dismiss();
         } else {
           this.overlayModal.dismiss();
           alert('There was an error sending your report.');
