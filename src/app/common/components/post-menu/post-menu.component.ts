@@ -224,7 +224,9 @@ export class PostMenuComponent {
 
   report() {
     console.warn(this.user, this.entity, this.session.getLoggedInUser().guid, this.entity.ownerObj.guid);
-    this.overlayModal.create(ReportCreatorComponent, this.entity)
+    this.overlayModal.create(ReportCreatorComponent, this.entity, {     
+      class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium',
+  })
       .present();
     this.selectOption('report');
   }
