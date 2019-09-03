@@ -29,7 +29,8 @@ import { ProfileReportComponent } from './profile-report/profile-report.componen
     ReportConsoleComponent
   ],
   entryComponents: [
-    ReportCreatorComponent
+    ReportCreatorComponent,
+    ProfileReportComponent
   ]
 })
 
