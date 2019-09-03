@@ -47,6 +47,13 @@ export const REPORT_REASONS : Array<any> = [
   { value: 7, label: 'Others', description: 'Inappropriate or disturbing content, hate speech, etc.' }
 ];
 
+export const PROFILE_REPORT_REASONS : Array<any> = [
+  { value: 1 , label: 'This person is annoying me', description: 'Constantly trying to make contact against your wish, stalking, commenting on your posts, etc.' },
+  { value: 2, label: 'Pretending to be someone I know', description: "Impersonating, using someone else’s content, fake accounts, etc." },
+  { value: 3, label: 'Sharing inappropriate or offensive post', description: 'Content that violates other people’s rights, insensitive and insulting in nature, etc.' },
+  { value: 4, label: 'Others', description: 'Cyber bullying, abuse, online shaming, intruding your privacy, hate speech, etc.' }
+];
+
 export const READABLE_REASONS : Array<any> = [
   { value: 1 , label: 'is illegal' },
   { value: 2, label: 'Should be marked as explicit' },
