@@ -6,6 +6,7 @@ import { OverlayModalService } from '../../../../services/ux/overlay-modal';
 import { BanModalComponent } from '../../../ban/modal/modal.component';
 import { ReportCreatorComponent } from '../../../report/creator/creator.component';
 import { Router } from '@angular/router';
+import { ProfileReportComponent } from '../../../report/profile-report/profile-report.component';
 
 @Component({
   selector: 'opspot-button-user-dropdown',
@@ -262,7 +263,7 @@ export class UserDropdownButton {
   }
 
   report() {
-    this.overlayService.create(ReportCreatorComponent, this.user)
+    this.overlayService.create(ProfileReportComponent, this.user)
       .present();
   }
 
