@@ -1,4 +1,4 @@
-<div class="m-report-creator">
+<!-- <div class="m-report-creator">
 
   <div class="m-report-creator--header">
     <h2>
@@ -43,7 +43,6 @@
     </p>
   </div>
 
-  <!-- Submit or Next -->
   <div *ngIf="!success && ( (next && subject === 11) || (!next && subject < 10) )">
     <section class="m-report-creator--section m-report-creator--section--last"
       (mouseenter)="showErrors()"
@@ -68,7 +67,6 @@
     </section>
   </div>
 
-  <!-- SHOW FOR MORE OR COPYRIGHT -->
   <div *ngIf="!success && !next && (subject === 11 || subject === 10)">
     <section class="m-report-creator--section m-report-creator--section--last">
       <div class="m-report-creator--submit">
@@ -100,4 +98,42 @@
     </button>
   </div>
 
-</div>
+</div> -->
+
+
+  <div class="o-report">
+      <div class="o-report__head">
+          <h4>Report this post</h4>
+          <!-- <a class="o-report-close "><i class="icon-x"></i></a> -->
+      </div><!-- report head end -->
+      <div class="o-report__container">
+          <div class="o-report-content">
+            <!-- <div *ngIf="!inProgress && !success" > -->
+                <div class="radiobutton" *ngFor="let item of subjects">
+                      <input type="radio" name="radios"
+                      [disabled]="inProgress"
+                      [checked]="subject == item.value"
+                      value="{{ item.value }}"
+                      [id]="'report-modal-reason-' + item.value"/>
+                      <label         
+                      [mdlRadio]
+                      [mdlRadioValue]="item.value"
+                      [checked]="subject"
+                      [for]="'report-modal-reason-' + item.value"
+                      (click)="onSelectionChange(item)">
+                          <div class="o-report-content-text">
+                              <div class="caption-bold">{{item.label}}</div>
+                              <div class="text-sm grey">{{item.description}}</div>
+                          </div>
+                      </label>
+                </div>
+              <!-- </div> -->
+             <!-- radio button end -->
+              <div class="o-report-describe-issue" *ngIf="!success && subject === 7">
+                  <textarea class="o-report-textarea"  [(ngModel)]="note" name="" id="" cols="2" rows="2" placeholder="Describe your issue here"></textarea>
+              </div>
+              <button type="button" class="btn btn-primary btn-block" [disabled]="!canSubmit() 
+              || inProgress || success" (click)="submit()">Report</button>
+          </div>
+      </div><!-- report container end -->
+  </div>

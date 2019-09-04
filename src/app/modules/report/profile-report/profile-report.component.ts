@@ -2,33 +2,31 @@ import { Component, Input, AfterViewInit, ViewChild, ElementRef, ChangeDetectorR
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
-import { REASONS } from '../../../services/list-options';
-import { REPORT_REASONS } from '../../../services/list-options'
+import { PROFILE_REPORT_REASONS } from '../../../services/list-options';
 
 @Component({
-  moduleId: module.id,
-  selector: 'm-report--creator',
-  templateUrl: 'creator.component.html',
-  styleUrls: ['creator.component.scss']
+  selector: 'app-profile-report',
+  templateUrl: './profile-report.component.html',
+  styleUrls: ['./profile-report.component.scss']
 })
-
-export class ReportCreatorComponent implements AfterViewInit {
+export class ProfileReportComponent implements AfterViewInit {
 
   subject: number = 0;
   note: string = '';
   guid: string = '';
-
+  name: string = '';
   initialized: boolean = false;
   inProgress: boolean = false;
 
   success: boolean = false;
   error: string = '';
-  subjects = REPORT_REASONS;
+  subjects = PROFILE_REPORT_REASONS;
 
   next: boolean = false;
 
   @Input('object') set data(object) {
     this.guid = object ? object.guid : null;
+    this.name = object ? object.name : null;
   }
 
   constructor(
@@ -49,7 +47,7 @@ export class ReportCreatorComponent implements AfterViewInit {
     if (!this.subject) {
       return false;
       //throw new Error('You cannot report this.');
-    } else if(this.subject === 7 && this.note === ''){ // others note validation
+    } else if(this.subject === 4 && this.note === ''){ // others note validation
       return false;
     }
     return true;
@@ -104,7 +102,7 @@ export class ReportCreatorComponent implements AfterViewInit {
         this.inProgress = false;
         if (response.done) {
           this.success = true;
-          this.overlayModal.dismiss(); //dismissing model after reporting
+          this.overlayModal.dismiss();
         } else {
           this.overlayModal.dismiss();
           alert('There was an error sending your report.');
@@ -116,4 +114,5 @@ export class ReportCreatorComponent implements AfterViewInit {
         alert(e.message ? e.message : e);
       });
   }
+
 }

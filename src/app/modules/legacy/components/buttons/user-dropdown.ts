@@ -6,17 +6,20 @@ import { OverlayModalService } from '../../../../services/ux/overlay-modal';
 import { BanModalComponent } from '../../../ban/modal/modal.component';
 import { ReportCreatorComponent } from '../../../report/creator/creator.component';
 import { Router } from '@angular/router';
+import { ProfileReportComponent } from '../../../report/profile-report/profile-report.component';
+
 
 @Component({
   selector: 'opspot-button-user-dropdown',
   inputs: ['user'],
   outputs: ['userChanged'],
   template: `
-    <button class="material-icons" (click)="toggleMenu($event)">settings</button>
 
+   <a class="o-prof-option"><i class="icon-more-vertical"  
+  (click)="toggleMenu($event)"></i></a> 
     <ul class="opspot-dropdown-menu" [hidden]="!showMenu" >
-      <li class="mdl-menu__item" [hidden]="user.blocked" (click)="block()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__BLOCK">Block @{{user.username}}</li>
-      <li class="mdl-menu__item" [hidden]="!user.blocked" (click)="unBlock()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__UNBLOCK">Un-Block @{{user.username}}</li>
+      <li class="mdl-menu__item" [hidden]="user.blocked" (click)="openModal()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__BLOCK">Block</li>
+      <li class="mdl-menu__item" [hidden]="!user.blocked" (click)="unBlock()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__UNBLOCK">Un-Block</li>
       <li class="mdl-menu__item" [hidden]="!user.subscribed" (click)="unSubscribe()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__UNSUBSCRIBE">Unsubscribe</li>
       <li class="mdl-menu__item"
         *ngIf="session.isAdmin()"
@@ -124,7 +127,28 @@ import { Router } from '@angular/router';
         <ng-container *ngIf="!user.email">...</ng-container>
       </div>
     </m-modal>
-  `
+
+    <m-modal *ngIf="openBlockModal" [open]="true" (closed)="openBlockModal = false">
+    <div class="o-block">
+    <div class="o-block__head">
+        <h4>Block {{user.name}}</h4>
+       <!-- <a class="o-block-close hidden-under-tablet"><i class="icon-x"></i></a> -->
+    </div><!-- block head end -->
+    <div class="o-block__content">
+        <p class="caption-regular">
+            If you block {{user.name}}, {{user.name}} will no longer be able to see your posts, tag you, invite you to communities or network with you. 
+        </p>
+    </div>
+    <div class="o-block__action">
+        <button type="button" class="btn btn-outline-primary btn--block hidden-above-tablet">Cancel</button>
+        <button type="button" class="btn btn-primary btn--block" (click)="block()">Block</button>
+    </div>
+    </div>
+    </m-modal>
+
+
+  `,
+  styleUrls:  ['./user-dropdown.scss']
 })
 
 export class UserDropdownButton {
@@ -137,6 +161,10 @@ export class UserDropdownButton {
   banToggle: boolean = false;
   banMonetizationToggle: boolean = false;
   viewEmailToggle: boolean = false;
+  openBlockModal = false;
+  openReportModal = false;
+
+  
 
   constructor(
     public session: Session,
@@ -262,8 +290,10 @@ export class UserDropdownButton {
   }
 
   report() {
-    this.overlayService.create(ReportCreatorComponent, this.user)
-      .present();
+    this.overlayService.create(ProfileReportComponent, this.user, {
+      class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium',
+    })
+          .present();
   }
 
   async setSpam(value: boolean) {
@@ -313,4 +343,9 @@ export class UserDropdownButton {
     }
   }
 
+  openModal(){
+    this.openBlockModal = true;
+    }
+
 }
+
