@@ -20,6 +20,7 @@ import { AboutComponent } from '../modules/channels/profile-edit/about/about.com
 import { ContactComponent } from '../modules/channels/profile-edit/contact/contact.component';
 import { EducationComponent } from '../modules/channels/profile-edit/education/education.component';
 import { AwardsComponent } from '../modules/channels/profile-edit/awards/awards.component';
+import { ExploreComponent } from '../modules/explore/explore.component';
 
 export const OpspotAppRoutes: Routes = [
 
@@ -63,6 +64,7 @@ export const OpspotAppRoutes: Routes = [
   
   ] 
   } ,
+  {path:'explore', component: ExploreComponent},
 
   { path: ':username/:filter', component: ChannelComponent },
  
