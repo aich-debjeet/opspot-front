@@ -13,8 +13,8 @@ import { ProfileReportComponent } from '../../../report/profile-report/profile-r
   inputs: ['user'],
   outputs: ['userChanged'],
   template: `
-    <button class="material-icons" (click)="toggleMenu($event)">settings</button>
-
+  <a class="o-prof-option"><i class="icon-more-vertical"  
+  (click)="toggleMenu($event)"></i></a>     
     <ul class="opspot-dropdown-menu" [hidden]="!showMenu" >
       <li class="mdl-menu__item" [hidden]="user.blocked" (click)="block()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__BLOCK">Block @{{user.username}}</li>
       <li class="mdl-menu__item" [hidden]="!user.blocked" (click)="unBlock()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__UNBLOCK">Un-Block @{{user.username}}</li>
@@ -125,7 +125,8 @@ import { ProfileReportComponent } from '../../../report/profile-report/profile-r
         <ng-container *ngIf="!user.email">...</ng-container>
       </div>
     </m-modal>
-  `
+  `,
+  styleUrls: ['./user-dropdown.scss']
 })
 
 export class UserDropdownButton {
