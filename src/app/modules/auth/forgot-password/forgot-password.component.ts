@@ -7,6 +7,8 @@ import { Session } from '../../../services/session';
 import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ForgotpasswordService } from './forgotpassword.service';
 import { FormValidator } from '../../../helpers/form.validator'
+import * as _ from 'lodash';
+
 
 @Component({
   moduleId: module.id,
@@ -46,6 +48,7 @@ export class ForgotPasswordComponent {
   password;
 
   paramsSubscription: Subscription;
+  mobilenumber;
 
   constructor(
     public client: Client,
@@ -172,6 +175,7 @@ export class ForgotPasswordComponent {
       this.forgotpasswordservice.sendOtp(data)
         .then((data: any) => {
           this.secret = data.secret;
+          this.mobilenumber = '******' + _.takeRight(this.mobile, 4).join('');
           //localStorage.setItem('phoneNumberSecret', data.secret);
           this.inProgress = false;
           this.step = 2;
