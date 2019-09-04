@@ -104,13 +104,12 @@
   <div class="o-report">
       <div class="o-report__head">
           <h4>Report this post</h4>
-          <a class="o-report-close "><i class="icon-x"></i></a>
+          <!-- <a class="o-report-close "><i class="icon-x"></i></a> -->
       </div><!-- report head end -->
       <div class="o-report__container">
           <div class="o-report-content">
-              <form action="">
-                <div *ngIf="!inProgress && !success" >
-                  <div class="radiobutton" *ngFor="let item of subjects">
+            <!-- <div *ngIf="!inProgress && !success" > -->
+                <div class="radiobutton" *ngFor="let item of subjects">
                       <input type="radio" name="radios"
                       [disabled]="inProgress"
                       [checked]="subject == item.value"
@@ -127,9 +126,9 @@
                               <div class="text-sm grey">{{item.description}}</div>
                           </div>
                       </label>
-                  </div>
                 </div>
-              </form><!-- radio button end -->
+              <!-- </div> -->
+             <!-- radio button end -->
               <div class="o-report-describe-issue" *ngIf="!success && subject === 7">
                   <textarea class="o-report-textarea"  [(ngModel)]="note" name="" id="" cols="2" rows="2" placeholder="Describe your issue here"></textarea>
               </div>

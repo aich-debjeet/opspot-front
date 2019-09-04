@@ -104,7 +104,7 @@ export class ReportCreatorComponent implements AfterViewInit {
         this.inProgress = false;
         if (response.done) {
           this.success = true;
-          this.overlayModal.dismiss();
+          this.overlayModal.dismiss(); //dismissing model after reporting
         } else {
           this.overlayModal.dismiss();
           alert('There was an error sending your report.');
