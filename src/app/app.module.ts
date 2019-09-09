@@ -64,6 +64,7 @@ import { ExploreImageComponent } from './modules/explore/explore-image/explore-i
 import { ExploreAudioComponent } from './modules/explore/explore-audio/explore-audio.component';
 import { ExploreVideoComponent } from './modules/explore/explore-video/explore-video.component';
 import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-blogs.component';
+import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
 
 
 @NgModule({
@@ -79,7 +80,7 @@ import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-b
     ExploreImageComponent,
     ExploreAudioComponent,
     ExploreVideoComponent,
-    ExploreBlogsComponent,
+    ExploreBlogsComponent
   ],
   imports: [
     BrowserModule,
@@ -127,11 +128,13 @@ import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-b
     HelpdeskModule,
     MobileModule,
     CanaryModule,
+    InviteFriendsModule,
     //last due to :username route
     ChannelsModule,
     BookmarkModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
+
   ],
   providers: [
     OpspotAppRoutingProviders,
