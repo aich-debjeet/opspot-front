@@ -74,6 +74,18 @@
             <span>Settings</span>
           </a>
         </li>
+        <li class="m-dropdownList__item"
+            *ngIf="session.isLoggedIn()"
+            (click)="menu.value = false"
+        >
+          <a
+            [routerLink]="['/invite']"
+            i18n="@@OPSPOT__TOPBAR__SETTINGS"
+          >
+            <i class="material-icons">settings</i>
+            <span>Invite Friends</span>
+          </a>
+        </li>
         <ng-container *mIfFeature="'helpdesk'; else faq">
         </ng-container>
         <ng-template #faq>
