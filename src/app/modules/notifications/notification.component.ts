@@ -26,7 +26,7 @@ export class NotificationComponent {
 
     (<any>window).openMessengerWindow();
   }
-
+  
   findReason(code: number): Reason {
     return rejectionReasons.find((item: Reason) => {
       return item.code === code;

@@ -29,6 +29,10 @@
 @import "src/assets/scss/components/wallet";
 @import "src/assets/scss/components/tab";
 @import "src/assets/scss/components/bookmark";
+@import "src/assets/scss/components/create-community";
+@import "src/assets/scss/components/editProfilePicture";
+
+
 
 
 
@@ -24440,6 +24444,30 @@ m-login{
 }
 
 .ng2-dropdown-menu{
-  top: 420px !important;
+  bottom: 0px !important;
 
 }
+
+@media only screen and (min-width: 768px) {
+  .bs-datepicker{
+    top:-60px !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .bs-datepicker{
+    top:-112px !important;
+  }
+}
+
+.bs-datepicker-container{
+  padding: 0px;
+}
+
+app-image-croper .mdl-card__menu{
+  display: none !important;
+}
+app-image-croper .m-modal-container {
+  min-width: auto !important;
+
+}
+

@@ -59,6 +59,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -123,6 +124,7 @@ import { BookmarkModule } from './modules/bookmark/bookmark.module';
     BookmarkModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     OpspotAppRoutingProviders,
