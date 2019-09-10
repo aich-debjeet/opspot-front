@@ -12,7 +12,7 @@
                 >Home</a>
             </li>
             <li class="nav__item">
-                <a class="nav__link nav__link--text" routerLink="/explore">Explore</a>
+                <a class="nav__link nav__link--text" [routerLink]="['/explore']" [queryParams]="{q:'', type:'object:all', ref:''}">Explore</a>
             </li>
             <li class="nav__item">
               <a class="nav__link nav__link--text" routerLink='/wallet/tokens/overview' >Wallet</a>

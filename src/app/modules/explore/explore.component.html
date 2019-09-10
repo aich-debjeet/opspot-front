@@ -1,22 +1,16 @@
 <div class="o-explore-tag-sec">
     <div class="o-explore-tag tag-slik">
-        <a href="javascript:void(0)" class="o-tag" *ngFor="let tags of hashtags">{{tags.value}}</a>
-        <!-- <a href="#" class="o-tag">Photography</a>
-        <a href="#" class="o-tag">Singer</a>
-        <a href="#" class="o-tag">Popular</a>
-        <a href="#" class="o-tag">Painting</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Photography</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a> -->
+        <ng-container *ngFor="let tags of hashtags">
+            <a (click)="switchCategoryType(tags.value)" class="o-tag">{{tags.value}}</a>
+        </ng-container>
+
+        <!-- <ngu-carousel [inputs]="exploreSlider">
+            <ngu-item NguCarouselItem class="" *ngFor="let tags of hashtags">
+                <a (click)="switchCategoryType(tags.value)" class="o-tag">{{tags.value}}</a>
+            </ngu-item>
+            <button NguCarouselPrev class='leftRs'>&lt;</button>
+            <button NguCarouselNext class='rightRs'>&gt;</button>
+        </ngu-carousel> -->
     </div><!-- tag block end -->
 </div><!-- tag section end-->
 
@@ -26,8 +20,8 @@
             <div class="o-explore-action__filter">
                 <form>
                     <div class="form-group">
-                        <select class="form-control">
-                            <option value="All Media" selected>All Media</option>
+                        <select class="form-control" (change)="onChange($event.target.value)">
+                            <option value="All Media" selected>All</option>
                             <option value="Image">Image</option>
                             <option value="Audio">Audio</option>
                             <option value="Video">Video</option>
@@ -38,34 +32,41 @@
             </div>
             <div class="o-explore-action__search">
                 <div class="form-group c-form_righticon-lg">
-                    <input type="text" class="form-control form-control-lg" placeholder="Serach Post">
+                    <input type="text" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q" name="q" autocomplete="off" #searchInput>
                     <span class="c-svg_eye"><i class="icon-search"></i></span>
                 </div>
             </div>
         </div><!--filter and search section-->
         <div class="o-explore-media-part">
-            <div class="o-explore-media-part__row">
-                <div class="o-explore-media-part__coloumn">
-                   <div class="o-explore-card">
-                     <app-explore-image></app-explore-image>
-                   </div>
-                </div>
-                <div class="o-explore-media-part__coloumn">
+            <div class="o-explore-media-part__row" >
+                <!-- <app-explore-all [response]="resp" *ngIf="type == 'object:All Media'"></app-explore-all>                   
+                <app-explore-image [response]="resp" *ngIf="type == 'object:Image'"></app-explore-image>
+                <app-explore-audio [response]="resp" *ngIf="type == 'object:Audio'"></app-explore-audio>
+                <app-explore-video [response]="resp" *ngIf="type == 'object:Video'"></app-explore-video>
+                <app-explore-blogs [response]="resp" *ngIf="type == 'object:Blogs'"></app-explore-blogs> -->
+                <div class="o-explore-media-part__coloumn" *ngFor="let explore of resp?.entities">
                     <div class="o-explore-card">
-                      <app-explore-audio></app-explore-audio>
+                      <!-- <app-explore-audio [response]="resp"></app-explore-audio> -->
+                      <app-explore-all [response]="explore" *ngIf="type == 'object:all'"></app-explore-all>
+                      <app-explore-image [response]="explore" *ngIf="type == 'object:Image'"></app-explore-image>
+                      <app-explore-audio [response]="explore" *ngIf="type == 'object:Audio'"></app-explore-audio>
+                      <app-explore-video [response]="explore" *ngIf="type == 'object:Video'"></app-explore-video>
+                      <app-explore-blogs [response]="explore" *ngIf="type == 'object:Blogs'"></app-explore-blogs>
                     </div>
                  </div>
-                 <div class="o-explore-media-part__coloumn">
+                 <!-- <div class="o-explore-media-part__coloumn" *ngIf="type == Video">
                     <div class="o-explore-card">
-                      <app-explore-video></app-explore-video>
+                      <app-explore-video [response]="resp"></app-explore-video>
                     </div>
                  </div>
-                 <div class="o-explore-media-part__coloumn">
+                 <div class="o-explore-media-part__coloumn" *ngIf="type == Blogs">
                     <div class="o-explore-card">
-                      <app-explore-blogs></app-explore-blogs>
+                      <app-explore-blogs [response]="resp"></app-explore-blogs>
                     </div>
-                 </div>
+                 </div> -->
             </div>
         </div><!--media section-->
     </div>
 </section>
+
+<!--*ngIf="resp.status == 'success' && resp.entities.length > 0"-->

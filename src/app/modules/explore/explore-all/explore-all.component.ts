@@ -2,12 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Session } from '../../../services/session';
 
 @Component({
-  selector: 'app-explore-audio',
-  templateUrl: './explore-audio.component.html',
-  styleUrls: ['./explore-audio.component.scss']
+  selector: 'app-explore-all',
+  templateUrl: './explore-all.component.html',
+  styleUrls: ['./explore-all.component.scss']
 })
-export class ExploreAudioComponent implements OnInit {
-
+export class ExploreAllComponent implements OnInit {
   @Input() response;
   tempUrl = 'https://ops.doesntexist.com/icon/'
   constructor(
@@ -16,6 +15,7 @@ export class ExploreAudioComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.response)
+
   }
 
 }

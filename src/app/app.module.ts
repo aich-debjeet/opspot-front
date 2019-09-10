@@ -59,11 +59,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
-import { ExploreComponent } from './modules/explore/explore.component';
-import { ExploreImageComponent } from './modules/explore/explore-image/explore-image.component';
-import { ExploreAudioComponent } from './modules/explore/explore-audio/explore-audio.component';
-import { ExploreVideoComponent } from './modules/explore/explore-video/explore-video.component';
-import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-blogs.component';
+import { ExploreModule } from './modules/explore/explore.module';
+
+import { NguCarouselModule } from '@ngu/carousel';
 
 
 @NgModule({
@@ -75,11 +73,6 @@ import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-b
     OPSPOT_APP_ROUTING_DECLARATIONS,
     OPSPOT_DECLARATIONS,
     OPSPOT_PLUGIN_DECLARATIONS,
-    ExploreComponent,
-    ExploreImageComponent,
-    ExploreAudioComponent,
-    ExploreVideoComponent,
-    ExploreBlogsComponent,
   ],
   imports: [
     BrowserModule,
@@ -130,8 +123,10 @@ import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-b
     //last due to :username route
     ChannelsModule,
     BookmarkModule,
+    ExploreModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
+    NguCarouselModule,
   ],
   providers: [
     OpspotAppRoutingProviders,

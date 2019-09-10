@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Session } from '../../../services/session';
 
 @Component({
   selector: 'app-explore-video',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExploreVideoComponent implements OnInit {
 
-  constructor() { }
+  @Input() response;
+  tempUrl = 'https://ops.doesntexist.com/icon/'
+  constructor(
+    public seesion: Session,
+  ) { }
 
   ngOnInit() {
+    console.log(this.response)
   }
 
 }

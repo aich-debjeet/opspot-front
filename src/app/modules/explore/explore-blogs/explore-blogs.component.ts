@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Session } from '../../../services/session';
 
 @Component({
   selector: 'app-explore-blogs',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExploreBlogsComponent implements OnInit {
 
-  constructor() { }
+  @Input() response;
+  constructor(
+    public session: Session
+    ) { }
 
   ngOnInit() {
+    console.log(this.response)
   }
 
 }
