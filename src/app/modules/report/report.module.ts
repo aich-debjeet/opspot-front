@@ -8,6 +8,7 @@ import { LegacyModule } from '../legacy/legacy.module';
 import { ReportCreatorComponent } from './creator/creator.component';
 import { ReportConsoleComponent } from './console/console.component';
 import { CommentsModule } from '../comments/comments.module';
+import { ProfileReportComponent } from './profile-report/profile-report.component';
 
 
 @NgModule({
@@ -21,13 +22,15 @@ import { CommentsModule } from '../comments/comments.module';
   ],
   declarations: [
     ReportCreatorComponent,
-    ReportConsoleComponent
+    ReportConsoleComponent,
+    ProfileReportComponent
   ],
   exports: [
     ReportConsoleComponent
   ],
   entryComponents: [
-    ReportCreatorComponent
+    ReportCreatorComponent,
+    ProfileReportComponent
   ]
 })
 

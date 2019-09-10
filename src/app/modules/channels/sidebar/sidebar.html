@@ -7,6 +7,10 @@
       <button class="material-icons" [hidden]="editing">edit</button>
       <button class="material-icons" [hidden]="!editing">done</button>
     </span> -->
+    <opspot-button-user-dropdown
+    [(user)]="user"
+    *ngIf="session.getLoggedInUser().guid != user.guid"
+  ></opspot-button-user-dropdown>
     <span class="text-md grey">@{{user.username}}</span>
 
   </div>

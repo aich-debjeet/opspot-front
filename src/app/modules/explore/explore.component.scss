@@ -1,0 +1,161 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+// for tag
+.o-explore-tag-sec{
+    width: 100%;
+    float: left;
+    margin-top: 15px;
+}
+.o-explore-tag{
+    width: 100%;
+    padding: 0px 6px;
+    overflow: hidden;
+}
+.o-tag{
+    padding: 11px 12px 14px;
+    border: 1px solid #E8EDF0;	
+    border-radius: 4px;	
+    background-color: #FFFFFF;	
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+    font-size: 14px;	
+    font-weight: 500;	
+    line-height: 20px;	
+    text-align: center;
+    color: $grey;
+    margin: 0px 6px;
+    display: inline-block;
+    &:hover{
+        color: $grey-dark;
+    }
+    &:focus{
+        color: $grey-dark;
+    }
+}
+
+// explore action 
+.o-explore-content-sec{
+    width:100%;
+    float: left;
+    margin-top: 15px;
+}
+.o-explore-action{
+    padding: 0px 6px;
+    margin: 0px 6px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+        .form-control{
+            padding: 10px 16px;
+            height: 40px!important;
+            border: 1px solid #ECEFF1;
+            color: #263238;
+            font-size: 14px;
+            line-height: 20px;
+                @include mq($until:$tablet){
+                    padding: 10px 20px; 
+                }
+                option{
+                    padding: 10px 16px;
+                    height: 40px!important;
+                    color: #263238;
+                }
+        }
+        &__filter{
+            width: 141px;
+            @include mq($until:$tablet){
+                width: 90%;
+                margin: 0 10px 0 0;
+            }
+        
+        }
+        &__search{ 
+            width: 254px;
+            @include mq($until:$tablet){
+                width: initial;
+                position: absolute;
+                right: 0;
+        }
+            .form-group{
+                
+                input{
+                    @include mq($until:$tablet){
+                        width: 40px;
+                        box-sizing: border-box;
+                        border-radius: 4px;
+                        background-color: white;
+                        -webkit-transition: width 0.4s ease-in-out;
+                        transition: width 0.4s ease-in-out;
+                        &:focus {
+                            max-width: 768px;
+                            width: auto;
+                        
+                        }
+                    }
+                }
+                i{
+                    font-size: 14px;
+                }
+            }
+        }
+}
+
+// media css
+.o-explore-media-part{
+    &__row{
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding: 0 4px;
+        @include mq($until:$tablet){
+            display:grid;
+            padding: 0;
+        }
+    }
+    &__coloumn{
+        flex: 25%;
+        max-width: 25%;
+        width:100%;
+        padding: 0 4px;
+        @include mq($until:$tablet){
+            flex: 100%;
+            max-width: 100%;
+        }
+        &__card{
+            margin-top: 8px;
+            vertical-align: middle;
+            width: 100%;
+        }
+    }
+}
+
+.leftRs {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, .3);
+    border-radius: 999px;
+    left: 0;
+}
+
+.rightRs {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, .3);
+    border-radius: 999px;
+    right: 0;
+}
+.bannerStyle h1 {
+    background-color: #ccc;
+    min-height: 300px;
+    text-align: center;
+    line-height: 300px;
+}
