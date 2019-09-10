@@ -10,7 +10,8 @@ import { ThirdPartyNetworksService } from '../../../services/third-party-network
 @Component({
   moduleId: module.id,
   selector: 'm-settings--general',
-  templateUrl: 'general.component.html'
+  templateUrl: 'general.component.html',
+  styleUrls: ['general.component.scss']
 })
 
 export class SettingsGeneralComponent {
@@ -41,6 +42,9 @@ export class SettingsGeneralComponent {
 
   paramsSubscription: Subscription;
   openSessions: number = 1;
+
+  reasonDelete: boolean = false;
+  deactivateOptions: boolean = false;
 
   constructor(
     public session: Session,
@@ -246,5 +250,51 @@ export class SettingsGeneralComponent {
 
   closeAllSessions() {
     this.router.navigate(['/logout/all']);
+  }
+
+  delete(){
+    //  if (!confirm('Your account and all data related to it will be deleted permanently. Are you sure you want to proceed?')) {
+    //   return;
+    // }
+    // const creator = this.overlayModal.create(ConfirmPasswordModalComponent, {}, {
+    //   class: 'm-overlay-modal--small',
+    //   onComplete: ({ password }) => {
+    //     this.client.post('api/v2/settings/delete', { password })
+    //       .then((response: any) => {
+    //         this.router.navigate(['/logout']);
+    //       })
+    //       .catch((e: any) => {
+    //         alert('Sorry, we could not delete your account');
+    //       });
+    //   }
+    // });
+    // creator.present();
+    // this.client.post('api/v2/settings/delete', { password })
+    //   .then((response: any) => {
+    //     this.router.navigate(['/logout']);
+    //   })
+    //   .catch((e: any) => {
+    //     alert('Sorry, we could not delete your account');
+    //   });
+  }
+  deactivate(){
+    this.client.delete('api/v1/channel')
+      .then((response: any) => {
+        this.router.navigate(['/logout']);
+      })
+      .catch((e: any) => {
+        alert('Sorry, we could not disable your account');
+      });
+  }
+  setOption(option: string){
+    console.log(option)
+    if(option == 'delete'){
+      this.reasonDelete = true;
+      this.deactivateOptions = false;
+    }
+    else if(option == 'deactivate'){
+      this.deactivateOptions = true;
+      this.reasonDelete = false;
+    }
   }
 }

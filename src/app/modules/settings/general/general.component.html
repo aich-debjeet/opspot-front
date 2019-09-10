@@ -1,5 +1,5 @@
 <!-- START: Actions -->
-<div class="m-settings--section m-layout--row m-border m-settings--action">
+<!-- <div class="m-settings--section m-layout--row m-border m-settings--action">
 
   <div class="opspot-error mdl-color--red mdl-color-text--white" [hidden]="!error">{{error}}</div>
   <div class="m-layout--spacer"></div>
@@ -17,10 +17,10 @@
     <ng-container i18n="@@M__COMMON__SAVED">Saved</ng-container>
   </button>
   <div id="p2" class="mdl-spinner mdl-js-spinner is-active" [mdl] [hidden]="!inProgress"></div>
-</div>
+</div> -->
 
 <!-- START: NAME -->
-<div class="m-settings--section m-border m-settings--name">
+<!-- <div class="m-settings--section m-border m-settings--name">
   <h4 i18n="@@OPSPOT__SETTINGS__DISPLAY_NAME_TITLE">Display Name</h4>
   <div class="mdl-card__supporting-text">
     <input class="m-input"
@@ -31,11 +31,11 @@
       (keyup)="change()"
       />
   </div>
-</div>
+</div> -->
 <!-- END: NAME -->
 
 <!-- START: PASSWORD -->
-<div class="m-settings--section m-border m-settings--password">
+<!-- <div class="m-settings--section m-border m-settings--password">
 
   <h4 i18n="@@OPSPOT__SETTINGS__ACCOUNT_PASSWORD_TITLE">Account Password</h4>
 
@@ -76,11 +76,11 @@
       <label class="mdl-textfield__label" for="password2" i18n="@@OPSPOT__SETTINGS__NEW_PASSWORD_AGAIN_LABEL">Your new password again</label>
     </div>
   </div>
-</div>
+</div> -->
 <!-- END: PASSWORD -->
 
 <!-- START: MATURE CONTENT -->
-<div class="m-settings--section m-border m-settings--mature">
+<!-- <div class="m-settings--section m-border m-settings--mature">
   <h4 i18n="@@OPSPOT__SETTINGS__MATURE_CONTENT_TITLE">Mature Content</h4>
   <div class="mdl-card__supporting-text">
     <input type="checkbox"
@@ -95,12 +95,12 @@
       </label>
   </div>
 
-</div>
+</div> -->
 <!-- END: MATURE CONTENT -->
 
 
 <!-- START: LANGUAGE  -->
-<div class="m-settings--section m-border m-settings--language">
+<!-- <div class="m-settings--section m-border m-settings--language">
   <h4 i18n="@@OPSPOT__SETTINGS__LANGUAGE_SETTINGS_TITLE">Language Settings</h4>
   <div class="mdl-card__supporting-text">
     <ng-container i18n="@@OPSPOT__SETTINGS__SITE_LANGUAGE_LABEL">Site language:</ng-container>
@@ -109,12 +109,12 @@
     </select>
   </div>
 
-</div>
+</div> -->
 
 <!-- END: LANGUAGE -->
 
 <!-- START: SESSIONS -->
-<div class="m-settings--section m-border m-settings--close-all-sessions">
+<!-- <div class="m-settings--section m-border m-settings--close-all-sessions">
   <h4 i18n="@@OPSPOT__SETTINGS__SESSIONS">Sessions</h4>
 
   <p i18n="@@OPSPOT__SETTINGS__YOU_CURRENTLY_HAVE_X_OPENED">
@@ -125,5 +125,188 @@
   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--red" (click)="closeAllSessions()">
     <ng-container i18n="@@OPSPOT__SETTINGS__CLOSE_ALL_SESSIONS_CONFIRM">Close All Sessions</ng-container>
   </button>
-</div>
+</div> -->
 <!-- END: SESSIONS -->
+<div class="o-settings-block__content">
+  <div class="tabs-settings">
+    <div id="general" class="tab ">
+      <div class="o-settings-fields">
+          <h5 class="f500">Username</h5>
+          <!-- <div class="text-md grey">
+              Edit your username on your account
+          </div> -->
+          <div class="form-group o-settings-width">
+              <label>Username</label>
+              <input type="text" class="form-control form-control-lg" value="gowtham46" readonly="readonly">
+          </div>
+          <div class="o-settings-line"></div>
+      </div><!--Username settings fields-->
+      <div class="o-settings-fields">
+          <h5 class="f500">Email</h5>
+          <!-- <div class="text-md grey">
+              Add or remove email on your account
+          </div> -->
+          <div class="form-group o-settings-width">
+              <label>Primary Email Address</label>
+              <input type="email" class="form-control form-control-lg" value="gowtham@aeione.com" readonly="readonly">
+          </div>
+          <!-- <a class="text-md primary" onclick="myFunction()">Add email address</a>
+          <div class="o-settings-add-email" id="email">
+              <div class="form-group o-settings-width">
+                  <label>Email Address</label><a class="text-md primary make-primary">Make Primary</a>
+                  <input type="email" class="form-control form-control-lg" value="gowtham@aeione.com">
+              </div>
+              <button type="button" class="btn btn-primary btn-lg pading-right">Send Verification</button>
+              <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
+          </div> -->
+          <div class="o-settings-line"></div>
+      </div><!--Email settings fields-->
+      <div class="o-settings-fields">
+          <h5 class="f500">Phone Number</h5>
+          <!-- <div class="text-md grey">
+              Add or remove phone number on your account
+          </div> -->
+          <div class="form-group o-settings-width">
+              <label>Primary Phone Number</label>
+              <input type="text" class="form-control form-control-lg" value="+91 9940777742" readonly="readonly">
+          </div>
+          <!-- <a class="text-md primary" onclick="myFunction1()">Add phone number</a>
+          <div class="o-settings-add-email" id="phone">
+                  <div class="form-group o-settings-width">
+                      <label>Phone Number</label><a class="text-md primary make-primary">Make Primary</a>
+                      <input type="email" class="form-control form-control-lg" value="+91 8973834712">
+                  </div>
+                  <button type="button" class="btn btn-primary btn-lg pading-right">Send Verification</button>
+                  <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
+              </div> -->
+          <div class="o-settings-line"></div>
+      </div><!--Phone Number settings fields-->
+      <div class="o-settings-fields">
+          <h5 class="f500">Language</h5>
+          <div class="text-md grey">
+              Select your language for One Page Spotlight account
+          </div>
+          <div class="form-group o-settings-width">
+              <label>Select Language</label>
+              <select class="form-control">
+                <option>English</option>
+                <option>Kannada</option>
+              </select>
+          </div>
+          <div class="o-settings-line"></div>
+      </div><!--Language settings fields-->
+      <!-- <div class="o-settings-fields">
+          <h5 class="f500">Auto Play</h5>
+          <div class="text-md grey">
+              Choose if you want videos to autoplay on your browser
+          </div>
+          <div class="o-settings-toggle">
+              <label class="switch ">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+              </label> 
+              <span class="text-md grey">Yes</span>
+          </div>
+          <div class="o-settings-line"></div>
+      </div> -->
+      <!--Auto Play toggle settings fields-->
+      <div class="o-settings-fields">
+          <h5 class="f500">Mature Content</h5>
+          <div class="text-md grey">
+              Choose if you want to see adult content on your timeline or account
+          </div>
+          <div class="o-settings-toggle">
+              <label class="switch ">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+              </label> 
+              <span class="text-md grey">Yes</span>
+          </div>
+          <div class="o-settings-line"></div>
+      </div><!--Mature Content toggle settings fields-->
+      <div class="o-settings-fields">
+          <h5 class="f500">Portfolio</h5>
+          <div class="text-md grey">
+              Choose public or private. A published portfolio will be visible to everyone whereas unpublished portfolio will be private to the user
+          </div>
+          <div class="o-settings-toggle">
+              <label class="switch ">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+              </label> 
+              <span class="text-md grey">Private</span>
+          </div>
+          <div class="o-settings-line"></div>
+      </div><!--Portfolio toggle settings fields-->
+      <div class="o-settings-fields">
+          <h5 class="f500">Delete or Deactivate Account <span class="icon-arrow-right">
+          </span></h5>
+          <div class="text-md grey">
+              Deactivating or Deleting Your One Page Spotlight Account
+          </div>
+          <div class="o-settings-fields__radio-button">
+              <label class="radio-label radio-label--flex">
+                  <input type="radio" name="rd" id="rd1" value="1" (click)="setOption('delete')">
+                  <div class="radio-widget"></div>
+                  <div class="text-lg f500">Delete Account</div>
+                  <div class="text-md grey">Deleting your account is permanent</div>
+              </label>
+              <label class="radio-label radio-label--flex">
+                  <input type="radio" name="rd" id="rd2" value="2" (click)="setOption('deactivate')">
+                  <div class="radio-widget"></div>
+                  <div class="text-lg f500">Deactivate Account</div>
+                  <div class="text-md grey">Deactivating your account can be temporary</div>
+              </label>
+          </div>
+          <div id="deletea" class="o-settings-delete-account" *ngIf="reasonDelete">
+            <div class="text-lg f500 padng-btm1">
+              Tell us why you’re closing your account:
+            </div>
+            <div class="text-md">
+              Please provide a reason. It’ll help us make One Page Spotlight better
+              </div>
+              <label class="c-checkbox">I have a duplicate account
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+              </label>
+              <label class="c-checkbox">I’m getting too many followers
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+              </label>
+              <label class="c-checkbox">I have a privacy concern
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+              </label>
+              <label class="c-checkbox">I’m receiving unwanted contact
+                  <input type="checkbox" >
+                  <span class="checkmark"></span>
+              </label>
+              <div class="text-md">
+              If Others, Your feedback matters. Is there anything else you’d like us to know?
+              </div>
+              <textarea class="form-control" rows="6" value="Textarea"></textarea>
+              <button type="button" class="btn btn-primary btn-lg pading-right">Confirm Delete</button>
+              <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
+          </div>
+          <div id="deactivate" class="o-settings-deactivate-account" *ngIf="deactivateOptions">
+              <div class="o-settings-info">
+                  <div class="o-avatar-md">
+                      <img src="assets/demo/avatar.png" alt="">
+                  </div>
+                  <div class="text-lg f500">Gowtham Kumar</div>
+              </div>
+              <div class="text-md">
+                  Just type your password to deactivete your account
+              </div>
+              <div class="form-group">
+                  <label>Password</label>
+                  <input type="email" class="form-control form-control-lg">
+              </div>
+              <button type="button" class="btn btn-primary btn-lg pading-right disabled" (click)="delete()">Confirm Delete</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" (click)="setOption('cancel')">Cancel</button>
+          </div>
+
+      </div><!--Delete settings fields-->
+    </div>
+  </div>
+</div>

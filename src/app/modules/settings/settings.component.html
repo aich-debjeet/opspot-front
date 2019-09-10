@@ -1,4 +1,4 @@
-<div class="m-settings--wrapper">
+<!-- <div class="m-settings--wrapper">
 
   <div class="m-page">
 
@@ -96,4 +96,27 @@
 
   </div>
 
-</div>
+</div> -->
+
+
+<section class="o-settings-sec">
+  <div class="container">
+      <div class="o-settings-header">
+          <h4 class="f500">Settings</h4>
+      </div>
+      <div class="o-settings-block">
+          <div class="o-settings-block__tab">
+              <div class="tabs-settings">
+                  <ul class="tabs-list settings-tabs">
+                      <li ><a routerLink="/settings/general">General</a></li>
+                      <li ><a href="#privacy_security">Privacy and Security</a></li>
+                      <li ><a href="#notifications">Notifications</a></li>
+                      <li ><a routerLink="/settings/wire">Wire</a></li>
+                      <li class="active"><a href="#support">Support</a></li>
+                  </ul>
+              </div><!--tab end-->
+          </div>
+          <router-outlet></router-outlet>
+      </div><!-- wallet block end -->
+  </div><!--container ends-->
+</section><!--setting sec ends-->
