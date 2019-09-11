@@ -59,6 +59,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ExploreComponent } from './modules/explore/explore.component';
 import { ExploreImageComponent } from './modules/explore/explore-image/explore-image.component';
 import { ExploreAudioComponent } from './modules/explore/explore-audio/explore-audio.component';
@@ -134,6 +135,7 @@ import { InviteFriendsModule } from './modules/invite-friends/invite-friends.mod
     BookmarkModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
+    BsDatepickerModule.forRoot(),
 
   ],
   providers: [

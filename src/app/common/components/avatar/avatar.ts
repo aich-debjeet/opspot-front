@@ -14,24 +14,21 @@ import { CroppieOptions, ResultOptions, CropData } from 'croppie';
       <ng-container *ngIf="showPrompt">
         <span *ngIf="src" i18n="@@COMMON__AVATAR__CHANGE">Change avatar</span>
         <span *ngIf="!src" i18n="@@COMMON__AVATAR__ADD">Add an avatar</span>
-      </ng-container>
+      </ng-container>  
     </div>
     <input *ngIf="editing" type="file" #file (change)="add($event)"/>
   </div>
 
-  <div class="o-prof-img-block">
+  <div *ngIf="proEdit" class="o-prof-img-block">
         <div class="o-avatar-xl o-avatar-xl--prof" [style.background-image]="'url(' + src + ')'" >
             <img *ngIf="!src" src="{{opspot.cdn_assets_url}}assets/avatars/blue/default-large.png" class="mdl-shadow--4dp" />
             <a *ngIf="opspot.user.guid===object.guid" class="o-prof-img-edit" (click)="openFileSelect()"><i class="icon-edit-profile"></i></a>
         </div>
       
       <input  style="display:none" id="onfile" type="file" #file (change)="add($event)"/>
-      
-      <m-modal [open]="open" (closed)="close()"  >
-      <ngx-croppie *ngIf="croppieImage" #ngxCroppie [croppieOptions]="croppieOptions" [imageUrl]="croppieImage" [points]="[0,0,400,400]" (result)="newImageResultFromCroppie($event)">
-      </ngx-croppie>
-      <button class='btn btn-primary btn-xs btn--boost' (click)="done()" >Crop</button>
-      </m-modal>
+  
+      <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage" [croperType]="'circle'" (imgResult)="newImageResultFromCroppie($event)">
+      </app-image-croper>
      
     
     </div>
@@ -95,8 +92,16 @@ import { CroppieOptions, ResultOptions, CropData } from 'croppie';
 //   <span *ngIf="!src" i18n="@@COMMON__AVATAR__ADD">Add an avatar</span>
 // </ng-container>
 // </div>
+
+ // <m-modal [open]="open" (closed)="close()"  >
+      // <ngx-croppie *ngIf="croppieImage" #ngxCroppie [croppieOptions]="croppiavatareOptions" [imageUrl]="croppieImage" [points]="[0,0,400,400]" (result)="newImageResultFromCroppie($event)">
+      // </ngx-croppie>
+      // <button class='btn btn-primary btn-xs btn--boost' (click)="done()" >Crop</button>
+      // </m-modal>
+
 export class OpspotAvatar  {
  
+
  
   opspot: Opspot = window.Opspot;
   object;
@@ -139,6 +144,7 @@ export class OpspotAvatar  {
 
   newImageResultFromCroppie(e){
     this.editedImg=e;
+    this.done()
   }
 
   set _object(value: any) {
@@ -197,39 +203,39 @@ export class OpspotAvatar  {
     //   this.done();
   }
 
-  dataURItoBlob(dataURI) {
-    this.src=dataURI;
-    var startIndex = dataURI.indexOf("base64,") + 7;
-    var b64 = dataURI.substr(startIndex);
-    const byteString = window.atob(b64);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([int8Array], { type: 'image/jpeg/png' });    
-    return blob;
- }
+//   dataURItoBlob(dataURI) {
+//     this.src=dataURI;
+//     var startIndex = dataURI.indexOf("base64,") + 7;
+//     var b64 = dataURI.substr(startIndex);
+//     const byteString = window.atob(b64);
+//     const arrayBuffer = new ArrayBuffer(byteString.length);
+//     const int8Array = new Uint8Array(arrayBuffer);
+//     for (let i = 0; i < byteString.length; i++) {
+//       int8Array[i] = byteString.charCodeAt(i);
+//     }
+//     const blob = new Blob([int8Array], { type: 'image/jpeg/png' });    
+//     return blob;
+//  }
   
- base64ToImage(){
-  const date = new Date().valueOf();
-  let text = '';
-  const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for (let i = 0; i < 5; i++) {
-    text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
-  }
-  // Replace extension according to your media type
-  const imageName = date + '.' + text + '.jpeg';
-  // call method that creates a blob from dataUri
-  const imageBlob = this.dataURItoBlob(this.editedImg);
-  const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
-  return imageFile;
- }
+//  base64ToImage(){
+//   const date = new Date().valueOf();
+//   let text = '';
+//   const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//   for (let i = 0; i < 5; i++) {
+//     text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
+//   }
+//   // Replace extension according to your media type
+//   const imageName = date + '.' + text + '.jpeg';
+//   // call method that creates a blob from dataUri
+//   const imageBlob = this.dataURItoBlob(this.editedImg);
+//   const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
+//   return imageFile;
+//  }
    
   done() {
     // this.added.next(this.file);
     // console.log(this.file, this.editedImg)
-    this.editedImg=this.base64ToImage()
+    // this.editedImg=this.base64ToImage()
     this.added.next(this.editedImg)
     this.file = null;
     this.open=false;
