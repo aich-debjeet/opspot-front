@@ -3,7 +3,7 @@ import { TopbarHashtagsService } from '../hashtags/service/topbar.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from '../../services/api';
-import { NguCarousel, NguCarouselStore } from '@ngu/carousel';
+
 
 @Component({
   selector: 'app-explore',

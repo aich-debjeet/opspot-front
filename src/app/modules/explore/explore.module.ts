@@ -10,7 +10,7 @@ import { ExploreImageComponent } from './explore-image/explore-image.component';
 import { ExploreBlogsComponent } from './explore-blogs/explore-blogs.component';
 import { ExploreAudioComponent } from './explore-audio/explore-audio.component';
 import { ExploreAllComponent} from './explore-all/explore-all.component';
-import { NguCarouselModule } from '@ngu/carousel';
+
 
 
 const exploreRoutes: Routes = [
@@ -24,7 +24,7 @@ const exploreRoutes: Routes = [
       ReactiveFormsModule,
       RouterModule.forChild(exploreRoutes),
       CommonModule,
-      NguCarouselModule,
+      
     ],
     declarations: [
         ExploreVideoComponent,

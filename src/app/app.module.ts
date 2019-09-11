@@ -61,7 +61,6 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
 import { ExploreModule } from './modules/explore/explore.module';
 
-import { NguCarouselModule } from '@ngu/carousel';
 
 
 @NgModule({
@@ -126,7 +125,7 @@ import { NguCarouselModule } from '@ngu/carousel';
     ExploreModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
-    NguCarouselModule,
+    
   ],
   providers: [
     OpspotAppRoutingProviders,
