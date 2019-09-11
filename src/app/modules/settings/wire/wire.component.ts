@@ -6,6 +6,7 @@ import { WireRewardsStruc, WireRewardsTiers, WireRewardsType } from '../../wire/
 @Component({
   selector: 'm-settings--wire',
   templateUrl: 'wire.component.html',
+  styleUrls: ['wire.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
 })
 

@@ -1,0 +1,133 @@
+<div class="o-settings-block__content">
+  <div class="tabs-settings">
+    <div id="privacy_security" class="tab">
+      <div class="o-settings-fields o-settings-fields-privacy">
+          <h5 class="f500">Password</h5>
+          <div class="text-md grey">
+              Choose a unique password to protect your password
+          </div>
+          <div class="form-group o-settings-width">
+              <label>Password</label>
+              <input type="password" class="form-control form-control-lg" value="abcdefghi">
+          </div>
+          <a class="text-md primary" (click)="changePassword()">Change Password</a>
+          <div class="o-settings-add-email" id="password" [hidden]="!displayPassword">
+              <div class="form-group o-settings-width">
+                  <label>Current Password</label>
+                  <input type="password" class="form-control form-control-lg" value="abcdefghi">
+              </div>
+              <div class="form-group o-settings-width">
+                  <label>New Password</label>
+                  <input type="password" class="form-control form-control-lg" value="abcdefghi">
+              </div>
+              <div class="form-group o-settings-width padng-btm1">
+                  <label>Confirm Password</label>
+                  <input type="password" class="form-control form-control-lg" value="abcdefghi">
+              </div>
+              <button type="button" class="btn btn-primary btn-lg pading-right">Update</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" (click)="changePassword()">Cancel</button>
+          </div><!--change password section-->
+          <div class="o-settings-line"></div>
+      </div><!--password settings fields-->
+      <div class="o-settings-fields">
+          <h5 class="f500">Login History</h5>
+          <div class="text-md grey">
+              See your recent active sessions
+          </div>
+          <div class="o-settings-login-history marg-tp1">
+              <div class="o-settings-login-history__details">
+                  <div class="text-md f500">Mac Bangalore</div>
+                  <div class="text-md grey">Chrome - 03.07.2019 - 12:00 PM</div>
+                  <a class="mob-x-button hidden-above-tablet"><i class="icon-x"></i></a>
+              </div>
+              <div class="text-md grey hidden-mob">Logout</div>
+          </div><!--login-history-ends-->
+          <div class="o-settings-login-history">
+              <div class="o-settings-login-history__details">
+                  <div class="text-md f500">iPhone</div>
+                  <div class="text-md grey">Chrome - 03.07.2019 - 12:00 PM</div>
+                  <a class="mob-x-button hidden-above-tablet"><i class="icon-x"></i></a>
+              </div>
+              <div class="text-md grey hidden-mob">Logout</div>
+          </div><!--login-history-ends-->
+          <div class="o-settings-login-history">
+              <div class="o-settings-login-history__details">
+                  <div class="text-md f500">Mac Bangalore</div>
+                  <div class="text-md grey">Chrome - 03.07.2019 - 12:00 PM</div>
+                  <a class="mob-x-button hidden-above-tablet"><i class="icon-x"></i></a>
+              </div>
+              <div class="text-md grey hidden-mob">Logout</div>
+          </div><!--login-history-ends-->
+          <div class="text-md primary marg-tp1">View More</div>
+          <div class="o-settings-line"></div>
+      </div><!--login history-->
+      <div class="o-settings-fields">
+          <h5 class="f500">Private Account</h5>
+          <div class="text-md grey">
+              Only people you approve can see your posts in onepagespotlight.com
+          </div>
+          <div class="o-settings-toggle">
+              <label class="switch ">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+              </label> 
+              <span class="text-md grey">Private</span>
+          </div>
+          <div class="o-settings-line"></div>
+      </div><!--Private settings fields-->
+      <div class="o-settings-fields">
+              <h5 class="f500">Blocked Accounts</h5>
+              <div class="text-md grey">
+                  People you blocked in onepagespotlight.com
+              </div>
+              <ul class="o-settings-block-members-list">
+                      <li class="o-settings-block-members-list__user-list">
+                          <div class="o-settings-block-members-list-info">
+                              <div class="o-settings-block-members-list-info__prof">
+                                  <div class="o-community-members-info-prof__avatar o-avatar-md">
+                                      <img src="assets/demo/avatar.png" alt="">
+                                  </div>
+                                  <div id="username" class="caption-bold">
+                                      Munish Kumar
+                                  </div>
+                              </div>
+                              <div class="o-settings-block-members-list-info__option">
+                                  <button type="button" class="btn btn-outline-primary btn-sm">Unblock</button>
+                              </div>
+                          </div>
+                      </li><!-- user list end--> 
+                      <li class="o-settings-block-members-list__user-list">
+                          <div class="o-settings-block-members-list-info">
+                              <div class="o-settings-block-members-list-info__prof">
+                                  <div class="o-community-members-info-prof__avatar o-avatar-md">
+                                      <img src="assets/demo/avatar.png" alt="">
+                                  </div>
+                                  <div id="username" class="caption-bold">
+                                      Munish Kumar
+                                  </div>
+                              </div>
+                              <div class="o-settings-block-members-list-info__option">
+                                  <button type="button" class="btn btn-outline-primary btn-sm">Unblock</button>
+                              </div>
+                          </div>
+                      </li><!-- user list end-->
+                      <li class="o-settings-block-members-list__user-list">
+                          <div class="o-settings-block-members-list-info">
+                              <div class="o-settings-block-members-list-info__prof">
+                                  <div class="o-community-members-info-prof__avatar o-avatar-md">
+                                      <img src="assets/demo/avatar.png" alt="">
+                                  </div>
+                                  <div id="username" class="caption-bold">
+                                      Munish Kumar
+                                  </div>
+                              </div>
+                              <div class="o-settings-block-members-list-info__option">
+                                  <button type="button" class="btn btn-outline-primary btn-sm">Unblock</button>
+                              </div>
+                          </div>
+                      </li><!-- user list end-->  
+                  </ul><!--block user list-->
+          </div><!--Blocked account settings fields-->
+    </div>
+  </div>
+</div>
