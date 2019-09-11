@@ -3608,6 +3608,8 @@ m-cookies-notice {
     max-width: 800px; }
   .m-overlay-modal.m-overlay-modal--medium {
     max-width: 600px; }
+  .m-overlay-modal.m-overlay-modal--medium-report {
+    max-width: 592px; }
   .m-overlay-modal.m-overlay-modal--small {
     background: #FFF;
     max-width: 480px;
@@ -12075,6 +12077,15 @@ m-groups--profile .m-group__grid header {
     background-color: white; }
     .m-overlay-modal--hashtag-selector .m-overlay-modal--close i {
       font-size: 24px !important; }
+
+.m-overlay-modal--report {
+  padding: 0px;
+  background-color: white; }
+    .m-overlay-modal--report .m-overlay-modal--close {
+      background-color: white; }
+        .m-overlay-modal--report .m-overlay-modal--close i {
+          font-size: 24px !important; }
+      
 
 .m-hashtags-selector--modal {
   font-weight: 400;

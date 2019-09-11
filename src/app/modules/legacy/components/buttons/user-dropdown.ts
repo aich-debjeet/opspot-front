@@ -291,7 +291,7 @@ export class UserDropdownButton {
 
   report() {
     this.overlayService.create(ProfileReportComponent, this.user, {
-      class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium',
+      class: 'm-overlay-modal--report m-overlay-modal--medium-report',
     })
           .present();
   }
