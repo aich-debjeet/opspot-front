@@ -1,0 +1,12 @@
+<div  class="o-prof-edit-privacy__drop"  [ngClass]="{'privacy-display-show':toggleClass,'privacy-display-hide':!toggleClass}" >
+    <div class="o-drop__arrow"><img src="assets/droparrow.png" alt="ss"></div>
+  <div class="o-prof-edit-privacy-radio">
+        <label class="radio-label radio-label--flex" *ngFor="let privacy of privacys">
+            <input type="radio"  (click)="model.privacy=privacy; changePrivacy()" [checked]="privacy===model.privacy">
+            <div class="radio-widget"></div><div class="text-sm grey">  {{privacy}}</div>
+          </label>
+    </div>
+</div>
+
+
+
