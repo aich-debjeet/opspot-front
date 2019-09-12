@@ -107,8 +107,7 @@ export class ReportCreatorComponent implements AfterViewInit {
           this.success = true;
           this.overlayModal.create(CreatorSuccessComponent, '', {
             class: 'm-overlay-modal--report m-overlay-modal--medium-report-success',
-          })
-                .present(); 
+          }).present(); 
         } else {
           this.overlayModal.dismiss();
           alert('There was an error sending your report.');

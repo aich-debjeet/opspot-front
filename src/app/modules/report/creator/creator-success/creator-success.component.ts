@@ -5,9 +5,9 @@ import { OverlayModalService } from '../../../../services/ux/overlay-modal';
   selector: 'app-creator-success',
   template: `
   <div class="o-toast-popup">
-    <div class="close">
+    <!-- <div class="close">
      <i class="icon-x"></i>
-    </div>
+    </div> -->
     <div class="o-toast-popup-body">
     <div class="text-h4 f500 o-toast-mob-border">
         Reported
