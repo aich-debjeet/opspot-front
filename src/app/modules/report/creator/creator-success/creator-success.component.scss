@@ -1,0 +1,118 @@
+// toast body style
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+.o-toast-popup{
+    width: 470px;
+    border-radius: 4px;
+    background-color: $white;
+    padding: 36px;
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $tablet){
+    width:100%;
+    //margin:0 15px;
+    padding:25px 32px 40px 32px;
+    .o-toast-mob-border:after{
+    content:"";
+    position: absolute;
+    background: $grey-light;
+    width: 100%;
+    height: 1px;
+    left: 0;
+    margin-top: 45px;
+    }
+    }
+    .close{
+    position: absolute;
+    right: 22px;
+    top: 18px;
+    @include mq($from: $mobile_sm, $until: $tablet){
+        display:none;
+    }
+    }
+}
+.o-toast-popup-body{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .mt-toast{
+       margin:27px 0 36px;
+    @include mq($from: $mobile_sm, $until: $tablet){
+        margin: 36px 0 26px;
+    }
+    }
+    button{
+        padding: 12px 47px;
+        @include mq($from: $mobile_sm, $until: $tablet){
+            padding: 8px 40px;
+        }
+    }
+}
+// toast reported user css
+.o-toast-reported-user{
+    width: 592px;
+    border-radius: 4px;
+    background-color: $white;
+    @include mq($from: $mobile_sm, $until: $tablet){
+        width:290px;
+        margin:0 15px;
+        padding:0;
+    }
+}
+.o-toast-reported-user--border{
+    border-bottom: 1px solid $grey-light;   
+}
+.o-toast-reported-user-head{
+    width: 100%;
+    padding: 26px 46px;
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $tablet){
+        padding:18px 27px;
+    }
+    .close{
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    @include mq($from: $mobile_sm, $until: $tablet){
+        display:none;
+    }
+    }   
+}
+.o-toast-reported-user-body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 25px 63px 42px 64px;
+    @include mq($from: $mobile_sm, $until: $tablet){
+        padding:24px 27px 36px;
+    }
+    .mt-toast{
+        margin:27px 0 36px;
+        @include mq($from: $mobile_sm, $until: $tablet){
+            margin:0 0 30px ;
+        }
+     }
+     button{
+         padding: 12px 47px;
+         @include mq($from: $mobile_sm, $until: $tablet){
+            padding: 8px 40px;
+        }
+     }
+}
+@include mq($from: $mobile_sm, $until: $tablet){
+.o-toast-button-list-mob{
+    display: flex;
+    width: 100%; 
+    button:nth-child(1){
+    margin-right:10px;
+    }
+}
+.text-lg {
+    font-size: 15px;
+}
+}

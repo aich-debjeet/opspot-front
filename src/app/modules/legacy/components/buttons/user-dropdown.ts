@@ -140,8 +140,9 @@ import { ProfileReportComponent } from '../../../report/profile-report/profile-r
         </p>
     </div>
     <div class="o-block__action">
-        <button type="button" class="btn btn-outline-primary btn--block hidden-above-tablet">Cancel</button>
-        <button type="button" class="btn btn-primary btn--block" (click)="block()">Block</button>
+        <button type="button" class="btn btn-outline-primary btn--block hidden-above-tablet" 
+        (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary btn--block" (click)="block(); showMenu = false">Block</button>
     </div>
     </div>
     </m-modal>
@@ -345,7 +346,10 @@ export class UserDropdownButton {
 
   openModal(){
     this.openBlockModal = true;
-    }
+    this.showMenu = false;
+  }
 
+  cancel(){
+    this.openBlockModal = false;
+  }
 }
-

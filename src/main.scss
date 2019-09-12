@@ -3614,6 +3614,8 @@ m-cookies-notice {
     max-width: 600px; }
   .m-overlay-modal.m-overlay-modal--medium-report {
     max-width: 592px; }
+  .m-overlay-modal.m-overlay-modal--medium-report-success {
+    max-width: 470px; }
   .m-overlay-modal.m-overlay-modal--small {
     background: #FFF;
     max-width: 480px;
@@ -3633,7 +3635,21 @@ m-cookies-notice {
       max-height: 100vh;
       left:0vw;
       right:0vw;
-     } }
+     } 
+    //  .m-overlay-modal.m-overlay-modal--medium-report-success {
+    //   max-width: -webkit-fit-content;
+    //   margin: 0px 15px;
+    //   width: 100% !important;
+    // }
+    }
+
+  // @media (max-width: 360px){      
+  //   .m-overlay-modal.m-overlay-modal--medium-report-success {
+  //     max-width: fit-content !important;
+  //     margin: 0px 15px;
+  //     width: 100%;
+  //   }
+  // }  
   @media screen and (max-height: 850px) {
     .m-overlay-modal {
       max-height: 100vh;

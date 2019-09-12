@@ -3,6 +3,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { PROFILE_REPORT_REASONS } from '../../../services/list-options';
+import { ProfileReportSuccessComponent } from './profile-report-success/profile-report-success.component';
 
 @Component({
   selector: 'app-profile-report',
@@ -102,7 +103,10 @@ export class ProfileReportComponent implements AfterViewInit {
         this.inProgress = false;
         if (response.done) {
           this.success = true;
-          this.overlayModal.dismiss();
+          this.overlayModal.create(ProfileReportSuccessComponent, '', {
+            class: 'm-overlay-modal--report m-overlay-modal--medium-report-success',
+          })
+                .present(); 
         } else {
           this.overlayModal.dismiss();
           alert('There was an error sending your report.');
