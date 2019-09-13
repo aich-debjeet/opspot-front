@@ -37,6 +37,7 @@ import { OnboardingModule } from './modules/onboarding/onboarding.module';
 import { NotificationModule } from './modules/notifications/notification.module';
 
 import { GroupsModule } from './modules/groups/groups.module';
+import { NetworkModule } from './modules/network/network.module'
 import { PostMenuModule } from './common/components/post-menu/post-menu.module';
 import { BanModule } from './modules/ban/ban.module';
 import { BlogModule } from './modules/blogs/blog.module';
@@ -136,6 +137,7 @@ import { InviteFriendsModule } from './modules/invite-friends/invite-friends.mod
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
     BsDatepickerModule.forRoot(),
+    NetworkModule,
 
   ],
   providers: [
