@@ -6,26 +6,28 @@
           <div class="text-md grey">
               Choose a unique password to protect your password
           </div>
-          <div class="form-group o-settings-width">
+          <!-- <div class="form-group o-settings-width">
               <label>Password</label>
               <input type="password" class="form-control form-control-lg" value="abcdefghi">
-          </div>
+          </div> -->
           <a class="text-md primary" (click)="changePassword()">Change Password</a>
           <div class="o-settings-add-email" id="password" [hidden]="!displayPassword">
+            <form [formGroup]="form">
               <div class="form-group o-settings-width">
                   <label>Current Password</label>
-                  <input type="password" class="form-control form-control-lg" value="abcdefghi">
+                  <input type="password" formControlName="currentPassword" class="form-control form-control-lg">
               </div>
               <div class="form-group o-settings-width">
                   <label>New Password</label>
-                  <input type="password" class="form-control form-control-lg" value="abcdefghi">
+                  <input type="password" formControlName="newPassword" class="form-control form-control-lg">
               </div>
               <div class="form-group o-settings-width padng-btm1">
                   <label>Confirm Password</label>
-                  <input type="password" class="form-control form-control-lg" value="abcdefghi">
+                  <input type="password" formControlName="confirmpassword" class="form-control form-control-lg">
               </div>
               <button type="button" class="btn btn-primary btn-lg pading-right">Update</button>
               <button type="button" class="btn btn-outline-primary btn-lg" (click)="changePassword()">Cancel</button>
+            </form>
           </div><!--change password section-->
           <div class="o-settings-line"></div>
       </div><!--password settings fields-->

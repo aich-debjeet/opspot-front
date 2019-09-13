@@ -137,7 +137,7 @@
           </div> -->
           <div class="form-group o-settings-width">
               <label>Username</label>
-              <input type="text" class="form-control form-control-lg" value="gowtham46" readonly="readonly">
+              <input type="text" class="form-control form-control-lg" [(ngModel)]="userName" readonly="readonly">
           </div>
           <div class="o-settings-line"></div>
       </div><!--Username settings fields-->
@@ -148,7 +148,7 @@
           </div> -->
           <div class="form-group o-settings-width">
               <label>Primary Email Address</label>
-              <input type="email" class="form-control form-control-lg" value="gowtham@aeione.com" readonly="readonly">
+              <input type="email" class="form-control form-control-lg" [(ngModel)]="email" readonly="readonly">
           </div>
           <!-- <a class="text-md primary" onclick="myFunction()">Add email address</a>
           <div class="o-settings-add-email" id="email">
@@ -168,7 +168,7 @@
           </div> -->
           <div class="form-group o-settings-width">
               <label>Primary Phone Number</label>
-              <input type="text" class="form-control form-control-lg" value="+91 9940777742" readonly="readonly">
+              <input type="text" class="form-control form-control-lg" [(ngModel)]="phone" readonly="readonly">
           </div>
           <!-- <a class="text-md primary" onclick="myFunction1()">Add phone number</a>
           <div class="o-settings-add-email" id="phone">
@@ -188,9 +188,12 @@
           </div>
           <div class="form-group o-settings-width">
               <label>Select Language</label>
-              <select class="form-control">
+              <!-- <select class="form-control">
                 <option>English</option>
                 <option>Kannada</option>
+              </select> -->
+              <select name="language"  class="form-control" [ngModel]="language" (ngModelChange)="language = $event; change()">
+                <option *ngFor="let language of languages" [value]="language.code">{{language.name}}</option>
               </select>
           </div>
           <div class="o-settings-line"></div>
@@ -217,7 +220,13 @@
           </div>
           <div class="o-settings-toggle">
               <label class="switch ">
-                  <input type="checkbox" checked>
+                  <!-- <input type="checkbox" checked> -->
+                  <input type="checkbox"
+                    id="flag_mature"
+                    (click)="change()"
+                    name="mature"
+                    [(ngModel)]="mature"
+                    />
                   <span class="slider round"></span>
               </label> 
               <span class="text-md grey">Yes</span>
@@ -231,7 +240,12 @@
           </div>
           <div class="o-settings-toggle">
               <label class="switch ">
-                  <input type="checkbox" checked>
+                <input type="checkbox"
+                id="flag_portfolio"
+                (click)="change()"
+                name="portfolio"
+                [(ngModel)]="portfolio"
+                />
                   <span class="slider round"></span>
               </label> 
               <span class="text-md grey">Private</span>
@@ -265,11 +279,11 @@
             <div class="text-md">
               Please provide a reason. It’ll help us make One Page Spotlight better
               </div>
-              <label class="c-checkbox">I have a duplicate account
-                  <input type="checkbox">
+              <label class="c-checkbox" *ngFor = "let reason of deleteAccountOption">{{reason.description}}
+                  <input type="checkbox" checked [(ngModel)]="reason.checked" (change)="updateCheckedOptions(reason, $event)">
                   <span class="checkmark"></span>
               </label>
-              <label class="c-checkbox">I’m getting too many followers
+              <!--<label class="c-checkbox">I’m getting too many followers
                   <input type="checkbox" checked="checked">
                   <span class="checkmark"></span>
               </label>
@@ -283,10 +297,10 @@
               </label>
               <div class="text-md">
               If Others, Your feedback matters. Is there anything else you’d like us to know?
-              </div>
-              <textarea class="form-control" rows="6" value="Textarea"></textarea>
+              </div> -->
+              <textarea class="form-control" rows="6" value="Textarea" [hidden]="!openText"></textarea>
               <button type="button" class="btn btn-primary btn-lg pading-right">Confirm Delete</button>
-              <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" (click)="setOption('delete')">Cancel</button>
           </div>
           <div id="deactivate" class="o-settings-deactivate-account" *ngIf="deactivateOptions">
               <div class="o-settings-info">
@@ -296,14 +310,14 @@
                   <div class="text-lg f500">Gowtham Kumar</div>
               </div>
               <div class="text-md">
-                  Just type your password to deactivete your account
+                  Just type your password to deactivate your account
               </div>
               <div class="form-group">
                   <label>Password</label>
-                  <input type="email" class="form-control form-control-lg">
+                  <input type="email" class="form-control form-control-lg" [(ngModel)]="password">
               </div>
-              <button type="button" class="btn btn-primary btn-lg pading-right disabled" (click)="delete()">Confirm Delete</button>
-              <button type="button" class="btn btn-outline-primary btn-lg" (click)="setOption('cancel')">Cancel</button>
+              <button type="button" class="btn btn-primary btn-lg pading-right" (click)="delete(password)">Confirm Delete</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" (click)="setOption('deactivate')">Cancel</button>
           </div>
 
       </div><!--Delete settings fields-->

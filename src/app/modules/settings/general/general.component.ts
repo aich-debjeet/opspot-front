@@ -26,11 +26,14 @@ export class SettingsGeneralComponent {
 
   guid: string = '';
   name: string;
+  userName: string;
   email: string;
+  phone: string;
   mature: boolean = false;
+  portfolio: boolean = false;
   enabled_mails: boolean = true;
 
-  password: string;
+  password: string='';
   password1: string;
   password2: string;
 
@@ -45,6 +48,8 @@ export class SettingsGeneralComponent {
 
   reasonDelete: boolean = false;
   deactivateOptions: boolean = false;
+  deleteAccountOption = [];
+  openText: boolean = false;
 
   constructor(
     public session: Session,
@@ -59,6 +64,12 @@ export class SettingsGeneralComponent {
   }
 
   ngOnInit() {
+    this.deleteAccountOption = [{name: 'duplicate', description: `I have a duplicate account` , value: 'duplicate', checked: false},
+                                    {name: 'followers', description: `I'm getting too many followers` , value: 'followers', checked: false},
+                                    {name: 'unwanted', description: `I'm receiving unwanted contact` , value: 'unwanted', checked: false},
+                                    {name: 'privacy', description: 'Receive an e-mail when other people follow you.' , value: 'privacy', checked: false},
+                                    {name: 'others', description: `others` , value: 'others', checked: false},
+          ]
     this.languages = [];
     for (let code in this.opspot.languages) {
       if (this.opspot.languages.hasOwnProperty(code)) {
@@ -92,13 +103,17 @@ export class SettingsGeneralComponent {
   load(remote: boolean = false) {
     if (!remote) {
       const user = this.session.getLoggedInUser();
+      console.log(user)
       this.name = user.name;
+      this.userName = user.username;
+      this.email = user.email;
+      this.phone = user.phone;
     }
 
     this.client.get('api/v1/settings/' + this.guid)
       .then((response: any) => {
         console.log('LOAD', response.channel);
-        this.email = response.channel.email;
+        // this.email = response.channel.email;
         this.mature = !!parseInt(response.channel.mature, 10);
         this.enabled_mails = !parseInt(response.channel.disabled_emails, 10);
         this.language = response.channel.language || 'en';
@@ -252,7 +267,8 @@ export class SettingsGeneralComponent {
     this.router.navigate(['/logout/all']);
   }
 
-  delete(){
+  delete(password: string){
+    console.log(password.length)
     //  if (!confirm('Your account and all data related to it will be deleted permanently. Are you sure you want to proceed?')) {
     //   return;
     // }
@@ -269,13 +285,16 @@ export class SettingsGeneralComponent {
     //   }
     // });
     // creator.present();
-    // this.client.post('api/v2/settings/delete', { password })
-    //   .then((response: any) => {
-    //     this.router.navigate(['/logout']);
-    //   })
-    //   .catch((e: any) => {
-    //     alert('Sorry, we could not delete your account');
-    //   });
+    if(password.length <= 0){
+      return;
+    }
+    this.client.post('api/v2/settings/delete', { password })
+      .then((response: any) => {
+        this.router.navigate(['/logout']);
+      })
+      .catch((e: any) => {
+        alert('Sorry, we could not delete your account');
+      });
   }
   deactivate(){
     this.client.delete('api/v1/channel')
@@ -287,14 +306,27 @@ export class SettingsGeneralComponent {
       });
   }
   setOption(option: string){
-    console.log(option)
     if(option == 'delete'){
-      this.reasonDelete = true;
-      this.deactivateOptions = false;
+      if(!this.reasonDelete) {
+        this.reasonDelete = true;
+        this.deactivateOptions = false;
+      } else {
+        this.reasonDelete = false;
+      }
     }
     else if(option == 'deactivate'){
-      this.deactivateOptions = true;
-      this.reasonDelete = false;
+      if(!this.deactivateOptions) {
+        this.deactivateOptions = true;
+        this.reasonDelete = false;
+      } else {
+        this.deactivateOptions = false;
+      }
+    }
+  }
+  updateCheckedOptions(option, event){
+    console.log(option,event)
+    if(option.value == 'others' && option.checked == true){
+      this.openText = true;
     }
   }
 }
