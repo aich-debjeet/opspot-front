@@ -55,6 +55,7 @@
     "ngx-chips": "^2.0.2",
     "ngx-croppie": "^3.0.0",
     "ngx-intl-tel-input": "^2.1.2",
+    "ngx-masonry": "^1.1.4",
     "ngx-useful-swiper": "^8.0.1",
     "node-sass": "^4.12.0",
     "rxjs": "~6.3.3",

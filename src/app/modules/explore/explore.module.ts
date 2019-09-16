@@ -10,6 +10,7 @@ import { ExploreImageComponent } from './explore-image/explore-image.component';
 import { ExploreBlogsComponent } from './explore-blogs/explore-blogs.component';
 import { ExploreAudioComponent } from './explore-audio/explore-audio.component';
 import { ExploreAllComponent} from './explore-all/explore-all.component';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 
 
@@ -24,6 +25,7 @@ const exploreRoutes: Routes = [
       ReactiveFormsModule,
       RouterModule.forChild(exploreRoutes),
       CommonModule,
+      NgxMasonryModule
       
     ],
     declarations: [

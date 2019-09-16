@@ -57,6 +57,7 @@ import { MobileModule } from './modules/mobile/mobile.module';
 import { CanaryModule } from './modules/canary/canary.module';
 import { HttpClientModule } from "@angular/common/http";
 import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
+import { NgxMasonryModule } from 'ngx-masonry';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
 import { ExploreModule } from './modules/explore/explore.module';
@@ -125,6 +126,7 @@ import { ExploreModule } from './modules/explore/explore.module';
     ExploreModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
+    NgxMasonryModule
     
   ],
   providers: [
