@@ -1,6 +1,6 @@
-<div class="o-explore-media-part__row">
+
     <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
-        <ngx-masonry-item class="o-explore-media-part__coloumn" *ngFor="let explore of response?.entities">
+        <div ngxMasonryItem class="o-explore-media-part__coloumn" *ngFor="let explore of response?.entities">
             <div class="o-explore-card">
                 <div class="o-explore-card">
                     <div class="o-explore-card__media">
@@ -85,6 +85,5 @@
                     </div><!-- media info end -->
                 </div>
             </div>
-        </ngx-masonry-item>
+        </div>
     </ngx-masonry>
-</div>
