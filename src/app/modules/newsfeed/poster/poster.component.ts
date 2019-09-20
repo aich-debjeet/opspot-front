@@ -25,6 +25,7 @@ import { Tag } from '../../hashtags/types/tag';
 
 export class PosterComponent {
 
+  display: string = '';
   content = '';
   meta: any = {
     message : '',
@@ -40,6 +41,7 @@ export class PosterComponent {
   tooManyTags: boolean = false;
 
   errorMessage: string = null;
+  staticBoard: boolean = false;
 
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
@@ -217,5 +219,22 @@ export class PosterComponent {
 
   getChoiceLabel(text: string) {
     return `#${text}`;
+  }
+  createForms(type:string){
+    this.staticBoard = true;
+    this.renderForms(type);
+  }
+  renderForms(type: string){
+    console.log(type)
+    this.display = type;
+  }
+
+  close(){
+    console.log('close');
+    this.display = '';
+    this.staticBoard = false;
+  }
+  changeToDefault(){
+    this.display = 'default';
   }
 }

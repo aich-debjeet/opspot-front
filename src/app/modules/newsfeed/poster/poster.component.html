@@ -1,4 +1,4 @@
-<div class="mdl-card m-border post" *ngIf="session.isLoggedIn()">
+<div class="mdl-card m-border post" *ngIf="session.isLoggedIn() && !staticBoard">
   <div class="mdl-card__supporting-text">
     <div class="opspot-avatar">
       <a [routerLink]="['/', session.getLoggedInUser().username]">
@@ -15,7 +15,7 @@
 
     <form (submit)="post()">
       <mwl-text-input-autocomplete-container>
-            <textarea
+            <!-- <textarea
               class="mdl-textfield__input"
               type="text"
               id="message"
@@ -31,6 +31,16 @@
               [findChoices]="findTrendingHashtags.bind(this)"
               [getChoiceLabel]="getChoiceLabel"
               [triggerCharacter]="'#'"
+            ></textarea> -->
+            <textarea
+              class="mdl-textfield__input"
+              type="text"
+              id="message"
+              #message
+              name="message"
+              placeholder="Speak your mind..."
+              i18n-placeholder="@@OPSPOT__POSTER__SPEAK_YOUR_MIND"
+              (click)="createForms('default')"
             ></textarea>
       </mwl-text-input-autocomplete-container>
       <div class="mdl-card__actions">
@@ -120,4 +130,314 @@
     <!--</div>-->
   </div>
 
+</div>
+
+<div *ngIf="staticBoard">
+  <div class="o-create-post" *ngIf="display == 'default'">
+      <div class="o-create-post-head o-create-post-head--border">
+          <div class="o-create-post__title text-lg f500">Create a post <span class="icon-box-design" #postType><span class="icon-chevron-down" (click)="postType.value = !postType.value">    
+          </span></span></div><!--title ends-->
+          <div class="o-create-post-dropdown" [hidden]="!postType.value">
+            <div class="o-create-post-dropdown-content">
+              <ul>
+                <li class="text-md" (click)="createForms('#Showtimez')">On #Showtimez</li>
+                <li class="text-md" (click)="createForms('#Opportunity')">On #Opportunity</li>
+                <li class="text-md" (click)="createForms('#TheBlueStore')">On #TheBlueStore</li>
+                <li class="text-md" (click)="createForms('#Portfolio')"> On #Portfolio</li>
+                <li class="text-md" (click)="createForms('#MyJourney')">On #MyJourney</li>
+              </ul>
+            </div>
+        </div>
+          <div class="text-md primary f500 o-create-post-write-blog">Write Blog</div>
+          <div class="close" (click)="close()"><i class="icon-x"></i></div>
+      </div><!--boost head end-->
+      <div class="o-create-post-body o-create-post-body--flex">
+          <div class="o-crete-post-userinfo">
+              <div class="o-crete-post-userinfo__avatar">
+                  <img src="assets/demo/avatar.png" alt="">
+              </div>
+              <div class="o-crete-post-userinfo__mesaage">
+                  <textarea rows="1" placeholder="Write Something"></textarea>
+              </div>
+          </div><!--userinfo ends--> 
+          <div class="o-create-post-fileupload">
+              <div class="fileUpload">
+                  <span class="icon-paperclip-2"></span>
+                  <input type="file" class="upload">
+              </div><!--file upload ends-->
+              <div class="text-md grey">
+                  Add Image, Video or Audio
+              </div><!--file preview ends-->
+          </div> 
+      </div><!--body ends-->
+      <div class="o-create-post-footer">
+          <div class="o-create-post-left">
+              <div class="o-create-post-toggle">
+                  <div class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                  </div> 
+              </div>
+              <span class="text-md grey f500">
+                  NSFW<span class="icon-info"></span>
+              </span>                 
+          </div><!--left ends-->
+          <div class="o-create-post-right">
+              <div class="o-create-post-right__status">
+                  <span class="o-create-post-right__icon"><span class="icon-users"></span></span>
+                  <span class="text-md f500">Paywall</span>
+                  <a href="#" class="o-create-post-right__dropdown"><span class="icon-chevron-down"></span></a>
+              </div>
+              <button type="button" class="btn btn-primary btn-sm disabled">Post</button><!--for event page-->
+          </div><!--right ends-->
+      </div><!--footer post ends-->
+  </div><!--post ends-->
+</div><!--preview ends-->
+
+<div *ngIf="display == '#Showtimez'">
+    <div class="o-create-show-timez">
+        <div class="o-create-show-timez-head o-create-show-timez-head--border">
+            <div class="o-create-show-timez__title text-lg f500">Create a post  
+                <span class="o-create-dropdown-style">
+                    <span class="text-md primary f500">On #Showtimez<span class="icon-x" (click)="changeToDefault()"></span></span>
+                </span>
+            </div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div><!--boost head end-->
+        <div class="o-create-show-timez-body o-create-show-timez-body--flex">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control form-control-lg">
+            </div><!--Event Title-->
+            <div class="form-group">
+                <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                <textarea class="form-control" rows="5"></textarea>
+            </div><!--Event Description-->
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="form-control form-control-lg">
+            </div><!--Event Location-->
+            <div class="o-create-show-timez-date-time">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="Select Date">
+                </div><!--Date Location-->
+                <div class="form-group ml-18">
+                    <label>Time</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="Select Time">
+                </div><!--Time Location-->
+            </div>
+            <div class="form-group">
+                <label>Cover Image</label>
+                <div class="o-create-show-timez-cover-image">
+                    <div class="fileUpload">
+                        <span class="icon-plus"></span>
+                        <input type="file" class="upload">
+                    </div><!--file upload ends-->
+                    <div class="fileUpload-preview ml-18">
+                        <a class="o-create-show-timez-cover-image__avatar" href="#">
+                            <img src="assets/demo/m3.jpg" alt="">
+                        </a>
+                    </div><!--file preview ends-->
+                </div> 
+                <div class="text-sm grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>                         
+            </div>
+        </div><!--body ends-->
+        <div class="o-create-show-timez-footer">
+            <button type="button" class="btn btn-primary btn-sm disabled">Post</button><!--for event page-->
+        </div>
+    </div>
+</div>
+
+<div *ngIf="display == '#Opportunity'">
+    <div class="o-create-opportunity">
+        <div class="o-create-opportunity-head o-create-opportunity-head--border">
+                <div class="o-create-opportunity__title text-lg f500">Create a post  
+                    <span class="o-create-dropdown-style">
+                        <span class="text-md primary f500">On #Opportunity<span class="icon-x" (click)="changeToDefault()"></span></span>
+                    </span>
+                </div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div><!--boost head end-->
+        <div class="o-create-opportunity-body o-create-opportunity-body--flex">
+            <div class="form-group o-create-opportunity-icon">
+                <label>Category</label>
+                <select class="form-control form-control-lg">
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="">Option 2</option>
+                    <option value="">Option 3</option>
+                    <option value="">Option 4</option>
+                    <option value="">Option 5</option>
+                </select>
+            </div><!--Category Title-->
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control form-control-lg">
+            </div><!--Title Location-->
+            <div class="form-group">
+                <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                <textarea class="form-control" rows="5"></textarea>
+            </div><!--Event Description-->
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="form-control form-control-lg">
+            </div><!--Event Location-->
+            <div class="form-group">
+                <label>Cover Image</label>
+                <div class="o-create-opportunity-cover-image">
+                    <div class="fileUpload">
+                        <span class="icon-plus"></span>
+                        <input type="file" class="upload">
+                    </div><!--file upload ends-->
+                    <div class="fileUpload-preview ml-18">
+                        <a class="o-create-opportunity-cover-image__avatar" href="#">
+                            <img src="assets/demo/m3.jpg" alt="">
+                        </a>
+                    </div><!--file preview ends-->
+                </div> 
+                <div class="text-sm grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>                         
+            </div>
+        </div><!--body ends-->
+        <div class="o-create-opportunity-footer">
+            <button type="button" class="btn btn-primary btn-sm disabled">Post</button><!--for event page-->
+        </div>
+    </div>
+</div>
+
+<div *ngIf="display == '#TheBlueStore'">
+    <div class="o-create-blue-store">
+        <div class="o-create-blue-store-head o-create-blue-store-head--border">
+            <div class="o-create-blue-store__title text-lg f500">Create a post  
+                <span class="o-create-dropdown-style">
+                    <span class="text-md primary f500">On #TheBlueStore<span class="icon-x" (click)="changeToDefault()"></span></span>
+                </span>
+            </div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div><!--boost head end-->
+        <div class="o-create-blue-store-body o-create-blue-store-body--flex">
+            <div class="form-group">
+                <label>Add up to 10 images</label>
+                <div class="o-create-blue-store-cover-image">
+                    <div class="fileUpload">
+                        <span class="icon-plus"></span>
+                        <input type="file" class="upload">
+                    </div><!--file upload ends-->
+                    <div class="fileUpload-preview ml-18">
+                        <a class="o-create-blue-store-cover-image__avatar" href="#">
+                            <img src="assets/demo/m3.jpg" alt="">
+                        </a>
+                    </div><!--file preview ends-->
+                </div>                        
+            </div><!--image upload-->
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control form-control-lg">
+            </div><!--Title Location-->
+            <div class="form-group">
+                <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                <textarea class="form-control" rows="5"></textarea>
+            </div><!--Event Description-->
+            <div class="o-create-blue-store-unit-price">
+                <div class="form-group">
+                    <label>No of Units <span class="icon-info"></span></label>
+                    <input type="text" class="form-control form-control-lg">
+                </div><!--Date Location-->
+                <div class="form-group ml-18">
+                    <label>Price <span class="icon-info"></span></label>
+                    <div class="o-create-blue-store-unit-price__inner">
+                        <div class="o-opportunity-country-code">
+                            <span class="o-opportunity-country-code__flag"><img src="assets/svg/in.png" alt=""></span>
+                            <span class="o-opportunity-country-code__text text-md">IND</span>
+                            <a href="#" class="o-opportunity-country-code__dropdown"><img src="assets/svg/arrow-down.svg" alt=""></a>
+                        </div>
+                    <input type="text" class="form-control form-control-lg  ml-8" placeholder="Enter Price">
+                    </div>
+                </div><!--Time Location-->
+            </div>
+        </div><!--body ends-->
+        <div class="o-create-blue-store-footer">
+            <button type="button" class="btn btn-primary btn-sm disabled">Post</button><!--for event page-->
+        </div>
+    </div>
+</div>
+
+<div *ngIf="display == '#Portfolio'">
+    <div class="o-create-portfolio">
+        <div class="o-create-portfolio-head o-create-portfolio-head--border">
+            <div class="o-create-show-timez__title text-lg f500">Create a post  
+                <span class="o-create-dropdown-style">
+                    <span class="text-md primary f500">On #Portfolio<span class="icon-x" (click)="changeToDefault()"></span></span>
+                </span>
+            </div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div><!--boost head end-->
+        <div class="o-create-portfolio-body o-create-portfolio-body--flex">
+            <div class="o-crete-portfolio-userinfo">
+                <div class="o-crete-portfolio-userinfo__avatar">
+                    <img src="assets/demo/avatar.png" alt="">
+                </div>
+                <div class="o-crete-portfolio-userinfo__mesaage">
+                    <textarea rows="1" placeholder="Write Something"></textarea>
+                </div>
+            </div><!--userinfo ends--> 
+            <div class="o-create-portfolio-fileupload">
+                <div class="fileUpload">
+                    <span class="icon-paperclip-2"></span>
+                    <input type="file" class="upload">
+                </div><!--file upload ends-->
+                <div class="text-md grey">
+                    Add Image, Video or Audio
+                </div><!--file preview ends-->
+            </div> 
+        </div><!--body ends-->
+        <div class="o-create-portfolio-footer">
+            <div class="o-create-portfolio-left">
+                <div class="o-create-portfolio-toggle">
+                    <div class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </div> 
+                </div>
+                <span class="text-md grey f500">
+                    NSFW<span class="icon-info"></span>
+                </span>                 
+            </div><!--left ends-->
+            <button type="button" class="btn btn-primary btn-sm disabled">Post</button><!--for event page-->
+        </div><!--footer post ends-->
+    </div><!--post ends-->
+</div>
+
+<div *ngIf="display == '#MyJourney'">
+    <div class="o-create-myjourney">
+        <div class="o-create-myjourney-head o-create-myjourney-head--border">
+            <div class="o-create-show-timez__title text-lg f500">Create a post  
+                <span class="o-create-dropdown-style">
+                    <span class="text-md primary f500">On #MyJourney<span class="icon-x" (click)="changeToDefault()"></span></span>
+                </span>
+            </div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div><!--boost head end-->
+        <div class="o-create-myjourney-body o-create-myjourney-body--flex">
+            <div class="o-crete-myjourney-userinfo">
+                <div class="o-crete-myjourney-userinfo__avatar">
+                    <img src="assets/demo/avatar.png" alt="">
+                </div>
+                <div class="o-crete-myjourney-userinfo__mesaage">
+                    <textarea rows="1" placeholder="Write Something"></textarea>
+                </div>
+            </div><!--userinfo ends--> 
+            <div class="o-create-myjourney-fileupload">
+                <div class="fileUpload">
+                    <span class="icon-paperclip-2"></span>
+                    <input type="file" class="upload">
+                </div><!--file upload ends-->
+                <div class="text-md grey">
+                    Add Video
+                </div><!--file preview ends-->
+            </div> 
+        </div><!--body ends-->
+        <div class="o-create-myjourney-footer">
+                <button type="button" class="btn btn-primary btn-sm disabled">Post</button><!--for event page-->
+        </div><!--footer post ends-->
+    </div><!--post ends-->
 </div>
