@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ModalPosterComponent } from './poster-modal.component';
 import { PosterComponent } from './poster.component';
 import { CommonModule as NgCommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WireModule } from '../../wire/wire.module';
 import { ThirdPartyNetworksModule } from '../../third-party-networks/third-party-networks.module';
 import { CommonModule } from '../../../common/common.module';
@@ -21,6 +21,7 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
     ThirdPartyNetworksModule,
     HashtagsModule,
     TextInputAutocompleteModule,
+    ReactiveFormsModule
   ],
   declarations: [
     PosterComponent,

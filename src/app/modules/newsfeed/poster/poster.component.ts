@@ -7,11 +7,12 @@ import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
 import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.component';
 import { Tag } from '../../hashtags/types/tag';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   moduleId: module.id,
   selector: 'opspot-newsfeed-poster',
-  inputs: ['_container_guid: containerGuid', 'accessId', 'message'],
+  inputs: ['_container_guid: containerGuid', 'accessId', 'message', 'title'],
   outputs: ['load'],
   providers: [
     {
@@ -28,10 +29,10 @@ export class PosterComponent {
   display: string = '';
   content = '';
   meta: any = {
-    message : '',
-    wire_threshold: null
+    message: '',
+    wire_threshold: null,
   };
-  tags = [];  
+  tags = [];
   opspot;
   load: EventEmitter<any> = new EventEmitter();
   inProgress: boolean = false;
@@ -43,9 +44,14 @@ export class PosterComponent {
   errorMessage: string = null;
   staticBoard: boolean = false;
 
+
+  //gk
+  opportunityForm: FormGroup;
+  submitted = false;
+
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
-  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService) {
+  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
     this.opspot = window.Opspot;
   }
 
@@ -217,24 +223,71 @@ export class PosterComponent {
       .slice(0, 5);
   }
 
+
   getChoiceLabel(text: string) {
     return `#${text}`;
   }
-  createForms(type:string){
+  createForms(type: string) {
     this.staticBoard = true;
     this.renderForms(type);
   }
-  renderForms(type: string){
-    console.log(type)
+  renderForms(type: string) {
     this.display = type;
+    if (type === '#Opportunity') {
+      this.opportunityForm = this.formBuilder.group({
+        category: ['', [Validators.required]],
+        opportunityTitle: ['', [Validators.required]],
+        opportunityDescription: ['', [Validators.required]],
+        opportunityLocation: ['', [Validators.required]],
+        opportunityImage: ['', []]
+      });
+    }
   }
 
-  close(){
+  close() {
     console.log('close');
     this.display = '';
     this.staticBoard = false;
   }
-  changeToDefault(){
+
+  changeToDefault() {
     this.display = 'default';
+  }
+
+
+  // post opportunity
+  postOpportunity() {
+
+    this.submitted = true;
+    this.errorMessage = "";
+    let data = Object.assign(this.meta, this.attachment.exportMeta());
+
+    console.log("data: ", data);
+    data.media = data.attachment_guid;
+    data.title = this.opportunityForm.value.opportunityTitle;
+    data.description = this.opportunityForm.value.opportunityDescription;
+    data.location = this.opportunityForm.value.opportunityLocation;
+    data.category = this.opportunityForm.value.catageory;
+    data.published = true,
+    this.inProgress = true;
+
+    if (this.opportunityForm.valid) {
+      this.client.post('api/v3/opportunity', data)
+        .then((data: any) => {
+          // data.activity.boostToggle = true;
+          //this.load.next(data.activity);
+          this.attachment.reset();
+          this.meta = { wire_threshold: null };
+          this.inProgress = false;
+          this.display = "default";
+          this.submitted = false;
+        })
+        .catch((e) => {
+          this.inProgress = false;
+          this.submitted = false;
+          alert(e.message);
+          this.display = "default";
+        });
+    }
   }
 }
