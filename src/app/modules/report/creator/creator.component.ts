@@ -4,6 +4,7 @@ import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { REASONS } from '../../../services/list-options';
 import { REPORT_REASONS } from '../../../services/list-options'
+import { CreatorSuccessComponent } from './creator-success/creator-success.component';
 
 @Component({
   moduleId: module.id,
@@ -104,7 +105,9 @@ export class ReportCreatorComponent implements AfterViewInit {
         this.inProgress = false;
         if (response.done) {
           this.success = true;
-          this.overlayModal.dismiss(); //dismissing model after reporting
+          this.overlayModal.create(CreatorSuccessComponent, '', {
+            class: 'm-overlay-modal--report m-overlay-modal--medium-report-success',
+          }).present(); 
         } else {
           this.overlayModal.dismiss();
           alert('There was an error sending your report.');

@@ -7,6 +7,7 @@ import { BanModalComponent } from '../../../ban/modal/modal.component';
 import { ReportCreatorComponent } from '../../../report/creator/creator.component';
 import { Router } from '@angular/router';
 import { ProfileReportComponent } from '../../../report/profile-report/profile-report.component';
+import { ProfileBlockComponent } from '../../../channels/profile-block/profile-block.component';
 
 
 @Component({
@@ -127,25 +128,6 @@ import { ProfileReportComponent } from '../../../report/profile-report/profile-r
         <ng-container *ngIf="!user.email">...</ng-container>
       </div>
     </m-modal>
-
-    <m-modal *ngIf="openBlockModal" [open]="true" (closed)="openBlockModal = false">
-    <div class="o-block">
-    <div class="o-block__head">
-        <h4>Block {{user.name}}</h4>
-       <!-- <a class="o-block-close hidden-under-tablet"><i class="icon-x"></i></a> -->
-    </div><!-- block head end -->
-    <div class="o-block__content">
-        <p class="caption-regular">
-            If you block {{user.name}}, {{user.name}} will no longer be able to see your posts, tag you, invite you to communities or network with you. 
-        </p>
-    </div>
-    <div class="o-block__action">
-        <button type="button" class="btn btn-outline-primary btn--block hidden-above-tablet">Cancel</button>
-        <button type="button" class="btn btn-primary btn--block" (click)="block()">Block</button>
-    </div>
-    </div>
-    </m-modal>
-
 
   `,
   styleUrls:  ['./user-dropdown.scss']
@@ -291,7 +273,7 @@ export class UserDropdownButton {
 
   report() {
     this.overlayService.create(ProfileReportComponent, this.user, {
-      class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium',
+      class: 'm-overlay-modal--report m-overlay-modal--medium-report',
     })
           .present();
   }
@@ -344,8 +326,14 @@ export class UserDropdownButton {
   }
 
   openModal(){
-    this.openBlockModal = true;
-    }
+    // this.openBlockModal = true;
+    this.overlayService.create(ProfileBlockComponent,this.user, {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-report',
+    }).present();
+    this.showMenu = false;
+  }
 
+  cancel(){
+    this.openBlockModal = false;  
+  }
 }
-
