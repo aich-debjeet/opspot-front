@@ -1,0 +1,128 @@
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Client } from '../../../services/api';
+import { Storage } from '../../../services/storage';
+
+@Component({
+  selector: 'app-suggestions',
+  templateUrl: './suggestions.component.html',
+  styleUrls: ['./suggestions.component.scss']
+})
+export class SuggestionsComponent implements OnInit, AfterViewInit {
+
+  ngAfterViewInit() {
+   // this.slickInit(event)
+  }
+
+  slideConfig = {
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    infinite: false,
+    arrows: true,
+    // responsive: [
+    //   {
+    //     breakpoint: 1024,
+    //     settings: {
+    //       slidesToShow: 3,
+    //       slidesToScroll: 3,
+    //       "variableWidth": false,
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 600,
+    //     settings: {
+    //       slidesToShow: 2,
+    //       slidesToScroll: 2
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 480,
+    //     settings: {
+    //       slidesToShow: 1,
+    //       slidesToScroll: 1
+    //     }
+    //   }
+    //   // You can unslick at a given breakpoint now by adding:
+    //   // settings: "unslick"
+    //   // instead of a settings object
+    // ]
+
+  };
+
+  opspot = window.Opspot;
+  suggestions: Array<any> = [];
+  lastOffset = 0;
+  inProgress: boolean = false;
+
+  constructor(
+    private client: Client,
+    private storage:Storage){}
+
+  ngOnInit() {
+    this.load();
+    console.log(this.suggestions)
+  }
+
+  async load() {
+    this.inProgress = true;
+    let limit: number = 4;
+
+    if (this.suggestions.length)
+      limit = 1;
+
+    // Subscribe can not rely on next batch, so load further batch
+    this.lastOffset = this.suggestions.length ? this.lastOffset + 11 : 0;
+
+    try {
+      let response: any = await this.client.get('api/v2/suggestions/user', {
+        limit,
+        offset: this.lastOffset,
+      });
+      for (let suggestion of response.suggestions) {
+        this.suggestions.push(suggestion);
+      }
+    } catch (err) {
+    } finally {
+      this.inProgress = false;
+    }
+  }
+
+  async pass(suggestion, e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.suggestions.splice(this.suggestions.indexOf(suggestion), 1);
+    // this.storage.set(
+    //   `user:suggestion:${suggestion.entity_guid}:removed`,
+    //   suggestion.entity_guid
+    // );
+    await this.client.put(`api/v2/suggestions/pass/${suggestion.entity_guid}`)
+    // load more
+    this.load();
+  }
+
+  remove(suggestion) {
+    this.suggestions.splice(this.suggestions.indexOf(suggestion), 1);
+    //  this.storage.set(
+    //   `user:suggestion:${suggestion.entity_guid}:removed`,
+    //   suggestion.entity_guid
+    // );
+    // load more
+    this.load();
+  }
+
+  slickInit(e) {
+    console.log('slick initialized');
+  }
+
+  breakpoint(e) {
+    console.log('breakpoint');
+  }
+
+  afterChange(e) {
+    console.log('afterChange');
+  }
+
+  beforeChange(e) {
+    console.log('beforeChange');
+  }
+
+}

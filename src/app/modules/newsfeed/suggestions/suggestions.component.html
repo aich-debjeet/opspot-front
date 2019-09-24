@@ -1,0 +1,30 @@
+<div class="o-card o-card-suggestion" *ngIf="suggestions.length>=3">
+    <div class="text-md f500">Suggestions for you</div>
+    <ngx-slick-carousel class="carousel" 
+           #slickModal="slick-carousel" 
+           [config]="slideConfig"
+           (init)="slickInit($event)"
+           (breakpoint)="breakpoint($event)" 
+           (afterChange)="afterChange($event)" 
+           (beforeChange)="beforeChange($event)"
+    >
+        <div ngxSlickItem *ngFor="let suggestion of suggestions">
+            <div class="o-card o-suggestion float-left slide">
+                <div class="o-suggestion__top-bar">
+                    <i class="material-icons o-fontRemove close-btn" (click)="pass(suggestion, $event)">close</i>
+                </div>
+                <a [routerLink]="['/', suggestion?.entity?.username]" class="demo"></a>
+                <div class="o-suggestion__avatar"
+                     [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + suggestion?.entity?.guid + ')'" alt="">
+                </div>
+                <div class="o-suggestion__name caption-bold">{{ suggestion?.entity?.name}}</div>
+                <div class="text-md grey">@{{ suggestion?.entity?.username}}</div>
+                <div class="o-suggestion__info text-sm grey">{{ suggestion?.entity?.merchant?.exclusive?.intro}}</div>
+                <opspot-button-subscribe [user]="suggestion?.entity" (subscribed)="remove(suggestion)">
+                </opspot-button-subscribe>         
+            </div>
+        </div>
+    </ngx-slick-carousel>
+    <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+    <button class="btn-next" (click)="slickModal.slickNext()">next</button>
+</div>
