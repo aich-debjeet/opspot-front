@@ -20,11 +20,13 @@ import { filter } from "rxjs/operators";
 
 @Component({
   selector: 'm-groups--profile',
-  templateUrl: 'profile.html'
+  templateUrl: 'profile.html',
+ 
 })
 
 export class GroupsProfile {
 
+ 
   guid;
   filter = 'activity';
   group;
@@ -45,9 +47,14 @@ export class GroupsProfile {
   paramsSubscription: Subscription;
   childParamsSubscription: Subscription;
   queryParamsSubscripton: Subscription;
+  totalMembers;
 
   socketRoomName: string;
   newConversationMessages: boolean = false;
+
+  inviteToggle:boolean=false;
+  memberToggle:boolean=false;
+
 
   @ViewChild('feed') private feed: GroupsProfileFeed;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
@@ -73,11 +80,11 @@ export class GroupsProfile {
   ) { }
 
   ngOnInit() {
+     
     this.context.set('activity');
     this.listenForNewMessages();
     this.detectWidth();
     this.detectConversationsState();
-
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {
         let changed = params['guid'] !== this.guid;
@@ -115,7 +122,6 @@ export class GroupsProfile {
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event) => {
       const url = this.router.routerState.snapshot.url;
-
       this.setFilter(url);
     });
 
@@ -170,6 +176,7 @@ export class GroupsProfile {
     // Load group
     try { 
       this.group = await this.service.load(this.guid);
+
     } catch (e) {
       this.error = e.message;
       return;
@@ -404,5 +411,26 @@ export class GroupsProfile {
     this.cd.markForCheck();
     this.cd.detectChanges();
   }
+
+  groupCount(e){
+   this.totalMembers=e
+  }
+
+  openInvite(){
+  if(window.innerWidth>785){
+    this.memberToggle=!this.memberToggle;
+     }else{
+       this.router.navigate([`/groups/${this.guid}/invite`])
+     } 
+  }
+   
+  showMembers(){
+    if(window.innerWidth>785){
+   this.memberToggle=!this.memberToggle;
+    }else{
+      this.router.navigate([`/groups/${this.guid}/members`])
+    } 
+  }
+
 
 }

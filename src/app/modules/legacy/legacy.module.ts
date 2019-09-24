@@ -38,6 +38,8 @@ import { HovercardPopup } from './components/hovercard-popup/hovercard-popup';
 import { CarouselComponent } from './components/carousel.component';
 import { CommentsModule } from '../comments/comments.module';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+import { AppuserComponent } from './components/appuser/appuser.component';
+import { GroupBannerComponent } from './components/group-banner/group-banner.component';
 
 @NgModule({
   imports: [
@@ -80,6 +82,11 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
     SocialIcons,
 
     CarouselComponent,
+
+    AppuserComponent,
+
+    GroupBannerComponent,
+
   ],
   exports: [
     Activity,
@@ -104,6 +111,8 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
     SocialIcons,
     HovercardPopup,
     CarouselComponent,
+    AppuserComponent,
+    GroupBannerComponent
   ],
   entryComponents: [
     Activity,

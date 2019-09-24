@@ -1,3 +1,4 @@
+<ng-container *ngIf="showNavbar">
 <m-topbar *ngIf="opspot.LoggedIn" class="m-noshadow mdl-color--white mdl-color-text--grey-600">
   <ng-container search>
     <m-search--bar></m-search--bar>
@@ -7,10 +8,11 @@
     <!-- <m-wallet--topbar-toggle></m-wallet--topbar-toggle> -->
   </ng-container>
 </m-topbar>
+</ng-container>
 
 <!-- <m-sidebar--markers></m-sidebar--markers> -->
 
-<m-body class="">
+<m-body [ngStyle]="!showNavbar?{'margin':0}:{'dispaly':'block'}" >
   <m-announcement [id]="'blockchain:sale'" *ngIf="false">
     <span class="m-blockchain--wallet-address-notice--action"
       routerLink="/tokens" 
