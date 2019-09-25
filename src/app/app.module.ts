@@ -58,6 +58,7 @@ import { CanaryModule } from './modules/canary/canary.module';
 import { HttpClientModule } from "@angular/common/http";
 import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { PortfolioModule } from './modules/portfolio/portfolio.module';
 
 
 @NgModule({
@@ -116,6 +117,7 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     HelpdeskModule,
     MobileModule,
     CanaryModule,
+    PortfolioModule,
 
     //last due to :username route
     ChannelsModule,
