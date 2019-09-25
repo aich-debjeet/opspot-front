@@ -24710,6 +24710,7 @@ app-image-croper .m-modal-container {
 
 //footer style
 .o-create-post-footer{
+  margin:0px 0px 18px;
   border-radius: 0 0 4px 4px;	
   background-color: rgba(235,239,242,0.4);
   padding: 12px 24px;
@@ -24776,6 +24777,7 @@ app-image-croper .m-modal-container {
   border: 1px solid #ECEFF1;	
   border-radius: 4px;	
   background-color:$white;	
+  z-index:99999999;
   box-shadow: 0 6px 10px 0 rgba(144,164,174,0.16), 0 1px 12px 0 rgba(144,164,174,0.18), 0 3px 5px 0 rgba(144,164,174,0.2);
   .icon-public,.icon-lock{
   color: $black;
@@ -24853,7 +24855,7 @@ app-image-croper .m-modal-container {
       border-radius: 4px;
   }
 }
-.fileUpload-preview-new:before{
+.fileUpload-preview-new-close{
   right: 8px;
   content: "\ea14";
   font-family: 'icomoon' !important;

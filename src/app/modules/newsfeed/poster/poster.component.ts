@@ -8,6 +8,7 @@ import { Client } from '../../../services/api/client';
 import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.component';
 import { Tag } from '../../hashtags/types/tag';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { remove as _remove, findIndex as _findIndex } from 'lodash';
 
 @Component({
   moduleId: module.id,
@@ -30,7 +31,7 @@ export class PosterComponent {
   content = '';
   meta: any = {
     message: '',
-    wire_threshold: null,
+    wire_threshold: null
   };
   tags = [];
   opspot;
@@ -48,11 +49,17 @@ export class PosterComponent {
   //gk
   opportunityForm: FormGroup;
   submitted = false;
+  cards = [];
+  isNSFW: boolean =false;
+  displayPaywal: boolean = false;
+  defaultCoins: string ='';
 
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
   constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
     this.opspot = window.Opspot;
+    this.cards = [];
+    
   }
 
   set _container_guid(guid: any) {
@@ -122,19 +129,31 @@ export class PosterComponent {
    * Post to the newsfeed
    */
   post() {
+    console.log('clicked')
     if (!this.meta.message && !this.attachment.has()) {
       return;
     }
-    if (this.hashtagsSelector.tags.length > 5) {
-      this.showTagsError();
-      return;
+    if(this.defaultCoins.length>0){
+      this.meta.wire_threshold = {
+        min: this.defaultCoins,
+        type: 'tokens'
+      }
     }
+    // if (this.hashtagsSelector.tags.length > 5) {
+    //   this.showTagsError();
+    //   return;
+    // }
 
     this.errorMessage = "";
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
     data.tags = this.tags;
+    data.isNSFW = this.isNSFW
+    console.log(data);
+    console.log(this.meta);
+    console.log(this.attachment.exportMeta());
+
 
     this.inProgress = true;
     this.client.post('api/v1/newsfeed', data)
@@ -152,6 +171,7 @@ export class PosterComponent {
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
+    console.log(file, event, this.attachment)
     if (file.value) { // this prevents IE from executing this code twice
       this.canPost = false;
       this.inProgress = true;
@@ -159,14 +179,22 @@ export class PosterComponent {
 
       this.attachment.upload(file)
         .then(guid => {
+          let obj = {};
+          obj['guid'] = guid;
+          obj['imageLink'] = this.attachment.getPreview();
+          console.log(guid)
+          console.log(obj)
+          this.cards.push(obj);
+          console.log(this.cards)
           this.inProgress = false;
           this.canPost = true;
-          if (this.attachment.isPendingDelete()) {
-            this.removeAttachment(file);
-          }
+          // if (this.attachment.isPendingDelete()) {
+          //   this.removeAttachment(file);
+          // }
           file.value = null;
         })
         .catch(e => {
+          console.log(e)
           if (e && e.message) {
             this.errorMessage = e.message;
           }
@@ -182,7 +210,8 @@ export class PosterComponent {
     this.attachment.reset();
   }
 
-  removeAttachment(file: HTMLInputElement) {
+  removeAttachment(file: HTMLInputElement, imageId: string) {
+    console.log(file, imageId)
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -190,6 +219,7 @@ export class PosterComponent {
       this.errorMessage = '';
       return;
     }
+
     // if we're not uploading a file right now
     this.attachment.setPendingDelete(false);
     this.canPost = false;
@@ -197,10 +227,14 @@ export class PosterComponent {
 
     this.errorMessage = '';
 
-    this.attachment.remove(file).then(() => {
+    this.attachment.remove(file, imageId).then((guid) => {
       this.inProgress = false;
       this.canPost = true;
       file.value = '';
+      this.cards = _remove(this.cards, function (n) {
+        return n.guid !== guid;
+      });
+      console.log(this.cards)
     }).catch(e => {
       console.error(e);
       this.inProgress = false;
@@ -229,9 +263,12 @@ export class PosterComponent {
   }
   createForms(type: string) {
     this.staticBoard = true;
+    this.attachment.reset();
+    this.cards = [];
     this.renderForms(type);
   }
   renderForms(type: string) {
+    console.log(type)
     this.display = type;
     if (type === '#Opportunity') {
       this.opportunityForm = this.formBuilder.group({
@@ -249,12 +286,6 @@ export class PosterComponent {
     this.display = '';
     this.staticBoard = false;
   }
-
-  changeToDefault() {
-    this.display = 'default';
-  }
-
-
   // post opportunity
   postOpportunity() {
 
@@ -289,5 +320,12 @@ export class PosterComponent {
           this.display = "default";
         });
     }
+  }
+  changeToDefault() {
+    this.display = 'default';
+  }
+  displayPaywall(){
+    if(this.displayPaywal) this.displayPaywal = false;
+    else this.displayPaywal = true;
   }
 }
