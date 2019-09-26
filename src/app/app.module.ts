@@ -67,6 +67,7 @@ import { ExploreAudioComponent } from './modules/explore/explore-audio/explore-a
 import { ExploreVideoComponent } from './modules/explore/explore-video/explore-video.component';
 import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-blogs.component';
 import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
+import { OpportunityModule } from './modules/opportunity/opportunity.module';
 
 
 @NgModule({
@@ -138,6 +139,7 @@ import { InviteFriendsModule } from './modules/invite-friends/invite-friends.mod
     NgxIntlTelInputModule,
     BsDatepickerModule.forRoot(),
     NetworkModule,
+    OpportunityModule
 
   ],
   providers: [
