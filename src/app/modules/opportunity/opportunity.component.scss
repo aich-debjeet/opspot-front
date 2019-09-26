@@ -1,0 +1,269 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+@import "src/assets/scss/base/_typography.scss";
+@import "src/assets/scss/base/_base.scss";
+@import "src/assets/scss/components/_common.scss";
+
+.o-post-inner-sec{
+    background-color: #FAFAFA;
+}
+
+// posts inner page style
+.o-posts-inner-page{
+    width: 100%;
+    max-width: 1070px;
+    min-height: 100%;
+    margin: 0px auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    &__left{
+        width: calc(100% - 264px);
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            width:100%;
+        }
+        .o-post-inner-minheight{
+            min-height: calc(110vh - 20px);
+        }
+        .mt-20{
+            margin-top:20px;
+        }
+        .o-comments-block{
+            padding: 0px 30px;
+        }
+        .o-comments-compose{
+            padding: 2px 30px 17px;
+        }
+        .feed-head{
+            padding:24px 30px 9px;   
+        }
+        .o-avatar__name {
+            font-size: 15px;
+            line-height: 22px;
+        }
+        .head-action__icon{
+            width: 18px;
+        }
+        .o-posts-tym{
+            font-size: 13px;
+        }
+        .feed-card-opportunity-block{
+            background-color:transparent;
+            border-top: 0px solid #ECEFF1;
+            border-bottom: 0px solid #ECEFF1;
+            padding: 19px 30px;
+            @include mq($from: $mobile_sm, $until: $desktop_sm) {
+                padding: 12px 30px; 
+            }
+            .opportunity-image img {
+                width: 140px;
+                height: 140px;
+                @include mq($from: $mobile_sm, $until: $desktop_sm) {
+                    width: 101px;
+                    height: 101px;
+                }
+            }
+            button{
+                padding: 9px 37px;
+                margin-top: 20px;
+            }
+            .opportunity-button{       
+                font-size: 13px;
+                padding:6px 20px;
+            }
+        }
+        .feed-card-opportunity-block__bottom{
+            width:495px;
+            margin-top:25px;
+        }
+    }
+    &__right{
+        width: 340px;
+        min-height: calc(100vh - 77px); 
+        margin-left:8px;
+        .o-card--trending-post{
+            background:$white;
+        }
+    }
+}
+
+//action style
+.o-posts-inner-page-action{
+    padding:19px 30px 17px;
+   &__details{
+       display:flex;
+       margin-bottom: 25px;
+       @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        flex-direction: column;   
+        }
+       .o-latest-channel-info-head__members{
+           width:65px;
+           @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            margin-bottom:20px; 
+            }
+       }
+       .m-16{
+        margin:0 16px;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            margin:0 0px;
+        }
+       }
+   }
+   &__icons{	
+    display: flex;
+    justify-content: space-between;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        flex-direction: column;   
+    }
+    .icon-posts-box{
+        border: 1px solid rgba(144,164,174,0.2);
+        border-radius: 4px;	
+        background-color: #FFFFFF;
+        padding: 11px 0;
+        text-align: center;
+        width: 215px;
+        font-family: "Roboto", sans-serif !important;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            width:100%;
+            margin-bottom: 10px;
+        }
+        .icon-heart,.icon-share-2,.icon-coins{
+            font-size:16px;
+            color:$black;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+    }
+    .icon-posts-box-profile{
+        border: 1px solid rgba(144,164,174,0.2);
+        border-radius: 4px;	
+        background-color: #FFFFFF;
+        padding: 11px 0;
+        text-align: center;
+        width:48%;
+        font-family: "Roboto", sans-serif !important;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            width:100%;
+            margin-bottom: 10px;
+        }
+        .icon-heart,.icon-share-2,.icon-coins{
+            font-size:16px;
+            color:$black;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+    }
+   }
+}
+//my journey style
+.o-post-inner-page-myjourney-image{
+    position: relative;
+    img{
+        height: 450px;
+        width: 100%;
+        object-fit:fill;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            height: 250px;
+        }
+    }
+    &__title{
+        font-size: 15px;	
+        font-weight: 500;
+        color:$white;
+        position:absolute;
+        top:13px;
+        left:17px;
+    }
+}
+
+// video style
+.o-post-inner-page-myjourney-right{
+    .feed-media-video__icon{
+        height: 14px;
+        width: 14px;
+        img{
+            width: 6px;
+            margin-left: 2px;  
+        }
+    }
+}
+
+//padding
+.o-posts-inner-page-myjourney-padding{
+    padding: 18px 30px 0px;
+    .post-view-style{
+        margin-bottom:20px;
+        .feed-media{
+            .feed-media-video__icon img{
+                width: 11px; 
+            }
+            &__img{
+            height: 101px;	
+            width: 101px;	
+            border: 1px solid #E9EDEF;	
+            border-radius: 4px;
+            object-fit: inherit;
+            margin-right:19px;
+            }
+            &__link{
+                flex: 0; 
+            }
+        }
+        .feed-media-overlay{
+            width:101px;
+            height:101px;
+        }
+    }
+}
+
+//profile style
+.o-post-inner-profile-head{
+    .o-posts-inner-page__left {
+        .feed-head{
+            position:relative;
+        }
+        .o-post-inner-profile-button{
+            button{
+                position: absolute;
+                right: 90px;
+                padding: 4px 23px;
+            }
+        }
+    }
+}
+
+//marketplace style
+.o-posts-inner-marketplace-reachout{
+    .feed-card-event-block{
+        background-color:transparent;
+        border-top:0px;
+        border-bottom: 0px;
+        padding: 19px 30px;
+        .o-event-width{
+            width: 465px;
+        }
+        &__left{
+            width: 495px;
+            .mt-10{
+                margin-top:10px
+            }
+            .mt-20{
+                margin-top:20px
+            }
+        }
+        &__right{
+            .btn-lg {
+                padding: 8px 38px;
+            }
+        }
+    }
+}
+
+// event style
+.o-posts-inner-event-image{
+    .feed-media-event-image{
+        img{
+            height: 300px;
+        }
+    } 
+}
