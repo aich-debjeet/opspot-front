@@ -52,7 +52,6 @@ export class RemindButton {
 
   set _object(value: any) {
     this.object = value;
-    console.log('remind: ', value);
   }
 
   remind() {

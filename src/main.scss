@@ -37,27 +37,6 @@
 @import "src/assets/scss/components/community-members";
 @import "src/assets/scss/components/community-prof-info";
 @import "src/assets/scss/components/cover";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 *,
 *::before,
 *::after {
@@ -24535,4 +24514,25 @@ app-image-croper .m-modal-container {
 }
 .btnDefault:focus{
   outline:none !important;
+}
+
+// style added beacuase of the changes in the thumbs.ts @gayatri
+.icon-posts-box{
+  border: 1px solid rgba(144,164,174,0.2);
+  border-radius: 4px;	
+  background-color: #FFFFFF;
+  padding: 11px 0;
+  text-align: center;
+  width: 215px;
+  font-family: "Roboto", sans-serif !important;
+  @include mq($from: $mobile_sm, $until: $desktop_sm) {
+      width:100%;
+      margin-bottom: 10px;
+  }
+  .icon-heart,.icon-share-2,.icon-coins{
+      font-size:16px;
+      color:$black;
+      margin-right: 16px;
+      vertical-align: middle;
+  }
 }
