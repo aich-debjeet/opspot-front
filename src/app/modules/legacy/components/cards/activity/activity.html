@@ -64,10 +64,9 @@
   <div *ngIf="showOpportunity">
     <div class="feed-card-opportunity-block" [routerLink]="['/opportunity/view', this.activity.guid]">
       <div class="feed-card-opportunity-block__top">
-          <div class="opportunity-image">
-      <img [src]="activity.custom_data[0]?activity.custom_data[0].src:''" style="width:100%"
+      <div class="opportunity-image">
+       <img [src]="activity.custom_data[0]?activity.custom_data[0].src:''" style="width:100%"
       (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
-        *ngIf="showOpportunity && activity.custom_data"
       >
           </div>
           <div class="opportunity-details">
@@ -183,7 +182,7 @@
   <!-- Custom type:: batch -->
   <div class="item item-image allow-select"
    [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
-   *ngIf="activity.custom_type == 'batch'">
+   *ngIf="activity.custom_type == 'batch' && !showOpportunity">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
