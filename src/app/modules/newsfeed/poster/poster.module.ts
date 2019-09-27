@@ -10,6 +10,7 @@ import { CommonModule } from '../../../common/common.module';
 import { RouterModule } from '@angular/router';
 import { HashtagsModule } from '../../hashtags/hashtags.module';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
     ThirdPartyNetworksModule,
     HashtagsModule,
     TextInputAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TextMaskModule,
   ],
   declarations: [
     PosterComponent,

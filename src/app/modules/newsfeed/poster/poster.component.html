@@ -183,7 +183,7 @@
                 <div class="o-create-post-left">
                     <div class="o-create-post-toggle">
                         <div class="switch">
-                            <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW" >
+                            <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW">
                             <span class="slider round"></span>
                         </div>
                     </div>
@@ -201,18 +201,22 @@
                         <div class="float-left" *ngIf="defaultCoins.length > 0">
                             <span class="text-md f500">{{defaultCoins}} spotcoins</span>
                         </div>
-                        <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span class="icon-chevron-down"></span></a>
-                        <div class="o-create-post-dropdown-footer" [hidden] = "!displayPaywal">
+                        <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span
+                                class="icon-chevron-down"></span></a>
+                        <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
                             <div class="o-create-post-dropdown-footer__paywall">
                                 <div class="text-sm grey">Visible to supporter who send over</div>
                                 <div class="paywall-coins">
-                                    <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins" placeholder="0 Spot Coins">
-                                    <button type="button" class="btn btn-primary btn-sm disabled" (click)="displayPaywall()">Add</button><!--for event page-->
+                                    <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins"
+                                        placeholder="0 Spot Coins">
+                                    <button type="button" class="btn btn-primary btn-sm disabled"
+                                        (click)="displayPaywall()">Add</button>
+                                    <!--for event page-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
                     <!--for event page-->
                 </div>
@@ -234,57 +238,71 @@
             <div class="close" (click)="close()"><i class="icon-x"></i></div>
         </div>
         <!--boost head end-->
-        <div class="o-create-show-timez-body o-create-show-timez-body--flex">
-            <div class="form-group">
-                <label>Title</label>
-                <input type="text" class="form-control form-control-lg">
-            </div>
-            <!--Event Title-->
-            <div class="form-group">
-                <label>Description<span class="text-sm grey description-width">21/300</span></label>
-                <textarea class="form-control" rows="5"></textarea>
-            </div>
-            <!--Event Description-->
-            <div class="form-group">
-                <label>Location</label>
-                <input type="text" class="form-control form-control-lg">
-            </div>
-            <!--Event Location-->
-            <div class="o-create-show-timez-date-time">
+        <form [formGroup]="showTimezForm">
+            <div class="o-create-show-timez-body o-create-show-timez-body--flex">
                 <div class="form-group">
-                    <label>Date</label>
-                    <input type="text" class="form-control form-control-lg" placeholder="Select Date">
+                    <label>Title</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="eventTitle">
+                    <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventTitle').errors?.required">
+                            This is required</div>
                 </div>
-                <!--Date Location-->
-                <div class="form-group ml-18">
-                    <label>Time</label>
-                    <input type="text" class="form-control form-control-lg" placeholder="Select Time">
+                
+                <!--Event Title-->
+                <div class="form-group">
+                    <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                    <textarea class="form-control" rows="5" formControlName="eventDescription"></textarea>
+                    <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventDescription').errors?.required">
+                            This is required</div>
                 </div>
-                <!--Time Location-->
-            </div>
-            <div class="form-group">
-                <label>Cover Image</label>
-                <div class="o-create-show-timez-cover-image">
-                    <div class="fileUpload">
-                        <span class="icon-plus"></span>
-                        <input type="file" class="upload">
+                <!--Event Description-->
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="eventsLocation">
+                    <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventsLocation').errors?.required">
+                            This is required</div>
+                </div>
+                <!--Event Location-->
+                <div class="o-create-show-timez-date-time">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="text" class="form-control form-control-lg" [textMask]="{mask: dateMask}" placeholder="Select Date" formControlName="eventdate">
+                        <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventdate').errors?.required">
+                                This is required</div>
                     </div>
-                    <!--file upload ends-->
-                    <div class="fileUpload-preview ml-18">
-                        <a class="o-create-show-timez-cover-image__avatar" href="#">
-                            <img src="assets/demo/m3.jpg" alt="">
-                        </a>
-                    </div>
-                    <!--file preview ends-->
+                    <!--Date Location-->
+                    <div class="form-group ml-18">
+                        <label>Time</label>
+                        <input type="text" class="form-control form-control-lg" placeholder="Time" [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventTime">
+                        <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventTime').errors?.required">
+                                This is required</div>
+                    </div>                    
                 </div>
-                <div class="text-sm grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>
+                <div class="form-group">
+                    <label>Cover Image</label>
+                    <div class="o-create-show-timez-cover-image">
+                        <div class="fileUpload">
+                            <span class="icon-plus"></span>
+                            <input type="file" id="file" #file class="upload" name="attachment"
+                            (change)="uploadAttachment(file, $event)" formControlName="eventImage">
+                        </div>
+                        <!--file upload ends-->
+                        <div class="fileUpload-preview ml-18" *ngIf="attachment.meta.attachment_guid.length > 0">
+                            <a class="o-create-show-timez-cover-image__avatar" *ngFor="let image of cards">
+                                <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i class="icon-x"></i></a>
+                                <img [src]="image.imageLink" alt="">
+                            </a>
+                        </div>
+                        <!--file preview ends-->
+                    </div>
+                    <div class="text-sm grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>
+                </div>
             </div>
-        </div>
-        <!--body ends-->
-        <div class="o-create-show-timez-footer">
-            <button type="button" class="btn btn-primary btn-sm disabled">Post</button>
-            <!--for event page-->
-        </div>
+            <!--body ends-->
+            <div class="o-create-show-timez-footer">
+                <button type="button" class="btn btn-primary btn-sm disabled" (click)="eventSubmit()">Post</button>
+                <!--for event page-->
+            </div>
+        </form>
     </div>
 
     <div class="o-create-opportunity" *ngIf="display == '#Opportunity'">
@@ -311,22 +329,29 @@
                         <option value="volunteer">Volunteer</option>
                         <option value="others">Others - Please specify in the description</option>
                     </select>
-                    <div class="error text-sm" *ngIf="submitted && opportunityForm.get('category').errors?.required">This is required</div>
+                    <div class="error text-sm" *ngIf="submitted && opportunityForm.get('category').errors?.required">
+                        This is required</div>
                 </div>
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" class="form-control form-control-lg" formControlName="opportunityTitle">
-                    <div class="error text-sm" *ngIf="submitted && opportunityForm.get('opportunityTitle').errors?.required">Title is required</div>
+                    <div class="error text-sm"
+                        *ngIf="submitted && opportunityForm.get('opportunityTitle').errors?.required">Title is required
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Description<span class="text-sm grey description-width">21/300</span></label>
                     <textarea class="form-control" rows="5" formControlName="opportunityDescription"></textarea>
-                    <div class="error text-sm" *ngIf="submitted && opportunityForm.get('opportunityDescription').errors?.required">Description is required</div>
+                    <div class="error text-sm"
+                        *ngIf="submitted && opportunityForm.get('opportunityDescription').errors?.required">Description
+                        is required</div>
                 </div>
                 <div class="form-group">
                     <label>Location</label>
                     <input type="text" class="form-control form-control-lg" formControlName="opportunityLocation">
-                    <div class="error text-sm" *ngIf="submitted && opportunityForm.get('opportunityLocation').errors?.required">Location is required</div>
+                    <div class="error text-sm"
+                        *ngIf="submitted && opportunityForm.get('opportunityLocation').errors?.required">Location is
+                        required</div>
                 </div>
                 <div class="form-group">
                     <label>Cover Image</label>
@@ -361,51 +386,63 @@
             <div class="close" (click)="close()"><i class="icon-x"></i></div>
         </div>
         <form [formGroup]="blueStoreForm">
-        <div class="o-create-blue-store-body o-create-blue-store-body--flex">
-            <div class="form-group">
-                <label>Add up to 10 images</label>
-                <div class="o-create-blue-store-cover-image">
-                    <div class="fileUpload">
-                        <span class="icon-plus"></span>
-                        <input type="file" class="upload">
-                    </div>
-                    <div class="fileUpload-preview ml-18">
-                        <a class="o-create-blue-store-cover-image__avatar" href="#">
-                            <img src="assets/demo/m3.jpg" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Title</label>
-                <input type="text" class="form-control form-control-lg" formControlName="blueStoreTitle">
-            </div>
-            <div class="form-group">
-                <label>Description<span class="text-sm grey description-width">21/300</span></label>
-                <textarea class="form-control" rows="5" formControlName="blueStoreDescription"></textarea>
-            </div>
-            <div class="o-create-blue-store-unit-price">
-            <div class="form-group">
-                <label>No of Units <span class="icon-info"></span></label>
-                <input type="text" class="form-control form-control-lg" formControlName="numberOfUnits">
-            </div>
-                <div class="form-group ml-18">
-                    <label>Price <span class="icon-info"></span></label>
-                    <div class="o-create-blue-store-unit-price__inner">
-                        <div class="o-opportunity-country-code">
-                            <span class="o-opportunity-country-code__flag"><img src="assets/svg/in.png" alt=""></span>
-                            <span class="o-opportunity-country-code__text text-md">IND</span>
-                            <a href="#" class="o-opportunity-country-code__dropdown">
-                            <img src="assets/svg/arrow-down.svg" alt=""></a>
+            <div class="o-create-blue-store-body o-create-blue-store-body--flex">
+                <div class="form-group">
+                    <label>Add images</label>
+                    <div class="o-create-blue-store-cover-image">
+                        <div class="fileUpload">
+                            <span class="icon-plus"></span>
+                            <input type="file" id="file" #file class="upload" name="attachment"
+                            (change)="uploadAttachment(file, $event)"/>
                         </div>
-                        <input type="text" class="form-control form-control-lg  ml-8" placeholder="Enter Price" formControlName="itemPrice">
+                        <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
+                            <a class="o-create-blue-store-cover-image__avatar">
+                                <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i class="icon-x"></i></a>
+                                <img [src]="image.imageLink" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="blueStoreTitle">
+                    <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreTitle').errors?.required">
+                            This is required</div>
+                </div>
+                <div class="form-group">
+                    <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                    <textarea class="form-control" rows="5" formControlName="blueStoreDescription"></textarea>
+                    <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreDescription').errors?.required">
+                            This is required</div>
+                </div>
+                <div class="o-create-blue-store-unit-price">
+                    <div class="form-group">
+                        <label>No of Units <span class="icon-info"></span></label>
+                        <input type="text" class="form-control form-control-lg" formControlName="blueStoreUnits">
+                        <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreUnits').errors?.required">
+                                This is required</div>
+                    </div>
+                    <div class="form-group ml-18">
+                        <label>Price <span class="icon-info"></span></label>
+                        <div class="o-create-blue-store-unit-price__inner">
+                            <div class="o-opportunity-country-code">
+                                <span class="o-opportunity-country-code__flag"><img src="assets/svg/in.png"
+                                        alt=""></span>
+                                <span class="o-opportunity-country-code__text text-md">IND</span>
+                                <a href="javascript:void(0)" class="o-opportunity-country-code__dropdown">
+                                    <img src="assets/svg/arrow-down.svg" alt=""></a>
+                            </div>
+                            <input type="text" class="form-control form-control-lg  ml-8" placeholder="Enter Price"
+                                formControlName="blueStorePrice">
+                                <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStorePrice').errors?.required">
+                                        This is required</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="o-create-blue-store-footer">
-            <button type="button" class="btn btn-primary btn-sm disabled">Post</button>
-        </div>
+            <div class="o-create-blue-store-footer">
+                <button type="button" class="btn btn-primary btn-sm disabled" (click)="blueStoreSubmit()">Post</button>
+            </div>
         </form>
     </div>
 
@@ -420,45 +457,67 @@
             <div class="close" (click)="close()"><i class="icon-x"></i></div>
         </div>
         <!--boost head end-->
-        <div class="o-create-portfolio-body o-create-portfolio-body--flex">
-            <div class="o-crete-portfolio-userinfo">
-                <div class="o-crete-portfolio-userinfo__avatar">
-                    <img src="assets/demo/avatar.png" alt="">
-                </div>
-                <div class="o-crete-portfolio-userinfo__mesaage">
-                    <textarea rows="1" placeholder="Write Something"></textarea>
-                </div>
-            </div>
-            <!--userinfo ends-->
-            <div class="o-create-portfolio-fileupload">
-                <div class="fileUpload">
-                    <span class="icon-paperclip-2"></span>
-                    <input type="file" class="upload">
-                </div>
-                <!--file upload ends-->
-                <div class="text-md grey">
-                    Add Image, Video or Audio
-                </div>
-                <!--file preview ends-->
-            </div>
-        </div>
-        <!--body ends-->
-        <div class="o-create-portfolio-footer">
-            <div class="o-create-portfolio-left">
-                <div class="o-create-portfolio-toggle">
-                    <div class="switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
+        <form (submit)="post()">
+            <div class="o-create-portfolio-body o-create-portfolio-body--flex">
+                <div class="o-crete-portfolio-userinfo">
+                    <div class="o-crete-portfolio-userinfo__avatar">
+                        <img src="assets/demo/avatar.png" alt="">
+                    </div>
+                    <div class="o-crete-portfolio-userinfo__mesaage">
+                        <textarea type="text" id="message" #message name="message" placeholder="Write Something"
+                        [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
+                        (keyup)="getPostPreview(message);"></textarea>
                     </div>
                 </div>
-                <span class="text-md grey f500">
-                    NSFW<span class="icon-info"></span>
-                </span>
+                <!--userinfo ends-->
+                <div class="o-create-portfolio-fileupload" *ngIf="attachment.meta.attachment_guid.length == 0">
+                    <div class="fileUpload">
+                        <span class="icon-paperclip-2"></span>
+                        <input type="file" id="file" #file class="upload" name="attachment"
+                                (change)="uploadAttachment(file, $event)" />
+                    </div>
+                    <!--file upload ends-->
+                    <div class="text-md grey">
+                        Add Image, Video or Audio
+                    </div>
+                    <!--file preview ends-->
+                </div>
+                <div class="o-create-portfolio-filled-fileupload" *ngIf="attachment.meta.attachment_guid.length > 0">
+                        <div class="fileUpload-preview-new mr-9" *ngFor="let image of cards">
+                            <!-- <a class="o-create-portfolio-filled-avatar" href="#">
+                                <img src="assets/demo/m3.jpg" alt="">
+                            </a> -->
+                            <a class="fileUpload-preview-new-close" (click)="removeAttachment(file,image.guid)"><i
+                                class="ico-x white"></i></a>
+                        <a class="o-create-portfolio-filled-avatar" href="#">
+                            <img [src]="image.imageLink" alt="">
+                        </a>
+                        </div><!--file preview ends--->
+                        <div class="fileUpload">
+                            <span class="icon-plus"></span>
+                            <input type="file" id="file" #file class="upload" class="upload" name="attachment"
+                                (change)="uploadAttachment(file, $event)" />
+                        </div><!--file upload ends-->
+                    </div> 
             </div>
-            <!--left ends-->
-            <button type="button" class="btn btn-primary btn-sm disabled">Post</button>
-            <!--for event page-->
-        </div>
+            <!--body ends-->
+            <div class="o-create-portfolio-footer">
+                <div class="o-create-portfolio-left">
+                    <div class="o-create-portfolio-toggle">
+                        <div class="switch">
+                            <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW">
+                            <span class="slider round"></span>
+                        </div>
+                    </div>
+                    <span class="text-md grey f500">
+                        NSFW<span class="icon-info"></span>
+                    </span>
+                </div>
+                <!--left ends-->
+                <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
+                <!--for event page-->
+            </div>
+        </form>
         <!--footer post ends-->
     </div>
     <!--post ends-->

@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CaptchaModule } from './modules/captcha/captcha.module';
 
+import { TextMaskModule } from 'angular2-text-mask';
+
 import { Opspot } from './app.component';
 
 import { OPSPOT_APP_ROUTING_DECLARATIONS, OpspotAppRoutes, OpspotAppRoutingProviders } from './router/app';
@@ -138,6 +140,7 @@ import { InviteFriendsModule } from './modules/invite-friends/invite-friends.mod
     NgxIntlTelInputModule,
     BsDatepickerModule.forRoot(),
     NetworkModule,
+    TextMaskModule,
 
   ],
   providers: [

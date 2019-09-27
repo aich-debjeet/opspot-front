@@ -231,6 +231,9 @@ export class AttachmentService {
   exportMeta() {
     let result = {};
     console.log(this.meta)
+    if(this.meta.attachment_guid.length > 0 && this.meta.attachment_guid.length <= 1){
+      this.meta.attachment_guid = this.meta.attachment_guid.toString();
+    }
     for (var prop in this.meta) {
       if (this.meta.hasOwnProperty(prop)) {
         result[prop] = this.meta[prop];

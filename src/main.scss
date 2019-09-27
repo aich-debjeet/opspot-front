@@ -5343,7 +5343,8 @@ m--tree {
   border-radius: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  transition: width 100ms ease-in-out, height 100ms ease-in-out; }
+  transition: width 100ms ease-in-out, height 100ms ease-in-out;
+ }
 
 .u-hover-ball-effect:hover, .c-datepicker__day-body:hover, .c-datepicker__clock__num:hover, .c-datepicker__clock__am-pm-toggle label:hover {
   color: white; }
@@ -25947,10 +25948,8 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
       border-radius: 4px;
   }
 }
-.fileUpload-preview-new:before{
+.search-results{
   right: 8px;
-  content: "\ea14";
-  font-family: 'icomoon' !important;
   line-height: 1;
   font-size: 12px;
   height: 22px;
@@ -25963,6 +25962,9 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   justify-content: center;
   display: flex;
   background-color: rgba(40,40,40,0.5);
+  i{
+    font-size:15px;
+  }
 }
 .o-create-myjourney-filled-fileupload{
 .fileUpload-preview-new:after{
@@ -26050,5 +26052,21 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
       textarea:focus{
           outline: none;
       }
+  }
+}
+
+
+// temporary style written by bijoy
+
+.fileUpload-close-temp{
+  position:absolute;
+  top:0px;
+  right:0px;
+}
+.o-create-show-timez-date-time{
+  m-date-selector .m-date-selector--input{
+     border:1px #333 solid!important;
+     border-radius:4px!important;
+     overflow:hidden!important;
   }
 }
