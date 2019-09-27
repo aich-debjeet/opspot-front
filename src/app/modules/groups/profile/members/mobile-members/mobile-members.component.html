@@ -1,0 +1,46 @@
+<div class="container hidden-above-tablet">
+    <div class="without-nav-header bg-white o-reg-skill-mob-header">
+        <a routerLink="../" ><i class="icon-arrow-left"></i> </a>
+        <div class="without-nav-header__title caption-bold f500">Community Members</div>
+    </div>
+</div>
+
+<div class="o-community-member-popup-body" style="padding-top: 2px;">
+
+
+<div class="form-group form-group--member-search" #el>
+    <input
+      type="text"
+      name="q"
+      [(ngModel)]="q"
+      (keyup)="search(q)"
+      placeholder="Search for a member"
+      i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__SEARCH_PLACEHOLDER"
+      class="form-control form-control-lg bg-grey-light "
+      style="border: 0px;
+      margin: 30px 0px 0px;
+      padding: 1.3rem 0.85rem; box-shadow: none;"
+      />
+      <i class="icon-search" style="position: absolute; top: 9px; right: 12px;"></i>
+  </div>
+
+  <ul class="o-community-members-list scrollbar scrollbar-default" >
+      <li class="o-community-members-list__user-list" *ngFor="let member of members">
+      <app-appuser [object]="member">
+          <opspot-groups-card-user-actions-button
+          style="position: relative;"
+          *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid"
+          [group]="group"
+          [user]="member"
+          ></opspot-groups-card-user-actions-button>
+      </app-appuser>
+      </li>   
+    </ul>
+    
+    <infinite-scroll
+        distance="25%"
+        (load)="load()"
+        [moreData]="moreData"
+        [inProgress]="inProgress">
+    </infinite-scroll>
+  </div>

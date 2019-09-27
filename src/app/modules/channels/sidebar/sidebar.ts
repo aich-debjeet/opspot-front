@@ -5,6 +5,7 @@ import { OpspotUser } from '../../../interfaces/entities';
 import { Tag } from '../../hashtags/types/tag';
 import { ChannelOnboardingService } from "../../onboarding/channel/onboarding.service";
 import { Storage } from '../../../services/storage';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   moduleId: module.id,
@@ -25,18 +26,20 @@ export class ChannelSidebar {
   amountOfTags: number = 0;
   tooManyTags: boolean = false;
   onboardingProgress: number = -1;
-
+  profEdit = true;
+  sidebarMsg = true;
   @Output() changeEditing = new EventEmitter<boolean>();
 
   //@todo make a re-usable city selection module to avoid duplication here
   cities: Array<any> = [];
 
   constructor(
-      public client: Client,
-      public upload: Upload,
-      public session: Session,
-      public onboardingService: ChannelOnboardingService,
-      protected storage: Storage
+    public client: Client,
+    public upload: Upload,
+    public session: Session,
+    public onboardingService: ChannelOnboardingService,
+    protected storage: Storage,
+    private overlayModal: OverlayModalService
   ) {
     if (onboardingService && onboardingService.onClose)
       onboardingService.onClose.subscribe(progress => {
@@ -89,7 +92,7 @@ export class ChannelSidebar {
     this.upload.post('api/v1/channel/avatar', [file], { filekey: 'file' })
       .then((response: any) => {
         self.user.icontime = Date.now();
-        if(window.Opspot.user)
+        if (window.Opspot.user)
           window.Opspot.user.icontime = Date.now();
       });
   }
@@ -136,13 +139,12 @@ export class ChannelSidebar {
     }
   }
 
-  onTagsAdded(tags: Tag[]) {}
+  onTagsAdded(tags: Tag[]) { }
 
-  onTagsRemoved(tags: Tag[]) {}
+  onTagsRemoved(tags: Tag[]) { }
 
   setSocialProfile(value: any) {
     this.user.social_profiles = value;
   }
 
 }
-

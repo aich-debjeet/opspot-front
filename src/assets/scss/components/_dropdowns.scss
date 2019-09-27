@@ -1,89 +1,81 @@
-// // @dropdowns style ----------------------------------------------------
-// .c-dropdown {
-//     .dropdown-menu>li>a {
-//         padding: 4px 20px;
-//     }
-//     .dropdown-menu {
-//         min-width: auto;
-//     }
-// }
+.o-drop{
+    width: 354px;
+    background: #fff;
+    position: absolute;
+    left: -175px;
+    top: 50px;
+    box-shadow: 0 6px 10px 0 rgba(144,164,174,0.16), 0 1px 12px 0 rgba(144,164,174,0.18), 0 3px 5px 0 rgba(144,164,174,0.2);
+    border: 1px solid #ECEFF1;
+    border-radius: 4px;
+    z-index: 1;
+    &__arrow{
+        text-align: right;
+        position: absolute;
+        top: -18px;
+        right: 38px;
+        img{
+            filter: drop-shadow(0px -2px 1px #f3f5f7);
+        }
+    }
+    &__body{
+        width: 100%;
+        float: left;
+        height: 380px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    &__more{
+        width: 100%;
+        float: left;
+        border-top: 1px solid #dedede !important;
+        position: relative;
+        cursor: pointer;
+        padding: 12px;
+        bottom: 0;
+        text-align: center;
 
-// .c-dropup {
-//     .dropdown-menu>li>a {
-//         padding: 4px 20px;
-//     }
-// }
-
-// //
-// .c-dropdown__options {
-//     position: absolute;
-//     right: 0;
-// }
-
-// .c-dropdown {
-//     .dropdown-submenu {
-//         position: relative;
-//         .dropdown-menu {
-//             top: 0;
-//             left: 100%;
-//             margin-top: -1px;
-//         }
-//     }
-// }
+    }
+}
 
 
-// // old
-// // dropdown 01
-// .c-opsdropdown--size1 {
-//     width: 109px;
-// }
 
-// .c-opsdropdown--size2 {
-//     width: 200px;
-// }
 
-// .c-dropdown__list {
-//     font-size: 12px;
-//     text-align: left;
-//     color: #979797;
-//     padding: 10px 20px;
-// }
+// for notification dropdown
 
-// .c-opsdropdown--icons {
-//     width: 12px;
-//     display: inline;
-//     margin: 0 !important;
-//     float: left;
-//     padding-top: 3px;
-// }
-
-// .c-opsdropdown--text {
-//     font-size: 12px;
-//     text-align: left;
-//     color: #979797;
-//     padding: 10px 20px;
-//     &:hover {
-//         color: #000000;
-//     }
-// }
-
-// .c-opsdropdown--text2 {
-//     font-size: 12px;
-//     text-align: left;
-//     color: #979797;
-//     &:hover {
-//         color: #000000;
-//     }
-// }
-
-// .dropup {
-//     .dropdown-menu {
-//         min-width: 100px;
-//     }
-//     .dropdown-menu>li>a {
-//         font-size: 12px;
-//         text-align: left;
-//         color: #979797;
-//         padding: 2px 20px;
-//     }
-// }
+.o-drop-title{
+    width: 100%;
+    border-bottom: 1px solid #dedede !important;
+    // border: none!important;	
+    border-radius: 4px;	
+    background-color: $white;
+    padding: 12px 19px;
+    display: flex;
+    margin:0px!important;
+    &__text{
+        width: 50%;
+        display: flex;
+        align-items: center;
+    }
+    &__action{
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
+.o-drop-title-count{
+    height: 21px;	
+    width: 29px;	
+    border-radius: 4px;	
+    background-color: $primary;
+    padding:3px 9px;
+    margin-left: 12px;
+}
+.o-drop-title-icons{
+    width: 17px;
+    height: 17px;
+    margin-left: 17px;
+    img{
+        width: 17px;
+    }
+}

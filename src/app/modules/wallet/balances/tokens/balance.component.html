@@ -1,17 +1,17 @@
-<div class="m-wallet--balance m-border">
-  <img [src]="opspot.cdn_assets_url + 'assets/logos/bulb.svg'" class="m-wallet--balance--logo" />
+<!-- <div class="m-wallet--balance m-border">
+  <img [src]="opspot.cdn_assets_url + 'assets/logos/bulb.svg'" class="m-wallet--balance--logo" /> -->
 
   <ng-container *ngIf="!inProgress; else loading">
-    <h2>{{ balance | token: 18 | number }}</h2>
+   {{ balance | token: 18 | number }}
   </ng-container>
 
   <ng-template #loading>
-    <h2>...</h2>
+   ...
   </ng-template>
 
-  <h3 i18n="@@WALLET__BALANCES__TOKENS__TOKENS_TITLE">Tokens</h3>
+  <!-- <h3 i18n="@@WALLET__BALANCES__TOKENS__TOKENS_TITLE">Tokens</h3> -->
 
-  <div class="m-wallet--balance--addresses">
+  <!-- <div class="m-wallet--balance--addresses">
 
     <span *ngIf="addresses.length" i18n="@@WALLET__BALANCES__TOKENS__BREAKDOWN_TITLE">Breakdown</span>
 
@@ -70,14 +70,14 @@
 
     </div>
 
-  </div>
+  </div> -->
 
-  <div class="m-wallet--balance--testnet m-border">
+  <!-- <div class="m-wallet--balance--testnet m-border">
     <p i18n="@@WALLET__BALANCES__TOKENS__RINKEBY_NOTICE">
       Opspot is currently running on the 
       <a href="https://etherscan.com/token/0xb26631c6dda06ad89b93c71400d25692de89c068" target="_blank">Ethereum Mainnet</a>.
     </p>
     <p style="margin-top: 8px"><b i18n="@@WALLET__BALANCES__TOKENS__TOKEN_TO_VIEWS_CONV_1_1000">1 Token = 1000 Views</b></p>
-  </div>
+  </div> -->
 
-</div>
+<!-- </div> -->

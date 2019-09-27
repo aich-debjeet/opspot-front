@@ -33,7 +33,7 @@ const routes: Routes = [
     LegacyModule,
     ModalsModule,
     OpspotFormsModule
-    ],
+  ],
   declarations: [
     LoginComponent,
     LogoutComponent,

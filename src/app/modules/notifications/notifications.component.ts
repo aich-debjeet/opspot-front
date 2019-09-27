@@ -30,7 +30,7 @@ export class NotificationsComponent {
 
   opspot: any = window.Opspot;
   paramsSubscription: Subscription;
-
+  
   constructor(
     public session: Session,
     public client: Client,
@@ -48,7 +48,7 @@ export class NotificationsComponent {
       return;
     }
 
-    this.paramsSubscription = this.route.params.subscribe(params => {
+    this.paramsSubscription = this.route.params.subscribe(params => {   
       if (params['filter']) {
         this._filter = params['filter'];
         this.notifications = [];

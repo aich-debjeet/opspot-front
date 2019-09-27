@@ -1,16 +1,27 @@
-<div class="avatar">
-  <a [routerLink]="['/', notification.fromObj.username || '']" *ngIf="notification.fromObj">
-    <img [src]="opspot.cdn_url + 'icon/' + notification.fromObj.guid + '/small/' + notification.fromObj.icontime" class="mdl-shadow--2dp"/>
-  </a>
+<div class="o-card o-noti-block">
+<div class="o-noti-head">
+    <div class="o-noti-head__avatar">
+        <a [routerLink]="['/', notification.fromObj.username || '']" *ngIf="notification.fromObj">
+          <img [src]="opspot.cdn_url + 'icon/' + notification.fromObj.guid + '/'" />
+          <!-- "opspot.cdn_url + 'icon/' + notification.fromObj.guid + '/small/' + notification.fromObj.icontimes -->
+        </a>
+      </div>
+      <div class="o-noti-head__info">
+          <div class="o-noti-info__name"><a [routerLink]="['/', notification.fromObj.username || '']" class="text-md f500">{{notification.fromObj.name}}</a></div>
+          <!-- <div class="o-noti-info__det text-sm grey">Added a event to News Channels</div> -->
+      </div>
+      <div class="o-noti-head__tym">
+          <span class="text-sm">{{ notification.time_created * 1000 |friendlydatediff  }}</span>
+      </div>
 </div>
 
-<div [ngSwitch]="notification.notification_view" class="body">
-
+<div [ngSwitch]="notification.notification_view" class="o-noti-body o-noti-body--event">
+<div class="o-noti-body o-noti-body--event">
   <!-- subscribed -->
   <ng-template ngSwitchCase="friends">
-    <a [routerLink]="['/', notification.fromObj.username || '']">
-      <p *ngIf="notification.fromObj.subscribed" i18n="@@NOTIFICATIONS__NOTIFICATION__FRIENDS_MATCH">You have a match! {{notification.fromObj.name}} subscribed to you</p>
-      <p *ngIf="!notification.fromObj.subscribed" i18n="@@NOTIFICATIONS__NOTIFICATION__FRIENDS">{{notification.fromObj.name}} subscribed to you</p>
+    <a  [routerLink]="['/', notification.fromObj.username || '']">
+      <p class="o-noti-info__det text-sm grey" *ngIf="notification.fromObj.subscribed" i18n="@@NOTIFICATIONS__NOTIFICATION__FRIENDS_MATCH">{{notification.fromObj.name}} Started Following you</p>
+      <p class="o-noti-info__det text-sm grey" *ngIf="!notification.fromObj.subscribed" i18n="@@NOTIFICATIONS__NOTIFICATION__FRIENDS">{{notification.fromObj.name}} Started Following you</p>
     </a>
   </ng-template>
 
@@ -680,6 +691,8 @@
     <span hidden>View: {{ notification.notification_view }}</span>
   </ng-template>
 
-  <span class="ts mdl-color-text--grey">{{ notification.time_created * 1000 | date : 'medium' }}</span>
+  <!-- <span class="ts mdl-color-text--grey">{{ notification.time_created * 1000 | date : 'medium' }}</span> -->
+</div>
+</div>
 
 </div>

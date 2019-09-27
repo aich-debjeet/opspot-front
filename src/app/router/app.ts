@@ -13,6 +13,14 @@ import { ChannelComponent } from '../modules/channels/channel.component';
 
 import {CanDeactivateGuardService} from '../services/can-deactivate-guard';
 import { RewardsComponent } from '../controllers/rewards/rewards';
+import { ProfileEditComponent } from '../modules/channels/profile-edit/profile-edit.component';
+import { GeneralComponent } from '../modules/channels/profile-edit/general/general.component';
+import { WorkComponent } from '../modules/channels/profile-edit/work/work.component';
+import { AboutComponent } from '../modules/channels/profile-edit/about/about.component';
+import { ContactComponent } from '../modules/channels/profile-edit/contact/contact.component';
+import { EducationComponent } from '../modules/channels/profile-edit/education/education.component';
+import { AwardsComponent } from '../modules/channels/profile-edit/awards/awards.component';
+import { ExploreComponent } from '../modules/explore/explore.component';
 
 export const OpspotAppRoutes: Routes = [
 
@@ -40,8 +48,27 @@ export const OpspotAppRoutes: Routes = [
   { path: 'p/:page', component: Pages },
 
   { path: 'claim-rewards/:uuid', component: RewardsComponent },
+  { path: 'profile_edit', component: ProfileEditComponent ,
+   
+  children:[
+  
+    {path:'' ,redirectTo:'general' ,pathMatch:'full' },
+    {path:'general', component:GeneralComponent},
+    {path:'work', component:WorkComponent},
+    {path:'about', component:AboutComponent},
+    {path:'contact', component:ContactComponent},
+    {path:'education', component:EducationComponent},
+    {path:'awards', component:AwardsComponent}
+
+
+  
+  ] 
+  } ,
+  {path:'explore', component: ExploreComponent},
 
   { path: ':username/:filter', component: ChannelComponent },
+ 
+
   { path: ':username', component: ChannelComponent, canDeactivate: [CanDeactivateGuardService]},
 ];
 

@@ -74,19 +74,21 @@ import { PieGraph } from './components/graphs/pie-graph';
 import { GraphSVG } from './components/graphs/svg';
 import { GraphPoints } from './components/graphs/points';
 import { DynamicFormComponent } from './components/forms/dynamic-form/dynamic-form.component';
-
+import {NgxCroppieModule} from 'ngx-croppie';
 import { UpdateMarkersService } from './services/update-markers.service';
 import { SocketsService } from '../services/sockets';
 import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
-
+import { ImageCroperComponent } from './components/image-croper/image-croper.component';
+import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
 
 @NgModule({
   imports: [
     NgCommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxCroppieModule
   ],
   declarations: [
     OPSPOT_PIPES,
@@ -159,6 +161,8 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
     GraphPoints,
     DynamicFormComponent,
     AndroidAppDownloadComponent,
+    ImageCroperComponent,
+    ReadMoreComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -231,6 +235,8 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
     PieGraph,
     DynamicFormComponent,
     AndroidAppDownloadComponent,
+    ImageCroperComponent,
+    ReadMoreComponent
   ],
   providers: [
     {

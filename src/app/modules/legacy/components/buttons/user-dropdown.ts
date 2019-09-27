@@ -6,17 +6,21 @@ import { OverlayModalService } from '../../../../services/ux/overlay-modal';
 import { BanModalComponent } from '../../../ban/modal/modal.component';
 import { ReportCreatorComponent } from '../../../report/creator/creator.component';
 import { Router } from '@angular/router';
+import { ProfileReportComponent } from '../../../report/profile-report/profile-report.component';
+import { ProfileBlockComponent } from '../../../channels/profile-block/profile-block.component';
+
 
 @Component({
   selector: 'opspot-button-user-dropdown',
   inputs: ['user'],
   outputs: ['userChanged'],
   template: `
-    <button class="material-icons" (click)="toggleMenu($event)">settings</button>
 
+   <a class="o-prof-option"><i class="icon-more-vertical"  
+  (click)="toggleMenu($event)"></i></a> 
     <ul class="opspot-dropdown-menu" [hidden]="!showMenu" >
-      <li class="mdl-menu__item" [hidden]="user.blocked" (click)="block()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__BLOCK">Block @{{user.username}}</li>
-      <li class="mdl-menu__item" [hidden]="!user.blocked" (click)="unBlock()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__UNBLOCK">Un-Block @{{user.username}}</li>
+      <li class="mdl-menu__item" [hidden]="user.blocked" (click)="openModal()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__BLOCK">Block</li>
+      <li class="mdl-menu__item" [hidden]="!user.blocked" (click)="unBlock()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__UNBLOCK">Un-Block</li>
       <li class="mdl-menu__item" [hidden]="!user.subscribed" (click)="unSubscribe()" i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__UNSUBSCRIBE">Unsubscribe</li>
       <li class="mdl-menu__item"
         *ngIf="session.isAdmin()"
@@ -124,7 +128,9 @@ import { Router } from '@angular/router';
         <ng-container *ngIf="!user.email">...</ng-container>
       </div>
     </m-modal>
-  `
+
+  `,
+  styleUrls:  ['./user-dropdown.scss']
 })
 
 export class UserDropdownButton {
@@ -137,6 +143,10 @@ export class UserDropdownButton {
   banToggle: boolean = false;
   banMonetizationToggle: boolean = false;
   viewEmailToggle: boolean = false;
+  openBlockModal = false;
+  openReportModal = false;
+
+  
 
   constructor(
     public session: Session,
@@ -262,8 +272,10 @@ export class UserDropdownButton {
   }
 
   report() {
-    this.overlayService.create(ReportCreatorComponent, this.user)
-      .present();
+    this.overlayService.create(ProfileReportComponent, this.user, {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-report',
+    })
+          .present();
   }
 
   async setSpam(value: boolean) {
@@ -313,4 +325,15 @@ export class UserDropdownButton {
     }
   }
 
+  openModal(){
+    // this.openBlockModal = true;
+    this.overlayService.create(ProfileBlockComponent,this.user, {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-report',
+    }).present();
+    this.showMenu = false;
+  }
+
+  cancel(){
+    this.openBlockModal = false;  
+  }
 }

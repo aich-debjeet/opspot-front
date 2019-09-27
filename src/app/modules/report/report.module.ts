@@ -8,6 +8,9 @@ import { LegacyModule } from '../legacy/legacy.module';
 import { ReportCreatorComponent } from './creator/creator.component';
 import { ReportConsoleComponent } from './console/console.component';
 import { CommentsModule } from '../comments/comments.module';
+import { ProfileReportComponent } from './profile-report/profile-report.component';
+import { CreatorSuccessComponent } from './creator/creator-success/creator-success.component';
+import { ProfileReportSuccessComponent } from './profile-report/profile-report-success/profile-report-success.component';
 
 
 @NgModule({
@@ -21,13 +24,19 @@ import { CommentsModule } from '../comments/comments.module';
   ],
   declarations: [
     ReportCreatorComponent,
-    ReportConsoleComponent
+    ReportConsoleComponent,
+    ProfileReportComponent,
+    CreatorSuccessComponent,
+    ProfileReportSuccessComponent
   ],
   exports: [
     ReportConsoleComponent
   ],
   entryComponents: [
-    ReportCreatorComponent
+    ReportCreatorComponent,
+    ProfileReportComponent,
+    CreatorSuccessComponent,
+    ProfileReportSuccessComponent
   ]
 })
 

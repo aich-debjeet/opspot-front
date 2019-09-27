@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 
 import { GroupsService } from '../../groups-service';
 
@@ -21,6 +21,8 @@ opspot = window.Opspot;
 
   group: any;
   $group;
+  @Input()frmGroup;
+  @Output()totalGroup:EventEmitter<any>=new EventEmitter()
 
   invitees: any = [];
   members: Array<any> = [];
@@ -85,7 +87,7 @@ opspot = window.Opspot;
     this.inProgress = true;
     this.httpSubscription = this.client.get(endpoint, params)
       .subscribe((response: any) => {
-        console.log(response);
+        this.totalGroup.emit(response.total)
         if (!response.members) {
           this.moreData = false;
           this.inProgress = false;

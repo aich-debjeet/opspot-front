@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="159px" viewBox="0 0 800 159" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>Logo/withoutText</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="800" height="159" rx="4"></rect>
+    </defs>
+    <g id="Wallet" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="wallet-overview" transform="translate(-320.000000, -70.000000)">
+            <g id="Logo/withoutText" transform="translate(320.000000, 70.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+                <g id="dots" opacity="0.498256138" mask="url(#mask-2)">
+                    <g transform="translate(549.088312, -1.205763) rotate(-45.000000) translate(-549.088312, 1.205763) translate(483.088312, -67.205763)" id="Group" opacity="0.2">
+                        <g>
+                            <circle id="Oval" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-383" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-319" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-384" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-287" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-385" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-320" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-386" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-271" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-387" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-321" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-388" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-288" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-389" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-322" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-390" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-263" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-391" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-323" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-392" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-289" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-393" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-324" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-394" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-272" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-395" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-325" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-396" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-290" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-397" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-326" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-398" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-259" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-399" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-327" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-400" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-291" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-401" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-328" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-402" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-273" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-403" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-329" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-404" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-292" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-405" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-330" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-406" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-264" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-407" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-331" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-408" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-293" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-409" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-332" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-410" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-274" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-411" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-333" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-412" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-294" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-413" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-334" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-414" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-257" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-415" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-335" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-416" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-295" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-417" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-336" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-418" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-275" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-419" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-337" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-420" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-296" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-421" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-338" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-422" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-265" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-423" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-339" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-424" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-297" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-425" fill="#0288D1" fill-rule="nonzero" cx="1.52777778" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-340" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-426" fill="#0288D1" fill-rule="nonzero" cx="69.9722222" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-276" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-427" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-341" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-428" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-298" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-429" fill="#0288D1" fill-rule="nonzero" cx="35.75" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-342" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-430" fill="#0288D1" fill-rule="nonzero" cx="104.194444" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-260" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-431" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-343" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-432" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-299" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-433" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-344" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-434" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-277" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-435" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-345" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-436" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-300" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-437" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-346" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-438" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-266" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-439" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-347" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-440" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-301" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-441" fill="#0288D1" fill-rule="nonzero" cx="18.6388889" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-348" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-442" fill="#0288D1" fill-rule="nonzero" cx="87.0833333" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-278" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-443" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-349" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-444" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-302" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-445" fill="#0288D1" fill-rule="nonzero" cx="52.8611111" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-350" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-446" fill="#0288D1" fill-rule="nonzero" cx="121.305556" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-256" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-447" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-351" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-448" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-303" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-449" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-352" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-450" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-279" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-451" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-353" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-452" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-304" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-453" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-354" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-454" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-267" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-455" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-355" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-456" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-305" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-457" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-356" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-458" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-280" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-459" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-357" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-460" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-306" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-461" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-358" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-462" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-261" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-463" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-359" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-464" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-307" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-465" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-360" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-466" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-281" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-467" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-361" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="1.52777778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-468" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="69.9722222" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-308" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-469" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-362" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="35.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-470" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="104.194444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-268" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-471" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-363" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-472" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-309" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-473" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-364" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-474" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-282" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-475" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-365" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="18.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-476" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="87.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-310" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-477" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-366" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="52.8611111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-478" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="121.305556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-258" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-479" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-367" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-480" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-311" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-481" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-368" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-482" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-283" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-483" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-369" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-484" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-312" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-485" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-370" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-486" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-269" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-487" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-371" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-488" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-313" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-489" fill="#0288D1" fill-rule="nonzero" cx="10.0833333" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-372" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-490" fill="#0288D1" fill-rule="nonzero" cx="78.5277778" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-284" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-491" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-373" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-492" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-314" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-493" fill="#0288D1" fill-rule="nonzero" cx="44.3055556" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-374" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-494" fill="#0288D1" fill-rule="nonzero" cx="112.75" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-262" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-495" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-375" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-496" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-315" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-497" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-376" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-498" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-285" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-499" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-377" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="10.0833333" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-500" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="78.5277778" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-316" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-501" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-378" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="44.3055556" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-502" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="112.75" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-270" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-503" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-379" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-504" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-317" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-505" fill="#0288D1" fill-rule="nonzero" cx="27.1944444" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-380" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-506" fill="#0288D1" fill-rule="nonzero" cx="95.6388889" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-286" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-507" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-381" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="27.1944444" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-508" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="95.6388889" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-318" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-509" fill="#0288D1" fill-rule="nonzero" cx="61.4166667" cy="129.861111" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-382" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="61.4166667" r="1.52777778"></circle>
+                            <circle id="Oval-Copy-510" fill="#0288D1" fill-rule="nonzero" cx="129.861111" cy="129.861111" r="1.52777778"></circle>
+                        </g>
+                    </g>
+                </g>
+                <g id="Group-4" mask="url(#mask-2)" fill="#E5F3FA" opacity="0.501069568">
+                    <g transform="translate(-192.000000, -240.000000)">
+                        <path d="M478,158.305903 C465.996271,126.70865 447.196445,97.0605201 421.528319,71.650392 C325.101368,-23.883464 168.746023,-23.883464 72.3190713,71.650392 C1.53316898,141.765179 -17.2847076,243.87062 15.8473907,331 C27.8511202,299.438511 46.6780222,269.835086 72.3190713,244.433899 C165.316386,152.297597 314.027251,149.052038 410.995724,234.625696 C431.745027,219.569167 456.609896,195.60747 478,158.305903" id="Fill-1"></path>
+                        <path d="M479.154406,159 C467.14137,190.569364 448.323052,220.17179 422.672377,245.58106 C329.672885,337.70531 180.958538,340.950759 83.9877942,255.37105 C63.2380045,270.453892 38.3815797,294.41478 17,331.73297 C29.0040105,363.320215 47.7952511,392.940522 73.4549518,418.358733 C169.884161,513.880422 326.243168,513.880422 422.672377,418.358733 C493.459937,348.237372 512.28728,246.135379 479.154406,159" id="Fill-3"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

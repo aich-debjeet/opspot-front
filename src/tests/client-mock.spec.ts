@@ -2,7 +2,7 @@
  * Created by Marcelo on 29/06/2017.
  */
 export let clientMock = new function () {
-  this.response = null;
+  this.response = [];
 
   let callFake = (url) => {
     return new Promise((resolve, reject) => {

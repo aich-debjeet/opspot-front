@@ -29,6 +29,9 @@ export class ChannelComponent {
   filter: any = 'feed';
   isLocked: boolean = false;
 
+  successRes=false;
+  errorRes="";
+  userVerifcation=false;
   username: string;
   user: OpspotUser;
   offset: string = '';
@@ -59,6 +62,8 @@ export class ChannelComponent {
     this.context.set('activity');
     this.onScroll();
 
+    
+
     this.paramsSubscription = this.route.params.subscribe((params) => {
       this.changed = false;
       this.editing = false;
@@ -84,12 +89,36 @@ export class ChannelComponent {
         this.load();
       }
 
-    });
+    })
+    this.route.queryParams.subscribe(pa=>{
+      if(pa.code){
+        let data={"username":this.username,"code":pa.code}
+        this.emailVerify(data)
+      }
+ 
+     })
   }
 
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();
   }
+
+  
+  emailVerify(data){
+    this.client.post('api/v3/verification/email/confirm',data).then(res=>{
+      if(res['status']==="error"){
+       this.errorRes=res['message']
+       this.userVerifcation=true;
+      }else {
+        res['status']==="success"
+       this.successRes=true;
+       this.userVerifcation=true;
+      } 
+
+    })
+     
+  }
+
 
   load() {
     this.error = '';

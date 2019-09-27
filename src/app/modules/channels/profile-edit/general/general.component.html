@@ -1,0 +1,27 @@
+<div  class="tab" style="display: block;">
+  <h5 class="o-prof-edit-title">Basic Info</h5>
+  <div class="o-prof-general">
+      <form name="form"  #f="ngForm"  >
+          <div class="form-group form-gorup--general-edit">
+              <label>Full Name</label>
+              <input type="text" name="fullName"  [(ngModel)]="model.fullName" #fullName="ngModel"  class="form-control form-control-lg" required >
+              <div *ngIf="fullName.invalid" class="error text-sm">
+                <div *ngIf="fullName.errors.required">full Name is required</div>
+            </div>
+            </div>
+          <div class="form-group form-gorup--general--textarea">
+              <label>Skills</label>
+            <app-skills [maxItems]=5 [(inputTagsValue)]="model.skills"></app-skills>
+              <div class="w100 text-sm grey">Use a enter to separate skills, or choose from the list.</div>
+              <!-- <div *ngIf="skills.invalid&&skills.touched" class="error text-sm">
+                <div *ngIf="skills.errors.required">Skills  required</div>
+            </div> -->
+          </div>
+          <div class="o-prof-edit-actions">
+              <button (click)="f.form.valid && onSubmit()"  type="button" class="btn btn-primary btn-lg">Save Changes</button>
+              <button type="button" class="btn btn-outline-primary btn-lg btn--cancel">Cancel</button>
+          </div><!-- prof edit actions end -->
+      </form>
+  </div>
+</div>
+

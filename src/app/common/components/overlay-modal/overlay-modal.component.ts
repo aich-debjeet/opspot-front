@@ -42,6 +42,7 @@ export class OverlayModalComponent implements AfterViewInit {
     }, ...opts };
 
     this.class = opts.class;
+    console.log(opts.class)
 
     if (!componentClass) {
       throw new Error('Unknown component class');

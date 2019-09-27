@@ -17,6 +17,7 @@ export class TopbarComponent implements OnInit{
   @ViewChild(DynamicHostDirective) host: DynamicHostDirective;
 
   opspot:any = window.Opspot;
+  avatarSize='small';
   user:any={}
   componentRef;
   componentInstance: NotificationsToasterComponent;

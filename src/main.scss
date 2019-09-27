@@ -6,6 +6,7 @@
 @import "src/assets/scss/base/reset";
 @import "src/assets/scss/base/typography";
 @import "src/assets/scss/components/buttons";
+@import "src/assets/scss/components/boost";
 @import "src/assets/scss/components/dropdowns";
 @import "src/assets/scss/components/flag";
 @import "src/assets/scss/components/radio-checkbox";
@@ -18,6 +19,38 @@
 @import "src/assets/scss/components/popular-channel";
 @import "src/assets/scss/components/suggestions";
 @import "src/assets/scss/components/trending-post";
+@import "src/stylesheets/ionicons";
+@import "src/assets/scss/components/profile";
+@import "src/assets/scss/components/profile-info";
+@import "src/assets/scss/components/profile-edit";
+@import "src/assets/scss/components/homepage";
+@import "src/assets/scss/components/footer";
+@import "src/assets/scss/components/notification";
+@import "src/assets/scss/components/wallet";
+@import "src/assets/scss/components/tab";
+@import "src/assets/scss/components/bookmark";
+@import "src/assets/scss/components/create-community";
+@import "src/assets/scss/components/editProfilePicture";
+@import "src/assets/scss/components/community";
+@import "src/assets/scss/components/community-join-request";
+@import "src/assets/scss/components/community-member-popup";
+@import "src/assets/scss/components/community-members";
+@import "src/assets/scss/components/community-prof-info";
+@import "src/assets/scss/components/cover";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29,6 +62,9 @@
 *::before,
 *::after {
     box-sizing: border-box;
+}
+body{
+  background: #fafafa;
 }
 
 .container {
@@ -1207,7 +1243,7 @@ label {
     display: inline-block;
     margin-bottom: 8px;
     font-size: 13px;
-    line-height: 20px;
+    line-height: 14px;
 }
 
 .form-control {
@@ -2763,7 +2799,8 @@ m-date-selector .m-date-selector--input {
           align-items: center;
   background-color: #FFF;
   color: #666;
-  border: 1px solid #DEDEDE; }
+  border: 1px solid #DEDEDE; 
+}
   m-date-selector .m-date-selector--input input {
     font-size: 12px;
     text-transform: uppercase;
@@ -2775,7 +2812,9 @@ m-date-selector .m-date-selector--input {
     width: auto;
     height: auto;
     -webkit-align-self: center;
-            align-self: center; }
+            align-self: center;
+  width: 100%;
+}
   m-date-selector .m-date-selector--input i {
     vertical-align: middle;
     cursor: pointer;
@@ -3318,9 +3357,12 @@ opspot-textarea {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-  background: #ffffff;
+  background: #ECEFF1;
   border: 1px solid #dddddd;
-  overflow: hidden; }
+  overflow: hidden;
+  border-radius: 2px;
+  font-size: 11px;
+  line-height: 18px; }
   opspot-textarea > .m-editor {
     display: inline-block;
     padding: 0;
@@ -3506,8 +3548,8 @@ m-modal .m-modal-container {
           transform: translate(-50%, -50%);
   min-width: 50%;
   min-height: 50%;
-  z-index: 9999998; }
-  @media screen and (max-width: 768px) {
+  z-index: 9999999999; }
+    @media screen and (max-width: 768px) {
     m-modal .m-modal-container {
       width: 90%; } }
   m-modal .m-modal-container .mdl-card {
@@ -3580,6 +3622,10 @@ m-cookies-notice {
     max-width: 800px; }
   .m-overlay-modal.m-overlay-modal--medium {
     max-width: 600px; }
+  .m-overlay-modal.m-overlay-modal--medium-report {
+    max-width: 592px; }
+  .m-overlay-modal.m-overlay-modal--medium-report-success {
+    max-width: 470px; }
   .m-overlay-modal.m-overlay-modal--small {
     background: #FFF;
     max-width: 480px;
@@ -3595,13 +3641,37 @@ m-cookies-notice {
     top: 150px; }
   @media screen and (max-width: 480px) {
     .m-overlay-modal {
-      padding: 16px 32px; } }
+      padding: 16px 32px;
+      max-height: 100vh;
+      left:0vw;
+      right:0vw;
+     } 
+    //  .m-overlay-modal.m-overlay-modal--medium-report-success {
+    //   max-width: -webkit-fit-content;
+    //   margin: 0px 15px;
+    //   width: 100% !important;
+    // }
+    }
+
+  // @media (max-width: 360px){      
+  //   .m-overlay-modal.m-overlay-modal--medium-report-success {
+  //     max-width: fit-content !important;
+  //     margin: 0px 15px;
+  //     width: 100%;
+  //   }
+  // }  
   @media screen and (max-height: 850px) {
     .m-overlay-modal {
-      max-height: 96vh; } }
+      max-height: 100vh;
+      left:0vw;
+      right:0vw;
+     } }
   @media screen and (max-height: 750px) {
     .m-overlay-modal {
-      max-height: 98vh; } }
+      max-height: 100vh;
+      left:0vw;
+      right:0vw;
+    } }
   .m-overlay-modal::-webkit-scrollbar {
     display: none; }
 
@@ -3623,7 +3693,7 @@ m-cookies-notice {
     .m-overlay-modal--close {
       right: 8px; } }
   .m-overlay-modal--close > i.material-icons {
-    font-size: 32px; }
+    font-size: 18px; }
 
 body.m-overlay-modal--shown {
   overflow: hidden; }
@@ -4738,10 +4808,12 @@ m--tree {
   background-color: rgba(0, 0, 0, 0.541176);
   opacity: 0;
   transition: 200ms ease opacity;
-  will-change: opacity; }
+  will-change: opacity;
+ z-index: 1;
+}
 
 .c-scrim--shown {
-  opacity: 1; }
+  opacity:3; }
 
 .c-datepicker {
   min-height: 610px;
@@ -4760,7 +4832,7 @@ m--tree {
   opacity: 0;
   will-change: opacity;
   transition: 200ms ease-in-out opacity, 200ms ease-in-out top;
-  z-index: 9999; }
+  z-index: 1; }
 
 .c-datepicker--open {
   opacity: 1;
@@ -4785,8 +4857,11 @@ m--tree {
 
 .c-datepicker__header-date {
   background: #00bcd4;
-  height: 150px;
-  padding: 16px 0; }
+  height: 180px;
+  padding: 16px 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center; }
 
 .rd-month-label {
   height: 56px;
@@ -4840,9 +4915,9 @@ m--tree {
   visibility: visible; }
 
 .c-datepicker__header-date span {
-  display: block;
+  // display: block;
   color: white;
-  margin: 0;
+  margin: 7px 0;
   transition: opacity 100ms ease-in-out; }
 
 .c-datepicker__header-date__month {
@@ -4858,7 +4933,12 @@ m--tree {
 
 .c-datepicker__header-date__time {
   font-size: 25px;
-  opacity: 0.6; }
+  opacity: 0.6; 
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+}
 
 .c-datepicker__header-date__time > span {
   display: inline-block; }
@@ -4899,7 +4979,7 @@ m--tree {
   content: "";
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 7px;
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -5267,7 +5347,7 @@ m--tree {
   content: "";
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 7px;
   width: 0%;
   height: 0%;
   border-radius: 50%;
@@ -5407,10 +5487,17 @@ m--tree {
   background: rgba(0, 0, 0, 0.05); }
 
 m-body {
-  margin-top: 52px;
+  margin-top: 60px;
   display: block;
   min-height: 100%; }
-
+  @media only screen and (max-width: 600px) {
+    m-body {
+      margin-top: 112px;
+      display: block;
+      min-height: 100%;
+      //height: 100%;
+    }
+  }
 .m-sidebarMarkers__container {
   right: 0;
   position: fixed;
@@ -10285,13 +10372,13 @@ opspot-comments, .m-comment-wrapper {
         -webkit-flex: 1;
                 flex: 1;
         margin-bottom: 8px;
-        border-radius: 25px; }
+         }
   opspot-comments .m-comments-composer form opspot-textarea,
   opspot-comments .opspot-editable-container textarea, .m-comment-wrapper .m-comments-composer form opspot-textarea,
   .m-comment-wrapper .opspot-editable-container textarea {
     width: 100%;
     padding: 8px 96px 8px 8px;
-    background: #fff; }
+    background: #ECEFF1; }
   opspot-comments .m-comments-composer .mdl-card__actions, .m-comment-wrapper .m-comments-composer .mdl-card__actions {
     top: 6px;
     right: 8px; }
@@ -12021,6 +12108,15 @@ m-groups--profile .m-group__grid header {
     .m-overlay-modal--hashtag-selector .m-overlay-modal--close i {
       font-size: 24px !important; }
 
+.m-overlay-modal--report {
+  padding: 0px;
+  background-color: white; }
+    .m-overlay-modal--report .m-overlay-modal--close {
+      background-color: white; }
+        .m-overlay-modal--report .m-overlay-modal--close i {
+          font-size: 24px !important; }
+      
+
 .m-hashtags-selector--modal {
   font-weight: 400;
   max-width: 900px;
@@ -12143,7 +12239,7 @@ m-hashtags-selector, .m-hashtags-selector {
     right: auto;
     left: 0; }
   .m-hashtags-selector .m-dropdown--list {
-    width: 250px; }
+    width: 150px; }
     .m-hashtags-selector .m-dropdown--list .m-btn--with-icon i {
       margin-right: 0px; }
     .m-hashtags-selector .m-dropdown--list .m-dropdown--list--item {
@@ -17371,11 +17467,11 @@ m-nodes--marketing m-nodes--pre-register {
  */
 m-notifications--flyout {
   z-index: 999;
-  background-color: lightgray;
-  width: 320px;
+  // background-color: lightgray;
+  width: 354px;
   position: absolute;
   top: 40px;
-  right: -160px; }
+  left: -290px; }
   @media screen and (max-width: 480px) {
     m-notifications--flyout {
       right: -80px; } }
@@ -17404,7 +17500,7 @@ m-notifications--flyout {
       width: 100%; }
       m-notifications--flyout .notifications-grid .mdl-cell--12-col opspot-notification {
         margin-bottom: 0;
-        padding: 16px 8px;
+        padding: 6px 6px;
         border-bottom: 1px solid #EFEFEF; }
         m-notifications--flyout .notifications-grid .mdl-cell--12-col opspot-notification .body {
           padding: 0 8px; }
@@ -17456,7 +17552,7 @@ opspot-notification.mdl-card {
             flex-direction: column; }
     opspot-notification.mdl-card .avatar img {
       border-radius: 50%;
-      max-height: 50px; }
+      max-height: 40px; }
   opspot-notification.mdl-card .body {
     padding: 0 16px; }
     opspot-notification.mdl-card .body a {
@@ -18738,12 +18834,13 @@ m-settings--wire .m-settings--wire--paywall-inputs > div {
   m-settings--wire .m-settings--wire--paywall-inputs > div.m-settings--wire--paywall--background input[type=file] {
     width: 100%; }
 
-.m-suggestions__sidebar h3 {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 0 8px;
-  color: #444; }
+.m-suggestions__sidebar  {
+  width: 100%;
+  border: 1px solid #ECEFF1;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  padding: 18px;
+  background: #FFFFFF; }
 
 .m-suggestionsSidebar__empty {
   padding: 8px;
@@ -18757,7 +18854,7 @@ m-settings--wire .m-settings--wire--paywall-inputs > div {
   background: #FFF; }
 
 .m-suggestionsSidebarList__item {
-  border-bottom: 1px solid #e8e8e8; }
+  }
   .m-suggestionsSidebarList__item:last-of-type {
     border-bottom: 0; }
   .m-suggestionsSidebarList__item a {
@@ -23462,6 +23559,28 @@ img {
   -moz-osx-font-smoothing: grayscale; }
 
 
+
+  .icon-hashtag:before {
+    content: "\ea2a";
+  }
+  .icon-NSFW .path1:before {
+    content: "\ea2b";
+    color: rgb(0, 0, 0);
+  }
+  .icon-NSFW .path2:before {
+    content: "\ea2c";
+    margin-left: -1em;
+    color: rgb(252, 252, 252);
+  }
+  .icon-paperclip-2:before {
+    content: "\e904";
+  }
+  .icon-paper-plane-1:before {
+    content: "\ea2d";
+  }
+  .icon-user-21:before {
+    content: "\ea2f";
+  }
   .icon-channels:before {
     content: "\e900";
   }
@@ -23478,7 +23597,7 @@ img {
     content: "\e9f54";
   }
   .icon-activity:before {
-    content: "\e905";
+    content: "\ea6d";
   }
   .icon-airplay:before {
     content: "\e906";
@@ -24317,3 +24436,111 @@ img {
   .icon-zoom-out:before {
     content: "\ea1c";
   }
+
+  .modalChanger{
+    padding: 0 !important;
+    max-width: 524px;
+  }
+  @media only screen and (max-width: 600px) {
+  .m-btn{
+    padding: 14px 16px !important;
+  }
+  .myHiddden{
+    display:none !important;
+  }
+} 
+
+
+.m-channel-sidebar{
+  width: 265px !important;
+}   
+
+.m-channel--bio{
+  padding: 25px;
+  margin-top: -106px;
+}
+  opspot-avatar{
+    margin:0 !important;
+  }
+.f-15{
+  font-size:15px !important;
+}
+
+.opAvatar{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center
+}
+
+m-login{
+  margin-top:-60px !important;
+}
+.btn-login{
+  margin-top:7px;
+}
+@media only screen and (max-width: 600px) {
+  m-login{
+    margin-top:-110px !important;
+  }
+}
+.container{
+  padding:0 !important;
+}
+
+.ng2-dropdown-menu{
+  bottom: 0px !important;
+
+}
+
+@media only screen and (min-width: 768px) {
+  .bs-datepicker{
+    top:-60px !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .bs-datepicker{
+    top:-112px !important;
+  }
+}
+
+.bs-datepicker-container{
+  padding: 0px;
+}
+
+app-image-croper .mdl-card__menu{
+  display: none !important;
+}
+app-image-croper .m-modal-container {
+  min-width: auto !important;
+
+}
+
+ m-groups--profile{
+  opspot-avatar .o-prof-img-edit{
+    position: absolute;
+    top:65px;
+  }
+
+  opspot-avatar .o-avatar-xl{
+    overflow: initial !important;
+    position: static;
+  }
+  @media (max-width:768px){
+    .o-avatar-xl--prof
+    {
+      border: none !important;
+    }
+  }
+  
+
+}
+
+
+.btnDefault{
+   border:none;
+   background:#fff;
+}
+.btnDefault:focus{
+  outline:none !important;
+}

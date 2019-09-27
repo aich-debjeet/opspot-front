@@ -1,15 +1,17 @@
+
+
 <div class="m-token--onboarding" *ngIf="!session.getLoggedInUser().rewards">
   <m-token--onboarding--rewards skippable="false"></m-token--onboarding--rewards>
 </div>
-
-<m-wallet-token--overview></m-wallet-token--overview>
+<div id="overview" class="tab" style="display: block;" >
+<!-- <m-wallet-token--overview></m-wallet-token--overview> -->
 
 <m-wallet-token--chart></m-wallet-token--chart>
 
 <div class="m-token-contributions--ledger">
   <div class="m-token-contributions--ledger-filters m-border">
-    <m-date-selector label="From:" [date]="startDate" (dateChange)="onStartDateChange($event)" dateFormat="shortDate"></m-date-selector>
-    <m-date-selector label="To:" [date]="endDate" (dateChange)="onEndDateChange($event)" dateFormat="shortDate"></m-date-selector>
+    <m-date-selector  [date]="startDate" (dateChange)="onStartDateChange($event)" dateFormat="shortDate"></m-date-selector>
+    <m-date-selector  [date]="endDate" (dateChange)="onEndDateChange($event)" dateFormat="shortDate"></m-date-selector>
   </div>
 
   <table class="mdl-data-table mdl-js-data-table m-border" [mdl]>
@@ -45,4 +47,5 @@
       </tr>
     </tbody>
   </table>
+</div>
 </div>

@@ -1,0 +1,62 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+.o-block{
+    min-height: 297px;	
+    max-width: 592px;
+    width: 100%;	
+    border-radius: 4px;	
+    background-color: #FFFFFF;
+    overflow: hidden;
+    //margin: 0px 15px;
+    &__head{
+        width: 100%;
+        border-bottom: 1px solid $grey-light;
+        padding: 25px 46px;
+        position: relative;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            padding: 25px 30px 15px 30px;
+        }
+    }
+    &__content{
+        width: 100%;
+        padding: 25px 0px 34px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        @include mq($from: $mobile_sm, $until: $mobile_lg) {
+            padding: 25px 0px 34px 0px;
+        }
+        p{
+            width: 387px;
+            text-align: center;
+            @include mq($from: $mobile_sm, $until: $mobile_lg) {
+                width: 100%;
+                padding: 32px;
+            }
+        }
+    }
+    &__action{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: row;
+        margin-bottom: 42px;
+    }
+}
+.o-block-close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    i{
+        font-size: 20px;
+    }
+}
+.btn--block{
+    width: 161px;
+    @include mq($from: $mobile_sm, $until: $mobile_lg) {
+        width: 115px;
+    }
+}

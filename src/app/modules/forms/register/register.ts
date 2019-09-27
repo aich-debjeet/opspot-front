@@ -7,6 +7,7 @@ import { ReCaptchaComponent } from '../../../modules/captcha/recaptcha/recaptcha
 import { ExperimentsService } from '../../experiments/experiments.service';
 import { Service } from './service';
 
+
 @Component({
   moduleId: module.id,
   selector: 'opspot-form-register',
@@ -25,8 +26,11 @@ export class RegisterForm {
   takenUsername: boolean = false;
   usernameValidationTimeout: any;
   number;
-  otpView = false;
+  noViewOtp=true;
+  verifiedOtp = false;
   showFbForm: boolean = false;
+  
+  enterOtpError: boolean = true;
 
   form: FormGroup;
   fbForm: FormGroup;
@@ -46,6 +50,7 @@ export class RegisterForm {
     private service: Service
 
   ) {
+    // this.dateOfBirth = this.dob();
     this.form = fb.group({
       fullname: ['', Validators.required],
       username: ['', Validators.required],
@@ -54,7 +59,7 @@ export class RegisterForm {
       password2: ['', Validators.required],
       otp: fb.group({
         otp1: '', otp2: '', otp3: '', otp4: '', otp5: '', otp6: ''
-      }, { updateOn: 'blur', }),
+      }, { updateOn: 'change' }),
       tos: [false],
       mobileNumber: ['', { validators: Validators.required, updateOn: 'blur' }],
       exclusive_promotions: [false],
@@ -65,10 +70,9 @@ export class RegisterForm {
       }),
     }, { validator: this.MustMatch('password', 'password2') })
 
-    // for dob 
+    //for dob 
   }
-
-  // mobile number entered
+  //mobile number entered
   onMobileNumbr() {
     let numbers;
     this.form.controls['mobileNumber'].valueChanges.subscribe(val => {
@@ -82,7 +86,7 @@ export class RegisterForm {
       let values = '';
       a.forEach(a => { values += a });
       if (values.length === 6) {
-        const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
+       const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
         const data = {
           'number': phoneNumber,
           'code': values,
@@ -90,20 +94,26 @@ export class RegisterForm {
         }
         this.service.verifyMobile(data)
           .then((data: any) => {
+            this.verifiedOtp = true;
+            if(this.errorMessage === 'Confirmation failed'){
+              this.errorMessage = ''
+            }
             // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
           })
           .catch((e) => {
             if (e.status === 'error') {
+              this.verifiedOtp = false;
               this.errorMessage = e.message;
             }
           });
       }
+
     })
   }
-  // for getting otp
-  getOtp(numbr) {
+  //for getting otp
+   getOtp(numbr) {
     this.service.getOtp(numbr).then((res: any) => {
-      this.otpView = true;
+      this.noViewOtp = false;
       localStorage.setItem('phoneNumberSecret', res.secret);
     });
   }
@@ -117,16 +127,23 @@ export class RegisterForm {
     this.onOtp()
   }
 
-  register(e) {
+  register() {
     // console.log(this.form.value);
-    e.preventDefault();
+    if (this.errorMessage.length > 0)
     this.errorMessage = '';
-    if (!this.form.value.tos) {
-      this.errorMessage = 'To create an account you need to accept terms and conditions.';
+    if(!this.enterOtpError)
+    this.enterOtpError = true;
+    
+    if((!this.form.value.tos) || (this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == '')){
+      if(this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == ''){
+        this.enterOtpError = false;
+      }
+      if (!this.form.value.tos) {
+        this.errorMessage = 'To create an account you need to accept terms and conditions.';
+      }
       return;
     }
     if (this.form.valid) {
-
       const otpCode = `${this.form.value.otp.otp1}${this.form.value.otp.otp2}${this.form.value.otp.otp3}${this.form.value.otp.otp4}${this.form.value.otp.otp5}${this.form.value.otp.otp6}`;
       const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
 
@@ -145,7 +162,7 @@ export class RegisterForm {
         'password': this.form.value.password,
         'password2': this.form.value.password2
       }
-      // re-enable cookies
+      //re-enable cookies
       document.cookie = 'disabled_cookies=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       this.form.value.referrer = this.referrer;
 
@@ -164,7 +181,7 @@ export class RegisterForm {
             this.reCaptcha.reset();
           }
           if (e.status === 'failed') {
-            // incorrect login details
+            //incorrect login details
             this.errorMessage = 'RegisterException::AuthenticationFailed';
             this.session.logout();
           } else if (e.status === 'error') {
@@ -207,13 +224,13 @@ export class RegisterForm {
   //   this.usernameValidationTimeout = setTimeout(this.validateUsername.bind(this), 500);
   // }
 
-
+  
   // function to give birth date selection
 
   dob() {
-    let date = ['Date', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
-    let month = ['Month', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-    let year = ['Year'];
+    let date = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+    let month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+    let year = [];
     let a = new Date().getFullYear() - 13;
     let ab = a - 70;
     for (let i: any = a; i >= ab; i--) {
@@ -223,10 +240,10 @@ export class RegisterForm {
     return val;
   }
 
-  // password controls
+  //password controls
   checkPassword(control: AbstractControl) {
     let enteredPassword = control.value
-    let passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+    let passwordCheck = /^(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
     return (!passwordCheck.test(enteredPassword) && enteredPassword) ? { 'requirements': true } : null;
   }
 
@@ -236,7 +253,7 @@ export class RegisterForm {
       this.form.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
   }
 
-  // for confirm password
+  //for confirm password
   MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
@@ -276,11 +293,11 @@ export class RegisterForm {
       }
     }
   }
-  removeSpace(numb) {
+  removeSpace(numb){
     return numb.replace(/\s/g, '')
   }
 
-  removeOperators(numb) {
+  removeOperators(numb){
     return numb.replace(/\s/g, '').replace('+', '').replace('-', '');
   }
 

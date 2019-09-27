@@ -1,4 +1,4 @@
-<div class="m-token-contributions--overview m-border">
+<!-- <div class="m-token-contributions--overview m-border">
   
   <div class="m-token-contributions--overview--columns">
 
@@ -47,4 +47,24 @@
 
   </div>
 
+</div> -->
+
+
+<div class="o-overview-score-reward">
+  <div class="o-score-reward">
+      <div class="text-h4 primary f500">
+        <ng-container *ngIf="overview.yourContribution !== null">
+          {{ overview.yourContribution | number }}
+        </ng-container>
+      </div>
+      <div class="text-md">Your Score</div>
+  </div>
+  <div class="o-score-reward">
+      <div class="text-h4 primary f500">
+        <ng-container *ngIf="overview.currentReward !== null">
+          {{ overview.currentReward | token:18 | number }}
+        </ng-container>
+      </div>
+      <div class="text-md">Estimated Rewards</div>
+  </div>
 </div>

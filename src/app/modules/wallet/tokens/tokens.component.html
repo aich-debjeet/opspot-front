@@ -1,16 +1,16 @@
-<div class="m-page">
+<!-- <div class="m-page">
   <div class="m-page--sidebar">
-    <m-wallet--balance-tokens></m-wallet--balance-tokens>
-
+    <m-wallet--balance-tokens></m-wallet--balance-tokens> -->
+<!-- 
     <div class="m-page--sidebar--navigation">
  
       <a class="m-page--sidebar--navigation--item"
         routerLink="/token"
         routerLinkActive="m-page--sidebar--navigation--item-active"
       >
-        <span class="icon-ops-cart">
+        <i style="font-size: 22px !important;" class="icon-shopping-cart ">
                 
-                </span>
+        </i>
         <span i18n="@@WALLET__TOKENS__PURCHASE">Buy Tokens</span>
       </a> 
   
@@ -36,30 +36,30 @@
       >
         <i class="material-icons">stars</i>
         <span i18n="@@WALLET__TOKENS__CONTRIBUTIONS">Contributions</span>
-      </a>
+      </a> -->
 
-      <a class="m-page--sidebar--navigation--item"
+      <!-- <a class="m-page--sidebar--navigation--item"
         routerLink="/wallet/tokens/addresses"
         routerLinkActive="m-page--sidebar--navigation--item-active"
       >
         <i class="material-icons">settings</i>
         <span i18n="@@WALLET__TOKENS__ADDRESSES">Addresses</span>
-      </a>
-      <a class="m-page--sidebar--navigation--item"
+      </a> -->
+      <!-- <a class="m-page--sidebar--navigation--item"
         routerLink="/wallet/tokens/101"
         routerLinkActive="m-page--sidebar--navigation--item-active"
       >
         <i class="material-icons">help</i>
         <span i18n="@@WALLET__TOKENS__TOKEN_101">Token 101</span>
-      </a>
-      <a class="m-page--sidebar--navigation--item"
+      </a> -->
+      <!-- <a class="m-page--sidebar--navigation--item"
         routerLink="/wallet/tokens/testnet"
         routerLinkActive="m-page--sidebar--navigation--item-active"
       >
         <i class="material-icons">link</i>
         <span i18n="@@WALLET__TOKENS__TESTNET_TOKENS">Testnet Tokens</span>
-      </a>
-      <a class="m-page--sidebar--navigation--item"
+      </a> -->
+      <!-- <a class="m-page--sidebar--navigation--item"
         (click)="invite.open = true"
       >
         <m-modal-invite #invite [open]="invite.open" (closed)="invite.open = false"></m-modal-invite>
@@ -68,10 +68,58 @@
         <span i18n="@@M__ACTION__REFERRAL_LINK">Referral Link</span>
       </a>
     </div>
-  </div>
+  </div> -->
 
-  <div class="m-page--main">
+  <!-- <div class="m-page--main">
     <m-token--onboarding *ngIf="showOnboarding"></m-token--onboarding>
     <router-outlet></router-outlet>
   </div>
+</div> -->
+
+
+<div class="container" style="margin-top:6em;">
+  <div class="o-wallet-topbar">
+    <div class="o-wallet-topbar-left">
+        <h3 class="f700">Wallet
+            <div class="o-payout-tym hidden-above-tablet">
+                <span class="caption-bold f700">{{ overview.nextPayout | timediff:true }} <i class="icon-info"></i></span>
+            </div>
+        </h3>
+        <div class="text-sm m-t-6">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.
+        </div>
+        <div class="o-payout-tym hidden-under-tablet">
+            <span class="caption-bold f700">{{ overview.nextPayout | timediff:true }} <i class="icon-info"></i>
+            
+            </span>
+        </div>
+    </div><!-- wallet topbar left end-->
+    <div class="o-wallet-topbar-right">
+        <div class="o-wallet-token-block">
+            <div id="token-title" class="text-md primary">Tokens</div>
+            <div id="token-count" class="text-h3 f700 primary"><m-wallet--balance-tokens></m-wallet--balance-tokens></div>
+        </div>
+        <a routerLink="/token" class="btn btn-primary btn-sm o-btn--wallet-buytoken">Buy Tokens</a>
+    </div><!-- wallet buytoken part end -->
+</div>
+<div class="o-wallet-block">
+  <div class="o-wallet-block__tab">
+    <div class="tabs-wallet">
+        <ul class="tabs-list wallet-tabs">
+            <li routerLinkActive="active" routerLink="/wallet/tokens/overview"><a >Overview</a></li>
+            <li  routerLink="/wallet/tokens/transactions"
+            routerLinkActive="active"><a >Transaction</a></li>
+            <li  routerLinkActive="active" routerLink="/wallet/tokens/contributions" ><a >Contribution</a></li>
+            <li  routerLinkActive="active" routerLink="/wallet/tokens/withdraw" ><a >Withdraw</a></li>
+        </ul>
+    </div><!--tab end-->
+</div>
+<div class="o-wallet-block__content">
+  <div class="tabs-wallet">
+    <!-- <m-token--onboarding *ngIf="showOnboarding"></m-token--onboarding> -->
+    <router-outlet></router-outlet>
+  </div>
+</div>
+</div>
+
 </div>

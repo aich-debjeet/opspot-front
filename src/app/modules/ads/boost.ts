@@ -10,9 +10,9 @@ import { SettingsService } from '../settings/settings.service';
   selector: 'm-ads-boost',
   inputs: ['handler', 'limit'],
   template: `
-    <h3 class="m-newsfeedSidebar__header">
+    <p class="m-newsfeedSidebar__header">
       <ng-container i18n="@@ADS__BOOSTED_CONTENT">Boosted content</ng-container>
-    </h3>
+    </p>
     <div class="m-ad-boost-entity" *ngFor="let entity of boosts">
       <opspot-card [object]="entity" hostClass="mdl-card m-border"></opspot-card>
     </div>

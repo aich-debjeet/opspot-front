@@ -4,6 +4,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { OpspotModule } from './app/app.module';
 import { environment } from './environments/environment';
 
+
 if (environment.production) {
   enableProdMode();
 }

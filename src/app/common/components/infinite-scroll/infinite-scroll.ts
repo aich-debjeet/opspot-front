@@ -9,20 +9,20 @@ import { ScrollService } from '../../../services/ux/scroll';
   outputs: ['loadHandler: load'],
   template: `
     <div class="mdl-spinner mdl-js-spinner is-active" [mdl] [hidden]="!inProgress"></div>
-    <div class="m-infinite-scroll-manual mdl-color--blue-grey-200 mdl-color-text--blue-grey-500"
-      [hidden]="inProgress || !moreData"
-      (click)="manualLoad()"
-      *ngIf="!hideManual">
-      <ng-container i18n="@@COMMON__INFINITE_SCROLL__LOAD_MORE">Click to load more</ng-container>
-    </div>
-    <div class="m-infinite-scroll-manual mdl-color--blue-grey-200 mdl-color-text--blue-grey-500"
+  
+    <div class="m-infinite-scroll-manual "
       [hidden]="moreData"
       *ngIf="!hideManual">
       <ng-container i18n="@@COMMON__INFINITE_SCROLL__NOTHING_MORE">Nothing more to load</ng-container>
     </div>
   `
 })
-
+  // <div class="m-infinite-scroll-manual mdl-color--blue-grey-200 mdl-color-text--blue-grey-500"
+    //   [hidden]="inProgress || !moreData"
+    //   (click)="manualLoad()"
+    //   *ngIf="!hideManual">
+    //   <ng-container i18n="@@COMMON__INFINITE_SCROLL__LOAD_MORE">Click to load more</ng-container>
+    // </div>
 
 export class InfiniteScroll {
 

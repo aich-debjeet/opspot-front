@@ -1,0 +1,16 @@
+<div class="o-community-members-info">
+    <div [routerLink]="['/', user.username]" class="o-community-members-info-prof">
+      <div class="o-community-members-info-prof__avatar o-avatar-md">
+          <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt="img">
+      </div>
+      <div  id="username"  class="caption-bold">
+          {{user.name}}
+      </div>
+    </div>
+    <div class="o-community-members-info__option">
+      <button *ngIf="user['is:owner']" type="button" class="btn btn-outline-primary btn-xs disabled">admin</button>
+      <a>
+     <ng-content></ng-content>
+      </a>
+    </div>
+</div>

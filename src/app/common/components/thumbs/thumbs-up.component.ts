@@ -13,7 +13,7 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
   template: `
     <a class="o-actions__link" (click)="thumb()" >
       <i class='spot-ico' [ngClass]="{'icon-heart-filled': has(),'icon-heart':!has() }"></i>
-      <span class="o-action-count text-sm grey" *ngIf="object['thumbs:up:count'] > 0"><span>{{object['thumbs:up:count'] | number}}</span></span>
+      <span class="o-action-count text-sm grey" *ngIf="object['thumbs:up:count'] > -1"><span>{{object['thumbs:up:count'] | number}}</span></span>
     </a>
   `,
   styles: [`
@@ -22,6 +22,9 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
       }
       .icon-heart-filled{
         color:red;
+      }
+      .spot-ico{
+        font-size:19px !important;
       }
   `],
 })

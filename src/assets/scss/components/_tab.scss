@@ -1,0 +1,424 @@
+.tabs{
+    width:100%;
+    height:auto;
+    margin:0 auto;
+}
+
+/* tab list item */
+.tabs .tabs-list{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 1px solid #dde4e8;
+    display: flex;
+    margin-bottom: 9px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        justify-content: center;
+    }
+}
+.tabs .tabs-list li{
+    float:left;
+    margin:0px;
+    margin: 15px 12px 0px;
+    text-align: center;
+    background-color:transparent;
+}
+.tabs .tabs-list li:hover{
+    cursor:pointer;
+}
+.tabs .tabs-list li a{
+    text-decoration: none;
+    padding:0px 8px 8px;
+    color:$grey;
+    font-size: 15px;	
+    font-weight: 500;	
+    line-height: 18px;
+    display: inline-block;
+}
+
+/* Tab content section */
+.tabs .tab{
+    display:none;
+    width: 100%;
+    min-height: 250px;
+    height: auto;
+    border-radius: 0px;
+    padding: 0;
+    background-color: transparent;
+    clear: both;
+}
+
+/* When active state */
+.active{
+    display:block !important;
+}
+.tabs .tabs-list li.active{
+    color: $primary!important;
+    border-bottom: 2px solid $primary; 
+}
+li.active a{
+    color: $primary!important;
+}
+
+/* media query */
+@media screen and (max-width:360px){
+    .tabs{
+        margin:0;
+        width:96%;
+    }
+    .tabs .tabs-list li{
+        width:80px;
+    }
+}
+
+
+// profile edit
+
+.tabs--prof-edit{
+    width:100%;
+    height:auto;
+    margin:0 auto;
+}
+
+/* tab list item */
+.tabs--prof-edit .tabs-list{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-bottom: 1px solid $grey-light;
+    padding: 0px 27px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        justify-content: flex-start;
+        flex-direction: row;
+        margin-top: 0px;
+        padding: 0px 15px;
+    }
+}
+.tabs--prof-edit .tabs-list li{
+    float: left;
+    margin: 0px;
+    padding: 23px 0px;
+    background-color: transparent;
+    border-bottom: 2px solid #FFFFFF;
+    margin: 0px 20px;
+    cursor: pointer;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        margin: 12px 12px 0px;
+        padding: 0px 0px 12px;
+        border-left: 0px!important;
+        border-bottom: 2px solid $white;
+    }
+}
+.tabs--prof-edit .tabs-list li:hover{
+    cursor:pointer;
+}
+.tabs--prof-edit .tabs-list li a{
+    text-decoration: none;
+    color:$grey-dark;
+    font-size: 15px;	
+    font-weight: 400;	
+    line-height: 18px;
+    display: inline-block;
+}
+
+/* Tab content section */
+.tabs--prof-edit .tab{
+    display:none;
+    width: 100%;
+    min-height: 615px;
+    height: auto;
+    border-radius: 0px;
+    padding: 0;
+    background-color: transparent;
+    clear: both;
+    padding: 24px 34px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        padding :15px;
+    }
+}
+
+/* When active state */
+.active{
+    display:block !important;
+}
+.tabs--prof-edit .tabs-list li.active{
+    color: $primary!important;
+    border-bottom: 2px solid $primary;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        border-left: 0px!important;
+        border-bottom: 2px solid $primary;
+    }
+}
+li.active a{
+    color: $primary!important;
+    font-weight: 500!important;
+    transition: .25s;
+}
+
+/* media query */
+@media screen and (max-width:360px){
+    .tabs--prof-edit{
+        margin:0;
+        width:100%;
+    }
+    .tabs--prof-edit .tabs-list li{
+        // width:80px;
+    }
+}
+
+// wallet tab
+
+.tabs-wallet{
+    width:100%;
+    height:auto;
+    margin:0 auto;
+}
+/* tab list item */
+.tabs-wallet .tabs-list{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: row;
+        padding-left: 15px;
+    }
+}
+.tabs-wallet .tabs-list li{
+    float:left;
+    margin:0px;
+    text-align: left;
+    background-color:transparent;
+    border-left: 6px solid #fff; 
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        border-left: 0px;
+        border-bottom: 3px solid #fff;
+        margin-right: 24px;
+    }
+}
+.tabs-wallet .tabs-list li:hover{
+    cursor:pointer;
+}
+.tabs-wallet .tabs-list li a{
+    text-decoration: none;
+    padding:16px 34px;
+    color:$grey-dark;
+    font-size: 15px;	
+    font-weight: 500;	
+    line-height: 18px;
+    display: inline-block;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        padding: 14px 0px 12px;
+    }
+}
+
+/* Tab content section */
+.tabs-wallet .tab{
+    display:none;
+    width: 100%;
+    min-height: 250px;
+    height: auto;
+    border-radius: 0px;
+    padding: 0;
+    background-color: transparent;
+    clear: both;
+}
+
+/* When active state */
+.active{
+    display:block !important;
+}
+.tabs-wallet .tabs-list li.active{
+    color: $primary!important;
+    border-left: 6px solid $primary; 
+    background: rgba( 236,239,241, 0.5);
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        border-left: 0px;
+        border-bottom: 3px solid $primary;
+        background: transparent;
+    }
+}
+li.active a{
+    color: $primary!important;
+}
+
+/* media query */
+@media screen and (max-width:360px){
+    .tabs-wallet{
+        margin:0;
+        width:100%;
+    }
+    .tabs-wallet .tabs-list li{
+        width:80px;
+    }
+}
+
+
+
+// community tab
+
+.tabs-community{
+    width:100%;
+    height:auto;
+    margin:0 auto;
+}
+
+/* tab list item */
+.tabs-community .tabs-list{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 1px solid #dde4e8;
+    display: flex;
+    margin-bottom: 9px;
+    justify-content: center;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        justify-content: center;
+    }
+}
+.tabs-community .tabs-list li{
+    float:left;
+    margin:0px;
+    margin: 15px 12px 0px;
+    text-align: center;
+    background-color:transparent;
+}
+.tabs-community .tabs-list li:hover{
+    cursor:pointer;
+}
+.tabs-community .tabs-list li a{
+    text-decoration: none;
+    padding:0px 8px 8px;
+    color:$grey;
+    font-size: 15px;	
+    font-weight: 500;	
+    line-height: 18px;
+    display: flex;
+}
+
+/* Tab content section */
+.tabs-community .tab{
+    display:none;
+    width: 100%;
+    min-height: 250px;
+    height: auto;
+    border-radius: 0px;
+    padding: 0;
+    background-color: transparent;
+    clear: both;
+}
+
+/* When active state */
+.active{
+    display:block !important;
+}
+.tabs-community .tabs-list li.active{
+    color: $primary!important;
+    border-bottom: 2px solid $primary; 
+}
+li.active a{
+    color: $primary!important;
+}
+
+/* media query */
+@media screen and (max-width:360px){
+    .tabs-community{
+        margin:0;
+        width:100%;
+    }
+    .tabs-community .tabs-list li{
+        width: unset;
+    }
+}
+
+
+// settings tab
+
+.tabs-settings{
+    width:100%;
+    height:auto;
+    margin:0 auto;
+}
+/* tab list item */
+.tabs-settings .tabs-list{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: row;
+        padding-left: 15px;
+    }
+}
+.tabs-settings .tabs-list li{
+    float:left;
+    margin:0px;
+    text-align: left;
+    background-color:transparent;
+    border-left: 6px solid #fff; 
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        border-left: 0px;
+        border-bottom: 3px solid #fff;
+        margin-right: 24px;
+    }
+}
+.tabs-settings .tabs-list li:hover{
+    cursor:pointer;
+}
+.tabs-settings .tabs-list li a{
+    text-decoration: none;
+    padding:16px 34px;
+    color:$grey-dark;
+    font-size: 15px;		
+    line-height: 18px;
+    display: inline-block;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        padding: 14px 0px 12px;
+    }
+}
+
+/* Tab content section */
+.tabs-settings .tab{
+    display:none;
+    width: 100%;
+    min-height: 250px;
+    height: auto;
+    border-radius: 0px;
+    padding: 0;
+    background-color: transparent;
+    clear: both;
+}
+
+/* When active state */
+.active{
+    display:block !important;
+}
+.tabs-settings .tabs-list li.active{
+    color: $primary!important;
+    border-left: 6px solid $primary; 
+    background: rgba( 236,239,241, 0.5);
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        border-left: 0px;
+        border-bottom: 3px solid $primary;
+        background: transparent;
+    }
+}
+li.active a{
+    color: $primary!important;
+}
+
+/* media query */
+@media screen and (max-width:360px){
+    .tabs-settings{
+        margin:0;
+        width:100%;
+    }
+    .tabs-settings .tabs-list li{
+        width:80px;
+    }
+}

@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CaptchaModule } from './modules/captcha/captcha.module';
 
+import { TextMaskModule } from 'angular2-text-mask';
+
 import { Opspot } from './app.component';
 
 import { OPSPOT_APP_ROUTING_DECLARATIONS, OpspotAppRoutes, OpspotAppRoutingProviders } from './router/app';
@@ -37,6 +39,7 @@ import { OnboardingModule } from './modules/onboarding/onboarding.module';
 import { NotificationModule } from './modules/notifications/notification.module';
 
 import { GroupsModule } from './modules/groups/groups.module';
+import { NetworkModule } from './modules/network/network.module'
 import { PostMenuModule } from './common/components/post-menu/post-menu.module';
 import { BanModule } from './modules/ban/ban.module';
 import { BlogModule } from './modules/blogs/blog.module';
@@ -58,7 +61,14 @@ import { CanaryModule } from './modules/canary/canary.module';
 import { HttpClientModule } from "@angular/common/http";
 import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
-import { PortfolioModule } from './modules/portfolio/portfolio.module';
+import { BookmarkModule } from './modules/bookmark/bookmark.module';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ExploreComponent } from './modules/explore/explore.component';
+import { ExploreImageComponent } from './modules/explore/explore-image/explore-image.component';
+import { ExploreAudioComponent } from './modules/explore/explore-audio/explore-audio.component';
+import { ExploreVideoComponent } from './modules/explore/explore-video/explore-video.component';
+import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-blogs.component';
+import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
 
 
 @NgModule({
@@ -70,6 +80,11 @@ import { PortfolioModule } from './modules/portfolio/portfolio.module';
     OPSPOT_APP_ROUTING_DECLARATIONS,
     OPSPOT_DECLARATIONS,
     OPSPOT_PLUGIN_DECLARATIONS,
+    ExploreComponent,
+    ExploreImageComponent,
+    ExploreAudioComponent,
+    ExploreVideoComponent,
+    ExploreBlogsComponent
   ],
   imports: [
     BrowserModule,
@@ -117,12 +132,16 @@ import { PortfolioModule } from './modules/portfolio/portfolio.module';
     HelpdeskModule,
     MobileModule,
     CanaryModule,
-    PortfolioModule,
-
+    InviteFriendsModule,
     //last due to :username route
     ChannelsModule,
+    BookmarkModule,
     BsDropdownModule.forRoot(),
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    BsDatepickerModule.forRoot(),
+    NetworkModule,
+    TextMaskModule,
+
   ],
   providers: [
     OpspotAppRoutingProviders,

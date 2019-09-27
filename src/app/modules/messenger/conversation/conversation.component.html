@@ -53,7 +53,7 @@
         [class.m-optimistic-guess]="message.optimisticGuess"
         [class.odd]="message.owner.guid == session.getLoggedInUser().guid"
         (click)="message.showTs = !message.showTs">
-          <img [src]="opspot.cdn_url + 'icon/' + message.owner.guid + '/small'"
+          <img [src]="opspot.cdn_url + 'icon/' + message.owner.guid"
             *ngIf="message.owner.guid == session.getLoggedInUser().guid"
             [routerLink]="['/', message.owner.username]">
           <div
@@ -73,7 +73,7 @@
             *ngIf="message.subtype == 'call_missed'">
             <ng-container i18n="@@MESSENGER__CONVERSATION__MISSED_CALL">Missed Call</ng-container>
           </div>
-          <img [src]="opspot.cdn_url + 'icon/' + message.owner.guid + '/small'"
+          <img [src]="opspot.cdn_url + 'icon/' + message.owner.guid "
             *ngIf="message.owner.guid != session.getLoggedInUser().guid"
             [routerLink]="['/', message.owner.username]">
           <div [hidden]="!message.showTs" class="m-messenger--conversations-ts mdl-color-text--blue-grey-100">{{ message.time_created * 1000 | date: 'medium' }}</div>

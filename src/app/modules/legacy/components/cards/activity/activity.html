@@ -161,8 +161,8 @@
     </div>
 
     <a [routerLink]="['/media', activity.entity_guid]">
-      <img [src]="activity.custom_data[0].src" style="width:100%"
-      (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/placeholder-bulb.jpg'"
+      <img [src]="activity.custom_data[0]?activity.custom_data[0].src:''" style="width:100%"
+      (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
         *ngIf="activity.custom_data"
       >
     </a>
@@ -178,24 +178,33 @@
 <div class="o-actions" *ngIf="!hideTabs">
 	<opspot-button-thumbs-up [object]="activity"></opspot-button-thumbs-up>
 	<!-- <opspot-button-thumbs-down [object]="activity"></opspot-button-thumbs-down> -->
-  <m-wire-button *ngIf="session.getLoggedInUser().guid != (activity.remind_object ? activity.remind_object.owner_guid : activity.owner_guid)"
-    [object]="activity.remind_object ? activity.remind_object : activity"
-    (done)="wireSubmitted($event)"
-  ></m-wire-button>
+
   <opspot-button-comment [object]="activity" (click)="openComments()"></opspot-button-comment>
-  <a class="o-actions__link" >
+  <a class="o-actions__link"  >
     <i class="icon-eye f-15"></i>
     <span class="o-action-count text-sm grey">
       <span>{{ activity.impressions | number }}</span>
     </span>
   </a>
+  <a class="o-actions__link"  *ngIf ="session.getLoggedInUser().guid == activity.owner_guid" >
+    <i class="icon-coins f-15"></i>
+    <span class="o-action-count text-sm grey">
+      <span *ngIf="activity.wire_totals">{{ activity.wire_totals.tokens | token:18 | abbr }}</span>
+    </span>
+  </a>
+
+
+  <m-wire-button *ngIf="session.getLoggedInUser().guid != (activity.remind_object ? activity.remind_object.owner_guid : activity.owner_guid)"
+  [object]="activity.remind_object ? activity.remind_object : activity"
+  (done)="wireSubmitted($event)"
+></m-wire-button>
 
 	<opspot-button-remind [object]="activity"></opspot-button-remind>
   <a class="btn btn-primary btn-xs btn--boost"
     *ngIf ="session.getLoggedInUser().guid == activity.owner_guid"
     id="boost-actions"
     (click)="showBoost()">
-    <ng-container i18n="verb|@@M__ACTION__BOOST">Boost</ng-container>
+    <ng-container i18n="verb|@@M__ACTION__BOOST" >Boost</ng-container>
   </a>
 </div>
 
@@ -229,22 +238,32 @@
 	<button
       class="mdl-button m-pin-button mdl-button--icon"
       (click)="togglePin()"
-      [disabled]="session.getLoggedInUser().guid != activity.owner_guid || activity.dontPin"
+      *ngIf="session.getLoggedInUser().guid != activity.owner_guid "
     >
-      <m-tooltip
+    <m-tooltip
+    icon="turned_in"  *ngIf="activity.bookmark">
+        This post is Bookmarked 
+    </m-tooltip>
+    <m-tooltip  *ngIf="!activity.bookmark"
+    icon="turned_in_not"
+    >
+    Click to bookmark this post to the top of your channel feed
+    </m-tooltip>
+
+    <!-- <m-tooltip
         icon="turned_in"
         *ngIf="activity.pinned"
         i18n="@@OPSPOT__CARDS__ACTIVITY__PINNED_POST"
         >
         This post is pinned
-      </m-tooltip>
-      <m-tooltip
+      </m-tooltip> -->
+      <!-- <m-tooltip
         icon="turned_in_not"
         *ngIf="session.getLoggedInUser().guid == activity.owner_guid && !activity.pinned && !activity.dontPin"
         i18n="@@OPSPOT__CARDS__ACTIVITY__CLICK_TO_PIN"
         >
         Click to pin this post to the top of your channel feed
-      </m-tooltip>
+      </m-tooltip> -->
     </button>
     <m-safe-toggle *ngIf="showRatingToggle && session.isAdmin()" [(entity)]="activity"></m-safe-toggle>
 	<button class="mdl-button m-translate-button mdl-button--icon" *ngIf="isTranslatable" (click)="translateToggle = true;">
