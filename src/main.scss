@@ -37,6 +37,7 @@
 @import "src/assets/scss/components/community-members";
 @import "src/assets/scss/components/community-prof-info";
 @import "src/assets/scss/components/cover";
+@import "src/assets/scss/components/discussions";
 
 
 
@@ -5487,7 +5488,7 @@ m--tree {
   background: rgba(0, 0, 0, 0.05); }
 
 m-body {
-  margin-top: 60px;
+  margin-top: 70px;
   display: block;
   min-height: 100%; }
   @media only screen and (max-width: 600px) {
@@ -11642,14 +11643,14 @@ m-group--members-module .opspot-group-sidebar-loader {
     -webkit-flex: 1;
             flex: 1; }
 
-opspot-groups-profile-conversation {
-  position: fixed;
-  top: 52px;
-  width: calc(33% - 12px);
-  display: block;
-  margin-bottom: 0;
-  -webkit-flex: 1;
-          flex: 1; }
+// opspot-groups-profile-conversation {
+//   // position: fixed;
+//   // top: 52px;
+//   // width: calc(33% - 12px);
+//   // display: block;
+//   // margin-bottom: 0;
+//   // -webkit-flex: 1;
+//   //         flex: 1; }
   @media screen and (max-width: 700px) {
     opspot-groups-profile-conversation {
       width: 100%; } }
@@ -11657,15 +11658,23 @@ opspot-groups-profile-conversation {
     background: #FFF;
     height: 100%;
     height: calc(100vh - 45px);
-    position: relative;
+    position: absolute;
     padding: 0;
     margin: 0;
-    display: -webkit-flex;
+    display: -webkit-box;
     display: flex;
-    -webkit-flex-direction: column;
-            flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
     box-sizing: border-box;
-    padding-bottom: 24px; }
+    padding-bottom: 24px;
+    overflow-y: scroll;
+    height: calc(100% - 115px);
+    top: 0;
+    padding-top: 15px;
+    width: 100%;
+    overflow-x:hidden;
+    padding: 0px 15px;}
     opspot-groups-profile-conversation .m-group__chat .opspot-comments-container {
       overflow-y: auto;
       max-height: none;
@@ -24463,6 +24472,16 @@ img {
   flex-direction: column;
   width: 100%;
   align-items: center
+
+  
+}
+@media screen and(max-width:785px){
+  .opAvatar{
+    .o-prof-img-block{
+      left:auto !important;
+      top:-62px !important;
+    }
+  }
 }
 
 m-login{

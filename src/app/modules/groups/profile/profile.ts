@@ -54,8 +54,8 @@ export class GroupsProfile {
 
   inviteToggle:boolean=false;
   memberToggle:boolean=false;
-
-
+  membersMobile;
+  memberSrc=`${this.opspot.cdn_url}icon/`
   @ViewChild('feed') private feed: GroupsProfileFeed;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
@@ -80,18 +80,19 @@ export class GroupsProfile {
   ) { }
 
   ngOnInit() {
-     
     this.context.set('activity');
     this.listenForNewMessages();
     this.detectWidth();
     this.detectConversationsState();
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {
+       this.loadMembers(params['guid'])
+
         let changed = params['guid'] !== this.guid;
 
         this.guid = params['guid'];
         this.postMeta.container_guid = this.guid;
-
+        
         if (changed) {
           this.group = void 0;
 
@@ -418,7 +419,7 @@ export class GroupsProfile {
 
   openInvite(){
   if(window.innerWidth>785){
-    this.memberToggle=!this.memberToggle;
+    this.inviteToggle=!this.inviteToggle;
      }else{
        this.router.navigate([`/groups/${this.guid}/invite`])
      } 
@@ -431,6 +432,12 @@ export class GroupsProfile {
       this.router.navigate([`/groups/${this.guid}/members`])
     } 
   }
-
-
+ 
+ async loadMembers(guid){
+    let endpoint = `api/v1/groups/membership/${guid}`
+    let  params = { limit: 4, offset: this.offset };
+     let members= await this.client.get(endpoint, params)
+     console.log(members)
+     this.membersMobile=members['members']
+    } 
 }
