@@ -305,7 +305,9 @@
         </form>
     </div>
 
-    <div class="o-create-opportunity" *ngIf="display == '#Opportunity'">
+    <app-opportunity-form *ngIf="display == '#Opportunity'" (ChangeDefault)="changeToDefault()" (Close)="close()"></app-opportunity-form>
+
+    <!-- <div class="o-create-opportunity" *ngIf="display == '#Opportunity'">
         <div class="o-create-opportunity-head o-create-opportunity-head--border">
             <div class="o-create-opportunity__title text-lg f500">Create a post
                 <span class="o-create-dropdown-style">
@@ -373,7 +375,7 @@
                 <button type="button" class="btn btn-primary btn-sm disabled" (click)="postOpportunity()">Post</button>
             </div>
         </form>
-    </div>
+    </div> -->
 
     <div class="o-create-blue-store" *ngIf="display == '#TheBlueStore'">
         <div class="o-create-blue-store-head o-create-blue-store-head--border">
