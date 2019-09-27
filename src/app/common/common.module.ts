@@ -82,6 +82,7 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
 import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
 import { OpportunityWidgetComponent } from './components/opportunity-widget/opportunity-widget.component';
+import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
 
 @NgModule({
   imports: [
@@ -164,7 +165,8 @@ import { OpportunityWidgetComponent } from './components/opportunity-widget/oppo
     AndroidAppDownloadComponent,
     ImageCroperComponent,
     ReadMoreComponent,
-    OpportunityWidgetComponent
+    OpportunityWidgetComponent,
+    OpportunityListCardComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -239,7 +241,8 @@ import { OpportunityWidgetComponent } from './components/opportunity-widget/oppo
     AndroidAppDownloadComponent,
     ImageCroperComponent,
     ReadMoreComponent,
-    OpportunityWidgetComponent
+    OpportunityWidgetComponent,
+    OpportunityListCardComponent
   ],
   providers: [
     {
