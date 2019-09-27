@@ -126,4 +126,4 @@ export class OpspotBanner {
   onClick(e) {
     e.target.parentNode.parentNode.getElementsByTagName('input')[0].click();
   }
-}
+} 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule as NgFormsModule, ReactiveFormsModule } from '@angular/forms';

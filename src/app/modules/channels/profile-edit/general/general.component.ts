@@ -15,10 +15,23 @@ export class GeneralComponent implements OnInit {
    }
  
    model: any = {};
-
+  
 
  onSubmit(){
-   console.log(this.model)
+   let skills=this.model.skills.map(el=>el.value)
+   let info={
+     fullName:this.model.fullName,  
+     skills
+   }
+    this.sendInfo(info)
+ }
+
+ sendInfo(data){
+   let info={"general_info":{
+     "full_name":data.fullName,
+     "skills":data.skills
+   }}
+  this.client.post('api/v1/entities/general_info' ,info)
  }
  
 
@@ -30,7 +43,13 @@ export class GeneralComponent implements OnInit {
   }
   async getInfo(){
    let res=await this.client.get('api/v1/channel/me')
-   console.log(res)
+   this.model.fullName=res['channel'].name
+     if(res['channel'].general_info.skills.length>0){
+        let skills=[];
+        res['channel'].general_info.skills.map(el=>{skills.push({display:el,value:el})})
+        this.model.skills=skills;
+     }
+    
   }
 
   ngOnInit() {
@@ -38,6 +57,5 @@ export class GeneralComponent implements OnInit {
 
     
   }
- items;
  data=[]
 }

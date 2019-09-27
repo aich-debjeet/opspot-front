@@ -31,6 +31,16 @@
 @import "src/assets/scss/components/bookmark";
 @import "src/assets/scss/components/create-community";
 @import "src/assets/scss/components/editProfilePicture";
+@import "src/assets/scss/components/community";
+@import "src/assets/scss/components/community-join-request";
+@import "src/assets/scss/components/community-member-popup";
+@import "src/assets/scss/components/community-members";
+@import "src/assets/scss/components/community-prof-info";
+@import "src/assets/scss/components/cover";
+
+
+
+
 
 
 
@@ -26069,4 +26079,30 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
      border-radius:4px!important;
      overflow:hidden!important;
   }
+}
+
+ .m-groups--profile{
+  opspot-avatar .o-prof-img-edit{
+    position: absolute;
+    top:65px;
+  }
+
+  opspot-avatar .o-avatar-xl{
+    overflow: initial !important;
+    position: static;
+  }
+  @media (max-width:768px){
+    .o-avatar-xl--prof
+    {
+      border: none !important;
+    }
+  }
+}
+
+.btnDefault{
+   border:none;
+   background:#fff;
+}
+.btnDefault:focus{
+  outline:none !important;
 }

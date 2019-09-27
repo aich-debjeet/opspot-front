@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
-
 import { NotificationService } from './modules/notifications/notification.service';
 import { AnalyticsService } from './services/analytics';
 import { SocketsService } from './services/sockets';
@@ -11,8 +10,9 @@ import { BlockchainService } from './modules/blockchain/blockchain.service';
 import { Web3WalletService } from './modules/blockchain/web3-wallet.service';
 import { Client } from './services/api/client';
 import { WebtorrentService } from './modules/webtorrent/webtorrent.service';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, NavigationStart } from "@angular/router";
 import { ChannelOnboardingService } from "./modules/onboarding/channel/onboarding.service";
+import { filter } from 'rxjs/operators';
 
 @Component({
   moduleId: module.id,
@@ -23,11 +23,12 @@ import { ChannelOnboardingService } from "./modules/onboarding/channel/onboardin
 export class Opspot {
   name: string;
   opspot = window.Opspot;
-
+  url;
   showOnboarding: boolean = false;
-
   showTOSModal: boolean = false;
-
+  
+  showNavbar=true
+  
   paramsSubscription;
 
   constructor(
@@ -46,11 +47,22 @@ export class Opspot {
     public router: Router,
   ) {
     this.name = 'Opspot';
+    if(window.innerWidth<778){
+      router.events.pipe(filter(event=>event instanceof NavigationStart))
+      .subscribe(event=>{
+          this.url=event['url'].split('/')
+           if( this.url[1]==="groups"){
+               this.showNavbar=false;
+          }
+      }
+      )
+     }
+     
+
   }
 
   async ngOnInit() {
     this.notificationService.getNotifications();
-
     this.session.isLoggedIn(async(is) => {
       if (is) {
         this.showOnboarding = await this.onboardingService.showModal();
@@ -60,6 +72,7 @@ export class Opspot {
         }
       }
     });
+
 
     this.onboardingService.onClose.subscribe(() => {
       this.showOnboarding = false;

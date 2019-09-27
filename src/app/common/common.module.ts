@@ -80,8 +80,7 @@ import { SocketsService } from '../services/sockets';
 import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
-import { from } from 'rxjs';
-
+import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
 
 @NgModule({
   imports: [
@@ -163,6 +162,7 @@ import { from } from 'rxjs';
     DynamicFormComponent,
     AndroidAppDownloadComponent,
     ImageCroperComponent,
+    ReadMoreComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -235,7 +235,8 @@ import { from } from 'rxjs';
     PieGraph,
     DynamicFormComponent,
     AndroidAppDownloadComponent,
-    ImageCroperComponent
+    ImageCroperComponent,
+    ReadMoreComponent
   ],
   providers: [
     {
