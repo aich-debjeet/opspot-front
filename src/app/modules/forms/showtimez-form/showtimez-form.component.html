@@ -1,0 +1,77 @@
+<div class="o-create-show-timez">
+  <div class="o-create-show-timez-head o-create-show-timez-head--border">
+      <div class="o-create-show-timez__title text-lg f500">Create a post
+          <span class="o-create-dropdown-style">
+              <span class="text-md primary f500">On #Showtimez<span class="icon-x"
+                      (click)="changeToDefault()"></span></span>
+          </span>
+      </div>
+      <div class="close" (click)="close()"><i class="icon-x"></i></div>
+  </div>
+  <!--boost head end-->
+  <form [formGroup]="showTimezForm">
+      <div class="o-create-show-timez-body o-create-show-timez-body--flex">
+          <div class="form-group">
+              <label>Title</label>
+              <input type="text" class="form-control form-control-lg" formControlName="eventTitle">
+              <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventTitle').errors?.required">
+                      This is required</div>
+          </div>
+          
+          <!--Event Title-->
+          <div class="form-group">
+              <label>Description<span class="text-sm grey description-width">21/300</span></label>
+              <textarea class="form-control" rows="5" formControlName="eventDescription"></textarea>
+              <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventDescription').errors?.required">
+                      This is required</div>
+          </div>
+          <!--Event Description-->
+          <div class="form-group">
+              <label>Location</label>
+              <input type="text" class="form-control form-control-lg" formControlName="eventsLocation">
+              <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventsLocation').errors?.required">
+                      This is required</div>
+          </div>
+          <!--Event Location-->
+          <div class="o-create-show-timez-date-time">
+              <div class="form-group">
+                  <label>Date</label>
+                  <input type="text" class="form-control form-control-lg" [textMask]="{mask: dateMask}" placeholder="Select Date" formControlName="eventdate">
+                  <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventdate').errors?.required">
+                          This is required</div>
+              </div>
+              <!--Date Location-->
+              <div class="form-group ml-18">
+                  <label>Time</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="Time" [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventTime">
+                  <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventTime').errors?.required">
+                          This is required</div>
+              </div>                    
+          </div>
+          <div class="form-group">
+              <label>Cover Image</label>
+              <div class="o-create-show-timez-cover-image">
+                  <div class="fileUpload">
+                      <span class="icon-plus"></span>
+                      <input type="file" id="file" #file class="upload" name="attachment"
+                      (change)="uploadAttachment(file, $event)" formControlName="eventImage">
+                  </div>
+                  <!--file upload ends-->
+                  <div class="fileUpload-preview ml-18" *ngIf="attachment.meta.attachment_guid.length > 0">
+                      <a class="o-create-show-timez-cover-image__avatar" *ngFor="let image of cards">
+                          <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i class="icon-x"></i></a>
+                          <img [src]="image.imageLink" alt="">
+                      </a>
+                  </div>
+                  <!--file preview ends-->
+              </div>
+              <div class="text-sm grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>
+          </div>
+      </div>
+      <!--body ends-->
+      <div class="o-create-show-timez-footer">
+          <button type="button" class="btn btn-primary btn-sm disabled" (click)="eventSubmit()">Post</button>
+          <!--for event page-->
+      </div>
+  </form>
+</div>

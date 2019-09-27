@@ -51,6 +51,8 @@ export class Activity  {
   type: string;
   element: any;
   visible: boolean = false;
+  showOpportunity = false;
+
 
   editing: boolean = false;
   @Input() hideTabs: boolean;
@@ -100,14 +102,22 @@ export class Activity  {
       && this.activity.custom_data[0].src
     ) {
       this.activity.custom_data[0].src = this.activity.custom_data[0].src.replace(this.opspot.site_url, this.opspot.cdn_url);
+
+      console.log("this.activity.custom_data[0].src: ", this.activity.custom_data[0].src);
+      
     }
     
     if (!this.activity.message) {
       this.activity.message = '';
+
     }
 
     if (!this.activity.title) {
       this.activity.title = '';
+    }
+
+    if( this.activity.entity_type === "opportunity" ){
+      this.showOpportunity = true;
     }
 
     this.boosted = this.activity.boosted || this.activity.p2p_boosted;
