@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-
+import { OpspotFormsModule } from '../../forms/forms.module';
 import { ModalPosterComponent } from './poster-modal.component';
 import { PosterComponent } from './poster.component';
 import { CommonModule as NgCommonModule } from '@angular/common';
@@ -24,6 +24,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     TextInputAutocompleteModule,
     ReactiveFormsModule,
     TextMaskModule,
+    OpspotFormsModule,
   ],
   declarations: [
     PosterComponent,
