@@ -58,7 +58,7 @@
               </div>
               <div class="feed-card-opportunity-block__bottom hidden-mob">
                 <div class="text-md">
-                  <div *ngIf="opportunity?.blurb"><span class="primary">#Oppornunity</span>{{opportunity?.blurb}}</div>
+                  <div *ngIf="opportunity?.blurb"><span class="primary">#Oppornunity</span>{{opportunity?.description}}</div>
 
                   <!-- <div class="mt-20">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
                   Aenean commodo ligula eget dolor. Aenean massa. 
@@ -188,6 +188,7 @@
         </div>
       </div>
       <div class="o-posts-inner-page__right hidden-mob">
+        <app-opportunity-widget *ngIf="allOpportunities" [object]="allOpportunities"></app-opportunity-widget>
         <!-- {% include components/opportunities_sidebar.html %}
           {% include components/trending_post.html %}   -->
       </div>

@@ -1,3 +1,5 @@
-<p>
-  opportunity-widget works!
-</p>
+<div class="o-card o-card--opportunities">
+  <div class="text-md f500">Opportunities <a href="#" class="text-sm grey float-right">See All</a></div>
+  <app-opportunity-list-card *ngFor="let opportunity of allOpportunities" [object]="opportunity">
+  </app-opportunity-list-card>
+</div>

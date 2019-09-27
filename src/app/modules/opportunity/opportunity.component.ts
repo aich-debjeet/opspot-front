@@ -26,6 +26,7 @@ export class OpportunityComponent implements OnInit {
       this.guid = params['guid'];
     });
     this.load();
+    this.loadAllOpportunities();
   }
 
   activity: any;
@@ -40,6 +41,7 @@ export class OpportunityComponent implements OnInit {
   showBoostOptions: boolean = false;
   private _showBoostMenuOptions: boolean = false;
   count;
+  allOpportunities : any;
 
 
   type: string;
@@ -177,6 +179,22 @@ export class OpportunityComponent implements OnInit {
     } else {
       this.count = this.opportunity['thumbs:up:count']
     }
+  }
+
+  loadAllOpportunities(){
+    this.inProgress = true;
+    let ownerGuid = this.session.getLoggedInUser().guid;
+    console.log("ownerGuid: ",ownerGuid)
+    this.client.get('api/v2/feeds/container/ownerGuid/opportunities?limit=3&sync=&as_activities=&force_public=1')
+      .then((data: any) => {
+        if(data && data.entities){
+          console.log("all opportunities: ", data.entities);
+          this.allOpportunities  = data.entities;
+        }
+      })
+      .catch((e) => {
+        this.inProgress = false;
+      });
   }
 
 }
