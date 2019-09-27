@@ -20,6 +20,7 @@ import { ShowtimezFormComponent } from './showtimez-form/showtimez-form.componen
 import { BlueStoreFormComponent } from './blue-store-form/blue-store-form.component';
 import { PortfolioFormComponent } from './portfolio-form/portfolio-form.component';
 import { MyJourneyFormComponent } from './my-journey-form/my-journey-form.component';
+import { TextMaskModule } from 'angular2-text-mask';
 // import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MyJourneyFormComponent } from './my-journey-form/my-journey-form.compon
     ReactiveFormsModule,
     CaptchaModule,
     ExperimentsModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    TextMaskModule,
   ],
   declarations: [
     LoginForm,
@@ -56,6 +58,10 @@ import { MyJourneyFormComponent } from './my-journey-form/my-journey-form.compon
     Tutorial,
     ForgotPasswordComponent,
     OpportunityFormComponent,
+    ShowtimezFormComponent,
+    BlueStoreFormComponent,
+    PortfolioFormComponent,
+    MyJourneyFormComponent
   ]
 })
 export class OpspotFormsModule {
