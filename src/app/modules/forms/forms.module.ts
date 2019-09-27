@@ -54,7 +54,8 @@ import { MyJourneyFormComponent } from './my-journey-form/my-journey-form.compon
     OnboardingForm,
     OnboardingCategoriesSelector,
     Tutorial,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    OpportunityFormComponent,
   ]
 })
 export class OpspotFormsModule {
