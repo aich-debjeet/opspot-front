@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CaptchaModule } from './modules/captcha/captcha.module';
 
+import { TextMaskModule } from 'angular2-text-mask';
+
 import { Opspot } from './app.component';
 
 import { OPSPOT_APP_ROUTING_DECLARATIONS, OpspotAppRoutes, OpspotAppRoutingProviders } from './router/app';
@@ -139,7 +141,8 @@ import { OpportunityModule } from './modules/opportunity/opportunity.module';
     NgxIntlTelInputModule,
     BsDatepickerModule.forRoot(),
     NetworkModule,
-    OpportunityModule
+    OpportunityModule,
+    TextMaskModule,
 
   ],
   providers: [
