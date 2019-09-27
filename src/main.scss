@@ -5749,9 +5749,9 @@ m-topbar {
     m-topbar .m-topbar--account img {
       border-radius: 50%;
       border: 1px solid #EEE;
-      max-height: 30px; }
+      max-height: 45px; }
     m-topbar .m-topbar--account .m-dropdown--menu, m-topbar .m-topbar--account .m-dropdown__list {
-      margin-top: 28px; }
+      margin-top: 50px; }
       m-topbar .m-topbar--account .m-dropdown--menu li.mdl-menu__item, m-topbar .m-topbar--account .m-dropdown__list li.mdl-menu__item {
         padding: 0; }
         m-topbar .m-topbar--account .m-dropdown--menu li.mdl-menu__item > a, m-topbar .m-topbar--account .m-dropdown__list li.mdl-menu__item > a {
@@ -23518,6 +23518,14 @@ input[type=number]::-webkit-outer-spin-button {
 
 img {
   text-indent: -9999px; }
+
+  .bufferbar {
+    background-image: linear-gradient(to right,rgba(255,255,255,.7),rgba(255,255,255,.7)),linear-gradient(to right,rgb(96,125,139),rgb(96,125,139))
+  }
+
+  .progressbar.bar.bar1 {
+    background-color: #0288D1;
+  }
 
 /*!
   Ionicons, v2.0.1
