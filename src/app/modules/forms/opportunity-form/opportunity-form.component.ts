@@ -17,6 +17,7 @@ export class OpportunityFormComponent implements OnInit {
   
   @Output() ChangeDefault: EventEmitter<any> = new EventEmitter<any>();
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
+  @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
   opportunityForm: FormGroup;
   submitted: boolean = false;
@@ -64,7 +65,7 @@ export class OpportunityFormComponent implements OnInit {
       this.client.post('api/v3/opportunity', data)
         .then((data: any) => {
           // data.activity.boostToggle = true;
-          //this.load.next(data.activity);
+          this.load.emit(data);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
           this.submitted = false;

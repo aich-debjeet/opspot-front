@@ -36,7 +36,7 @@ input:focus{
      type="text" name="q" [(ngModel)]="q" (keyup)="search(q)" placeholder="Search for a channel" i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__INVITE__SEARCH_PLACEHOLDER" />
 
     <ul class="o-community-members-list scrollbar scrollbar-default" [hidden]="users.length == 0 || !searching">
-      <li *ngFor="let user of users" (click)="invite(user);" class="o-community-members-list__user-list">
+      <li *ngFor="let user of users"  class="o-community-members-list__user-list">
         <div class="o-community-members-list__user-list">
           <div class="o-community-members-info">
             <div class="o-community-members-info-prof">
