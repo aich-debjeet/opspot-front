@@ -463,15 +463,16 @@ export class CommentListComponent implements OnInit {
     this.canPost = false;
     this.triedToPost = false;
 
-    this.attachment.remove(file).then(() => {
-      this.canPost = true;
-      this.triedToPost = false;
-      file.value = '';
-    }).catch(e => {
-      console.error(e);
-      this.canPost = true;
-      this.triedToPost = false;
-    });
+    // TODO @abhijeet: resolve the bug
+    // this.attachment.remove(file).then(() => {
+    //   this.canPost = true;
+    //   this.triedToPost = false;
+    //   file.value = '';
+    // }).catch(e => {
+    //   console.error(e);
+    //   this.canPost = true;
+    //   this.triedToPost = false;
+    // });
 
     this.detectChanges();
   }
