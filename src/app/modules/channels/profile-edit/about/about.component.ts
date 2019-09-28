@@ -9,11 +9,13 @@ import {Client } from '../../../../services/api/client';
 export class AboutComponent implements OnInit {
 
 
-  constructor(private client:Client) { }
+  constructor(private client:Client) { 
+  this.data=["Kannada","English" ,"Hindi" ,"Tamil"]
+
+  }
   date;
   model:any={}
-  data=["Kannada","English" ,"Hindi" ,"Tamil"]
-
+  data;
   bsConfig={
     containerClass:'theme-dark-blue',
     adaptivePosition: true,
