@@ -1,4 +1,4 @@
-<div class="opspot-comments-container"
+<div class="m-group__chat"
   commentsScroll
   (previous)="autoloadPrevious()"
   [emitter]="commentsScrollEmitter"
@@ -42,7 +42,7 @@
     <span>{{ error }}</span>
   </p>
 
-  <div class="m-layout--spacer"></div>
+  <!-- <div class="m-layout--spacer"></div> -->
   <!-- <opspot-card-comment *ngFor="let comment of comments; let i = index"
     [object]="comment"
     [parent]="parent"
@@ -83,17 +83,20 @@
 
 <div class="m-comment m-comment--poster opspot-block" *ngIf="!readonly">
 
-    <div class="opspot-avatar">
+    <!-- <div class="opspot-avatar">
       <a [routerLink]="['/', session.getLoggedInUser().username]">
         <img [src]="getAvatar()" style="height: 28px; width: 28px; margin-top: 5px;" />
       </a>
-    </div>
+    </div> -->
 
-    <div class="opspot-body">
+    <div class="o-dis-msgs-footer">
 
-        <div class="m-comments-composer">
-            <form (submit)="post($event)">
+        <div class="o-dis-msgs-type" >
+            <form (submit)="post($event)" style="width: 100%;
+            margin-top: -9px;
+            border: none;">
                 <opspot-textarea
+                style="border: none !important"
                   #message="Textarea"
                   [(mModel)]="content"
                   [disabled]="(ascendingInProgress || descendingInProgress) && attachment.hasFile()"
@@ -103,37 +106,46 @@
                   [placeholder]="conversation ? 'Enter your message' : 'Enter your comment'"
                 ></opspot-textarea>
             </form>
-
+            <div class="o-dis-msgs-type__addon">
+              <a   class="o-dis-msgs-type__link">
+                  <i (click)="fileUploaderBtn()" class="icon-plus-circle"></i>
+              </a>
+            </div>
             <div class="opspot-comment-span mdl-color-text--red-500" *ngIf="!canPost && triedToPost">
               <ng-container i18n="@@M__COMMON__WAIT_UPLOAD">Please wait until the upload is complete.</ng-container>
             </div>
+            <input type="file" style="display: none;"  id="file" #file name="attachment" (change)="uploadAttachment(file, $event)"/>
 
-            <div class="mdl-card__actions">
+
+            <!-- <div class="mdl-card__actions"> -->
               <!-- Attachements -->
-              <div class="attachment-button" [ngClass]="{ 'mdl-color-text--amber-500': attachment.hasFile() }">
+              <!-- <div class="attachment-button" [ngClass]="{ 'mdl-color-text--amber-500': attachment.hasFile() }">
                 <span class="icon-paperclip-2"></span>
                 <input type="file" id="file" #file name="attachment" (change)="uploadAttachment(file, $event)"/>
-              </div>
+              </div> -->
 
-              <a class="m-mature-button"
+              <!-- <a class="m-mature-button"
               [ngClass]="{ 'mdl-color-text--red-500': attachment.isMature() }"
               (click)="attachment.toggleMature()"
               title="Mature content"
               i18n-title="@@M__COMMON__MATURE_CONTENT"
               >
                 <i class="material-icons">explicit</i>
-              </a>
-
+              </a> -->
+<!-- 
               <a class="m-post-button"
               (click)="post($event)"
               [ngClass]="{ 'm-button-disabled': !postEnabled() }"
               >
                 <i class="material-icons">send</i>
-              </a>
-            </div>
+              </a> -->
+            <!-- </div> -->
 
             <!-- Rich embed preview -->
-            <div class="post-preview" *ngIf="attachment.isRich()">
+
+
+
+            <!-- <div class="post-preview" *ngIf="attachment.isRich()">
               <div class="mdl-spinner mdl-js-spinner is-active" [mdl] [hidden]="attachment.getMeta().title"></div>
               <div class="m-rich-embed mdl-shadow--2dp cf" *ngIf="attachment.getMeta().title">
                 <opspot-rich-embed
@@ -143,7 +155,7 @@
                   <i class="material-icons">delete</i>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Attachment preview -->
             <div class="post-preview" *ngIf="attachment.hasFile() || attachment.getUploadProgress() > 0"  (click)="removeAttachment(file)">
@@ -162,9 +174,12 @@
               </div>
             </div>
         </div>
+        <div (click)="post($event)" class="o-dis-msgs-send"><i class="icon-send"></i>
+        </div>
 
     </div>
 
 </div>
 
 <m-modal-signup-on-action [open]="showModal" (closed)="showModal = false" action="comment" [overrideOnboarding]="true"></m-modal-signup-on-action>
+

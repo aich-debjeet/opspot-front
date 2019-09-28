@@ -10,6 +10,8 @@ import { TranslateModule } from '../translate/translate.module';
 import { ModalsModule } from '../modals/modals.module';
 import { CommentsListComponent } from './list/list.component';
 import { CommentComponent } from './card/comment.component';
+import { CommentCardComponent } from './comment-card/comment-card.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
 
 @NgModule({
   imports: [
@@ -25,11 +27,15 @@ import { CommentComponent } from './card/comment.component';
     CommentsScrollDirective,
     CommentComponent,
     CommentsListComponent,
+    CommentCardComponent,
+    CommentListComponent,
   ],
   exports: [
     CommentsScrollDirective,
     CommentComponent,
     CommentsListComponent,
+    CommentListComponent,
+    CommentCardComponent,
   ],
   providers: [],
 })

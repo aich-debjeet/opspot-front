@@ -170,6 +170,7 @@ export class PosterComponent {
     this.client.post('api/v1/newsfeed', data)
       .then((data: any) => {
         data.activity.boostToggle = true;
+        console.log(data)
         this.load.next(data.activity);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
@@ -435,5 +436,9 @@ export class PosterComponent {
     } else {
       this.timeMask[1] = new RegExp('[0-9]')
     }
+  }
+  emitEvent(data){
+    console.log(data)
+    this.load.next(data.activity);
   }
 }
