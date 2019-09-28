@@ -8,6 +8,7 @@ import { CommonModule } from '../../common/common.module';
 // components
 import { PortfolioComponent } from './portfolio.component';
 
+// TODO @abhijeet: handle the other routes
 const portfolioRoutes: Routes = [
   { path: 'portfolio/:username', component: PortfolioComponent }
 ];

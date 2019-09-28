@@ -11,8 +11,8 @@ import { Client } from '../../services/api';
 export class PortfolioComponent implements OnInit, OnDestroy {
 
   paramsSubscription: Subscription;
-  username: string;
   portfolioMedia: any[];
+  username: string;
 
   constructor(
     private route: ActivatedRoute,
