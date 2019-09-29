@@ -1,11 +1,17 @@
 <div class="o-create-opportunity">
   <div class="o-create-opportunity-head o-create-opportunity-head--border">
-      <div class="o-create-opportunity__title text-lg f500">Create a post
+      <div class="o-create-opportunity__title text-lg f500" *ngIf="!oppGuid">Create a post
           <span class="o-create-dropdown-style">
               <span class="text-md primary f500">On #Opportunity<span class="icon-x"
                       (click)="changeToDefault()"></span></span>
           </span>
       </div>
+      <div class="o-create-opportunity__title text-lg f500" *ngIf="oppGuid" >Edit a post
+        <span class="o-create-dropdown-style">
+            <span class="text-md primary f500">On #Opportunity<span class="icon-x"
+                    (click)="changeToDefault()"></span></span>
+        </span>
+    </div>
       <div class="close" (click)="close()"><i class="icon-x"></i></div>
   </div>
   <form [formGroup]="opportunityForm" (ngSubmit)="postOpportunity(opportunityForm.value)">

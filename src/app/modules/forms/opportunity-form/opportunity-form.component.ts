@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Session } from '../../../services/session';
@@ -19,6 +19,20 @@ export class OpportunityFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
+  opportunity: any;
+  oppGuid: string;
+
+  @Input('object') set data(object) {
+    // console.log('INPUT', JSON.stringify(object));
+    this.opportunity = object;
+    if (this.opportunity) {
+      this.oppGuid = object['guid'];
+      this.buildForm(this.opportunity);
+    } else {
+      this.buildForm();
+    }
+  }
+
   opportunityForm: FormGroup;
   submitted: boolean = false;
   meta: any = {
@@ -28,15 +42,35 @@ export class OpportunityFormComponent implements OnInit {
   tags = [];
   cards = [];
   
-  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
-    this.opportunityForm = this.formBuilder.group({
-      category: ['', [Validators.required]],
-      opportunityTitle: ['', [Validators.required]],
-      opportunityDescription: ['', [Validators.required]],
-      opportunityLocation: ['', [Validators.required]],
-      opportunityImage: ['', []]
-    }); 
+  constructor(
+    public session: Session,
+    public client: Client,
+    public upload: Upload,
+    public attachment: AttachmentService,
+    private formBuilder: FormBuilder
+  ) {
+    // this.buildForm();
    }
+
+   buildForm(data?) {
+    if (data) {
+      this.opportunityForm = this.formBuilder.group({
+        category: [data['category'] ? data['category'] : '', [Validators.required]],
+        opportunityTitle: [data['title'] ? data['title'] : '', [Validators.required]],
+        opportunityDescription: [data['description'] ? data['description'] : '', [Validators.required]],
+        opportunityLocation: [data['location'] ? data['location'] : '', [Validators.required]],
+        opportunityImage: [data['image'] ? data['image'] : '', []]
+      });
+    } else {
+      this.opportunityForm = this.formBuilder.group({
+        category: ['', [Validators.required]],
+        opportunityTitle: ['', [Validators.required]],
+        opportunityDescription: ['', [Validators.required]],
+        opportunityLocation: ['', [Validators.required]],
+        opportunityImage: ['', []]
+      });
+    }
+  }
 
   ngOnInit() {
   }
@@ -48,12 +82,11 @@ export class OpportunityFormComponent implements OnInit {
     this.Close.emit();
   }
   postOpportunity(value) {
-    console.log(value)
+    console.log(value);
 
     this.submitted = true;
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
-    console.log("data: ", data);
     data.attachment_guid = data.attachment_guid;
     data.title = value.opportunityTitle;
     data.description = value.opportunityDescription;
@@ -62,13 +95,18 @@ export class OpportunityFormComponent implements OnInit {
     data.published = true;
 
     if (this.opportunityForm.valid) {
-      this.client.post('api/v3/opportunity', data)
+
+      let endpoint = 'api/v3/opportunity';
+      if (this.oppGuid) {
+        endpoint = 'api/v3/opportunity/' + this.oppGuid;
+      }
+      this.client.post(endpoint, data)
         .then((data: any) => {
-          // data.activity.boostToggle = true;
           this.load.emit(data);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
           this.submitted = false;
+          this.changeToDefault();
         })
         .catch((e) => {
           this.submitted = false;

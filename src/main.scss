@@ -3627,6 +3627,8 @@ m-cookies-notice {
     max-width: 592px; }
   .m-overlay-modal.m-overlay-modal--medium-report-success {
     max-width: 470px; }
+  .m-overlay-modal.m-overlay-modal--medium-hashtagforms {
+    max-width: 525px; }
   .m-overlay-modal.m-overlay-modal--small {
     background: #FFF;
     max-width: 480px;
@@ -25162,7 +25164,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 
 
 .o-create-opportunity{
-  width: 525px;
+  width: 525px; 
   border-radius: 4px;
   background-color: $white;
 }
