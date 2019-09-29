@@ -3,6 +3,8 @@ import { Client } from '../../services/api';
 import { Session } from '../../services/session';
 import { OpspotActivityObject } from '../../interfaces/entities';
 import { ActivatedRoute } from '@angular/router';
+import { OpportunityFormComponent } from '../forms/opportunity-form/opportunity-form.component';
+import { OverlayModalService } from '../../services/ux/overlay-modal';
 
 
 @Component({
@@ -18,7 +20,8 @@ export class OpportunityComponent implements OnInit {
     private route: ActivatedRoute,
     public session: Session,
     public client: Client,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    public overlayModal: OverlayModalService
   ) { }
 
   ngOnInit() {
@@ -41,7 +44,7 @@ export class OpportunityComponent implements OnInit {
   showBoostOptions: boolean = false;
   private _showBoostMenuOptions: boolean = false;
   count;
-  allOpportunities : any;
+  allOpportunities: any;
 
 
   type: string;
@@ -148,22 +151,36 @@ export class OpportunityComponent implements OnInit {
   menuOptionSelected(option: string) {
     switch (option) {
       case 'edit':
-        this.editing = true;
+        //this.editing = true;
+        this.editOptions();
         break;
       case 'delete':
         this.delete();
         break;
-      // case 'set-explicit':
-      //   this.setExplicit(true);
-      //   break;
-      // case 'remove-explicit':
-      //   this.setExplicit(false);
-      //   break;
+      case 'set-explicit':
+        this.setExplicit(true);
+        break;
+      case 'remove-explicit':
+        this.setExplicit(false);
+        break;
       case 'translate':
         this.translateToggle = true;
         break;
     }
   }
+
+
+  editOptions() {
+    if (this.opportunity) {
+      const oppModal = this.overlayModal.create(OpportunityFormComponent,
+         this.opportunity, { class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms'
+        });
+      oppModal.present();
+    } else {
+      this.editing = true;
+    }
+  }
+
 
   private viewed: boolean = false;
 
@@ -181,15 +198,41 @@ export class OpportunityComponent implements OnInit {
     }
   }
 
-  loadAllOpportunities(){
+  setExplicit(value: boolean) {
+    let oldValue = this.activity.mature,
+      oldMatureVisibility = this.activity.mature_visibility;
+
+    this.activity.mature = value;
+    this.activity.mature_visibility = void 0;
+
+    if (this.activity.custom_data && this.activity.custom_data[0]) {
+      this.activity.custom_data[0].mature = value;
+    } else if (this.activity.custom_data) {
+      this.activity.custom_data.mature = value;
+    }
+
+    this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
+      .catch(e => {
+        this.activity.mature = oldValue;
+        this.activity.mature_visibility = oldMatureVisibility;
+
+        if (this.activity.custom_data && this.activity.custom_data[0]) {
+          this.activity.custom_data[0].mature = oldValue;
+        } else if (this.activity.custom_data) {
+          this.activity.custom_data.mature = oldValue;
+        }
+      });
+  }
+
+  loadAllOpportunities() {
     this.inProgress = true;
     let ownerGuid = this.session.getLoggedInUser().guid;
-    console.log("ownerGuid: ",ownerGuid)
+    console.log("ownerGuid: ", ownerGuid)
     this.client.get('api/v2/feeds/container/ownerGuid/opportunities?limit=3&sync=&as_activities=&force_public=1')
       .then((data: any) => {
-        if(data && data.entities){
+        if (data && data.entities) {
           console.log("all opportunities: ", data.entities);
-          this.allOpportunities  = data.entities;
+          this.allOpportunities = data.entities;
         }
       })
       .catch((e) => {
