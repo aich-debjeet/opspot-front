@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Session } from '../../../services/session';
+import { NgxMasonryOptions } from 'ngx-masonry';
 
 @Component({
   selector: 'app-explore-image',
@@ -8,6 +9,9 @@ import { Session } from '../../../services/session';
 })
 export class ExploreImageComponent implements OnInit {
 @Input() response;
+masonryOptions: NgxMasonryOptions = {
+  transitionDuration: '0s',		
+};
 tempUrl = 'https://ops.doesntexist.com/icon/'
   constructor(
     public session: Session,

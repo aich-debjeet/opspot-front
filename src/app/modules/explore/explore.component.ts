@@ -3,6 +3,7 @@ import { TopbarHashtagsService } from '../hashtags/service/topbar.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from '../../services/api';
+import { Session } from '../../services/session';
 
 
 @Component({
@@ -1134,6 +1135,7 @@ export class ExploreComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public client: Client,
+    public session: Session,
   ) { 
     this.paramsSubscription = this.route.queryParams.subscribe(params => {
       if (typeof params['q'] !== 'undefined') {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Session } from '../../../services/session';
+import { NgxMasonryOptions } from 'ngx-masonry';
 
 @Component({
   selector: 'app-explore-video',
@@ -9,9 +10,12 @@ import { Session } from '../../../services/session';
 export class ExploreVideoComponent implements OnInit {
 
   @Input() response;
+  masonryOptions: NgxMasonryOptions = {
+    transitionDuration: '0s',		
+  };
   tempUrl = 'https://ops.doesntexist.com/icon/'
   constructor(
-    public seesion: Session,
+    public session: Session,
   ) { }
 
   ngOnInit() {
