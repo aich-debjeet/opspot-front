@@ -81,6 +81,8 @@ import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
 import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
+import { OpportunityWidgetComponent } from './components/opportunity-widget/opportunity-widget.component';
+import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
 
 @NgModule({
   imports: [
@@ -162,7 +164,9 @@ import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
     DynamicFormComponent,
     AndroidAppDownloadComponent,
     ImageCroperComponent,
-    ReadMoreComponent
+    ReadMoreComponent,
+    OpportunityWidgetComponent,
+    OpportunityListCardComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -236,7 +240,9 @@ import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
     DynamicFormComponent,
     AndroidAppDownloadComponent,
     ImageCroperComponent,
-    ReadMoreComponent
+    ReadMoreComponent,
+    OpportunityWidgetComponent,
+    OpportunityListCardComponent
   ],
   providers: [
     {

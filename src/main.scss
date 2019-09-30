@@ -3627,6 +3627,8 @@ m-cookies-notice {
     max-width: 592px; }
   .m-overlay-modal.m-overlay-modal--medium-report-success {
     max-width: 470px; }
+  .m-overlay-modal.m-overlay-modal--medium-hashtagforms {
+    max-width: 525px; }
   .m-overlay-modal.m-overlay-modal--small {
     background: #FFF;
     max-width: 480px;
@@ -25163,7 +25165,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 
 
 .o-create-opportunity{
-  width: 525px;
+  width: 525px; 
   border-radius: 4px;
   background-color: $white;
   margin-bottom: 16px;
@@ -26136,4 +26138,92 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 }
 .btnDefault:focus{
   outline:none !important;
+}
+
+// @TODO gayatri style added beacuase of the changes in the thumbs.ts @gayatri
+.icon-posts-box{
+  border: 1px solid rgba(144,164,174,0.2);
+  border-radius: 4px;	
+  background-color: #FFFFFF;
+  padding: 11px 0;
+  text-align: center;
+  width: 215px;
+  font-family: "Roboto", sans-serif !important;
+  @include mq($from: $mobile_sm, $until: $desktop_sm) {
+      width:100%;
+      margin-bottom: 10px;
+  }
+  .icon-heart,.icon-share-2,.icon-coins{
+      font-size:16px;
+      color:$black;
+      margin-right: 16px;
+      vertical-align: middle;
+  }
+}
+
+// @TODO gayatri feed card opportunity block style added here beacuse not getting apply from component style
+.feed-card-opportunity-block{
+    justify-content: space-between;
+    background-color: rgba(2,136,209,0.03);
+    padding:19px 17px;
+    position: relative;
+    border-top: 1px solid #ECEFF1;
+    border-bottom: 1px solid #ECEFF1;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        border-top: 0px solid #ECEFF1;
+        border-bottom: 0px solid #ECEFF1;
+    }
+    &__top{
+        display:flex;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .mb-3{
+            margin-bottom:3px;
+        }
+        .opportunity-image{
+            img{
+                width:101px;
+                height:101px;
+                @include mq($from: $mobile_sm, $until: $desktop_sm) {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+        .opportunity-button{
+            border-radius: 2px;	
+            background-color: #90A4AE; 
+            padding:2px 13px;
+            color:$white;
+            position: absolute;
+            right: 16px;
+            font-size:11px;
+            @include mq($from: $mobile_sm, $until: $desktop_sm) {
+                right:inherit;
+            }
+        }
+        .opportunity-details{
+            margin-left: 17px;
+            @include mq($from: $mobile_sm, $until: $desktop_sm) {
+                text-align: center;
+                margin-top: 30px;
+            }
+        }
+        button{
+            margin-top:13px;
+            @include mq($from: $mobile_sm, $until: $desktop_sm) {
+                font-size: 11px;
+                padding: 4px 8px;
+            }
+        }
+    }
+    &__bottom{
+        margin-top: 15px;
+        width: 421px;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            width:100%;
+        }
+    }
 }

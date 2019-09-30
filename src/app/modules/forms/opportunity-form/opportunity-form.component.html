@@ -1,71 +1,78 @@
 <div class="o-create-opportunity">
-  <div class="o-create-opportunity-head o-create-opportunity-head--border">
-      <div class="o-create-opportunity__title text-lg f500">Create a post
-          <span class="o-create-dropdown-style">
-              <span class="text-md primary f500">On #Opportunity<span class="icon-x"
-                      (click)="changeToDefault()"></span></span>
-          </span>
-      </div>
-      <div class="close" (click)="close()"><i class="icon-x"></i></div>
-  </div>
-  <form [formGroup]="opportunityForm" (ngSubmit)="postOpportunity(opportunityForm.value)">
-      <div class="o-create-opportunity-body o-create-opportunity-body--flex">
-          <div class="form-group o-create-opportunity-icon">
-              <label>Category</label>
-              <select class="form-control form-control-lg" formControlName="category">
-                  <option value="" disabled selected>Select Category</option>
-                  <option value="audition">Audition</option>
-                  <option value="project">Project</option>
-                  <option value="job">Job</option>
-                  <option value="internship">Internship</option>
-                  <option value="freelance">Freelance</option>
-                  <option value="volunteer">Volunteer</option>
-                  <option value="others">Others - Please specify in the description</option>
-              </select>
-              <div class="error text-sm" *ngIf="submitted && opportunityForm.get('category').errors?.required">
-                  This is required</div>
-          </div>
-          <div class="form-group">
-              <label>Title</label>
-              <input type="text" class="form-control form-control-lg" formControlName="opportunityTitle">
-              <div class="error text-sm"
-                  *ngIf="submitted && opportunityForm.get('opportunityTitle').errors?.required">Title is required
-              </div>
-          </div>
-          <div class="form-group">
-              <label>Description<span class="text-sm grey description-width">21/300</span></label>
-              <textarea class="form-control" rows="5" formControlName="opportunityDescription"></textarea>
-              <div class="error text-sm"
-                  *ngIf="submitted && opportunityForm.get('opportunityDescription').errors?.required">Description
-                  is required</div>
-          </div>
-          <div class="form-group">
-              <label>Location</label>
-              <input type="text" class="form-control form-control-lg" formControlName="opportunityLocation">
-              <div class="error text-sm"
-                  *ngIf="submitted && opportunityForm.get('opportunityLocation').errors?.required">Location is
-                  required</div>
-          </div>
-          <div class="form-group">
-              <label>Cover Image</label>
-              <div class="o-create-opportunity-cover-image">
-                  <div class="fileUpload">
-                      <span class="icon-plus"></span>
-                      <input type="file" class="upload" formControlName="opportunityImage" #file name="attachment"
-                          (change)="uploadAttachment(file, $event)">
-                  </div>
-                  <div class="fileUpload-preview ml-18" *ngIf="attachment.meta.attachment_guid.length > 0">
-                      <a class="o-create-opportunity-cover-image__avatar" *ngFor="let image of cards">
-                        <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i class="icon-x"></i></a>
-                        <img [src]="image.imageLink" alt="">
-                      </a>
-                  </div>
-              </div>
-              <div class="text-sm grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>
-          </div>
-      </div>
-      <div class="o-create-opportunity-footer">
-          <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
-      </div>
-  </form>
+    <div class="o-create-opportunity-head o-create-opportunity-head--border">
+        <div class="o-create-opportunity__title text-lg f500" *ngIf="!oppGuid">Create a post
+            <span class="o-create-dropdown-style">
+                <span class="text-md primary f500">On #Opportunity<span class="icon-x"
+                        (click)="changeToDefault()"></span></span>
+            </span>
+        </div>
+        <div class="o-create-opportunity__title text-lg f500" *ngIf="oppGuid">Edit a post
+            <span class="o-create-dropdown-style">
+                <span class="text-md primary f500">On #Opportunity<span class="icon-x"
+                        (click)="changeToDefault()"></span></span>
+            </span>
+        </div>
+        <div class="close" (click)="close()"><i class="icon-x"></i></div>
+    </div>
+    <form [formGroup]="opportunityForm" (ngSubmit)="postOpportunity(opportunityForm.value); closeModal()">
+        <div class="o-create-opportunity-body o-create-opportunity-body--flex">
+            <div class="form-group o-create-opportunity-icon">
+                <label>Category</label>
+                <select class="form-control form-control-lg" formControlName="category">
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="audition">Audition</option>
+                    <option value="project">Project</option>
+                    <option value="job">Job</option>
+                    <option value="internship">Internship</option>
+                    <option value="freelance">Freelance</option>
+                    <option value="volunteer">Volunteer</option>
+                    <option value="others">Others - Please specify in the description</option>
+                </select>
+                <div class="error text-sm" *ngIf="submitted && opportunityForm.get('category').errors?.required">
+                    This is required</div>
+            </div>
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control form-control-lg" formControlName="opportunityTitle">
+                <div class="error text-sm"
+                    *ngIf="submitted && opportunityForm.get('opportunityTitle').errors?.required">Title is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                <textarea class="form-control" rows="5" formControlName="opportunityDescription"></textarea>
+                <div class="error text-sm"
+                    *ngIf="submitted && opportunityForm.get('opportunityDescription').errors?.required">Description
+                    is required</div>
+            </div>
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="form-control form-control-lg" formControlName="opportunityLocation">
+                <div class="error text-sm"
+                    *ngIf="submitted && opportunityForm.get('opportunityLocation').errors?.required">Location is
+                    required</div>
+            </div>
+            <div class="form-group">
+                <label>Cover Image</label>
+                <div class="o-create-opportunity-cover-image">
+                    <div class="fileUpload">
+                        <span class="icon-plus"></span>
+                        <input type="file" class="upload" formControlName="opportunityImage" #file name="attachment"
+                            (change)="uploadAttachment(file, $event)">
+                    </div>
+                    <div class="fileUpload-preview ml-18" *ngIf="attachment.meta.attachment_guid.length > 0">
+                        <a class="o-create-opportunity-cover-image__avatar" *ngFor="let image of cards">
+                            <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i
+                                    class="icon-x"></i></a>
+                            <img [src]="image.imageLink" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="text-sm grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>
+            </div>
+        </div>
+        <div class="o-create-opportunity-footer">
+            <button type="submit" class="btn btn-primary btn-sm disabled" >Post</button>
+        </div>
+    </form>
 </div>
