@@ -21,16 +21,14 @@
               </div>
             </div>
             <div class="o-feed-head-action">
-              <a class="head-action__link" (click)="togglePin()">
-                <!-- <img src="assets/svg/bookmark.svg" alt=""
-                  class="head-action__icon hidden-mob"> -->
+              <!-- <a class="head-action__link" (click)="togglePin()">
                 <m-tooltip icon="turned_in" *ngIf="opportunity?.bookmark">
                   This post is Bookmarked
                 </m-tooltip>
                 <m-tooltip *ngIf="!opportunity?.bookmark" icon="turned_in_not">
                   Click to bookmark this post to the top of your channel feed
                 </m-tooltip>
-              </a>
+              </a> -->
               <m-post-menu  *ngIf="opportunity" [entity]="opportunity" [canDelete]="canDelete" [isTranslatable]="isTranslatable"
                 [options]="menuOptions" (optionSelected)="menuOptionSelected($event)">
                 <ng-container post-menu>
@@ -107,86 +105,6 @@
           [focusedCommentGuid]="focusedCommentGuid"
           [canEdit]="canDelete">
           </opspot-comments>
-
-          <!-- <div class="o-comments-compose">
-              <div class="o-avatar-sm">
-                <img src="assets/demo/avatar.png" alt="">
-              </div>    
-              <div class="o-comments-composer">
-                <textarea rows="1" placeholder="Write a comment"></textarea>
-              </div>
-            </div> -->
-          <!-- <div class="o-comments-block">
-              <div class="o-comments">
-                <a href="#" class="o-comments__avatar o-avatar-sm"><img src="assets/demo/avatar.png" alt=""></a>
-                <div class="o-comments__data">
-                  <a class="o-commenter text-md f500">Mythili Rajendran</a>
-                  <div class="o-comments__txt">
-                    Far far away, behind the word mountains, far from the countries 
-                    Vokalia and Consonantia, there live the blind texts far from the 
-                    countries Vokalia and Consonantia, there live the blind texts  
-                  </div>
-                  <div class="o-comments__action">
-                    <a href="#">
-                      <div class="o-like-ico"><img src="assets/svg/heart.svg" alt="" ></div>
-                      <div class="text-sm grey">4 Likes</div>
-                    </a>
-                    <a href="#">
-                      <div class="dot"></div><div class="text-sm grey m-l-7">Reply</div>
-                    </a>
-                    <a href="#">
-                      <div class="dot"></div><div class="text-sm grey o-comments__tym m-l-7">15 mins</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="o-comments o-comments--reply">
-                <a href="#" class="o-comments__avatar o-avatar-sm"><img src="assets/demo/avatar.png" alt=""></a>
-                <div class="o-comments__data">
-                  <a class="o-commenter text-md f500">Mythili Rajendran</a>
-                  <div class="o-comments__txt">
-                    Far far away, behind the word mountains, far from the countries 
-                    Vokalia and Consonantia, there live the blind texts far from the 
-                    countries Vokalia and Consonantia, there live the blind texts
-                  </div>
-                  <div class="o-comments__action">
-                    <a href="#">
-                      <div class="o-like-ico"><img src="assets/svg/heart.svg" alt="" ></div>
-                      <div class="text-sm grey">4 Likes</div>
-                    </a>
-                    <a href="#">
-                      <div class="dot"></div><div class="text-sm grey m-l-7">Reply</div>
-                    </a>
-                    <a href="#">
-                      <div class="dot"></div><div class="text-sm grey o-comments__tym m-l-7">15 mins</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="o-comments">
-                <a href="#" class="o-comments__avatar o-avatar-sm"><img src="assets/demo/avatar.png" alt=""></a>
-                <div class="o-comments__data">
-                  <a class="o-commenter text-md f500">Mythili Rajendran</a>
-                  <div class="o-comments__txt">
-                    Far far away, behind the word mountains, far from the countries 
-                    Vokalia and Consonantia, there live the blind texts far from the 
-                    countries Vokalia and Consonantia, there live the blind texts 
-                  </div>
-                  <div class="o-comments__action">
-                    <a href="#">
-                      <div class="o-like-ico"><img src="assets/svg/heart.svg" alt="" ></div>
-                      <div class="text-sm grey">4 Likes</div>
-                    </a>
-                    <a href="#">
-                      <div class="dot"></div><div class="text-sm grey m-l-7">Reply</div>
-                    </a>
-                    <a href="#">
-                      <div class="dot"></div><div class="text-sm grey o-comments__tym m-l-7">15 mins</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div> -->
         </div>
       </div>
       <div class="o-posts-inner-page__right hidden-mob">

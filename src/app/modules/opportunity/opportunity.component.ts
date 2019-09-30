@@ -37,8 +37,8 @@ export class OpportunityComponent implements OnInit {
 
   boosted: boolean = false;
   commentsToggle: boolean = false;
-  shareToggle: boolean = false;
-  deleteToggle: boolean = false;
+  // shareToggle: boolean = false;
+  // deleteToggle: boolean = false;
   translateToggle: boolean = false;
   translateEvent: EventEmitter<any> = new EventEmitter();
   showBoostOptions: boolean = false;
@@ -54,7 +54,7 @@ export class OpportunityComponent implements OnInit {
   inProgress: boolean = false;
   opportunity: any;
 
-  editing: boolean = false;
+  // editing: boolean = false;
 
   _delete: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
@@ -176,9 +176,7 @@ export class OpportunityComponent implements OnInit {
          this.opportunity, { class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms'
         });
       oppModal.present();
-    } else {
-      this.editing = true;
-    }
+    } 
   }
 
 
