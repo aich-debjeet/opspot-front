@@ -267,13 +267,26 @@ export class Activity {
 
   editOptions() {
     if (this.activity.entity_type === 'opportunity') {
-      const oppModal = this.overlayModal.create(OpportunityFormComponent, this.activity, {
-        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms'
-      });
-      oppModal.present();
+      this.overlayModal.create(OpportunityFormComponent, this.activity, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+        // listen to the update callback
+        onUpdate: (payload: any) => {
+          // make update to local var
+          this.udpateOpportunity(payload);
+        }
+      }).present();
     } else {
       this.editing = true;
     }
+  }
+
+  udpateOpportunity(data: any) {
+    this.activity.category = data.category;
+    this.activity.description = data.description;
+    this.activity.location = data.location;
+    this.activity.title = data.title;
+    // trigger component observe new changes
+    this.detectChanges();
   }
 
   setExplicit(value: boolean) {
