@@ -70,6 +70,7 @@ import { ExploreVideoComponent } from './modules/explore/explore-video/explore-v
 import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-blogs.component';
 import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
+import { BluestoreModule } from './modules/bluestore/bluestore.module';
 
 
 @NgModule({
@@ -143,6 +144,7 @@ import { OpportunityModule } from './modules/opportunity/opportunity.module';
     NetworkModule,
     OpportunityModule,
     TextMaskModule,
+    BluestoreModule
 
   ],
   providers: [

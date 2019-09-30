@@ -54,6 +54,7 @@ export class BlueStoreFormComponent implements OnInit {
     data.price = this.blueStoreForm.value.blueStorePrice;
     data.item_count = this.blueStoreForm.value.blueStoreUnits;
     data.currency = 'INR';
+    data.published = 1;
 
 
     if (this.blueStoreForm.valid) {
@@ -65,6 +66,7 @@ export class BlueStoreFormComponent implements OnInit {
           this.meta = { wire_threshold: null };
 
           this.blueStoreSubmitted = false;
+          this.changeToDefault();
         })
         .catch((e) => {
 
