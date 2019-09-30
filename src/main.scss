@@ -9342,7 +9342,7 @@ m-channel header {
   display: flex;
   -webkit-align-items: flex-end;
           align-items: flex-end;
-  height: 360px;
+  height: 443px;
   box-sizing: content-box;
   position: relative;
   overflow: visible; }
@@ -24538,7 +24538,6 @@ app-image-croper .m-modal-container {
 
 .this-is-for-priview{
   width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24996,6 +24995,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   width: 525px;
   border-radius: 4px;
   background-color: $white;
+  margin-bottom: 16px;
 }
 .o-create-show-timez-head{
   width: 100%;
@@ -25166,6 +25166,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   width: 525px;
   border-radius: 4px;
   background-color: $white;
+  margin-bottom: 16px;
 }
 .o-create-opportunity-head{
   width: 100%;
@@ -25350,6 +25351,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   width: 525px;
   border-radius: 4px;
   background-color: $white;
+  margin-bottom: 16px;
 }
 .o-create-blue-store-head{
   width: 100%;
@@ -25565,7 +25567,8 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .o-create-portfolio{
   width: 525px;
   border-radius: 4px;
-  background-color: $white;   
+  background-color: $white; 
+  margin-bottom: 16px;  
 }
 
 //head style
@@ -25835,7 +25838,8 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .o-create-myjourney{
   width: 525px;
   border-radius: 4px;
-  background-color: $white;   
+  background-color: $white;
+  margin-bottom: 16px;   
 }
 
 //head style
