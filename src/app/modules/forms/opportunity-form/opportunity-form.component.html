@@ -14,7 +14,7 @@
         </div>
         <div class="close" (click)="close()"><i class="icon-x"></i></div>
     </div>
-    <form [formGroup]="opportunityForm" (ngSubmit)="postOpportunity(opportunityForm.value); closeModal()">
+    <form [formGroup]="opportunityForm" (ngSubmit)="postOpportunity(opportunityForm.value);">
         <div class="o-create-opportunity-body o-create-opportunity-body--flex">
             <div class="form-group o-create-opportunity-icon">
                 <label>Category</label>
