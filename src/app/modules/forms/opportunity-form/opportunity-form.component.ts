@@ -7,6 +7,7 @@ import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
 
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   selector: 'app-opportunity-form',
@@ -47,7 +48,9 @@ export class OpportunityFormComponent implements OnInit {
     public client: Client,
     public upload: Upload,
     public attachment: AttachmentService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private overlayModal: OverlayModalService,
+
   ) {
     // this.buildForm();
    }
@@ -95,13 +98,14 @@ export class OpportunityFormComponent implements OnInit {
     data.published = true;
 
     if (this.opportunityForm.valid) {
-
+      alert("dsfsf")
       let endpoint = 'api/v3/opportunity';
       if (this.oppGuid) {
         endpoint = 'api/v3/opportunity/' + this.oppGuid;
       }
       this.client.post(endpoint, data)
         .then((data: any) => {
+          alert("dsfsf")
           this.load.emit(data);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
@@ -161,5 +165,9 @@ export class OpportunityFormComponent implements OnInit {
     }).catch(e => {
       console.error(e);
     });
+  }
+
+  closeModal(){
+    this.overlayModal.dismiss();
   }
 }
