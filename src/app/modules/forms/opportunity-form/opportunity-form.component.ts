@@ -15,7 +15,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
   styleUrls: ['./opportunity-form.component.scss']
 })
 export class OpportunityFormComponent implements OnInit {
-  
+
   @Output() ChangeDefault: EventEmitter<any> = new EventEmitter<any>();
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
@@ -24,7 +24,6 @@ export class OpportunityFormComponent implements OnInit {
   oppGuid: string;
 
   @Input('object') set data(object) {
-    // console.log('INPUT', JSON.stringify(object));
     this.opportunity = object;
     if (this.opportunity) {
       this.oppGuid = object['guid'];
@@ -42,7 +41,7 @@ export class OpportunityFormComponent implements OnInit {
   };
   tags = [];
   cards = [];
-  
+
   constructor(
     public session: Session,
     public client: Client,
@@ -53,9 +52,9 @@ export class OpportunityFormComponent implements OnInit {
 
   ) {
     // this.buildForm();
-   }
+  }
 
-   buildForm(data?) {
+  buildForm(data?) {
     if (data) {
       this.opportunityForm = this.formBuilder.group({
         category: [data['category'] ? data['category'] : '', [Validators.required]],
@@ -81,15 +80,12 @@ export class OpportunityFormComponent implements OnInit {
   changeToDefault() {
     this.ChangeDefault.emit();
   }
-  close(){
+  close() {
     this.Close.emit();
   }
   postOpportunity(value) {
-    console.log(value);
-
     this.submitted = true;
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-
     data.attachment_guid = data.attachment_guid;
     data.title = value.opportunityTitle;
     data.description = value.opportunityDescription;
@@ -117,7 +113,6 @@ export class OpportunityFormComponent implements OnInit {
     }
   }
   uploadAttachment(file: HTMLInputElement, event) {
-    console.log(file, event, this.attachment)
     if (file.value) { // this prevents IE from executing this code twice
 
       this.attachment.upload(file)
@@ -125,17 +120,14 @@ export class OpportunityFormComponent implements OnInit {
           let obj = {};
           obj['guid'] = guid;
           obj['imageLink'] = this.attachment.getPreview();
-          console.log(guid)
-          console.log(obj)
+
           this.cards.push(obj);
-          console.log(this.cards)
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }
           file.value = null;
         })
         .catch(e => {
-          console.log(e)
           if (e && e.message) {
           }
           file.value = null;
@@ -145,27 +137,17 @@ export class OpportunityFormComponent implements OnInit {
   }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    console.log(file, imageId)
-
-    // if we're not uploading a file right now
-    // this.attachment.setPendingDelete(false);
-    // this.canPost = false;
-    // this.inProgress = true;
-
-    // this.errorMessage = '';
-
     this.attachment.remove(file, imageId).then((guid) => {
       file.value = '';
       this.cards = _remove(this.cards, function (n) {
         return n.guid !== guid;
       });
-      console.log(this.cards)
     }).catch(e => {
       console.error(e);
     });
   }
 
-  closeModal(){
+  closeModal() {
     this.overlayModal.dismiss();
   }
 }

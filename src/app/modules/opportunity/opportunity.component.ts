@@ -192,7 +192,6 @@ export class OpportunityComponent implements OnInit {
   liked(count) {
     if (count != this.opportunity['thumbs:up:count:old']) {
       this.count = count;
-      console.log("count: ", this.count);
     } else {
       this.count = this.opportunity['thumbs:up:count']
     }
@@ -227,11 +226,9 @@ export class OpportunityComponent implements OnInit {
   loadAllOpportunities() {
     this.inProgress = true;
     let ownerGuid = this.session.getLoggedInUser().guid;
-    console.log("ownerGuid: ", ownerGuid)
     this.client.get('api/v2/feeds/container/ownerGuid/opportunities?limit=3&sync=&as_activities=&force_public=1')
       .then((data: any) => {
         if (data && data.entities) {
-          console.log("all opportunities: ", data.entities);
           this.allOpportunities = data.entities;
         }
       })

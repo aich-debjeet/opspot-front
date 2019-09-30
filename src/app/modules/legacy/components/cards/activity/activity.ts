@@ -103,9 +103,6 @@ export class Activity {
       && this.activity.custom_data[0].src
     ) {
       this.activity.custom_data[0].src = this.activity.custom_data[0].src.replace(this.opspot.site_url, this.opspot.cdn_url);
-
-      console.log("this.activity.custom_data[0].src: ", this.activity.custom_data[0].src);
-
     }
 
     if (!this.activity.message) {
@@ -148,7 +145,6 @@ export class Activity {
   }
 
   save() {
-    console.log('trying to save your changes to the server', this.activity);
     this.editing = false;
     this.activity.edited = true;
     this.client.post('api/v1/newsfeed/' + this.activity.guid, this.activity);
@@ -208,11 +204,6 @@ export class Activity {
   }
 
   async togglePin() {
-
-    // if (this.session.getLoggedInUser().guid === this.activity.owner_guid) {
-    //   return;
-    // }
-
     this.activity.bookmark = !this.activity.bookmark;
     const url: string = `api/v3/bookmark/${this.activity.guid}/image`;
     try {
