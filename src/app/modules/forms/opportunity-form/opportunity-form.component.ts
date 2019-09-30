@@ -94,18 +94,16 @@ export class OpportunityFormComponent implements OnInit {
     data.title = value.opportunityTitle;
     data.description = value.opportunityDescription;
     data.location = value.opportunityLocation;
-    data.opp_type = value.category;
+    data.category = value.category;
     data.published = true;
 
     if (this.opportunityForm.valid) {
-      alert("dsfsf")
       let endpoint = 'api/v3/opportunity';
       if (this.oppGuid) {
         endpoint = 'api/v3/opportunity/' + this.oppGuid;
       }
       this.client.post(endpoint, data)
         .then((data: any) => {
-          alert("dsfsf")
           this.load.emit(data);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
