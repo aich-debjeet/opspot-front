@@ -172,11 +172,27 @@ export class OpportunityComponent implements OnInit {
 
   editOptions() {
     if (this.opportunity) {
-      const oppModal = this.overlayModal.create(OpportunityFormComponent,
-         this.opportunity, { class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms'
-        });
-      oppModal.present();
-    } 
+        this.overlayModal.create(OpportunityFormComponent, this.opportunity, {
+          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+          // listen to the update callback
+          onUpdate: (payload: any) => {
+            // make update to local var
+            alert(payload)
+            this.udpateOpportunity(payload);
+          }
+        }).present();  
+    }
+  }
+
+
+  udpateOpportunity(data: any) {
+    alert()
+    this.opportunity.category = data.category;
+    this.opportunity.description = data.description;
+    this.opportunity.location = data.location;
+    this.opportunity.title = data.title;
+    // trigger component observe new changes
+    this.detectChanges();
   }
 
 

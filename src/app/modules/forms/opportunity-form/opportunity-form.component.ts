@@ -110,7 +110,7 @@ export class OpportunityFormComponent implements OnInit {
           this.meta = { wire_threshold: null };
           this.submitted = false;
           this.changeToDefault();
-          // check if update callback function is avaibale
+          // // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
             this._opts.onUpdate(data);
             // close modal
