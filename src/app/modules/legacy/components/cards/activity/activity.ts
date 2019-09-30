@@ -53,6 +53,7 @@ export class Activity {
   element: any;
   visible: boolean = false;
   showOpportunity = false;
+  showBlueStore = false;
 
 
   editing: boolean = false;
@@ -116,6 +117,10 @@ export class Activity {
 
     if (this.activity.entity_type === "opportunity") {
       this.showOpportunity = true;
+    }
+
+    if (this.activity.entity_type === "item") {
+      this.showBlueStore = true;
     }
 
     this.boosted = this.activity.boosted || this.activity.p2p_boosted;

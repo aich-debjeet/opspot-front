@@ -61,7 +61,7 @@
   </div>
 
   <!-- opportunity -->
-  <div *ngIf="showOpportunity">
+  <div *ngIf="showOpportunity && (!showBlueStore)">
     <div class="feed-card-opportunity-block" [routerLink]="['/opportunity/view', this.activity.guid]">
       <div class="feed-card-opportunity-block__top">
       <div class="opportunity-image">
@@ -89,6 +89,39 @@
   </div>
   </div>
 
+  <div class="o-card feed" *ngIf= "showBlueStore && !showOpportunity">
+      <div class="feed-media" [routerLink]="['/Item/view', this.activity.guid]">
+          <a class="feed-media__link"><img src="assets/demo/m1.jpg" alt="" class="feed-media__img"></a>
+          <a class="feed-media__link">
+              <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
+              <div class="feed-media-overlay">
+                  <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+              </div>
+          </a>
+          <a class="feed-media__link">
+              <img src="assets/demo/m3.jpg" alt="" class="feed-media__img">
+              <div class="feed-media-overlay"><h3 class="white">+2</h3></div>
+          </a>
+      </div>
+      <div class="feed-card-event-block">
+          <div class="feed-card-event-block__left">
+              <div class="text-lg f500 mb-3">
+                 {{activity?.title}}
+              </div>
+              <div class="text-md grey">
+                 {{activity?.blurb}}
+              </div>
+              <div class="text-rate">
+                  ₹ {{activity?.price}}.00 <span class="text-md grey">per piece</span>
+              </div>
+          </div>
+          <div class="feed-card-event-block__right ">
+              <button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+          </div>
+      </div>
+  </div>
+  
+
   <m-translate
     [open]="translateToggle"
     [entity]="activity"
@@ -109,7 +142,7 @@
 
   <!-- Rich content -->
   <div class="m-rich-embed"
-    *ngIf="activity.perma_url && activity.title && (!showOpportunity)"
+    *ngIf="activity.perma_url && activity.title && (!showOpportunity) && (!showBlueStore)"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
@@ -129,7 +162,7 @@
   </div>
   <!-- End translation -->
 
-  <div class="opspot-editable-container" *ngIf="editing && activity.custom_type && activity.title &&  (!showOpportunity)">
+  <div class="opspot-editable-container" *ngIf="editing && activity.custom_type && activity.title &&  (!showOpportunity) && (!showBlueStore)">
     <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
     <textarea class="mdl-card__supporting-text message" name="title" [ngModel]="activity.title" #titleEdit [autoGrow]></textarea>
     <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall"></m-wire-threshold-input>
@@ -181,7 +214,7 @@
   <!-- Custom type:: batch -->
   <div class="item item-image allow-select"
    [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
-   *ngIf="activity.custom_type == 'batch' && !showOpportunity">
+   *ngIf="activity.custom_type == 'batch' && !showOpportunity && (!showBlueStore)">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
