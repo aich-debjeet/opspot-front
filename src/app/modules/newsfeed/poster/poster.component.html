@@ -307,6 +307,7 @@
     <app-opportunity-form *ngIf="display == '#Opportunity'" [object]="''" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-opportunity-form>
     <app-blue-store-form *ngIf="display == '#TheBlueStore'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-blue-store-form>
     <app-portfolio-form *ngIf="display == '#Portfolio'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-portfolio-form>
+    <app-my-journey-form *ngIf="display == '#MyJourney'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-my-journey-form>
 
     <!-- <div class="o-create-opportunity" *ngIf="display == '#Opportunity'">
         <div class="o-create-opportunity-head o-create-opportunity-head--border">
@@ -523,7 +524,7 @@
     </div> -->
     <!--post ends-->
 
-    <div class="o-create-myjourney" *ngIf="display == '#MyJourney'">
+    <!-- <div class="o-create-myjourney" *ngIf="display == '#MyJourney'">
         <div class="o-create-myjourney-head o-create-myjourney-head--border">
             <div class="o-create-show-timez__title text-lg f500">Create a post
                 <span class="o-create-dropdown-style">
@@ -533,7 +534,7 @@
             </div>
             <div class="close" (click)="close()"><i class="icon-x"></i></div>
         </div>
-        <!--boost head end-->
+        
         <div class="o-create-myjourney-body o-create-myjourney-body--flex">
             <div class="o-crete-myjourney-userinfo">
                 <div class="o-crete-myjourney-userinfo__avatar">
@@ -543,26 +544,26 @@
                     <textarea rows="1" placeholder="Write Something"></textarea>
                 </div>
             </div>
-            <!--userinfo ends-->
+            
             <div class="o-create-myjourney-fileupload">
                 <div class="fileUpload">
                     <span class="icon-paperclip-2"></span>
                     <input type="file" class="upload">
                 </div>
-                <!--file upload ends-->
+                
                 <div class="text-md grey">
                     Add Video
                 </div>
-                <!--file preview ends-->
+                
             </div>
         </div>
-        <!--body ends-->
+        
         <div class="o-create-myjourney-footer">
             <button type="button" class="btn btn-primary btn-sm disabled">Post</button>
-            <!--for event page-->
+            
         </div>
-        <!--footer post ends-->
-    </div>
-    <!--post ends-->
+        
+    </div> -->
+    
 </div>
 <!--preview ends-->
