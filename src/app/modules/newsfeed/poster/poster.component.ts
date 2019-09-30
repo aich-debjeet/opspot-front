@@ -56,9 +56,6 @@ export class PosterComponent {
   displayPaywal: boolean = false;
   defaultCoins: string ='';
 
-  public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
-  public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
   constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
@@ -67,10 +64,6 @@ export class PosterComponent {
     
   }
   ngOnInit() {
-    // const d = new Date();
-    // d.setMonth(d.getMonth() - 1);
-    // d.setHours(0, 0, 0);
-    // this.startDate = d.toISOString();
   }
 
   set _container_guid(guid: any) {
@@ -282,7 +275,7 @@ export class PosterComponent {
   renderForms(type: string) {
     console.log(type)
     this.display = type;
-    this.buildForm(type);
+    // this.buildForm(type);
   }
 
   close() {
@@ -291,41 +284,41 @@ export class PosterComponent {
     this.staticBoard = false;
   }
   // post opportunity
-  postOpportunity() {
+  // postOpportunity() {
 
-    this.submitted = true;
-    this.errorMessage = "";
-    let data = Object.assign(this.meta, this.attachment.exportMeta());
+  //   this.submitted = true;
+  //   this.errorMessage = "";
+  //   let data = Object.assign(this.meta, this.attachment.exportMeta());
 
-    console.log("data: ", data);
-    data.attachment_guid = data.attachment_guid;
-    data.title = this.opportunityForm.value.opportunityTitle;
-    data.description = this.opportunityForm.value.opportunityDescription;
-    data.location = this.opportunityForm.value.opportunityLocation;
-    data.category = this.opportunityForm.value.catageory;
-    data.opp_type = 'job';
-    data.published = true,
-    this.inProgress = true;
+  //   console.log("data: ", data);
+  //   data.attachment_guid = data.attachment_guid;
+  //   data.title = this.opportunityForm.value.opportunityTitle;
+  //   data.description = this.opportunityForm.value.opportunityDescription;
+  //   data.location = this.opportunityForm.value.opportunityLocation;
+  //   data.category = this.opportunityForm.value.catageory;
+  //   data.opp_type = 'job';
+  //   data.published = true,
+  //   this.inProgress = true;
 
-    if (this.opportunityForm.valid) {
-      this.client.post('api/v3/opportunity', data)
-        .then((data: any) => {
-          // data.activity.boostToggle = true;
-          //this.load.next(data.activity);
-          this.attachment.reset();
-          this.meta = { wire_threshold: null };
-          this.inProgress = false;
-          this.display = "default";
-          this.submitted = false;
-        })
-        .catch((e) => {
-          this.inProgress = false;
-          this.submitted = false;
-          alert(e.message);
-          this.display = "default";
-        });
-    }
-  }
+  //   if (this.opportunityForm.valid) {
+  //     this.client.post('api/v3/opportunity', data)
+  //       .then((data: any) => {
+  //         // data.activity.boostToggle = true;
+  //         //this.load.next(data.activity);
+  //         this.attachment.reset();
+  //         this.meta = { wire_threshold: null };
+  //         this.inProgress = false;
+  //         this.display = "default";
+  //         this.submitted = false;
+  //       })
+  //       .catch((e) => {
+  //         this.inProgress = false;
+  //         this.submitted = false;
+  //         alert(e.message);
+  //         this.display = "default";
+  //       });
+  //   }
+  // }
   changeToDefault() {
     this.display = 'default';
   }
@@ -333,110 +326,110 @@ export class PosterComponent {
     if(this.displayPaywal) this.displayPaywal = false;
     else this.displayPaywal = true;
   }
-  buildForm(type: string){
-    if (type === '#Opportunity') {
-      this.opportunityForm = this.formBuilder.group({
-        category: ['', [Validators.required]],
-        opportunityTitle: ['', [Validators.required]],
-        opportunityDescription: ['', [Validators.required]],
-        opportunityLocation: ['', [Validators.required]],
-        opportunityImage: ['', []]
-      });  
-    }
-    if(type === '#Showtimez'){
-      this.showTimezForm =  this.formBuilder.group({
-        eventTitle:['', [Validators.required]],
-        eventDescription:['', [Validators.required]],
-        eventsLocation:['', [Validators.required]],
-        eventdate:['', [Validators.required]],
-        eventTime:['', [Validators.required]],
-        eventImage:['']
-      })
-    }
+  // buildForm(type: string){
+  //   if (type === '#Opportunity') {
+  //     this.opportunityForm = this.formBuilder.group({
+  //       category: ['', [Validators.required]],
+  //       opportunityTitle: ['', [Validators.required]],
+  //       opportunityDescription: ['', [Validators.required]],
+  //       opportunityLocation: ['', [Validators.required]],
+  //       opportunityImage: ['', []]
+  //     });  
+  //   }
+  //   if(type === '#Showtimez'){
+  //     this.showTimezForm =  this.formBuilder.group({
+  //       eventTitle:['', [Validators.required]],
+  //       eventDescription:['', [Validators.required]],
+  //       eventsLocation:['', [Validators.required]],
+  //       eventdate:['', [Validators.required]],
+  //       eventTime:['', [Validators.required]],
+  //       eventImage:['']
+  //     })
+  //   }
 
-    if(type == '#TheBlueStore'){
-      this.blueStoreForm = this.formBuilder.group({
-        blueStoreTitle:['',[Validators.required]],
-        blueStoreDescription: ['',[Validators.required]],
-        blueStoreUnits: ['',[Validators.required]],
-        blueStorePrice:['',[Validators.required]]
-      })
-    }
+  //   if(type == '#TheBlueStore'){
+  //     this.blueStoreForm = this.formBuilder.group({
+  //       blueStoreTitle:['',[Validators.required]],
+  //       blueStoreDescription: ['',[Validators.required]],
+  //       blueStoreUnits: ['',[Validators.required]],
+  //       blueStorePrice:['',[Validators.required]]
+  //     })
+  //   }
     
-  }
-  eventSubmit(){
-    this.eventSubmitted = true;
-    let data = Object.assign(this.meta, this.attachment.exportMeta());
+  // }
+  // eventSubmit(){
+  //   this.eventSubmitted = true;
+  //   let data = Object.assign(this.meta, this.attachment.exportMeta());
 
-    data.attachment_guid = data.attachment_guid;
-    data.title = this.showTimezForm.value.eventTitle;
-    data.description = this.showTimezForm.value.eventDescription;
-    data.location = this.showTimezForm.value.eventsLocation;
-    // data.eventdate = this.showTimezForm.value.eventdate;
-    // data.eventTime = this.showTimezForm.value.eventTime;
-    data.published = true;
-    data.start_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`)
+  //   data.attachment_guid = data.attachment_guid;
+  //   data.title = this.showTimezForm.value.eventTitle;
+  //   data.description = this.showTimezForm.value.eventDescription;
+  //   data.location = this.showTimezForm.value.eventsLocation;
+  //   // data.eventdate = this.showTimezForm.value.eventdate;
+  //   // data.eventTime = this.showTimezForm.value.eventTime;
+  //   data.published = true;
+  //   data.start_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`)
 
-    console.log(data)
-    if(this.showTimezForm.valid){
-      this.client.post('api/v3/event', data)
-      .then((data: any) => {
-        // data.activity.boostToggle = true;
-        //this.load.next(data.activity);
-        this.attachment.reset();
-        this.meta = { wire_threshold: null };
-        this.inProgress = false;
-        this.submitted = false;
-      })
-      .catch((e) => {
-        this.inProgress = false;
-        this.submitted = false;
-        alert(e.message);
-        this.display = "default";
-      });
-    }
-  }
+  //   console.log(data)
+  //   if(this.showTimezForm.valid){
+  //     this.client.post('api/v3/event', data)
+  //     .then((data: any) => {
+  //       // data.activity.boostToggle = true;
+  //       //this.load.next(data.activity);
+  //       this.attachment.reset();
+  //       this.meta = { wire_threshold: null };
+  //       this.inProgress = false;
+  //       this.submitted = false;
+  //     })
+  //     .catch((e) => {
+  //       this.inProgress = false;
+  //       this.submitted = false;
+  //       alert(e.message);
+  //       this.display = "default";
+  //     });
+  //   }
+  // }
 
-  blueStoreSubmit(){
-    this.blueStoreSubmitted = true;
-    let data = Object.assign(this.meta, this.attachment.exportMeta());
+  // blueStoreSubmit(){
+  //   this.blueStoreSubmitted = true;
+  //   let data = Object.assign(this.meta, this.attachment.exportMeta());
 
-    data.attachment_guid = data.attachment_guid;
-    data.title = this.blueStoreForm.value.blueStoreTitle;
-    data.description = this.blueStoreForm.value.blueStoreDescription;
-    data.price = this.blueStoreForm.value.blueStorePrice;
-    data.item_count = this.blueStoreForm.value.blueStoreUnits;
-    data.currency = 'INR';
+  //   data.attachment_guid = data.attachment_guid;
+  //   data.title = this.blueStoreForm.value.blueStoreTitle;
+  //   data.description = this.blueStoreForm.value.blueStoreDescription;
+  //   data.price = this.blueStoreForm.value.blueStorePrice;
+  //   data.item_count = this.blueStoreForm.value.blueStoreUnits;
+  //   data.currency = 'INR';
 
 
-    console.log(data)
-    if(this.blueStoreForm.valid){
-      this.client.post('api/v3/marketplace', data)
-      .then((data: any) => {
-        // data.activity.boostToggle = true;
-        //this.load.next(data.activity);
-        this.attachment.reset();
-        this.meta = { wire_threshold: null };
-        this.inProgress = false;
-        this.submitted = false;
-      })
-      .catch((e) => {
-        this.inProgress = false;
-        this.submitted = false;
-        alert(e.message);
-        this.display = "default";
-      });
-    }
-  }
+  //   console.log(data)
+  //   if(this.blueStoreForm.valid){
+  //     this.client.post('api/v3/marketplace', data)
+  //     .then((data: any) => {
+  //       // data.activity.boostToggle = true;
+  //       //this.load.next(data.activity);
+  //       this.attachment.reset();
+  //       this.meta = { wire_threshold: null };
+  //       this.inProgress = false;
+  //       this.submitted = false;
+  //     })
+  //     .catch((e) => {
+  //       this.inProgress = false;
+  //       this.submitted = false;
+  //       alert(e.message);
+  //       this.display = "default";
+  //     });
+  //   }
+  // }
 
-  changeRegex(e) {
-    console.log(e)
-    if (e.target.value.charAt(0) == '2') {
-      this.timeMask[1] = new RegExp('[0-3]')
-    } else {
-      this.timeMask[1] = new RegExp('[0-9]')
-    }
-  }
+  // changeRegex(e) {
+  //   console.log(e)
+  //   if (e.target.value.charAt(0) == '2') {
+  //     this.timeMask[1] = new RegExp('[0-3]')
+  //   } else {
+  //     this.timeMask[1] = new RegExp('[0-9]')
+  //   }
+  // }
   emitEvent(data){
     console.log(data)
     this.load.next(data.activity);
