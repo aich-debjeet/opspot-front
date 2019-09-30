@@ -74,6 +74,8 @@ import { ExploreVideoComponent } from './modules/explore/explore-video/explore-v
 import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-blogs.component';
 import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
+import { OpportunityModule } from './modules/opportunity/opportunity.module';
+
 
 @NgModule({
   bootstrap: [Opspot],
@@ -142,6 +144,7 @@ import { PortfolioModule } from './modules/portfolio/portfolio.module';
     NgxIntlTelInputModule,
     BsDatepickerModule.forRoot(),
     NetworkModule,
+    OpportunityModule,
     TextMaskModule,
     PortfolioModule
   ],

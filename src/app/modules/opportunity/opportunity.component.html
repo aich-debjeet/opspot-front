@@ -1,0 +1,199 @@
+<section class="o-post-inner-sec">
+  <div class="container">
+    <div class="o-posts-inner-page">
+      <div class="o-posts-inner-page__left">
+        <div class="o-card feed o-post-inner-minheight">
+          <div class="feed-head">
+            <a *ngIf="opportunity?.ownerObj && opportunity?.ownerObj?.username"
+              [routerLink]="['/', opportunity?.ownerObj?.username]" class="o-avatar"><img
+                [src]="opspot.cdn_url + 'icon/' + opportunity?.ownerObj?.guid + '/medium/' + getOwnerIconTime()"
+                alt=""></a>
+            <div class="o-avatar__info">
+              <div class="o-avatar-det-block">
+                <span class="text-lg grey o-posts-det" *ngIf="opportunity?.ownerObj?.name"><a
+                    class="o-avatar__name">{{opportunity?.ownerObj?.name}}</a>
+                  added 4 medias to <a class="grey-dark f500">#Opportunity</a></span>
+              </div>
+              <div class="grey m-l-8 o-posts-tym" *ngIf="opportunity?.time_created">
+                <span>{{opportunity?.time_created * 1000 | date:'medium'}}</span>
+                <span class="o-posts-public-private" *ngIf="isTranslatable" (click)="translateToggle = true;"><i
+                    class="icon-public"></i></span>
+              </div>
+            </div>
+            <div class="o-feed-head-action">
+              <a class="head-action__link" (click)="togglePin()">
+                <!-- <img src="assets/svg/bookmark.svg" alt=""
+                  class="head-action__icon hidden-mob"> -->
+                <m-tooltip icon="turned_in" *ngIf="opportunity?.bookmark">
+                  This post is Bookmarked
+                </m-tooltip>
+                <m-tooltip *ngIf="!opportunity?.bookmark" icon="turned_in_not">
+                  Click to bookmark this post to the top of your channel feed
+                </m-tooltip>
+              </a>
+              <m-post-menu  *ngIf="opportunity" [entity]="opportunity" [canDelete]="canDelete" [isTranslatable]="isTranslatable"
+                [options]="menuOptions" (optionSelected)="menuOptionSelected($event)">
+                <ng-container post-menu>
+                  <ng-content select="[post-menu]"></ng-content>
+                </ng-container>
+              </m-post-menu>
+            </div>
+          </div>
+          <div>
+            <div class="feed-card-opportunity-block">
+              <div class="feed-card-opportunity-block__top">
+                <div class="opportunity-image">
+                    <!-- <img *ngIf="opportunity?.custom_data[0]" [src]="activity?.custom_data[0]?activity?.custom_data[0].src:''">
+                    <img *ngIf="!activity?.custom_data[0]" src="assets/ops_icon.png"> -->
+                  <img src="assets/ops_icon.png">
+                </div>
+                <div class="opportunity-details">
+                  <h5 class="f500 mb-3" *ngIf="opportunity?.title">{{ opportunity?.title}}</h5>
+                  <div class="text-md grey" *ngIf="opportunity?.location">
+                    {{ opportunity?.location }}
+                  </div>
+                  <button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+                </div>
+                <div class="opportunity-button" *ngIf="opportunity?.category">
+                  {{opportunity?.category}}
+                </div>
+              </div>
+              <div class="feed-card-opportunity-block__bottom hidden-mob">
+                <div class="text-md">
+                  <div *ngIf="opportunity?.description"><span class="primary" [innerHtml]="opportunity?.description | tags"></span></div>
+
+                  <!-- <div class="mt-20">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                  Aenean commodo ligula eget dolor. Aenean massa. 
+                  Cum sociis natoque penatibus et magnis dis parturient montes, 
+                  nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, 
+                  pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, 
+                  fringilla vel, aliquet nec, vulputate eget, arcu</div> -->
+                </div>
+              </div>
+            </div>
+            <!--block ends-->
+          </div>
+          <div class="o-posts-inner-page-action">
+            <div class="o-posts-inner-page-action__details">
+              <div class="o-latest-channel-info-head__members members-list">
+                <div class="members-circle members-circle1"><img src="assets/demo/avatar.png" alt=""></div>
+                <div class="members-circle members-circle2"><img src="assets/demo/avatar.png" alt=""></div>
+                <div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt=""></div>
+              </div>
+              <div class="text-sm grey">{{count}} liked this post</div>
+              <div class="text-sm grey m-16">46 shared this post</div>
+              <div class="text-sm grey m-16">13 contributed this post</div>
+              <div class="text-sm grey m-16">2k viewed this post</div>
+            </div>
+            <div class="o-posts-inner-page-action__icons">
+              <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="opportunity">
+              </opspot-button-thumbs-up>
+              <opspot-button-remind *ngIf="opportunity" [object]="opportunity" [large]="'true'"></opspot-button-remind>
+              <div class="icon-posts-box">
+                <span class="icon-coins"></span><span class="text-md f500">Contribute</span>
+              </div>
+              <!-- <m-wire-button
+                *ngIf="session.getLoggedInUser().guid != (opportunity?.remind_object ? opportunity?.remind_object?.owner_guid : opportunity?.owner_guid)"
+                [object]="opportunity?.remind_object ? opportunity?.remind_object : opportunity" (done)="wireSubmitted($event)">
+              </m-wire-button> -->
+
+            </div>
+          </div>
+          <!--action ends-->
+          <opspot-comments
+          *ngIf="opportunity"
+          [object]="opportunity" 
+          [focusOnInit]="true" 
+          [focusedCommentGuid]="focusedCommentGuid"
+          [canEdit]="canDelete">
+          </opspot-comments>
+
+          <!-- <div class="o-comments-compose">
+              <div class="o-avatar-sm">
+                <img src="assets/demo/avatar.png" alt="">
+              </div>    
+              <div class="o-comments-composer">
+                <textarea rows="1" placeholder="Write a comment"></textarea>
+              </div>
+            </div> -->
+          <!-- <div class="o-comments-block">
+              <div class="o-comments">
+                <a href="#" class="o-comments__avatar o-avatar-sm"><img src="assets/demo/avatar.png" alt=""></a>
+                <div class="o-comments__data">
+                  <a class="o-commenter text-md f500">Mythili Rajendran</a>
+                  <div class="o-comments__txt">
+                    Far far away, behind the word mountains, far from the countries 
+                    Vokalia and Consonantia, there live the blind texts far from the 
+                    countries Vokalia and Consonantia, there live the blind texts  
+                  </div>
+                  <div class="o-comments__action">
+                    <a href="#">
+                      <div class="o-like-ico"><img src="assets/svg/heart.svg" alt="" ></div>
+                      <div class="text-sm grey">4 Likes</div>
+                    </a>
+                    <a href="#">
+                      <div class="dot"></div><div class="text-sm grey m-l-7">Reply</div>
+                    </a>
+                    <a href="#">
+                      <div class="dot"></div><div class="text-sm grey o-comments__tym m-l-7">15 mins</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="o-comments o-comments--reply">
+                <a href="#" class="o-comments__avatar o-avatar-sm"><img src="assets/demo/avatar.png" alt=""></a>
+                <div class="o-comments__data">
+                  <a class="o-commenter text-md f500">Mythili Rajendran</a>
+                  <div class="o-comments__txt">
+                    Far far away, behind the word mountains, far from the countries 
+                    Vokalia and Consonantia, there live the blind texts far from the 
+                    countries Vokalia and Consonantia, there live the blind texts
+                  </div>
+                  <div class="o-comments__action">
+                    <a href="#">
+                      <div class="o-like-ico"><img src="assets/svg/heart.svg" alt="" ></div>
+                      <div class="text-sm grey">4 Likes</div>
+                    </a>
+                    <a href="#">
+                      <div class="dot"></div><div class="text-sm grey m-l-7">Reply</div>
+                    </a>
+                    <a href="#">
+                      <div class="dot"></div><div class="text-sm grey o-comments__tym m-l-7">15 mins</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="o-comments">
+                <a href="#" class="o-comments__avatar o-avatar-sm"><img src="assets/demo/avatar.png" alt=""></a>
+                <div class="o-comments__data">
+                  <a class="o-commenter text-md f500">Mythili Rajendran</a>
+                  <div class="o-comments__txt">
+                    Far far away, behind the word mountains, far from the countries 
+                    Vokalia and Consonantia, there live the blind texts far from the 
+                    countries Vokalia and Consonantia, there live the blind texts 
+                  </div>
+                  <div class="o-comments__action">
+                    <a href="#">
+                      <div class="o-like-ico"><img src="assets/svg/heart.svg" alt="" ></div>
+                      <div class="text-sm grey">4 Likes</div>
+                    </a>
+                    <a href="#">
+                      <div class="dot"></div><div class="text-sm grey m-l-7">Reply</div>
+                    </a>
+                    <a href="#">
+                      <div class="dot"></div><div class="text-sm grey o-comments__tym m-l-7">15 mins</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+        </div>
+      </div>
+      <div class="o-posts-inner-page__right hidden-mob">
+        <app-opportunity-widget *ngIf="allOpportunities" [object]="allOpportunities"></app-opportunity-widget>
+        <!-- {% include components/opportunities_sidebar.html %}
+          {% include components/trending_post.html %}   -->
+      </div>
+    </div>
+  </div>
+</section>

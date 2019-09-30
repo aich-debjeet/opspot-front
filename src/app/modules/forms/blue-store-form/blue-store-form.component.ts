@@ -18,7 +18,7 @@ export class BlueStoreFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
-  blueStoreForm:FormGroup;
+  blueStoreForm: FormGroup;
   meta: any = {
     message: '',
     wire_threshold: null
@@ -28,12 +28,12 @@ export class BlueStoreFormComponent implements OnInit {
   blueStoreSubmitted: boolean = false;
   constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
     this.blueStoreForm = this.formBuilder.group({
-      blueStoreTitle:['',[Validators.required]],
-      blueStoreDescription: ['',[Validators.required]],
-      blueStoreUnits: ['',[Validators.required]],
-      blueStorePrice:['',[Validators.required]]
+      blueStoreTitle: ['', [Validators.required]],
+      blueStoreDescription: ['', [Validators.required]],
+      blueStoreUnits: ['', [Validators.required]],
+      blueStorePrice: ['', [Validators.required]]
     })
-   }
+  }
 
   ngOnInit() {
   }
@@ -41,10 +41,10 @@ export class BlueStoreFormComponent implements OnInit {
   changeToDefault() {
     this.ChangeDefault.emit();
   }
-  close(){
+  close() {
     this.Close.emit();
   }
-  blueStoreSubmit(){
+  blueStoreSubmit() {
     this.blueStoreSubmitted = true;
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
@@ -56,26 +56,24 @@ export class BlueStoreFormComponent implements OnInit {
     data.currency = 'INR';
 
 
-    console.log(data)
-    if(this.blueStoreForm.valid){
+    if (this.blueStoreForm.valid) {
       this.client.post('api/v3/marketplace', data)
-      .then((data: any) => {
-        // data.activity.boostToggle = true;
-        this.load.emit(data);
-        this.attachment.reset();
-        this.meta = { wire_threshold: null };
-        
-        this.blueStoreSubmitted = false;
-      })
-      .catch((e) => {
-        
-        this.blueStoreSubmitted = false;
-        alert(e.message);
-      });
+        .then((data: any) => {
+          // data.activity.boostToggle = true;
+          this.load.emit(data);
+          this.attachment.reset();
+          this.meta = { wire_threshold: null };
+
+          this.blueStoreSubmitted = false;
+        })
+        .catch((e) => {
+
+          this.blueStoreSubmitted = false;
+          alert(e.message);
+        });
     }
   }
   uploadAttachment(file: HTMLInputElement, event) {
-    console.log(file, event, this.attachment)
     if (file.value) { // this prevents IE from executing this code twice
 
       this.attachment.upload(file)
@@ -83,17 +81,13 @@ export class BlueStoreFormComponent implements OnInit {
           let obj = {};
           obj['guid'] = guid;
           obj['imageLink'] = this.attachment.getPreview();
-          console.log(guid)
-          console.log(obj)
           this.cards.push(obj);
-          console.log(this.cards)
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }
           file.value = null;
         })
         .catch(e => {
-          console.log(e)
           if (e && e.message) {
           }
           file.value = null;
@@ -103,7 +97,6 @@ export class BlueStoreFormComponent implements OnInit {
   }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    console.log(file, imageId)
 
     // if we're not uploading a file right now
     // this.attachment.setPendingDelete(false);
@@ -117,7 +110,6 @@ export class BlueStoreFormComponent implements OnInit {
       this.cards = _remove(this.cards, function (n) {
         return n.guid !== guid;
       });
-      console.log(this.cards)
     }).catch(e => {
       console.error(e);
     });

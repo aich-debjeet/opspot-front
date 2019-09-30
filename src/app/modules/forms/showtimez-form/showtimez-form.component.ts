@@ -19,7 +19,7 @@ export class ShowtimezFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
-  showTimezForm:FormGroup;
+  showTimezForm: FormGroup;
   eventSubmitted: boolean = false;
   meta: any = {
     message: '',
@@ -29,15 +29,15 @@ export class ShowtimezFormComponent implements OnInit {
   cards = [];
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-  
-  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) { 
-    this.showTimezForm =  this.formBuilder.group({
-      eventTitle:['', [Validators.required]],
-      eventDescription:['', [Validators.required]],
-      eventsLocation:['', [Validators.required]],
-      eventdate:['', [Validators.required]],
-      eventTime:['', [Validators.required]],
-      eventImage:['']
+
+  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
+    this.showTimezForm = this.formBuilder.group({
+      eventTitle: ['', [Validators.required]],
+      eventDescription: ['', [Validators.required]],
+      eventsLocation: ['', [Validators.required]],
+      eventdate: ['', [Validators.required]],
+      eventTime: ['', [Validators.required]],
+      eventImage: ['']
     })
   }
 
@@ -45,7 +45,6 @@ export class ShowtimezFormComponent implements OnInit {
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
-    console.log(file, event, this.attachment)
     if (file.value) { // this prevents IE from executing this code twice
 
       this.attachment.upload(file)
@@ -53,17 +52,14 @@ export class ShowtimezFormComponent implements OnInit {
           let obj = {};
           obj['guid'] = guid;
           obj['imageLink'] = this.attachment.getPreview();
-          console.log(guid)
-          console.log(obj)
+
           this.cards.push(obj);
-          console.log(this.cards)
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }
           file.value = null;
         })
         .catch(e => {
-          console.log(e)
           if (e && e.message) {
           }
           file.value = null;
@@ -73,27 +69,17 @@ export class ShowtimezFormComponent implements OnInit {
   }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    console.log(file, imageId)
-
-    // if we're not uploading a file right now
-    // this.attachment.setPendingDelete(false);
-    // this.canPost = false;
-    // this.inProgress = true;
-
-    // this.errorMessage = '';
-
     this.attachment.remove(file, imageId).then((guid) => {
       file.value = '';
       this.cards = _remove(this.cards, function (n) {
         return n.guid !== guid;
       });
-      console.log(this.cards)
     }).catch(e => {
       console.error(e);
     });
   }
 
-  eventSubmit(){
+  eventSubmit() {
     this.eventSubmitted = true;
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
@@ -106,34 +92,32 @@ export class ShowtimezFormComponent implements OnInit {
     data.published = true;
     data.start_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`)
 
-    console.log(data)
-    if(this.showTimezForm.valid){
+    if (this.showTimezForm.valid) {
       this.client.post('api/v3/event', data)
-      .then((data: any) => {
-        // data.activity.boostToggle = true;
-        this.load.emit(data);
-        this.attachment.reset();
-        this.meta = { wire_threshold: null };
-        
-        this.eventSubmitted = false;
-      })
-      .catch((e) => {
-        
-        this.eventSubmitted = false;
-        alert(e.message);
-        
-      });
+        .then((data: any) => {
+          // data.activity.boostToggle = true;
+          this.load.emit(data);
+          this.attachment.reset();
+          this.meta = { wire_threshold: null };
+
+          this.eventSubmitted = false;
+        })
+        .catch((e) => {
+
+          this.eventSubmitted = false;
+          alert(e.message);
+
+        });
     }
   }
   changeToDefault() {
     this.ChangeDefault.emit();
   }
-  close(){
+  close() {
     this.Close.emit();
   }
 
   changeRegex(e) {
-    console.log(e)
     if (e.target.value.charAt(0) == '2') {
       this.timeMask[1] = new RegExp('[0-3]')
     } else {

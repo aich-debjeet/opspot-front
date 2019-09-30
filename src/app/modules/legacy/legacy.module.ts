@@ -40,6 +40,7 @@ import { CommentsModule } from '../comments/comments.module';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { AppuserComponent } from './components/appuser/appuser.component';
 import { GroupBannerComponent } from './components/group-banner/group-banner.component';
+import { OpspotFormsModule } from '../forms/forms.module';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import { GroupBannerComponent } from './components/group-banner/group-banner.com
     PostMenuModule,
     CommentsModule,
     TextInputAutocompleteModule,
+    OpspotFormsModule,
   ],
   declarations: [
     Activity,

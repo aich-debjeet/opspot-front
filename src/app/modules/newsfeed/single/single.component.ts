@@ -71,6 +71,9 @@ export class NewsfeedSingleComponent {
           case 'blog':
             this.router.navigate(['/blog/view', this.activity.guid], { replaceUrl: true });
             break;
+          case 'opportunity':
+            this.router.navigate(['/opportunity/view', this.activity.guid], { replaceUrl: true });
+            break;
         }
 
         if (this.activity.ownerObj) {
