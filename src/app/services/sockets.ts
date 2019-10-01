@@ -29,7 +29,7 @@ export class SocketsService {
 
     this.socket = io.connect(this.SOCKET_IO_SERVER, {
       // 'reconnect': true,
-      'reconnection': true,
+      'reconnection': false,
       'timeout': 40000,
       'autoConnect': true
     });
