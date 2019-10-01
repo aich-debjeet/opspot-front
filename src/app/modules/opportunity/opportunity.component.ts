@@ -177,7 +177,6 @@ export class OpportunityComponent implements OnInit {
           // listen to the update callback
           onUpdate: (payload: any) => {
             // make update to local var
-            alert(payload)
             this.udpateOpportunity(payload);
           }
         }).present();  
@@ -186,7 +185,6 @@ export class OpportunityComponent implements OnInit {
 
 
   udpateOpportunity(data: any) {
-    alert()
     this.opportunity.category = data.category;
     this.opportunity.description = data.description;
     this.opportunity.location = data.location;

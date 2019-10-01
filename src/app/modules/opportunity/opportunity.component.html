@@ -57,8 +57,8 @@
                 </div>
               </div>
               <div class="feed-card-opportunity-block__bottom hidden-mob">
-                <div class="text-md">
-                  <div *ngIf="opportunity?.description"><span class="primary" [innerHtml]="opportunity?.description | tags"></span></div>
+                <div class="text-md" *ngIf="opportunity?.description">
+                 <span class="primary" [innerHtml]="opportunity?.description | safe"></span>
                 </div>
               </div>
             </div>

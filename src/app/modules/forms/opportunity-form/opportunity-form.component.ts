@@ -96,7 +96,7 @@ export class OpportunityFormComponent implements OnInit {
     data.description = value.opportunityDescription;
     data.location = value.opportunityLocation;
     data.category = value.category;
-    data.published = true;
+    data.published = 1;
 
     if (this.opportunityForm.valid) {
       let endpoint = 'api/v3/opportunity';

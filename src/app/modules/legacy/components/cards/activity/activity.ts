@@ -63,7 +63,7 @@ export class Activity {
   commentsOpened: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
   scroll_listener;
-
+  oppGuid;
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
   onViewed: EventEmitter<{ activity, visible }> = new EventEmitter<{ activity, visible }>();
 
@@ -117,6 +117,7 @@ export class Activity {
 
     if (this.activity.entity_type === "opportunity") {
       this.showOpportunity = true;
+      this.oppGuid = this.activity.guid;
     }
 
     if (this.activity.entity_type === "item") {
