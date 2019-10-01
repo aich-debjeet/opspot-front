@@ -20,6 +20,11 @@ export class OpportunityFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
+  _opts: any;
+  set opts(opts: any) {
+    this._opts = opts;
+  }
+
   opportunity: any;
   oppGuid: string;
 
@@ -99,12 +104,18 @@ export class OpportunityFormComponent implements OnInit {
         endpoint = 'api/v3/opportunity/' + this.oppGuid;
       }
       this.client.post(endpoint, data)
-        .then((data: any) => {
-          this.load.emit(data);
+        .then((resp: any) => {
+          this.load.emit(resp);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
           this.submitted = false;
           this.changeToDefault();
+          // check if update callback function is avaibale
+          if (this._opts && this._opts.onUpdate) {
+            this._opts.onUpdate(data);
+            // close modal
+            this.closeModal();
+          }
         })
         .catch((e) => {
           this.submitted = false;
