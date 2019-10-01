@@ -30,8 +30,10 @@ export class OpportunityFormComponent implements OnInit {
 
   @Input('object') set data(object) {
     this.opportunity = object;
+    console.log("this.opportunity: ", this.opportunity);
+    
     if (this.opportunity) {
-      this.oppGuid = object['guid'];
+      this.oppGuid = object['entity_guid'];
       this.buildForm(this.opportunity);
     } else {
       this.buildForm();
@@ -59,12 +61,20 @@ export class OpportunityFormComponent implements OnInit {
     // this.buildForm();
   }
 
+  description = '';
+
   buildForm(data?) {
     if (data) {
+      console.log("data in opp form: ", data);
+      if(data.description){
+        this.description = data.description;
+      } if(data.blurb){
+        this.description = data.blurb;
+      }    
       this.opportunityForm = this.formBuilder.group({
         category: [data['category'] ? data['category'] : '', [Validators.required]],
         opportunityTitle: [data['title'] ? data['title'] : '', [Validators.required]],
-        opportunityDescription: [data['description'] ? data['description'] : '', [Validators.required]],
+        opportunityDescription: [this.description ? this.description : '', [Validators.required]],
         opportunityLocation: [data['location'] ? data['location'] : '', [Validators.required]],
         opportunityImage: [data['image'] ? data['image'] : '', []]
       });

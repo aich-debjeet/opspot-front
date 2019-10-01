@@ -80,11 +80,8 @@
 							<div class="text-sm grey m-16">2k viewed this post</div>
 						</div>
 						<div class="o-posts-inner-page-action__icons">
-							<opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="marketplace">
-							</opspot-button-thumbs-up>
-							<div class="icon-posts-box">
-								<span class="icon-share-2"></span><span class="text-md f500">Share</span>
-							</div>
+							<opspot-button-thumbs-up *ngIf="marketplace" (liked)="liked($event)" [large]="'true'" [object]="marketplace"></opspot-button-thumbs-up>
+							<opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'"></opspot-button-remind>
 							<div class="icon-posts-box">
 								<span class="icon-coins"></span><span class="text-md f500">Contribute</span>
 							</div>

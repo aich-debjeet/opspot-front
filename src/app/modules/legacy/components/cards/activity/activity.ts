@@ -10,6 +10,7 @@ import { WireCreatorComponent } from '../../../../wire/creator/creator.component
 import { OpspotVideoComponent } from '../../../../media/components/video/video.component';
 import { NewsfeedService } from '../../../../newsfeed/services/newsfeed.service';
 import { OpportunityFormComponent } from '../../../../../modules/forms/opportunity-form/opportunity-form.component';
+import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-form/blue-store-form.component';
 
 @Component({
   moduleId: module.id,
@@ -274,10 +275,23 @@ export class Activity {
         // listen to the update callback
         onUpdate: (payload: any) => {
           // make update to local var
+          console.log("payload: ",payload);
+          
           this.udpateOpportunity(payload);
         }
       }).present();
-    } else {
+    } 
+    // if(this.activity.entity_type === 'item'){
+    //   this.overlayModal.create(BlueStoreFormComponent, this.activity, {
+    //     class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+    //     // listen to the update callback
+    //     onUpdate: (payload: any) => {
+    //       // make update to local var
+    //       this.udpateMarketPlace(payload);
+    //     }
+    //   }).present()
+    // } 
+    else {
       this.editing = true;
     }
   }
@@ -287,6 +301,18 @@ export class Activity {
     this.activity.description = data.description;
     this.activity.location = data.location;
     this.activity.title = data.title;
+    // trigger component observe new changes
+    this.detectChanges();
+  }
+
+  udpateMarketPlace(data: any) {
+    this.activity.description = data.description;
+    this.activity.title = data.title;
+    this.activity.attachment_guid = data.attachment_guid;
+    this.activity.price = data.blueStorePrice;
+    this.activity.item_count = data.blueStoreUnits;
+    this.activity.currency = 'INR';
+    this.activity.published = 1;
     // trigger component observe new changes
     this.detectChanges();
   }

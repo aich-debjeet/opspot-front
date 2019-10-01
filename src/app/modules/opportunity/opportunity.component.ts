@@ -72,7 +72,6 @@ export class OpportunityComponent implements OnInit {
   menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
   load() {
-
     if (this.inProgress)
       return false;
 
@@ -172,14 +171,14 @@ export class OpportunityComponent implements OnInit {
 
   editOptions() {
     if (this.opportunity) {
-        this.overlayModal.create(OpportunityFormComponent, this.opportunity, {
-          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
-          // listen to the update callback
-          onUpdate: (payload: any) => {
-            // make update to local var
-            this.udpateOpportunity(payload);
-          }
-        }).present();  
+      this.overlayModal.create(OpportunityFormComponent, this.opportunity, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+        // listen to the update callback
+        onUpdate: (payload: any) => {
+          // make update to local var
+          this.udpateOpportunity(payload);
+        }
+      }).present();
     }
   }
 

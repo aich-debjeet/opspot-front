@@ -23,7 +23,7 @@ export class BluestoreComponent implements OnInit {
 
   isTranslatable: boolean;
   canDelete: boolean = false;
-  activity:any;
+  activity: any;
   translateToggle: boolean = false;
   _delete: EventEmitter<any> = new EventEmitter();
 
@@ -59,7 +59,6 @@ export class BluestoreComponent implements OnInit {
 
     this.client.get('api/v3/marketplace/' + this.guid)
       .then((data: any) => {
-        console.log(data);
         if (data.marketplace) {
           this.marketplace = data.marketplace;
           this.count = this.marketplace['thumbs:up:count'];
@@ -88,7 +87,7 @@ export class BluestoreComponent implements OnInit {
     switch (option) {
       case 'edit':
         //this.editing = true;
-       this.editOptions();
+        this.editOptions();
         break;
       case 'delete':
         this.delete();
@@ -107,15 +106,15 @@ export class BluestoreComponent implements OnInit {
 
   editOptions() {
     if (this.marketplace) {
-        this.overlayModal.create(BlueStoreFormComponent, this.marketplace, {
-          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
-          // listen to the update callback
-          onUpdate: (payload: any) => {
-            // make update to local var
-            alert(payload)
-            this.udpateMarketPlace(payload);
-          }
-        }).present();  
+      this.overlayModal.create(BlueStoreFormComponent, this.marketplace, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+        // listen to the update callback
+        onUpdate: (payload: any) => {
+          // make update to local var
+          alert(payload)
+          this.udpateMarketPlace(payload);
+        }
+      }).present();
     }
   }
 
@@ -127,71 +126,68 @@ export class BluestoreComponent implements OnInit {
     this.marketplace.item_count = data.blueStoreUnits;
     this.marketplace.currency = 'INR';
     this.marketplace.published = 1;
-
     // trigger component observe new changes
     this.detectChanges();
   }
 
+  detectChanges() {
+    this.cd.markForCheck();
+    this.cd.detectChanges();
+  }
 
+  liked(count) {
+    if (count != this.marketplace['thumbs:up:count:old']) {
+      this.count = count;
+    } else {
+      this.count = this.marketplace['thumbs:up:count']
+    }
+  }
 
-    detectChanges() {
-      this.cd.markForCheck();
-      this.cd.detectChanges();
+  setExplicit(value: boolean) {
+    let oldValue = this.activity.mature,
+      oldMatureVisibility = this.activity.mature_visibility;
+
+    this.activity.mature = value;
+    this.activity.mature_visibility = void 0;
+
+    if (this.activity.custom_data && this.activity.custom_data[0]) {
+      this.activity.custom_data[0].mature = value;
+    } else if (this.activity.custom_data) {
+      this.activity.custom_data.mature = value;
     }
-  
-    liked(count) {
-      if (count != this.marketplace['thumbs:up:count:old']) {
-        this.count = count;
-      } else {
-        this.count = this.marketplace['thumbs:up:count']
-      }
+
+    this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
+      .catch(e => {
+        this.activity.mature = oldValue;
+        this.activity.mature_visibility = oldMatureVisibility;
+
+        if (this.activity.custom_data && this.activity.custom_data[0]) {
+          this.activity.custom_data[0].mature = oldValue;
+        } else if (this.activity.custom_data) {
+          this.activity.custom_data.mature = oldValue;
+        }
+      });
+  }
+
+  delete($event: any = {}) {
+    if ($event.inProgress) {
+      $event.inProgress.emit(true);
     }
-  
-    setExplicit(value: boolean) {
-      let oldValue = this.activity.mature,
-        oldMatureVisibility = this.activity.mature_visibility;
-  
-      this.activity.mature = value;
-      this.activity.mature_visibility = void 0;
-  
-      if (this.activity.custom_data && this.activity.custom_data[0]) {
-        this.activity.custom_data[0].mature = value;
-      } else if (this.activity.custom_data) {
-        this.activity.custom_data.mature = value;
-      }
-  
-      this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
-        .catch(e => {
-          this.activity.mature = oldValue;
-          this.activity.mature_visibility = oldMatureVisibility;
-  
-          if (this.activity.custom_data && this.activity.custom_data[0]) {
-            this.activity.custom_data[0].mature = oldValue;
-          } else if (this.activity.custom_data) {
-            this.activity.custom_data.mature = oldValue;
-          }
-        });
-    }
-  
-    delete($event: any = {}) {
-      if ($event.inProgress) {
-        $event.inProgress.emit(true);
-      }
-      this.client.delete(`api/v1/newsfeed/${this.activity.guid}`)
-        .then((response: any) => {
-          if ($event.inProgress) {
-            $event.inProgress.emit(false);
-            $event.completed.emit(0);
-          }
-          this._delete.next(this.activity);
-        })
-        .catch(e => {
-          if ($event.inProgress) {
-            $event.inProgress.emit(false);
-            $event.completed.emit(1);
-          }
-        });
-    }
+    this.client.delete(`api/v1/newsfeed/${this.activity.guid}`)
+      .then((response: any) => {
+        if ($event.inProgress) {
+          $event.inProgress.emit(false);
+          $event.completed.emit(0);
+        }
+        this._delete.next(this.activity);
+      })
+      .catch(e => {
+        if ($event.inProgress) {
+          $event.inProgress.emit(false);
+          $event.completed.emit(1);
+        }
+      });
+  }
 
 
 }

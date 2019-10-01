@@ -7,6 +7,7 @@ import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
 
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   selector: 'app-blue-store-form',
@@ -17,6 +18,11 @@ export class BlueStoreFormComponent implements OnInit {
   @Output() ChangeDefault: EventEmitter<any> = new EventEmitter<any>();
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
+
+  _opts: any;
+  set opts(opts: any) {
+    this._opts = opts;
+  }
 
   blueStoreForm: FormGroup;
   meta: any = {
@@ -29,19 +35,21 @@ export class BlueStoreFormComponent implements OnInit {
   bluestore: any;
   bluestoreGuid: any;
 
-  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
-    // this.blueStoreForm = this.formBuilder.group({
-    //   blueStoreTitle: ['', [Validators.required]],
-    //   blueStoreDescription: ['', [Validators.required]],
-    //   blueStoreUnits: ['', [Validators.required]],
-    //   blueStorePrice: ['', [Validators.required]]
-    // })
+  description = '';
+
+  constructor(
+    public session: Session, 
+    public client: Client, 
+    public upload: Upload, 
+    public attachment: AttachmentService, 
+    private formBuilder: FormBuilder,
+    private overlayModal: OverlayModalService) {
   }
 
   @Input('object') set data(object) {
     this.bluestore = object;
     if (this.bluestore) {
-      this.bluestoreGuid = object['guid'];
+      this.bluestoreGuid = object['entity_guid'];
       this.buildForm(this.bluestore);
     } else {
       this.buildForm();
@@ -50,6 +58,13 @@ export class BlueStoreFormComponent implements OnInit {
 
   buildForm(data?) {
     if (data) {
+
+      if(data.description){
+        this.description = data.description;
+      } if(data.blurb){
+        this.description = data.blurb;
+      }   
+
       this.blueStoreForm = this.formBuilder.group({
         blueStoreTitle: [data['title'] ? data['title'] : '', [Validators.required]],
         blueStoreDescription: [data['description'] ? data['description'] : '', [Validators.required]],
@@ -88,21 +103,30 @@ export class BlueStoreFormComponent implements OnInit {
     data.published = 1;
 
     console.log("data: ", data);
-    
-   console.log("this.blueStoreForm.valid: ", this.blueStoreForm.valid);
-   
+
+    console.log("this.blueStoreForm.valid: ", this.blueStoreForm.valid);
+
 
     if (this.blueStoreForm.valid) {
+      let endpoint = 'api/v3/marketplace';
+      if (this.bluestoreGuid) {
+        endpoint = 'api/v3/marketplace' + this.bluestoreGuid;
+      }
       this.client.post('api/v3/marketplace', data)
         .then((data: any) => {
           // data.activity.boostToggle = true;
-          alert("dsfsreg");
           this.load.emit(data);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
 
           this.blueStoreSubmitted = false;
           this.changeToDefault();
+          // // check if update callback function is avaibale
+          if (this._opts && this._opts.onUpdate) {
+            this._opts.onUpdate(data);
+            // close modal
+            this.closeModal();
+          }
         })
         .catch((e) => {
 
@@ -153,4 +177,7 @@ export class BlueStoreFormComponent implements OnInit {
     });
   }
 
+  closeModal() {
+    this.overlayModal.dismiss();
+  }
 }
