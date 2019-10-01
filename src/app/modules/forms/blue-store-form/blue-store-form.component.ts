@@ -58,7 +58,6 @@ export class BlueStoreFormComponent implements OnInit {
       });
     } else {
       this.blueStoreForm = this.formBuilder.group({
-        category: ['', [Validators.required]],
         blueStoreTitle: ['', [Validators.required]],
         blueStoreDescription: ['', [Validators.required]],
         blueStoreUnits: ['', [Validators.required]],
@@ -88,11 +87,16 @@ export class BlueStoreFormComponent implements OnInit {
     data.currency = 'INR';
     data.published = 1;
 
+    console.log("data: ", data);
+    
+   console.log("this.blueStoreForm.valid: ", this.blueStoreForm.valid);
+   
 
     if (this.blueStoreForm.valid) {
       this.client.post('api/v3/marketplace', data)
         .then((data: any) => {
           // data.activity.boostToggle = true;
+          alert("dsfsreg");
           this.load.emit(data);
           this.attachment.reset();
           this.meta = { wire_threshold: null };

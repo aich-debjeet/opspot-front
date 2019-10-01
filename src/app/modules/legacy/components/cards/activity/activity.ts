@@ -117,7 +117,6 @@ export class Activity {
 
     if (this.activity.entity_type === "opportunity") {
       this.showOpportunity = true;
-      this.oppGuid = this.activity.guid;
     }
 
     if (this.activity.entity_type === "item") {
@@ -131,9 +130,6 @@ export class Activity {
       (this.activity.remind_object && this.translationService.isTranslatable(this.activity.remind_object))
     );
   }
-
-
-
 
   getOwnerIconTime() {
     let session = this.session.getLoggedInUser();

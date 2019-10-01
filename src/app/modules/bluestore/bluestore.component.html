@@ -6,39 +6,28 @@
 					<div class="feed-head">
 						<a *ngIf="marketplace?.ownerObj && marketplace?.ownerObj?.username"
 							[routerLink]="['/', marketplace?.ownerObj?.username]" class="o-avatar">
-							<img [src]="opspot.cdn_url + 'icon/' + marketplace?.ownerObj?.guid + '/medium/' + getOwnerIconTime()"
-								alt="">
+							<img [src]="opspot.cdn_url + 'icon/' + marketplace?.ownerObj?.guid + '/medium/' + getOwnerIconTime()" alt="">
 						</a>
 						<div class="o-avatar__info">
 							<div class="o-avatar-det-block">
-								<span class="text-lg grey o-posts-det"><a
-										class="o-avatar__name">{{marketplace?.ownerObj?.name}}</a>
-									added 4 medias to <a class="grey-dark f500">#Marketplace</a></span>
+								<span class="text-lg grey o-posts-det">
+									<a class="o-avatar__name">{{marketplace?.ownerObj?.name}}</a>
+									added 4 medias to <a class="grey-dark f500">#Marketplace</a>
+								</span>
 							</div>
 							<div class="grey m-l-8 o-posts-tym" *ngIf="marketplace?.time_created">
 								<span>{{marketplace?.time_created * 1000 | date:'medium'}}</span>
 								<span class="o-posts-public-private" *ngIf="isTranslatable"
-									(click)="translateToggle = true;"><i class="icon-public"></i></span>
+								   (click)="translateToggle = true;"><i class="icon-public"></i>
+							    </span>
 							</div>
 						</div>
-						<!--avatar info end-->
 						<div class="o-feed-head-action">
-							<!-- <a href="#" class="head-action__link">
-								<img src="assets/svg/bookmark.svg" alt="" class="head-action__icon hidden-mob">
-							</a> -->
-							<!-- <div class="o-option-drop">
-								<div onclick="myFunction()" class="o-option-drop__btn head-action__link"><img
-										src="assets/svg/more-horizontal.svg" alt="" class="head-action__icon"></div>
-								<div id="o-option-dropdown" class="o-option-drop__block">
-									<a href="#">Report</a>
-									<a href="#">Block</a>
-								</div>
-							</div> -->
-							<m-post-menu *ngIf="marketplace" [entity]="marketplace" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
-							(optionSelected)="menuOptionSelected($event)">
-							<ng-container post-menu>
-								<ng-content select="[post-menu]"></ng-content>
-							</ng-container>
+							<m-post-menu *ngIf="marketplace" [entity]="marketplace" 
+							[canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)">
+								<ng-container post-menu>
+									<ng-content select="[post-menu]"></ng-content>
+								</ng-container>
 							</m-post-menu>
 						</div>
 					</div>
@@ -50,8 +39,8 @@
 							<a class="feed-media__link">
 								<img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
 							</a>
-							<a class="feed-media__link"><img src="assets/demo/m1.jpg" alt=""
-									class="feed-media__img"></a>
+							<a class="feed-media__link"><img src="assets/demo/m1.jpg" 
+								alt="" class="feed-media__img"></a>
 							<a class="feed-media__link">
 								<img src="assets/demo/m3.jpg" alt="" class="feed-media__img">
 							</a>
@@ -64,7 +53,7 @@
 									{{ marketplace?.title}}
 								</h5>
 								<div class="text-md" *ngIf="marketplace?.description">
-									<span class="primary" [innerHtml]="marketplace.description | safe"></span> 		
+								   <span class="primary" [innerHtml]="marketplace.description | safe"></span>
 								</div>
 								<div class="text-rate" *ngIf="marketplace?.price ">
 									₹ {{ marketplace?.price  }}.00/- <span class="text-md f500">(per piece)</span>
@@ -91,7 +80,7 @@
 							<div class="text-sm grey m-16">2k viewed this post</div>
 						</div>
 						<div class="o-posts-inner-page-action__icons">
-							<opspot-button-thumbs-up (liked)="liked($event)"  [large]="'true'"[object]="marketplace">
+							<opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="marketplace">
 							</opspot-button-thumbs-up>
 							<div class="icon-posts-box">
 								<span class="icon-share-2"></span><span class="text-md f500">Share</span>
@@ -101,12 +90,7 @@
 							</div>
 						</div>
 					</div>
-					<opspot-comments
-					*ngIf="marketplace"
-					[object]="marketplace" 
-					[focusOnInit]="true" 
-					[focusedCommentGuid]="focusedCommentGuid"
-					[canEdit]="canDelete">
+					<opspot-comments *ngIf="marketplace" [object]="marketplace" [focusOnInit]="true"	[focusedCommentGuid]="focusedCommentGuid" [canEdit]="canDelete">
 					</opspot-comments>
 				</div>
 			</div>
