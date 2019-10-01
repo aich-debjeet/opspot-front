@@ -37,7 +37,6 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   }
 
   loadProfileInfo() {
-    console.log('loadProfileInfo()');
     try {
       this.inProgress = true;
       this.client.get(`api/v1/channel/${this.channel.username}`, )
@@ -57,8 +56,8 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   loadPortfolio() {
     this.client.get('api/v2/search', this.requestParams)
       .then((response: any) => {
-        this.inProgress = false;
-        this.loadPortfolio();
+        // this.inProgress = false;
+        console.log('response', response);
       })
       .catch(e => {
         console.error('Error: ', e);
