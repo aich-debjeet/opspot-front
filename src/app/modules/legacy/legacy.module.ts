@@ -41,7 +41,7 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { AppuserComponent } from './components/appuser/appuser.component';
 import { GroupBannerComponent } from './components/group-banner/group-banner.component';
 import { OpspotFormsModule } from '../forms/forms.module';
-import { PostCardComponent } from './components/cards/post-card/post-card.component';
+import { PostCard } from './components/cards/post-card/post-card';
 
 @NgModule({
   imports: [
@@ -90,7 +90,7 @@ import { PostCardComponent } from './components/cards/post-card/post-card.compon
 
     GroupBannerComponent,
 
-    PostCardComponent,
+    PostCard,
 
   ],
   exports: [
@@ -118,7 +118,7 @@ import { PostCardComponent } from './components/cards/post-card/post-card.compon
     CarouselComponent,
     AppuserComponent,
     GroupBannerComponent,
-    PostCardComponent
+    PostCard
   ],
   entryComponents: [
     Activity,

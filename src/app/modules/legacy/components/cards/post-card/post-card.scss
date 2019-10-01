@@ -1,0 +1,151 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+// explore card scss
+
+.o-explore-card{
+    width: 100%;
+    border: 1px solid $grey-light;	
+    border-radius: 3px;	
+    background-color: #FFFFFF;
+    overflow: hidden;
+    @include mq($until:$tablet){
+        margin-bottom: 10px; 
+    }
+    &:hover{
+        .o-explore-card-media-info{
+            display:flex!important;
+            transition: 5s;
+        }
+    }
+    &__media{
+        width: 100%;
+        min-height: 20px;
+        object-fit: contain;
+        position: relative;
+    }
+    &__media-info{
+        width: 100%;
+        padding: 12px;
+    }
+}
+// for media
+
+.o-explore-media-img{
+    width: 100%;
+    overflow: hidden;
+    img{
+        object-fit: cover;
+        width: 100%;
+    }
+}
+.wdt-hght{
+    img{
+    height: 306px;;
+    }
+}
+.o-explore-card-media-info{
+    width: 100%;
+    display: flex!important;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    display:none!important;
+    transition: 5s;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #000000 100%);
+    &__avatar{
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 6px;  
+        img{
+            width: 24px;
+        }
+    }
+}
+
+// for hashtag
+.o-media-hashtag{
+    width: 100%;
+    margin-top: 4px;
+}
+
+// for actions
+.o-explore-card-action{
+    border-top: 1px solid #E8EDF0;
+    margin-top: 11px;
+    .o-actions{
+        width: 100%;
+        padding: 13px 0px 4px;
+        display: flex;
+        position: relative;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            padding: 12px 14px;
+        }
+        &__link{
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            @include mq($from: $mobile_sm, $until: $desktop_sm) {
+                margin-right: 8px;
+            }
+            i{
+                font-size: 10px;
+            }
+        }
+        .btn--boost{
+            position: absolute;
+            right: 18px;
+            top: 10px;
+        }
+        .o-actions__link--coin{
+            position: absolute;
+            right: -7px;
+            top: 12px;
+        }
+    }
+    .o-action-icon{
+        width: 18px;
+        height: 18px;
+    }
+    .o-action-icon--lg{
+        height: 24px;	
+        width: 24px;
+    }
+    .o-action-count{
+        margin-left: 6px;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            margin-left: 4px;
+        }
+    }
+    .spot-ico{
+        font-size:19px!important; 
+        &--filled{
+            color: $error!important;
+        }
+    }
+}
+// for overlay
+.o-explore-media-img-oberlay:before {
+    background: hsla(0, 0%, 0%, 0.5803921568627451);
+    content:"\e9c0";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size: 40px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
