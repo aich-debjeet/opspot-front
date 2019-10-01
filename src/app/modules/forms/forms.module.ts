@@ -64,7 +64,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     MyJourneyFormComponent
   ],
   entryComponents: [
-    OpportunityFormComponent
+    OpportunityFormComponent,
+    BlueStoreFormComponent
   ]
 })
 export class OpspotFormsModule {

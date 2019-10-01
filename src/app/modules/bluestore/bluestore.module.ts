@@ -10,7 +10,7 @@ import { LegacyModule } from '../legacy/legacy.module';
 // TODO @gayatri: handle all other requests
 const blueStoreRoutes: Routes = [
   {
-    path: 'Item/view/:guid',
+    path: 'item/view/:guid',
     component: BluestoreComponent,
   }
   // {

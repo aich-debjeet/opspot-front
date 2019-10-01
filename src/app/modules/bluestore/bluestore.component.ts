@@ -3,6 +3,7 @@ import { Client } from '../../services/api';
 import { Session } from '../../services/session';
 import { ActivatedRoute } from '@angular/router';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
+import { BlueStoreFormComponent } from '../forms/blue-store-form/blue-store-form.component';
 
 
 
@@ -87,7 +88,7 @@ export class BluestoreComponent implements OnInit {
     switch (option) {
       case 'edit':
         //this.editing = true;
-       // this.editOptions();
+       this.editOptions();
         break;
       case 'delete':
         this.delete();
@@ -103,6 +104,35 @@ export class BluestoreComponent implements OnInit {
         break;
     }
   }
+
+  editOptions() {
+    if (this.marketplace) {
+        this.overlayModal.create(BlueStoreFormComponent, this.marketplace, {
+          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+          // listen to the update callback
+          onUpdate: (payload: any) => {
+            // make update to local var
+            alert(payload)
+            this.udpateMarketPlace(payload);
+          }
+        }).present();  
+    }
+  }
+
+  udpateMarketPlace(data: any) {
+    this.marketplace.description = data.description;
+    this.marketplace.title = data.title;
+    this.marketplace.attachment_guid = data.attachment_guid;
+    this.marketplace.price = data.blueStorePrice;
+    this.marketplace.item_count = data.blueStoreUnits;
+    this.marketplace.currency = 'INR';
+    this.marketplace.published = 1;
+
+    // trigger component observe new changes
+    this.detectChanges();
+  }
+
+
 
     detectChanges() {
       this.cd.markForCheck();

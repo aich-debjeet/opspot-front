@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Session } from '../../../services/session';
@@ -26,13 +26,45 @@ export class BlueStoreFormComponent implements OnInit {
   tags = [];
   cards = [];
   blueStoreSubmitted: boolean = false;
+  bluestore: any;
+  bluestoreGuid: any;
+
   constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
-    this.blueStoreForm = this.formBuilder.group({
-      blueStoreTitle: ['', [Validators.required]],
-      blueStoreDescription: ['', [Validators.required]],
-      blueStoreUnits: ['', [Validators.required]],
-      blueStorePrice: ['', [Validators.required]]
-    })
+    // this.blueStoreForm = this.formBuilder.group({
+    //   blueStoreTitle: ['', [Validators.required]],
+    //   blueStoreDescription: ['', [Validators.required]],
+    //   blueStoreUnits: ['', [Validators.required]],
+    //   blueStorePrice: ['', [Validators.required]]
+    // })
+  }
+
+  @Input('object') set data(object) {
+    this.bluestore = object;
+    if (this.bluestore) {
+      this.bluestoreGuid = object['guid'];
+      this.buildForm(this.bluestore);
+    } else {
+      this.buildForm();
+    }
+  }
+
+  buildForm(data?) {
+    if (data) {
+      this.blueStoreForm = this.formBuilder.group({
+        blueStoreTitle: [data['title'] ? data['title'] : '', [Validators.required]],
+        blueStoreDescription: [data['description'] ? data['description'] : '', [Validators.required]],
+        blueStoreUnits: [data['item_count'] ? data['item_count'] : '', [Validators.required]],
+        blueStorePrice: [data['price'] ? data['price'] : '', []]
+      });
+    } else {
+      this.blueStoreForm = this.formBuilder.group({
+        category: ['', [Validators.required]],
+        blueStoreTitle: ['', [Validators.required]],
+        blueStoreDescription: ['', [Validators.required]],
+        blueStoreUnits: ['', [Validators.required]],
+        blueStorePrice: ['', []]
+      });
+    }
   }
 
   ngOnInit() {
