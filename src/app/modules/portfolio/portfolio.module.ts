@@ -9,7 +9,7 @@ import { CommonModule } from '../../common/common.module';
 import { PortfolioComponent } from './portfolio.component';
 
 // TODO @abhijeet: handle the other routes
-const portfolioRoutes: Routes = [
+const routes: Routes = [
   { path: 'portfolio/:username', component: PortfolioComponent }
 ];
 
@@ -17,7 +17,7 @@ const portfolioRoutes: Routes = [
   declarations: [PortfolioComponent],
   imports: [
     NgCommonModule,
-    RouterModule.forChild(portfolioRoutes),
+    RouterModule.forChild(routes),
     CommonModule
   ]
 })

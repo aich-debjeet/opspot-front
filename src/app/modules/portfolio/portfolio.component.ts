@@ -10,9 +10,18 @@ import { Client } from '../../services/api';
 })
 export class PortfolioComponent implements OnInit, OnDestroy {
 
-  paramsSubscription: Subscription;
+  paramsSub: Subscription;
   portfolioMedia: any[];
-  username: string;
+  requestParams = {
+    taxonomies: 'activity',
+    offset: '',
+    limit: 10,
+    q: ''
+  };
+  channel = {
+    username: ''
+  };
+  inProgress = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,21 +29,45 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.paramsSubscription = this.route.params.subscribe((params) => {
-      this.username = params['username'];
-      this.load();
+    this.paramsSub = this.route.params.subscribe((params) => {
+      this.channel.username = params['username'];
+      this.requestParams.q = '#portfolio' + params['username'];
+      this.loadProfileInfo();
     });
   }
 
-  load() {
-    this.client.get('api/v3/portfolio/' + this.username)
-    .then((response: any) => {
-      this.portfolioMedia = response.data;
-    });
+  loadProfileInfo() {
+    console.log('loadProfileInfo()');
+    try {
+      this.inProgress = true;
+      this.client.get(`api/v1/channel/${this.channel.username}`, )
+        .then((response: any) => {
+          this.inProgress = false;
+          this.channel = response['channel'];
+          this.loadPortfolio();
+        })
+        .catch(e => {
+          console.error('Error: ', e);
+        });
+    } catch (e) {
+      this.inProgress = false;
+    }
+  }
+
+  loadPortfolio() {
+    this.client.get('api/v2/search', this.requestParams)
+      .then((response: any) => {
+        this.inProgress = false;
+        this.loadPortfolio();
+      })
+      .catch(e => {
+        console.error('Error: ', e);
+      });
+    // console.log('resp', resp);
   }
 
   ngOnDestroy() {
-    this.paramsSubscription.unsubscribe();
+    this.paramsSub.unsubscribe();
   }
 
 }
