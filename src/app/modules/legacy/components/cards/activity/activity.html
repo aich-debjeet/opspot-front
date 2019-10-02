@@ -192,12 +192,8 @@
   </div>
   <!-- End translation -->
 
-<<<<<<< HEAD
-  <div class="opspot-editable-container" *ngIf="editing && activity.custom_type && activity.title">
-=======
   <div class="opspot-editable-container"
     *ngIf="editing && activity.custom_type && activity.title &&  !showOpportunity && !showBlueStore && !showTimez">
->>>>>>> e5750c3f3a416700f4a5bae8c3b1492acf6d64a0
     <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
     <textarea class="mdl-card__supporting-text message" name="title" [ngModel]="activity.title" #titleEdit
       [autoGrow]></textarea>
