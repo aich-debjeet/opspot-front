@@ -80,4 +80,10 @@ export class GroupBannerComponent  {
     this.file = null; 
   }
 
+  // fix: AOT
+  // TODO @shashi: complete this feature
+  close() {
+
+  }
+
 }

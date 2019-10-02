@@ -1413,10 +1413,10 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     limit: 10,
     q: ''
   };
-  channel = {
-    username: ''
-  };
+  channel: any;
+  username: string;
   inProgress = false;
+  moreData: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -1425,14 +1425,14 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe((params) => {
-      this.channel.username = params['username'];
+      this.username = params['username'];
       this.requestParams.q = '#portfolio' + params['username'];
       this.loadProfileInfo();
     });
   }
 
   loadProfileInfo() {
-    this.client.get(`api/v1/channel/${this.channel.username}`, )
+    this.client.get(`api/v1/channel/${this.username}`)
       .then((response: any) => {
         this.channel = response['channel'];
         this.loadPortfolio();
@@ -1457,6 +1457,10 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.paramsSub.unsubscribe();
+  }
+
+  search(refresh: boolean) {
+	
   }
 
 }
