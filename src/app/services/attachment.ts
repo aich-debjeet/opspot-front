@@ -4,7 +4,8 @@ import { Session } from './session';
 
 export class AttachmentService {
 
-  private meta: any = {};
+  // TODO @abhijeet: check if need to keep meta info private?
+  public meta: any = {};
   private attachment: any = {};
 
   private container: any = {};
