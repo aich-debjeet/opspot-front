@@ -38,10 +38,10 @@ export class BlueStoreFormComponent implements OnInit {
   description = '';
 
   constructor(
-    public session: Session, 
-    public client: Client, 
-    public upload: Upload, 
-    public attachment: AttachmentService, 
+    public session: Session,
+    public client: Client,
+    public upload: Upload,
+    public attachment: AttachmentService,
     private formBuilder: FormBuilder,
     private overlayModal: OverlayModalService) {
   }
@@ -58,16 +58,14 @@ export class BlueStoreFormComponent implements OnInit {
 
   buildForm(data?) {
     if (data) {
-
-      if(data.description){
+      if (data.description) {
         this.description = data.description;
-      } if(data.blurb){
+      } else if (data.blurb) {
         this.description = data.blurb;
-      }   
-
+      }
       this.blueStoreForm = this.formBuilder.group({
         blueStoreTitle: [data['title'] ? data['title'] : '', [Validators.required]],
-        blueStoreDescription: [data['description'] ? data['description'] : '', [Validators.required]],
+        blueStoreDescription: [this.description ? this.description : '', [Validators.required]],
         blueStoreUnits: [data['item_count'] ? data['item_count'] : '', [Validators.required]],
         blueStorePrice: [data['price'] ? data['price'] : '', []]
       });
@@ -100,7 +98,8 @@ export class BlueStoreFormComponent implements OnInit {
     data.price = this.blueStoreForm.value.blueStorePrice;
     data.item_count = this.blueStoreForm.value.blueStoreUnits;
     data.currency = 'INR';
-    data.published = 1;
+    data.access_id = 2,
+      data.published = 1;
 
     console.log("data: ", data);
 
@@ -110,18 +109,17 @@ export class BlueStoreFormComponent implements OnInit {
     if (this.blueStoreForm.valid) {
       let endpoint = 'api/v3/marketplace';
       if (this.bluestoreGuid) {
-        endpoint = 'api/v3/marketplace' + this.bluestoreGuid;
+        endpoint = 'api/v3/marketplace/' + this.bluestoreGuid;
       }
       this.client.post(endpoint, data)
-        .then((data: any) => {
+        .then((resp: any) => {
           // data.activity.boostToggle = true;
-          this.load.emit(data);
+          this.load.emit(resp);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
-
           this.blueStoreSubmitted = false;
           this.changeToDefault();
-          // // check if update callback function is avaibale
+          // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
             this._opts.onUpdate(data);
             // close modal
@@ -129,7 +127,6 @@ export class BlueStoreFormComponent implements OnInit {
           }
         })
         .catch((e) => {
-
           this.blueStoreSubmitted = false;
           alert(e.message);
         });
