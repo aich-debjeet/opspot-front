@@ -26,7 +26,9 @@ import { filter } from "rxjs/operators";
 
 export class GroupsProfile {
 
- 
+  // fix: AOT
+  // TODO @shashi: dev? please fix
+  dev: any;
   guid;
   filter = 'activity';
   group;

@@ -34,6 +34,10 @@ import { ReportCreatorComponent } from '../../report/creator/creator.component';
   ],
 })
 export class CommentCardComponent implements OnInit {
+
+  // fix: AOT
+  // TODO @shashi: dev? please fix
+  dev: any;
   comment: any;
   editing: boolean = false;
   opspot = window.Opspot;
