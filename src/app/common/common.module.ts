@@ -83,6 +83,7 @@ import { ImageCroperComponent } from './components/image-croper/image-croper.com
 import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
 import { OpportunityWidgetComponent } from './components/opportunity-widget/opportunity-widget.component';
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
+import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
 
 @NgModule({
   imports: [
@@ -166,7 +167,8 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     ImageCroperComponent,
     ReadMoreComponent,
     OpportunityWidgetComponent,
-    OpportunityListCardComponent
+    OpportunityListCardComponent,
+    MasonryContainerComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -242,7 +244,8 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     ImageCroperComponent,
     ReadMoreComponent,
     OpportunityWidgetComponent,
-    OpportunityListCardComponent
+    OpportunityListCardComponent,
+    MasonryContainerComponent
   ],
   providers: [
     {
