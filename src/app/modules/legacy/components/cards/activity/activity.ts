@@ -9,6 +9,7 @@ import { BoostCreatorComponent } from '../../../../boost/creator/creator.compone
 import { WireCreatorComponent } from '../../../../wire/creator/creator.component';
 import { OpspotVideoComponent } from '../../../../media/components/video/video.component';
 import { NewsfeedService } from '../../../../newsfeed/services/newsfeed.service';
+import { OpportunityFormComponent } from '../../../../../modules/forms/opportunity-form/opportunity-form.component';
 
 @Component({
   moduleId: module.id,
@@ -22,7 +23,7 @@ import { NewsfeedService } from '../../../../newsfeed/services/newsfeed.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class Activity  {
+export class Activity {
 
   opspot = window.Opspot;
 
@@ -51,6 +52,7 @@ export class Activity  {
   type: string;
   element: any;
   visible: boolean = false;
+  showOpportunity = false;
 
   editing: boolean = false;
   @Input() hideTabs: boolean;
@@ -61,7 +63,7 @@ export class Activity  {
   scroll_listener;
 
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
-  onViewed: EventEmitter<{activity, visible}> = new EventEmitter<{activity, visible}>();
+  onViewed: EventEmitter<{ activity, visible }> = new EventEmitter<{ activity, visible }>();
 
   isTranslatable: boolean;
   canDelete: boolean = false;
@@ -95,19 +97,23 @@ export class Activity  {
     this.activity.url = window.Opspot.site_url + 'newsfeed/' + value.guid;
 
     if (
-      this.activity.custom_type == 'batch' 
-      && this.activity.custom_data 
+      this.activity.custom_type == 'batch'
+      && this.activity.custom_data
       && this.activity.custom_data[0].src
     ) {
       this.activity.custom_data[0].src = this.activity.custom_data[0].src.replace(this.opspot.site_url, this.opspot.cdn_url);
     }
-    
+
     if (!this.activity.message) {
       this.activity.message = '';
     }
 
     if (!this.activity.title) {
       this.activity.title = '';
+    }
+
+    if (this.activity.entity_type === "opportunity") {
+      this.showOpportunity = true;
     }
 
     this.boosted = this.activity.boosted || this.activity.p2p_boosted;
@@ -118,12 +124,12 @@ export class Activity  {
     );
   }
 
-  
+
 
 
   getOwnerIconTime() {
     let session = this.session.getLoggedInUser();
-    if(session && session.guid === this.activity.ownerObj.guid) {
+    if (session && session.guid === this.activity.ownerObj.guid) {
       return session.icontime;
     } else {
       return this.activity.ownerObj.icontime;
@@ -137,7 +143,6 @@ export class Activity  {
   }
 
   save() {
-    console.log('trying to save your changes to the server', this.activity);
     this.editing = false;
     this.activity.edited = true;
     this.client.post('api/v1/newsfeed/' + this.activity.guid, this.activity);
@@ -197,11 +202,6 @@ export class Activity  {
   }
 
   async togglePin() {
-
-    // if (this.session.getLoggedInUser().guid === this.activity.owner_guid) {
-    //   return;
-    // }
-
     this.activity.bookmark = !this.activity.bookmark;
     const url: string = `api/v3/bookmark/${this.activity.guid}/image`;
     try {
@@ -216,7 +216,7 @@ export class Activity  {
   }
 
   showBoost() {
-    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.activity,{class:'modalChanger'});
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.activity, { class: 'modalChanger' });
 
     boostModal.onDidDismiss(() => {
       this.showBoostOptions = false;
@@ -226,11 +226,11 @@ export class Activity  {
   }
 
   showWire() {
-    if(this.session.getLoggedInUser().guid !== this.activity.owner_guid) {
+    if (this.session.getLoggedInUser().guid !== this.activity.owner_guid) {
       this.overlayModal.create(WireCreatorComponent,
         this.activity.remind_object ? this.activity.remind_object : this.activity,
         { onComplete: wire => this.wireSubmitted(wire) })
-          .present();
+        .present();
     }
   }
 
@@ -246,7 +246,7 @@ export class Activity  {
   menuOptionSelected(option: string) {
     switch (option) {
       case 'edit':
-        this.editing = true;
+        this.editOptions();
         break;
       case 'delete':
         this.delete();
@@ -261,6 +261,30 @@ export class Activity  {
         this.translateToggle = true;
         break;
     }
+  }
+
+  editOptions() {
+    if (this.activity.entity_type === 'opportunity') {
+      this.overlayModal.create(OpportunityFormComponent, this.activity, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+        // listen to the update callback
+        onUpdate: (payload: any) => {
+          // make update to local var
+          this.udpateOpportunity(payload);
+        }
+      }).present();
+    } else {
+      this.editing = true;
+    }
+  }
+
+  udpateOpportunity(data: any) {
+    this.activity.category = data.category;
+    this.activity.description = data.description;
+    this.activity.location = data.location;
+    this.activity.title = data.title;
+    // trigger component observe new changes
+    this.detectChanges();
   }
 
   setExplicit(value: boolean) {
@@ -289,11 +313,11 @@ export class Activity  {
       });
   }
 
-  private viewed:boolean = false;
+  private viewed: boolean = false;
 
   isVisible() {
     if (this.visible) {
-      this.onViewed.emit({activity: this.activity, visible: true});
+      this.onViewed.emit({ activity: this.activity, visible: true });
       return true;
     }
     this.scroll_listener = this.scroll.listenForView().subscribe((view) => {

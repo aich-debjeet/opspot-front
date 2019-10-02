@@ -22,9 +22,11 @@ export class AttachmentService {
 
   constructor(@Inject(Session) public session: Session, @Inject(Client) public clientService: Client, @Inject(Upload) public uploadService: Upload) {
     this.reset();
+    console.log(this.attachment)
   }
 
   load(object: any) {
+    console.log(object)
     if (!object) {
       return;
     }
@@ -40,7 +42,7 @@ export class AttachmentService {
     }
 
     if (object.attachment_guid) {
-      this.meta.attachment_guid = object.attachment_guid;
+      this.meta.attachment_guid.push(object.attachment_guid);
 
       if (object.custom_data && object.custom_data.thumbnail_src) {
         this.attachment.preview = object.custom_data.thumbnail_src;
@@ -111,21 +113,23 @@ export class AttachmentService {
   }
 
   upload(fileInput: HTMLInputElement) {
-    this.reset();
+    console.log(fileInput)
+    // this.reset();
 
     this.attachment.progress = 0;
     this.attachment.mime = '';
-    
+
     let file = fileInput ? fileInput.files[0] : null;
 
     if (!file) {
       return Promise.reject(null);
     }
 
-    if(this.xhr) {
+    if (this.xhr) {
       this.xhr.abort();
     }
     this.xhr = new XMLHttpRequest();
+    console.log(this.attachment, file, this.meta)
 
     return this.checkFileType(file)
       .then(() => {
@@ -135,13 +139,14 @@ export class AttachmentService {
         }, this.xhr);
       })
       .then((response: any) => {
-        this.meta.attachment_guid = response.guid ? response.guid : null;
+        console.log(response)
+        this.meta.attachment_guid.push(response.guid ? response.guid : null);
 
         if (!this.meta.attachment_guid) {
           throw 'No GUID';
         }
 
-        return Promise.resolve(this.meta.attachment_guid);
+        return Promise.resolve(response.guid ? response.guid : null);
       })
       .catch(e => {
         this.meta.attachment_guid = null;
@@ -165,7 +170,10 @@ export class AttachmentService {
     }
   }
 
-  remove(fileInput: HTMLInputElement) {
+  remove(fileInput: HTMLInputElement, imageId: string) {
+    console.log(fileInput)
+    console.log(this.meta.attachment_guid)
+    let idx = this.meta.attachment_guid.indexOf(imageId);
     this.attachment.progress = 0;
     this.attachment.mime = '';
     this.attachment.preview = null;
@@ -174,9 +182,14 @@ export class AttachmentService {
       return Promise.reject('No GUID');
     }
 
-    return this.clientService.delete('api/v1/media/' + this.meta.attachment_guid)
+    return this.clientService.delete('api/v1/media/' + imageId)
       .then(() => {
-        this.meta.attachment_guid = null;
+        // this.meta.attachment_guid = null;
+        if (idx !== -1) {
+          this.meta.attachment_guid.splice(idx, 1);
+          console.log(this.meta.attachment_guid)
+          return imageId;
+        }
       })
       .catch(e => {
         this.meta.attachment_guid = null;
@@ -198,6 +211,7 @@ export class AttachmentService {
   }
 
   getPreview() {
+    console.log(this.attachment)
     return this.attachment.preview;
   }
 
@@ -210,18 +224,22 @@ export class AttachmentService {
   }
 
   getMeta() {
+    console.log(this.meta)
     return this.meta;
   }
 
   exportMeta() {
     let result = {};
-
+    console.log(this.meta)
+    if(this.meta.attachment_guid.length > 0 && this.meta.attachment_guid.length <= 1){
+      this.meta.attachment_guid = this.meta.attachment_guid.toString();
+    }
     for (var prop in this.meta) {
       if (this.meta.hasOwnProperty(prop)) {
         result[prop] = this.meta[prop];
       }
     }
-
+    console.log(result)
     return result;
   }
 
@@ -239,7 +257,7 @@ export class AttachmentService {
       description: '',
       thumbnail: '',
       url: '',
-      attachment_guid: null,
+      attachment_guid: [],
       mature: 0,
       container_guid: this.getContainer().guid,
       access_id: this.getAccessId()
@@ -261,7 +279,7 @@ export class AttachmentService {
     if (!match) {
       return;
     }
-    
+
     if (this.attachment.preview) {
       return;
     }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 import { OPSPOT_PIPES } from './pipes/pipes';
 
@@ -80,8 +81,11 @@ import { SocketsService } from '../services/sockets';
 import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
-import { from } from 'rxjs';
-
+import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
+import { OpportunityWidgetComponent } from './components/opportunity-widget/opportunity-widget.component';
+import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
+import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
+import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
 
 @NgModule({
   imports: [
@@ -89,7 +93,8 @@ import { from } from 'rxjs';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCroppieModule
+    NgxCroppieModule,
+    NgxMasonryModule
   ],
   declarations: [
     OPSPOT_PIPES,
@@ -133,6 +138,7 @@ import { from } from 'rxjs';
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -163,6 +169,10 @@ import { from } from 'rxjs';
     DynamicFormComponent,
     AndroidAppDownloadComponent,
     ImageCroperComponent,
+    ReadMoreComponent,
+    OpportunityWidgetComponent,
+    OpportunityListCardComponent,
+    MasonryContainerComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -205,6 +215,7 @@ import { from } from 'rxjs';
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -235,7 +246,11 @@ import { from } from 'rxjs';
     PieGraph,
     DynamicFormComponent,
     AndroidAppDownloadComponent,
-    ImageCroperComponent
+    ImageCroperComponent,
+    ReadMoreComponent,
+    OpportunityWidgetComponent,
+    OpportunityListCardComponent,
+    MasonryContainerComponent
   ],
   providers: [
     {

@@ -1,21 +1,19 @@
-<div class="mdl-card m-border post" *ngIf="session.isLoggedIn()">
-  <div class="mdl-card__supporting-text">
-    <div class="opspot-avatar">
-      <a [routerLink]="['/', session.getLoggedInUser().username]">
-        <!-- <img
+<div class="mdl-card m-border post" *ngIf="session.isLoggedIn() && !staticBoard">
+    <div class="mdl-card__supporting-text">
+        <div class="opspot-avatar">
+            <a [routerLink]="['/', session.getLoggedInUser().username]">
+                <!-- <img
           src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/"
           class="m-border"
         /> -->
-        <img
-          src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/"
-          class="m-border"
-        />
-      </a>
-    </div>
+                <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/"
+                    class="m-border" />
+            </a>
+        </div>
 
-    <form (submit)="post()">
-      <mwl-text-input-autocomplete-container>
-            <textarea
+        <form (submit)="post()">
+            <mwl-text-input-autocomplete-container>
+                <!-- <textarea
               class="mdl-textfield__input"
               type="text"
               id="message"
@@ -31,36 +29,28 @@
               [findChoices]="findTrendingHashtags.bind(this)"
               [getChoiceLabel]="getChoiceLabel"
               [triggerCharacter]="'#'"
-            ></textarea>
-      </mwl-text-input-autocomplete-container>
-      <div class="mdl-card__actions">
-        <!-- Attachments -->
+            ></textarea> -->
+                <textarea class="mdl-textfield__input" type="text" placeholder="Speak your mind..."
+                    i18n-placeholder="@@OPSPOT__POSTER__SPEAK_YOUR_MIND" (click)="createForms('default')"></textarea>
+            </mwl-text-input-autocomplete-container>
+            <!-- <div class="mdl-card__actions">
+         Attachments
         <div class="attachment-button" [ngClass]="{ 'mdl-color-text--amber-500': attachment.hasFile() }">
           <span class="icon-paperclip-2"></span>
           <input type="file" id="file" #file name="attachment" (change)="uploadAttachment(file, $event)"/>
         </div>
 
-        <a class="m-mature-button"
-          [ngClass]="{ 'mdl-color-text--red-500': attachment.isMature() }"
-          (click)="attachment.toggleMature()"
-          title="Mature content"
-          i18n-title="@@M__COMMON__MATURE_CONTENT"
-        >
-          <i class="material-icons">explicit</i>
-          <span *ngIf="attachment.isMature()" i18n="@@M__COMMON__MATURE_CONTENT">Mature content</span>
-        </a>
+                <a class="m-mature-button" [ngClass]="{ 'mdl-color-text--red-500': attachment.isMature() }"
+                    (click)="attachment.toggleMature()" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">
+                    <i class="material-icons">explicit</i>
+                    <span *ngIf="attachment.isMature()" i18n="@@M__COMMON__MATURE_CONTENT">Mature content</span>
+                </a>
 
-        <m-hashtags-selector #hashtagsSelector
-          [tags]="tags"
-          (tagsChange)="onTagsChange($event)"
-          (tagsAdded)="onTagsAdded($event)"
-          (tagsRemoved)="onTagsRemoved($event)"
-        ></m-hashtags-selector>
+                <m-hashtags-selector #hashtagsSelector [tags]="tags" (tagsChange)="onTagsChange($event)"
+                    (tagsAdded)="onTagsAdded($event)" (tagsRemoved)="onTagsRemoved($event)"></m-hashtags-selector>
 
-        <m-wire-threshold-input
-          [(threshold)]="meta.wire_threshold"
-          (validThreshold)="validThreshold = $event"
-        ></m-wire-threshold-input>
+                <m-wire-threshold-input [(threshold)]="meta.wire_threshold" (validThreshold)="validThreshold = $event">
+                </m-wire-threshold-input>
 
         <button
           type="submit"
@@ -70,18 +60,18 @@
           <span class="myHiddden" i18n="Action of posting@@OPSPOT__POSTER__POST_ACTION">Post</span>
           <i class="icon-paper-plane-1"></i>
         </button>
-      </div>
+      </div> -->
 
-    </form>
-  </div>
-  <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp" style="min-height:0;"
+        </form>
+    </div>
+    <!-- <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp" style="min-height:0;"
     *ngIf="errorMessage">
     <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
       {{errorMessage}}
     </div>
-  </div>
-  <!-- Rich embed preview -->
-  <div class="post-preview" *ngIf="attachment.isRich()">
+  </div> -->
+    <!-- Rich embed preview -->
+    <!-- <div class="post-preview" *ngIf="attachment.isRich()">
     <div class="mdl-spinner mdl-js-spinner is-active" [mdl] [hidden]="attachment.getMeta().title"></div>
     <div class="m-rich-embed" *ngIf="attachment.getMeta().title">
       <div class="attachment-preview-delete" (click)="removeRichEmbed()">
@@ -91,10 +81,10 @@
         [preview]="attachment.getMeta()"
       ></opspot-rich-embed>
     </div>
-  </div>
+  </div> -->
 
-  <!-- Attachment preview -->
-  <div class="post-preview" *ngIf="attachment.hasFile() || attachment.getUploadProgress() > 0"
+    <!-- Attachment preview -->
+    <!-- <div class="post-preview" *ngIf="attachment.hasFile() || attachment.getUploadProgress() > 0"
     (click)="removeAttachment(file)">
     <div class="mdl-progress mdl-js-progress"
       [mdlUpload]
@@ -104,9 +94,9 @@
     ></div>
     <div *ngIf="attachment.getMime() == 'video'" class="attachment-preview video-placeholder mdl-color--blue-grey-600">
       <i class="material-icons" *ngIf="!attachment.isPendingDelete()">videocam</i>
-    </div>
+    </div> -->
 
-    <ng-container>
+    <!-- <ng-container>
       <img *ngIf="attachment.getMime() != 'video'" [src]="attachment.getPreview()" class="attachment-preview"/>
       <div class="attachment-preview-delete" *ngIf="!attachment.isPendingDelete()">
         <i class="material-icons">delete</i>
@@ -114,10 +104,466 @@
       <div class="mdl-spinner attachment-preview-delete-in-progress mdl-js-spinner is-active" [mdl]
         *ngIf="attachment.isPendingDelete()"></div>
 
-    </ng-container>
+    </ng-container> -->
     <!--<div class="attachment-preview-delete-in-progress" *ngIf="attachment.isPendingDelete()">-->
     <!--<div class="mdl-spinner mdl-js-spinner is-active" [mdl]></div>-->
     <!--</div>-->
-  </div>
+    <!-- </div> -->
 
 </div>
+
+<div *ngIf="staticBoard">
+    <div class="o-create-post" *ngIf="display == 'default'">
+        <div class="o-create-post-head o-create-post-head--border">
+            <div class="o-create-post__title text-lg f500">Create a post <span class="icon-box-design" #postType><span
+                        class="icon-chevron-down" (click)="postType.value = !postType.value">
+                    </span></span></div>
+            <!--title ends-->
+            <div class="o-create-post-dropdown" [hidden]="!postType.value">
+                <div class="o-create-post-dropdown-content">
+                    <ul>
+                        <li class="text-md" (click)="createForms('#Showtimez')">On #Showtimez</li>
+                        <li class="text-md" (click)="createForms('#Opportunity')">On #Opportunity</li>
+                        <li class="text-md" (click)="createForms('#TheBlueStore')">On #TheBlueStore</li>
+                        <li class="text-md" (click)="createForms('#Portfolio')"> On #Portfolio</li>
+                        <li class="text-md" (click)="createForms('#MyJourney')">On #MyJourney</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-md primary f500 o-create-post-write-blog">Write Blog</div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div>
+        <!--boost head end-->
+        <form (submit)="post()">
+            <div class="o-create-post-body o-create-post-body--flex">
+                <div class="o-crete-post-userinfo">
+                    <div class="o-crete-post-userinfo__avatar">
+                        <img src="assets/demo/avatar.png" alt="">
+                    </div>
+                    <div class="o-crete-post-userinfo__mesaage">
+                        <textarea type="text" id="message" #message name="message" placeholder="Write Something"
+                            [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
+                            (keyup)="getPostPreview(message);"></textarea>
+                    </div>
+                </div>
+                <!--userinfo ends-->
+                <div class="o-create-post-fileupload" *ngIf="attachment.meta.attachment_guid.length == 0">
+                    <div class="fileUpload">
+                        <span class="icon-paperclip-2"></span>
+                        <!-- <input type="file" class="upload"> -->
+                        <input type="file" id="file" #file class="upload" name="attachment"
+                            (change)="uploadAttachment(file, $event)" />
+                    </div>
+                    <!--file upload ends-->
+                    <div class="text-md grey">
+                        Add Image, Video or Audio
+                    </div>
+                    <!--file preview ends-->
+                </div>
+                <div class="o-create-post-filled-fileupload" *ngIf="attachment.meta.attachment_guid.length > 0">
+                    <div class="fileUpload-preview-new mr-9" *ngFor="let image of cards">
+                        <a class="fileUpload-preview-new-close" (click)="removeAttachment(file,image.guid)"><i
+                                class="ico-x white"></i></a>
+                        <a class="o-create-post-filled-avatar" href="javascript:void(0)">
+                            <img [src]="image.imageLink" alt="">
+                        </a>
+                    </div>
+                    <!--file preview ends--->
+                    <div class="fileUpload">
+                        <span class="icon-plus"></span>
+                        <input type="file" id="file" #file class="upload" class="upload" name="attachment"
+                            (change)="uploadAttachment(file, $event)" />
+                    </div>
+                    <!--file upload ends-->
+                </div>
+            </div>
+            <!--body ends-->
+            <div class="o-create-post-footer">
+                <div class="o-create-post-left">
+                    <div class="o-create-post-toggle">
+                        <div class="switch">
+                            <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW">
+                            <span class="slider round"></span>
+                        </div>
+                    </div>
+                    <span class="text-md grey f500">
+                        isNSFW<span class="icon-info"></span>
+                    </span>
+                </div>
+                <!--left ends-->
+                <div class="o-create-post-right">
+                    <div class="o-create-post-right__status">
+                        <div class="float-left" *ngIf="defaultCoins.length == 0">
+                            <span class="o-create-post-right__icon"><span class="icon-users"></span></span>
+                            <span class="text-md f500">Paywall</span>
+                        </div>
+                        <div class="float-left" *ngIf="defaultCoins.length > 0">
+                            <span class="text-md f500">{{defaultCoins}} spotcoins</span>
+                        </div>
+                        <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span
+                                class="icon-chevron-down"></span></a>
+                        <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
+                            <div class="o-create-post-dropdown-footer__paywall">
+                                <div class="text-sm grey">Visible to supporter who send over</div>
+                                <div class="paywall-coins">
+                                    <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins"
+                                        placeholder="0 Spot Coins">
+                                    <button type="button" class="btn btn-primary btn-sm disabled"
+                                        (click)="displayPaywall()">Add</button>
+                                    <!--for event page-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
+                    <!--for event page-->
+                </div>
+                <!--right ends-->
+            </div>
+            <!--footer post ends-->
+        </form>
+    </div>
+    <!--post ends-->
+
+    <!-- <div class="o-create-show-timez" *ngIf="display == '#Showtimez'">
+        <div class="o-create-show-timez-head o-create-show-timez-head--border">
+            <div class="o-create-show-timez__title text-lg f500">Create a post
+                <span class="o-create-dropdown-style">
+                    <span class="text-md primary f500">On #Showtimez<span class="icon-x"
+                            (click)="changeToDefault()"></span></span>
+                </span>
+            </div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div>
+        
+        <form [formGroup]="showTimezForm">
+            <div class="o-create-show-timez-body o-create-show-timez-body--flex">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="eventTitle">
+                    <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventTitle').errors?.required">
+                            This is required</div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                    <textarea class="form-control" rows="5" formControlName="eventDescription"></textarea>
+                    <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventDescription').errors?.required">
+                            This is required</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="eventsLocation">
+                    <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventsLocation').errors?.required">
+                            This is required</div>
+                </div>
+                
+                <div class="o-create-show-timez-date-time">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="text" class="form-control form-control-lg" [textMask]="{mask: dateMask}" placeholder="Select Date" formControlName="eventdate">
+                        <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventdate').errors?.required">
+                                This is required</div>
+                    </div>
+                    
+                    <div class="form-group ml-18">
+                        <label>Time</label>
+                        <input type="text" class="form-control form-control-lg" placeholder="Time" [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventTime">
+                        <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventTime').errors?.required">
+                                This is required</div>
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <label>Cover Image</label>
+                    <div class="o-create-show-timez-cover-image">
+                        <div class="fileUpload">
+                            <span class="icon-plus"></span>
+                            <input type="file" id="file" #file class="upload" name="attachment"
+                            (change)="uploadAttachment(file, $event)" formControlName="eventImage">
+                        </div>
+                        
+                        <div class="fileUpload-preview ml-18" *ngIf="attachment.meta.attachment_guid.length > 0">
+                            <a class="o-create-show-timez-cover-image__avatar" *ngFor="let image of cards">
+                                <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i class="icon-x"></i></a>
+                                <img [src]="image.imageLink" alt="">
+                            </a>
+                        </div>
+                        
+                    </div>
+                    <div class="text-sm grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>
+                </div>
+            </div>
+            
+            <div class="o-create-show-timez-footer">
+                <button type="button" class="btn btn-primary btn-sm disabled" (click)="eventSubmit()">Post</button>
+                
+            </div>
+        </form>
+    </div> -->
+    <app-showtimez-form *ngIf="display == '#Showtimez'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-showtimez-form>
+    <app-opportunity-form *ngIf="display == '#Opportunity'" [object]="''" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-opportunity-form>
+    <app-blue-store-form *ngIf="display == '#TheBlueStore'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-blue-store-form>
+    <app-portfolio-form *ngIf="display == '#Portfolio'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-portfolio-form>
+    <app-my-journey-form *ngIf="display == '#MyJourney'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-my-journey-form>
+
+    <!-- <div class="o-create-opportunity" *ngIf="display == '#Opportunity'">
+        <div class="o-create-opportunity-head o-create-opportunity-head--border">
+            <div class="o-create-opportunity__title text-lg f500">Create a post
+                <span class="o-create-dropdown-style">
+                    <span class="text-md primary f500">On #Opportunity<span class="icon-x"
+                            (click)="changeToDefault()"></span></span>
+                </span>
+            </div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div>
+        <form [formGroup]="opportunityForm">
+            <div class="o-create-opportunity-body o-create-opportunity-body--flex">
+                <div class="form-group o-create-opportunity-icon">
+                    <label>Category</label>
+                    <select class="form-control form-control-lg" formControlName="category">
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="audition">Audition</option>
+                        <option value="project">Project</option>
+                        <option value="job">Job</option>
+                        <option value="internship">Internship</option>
+                        <option value="freelance">Freelance</option>
+                        <option value="volunteer">Volunteer</option>
+                        <option value="others">Others - Please specify in the description</option>
+                    </select>
+                    <div class="error text-sm" *ngIf="submitted && opportunityForm.get('category').errors?.required">
+                        This is required</div>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="opportunityTitle">
+                    <div class="error text-sm"
+                        *ngIf="submitted && opportunityForm.get('opportunityTitle').errors?.required">Title is required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                    <textarea class="form-control" rows="5" formControlName="opportunityDescription"></textarea>
+                    <div class="error text-sm"
+                        *ngIf="submitted && opportunityForm.get('opportunityDescription').errors?.required">Description
+                        is required</div>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="opportunityLocation">
+                    <div class="error text-sm"
+                        *ngIf="submitted && opportunityForm.get('opportunityLocation').errors?.required">Location is
+                        required</div>
+                </div>
+                <div class="form-group">
+                    <label>Cover Image</label>
+                    <div class="o-create-opportunity-cover-image">
+                        <div class="fileUpload">
+                            <span class="icon-plus"></span>
+                            <input type="file" class="upload" formControlName="opportunityImage" #file name="attachment"
+                                (change)="uploadAttachment(file, $event)">
+                        </div>
+                        <div class="fileUpload-preview ml-18">
+                            <a class="o-create-opportunity-cover-image__avatar" href="#">
+                                <img *ngIf="attachment.getMime() != 'video'" [src]="attachment.getPreview()" /> </a>
+                        </div>
+                    </div>
+                    <div class="text-sm grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>
+                </div>
+            </div>
+            <div class="o-create-opportunity-footer">
+                <button type="button" class="btn btn-primary btn-sm disabled" (click)="postOpportunity()">Post</button>
+            </div>
+        </form>
+    </div> -->
+
+    <!-- <div class="o-create-blue-store" *ngIf="display == '#TheBlueStore'">
+        <div class="o-create-blue-store-head o-create-blue-store-head--border">
+            <div class="o-create-blue-store__title text-lg f500">Create a post
+                <span class="o-create-dropdown-style">
+                    <span class="text-md primary f500">On #TheBlueStore<span class="icon-x"
+                            (click)="changeToDefault()"></span></span>
+                </span>
+            </div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div>
+        <form [formGroup]="blueStoreForm">
+            <div class="o-create-blue-store-body o-create-blue-store-body--flex">
+                <div class="form-group">
+                    <label>Add images</label>
+                    <div class="o-create-blue-store-cover-image">
+                        <div class="fileUpload">
+                            <span class="icon-plus"></span>
+                            <input type="file" id="file" #file class="upload" name="attachment"
+                            (change)="uploadAttachment(file, $event)"/>
+                        </div>
+                        <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
+                            <a class="o-create-blue-store-cover-image__avatar">
+                                <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i class="icon-x"></i></a>
+                                <img [src]="image.imageLink" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="blueStoreTitle">
+                    <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreTitle').errors?.required">
+                            This is required</div>
+                </div>
+                <div class="form-group">
+                    <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                    <textarea class="form-control" rows="5" formControlName="blueStoreDescription"></textarea>
+                    <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreDescription').errors?.required">
+                            This is required</div>
+                </div>
+                <div class="o-create-blue-store-unit-price">
+                    <div class="form-group">
+                        <label>No of Units <span class="icon-info"></span></label>
+                        <input type="text" class="form-control form-control-lg" formControlName="blueStoreUnits">
+                        <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreUnits').errors?.required">
+                                This is required</div>
+                    </div>
+                    <div class="form-group ml-18">
+                        <label>Price <span class="icon-info"></span></label>
+                        <div class="o-create-blue-store-unit-price__inner">
+                            <div class="o-opportunity-country-code">
+                                <span class="o-opportunity-country-code__flag"><img src="assets/svg/in.png"
+                                        alt=""></span>
+                                <span class="o-opportunity-country-code__text text-md">IND</span>
+                                <a href="javascript:void(0)" class="o-opportunity-country-code__dropdown">
+                                    <img src="assets/svg/arrow-down.svg" alt=""></a>
+                            </div>
+                            <input type="text" class="form-control form-control-lg  ml-8" placeholder="Enter Price"
+                                formControlName="blueStorePrice">
+                                <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStorePrice').errors?.required">
+                                        This is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="o-create-blue-store-footer">
+                <button type="button" class="btn btn-primary btn-sm disabled" (click)="blueStoreSubmit()">Post</button>
+            </div>
+        </form>
+    </div> -->
+
+    <!-- <div class="o-create-portfolio" *ngIf="display == '#Portfolio'">
+        <div class="o-create-portfolio-head o-create-portfolio-head--border">
+            <div class="o-create-show-timez__title text-lg f500">Create a post
+                <span class="o-create-dropdown-style">
+                    <span class="text-md primary f500">On #Portfolio<span class="icon-x"
+                            (click)="changeToDefault()"></span></span>
+                </span>
+            </div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div>
+        
+        <form (submit)="post()">
+            <div class="o-create-portfolio-body o-create-portfolio-body--flex">
+                <div class="o-crete-portfolio-userinfo">
+                    <div class="o-crete-portfolio-userinfo__avatar">
+                        <img src="assets/demo/avatar.png" alt="">
+                    </div>
+                    <div class="o-crete-portfolio-userinfo__mesaage">
+                        <textarea type="text" id="message" #message name="message" placeholder="Write Something"
+                        [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
+                        (keyup)="getPostPreview(message);"></textarea>
+                    </div>
+                </div>
+                
+                <div class="o-create-portfolio-fileupload" *ngIf="attachment.meta.attachment_guid.length == 0">
+                    <div class="fileUpload">
+                        <span class="icon-paperclip-2"></span>
+                        <input type="file" id="file" #file class="upload" name="attachment"
+                                (change)="uploadAttachment(file, $event)" />
+                    </div>
+                    
+                    <div class="text-md grey">
+                        Add Image, Video or Audio
+                    </div>
+                    
+                </div>
+                <div class="o-create-portfolio-filled-fileupload" *ngIf="attachment.meta.attachment_guid.length > 0">
+                        <div class="fileUpload-preview-new mr-9" *ngFor="let image of cards">
+                            
+                            <a class="fileUpload-preview-new-close" (click)="removeAttachment(file,image.guid)"><i
+                                class="ico-x white"></i></a>
+                        <a class="o-create-portfolio-filled-avatar" href="#">
+                            <img [src]="image.imageLink" alt="">
+                        </a>
+                        </div>
+                        <div class="fileUpload">
+                            <span class="icon-plus"></span>
+                            <input type="file" id="file" #file class="upload" class="upload" name="attachment"
+                                (change)="uploadAttachment(file, $event)" />
+                        </div>
+                    </div> 
+            </div>
+            
+            <div class="o-create-portfolio-footer">
+                <div class="o-create-portfolio-left">
+                    <div class="o-create-portfolio-toggle">
+                        <div class="switch">
+                            <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW">
+                            <span class="slider round"></span>
+                        </div>
+                    </div>
+                    <span class="text-md grey f500">
+                        NSFW<span class="icon-info"></span>
+                    </span>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
+                
+            </div>
+        </form>
+        
+    </div> -->
+    <!--post ends-->
+
+    <!-- <div class="o-create-myjourney" *ngIf="display == '#MyJourney'">
+        <div class="o-create-myjourney-head o-create-myjourney-head--border">
+            <div class="o-create-show-timez__title text-lg f500">Create a post
+                <span class="o-create-dropdown-style">
+                    <span class="text-md primary f500">On #MyJourney<span class="icon-x"
+                            (click)="changeToDefault()"></span></span>
+                </span>
+            </div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div>
+        
+        <div class="o-create-myjourney-body o-create-myjourney-body--flex">
+            <div class="o-crete-myjourney-userinfo">
+                <div class="o-crete-myjourney-userinfo__avatar">
+                    <img src="assets/demo/avatar.png" alt="">
+                </div>
+                <div class="o-crete-myjourney-userinfo__mesaage">
+                    <textarea rows="1" placeholder="Write Something"></textarea>
+                </div>
+            </div>
+            
+            <div class="o-create-myjourney-fileupload">
+                <div class="fileUpload">
+                    <span class="icon-paperclip-2"></span>
+                    <input type="file" class="upload">
+                </div>
+                
+                <div class="text-md grey">
+                    Add Video
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="o-create-myjourney-footer">
+            <button type="button" class="btn btn-primary btn-sm disabled">Post</button>
+            
+        </div>
+        
+    </div> -->
+    
+</div>
+<!--preview ends-->

@@ -5,9 +5,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CaptchaModule } from './modules/captcha/captcha.module';
 
+import { TextMaskModule } from 'angular2-text-mask';
+
 import { Opspot } from './app.component';
 
-import { OPSPOT_APP_ROUTING_DECLARATIONS, OpspotAppRoutes, OpspotAppRoutingProviders } from './router/app';
+import {
+  OPSPOT_APP_ROUTING_DECLARATIONS,
+  OpspotAppRoutes,
+  OpspotAppRoutingProviders
+} from './router/app';
 
 import { OPSPOT_DECLARATIONS } from './declarations';
 import { OPSPOT_PLUGIN_DECLARATIONS } from './plugin-declarations';
@@ -37,6 +43,7 @@ import { OnboardingModule } from './modules/onboarding/onboarding.module';
 import { NotificationModule } from './modules/notifications/notification.module';
 
 import { GroupsModule } from './modules/groups/groups.module';
+import { NetworkModule } from './modules/network/network.module';
 import { PostMenuModule } from './common/components/post-menu/post-menu.module';
 import { BanModule } from './modules/ban/ban.module';
 import { BlogModule } from './modules/blogs/blog.module';
@@ -55,24 +62,35 @@ import { JobsMarketingModule } from './modules/jobs/jobs.module';
 import { HelpdeskModule } from './modules/helpdesk/helpdesk.module';
 import { MobileModule } from './modules/mobile/mobile.module';
 import { CanaryModule } from './modules/canary/canary.module';
-import { HttpClientModule } from "@angular/common/http";
-import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
-import { NgxMasonryModule } from 'ngx-masonry';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
-import { ExploreModule } from './modules/explore/explore.module';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ExploreComponent } from './modules/explore/explore.component';
+import { ExploreImageComponent } from './modules/explore/explore-image/explore-image.component';
+import { ExploreAudioComponent } from './modules/explore/explore-audio/explore-audio.component';
+import { ExploreVideoComponent } from './modules/explore/explore-video/explore-video.component';
+import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-blogs.component';
+import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
+import { PortfolioModule } from './modules/portfolio/portfolio.module';
+import { OpportunityModule } from './modules/opportunity/opportunity.module';
+import { InviteFriendsComponent } from './modules/invite-friends/invite-friends.component';
 
 
 @NgModule({
-  bootstrap: [
-    Opspot
-  ],
+  bootstrap: [Opspot],
   declarations: [
     Opspot,
     OPSPOT_APP_ROUTING_DECLARATIONS,
     OPSPOT_DECLARATIONS,
     OPSPOT_PLUGIN_DECLARATIONS,
+    ExploreComponent,
+    ExploreImageComponent,
+    ExploreAudioComponent,
+    ExploreVideoComponent,
+    ExploreBlogsComponent,
+    InviteFriendsComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +129,7 @@ import { ExploreModule } from './modules/explore/explore.module';
     NewsfeedModule,
     MediaModule,
     AuthModule,
-    BlockchainModule,    
+    BlockchainModule,
     BlockchainMarketingModule,
     NodesMarketingModule,
     BrandingModule,
@@ -120,23 +138,23 @@ import { ExploreModule } from './modules/explore/explore.module';
     HelpdeskModule,
     MobileModule,
     CanaryModule,
+    InviteFriendsModule,
     //last due to :username route
     ChannelsModule,
     BookmarkModule,
-    ExploreModule,
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
-    NgxMasonryModule
-    
+    BsDatepickerModule.forRoot(),
+    NetworkModule,
+    OpportunityModule,
+    TextMaskModule,
+    PortfolioModule
   ],
   providers: [
     OpspotAppRoutingProviders,
     OPSPOT_PROVIDERS,
-    OPSPOT_PLUGIN_PROVIDERS,
+    OPSPOT_PLUGIN_PROVIDERS
   ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class OpspotModule {
-}
+export class OpspotModule {}
