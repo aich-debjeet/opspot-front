@@ -68,7 +68,8 @@
     "tslib": "~1.9.3",
     "webtorrent": "^0.103.0",
     "workbox-build": "^4.3.1",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "angular2-text-mask": "^9.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.12.1",
