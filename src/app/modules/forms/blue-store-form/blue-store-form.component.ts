@@ -99,12 +99,7 @@ export class BlueStoreFormComponent implements OnInit {
     data.item_count = this.blueStoreForm.value.blueStoreUnits;
     data.currency = 'INR';
     data.access_id = 2,
-      data.published = 1;
-
-    console.log("data: ", data);
-
-    console.log("this.blueStoreForm.valid: ", this.blueStoreForm.valid);
-
+    data.published = 1;
 
     if (this.blueStoreForm.valid) {
       let endpoint = 'api/v3/marketplace';

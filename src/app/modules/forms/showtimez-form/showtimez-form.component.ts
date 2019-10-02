@@ -7,6 +7,7 @@ import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
 
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   selector: 'app-showtimez-form',
@@ -29,10 +30,9 @@ export class ShowtimezFormComponent implements OnInit {
 
   @Input('object') set data(object) {
     this.event = object;
-    console.log("this.opportunity: ", this.event);  
     if (this.event) {
       this.eventGuid = object['entity_guid'];
-      this.buildForm(this.eventGuid);
+      this.buildForm(this.event);
     } else {
       this.buildForm();
     }
@@ -50,7 +50,7 @@ export class ShowtimezFormComponent implements OnInit {
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
+  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder, private overlayModal: OverlayModalService) {
 
   }
 
@@ -61,9 +61,9 @@ export class ShowtimezFormComponent implements OnInit {
 
   buildForm(data?) {
     if (data) {
-      if(data.description){
+      if (data.description) {
         this.description = data.description;
-      } if(data.blurb){
+      } if (data.blurb) {
         this.description = data.blurb;
       }
       this.showTimezForm = this.formBuilder.group({
@@ -129,10 +129,10 @@ export class ShowtimezFormComponent implements OnInit {
     data.title = this.showTimezForm.value.eventTitle;
     data.description = this.showTimezForm.value.eventDescription;
     data.location = this.showTimezForm.value.eventsLocation;
-    // data.eventdate = this.showTimezForm.value.eventdate;
-    // data.eventTime = this.showTimezForm.value.eventTime;
+    data.access_id = 2;
     data.published = 1;
-    data.start_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`)
+    data.start_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`);
+    data.end_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`)
 
     if (this.showTimezForm.valid) {
       let endpoint = 'api/v3/event';
@@ -140,11 +140,17 @@ export class ShowtimezFormComponent implements OnInit {
         endpoint = 'api/v3/event/' + this.eventGuid;
       }
       this.client.post(endpoint, data)
-        .then((data: any) => {
+        .then((resp: any) => {
           // data.activity.boostToggle = true;
-          this.load.emit(data);
+          this.load.emit(resp);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
+
+          if (this._opts && this._opts.onUpdate) {
+            this._opts.onUpdate(data);
+            // close modal
+            this.closeModal();
+          }
 
           this.eventSubmitted = false;
           this.changeToDefault();
@@ -170,6 +176,10 @@ export class ShowtimezFormComponent implements OnInit {
     } else {
       this.timeMask[1] = new RegExp('[0-9]')
     }
+  }
+
+  closeModal() {
+    this.overlayModal.dismiss();
   }
 
 }
