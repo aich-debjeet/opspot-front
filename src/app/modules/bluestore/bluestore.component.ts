@@ -20,6 +20,8 @@ export class BluestoreComponent implements OnInit {
   marketplace: any;
   count
   opspot = window.Opspot;
+  allOpportunities: any;
+
 
   isTranslatable: boolean;
   canDelete: boolean = false;
@@ -49,6 +51,7 @@ export class BluestoreComponent implements OnInit {
       this.guid = params['guid'];
     });
     this.load();
+    this.loadAllOpportunities();
   }
 
   load() {
@@ -186,6 +189,20 @@ export class BluestoreComponent implements OnInit {
           $event.inProgress.emit(false);
           $event.completed.emit(1);
         }
+      });
+  }
+
+  loadAllOpportunities() {
+    this.inProgress = true;
+    let ownerGuid = this.session.getLoggedInUser().guid;
+    this.client.get('api/v2/feeds/container/ownerGuid/opportunities?limit=3&sync=&as_activities=&force_public=1')
+      .then((data: any) => {
+        if (data && data.entities) {
+          this.allOpportunities = data.entities;
+        }
+      })
+      .catch((e) => {
+        this.inProgress = false;
       });
   }
 
