@@ -75,7 +75,7 @@ import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-b
 import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
-import { InviteFriendsComponent } from './modules/invite-friends/invite-friends.component';
+
 
 
 @NgModule({
@@ -89,8 +89,7 @@ import { InviteFriendsComponent } from './modules/invite-friends/invite-friends.
     ExploreImageComponent,
     ExploreAudioComponent,
     ExploreVideoComponent,
-    ExploreBlogsComponent,
-    InviteFriendsComponent
+    ExploreBlogsComponent
   ],
   imports: [
     BrowserModule,
