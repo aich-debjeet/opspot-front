@@ -254,6 +254,8 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
     ReadMoreComponent,
     OpportunityWidgetComponent,
     OpportunityListCardComponent,
+    ShowtimeListCardComponent,
+    ShowtimeWidgetComponent,
     MasonryContainerComponent
   ],
   providers: [

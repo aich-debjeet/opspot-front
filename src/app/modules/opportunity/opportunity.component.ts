@@ -29,10 +29,12 @@ export class OpportunityComponent implements OnInit {
     });
     this.load();
     this.loadAllOpportunities();
+    this.loadAllEvents();
   }
 
   activity: any;
   opspot = window.Opspot;
+  allevents = [];
 
   boosted: boolean = false;
   commentsToggle: boolean = false;
@@ -43,7 +45,7 @@ export class OpportunityComponent implements OnInit {
   showBoostOptions: boolean = false;
   private _showBoostMenuOptions: boolean = false;
   count;
-  allOpportunities: any;
+  allOpportunities = [];
 
 
   type: string;
@@ -240,6 +242,23 @@ export class OpportunityComponent implements OnInit {
       .then((data: any) => {
         if (data && data.entities) {
           this.allOpportunities = data.entities;
+        }
+      })
+      .catch((e) => {
+        this.inProgress = false;
+      });
+  }
+
+  loadAllEvents() {
+    alert();
+    this.inProgress = true;
+    let ownerGuid = this.session.getLoggedInUser().guid;
+    this.client.get('api/v2/feeds/container/ownerGuid/events?limit=3&sync=&as_activities=&force_public=1')
+      .then((data: any) => {
+        if (data && data.entities) {
+          this.allevents = data.entities;
+          console.log("allevents: ", data);
+          
         }
       })
       .catch((e) => {
