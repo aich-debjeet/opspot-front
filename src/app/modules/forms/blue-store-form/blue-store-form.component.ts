@@ -54,6 +54,7 @@ export class BlueStoreFormComponent implements OnInit {
     data.price = this.blueStoreForm.value.blueStorePrice;
     data.item_count = this.blueStoreForm.value.blueStoreUnits;
     data.currency = 'INR';
+    data.published = 1;
 
 
     console.log(data)

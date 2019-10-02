@@ -43,23 +43,15 @@
   </p>
 
   <div class="m-layout--spacer"></div>
-  <!-- <opspot-card-comment *ngFor="let comment of comments; let i = index"
+  <opspot-card-comment *ngFor="let comment of comments; let i = index"
     [object]="comment"
     [parent]="parent"
     [canEdit]="canEdit"
     (delete)="delete(i)"
     (saved)="edited(i, $event)"
     (onReply)="reply($event.comment)"
-  ></opspot-card-comment> -->
-  
-  <app-comment-card *ngFor="let comment of comments; let i = index"
-    [object]="comment"
-    [parent]="parent"
-    [canEdit]="canEdit"
-    (delete)="delete(i)"
-    (saved)="edited(i, $event)"
-    (onReply)="reply($event.comment)"
-  ></app-comment-card>
+  ></opspot-card-comment>
+
 
   <div class="mdl-color-text--blue-grey-500 m-comments-load-more"
      (click)="load(false, false)"

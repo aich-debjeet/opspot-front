@@ -58,7 +58,7 @@ export class OpportunityFormComponent implements OnInit {
     data.title = value.opportunityTitle;
     data.description = value.opportunityDescription;
     data.location = value.opportunityLocation;
-    data.opp_type = value.category;
+    data.category= value.category;
     data.published = true;
 
     if (this.opportunityForm.valid) {

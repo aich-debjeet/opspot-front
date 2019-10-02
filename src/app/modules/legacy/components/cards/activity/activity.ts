@@ -14,11 +14,12 @@ import { NewsfeedService } from '../../../../newsfeed/services/newsfeed.service'
   moduleId: module.id,
   selector: 'opspot-activity',
   host: {
-    'class': 'mdl-card m-border'
+    
   },
   inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle'],
   outputs: ['_delete: delete', 'commentsOpened', 'onViewed'],
   templateUrl: 'activity.html',
+  styleUrls: ['./activity.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
@@ -85,7 +86,7 @@ export class Activity  {
     private overlayModal: OverlayModalService,
     private cd: ChangeDetectorRef
   ) {
-
+console.log(this.hideTabs)
     this.element = _element.nativeElement;
     this.isVisible();
   }

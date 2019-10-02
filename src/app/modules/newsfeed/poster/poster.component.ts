@@ -153,7 +153,7 @@ export class PosterComponent {
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
     data.tags = this.tags;
-    data.isNSFW = this.isNSFW
+    data.mature = this.isNSFW
     console.log(data);
     console.log(this.meta);
     console.log(this.attachment.exportMeta());
