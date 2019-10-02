@@ -86,6 +86,8 @@ import { OpportunityWidgetComponent } from './components/opportunity-widget/oppo
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
 import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
 import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
+import { ShowtimeWidgetComponent } from './components/showtime-widget/showtime-widget.component';
+import { ShowtimeListCardComponent } from './components/showtime-list-card/showtime-list-card.component';
 
 @NgModule({
   imports: [
@@ -172,7 +174,9 @@ import { PostCard } from '../modules/legacy/components/cards/post-card/post-card
     ReadMoreComponent,
     OpportunityWidgetComponent,
     OpportunityListCardComponent,
-    MasonryContainerComponent
+    MasonryContainerComponent,
+    ShowtimeWidgetComponent,
+    ShowtimeListCardComponent
   ],
   exports: [
     OPSPOT_PIPES,
