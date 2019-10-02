@@ -36,8 +36,8 @@
                 *ngIf="showTimez?.custom_data">
                 <img *ngIf="!showTimez?.custom_data" src="assets/logos/logo.svg">
               <div class="event-date">
-                <div class="text-red">{{showTimez?.startTimeDate | date:'dd'}} </div>
-                <div class="text-md">{{showTimez?.startTimeDate | date:'MMM'}} </div>
+                <div class="text-red">{{showTimez?.start_time_date | date:'dd'}} </div>
+                <div class="text-md">{{showTimez?.start_time_date | date:'MMM'}} </div>
               </div>
             </div>
           </div>
@@ -48,10 +48,10 @@
                   {{showTimez?.title}}
                 </h5>
                 <div class="text-lg grey">{{showTimez?.location}}<br>
-                  19:00 | 22 January 2019</div>
+                  {{showTimez?.start_time_date | date:'h:mm | dd MMMM y'}}</div>
                 <div class="text-md">
                   <div class="mt-15"><span class="primary">#Event</span>
-                    {{showTimez?.description}}
+                    <span class="mt-15" [innerHtml]="showTimez?.description | safe"></span>
                   </div>
                 </div>
               </div>
