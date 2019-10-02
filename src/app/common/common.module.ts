@@ -84,6 +84,7 @@ import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
 import { OpportunityWidgetComponent } from './components/opportunity-widget/opportunity-widget.component';
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
 import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
+import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
 
 @NgModule({
   imports: [
@@ -135,6 +136,7 @@ import { MasonryContainerComponent } from './components/masonry-container/masonr
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -211,6 +213,7 @@ import { MasonryContainerComponent } from './components/masonry-container/masonr
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
