@@ -28,29 +28,14 @@
                 </div>
             </div>
         </div><!--filter and search section-->
-        <div class="o-portfolio-media-part" style="height: 1000px;">
-            <div class="o-portfolio-media-part__row">
-                <div class="o-portfolio-media-part__coloumn">
-                   <div class="o-portfolio-card">
-                        <opspot-post-card></opspot-post-card>
-                   </div>
-                </div>
-                <div class="o-portfolio-media-part__coloumn">
-                    <div class="o-portfolio-card">
-                        <opspot-post-card></opspot-post-card>
-                    </div>
-                 </div>
-                 <div class="o-portfolio-media-part__coloumn">
-                    <div class="o-portfolio-card">
-                        <opspot-post-card></opspot-post-card>
-                    </div>
-                 </div>
-                 <div class="o-portfolio-media-part__coloumn">
-                    <div class="o-portfolio-card">
-                        <opspot-post-card></opspot-post-card>
-                    </div>
-                 </div>
-            </div>
-        </div><!--media section-->
+        <opspot-masonry-container [entities]="entities"></opspot-masonry-container>
+
+        <!-- TODO: load more -->
+        <infinite-scroll
+            distance="25%"
+            (load)="search(false)"
+            [moreData]="moreData"
+            [inProgress]="inProgress"
+        ></infinite-scroll>
     </div>
 </section>
