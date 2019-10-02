@@ -122,7 +122,8 @@
   </div>
 
   <!--Showtime-->
-  <div class="o-card feed" *ngIf="showTimez && !showBlueStore && !showOpportunity">
+  <div class="o-card feed" *ngIf="showTimez && !showBlueStore && !showOpportunity" 
+  [routerLink]="['/event/view', activity.entity_guid]">
     <div class="feed-media">
       <div class="feed-media-event-image">
           <img [src]="activity?.custom_data[0] ? activity?.custom_data[0].src:''" 

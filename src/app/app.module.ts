@@ -76,6 +76,7 @@ import { InviteFriendsModule } from './modules/invite-friends/invite-friends.mod
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
 import { BluestoreModule } from './modules/bluestore/bluestore.module';
+import { ShowtimezModule } from './modules/showtimez/showtimez.module';
 
 
 @NgModule({
@@ -148,7 +149,7 @@ import { BluestoreModule } from './modules/bluestore/bluestore.module';
     OpportunityModule,
     TextMaskModule,
     BluestoreModule,
-
+    ShowtimezModule,
     PortfolioModule
   ],
   providers: [
