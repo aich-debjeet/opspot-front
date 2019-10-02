@@ -25,7 +25,7 @@
  </div>
   <div class="o-prof-activity">
     <a [routerLink]="['/', user.username, 'subscribers']" ><div class="caption-bold f700">{{user.subscribers_count}}</div><div class="text-sm grey">Followers</div></a>
-    <a [routerLink]="['/', user.username, 'subscriptions']" ><div class="caption-bold f700">{{user.subscriptions_count-1}}</div><div class="text-sm grey">Following</div></a>
+    <a [routerLink]="['/', user.username, 'subscriptions']"><div class="caption-bold f700">{{user.subscriptions_count-1}}</div><div class="text-sm grey">Following</div></a>
     <a ><div class="caption-bold f700">{{user.post_count?user.post_count:0}}</div><div class="text-sm grey">Posts</div></a>
     <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
   </div>
@@ -33,7 +33,7 @@
     <a href="" *ngFor="let tag of user.tags" class="o-prof-skills__tag">{{tag}}</a>
   </div>
   <div class="o-prof-portfolio">
-      <a href="" class="btn btn-outline-primary btn-sm">Portfolio</a>
+    <a [routerLink]="['/', 'portfolio', user.username]" class="btn btn-outline-primary btn-sm">Portfolio</a>
   </div>
 
   <!-- <div class="mdl-card__supporting-text" id="bio" [hidden]="editing" style="white-space:pre-line; text-align:center;" [innerHtml]="user.briefdescription | tags"></div> -->

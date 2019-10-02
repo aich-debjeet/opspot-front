@@ -4,11 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 // modules
 import { CommonModule } from '../../common/common.module';
+import { LegacyModule } from '../legacy/legacy.module';
 
 // components
 import { PortfolioComponent } from './portfolio.component';
 
-const portfolioRoutes: Routes = [
+// TODO @abhijeet: handle the other routes
+const routes: Routes = [
   { path: 'portfolio/:username', component: PortfolioComponent }
 ];
 
@@ -16,8 +18,9 @@ const portfolioRoutes: Routes = [
   declarations: [PortfolioComponent],
   imports: [
     NgCommonModule,
-    RouterModule.forChild(portfolioRoutes),
-    CommonModule
+    RouterModule.forChild(routes),
+    CommonModule,
+    LegacyModule
   ]
 })
 export class PortfolioModule { }
