@@ -30,8 +30,7 @@ export class OpportunityFormComponent implements OnInit {
 
   @Input('object') set data(object) {
     this.opportunity = object;
-    console.log("this.opportunity: ", this.opportunity);
-    
+    console.log("this.opportunity: ", this.opportunity);  
     if (this.opportunity) {
       this.oppGuid = object['entity_guid'];
       this.buildForm(this.opportunity);
@@ -76,7 +75,7 @@ export class OpportunityFormComponent implements OnInit {
         opportunityTitle: [data['title'] ? data['title'] : '', [Validators.required]],
         opportunityDescription: [this.description ? this.description : '', [Validators.required]],
         opportunityLocation: [data['location'] ? data['location'] : '', [Validators.required]],
-        opportunityImage: [data['image'] ? data['image'] : '', []]
+        opportunityImage: ['', []]
       });
     } else {
       this.opportunityForm = this.formBuilder.group({
@@ -106,11 +105,12 @@ export class OpportunityFormComponent implements OnInit {
     data.description = value.opportunityDescription;
     data.location = value.opportunityLocation;
     data.category = value.category;
+    data.access_id = 2,
     data.published = 1;
 
     if (this.opportunityForm.valid) {
       let endpoint = 'api/v3/opportunity';
-      if (this.oppGuid) {
+      if (this.oppGuid) { 
         endpoint = 'api/v3/opportunity/' + this.oppGuid;
       }
       this.client.post(endpoint, data)
