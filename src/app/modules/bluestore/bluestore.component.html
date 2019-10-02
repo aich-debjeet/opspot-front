@@ -53,7 +53,8 @@
 									{{ marketplace?.title}}
 								</h5>
 								<div class="text-md" *ngIf="marketplace?.description">
-								   <span class="primary" [innerHtml]="marketplace.description | safe"></span>
+								<span class="primary">#Marketplace</span>
+								<span class="primary" [innerHtml]="marketplace.description | safe"></span>
 								</div>
 								<div class="text-rate" *ngIf="marketplace?.price ">
 									₹ {{ marketplace?.price  }}.00/- <span class="text-md f500">(per piece)</span>
