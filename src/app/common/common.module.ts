@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 import { OPSPOT_PIPES } from './pipes/pipes';
 
@@ -92,7 +93,8 @@ import { PostCard } from '../modules/legacy/components/cards/post-card/post-card
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCroppieModule
+    NgxCroppieModule,
+    NgxMasonryModule
   ],
   declarations: [
     OPSPOT_PIPES,
