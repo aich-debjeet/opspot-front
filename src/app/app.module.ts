@@ -75,6 +75,8 @@ import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-b
 import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
+import { BluestoreModule } from './modules/bluestore/bluestore.module';
+import { ShowtimezModule } from './modules/showtimez/showtimez.module';
 
 
 
@@ -147,6 +149,8 @@ import { OpportunityModule } from './modules/opportunity/opportunity.module';
     NetworkModule,
     OpportunityModule,
     TextMaskModule,
+    BluestoreModule,
+    ShowtimezModule,
     PortfolioModule
   ],
   providers: [

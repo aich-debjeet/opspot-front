@@ -31,7 +31,7 @@ export class OpportunityFormComponent implements OnInit {
   @Input('object') set data(object) {
     this.opportunity = object;
     if (this.opportunity) {
-      this.oppGuid = object['guid'];
+      this.oppGuid = object['entity_guid'];
       this.buildForm(this.opportunity);
     } else {
       this.buildForm();
@@ -59,14 +59,21 @@ export class OpportunityFormComponent implements OnInit {
     // this.buildForm();
   }
 
+  description = '';
+
   buildForm(data?) {
     if (data) {
+      if (data.description) {
+        this.description = data.description;
+      } if (data.blurb) {
+        this.description = data.blurb;
+      }
       this.opportunityForm = this.formBuilder.group({
         category: [data['category'] ? data['category'] : '', [Validators.required]],
         opportunityTitle: [data['title'] ? data['title'] : '', [Validators.required]],
-        opportunityDescription: [data['description'] ? data['description'] : '', [Validators.required]],
+        opportunityDescription: [this.description ? this.description : '', [Validators.required]],
         opportunityLocation: [data['location'] ? data['location'] : '', [Validators.required]],
-        opportunityImage: [data['image'] ? data['image'] : '', []]
+        opportunityImage: ['', []]
       });
     } else {
       this.opportunityForm = this.formBuilder.group({
@@ -96,7 +103,8 @@ export class OpportunityFormComponent implements OnInit {
     data.description = value.opportunityDescription;
     data.location = value.opportunityLocation;
     data.category = value.category;
-    data.published = true;
+    data.access_id = 2,
+      data.published = 1;
 
     if (this.opportunityForm.valid) {
       let endpoint = 'api/v3/opportunity';
@@ -110,7 +118,7 @@ export class OpportunityFormComponent implements OnInit {
           this.meta = { wire_threshold: null };
           this.submitted = false;
           this.changeToDefault();
-          // check if update callback function is avaibale
+          // // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
             this._opts.onUpdate(data);
             // close modal

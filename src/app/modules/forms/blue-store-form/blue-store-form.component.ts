@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Session } from '../../../services/session';
@@ -7,6 +7,7 @@ import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
 
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   selector: 'app-blue-store-form',
@@ -18,6 +19,11 @@ export class BlueStoreFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
+  _opts: any;
+  set opts(opts: any) {
+    this._opts = opts;
+  }
+
   blueStoreForm: FormGroup;
   meta: any = {
     message: '',
@@ -26,13 +32,51 @@ export class BlueStoreFormComponent implements OnInit {
   tags = [];
   cards = [];
   blueStoreSubmitted: boolean = false;
-  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
-    this.blueStoreForm = this.formBuilder.group({
-      blueStoreTitle: ['', [Validators.required]],
-      blueStoreDescription: ['', [Validators.required]],
-      blueStoreUnits: ['', [Validators.required]],
-      blueStorePrice: ['', [Validators.required]]
-    })
+  bluestore: any;
+  bluestoreGuid: any;
+
+  description = '';
+
+  constructor(
+    public session: Session,
+    public client: Client,
+    public upload: Upload,
+    public attachment: AttachmentService,
+    private formBuilder: FormBuilder,
+    private overlayModal: OverlayModalService) {
+  }
+
+  @Input('object') set data(object) {
+    this.bluestore = object;
+    if (this.bluestore) {
+      this.bluestoreGuid = object['entity_guid'];
+      this.buildForm(this.bluestore);
+    } else {
+      this.buildForm();
+    }
+  }
+
+  buildForm(data?) {
+    if (data) {
+      if (data.description) {
+        this.description = data.description;
+      } else if (data.blurb) {
+        this.description = data.blurb;
+      }
+      this.blueStoreForm = this.formBuilder.group({
+        blueStoreTitle: [data['title'] ? data['title'] : '', [Validators.required]],
+        blueStoreDescription: [this.description ? this.description : '', [Validators.required]],
+        blueStoreUnits: [data['item_count'] ? data['item_count'] : '', [Validators.required]],
+        blueStorePrice: [data['price'] ? data['price'] : '', []]
+      });
+    } else {
+      this.blueStoreForm = this.formBuilder.group({
+        blueStoreTitle: ['', [Validators.required]],
+        blueStoreDescription: ['', [Validators.required]],
+        blueStoreUnits: ['', [Validators.required]],
+        blueStorePrice: ['', []]
+      });
+    }
   }
 
   ngOnInit() {
@@ -54,20 +98,30 @@ export class BlueStoreFormComponent implements OnInit {
     data.price = this.blueStoreForm.value.blueStorePrice;
     data.item_count = this.blueStoreForm.value.blueStoreUnits;
     data.currency = 'INR';
-
+    data.access_id = 2,
+    data.published = 1;
 
     if (this.blueStoreForm.valid) {
-      this.client.post('api/v3/marketplace', data)
-        .then((data: any) => {
+      let endpoint = 'api/v3/marketplace';
+      if (this.bluestoreGuid) {
+        endpoint = 'api/v3/marketplace/' + this.bluestoreGuid;
+      }
+      this.client.post(endpoint, data)
+        .then((resp: any) => {
           // data.activity.boostToggle = true;
-          this.load.emit(data);
+          this.load.emit(resp);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
-
           this.blueStoreSubmitted = false;
+          this.changeToDefault();
+          // check if update callback function is avaibale
+          if (this._opts && this._opts.onUpdate) {
+            this._opts.onUpdate(data);
+            // close modal
+            this.closeModal();
+          }
         })
         .catch((e) => {
-
           this.blueStoreSubmitted = false;
           alert(e.message);
         });
@@ -115,4 +169,7 @@ export class BlueStoreFormComponent implements OnInit {
     });
   }
 
+  closeModal() {
+    this.overlayModal.dismiss();
+  }
 }

@@ -1,18 +1,19 @@
 import { Component, OnInit, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
+import { OpspotActivityObject } from '../../interfaces/entities';
 import { ActivatedRoute } from '@angular/router';
 import { OpportunityFormComponent } from '../forms/opportunity-form/opportunity-form.component';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
+import { ShowtimezFormComponent } from '../forms/showtimez-form/showtimez-form.component';
 
 
 @Component({
-  selector: 'app-opportunity',
-  templateUrl: './opportunity.component.html',
-  styleUrls: ['./opportunity.component.scss']
+  selector: 'app-showtimez',
+  templateUrl: './showtimez.component.html',
+  styleUrls: ['./showtimez.component.scss']
 })
-export class OpportunityComponent implements OnInit {
-
+export class ShowtimezComponent implements OnInit {
   guid: string;
 
   constructor(
@@ -29,31 +30,26 @@ export class OpportunityComponent implements OnInit {
     });
     this.load();
     this.loadAllOpportunities();
-    this.loadAllEvents();
   }
 
   activity: any;
   opspot = window.Opspot;
-  allevents = [];
 
   boosted: boolean = false;
   commentsToggle: boolean = false;
-  // shareToggle: boolean = false;
-  // deleteToggle: boolean = false;
   translateToggle: boolean = false;
   translateEvent: EventEmitter<any> = new EventEmitter();
   showBoostOptions: boolean = false;
   private _showBoostMenuOptions: boolean = false;
   count;
-  allOpportunities = [];
+  allOpportunities: any;
 
 
   type: string;
   element: any;
   visible: boolean = false;
-  showOpportunity = false;
   inProgress: boolean = false;
-  opportunity: any;
+  showTimez: any;
 
   // editing: boolean = false;
 
@@ -78,14 +74,14 @@ export class OpportunityComponent implements OnInit {
 
     this.inProgress = true;
 
-    this.client.get('api/v3/opportunity/' + this.guid)
+    this.client.get('api/v3/event/' + this.guid)
       .then((data: any) => {
-        if (data.opportunity) {
-          this.opportunity = data.opportunity;
-          this.count = this.opportunity['thumbs:up:count'];
+        if (data.event) {
+          this.showTimez = data.event;
+          this.count = this.showTimez['thumbs:up:count'];
 
-          if (data.opportunity.owner_obj) {
-            this.opportunity['ownerObj'] = data.opportunity.owner_obj;
+          if (data.event.owner_obj) {
+            this.showTimez['ownerObj'] = data.event.owner_obj;
           }
           this.inProgress = false;
         }
@@ -97,10 +93,10 @@ export class OpportunityComponent implements OnInit {
 
   getOwnerIconTime() {
     let session = this.session.getLoggedInUser();
-    if (session && session.guid === this.opportunity.ownerObj.guid) {
+    if (session && session.guid === this.showTimez.ownerObj.guid) {
       return session.icontime;
     } else {
-      return this.opportunity.ownerObj.icontime;
+      return this.showTimez.ownerObj.icontime;
     }
   }
 
@@ -124,29 +120,29 @@ export class OpportunityComponent implements OnInit {
       });
   }
 
-  async togglePin() {
-    this.opportunity.bookmark = !this.opportunity.bookmark;
-    const url: string = `api/v3/bookmark/${this.opportunity.guid}/image`;
-    try {
-      if (this.opportunity.bookmark) {
-        await this.client.post(url);
-      } else {
-        await this.client.delete(url);
-      }
-    } catch (e) {
-      this.opportunity.bookmark = !this.opportunity.bookmark;
-    }
-  }
+  // async togglePin() {
+  //   this.opportunity.bookmark = !this.opportunity.bookmark;
+  //   const url: string = `api/v3/bookmark/${this.opportunity.guid}/image`;
+  //   try {
+  //     if (this.opportunity.bookmark) {
+  //       await this.client.post(url);
+  //     } else {
+  //       await this.client.delete(url);
+  //     }
+  //   } catch (e) {
+  //     this.opportunity.bookmark = !this.opportunity.bookmark;
+  //   }
+  // }
 
 
-  async wireSubmitted(wire?) {
-    if (wire && this.opportunity.wire_totals) {
-      this.opportunity.wire_totals.tokens =
-        parseFloat(this.opportunity.wire_totals.tokens) + (wire.amount * Math.pow(10, 18));
+  // async wireSubmitted(wire?) {
+  //   if (wire && this.opportunity.wire_totals) {
+  //     this.opportunity.wire_totals.tokens =
+  //       parseFloat(this.opportunity.wire_totals.tokens) + (wire.amount * Math.pow(10, 18));
 
-      this.detectChanges();
-    }
-  }
+  //     this.detectChanges();
+  //   }
+  // }
 
   menuOptionSelected(option: string) {
     switch (option) {
@@ -171,8 +167,8 @@ export class OpportunityComponent implements OnInit {
 
 
   editOptions() {
-    if (this.opportunity) {
-      this.overlayModal.create(OpportunityFormComponent, this.opportunity, {
+    if (this.showTimez) {
+      this.overlayModal.create(ShowtimezFormComponent, this.showTimez, {
         class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
         // listen to the update callback
         onUpdate: (payload: any) => {
@@ -185,10 +181,10 @@ export class OpportunityComponent implements OnInit {
 
 
   udpateOpportunity(data: any) {
-    this.opportunity.category = data.category;
-    this.opportunity.description = data.description;
-    this.opportunity.location = data.location;
-    this.opportunity.title = data.title;
+    // this.opportunity.category = data.category;
+    // this.opportunity.description = data.description;
+    // this.opportunity.location = data.location;
+    // this.opportunity.title = data.title;
     // trigger component observe new changes
     this.detectChanges();
   }
@@ -202,10 +198,10 @@ export class OpportunityComponent implements OnInit {
   }
 
   liked(count) {
-    if (count != this.opportunity['thumbs:up:count:old']) {
+    if (count != this.showTimez['thumbs:up:count:old']) {
       this.count = count;
     } else {
-      this.count = this.opportunity['thumbs:up:count']
+      this.count = this.showTimez['thumbs:up:count']
     }
   }
 
@@ -242,23 +238,6 @@ export class OpportunityComponent implements OnInit {
       .then((data: any) => {
         if (data && data.entities) {
           this.allOpportunities = data.entities;
-        }
-      })
-      .catch((e) => {
-        this.inProgress = false;
-      });
-  }
-
-  loadAllEvents() {
-    alert();
-    this.inProgress = true;
-    let ownerGuid = this.session.getLoggedInUser().guid;
-    this.client.get('api/v2/feeds/container/ownerGuid/events?limit=3&sync=&as_activities=&force_public=1')
-      .then((data: any) => {
-        if (data && data.entities) {
-          this.allevents = data.entities;
-          console.log("allevents: ", data);
-          
         }
       })
       .catch((e) => {
