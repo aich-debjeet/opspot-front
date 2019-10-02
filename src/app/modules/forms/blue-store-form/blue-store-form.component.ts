@@ -112,7 +112,7 @@ export class BlueStoreFormComponent implements OnInit {
       if (this.bluestoreGuid) {
         endpoint = 'api/v3/marketplace' + this.bluestoreGuid;
       }
-      this.client.post('api/v3/marketplace', data)
+      this.client.post(endpoint, data)
         .then((data: any) => {
           // data.activity.boostToggle = true;
           this.load.emit(data);
