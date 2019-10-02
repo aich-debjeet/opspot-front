@@ -9,7 +9,11 @@ import { TextMaskModule } from 'angular2-text-mask';
 
 import { Opspot } from './app.component';
 
-import { OPSPOT_APP_ROUTING_DECLARATIONS, OpspotAppRoutes, OpspotAppRoutingProviders } from './router/app';
+import {
+  OPSPOT_APP_ROUTING_DECLARATIONS,
+  OpspotAppRoutes,
+  OpspotAppRoutingProviders
+} from './router/app';
 
 import { OPSPOT_DECLARATIONS } from './declarations';
 import { OPSPOT_PLUGIN_DECLARATIONS } from './plugin-declarations';
@@ -39,7 +43,7 @@ import { OnboardingModule } from './modules/onboarding/onboarding.module';
 import { NotificationModule } from './modules/notifications/notification.module';
 
 import { GroupsModule } from './modules/groups/groups.module';
-import { NetworkModule } from './modules/network/network.module'
+import { NetworkModule } from './modules/network/network.module';
 import { PostMenuModule } from './common/components/post-menu/post-menu.module';
 import { BanModule } from './modules/ban/ban.module';
 import { BlogModule } from './modules/blogs/blog.module';
@@ -58,8 +62,8 @@ import { JobsMarketingModule } from './modules/jobs/jobs.module';
 import { HelpdeskModule } from './modules/helpdesk/helpdesk.module';
 import { MobileModule } from './modules/mobile/mobile.module';
 import { CanaryModule } from './modules/canary/canary.module';
-import { HttpClientModule } from "@angular/common/http";
-import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -69,13 +73,12 @@ import { ExploreAudioComponent } from './modules/explore/explore-audio/explore-a
 import { ExploreVideoComponent } from './modules/explore/explore-video/explore-video.component';
 import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-blogs.component';
 import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
+import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
 
 
 @NgModule({
-  bootstrap: [
-    Opspot
-  ],
+  bootstrap: [Opspot],
   declarations: [
     Opspot,
     OPSPOT_APP_ROUTING_DECLARATIONS,
@@ -124,7 +127,7 @@ import { OpportunityModule } from './modules/opportunity/opportunity.module';
     NewsfeedModule,
     MediaModule,
     AuthModule,
-    BlockchainModule,    
+    BlockchainModule,
     BlockchainMarketingModule,
     NodesMarketingModule,
     BrandingModule,
@@ -143,16 +146,13 @@ import { OpportunityModule } from './modules/opportunity/opportunity.module';
     NetworkModule,
     OpportunityModule,
     TextMaskModule,
-
+    PortfolioModule
   ],
   providers: [
     OpspotAppRoutingProviders,
     OPSPOT_PROVIDERS,
-    OPSPOT_PLUGIN_PROVIDERS,
+    OPSPOT_PLUGIN_PROVIDERS
   ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class OpspotModule {
-}
+export class OpspotModule {}

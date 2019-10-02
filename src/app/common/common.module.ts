@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 import { OPSPOT_PIPES } from './pipes/pipes';
 
@@ -83,6 +84,8 @@ import { ImageCroperComponent } from './components/image-croper/image-croper.com
 import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
 import { OpportunityWidgetComponent } from './components/opportunity-widget/opportunity-widget.component';
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
+import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
+import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
 
 @NgModule({
   imports: [
@@ -90,7 +93,8 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCroppieModule
+    NgxCroppieModule,
+    NgxMasonryModule
   ],
   declarations: [
     OPSPOT_PIPES,
@@ -134,6 +138,7 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -166,7 +171,8 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     ImageCroperComponent,
     ReadMoreComponent,
     OpportunityWidgetComponent,
-    OpportunityListCardComponent
+    OpportunityListCardComponent,
+    MasonryContainerComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -209,6 +215,7 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -242,7 +249,8 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     ImageCroperComponent,
     ReadMoreComponent,
     OpportunityWidgetComponent,
-    OpportunityListCardComponent
+    OpportunityListCardComponent,
+    MasonryContainerComponent
   ],
   providers: [
     {
