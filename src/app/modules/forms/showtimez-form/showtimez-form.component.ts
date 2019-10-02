@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Session } from '../../../services/session';
@@ -19,6 +19,26 @@ export class ShowtimezFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
+  _opts: any;
+  set opts(opts: any) {
+    this._opts = opts;
+  }
+
+  event: any;
+  eventGuid: string;
+
+  @Input('object') set data(object) {
+    this.event = object;
+    console.log("this.opportunity: ", this.event);  
+    if (this.event) {
+      this.eventGuid = object['entity_guid'];
+      this.buildForm(this.eventGuid);
+    } else {
+      this.buildForm();
+    }
+  }
+
+
   showTimezForm: FormGroup;
   eventSubmitted: boolean = false;
   meta: any = {
@@ -31,17 +51,39 @@ export class ShowtimezFormComponent implements OnInit {
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
-    this.showTimezForm = this.formBuilder.group({
-      eventTitle: ['', [Validators.required]],
-      eventDescription: ['', [Validators.required]],
-      eventsLocation: ['', [Validators.required]],
-      eventdate: ['', [Validators.required]],
-      eventTime: ['', [Validators.required]],
-      eventImage: ['']
-    })
+
   }
 
   ngOnInit() {
+  }
+
+  description = '';
+
+  buildForm(data?) {
+    if (data) {
+      if(data.description){
+        this.description = data.description;
+      } if(data.blurb){
+        this.description = data.blurb;
+      }
+      this.showTimezForm = this.formBuilder.group({
+        eventTitle: [data['title'] ? data['title'] : '', [Validators.required]],
+        eventDescription: [this.description ? this.description : '', [Validators.required]],
+        eventsLocation: [data['location'] ? data['location'] : '', [Validators.required]],
+        eventdate: ['', [Validators.required]],
+        eventTime: ['', [Validators.required]],
+        eventImage: ['']
+      })
+    } else {
+      this.showTimezForm = this.formBuilder.group({
+        eventTitle: ['', [Validators.required]],
+        eventDescription: ['', [Validators.required]],
+        eventsLocation: ['', [Validators.required]],
+        eventdate: ['', [Validators.required]],
+        eventTime: ['', [Validators.required]],
+        eventImage: ['']
+      })
+    }
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
@@ -89,11 +131,15 @@ export class ShowtimezFormComponent implements OnInit {
     data.location = this.showTimezForm.value.eventsLocation;
     // data.eventdate = this.showTimezForm.value.eventdate;
     // data.eventTime = this.showTimezForm.value.eventTime;
-    data.published = true;
+    data.published = 1;
     data.start_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`)
 
     if (this.showTimezForm.valid) {
-      this.client.post('api/v3/event', data)
+      let endpoint = 'api/v3/event';
+      if (this.eventGuid) {
+        endpoint = 'api/v3/event/' + this.eventGuid;
+      }
+      this.client.post(endpoint, data)
         .then((data: any) => {
           // data.activity.boostToggle = true;
           this.load.emit(data);
@@ -101,6 +147,7 @@ export class ShowtimezFormComponent implements OnInit {
           this.meta = { wire_threshold: null };
 
           this.eventSubmitted = false;
+          this.changeToDefault();
         })
         .catch((e) => {
 

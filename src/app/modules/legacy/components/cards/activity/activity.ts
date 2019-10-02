@@ -11,6 +11,7 @@ import { OpspotVideoComponent } from '../../../../media/components/video/video.c
 import { NewsfeedService } from '../../../../newsfeed/services/newsfeed.service';
 import { OpportunityFormComponent } from '../../../../../modules/forms/opportunity-form/opportunity-form.component';
 import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-form/blue-store-form.component';
+import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
 
 @Component({
   moduleId: module.id,
@@ -55,6 +56,8 @@ export class Activity {
   visible: boolean = false;
   showOpportunity = false;
   showBlueStore = false;
+  showTimez = false;
+
 
 
   editing: boolean = false;
@@ -88,7 +91,6 @@ export class Activity {
     private overlayModal: OverlayModalService,
     private cd: ChangeDetectorRef
   ) {
-
     this.element = _element.nativeElement;
     this.isVisible();
   }
@@ -122,6 +124,10 @@ export class Activity {
 
     if (this.activity.entity_type === "item") {
       this.showBlueStore = true;
+    }
+
+    if (this.activity.entity_type === "event") {
+      this.showTimez = true;
     }
 
     this.boosted = this.activity.boosted || this.activity.p2p_boosted;
@@ -276,21 +282,30 @@ export class Activity {
         onUpdate: (payload: any) => {
           // make update to local var
           console.log("payload: ",payload);
-          
           this.udpateOpportunity(payload);
         }
       }).present();
     } 
-    // if(this.activity.entity_type === 'item'){
-    //   this.overlayModal.create(BlueStoreFormComponent, this.activity, {
-    //     class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
-    //     // listen to the update callback
-    //     onUpdate: (payload: any) => {
-    //       // make update to local var
-    //       this.udpateMarketPlace(payload);
-    //     }
-    //   }).present()
-    // } 
+    else if(this.activity.entity_type === 'item'){
+      this.overlayModal.create(BlueStoreFormComponent, this.activity, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+        // listen to the update callback
+        onUpdate: (payload: any) => {
+          // make update to local var
+          this.udpateMarketPlace(payload);
+        }
+      }).present()
+    } 
+    else if(this.activity.entity_type === 'event'){
+      this.overlayModal.create(ShowtimezFormComponent, this.activity, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+        // listen to the update callback
+        onUpdate: (payload: any) => {
+          // make update to local var
+          this.udpateShowtime(payload);
+        }
+      }).present()
+    } 
     else {
       this.editing = true;
     }
@@ -298,14 +313,28 @@ export class Activity {
 
   udpateOpportunity(data: any) {
     this.activity.category = data.category;
-    this.activity.description = data.description;
+    this.activity.blurb = data.description;
     this.activity.location = data.location;
     this.activity.title = data.title;
+    console.log('BEFORE', this.activity);
+    // trigger component observe new changes
+    this.detectChanges();
+    console.log('AFTER', this.activity);
+  }
+
+  udpateMarketPlace(data: any) {
+    this.activity.description = data.description;
+    this.activity.title = data.title;
+    this.activity.attachment_guid = data.attachment_guid;
+    this.activity.price = data.blueStorePrice;
+    this.activity.item_count = data.blueStoreUnits;
+    this.activity.currency = 'INR';
+    this.activity.published = 1;
     // trigger component observe new changes
     this.detectChanges();
   }
 
-  udpateMarketPlace(data: any) {
+  udpateShowtime(data: any) {
     this.activity.description = data.description;
     this.activity.title = data.title;
     this.activity.attachment_guid = data.attachment_guid;
