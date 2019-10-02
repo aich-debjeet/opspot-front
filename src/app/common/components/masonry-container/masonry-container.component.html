@@ -1,3 +1,11 @@
-<p>
-  masonry-container works!
-</p>
+<div class="o-portfolio-media-part" style="height: 1000px;">
+  <div class="o-portfolio-media-part__row">
+      <div class="o-portfolio-media-part__coloumn">
+          <ngx-masonry class="o-portfolio-card">
+            <div ngxMasonryItem class="masonry-item" *ngFor="let entity of entities">
+              <opspot-post-card [entity]="entity"></opspot-post-card>
+            </div>
+          </ngx-masonry>
+      </div>
+  </div>
+</div>

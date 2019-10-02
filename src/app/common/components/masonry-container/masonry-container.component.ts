@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-masonry-container',
+  selector: 'opspot-masonry-container',
   templateUrl: './masonry-container.component.html',
   styleUrls: ['./masonry-container.component.scss']
 })
 export class MasonryContainerComponent implements OnInit {
+
+  @Input() entities: any[];
 
   constructor() { }
 
