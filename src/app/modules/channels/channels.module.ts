@@ -38,6 +38,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { UserPrivacyComponent } from './profile-edit/user-privacy/user-privacy.component';
 import { ProfileBlockComponent } from './profile-block/profile-block.component';
 import { ProfileBlockSuccessComponent } from './profile-block/profile-block-success/profile-block-success.component';
+import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
+
 
 const routes: Routes = [
   { path: 'channels/:filter', component: ChannelsListComponent },
@@ -62,7 +64,8 @@ const routes: Routes = [
     NgxUsefulSwiperModule,
     TagInputModule,
     BsDatepickerModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    NgxIntlTelInputModule
   ],
 
 

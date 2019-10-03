@@ -16,7 +16,7 @@ export class UserPrivacyComponent implements OnInit {
    if(this.inPrivacy){
      this.model.privacy=this.inPrivacy;
    }
-   console.log(this.toggleClass)
+  //  console.log(this.toggleClass)
   }
    
   @Input('inPrivacy')inPrivacy;
@@ -25,6 +25,7 @@ export class UserPrivacyComponent implements OnInit {
 
    
   changePrivacy(){
+    console.log(this.model.privacy)
     this.privacyChange.emit(this.model.privacy)
   }
 

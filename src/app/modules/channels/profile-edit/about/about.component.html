@@ -4,11 +4,12 @@
     <div class="o-prof-edit-about">
         <div class="form-group w-xl">
             <label class="w-xl">Description</label>
-            <textarea name="description" ngModel class="o-prof-edit-about-descr" placeholder="Description goes here">                                </textarea>
+            <textarea name="description" [(ngModel)]=model.description class="o-prof-edit-about-descr" placeholder="Description goes here">                                </textarea>
         </div>
         <div class="form-group w-sm">
             <label>Gender</label>
-            <select class="form-control" name="gender" ngModel>
+            <select class="form-control" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
+                <option selected="selected" [value]="choose" disabled >Select Type</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="others">Others</option>
@@ -19,16 +20,17 @@
         <div class="o-prof-edit-item__title f500">Date of Birth 
             <div class="pos">
                 <a class="o-prof-edit-privacy Eternity text-md primary hidden-above-tablet" (click)="toggleDob=!toggleDob">{{privacy.dob}}</a>
-                <app-user-privacy class="privacy_mob hidden-above-tablet" [toggleClass]="toggleDob" ></app-user-privacy>
+                <app-user-privacy (privacyChange)="changePrivacy($event,'dob')"  class="privacy_mob hidden-above-tablet" [toggleClass]="toggleDob" ></app-user-privacy>
             </div>
         </div>
         <div class="o-prof-edit-dob">
             <div class="form-group w-sm">
-              <input type="text" class="form-controls" name="dateOfBirth" [(ngModel)]="model.dob"  bsDatepicker placement="bottom"  [bsConfig]="bsConfig">
+              <input type="text" class="form-controls" name="dob" [(ngModel)]="model.dob" [bsValue]="model.dob" bsDatepicker placement="bottom"  [bsConfig]="bsConfig">
             </div>
             <div class="pos">
                 <a class="o-prof-edit-privacy Eternity text-md primary hidden-mob" (click)="toggleDob=!toggleDob" >{{privacy.dob}}</a>
-                <app-user-privacy (privacyChange)="changePrivacy($event,'dob')" [toggleClass]="toggleDob"  class="privacy"></app-user-privacy>
+                <app-user-privacy   
+                 (privacyChange)="changePrivacy($event,'dob')" [toggleClass]="toggleDob"  class="privacy"></app-user-privacy>
             </div>
         </div>
     
@@ -36,7 +38,7 @@
         <div class="form-group w-xl">
             <label>Languages Known</label>
             <!-- <input type="text" class="form-control form-control-lg" placeholder=""> -->
-            <tag-input  [maxItems]=5 required  style="border:1px solid #959595; border-radius:4px " [(ngModel)]='model.skills' #skills="ngModel"  name="skills" theme='minimal'>
+            <tag-input  [maxItems]=5 required  style="border:1px solid #959595; border-radius:4px " [(ngModel)]='model.languages' #languages="ngModel" required name="languages" theme='minimal'>
                 <tag-input-dropdown  [minimumTextLength]=5 [autocompleteItems]="data">
                 </tag-input-dropdown>
            </tag-input>
@@ -47,12 +49,12 @@
               
             <div class="form-group w-sm">
                 <label>Height</label>
-                <input  class="form-control form-control-lg" type="text" >
+                <input  maxlength="5"  [(ngModel)]="model.height" name="height"  class="form-control form-control-lg" type="text" >
             </div>
             <div class="form-group w-sm">
 
                 <label>Weight</label>
-                <input  class="form-control form-control-lg" type="text" >
+                <input  maxlength="5" [(ngModel)]="model.weight" name="weight" class="form-control form-control-lg" type="text" >
             </div>
             <div class="pos">
             <a class="o-prof-edit-privacy Eternity text-md primary hidden-mob" (click)="toggleHeight=!toggleHeight" >
@@ -71,22 +73,24 @@
                     </div>
                 </div>
             <div class="form-group w-sm">
-                <input  class="form-control form-control-lg" type="text" placeholder="Height" >
+                <input  class="form-control form-control-lg" [(ngModel)]="model.height" name="height" type="text" placeholder="Height" >
             </div>
             <div class="form-group w-sm">
-                <input  class="form-control form-control-lg" type="text" placeholder="Weight" >
+                <input  class="form-control form-control-lg" [(ngModel)]="model.weight" name="weight" type="text" placeholder="Weight" >
             </div>
             
             <!--privacy end-->
         </div><!-- height and weight mobile end -->
+        <p *ngIf="aboutError.dob" class="error text-sm">The age must be atleat 10 or above</p>
+        <p *ngIf="aboutError.dobInvalid" class="error text-sm">Please select a Valid Date</p>
+        <p *ngIf="!gender.valid&&submitted" class="error text-sm">Please select a gender</p>
+        <p *ngIf="!languages.valid&&submitted" class="error text-sm">Please add atleast one language </p>
 
         <div class="o-prof-edit-actions">
-            <button type="button" class="btn btn-primary btn-lg">Save Changes</button>
+            <button type="button" class="btn btn-primary btn-lg" (click)="onSubmit(f)">Save Changes</button>
             <button type="button" class="btn btn-outline-primary btn-lg btn--cancel">Cancel</button>
         </div><!-- prof edit actions end -->
 
     </div><!-- about edit block end -->
 </form>
 </div>
-{{f.value|json}}
-{{model|json}}
