@@ -21,7 +21,7 @@
                 <form>
                     <div class="form-group">
                         <select class="form-control" (change)="onChange($event.target.value)">
-                            <option value="All Media" selected>All</option>
+                            <option value="All" selected>All</option>
                             <option value="Image">Image</option>
                             <option value="Audio">Audio</option>
                             <option value="Video">Video</option>
@@ -38,18 +38,13 @@
             </div>
         </div><!--filter and search section-->
         <div class="o-explore-media-part">
-            <!-- <div class="o-explore-media-part__row"> -->
-                <!-- <div class="o-explore-media-part__coloumn" *ngFor="let explore of resp?.entities"> -->
-                    <!-- <div class="o-explore-card"> -->
-                      <!-- <app-explore-audio [response]="resp"></app-explore-audio> -->
-                      <app-explore-all [response]="resp" *ngIf="type == 'object:all'"></app-explore-all>
-                      <app-explore-image [response]="resp" *ngIf="type == 'object:Image'"></app-explore-image>
-                      <app-explore-audio [response]="resp" *ngIf="type == 'object:Audio'"></app-explore-audio>
-                      <app-explore-video [response]="resp" *ngIf="type == 'object:Video'"></app-explore-video>
-                      <app-explore-blogs [response]="resp" *ngIf="type == 'object:Blogs'"></app-explore-blogs>
-                    <!-- </div> -->
-                <!-- </div> -->
-            <!-- </div> -->
+            <opspot-masonry-container [entities]="entities"></opspot-masonry-container>
+            <infinite-scroll
+            distance="25%"
+            (load)="searchMore(false)"
+            [moreData]="moreData"
+            [inProgress]="inProgress">
+        </infinite-scroll>
         </div><!--media section-->
     </div>
 </section>

@@ -29,9 +29,8 @@ export class ExploreComponent implements OnInit {
   
   @ViewChild('searchInput') searchInput: ElementRef;
 
-  resp = {
-    "status": "success",
-    "entities": [{
+
+    entities= [{
       "guid": "1016254594423984139",
       "type": "object",
       "subtype": "image",
@@ -1127,9 +1126,7 @@ export class ExploreComponent implements OnInit {
       "gif": false,
       "thumbnail_src": "https:\/\/ops.doesntexist.com\/api\/v1\/media\/thumbnails\/1010876783190347786\/large",
       "description": null
-    }],
-    "load-next": 12
-  };
+    }];
   constructor(
     public service: TopbarHashtagsService,
     private router: Router,
@@ -1140,28 +1137,29 @@ export class ExploreComponent implements OnInit {
     this.paramsSubscription = this.route.queryParams.subscribe(params => {
       if (typeof params['q'] !== 'undefined') {
         this.q = decodeURIComponent(params['q'] || '');
-        console.log(this.q)
+        // console.log(this.q)
       }
 
       if (typeof params['type'] !== 'undefined') {
         this.type = params['type'] || '';
-        console.log(params['type'])
+        // console.log(this.type)
       }
 
       if (typeof params['id'] !== 'undefined') {
         this.container = params['id'] || '';
-        console.log(this.container)
+        // console.log(this.container)
       }
 
       if (typeof params['ref'] !== 'undefined') {
         this.ref = params['ref'] || '';
-        console.log(this.ref);
+        // console.log(this.ref);
       }
       // this.reset();
-      // this.inProgress = false;
+      this.inProgress = false;
       this.offset = '';
-
-      this.triggerSearchApi();
+      this.searchMore();
+      console.log('entities', this.entities);
+      // this.triggerSearchApi();
       
 
     });
@@ -1169,31 +1167,29 @@ export class ExploreComponent implements OnInit {
 
   async ngOnInit() {
     await this.load();
-    this.exploreSlider = {
-      grid: { xs: 2, sm: 3, md: 11, lg: 11, all: 0 },
-      slide: 5,
-      speed: 400,
-      interval: {
-        timing: 3000,
-        initialDelay: 1000
-      },
-      point: {
-        visible: false
-      },
-      load: 5,
-      loop: false,
-      touch: true,
-      
-    };
-
+    // this.exploreSlider = {
+    //   grid: { xs: 2, sm: 3, md: 11, lg: 11, all: 0 },
+    //   slide: 5,
+    //   speed: 400,
+    //   interval: {
+    //     timing: 3000,
+    //     initialDelay: 1000
+    //   },
+    //   point: {
+    //     visible: false
+    //   },
+    //   load: 5,
+    //   loop: false,
+    //   touch: true,
+    // };
   }
 
   async load(){
     try{
       this.hashtags = await this.service.load(20);
-      console.log(this.hashtags);
+      // console.log(this.hashtags);
     } catch(e){
-      console.log(e);
+      // console.log(e);
     }
   }
   switchSearchType(sType: string){}
@@ -1219,11 +1215,11 @@ export class ExploreComponent implements OnInit {
       taxonomies: this.type
     };
     let response: any = await this.client.get(endpoint, data);
-    console.log(response);
+    // console.log(response);
     }
 
   onChange(e:any){
-    console.log(e);
+    console.log('onChange', e);
     // this.exploreType = e;
     this.type = e;
     this.router.navigate(['/explore'], {
@@ -1236,10 +1232,11 @@ export class ExploreComponent implements OnInit {
       // preserve the existing query params in the route
       // skipLocationChange: true
       // do not trigger navigation
-    });    
+    });
+    // console.log('entities', this.entities);
   }
   keyup(e) {
-    console.log(e);
+    // console.log(e);
     if(e.keyCode === 13){
       this.search();
     }
@@ -1252,5 +1249,37 @@ export class ExploreComponent implements OnInit {
         ref:`${this.ref}`
       },
     })
+  }
+
+  async searchMore(refresh: boolean = true) {
+    if (this.inProgress && !refresh) {
+      return;
+    }
+    this.inProgress = true;
+    if (refresh) {
+      this.offset = '';
+      this.moreData = true;
+    }
+    try {
+      let endpoint = 'api/v2/search';
+
+      const data = {
+        q: this.q,
+        limit: 12,
+        offset: this.offset,
+        type:`object:${this.type}`,
+        ref:`${this.ref}`
+      };
+
+      let response: any = await this.client.get(endpoint, data);
+
+      if (response['load-next']) {
+        this.offset = response['load-next'];
+      } else {
+        this.moreData = false;
+      }
+    } catch (e) { } finally {
+      this.inProgress = false;
+    }
   }
 }

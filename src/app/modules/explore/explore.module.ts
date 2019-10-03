@@ -3,14 +3,7 @@ import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CommonModule } from '../../common/common.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExploreComponent } from './explore.component';
-import { ExploreVideoComponent } from './explore-video/explore-video.component';
-import { ExploreImageComponent } from './explore-image/explore-image.component';
-import { ExploreBlogsComponent } from './explore-blogs/explore-blogs.component';
-import { ExploreAudioComponent } from './explore-audio/explore-audio.component';
-import { ExploreAllComponent} from './explore-all/explore-all.component';
-import { NgxMasonryModule } from 'ngx-masonry';
 
 
 
@@ -21,20 +14,11 @@ const exploreRoutes: Routes = [
   @NgModule({
     imports: [
       NgCommonModule,
-      FormsModule,
-      ReactiveFormsModule,
       RouterModule.forChild(exploreRoutes),
       CommonModule,
-      NgxMasonryModule
-      
     ],
     declarations: [
-        ExploreVideoComponent,
-        ExploreImageComponent,
-        ExploreBlogsComponent,
-        ExploreAudioComponent,
-        ExploreComponent,
-        ExploreAllComponent,
+        ExploreComponent,        
     ],
     providers: [
     ],

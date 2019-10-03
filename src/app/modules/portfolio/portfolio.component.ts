@@ -104,6 +104,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 			"eth_wallet": "0xdb170a3331474ee0750621bff583e4a437aa8c35",
 			"rating": "1"
 		},
+		"entity_guid": "1025713606068539412",
 		"category": false,
 		"comments:count": false,
 		"thumbs:up:count": 0,

@@ -68,10 +68,6 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ExploreComponent } from './modules/explore/explore.component';
-import { ExploreImageComponent } from './modules/explore/explore-image/explore-image.component';
-import { ExploreAudioComponent } from './modules/explore/explore-audio/explore-audio.component';
-import { ExploreVideoComponent } from './modules/explore/explore-video/explore-video.component';
-import { ExploreBlogsComponent } from './modules/explore/explore-blogs/explore-blogs.component';
 import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
@@ -88,10 +84,6 @@ import { ShowtimezModule } from './modules/showtimez/showtimez.module';
     OPSPOT_DECLARATIONS,
     OPSPOT_PLUGIN_DECLARATIONS,
     ExploreComponent,
-    ExploreImageComponent,
-    ExploreAudioComponent,
-    ExploreVideoComponent,
-    ExploreBlogsComponent
   ],
   imports: [
     BrowserModule,
