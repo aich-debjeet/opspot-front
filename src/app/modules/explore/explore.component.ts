@@ -15,6 +15,8 @@ import { Session } from '../../services/session';
   styleUrls: ['./explore.component.scss']
 })
 export class ExploreComponent implements OnInit {
+  
+  entities: Array<Object>;
   hashtags:[];
   exploreType: string;
   paramsSubscription: Subscription;
@@ -30,7 +32,7 @@ export class ExploreComponent implements OnInit {
   @ViewChild('searchInput') searchInput: ElementRef;
 
 
-    entities= [{
+    entities1= [{
       "guid": "1016254594423984139",
       "type": "object",
       "subtype": "image",
@@ -1154,10 +1156,10 @@ export class ExploreComponent implements OnInit {
         this.ref = params['ref'] || '';
         // console.log(this.ref);
       }
-      // this.reset();
+      this.reset();
       this.inProgress = false;
       this.offset = '';
-      this.searchMore();
+      this.searchMore(true);
       console.log('entities', this.entities);
       // this.triggerSearchApi();
       
@@ -1251,35 +1253,37 @@ export class ExploreComponent implements OnInit {
     })
   }
 
-  async searchMore(refresh: boolean = true) {
-    if (this.inProgress && !refresh) {
+  async searchMore(refresh: boolean = false) {
+    if (this.inProgress) {
       return;
     }
-    this.inProgress = true;
     if (refresh) {
       this.offset = '';
-      this.moreData = true;
     }
-    try {
-      let endpoint = 'api/v2/search';
-
-      const data = {
-        q: this.q,
-        limit: 12,
-        offset: this.offset,
-        type:`object:${this.type}`,
-        ref:`${this.ref}`
-      };
-
-      let response: any = await this.client.get(endpoint, data);
-
-      if (response['load-next']) {
-        this.offset = response['load-next'];
-      } else {
-        this.moreData = false;
-      }
-    } catch (e) { } finally {
-      this.inProgress = false;
-    }
+    this.inProgress = true;
+    this.client.get('api/v2/search', { q: this.q,limit: 12, offset: this.offset, type:`object:${this.type}` }, { cache: true })
+      .then((data) => {
+        if (!data) {
+          this.moreData = false;
+          this.inProgress = false;
+          return false;
+        }
+        if (this.entities && !refresh) {
+          console.log('added data')
+          this.entities = this.entities.concat(this.entities1);
+        } else {
+          console.log('added new data')
+          this.entities = this.entities1;
+        }
+        this.offset = data['load-next'];
+        this.inProgress = false;
+      })
+      .catch((e) => {
+        this.inProgress = false;
+      });
   }
+  reset(){
+    this.entities = [];
+  }
+
 }
