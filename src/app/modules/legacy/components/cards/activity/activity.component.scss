@@ -199,6 +199,7 @@ opspot-groups-profile-feed .m-pin-button {
 }
 .feed-media__img{
     width: 100%;
+    max-width: 200px;
     object-fit: contain;
 }
 // video media
@@ -745,3 +746,4 @@ opspot-groups-profile-feed .m-pin-button {
    }
    
 }
+

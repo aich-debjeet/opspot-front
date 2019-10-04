@@ -27507,3 +27507,18 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
    }
    
 }
+
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+    // width: 100%;
+    max-width: 590px;
+}

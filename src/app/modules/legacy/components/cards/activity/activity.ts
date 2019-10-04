@@ -80,6 +80,8 @@ export class Activity {
 
   @ViewChild('player') player: OpspotVideoComponent;
 
+  slideConfig = {slidesToShow: 3, slidesToScroll: 1, arrows: true};
+
   constructor(
     public session: Session,
     public client: Client,
@@ -411,4 +413,21 @@ export class Activity {
     this.cd.markForCheck();
     this.cd.detectChanges();
   }
+
+
+  slickInit(e) {
+    console.log('slick initialized in activity');
+  }
+  breakpoint(e) {
+    console.log('breakpoint');
+  }
+
+  afterChange(e) {
+    console.log('afterChange');
+  }
+
+  beforeChange(e) {
+    console.log('beforeChange');
+  }
+
 }

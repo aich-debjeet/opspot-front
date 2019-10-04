@@ -76,7 +76,7 @@ const routes: Routes = [
   exports: [
     NewsfeedDropdownComponent,
     NewsfeedBoostRotatorComponent,
-    SlickCarouselModule,
+    // SlickCarouselModule,
     SuggestionsComponent
   ],
   entryComponents: [

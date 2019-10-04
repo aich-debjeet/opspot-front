@@ -36,8 +36,8 @@
                 *ngIf="showTimez?.custom_data">
                 <img *ngIf="!showTimez?.custom_data" src="assets/logos/logo.svg">
               <div class="event-date">
-                <div class="text-red">{{showTimez?.start_time_date | date:'dd'}} </div>
-                <div class="text-md">{{showTimez?.start_time_date | date:'MMM'}} </div>
+                <div class="text-red">{{showTimez?.start_time_date * 1000| date:'dd'}} </div>
+                <div class="text-md">{{showTimez?.start_time_date * 1000 | date:'MMM'}} </div>
               </div>
             </div>
           </div>
