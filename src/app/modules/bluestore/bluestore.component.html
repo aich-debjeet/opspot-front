@@ -1,0 +1,102 @@
+<section class="o-post-inner-sec">
+	<div class="container">
+		<div class="o-posts-inner-page">
+			<div class="o-posts-inner-page__left">
+				<div class="o-card feed o-post-inner-minheight">
+					<div class="feed-head">
+						<a *ngIf="marketplace?.ownerObj && marketplace?.ownerObj?.username"
+							[routerLink]="['/', marketplace?.ownerObj?.username]" class="o-avatar">
+							<img [src]="opspot.cdn_url + 'icon/' + marketplace?.ownerObj?.guid + '/medium/' + getOwnerIconTime()" alt="">
+						</a>
+						<div class="o-avatar__info">
+							<div class="o-avatar-det-block">
+								<span class="text-lg grey o-posts-det">
+									<a class="o-avatar__name">{{marketplace?.ownerObj?.name}}</a>
+									added 4 medias to <a class="grey-dark f500">#Marketplace</a>
+								</span>
+							</div>
+							<div class="grey m-l-8 o-posts-tym" *ngIf="marketplace?.time_created">
+								<span>{{marketplace?.time_created * 1000 | date:'medium'}}</span>
+								<span class="o-posts-public-private" *ngIf="isTranslatable"
+								   (click)="translateToggle = true;"><i class="icon-public"></i>
+							    </span>
+							</div>
+						</div>
+						<div class="o-feed-head-action">
+							<m-post-menu *ngIf="marketplace" [entity]="marketplace" 
+							[canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)">
+								<ng-container post-menu>
+									<ng-content select="[post-menu]"></ng-content>
+								</ng-container>
+							</m-post-menu>
+						</div>
+					</div>
+					<div class="o-post-inner-page-myjourney-image">
+						<img src="assets/demo/m3.jpg" alt="">
+					</div>
+					<div class="o-posts-inner-page-myjourney-padding">
+						<div class="feed-media post-view-style">
+							<a class="feed-media__link">
+								<img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
+							</a>
+							<a class="feed-media__link"><img src="assets/demo/m1.jpg" 
+								alt="" class="feed-media__img"></a>
+							<a class="feed-media__link">
+								<img src="assets/demo/m3.jpg" alt="" class="feed-media__img">
+							</a>
+						</div>
+					</div>
+					<div class="o-posts-inner-marketplace-reachout">
+						<div class="feed-card-event-block">
+							<div class="feed-card-event-block__left">
+								<h5 class="f500 mb-3" *ngIf="marketplace?.title">
+									{{ marketplace?.title}}
+								</h5>
+								<div class="text-md" *ngIf="marketplace?.description">
+								<span class="primary">#Marketplace</span>
+								<span class="primary" [innerHtml]="marketplace.description | safe"></span>
+								</div>
+								<div class="text-rate" *ngIf="marketplace?.price ">
+									₹ {{ marketplace?.price  }}.00/- <span class="text-md f500">(per piece)</span>
+								</div>
+							</div>
+							<div class="feed-card-event-block__right ">
+								<button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+							</div>
+						</div>
+					</div>
+					<div class="o-posts-inner-page-action">
+						<div class="o-posts-inner-page-action__details">
+							<div class="o-latest-channel-info-head__members members-list">
+								<div class="members-circle members-circle1"><img src="assets/demo/avatar.png" alt="">
+								</div>
+								<div class="members-circle members-circle2"><img src="assets/demo/avatar.png" alt="">
+								</div>
+								<div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt="">
+								</div>
+							</div>
+							<div class="text-sm grey">{{count}} liked this post</div>
+							<div class="text-sm grey m-16">46 shared this post</div>
+							<div class="text-sm grey m-16">13 contributed this post</div>
+							<div class="text-sm grey m-16">2k viewed this post</div>
+						</div>
+						<div class="o-posts-inner-page-action__icons">
+							<opspot-button-thumbs-up *ngIf="marketplace" (liked)="liked($event)" [large]="'true'" [object]="marketplace"></opspot-button-thumbs-up>
+							<opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'"></opspot-button-remind>
+							<div class="icon-posts-box">
+								<span class="icon-coins"></span><span class="text-md f500">Contribute</span>
+							</div>
+						</div>
+					</div>
+					<opspot-comments *ngIf="marketplace" [object]="marketplace" [focusOnInit]="true"	[focusedCommentGuid]="focusedCommentGuid" [canEdit]="canDelete">
+					</opspot-comments>
+				</div>
+			</div>
+			<div class="o-posts-inner-page__right hidden-mob">
+					<app-opportunity-widget *ngIf="allOpportunities" [object]="allOpportunities"></app-opportunity-widget>
+				<!-- % include components/opportunities_sidebar.html %}
+				{% include components/trending_post.html{ %}   -->
+			</div>
+		</div>
+	</div>
+</section>

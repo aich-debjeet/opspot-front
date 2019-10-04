@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 import { OPSPOT_PIPES } from './pipes/pipes';
 
@@ -81,6 +82,12 @@ import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
 import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
+import { OpportunityWidgetComponent } from './components/opportunity-widget/opportunity-widget.component';
+import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
+import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
+import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
+import { ShowtimeWidgetComponent } from './components/showtime-widget/showtime-widget.component';
+import { ShowtimeListCardComponent } from './components/showtime-list-card/showtime-list-card.component';
 
 @NgModule({
   imports: [
@@ -88,7 +95,8 @@ import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCroppieModule
+    NgxCroppieModule,
+    NgxMasonryModule
   ],
   declarations: [
     OPSPOT_PIPES,
@@ -132,6 +140,7 @@ import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -162,7 +171,12 @@ import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
     DynamicFormComponent,
     AndroidAppDownloadComponent,
     ImageCroperComponent,
-    ReadMoreComponent
+    ReadMoreComponent,
+    OpportunityWidgetComponent,
+    OpportunityListCardComponent,
+    MasonryContainerComponent,
+    ShowtimeWidgetComponent,
+    ShowtimeListCardComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -205,6 +219,7 @@ import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -236,7 +251,12 @@ import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
     DynamicFormComponent,
     AndroidAppDownloadComponent,
     ImageCroperComponent,
-    ReadMoreComponent
+    ReadMoreComponent,
+    OpportunityWidgetComponent,
+    OpportunityListCardComponent,
+    ShowtimeListCardComponent,
+    ShowtimeWidgetComponent,
+    MasonryContainerComponent
   ],
   providers: [
     {

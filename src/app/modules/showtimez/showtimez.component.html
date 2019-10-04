@@ -1,0 +1,100 @@
+<section class="o-post-inner-sec">
+  <div class="container">
+    <div class="o-posts-inner-page">
+      <div class="o-posts-inner-page__left">
+        <div class="o-card feed o-post-inner-minheight">
+          <div class="feed-head">
+            <a *ngIf="showTimez?.ownerObj && showTimez?.ownerObj?.username"
+              [routerLink]="['/', showTimez?.ownerObj?.username]" class="o-avatar"><img
+                [src]="opspot.cdn_url + 'icon/' + showTimez?.ownerObj?.guid + '/medium/' + getOwnerIconTime()"
+                alt=""></a>
+            <div class="o-avatar__info">
+              <div class="o-avatar-det-block">
+                <span class="text-lg grey o-posts-det" *ngIf="showTimez?.ownerObj?.name"><a
+                    class="o-avatar__name">{{showTimez?.ownerObj?.name}}</a>
+                  added 4 medias to <a class="grey-dark f500">#Event</a></span>
+              </div>
+              <div class="grey m-l-8 o-posts-tym" *ngIf="showTimez?.time_created">
+                <span>{{showTimez?.time_created * 1000 | date:'medium'}}</span>
+                <span class="o-posts-public-private" *ngIf="isTranslatable" (click)="translateToggle = true;"><i
+                    class="icon-public"></i></span>
+              </div>
+            </div>
+            <div class="o-feed-head-action">
+              <m-post-menu *ngIf="showTimez" [entity]="showTimez" [canDelete]="canDelete"
+                [isTranslatable]="isTranslatable" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)">
+                <ng-container post-menu>
+                  <ng-content select="[post-menu]"></ng-content>
+                </ng-container>
+              </m-post-menu>
+            </div>
+          </div>
+          <div class="feed-media o-posts-inner-event-image">
+            <div class="feed-media-event-image">
+              <img [src]="showTimez?.custom_data[0] ? showTimez?.custom_data[0].src:''"
+                (error)="showTimez.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
+                *ngIf="showTimez?.custom_data">
+                <img *ngIf="!showTimez?.custom_data" src="assets/logos/logo.svg">
+              <div class="event-date">
+                <div class="text-red">{{showTimez?.start_time_date | date:'dd'}} </div>
+                <div class="text-md">{{showTimez?.start_time_date | date:'MMM'}} </div>
+              </div>
+            </div>
+          </div>
+          <div class="o-posts-inner-marketplace-reachout">
+            <div class="feed-card-event-block">
+              <div class="feed-card-event-block__left o-event-width">
+                <h5 class="f500 mb-3">
+                  {{showTimez?.title}}
+                </h5>
+                <div class="text-lg grey">{{showTimez?.location}}<br>
+                  {{showTimez?.start_time_date | date:'h:mm | dd MMMM y'}}</div>
+                <div class="text-md">
+                  <div class="mt-15"><span class="primary">#Event</span>
+                    <span class="mt-15" [innerHtml]="showTimez?.description | safe"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="feed-card-event-block__right ">
+                <button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+              </div>
+            </div>
+          </div>
+          <div class="o-posts-inner-page-action">
+            <div class="o-posts-inner-page-action__details">
+              <div class="o-latest-channel-info-head__members members-list">
+                <div class="members-circle members-circle1"><img src="assets/demo/avatar.png" alt=""></div>
+                <div class="members-circle members-circle2"><img src="assets/demo/avatar.png" alt=""></div>
+                <div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt=""></div>
+              </div>
+              <div class="text-sm grey">{{count}} liked this post</div>
+              <div class="text-sm grey m-16">46 shared this post</div>
+              <div class="text-sm grey m-16">13 contributed this post</div>
+              <div class="text-sm grey m-16">2k viewed this post</div>
+            </div>
+            <div class="o-posts-inner-page-action__icons">
+              <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="showTimez">
+              </opspot-button-thumbs-up>
+              <opspot-button-remind *ngIf="showTimez" [object]="showTimez" [large]="'true'"></opspot-button-remind>
+              <div class="icon-posts-box">
+                <span class="icon-coins"></span><span class="text-md f500">Contribute</span>
+              </div>
+            </div>
+          </div>
+          <opspot-comments
+          *ngIf="showTimez"
+          [object]="showTimez" 
+          [focusOnInit]="true" 
+          [focusedCommentGuid]="focusedCommentGuid"
+          [canEdit]="canDelete">
+          </opspot-comments>
+        </div>
+      </div>
+      <div class="o-posts-inner-page__right hidden-mob">
+          <app-opportunity-widget *ngIf="allOpportunities" [object]="allOpportunities"></app-opportunity-widget>
+        <!-- {% include components/opportunities_sidebar.html %}
+        {% include components/trending_post.html %} -->
+      </div>
+    </div>
+  </div>
+</section>

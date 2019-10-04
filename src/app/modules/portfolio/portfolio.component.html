@@ -1,6 +1,6 @@
 <section class="o-portfolio-content-sec">
     <div class="container">
-        <h2 class="mb26">Gowtham Kumar’s Portfolio</h2>
+        <h2 class="mb26">{{ channel?.name }}'s Portfolio</h2>
         <div class="o-portfolio-action">
             <div class="o-portfolio-action__icons hidden-mob">
                 <ul>
@@ -28,29 +28,14 @@
                 </div>
             </div>
         </div><!--filter and search section-->
-        <div class="o-portfolio-media-part">
-            <div class="o-portfolio-media-part__row">
-                <div class="o-portfolio-media-part__coloumn">
-                   <div class="o-portfolio-card">
-                      explore_card
-                   </div>
-                </div>
-                <div class="o-portfolio-media-part__coloumn">
-                    <div class="o-portfolio-card">
-                      explore_video
-                    </div>
-                 </div>
-                 <div class="o-portfolio-media-part__coloumn">
-                    <div class="o-portfolio-card">
-                      explore_blog
-                    </div>
-                 </div>
-                 <div class="o-portfolio-media-part__coloumn">
-                    <div class="o-portfolio-card">
-                      explore_card
-                    </div>
-                 </div>
-            </div>
-        </div><!--media section-->
+        <opspot-masonry-container [entities]="entities"></opspot-masonry-container>
+
+        <!-- TODO: load more -->
+        <infinite-scroll
+            distance="25%"
+            (load)="search(false)"
+            [moreData]="moreData"
+            [inProgress]="inProgress"
+        ></infinite-scroll>
     </div>
 </section>

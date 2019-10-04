@@ -40,6 +40,8 @@ import { CommentsModule } from '../comments/comments.module';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { AppuserComponent } from './components/appuser/appuser.component';
 import { GroupBannerComponent } from './components/group-banner/group-banner.component';
+import { OpspotFormsModule } from '../forms/forms.module';
+// import { PostCard } from './components/cards/post-card/post-card';
 
 @NgModule({
   imports: [
@@ -58,6 +60,7 @@ import { GroupBannerComponent } from './components/group-banner/group-banner.com
     PostMenuModule,
     CommentsModule,
     TextInputAutocompleteModule,
+    OpspotFormsModule,
   ],
   declarations: [
     Activity,
@@ -87,6 +90,8 @@ import { GroupBannerComponent } from './components/group-banner/group-banner.com
 
     GroupBannerComponent,
 
+    // PostCard,
+
   ],
   exports: [
     Activity,
@@ -112,7 +117,8 @@ import { GroupBannerComponent } from './components/group-banner/group-banner.com
     HovercardPopup,
     CarouselComponent,
     AppuserComponent,
-    GroupBannerComponent
+    GroupBannerComponent,
+    // PostCard
   ],
   entryComponents: [
     Activity,

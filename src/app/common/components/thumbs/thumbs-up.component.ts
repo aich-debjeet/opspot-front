@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component, DoCheck, OnChanges } from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component, DoCheck, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
 import { Session } from '../../../services/session';
 import { Client } from '../../../services/api';
@@ -11,10 +11,16 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
   inputs: ['_object: object'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <a class="o-actions__link" (click)="thumb()" >
+    <!-- TODO @gayatri: check if can reuse the markup -->
+    <a *ngIf="!large" class="o-actions__link" (click)="thumb()" >
       <i class='spot-ico' [ngClass]="{'icon-heart-filled': has(),'icon-heart':!has() }"></i>
       <span class="o-action-count text-sm grey" *ngIf="object['thumbs:up:count'] > -1"><span>{{object['thumbs:up:count'] | number}}</span></span>
     </a>
+    <div *ngIf="large" class="icon-posts-box" (click)="thumb()">
+    <i class='spot-ico' [ngClass]="{'icon-heart-filled': has(),'icon-heart':!has() }">
+    </i>
+    <span class="text-md f500">Like</span> 
+    </div>
   `,
   styles: [`
       a {
@@ -31,6 +37,7 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
 
 export class ThumbsUpButton implements DoCheck, OnChanges {
 
+  @Input() large: boolean = false;
   changesDetected: boolean = false;
   object = {
     'guid': null,
@@ -38,6 +45,8 @@ export class ThumbsUpButton implements DoCheck, OnChanges {
     'thumbs:up:user_guids': []
   };
   showModal: boolean = false;
+
+  @Output() liked: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public session: Session,
@@ -68,12 +77,14 @@ export class ThumbsUpButton implements DoCheck, OnChanges {
       //this.object['thumbs:up:user_guids'].push(this.session.getLoggedInUser().guid);
       this.object['thumbs:up:user_guids'] = [this.session.getLoggedInUser().guid];
       this.object['thumbs:up:count']++;
+      this.liked.emit(this.object['thumbs:up:count']);
     } else {
       for (let key in this.object['thumbs:up:user_guids']) {
         if (this.object['thumbs:up:user_guids'][key] === this.session.getLoggedInUser().guid)
           delete this.object['thumbs:up:user_guids'][key];
       }
       this.object['thumbs:up:count']--;
+      this.liked.emit(this.object['thumbs:up:count']);
     }
   }
 

@@ -303,10 +303,11 @@
             </div>
         </form>
     </div> -->
-    <app-showtimez-form *ngIf="display == '#Showtimez'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-showtimez-form>
-    <app-opportunity-form *ngIf="display == '#Opportunity'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-opportunity-form>
-    <app-blue-store-form *ngIf="display == '#TheBlueStore'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-blue-store-form>
-    <app-portfolio-form *ngIf="display == '#Portfolio'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-portfolio-form>
+    <app-showtimez-form *ngIf="display == '#Showtimez'" [object]="''" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-showtimez-form>
+    <app-opportunity-form *ngIf="display == '#Opportunity'" [object]="''" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-opportunity-form>
+    <app-blue-store-form *ngIf="display == '#TheBlueStore'" [object]="''" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-blue-store-form>
+    <app-portfolio-form *ngIf="display == '#Portfolio'" (ChangeDefault)="changeToDefault()" 
+    (Close)="close()" (load)="emitEvent($event)"></app-portfolio-form>
     <app-my-journey-form *ngIf="display == '#MyJourney'" (ChangeDefault)="changeToDefault()" (Close)="close()" (load)="emitEvent($event)"></app-my-journey-form>
 
     <!-- <div class="o-create-opportunity" *ngIf="display == '#Opportunity'">

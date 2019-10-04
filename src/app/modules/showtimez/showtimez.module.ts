@@ -1,0 +1,35 @@
+import { NgModule } from '@angular/core';
+import { ShowtimezComponent } from './showtimez.component';
+import { CommonModule as NgCommonModule } from '@angular/common';
+import { CommonModule } from '../../common/common.module';
+import { Routes, RouterModule } from '@angular/router';
+import { PostMenuModule } from '../../common/components/post-menu/post-menu.module';
+import { CommentsModule } from '../comments/comments.module';
+import { WireModule } from '../wire/wire.module';
+import { LegacyModule } from '../legacy/legacy.module';
+
+// TODO @gayatri: handle all other requests
+const showtimeRoutes: Routes = [
+  {
+    path: 'event/view/:guid',
+    component: ShowtimezComponent,
+  }
+  // {
+  //   path: '**',
+  //   redirectTo: '/'
+  // }
+]
+
+@NgModule({
+  declarations: [ShowtimezComponent],
+  imports: [
+    CommonModule,
+    NgCommonModule,
+    RouterModule.forChild(showtimeRoutes),
+    PostMenuModule,
+    CommentsModule,
+    WireModule,
+    LegacyModule
+  ]
+})
+export class ShowtimezModule { }
