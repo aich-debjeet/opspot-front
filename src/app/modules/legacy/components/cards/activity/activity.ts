@@ -17,11 +17,12 @@ import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-f
   moduleId: module.id,
   selector: 'opspot-activity',
   host: {
-    'class': 'mdl-card m-border'
+    
   },
   inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle'],
   outputs: ['_delete: delete', 'commentsOpened', 'onViewed'],
   templateUrl: 'activity.html',
+  styleUrls: ['./activity.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
