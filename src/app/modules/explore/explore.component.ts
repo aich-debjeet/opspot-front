@@ -16,7 +16,7 @@ import { Session } from '../../services/session';
 })
 export class ExploreComponent implements OnInit {
   
-  entities: Array<Object>;
+  // entities: Array<Object>;
   hashtags:[];
   exploreType: string;
   paramsSubscription: Subscription;
@@ -31,8 +31,7 @@ export class ExploreComponent implements OnInit {
   
   @ViewChild('searchInput') searchInput: ElementRef;
 
-
-    entities1= [{
+  entities= [{
       "guid": "1016254594423984139",
       "type": "object",
       "subtype": "image",
@@ -1156,11 +1155,10 @@ export class ExploreComponent implements OnInit {
         this.ref = params['ref'] || '';
         // console.log(this.ref);
       }
-      this.reset();
+      // this.reset();
       this.inProgress = false;
       this.offset = '';
       this.searchMore(true);
-      console.log('entities', this.entities);
       // this.triggerSearchApi();
       
 
@@ -1169,21 +1167,6 @@ export class ExploreComponent implements OnInit {
 
   async ngOnInit() {
     await this.load();
-    // this.exploreSlider = {
-    //   grid: { xs: 2, sm: 3, md: 11, lg: 11, all: 0 },
-    //   slide: 5,
-    //   speed: 400,
-    //   interval: {
-    //     timing: 3000,
-    //     initialDelay: 1000
-    //   },
-    //   point: {
-    //     visible: false
-    //   },
-    //   load: 5,
-    //   loop: false,
-    //   touch: true,
-    // };
   }
 
   async load(){
@@ -1194,7 +1177,6 @@ export class ExploreComponent implements OnInit {
       // console.log(e);
     }
   }
-  switchSearchType(sType: string){}
 
   switchCategoryType(sType: string){
     console.log(sType)
@@ -1261,26 +1243,26 @@ export class ExploreComponent implements OnInit {
       this.offset = '';
     }
     this.inProgress = true;
-    this.client.get('api/v2/search', { q: this.q,limit: 12, offset: this.offset, type:`object:${this.type}` }, { cache: true })
-      .then((data) => {
-        if (!data) {
-          this.moreData = false;
-          this.inProgress = false;
-          return false;
-        }
-        if (this.entities && !refresh) {
-          console.log('added data')
-          this.entities = this.entities.concat(this.entities1);
-        } else {
-          console.log('added new data')
-          this.entities = this.entities1;
-        }
-        this.offset = data['load-next'];
-        this.inProgress = false;
-      })
-      .catch((e) => {
-        this.inProgress = false;
-      });
+    // this.client.get('api/v2/search', { q: this.q,limit: 12, offset: this.offset, type:`object:${this.type}` }, { cache: true })
+    //   .then((data) => {
+    //     if (!data) {
+    //       this.moreData = false;
+    //       this.inProgress = false;
+    //       return false;
+    //     }
+    //     if (this.entities && !refresh) {
+    //       console.log('added data')
+    //       this.entities = this.entities.concat(this.entities1);
+    //     } else {
+    //       console.log('added new data')
+    //       this.entities = this.entities1;
+    //     }
+    //     this.offset = data['load-next'];
+    //     this.inProgress = false;
+    //   })
+    //   .catch((e) => {
+    //     this.inProgress = false;
+    //   });
   }
   reset(){
     this.entities = [];
