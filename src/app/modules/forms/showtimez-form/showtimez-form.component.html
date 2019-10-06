@@ -57,10 +57,10 @@
                       (change)="uploadAttachment(file, $event)" formControlName="eventImage">
                   </div>
                   <!--file upload ends-->
-                  <div class="fileUpload-preview ml-18" *ngIf="attachment.meta.attachment_guid.length > 0">
-                      <a class="o-create-show-timez-cover-image__avatar" *ngFor="let image of cards">
-                          <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i class="icon-x"></i></a>
-                          <img [src]="image.imageLink" alt="">
+                  <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
+                      <a class="o-create-show-timez-cover-image__avatar" >
+                          <a class="fileUpload-close-temp" (click)="removeAttachment(image.guid)"><i class="icon-x"></i></a>
+                          <img [src]="image.src" alt="">
                       </a>
                   </div>
                   <!--file preview ends-->
