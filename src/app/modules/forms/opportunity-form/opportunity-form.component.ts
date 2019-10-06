@@ -27,11 +27,13 @@ export class OpportunityFormComponent implements OnInit {
 
   opportunity: any;
   oppGuid: string;
+  label = "Create";
 
   @Input('object') set data(object) {
     this.opportunity = object;
     if (this.opportunity) {
       this.oppGuid = object['entity_guid'];
+      this.label = "Edit";
       this.buildForm(this.opportunity);
     } else {
       this.buildForm();
