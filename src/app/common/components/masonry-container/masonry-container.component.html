@@ -1,4 +1,4 @@
-<div class="o-portfolio-media-part" style="height: 1000px;">
+<!-- <div class="o-portfolio-media-part" style="height: 1000px;">
   <div class="o-portfolio-media-part__row">
       <div class="o-portfolio-media-part__coloumn">
           <ngx-masonry class="o-portfolio-card">
@@ -8,4 +8,10 @@
           </ngx-masonry>
       </div>
   </div>
-</div>
+</div> -->
+
+<ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
+  <div ngxMasonryItem class="o-explore-media-part__coloumn" *ngFor="let explore of entities">
+      <opspot-post-card [entity]="explore"></opspot-post-card>
+  </div>
+</ngx-masonry>

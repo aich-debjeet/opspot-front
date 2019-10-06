@@ -24,8 +24,6 @@ import { PosterModule } from './poster/poster.module';
 import { CommentsModule } from '../comments/comments.module';
 import { HashtagsModule } from '../hashtags/hashtags.module';
 import { NewsfeedTagsComponent } from './feeds/tags/tags.component';
-import { SuggestionsComponent } from './suggestions/suggestions.component';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 const routes: Routes = [
   {
@@ -56,7 +54,6 @@ const routes: Routes = [
     PosterModule,
     HashtagsModule,
     SuggestionsModule,
-    SlickCarouselModule
   ],
   declarations: [
     NewsfeedDropdownComponent,
@@ -67,7 +64,6 @@ const routes: Routes = [
     NewsfeedSubscribedComponent,
     NewsfeedBoostComponent,
     NewsfeedTagsComponent,
-    SuggestionsComponent
   ],
   providers: [
     NewsfeedService,
@@ -76,8 +72,6 @@ const routes: Routes = [
   exports: [
     NewsfeedDropdownComponent,
     NewsfeedBoostRotatorComponent,
-    SlickCarouselModule,
-    SuggestionsComponent
   ],
   entryComponents: [
     NewsfeedComponent,

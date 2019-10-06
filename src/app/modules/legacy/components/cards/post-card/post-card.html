@@ -1,29 +1,25 @@
 <div class="o-explore-card">
   <div class="o-explore-card__media">
     <div class="o-explore-media-img">
-      <img src="/icon/{{entity.ownerObj.guid}}/small/{{entity.ownerObj.icontime}}" alt="media">
+      <a [routerLink]="['/media', entity.entity_guid]">
+        <img [src]="entity.thumbnail_src" alt="media">
+      </a>
     </div><!-- media img end -->
     <a class="o-explore-card-media-info">
       <div class="o-explore-card-media-info__avatar">
-        <img src="assets/demo/avatar.png" alt="avatar">
+        <img src="{{tempUrl}}{{entity.guid}}/medium/{{entity?.ownerObj?.icontime}}" alt="avatar">
       </div>
       <div class="text-md white f500">{{entity.ownerObj.username}}</div>
     </a><!-- media info end -->
   </div><!-- media end -->
   <div class="o-explore-card__media-info">
     <div class="text-md f500">If you are in the market for a computer, there are…</div>
-    <div class="o-media-hashtag">
-      <a class="text-md primary"> #Music </a>
-      <a class="text-md primary"> #Art </a>
+    <div class="o-media-hashtag" *ngIf="entity.tags?.length > 0">
+      <a class="text-md primary" *ngFor ="let tags of entity.tags "> {{tags}} </a>
     </div><!-- hashtag end -->
     <div class="o-explore-card-action">
       <div class="o-actions">
-        <a href="#" class="o-actions__link">
-          <img src="assets/svg/heart.svg" alt="" class="o-action-icon">
-          <span class="o-action-count text-sm grey">
-            <span>12k</span>
-          </span>
-        </a>
+          <opspot-button-thumbs-up [object]="entity"></opspot-button-thumbs-up>
         <a href="#" class="o-actions__link">
           <i class="icon-message-square f-15"></i>
           <span class="o-action-count text-sm grey">
@@ -33,21 +29,16 @@
         <a href="#" class="o-actions__link">
           <i class="icon-eye f-15"></i>
           <span class="o-action-count text-sm grey">
-            <span>2k</span>
+            <span>{{ entity.impressions | number }}</span>
           </span>
         </a>
-        <a href="#" class="o-actions__link">
-          <i class="icon-share-2 f-15"></i>
-          <span class="o-action-count text-sm grey">
-            <span>56</span>
-          </span>
-        </a>
-        <a href="#" class="o-actions__link o-actions__link--coin">
+        <!-- <opspot-button-remind [object]="entity"></opspot-button-remind> -->
+        <a class="o-actions__link o-actions__link--coin" *ngIf="session.getLoggedInUser().guid == entity.owner_guid">
           <div class="tooltip_coin"><i class="icon-coins f-18"></i>
             <span class="tooltip_coin__text">
               <div class="float-left"><i class="icon-coins f-18"></i></div>
               <div class="o-action-count text-sm grey float-left">
-                22
+                  <span *ngIf="entity.wire_totals">{{ entity.wire_totals.tokens | token:18 | abbr }}</span>
               </div>
             </span>
           </div>

@@ -9,8 +9,6 @@ import { ReportCreatorComponent } from './creator/creator.component';
 import { ReportConsoleComponent } from './console/console.component';
 import { CommentsModule } from '../comments/comments.module';
 import { ProfileReportComponent } from './profile-report/profile-report.component';
-import { CreatorSuccessComponent } from './creator/creator-success/creator-success.component';
-import { ProfileReportSuccessComponent } from './profile-report/profile-report-success/profile-report-success.component';
 
 
 @NgModule({
@@ -25,18 +23,14 @@ import { ProfileReportSuccessComponent } from './profile-report/profile-report-s
   declarations: [
     ReportCreatorComponent,
     ReportConsoleComponent,
-    ProfileReportComponent,
-    CreatorSuccessComponent,
-    ProfileReportSuccessComponent
+    ProfileReportComponent
   ],
   exports: [
     ReportConsoleComponent
   ],
   entryComponents: [
     ReportCreatorComponent,
-    ProfileReportComponent,
-    CreatorSuccessComponent,
-    ProfileReportSuccessComponent
+    ProfileReportComponent
   ]
 })
 

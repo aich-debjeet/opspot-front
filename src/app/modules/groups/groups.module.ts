@@ -29,8 +29,6 @@ import { HashtagsModule } from '../hashtags/hashtags.module';
 import { GroupMemberPreviews } from './profile/member-previews/member-previews.component';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { CanDeactivateGroupService } from "./profile/can-deactivate/can-deactivate-group.service";
-import { MobileMembersComponent } from './profile/members/mobile-members/mobile-members.component';
-import { MobileInviteComponent } from './profile/members/mobile-invite/mobile-invite.component';
 
 const routes: Routes = [
   { path: 'groups/profile/:guid', component: GroupsProfile, canDeactivate: [CanDeactivateGroupService], children: [
@@ -43,13 +41,8 @@ const routes: Routes = [
     ],
   },
   { path: 'groups/create', component: GroupsCreator },
-  { path: 'groups/edit/:guid', component: GroupsCreator,canDeactivate: [CanDeactivateGroupService] },
   { path: 'groups/:filter', component: GroupsListComponent },
   { path: 'groups', redirectTo: '/groups/top', pathMatch: 'full' },
-  { path: 'groups/:guid/members' ,component:MobileMembersComponent},
-  { path: 'groups/:guid/invite' ,component:MobileInviteComponent}
-
-
 ];
 
 @NgModule({
@@ -86,8 +79,6 @@ const routes: Routes = [
     GroupsTileComponent,
     GroupMemberPreviews,
     GroupsSidebarMarkersComponent,
-    MobileMembersComponent,
-    MobileInviteComponent,
   ],
   exports: [
     GroupsListComponent,

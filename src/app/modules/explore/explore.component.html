@@ -1,22 +1,16 @@
 <div class="o-explore-tag-sec">
     <div class="o-explore-tag tag-slik">
-        <a href="javascript:void(0)" class="o-tag" *ngFor="let tags of hashtags">{{tags.value}}</a>
-        <!-- <a href="#" class="o-tag">Photography</a>
-        <a href="#" class="o-tag">Singer</a>
-        <a href="#" class="o-tag">Popular</a>
-        <a href="#" class="o-tag">Painting</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Photography</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a>
-        <a href="#" class="o-tag">Art</a> -->
+        <ng-container *ngFor="let tags of hashtags">
+            <a (click)="switchCategoryType(tags.value)" class="o-tag">{{tags.value}}</a>
+        </ng-container>
+
+        <!-- <ngu-carousel [inputs]="exploreSlider">
+            <ngu-item NguCarouselItem class="" *ngFor="let tags of hashtags">
+                <a (click)="switchCategoryType(tags.value)" class="o-tag">{{tags.value}}</a>
+            </ngu-item>
+            <button NguCarouselPrev class='leftRs'>&lt;</button>
+            <button NguCarouselNext class='rightRs'>&gt;</button>
+        </ngu-carousel> -->
     </div><!-- tag block end -->
 </div><!-- tag section end-->
 
@@ -26,8 +20,8 @@
             <div class="o-explore-action__filter">
                 <form>
                     <div class="form-group">
-                        <select class="form-control">
-                            <option value="All Media" selected>All Media</option>
+                        <select class="form-control" (change)="onChange($event.target.value)">
+                            <option value="All" selected>All</option>
                             <option value="Image">Image</option>
                             <option value="Audio">Audio</option>
                             <option value="Video">Video</option>
@@ -38,34 +32,19 @@
             </div>
             <div class="o-explore-action__search">
                 <div class="form-group c-form_righticon-lg">
-                    <input type="text" class="form-control form-control-lg" placeholder="Serach Post">
+                    <input type="text" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q" name="q" autocomplete="off" #searchInput>
                     <span class="c-svg_eye"><i class="icon-search"></i></span>
                 </div>
             </div>
         </div><!--filter and search section-->
         <div class="o-explore-media-part">
-            <div class="o-explore-media-part__row">
-                <div class="o-explore-media-part__coloumn">
-                   <div class="o-explore-card">
-                     <app-explore-image></app-explore-image>
-                   </div>
-                </div>
-                <div class="o-explore-media-part__coloumn">
-                    <div class="o-explore-card">
-                      <app-explore-audio></app-explore-audio>
-                    </div>
-                 </div>
-                 <div class="o-explore-media-part__coloumn">
-                    <div class="o-explore-card">
-                      <app-explore-video></app-explore-video>
-                    </div>
-                 </div>
-                 <div class="o-explore-media-part__coloumn">
-                    <div class="o-explore-card">
-                      <app-explore-blogs></app-explore-blogs>
-                    </div>
-                 </div>
-            </div>
+            <opspot-masonry-container [entities]="entities"></opspot-masonry-container>
+            <!-- <infinite-scroll
+            distance="25%"
+            (load)="searchMore()"
+            [moreData]="moreData"
+            [inProgress]="inProgress">
+        </infinite-scroll> -->
         </div><!--media section-->
     </div>
 </section>

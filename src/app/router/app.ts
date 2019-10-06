@@ -22,6 +22,7 @@ import { EducationComponent } from '../modules/channels/profile-edit/education/e
 import { AwardsComponent } from '../modules/channels/profile-edit/awards/awards.component';
 import { ExploreComponent } from '../modules/explore/explore.component';
 
+
 export const OpspotAppRoutes: Routes = [
 
   { path: 'capture', redirectTo: 'media/images/suggested' },
@@ -64,7 +65,7 @@ export const OpspotAppRoutes: Routes = [
   
   ] 
   } ,
-  {path:'explore', component: ExploreComponent},
+  {path:'explore', component: ExploreComponent },
 
   { path: ':username/:filter', component: ChannelComponent },
  

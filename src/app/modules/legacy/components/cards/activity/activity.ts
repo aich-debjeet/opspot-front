@@ -17,11 +17,12 @@ import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-f
   moduleId: module.id,
   selector: 'opspot-activity',
   host: {
-    'class': 'mdl-card m-border'
+    
   },
   inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle'],
   outputs: ['_delete: delete', 'commentsOpened', 'onViewed'],
   templateUrl: 'activity.html',
+  styleUrls: ['./activity.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
@@ -57,7 +58,6 @@ export class Activity {
   showOpportunity = false;
   showBlueStore = false;
   showTimez = false;
-
 
 
   editing: boolean = false;
@@ -111,7 +111,6 @@ export class Activity {
 
     if (!this.activity.message) {
       this.activity.message = '';
-
     }
 
     if (!this.activity.title) {
