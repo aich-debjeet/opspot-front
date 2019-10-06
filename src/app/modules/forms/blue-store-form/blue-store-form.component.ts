@@ -61,15 +61,13 @@ export class BlueStoreFormComponent implements OnInit {
     this.bluestore = object;
     if (this.bluestore) {
       this.bluestoreGuid = object['entity_guid'];
+      this.label = "Edit";
       this.buildForm(this.bluestore);
       this.cards = this.bluestore['custom_data'];
       if (this.bluestore['custom_data']) {
         // for(let i = 0; i > this.bluestore['custom_data'].length; i++) {
         //   this.reqBody.attachment_guid.push(this.bluestore['custom_data'][i]['guid']);
         // }
-        if(this.bluestoreGuid){
-          this.label = "Edit"
-        }
         this.bluestore['custom_data'].forEach(image => {
           this.reqBody.attachment_guid.push(image['guid']);
         });
