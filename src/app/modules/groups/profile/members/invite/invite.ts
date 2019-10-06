@@ -18,7 +18,7 @@ export class GroupsProfileMembersInvite {
 
   group: any;
   invited: EventEmitter<any> = new EventEmitter();
-  mobileView;
+
   users: Array<any> = [];
   searching: boolean = false;
   q: string = '';
@@ -30,9 +30,8 @@ export class GroupsProfileMembersInvite {
   destination: any; // @todo: ??
 
   timeout;
- 
+
   constructor(public client: Client, public service: GroupsService) {
-   if(window.innerWidth<775){this.mobileView=true;}
   }
 
   set _group(value: any) {
@@ -89,7 +88,6 @@ export class GroupsProfileMembersInvite {
         .then((success: any) => {
           if (success.entities) {
             this.users = success.entities;
-            
           }
         })
         .catch((error) => {

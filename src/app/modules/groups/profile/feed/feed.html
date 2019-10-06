@@ -14,15 +14,16 @@
     >
       <i class="material-icons">update</i> {{ pollingNewPosts }} new {{ pollingNewPosts === 1 ? 'post' : 'posts' }}
     </div>
- 
-    <!-- <a class="mdl-shadow--4dp mdl-color--blue-grey-50 mdl-color-text--blue-grey-500 m-newsfeed-message"
+
+    <a class="mdl-shadow--4dp mdl-color--blue-grey-50 mdl-color-text--blue-grey-500 m-newsfeed-message"
       routerLink="review"
       *ngIf="filter == 'activity' && (group['is:owner']||group['is:moderator']) && group['adminqueue:count']"
     >
       <i class="material-icons">rate_review</i>
       {{ group['adminqueue:count'] }} new {{ group['adminqueue:count'] === 1 ? 'post' : 'posts' }} in review queue
-    </a> -->
-    <div  [class.m-groupProfileFeed__mediaList]="filter !== 'activity'">
+    </a>
+
+    <div class="opspot-list" [class.m-groupProfileFeed__mediaList]="filter !== 'activity'">
 
         <opspot-activity
             *ngFor="let activity of pinned"
@@ -50,23 +51,20 @@
           >Remove user</li>
 
           <!-- Review -->
-          <div bottom-content *ngIf="filter == 'review'" style="display: flex;flex-flow:row-reverse; padding: 15px;" class="o-actions-moderate-community">
-              
-              <button
-              class="btn btn-primary btn-sm float-right btn--commu"
+          <div bottom-content *ngIf="filter == 'review'" class="m-groups-feed--review-actions">
+            <button
+              class="mdl-button mdl-button--raised mdl-button--colored mdl-color--green-500"
               (click)="approve(a, i)"
               i18n="@@M__ACTION__APPROVE"
-            >Accept</button>
-            
+            >Approve</button>
+
             <button
-              class="btn btn-outline-primary btn-sm float-rights"
+              class="mdl-button mdl-button--raised mdl-button--colored mdl-color--red-500"
               (click)="reject(a, i)"
               i18n="@@M__ACTION__REJECT"
-              style="margin-right: 10px;"
             >Reject</button>
-            
-            
-           </div>
+          </div>
+
           <!-- / -->
         </opspot-activity>
 

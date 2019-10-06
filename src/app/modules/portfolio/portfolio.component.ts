@@ -11,6 +11,10 @@ import { Client } from '../../services/api';
 export class PortfolioComponent implements OnInit, OnDestroy {
 
   paramsSub: Subscription;
+  /**temp variables */
+  offset: string = '';
+  q: string = '';
+  type: string = '';
   entities = [{
 		"guid": "1026022979215454208",
 		"type": "object",
@@ -104,6 +108,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 			"eth_wallet": "0xdb170a3331474ee0750621bff583e4a437aa8c35",
 			"rating": "1"
 		},
+		"entity_guid": "1025713606068539412",
 		"category": false,
 		"comments:count": false,
 		"thumbs:up:count": 0,
@@ -1459,8 +1464,34 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     this.paramsSub.unsubscribe();
   }
 
-  search(refresh: boolean) {
-	
+  async searchMore(refresh: boolean = false) {
+    if (this.inProgress) {
+      return;
+    }
+    if (refresh) {
+      this.offset = '';
+    }
+    this.inProgress = true;
+    this.client.get('api/v2/search', { q: this.q,limit: 12, offset: this.offset, type:`object:${this.type}` }, { cache: true })
+      .then((data) => {
+        if (!data) {
+          this.moreData = false;
+          this.inProgress = false;
+          return false;
+        }
+        if (this.entities && !refresh) {
+          console.log('added data')
+        //   this.entities = this.entities.concat(this.entities1);
+        } else {
+          console.log('added new data')
+        //   this.entities = this.entities1;
+        }
+        this.offset = data['load-next'];
+        this.inProgress = false;
+      })
+      .catch((e) => {
+        this.inProgress = false;
+      });
   }
 
 }

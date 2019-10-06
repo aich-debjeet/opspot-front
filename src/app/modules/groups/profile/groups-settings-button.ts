@@ -10,8 +10,9 @@ import { Session } from '../../../services/session';
 @Component({
   selector: 'opspot-groups-settings-button',
   template: `
-    <button class="icon-more-vertical f-15 focusNone" style="padding: 0;background: #fff;
-    border: 0 !important;" (click)="toggleMenu($event)">
+    <button class="material-icons" (click)="toggleMenu($event)">
+      settings
+      <i *ngIf="group['is:muted']" class="opspot-groups-button-badge material-icons">notifications_off</i>
     </button>
 
     <ul class="opspot-dropdown-menu" [hidden]="!showMenu" >
@@ -66,22 +67,8 @@ import { Session } from '../../../services/session';
         <button class="mdl-button mdl-button--colored" (click)="feature()" i18n="@@M__ACTION__FEATURE">Feature</button>
       </div>
     </m-modal>
-   <style>
-    .focusNone{
-      outline:none;
-    }
-   </style>
-  
-
-
   `
 })
-
-
-//old code
-//<i *ngIf="group['is:muted']" class="opspot-groups-button-badge material-icons">notifications_off</i>
-// 
-
 
 export class GroupsSettingsButton {
 
@@ -239,7 +226,8 @@ export class GroupsSettingsButton {
   }
 
   toggleEdit() {
-    this.router.navigate([`/groups/edit/${this.group.guid}`])
+    this.editing = !this.editing;
+    this.change.emit({ editing: this.editing });
   }
 
   toggleVideoChat(enabled: boolean) {
