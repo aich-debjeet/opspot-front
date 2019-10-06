@@ -44,6 +44,7 @@ export class BlueStoreFormComponent implements OnInit {
   blueStoreSubmitted: boolean = false;
   bluestore: any;
   bluestoreGuid: any;
+  label = "Create"
 
   description = '';
 
@@ -66,6 +67,9 @@ export class BlueStoreFormComponent implements OnInit {
         // for(let i = 0; i > this.bluestore['custom_data'].length; i++) {
         //   this.reqBody.attachment_guid.push(this.bluestore['custom_data'][i]['guid']);
         // }
+        if(this.bluestoreGuid){
+          this.label = "Edit"
+        }
         this.bluestore['custom_data'].forEach(image => {
           this.reqBody.attachment_guid.push(image['guid']);
         });
