@@ -44,6 +44,7 @@ export class BlueStoreFormComponent implements OnInit {
   blueStoreSubmitted: boolean = false;
   bluestore: any;
   bluestoreGuid: any;
+  label = "Create"
 
   description = '';
 
@@ -60,6 +61,7 @@ export class BlueStoreFormComponent implements OnInit {
     this.bluestore = object;
     if (this.bluestore) {
       this.bluestoreGuid = object['entity_guid'];
+      this.label = "Edit";
       this.buildForm(this.bluestore);
       this.cards = this.bluestore['custom_data'];
       if (this.bluestore['custom_data']) {
