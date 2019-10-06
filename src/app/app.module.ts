@@ -67,7 +67,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { ExploreComponent } from './modules/explore/explore.component';
+// import { ExploreComponent } from './modules/explore/explore.component';
 import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
@@ -83,7 +83,8 @@ import { ShowtimezModule } from './modules/showtimez/showtimez.module';
     OPSPOT_APP_ROUTING_DECLARATIONS,
     OPSPOT_DECLARATIONS,
     OPSPOT_PLUGIN_DECLARATIONS,
-    ExploreComponent,
+    // TODO @abhijeet: implement lazy loading
+    // ExploreComponent,
   ],
   imports: [
     BrowserModule,
