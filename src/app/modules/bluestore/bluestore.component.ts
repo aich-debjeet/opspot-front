@@ -21,7 +21,7 @@ export class BluestoreComponent implements OnInit {
   count
   opspot = window.Opspot;
   allOpportunities: any;
-
+  largeImage: string;
 
   isTranslatable: boolean;
   canDelete: boolean = false;
@@ -64,6 +64,7 @@ export class BluestoreComponent implements OnInit {
       .then((data: any) => {
         if (data.marketplace) {
           this.marketplace = data.marketplace;
+          this.showImage(0);
           this.count = this.marketplace['thumbs:up:count'];
 
           if (data.marketplace.owner_obj) {
@@ -114,7 +115,7 @@ export class BluestoreComponent implements OnInit {
         // listen to the update callback
         onUpdate: (payload: any) => {
           // make update to local var
-          alert(payload)
+          // alert(payload)
           this.udpateMarketPlace(payload);
         }
       }).present();
@@ -206,5 +207,25 @@ export class BluestoreComponent implements OnInit {
       });
   }
 
+  slideConfig = {slidesToShow: 3, slidesToScroll: 1, arrows: true};
 
+  slickInit(e) {
+    console.log('slick initialized in activity');
+  }
+  breakpoint(e) {
+    console.log('breakpoint');
+  }
+
+  afterChange(e) {
+    console.log('afterChange');
+  }
+
+  beforeChange(e) {
+    console.log('beforeChange');
+  }
+
+  showImage(i) {
+    this.largeImage = this.marketplace.custom_data[i].src;
+    console.log('this.largeImage', this.largeImage);
+  }
 }

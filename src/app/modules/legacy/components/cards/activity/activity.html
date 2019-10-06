@@ -109,9 +109,13 @@
       </div> -->
     <!-- </div> -->
     <div class="" *ngIf="activity.custom_data.length">
-      <ngx-slick-carousel class="carousel feed-media" #slickModal="slick-carousel" [config]="slideConfig"
-        (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
-        (beforeChange)="beforeChange($event)">
+      <ngx-slick-carousel class="carousel feed-media" 
+      #slickModal="slick-carousel" 
+      [config]="slideConfig"
+      (init)="slickInit($event)" 
+      (breakpoint)="breakpoint($event)" 
+      (afterChange)="afterChange($event)"
+      (beforeChange)="beforeChange($event)">
         <div ngxSlickItem *ngFor="let image of activity.custom_data" class="slide">
           <a class="feed-media__link">
             <img [src]="image.src" alt="" class="feed-media__img"
@@ -119,8 +123,8 @@
           </a>
         </div>
       </ngx-slick-carousel>
-      <!-- <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
-      <button class="btn-next" (click)="slickModal.slickNext()">next</button> -->
+      <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+      <button class="btn-next" (click)="slickModal.slickNext()">next</button>
     </div>
 
     <div class="feed-card-event-block" [routerLink]="['/item/view', activity.entity_guid]">

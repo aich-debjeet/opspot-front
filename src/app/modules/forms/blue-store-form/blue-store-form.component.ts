@@ -23,6 +23,16 @@ export class BlueStoreFormComponent implements OnInit {
   set opts(opts: any) {
     this._opts = opts;
   }
+  reqBody = {
+    title: null,
+    description: null,
+    item_count: null,
+    price: 0,
+    currency: 'INR',
+    access_id: 2,
+    published: 1,
+    attachment_guid: []
+  };
 
   blueStoreForm: FormGroup;
   meta: any = {
@@ -51,6 +61,18 @@ export class BlueStoreFormComponent implements OnInit {
     if (this.bluestore) {
       this.bluestoreGuid = object['entity_guid'];
       this.buildForm(this.bluestore);
+      this.cards = this.bluestore['custom_data'];
+      if (this.bluestore['custom_data']) {
+        // for(let i = 0; i > this.bluestore['custom_data'].length; i++) {
+        //   this.reqBody.attachment_guid.push(this.bluestore['custom_data'][i]['guid']);
+        // }
+        this.bluestore['custom_data'].forEach(image => {
+          this.reqBody.attachment_guid.push(image['guid']);
+        });
+        setTimeout(() => {
+          console.log('INITIAL attachment_guid', this.reqBody.attachment_guid);
+        }, 500);
+      }
     } else {
       this.buildForm();
     }
@@ -90,23 +112,28 @@ export class BlueStoreFormComponent implements OnInit {
   }
   blueStoreSubmit() {
     this.blueStoreSubmitted = true;
-    let data = Object.assign(this.meta, this.attachment.exportMeta());
-
-    data.attachment_guid = data.attachment_guid;
-    data.title = this.blueStoreForm.value.blueStoreTitle;
-    data.description = this.blueStoreForm.value.blueStoreDescription;
-    data.price = this.blueStoreForm.value.blueStorePrice;
-    data.item_count = this.blueStoreForm.value.blueStoreUnits;
-    data.currency = 'INR';
-    data.access_id = 2,
-    data.published = 1;
+    // if (this.attachment) {
+    //   this.reqBody = Object.assign(this.meta, this.attachment.exportMeta());
+    //   console.log('this.reqBody', this.reqBody);
+    //   return;
+    // }
+    // this.reqBody.attachment_guid = this.reqBody.attachment_guid;
+    this.reqBody.title = this.blueStoreForm.value.blueStoreTitle;
+    this.reqBody.description = this.blueStoreForm.value.blueStoreDescription;
+    this.reqBody.price = this.blueStoreForm.value.blueStorePrice;
+    this.reqBody.item_count = this.blueStoreForm.value.blueStoreUnits;
+    // this.reqBody.currency = 'INR';
+    // this.reqBody.access_id = 2,
+    // this.reqBody.published = 1;
+    // console.log('this.reqBody', this.reqBody);
+    // return;
 
     if (this.blueStoreForm.valid) {
       let endpoint = 'api/v3/marketplace';
       if (this.bluestoreGuid) {
         endpoint = 'api/v3/marketplace/' + this.bluestoreGuid;
       }
-      this.client.post(endpoint, data)
+      this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
           // data.activity.boostToggle = true;
           this.load.emit(resp);
@@ -116,7 +143,7 @@ export class BlueStoreFormComponent implements OnInit {
           this.changeToDefault();
           // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
-            this._opts.onUpdate(data);
+            this._opts.onUpdate(this.reqBody);
             // close modal
             this.closeModal();
           }
@@ -127,6 +154,7 @@ export class BlueStoreFormComponent implements OnInit {
         });
     }
   }
+
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
 
@@ -134,8 +162,8 @@ export class BlueStoreFormComponent implements OnInit {
         .then(guid => {
           let obj = {};
           obj['guid'] = guid;
-          obj['imageLink'] = this.attachment.getPreview();
-          this.cards.push(obj);
+          obj['src'] = this.attachment.getPreview();
+          this.addAttachment(obj);
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }
@@ -150,24 +178,40 @@ export class BlueStoreFormComponent implements OnInit {
     }
   }
 
-  removeAttachment(file: HTMLInputElement, imageId: string) {
+  addAttachment(obj) {
+    this.cards.push(obj);
+    this.reqBody.attachment_guid.push(obj['guid']);
+  }
 
-    // if we're not uploading a file right now
-    // this.attachment.setPendingDelete(false);
-    // this.canPost = false;
-    // this.inProgress = true;
-
-    // this.errorMessage = '';
-
-    this.attachment.remove(file, imageId).then((guid) => {
-      file.value = '';
-      this.cards = _remove(this.cards, function (n) {
-        return n.guid !== guid;
-      });
-    }).catch(e => {
-      console.error(e);
+  // TODO @abhijeet: check of deleting media here is required?
+  removeAttachment(guid){
+    console.log('DELETE ', guid);
+    console.log('DELETE ', this.reqBody.attachment_guid[guid]);
+    this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
+    console.log('AFTER DELETE ', this.reqBody.attachment_guid);
+    this.cards = _remove(this.cards, function (n) {
+      return n.guid !== guid;
     });
   }
+
+  // removeAttachment(file: HTMLInputElement, imageId: string) {
+
+  //   // if we're not uploading a file right now
+  //   // this.attachment.setPendingDelete(false);
+  //   // this.canPost = false;
+  //   // this.inProgress = true;
+
+  //   // this.errorMessage = '';
+
+  //   this.attachment.remove(file, imageId).then((guid) => {
+  //     file.value = '';
+  //     this.cards = _remove(this.cards, function (n) {
+  //       return n.guid !== guid;
+  //     });
+  //   }).catch(e => {
+  //     console.error(e);
+  //   });
+  // }
 
   closeModal() {
     this.overlayModal.dismiss();

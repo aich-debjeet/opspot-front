@@ -20,8 +20,8 @@
                   </div>
                   <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
                       <a class="o-create-blue-store-cover-image__avatar">
-                          <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i class="icon-x"></i></a>
-                          <img [src]="image.imageLink" alt="">
+                          <a class="fileUpload-close-temp" (click)="removeAttachment(image.guid)"><i class="icon-x"></i></a>
+                          <img [src]="image.src" alt="">
                       </a>
                   </div>
               </div>

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PostMenuModule } from '../../common/components/post-menu/post-menu.module';
 import { CommentsModule } from '../comments/comments.module';
 import { LegacyModule } from '../legacy/legacy.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 // TODO @gayatri: handle all other requests
 const blueStoreRoutes: Routes = [
@@ -27,8 +28,8 @@ const blueStoreRoutes: Routes = [
     RouterModule.forChild(blueStoreRoutes),
     PostMenuModule,
     CommentsModule,
-    LegacyModule
-
+    LegacyModule,
+    SlickCarouselModule
   ]
 })
 export class BluestoreModule { }
