@@ -226,6 +226,7 @@
 
       <div class="m-commentToolbar__buttons" [hidden]="editing">
         <opspot-button-thumbs-up [object]="comment" [class.has-count]="comment['thumbs:up:count'] > 0"></opspot-button-thumbs-up>
+        <!-- <span i18n="@@M__COMMON__LIKES">Likes</span> -->
         <!-- <opspot-button-thumbs-down [object]="comment"></opspot-button-thumbs-down> -->
         <span class="m-clickable m-r-16"
           [class.selected]="comment.replies_count > 0"
@@ -239,7 +240,7 @@
       </div>
 
       <span [title]="comment.time_created * 1000 | date: 'medium'" class="m-commentToolbar__timestamp" *ngIf="( commentAge$ | async ) as commentAge">{{ commentAge | friendlydatediff }}</span>
-      <span *ngIf="comment.edited" class="m-edited-text" i18n="@@M__COMMON__EDITED">edited</span>
+      <!-- <span *ngIf="comment.edited" class="m-edited-text" i18n="@@M__COMMON__EDITED">edited</span> -->
 
     </div>
 

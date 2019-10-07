@@ -10064,7 +10064,7 @@ opspot-payments-checkout, opspot-payments-stripe-checkout {
         margin-top: -2px; }
       .m-commentToolbar__buttons > *.m-clickable span {
         vertical-align: middle;
-        line-height: 16px; }
+        line-height: 20px; }
     .m-commentToolbar__buttons > * .opspot-counter {
       font-size: 12px;
       line-height: 16px;
@@ -27541,3 +27541,6 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   padding-right: 10px;
 }
 
+.m-r-0 {
+  margin-right: 0;
+}
