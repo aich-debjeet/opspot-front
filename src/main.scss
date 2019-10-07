@@ -9999,10 +9999,10 @@ opspot-payments-checkout, opspot-payments-stripe-checkout {
   padding: 12px; }
 
 .m-comment__bubble {
-  background: #f1f1f1;
+  /* background: #f1f1f1; */
   display: inline-block;
   border-radius: 24px;
-  padding: 8px 16px;
+  padding: 8px;
   max-width: 75%;
   white-space: pre-line; }
 
@@ -10021,6 +10021,7 @@ opspot-payments-checkout, opspot-payments-stripe-checkout {
     max-width: 100%;
     white-space: nowrap; }
     .m-commentBubble__username > a span {
+      color: #263238;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -10031,7 +10032,7 @@ opspot-payments-checkout, opspot-payments-stripe-checkout {
     margin-top: -1px; }
 
 .m-commentBubble__message {
-  display: inline;
+  display: block;
   vertical-align: middle;
   font-size: 13px;
   line-height: 16px; }
@@ -10048,7 +10049,7 @@ opspot-payments-checkout, opspot-payments-stripe-checkout {
           align-items: center; }
 
 .m-commentToolbar__buttons {
-  display: inline-block;
+  display: inherit;
   position: relative;
   margin: 4px 0 4px 8px; }
   .m-commentToolbar__buttons > * {
@@ -10376,6 +10377,7 @@ opspot-comments, .m-comment-wrapper {
         -webkit-flex: 1;
                 flex: 1;
         margin-bottom: 8px;
+        margin-right: 8px;
          }
   opspot-comments .m-comments-composer form opspot-textarea,
   opspot-comments .opspot-editable-container textarea, .m-comment-wrapper .m-comments-composer form opspot-textarea,
@@ -27526,3 +27528,16 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .icon-send {
   font-size: 25px !important;
 }
+
+.m-l-0 {
+  margin-left: 0;
+}
+
+.m-r-16 {
+  margin-right: 16px;
+}
+
+.p-r-10 {
+  padding-right: 10px;
+}
+

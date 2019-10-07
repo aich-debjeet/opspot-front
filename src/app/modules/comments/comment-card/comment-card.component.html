@@ -43,7 +43,7 @@
     </button>
       
     <ul class="m-comment__ribbon" [hidden]="!toggle.value" #toggle>
-      <li class="m-commentRibbon__item"
+      <!-- <li class="m-commentRibbon__item"
         *ngIf="comment.owner_guid == session.getLoggedInUser()?.guid || session.isAdmin()"
         (click)="editing = !editing; toggle.value = false"
         title="Edit"
@@ -58,23 +58,23 @@
         i18n-title="@@M__ACTION__TRANSLATE"
         >
         <i class="material-icons">public</i>
-      </li>
+      </li> -->
       <li class="m-commentRibbon__item"
         *ngIf="comment.owner_guid == session.getLoggedInUser()?.guid || session.isAdmin() || parent.owner_guid == session.getLoggedInUser()?.guid || canEdit"
         (click)="delete(); toggle.value = false"
         title="Delete"
         i18n-title="@@M__ACTION__DELETE"
         >
-          <i class="material-icons">delete</i>
-        </li>
-      <li class="m-commentRibbon__item"
+        <i class="material-icons">delete</i>
+      </li>
+      <!-- <li class="m-commentRibbon__item"
         *ngIf="!editing && comment.owner_guid != session.getLoggedInUser()?.guid"
         (click)="showReport()"
         title="Report"
         i18n-title="verb|@@M__ACTION__REPORT"
         >
         <i class="material-icons">flag</i>
-      </li>
+      </li> -->
     </ul>
 
     <div class="m-comment__attachment">
@@ -242,7 +242,6 @@
 
       <span [title]="comment.time_created * 1000 | date: 'medium'" class="m-commentToolbar__timestamp" *ngIf="( commentAge$ | async ) as commentAge">{{ commentAge | friendlydatediff }}</span>
       <span *ngIf="comment.edited" class="m-edited-text" i18n="@@M__COMMON__EDITED">edited</span>
-
 
     </div>
 
