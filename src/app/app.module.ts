@@ -67,12 +67,11 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-// import { ExploreComponent } from './modules/explore/explore.component';
 import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
-import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
 import { BluestoreModule } from './modules/bluestore/bluestore.module';
 import { ShowtimezModule } from './modules/showtimez/showtimez.module';
+import { ExploreModule } from './modules/explore/explore.module';
 
 
 
@@ -82,9 +81,7 @@ import { ShowtimezModule } from './modules/showtimez/showtimez.module';
     Opspot,
     OPSPOT_APP_ROUTING_DECLARATIONS,
     OPSPOT_DECLARATIONS,
-    OPSPOT_PLUGIN_DECLARATIONS,
-    // TODO @abhijeet: implement lazy loading
-    // ExploreComponent,
+    OPSPOT_PLUGIN_DECLARATIONS
   ],
   imports: [
     BrowserModule,
@@ -144,7 +141,7 @@ import { ShowtimezModule } from './modules/showtimez/showtimez.module';
     TextMaskModule,
     BluestoreModule,
     ShowtimezModule,
-    PortfolioModule
+    ExploreModule
   ],
   providers: [
     OpspotAppRoutingProviders,
