@@ -169,8 +169,10 @@ export class OpportunityFormComponent implements OnInit {
   }
 
   addAttachment(obj) {
-    this.cards.push(obj);
-    this.reqBody.attachment_guid.push(obj['guid']);
+    if (this.cards.length < 1) {
+      this.cards.push(obj);
+      this.reqBody.attachment_guid.push(obj['guid']);
+    }
   }
 
   removeAttachment(guid) {

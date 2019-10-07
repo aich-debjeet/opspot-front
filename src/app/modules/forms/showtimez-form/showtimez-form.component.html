@@ -51,7 +51,7 @@
           <div class="form-group">
               <label>Cover Image</label>
               <div class="o-create-show-timez-cover-image">
-                  <div class="fileUpload">
+                  <div class="fileUpload" *ngIf="this.cards.length == 0">
                       <span class="icon-plus"></span>
                       <input type="file" id="file" #file class="upload" name="attachment"
                       (change)="uploadAttachment(file, $event)" formControlName="eventImage">

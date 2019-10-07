@@ -50,7 +50,7 @@
             <div class="form-group">
                 <label>Cover Image</label>
                 <div class="o-create-opportunity-cover-image">
-                    <div class="fileUpload">
+                    <div class="fileUpload" *ngIf="this.cards.length == 0">
                         <span class="icon-plus"></span>
                         <input type="file" class="upload" formControlName="opportunityImage" #file name="attachment"
                             (change)="uploadAttachment(file, $event)">
