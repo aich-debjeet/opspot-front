@@ -35,15 +35,16 @@ export class BlueStoreFormComponent implements OnInit {
   };
 
   blueStoreForm: FormGroup;
-  meta: any = {
-    message: '',
-    wire_threshold: null
-  };
+  // meta: any = {
+  //   message: '',
+  //   wire_threshold: null
+  // };
   tags = [];
   cards = [];
   blueStoreSubmitted: boolean = false;
   bluestore: any;
   bluestoreGuid: any;
+  label = "Create"
 
   description = '';
 
@@ -60,6 +61,7 @@ export class BlueStoreFormComponent implements OnInit {
     this.bluestore = object;
     if (this.bluestore) {
       this.bluestoreGuid = object['entity_guid'];
+      this.label = "Edit";
       this.buildForm(this.bluestore);
       this.cards = this.bluestore['custom_data'];
       if (this.bluestore['custom_data']) {
@@ -69,9 +71,6 @@ export class BlueStoreFormComponent implements OnInit {
         this.bluestore['custom_data'].forEach(image => {
           this.reqBody.attachment_guid.push(image['guid']);
         });
-        setTimeout(() => {
-          console.log('INITIAL attachment_guid', this.reqBody.attachment_guid);
-        }, 500);
       }
     } else {
       this.buildForm();
@@ -138,7 +137,7 @@ export class BlueStoreFormComponent implements OnInit {
           // data.activity.boostToggle = true;
           this.load.emit(resp);
           this.attachment.reset();
-          this.meta = { wire_threshold: null };
+          // this.meta = { wire_threshold: null };
           this.blueStoreSubmitted = false;
           this.changeToDefault();
           // check if update callback function is avaibale
@@ -185,10 +184,7 @@ export class BlueStoreFormComponent implements OnInit {
 
   // TODO @abhijeet: check of deleting media here is required?
   removeAttachment(guid){
-    console.log('DELETE ', guid);
-    console.log('DELETE ', this.reqBody.attachment_guid[guid]);
     this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
-    console.log('AFTER DELETE ', this.reqBody.attachment_guid);
     this.cards = _remove(this.cards, function (n) {
       return n.guid !== guid;
     });

@@ -42,7 +42,6 @@ import { AppuserComponent } from './components/appuser/appuser.component';
 import { GroupBannerComponent } from './components/group-banner/group-banner.component';
 import { OpspotFormsModule } from '../forms/forms.module';
 // import { PostCard } from './components/cards/post-card/post-card';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 
 @NgModule({
@@ -63,7 +62,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     CommentsModule,
     TextInputAutocompleteModule,
     OpspotFormsModule,
-    SlickCarouselModule
   ],
   declarations: [
     Activity,

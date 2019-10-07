@@ -25,14 +25,34 @@ export class ShowtimezFormComponent implements OnInit {
     this._opts = opts;
   }
 
+  reqBody = {
+    title: null,
+    description: null,
+    location: null,
+    access_id: 2,
+    published: 1,
+    start_time_date: null,
+    attachment_guid: []
+  };
+
   event: any;
   eventGuid: string;
+  label = "Create";
+  description = '';
+
 
   @Input('object') set data(object) {
     this.event = object;
     if (this.event) {
       this.eventGuid = object['entity_guid'];
+      this.label = "Edit"
       this.buildForm(this.event);
+      if (this.event['custom_data']) {
+        this.event['custom_data'].forEach(image => {
+          this.reqBody.attachment_guid.push(image['guid']);
+        });
+        this.cards = this.event['custom_data'];
+      }
     } else {
       this.buildForm();
     }
@@ -41,23 +61,27 @@ export class ShowtimezFormComponent implements OnInit {
 
   showTimezForm: FormGroup;
   eventSubmitted: boolean = false;
-  meta: any = {
-    message: '',
-    wire_threshold: null
-  };
+  // meta: any = {
+  //   message: '',
+  //   wire_threshold: null
+  // };
   tags = [];
   cards = [];
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder, private overlayModal: OverlayModalService) {
-
+  constructor(
+    public session: Session,
+    public client: Client,
+    public upload: Upload,
+    public attachment: AttachmentService,
+    private formBuilder: FormBuilder,
+    private overlayModal: OverlayModalService) {
   }
 
   ngOnInit() {
   }
 
-  description = '';
 
   buildForm(data?) {
     if (data) {
@@ -93,9 +117,8 @@ export class ShowtimezFormComponent implements OnInit {
         .then(guid => {
           let obj = {};
           obj['guid'] = guid;
-          obj['imageLink'] = this.attachment.getPreview();
-
-          this.cards.push(obj);
+          obj['src'] = this.attachment.getPreview();
+          this.addAttachment(obj);
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }
@@ -110,44 +133,54 @@ export class ShowtimezFormComponent implements OnInit {
     }
   }
 
-  removeAttachment(file: HTMLInputElement, imageId: string) {
-    this.attachment.remove(file, imageId).then((guid) => {
-      file.value = '';
-      this.cards = _remove(this.cards, function (n) {
-        return n.guid !== guid;
-      });
-    }).catch(e => {
-      console.error(e);
+  addAttachment(obj) {
+    if(this.cards.length < 1){
+      this.cards.push(obj);
+      this.reqBody.attachment_guid.push(obj['guid']);
+    }
+  }
+
+  removeAttachment(guid){ 
+    this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
+    this.cards = _remove(this.cards, function (n) {
+      return n.guid !== guid;
     });
   }
+  // removeAttachment(file: HTMLInputElement, imageId: string) {
+  //   this.attachment.remove(file, imageId).then((guid) => {
+  //     file.value = '';
+  //     this.cards = _remove(this.cards, function (n) {
+  //       return n.guid !== guid;
+  //     });
+  //   }).catch(e => {
+  //     console.error(e);
+  //   });
+  // }
 
   eventSubmit() {
     this.eventSubmitted = true;
-    let data = Object.assign(this.meta, this.attachment.exportMeta());
 
-    data.attachment_guid = data.attachment_guid;
-    data.title = this.showTimezForm.value.eventTitle;
-    data.description = this.showTimezForm.value.eventDescription;
-    data.location = this.showTimezForm.value.eventsLocation;
-    data.access_id = 2;
-    data.published = 1;
-    data.start_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`);
-    data.end_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`)
+    this.reqBody.title = this.showTimezForm.value.eventTitle;
+    this.reqBody.description = this.showTimezForm.value.eventDescription;
+    this.reqBody.location = this.showTimezForm.value.eventsLocation;
+
+    this.reqBody.start_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`);
+
 
     if (this.showTimezForm.valid) {
       let endpoint = 'api/v3/event';
       if (this.eventGuid) {
         endpoint = 'api/v3/event/' + this.eventGuid;
       }
-      this.client.post(endpoint, data)
+      this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
-          // data.activity.boostToggle = true;
+          // reqBody.activity.boostToggle = true;
           this.load.emit(resp);
           this.attachment.reset();
-          this.meta = { wire_threshold: null };
+          // this.meta = { wire_threshold: null };
 
           if (this._opts && this._opts.onUpdate) {
-            this._opts.onUpdate(data);
+            this._opts.onUpdate(this.reqBody);
             // close modal
             this.closeModal();
           }

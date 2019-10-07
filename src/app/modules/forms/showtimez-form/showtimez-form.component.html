@@ -1,6 +1,6 @@
 <div class="o-create-show-timez">
   <div class="o-create-show-timez-head o-create-show-timez-head--border">
-      <div class="o-create-show-timez__title text-lg f500">Create a post
+      <div class="o-create-show-timez__title text-lg f500">{{label}} a post
           <span class="o-create-dropdown-style">
               <span class="text-md primary f500">On #Showtimez<span class="icon-x"
                       (click)="changeToDefault()"></span></span>
@@ -51,16 +51,16 @@
           <div class="form-group">
               <label>Cover Image</label>
               <div class="o-create-show-timez-cover-image">
-                  <div class="fileUpload">
+                  <div class="fileUpload" *ngIf="this.cards.length == 0">
                       <span class="icon-plus"></span>
                       <input type="file" id="file" #file class="upload" name="attachment"
                       (change)="uploadAttachment(file, $event)" formControlName="eventImage">
                   </div>
                   <!--file upload ends-->
-                  <div class="fileUpload-preview ml-18" *ngIf="attachment.meta.attachment_guid.length > 0">
-                      <a class="o-create-show-timez-cover-image__avatar" *ngFor="let image of cards">
-                          <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i class="icon-x"></i></a>
-                          <img [src]="image.imageLink" alt="">
+                  <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
+                      <a class="o-create-show-timez-cover-image__avatar" >
+                          <a class="fileUpload-close-temp" (click)="removeAttachment(image.guid)"><i class="icon-x"></i></a>
+                          <img [src]="image.src" alt="">
                       </a>
                   </div>
                   <!--file preview ends-->

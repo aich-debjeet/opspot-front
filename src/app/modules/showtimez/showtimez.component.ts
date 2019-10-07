@@ -173,18 +173,20 @@ export class ShowtimezComponent implements OnInit {
         // listen to the update callback
         onUpdate: (payload: any) => {
           // make update to local var
-          this.udpateOpportunity(payload);
+          this.updateShowTimez(payload);
         }
       }).present();
     }
   }
 
 
-  udpateOpportunity(data: any) {
-    // this.opportunity.category = data.category;
-    // this.opportunity.description = data.description;
-    // this.opportunity.location = data.location;
-    // this.opportunity.title = data.title;
+  updateShowTimez(data: any) {
+    this.showTimez.description = data.description;
+    this.showTimez.location = data.location;
+    this.showTimez.title = data.title;
+    this.showTimez.eventdate = data.start_time_date;
+    //this.showTimez.eventtime = data.start_time_date;
+    this.showTimez.attachment_guid = data.attachment_guid;
     // trigger component observe new changes
     this.detectChanges();
   }
