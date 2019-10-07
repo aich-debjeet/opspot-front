@@ -1,6 +1,9 @@
 @import "defaults";
 
 opspot-comments, .m-comment-wrapper {
+  .pad-r-10 {
+    padding-right: 10px;
+  }
   margin-top: 50px;
   width: 100%;
 
@@ -233,6 +236,7 @@ opspot-comments, .m-comment-wrapper {
         flex: 1;
         margin-bottom: $opspot-padding;
         border-radius: 25px;
+        margin-right: 8px;
 
         .m-editor {
           //min-height: 26px;
