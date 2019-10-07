@@ -49,7 +49,6 @@ export const OpspotAppRoutes: Routes = [
   {
     path: 'profile_edit',
     component: ProfileEditComponent,
-
     children: [
       { path: '', redirectTo: 'general', pathMatch: 'full' },
       { path: 'general', component: GeneralComponent },
@@ -59,10 +58,6 @@ export const OpspotAppRoutes: Routes = [
       { path: 'education', component: EducationComponent },
       { path: 'awards', component: AwardsComponent }
     ]
-  },
-  {
-    path: 'explore',
-    loadChildren: './modules/explore/explore.module#ExploreModule'
   },
   {
     path: ':username/:filter',
