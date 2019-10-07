@@ -973,10 +973,10 @@ opspot-button {
 
 .m-btn--action {
   background: #FFF;
-  border: 1px solid #00badc;
-  color: #00badc !important; }
+  border: 1px solid #0288D1;
+  color: #0288D1 !important; }
   .m-btn--action:hover {
-    border: 1px solid #00badc; }
+    border: 1px solid #0288D1; }
   .m-btn--action[disabled] {
     color: #aaa !important;
     border-color: #aaa !important; }
@@ -1185,7 +1185,7 @@ m-date-selector .m-date-selector--input {
     border-bottom: 1px solid #ececec;
     text-align: left; }
     .m-dropdown--list .m-dropdown--list--item.m-dropdown--list--item--selected, .m-dropdown--list .m-dropdown--list--item .m-dropdownList__item--selected, .m-dropdown--list .m-dropdownList__item.m-dropdown--list--item--selected, .m-dropdown--list .m-dropdownList__item .m-dropdownList__item--selected, .m-dropdown__list .m-dropdown--list--item.m-dropdown--list--item--selected, .m-dropdown__list .m-dropdown--list--item .m-dropdownList__item--selected, .m-dropdown__list .m-dropdownList__item.m-dropdown--list--item--selected, .m-dropdown__list .m-dropdownList__item .m-dropdownList__item--selected {
-      background-color: #00badc;
+      background-color: #0288D1;
       color: white; }
     .m-dropdown--list .m-dropdown--list--item a, .m-dropdown--list .m-dropdownList__item a, .m-dropdown__list .m-dropdown--list--item a, .m-dropdown__list .m-dropdownList__item a {
       text-decoration: none;
@@ -1526,7 +1526,7 @@ m-inline-editor .m-blog--image {
   border-top-right-radius: 5px; }
 
 .medium-editor-toolbar li .medium-editor-button-active {
-  color: #00badc; }
+  color: #0288D1; }
 
 .medium-editor-toolbar-form {
   background-color: rgba(0, 0, 0, 0.99);
@@ -5713,7 +5713,7 @@ footer {
   .m-blockchain--marketing .m-marketing--hero .m-marketing--hero--actions .m-marketing--marketing-action-button button.mdl-button {
     width: 200px;
     font-size: 20px;
-    background-color: #00badc !important;
+    background-color: #0288D1 !important;
     color: white; }
 
 .m-blockchain--marketing .m-blockchain--marketing--pledges {
@@ -5836,7 +5836,7 @@ footer {
     font-size: 52px;
     letter-spacing: 2px;
     line-height: 1.5;
-    color: #00badc; }
+    color: #0288D1; }
   .m-blockchain--marketing-tde-stats .m-blockchain--marketing-label {
     font-size: 24px;
     letter-spacing: 2px;
@@ -9198,7 +9198,7 @@ opspot-comments, .m-comment-wrapper {
         display: none; } }
   .m-faq--container--category .m-faq--nav--back a {
     text-decoration: none;
-    color: #00badc !important; }
+    color: #0288D1 !important; }
   .m-faq--container--category .m-faq--question {
     text-align: left;
     padding: 16px;
@@ -11057,7 +11057,7 @@ m-hashtags-selector, .m-hashtags-selector {
 .m-hashtags-selector {
   font-family: 'Roboto', sans-serif; }
   .m-hashtags-selector .m-hashtags-selector--toggle.m-hashtags-selector--toggle-enabled {
-    color: #00badc; }
+    color: #0288D1; }
   .m-hashtags-selector.m-hashtags-selector--align-left .m-dropdown--list {
     right: auto;
     left: 0; }
@@ -12401,7 +12401,7 @@ opspot-button-remind a {
   border: 0; }
 
 .opspot-boost-button {
-  background-color: #00badc !important;
+  background-color: #0288D1 !important;
   font-size: 12px;
   height: auto;
   min-height: 0;
@@ -15780,8 +15780,8 @@ m-newsfeed--dropdown {
   padding: 16px;
   margin-bottom: 16px;
   border-radius: 3px;
-  color: #00badc;
-  border: 1px solid #00badc; }
+  color: #0288D1;
+  border: 1px solid #0288D1; }
   .m-newsfeed--boost-header span {
     vertical-align: middle;
     text-transform: uppercase;
@@ -16019,7 +16019,7 @@ m-nodes--marketing .m-nodes--marketing .m-marketing--hero .m-marketing--hero--ac
   m-nodes--marketing .m-nodes--marketing .m-marketing--hero .m-marketing--hero--actions .m-marketing--marketing-action-button button.mdl-button {
     width: 200px;
     font-size: 20px;
-    background-color: #00badc !important;
+    background-color: #0288D1 !important;
     color: white; }
 
 m-nodes--marketing .m-nodes--marketing .m-nodes--marketing--pledges {
@@ -16135,7 +16135,7 @@ m-nodes--marketing .m-nodes--marketing-tde-stats {
     font-size: 52px;
     letter-spacing: 2px;
     line-height: 1.5;
-    color: #00badc; }
+    color: #0288D1; }
   m-nodes--marketing .m-nodes--marketing-tde-stats .m-nodes--marketing-label {
     font-size: 24px;
     letter-spacing: 2px;
@@ -17920,7 +17920,7 @@ m-wallet--flyout {
   m-wallet--flyout .m-wallet--flyout-announcement {
     max-height: 112px;
     padding: 16px;
-    background-color: #00badc;
+    background-color: #0288D1;
     color: white;
     text-align: left;
     word-wrap: break-word;
@@ -18931,10 +18931,10 @@ m-monetization--graph {
     fill: #607d8b; }
 
 .m-wire--overview .opspot-card-navigation .selected m--crypto-token-symbol .m--crypto-token-symbol--stroke {
-  stroke: #00badc; }
+  stroke: #0288D1; }
 
 .m-wire--overview .opspot-card-navigation .selected m--crypto-token-symbol .m--crypto-token-symbol--fill {
-  fill: #00badc; }
+  fill: #0288D1; }
 
 h2.m-wire--overview-product-header {
   margin: 0;
@@ -18961,7 +18961,7 @@ h2.m-wire--overview-product-header {
   border: 0;
   border-radius: 0;
   padding: 0;
-  color: #00badc;
+  color: #0288D1;
   cursor: pointer; }
   .m-wire-button > .ion-icon {
     -webkit-transform: scale(1.6);
@@ -19011,7 +19011,7 @@ m-wire-channel {
               flex: 1; }
       m-wire-channel .m-wire-channel--totals .m-wire-channel--totals-total .m-wire-channel--totals-number {
         font-size: 18px;
-        color: #00badc !important;
+        color: #0288D1 !important;
         letter-spacing: 2.5px; }
       m-wire-channel .m-wire-channel--totals .m-wire-channel--totals-total .m-wire-channel--totals-period {
         font-size: 11px; }
@@ -19078,7 +19078,7 @@ m-wire-channel {
     margin-top: 4px; }
   m-wire-channel .m-wire-channel--reward-send-wire {
     text-align: right;
-    color: #00badc; }
+    color: #0288D1; }
   m-wire-channel .m-wire-channel--reward-amount,
   m-wire-channel .m-wire-channel--reward-description {
     font-weight: 400; }
@@ -19562,7 +19562,7 @@ m-wire-console-rewards--container .m-wire-console--rewards {
       -webkit-justify-content: flex-start;
               justify-content: flex-start; }
       .m-wire--creator .m-wire--creator--header .m-wire-creator--header-svg .ion-icon {
-        color: #00badc;
+        color: #0288D1;
         margin-right: 8px;
         font-size: 36px; }
     .m-wire--creator .m-wire--creator--header .m-wire--creator--header-text {
@@ -20398,7 +20398,7 @@ m-wire--lock-screen {
       -webkit-justify-content: flex-start;
               justify-content: flex-start; }
       .m-wire-payment--creator .m-wire--creator--header .m-wire-creator--header-svg .ion-icon {
-        color: #00badc;
+        color: #0288D1;
         margin-right: 8px;
         font-size: 36px; }
     .m-wire-payment--creator .m-wire--creator--header .m-wire--creator--header-text {
@@ -21061,7 +21061,7 @@ m-wire-threshold-input, .m-wire-threshold-input {
       font-size: 14px;
     }*/ }
     .m-wire-threshold-input .m-wire-threshold-input--toggle.m-wire-threshold-input--toggle-enabled {
-      color: #00badc; }
+      color: #0288D1; }
   .m-wire-threshold-input .m-wire-threshold-input--input {
     display: inline-block;
     vertical-align: middle;
@@ -22084,7 +22084,7 @@ mwl-text-input-autocomplete-menu ul.dropdown-menu {
     background-color: #f5f5f5; }
   mwl-text-input-autocomplete-menu ul.dropdown-menu li.active a, mwl-text-input-autocomplete-menu ul.dropdown-menu li.active a:hover {
     color: #fff;
-    background-color: #00badc;
+    background-color: #0288D1;
     outline: 0; }
 
 /**
