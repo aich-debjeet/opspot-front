@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CaptchaModule } from './modules/captcha/captcha.module';
-
 import { TextMaskModule } from 'angular2-text-mask';
 
 import { Opspot } from './app.component';
@@ -23,7 +22,7 @@ import { OPSPOT_PLUGIN_PROVIDERS } from './plugin-providers';
 import { CommonModule } from './common/common.module';
 import { MonetizationModule } from './modules/monetization/monetization.module';
 import { WalletModule } from './modules/wallet/wallet.module';
-import { CheckoutModule } from './modules/checkout/checkout.module';
+// import { CheckoutModule } from './modules/checkout/checkout.module';
 import { PlusModule } from './modules/plus/plus.module';
 import { I18nModule } from './modules/i18n/i18n.module';
 
@@ -67,12 +66,12 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-// import { ExploreComponent } from './modules/explore/explore.component';
 import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
-import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
 import { BluestoreModule } from './modules/bluestore/bluestore.module';
 import { ShowtimezModule } from './modules/showtimez/showtimez.module';
+import { ExploreModule } from './modules/explore/explore.module';
+import { PortfolioModule } from './modules/portfolio/portfolio.module';
 
 
 
@@ -82,9 +81,7 @@ import { ShowtimezModule } from './modules/showtimez/showtimez.module';
     Opspot,
     OPSPOT_APP_ROUTING_DECLARATIONS,
     OPSPOT_DECLARATIONS,
-    OPSPOT_PLUGIN_DECLARATIONS,
-    // TODO @abhijeet: implement lazy loading
-    // ExploreComponent,
+    OPSPOT_PLUGIN_DECLARATIONS
   ],
   imports: [
     BrowserModule,
@@ -96,7 +93,7 @@ import { ShowtimezModule } from './modules/showtimez/showtimez.module';
     CaptchaModule,
     CommonModule,
     WalletModule,
-    //CheckoutModule,
+    // CheckoutModule,
     MonetizationModule,
     PlusModule,
     AdsModule,
@@ -133,7 +130,7 @@ import { ShowtimezModule } from './modules/showtimez/showtimez.module';
     MobileModule,
     CanaryModule,
     InviteFriendsModule,
-    //last due to :username route
+    // last due to :username route
     ChannelsModule,
     BookmarkModule,
     BsDropdownModule.forRoot(),
@@ -144,6 +141,7 @@ import { ShowtimezModule } from './modules/showtimez/showtimez.module';
     TextMaskModule,
     BluestoreModule,
     ShowtimezModule,
+    ExploreModule,
     PortfolioModule
   ],
   providers: [
