@@ -12,10 +12,10 @@
     <base href="/" />
 
     <meta charset="utf-8">
-    <link rel="icon" type="image/svg" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/bulb.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/bulb-apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/bulb-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/bulb-16x16.png">
+    <link rel="icon" type="image/svg" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-16x16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <?php
       foreach($meta as $name => $content){
