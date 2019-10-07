@@ -250,7 +250,6 @@ export class OpportunityComponent implements OnInit {
   }
 
   loadAllEvents() {
-    alert();
     this.inProgress = true;
     let ownerGuid = this.session.getLoggedInUser().guid;
     this.client.get('api/v2/feeds/container/ownerGuid/events?limit=3&sync=&as_activities=&force_public=1')
