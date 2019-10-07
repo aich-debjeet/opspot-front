@@ -69,20 +69,20 @@
         </div>
         <div class="opportunity-details">
           <div class="text-lg f500 mb-3">
-            {{activity.title}}
+            {{activity?.title}}
           </div>
           <div class="text-md grey">
-            {{activity.location}}
+            {{activity?.location}}
           </div>
           <button type="button" class="btn btn-primary btn-lg">Reach Out</button>
         </div>
         <div class="opportunity-button">
-          {{activity.category}}
+          {{activity?.category}}
         </div>
       </div>
       <div class="feed-card-opportunity-block__bottom hidden-mob">
         <div class="text-md grey">
-          {{activity.blurb}}
+          {{activity?.blurb | truncate:[100, '...']}}
         </div>
       </div>
     </div>
@@ -117,7 +117,7 @@
           {{activity?.title}}
         </div>
         <div class="text-md grey">
-          {{activity?.blurb}}
+          {{activity?.blurb | truncate:[100, '...']}}
         </div>
         <div class="text-rate">
           ₹ {{activity?.price}}.00 <span class="text-md grey">per piece</span>
@@ -150,7 +150,7 @@
           {{activity?.title}}
         </div>
         <div class="text-md grey">
-          {{activity?.blurb}}
+          {{activity?.blurb | truncate:[100, '...']}}
         </div>
       </div>
       <div class="feed-card-event-block__right">
