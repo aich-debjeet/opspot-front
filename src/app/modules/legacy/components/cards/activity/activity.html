@@ -37,6 +37,7 @@
     </a>
   </div>
 </div>
+
 <m-wire--lock-screen [(entity)]="activity" *ngIf="activity.paywall && !editing"></m-wire--lock-screen>
 
 <ng-container *ngIf="!activity.paywall || editing">
@@ -88,14 +89,16 @@
   </div>
 
   <!--BlueStore-->
-  <div class="o-card feed" *ngIf="showBlueStore && !showOpportunity && !showTimez">
-    <!-- <div *ngIf="activity.custom_data.length < 4"> -->
-      <!-- <div *ngFor="let image of activity.custom_data">
+  <div class="o-card feed" *ngIf="showBlueStore && !showOpportunity && !showTimez" [routerLink]="['/item/view', activity.entity_guid]">
+    <div *ngIf="activity?.custom_data">
         <div class="feed-media">
-          <a class="feed-media__link">
-            <img [src]="image.src" alt="" class="feed-media__img"
-              (error)="image.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
-          </a> -->
+          <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+            <img [src]="media.src" alt="" class="feed-media__img"
+              (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+              <div *ngIf="i >= 2" class="feed-media-overlay">
+                <h3 class="white">+{{ activity.custom_data.length - 3 }}</h3>
+              </div>
+          </a>
           <!-- <a class="feed-media__link">
               <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
               <div class="feed-media-overlay">
@@ -106,29 +109,9 @@
               <img src="assets/demo/m3.jpg" alt="" class="feed-media__img">
               <div class="feed-media-overlay"><h3 class="white">+2</h3></div>
           </a> -->
-        <!-- </div>
-      </div> -->
-    <!-- </div> -->
-    <div class="" *ngIf="activity.custom_data.length">
-      <ngx-slick-carousel class="carousel feed-media" 
-      #slickModal="slick-carousel" 
-      [config]="slideConfig"
-      (init)="slickInit($event)" 
-      (breakpoint)="breakpoint($event)" 
-      (afterChange)="afterChange($event)"
-      (beforeChange)="beforeChange($event)">
-        <div ngxSlickItem *ngFor="let image of activity.custom_data" class="slide">
-          <a class="feed-media__link">
-            <img [src]="image.src" alt="" class="feed-media__img"
-              (error)="image.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
-          </a>
-        </div>
-      </ngx-slick-carousel>
-      <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
-      <button class="btn-next" (click)="slickModal.slickNext()">next</button>
+      </div>
     </div>
-
-    <div class="feed-card-event-block" [routerLink]="['/item/view', activity.entity_guid]">
+    <div class="feed-card-event-block">
       <div class="feed-card-event-block__left">
         <div class="text-lg f500 mb-3">
           {{activity?.title}}
@@ -149,6 +132,7 @@
   <!--Showtime-->
   <div class="o-card feed" *ngIf="showTimez && !showBlueStore && !showOpportunity"
     [routerLink]="['/event/view', activity.entity_guid]">
+    <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
     <div class="feed-media">
       <div class="feed-media-event-image">
         <img [src]="activity?.custom_data[0] ? activity?.custom_data[0].src:''"
