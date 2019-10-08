@@ -192,7 +192,7 @@ export class BluestoreComponent implements OnInit {
       });
   }
 
-  slideConfig = {slidesToShow: 3, slidesToScroll: 1, arrows: true};
+  slideConfig = {slidesToShow: 6, slidesToScroll: 1, arrows: true};
 
   slickInit(e) {
     console.log('slick initialized in activity');

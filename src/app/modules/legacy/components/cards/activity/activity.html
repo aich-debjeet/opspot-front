@@ -63,8 +63,8 @@
     <div class="feed-card-opportunity-block" [routerLink]="['/opportunity/view',activity.entity_guid]">
       <div class="feed-card-opportunity-block__top">
         <div class="opportunity-image">
-          <img *ngIf="activity?.custom_data" [src]="activity?.custom_data[0]?activity?.custom_data[0].src:''" (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'"
-          >
+          <img *ngIf="activity?.custom_data" [src]="activity?.custom_data[0]?activity?.custom_data[0].src:''"
+            (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'">
           <img *ngIf="!activity?.custom_data" src="assets/ops_icon.png">
         </div>
         <div class="opportunity-details">
@@ -89,26 +89,23 @@
   </div>
 
   <!--BlueStore-->
-  <div class="o-card feed" *ngIf="showBlueStore && !showOpportunity && !showTimez" [routerLink]="['/item/view', activity.entity_guid]">
-    <div *ngIf="activity?.custom_data">
-        <div class="feed-media">
-          <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link set-bg" [style.backgroundImage]="'url(' + media.src + ')'">
-            <!-- <img [src]="media.src" alt="" class="feed-media__img" (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
-              <div *ngIf="i >= 2 && activity?.custom_data.length > 4" class="feed-media-overlay">
-                <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
-              </div>
-          </a>
-          <!-- <a class="feed-media__link">
+  <div class="o-card feed" *ngIf="showBlueStore && !showOpportunity && !showTimez"
+    [routerLink]="['/item/view', activity.entity_guid]">
+    <div class="feed-media" *ngIf="activity?.custom_data">
+      <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+        <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
+        <img [src]="media.src" alt="" class="feed-media__img"
+          (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+        <div *ngIf="i >= 2 && activity?.custom_data.length > 4" class="feed-media-overlay">
+          <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
+        </div>
+      </a>
+      <!-- <a class="feed-media__link">
               <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
               <div class="feed-media-overlay">
                   <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
               </div>
-          </a>
-          <a class="feed-media__link">
-              <img src="assets/demo/m3.jpg" alt="" class="feed-media__img">
-              <div class="feed-media-overlay"><h3 class="white">+2</h3></div>
           </a> -->
-      </div>
     </div>
     <div class="feed-card-event-block">
       <div class="feed-card-event-block__left">
