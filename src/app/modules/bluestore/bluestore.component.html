@@ -53,7 +53,8 @@
 							(beforeChange)="beforeChange($event)">
 							<div ngxSlickItem *ngFor="let image of marketplace?.custom_data; let i = index;" class="slide">
 								<a (click)="showImage(i)" class="feed-media__link">
-									<img [src]="image.src" alt="" class="feed-media__img" (error)="image.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> 
+									<div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + image.src + ')'"></div>
+									<!-- <img [src]="image.src" alt="" class="feed-media__img" (error)="image.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">  -->
 								</a>
 							</div>
 						</ngx-slick-carousel>

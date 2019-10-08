@@ -4,6 +4,7 @@ import { Session } from '../../services/session';
 import { ActivatedRoute } from '@angular/router';
 import { OpportunityFormComponent } from '../forms/opportunity-form/opportunity-form.component';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
 export class OpportunityComponent implements OnInit {
 
   guid: string;
+  paramsSubscription: Subscription;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -24,13 +27,17 @@ export class OpportunityComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.guid = params['guid'];
+    // this.route.params.subscribe((params) => {
+    //   this.guid = params['guid'];
+    // });
+    // this.load();
+    this.paramsSubscription = this.route.paramMap.subscribe(params => {
+      if (params.get('guid')) {
+        this.guid = params.get('guid');  
+        this.load();
+      }
     });
-    this.load();
-    this.loadAllOpportunities();
-    this.loadAllEvents();
-  }
+}
 
   activity: any;
   opspot = window.Opspot;
@@ -73,6 +80,11 @@ export class OpportunityComponent implements OnInit {
   menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
   load() {
+    // if (refresh) {
+    //  // this.entity = {};
+    //   this.detectChanges();
+    // }
+
     if (this.inProgress)
       return false;
 
@@ -89,10 +101,11 @@ export class OpportunityComponent implements OnInit {
           }
           this.inProgress = false;
         }
-      })
+        this.detectChanges();
+      }) 
       .catch((e) => {
         this.inProgress = false;
-      });
+      });  
   }
 
   getOwnerIconTime() {
@@ -232,36 +245,6 @@ export class OpportunityComponent implements OnInit {
         } else if (this.activity.custom_data) {
           this.activity.custom_data.mature = oldValue;
         }
-      });
-  }
-
-  loadAllOpportunities() {
-    this.inProgress = true;
-    let ownerGuid = this.session.getLoggedInUser().guid;
-    this.client.get('api/v2/feeds/container/ownerGuid/opportunities?limit=3&sync=&as_activities=&force_public=1')
-      .then((data: any) => {
-        if (data && data.entities) {
-          this.allOpportunities = data.entities;
-        }
-      })
-      .catch((e) => {
-        this.inProgress = false;
-      });
-  }
-
-  loadAllEvents() {
-    this.inProgress = true;
-    let ownerGuid = this.session.getLoggedInUser().guid;
-    this.client.get('api/v2/feeds/container/ownerGuid/events?limit=3&sync=&as_activities=&force_public=1')
-      .then((data: any) => {
-        if (data && data.entities) {
-          this.allevents = data.entities;
-          console.log("allevents: ", data);
-          
-        }
-      })
-      .catch((e) => {
-        this.inProgress = false;
       });
   }
 

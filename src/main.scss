@@ -27522,7 +27522,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
     // width: 100%;
-    max-width: 590px;
+    max-width: 100%;
 }
 
 .icon-send {
@@ -27552,4 +27552,13 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 
 .m-t-70 {
   margin-top: 70px !important;
+}
+
+.set-bg {
+  background-position: center center;
+  background-size: cover;
+}
+
+.feed-media {
+  height: 200px;
 }

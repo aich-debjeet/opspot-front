@@ -16,15 +16,15 @@ export class ShowtimeListCardComponent implements OnInit {
 
   ngOnInit() {}
 
-  getOwnerIconTime() {
-    // TODO @gayatri: check for an alternate to prevent heavy work in child comp
-    let session = this.session.getLoggedInUser();
-    if (session && session.guid === this.event.ownerObj.guid) {
-      return session.icontime;
-    } else {
-      return this.event.ownerObj.icontime;
-    }
-  }
+  // getOwnerIconTime() {
+  //   // TODO @gayatri: check for an alternate to prevent heavy work in child comp
+  //   let session = this.session.getLoggedInUser();
+  //   if (session && session.guid === this.event.ownerObj.guid) {
+  //     return session.icontime;
+  //   } else {
+  //     return this.event.ownerObj.icontime;
+  //   }
+  // }
 
   set _object(value) {
     this.event = value;
