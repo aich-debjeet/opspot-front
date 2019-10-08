@@ -124,11 +124,11 @@ export class BluestoreComponent implements OnInit {
   udpateMarketPlace(data: any) {
     this.marketplace.description = data.description;
     this.marketplace.title = data.title;
-    this.marketplace.attachment_guid = data.attachment_guid;
+    // this.marketplace.attachment_guid = data.attachment_guid;
     this.marketplace.price = data.blueStorePrice;
     this.marketplace.item_count = data.blueStoreUnits;
-    this.marketplace.currency = 'INR';
-    this.marketplace.published = 1;
+    // this.marketplace.currency = 'INR';
+    // this.marketplace.published = 1;
     // trigger component observe new changes
     this.detectChanges();
   }

@@ -94,8 +94,8 @@
         <div class="feed-media">
           <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link set-bg" [style.backgroundImage]="'url(' + media.src + ')'">
             <!-- <img [src]="media.src" alt="" class="feed-media__img" (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
-              <div *ngIf="i >= 2" class="feed-media-overlay">
-                <h3 class="white">+{{ activity.custom_data.length - 3 }}</h3>
+              <div *ngIf="i >= 2 && activity?.custom_data.length > 4" class="feed-media-overlay">
+                <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
               </div>
           </a>
           <!-- <a class="feed-media__link">
