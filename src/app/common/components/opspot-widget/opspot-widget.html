@@ -1,0 +1,14 @@
+
+<div class="o-card o-card--opportunities">
+    <div class="text-md f500">{{ reqType }} <a href="#" class="text-sm grey float-right">See All</a></div>
+    <div *ngIf="entityType == 'opportunity'">
+        <div *ngFor="let entity of entities">
+        <app-opportunity-list-card [object]="entity"></app-opportunity-list-card>
+        </div>
+    </div>
+    <div *ngIf="entityType == 'event'">
+        <div *ngFor="let entity of entities">
+        <app-showtime-list-card [object]="entity"></app-showtime-list-card>
+        </div>
+    </div>
+</div>

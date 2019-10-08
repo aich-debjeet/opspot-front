@@ -82,7 +82,7 @@ import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
 import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
-import { OpportunityWidgetComponent } from './components/opportunity-widget/opportunity-widget.component';
+import { OpspotWidgetComponent } from './components/opspot-widget/opspot-widget.component';
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
 import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
 import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
@@ -172,7 +172,7 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
     AndroidAppDownloadComponent,
     ImageCroperComponent,
     ReadMoreComponent,
-    OpportunityWidgetComponent,
+    OpspotWidgetComponent,
     OpportunityListCardComponent,
     MasonryContainerComponent,
     ShowtimeWidgetComponent,
@@ -252,7 +252,7 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
     AndroidAppDownloadComponent,
     ImageCroperComponent,
     ReadMoreComponent,
-    OpportunityWidgetComponent,
+    OpspotWidgetComponent,
     OpportunityListCardComponent,
     ShowtimeListCardComponent,
     ShowtimeWidgetComponent,
