@@ -5491,7 +5491,7 @@ m--tree {
   background: rgba(0, 0, 0, 0.05); }
 
 m-body {
-  margin-top: 70px;
+  margin-top: 60px;
   display: block;
   min-height: 100%; }
   @media only screen and (max-width: 600px) {
@@ -27548,4 +27548,8 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .p-l-r-0 {
   padding-left: 0;
   padding-right: 0;
+}
+
+.m-t-70 {
+  margin-top: 70px !important;
 }
