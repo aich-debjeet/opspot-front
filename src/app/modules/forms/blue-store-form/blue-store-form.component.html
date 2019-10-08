@@ -42,7 +42,7 @@
             <div class="o-create-blue-store-unit-price">
                 <div class="form-group">
                     <label>No of Units <span class="icon-info"></span></label>
-                    <input type="text" class="form-control form-control-lg" formControlName="blueStoreUnits">
+                    <input type="number" class="form-control form-control-lg" formControlName="blueStoreUnits">
                     <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreUnits').errors?.required">
                             This is required</div>
                 </div>
@@ -55,7 +55,7 @@
                             <a href="javascript:void(0)" class="o-opportunity-country-code__dropdown">
                                 <img src="assets/svg/arrow-down.svg" alt=""></a>
                         </div>
-                        <input type="text" class="form-control form-control-lg  ml-8" placeholder="Enter Price"
+                        <input type="number" class="form-control form-control-lg  ml-8" placeholder="Enter Price"
                             formControlName="blueStorePrice">
                             <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStorePrice').errors?.required">
                                     This is required</div>
