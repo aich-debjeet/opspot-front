@@ -4,6 +4,7 @@ import { Session } from '../../services/session';
 import { ActivatedRoute } from '@angular/router';
 import { OpportunityFormComponent } from '../forms/opportunity-form/opportunity-form.component';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
 export class OpportunityComponent implements OnInit {
 
   guid: string;
+  paramsSubscription: Subscription;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -24,11 +27,17 @@ export class OpportunityComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.guid = params['guid'];
+    // this.route.params.subscribe((params) => {
+    //   this.guid = params['guid'];
+    // });
+    // this.load();
+    this.paramsSubscription = this.route.paramMap.subscribe(params => {
+      if (params.get('guid')) {
+        this.guid = params.get('guid');  
+        this.load();
+      }
     });
-    this.load();
-  }
+}
 
   activity: any;
   opspot = window.Opspot;
@@ -71,6 +80,11 @@ export class OpportunityComponent implements OnInit {
   menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
   load() {
+    // if (refresh) {
+    //  // this.entity = {};
+    //   this.detectChanges();
+    // }
+
     if (this.inProgress)
       return false;
 
@@ -87,10 +101,11 @@ export class OpportunityComponent implements OnInit {
           }
           this.inProgress = false;
         }
-      })
+        this.detectChanges();
+      }) 
       .catch((e) => {
         this.inProgress = false;
-      });
+      });  
   }
 
   getOwnerIconTime() {

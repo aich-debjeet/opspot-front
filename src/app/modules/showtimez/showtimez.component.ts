@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OpportunityFormComponent } from '../forms/opportunity-form/opportunity-form.component';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { ShowtimezFormComponent } from '../forms/showtimez-form/showtimez-form.component';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { ShowtimezFormComponent } from '../forms/showtimez-form/showtimez-form.c
 })
 export class ShowtimezComponent implements OnInit {
   guid: string;
+  paramsSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,10 +27,16 @@ export class ShowtimezComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.guid = params['guid'];
+    // this.route.params.subscribe((params) => {
+    //   this.guid = params['guid'];
+    // });
+    // this.load();
+    this.paramsSubscription = this.route.paramMap.subscribe(params => {
+      if (params.get('guid')) {
+        this.guid = params.get('guid');  
+        this.load();
+      }
     });
-    this.load();
   }
 
   activity: any;
