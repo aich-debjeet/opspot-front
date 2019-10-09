@@ -58,6 +58,7 @@ export class Activity {
   showOpportunity = false;
   showBlueStore = false;
   showTimez = false;
+  showAlbum = false;
 
 
   editing: boolean = false;
@@ -127,6 +128,10 @@ export class Activity {
 
     if (this.activity.entity_type === "event") {
       this.showTimez = true;
+    }
+
+    if (this.activity.entity_type === "album") {
+      this.showAlbum = true;
     }
 
     this.boosted = this.activity.boosted || this.activity.p2p_boosted;
