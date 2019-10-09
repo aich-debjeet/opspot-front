@@ -24561,7 +24561,9 @@ app-image-croper .m-modal-container {
 .o-create-post{
   // width: 525px;
   border-radius: 4px;
-  background-color: $white;   
+  background-color: $white;
+  border: 1px solid #ECEFF1;
+  margin-bottom: 18px;
 }
 //dropdown css
 .o-create-post-dropdown {
@@ -24751,14 +24753,14 @@ app-image-croper .m-modal-container {
 
 //footer style
 .o-create-post-footer{
-  margin:0px 0px 18px;
+  // margin:0px 0px 18px;
   border-radius: 0 0 4px 4px;	
   background-color: rgba(235,239,242,0.4);
   padding: 12px 24px;
   display: flex;
   align-items: flex-end;
   justify-content:space-between;
-  border: 1px solid #ECEFF1;
+  // border: 1px solid #ECEFF1;
   position: relative;
   @include mq($from: $mobile_sm, $until:$mobile_lg ){
       background: transparent;
@@ -24815,7 +24817,7 @@ app-image-croper .m-modal-container {
   bottom: -90px;
   position:absolute;	
   width: 197px;	
-  border: 1px solid #ECEFF1;	
+  // border: 1px solid #ECEFF1;	
   border-radius: 4px;	
   background-color:$white;	
   z-index:99999999;
@@ -25000,6 +25002,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   border-radius: 4px;
   background-color: $white;
   margin-bottom: 16px;
+  border: 1px solid #ECEFF1;
 }
 .o-create-show-timez-head{
   width: 100%;
@@ -25101,14 +25104,14 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
       }
   }
 }
-.o-create-show-timez-footer{
+.o-create-show-timez  {
   border-radius: 0 0 4px 4px;	
   background-color: rgba(235,239,242,0.4);
   padding: 12px 24px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  border: 1px solid #ECEFF1;
+  // border: 1px solid #ECEFF1;
   .btn-primary.disabled{
       color: $grey!important;
   }
@@ -25171,6 +25174,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   border-radius: 4px;
   background-color: $white;
   margin-bottom: 16px;
+  border: 1px solid #ECEFF1;
 }
 .o-create-opportunity-head{
   width: 100%;
@@ -25295,7 +25299,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  border: 1px solid #ECEFF1;
+  // border: 1px solid #ECEFF1;
   .btn-primary.disabled{
       color: $grey!important;
   }
@@ -25356,6 +25360,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   border-radius: 4px;
   background-color: $white;
   margin-bottom: 16px;
+  border: 1px solid #ECEFF1;
 }
 .o-create-blue-store-head{
   width: 100%;
@@ -25511,7 +25516,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  border: 1px solid #ECEFF1;
+  // border: 1px solid #ECEFF1;
   .btn-primary.disabled{
       color: $grey!important;
   }
@@ -25572,7 +25577,8 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   // width: 525px;
   border-radius: 4px;
   background-color: $white; 
-  margin-bottom: 16px;  
+  margin-bottom: 16px; 
+  border: 1px solid #ECEFF1; 
 }
 
 //head style
@@ -25720,7 +25726,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   display: flex;
   align-items: flex-end;
   justify-content:space-between;
-  border: 1px solid #ECEFF1;
+  // border :1px solid #ECEFF1;
   position: relative;
   .o-create-portfolio-left{
       display:flex;
@@ -25843,7 +25849,8 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   // width: 525px;
   border-radius: 4px;
   background-color: $white;
-  margin-bottom: 16px;   
+  margin-bottom: 16px;
+  border: 1px solid #ECEFF1;
 }
 
 //head style
@@ -26037,7 +26044,6 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   display: flex;
   align-items: flex-end;
   justify-content:flex-end;
-  border: 1px solid #ECEFF1;
   position: relative;
   @include mq($from: $mobile_sm, $until:$mobile_lg ){
       background: transparent;
@@ -26160,6 +26166,9 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
       color:$black;
       margin-right: 16px;
       vertical-align: middle;
+  }
+  .icon-heart-filled {
+    margin-right: 16px;
   }
 }
 
