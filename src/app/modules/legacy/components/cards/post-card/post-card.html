@@ -25,7 +25,7 @@
     </a><!-- media info end -->
   </div><!-- media end -->
   <div class="o-explore-card__media-info">
-    <div class="text-md f500">{{entity.message}}</div>
+    <div class="text-md f500">{{entity.message | truncate:[100, '...']}}</div>
     <div class="o-media-hashtag" *ngIf="entity.tags?.length > 0">
       <a class="text-md primary" *ngFor ="let tags of entity.tags "> {{tags}} </a>
     </div><!-- hashtag end -->
