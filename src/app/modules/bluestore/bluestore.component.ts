@@ -51,7 +51,6 @@ export class BluestoreComponent implements OnInit {
       this.guid = params['guid'];
     });
     this.load();
-    this.loadAllOpportunities();
   }
 
   load() {
@@ -125,11 +124,11 @@ export class BluestoreComponent implements OnInit {
   udpateMarketPlace(data: any) {
     this.marketplace.description = data.description;
     this.marketplace.title = data.title;
-    this.marketplace.attachment_guid = data.attachment_guid;
+    // this.marketplace.attachment_guid = data.attachment_guid;
     this.marketplace.price = data.blueStorePrice;
     this.marketplace.item_count = data.blueStoreUnits;
-    this.marketplace.currency = 'INR';
-    this.marketplace.published = 1;
+    // this.marketplace.currency = 'INR';
+    // this.marketplace.published = 1;
     // trigger component observe new changes
     this.detectChanges();
   }
@@ -193,21 +192,7 @@ export class BluestoreComponent implements OnInit {
       });
   }
 
-  loadAllOpportunities() {
-    this.inProgress = true;
-    let ownerGuid = this.session.getLoggedInUser().guid;
-    this.client.get('api/v2/feeds/container/ownerGuid/opportunities?limit=3&sync=&as_activities=&force_public=1')
-      .then((data: any) => {
-        if (data && data.entities) {
-          this.allOpportunities = data.entities;
-        }
-      })
-      .catch((e) => {
-        this.inProgress = false;
-      });
-  }
-
-  slideConfig = {slidesToShow: 3, slidesToScroll: 1, arrows: true};
+  slideConfig = {slidesToShow: 6, slidesToScroll: 1, arrows: true};
 
   slickInit(e) {
     console.log('slick initialized in activity');

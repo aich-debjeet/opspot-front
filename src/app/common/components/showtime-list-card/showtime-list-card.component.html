@@ -1,15 +1,20 @@
 <div>
-<ul class="o-trending-post">
-    <li class="o-trending-post__item">
-        <a href="#">
-            <div class="o-trending-post__cover">
-                <img src="assets/demo/m3.jpg" alt="">
-            </div>
-            <div class="o-trending-post__info">
-                <div class="text-md f500">Bring Pluto Back!</div>
-                <div class="text-sm m-t-6"><span class="o-event-date">15 Jan</span>  Bangalore</div>
-            </div>
-        </a>
-    </li> 
-</ul>
+    <ul class="o-trending-post">
+        <li class="o-trending-post__item">
+            <a [routerLink]="['/event/view', event?.guid]">
+                <div class="o-trending-post__cover">
+                    <img [src]="event?.custom_data[0] ? event?.custom_data[0].src:''"
+                        (error)="showTimez.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'"
+                        *ngIf="event?.custom_data">
+                    <img *ngIf="!event?.custom_data" src="assets/ops_icon.png">
+                </div>
+                <div class="o-trending-post__info">
+                    <div class="text-md f500">{{event?.title}}</div>
+                    <div class="text-sm m-t-6">
+                        <span class="o-event-date">{{event?.start_time_date}}</span>{{event?.location}}
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
 </div>
