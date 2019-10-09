@@ -90,6 +90,7 @@ export class MyJourneyFormComponent implements OnInit {
           //   this.removeAttachment(file);
           // }
           file.value = null;
+          // this.attachment.reset();
         })
         .catch(e => {
           console.log(e)
@@ -131,11 +132,12 @@ export class MyJourneyFormComponent implements OnInit {
         this.meta = { wire_threshold: null };
         
       })
-      .catch((e) => {
-        
+      .catch((e) => {     
         alert(e.message);
+        this.attachment.reset();
       });
   }
+  
   getPostPreview(message) {
     if (!message.value) {
       return;
@@ -154,5 +156,7 @@ export class MyJourneyFormComponent implements OnInit {
     while ((match = regex.exec(this.meta.message)) !== null) {
       this.tags.push(match[2]);
     }
+    this.tags.push('#myjourney' + this.session.getLoggedInUser().username )
+
   }
 }
