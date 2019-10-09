@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { HybridSearchEntities } from '../search.component';
 
 @Component({
@@ -8,4 +8,9 @@ import { HybridSearchEntities } from '../search.component';
 })
 export class SearchHybridListComponent {
   @Input() entities: HybridSearchEntities;
+  @Output() seeAll: EventEmitter<any> = new EventEmitter();
+
+  searchType(type: string) {
+    this.seeAll.emit(type);
+  }
 }

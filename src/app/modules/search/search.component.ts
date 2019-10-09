@@ -255,4 +255,9 @@ export class SearchComponent {
       }
     }
   }
+
+  seeAll(type) {
+    console.log('see all: ', type);
+    // this.router.navigate(['']);
+  }
 }

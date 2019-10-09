@@ -1,4 +1,4 @@
-<div class="m-search--list">
+<!-- <div class="m-search--list">
   <div class="m-search--list-section" *ngIf="entities?.user?.length">
     <h3 class="m-search--list-title" i18n="@@M__FEATURE__CHANNEL__PLURAL">Channels</h3>
 
@@ -70,4 +70,40 @@
       ></opspot-card>
     </div>
   </div>
-</div>
+</div> -->
+
+<div class="o-serach-post" *ngIf="entities?.user?.length">
+  <div class="o-serach-post__header">
+    <div class="text-lg f500">
+      Profiles
+    </div>
+    <div class="text-md primary">
+      <a (click)="searchType('user')">
+        See All
+      </a>
+    </div>
+  </div><!--header ends-->
+  <opspot-card *ngFor="let entity of entities.user"
+    class="mdl-cell mdl-cell--4-col"
+    hostClass="mdl-card mdl-color--white m-border m-search--entity"
+    [object]="entity"
+  ></opspot-card>
+</div><!--post ends-->
+
+<div class="o-serach-post" *ngIf="entities?.activity?.length">
+  <div class="o-serach-post__header">
+    <div class="text-lg f500">
+      Posts
+    </div>
+    <div class="text-md primary">
+      <a (click)="searchType('activity')">
+        See All
+      </a>
+    </div>
+  </div><!--header ends-->
+  <opspot-card *ngFor="let entity of entities.activity"
+    class="mdl-cell mdl-cell--4-col"
+    hostClass="mdl-card mdl-color--white m-border m-search--entity"
+    [object]="entity"
+  ></opspot-card>
+</div><!--post ends-->

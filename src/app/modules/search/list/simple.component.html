@@ -1,4 +1,4 @@
-<div class="m-search--list">
+<!-- <div class="m-search--list">
   <div class="mdl-grid m-search--list-entities">
     <opspot-card *ngFor="let entity of entities"
       class="mdl-cell"
@@ -9,4 +9,14 @@
       [object]="entity"
     ></opspot-card>
   </div>
-</div>
+</div> -->
+
+<div class="o-serach-post">
+  <opspot-card *ngFor="let entity of entities"
+    class="col-4 pad-0 bg-trans"
+    [class.col-12]="entity.type == 'activity'"
+    hostClass="mdl-card mdl-color--white m-border m-search--entity"
+    [object]="entity"
+  ></opspot-card>
+</div><!--post ends-->
+
