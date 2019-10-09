@@ -10,6 +10,7 @@ import { SearchSimpleListComponent } from './list/simple.component';
 import { SearchBarSuggestionsComponent } from './suggestions/suggestions.component';
 import { SearchBarComponent } from './bar.component';
 import { SearchComponent } from './search.component';
+import { SearchFilterComponent } from './filter/search-filter.component';
 
 const searchRoutes: Routes = [
   { path: 'search', component: SearchComponent }
@@ -28,7 +29,8 @@ const searchRoutes: Routes = [
     SearchSimpleListComponent,
     SearchBarSuggestionsComponent,
     SearchBarComponent,
-    SearchComponent
+    SearchComponent,
+    SearchFilterComponent
   ],
   providers: [
   ],
