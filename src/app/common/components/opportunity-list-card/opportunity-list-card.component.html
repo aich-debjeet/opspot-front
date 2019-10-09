@@ -1,7 +1,7 @@
 <div *ngIf="opportunity">
     <ul class="o-opportunites-list">
         <li class="o-opportunites-list__item">
-            <a href="#">
+            <a [routerLink]="['/opportunity/view',opportunity?.guid]">
                 <div class="o-opportunities-avatar">
                     <a [routerLink]="['/', opportunity.ownerObj.username]">
                         <img [src]="opspot.cdn_url + 'icon/' + opportunity.ownerObj.guid + '/medium/' + getOwnerIconTime()"

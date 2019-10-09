@@ -99,8 +99,8 @@
         </div>
       </div>
       <div class="o-posts-inner-page__right hidden-mob">
-        <app-opportunity-widget *ngIf="allOpportunities" [object]="allOpportunities"></app-opportunity-widget>
-        <app-showtime-widget></app-showtime-widget>
+          <opspot-widget [entityType]="'opportunity'"></opspot-widget>
+          <opspot-widget [entityType]="'event'"></opspot-widget>
       </div>
     </div>
   </div>

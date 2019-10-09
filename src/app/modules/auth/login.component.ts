@@ -46,12 +46,12 @@ export class LoginComponent {
     this.loginView = !this.loginView;
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    if (event.target.screen.width < 600) {
-      this.loginView = false;
-    } else this.loginView = true;
-  }
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event) {
+  //   if (event.target.screen.width < 600) {
+  //     this.loginView = false;
+  //   } else this.loginView = true;
+  // }
 
   ngOnInit() {
     if (this.session.isLoggedIn()) {

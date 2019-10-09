@@ -24,8 +24,7 @@
 							</div>
 						</div>
 						<div class="o-feed-head-action">
-							<m-post-menu *ngIf="marketplace" [entity]="marketplace" [canDelete]="canDelete"
-								[isTranslatable]="isTranslatable" [options]="menuOptions"
+							<m-post-menu *ngIf="marketplace" [entity]="marketplace" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
 								(optionSelected)="menuOptionSelected($event)">
 								<ng-container post-menu>
 									<ng-content select="[post-menu]"></ng-content>
@@ -36,31 +35,36 @@
 					<div class="o-post-inner-page-myjourney-image">
 						<img [src]="largeImage" (error)="opspot.cdn_assets_url + 'assets/logos/logo.svg'" alt="">
 					</div>
-					<div class=""> 
-					<!-- <div class="o-posts-inner-page-myjourney-padding">
-						<div class="feed-media post-view-style" *ngFor="let image of marketplace?.custom_data">
-							
+					<div class="o-posts-inner-page-myjourney-padding">
+						<div class="feed-media post-view-style" *ngIf="marketplace?.custom_data.length <= 5">
+							<a *ngFor="let image of marketplace?.custom_data; let i = index;" (click)="showImage(i)"
+								class="feed-media__link">
+								<img [src]="image.src" alt="" class="feed-media__img">
+								<!-- <div class="full-h-v set-bg" [style.backgroundImage]="'url(' + image.src + ')'"></div> -->
+							</a>
 						</div>
-					</div> -->
-
-					<div class="" *ngIf="marketplace?.custom_data.length">
-						<ngx-slick-carousel class="carousel feed-media" 
+						<div class="" *ngIf="marketplace?.custom_data.length > 5">
+							<ngx-slick-carousel 
+							class="carousel feed-media post-view-style"
 							#slickModal="slick-carousel" 
-							[config]="slideConfig"
-							(init)="slickInit($event)" 
+							[config]="slideConfig" 
+							(init)="slickInit($event)"
 							(breakpoint)="breakpoint($event)" 
 							(afterChange)="afterChange($event)"
-							(beforeChange)="beforeChange($event)">
+							(beforeChange)="beforeChange($event)"
+							>
 							<div ngxSlickItem *ngFor="let image of marketplace?.custom_data; let i = index;" class="slide">
 								<a (click)="showImage(i)" class="feed-media__link">
-									<img [src]="image.src" alt="" class="feed-media__img" (error)="image.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> 
+										<!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + image.src + ')'"></div> -->
+								<img [src]="image.src" alt="" class="feed-media__img"
+									(error)="image.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
 								</a>
 							</div>
-						</ngx-slick-carousel>
-						<button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
-						<button class="btn-next" (click)="slickModal.slickNext()">next</button>
+							</ngx-slick-carousel>
+							<button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+							<button class="btn-next" (click)="slickModal.slickNext()">next</button>
+						</div>
 					</div>
-				    </div>
 					<div class="o-posts-inner-marketplace-reachout">
 						<div class="feed-card-event-block">
 							<div class="feed-card-event-block__left">
@@ -105,15 +109,13 @@
 							</div>
 						</div>
 					</div>
-					<opspot-comments *ngIf="marketplace" [object]="marketplace" [focusOnInit]="true"
-						[focusedCommentGuid]="focusedCommentGuid" [canEdit]="canDelete">
+					<opspot-comments *ngIf="marketplace" [object]="marketplace" [focusOnInit]="true" [focusedCommentGuid]="focusedCommentGuid" [canEdit]="canDelete">
 					</opspot-comments>
 				</div>
 			</div>
 			<div class="o-posts-inner-page__right hidden-mob">
-				<app-opportunity-widget *ngIf="allOpportunities" [object]="allOpportunities"></app-opportunity-widget>
-				<!-- % include components/opportunities_sidebar.html %}
-				{% include components/trending_post.html{ %}   -->
+				<opspot-widget [entityType]="'opportunity'"></opspot-widget>
+				<opspot-widget [entityType]="'event'"></opspot-widget>
 			</div>
 		</div>
 	</div>
