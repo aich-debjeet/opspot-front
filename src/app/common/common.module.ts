@@ -83,6 +83,7 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
 import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
 import { OpspotWidgetComponent } from './components/opspot-widget/opspot-widget.component';
+import { OpspotWidgetSliderComponent } from './components/opspot-widget-slider/opspot-widget-slider.component';
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
 import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
 import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
@@ -173,6 +174,7 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
     ImageCroperComponent,
     ReadMoreComponent,
     OpspotWidgetComponent,
+    OpspotWidgetSliderComponent,
     OpportunityListCardComponent,
     MasonryContainerComponent,
     ShowtimeWidgetComponent,
@@ -253,6 +255,7 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
     ImageCroperComponent,
     ReadMoreComponent,
     OpspotWidgetComponent,
+    OpspotWidgetSliderComponent,
     OpportunityListCardComponent,
     ShowtimeListCardComponent,
     ShowtimeWidgetComponent,
