@@ -1,0 +1,30 @@
+<!-- <div class="o-card o-card-suggestion" >
+    <div class="text-md f500">{{ title }}</div>
+    <ngx-slick-carousel class="carousel" 
+           #slickModal="slick-carousel" 
+           [config]="slideConfig"
+           (init)="slickInit($event)"
+           (breakpoint)="breakpoint($event)" 
+           (afterChange)="afterChange($event)" 
+           (beforeChange)="beforeChange($event)"
+    >
+        <div ngxSlickItem *ngFor="let user of suggestions">
+            <opspot-card-user [cardType]="'new'" [object]="user.entity"></opspot-card-user>
+        </div>
+    </ngx-slick-carousel>
+    <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+    <button class="btn-next" (click)="slickModal.slickNext()">next</button>
+</div> -->
+
+<div class="o-card o-card-suggestion" >
+    <div class="text-md f500">Suggestions for you</div>
+    <div *ngFor="let user of suggestions">
+      <opspot-card-user [cardType]="'new'" [object]="user.entity" class="dis-in"></opspot-card-user>
+    </div>
+</div>
+
+<style>
+  .dis-in {
+    display: inline !important;
+  }
+</style>

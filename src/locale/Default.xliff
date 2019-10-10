@@ -4091,7 +4091,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="MODALS__REMIND_COMPOSER__PLACEHOLDER" datatype="html">
-        <source>Enter your remind status here (optional)</source>
+        <source>Write something (optional)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/modals/remind-composer/remind-composer.ts</context>
           <context context-type="linenumber">9</context>
