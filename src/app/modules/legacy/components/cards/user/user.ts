@@ -6,7 +6,7 @@ import { Client } from '../../../../../services/api';
 @Component({
   moduleId: module.id,
   selector: 'opspot-card-user',
-  inputs: ['object', 'avatarSize'],
+  inputs: ['object', 'avatarSize', 'cardType'],
   templateUrl: 'user.html'
 })
 
@@ -15,6 +15,7 @@ export class UserCard implements OnInit {
   user: any;
   opspot = window.Opspot;
   avatarSize: string = 'medium';
+  cardType: string = 'default';
   bannerSrc: string;
   offset: string = '';
   subscriptionCount;
