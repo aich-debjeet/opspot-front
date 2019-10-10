@@ -8,7 +8,7 @@ export class ReadMoreDirective {
 
   _element: any;
   realHeight: any;
-  maxHeightAllowed: number = 320;
+  maxHeightAllowed: number = 20;
   expandable: boolean = false;
   @ContentChild(ReadMoreButtonComponent) button;
 
