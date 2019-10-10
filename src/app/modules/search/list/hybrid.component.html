@@ -83,11 +83,15 @@
       </a>
     </div>
   </div><!--header ends-->
-  <opspot-card *ngFor="let entity of entities.user"
+  <!-- <opspot-card *ngFor="let entity of entities.user"
     class="mdl-cell mdl-cell--4-col"
     hostClass="mdl-card mdl-color--white m-border m-search--entity"
     [object]="entity"
-  ></opspot-card>
+  ></opspot-card> -->
+  <opspot-card-user *ngFor="let entity of entities.user"
+    [cardType]="'new'"
+    [object]="entity"
+  ></opspot-card-user>
 </div><!--post ends-->
 
 <div class="o-serach-post" *ngIf="entities?.activity?.length">
