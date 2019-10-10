@@ -14,7 +14,7 @@ export class OpspotWidgetSliderComponent implements OnInit {
     arrows: true
   };
 
-  @Input() title: any;
+  @Input() title: string;
 
   opspot = window.Opspot;
   suggestions: Array<any> = [];
@@ -24,8 +24,8 @@ export class OpspotWidgetSliderComponent implements OnInit {
   constructor(private client: Client, private storage: Storage) {}
 
   ngOnInit() {
+    // TODO @abhijeet: load entities from the parent
     this.load();
-    console.log(this.suggestions);
   }
 
   async load() {
