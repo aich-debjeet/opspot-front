@@ -168,7 +168,7 @@
 <!-- adding a new bio -->
 
 <div class="o-card o-bio">
-  <a class="o-edit"><i class="icon-edit-profile f-15"></i> </a>
+  <a class="o-edit" [routerLink]="['/profile_edit/general']"><i class="icon-edit-profile f-15"></i> </a>
   <span class="o-bio__title caption-medium">About {{user.name}}</span>
   <span *ngIf="!user.briefdescription" class="text-md">
       <a href="#" class="primary">Tell something about yourself</a>
@@ -231,7 +231,7 @@
 
 <div class="o-card o-card--padding" >
   <div class="o-work">
-      <a *ngIf="isOwner()" class="o-edit"><i class="icon-edit-profile f-15"></i></a>
+      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile_edit/general']"><i class="icon-edit-profile f-15"></i></a>
       <div class="o-work__title caption-medium">Work</div>
       <!-- <div class="o-work-info">
           <div class="o-work-info__logo"><a href="#"></a></div>
