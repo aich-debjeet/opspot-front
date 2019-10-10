@@ -258,7 +258,8 @@ import { MyjourneyWidgetComponent } from './components/myjourney-widget/myjourne
     OpportunityListCardComponent,
     ShowtimeListCardComponent,
     ShowtimeWidgetComponent,
-    MasonryContainerComponent
+    MasonryContainerComponent,
+    MyjourneyWidgetComponent
   ],
   providers: [
     {
