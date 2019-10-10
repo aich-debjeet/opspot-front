@@ -16,15 +16,15 @@
         <ng-container i18n="@@WIRE__LOCK_SCREEN__WIRE_ME_OVER_PART">Wire me over</ng-container>
 
         <ng-container *ngIf="entity?.wire_threshold?.type == 'money'" i18n="@@WIRE__LOCK_SCREEN__USD_PER_MONTH">
-          {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}/month
+          {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}
         </ng-container>
 
         <ng-container *ngIf="entity?.wire_threshold?.type == 'points'" i18n="@@WIRE__LOCK_SCREEN__POINTS_PER_MONTH">
-          {{ entity.wire_threshold.min | number }} points/month
+          {{ entity.wire_threshold.min | number }} points
         </ng-container>
 
         <ng-container *ngIf="entity?.wire_threshold?.type == 'tokens'" i18n="@@WIRE__LOCK_SCREEN__TOKENS_PER_MONTH">
-          {{ entity.wire_threshold.min | number:'1.0-4' }} Tokens/month
+          {{ entity.wire_threshold.min | number:'1.0-4' }} Tokens
         </ng-container>
 
         <ng-container i18n="@@WIRE__LOCK_SCREEN__TO_SEE_TITLE_PART">to see this post.</ng-container>
@@ -36,15 +36,15 @@
       <ng-container i18n="@@WIRE__LOCK_SCREEN__ONLY_SUPPORTERS_TITLE_PART">Only supporters who wire you over</ng-container>
 
       <ng-container *ngIf="entity?.wire_threshold?.type == 'money'" i18n="@@WIRE__LOCK_SCREEN__USD_PER_MONTH">
-        {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}/month
+        {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}
       </ng-container>
 
       <ng-container *ngIf="entity?.wire_threshold?.type == 'points'" i18n="@@WIRE__LOCK_SCREEN__POINTS_PER_MONTH">
-        {{ entity.wire_threshold.min | number }} points/month
+        {{ entity.wire_threshold.min | number }} points
       </ng-container>
 
       <ng-container *ngIf="entity?.wire_threshold?.type == 'tokens'" i18n="@@WIRE__LOCK_SCREEN__TOKENS_PER_MONTH">
-        {{ entity.wire_threshold.min | number:'1.0-4' }} Tokens/month
+        {{ entity.wire_threshold.min | number:'1.0-4' }} Tokens
       </ng-container>
 
       <ng-container i18n="@@WIRE__LOCK_SCREEN__WILL_SEE_TITLE_PART">will see this post.</ng-container>
@@ -69,15 +69,15 @@
   <h2 class="m-wire--lock-screen-amount">
     <span>
       <ng-container *ngIf="entity?.wire_threshold?.type == 'money'" i18n="@@WIRE__LOCK_SCREEN__USD_PER_MONTH">
-        {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}/month
+        {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}
       </ng-container>
 
       <ng-container *ngIf="entity?.wire_threshold?.type == 'points'" i18n="@@WIRE__LOCK_SCREEN__POINTS_PER_MONTH">
-        {{ entity.wire_threshold.min | number }} points/month
+        {{ entity.wire_threshold.min | number }} points
       </ng-container>
 
       <ng-container *ngIf="entity?.wire_threshold?.type == 'tokens'" i18n="@@WIRE__LOCK_SCREEN__TOKENS_PER_MONTH">
-        {{ entity.wire_threshold.min | number:'1.0-4' }} Tokens/month
+        {{ entity.wire_threshold.min | number:'1.0-4' }} Tokens
       </ng-container>
     </span>
   </h2>
@@ -86,15 +86,15 @@
     <ng-container i18n="@@WIRE__LOCK_SCREEN__CAN_ONLY_BE_SEEN_TITLE_PART">This post can only be seen by supporters who wire</ng-container>
 
     <ng-container *ngIf="entity?.wire_threshold?.type == 'money'" i18n="@@WIRE__LOCK_SCREEN__OVER_USD_PER_MONTH">
-        over {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}/month
+        over {{ entity.wire_threshold.min | currency:'USD':true:'1.0-0' }}
     </ng-container>
 
     <ng-container *ngIf="entity?.wire_threshold?.type == 'points'" i18n="@@WIRE__LOCK_SCREEN__OVER_POINTS_PER_MONTH">
-      over {{ entity.wire_threshold.min | number }} points/month
+      over {{ entity.wire_threshold.min | number }} points
     </ng-container>
 
     <ng-container *ngIf="entity?.wire_threshold?.type == 'tokens'" i18n="@@WIRE__LOCK_SCREEN__OVER_TOKENS_PER_MONTH">
-      over {{ entity.wire_threshold.min | number }} Tokens/month
+      over {{ entity.wire_threshold.min | number }} Tokens
     </ng-container>
 
     <ng-container *ngIf="entity?.ownerObj?.username" i18n="@@WIRE__LOCK_SCREEN__TO_USERNAME_PART">
