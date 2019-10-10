@@ -58,8 +58,78 @@
     <m-read-more--button></m-read-more--button>
   </div>
 
+  <m-translate [open]="translateToggle" [entity]="activity" [translateEvent]="translateEvent"
+    (onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
+    (onTranslateError)="translateToggle = false" #translate></m-translate>
+
+  <div class="opspot-editable-container"
+    *ngIf="editing && (!activity.custom_type || (activity.custom_type && !activity.title))">
+    <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
+    <textarea class="mdl-card__supporting-text message" name="message" [ngModel]="activity.message" #messageEdit
+      [autoGrow]></textarea>
+    <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
+    </m-wire-threshold-input>
+    <button class="mdl-button mdl-button--raised mdl-color--blue-grey-100"
+      (click)="messageEdit.value = activity.message; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
+    <button class="mdl-button mdl-button--colored mdl-button--raised"
+      (click)="activity.message = messageEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
+  </div>
+
+  <!-- Rich content -->
+  <div class="m-rich-embed"
+    *ngIf="activity.perma_url && activity.title && !showOpportunity && !showBlueStore && !showTimez  && !showAlbum"
+    [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
+    <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
+      <span class="m-mature-overlay-note">
+        <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
+        <span i18n="@@M__COMMON__CONFIRM_18">Click to confirm your are 18+</span>
+      </span>
+    </div>
+    <opspot-rich-embed [src]="activity" [maxheight]="480"></opspot-rich-embed>
+  </div>
+
+  <!-- Album post-->
+  <div *ngIf = "showAlbum && !showOpportunity && !showBlueStore && !showTimez">
+  <!-- <div class="feed-head">  
+      <div class="o-posts-discription">
+          <p class="text-md grey-darker">
+             {{activity?.message}}
+          </p>
+      </div>
+  </div> -->
+  <!-- <div class="feed-media">
+      <a class="feed-media__link"><img src="assets/demo/m1.jpg" alt="" class="feed-media__img"></a>
+      <a class="feed-media__link">
+          <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
+          <div class="feed-media-overlay">
+              <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+          </div>
+      </a>
+      <a class="feed-media__link">
+          <img src="assets/demo/m3.jpg" alt="" class="feed-media__img">
+          <div class="feed-media-overlay"><h3 class="white">+2</h3></div>
+      </a>
+  </div> -->
+    <div class="feed-media" *ngIf="activity?.custom_data">
+        <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+          <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
+          <img [src]="media.src" alt="" class="feed-media__img"
+            (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+          <div *ngIf="i >= 2 && activity?.custom_data.length > 4" class="feed-media-overlay">
+            <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
+          </div>
+        </a>
+        <!-- <a class="feed-media__link">
+                <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
+                <div class="feed-media-overlay">
+                    <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+                </div>
+            </a> -->
+    </div>
+  </div>
+
   <!-- opportunity -->
-  <div *ngIf="showOpportunity && !showBlueStore && !showTimez">
+  <div *ngIf="showOpportunity && !showBlueStore && !showTimez && !showAlbum">
     <div class="feed-card-opportunity-block" [routerLink]="['/opportunity/view',activity.entity_guid]">
       <div class="feed-card-opportunity-block__top">
         <div class="opportunity-image">
@@ -89,7 +159,7 @@
   </div>
 
   <!--BlueStore-->
-  <div class="o-card feed" *ngIf="showBlueStore && !showOpportunity && !showTimez"
+  <div class="o-card feed" *ngIf="showBlueStore && !showOpportunity && !showTimez  && !showAlbum"
     [routerLink]="['/item/view', activity.entity_guid]">
     <div class="feed-media" *ngIf="activity?.custom_data">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
@@ -126,7 +196,7 @@
   </div>
 
   <!--Showtime-->
-  <div class="o-card feed" *ngIf="showTimez && !showBlueStore && !showOpportunity"
+  <div class="o-card feed" *ngIf="showTimez && !showBlueStore && !showOpportunity && !showAlbum"
     [routerLink]="['/event/view', activity.entity_guid]">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
     <div class="feed-media">
@@ -155,40 +225,9 @@
     </div>
   </div>
 
-
-
-  <m-translate [open]="translateToggle" [entity]="activity" [translateEvent]="translateEvent"
-    (onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
-    (onTranslateError)="translateToggle = false" #translate></m-translate>
-
-  <div class="opspot-editable-container"
-    *ngIf="editing && (!activity.custom_type || (activity.custom_type && !activity.title))">
-    <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
-    <textarea class="mdl-card__supporting-text message" name="message" [ngModel]="activity.message" #messageEdit
-      [autoGrow]></textarea>
-    <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
-    </m-wire-threshold-input>
-    <button class="mdl-button mdl-button--raised mdl-color--blue-grey-100"
-      (click)="messageEdit.value = activity.message; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
-    <button class="mdl-button mdl-button--colored mdl-button--raised"
-      (click)="activity.message = messageEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
-  </div>
-
-  <!-- Rich content -->
-  <div class="m-rich-embed"
-    *ngIf="activity.perma_url && activity.title && !showOpportunity && !showBlueStore && !showTimez"
-    [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
-    <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
-      <span class="m-mature-overlay-note">
-        <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
-        <span i18n="@@M__COMMON__CONFIRM_18">Click to confirm your are 18+</span>
-      </span>
-    </div>
-    <opspot-rich-embed [src]="activity" [maxheight]="480"></opspot-rich-embed>
-  </div>
-
   <div class="mdl-card__supporting-text message" [hidden]="!activity.title || activity.perma_url || editing"
     [innerHtml]="activity.title | tags"></div>
+
   <!-- Translation -->
   <div *ngIf="translate && translate.translation && translate.translation.translated && translate.translation.title"
     class="m-translation-wrapper">
@@ -199,7 +238,7 @@
   <!-- End translation -->
 
   <div class="opspot-editable-container"
-    *ngIf="editing && activity.custom_type && activity.title &&  !showOpportunity && !showBlueStore && !showTimez">
+    *ngIf="editing && activity.custom_type && activity.title &&  !showOpportunity && !showBlueStore && !showTimez  && !showAlbum">
     <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
     <textarea class="mdl-card__supporting-text message" name="title" [ngModel]="activity.title" #titleEdit
       [autoGrow]></textarea>
@@ -249,7 +288,7 @@
   <!-- Custom type:: batch -->
   <div class="item item-image allow-select"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
-    *ngIf="activity.custom_type == 'batch' && !showOpportunity && !showBlueStore && !showTimez">
+    *ngIf="activity.custom_type == 'batch' && !showOpportunity && !showBlueStore && !showTimez  && !showAlbum">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
@@ -268,15 +307,22 @@
     <opspot-remind [object]="activity.remind_object" [events]="childEventsEmitter" [boosted]="activity.boosted">
     </opspot-remind>
   </div>
+
 </ng-container>
 
 <ng-content select="[bottom-content]"></ng-content>
 
+<!-- actions bar(like, comments, share, wire, boost)-->
 <div class="o-actions" *ngIf="!hideTabs">
+
+  <!--like buttom-->
   <opspot-button-thumbs-up [object]="activity"></opspot-button-thumbs-up>
   <!-- <opspot-button-thumbs-down [object]="activity"></opspot-button-thumbs-down> -->
 
+  <!--comment button-->
   <opspot-button-comment [object]="activity" (click)="openComments()"></opspot-button-comment>
+
+  <!-- wire button-->
   <a class="o-actions__link">
     <i class="icon-eye f-15"></i>
     <span class="o-action-count text-sm grey">
@@ -296,7 +342,10 @@
     [object]="activity.remind_object ? activity.remind_object : activity" (done)="wireSubmitted($event)">
   </m-wire-button>
 
+  <!--share button-->
   <opspot-button-remind [object]="activity"></opspot-button-remind>
+
+  <!--boost button-->
   <a class="btn btn-primary btn-xs btn--boost" *ngIf="session.getLoggedInUser().guid == activity.owner_guid"
     id="boost-actions" (click)="showBoost()">
     <ng-container i18n="verb|@@M__ACTION__BOOST">Boost</ng-container>
@@ -316,6 +365,7 @@
   </div>
 </div> -->
 
+<!-- comments -->
 <opspot-comments *ngIf="commentsToggle" [object]="activity" [focusOnInit]="true"
   [focusedCommentGuid]="focusedCommentGuid" [canEdit]="canDelete">
 </opspot-comments>
