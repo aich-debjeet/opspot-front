@@ -83,12 +83,14 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
 import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
 import { OpspotWidgetComponent } from './components/opspot-widget/opspot-widget.component';
+import { OpspotWidgetSliderComponent } from './components/opspot-widget-slider/opspot-widget-slider.component';
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
 import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
 import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
 import { ShowtimeWidgetComponent } from './components/showtime-widget/showtime-widget.component';
 import { ShowtimeListCardComponent } from './components/showtime-list-card/showtime-list-card.component';
 import { MyjourneyWidgetComponent } from './components/myjourney-widget/myjourney-widget.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   imports: [
@@ -97,7 +99,8 @@ import { MyjourneyWidgetComponent } from './components/myjourney-widget/myjourne
     FormsModule,
     ReactiveFormsModule,
     NgxCroppieModule,
-    NgxMasonryModule
+    NgxMasonryModule,
+    SlickCarouselModule
   ],
   declarations: [
     OPSPOT_PIPES,
@@ -174,6 +177,7 @@ import { MyjourneyWidgetComponent } from './components/myjourney-widget/myjourne
     ImageCroperComponent,
     ReadMoreComponent,
     OpspotWidgetComponent,
+    OpspotWidgetSliderComponent,
     OpportunityListCardComponent,
     MasonryContainerComponent,
     ShowtimeWidgetComponent,
@@ -255,6 +259,7 @@ import { MyjourneyWidgetComponent } from './components/myjourney-widget/myjourne
     ImageCroperComponent,
     ReadMoreComponent,
     OpspotWidgetComponent,
+    OpspotWidgetSliderComponent,
     OpportunityListCardComponent,
     ShowtimeListCardComponent,
     ShowtimeWidgetComponent,

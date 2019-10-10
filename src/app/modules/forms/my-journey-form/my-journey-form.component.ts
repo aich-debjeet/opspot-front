@@ -132,6 +132,8 @@ export class MyJourneyFormComponent implements OnInit {
         this.attachment.reset();
         this.meta = { wire_threshold: null };
 
+        this.cards = [];
+        
       })
       .catch((e) => {
         alert(e.message);
