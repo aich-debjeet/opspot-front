@@ -13,6 +13,7 @@ import {
 import { DynamicHostDirective } from '../../directives/dynamic-host.directive';
 
 import { UserCard } from '../../../modules/legacy/components/cards/user/user';
+import { UserCard2 } from '../../../modules/legacy/components/cards/user2/user2';
 import { Activity } from '../../../modules/legacy/components/cards/activity/activity';
 import { GroupsCard } from '../../../modules/groups/card/card';
 import { ImageCard } from '../../../modules/legacy/components/cards/object/image/image';
@@ -88,6 +89,8 @@ export class OpspotCard implements AfterViewInit {
 
     if (object.type === 'user') {
       return UserCard;
+    } if (object.type === 'user2') {
+      return UserCard2;
     } else if (object.type === 'activity') {
       return Activity;
     } else if (object.type === 'group') {

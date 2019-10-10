@@ -18,6 +18,7 @@ import { ImageCard } from './components/cards/object/image/image';
 import { VideoCard } from './components/cards/object/video/video';
 import { Remind } from './components/cards/remind/remind';
 import { UserCard } from './components/cards/user/user';
+import { UserCard2 } from './components/cards/user2/user2';
 
 import { BoostButton } from './components/buttons/boost';
 import { CommentButton } from './components/buttons/comment';
@@ -73,6 +74,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
     VideoCard,
     Remind,
     UserCard,
+    UserCard2,
     HovercardPopup,
     BoostButton,
     CommentButton,
@@ -104,6 +106,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
     VideoCard,
     Remind,
     UserCard,
+    UserCard2,
     BoostButton,
     CommentButton,
     FeatureButton,
