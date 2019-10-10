@@ -4,7 +4,7 @@ import { Session } from '../../../services/session';
 
 @Component({
   selector: 'opspot-widget',
-  templateUrl: 'opspot-widget.html'
+  templateUrl: 'opspot-widget.component.html'
 })
 export class OpspotWidgetComponent implements OnInit {
 
