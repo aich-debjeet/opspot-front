@@ -7,7 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UserCard2 implements OnInit {
 
-  @Input() entity: any;
+  @Input() user: any;
+  opspot: Opspot = window.Opspot;
 
   constructor() {}
 

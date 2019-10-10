@@ -4,10 +4,10 @@
     </div>
     <a [routerLink]="['/', user?.entity?.username]" class="demo"></a>
     <div class="o-suggestion__avatar"
-         [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + user?.entity?.guid + ')'" alt="">
+        [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + user?.entity?.guid + ')'" alt="">
     </div>
-    <div class="o-suggestion__name caption-bold">{{ user?.entity?.name}}</div>
-    <div class="text-md grey">@{{ user?.entity?.username}}</div>
-    <div class="o-suggestion__info text-sm grey">{{ user?.entity?.merchant?.exclusive?.intro}}</div>
+    <div class="o-suggestion__name caption-bold">{{ user?.entity?.name }}</div>
+    <div class="text-md grey">@{{ user?.entity?.username }}</div>
+    <div class="o-suggestion__info text-sm grey">{{ user?.entity?.merchant?.exclusive?.intro }}</div>
     <!-- <opspot-button-subscribe [user]="user?.entity" (subscribed)="remove(suggestion)"></opspot-button-subscribe> -->
 </div>
