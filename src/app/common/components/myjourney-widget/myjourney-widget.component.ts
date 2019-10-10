@@ -22,6 +22,9 @@ export class MyjourneyWidgetComponent implements OnInit {
   offset: string = '';
   moreData: boolean = true;
   inProgress: boolean = false;
+  // myjourneyVideos = [];
+  multiVIdeos = [];
+  singleVideo = [];
 
   hashMatchString = '#myjourney' + this.session.getLoggedInUser().username;
 
@@ -66,17 +69,29 @@ export class MyjourneyWidgetComponent implements OnInit {
           this.inProgress = false;
           return false;
         }
-        if (this.feed) {
-          for (let activity of data.activity) {
-            console.log("activity.tags[0]: ", activity.tags[0]);
-            if (activity.tags.length && activity.tags[0] === this.hashMatchString) {
-              this.feed.push(activity);
+        for (let activity of data.activity) {
+          if (activity.tags.length && activity.tags[0] === this.hashMatchString) {
+          
+            console.log("myjourneyVideos", activity.custom_data.length);
+            if (activity.custom_data.length) {
+              for (var i = 0; i < activity.custom_data.length; i++) {
+                this.multiVIdeos.push(activity.custom_data[i]);
+              }
+            } else {
+              this.singleVideo.push(activity.custom_data);
             }
           }
-        } else {
-          this.feed = this.filterPinned(data.activity);
-          this.pinned = data.pinned;
         }
+        console.log("this multivideos: ", this.multiVIdeos);
+        console.log("this singlevideos: ", this.singleVideo);
+
+        this.feed = this.multiVIdeos.concat(this.singleVideo);
+        console.log("All my journey videos: ", this.feed);
+
+        // } else {
+        //   this.feed = this.filterPinned(data.activity);
+        //   this.pinned = data.pinned;
+        // }
         this.offset = data['load-next'];
         this.inProgress = false;
       })
@@ -84,16 +99,4 @@ export class MyjourneyWidgetComponent implements OnInit {
         this.inProgress = false;
       });
   }
-
-  filterPinned(activities) {
-    return activities.filter((activity) => {
-      if (this.user.pinned_posts.indexOf(activity.guid) >= 0) {
-        activity.pinned = true;
-      } else {
-        return activity;
-      }
-    }).filter(x => !!x);
-  }
-
-
 }
