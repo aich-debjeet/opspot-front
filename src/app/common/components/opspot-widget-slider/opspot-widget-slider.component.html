@@ -1,0 +1,17 @@
+<div class="o-card o-card-suggestion" >
+    <div class="text-md f500">{{ title }}</div>
+    <ngx-slick-carousel class="carousel" 
+           #slickModal="slick-carousel" 
+           [config]="slideConfig"
+           (init)="slickInit($event)"
+           (breakpoint)="breakpoint($event)" 
+           (afterChange)="afterChange($event)" 
+           (beforeChange)="beforeChange($event)"
+    >
+        <div ngxSlickItem *ngFor="let suggestion of suggestions">
+            <opspot-card-user2 [user]="suggestion"></opspot-card-user2>
+        </div>
+    </ngx-slick-carousel>
+    <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+    <button class="btn-next" (click)="slickModal.slickNext()">next</button>
+</div>

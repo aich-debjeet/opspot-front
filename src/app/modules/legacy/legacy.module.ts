@@ -18,7 +18,6 @@ import { ImageCard } from './components/cards/object/image/image';
 import { VideoCard } from './components/cards/object/video/video';
 import { Remind } from './components/cards/remind/remind';
 import { UserCard } from './components/cards/user/user';
-import { UserCard2 } from './components/cards/user2/user2';
 
 import { BoostButton } from './components/buttons/boost';
 import { CommentButton } from './components/buttons/comment';
@@ -42,7 +41,7 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { AppuserComponent } from './components/appuser/appuser.component';
 import { GroupBannerComponent } from './components/group-banner/group-banner.component';
 import { OpspotFormsModule } from '../forms/forms.module';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
+// import { SlickCarouselModule } from 'ngx-slick-carousel';
 // import { PostCard } from './components/cards/post-card/post-card';
 
 
@@ -64,7 +63,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     CommentsModule,
     TextInputAutocompleteModule,
     OpspotFormsModule,
-    SlickCarouselModule
+    // SlickCarouselModule
   ],
   declarations: [
     Activity,
@@ -74,7 +73,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     VideoCard,
     Remind,
     UserCard,
-    UserCard2,
     HovercardPopup,
     BoostButton,
     CommentButton,
@@ -106,7 +104,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     VideoCard,
     Remind,
     UserCard,
-    UserCard2,
     BoostButton,
     CommentButton,
     FeatureButton,
@@ -123,7 +120,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     CarouselComponent,
     AppuserComponent,
     GroupBannerComponent,
-    SlickCarouselModule
+    // SlickCarouselModule
     // PostCard
   ],
   entryComponents: [
@@ -134,7 +131,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     VideoCard,
     Remind,
     UserCard,
-    UserCard2,
     // SlickCarouselModule,
     BoostButton,
   ]

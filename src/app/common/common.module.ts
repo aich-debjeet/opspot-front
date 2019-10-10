@@ -83,11 +83,14 @@ import { AndroidAppDownloadComponent } from "./components/android-app-download-b
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
 import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
 import { OpspotWidgetComponent } from './components/opspot-widget/opspot-widget.component';
+import { OpspotWidgetSliderComponent } from './components/opspot-widget-slider/opspot-widget-slider.component';
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
 import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
 import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
 import { ShowtimeWidgetComponent } from './components/showtime-widget/showtime-widget.component';
 import { ShowtimeListCardComponent } from './components/showtime-list-card/showtime-list-card.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { UserCard2 } from './components/opspot-widget-slider/user2/user2';
 
 @NgModule({
   imports: [
@@ -96,7 +99,8 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
     FormsModule,
     ReactiveFormsModule,
     NgxCroppieModule,
-    NgxMasonryModule
+    NgxMasonryModule,
+    SlickCarouselModule
   ],
   declarations: [
     OPSPOT_PIPES,
@@ -173,10 +177,13 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
     ImageCroperComponent,
     ReadMoreComponent,
     OpspotWidgetComponent,
+    OpspotWidgetSliderComponent,
     OpportunityListCardComponent,
     MasonryContainerComponent,
     ShowtimeWidgetComponent,
-    ShowtimeListCardComponent
+    ShowtimeListCardComponent,
+    // TODO @abhijeet: put this card in the opspot widget slider component
+    UserCard2
   ],
   exports: [
     OPSPOT_PIPES,
@@ -253,10 +260,12 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
     ImageCroperComponent,
     ReadMoreComponent,
     OpspotWidgetComponent,
+    OpspotWidgetSliderComponent,
     OpportunityListCardComponent,
     ShowtimeListCardComponent,
     ShowtimeWidgetComponent,
-    MasonryContainerComponent
+    MasonryContainerComponent,
+    UserCard2
   ],
   providers: [
     {

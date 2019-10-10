@@ -88,7 +88,7 @@ export class PortfolioFormComponent implements OnInit {
         this.load.emit(data);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
-        this.changeToDefault();
+        this.cards = [];
       })
       .catch((e) => {       
         alert(e.message);
