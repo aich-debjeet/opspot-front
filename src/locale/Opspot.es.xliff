@@ -1533,7 +1533,7 @@
         <target>Recordar</target>
       </trans-unit>
       <trans-unit id="MODALS__REMIND_COMPOSER__PLACEHOLDER">
-        <source>Enter your remind status here (optional)</source>
+        <source>Write something (optional)</source>
         <target>Ingresa el estado de tu Recordar aquí (opcional)</target>
       </trans-unit>
       <trans-unit id="MODALS__SHARE__ON_FACEBOOK">
