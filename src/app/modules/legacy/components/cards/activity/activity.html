@@ -89,15 +89,15 @@
   </div>
 
   <!-- Album post-->
-  <div *ngIf = "showAlbum && !showOpportunity && !showBlueStore && !showTimez">
-  <!-- <div class="feed-head">  
+  <div *ngIf="showAlbum && !showOpportunity && !showBlueStore && !showTimez">
+    <!-- <div class="feed-head">  
       <div class="o-posts-discription">
           <p class="text-md grey-darker">
              {{activity?.message}}
           </p>
       </div>
   </div> -->
-  <!-- <div class="feed-media">
+    <!-- <div class="feed-media">
       <a class="feed-media__link"><img src="assets/demo/m1.jpg" alt="" class="feed-media__img"></a>
       <a class="feed-media__link">
           <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
@@ -111,20 +111,23 @@
       </a>
   </div> -->
     <div class="feed-media" *ngIf="activity?.custom_data">
-        <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
-          <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
-          <img [src]="media.src" alt="" class="feed-media__img"
-            (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
-          <div *ngIf="i >= 2 && activity?.custom_data.length > 4" class="feed-media-overlay">
-            <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
-          </div>
-        </a>
-        <!-- <a class="feed-media__link">
-                <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
-                <div class="feed-media-overlay">
-                    <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
-                </div>
-            </a> -->
+      <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+        <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
+        <img [src]="media.src" alt="" class="feed-media__img"
+          (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+        <div *ngIf="i >= 2 && activity?.custom_data.length > 4" class="feed-media-overlay">
+          <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
+        </div>
+        <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
+          <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+        </div>
+      </a>
+      <!-- <a class="feed-media__link">
+        <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
+        <div class="feed-media-overlay">
+          <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+        </div>
+      </a> -->
     </div>
   </div>
 

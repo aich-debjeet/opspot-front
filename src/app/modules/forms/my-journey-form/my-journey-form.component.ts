@@ -134,7 +134,7 @@ export class MyJourneyFormComponent implements OnInit {
       })
       .catch((e) => {     
         alert(e.message);
-        this.attachment.reset();
+        // this.attachment.reset();
       });
   }
   
