@@ -12,42 +12,12 @@ import { Storage } from '../../../../../services/storage';
 })
 
 export class UserCard2 implements OnInit {
-
-
  
    slideConfig = {
      slidesToShow: 3,
      slidesToScroll: 1,
      infinite: false,
      arrows: true,
-     // responsive: [
-     //   {
-     //     breakpoint: 1024,
-     //     settings: {
-     //       slidesToShow: 3,
-     //       slidesToScroll: 3,
-     //       "variableWidth": false,
-     //     }
-     //   },
-     //   {
-     //     breakpoint: 600,
-     //     settings: {
-     //       slidesToShow: 2,
-     //       slidesToScroll: 2
-     //     }
-     //   },
-     //   {
-     //     breakpoint: 480,
-     //     settings: {
-     //       slidesToShow: 1,
-     //       slidesToScroll: 1
-     //     }
-     //   }
-     //   // You can unslick at a given breakpoint now by adding:
-     //   // settings: "unslick"
-     //   // instead of a settings object
-     // ]
- 
    };
  
    opspot = window.Opspot;
@@ -71,7 +41,6 @@ export class UserCard2 implements OnInit {
      if (this.suggestions.length)
        limit = 1;
  
-     // Subscribe can not rely on next batch, so load further batch
      this.lastOffset = this.suggestions.length ? this.lastOffset + 11 : 0;
  
      try {
@@ -92,10 +61,10 @@ export class UserCard2 implements OnInit {
      e.preventDefault();
      e.stopPropagation();
      this.suggestions.splice(this.suggestions.indexOf(suggestion), 1);
-     // this.storage.set(
-     //   `user:suggestion:${suggestion.entity_guid}:removed`,
-     //   suggestion.entity_guid
-     // );
+     this.storage.set(
+       `user:suggestion:${suggestion.entity_guid}:removed`,
+       suggestion.entity_guid
+     );
      await this.client.put(`api/v2/suggestions/pass/${suggestion.entity_guid}`)
      // load more
      this.load();
@@ -103,10 +72,10 @@ export class UserCard2 implements OnInit {
  
    remove(suggestion) {
      this.suggestions.splice(this.suggestions.indexOf(suggestion), 1);
-     //  this.storage.set(
-     //   `user:suggestion:${suggestion.entity_guid}:removed`,
-     //   suggestion.entity_guid
-     // );
+      this.storage.set(
+       `user:suggestion:${suggestion.entity_guid}:removed`,
+       suggestion.entity_guid
+     );
      // load more
      this.load();
    }
