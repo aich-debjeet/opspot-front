@@ -1,121 +1,154 @@
-<ng-template #otherUser>
-    <div class="m-card--user--banner">
-        <div class="m-card--user--banner--img"
-        [ngStyle]="{'background-image': 'url(' + bannerSrc + ')'}"
-    ></div>
-        <div class="opspot-banner-overlay"></div>
+<ng-container *ngIf="cardType == 'new'; else defaultCard">
+    <div class="o-card o-suggestion float-left slide">
+        <div class="o-suggestion__top-bar">
+            <i class="material-icons o-fontRemove close-btn" (click)="pass(suggestion, $event)">close</i>
+        </div>
+        <a [routerLink]="['/', user?.username]" class="demo"></a>
+        <div class="o-suggestion__avatar"
+            [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + user?.guid + ')'" alt="">
+        </div>
+        <div class="o-suggestion__name caption-bold">{{ user?.name }}</div>
+        <div class="text-md grey">@{{ user?.username }}</div>
+        <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div>
+        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="remove(suggestion)"></opspot-button-subscribe>
     </div>
+</ng-container>
 
-    <a [routerLink]="['/', user.username]" class="mdl-card__supporting-text opspot-usercard-block">
-        <div class="avatar">
-                <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}"/>
+<ng-template #defaultCard>
+    <ng-template #otherUser>
+        <div class="m-card--user--banner">
+            <div class="m-card--user--banner--img" [ngStyle]="{'background-image': 'url(' + bannerSrc + ')'}"></div>
+            <div class="opspot-banner-overlay"></div>
+        </div>
+    
+        <a [routerLink]="['/', user.username]" class="mdl-card__supporting-text opspot-usercard-block">
+            <div class="avatar">
+                <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" />
                 <!-- <img src="../../../assets/demo/avatar.png"/> -->
-        </div>
-        <div class="body">
-            <h3>{{user.name}}</h3>
-            <span>@{{user.username}}</span>
-
-            <!-- <div class="m-usercard-bio">
-            <div class="m-usercard-bio-location" [hidden]="!user.city">
-                <i class="material-icons mdl-color-text--blue-grey-400">location_city</i>
-                {{user.city}}
             </div>
-            <div class="m-usercard-bio-brief" [hidden]="!user.briefdescription">
-                <i class="material-icons mdl-color-text--blue-grey-400">assignment</i>
-                {{user.briefdescription}}
+            <div class="body">
+                <h3>{{user.name}}</h3>
+                <span>@{{user.username}}</span>
+    
+                <!-- <div class="m-usercard-bio">
+                <div class="m-usercard-bio-location" [hidden]="!user.city">
+                    <i class="material-icons mdl-color-text--blue-grey-400">location_city</i>
+                    {{user.city}}
+                </div>
+                <div class="m-usercard-bio-brief" [hidden]="!user.briefdescription">
+                    <i class="material-icons mdl-color-text--blue-grey-400">assignment</i>
+                    {{user.briefdescription}}
+                </div>
+                </div> -->
             </div>
-            </div> -->
+        </a>
+    
+        <!-- <div class="opspot-tabs mdl-tabs__tab-bar" *ngIf="user.subscribed">
+            <a class="mdl-tabs__tab mdl-color-text--blue-grey-500 1" [routerLink]="['/', user.username, 'subscribers']">
+                <span i18n="@@M__COMMON__SUBSCRIBERS">Subscribers</span>
+                <b>{{user.subscribers_count?user.subscribers_count:'0' | abbr:0}}</b>
+            </a>
+            <a class="mdl-tabs__tab mdl-color-text--blue-grey-500 2" [routerLink]="['/', user.username, 'subscriptions']">
+                <span i18n="@@M__COMMON__SUBSCRIPTIONS">Subscriptions</span>
+                <b>{{user.subscriptions_count?user.subscriptions_count:'0' | abbr:0}}</b>
+            </a>
+            <a class="mdl-tabs__tab mdl-color-text--blue-grey-500 3" [routerLink]="['/', user.username, 'feed']">
+                <span i18n="@@M__COMMON__VIEWS">Views</span>
+                <b>{{user.impressions?user.impressions:'0' | abbr:0}}</b>
+            </a>
+        </div> -->
+    
+        <opspot-button-subscribe [user]="user"></opspot-button-subscribe>
+        <!-- <opspot-button-boost [object]="user" *ngIf="user.guid == session.getLoggedInUser().guid"></opspot-button-boost> -->
+        <!-- <div class="opspot-usercard-buttons" [ngClass]="{ 'has-feature-button': session.isAdmin() }">
+            <ng-content select="[buttons]"></ng-content>
+        </div> -->
+    </ng-template>
+    
+    <div class="o-prof-info" *ngIf="user.guid == session.getLoggedInUser().guid; else otherUser">
+        <a [routerLink]="['/', user.username]">
+            <div class="o-avatar-lg">
+                <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" />
+            </div>
+        </a>
+        <div class="o-prof-name">
+            <div class="caption-bold f700">{{user.name}}</div>
+            <span class="text-md grey">@{{user.username}}</span>
         </div>
-    </a>
-
-    <!-- <div class="opspot-tabs mdl-tabs__tab-bar" *ngIf="user.subscribed">
-        <a class="mdl-tabs__tab mdl-color-text--blue-grey-500 1" [routerLink]="['/', user.username, 'subscribers']">
-            <span i18n="@@M__COMMON__SUBSCRIBERS">Subscribers</span>
-            <b>{{user.subscribers_count?user.subscribers_count:'0' | abbr:0}}</b>
-        </a>
-        <a class="mdl-tabs__tab mdl-color-text--blue-grey-500 2" [routerLink]="['/', user.username, 'subscriptions']">
-            <span i18n="@@M__COMMON__SUBSCRIPTIONS">Subscriptions</span>
-            <b>{{user.subscriptions_count?user.subscriptions_count:'0' | abbr:0}}</b>
-        </a>
-        <a class="mdl-tabs__tab mdl-color-text--blue-grey-500 3" [routerLink]="['/', user.username, 'feed']">
-            <span i18n="@@M__COMMON__VIEWS">Views</span>
-            <b>{{user.impressions?user.impressions:'0' | abbr:0}}</b>
-        </a>
-    </div> -->
-
-    <opspot-button-subscribe [user]="user"></opspot-button-subscribe>
-    <!-- <opspot-button-boost [object]="user" *ngIf="user.guid == session.getLoggedInUser().guid"></opspot-button-boost> -->
-    <!-- <div class="opspot-usercard-buttons" [ngClass]="{ 'has-feature-button': session.isAdmin() }">
-        <ng-content select="[buttons]"></ng-content>
-    </div> -->
+        <div class="o-prof-activity">
+            <a [routerLink]="['/', user.username, 'subscribers']">
+                <div class="caption-bold f700">{{subscriberCount?subscriberCount:0}}</div>
+                <div class="text-sm grey">Followers</div>
+            </a>
+            <a [routerLink]="['/', user.username, 'subscriptions']">
+                <div class="caption-bold f700">{{subscriptionCount?subscriptionCount:0}}</div>
+                <div class="text-sm grey">Following</div>
+            </a>
+            <a [routerLink]="['/', user.username, 'feed']">
+                <div class="caption-bold f700">{{user.impressions?user.impressions:'0' | abbr:0}}</div>
+                <div class="text-sm grey">Views</div>
+            </a>
+            <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
+        </div>
+        <!-- <opspot-button-boost [object]="user" *ngIf="user.guid == session.getLoggedInUser().guid"></opspot-button-boost> -->
+    </div>
 </ng-template>
 
 
-<div class="o-prof-info" *ngIf="user.guid == session.getLoggedInUser().guid; else otherUser">
-	<a [routerLink]="['/', user.username]"  >
-		<div class="o-avatar-lg">
-                <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}"/>
-		</div> 
-	</a>
-	<div class="o-prof-name">
-		<div class="caption-bold f700">{{user.name}}</div>
-		<span class="text-md grey">@{{user.username}}</span>
-    </div>
-    <div class="o-prof-activity">
-        <a [routerLink]="['/', user.username, 'subscribers']"><div class="caption-bold f700">{{subscriberCount?subscriberCount:0}}</div><div class="text-sm grey">Followers</div></a>
-        <a [routerLink]="['/', user.username, 'subscriptions']"><div class="caption-bold f700">{{subscriptionCount?subscriptionCount:0}}</div><div class="text-sm grey">Following</div></a>
-		<a  [routerLink]="['/', user.username, 'feed']"><div class="caption-bold f700">{{user.impressions?user.impressions:'0' | abbr:0}}</div><div class="text-sm grey">Views</div></a>
-        <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
-    </div>
-    <!-- <opspot-button-boost [object]="user" *ngIf="user.guid == session.getLoggedInUser().guid"></opspot-button-boost> -->
-</div>
-
 <style>
-.o-prof-info {
-    width: 100%;
-    background: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 23px;
-    border: 1px solid #ECEFF1;
-}
-.o-avatar-lg {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    overflow: hidden;
-    float: left;
-}
+    .follow-btn {
+        position: relative;
+        margin: auto;
+    }
+    .o-prof-info {
+        width: 100%;
+        background: #FFFFFF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 23px;
+        border: 1px solid #ECEFF1;
+    }
 
-.o-prof-name {
-    text-align: center;
-    margin-top: 9px;
-}
+    .o-avatar-lg {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        overflow: hidden;
+        float: left;
+    }
+
+    .o-prof-name {
+        text-align: center;
+        margin-top: 9px;
+    }
 
 
-.o-prof-activity {
-    width: 100%;
-    display: flex;
-    margin-top: 18px;
-}
-.o-prof-activity a div {
-    width: 100%;
-    text-align: center;
-}
-.caption-bold {
-    color: #263238;
-    font-size: 15px;
-    line-height: 20px;
-    font-weight: 500;
-}
-.f700 {
-    font-weight: 700 !important;
-}
-.o-prof-activity a {
-    flex: 1;
-    text-align: center;
-}
+    .o-prof-activity {
+        width: 100%;
+        display: flex;
+        margin-top: 18px;
+    }
 
+    .o-prof-activity a div {
+        width: 100%;
+        text-align: center;
+    }
+
+    .caption-bold {
+        color: #263238;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 500;
+    }
+
+    .f700 {
+        font-weight: 700 !important;
+    }
+
+    .o-prof-activity a {
+        flex: 1;
+        text-align: center;
+    }
 </style>
