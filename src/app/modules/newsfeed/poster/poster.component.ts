@@ -168,6 +168,7 @@ export class PosterComponent {
         this.attachment.reset();
         this.meta = { wire_threshold: null };
         this.inProgress = false;
+        this.cards = [];
       })
       .catch((e) => {
         this.inProgress = false;
@@ -265,13 +266,13 @@ export class PosterComponent {
   }
   createForms(type: string) {
     this.staticBoard = true;
-    this.attachment.reset();
     this.cards = [];
     this.renderForms(type);
   }
   renderForms(type: string) {
     console.log(type)
     this.display = type;
+    this.attachment.reset();
     // this.buildForm(type);
   }
 
@@ -282,6 +283,7 @@ export class PosterComponent {
   }
    changeToDefault() {
     this.display = 'default';
+    this.attachment.reset();
   }
   displayPaywall(){
     if(this.displayPaywal) this.displayPaywal = false;
