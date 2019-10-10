@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Client } from '../../../services/api/client';
+import { Storage } from '../../../services/storage';
 
 @Component({
   selector: 'opspot-widget-slider',
