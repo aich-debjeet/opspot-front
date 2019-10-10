@@ -88,6 +88,7 @@ import { MasonryContainerComponent } from './components/masonry-container/masonr
 import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
 import { ShowtimeWidgetComponent } from './components/showtime-widget/showtime-widget.component';
 import { ShowtimeListCardComponent } from './components/showtime-list-card/showtime-list-card.component';
+import { MyjourneyWidgetComponent } from './components/myjourney-widget/myjourney-widget.component';
 
 @NgModule({
   imports: [
@@ -176,7 +177,8 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
     OpportunityListCardComponent,
     MasonryContainerComponent,
     ShowtimeWidgetComponent,
-    ShowtimeListCardComponent
+    ShowtimeListCardComponent,
+    MyjourneyWidgetComponent
   ],
   exports: [
     OPSPOT_PIPES,
