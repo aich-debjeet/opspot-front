@@ -42,7 +42,7 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { AppuserComponent } from './components/appuser/appuser.component';
 import { GroupBannerComponent } from './components/group-banner/group-banner.component';
 import { OpspotFormsModule } from '../forms/forms.module';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
+// import { SlickCarouselModule } from 'ngx-slick-carousel';
 // import { PostCard } from './components/cards/post-card/post-card';
 
 
@@ -64,7 +64,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     CommentsModule,
     TextInputAutocompleteModule,
     OpspotFormsModule,
-    SlickCarouselModule
+    // SlickCarouselModule
   ],
   declarations: [
     Activity,
@@ -123,7 +123,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     CarouselComponent,
     AppuserComponent,
     GroupBannerComponent,
-    SlickCarouselModule
+    // SlickCarouselModule
     // PostCard
   ],
   entryComponents: [

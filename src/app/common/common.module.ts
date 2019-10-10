@@ -89,6 +89,7 @@ import { MasonryContainerComponent } from './components/masonry-container/masonr
 import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
 import { ShowtimeWidgetComponent } from './components/showtime-widget/showtime-widget.component';
 import { ShowtimeListCardComponent } from './components/showtime-list-card/showtime-list-card.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   imports: [
@@ -97,7 +98,8 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
     FormsModule,
     ReactiveFormsModule,
     NgxCroppieModule,
-    NgxMasonryModule
+    NgxMasonryModule,
+    SlickCarouselModule
   ],
   declarations: [
     OPSPOT_PIPES,
