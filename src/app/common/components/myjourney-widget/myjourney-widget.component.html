@@ -1,0 +1,46 @@
+
+<div class="o-card journey">
+    <div class="journey-media">
+        <ng-container *ngFor="let entity of entities | slice:0:4; let i=index">
+            <a class="journey-media__one" *ngIf="i===0" [ngStyle]="{'background': '#444 url(' + entity.thumbnail_src + ') center center / cover'}">
+                <div class="journey-overlay">
+                    <div class="journey-media__play-ico">
+                        <img src="assets/svg/playfill.svg" alt="">
+                    </div>
+                </div>
+            </a>
+            <a class="journey-media__two" *ngIf="i===1" [ngStyle]="{'background': '#444 url(' + entity.thumbnail_src + ') center center / cover'}">
+                <div class="journey-overlay">
+                    <div class="journey-media__play-ico">
+                        <img src="assets/svg/playfill.svg" alt="">
+                    </div>
+                </div>
+            </a>
+            <a class="journey-media__three" *ngIf="i===2" [ngStyle]="{'background': '#444 url(' + entity.thumbnail_src + ') center center / cover'}">
+                <div class="journey-overlay">
+                    <div class="journey-media__play-ico">
+                        <img src="assets/svg/playfill.svg" alt="">
+                    </div>
+                </div>
+            </a>
+            <a class="journey-media__four" *ngIf="i===3" [ngStyle]="{'background': '#444 url(' + entity.thumbnail_src + ') center center / cover'}">
+                <div class="journey-overlay">
+                    <div class="journey-media__play-ico">
+                        <img src="assets/svg/playfill.svg" alt="">
+                    </div>
+                </div>
+            </a>
+        </ng-container>
+    </div>
+    <!-- TODO Flow is required for add journey from profile page-->
+    <div class="journey__add">
+        <a href="addpost.html" class="journey-add__link">
+            <div class="journey-add__icon">
+                <img src="https://cdn.onepagespotlight.com/v2/svg/ico_create-plus.svg" alt="">
+            </div>
+            <div class="journey-add__txt text-md primary">
+                Add Journey 
+            </div>
+        </a>
+    </div>
+</div>

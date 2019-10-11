@@ -25105,18 +25105,6 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
       }
   }
 }
-.o-create-show-timez  {
-  border-radius: 0 0 4px 4px;	
-  background-color: rgba(235,239,242,0.4);
-  padding: 12px 24px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  // border: 1px solid #ECEFF1;
-  .btn-primary.disabled{
-      color: $grey!important;
-  }
-}
 
 //responsive style
 @include mq($from: $mobile_sm, $until:$mobile_lg ) {
@@ -25293,7 +25281,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
       }
   }
 }
-.o-create-opportunity-footer{
+.o-create-opportunity-footer, .o-create-show-timez-footer{
   border-radius: 0 0 4px 4px;	
   background-color: rgba(235,239,242,0.4);
   padding: 12px 24px;
