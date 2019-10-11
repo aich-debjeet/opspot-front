@@ -90,7 +90,7 @@ export class MyJourneyFormComponent implements OnInit {
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
-    this.tags.push('#myjourney' + this.session.getLoggedInUser().username);
+    this.tags.push('myjourney' + this.session.getLoggedInUser().username);
     data.tags = this.tags;
     data.isNSFW = this.isNSFW;
     this.client.post('api/v1/newsfeed', data)

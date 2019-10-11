@@ -77,7 +77,7 @@ export class PortfolioFormComponent implements OnInit {
       return;
     }
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-    this.tags.push('#portfolio' + this.session.getLoggedInUser().username)
+    this.tags.push('portfolio' + this.session.getLoggedInUser().username)
     data.tags = this.tags;
     data.isNSFW = this.isNSFW
    
