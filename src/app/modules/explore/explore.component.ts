@@ -28,6 +28,41 @@ export class ExploreComponent implements OnInit {
   moreData: boolean = true;
   ref: string = '';
   exploreSlider;
+  slideConfig = {
+    slidesToShow: 8, 
+    slidesToScroll: 8, 
+    arrows: false, 
+    responsive:[
+      {
+        breakpoint: 1024,
+        settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 320,
+      settings: {
+        slidesToShow:1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+};
   
   @ViewChild('searchInput') searchInput: ElementRef;
 
@@ -170,6 +205,21 @@ export class ExploreComponent implements OnInit {
   }
   reset(){
     this.exploreArray = [];
+  }
+
+  slickInit(e) {
+    console.log('slick initialized in activity');
+  }
+  breakpoint(e) {
+    console.log('breakpoint');
+  }
+
+  afterChange(e) {
+    console.log('afterChange');
+  }
+
+  beforeChange(e) {
+    console.log('beforeChange');
   }
 
 }

@@ -1,19 +1,21 @@
 <div class="o-explore-tag-sec">
-    <div class="o-explore-tag tag-slik">
-        <ng-container *ngFor="let tags of hashtags">
-            <a (click)="switchCategoryType(tags.value)" class="o-tag">{{tags.value}}</a>
-        </ng-container>
-
-        <!-- <ngu-carousel [inputs]="exploreSlider">
-            <ngu-item NguCarouselItem class="" *ngFor="let tags of hashtags">
-                <a (click)="switchCategoryType(tags.value)" class="o-tag">{{tags.value}}</a>
-            </ngu-item>
-            <button NguCarouselPrev class='leftRs'>&lt;</button>
-            <button NguCarouselNext class='rightRs'>&gt;</button>
-        </ngu-carousel> -->
-    </div><!-- tag block end -->
+            <ngx-slick-carousel 
+            class="carousel o-explore-tag tag-slik"
+            #slickModal="slick-carousel" 
+            [config]="slideConfig" 
+            (init)="slickInit($event)"
+            (breakpoint)="breakpoint($event)" 
+            (afterChange)="afterChange($event)"
+            (beforeChange)="beforeChange($event)"
+            >
+            <div ngxSlickItem *ngFor="let tags of hashtags; let i = index;" class="slide o-tag">
+                <a (click)="switchCategoryType(tags.value)" class="">{{tags.value}}</a>
+            </div>
+            </ngx-slick-carousel>
+            <!-- <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+            <button class="btn-next" (click)="slickModal.slickNext()">next</button> -->
+    <!--tag block end -->
 </div><!-- tag section end-->
-
 <section class="o-explore-content-sec">
     <div class="container">
         <div class="o-explore-action">
