@@ -1,70 +1,71 @@
 <div class="o-create-blue-store">
-  <div class="o-create-blue-store-head o-create-blue-store-head--border">
-      <div class="o-create-blue-store__title text-lg f500">Create a post
-          <span class="o-create-dropdown-style">
-              <span class="text-md primary f500">On #TheBlueStore<span class="icon-x"
-                      (click)="changeToDefault()"></span></span>
-          </span>
-      </div>
-      <div class="close" (click)="close()"><i class="icon-x"></i></div>
+    <div class="o-create-blue-store-head o-create-blue-store-head--border">
+        <div class="o-create-blue-store__title text-lg f500">{{label}} a post
+            <span class="o-create-dropdown-style">
+                <span class="text-md primary f500">On #TheBlueStore
+                  <span class="icon-x" (click)="changeToDefault()"></span>
+                </span>
+            </span>
+        </div>
+        <div class="close" (click)="close()"><i class="icon-x"></i></div>
+    </div>
+    <form [formGroup]="blueStoreForm">
+        <div class="o-create-blue-store-body o-create-blue-store-body--flex">
+            <div class="form-group">
+                <label>Add images</label>
+                <div class="o-create-blue-store-cover-image">
+                    <div class="fileUpload">
+                        <span class="icon-plus"></span>
+                        <input type="file" id="file" #file class="upload" name="attachment"
+                        (change)="uploadAttachment(file, $event)"/>
+                    </div>
+                    <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
+                        <a class="o-create-blue-store-cover-image__avatar">
+                            <a class="fileUpload-close-temp" (click)="removeAttachment(image.guid)"><i class="icon-x"></i></a>
+                            <img [src]="image.src" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control form-control-lg" formControlName="blueStoreTitle">
+                <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreTitle').errors?.required">
+                        This is required</div>
+            </div>
+            <div class="form-group">
+                <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                <textarea class="form-control" rows="5" formControlName="blueStoreDescription"></textarea>
+                <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreDescription').errors?.required">
+                        This is required</div>
+            </div>
+            <div class="o-create-blue-store-unit-price">
+                <div class="form-group">
+                    <label>No of Units <span class="icon-info"></span></label>
+                    <input type="number" class="form-control form-control-lg" formControlName="blueStoreUnits">
+                    <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreUnits').errors?.required">
+                            This is required</div>
+                </div>
+                <div class="form-group ml-18">
+                    <label>Price <span class="icon-info"></span></label>
+                    <div class="o-create-blue-store-unit-price__inner">
+                        <div class="o-opportunity-country-code">
+                            <span class="o-opportunity-country-code__flag"><img src="assets/svg/in.png" alt=""></span>
+                            <span class="o-opportunity-country-code__text text-md">IND</span>
+                            <a href="javascript:void(0)" class="o-opportunity-country-code__dropdown">
+                                <img src="assets/svg/arrow-down.svg" alt=""></a>
+                        </div>
+                        <input type="number" class="form-control form-control-lg  ml-8" placeholder="Enter Price"
+                            formControlName="blueStorePrice">
+                            <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStorePrice').errors?.required">
+                                    This is required</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="o-create-blue-store-footer">
+            <button type="button" class="btn btn-primary btn-sm disabled" 
+            (click)="blueStoreSubmit()">Post</button>
+        </div>
+    </form>
   </div>
-  <form [formGroup]="blueStoreForm">
-      <div class="o-create-blue-store-body o-create-blue-store-body--flex">
-          <div class="form-group">
-              <label>Add images</label>
-              <div class="o-create-blue-store-cover-image">
-                  <div class="fileUpload">
-                      <span class="icon-plus"></span>
-                      <input type="file" id="file" #file class="upload" name="attachment"
-                      (change)="uploadAttachment(file, $event)"/>
-                  </div>
-                  <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
-                      <a class="o-create-blue-store-cover-image__avatar">
-                          <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i class="icon-x"></i></a>
-                          <img [src]="image.imageLink" alt="">
-                      </a>
-                  </div>
-              </div>
-          </div>
-          <div class="form-group">
-              <label>Title</label>
-              <input type="text" class="form-control form-control-lg" formControlName="blueStoreTitle">
-              <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreTitle').errors?.required">
-                      This is required</div>
-          </div>
-          <div class="form-group">
-              <label>Description<span class="text-sm grey description-width">21/300</span></label>
-              <textarea class="form-control" rows="5" formControlName="blueStoreDescription"></textarea>
-              <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreDescription').errors?.required">
-                      This is required</div>
-          </div>
-          <div class="o-create-blue-store-unit-price">
-              <div class="form-group">
-                  <label>No of Units <span class="icon-info"></span></label>
-                  <input type="text" class="form-control form-control-lg" formControlName="blueStoreUnits">
-                  <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreUnits').errors?.required">
-                          This is required</div>
-              </div>
-              <div class="form-group ml-18">
-                  <label>Price <span class="icon-info"></span></label>
-                  <div class="o-create-blue-store-unit-price__inner">
-                      <div class="o-opportunity-country-code">
-                          <span class="o-opportunity-country-code__flag"><img src="assets/svg/in.png"
-                                  alt=""></span>
-                          <span class="o-opportunity-country-code__text text-md">IND</span>
-                          <a href="javascript:void(0)" class="o-opportunity-country-code__dropdown">
-                              <img src="assets/svg/arrow-down.svg" alt=""></a>
-                      </div>
-                      <input type="text" class="form-control form-control-lg  ml-8" placeholder="Enter Price"
-                          formControlName="blueStorePrice">
-                          <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStorePrice').errors?.required">
-                                  This is required</div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="o-create-blue-store-footer">
-          <button type="button" class="btn btn-primary btn-sm disabled" (click)="blueStoreSubmit()">Post</button>
-      </div>
-  </form>
-</div>

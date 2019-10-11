@@ -1,4 +1,5 @@
-<app-comment-list *ngIf="group?.guid"
+<opspot-comments *ngIf="group?.guid"
+  class="m-group__chat"
   [limit]="24"
   [object]="group"
   [focusOnInit]="true"
@@ -6,4 +7,4 @@
   [scrollable]="true"
   [canEdit]="group['is:moderator'] || group['is:creator']"
   [readonly]="!group['is:member']"
-></app-comment-list>
+></opspot-comments>

@@ -1,3 +1,6 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
 .tabs .m-wire-button{
   transform: scale(0.8) translateY(-4px);
 }
@@ -102,9 +105,6 @@ opspot-groups-profile-feed .m-pin-button {
   //display: none;
 }
 
-@import "src/assets/helpers/variables";
-@import "node_modules/sass-mq/_mq";
-
 .feed{
     float: left;
     background: $white;
@@ -180,6 +180,7 @@ opspot-groups-profile-feed .m-pin-button {
 
 .feed-media{
     width: 100%;
+    // height: 120px; // TODO @Bijoy
     display: flex;
     flex-direction: row;
     position: relative;
@@ -196,10 +197,11 @@ opspot-groups-profile-feed .m-pin-button {
 .feed-media__link{
     max-height: 900px;
     position: relative;
+    display: flex;
 }
 .feed-media__img{
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 // video media
 
@@ -745,3 +747,9 @@ opspot-groups-profile-feed .m-pin-button {
    }
    
 }
+
+// .set-bg {
+//     background-position: center center;
+//     background-size: cover;
+// }
+

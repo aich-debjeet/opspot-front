@@ -10,20 +10,6 @@ import { UtcDatePipe } from './utcdate';
 import { AddressExcerptPipe } from './address-excerpt';
 import { TimediffPipe } from './timediff.pipe';
 import { FriendlyDateDiffPipe } from './friendlydatediff';
-import { StripHtmlPipe } from './strip-html.pipe';
+import { TruncatePipe } from './truncate.pipe';
 
-export const OPSPOT_PIPES = [
-  AbbrPipe,
-  DomainPipe,
-  TagsPipe,
-  SanitizePipe,
-  SafePipe,
-  ListablePipe,
-  ExcerptPipe,
-  TokenPipe,
-  UtcDatePipe,
-  AddressExcerptPipe,
-  TimediffPipe,
-  FriendlyDateDiffPipe,
-  StripHtmlPipe
-];
+export const OPSPOT_PIPES = [ AbbrPipe, DomainPipe, TagsPipe, SanitizePipe, SafePipe, ListablePipe, ExcerptPipe, TokenPipe, UtcDatePipe, AddressExcerptPipe, TimediffPipe, FriendlyDateDiffPipe, TruncatePipe ];

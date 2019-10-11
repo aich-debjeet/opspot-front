@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule as NgFormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,8 +35,6 @@ import { TagInputModule } from 'ngx-chips';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { UserPrivacyComponent } from './profile-edit/user-privacy/user-privacy.component';
-import { ProfileBlockComponent } from './profile-block/profile-block.component';
-import { ProfileBlockSuccessComponent } from './profile-block/profile-block-success/profile-block-success.component';
 import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
 
 
@@ -52,7 +49,6 @@ const routes: Routes = [
     NgFormsModule,
     ReactiveFormsModule,
     CommonModule,
-    BrowserAnimationsModule,
     RouterModule.forChild(routes),
     LegacyModule,
     MessengerModule,
@@ -88,9 +84,7 @@ const routes: Routes = [
     WorkComponent,
     EducationComponent,
     AwardsComponent,
-    UserPrivacyComponent,
-    ProfileBlockComponent,
-    ProfileBlockSuccessComponent,
+    UserPrivacyComponent
   ],
   exports: [
     ChannelModulesComponent,
@@ -104,8 +98,6 @@ const routes: Routes = [
   entryComponents: [
     ChannelComponent,
     ChannelsListComponent,
-    ProfileBlockComponent,
-    ProfileBlockSuccessComponent
   ],
 })
 export class ChannelsModule {

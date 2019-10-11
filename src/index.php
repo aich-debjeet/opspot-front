@@ -12,10 +12,10 @@
     <base href="/" />
 
     <meta charset="utf-8">
-    <link rel="icon" type="image/svg" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/bulb.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/bulb-apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/bulb-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/bulb-16x16.png">
+    <link rel="icon" type="image/svg" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-16x16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <?php
       foreach($meta as $name => $content){
@@ -66,7 +66,7 @@
             <div class="auxbar bar bar3" style="width: 0%;"></div>
           </div>
 
-          <!-- <div class="m-initial-loading-centred" style="width:100%; text-align:center; margin: 100px auto;">
+          <div class="m-initial-loading-centred" style="width:100%; text-align:center; margin: 100px auto;">
             <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active is-upgraded" style="width: 64px;height: 64px;" data-upgraded=",MaterialSpinner">
               <div class="mdl-spinner__layer mdl-spinner__layer-1">
                 <div class="mdl-spinner__circle-clipper mdl-spinner__left">
@@ -89,7 +89,7 @@
                 </div><div class="mdl-spinner__gap-patch"><div class="mdl-spinner__circle"></div></div><div class="mdl-spinner__circle-clipper mdl-spinner__right"><div class="mdl-spinner__circle"></div></div>
               </div>
             </div>
-          </div> -->
+          </div>
         </m-app>
     <?php endif; ?>
 

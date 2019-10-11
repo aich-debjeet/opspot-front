@@ -1,219 +1,219 @@
 <section class="o-invite-sec">
-    <div class="container">
-        <div class="o-invite-block">
-            <div class="o-invite-block-hero">
-                <div class="o-invite-block-hero__title">
-                    <h2 class="f700">Invite Friends</h2>
-                    <div class="caption-regular o-invit-block-hero-text">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.
-                    </div>
-                </div>
-            </div><!-- invite block hero end -->
-            <div class="o-invite-short-det">
-                <h3 class="f500 text-center">Invite your friends on One Page Spotlight and earn spotcoins</h3>
-                <div class="text-md o-invite-short-det__parag">
-                    Tell your friends to register on One Page Spotlight using your referral link
-                    and earn spotcoins! 
-                </div>
-            </div><!-- invite short det end -->
-            <div class="o-invite-email">
-                <div class="caption-bold f500">Invite your friends by email</div>
-                <textarea name="" id="" cols="" rows="" class="o-invite-email-textarea text-md" placeholder="Add email address using commas"></textarea>
-                <a class="o-send-invite">Send Invite</a>
-            </div><!-- invite by email end -->
-            <div class="o-invite-other-way">
-                <div class="caption-bold f500">More ways to invite your friends</div>
-                <div class="o-invite-link-copy">
-                    <!-- <div class="o-invite-copy-link text-md grey"
-                      (click)="applyFocus(registerUrlEl, 'registerUrl')"> -->
-                      <input
-                      class="text-md grey input"
-                      readonly
-                      tabindex="-1"     
-                      value="{{ registerUrl }}"
-                      #registerUrlEl
-                    />
-                    <!-- </div> -->
-                    <button class="o-invite-copy-link-btn text-sm f500 white"                       (click)="copyToClipboard(registerUrlEl, 'registerUrl')"
-                    >Copy Link</button>
-                </div><!-- invite link copy end -->
-                <div class="o-invite-link-copy-other-social">
-                    <a (click)="openEmail()" class="o-invite-social-btn">
-                        <div class="o-invite-social-icon"><img src="../../../assets/svg/gmail_icon.svg" alt=""></div>
-                        <div class="text-sm f500 hidden-under-tablet">Invite Gmail Contacts</div>
-                    </a>
-                    <a (click)="openFacebook()" class="o-invite-social-btn">
-                        <div class="o-invite-social-icon"><img src="../../../assets/svg/fb_icon.svg" alt=""></div>
-                        <div class="text-sm f500 hidden-under-tablet">Share in Facebook</div>
-                    </a>
-                    <a (click)="openTwitter()" class="o-invite-social-btn">
-                        <div class="o-invite-social-icon"><img src="../../../assets/svg/twittor_icon.svg" alt=""></div>
-                        <div class="text-sm f500 hidden-under-tablet">Tweet in Twitter</div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="container">
+      <div class="o-invite-block">
+          <div class="o-invite-block-hero">
+              <div class="o-invite-block-hero__title">
+                  <h2 class="f700">Invite Friends</h2>
+                  <div class="caption-regular o-invit-block-hero-text">
+                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                      Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.
+                  </div>
+              </div>
+          </div><!-- invite block hero end -->
+          <div class="o-invite-short-det">
+              <h3 class="f500 text-center">Invite your friends on One Page Spotlight and earn spotcoins</h3>
+              <div class="text-md o-invite-short-det__parag">
+                  Tell your friends to register on One Page Spotlight using your referral link
+                  and earn spotcoins! 
+              </div>
+          </div><!-- invite short det end -->
+          <div class="o-invite-email">
+              <div class="caption-bold f500">Invite your friends by email</div>
+              <textarea name="" id="" cols="" rows="" class="o-invite-email-textarea text-md" placeholder="Add email address using commas"></textarea>
+              <a class="o-send-invite">Send Invite</a>
+          </div><!-- invite by email end -->
+          <div class="o-invite-other-way">
+              <div class="caption-bold f500">More ways to invite your friends</div>
+              <div class="o-invite-link-copy">
+                  <!-- <div class="o-invite-copy-link text-md grey"
+                    (click)="applyFocus(registerUrlEl, 'registerUrl')"> -->
+                    <input
+                    class="text-md grey input"
+                    readonly
+                    tabindex="-1"     
+                    value="{{ registerUrl }}"
+                    #registerUrlEl
+                  />
+                  <!-- </div> -->
+                  <button class="o-invite-copy-link-btn text-sm f500 white"                       (click)="copyToClipboard(registerUrlEl, 'registerUrl')"
+                  >Copy Link</button>
+              </div><!-- invite link copy end -->
+              <div class="o-invite-link-copy-other-social">
+                  <a (click)="openEmail()" class="o-invite-social-btn">
+                      <div class="o-invite-social-icon"><img src="../../../assets/svg/gmail_icon.svg" alt=""></div>
+                      <div class="text-sm f500 hidden-under-tablet">Invite Gmail Contacts</div>
+                  </a>
+                  <a (click)="openFacebook()" class="o-invite-social-btn">
+                      <div class="o-invite-social-icon"><img src="../../../assets/svg/fb_icon.svg" alt=""></div>
+                      <div class="text-sm f500 hidden-under-tablet">Share in Facebook</div>
+                  </a>
+                  <a (click)="openTwitter()" class="o-invite-social-btn">
+                      <div class="o-invite-social-icon"><img src="../../../assets/svg/twittor_icon.svg" alt=""></div>
+                      <div class="text-sm f500 hidden-under-tablet">Tweet in Twitter</div>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
 </section>
 
 <!-- <div class="m-referralsLinks">
-    <div class="m-referralsLinks__copyableLinks">
-      <h3
-        class="m-referralsLinks__modalShow"
-        i18n="@@M_REFERRALS__LINKS_MODAL_HEADER"
-      >
-        Earn tokens for referring your friends
-      </h3>
-      <p
-        class="m-referralsLinks__modalHide"
-        i18n="@@M_REFERRALS__LINKS_REGISTER_URL_DESC"
-      >
-        Send this link to your friends to earn tokens for referrals
-      </p>
-  
+  <div class="m-referralsLinks__copyableLinks">
+    <h3
+      class="m-referralsLinks__modalShow"
+      i18n="@@M_REFERRALS__LINKS_MODAL_HEADER"
+    >
+      Earn tokens for referring your friends
+    </h3>
+    <p
+      class="m-referralsLinks__modalHide"
+      i18n="@@M_REFERRALS__LINKS_REGISTER_URL_DESC"
+    >
+      Send this link to your friends to earn tokens for referrals
+    </p>
+
+    <div
+      class="m-referralsLinks__copyableLink m-border"
+      [class.focused]="registerUrlFocused"
+      (click)="applyFocus(registerUrlEl, 'registerUrl')"
+    >
+      <input
+        class="m-referralsLinks__copyableLinkText"
+        [class.recentlyCopied]="registerUrlRecentlyCopied"
+        readonly
+        tabindex="-1"
+        (focus)="(registerUrlFocused)"
+        (focusout)="registerUrlFocused = false"
+        value="{{ registerUrl }}"
+        #registerUrlEl
+      />
       <div
-        class="m-referralsLinks__copyableLink m-border"
-        [class.focused]="registerUrlFocused"
-        (click)="applyFocus(registerUrlEl, 'registerUrl')"
+        (click)="copyToClipboard(registerUrlEl, 'registerUrl')"
+        class="m-referralsLinks__copyableLinkButton"
       >
-        <input
-          class="m-referralsLinks__copyableLinkText"
-          [class.recentlyCopied]="registerUrlRecentlyCopied"
-          readonly
-          tabindex="-1"
-          (focus)="(registerUrlFocused)"
-          (focusout)="registerUrlFocused = false"
-          value="{{ registerUrl }}"
-          #registerUrlEl
-        />
         <div
-          (click)="copyToClipboard(registerUrlEl, 'registerUrl')"
-          class="m-referralsLinks__copyableLinkButton"
+          *ngIf="!registerUrlRecentlyCopied"
+          i18n="@@M_REFERRALS__LINKS_COPY_ACTION"
         >
-          <div
-            *ngIf="!registerUrlRecentlyCopied"
-            i18n="@@M_REFERRALS__LINKS_COPY_ACTION"
-          >
-            Copy
-          </div>
-          <div
-            *ngIf="registerUrlRecentlyCopied"
-            i18n="@@M_REFERRALS__LINKS_COPY_STATE"
-          >
-            Copied
-          </div>
+          Copy
         </div>
-      </div>
-  
-      <p i18n="@@M_REFERRALS__LINKS_REFERRER_PARAM_DESC">
-        You can also get referrals by adding this code to the end of any Minds
-        link you share
-      </p>
-      <div
-        class="m-referralsLinks__copyableLink m-border"
-        [class.focused]="referrerParamFocused"
-        (click)="applyFocus(referrerParamEl, 'referrerParam')"
-      >
-        <input
-          class="m-referralsLinks__copyableLinkText"
-          [class.recentlyCopied]="referrerParamRecentlyCopied"
-          readonly
-          tabindex="-1"
-          (focus)="(referrerParamFocused)"
-          (focusout)="referrerParamFocused = false"
-          value="{{ referrerParam }}"
-          #referrerParamEl
-        />
         <div
-          (click)="copyToClipboard(referrerParamEl, 'referrerParam')"
-          class="m-referralsLinks__copyableLinkButton"
+          *ngIf="registerUrlRecentlyCopied"
+          i18n="@@M_REFERRALS__LINKS_COPY_STATE"
         >
-          <div
-            i18n="@@M_REFERRALS__LINKS_COPY_ACTION"
-            *ngIf="!referrerParamRecentlyCopied"
-          >
-            Copy
-          </div>
-          <div
-            i18n="@@M_REFERRALS__LINKS_COPY_STATE"
-            *ngIf="referrerParamRecentlyCopied"
-          >
-            Copied
-          </div>
+          Copied
         </div>
       </div>
     </div>
-  
-    <div class="m-referralsLinks__share">
-      <h4 i18n="@@M_REFERRALS__SHARE_HEADER">More ways to share</h4>
-      <div class="m-referralsLinks__shareButtons">
-        <button
-          i18n-title="@@M_REFERRALS__SHARE_BUTTON_TWITTER"
-          title="Twitter"
-          class="m-referralsLinks__shareButton m-referralsLinks__shareButton--twitter"
-          (click)="openTwitter()"
+
+    <p i18n="@@M_REFERRALS__LINKS_REFERRER_PARAM_DESC">
+      You can also get referrals by adding this code to the end of any Minds
+      link you share
+    </p>
+    <div
+      class="m-referralsLinks__copyableLink m-border"
+      [class.focused]="referrerParamFocused"
+      (click)="applyFocus(referrerParamEl, 'referrerParam')"
+    >
+      <input
+        class="m-referralsLinks__copyableLinkText"
+        [class.recentlyCopied]="referrerParamRecentlyCopied"
+        readonly
+        tabindex="-1"
+        (focus)="(referrerParamFocused)"
+        (focusout)="referrerParamFocused = false"
+        value="{{ referrerParam }}"
+        #referrerParamEl
+      />
+      <div
+        (click)="copyToClipboard(referrerParamEl, 'referrerParam')"
+        class="m-referralsLinks__copyableLinkButton"
+      >
+        <div
+          i18n="@@M_REFERRALS__LINKS_COPY_ACTION"
+          *ngIf="!referrerParamRecentlyCopied"
         >
-          <img [src]="minds.cdn_assets_url + 'assets/icons/twitter.svg'" />
-        </button>
-  
-        <button
-          i18n-title="@@M_REFERRALS__SHARE_BUTTON_FACEBOOK"
-          title="Facebook"
-          class="m-referralsLinks__shareButton m-referralsLinks__shareButton--facebook"
-          (click)="openFacebook()"
+          Copy
+        </div>
+        <div
+          i18n="@@M_REFERRALS__LINKS_COPY_STATE"
+          *ngIf="referrerParamRecentlyCopied"
         >
-          <img [src]="minds.cdn_assets_url + 'assets/icons/facebook.svg'" />
-        </button>
-  
-        <button
-          i18n-title="@@M_REFERRALS__SHARE_BUTTON_MESSENGER"
-          title="Messenger"
-          class="m-referralsLinks__shareButton m-referralsLinks__shareButton--messenger"
-          *ngIf="isMobileOrTablet()"
-          (click)="openMessenger()"
-        >
-          <img [src]="minds.cdn_assets_url + 'assets/icons/messenger.svg'" />
-        </button>
-  
-        <button
-          i18n-title="@@M_REFERRALS__SHARE_BUTTON_Whatsapp"
-          title="Whatsapp"
-          class="m-referralsLinks__shareButton m-referralsLinks__shareButton--whatsapp"
-          *ngIf="isMobileOrTablet()"
-          (click)="openWhatsapp()"
-        >
-          <img [src]="minds.cdn_assets_url + 'assets/icons/whatsapp.svg'" />
-        </button>
-  
-        <button
-          i18n-title="@@M_REFERRALS__SHARE_BUTTON_SMS"
-          title="SMS"
-          class="m-referralsLinks__shareButton m-referralsLinks__shareButton--sms"
-          *ngIf="isMobile()"
-          (click)="openSMS()"
-        >
-          <img [src]="minds.cdn_assets_url + 'assets/icons/sms.svg'" />
-        </button>
-  
-        <button
-          i18n-title="@@M_REFERRALS__SHARE_BUTTON_EMAIL"
-          title="Email"
-          class="m-referralsLinks__shareButton m-referralsLinks__shareButton--email"
-          (click)="openEmail()"
-        >
-          <img [src]="minds.cdn_assets_url + 'assets/icons/email.svg'" />
-        </button>
+          Copied
+        </div>
       </div>
-    </div>
-    <div class="m-referralsLinks__modalShow m-referralsLinks__modalButton">
-      <a [routerLink]="['/wallet/tokens/referrals']" (click)="closeModal()">
-        <button class="m-btn m-btn--slim m-btn--action">
-          <span i18n-title="@@M_REFERRALS__LINKS_CONSOLE_BUTTON"
-            >Go to Referrals Console</span
-          >
-        </button>
-      </a>
     </div>
   </div>
-   -->
+
+  <div class="m-referralsLinks__share">
+    <h4 i18n="@@M_REFERRALS__SHARE_HEADER">More ways to share</h4>
+    <div class="m-referralsLinks__shareButtons">
+      <button
+        i18n-title="@@M_REFERRALS__SHARE_BUTTON_TWITTER"
+        title="Twitter"
+        class="m-referralsLinks__shareButton m-referralsLinks__shareButton--twitter"
+        (click)="openTwitter()"
+      >
+        <img [src]="minds.cdn_assets_url + 'assets/icons/twitter.svg'" />
+      </button>
+
+      <button
+        i18n-title="@@M_REFERRALS__SHARE_BUTTON_FACEBOOK"
+        title="Facebook"
+        class="m-referralsLinks__shareButton m-referralsLinks__shareButton--facebook"
+        (click)="openFacebook()"
+      >
+        <img [src]="minds.cdn_assets_url + 'assets/icons/facebook.svg'" />
+      </button>
+
+      <button
+        i18n-title="@@M_REFERRALS__SHARE_BUTTON_MESSENGER"
+        title="Messenger"
+        class="m-referralsLinks__shareButton m-referralsLinks__shareButton--messenger"
+        *ngIf="isMobileOrTablet()"
+        (click)="openMessenger()"
+      >
+        <img [src]="minds.cdn_assets_url + 'assets/icons/messenger.svg'" />
+      </button>
+
+      <button
+        i18n-title="@@M_REFERRALS__SHARE_BUTTON_Whatsapp"
+        title="Whatsapp"
+        class="m-referralsLinks__shareButton m-referralsLinks__shareButton--whatsapp"
+        *ngIf="isMobileOrTablet()"
+        (click)="openWhatsapp()"
+      >
+        <img [src]="minds.cdn_assets_url + 'assets/icons/whatsapp.svg'" />
+      </button>
+
+      <button
+        i18n-title="@@M_REFERRALS__SHARE_BUTTON_SMS"
+        title="SMS"
+        class="m-referralsLinks__shareButton m-referralsLinks__shareButton--sms"
+        *ngIf="isMobile()"
+        (click)="openSMS()"
+      >
+        <img [src]="minds.cdn_assets_url + 'assets/icons/sms.svg'" />
+      </button>
+
+      <button
+        i18n-title="@@M_REFERRALS__SHARE_BUTTON_EMAIL"
+        title="Email"
+        class="m-referralsLinks__shareButton m-referralsLinks__shareButton--email"
+        (click)="openEmail()"
+      >
+        <img [src]="minds.cdn_assets_url + 'assets/icons/email.svg'" />
+      </button>
+    </div>
+  </div>
+  <div class="m-referralsLinks__modalShow m-referralsLinks__modalButton">
+    <a [routerLink]="['/wallet/tokens/referrals']" (click)="closeModal()">
+      <button class="m-btn m-btn--slim m-btn--action">
+        <span i18n-title="@@M_REFERRALS__LINKS_CONSOLE_BUTTON"
+          >Go to Referrals Console</span
+        >
+      </button>
+    </a>
+  </div>
+</div>
+ -->

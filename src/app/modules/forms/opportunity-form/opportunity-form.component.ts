@@ -25,14 +25,31 @@ export class OpportunityFormComponent implements OnInit {
     this._opts = opts;
   }
 
+  reqBody = {
+    title: null,
+    description: null,
+    category: null,
+    access_id: 2,
+    published: 1,
+    location: null,
+    attachment_guid: []
+  };
+
+
   opportunity: any;
   oppGuid: string;
+  label = "Create";
 
   @Input('object') set data(object) {
     this.opportunity = object;
     if (this.opportunity) {
-      this.oppGuid = object['guid'];
+      this.oppGuid = object['entity_guid'];
+      this.label = "Edit";
       this.buildForm(this.opportunity);
+      this.cards = this.opportunity['custom_data'];
+      this.opportunity['custom_data'].forEach(image => {
+        this.reqBody.attachment_guid.push(image['guid']);
+      });
     } else {
       this.buildForm();
     }
@@ -59,14 +76,21 @@ export class OpportunityFormComponent implements OnInit {
     // this.buildForm();
   }
 
+  description = '';
+
   buildForm(data?) {
     if (data) {
+      if (data.description) {
+        this.description = data.description;
+      } if (data.blurb) {
+        this.description = data.blurb;
+      }
       this.opportunityForm = this.formBuilder.group({
         category: [data['category'] ? data['category'] : '', [Validators.required]],
         opportunityTitle: [data['title'] ? data['title'] : '', [Validators.required]],
-        opportunityDescription: [data['description'] ? data['description'] : '', [Validators.required]],
+        opportunityDescription: [this.description ? this.description : '', [Validators.required]],
         opportunityLocation: [data['location'] ? data['location'] : '', [Validators.required]],
-        opportunityImage: [data['image'] ? data['image'] : '', []]
+        opportunityImage: ['', []]
       });
     } else {
       this.opportunityForm = this.formBuilder.group({
@@ -90,29 +114,27 @@ export class OpportunityFormComponent implements OnInit {
   }
   postOpportunity(value) {
     this.submitted = true;
-    let data = Object.assign(this.meta, this.attachment.exportMeta());
-    data.attachment_guid = data.attachment_guid;
-    data.title = value.opportunityTitle;
-    data.description = value.opportunityDescription;
-    data.location = value.opportunityLocation;
-    data.category = value.category;
-    data.published = true;
+
+    this.reqBody.title = value.opportunityTitle;
+    this.reqBody.description = value.opportunityDescription;
+    this.reqBody.location = value.opportunityLocation;
+    this.reqBody.category = value.category;
 
     if (this.opportunityForm.valid) {
       let endpoint = 'api/v3/opportunity';
       if (this.oppGuid) {
         endpoint = 'api/v3/opportunity/' + this.oppGuid;
       }
-      this.client.post(endpoint, data)
+      this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
           this.load.emit(resp);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
           this.submitted = false;
           this.changeToDefault();
-          // check if update callback function is avaibale
+          // // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
-            this._opts.onUpdate(data);
+            this._opts.onUpdate(this.reqBody);
             // close modal
             this.closeModal();
           }
@@ -130,9 +152,8 @@ export class OpportunityFormComponent implements OnInit {
         .then(guid => {
           let obj = {};
           obj['guid'] = guid;
-          obj['imageLink'] = this.attachment.getPreview();
-
-          this.cards.push(obj);
+          obj['src'] = this.attachment.getPreview();
+          this.addAttachment(obj);
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }
@@ -147,16 +168,30 @@ export class OpportunityFormComponent implements OnInit {
     }
   }
 
-  removeAttachment(file: HTMLInputElement, imageId: string) {
-    this.attachment.remove(file, imageId).then((guid) => {
-      file.value = '';
-      this.cards = _remove(this.cards, function (n) {
-        return n.guid !== guid;
-      });
-    }).catch(e => {
-      console.error(e);
+  addAttachment(obj) {
+    if (this.cards.length < 1) {
+      this.cards.push(obj);
+      this.reqBody.attachment_guid.push(obj['guid']);
+    }
+  }
+
+  removeAttachment(guid) {
+    this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
+    this.cards = _remove(this.cards, function (n) {
+      return n.guid !== guid;
     });
   }
+
+  // removeAttachment(file: HTMLInputElement, imageId: string) {
+  //   this.attachment.remove(file, imageId).then((guid) => {
+  //     file.value = '';
+  //     this.cards = _remove(this.cards, function (n) {
+  //       return n.guid !== guid;
+  //     });
+  //   }).catch(e => {
+  //     console.error(e);
+  //   });
+  // }
 
   closeModal() {
     this.overlayModal.dismiss();

@@ -20,13 +20,14 @@ import { filter } from "rxjs/operators";
 
 @Component({
   selector: 'm-groups--profile',
-  templateUrl: 'profile.html',
- 
+  templateUrl: 'profile.html'
 })
 
 export class GroupsProfile {
 
- 
+  // fix: AOT
+  // TODO @shashi: dev? please fix
+  dev: any;
   guid;
   filter = 'activity';
   group;
@@ -47,15 +48,10 @@ export class GroupsProfile {
   paramsSubscription: Subscription;
   childParamsSubscription: Subscription;
   queryParamsSubscripton: Subscription;
-  totalMembers;
 
   socketRoomName: string;
   newConversationMessages: boolean = false;
 
-  inviteToggle:boolean=false;
-  memberToggle:boolean=false;
-  membersMobile;
-  memberSrc=`${this.opspot.cdn_url}icon/`
   @ViewChild('feed') private feed: GroupsProfileFeed;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
@@ -84,15 +80,14 @@ export class GroupsProfile {
     this.listenForNewMessages();
     this.detectWidth();
     this.detectConversationsState();
+
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {
-       this.loadMembers(params['guid'])
-
         let changed = params['guid'] !== this.guid;
 
         this.guid = params['guid'];
         this.postMeta.container_guid = this.guid;
-        
+
         if (changed) {
           this.group = void 0;
 
@@ -123,6 +118,7 @@ export class GroupsProfile {
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event) => {
       const url = this.router.routerState.snapshot.url;
+
       this.setFilter(url);
     });
 
@@ -177,7 +173,6 @@ export class GroupsProfile {
     // Load group
     try { 
       this.group = await this.service.load(this.guid);
-
     } catch (e) {
       this.error = e.message;
       return;
@@ -413,31 +408,4 @@ export class GroupsProfile {
     this.cd.detectChanges();
   }
 
-  groupCount(e){
-   this.totalMembers=e
-  }
-
-  openInvite(){
-  if(window.innerWidth>785){
-    this.inviteToggle=!this.inviteToggle;
-     }else{
-       this.router.navigate([`/groups/${this.guid}/invite`])
-     } 
-  }
-   
-  showMembers(){
-    if(window.innerWidth>785){
-   this.memberToggle=!this.memberToggle;
-    }else{
-      this.router.navigate([`/groups/${this.guid}/members`])
-    } 
-  }
- 
- async loadMembers(guid){
-    let endpoint = `api/v1/groups/membership/${guid}`
-    let  params = { limit: 4, offset: this.offset };
-     let members= await this.client.get(endpoint, params)
-     console.log(members)
-     this.membersMobile=members['members']
-    } 
 }

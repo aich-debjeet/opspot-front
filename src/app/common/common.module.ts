@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 import { OPSPOT_PIPES } from './pipes/pipes';
 
@@ -81,8 +82,15 @@ import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
 import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
-import { OpportunityWidgetComponent } from './components/opportunity-widget/opportunity-widget.component';
+import { OpspotWidgetComponent } from './components/opspot-widget/opspot-widget.component';
+import { OpspotWidgetSliderComponent } from './components/opspot-widget-slider/opspot-widget-slider.component';
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
+import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
+import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
+import { ShowtimeWidgetComponent } from './components/showtime-widget/showtime-widget.component';
+import { ShowtimeListCardComponent } from './components/showtime-list-card/showtime-list-card.component';
+import { MyjourneyWidgetComponent } from './components/myjourney-widget/myjourney-widget.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   imports: [
@@ -90,7 +98,9 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCroppieModule
+    NgxCroppieModule,
+    NgxMasonryModule,
+    SlickCarouselModule
   ],
   declarations: [
     OPSPOT_PIPES,
@@ -134,6 +144,7 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -165,8 +176,13 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     AndroidAppDownloadComponent,
     ImageCroperComponent,
     ReadMoreComponent,
-    OpportunityWidgetComponent,
-    OpportunityListCardComponent
+    OpspotWidgetComponent,
+    OpspotWidgetSliderComponent,
+    OpportunityListCardComponent,
+    MasonryContainerComponent,
+    ShowtimeWidgetComponent,
+    ShowtimeListCardComponent,
+    MyjourneyWidgetComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -209,6 +225,7 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -241,8 +258,13 @@ import { OpportunityListCardComponent } from './components/opportunity-list-card
     AndroidAppDownloadComponent,
     ImageCroperComponent,
     ReadMoreComponent,
-    OpportunityWidgetComponent,
-    OpportunityListCardComponent
+    OpspotWidgetComponent,
+    OpspotWidgetSliderComponent,
+    OpportunityListCardComponent,
+    ShowtimeListCardComponent,
+    ShowtimeWidgetComponent,
+    MasonryContainerComponent,
+    MyjourneyWidgetComponent
   ],
   providers: [
     {

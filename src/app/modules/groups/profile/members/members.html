@@ -1,12 +1,5 @@
-<!-- <a class="m-group__goBack" routerLink="..">&lt; Back to feed</a> -->
-<style>
-input:focus{
-  box-shadow: none ;
-}
-</style>
-
-<div *ngIf="!frmGroup"> 
-<!-- <div class="">
+<a class="m-group__goBack" routerLink="..">&lt; Back to feed</a>
+<div class="">
   <opspot-groups-profile-members-invite *ngIf="canInvite" [group]="group" (invited)="invite($event)"></opspot-groups-profile-members-invite>
   <div class="invitees m-search-inline">
     <div class="m-search-inline-list mdl-shadow--2dp mdl-color--white">
@@ -20,14 +13,9 @@ input:focus{
       </div>
     </div>
   </div>
-</div> -->
-
-<div class="o-community-member-popup-body__title" style="margin-bottom: 8px;">
-    <div class="text-h3">
-        Community Members
-    </div>
 </div>
-<div class="form-group form-group--member-search" #el>
+
+<div class="m-groupMembers__search" #el>
   <input
     type="text"
     name="q"
@@ -35,15 +23,11 @@ input:focus{
     (keyup)="search(q)"
     placeholder="Search for a member"
     i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__SEARCH_PLACEHOLDER"
-    class="form-control form-control-lg bg-grey-light "
-    style="border: 0px;
-    margin: 30px 0px 0px;
-    padding: 1.3rem 0.85rem; box-shadow: none;"
+    class="m-input m-border"
     />
-    <i class="icon-search" style="position: absolute; top: 9px; right: 12px;"></i>
 </div>
-</div>
-<!-- <div class="mdl-grid m-groupMembers__list m-border">
+
+<div class="mdl-grid m-groupMembers__list m-border">
   <div class="mdl-cell mdl-cell--6-col m-groupMembers__memberCard" *ngFor="let member of members">
       <div class="mdl-card m-border">
           <opspot-card-user [object]="member" [ngClass]="{ 'opspot-user-ephemeral': !member['is:member'] }">
@@ -59,20 +43,7 @@ input:focus{
           </opspot-card-user>
       </div>
   </div>
-</div> -->
-
-<ul class="o-community-members-list scrollbar scrollbar-default" *ngFor="let member of members">
-  <li class="o-community-members-list__user-list">
-  <app-appuser [object]="member">
-      <opspot-groups-card-user-actions-button
-      style="position: relative;"
-      *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid"
-      [group]="group"
-      [user]="member"
-      ></opspot-groups-card-user-actions-button>
-  </app-appuser>
-  </li>   
-</ul>
+</div>
 
 <infinite-scroll
     distance="25%"

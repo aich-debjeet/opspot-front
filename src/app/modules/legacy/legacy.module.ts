@@ -41,6 +41,9 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { AppuserComponent } from './components/appuser/appuser.component';
 import { GroupBannerComponent } from './components/group-banner/group-banner.component';
 import { OpspotFormsModule } from '../forms/forms.module';
+// import { SlickCarouselModule } from 'ngx-slick-carousel';
+// import { PostCard } from './components/cards/post-card/post-card';
+
 
 @NgModule({
   imports: [
@@ -60,6 +63,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
     CommentsModule,
     TextInputAutocompleteModule,
     OpspotFormsModule,
+    // SlickCarouselModule
   ],
   declarations: [
     Activity,
@@ -88,6 +92,8 @@ import { OpspotFormsModule } from '../forms/forms.module';
     AppuserComponent,
 
     GroupBannerComponent,
+    
+    // PostCard,
 
   ],
   exports: [
@@ -98,7 +104,6 @@ import { OpspotFormsModule } from '../forms/forms.module';
     VideoCard,
     Remind,
     UserCard,
-
     BoostButton,
     CommentButton,
     FeatureButton,
@@ -114,7 +119,9 @@ import { OpspotFormsModule } from '../forms/forms.module';
     HovercardPopup,
     CarouselComponent,
     AppuserComponent,
-    GroupBannerComponent
+    GroupBannerComponent,
+    // SlickCarouselModule
+    // PostCard
   ],
   entryComponents: [
     Activity,
@@ -124,6 +131,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
     VideoCard,
     Remind,
     UserCard,
+    // SlickCarouselModule,
     BoostButton,
   ]
 })

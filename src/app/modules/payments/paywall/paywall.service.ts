@@ -1,3 +1,1 @@
-export class PaywallService {
-
-}
+export class PaywallService { }

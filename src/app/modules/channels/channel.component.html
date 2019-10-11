@@ -1,6 +1,8 @@
 <div class="m--spam-notice" *ngIf="user?.spam">
-  <ng-container *ngIf="user?.spam" i18n="@@OPSPOT__CHANNELS__FLAGGED_AS_SPAM">This user was flagged as spam.</ng-container>
-  <ng-container *ngIf="user?.deleted" i18n="@@OPSPOT__CHANNELS__FLAGGED_AS_DELETED">This user was flagged as deleted.</ng-container>
+  <ng-container *ngIf="user?.spam" i18n="@@OPSPOT__CHANNELS__FLAGGED_AS_SPAM">This user was flagged as spam.
+  </ng-container>
+  <ng-container *ngIf="user?.deleted" i18n="@@OPSPOT__CHANNELS__FLAGGED_AS_DELETED">This user was flagged as deleted.
+  </ng-container>
 
   <ng-container *ngIf="!session.isAdmin()" i18n="@@M__ACTION__APPEAL_MARK">
     If you wish to appeal, please check your <a routerLink="/settings/reported-content">Reported Content console</a>.
@@ -13,87 +15,105 @@
 <div class="m-error-splash" *ngIf="error && !user">
   <img [src]="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
   <h3 class="mdl-color-text--red-300">{{error}}</h3>
-  <span class="mdl-color-text--blue-grey-300" i18n="@@OPSPOT__CHANNELS__ERROR_CHECK_USERNAME">Please check the username</span>
+  <span class="mdl-color-text--blue-grey-300" i18n="@@OPSPOT__CHANNELS__ERROR_CHECK_USERNAME">Please check the
+    username</span>
 </div>
 
 <header [hidden]="!isLocked"></header>
 
-<header  *ngIf="user" [ngClass]="{'isLocked': isLocked}">
-  <m-channel--carousel [banners]="user.carousels" [editMode]="editing" (done)="updateCarousels($event)" (delete)="removeCarousel($event)"></m-channel--carousel>
+<header *ngIf="user" [ngClass]="{'isLocked': isLocked}">
+  <m-channel--carousel [banners]="user.carousels" [editMode]="editing" (done)="updateCarousels($event)"
+    (delete)="removeCarousel($event)"></m-channel--carousel>
 </header>
 
 
 <div class="mdl-grid channel-grid m-channel--blocked" style="max-width:900px" *ngIf="user && user?.blocked">
-  <h3 class="mdl-color-text--blue-grey-300" i18n="@@OPSPOT__CHANNELS__BLOCKED_NOTICE">You have blocked @{{user.username}}</h3>
+  <h3 class="mdl-color-text--blue-grey-300" i18n="@@OPSPOT__CHANNELS__BLOCKED_NOTICE">You have blocked
+    @{{user.username}}</h3>
   <a (click)="unBlock()" i18n="@@OPSPOT__CHANNELS__UNBLOCK_ACTION">Click to Unblock</a>
 </div>
 
 <div class="container">
-<div class="o-blocks o-blocks--flex" style="max-width:1190px" *ngIf="user && !user?.blocked">
-  <section class="o-left-block o-left-block--prof">
-    <m-channel--sidebar [user]="user" [editing]="editing" (changeEditing)="toggleEditing($event)"></m-channel--sidebar>
-  </section>
-  <!-- Feed list -->
-  <section class="o-center-block" *ngIf="filter == 'feed'">
-    <m-channel--feed [user]="user" #feed></m-channel--feed>
-  </section>
+  <div class="o-blocks o-blocks--flex" style="max-width:1190px" *ngIf="user && !user?.blocked">
+    <section class="o-left-block o-left-block--prof">
+      <m-channel--sidebar [user]="user" [editing]="editing" (changeEditing)="toggleEditing($event)">
+      </m-channel--sidebar>
+    </section>
+    <!-- Feed list -->
+    <section class="o-center-block" *ngIf="filter == 'feed'">
+      <m-channel--feed [user]="user" #feed></m-channel--feed>
+    </section>
 
-  <!-- Supporters list -->
-  <section class="mdl-cell mdl-cell--8-col" *ngIf="filter == 'supporters'">
+    <section class="o-right-block hidden-mob">
+      <div class="o-title caption-medium">My Journey<a href="#" class="text-md primary float-right">See All</a></div>
+      <app-myjourney-widget [user]="user"></app-myjourney-widget>
+    </section>
 
-    <m-channel--supporters [channel]="user" class="mdl-grid"></m-channel--supporters>
 
-  </section>
+    <!-- Supporters list -->
+    <section class="mdl-cell mdl-cell--8-col" *ngIf="filter == 'supporters'">
 
-  <!-- Subscriptions list -->
-  <section class="o-center-block" *ngIf="filter == 'subscriptions'">
+      <m-channel--supporters [channel]="user" class="mdl-grid"></m-channel--supporters>
 
-    <div class="mdl-card m-channel--subscribers-tabs">
-      <div class="mdl-tabs__tab-bar">
-        <a [routerLink]="['/', user.username, 'subscribers']" class="mdl-tabs__tab" [ngClass]="{ 'is-active': filter === 'subscribers' }" i18n="@@OPSPOT__CHANNELS__SUBSCRIBERS_WITH_COUNT">Followers ({{user.subscribers_count}})</a>
-        <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab" [ngClass]="{ 'is-active': filter === 'subscriptions' }" i18n="@@OPSPOT__CHANNELS__SUBSCRIPTIONS_WITH_COUNT">Following ({{user.subscriptions_count-1}})</a>
+    </section>
+
+    <!-- Subscriptions list -->
+    <section class="o-center-block" *ngIf="filter == 'subscriptions'">
+
+      <div class="mdl-card m-channel--subscribers-tabs">
+        <div class="mdl-tabs__tab-bar">
+          <a [routerLink]="['/', user.username, 'subscribers']" class="mdl-tabs__tab"
+            [ngClass]="{ 'is-active': filter === 'subscribers' }"
+            i18n="@@OPSPOT__CHANNELS__SUBSCRIBERS_WITH_COUNT">Followers ({{user.subscribers_count}})</a>
+          <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab"
+            [ngClass]="{ 'is-active': filter === 'subscriptions' }"
+            i18n="@@OPSPOT__CHANNELS__SUBSCRIPTIONS_WITH_COUNT">Following ({{user.subscriptions_count-1}})</a>
+        </div>
       </div>
-    </div>
 
-    <m-channel--subscriptions [channel]="user" class="mdl-grid"></m-channel--subscriptions>
+      <m-channel--subscriptions [channel]="user" class="mdl-grid"></m-channel--subscriptions>
 
-  </section>
+    </section>
 
-  <!-- Subscriptions list -->
-  <section class="o-center-block" *ngIf="filter == 'subscribers'">
+    <!-- Subscriptions list -->
+    <section class="o-center-block" *ngIf="filter == 'subscribers'">
 
-    <div class="mdl-card m-channel--subscribers-tabs">
-      <div class="mdl-tabs__tab-bar">
-        <a [routerLink]="['/', user.username, 'subscribers']" class="mdl-tabs__tab" [ngClass]="{ 'is-active': filter === 'subscribers' }" i18n="@@OPSPOT__CHANNELS__SUBSCRIBERS_WITH_COUNT">Followers ({{user.subscribers_count}})</a>
-        <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab" [ngClass]="{ 'is-active': filter === 'subscriptions' }" i18n="@@OPSPOT__CHANNELS__SUBSCRIPTIONS_WITH_COUNT">Following ({{user.subscriptions_count-1}})</a>
+      <div class="mdl-card m-channel--subscribers-tabs">
+        <div class="mdl-tabs__tab-bar">
+          <a [routerLink]="['/', user.username, 'subscribers']" class="mdl-tabs__tab"
+            [ngClass]="{ 'is-active': filter === 'subscribers' }"
+            i18n="@@OPSPOT__CHANNELS__SUBSCRIBERS_WITH_COUNT">Followers ({{user.subscribers_count}})</a>
+          <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab"
+            [ngClass]="{ 'is-active': filter === 'subscriptions' }"
+            i18n="@@OPSPOT__CHANNELS__SUBSCRIPTIONS_WITH_COUNT">Following ({{user.subscriptions_count-1}})</a>
+        </div>
       </div>
-    </div>
 
-    <m-channel--subscribers [channel]="user" class="mdl-grid"></m-channel--subscribers>
+      <m-channel--subscribers [channel]="user" class="mdl-grid"></m-channel--subscribers>
 
-  </section>
+    </section>
 
-</div>
+  </div>
 </div>
 
 <m-channel--explicit-overlay [channel]="user"></m-channel--explicit-overlay>
 
 <m-modal open='true' *ngIf="userVerifcation">
   <h2 class="modalCls">
-    <ng-container *ngIf="successRes" >
+    <ng-container *ngIf="successRes">
       Thanks for verifing email
     </ng-container>
-    <ng-container >
-    {{errorRes}}
+    <ng-container>
+      {{errorRes}}
     </ng-container>
   </h2>
 </m-modal>
 
 <style>
-.modalCls{
-  position: absolute;
+  .modalCls {
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-}
+  }
 </style>

@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
-import { OpspotActivityObject } from '../../interfaces/entities';
 import { ActivatedRoute } from '@angular/router';
 import { OpportunityFormComponent } from '../forms/opportunity-form/opportunity-form.component';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,6 +15,8 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
 export class OpportunityComponent implements OnInit {
 
   guid: string;
+  paramsSubscription: Subscription;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -25,26 +27,28 @@ export class OpportunityComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.guid = params['guid'];
+    this.paramsSubscription = this.route.paramMap.subscribe(params => {
+      if (params.get('guid')) {
+        this.guid = params.get('guid');  
+        this.load();
+      }
     });
-    this.load();
-    this.loadAllOpportunities();
-  }
+}
 
-  activity: any;
+  // activity: any;
   opspot = window.Opspot;
+  // allevents = [];
 
   boosted: boolean = false;
   commentsToggle: boolean = false;
-  shareToggle: boolean = false;
-  deleteToggle: boolean = false;
+  // shareToggle: boolean = false;
+  // deleteToggle: boolean = false;
   translateToggle: boolean = false;
   translateEvent: EventEmitter<any> = new EventEmitter();
   showBoostOptions: boolean = false;
   private _showBoostMenuOptions: boolean = false;
   count;
-  allOpportunities: any;
+  // allOpportunities = [];
 
 
   type: string;
@@ -54,7 +58,7 @@ export class OpportunityComponent implements OnInit {
   inProgress: boolean = false;
   opportunity: any;
 
-  editing: boolean = false;
+  // editing: boolean = false;
 
   _delete: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
@@ -72,6 +76,10 @@ export class OpportunityComponent implements OnInit {
   menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
   load() {
+    // if (refresh) {
+    //  // this.entity = {};
+    //   this.detectChanges();
+    // }
 
     if (this.inProgress)
       return false;
@@ -89,10 +97,11 @@ export class OpportunityComponent implements OnInit {
           }
           this.inProgress = false;
         }
-      })
+        this.detectChanges();
+      }) 
       .catch((e) => {
         this.inProgress = false;
-      });
+      });  
   }
 
   getOwnerIconTime() {
@@ -108,13 +117,13 @@ export class OpportunityComponent implements OnInit {
     if ($event.inProgress) {
       $event.inProgress.emit(true);
     }
-    this.client.delete(`api/v1/newsfeed/${this.activity.guid}`)
+    this.client.delete(`api/v1/newsfeed/${this.opportunity.guid}`)
       .then((response: any) => {
         if ($event.inProgress) {
           $event.inProgress.emit(false);
           $event.completed.emit(0);
         }
-        this._delete.next(this.activity);
+        this._delete.next(this.opportunity);
       })
       .catch(e => {
         if ($event.inProgress) {
@@ -158,10 +167,10 @@ export class OpportunityComponent implements OnInit {
         this.delete();
         break;
       case 'set-explicit':
-        this.setExplicit(true);
+        //this.setExplicit(true);
         break;
       case 'remove-explicit':
-        this.setExplicit(false);
+        //this.setExplicit(false);
         break;
       case 'translate':
         this.translateToggle = true;
@@ -172,13 +181,25 @@ export class OpportunityComponent implements OnInit {
 
   editOptions() {
     if (this.opportunity) {
-      const oppModal = this.overlayModal.create(OpportunityFormComponent,
-         this.opportunity, { class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms'
-        });
-      oppModal.present();
-    } else {
-      this.editing = true;
+      this.overlayModal.create(OpportunityFormComponent, this.opportunity, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+        // listen to the update callback
+        onUpdate: (payload: any) => {
+          // make update to local var
+          this.udpateOpportunity(payload);
+        }
+      }).present();
     }
+  }
+
+
+  udpateOpportunity(data: any) {
+    this.opportunity.category = data.category;
+    this.opportunity.description = data.description;
+    this.opportunity.location = data.location;
+    this.opportunity.title = data.title;
+    // trigger component observe new changes
+    this.detectChanges();
   }
 
 
@@ -197,44 +218,30 @@ export class OpportunityComponent implements OnInit {
     }
   }
 
-  setExplicit(value: boolean) {
-    let oldValue = this.activity.mature,
-      oldMatureVisibility = this.activity.mature_visibility;
+  // setExplicit(value: boolean) {
+  //   let oldValue = this.activity.mature,
+  //     oldMatureVisibility = this.activity.mature_visibility;
 
-    this.activity.mature = value;
-    this.activity.mature_visibility = void 0;
+  //   this.activity.mature = value;
+  //   this.activity.mature_visibility = void 0;
 
-    if (this.activity.custom_data && this.activity.custom_data[0]) {
-      this.activity.custom_data[0].mature = value;
-    } else if (this.activity.custom_data) {
-      this.activity.custom_data.mature = value;
-    }
+  //   if (this.activity.custom_data && this.activity.custom_data[0]) {
+  //     this.activity.custom_data[0].mature = value;
+  //   } else if (this.activity.custom_data) {
+  //     this.activity.custom_data.mature = value;
+  //   }
 
-    this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
-      .catch(e => {
-        this.activity.mature = oldValue;
-        this.activity.mature_visibility = oldMatureVisibility;
+  //   this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
+  //     .catch(e => {
+  //       this.activity.mature = oldValue;
+  //       this.activity.mature_visibility = oldMatureVisibility;
 
-        if (this.activity.custom_data && this.activity.custom_data[0]) {
-          this.activity.custom_data[0].mature = oldValue;
-        } else if (this.activity.custom_data) {
-          this.activity.custom_data.mature = oldValue;
-        }
-      });
-  }
-
-  loadAllOpportunities() {
-    this.inProgress = true;
-    let ownerGuid = this.session.getLoggedInUser().guid;
-    this.client.get('api/v2/feeds/container/ownerGuid/opportunities?limit=3&sync=&as_activities=&force_public=1')
-      .then((data: any) => {
-        if (data && data.entities) {
-          this.allOpportunities = data.entities;
-        }
-      })
-      .catch((e) => {
-        this.inProgress = false;
-      });
-  }
+  //       if (this.activity.custom_data && this.activity.custom_data[0]) {
+  //         this.activity.custom_data[0].mature = oldValue;
+  //       } else if (this.activity.custom_data) {
+  //         this.activity.custom_data.mature = oldValue;
+  //       }
+  //     });
+  // }
 
 }
