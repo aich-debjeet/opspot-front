@@ -1,18 +1,12 @@
 <div class="o-explore-tag-sec">
-            <ngx-slick-carousel 
-            class="carousel o-explore-tag tag-slik"
-            #slickModal="slick-carousel" 
-            [config]="slideConfig" 
-            (init)="slickInit($event)"
-            (breakpoint)="breakpoint($event)" 
-            (afterChange)="afterChange($event)"
-            (beforeChange)="beforeChange($event)"
-            >
-            <div ngxSlickItem *ngFor="let tags of hashtags; let i = index;" class="slide o-tag">
-                <a (click)="switchCategoryType(tags.value)" class="">{{tags.value}}</a>
-            </div>
-            </ngx-slick-carousel>
-            <!-- <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+    <ngx-slick-carousel class="carousel o-explore-tag tag-slik" #slickModal="slick-carousel" [config]="slideConfig"
+        (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+        (beforeChange)="beforeChange($event)">
+        <div ngxSlickItem *ngFor="let tags of hashtags; let i = index;" class="slide o-tag">
+            <a (click)="switchCategoryType(tags.value)" class="">{{tags.value}}</a>
+        </div>
+    </ngx-slick-carousel>
+    <!-- <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
             <button class="btn-next" (click)="slickModal.slickNext()">next</button> -->
     <!--tag block end -->
 </div><!-- tag section end-->
@@ -34,19 +28,18 @@
             </div>
             <div class="o-explore-action__search">
                 <div class="form-group c-form_righticon-lg">
-                    <input type="text" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q" name="q" autocomplete="off" #searchInput>
+                    <input type="text" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q"
+                        name="q" autocomplete="off" #searchInput>
                     <span class="c-svg_eye"><i class="icon-search"></i></span>
                 </div>
             </div>
-        </div><!--filter and search section-->
+        </div>
+        <!--filter and search section-->
         <div class="o-explore-media-part">
             <opspot-masonry-container [entities]="exploreArray"></opspot-masonry-container>
-            <infinite-scroll
-            distance="25%"
-            (load)="searchMore()"
-            [moreData]="moreData"
-            [inProgress]="inProgress">
-        </infinite-scroll>
-        </div><!--media section-->
+            <infinite-scroll distance="25%" (load)="searchMore()" [moreData]="moreData" [inProgress]="inProgress">
+            </infinite-scroll>
+        </div>
+        <!--media section-->
     </div>
 </section>

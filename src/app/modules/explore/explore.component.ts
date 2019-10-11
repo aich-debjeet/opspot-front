@@ -15,9 +15,9 @@ import { Session } from '../../services/session';
   styleUrls: ['./explore.component.scss']
 })
 export class ExploreComponent implements OnInit {
-  
+
   exploreArray: Array<Object>;
-  hashtags:[];
+  hashtags: [];
   exploreType: string;
   paramsSubscription: Subscription;
   q: string = '';
@@ -29,41 +29,41 @@ export class ExploreComponent implements OnInit {
   ref: string = '';
   exploreSlider;
   slideConfig = {
-    slidesToShow: 8, 
-    slidesToScroll: 8, 
-    arrows: false, 
-    responsive:[
+    slidesToShow: 8,
+    slidesToScroll: 8,
+    arrows: false,
+    responsive: [
       {
         breakpoint: 1024,
         settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3
+          slidesToShow: 3,
+          slidesToScroll: 3
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 320,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
       }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 320,
-      settings: {
-        slidesToShow:1,
-        slidesToScroll: 1
-      }
-    }
-  ]
-};
-  
+    ]
+  };
+
   @ViewChild('searchInput') searchInput: ElementRef;
 
   constructor(
@@ -72,7 +72,7 @@ export class ExploreComponent implements OnInit {
     private route: ActivatedRoute,
     public client: Client,
     public session: Session,
-  ) { 
+  ) {
     this.paramsSubscription = this.route.queryParams.subscribe(params => {
       if (typeof params['q'] !== 'undefined') {
         this.q = decodeURIComponent(params['q'] || '');
@@ -98,7 +98,7 @@ export class ExploreComponent implements OnInit {
       this.offset = '';
       this.searchMore(true);
       // this.triggerSearchApi();
-      
+
 
     });
   }
@@ -107,28 +107,28 @@ export class ExploreComponent implements OnInit {
     await this.load();
   }
 
-  async load(){
-    try{
+  async load() {
+    try {
       this.hashtags = await this.service.load(20);
       // console.log(this.hashtags);
-    } catch(e){
+    } catch (e) {
       // console.log(e);
     }
   }
 
-  switchCategoryType(sType: string){
+  switchCategoryType(sType: string) {
     console.log(sType)
-    this.ref= sType;
+    this.ref = sType;
     this.router.navigate(['/explore'], {
       queryParams: {
         q: this.q,
         type: `${this.type}`,
-        ref:`${this.ref}`
+        ref: `${this.ref}`
       },
     })
   }
 
-  async triggerSearchApi(refresh: boolean = true){
+  async triggerSearchApi(refresh: boolean = true) {
     let endpoint = 'api/v2/search';
     const data = {
       q: this.q,
@@ -138,17 +138,17 @@ export class ExploreComponent implements OnInit {
     };
     let response: any = await this.client.get(endpoint, data);
     // console.log(response);
-    }
+  }
 
-  onChange(e:any){
+  onChange(e: any) {
     console.log('onChange', e);
     // this.exploreType = e;
     this.type = e;
     this.router.navigate(['/explore'], {
       queryParams: {
-        type:`object:${this.type}`,
+        type: `object:${this.type}`,
         q: this.q,
-        ref:`${this.ref}`
+        ref: `${this.ref}`
       },
       // queryParamsHandling: 'merge',
       // preserve the existing query params in the route
@@ -159,16 +159,16 @@ export class ExploreComponent implements OnInit {
   }
   keyup(e) {
     // console.log(e);
-    if(e.keyCode === 13){
+    if (e.keyCode === 13) {
       this.search();
     }
   }
-  search(){
+  search() {
     this.router.navigate(['/explore'], {
       queryParams: {
         q: this.q,
         type: `${this.type}`,
-        ref:`${this.ref}`
+        ref: `${this.ref}`
       },
     })
   }
@@ -181,9 +181,9 @@ export class ExploreComponent implements OnInit {
       this.offset = '';
     }
     this.inProgress = true;
-    this.client.get('api/v2/feeds/global/top/activities', { hashtags:'',period:'12h',all:'',query:'',nsfw:'',sync:'1', as_activities:'1',from_timestamp:'',limit: 10, offset: this.offset }, { cache: true })
-      .then((data:any) => {
-        let respData:any = data;
+    this.client.get('api/v2/feeds/global/top/activities', { hashtags: '', period: '12h', all: '', query: '', nsfw: '', sync: '1', as_activities: '1', from_timestamp: '', limit: 10, offset: this.offset }, { cache: true })
+      .then((data: any) => {
+        let respData: any = data;
         if (respData.entities.length == 0) {
           this.moreData = false;
           this.inProgress = false;
@@ -203,7 +203,7 @@ export class ExploreComponent implements OnInit {
         this.inProgress = false;
       });
   }
-  reset(){
+  reset() {
     this.exploreArray = [];
   }
 
