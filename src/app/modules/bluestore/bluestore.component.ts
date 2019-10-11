@@ -25,7 +25,6 @@ export class BluestoreComponent implements OnInit {
 
   isTranslatable: boolean;
   canDelete: boolean = false;
-  activity: any;
   translateToggle: boolean = false;
   _delete: EventEmitter<any> = new EventEmitter();
 
@@ -71,6 +70,7 @@ export class BluestoreComponent implements OnInit {
           }
           this.inProgress = false;
         }
+        this.detectChanges();
       })
       .catch((e) => {
         this.inProgress = false;
@@ -96,10 +96,10 @@ export class BluestoreComponent implements OnInit {
         this.delete();
         break;
       case 'set-explicit':
-        this.setExplicit(true);
+        //this.setExplicit(true);
         break;
       case 'remove-explicit':
-        this.setExplicit(false);
+        //this.setExplicit(false);
         break;
       case 'translate':
         this.translateToggle = true;
@@ -146,43 +146,43 @@ export class BluestoreComponent implements OnInit {
     }
   }
 
-  setExplicit(value: boolean) {
-    let oldValue = this.activity.mature,
-      oldMatureVisibility = this.activity.mature_visibility;
+  // setExplicit(value: boolean) {
+  //   let oldValue = this.activity.mature,
+  //     oldMatureVisibility = this.activity.mature_visibility;
 
-    this.activity.mature = value;
-    this.activity.mature_visibility = void 0;
+  //   this.activity.mature = value;
+  //   this.activity.mature_visibility = void 0;
 
-    if (this.activity.custom_data && this.activity.custom_data[0]) {
-      this.activity.custom_data[0].mature = value;
-    } else if (this.activity.custom_data) {
-      this.activity.custom_data.mature = value;
-    }
+  //   if (this.activity.custom_data && this.activity.custom_data[0]) {
+  //     this.activity.custom_data[0].mature = value;
+  //   } else if (this.activity.custom_data) {
+  //     this.activity.custom_data.mature = value;
+  //   }
 
-    this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
-      .catch(e => {
-        this.activity.mature = oldValue;
-        this.activity.mature_visibility = oldMatureVisibility;
+  //   this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
+  //     .catch(e => {
+  //       this.activity.mature = oldValue;
+  //       this.activity.mature_visibility = oldMatureVisibility;
 
-        if (this.activity.custom_data && this.activity.custom_data[0]) {
-          this.activity.custom_data[0].mature = oldValue;
-        } else if (this.activity.custom_data) {
-          this.activity.custom_data.mature = oldValue;
-        }
-      });
-  }
+  //       if (this.activity.custom_data && this.activity.custom_data[0]) {
+  //         this.activity.custom_data[0].mature = oldValue;
+  //       } else if (this.activity.custom_data) {
+  //         this.activity.custom_data.mature = oldValue;
+  //       }
+  //     });
+  // }
 
   delete($event: any = {}) {
     if ($event.inProgress) {
       $event.inProgress.emit(true);
     }
-    this.client.delete(`api/v1/newsfeed/${this.activity.guid}`)
+    this.client.delete(`api/v1/newsfeed/${this.marketplace.guid}`)
       .then((response: any) => {
         if ($event.inProgress) {
           $event.inProgress.emit(false);
           $event.completed.emit(0);
         }
-        this._delete.next(this.activity);
+        this._delete.next(this.marketplace);
       })
       .catch(e => {
         if ($event.inProgress) {
@@ -192,7 +192,7 @@ export class BluestoreComponent implements OnInit {
       });
   }
 
-  slideConfig = {slidesToShow: 6, slidesToScroll: 1, arrows: true};
+  slideConfig = { slidesToShow: 6, slidesToScroll: 1, arrows: true };
 
   slickInit(e) {
     console.log('slick initialized in activity');
