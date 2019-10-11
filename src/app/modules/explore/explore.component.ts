@@ -147,11 +147,9 @@ export class ExploreComponent implements OnInit {
     }
     this.inProgress = true;
     this.client.get('api/v2/feeds/global/top/activities', { hashtags:'',period:'12h',all:'',query:'',nsfw:'',sync:'1', as_activities:'1',from_timestamp:'',limit: 10, offset: this.offset }, { cache: true })
-      .then((data) => {
-        console.log(data)
-        let respData: any = data;
-        console.log(respData)
-        if (!data) {
+      .then((data:any) => {
+        let respData:any = data;
+        if (respData.entities.length == 0) {
           this.moreData = false;
           this.inProgress = false;
           return false;
