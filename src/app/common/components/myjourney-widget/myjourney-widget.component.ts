@@ -646,10 +646,10 @@ export class MyjourneyWidgetComponent implements OnInit {
       return false;
     }
 
-    this.params.q = '#myjourney' + this.user.username;
+    this.params.q = 'myjourney' + this.user.username;
     this.inProgress = true;
 
-    this.client.get('api/v1/search', this.params)
+    this.client.get('api/v2/search', this.params)
       .then((resp: any) => {
         console.log("response: ", resp);
         //  for (let entity of this.entities) {
