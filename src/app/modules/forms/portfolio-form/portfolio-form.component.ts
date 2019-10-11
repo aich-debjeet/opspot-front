@@ -77,7 +77,7 @@ export class PortfolioFormComponent implements OnInit {
       return;
     }
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-
+    this.tags.push('#portfolio' + this.session.getLoggedInUser().username)
     data.tags = this.tags;
     data.isNSFW = this.isNSFW
    
@@ -119,7 +119,7 @@ export class PortfolioFormComponent implements OnInit {
     while ((match = regex.exec(this.meta.message)) !== null) {
       this.tags.push(match[2]);
     }
-    this.tags.push('#portfolio' + this.session.getLoggedInUser().username )
+   
 
   }
 }
