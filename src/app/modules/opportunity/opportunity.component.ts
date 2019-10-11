@@ -121,13 +121,13 @@ export class OpportunityComponent implements OnInit {
     if ($event.inProgress) {
       $event.inProgress.emit(true);
     }
-    this.client.delete(`api/v1/newsfeed/${this.activity.guid}`)
+    this.client.delete(`api/v1/newsfeed/${this.opportunity.guid}`)
       .then((response: any) => {
         if ($event.inProgress) {
           $event.inProgress.emit(false);
           $event.completed.emit(0);
         }
-        this._delete.next(this.activity);
+        this._delete.next(this.opportunity);
       })
       .catch(e => {
         if ($event.inProgress) {
@@ -171,10 +171,10 @@ export class OpportunityComponent implements OnInit {
         this.delete();
         break;
       case 'set-explicit':
-        this.setExplicit(true);
+        //this.setExplicit(true);
         break;
       case 'remove-explicit':
-        this.setExplicit(false);
+        //this.setExplicit(false);
         break;
       case 'translate':
         this.translateToggle = true;
