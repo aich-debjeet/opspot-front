@@ -27,10 +27,6 @@ export class OpportunityComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.route.params.subscribe((params) => {
-    //   this.guid = params['guid'];
-    // });
-    // this.load();
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
         this.guid = params.get('guid');  
@@ -39,9 +35,9 @@ export class OpportunityComponent implements OnInit {
     });
 }
 
-  activity: any;
+  // activity: any;
   opspot = window.Opspot;
-  allevents = [];
+  // allevents = [];
 
   boosted: boolean = false;
   commentsToggle: boolean = false;
@@ -52,7 +48,7 @@ export class OpportunityComponent implements OnInit {
   showBoostOptions: boolean = false;
   private _showBoostMenuOptions: boolean = false;
   count;
-  allOpportunities = [];
+  // allOpportunities = [];
 
 
   type: string;
@@ -222,30 +218,30 @@ export class OpportunityComponent implements OnInit {
     }
   }
 
-  setExplicit(value: boolean) {
-    let oldValue = this.activity.mature,
-      oldMatureVisibility = this.activity.mature_visibility;
+  // setExplicit(value: boolean) {
+  //   let oldValue = this.activity.mature,
+  //     oldMatureVisibility = this.activity.mature_visibility;
 
-    this.activity.mature = value;
-    this.activity.mature_visibility = void 0;
+  //   this.activity.mature = value;
+  //   this.activity.mature_visibility = void 0;
 
-    if (this.activity.custom_data && this.activity.custom_data[0]) {
-      this.activity.custom_data[0].mature = value;
-    } else if (this.activity.custom_data) {
-      this.activity.custom_data.mature = value;
-    }
+  //   if (this.activity.custom_data && this.activity.custom_data[0]) {
+  //     this.activity.custom_data[0].mature = value;
+  //   } else if (this.activity.custom_data) {
+  //     this.activity.custom_data.mature = value;
+  //   }
 
-    this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
-      .catch(e => {
-        this.activity.mature = oldValue;
-        this.activity.mature_visibility = oldMatureVisibility;
+  //   this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
+  //     .catch(e => {
+  //       this.activity.mature = oldValue;
+  //       this.activity.mature_visibility = oldMatureVisibility;
 
-        if (this.activity.custom_data && this.activity.custom_data[0]) {
-          this.activity.custom_data[0].mature = oldValue;
-        } else if (this.activity.custom_data) {
-          this.activity.custom_data.mature = oldValue;
-        }
-      });
-  }
+  //       if (this.activity.custom_data && this.activity.custom_data[0]) {
+  //         this.activity.custom_data[0].mature = oldValue;
+  //       } else if (this.activity.custom_data) {
+  //         this.activity.custom_data.mature = oldValue;
+  //       }
+  //     });
+  // }
 
 }
