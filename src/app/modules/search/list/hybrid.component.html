@@ -83,15 +83,14 @@
       </a>
     </div>
   </div><!--header ends-->
-  <!-- <opspot-card *ngFor="let entity of entities.user"
-    class="mdl-cell mdl-cell--4-col"
-    hostClass="mdl-card mdl-color--white m-border m-search--entity"
-    [object]="entity"
-  ></opspot-card> -->
-  <opspot-card-user *ngFor="let entity of entities.user"
-    [cardType]="'new'"
-    [object]="entity"
-  ></opspot-card-user>
+  <div class="wrapper">
+    <opspot-card *ngFor="let entity of entities.user | slice:0:3;"
+      class="mdl-cell--4-col fl-l user-card"
+      hostClass="mdl-card mdl-color--white m-border m-search--entity"
+      [object]="entity"
+      [cardType]="'user2'"
+    ></opspot-card>
+  </div>
 </div><!--post ends-->
 
 <div class="o-serach-post" *ngIf="entities?.activity?.length">
@@ -111,3 +110,20 @@
     [object]="entity"
   ></opspot-card>
 </div><!--post ends-->
+
+<style>
+  .fl-l {
+    float: left;
+  }
+  .user-card {
+    width: 168px;
+    margin: 0 4px;
+    float: left;
+  }
+  .user-card:first-child {
+    margin-left: 0;
+  }
+  .user-card:last-child {
+    margin-right: 0;
+  }
+</style>
