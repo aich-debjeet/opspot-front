@@ -32,8 +32,12 @@ export class MediaViewComponent {
   deleteToggle: boolean = false;
 
   theaterMode: boolean = false;
+  count: any;
 
-  menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'subscribe', 'remove-explicit', 'rating'];
+  // menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'subscribe', 'remove-explicit', 'rating'];
+
+  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'rating'];
+
 
   paramsSubscription: Subscription;
   queryParamsSubscription$: Subscription;
@@ -81,13 +85,17 @@ export class MediaViewComponent {
     this.inProgress = true;
     this.client.get('api/v1/media/' + this.guid, { children: false })
       .then((response: any) => {
+        console.log("RESPONSE: ", response);
+        
         this.inProgress = false;
         if (response.entity.type !== 'object') {
           return;
         }
         if (response.entity) {
           this.entity = response.entity;
-
+           console.log("ENTITY: ", this.entity);
+           this.count = this.entity['thumbs:up:count'];
+           
           switch (this.entity.subtype) {
             case 'video':
               this.context.set('object:video');
@@ -174,6 +182,20 @@ export class MediaViewComponent {
         this.entity.mature = !!this.entity.mature;
         this.detectChanges();
       });
+  }
+
+  liked(count) {
+    if (count != this.entity['thumbs:up:count:old']) {
+      this.count = count;
+    } else {
+      this.count = this.entity['thumbs:up:count']
+    }
+  }
+
+  getThumbnail() {
+    const url = this.entity.paywalled || (this.entity.wire_threshold && this.entity.wire_threshold !== '0') ? this.opspot.site_url : this.opspot.cdn_url;
+
+    return url + `fs/v1/thumbnail/${this.entity.guid}/xlarge`;
   }
 
   private detectChanges() {
