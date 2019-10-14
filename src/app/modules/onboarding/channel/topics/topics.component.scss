@@ -33,6 +33,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 200px;
+    white-space: nowrap;
     &:hover, &:active{
         background-color: #0288D1;
         color:#fff;
@@ -57,13 +58,13 @@
         outline:none;
     }
     input{
-        width: 100%;
+        width: 100px;
         border: none;
     }
 }
 //skill main css
 .o-reg-skill{
-    width: 796px;
+    // width: 796px;
     border-radius: 4px;
     background-color: #FFFFFF;
     padding:64px 55px;
@@ -88,6 +89,9 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 375px;
     .active{
         background-color: #0288D1;
         color:#fff;
@@ -101,6 +105,11 @@
         line-height: 1;
         font-size: 24px;
     }
+}
+.o-reg-skill-btn-add-skill--no-need{
+    overflow: hidden!important;
+    height: unset!important;
+    margin-top: 28px!important;
 }
 //button css
 .o-reg-skill-continue{
