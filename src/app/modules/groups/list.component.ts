@@ -29,6 +29,7 @@ export class GroupsListComponent {
   paramsSubscription: Subscription;
   rating: number = 1;
   preventHashtagOverflow: boolean = false;
+  dev = false;
 
   constructor(
     public client: Client,
