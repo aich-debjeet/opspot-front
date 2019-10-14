@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
@@ -33,6 +33,7 @@ export class MediaViewComponent {
 
   theaterMode: boolean = false;
   count: any;
+  largeImage: string;
 
   // menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'subscribe', 'remove-explicit', 'rating'];
 
@@ -83,31 +84,32 @@ export class MediaViewComponent {
       this.detectChanges();
     }
     this.inProgress = true;
-    this.client.get('api/v1/media/' + this.guid, { children: false })
+    this.client.get('api/v1/newsfeed/single/' + this.guid, { children: false })
       .then((response: any) => {
         console.log("RESPONSE: ", response);
-        
+
         this.inProgress = false;
-        if (response.entity.type !== 'object') {
-          return;
-        }
-        if (response.entity) {
-          this.entity = response.entity;
-           console.log("ENTITY: ", this.entity);
-           this.count = this.entity['thumbs:up:count'];
-           
-          switch (this.entity.subtype) {
-            case 'video':
-              this.context.set('object:video');
-              break;
+        // if (response.activity.type !== 'object') {
+        //   return;
+        // }
+        if (response.activity) {
+          this.entity = response.activity;
+          console.log("ENTITY: ", this.entity);
+          this.showImage(0);
+          this.count = this.entity['thumbs:up:count'];
 
-            case 'image':
-              this.context.set('object:image');
-              break;
+          // switch (this.entity.subtype) {
+          //   case 'video':
+          //     this.context.set('object:video');
+          //     break;
 
-            default:
-              this.context.reset();
-          }
+          //   case 'image':
+          //     this.context.set('object:image');
+          //     break;
+
+          //   default:
+          //     this.context.reset();
+          // }
 
           if (this.entity.title) {
             this.title.setTitle(this.entity.title);
@@ -125,7 +127,7 @@ export class MediaViewComponent {
   delete() {
     this.client.delete('api/v1/media/' + this.guid)
       .then((response: any) => {
-        const type: string = this.entity.subtype === 'video' ? 'videos': 'images';
+        const type: string = this.entity.subtype === 'video' ? 'videos' : 'images';
         this.router.navigate([`/media/${type}/my`]);
       })
       .catch(e => {
@@ -177,7 +179,7 @@ export class MediaViewComponent {
     this.entity.mature = value;
     this.detectChanges();
 
-    this.client.post(`api/v1/entities/explicit/${this.entity.guid}`, { value: value ? '1': '0' })
+    this.client.post(`api/v1/entities/explicit/${this.entity.guid}`, { value: value ? '1' : '0' })
       .catch(e => {
         this.entity.mature = !!this.entity.mature;
         this.detectChanges();
@@ -196,6 +198,21 @@ export class MediaViewComponent {
     const url = this.entity.paywalled || (this.entity.wire_threshold && this.entity.wire_threshold !== '0') ? this.opspot.site_url : this.opspot.cdn_url;
 
     return url + `fs/v1/thumbnail/${this.entity.guid}/xlarge`;
+  }
+
+  showVideo = false;
+  videoData: any;
+
+  showImage(i, data?) {
+    if (data) {
+      this.showVideo = true;
+      this.videoData = data;
+      console.log("video: ", data);
+    } else {
+      this.showVideo = false;
+      this.largeImage = this.entity.custom_data[i].src;
+      console.log(" this.largeImage: ", this.largeImage); 
+    }
   }
 
   private detectChanges() {
