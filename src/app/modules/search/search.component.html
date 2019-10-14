@@ -1,4 +1,4 @@
-<div class="m-toolbar">
+<!-- <div class="m-toolbar">
   <div class="m-topbar--row">
     <div class="m-topbar--navigation m-topbar--navigation--text-only">
 
@@ -189,19 +189,70 @@
 
     </div>
   </div>
+</div> -->
+
+<div class="o-search-block">
+  <div class="o-search-block__tab">
+    <div class="tabs-search">
+      <ul class="tabs-list search-tabs">
+        <li [class.active]="type == ''">
+          <a [routerLink]="['/search', { q: q, type: '', ref: ref }]">All</a>
+        </li>
+        <li [class.active]="type == 'activity'">
+          <a [routerLink]="['/search', { q: q, type: 'activity', ref: ref }]">Post</a>
+        </li>
+        <li [class.active]="type == 'user'">
+          <a [routerLink]="['/search', { q: q, type: 'user', ref: ref }]">Profile</a>
+        </li>
+        <li [class.active]="type == 'community'">
+          <a [routerLink]="['/search', { q: q, type: 'community', ref: ref }]">Community</a>
+        </li>
+        <li [class.active]="type == 'opportunity'">
+          <a [routerLink]="['/search', { q: q, type: 'opportunity', ref: ref }]">Opportunity</a>
+        </li>
+        <li [class.active]="type == 'showtimez'">
+          <a [routerLink]="['/search', { q: q, type: 'showtimez', ref: ref }]">Showtimez</a>
+        </li>
+      </ul>
+    </div><!--tab end-->
+  </div>
 </div>
 
-<ng-container *ngIf="searchType == 'hybrid'; else simpleList">
-  <m-search--hybrid-list
-    [entities]="hybridEntities"
-  ></m-search--hybrid-list>
-</ng-container>
-
-<ng-template #simpleList>
-  <m-search--simple-list
-    [entities]="entities"
-  ></m-search--simple-list>
-</ng-template>
+<div class="o-search-content-background">
+    <div class="container-search">
+        <div class="o-search-content">
+            <div class="o-search-tab-content">
+                <div class="tabs-search">
+                    <div id="all" class="tab active">
+                        <div class="o-blocks">
+                            <div  class="o-left-block hidden-under-tablet">
+                              <opspot-search-filter></opspot-search-filter>
+                            </div><!--left-block ends-->
+                            <div class="o-center-block">
+                                <ng-container *ngIf="searchType == 'hybrid'; else simpleList">
+                                  <m-search--hybrid-list
+                                    (seeAll)="seeAll($event)"
+                                    [entities]="hybridEntities"
+                                  ></m-search--hybrid-list>
+                                </ng-container>
+                                <ng-template #simpleList>
+                                  <m-search--simple-list
+                                    (seeAll)="seeAll($event)"
+                                    [entities]="entities"
+                                  ></m-search--simple-list>
+                                </ng-template>
+                            </div><!--center block ends-->
+                        </div><!--o-block-ends-->
+                    </div><!--all tab content ends-->
+                </div><!--tab content end-->
+            </div>
+            <div class="o-search-rightbar hidden-mob">
+              <opspot-widget [entityType]="'opportunity'"></opspot-widget>
+              <opspot-widget [entityType]="'event'"></opspot-widget>
+            </div>
+        </div>
+    </div>
+</div>
 
 <infinite-scroll
   distance="25%"

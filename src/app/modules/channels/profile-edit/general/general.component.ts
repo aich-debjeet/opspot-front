@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TopbarHashtagsService } from  '../../../hashtags/service/topbar.service';
 import { Client } from '../../../../services/api/client';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,17 +11,31 @@ import { Client } from '../../../../services/api/client';
 })
 export class GeneralComponent implements OnInit {
 
-  constructor(private service:TopbarHashtagsService ,private client:Client) {
+  constructor(private service:TopbarHashtagsService ,private client:Client,private router:Router) {
     this.load()
    }
  
    model: any = {};
 
 
- onSubmit(){
-   console.log(this.model)
- }
+  onSubmit(){
+    let skills=this.model.skills.map(el=>el.value)
+    let info={
+      fullName:this.model.fullName,  
+      skills
+    }
+     this.sendInfo(info)
+  }
  
+  sendInfo(data){
+    let info={"general_info":{
+      "full_name":data.fullName,
+      "skills":data.skills
+    }}
+   this.client.post('api/v1/entities/general_info' ,info).then(res=>{
+     this.router.navigate(['/profile_edit/about'])
+   })
+  }
 
  async load(){
       let res=await this.service.load(50)

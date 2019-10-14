@@ -9,7 +9,7 @@
            (beforeChange)="beforeChange($event)"
     >
         <div ngxSlickItem *ngFor="let user of suggestions">
-            <opspot-card-user [cardType]="'new'" [object]="user.entity"></opspot-card-user>
+            <opspot-card-user [cardType]="'user2'" [object]="user.entity"></opspot-card-user>
         </div>
     </ngx-slick-carousel>
     <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
@@ -17,14 +17,25 @@
 </div> -->
 
 <div class="o-card o-card-suggestion" >
-    <div class="text-md f500">Suggestions for you</div>
-    <div *ngFor="let user of suggestions">
-      <opspot-card-user [cardType]="'new'" [object]="user.entity" class="dis-in"></opspot-card-user>
+    <div class="text-md f500 p-b-10">Suggestions for you</div>
+    <div class="wrapper">
+        <opspot-card *ngFor="let user of suggestions" class="suggestion-card" [cardType]="'user2'" [object]="user.entity"></opspot-card>
     </div>
 </div>
 
 <style>
-  .dis-in {
-    display: inline !important;
-  }
+.suggestion-card {
+    width: 190px;
+    margin: 0 4px;
+    float: left;
+}
+.suggestion-card:first-child {
+    margin-left: 0;
+}
+.suggestion-card:last-child {
+    margin-right: 0;
+}
+.p-b-10 {
+    padding-bottom: 10px;
+}
 </style>

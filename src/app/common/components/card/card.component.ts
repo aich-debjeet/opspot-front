@@ -41,6 +41,8 @@ export class OpspotCard implements AfterViewInit {
 
   private initialized: boolean = false;
 
+  @Input() cardType: string;
+
   constructor(
     private _componentFactoryResolver: ComponentFactoryResolver
   ) { }
@@ -139,6 +141,10 @@ export class OpspotCard implements AfterViewInit {
 
       if (this.object.type === 'activity') {
         (<Activity>this.componentInstance).hideTabs = this.flags.hideTabs || false;
+      }
+
+      if (this.cardType === 'user2') {
+        this.componentInstance.cardType = this.cardType;
       }
     }
 
