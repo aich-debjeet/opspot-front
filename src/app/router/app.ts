@@ -47,7 +47,7 @@ export const OpspotAppRoutes: Routes = [
 
   { path: 'claim-rewards/:uuid', component: RewardsComponent },
   {
-    path: 'profile_edit',
+    path: 'profile',
     component: ProfileEditComponent,
     children: [
       { path: '', redirectTo: 'general', pathMatch: 'full' },

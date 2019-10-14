@@ -22,7 +22,6 @@
             <h4 class="f500">Communities</h4>
             <button type="button" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn()" routerLink="/groups/create" >Create Community</button>
             <div class="text-lg f500 mb-17">Communities you manage</div>
-            {{entity|json}}
 
             <div *ngFor="let entity of entities">
                 <div class="o-community-landing-block-manage" *ngIf="entity['is:creator']" [routerLink]="['/groups/profile', entity.guid]">

@@ -90,7 +90,7 @@ async load(){
         }
       }
       this.client.post('api/v1/entities/contact_details', contact).then(res=>{
-        this.router.navigate(['/profile_edit/work'])
+        this.router.navigate(['/profile/work'])
       })
     }
 
