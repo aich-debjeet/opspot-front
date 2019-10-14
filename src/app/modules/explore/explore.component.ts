@@ -119,6 +119,7 @@ export class ExploreComponent implements OnInit {
   switchCategoryType(sType: string) {
     console.log(sType)
     this.ref = sType;
+    // this.searchMore(true)
     this.router.navigate(['/explore'], {
       queryParams: {
         q: this.q,
@@ -181,7 +182,7 @@ export class ExploreComponent implements OnInit {
       this.offset = '';
     }
     this.inProgress = true;
-    this.client.get('api/v2/feeds/global/top/activities', { hashtags: '', period: '12h', all: '', query: '', nsfw: '', sync: '1', as_activities: '1', from_timestamp: '', limit: 10, offset: this.offset }, { cache: true })
+    this.client.get('api/v2/feeds/global/top/activities', { hashtags: this.ref, period: '12h', all: '', query: '', nsfw: '', sync: '1', as_activities: '1', from_timestamp: '', limit: 10, offset: this.offset }, { cache: true })
       .then((data: any) => {
         let respData: any = data;
         if (respData.entities.length == 0) {
