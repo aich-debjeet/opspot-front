@@ -7,41 +7,8 @@ type Hashtag = {
 
 @Component({
   selector: 'm-onboarding--topics',
-  template: `
-    <div class="m-channelOnboarding__slide">
-      <h2>What topics are you most interested in?</h2>
-
-      <ul class="m-channelOnboardingSlideSection__list">
-        <div class="mdl-spinner mdl-js-spinner is-active" [mdl] [hidden]="!inProgress"></div>
-
-        <li class="m-channelOnboardingSlideSection__item"
-            [ngClass]="{ 'm-channelOnboardingSlideSection__item--selected': hashtag.selected }"
-            *ngFor="let hashtag of hashtags"
-          >
-          <span [ngClass]="{ 'selected': hashtag.selected }"
-                (click)="toggleSelection(hashtag)">#{{hashtag.value}}</span>
-        </li>
-        <li class="m-hashtag--creator" *ngIf="!inProgress">
-          <input
-            type="text"
-            name="hashtag"
-            [(ngModel)]="input"
-            (keyup)="keyUp($event)"
-            #hashtagInput/>
-          <i class="material-icons m-hashtag--creator--done"
-             (click)="addNew()"
-          >
-            done
-          </i>
-          <i class="material-icons m-hashtag--creator--close"
-             (click)="input = ''; addingHashtag = false; hashtagInput.focus()"
-          >
-            close
-          </i>
-        </li>
-      </ul>
-    </div>
-  `
+  templateUrl: './topics.component.html',
+  styleUrls: ['./topics.component.scss']
 })
 
 export class TopicsOnboardingComponent implements OnInit {
