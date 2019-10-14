@@ -239,7 +239,7 @@ opspot-button-remind{
                     [src]="[{ 'res': '360', 'uri': 'api/v1/media/' + videoData.guid + '/play', 'type': 'video/mp4' }]"
                     [guid]="videoData.guid" 
                     [torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
-                    <!-- <video-ads [player]="player" *ngIf="activity.monetized"></video-ads> -->
+                    <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
             </m-video>
           </div>
           <div class="o-posts-inner-page-myjourney-padding">

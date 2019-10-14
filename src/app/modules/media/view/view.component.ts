@@ -95,7 +95,11 @@ export class MediaViewComponent {
         if (response.activity) {
           this.entity = response.activity;
           console.log("ENTITY: ", this.entity);
-          this.showImage(0);
+          if (this.entity['custom_data'][0]['entity_type'] === 'video') {
+            this.showImage(0,this.entity['custom_data'][0]);
+          } else {
+            this.showImage(0);
+          }
           this.count = this.entity['thumbs:up:count'];
 
           // switch (this.entity.subtype) {
@@ -211,7 +215,7 @@ export class MediaViewComponent {
     } else {
       this.showVideo = false;
       this.largeImage = this.entity.custom_data[i].src;
-      console.log(" this.largeImage: ", this.largeImage); 
+      console.log(" this.largeImage: ", this.largeImage);
     }
   }
 
