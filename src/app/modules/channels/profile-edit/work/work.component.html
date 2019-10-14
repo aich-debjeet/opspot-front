@@ -1,3 +1,107 @@
-<p>
-  work works!
-</p>
+<h5 class="o-prof-edit-title workTitleback" *ngIf="!addWork" >Work Experience</h5>
+<div class="o-prof-edit-block" style="padding-left: 15px" *ngIf="!addWork" >
+  <a class="btn btn-outline-primary btn-block showSingle"  (click)="addWork=!addWork; addWorkMove();"   >ADD WORK EXPERIENCE</a>
+  <div class="o-prof-edit-wea">
+      <div class="o-wea-block" *ngFor="let work of work.work_experience; let i=index;" >
+          <div class="o-wea-logo"><img src="assets/Work.jpg" alt=""></div>
+          <div class="o-wea-info">
+              <div class="caption-bold">{{work.designation}}</div>
+              <div class="caption-bold f400">{{work.company_name}} - {{work.location}}</div>
+              <div class="text-md grey">{{work.start_date}} -  {{work.end_date?work.end_date:'Present'}}</div>
+          </div>
+          <div class="o-wea-edit"><a (click)="update(i)" ><i class="icon-edit-profile"></i></a></div> 
+      </div>
+  </div>
+</div>
+
+<div *ngIf="addWork" style="display: block; padding: 10px;">
+  <h5 class="o-prof-edit-title workTitle">
+    <a (click)="goBack()" class="o-wea-back" target="2">
+      <i class="icon-arrow-left"></i>
+    </a> Add Work Experience</h5>
+   <form #f="ngForm" >
+      <div class="o-wea-add-block" style="padding-left: 12px;">
+           <input type="hidden" [(ngModel)]="model.index" [value]=model.index name="updateIndex" >
+          <div class="o-wea-add-block__left">
+              <div class="form-group w-lg">
+                  <label>Designation</label>
+                  <input type="text" #designation="ngModel" required name="designation" [(ngModel)]="model.designation" class="form-control form-control-lg" placeholder="">
+              </div><!--designation end-->
+              <div class="form-group w-lg">
+                  <label>Company Name</label>
+                  <input #company="ngModel" required name="company" [(ngModel)]="model.company" type="text" class="form-control form-control-lg" placeholder="">
+              </div><!--company name end-->
+              <div class="form-group w-lg">
+                  <label>Location</label>
+                  <input required type="text" #location="ngModel" name="location" [(ngModel)]="model.location" class="form-control form-control-lg" placeholder="">
+                  
+              </div><!--location end-->
+              <div class="o-toggle-check">
+                  <label>
+                      <input type="checkbox" (click)="toggleEndDate()" [(ngModel)]="model.present" name="present">
+                      <span class="text-md">I’m currently working here</span>
+                  </label>
+              </div><!-- toggle check end -->
+              <div class="o-prof-edit-item__title">Start Date</div>
+              <div class="o-wea-date">
+                  <div class="form-group">
+                      <select class="form-control" name="strtMonth" #strtMonth="ngModel" required [(ngModel)]="model.strtMonth" >
+                          <option [value]="Month" selected disabled hidden>Month</option>
+                          <option *ngFor="let month of dateOfBirth.month" [value]="month" placeholder="month"> {{month}}</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <select class="form-control" name="strtYear" #strtYear="ngModel" required [(ngModel)]="model.strtYear" >
+                          <option  [value]="Year"  selected disabled hidden>Year</option>
+                           <option *ngFor="let year of dateOfBirth.year" [value]="year">{{year}}</option>
+                      </select>
+                  </div>
+                  <div class="text-md o-to">to</div>
+              </div><!-- start date end -->
+              <ng-template [ngIf]="!toggleEnd" >
+              <div class="o-prof-edit-item__title" >End Date</div>
+              <div class="o-wea-date">
+                  <div class="form-group">
+                      <select class="form-control" name="endMonth"  [(ngModel)]="model.endMonth" >
+                          <option [value]="Month" selected disabled hidden>Month</option>
+                          <option *ngFor="let month of dateOfBirth.month" [value]="month" placeholder="month"> {{month}}</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <select class="form-control" name="endYear" [(ngModel)]="model.endYear" >
+                          <option [value]="Year" selected disabled hidden>Year</option>
+                          <option *ngFor="let year of dateOfBirth.year" [value]="year">{{year}}</option>
+                      </select>
+                  </div>
+              </div><!-- end date end -->
+            </ng-template>
+
+          </div>
+         
+      </div>  
+      
+   </form>
+   <div class="o-toggle-check">
+      <label>
+          <input type="checkbox" name="privacy" [(ngModel)]="model.privacy">
+          <span class="text-md">Show this work experience in my profile page</span>
+      </label>
+  </div>
+
+  <p *ngIf="!location.valid&&submitted" class="error text-sm">Please add Location</p>
+  <p *ngIf="!designation.valid&&submitted" class="error text-sm">Please add designation</p>
+  <p *ngIf="!company.valid&&submitted" class="error text-sm">Please add company</p>
+  <p *ngIf="!strtMonth.valid&&submitted" class="error text-sm">Please enter start Month</p>
+  <p *ngIf="!strtYear.valid&&submitted" class="error text-sm">Please enter start year</p>
+  <p *ngIf="errWork&&submitted" class="error text-sm">Please add valid dates</p>
+  <p *ngIf="errEndDate&&submitted" class="error text-sm">Enddate is required</p>
+
+
+
+
+   <div class="o-prof-edit-actions" style="padding-left:12px; ">
+      <button type="button" class="btn btn-outline-primary btn-lg ">Cancel</button>
+      <button type="button" class="btn btn-primary btn-lg btn--cancel" (click)="onSubmit(f)">Update</button>
+  </div>
+</div>
+

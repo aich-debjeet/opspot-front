@@ -32,6 +32,10 @@ import { EducationComponent } from './profile-edit/education/education.component
 import { AwardsComponent } from './profile-edit/awards/awards.component';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { TagInputModule } from 'ngx-chips';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { UserPrivacyComponent } from './profile-edit/user-privacy/user-privacy.component';
+import { NgxIntlTelInputModule }  from 'ngx-intl-tel-input';
 
 
 const routes: Routes = [
@@ -55,6 +59,9 @@ const routes: Routes = [
     HashtagsModule,
     NgxUsefulSwiperModule,
     TagInputModule,
+    BsDatepickerModule.forRoot(),
+    TooltipModule.forRoot(),
+    NgxIntlTelInputModule
   ],
 
 
@@ -77,6 +84,7 @@ const routes: Routes = [
     WorkComponent,
     EducationComponent,
     AwardsComponent,
+    UserPrivacyComponent
   ],
   exports: [
     ChannelModulesComponent,
