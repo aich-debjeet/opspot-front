@@ -244,15 +244,15 @@ opspot-button-remind{
           </div>
           <div class="o-posts-inner-page-myjourney-padding">
               <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">
-              <div *ngFor="let image of entity?.custom_data; let i = index;">
+                <div *ngFor="let media of entity?.custom_data; let i = index;">
                   <a class="feed-media__link">
-                    <img [src]="image.src" alt="" class="feed-media__img" *ngIf="image.entity_type != 'video'" (click)="showImage(i)">
-                    <img *ngIf="image.entity_type === 'video'" [src]="image.thumbnail_src" alt="" class="feed-media__img">
-                    <div class="feed-media-overlay" *ngIf="image.entity_type === 'video'" (click)="showImage(i,image)">
+                    <img *ngIf="media.entity_type !== 'video'" [src]="media.src" alt="" class="feed-media__img" (click)="showImage(i)">
+                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+                    <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
                         <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
                     </div>
                   </a>
-              </div>
+                </div>
               </div>
               <div class="" *ngIf="entity?.custom_data?.length > 5">
                   <ngx-slick-carousel 
@@ -264,14 +264,14 @@ opspot-button-remind{
                   (afterChange)="afterChange($event)"
                   (beforeChange)="beforeChange($event)"
                   >
-                  <div ngxSlickItem *ngFor="let image of entity?.custom_data; let i = index;" class="slide">
+                  <div ngxSlickItem *ngFor="let media of entity?.custom_data; let i = index;" class="slide">
                     <a class="feed-media__link">
-                        <!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + image.src + ')'"></div> -->
-                      <!-- <img [src]="image.src" alt="" class="feed-media__img"
-                      (error)="image.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
-                      <img [src]="image.src" alt="" class="feed-media__img" *ngIf="image.entity_type != 'video'" (click)="showImage(i)">
-                      <img *ngIf="image.entity_type === 'video'" [src]="image.thumbnail_src" alt="" class="feed-media__img">
-                      <div class="feed-media-overlay" *ngIf="image.entity_type === 'video'" (click)="showImage(i,image)">
+                        <!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + media.src + ')'"></div> -->
+                      <!-- <img [src]="media.src" alt="" class="feed-media__img"
+                      (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
+                      <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'" (click)="showImage(i)">
+                      <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+                      <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
                           <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
                       </div>
                     </a>
