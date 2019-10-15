@@ -7,6 +7,8 @@ import { PostMenuModule } from '../../common/components/post-menu/post-menu.modu
 import { CommentsModule } from '../comments/comments.module';
 import { LegacyModule } from '../legacy/legacy.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { VideoModule } from '../../modules/media/components/video/video.module';
+
 
 // TODO @gayatri: handle all other requests
 const blueStoreRoutes: Routes = [
@@ -29,7 +31,8 @@ const blueStoreRoutes: Routes = [
     PostMenuModule,
     CommentsModule,
     LegacyModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    VideoModule
   ]
 })
 export class BluestoreModule { }

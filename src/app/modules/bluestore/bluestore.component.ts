@@ -62,7 +62,11 @@ export class BluestoreComponent implements OnInit {
       .then((data: any) => {
         if (data.marketplace) {
           this.marketplace = data.marketplace;
-          this.showImage(0);
+          if (this.marketplace['custom_data'][0]['entity_type'] === 'video') {
+            this.showImage(0,this.marketplace['custom_data'][0]);
+          } else {
+            this.showImage(0);
+          }
           this.count = this.marketplace['thumbs:up:count'];
 
           if (data.marketplace.owner_obj) {
@@ -209,8 +213,19 @@ export class BluestoreComponent implements OnInit {
     console.log('beforeChange');
   }
 
-  showImage(i) {
-    this.largeImage = this.marketplace.custom_data[i].src;
-    console.log('this.largeImage', this.largeImage);
+  
+  showVideo = false;
+  videoData: any;
+
+  showImage(i, data?) {
+    if (data) {
+      this.showVideo = true;
+      this.videoData = data;
+      console.log("video: ", data);
+    } else {
+      this.showVideo = false;
+      this.largeImage = this.marketplace.custom_data[i].src;
+      console.log(" this.largeImage: ", this.largeImage);
+    }
   }
 }
