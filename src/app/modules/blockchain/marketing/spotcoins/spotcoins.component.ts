@@ -63,7 +63,7 @@ export class SpotcoinsComponent implements OnInit {
     public session: Session,
     public http: HttpClient) {
     this.loadScript();
-   }
+  }
 
   ngOnInit() {
     // this.loadWalletAddress();
@@ -80,7 +80,7 @@ export class SpotcoinsComponent implements OnInit {
     console.log(value)
     this.tokens = value * this.rate;
   }
-  
+
   async load() {
     this.inProgress = true;
     this.detectChanges();
@@ -131,7 +131,7 @@ export class SpotcoinsComponent implements OnInit {
     let tx, amount;
 
     try {
-      let comp = 0.000000000000000001; 
+      let comp = 0.000000000000000001;
       amount = parseFloat((this.amount + comp).toFixed(18)); // Allow for small rounding discrepencies caused by recurring decimals
       tx = await this.tde.buy(amount, this.rate);
     } catch (err) {
@@ -142,9 +142,9 @@ export class SpotcoinsComponent implements OnInit {
     }
 
     let response = await this.client.post('api/v2/blockchain/purchase', {
-        tx: tx,
-        amount: amount.toString(),
-        wallet_address: await this.web3Wallet.getCurrentWallet()
+      tx: tx,
+      amount: amount.toString(),
+      wallet_address: await this.web3Wallet.getCurrentWallet()
     });
 
     this.confirming = false;
@@ -170,7 +170,7 @@ export class SpotcoinsComponent implements OnInit {
 
   promptTokenInput(input) {
     alert('Please enter how many tokens you wish to purchase');
-    setTimeout(() => { input.focus()}, 100);
+    setTimeout(() => { input.focus() }, 100);
   }
 
   detectChanges() {
@@ -180,10 +180,10 @@ export class SpotcoinsComponent implements OnInit {
 
   loadScript() {
     const location = window.location.href;
-    if(location.split("?").length == 2){
+    if (location.split("?").length == 2) {
       this.confirming = false;
       this.confirmed = true;
-      this.showPledgeModal =true;
+      this.showPledgeModal = true;
     }
     const a = document.createElement('script');
     a.src = 'https://js.instamojo.com/v1/checkout.js';
@@ -194,26 +194,26 @@ export class SpotcoinsComponent implements OnInit {
   }
   payment() {
     const formData = new FormData();
-    formData.append('amount',this.amount.toString());
-    formData.append('purpose','token_purchase');
-    formData.append('buyer_name',window.Opspot.user.name);
+    formData.append('amount', this.amount.toString());
+    formData.append('purpose', 'token_purchase');
+    formData.append('buyer_name', window.Opspot.user.name);
     //formData.append('redirect_url','https://336a201c.ngrok.io/Instamojo-php-curl/success');
-    formData.append('email',window.Opspot.user.email);
-    formData.append('phone',window.Opspot.user.phone);
+    formData.append('email', window.Opspot.user.email);
+    formData.append('phone', window.Opspot.user.phone);
 
 
     this.http.post<any>('api/v3/payment/instamojo', formData).subscribe(
       (res) => {
         const s = document.createElement('script');
 
-          s.type = 'text/javascript';
-          s.innerHTML = "Instamojo.open('" + res.longurl + "');";
+        s.type = 'text/javascript';
+        s.innerHTML = "Instamojo.open('" + res.longurl + "');";
 
-  
-      this.elementRef.nativeElement.appendChild(s);
-    },
+
+        this.elementRef.nativeElement.appendChild(s);
+      },
       (err) => console.log(err)
     );
- }
+  }
 
 }
