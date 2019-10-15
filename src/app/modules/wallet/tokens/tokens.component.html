@@ -86,7 +86,7 @@
             </div>
         </h3>
         <div class="text-sm m-t-6">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.
+          Wallet is a single place to check all your transactions, rewards, withdrawals, next payout, contributions and coins available.
         </div>
         <div class="o-payout-tym hidden-under-tablet">
             <span class="caption-bold f700">{{ overview.nextPayout | timediff:true }} <i class="icon-info"></i>
@@ -99,7 +99,7 @@
             <div id="token-title" class="text-md primary">Tokens</div>
             <div id="token-count" class="text-h3 f700 primary"><m-wallet--balance-tokens></m-wallet--balance-tokens></div>
         </div>
-        <a routerLink="/token" class="btn btn-primary btn-sm o-btn--wallet-buytoken">Buy Tokens</a>
+        <a (click)="buyTokens()" class="btn btn-primary btn-sm o-btn--wallet-buytoken">Buy Tokens</a>
     </div><!-- wallet buytoken part end -->
 </div>
 <div class="o-wallet-block">

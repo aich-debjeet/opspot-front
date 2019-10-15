@@ -1,0 +1,144 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+@import "src/assets/scss/base/_typography.scss";
+@import "src/assets/scss/base/_base.scss";
+@import "src/assets/scss/components/_common.scss";
+
+.o-token{
+    width: 521px;
+    border-radius: 4px;	
+    background-color: #FFFFFF;
+    @include mq($from: $mobile_sm, $until: $mobile  ) {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+	}
+}
+.o-token-head{
+    width: 100%;
+    padding: 25px 38px;
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $mobile  ) {
+        padding: 14px;
+	}
+    &--border{
+        border-bottom: 1px solid #ECEFF1;
+    }
+    .close{
+        position: absolute;
+        top: 30px;
+        right: 38px;
+        @include mq($from: $mobile_sm, $until: $mobile  ) {
+            top: 18px;
+            right: 14px;
+        }
+    }
+    .go-back{
+        position: absolute;
+        top: 30px;
+        left: 38px;
+        @include mq($from: $mobile_sm, $until: $mobile  ) {
+            top: 18px;
+            left: 14px;
+        }
+    }
+}
+
+// // // token body part
+
+.o-token-body{
+    width: 100%;
+    padding: 23px 38px 38px;
+    @include mq($from: $mobile_sm, $until: $mobile  ) {
+        padding: 14px;
+	}
+    &--flex{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+.o-token-discrptn{
+    width: 275px;
+    margin: 0px auto;
+    @include mq($from: $mobile_sm, $until: $mobile  ) {
+        width: 100%;
+	}
+}
+// token purchase
+.o-token-purchase{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 21px 0px 0px;
+}
+// input
+.o-token-action-input{
+    width: 146px;	
+    border: 1px solid #90A4AE;	
+    border-radius: 4px;
+    padding: 14px;
+    text-align: center;
+    margin-top: 16px;
+    font-size: 20px;	
+    line-height: 20px;
+    color: $grey-dark;
+    margin: 29px 0px 35px;
+    &:focus{
+        outline: none;
+    }
+}
+
+// purchase det
+
+.o-purchase-detail{
+    width: 100%;
+    &__title{
+        width: 100%;
+        background: $grey-light;
+        font-size: 13px;	
+        font-weight: 500;	
+        line-height: 18px;
+        color: $grey-dark;
+        padding: 4px 39px;
+    }
+    &__body{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        padding: 4px 39px;
+    }
+}
+.o-purchase-count{
+    width: calc(100% - 57px);
+    span{
+        width: 100%;
+        display: block;
+        margin: 6px 0px;
+    }
+    .text-sm{
+        line-height: 21px!important;
+    }
+}
+.o-purchase-token-price{
+    width: 56px;
+    span{
+        display: block;
+        margin: 6px 0px;
+        text-align: right;
+        label{
+            margin: 0px;
+        }
+    }
+    &__total{
+        padding-top: 10px;
+        border-top: 1px solid #E6E6E6;
+        margin-top: 3px;
+    }
+}
+.btn--token-buy{
+    margin-top: 23px;
+}
