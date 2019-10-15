@@ -38,6 +38,12 @@ import { HovercardPopup } from './components/hovercard-popup/hovercard-popup';
 import { CarouselComponent } from './components/carousel.component';
 import { CommentsModule } from '../comments/comments.module';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+import { AppuserComponent } from './components/appuser/appuser.component';
+import { GroupBannerComponent } from './components/group-banner/group-banner.component';
+import { OpspotFormsModule } from '../forms/forms.module';
+// import { SlickCarouselModule } from 'ngx-slick-carousel';
+// import { PostCard } from './components/cards/post-card/post-card';
+
 
 @NgModule({
   imports: [
@@ -56,6 +62,8 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
     PostMenuModule,
     CommentsModule,
     TextInputAutocompleteModule,
+    OpspotFormsModule,
+    // SlickCarouselModule
   ],
   declarations: [
     Activity,
@@ -80,6 +88,13 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
     SocialIcons,
 
     CarouselComponent,
+
+    AppuserComponent,
+
+    GroupBannerComponent,
+    
+    // PostCard,
+
   ],
   exports: [
     Activity,
@@ -89,7 +104,6 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
     VideoCard,
     Remind,
     UserCard,
-
     BoostButton,
     CommentButton,
     FeatureButton,
@@ -104,6 +118,10 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
     SocialIcons,
     HovercardPopup,
     CarouselComponent,
+    AppuserComponent,
+    GroupBannerComponent,
+    // SlickCarouselModule
+    // PostCard
   ],
   entryComponents: [
     Activity,
@@ -113,6 +131,7 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
     VideoCard,
     Remind,
     UserCard,
+    // SlickCarouselModule,
     BoostButton,
   ]
 })

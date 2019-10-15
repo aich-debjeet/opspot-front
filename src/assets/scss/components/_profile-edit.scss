@@ -6,7 +6,7 @@
     height: 100%;
 }
 .o-prof-edit{
-    height: 100%;	
+    min-height: 100%;	
     width: 100%;
     max-width: 1070px;	
     border-radius: 4px;	
@@ -159,6 +159,14 @@
         top: 56px;
         right: 165px;
         transform: rotate(-90deg);
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            text-align: right;
+            position: absolute;
+            top: -11px;
+            right: 13px;
+            // -webkit-transform: rotate(-90deg); 
+            transform: none; 
+        }
     }
 }
 .o-prof-edit-privacy-radio{

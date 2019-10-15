@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 import { OPSPOT_PIPES } from './pipes/pipes';
 
@@ -80,8 +81,16 @@ import { SocketsService } from '../services/sockets';
 import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
-import { from } from 'rxjs';
-
+import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
+import { OpspotWidgetComponent } from './components/opspot-widget/opspot-widget.component';
+import { OpspotWidgetSliderComponent } from './components/opspot-widget-slider/opspot-widget-slider.component';
+import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
+import { MasonryContainerComponent } from './components/masonry-container/masonry-container.component';
+import { PostCard } from '../modules/legacy/components/cards/post-card/post-card';
+import { ShowtimeWidgetComponent } from './components/showtime-widget/showtime-widget.component';
+import { ShowtimeListCardComponent } from './components/showtime-list-card/showtime-list-card.component';
+import { MyjourneyWidgetComponent } from './components/myjourney-widget/myjourney-widget.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   imports: [
@@ -89,7 +98,9 @@ import { from } from 'rxjs';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCroppieModule
+    NgxCroppieModule,
+    NgxMasonryModule,
+    SlickCarouselModule
   ],
   declarations: [
     OPSPOT_PIPES,
@@ -133,6 +144,7 @@ import { from } from 'rxjs';
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -163,6 +175,14 @@ import { from } from 'rxjs';
     DynamicFormComponent,
     AndroidAppDownloadComponent,
     ImageCroperComponent,
+    ReadMoreComponent,
+    OpspotWidgetComponent,
+    OpspotWidgetSliderComponent,
+    OpportunityListCardComponent,
+    MasonryContainerComponent,
+    ShowtimeWidgetComponent,
+    ShowtimeListCardComponent,
+    MyjourneyWidgetComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -205,6 +225,7 @@ import { from } from 'rxjs';
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,
+    PostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -235,7 +256,15 @@ import { from } from 'rxjs';
     PieGraph,
     DynamicFormComponent,
     AndroidAppDownloadComponent,
-    ImageCroperComponent
+    ImageCroperComponent,
+    ReadMoreComponent,
+    OpspotWidgetComponent,
+    OpspotWidgetSliderComponent,
+    OpportunityListCardComponent,
+    ShowtimeListCardComponent,
+    ShowtimeWidgetComponent,
+    MasonryContainerComponent,
+    MyjourneyWidgetComponent
   ],
   providers: [
     {

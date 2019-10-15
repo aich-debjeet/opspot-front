@@ -3,11 +3,11 @@
     <ng-content select="[confirm-message]"></ng-content>
 
     <div class="m-modal-confirm-buttons">
-      <button class="mdl-button mdl-color-text--white mdl-button--colored mdl-button--raised" [disabled]="inProgress" (click)="action($event)">
+      <button class="btn btn-primary" [disabled]="inProgress" (click)="action($event)">
         {{ yesButton }}
       </button>
 
-      <button class="mdl-button mdl-button--raised mdl-color-text--blue-grey-700" [disabled]="inProgress" (click)="close($event)" *ngIf="noButton">
+      <button class="btn btn-outline-primary" [disabled]="inProgress" (click)="close($event)" *ngIf="noButton">
         {{ noButton }}
       </button>
     </div>

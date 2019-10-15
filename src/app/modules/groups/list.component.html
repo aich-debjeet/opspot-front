@@ -1,3 +1,77 @@
+<div class="container">
+    <div class="o-community-landing-block">
+        <div class="o-community-landing-block__mob-header">
+            <h4 class="f500">Communities</h4>
+        
+        <a routerLink="/groups/create"  *ngIf="session.isLoggedIn()" class="text-lg primary f500">Create</a>
+        </div>
+        <div class="o-community-landing-block__mob-tab">
+            <div class="o-cmnity-landing-block">
+                <div class="o-cmnity-landing-block__tab">
+                    <div class="tabs-cmnity-landing">
+                        <ul class="tabs-list cmnity-landing-tabs">
+                            <li class="active"><a href="#discover">Discover</a></li>
+                            <li class=""><a href="#communities">My Communities</a></li>
+                        </ul>
+                    </div><!--tab end-->
+                </div>
+               </div><!-- wallet block end -->
+        </div>
+ 
+        <div class="o-community-landing-block__sidebar hidden-mob">
+            <h4 class="f500">Communities</h4>
+            <button type="button" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn()" routerLink="/groups/create" >Create Community</button>
+            <div class="text-lg f500 mb-17">Communities you manage</div>
+
+            <div *ngFor="let entity of entities">
+                <div class="o-community-landing-block-manage" *ngIf="entity['is:creator']" [routerLink]="['/groups/profile', entity.guid]">
+                    <div class="o-community-landing-block-manage__avatar">
+                        <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="">
+                    </div>
+                    <div class="text-md f500">
+                     {{entity.name}}
+                    </div>
+                </div>
+              </div>
+          
+          <!--communities-manage ends-->
+            <div class="o-community-landing-block-your">
+                <div class="text-lg f500 mb-17">Communities you’re in</div>
+               <!--communities-manage ends-->
+               <div *ngFor="let entity of entities">
+                  <div class="o-community-landing-block-manage" *ngIf="entity['is:member']" [routerLink]="['/groups/profile', entity.guid]">
+                      <div class="o-community-landing-block-manage__avatar">
+                          <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="">
+                      </div>
+                      <div class="text-md f500">
+                       {{entity.name}}
+                      </div>
+                  </div>
+                </div>
+            </div><!--your block ends-->
+        </div>
+        <div class="o-community-landing-block__main" style="height: 0;">
+            <div class="o-cmnity-landing-tab-content">
+                <div class="tabs-cmnity-landing">
+                    <div id="discover" class="tab active">
+                        <div class="o-community-landing-block-design">
+                            <div class="o-community-landing-block-design hidden-mob">
+                                <m-groups--tile *ngFor="let entity of entities" [entity]="entity"></m-groups--tile>
+                            </div>
+                        </div><!--design block ends-->
+                       <!--community block ends-->
+                </div><!--tabs-cmnity-landing ends-->
+            </div><!--tab-content ends-->
+        </div>
+       </div>
+       
+            <div class="o-community-landing-block-design hidden-above-tablet" style="flex-direction: column;">
+                <m-groups--tile *ngFor="let entity of entities" [entity]="entity"></m-groups--tile>
+            </div>
+</div>
+
+<div *ngIf="dev">
+
 <div class="m-toolbar">
   <div class="m-topbar--row">
     <div class="m-topbar--navigation m-topbar--navigation--text-only">
@@ -83,3 +157,7 @@
   </infinite-scroll>
 
 </div>
+
+</div>
+
+

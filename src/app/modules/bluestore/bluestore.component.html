@@ -1,0 +1,122 @@
+<section class="o-post-inner-sec">
+	<div class="container">
+		<div class="o-posts-inner-page">
+			<div class="o-posts-inner-page__left">
+				<div class="o-card feed o-post-inner-minheight">
+					<div class="feed-head">
+						<a *ngIf="marketplace?.ownerObj && marketplace?.ownerObj?.username"
+							[routerLink]="['/', marketplace?.ownerObj?.username]" class="o-avatar">
+							<img [src]="opspot.cdn_url + 'icon/' + marketplace?.ownerObj?.guid + '/medium/' + getOwnerIconTime()"
+								alt="">
+						</a>
+						<div class="o-avatar__info">
+							<div class="o-avatar-det-block">
+								<span class="text-lg grey o-posts-det">
+									<a class="o-avatar__name">{{marketplace?.ownerObj?.name}}</a>
+									added 4 medias to <a class="grey-dark f500">#Marketplace</a>
+								</span>
+							</div>
+							<div class="grey m-l-8 o-posts-tym" *ngIf="marketplace?.time_created">
+								<span>{{marketplace?.time_created * 1000 | date:'medium'}}</span>
+								<span class="o-posts-public-private" *ngIf="isTranslatable"
+									(click)="translateToggle = true;"><i class="icon-public"></i>
+								</span>
+							</div>
+						</div>
+						<div class="o-feed-head-action">
+							<m-post-menu *ngIf="marketplace" [entity]="marketplace" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
+								(optionSelected)="menuOptionSelected($event)">
+								<ng-container post-menu>
+									<ng-content select="[post-menu]"></ng-content>
+								</ng-container>
+							</m-post-menu>
+						</div>
+					</div>
+					<div class="o-post-inner-page-myjourney-image">
+						<img [src]="largeImage" (error)="opspot.cdn_assets_url + 'assets/logos/logo.svg'" alt="">
+					</div>
+					<div class="o-posts-inner-page-myjourney-padding">
+						<div class="feed-media post-view-style" *ngIf="marketplace?.custom_data.length <= 5">
+							<a *ngFor="let image of marketplace?.custom_data; let i = index;" (click)="showImage(i)"
+								class="feed-media__link">
+								<img [src]="image.src" alt="" class="feed-media__img">
+								<!-- <div class="full-h-v set-bg" [style.backgroundImage]="'url(' + image.src + ')'"></div> -->
+							</a>
+						</div>
+						<div class="" *ngIf="marketplace?.custom_data.length > 5">
+							<ngx-slick-carousel 
+							class="carousel feed-media post-view-style"
+							#slickModal="slick-carousel" 
+							[config]="slideConfig" 
+							(init)="slickInit($event)"
+							(breakpoint)="breakpoint($event)" 
+							(afterChange)="afterChange($event)"
+							(beforeChange)="beforeChange($event)"
+							>
+							<div ngxSlickItem *ngFor="let image of marketplace?.custom_data; let i = index;" class="slide">
+								<a (click)="showImage(i)" class="feed-media__link">
+										<!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + image.src + ')'"></div> -->
+								<img [src]="image.src" alt="" class="feed-media__img"
+									(error)="image.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+								</a>
+							</div>
+							</ngx-slick-carousel>
+							<button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+							<button class="btn-next" (click)="slickModal.slickNext()">next</button>
+						</div>
+					</div>
+					<div class="o-posts-inner-marketplace-reachout">
+						<div class="feed-card-event-block">
+							<div class="feed-card-event-block__left">
+								<h5 class="f500 mb-3" *ngIf="marketplace?.title">
+									{{ marketplace?.title}}
+								</h5>
+								<div class="text-md" *ngIf="marketplace?.description">
+									<span class="primary">#Marketplace</span>
+									<span class="primary" [innerHtml]="marketplace.description | safe"></span>
+								</div>
+								<div class="text-rate" *ngIf="marketplace?.price ">
+									₹ {{ marketplace?.price  }}.00/- <span class="text-md f500">(per piece)</span>
+								</div>
+							</div>
+							<div class="feed-card-event-block__right ">
+								<button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+							</div>
+						</div>
+					</div>
+					<div class="o-posts-inner-page-action">
+						<div class="o-posts-inner-page-action__details">
+							<div class="o-latest-channel-info-head__members members-list">
+								<div class="members-circle members-circle1"><img src="assets/demo/avatar.png" alt="">
+								</div>
+								<div class="members-circle members-circle2"><img src="assets/demo/avatar.png" alt="">
+								</div>
+								<div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt="">
+								</div>
+							</div>
+							<div class="text-sm grey">{{count}} liked this post</div>
+							<div class="text-sm grey m-16">46 shared this post</div>
+							<div class="text-sm grey m-16">13 contributed this post</div>
+							<div class="text-sm grey m-16">2k viewed this post</div>
+						</div>
+						<div class="o-posts-inner-page-action__icons">
+							<opspot-button-thumbs-up *ngIf="marketplace" (liked)="liked($event)" [large]="'true'"
+								[object]="marketplace"></opspot-button-thumbs-up>
+							<opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'">
+							</opspot-button-remind>
+							<div class="icon-posts-box">
+								<span class="icon-coins"></span><span class="text-md f500">Contribute</span>
+							</div>
+						</div>
+					</div>
+					<opspot-comments *ngIf="marketplace" [object]="marketplace" [focusOnInit]="true" [focusedCommentGuid]="focusedCommentGuid" [canEdit]="canDelete">
+					</opspot-comments>
+				</div>
+			</div>
+			<div class="o-posts-inner-page__right hidden-mob">
+				<opspot-widget [entityType]="'opportunity'"></opspot-widget>
+				<opspot-widget [entityType]="'event'"></opspot-widget>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { Session } from '../../../../services/session';
 import { Client } from '../../../../services/api';
@@ -10,10 +10,13 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
   inputs: ['_object: object'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <a class="o-actions__link" (click)="remind()" [ngClass]="{'selected': object.reminded }">
+    <a class="o-actions__link"  *ngIf = "!large" (click)="remind()" [ngClass]="{'selected': object.reminded }">
       <i class="icon-share-2"></i>
       <span class="opspot-counter" *ngIf="object.reminds > 0">{{object.reminds | number}}</span>
     </a>
+    <div class="icon-posts-box" *ngIf = "large" (click)="remind()" [ngClass]="{'selected': object.reminded }">
+    <span class="icon-share-2"></span><span class="text-md f500">Share</span>
+    </div>
     <m-modal-remind-composer *ngIf="remindOpen"
     [object]="object"
     [open]="true"
@@ -42,6 +45,7 @@ export class RemindButton {
   showModal: boolean = false;
   message: string = '';
   remindOpen: boolean = false;
+  @Input() large: boolean = false;
 
   constructor(public session: Session, public client: Client, private modal: SignupModalService) {
   }

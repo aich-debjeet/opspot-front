@@ -1,0 +1,179 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+// // for tag
+// .o-portfolio-tag-sec{
+//     width: 100%;
+//     float: left;
+//     margin-top: 15px;
+// }
+// .o-portfolio-tag{
+//     width: 100%;
+//     padding: 0px 6px;
+//     overflow: hidden;
+// }
+// .o-tag{
+//     padding: 11px 12px 14px;
+//     border: 1px solid #E8EDF0;	
+//     border-radius: 4px;	
+//     background-color: #FFFFFF;	
+//     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+//     font-size: 14px;	
+//     font-weight: 500;	
+//     line-height: 20px;	
+//     text-align: center;
+//     color: $grey;
+//     margin: 0px 6px;
+//     display: inline-block;
+//     &:hover{
+//         color: $grey-dark;
+//     }
+//     &:focus{
+//         color: $grey-dark;
+//     }
+// }
+
+// explore action 
+.o-portfolio-content-sec{
+    width:100%;
+    float: left;
+    margin-top: 15px;
+    .mb26{
+        margin-bottom:26px;
+        @include mq($until:$tablet){
+            margin-bottom: 0;
+        }
+    }
+}
+.o-portfolio-action{
+    padding: 0px 6px;
+    margin: 0px 6px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 55px;
+    @include mq($until:$tablet){
+        margin: 0px 0px;  
+        padding: 0px 0px;
+    }
+        .visible-mob{
+            display: none;
+            @include mq($until:$tablet){
+                display:block;
+                width: 85%;
+            }
+        }
+        .form-control{
+            padding: 10px 35px;
+            height: 40px!important;
+            border: 1px solid #ECEFF1;
+            color: #263238;
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 15px;
+                @include mq($until:$tablet){
+                    padding: 10px 20px; 
+                }
+                option{
+                    padding: 10px 16px;
+                    height: 40px!important;
+                    color: #263238;
+                }
+        }
+        &__icons{
+            ul{
+                list-style-type:none;
+                display: flex;
+                i{
+                    font-size:22px;
+                    margin-right:30px;
+                    &:hover{
+                        color:$primary;
+                        cursor: pointer;
+                    }
+                }
+
+            }
+            @include mq($until:$tablet){
+                width: 90%;
+                margin: 0 10px 0 0;
+            }
+        
+        }
+        &__search{ 
+            width: 254px;
+            @include mq($until:$tablet){
+                width: initial;
+                position: absolute;
+                right: 0;
+            }
+            .form-group{
+                input{
+                    @include mq($until:$tablet){
+                        width: 40px;
+                        box-sizing: border-box;
+                        border-radius: 4px;
+                        background-color: white;
+                        -webkit-transition: width 0.4s ease-in-out;
+                        transition: width 0.4s ease-in-out;
+                        &:focus {
+                            max-width: 768px;
+                            width: auto;
+                        
+                        }
+                    }
+                }
+                i{
+                    font-size: 14px;
+                }
+                ::placeholder{
+                    color:$grey;
+                }
+            }
+            .c-form_righticon-lg{
+                span{
+                    margin-top: -42px;
+                    left:15px;
+                }
+            }
+
+        }
+}
+
+// // media css
+// .o-portfolio-media-part{
+//     &__row{
+//         display: -ms-flexbox;
+//         display: flex;
+//         -ms-flex-wrap: wrap;
+//         flex-wrap: wrap;
+//         padding: 0 4px;
+//         @include mq($until:$tablet){
+//             display:grid;
+//             padding: 0;
+//         }
+//     }
+//     &__coloumn{
+//         flex: 25%;
+//         max-width: 25%;
+//         width:100%;
+//         padding: 0 4px;
+//         @include mq($until:$tablet){
+//             flex: 100%;
+//             max-width: 100%;
+//         }
+//         &__card{
+//             margin-top: 8px;
+//             vertical-align: middle;
+//             width: 100%;
+//         }
+//     }
+// }
+// //responsive 
+// @include mq($until:$tablet){
+//     h2.mb26{
+//         font-size: 20px;
+//         font-weight: 300;
+//         padding: 0px 15px 18px 15px;
+//     }
+// }

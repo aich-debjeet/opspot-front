@@ -1,0 +1,18 @@
+<div *ngIf="opportunity">
+    <ul class="o-opportunites-list">
+        <li class="o-opportunites-list__item">
+            <a [routerLink]="['/opportunity/view',opportunity?.guid]">
+                <div class="o-opportunities-avatar">
+                    <a [routerLink]="['/', opportunity.ownerObj.username]">
+                        <img [src]="opspot.cdn_url + 'icon/' + opportunity.ownerObj.guid + '/medium/' + getOwnerIconTime()"
+                            class="mdl-shadow--2dp" />
+                    </a>
+                </div>
+                <div class="o-opportunities-info">
+                    <div class="text-md f500">{{opportunity.title}}</div>
+                    <div class="text-sm">{{opportunity.location}}</div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
