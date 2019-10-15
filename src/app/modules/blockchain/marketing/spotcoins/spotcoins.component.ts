@@ -33,7 +33,7 @@ export class SpotcoinsComponent implements OnInit {
   };
 
   //amount: number = 0.25;
-  tokens: number = 1000;
+  tokens: number = 10;
   address: string = '';
   ofac: boolean = false;
   use: boolean = false;
@@ -50,7 +50,7 @@ export class SpotcoinsComponent implements OnInit {
 
   @Input() phase: string = 'presale';
   inProgress: boolean = false;
-  rate: number = 100;    //change the rate to display the value of tokens
+  rate: number = 1;    //change the rate to display the value of tokens
 
   constructor(
     protected client: Client,
