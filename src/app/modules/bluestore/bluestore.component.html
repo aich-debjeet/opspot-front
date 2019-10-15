@@ -33,7 +33,7 @@
 						</div>
 					</div>
 					<div class="o-post-inner-page-myjourney-image">
-						<img [src]="largeImage" (error)="opspot.cdn_assets_url + 'assets/logos/logo.svg'" alt="">
+						<img [src]="largeImage" (error)="opspot.cdn_assets_url + 'assets/logos/logo.svg'" alt="" *ngIf="!showVideo">
 						<m-video *ngIf="showVideo" style="background:#000;" [muted]="false"
 							[poster]="videoData.thumbnail_src"
 							[src]="[{ 'res': '360', 'uri': 'api/v1/media/' + videoData.guid + '/play', 'type': 'video/mp4' }]"
