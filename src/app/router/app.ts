@@ -60,6 +60,10 @@ export const OpspotAppRoutes: Routes = [
     ]
   },
   {
+    path: 'invite',
+    loadChildren: './modules/invite-friends/invite-friends.module#InviteFriendsModule'
+  },
+  {
     path: ':username/:filter',
     component: ChannelComponent
   },
