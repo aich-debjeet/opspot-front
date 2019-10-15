@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Session } from '../../../services/session';
 import { Client } from '../../../services/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-privacy-security',
@@ -17,6 +18,7 @@ export class PrivacySecurityComponent implements OnInit {
     fb: FormBuilder,
     public session: Session,
     public client: Client,
+    public router: Router,
   ) {
     this.form = fb.group({
       currentPassword:[''],
@@ -27,11 +29,11 @@ export class PrivacySecurityComponent implements OnInit {
    }
 
   ngOnInit() {
-    // this.client.get('api/v1/settings/' + this.guid)
-    //   .then((response: any) => {
-    //     console.log('LOAD', response.channel);
-    //     this.openSessions = response.channel.open_sessions || 1;
-    //   });
+    this.client.get('api/v1/settings/' + this.guid)
+      .then((response: any) => {
+        console.log('LOAD', response.channel);
+        this.openSessions = response.channel.open_sessions || 1;
+      });
   }
   changePassword(){
     if(this.displayPassword) this.displayPassword = false;
@@ -53,5 +55,8 @@ export class PrivacySecurityComponent implements OnInit {
     let enteredPassword = control.value
     let passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
     return (!passwordCheck.test(enteredPassword) && enteredPassword) ? { 'requirements': true } : null;
+  }
+  closeAllSessions() {
+    this.router.navigate(['/logout/all']);
   }
 }

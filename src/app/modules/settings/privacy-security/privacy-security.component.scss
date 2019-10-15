@@ -49,7 +49,7 @@
       }
   }
   &__content{
-      width: calc(100% - 176px);
+      width: 800px; //for the tym being need to update
       padding: 35px 36px;
       @include mq($from: $mobile_sm, $until: $tablet) {
           width: 100%;
@@ -89,17 +89,16 @@
       margin-top:22px;
   }
   a{
-      position: absolute;
-      right: 0;
-      display: flex;
-      width: 100%;
-      align-items: center;
-      justify-content: center;
-      bottom: 40px;
-      @include mq($from: $mobile_sm, $until: $tablet) {
-          position:relative;
-          justify-content: left;
-          bottom:0;
+        position: absolute;
+        display: flex;
+        right: 0;
+        width: 100%;
+        justify-content: center;
+        bottom: 29px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+           position:relative;
+           justify-content: left;
+           bottom:0;
       }
   }
   select.form-control:not([size]):not([multiple]) {
@@ -559,3 +558,9 @@ margin-bottom:15px;
     overflow: hidden;
     float: left;
 }
+.tabs-settings .tab {
+    display: block;
+}
+// app-privacy-security{
+//     width: 100%;
+// }
