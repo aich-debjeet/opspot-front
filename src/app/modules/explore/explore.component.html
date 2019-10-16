@@ -36,7 +36,7 @@
         </div>
         <!--filter and search section-->
         <div class="o-explore-media-part">
-            <opspot-masonry-container [entities]="exploreArray"></opspot-masonry-container>
+            <opspot-masonry-container [entities]="filteredArray"></opspot-masonry-container>
             <infinite-scroll distance="25%" (load)="searchMore()" [moreData]="moreData" [inProgress]="inProgress">
             </infinite-scroll>
         </div>

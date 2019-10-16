@@ -16,7 +16,8 @@ import { Session } from '../../services/session';
 })
 export class ExploreComponent implements OnInit {
 
-  exploreArray: Array<Object>;
+  exploreArray = [];
+  filteredArray = [];
   hashtags: [];
   paramsSubscription: Subscription;
   q: string = '';
@@ -162,7 +163,21 @@ export class ExploreComponent implements OnInit {
   // keyup event for search
   keyup(e) {
     if (e.keyCode === 13) {
-      this.search();
+      console.log(this.q);
+      // this.search();
+      if (!this.filteredArray || !this.q) {
+        return this.filteredArray = this.exploreArray;
+      }
+      // filter items array, items which match and return true will be
+      // kept, false will be filtered out
+      //   console.log('Before filter',this.filteredArray)
+      // this.filteredArray = this.exploreArray.filter((item) => item.message.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1);
+      // console.log('After Filter',this.filteredArray)
+      if (this.exploreArray.find((item) => item.message.toString().toLowerCase() === this.q.toLowerCase())) {
+        // console.log('Before filter', this.filteredArray)
+        this.filteredArray = this.exploreArray.filter((item) => item.message.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1)
+        // console.log('After filter', this.filteredArray)
+      }
     }
   }
 
@@ -192,12 +207,12 @@ export class ExploreComponent implements OnInit {
           this.inProgress = false;
           return false;
         }
-        if (this.exploreArray && !refresh) {
+        if (this.filteredArray && !refresh) {
           console.log('added data')
-          this.exploreArray = this.exploreArray.concat(respData.entities);
+          this.filteredArray = this.exploreArray = this.exploreArray.concat(respData.entities);
         } else {
           console.log('added new data')
-          this.exploreArray = respData.entities;
+          this.filteredArray = this.exploreArray = respData.entities;
         }
         this.moreData = true;
         this.offset = respData['load-next'];
@@ -209,7 +224,7 @@ export class ExploreComponent implements OnInit {
   }
   reset() {
     console.log(this.exploreArray)
-    this.exploreArray = [];
+    this.filteredArray = this.exploreArray = [];
   }
 
   slickInit(e) {
