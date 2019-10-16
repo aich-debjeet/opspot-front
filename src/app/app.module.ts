@@ -66,7 +66,6 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BookmarkModule } from './modules/bookmark/bookmark.module';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { InviteFriendsModule } from './modules/invite-friends/invite-friends.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
 import { BluestoreModule } from './modules/bluestore/bluestore.module';
 import { ShowtimezModule } from './modules/showtimez/showtimez.module';
@@ -129,7 +128,6 @@ import { PortfolioModule } from './modules/portfolio/portfolio.module';
     HelpdeskModule,
     MobileModule,
     CanaryModule,
-    InviteFriendsModule,
     // last due to :username route
     ChannelsModule,
     BookmarkModule,

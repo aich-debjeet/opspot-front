@@ -1,6 +1,8 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '../../../services/api/client';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { SpotcoinsComponent } from '../../blockchain/marketing/spotcoins/spotcoins.component';
 
 
 @Component({
@@ -12,10 +14,11 @@ export class WalletTokensComponent implements OnInit {
 
   showOnboarding: boolean = false;
   opspot = window.Opspot;
+  showTokenOptions: boolean = false;
 
 
   
-  constructor(route: ActivatedRoute, protected client: Client,protected cd: ChangeDetectorRef,) {
+  constructor(route: ActivatedRoute, protected client: Client,protected cd: ChangeDetectorRef,private overlayModal: OverlayModalService,) {
     route.url.subscribe(() => {
       this.showOnboarding = route.snapshot.firstChild && route.snapshot.firstChild.routeConfig.path === 'transactions';
     });
@@ -52,5 +55,16 @@ export class WalletTokensComponent implements OnInit {
       this.detectChanges();
     }
    }
+
+   buyTokens() {
+    // this.overlayService.dismiss();
+    // this.router.navigate(['/token']);
+    const tokenModal = this.overlayModal.create(SpotcoinsComponent,'',  { class: 'modalChanger' });
+
+    tokenModal.onDidDismiss(() => {
+      this.showTokenOptions = false;
+    });
+    tokenModal.present();
+  }
 
 }

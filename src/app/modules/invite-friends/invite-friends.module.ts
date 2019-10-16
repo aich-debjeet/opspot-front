@@ -4,10 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { InviteFriendsComponent } from './invite-friends.component';
 
 const routes: Routes = [
-  {
-    path: 'invite',
-    component: InviteFriendsComponent,
-  }
+  { path: '', component: InviteFriendsComponent }
 ];
 
 @NgModule({

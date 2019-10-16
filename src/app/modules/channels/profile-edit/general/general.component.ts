@@ -33,7 +33,7 @@ export class GeneralComponent implements OnInit {
       "skills":data.skills
     }}
    this.client.post('api/v1/entities/general_info' ,info).then(res=>{
-     this.router.navigate(['/profile_edit/about'])
+     this.router.navigate(['/profile/about'])
    })
   }
 
