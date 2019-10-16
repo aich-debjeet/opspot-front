@@ -15,6 +15,7 @@ import { BlockchainMarketingOnboardComponent } from './onboard.component';
 import { BlockchainMarketingBlogsComponent } from './blogs.component';
 import { BlockchainMarketingCountdownComponent } from './countdown.component';
 import { ModalsModule } from '../../modals/modals.module';
+import { SpotcoinsComponent } from './spotcoins/spotcoins.component';
 
 const routes: Routes = [
   {
@@ -46,12 +47,14 @@ const routes: Routes = [
     BlockchainPurchaseComponent,
     BlockchainMarketingBlogsComponent,
     BlockchainMarketingCountdownComponent,
+    SpotcoinsComponent,
   ],
   exports: [
     BlockchainMarketingComponent,
   ],
   entryComponents: [
     BlockchainMarketingComponent,
+    SpotcoinsComponent
   ]
 })
 export class BlockchainMarketingModule { }

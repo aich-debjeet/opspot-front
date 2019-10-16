@@ -15,9 +15,6 @@ import { Modal } from "../../../common/components/modal/modal.component";
       (closed)="onClose()"
       class="m-channel--onboarding"
     >
-      <div class="m-channelOnboarding__logo">
-        <img [src]="opspot.cdn_assets_url + 'assets/logos/ops_icon.png'"/>
-      </div>
       <ng-template dynamic-host></ng-template>
 
       <div class="m-channelOnboarding__buttons" *ngIf="service.currentSlide > 0">

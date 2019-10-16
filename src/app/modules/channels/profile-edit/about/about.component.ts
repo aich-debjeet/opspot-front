@@ -99,7 +99,7 @@ export class AboutComponent implements OnInit {
       }
 
       this.client.post("api/v1/entities/about",about).then(res=>{
-        this.router.navigate(['/profile_edit/contact'])
+        this.router.navigate(['/profile/contact'])
       })
     }
   }
