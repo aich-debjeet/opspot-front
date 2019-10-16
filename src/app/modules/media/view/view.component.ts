@@ -10,6 +10,8 @@ import { RecommendedService } from '../components/video/recommended.service';
 import { AttachmentService } from '../../../services/attachment';
 import { ContextService } from '../../../services/context.service';
 import { OpspotTitle } from '../../../services/ux/title';
+import { PostFormComponent } from '../../forms/post-form/post-form.component';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   moduleId: module.id,
@@ -52,7 +54,8 @@ export class MediaViewComponent {
     public route: ActivatedRoute,
     public attachment: AttachmentService,
     public context: ContextService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    public overlayModal: OverlayModalService
   ) { }
 
   ngOnInit() {
@@ -163,7 +166,8 @@ export class MediaViewComponent {
   menuOptionSelected(option: string) {
     switch (option) {
       case 'edit':
-        this.router.navigate(['/media/edit', this.entity.guid]);
+        //this.router.navigate(['/media/edit', this.entity.guid]);
+        this.editOptions();
         break;
       case 'delete':
         this.delete();
@@ -175,6 +179,20 @@ export class MediaViewComponent {
         this.setExplicit(false);
         break;
 
+    }
+  }
+
+  editOptions() {
+    if (this.entity) {
+      this.overlayModal.create(PostFormComponent, this.entity, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+        // listen to the update callback
+        onUpdate: (payload: any) => {
+          // make update to local var
+          // alert(payload)
+          //this.udpateMarketPlace(payload);
+        }
+      }).present();
     }
   }
 

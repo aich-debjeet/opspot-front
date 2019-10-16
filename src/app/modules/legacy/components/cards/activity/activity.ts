@@ -12,12 +12,13 @@ import { NewsfeedService } from '../../../../newsfeed/services/newsfeed.service'
 import { OpportunityFormComponent } from '../../../../../modules/forms/opportunity-form/opportunity-form.component';
 import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-form/blue-store-form.component';
 import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
+import { PostFormComponent } from '../../../../../modules/forms/post-form/post-form.component';
 
 @Component({
   moduleId: module.id,
   selector: 'opspot-activity',
   host: {
-    
+
   },
   inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle'],
   outputs: ['_delete: delete', 'commentsOpened', 'onViewed'],
@@ -100,6 +101,8 @@ export class Activity {
     if (!value)
       return;
     this.activity = value;
+    console.log("this.activity: ",this.activity);
+    
     this.activity.url = window.Opspot.site_url + 'newsfeed/' + value.guid;
 
     if (
@@ -310,6 +313,16 @@ export class Activity {
         }
       }).present()
     }
+    else if (this.activity.entity_type === 'album' || this.activity.entity_type === 'image') {
+      this.overlayModal.create(PostFormComponent, this.activity, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+        // listen to the update callback
+        onUpdate: (payload: any) => {
+          // make update to local var
+         // this.udpateShowtime(payload);
+        }
+      }).present()
+    }
     else {
       this.editing = true;
     }
@@ -417,6 +430,6 @@ export class Activity {
   }
 
 
-  
+
 
 }
