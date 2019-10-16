@@ -18,7 +18,6 @@ export class ExploreComponent implements OnInit {
 
   exploreArray: Array<Object>;
   hashtags: [];
-  exploreType: string;
   paramsSubscription: Subscription;
   q: string = '';
   type: string = '';
@@ -27,7 +26,7 @@ export class ExploreComponent implements OnInit {
   inProgress: boolean = false;
   moreData: boolean = true;
   ref: string = '';
-  exploreSlider;
+
   slideConfig = {
     slidesToShow: 8,
     slidesToScroll: 8,
@@ -96,10 +95,9 @@ export class ExploreComponent implements OnInit {
       // this.reset();
       this.inProgress = false;
       this.offset = '';
+      this.reset();
       this.searchMore(true);
       // this.triggerSearchApi();
-
-
     });
   }
 
@@ -107,6 +105,7 @@ export class ExploreComponent implements OnInit {
     await this.load();
   }
 
+  //load hashtags
   async load() {
     try {
       this.hashtags = await this.service.load(20);
@@ -119,7 +118,6 @@ export class ExploreComponent implements OnInit {
   switchCategoryType(sType: string) {
     console.log(sType)
     this.ref = sType;
-    // this.searchMore(true)
     this.router.navigate(['/explore'], {
       queryParams: {
         q: this.q,
@@ -129,25 +127,28 @@ export class ExploreComponent implements OnInit {
     })
   }
 
-  async triggerSearchApi(refresh: boolean = true) {
-    let endpoint = 'api/v2/search';
-    const data = {
-      q: this.q,
-      limit: 12,
-      offset: this.offset,
-      taxonomies: this.type
-    };
-    let response: any = await this.client.get(endpoint, data);
-    // console.log(response);
-  }
+  /**
+   * 
+   * @param e to be removed at final stage
+   */
+
+  // async triggerSearchApi(refresh: boolean = true) {
+  //   let endpoint = 'api/v2/search';
+  //   const data = {
+  //     q: this.q,
+  //     limit: 12,
+  //     offset: this.offset,
+  //     taxonomies: this.type
+  //   };
+  //   let response: any = await this.client.get(endpoint, data);
+  //   // console.log(response);
+  // }
 
   onChange(e: any) {
-    console.log('onChange', e);
-    // this.exploreType = e;
     this.type = e;
     this.router.navigate(['/explore'], {
       queryParams: {
-        type: `object:${this.type}`,
+        type: `${this.type}`,
         q: this.q,
         ref: `${this.ref}`
       },
@@ -156,14 +157,15 @@ export class ExploreComponent implements OnInit {
       // skipLocationChange: true
       // do not trigger navigation
     });
-    // console.log('entities', this.entities);
   }
+
+  // keyup event for search
   keyup(e) {
-    // console.log(e);
     if (e.keyCode === 13) {
       this.search();
     }
   }
+
   search() {
     this.router.navigate(['/explore'], {
       queryParams: {
@@ -182,7 +184,7 @@ export class ExploreComponent implements OnInit {
       this.offset = '';
     }
     this.inProgress = true;
-    this.client.get('api/v2/feeds/global/top/activities', { hashtags: this.ref, period: '12h', all: '', query: '', nsfw: '', sync: '1', as_activities: '1', from_timestamp: '', limit: 10, offset: this.offset }, { cache: true })
+    this.client.get(`api/v2/feeds/global/top/${this.type}`, { hashtags: this.ref, period: '12h', all: '', query: this.q, nsfw: '', sync: '1', as_activities: '1', from_timestamp: '', limit: 10, offset: this.offset }, { cache: true })
       .then((data: any) => {
         let respData: any = data;
         if (respData.entities.length == 0) {
@@ -197,6 +199,7 @@ export class ExploreComponent implements OnInit {
           console.log('added new data')
           this.exploreArray = respData.entities;
         }
+        this.moreData = true;
         this.offset = respData['load-next'];
         this.inProgress = false;
       })
@@ -205,6 +208,7 @@ export class ExploreComponent implements OnInit {
       });
   }
   reset() {
+    console.log(this.exploreArray)
     this.exploreArray = [];
   }
 
