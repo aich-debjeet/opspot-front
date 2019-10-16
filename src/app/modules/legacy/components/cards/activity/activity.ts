@@ -313,16 +313,17 @@ export class Activity {
         }
       }).present()
     }
-    else if (this.activity.entity_type === 'album' || this.activity.entity_type === 'image') {
-      this.overlayModal.create(PostFormComponent, this.activity, {
-        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
-        // listen to the update callback
-        onUpdate: (payload: any) => {
-          // make update to local var
-         // this.udpateShowtime(payload);
-        }
-      }).present()
-    }
+    // TODO @gayatri need to check for edit
+    // else if (this.activity.entity_type === 'album' || this.activity.entity_type === 'image') {
+    //   this.overlayModal.create(PostFormComponent, this.activity, {
+    //     class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+    //     // listen to the update callback
+    //     onUpdate: (payload: any) => {
+    //       // make update to local var
+    //      // this.udpateShowtime(payload);
+    //     }
+    //   }).present()
+    // }
     else {
       this.editing = true;
     }

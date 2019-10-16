@@ -167,7 +167,7 @@ export class MediaViewComponent {
     switch (option) {
       case 'edit':
         //this.router.navigate(['/media/edit', this.entity.guid]);
-        this.editOptions();
+       // this.editOptions();
         break;
       case 'delete':
         this.delete();
