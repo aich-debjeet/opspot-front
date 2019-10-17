@@ -1,0 +1,223 @@
+//for layout
+// .container{
+//     width: 100%;
+//     max-width: 1170px;
+//     margin: 0px auto;
+// }
+.o-blocks{
+    width: 100%;
+    display: flex;
+    flex: 1;
+    // div{
+    //     height: 500px;
+    // }
+    &--flex{
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            flex-direction: column;
+        }
+    }
+}
+.o-left-block{
+    width: 265px;
+    order: 1;
+    z-index: 1;
+    // background: $grey-light ;
+    &--prof{
+        margin-top: -106px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+            margin-top: 0px;
+            position: relative;
+        }
+    }
+    &--community{
+        margin-top: 0px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+            margin-top: 0px;
+            position: relative;
+        }
+    }
+}
+.o-center-block{
+    flex: 1;
+    order: 2;
+    margin: 0px 10px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        margin:0px 15px;
+        // margin-left: 9px;
+    }
+} 
+.o-right-block{
+    width: 265px;
+    order: 3;
+    // background: $grey-light ;
+}
+
+//for card
+
+.o-card{
+    width: 100%;
+    border: 1px solid $grey-light;	
+    border-radius: 4px;
+    margin-bottom: 6px;
+    &-padding{
+        padding:16px;
+    }
+}
+
+// prof images
+
+.o-avatar-xl{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+    img{
+        width: 100%;
+    }
+    &--prof{
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            border: 2px solid #FFFFFF;
+        }
+    }
+    &--community{
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            border: 2px solid #FFFFFF;
+        }
+    }
+}
+.o-avatar-lg{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        width: 100%;
+    }
+}
+.o-avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        width: 100%;
+    }
+}
+.o-avatar-md{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        width: 100%;
+    }
+}
+.o-avatar-sm{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        width: 100%;
+    }
+}
+.o-avatar-xs{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    img{
+        width: 100%;
+    }
+}
+
+
+// for dot
+
+.dot{
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: $grey;
+}
+
+
+// input inside tag
+
+.input-tag{
+    border-radius: 4px;	
+    background-color: #ECEFF1;
+    padding: 6px 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.input-tag-remove{
+    i{
+        font-size: 13px;
+        margin-left: 6px;
+    }
+}
+
+// width
+
+.w100{
+    width: 100%!important;
+}
+
+// aligning
+
+.center{
+    text-align: center!important;
+}
+
+
+// for sticky div
+
+.for-sticky {
+    position: sticky;
+    top: 0;
+  }
+
+
+
+
+// without nav style
+
+.without-nav-header{
+    width: 100%;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px;
+    box-shadow: 0 6px 10px 0 rgba(144, 164, 174, 0.16), 0 1px 12px 0 rgba(144, 164, 174, 0.18), 0 3px 5px 0 rgba(144, 164, 174, 0.2);
+    z-index: 3;
+    a{
+        i{
+            font-size: 24px;
+            color: $grey-dark;
+        }
+    }
+    &__title{
+        flex: 1;
+        text-align: center;
+    }
+}
+
+
+// for develop
+
+.m-b-16{
+    margin-bottom: 16px;
+}
