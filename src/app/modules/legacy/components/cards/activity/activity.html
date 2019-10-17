@@ -55,7 +55,7 @@
       [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"
       (click)="activity.mature && !activity.mature_visibility ? activity.mature_visibility = !activity.mature_visibility : null">
     </span>
-    <m-read-more--button></m-read-more--button>
+    <!-- <m-read-more--button></m-read-more--button> -->
   </div>
 
   <m-translate [open]="translateToggle" [entity]="activity" [translateEvent]="translateEvent"
