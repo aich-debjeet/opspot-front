@@ -136,25 +136,26 @@ export class SettingsGeneralComponent {
   }
 
   canSubmit() {
-    if (!this.changed)
-      return false;
+    return this.changed;
+    // if (!this.changed)
+    //   return false;
 
-    if (this.password && !this.password1 || this.password && !this.password2)
-      return false;
+    // if (this.password && !this.password1 || this.password && !this.password2)
+    //   return false;
 
-    if (this.password1 && !this.password) {
-      this.error = 'You must enter your current password';
-      return false;
-    }
+    // if (this.password1 && !this.password) {
+    //   this.error = 'You must enter your current password';
+    //   return false;
+    // }
 
-    if (this.password1 !== this.password2) {
-      this.error = 'Your new passwords do not match';
-      return false;
-    }
+    // if (this.password1 !== this.password2) {
+    //   this.error = 'Your new passwords do not match';
+    //   return false;
+    // }
 
-    this.error = '';
+    // this.error = '';
 
-    return true;
+    // return true;
   }
 
   change() {
@@ -169,23 +170,17 @@ export class SettingsGeneralComponent {
     this.inProgress = true;
     this.client.post('api/v1/settings/' + this.guid,
       {
-        name: this.name,
         email: this.email,
-        password: this.password,
-        new_password: this.password2,
         mature: this.mature ? 1 : 0,
         disabled_emails: this.enabled_mails ? 0 : 1,
         language: this.language,
-        categories: this.selectedCategories
+        categories: this.selectedCategories,
+        portfolio: this.portfolio ? 1 : 0
       })
       .then((response: any) => {
         this.changed = false;
         this.saved = true;
         this.error = '';
-
-        this.password = '';
-        this.password1 = '';
-        this.password2 = '';
 
         if (window.Opspot.user) {
           window.Opspot.user.mature = this.mature ? 1 : 0;
@@ -268,23 +263,6 @@ export class SettingsGeneralComponent {
   }
 
   delete(password: string){
-    console.log(password.length)
-    //  if (!confirm('Your account and all data related to it will be deleted permanently. Are you sure you want to proceed?')) {
-    //   return;
-    // }
-    // const creator = this.overlayModal.create(ConfirmPasswordModalComponent, {}, {
-    //   class: 'm-overlay-modal--small',
-    //   onComplete: ({ password }) => {
-    //     this.client.post('api/v2/settings/delete', { password })
-    //       .then((response: any) => {
-    //         this.router.navigate(['/logout']);
-    //       })
-    //       .catch((e: any) => {
-    //         alert('Sorry, we could not delete your account');
-    //       });
-    //   }
-    // });
-    // creator.present();
     if(password.length <= 0){
       return;
     }
@@ -325,8 +303,10 @@ export class SettingsGeneralComponent {
   }
   updateCheckedOptions(option, event){
     console.log(option,event)
-    if(option.value == 'others' && option.checked == true){
+    if(option.value == 'others'){
+      if(option.checked == true)
       this.openText = true;
+      else this.openText = false;
     }
   }
 }

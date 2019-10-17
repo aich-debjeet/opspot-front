@@ -130,6 +130,9 @@
 <div class="o-settings-block__content">
   <div class="tabs-settings">
     <div id="general" class="tab ">
+        <div class="text-md grey">
+            <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+        </div>
       <div class="o-settings-fields">
           <h5 class="f500">Username</h5>
           <!-- <div class="text-md grey">
@@ -272,9 +275,9 @@
                   <div class="text-md grey">Deactivating your account can be temporary</div>
               </label>
           </div>
-          <div id="deletea" class="o-settings-delete-account" *ngIf="reasonDelete">
+          <div id="deactivate" class="o-settings-delete-account" *ngIf="deactivateOptions">
             <div class="text-lg f500 padng-btm1">
-              Tell us why you’re closing your account:
+              Tell us why you’re deactivating your account:
             </div>
             <div class="text-md">
               Please provide a reason. It’ll help us make One Page Spotlight better
@@ -283,26 +286,11 @@
                   <input type="checkbox" checked [(ngModel)]="reason.checked" (change)="updateCheckedOptions(reason, $event)">
                   <span class="checkmark"></span>
               </label>
-              <!--<label class="c-checkbox">I’m getting too many followers
-                  <input type="checkbox" checked="checked">
-                  <span class="checkmark"></span>
-              </label>
-              <label class="c-checkbox">I have a privacy concern
-                  <input type="checkbox">
-                  <span class="checkmark"></span>
-              </label>
-              <label class="c-checkbox">I’m receiving unwanted contact
-                  <input type="checkbox" >
-                  <span class="checkmark"></span>
-              </label>
-              <div class="text-md">
-              If Others, Your feedback matters. Is there anything else you’d like us to know?
-              </div> -->
               <textarea class="form-control" rows="6" value="Textarea" [hidden]="!openText"></textarea>
-              <button type="button" class="btn btn-primary btn-lg pading-right">Confirm Delete</button>
-              <button type="button" class="btn btn-outline-primary btn-lg" (click)="setOption('delete')">Cancel</button>
+              <button type="button" class="btn btn-primary btn-lg pading-right" (click)="deactivate()">Confirm Deactivate</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" (click)="setOption('deactivate')">Cancel</button>
           </div>
-          <div id="deactivate" class="o-settings-deactivate-account" *ngIf="deactivateOptions">
+          <div id="delete" class="o-settings-deactivate-account" *ngIf="reasonDelete">
               <div class="o-settings-info">
                   <div class="o-avatar-md">
                       <img src="assets/demo/avatar.png" alt="">
@@ -310,16 +298,15 @@
                   <div class="text-lg f500">Gowtham Kumar</div>
               </div>
               <div class="text-md">
-                  Just type your password to deactivate your account
+                  Just type your password to delete your account
               </div>
               <div class="form-group">
                   <label>Password</label>
                   <input type="email" class="form-control form-control-lg" [(ngModel)]="password">
               </div>
               <button type="button" class="btn btn-primary btn-lg pading-right" (click)="delete(password)">Confirm Delete</button>
-              <button type="button" class="btn btn-outline-primary btn-lg" (click)="setOption('deactivate')">Cancel</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" (click)="setOption('delete')">Cancel</button>
           </div>
-
       </div><!--Delete settings fields-->
     </div>
   </div>
