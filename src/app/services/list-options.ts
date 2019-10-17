@@ -67,6 +67,44 @@ export const READABLE_REASONS : Array<any> = [
   { value: 11, label: 'Another reason' }
 ];
 
+export const EVENT_TYPES : Array<any> = [
+  { value: 1 , label: 'Arts Events‎' },
+  { value: 2, label: 'Award Ceremonies' },
+  { value: 3, label: 'Ball‎' },
+  { value: 4, label: 'Concerts' },
+  { value: 5, label: 'Cultural Conferences‎' },
+  { value: 6, label: 'Cultural Festivals' },
+  { value: 7, label: 'Exhibitions' },
+  { value: 8, label: 'Fashion Events‎' },
+  { value: 10, label: 'Festivals by culture' },
+  { value: 11, label: 'Film Festivals' },
+  { value: 12, label: 'Inaugrations‎' },
+  { value: 13, label: 'Museum Events' },
+  { value: 14, label: 'Performances' },
+  { value: 15, label: 'Technical Events‎' },
+  { value: 16, label: 'Theatre' },
+  { value: 17, label: 'Trade Fairs' }
+];
+
+export const EVENT_CATEGORY : Array<any> = [
+  { value: 1 , label: 'Arts Events‎' },
+  { value: 2, label: 'Award Ceremonies' },
+  { value: 3, label: 'Ball‎' },
+  { value: 4, label: 'Concerts' },
+  { value: 5, label: 'Cultural Conferences‎' },
+  { value: 6, label: 'Cultural Festivals' },
+  { value: 7, label: 'Exhibitions' },
+  { value: 8, label: 'Fashion Events‎' },
+  { value: 10, label: 'Festivals by culture' },
+  { value: 11, label: 'Film Festivals' },
+  { value: 12, label: 'Inaugrations‎' },
+  { value: 13, label: 'Museum Events' },
+  { value: 14, label: 'Performances' },
+  { value: 15, label: 'Technical Events‎' },
+  { value: 16, label: 'Theatre' },
+  { value: 17, label: 'Trade Fairs' }
+];
+
 export const REPORT_ACTIONS = {
   'explicit': 'Marked as Explicit',
   'spam': 'Marked as Spam',
