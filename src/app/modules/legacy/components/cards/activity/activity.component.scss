@@ -694,6 +694,7 @@ opspot-groups-profile-feed .m-pin-button {
             img{
                 width:101px;
                 height:101px;
+                object-fit: cover;
                 @include mq($from: $mobile_sm, $until: $desktop_sm) {
                     margin-bottom: 20px;
                 }
