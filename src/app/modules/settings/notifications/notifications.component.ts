@@ -66,7 +66,6 @@ export class NotificationsComponent implements OnInit {
       }
       this.notifications[item.campaign][item.topic] = value;
     });
-    this.email = response.email;
     this.loading = false;
   }
 
