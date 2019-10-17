@@ -41,23 +41,8 @@
     </section>
 
     <!-- Feed list -->
-    <section class="o-center-block">
-      <div class="tabs">
-        <ul class="tabs-list">
-          <li class="active"><a [routerLink]="['/', user.username, 'feed']">Feed</a></li>
-          <li><a [routerLink]="['/', user.username, 'groups']">Community</a></li>
-          <!-- <li><a [routerLink]="['/', user.username, 'events']">Event</a></li> -->
-          <li><a [routerLink]="['/', user.username, 'opportunities']">Opportunity</a></li>
-          <li><a [routerLink]="['/', user.username, 'marketplace']">Market Place</a></li>
-          <li><a [routerLink]="['/', user.username, 'blogs']">Blog</a></li>
-        </ul>
-      </div>
-      <m-channel--feed *ngIf="filter == 'feed'" [user]="user" #feed></m-channel--feed>
-      <m-channel--opportunities *ngIf="filter == 'opportunities'" [user]="user"></m-channel--opportunities>
-      <m-channel--groups *ngIf="filter == 'groups'" [user]="user"></m-channel--groups>
-      <m-channel--blogs *ngIf="filter == 'blogs'" [user]="user"></m-channel--blogs>
-      <!-- <m-channel--events *ngIf="filter == 'events'" [user]="user"></m-channel--events> -->
-      <m-channel--marketplace *ngIf="filter == 'marketplace'" [user]="user"></m-channel--marketplace>
+    <section class="o-center-block" *ngIf="filter == 'feed'">
+      <m-channel--feed [user]="user" #feed></m-channel--feed>
     </section>
 
     <section class="o-right-block hidden-mob">
