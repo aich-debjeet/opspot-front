@@ -27,6 +27,9 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 export class MediaViewComponent {
 
+  isTranslatable: boolean;
+  canDelete: boolean = false;
+
   opspot = window.Opspot;
   guid: string;
   entity: any = {};
