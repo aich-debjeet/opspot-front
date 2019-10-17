@@ -34,7 +34,7 @@
               <img [src]="showTimez?.custom_data[0] ? showTimez?.custom_data[0].src:''"
                 (error)="showTimez.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
                 *ngIf="showTimez?.custom_data">
-                <img *ngIf="!showTimez?.custom_data" src="assets/logos/logo.svg">
+                <img *ngIf="!showTimez?.custom_data" src="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
               <div class="event-date">
                 <div class="text-red">{{showTimez?.start_time_date | date:'dd'}} </div>
                 <div class="text-md">{{showTimez?.start_time_date | date:'MMM'}} </div>
@@ -50,9 +50,8 @@
                 <div class="text-lg grey">{{showTimez?.location}}<br>
                   {{showTimez?.start_time_date | date:'h:mm | dd MMMM y'}}</div>
                 <div class="text-md">
-                  <div class="mt-15"><span class="primary">#Event</span>
+                    <!-- <span class="primary">#Event</span> -->
                     <span class="mt-15" [innerHtml]="showTimez?.description | safe"></span>
-                  </div>
                 </div>
               </div>
               <div class="feed-card-event-block__right ">
@@ -62,11 +61,11 @@
           </div>
           <div class="o-posts-inner-page-action">
             <div class="o-posts-inner-page-action__details">
-              <div class="o-latest-channel-info-head__members members-list">
+              <!-- <div class="o-latest-channel-info-head__members members-list">
                 <div class="members-circle members-circle1"><img src="assets/demo/avatar.png" alt=""></div>
                 <div class="members-circle members-circle2"><img src="assets/demo/avatar.png" alt=""></div>
                 <div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt=""></div>
-              </div>
+              </div> -->
               <div class="text-sm grey">{{count}} liked this post</div>
               <div class="text-sm grey m-16">46 shared this post</div>
               <div class="text-sm grey m-16">13 contributed this post</div>

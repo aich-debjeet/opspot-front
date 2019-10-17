@@ -1,16 +1,13 @@
 @import "src/assets/helpers/variables";
 @import "node_modules/sass-mq/_mq";
-// @import "src/assets/scss/base/_typography.scss";
-// @import "src/assets/scss/base/_base.scss";
-// @import "src/assets/scss/components/_common.scss";
-// @import "src/assets/scss/components/feed-card";
+
+// posts inner page style
 
 .o-post-inner-sec{
     background-color: #FAFAFA;
-}
-
-// posts inner page style
-.o-posts-inner-page{
+  }
+  
+  .o-posts-inner-page{
     width: 100%;
     max-width: 1070px;
     min-height: 100%;
@@ -87,10 +84,10 @@
             background:$white;
         }
     }
-}
-
-//action style
-.o-posts-inner-page-action{
+  }
+  
+  //action style
+  .o-posts-inner-page-action{
     padding:19px 30px 17px;
    &__details{
        display:flex;
@@ -156,9 +153,9 @@
         }
     }
    }
-}
-//my journey style
-.o-post-inner-page-myjourney-image{
+  }
+  //my journey style
+  .o-post-inner-page-myjourney-image{
     position: relative;
     width: 100%;
     height: 500px;
@@ -180,10 +177,10 @@
         top:13px;
         left:17px;
     }
-}
-
-// video style
-.o-post-inner-page-myjourney-right{
+  }
+  
+  // video style
+  .o-post-inner-page-myjourney-right{
     .feed-media-video__icon{
         height: 14px;
         width: 14px;
@@ -192,10 +189,10 @@
             margin-left: 2px;  
         }
     }
-}
-
-//padding
-.o-posts-inner-page-myjourney-padding{
+  }
+  
+  //padding
+  .o-posts-inner-page-myjourney-padding{
     padding: 18px 30px 0px;
     .post-view-style{
         margin-bottom:20px;
@@ -220,10 +217,10 @@
             height:101px;
         }
     }
-}
-
-//profile style
-.o-post-inner-profile-head{
+  }
+  
+  //profile style
+  .o-post-inner-profile-head{
     .o-posts-inner-page__left {
         .feed-head{
             position:relative;
@@ -236,10 +233,10 @@
             }
         }
     }
-}
-
-//marketplace style
-.o-posts-inner-marketplace-reachout{
+  }
+  
+  //marketplace style
+  .o-posts-inner-marketplace-reachout{
     .feed-card-event-block{
         background-color:transparent;
         border-top:0px;
@@ -263,18 +260,18 @@
             }
         }
     }
-}
-
-// event style
-.o-posts-inner-event-image{
+  }
+  
+  // event style
+  .o-posts-inner-event-image{
     .feed-media-event-image{
         img{
             height: 300px;
         }
     } 
-}
-
-.members-list{
+  }
+  
+  .members-list{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -307,4 +304,3 @@
     left: 30px;
     z-index: 1;
   }
-  

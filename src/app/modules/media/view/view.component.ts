@@ -17,6 +17,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
   moduleId: module.id,
   selector: 'm-media--view',
   templateUrl: 'view.component.html',
+  styleUrls: ['view.component.scss'],
   providers: [{
     provide: RecommendedService,
     useFactory: RecommendedService._,

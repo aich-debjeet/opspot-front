@@ -83,28 +83,28 @@
 									{{ marketplace?.title}}
 								</h5>
 								<div class="text-md" *ngIf="marketplace?.description">
-									<span class="primary">#Marketplace</span>
+									<!-- <span class="primary">#Marketplace</span> -->
 									<span class="primary" [innerHtml]="marketplace.description | safe"></span>
 								</div>
 								<div class="text-rate" *ngIf="marketplace?.price ">
-									₹ {{ marketplace?.price  }}.00/- <span class="text-md f500">(per piece)</span>
+									₹ {{ marketplace?.price  }} /- <span class="text-md f500">(per piece)</span>
 								</div>
 							</div>
 							<div class="feed-card-event-block__right ">
-								<button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+								<button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != marketplace.owner_guid">Reach Out</button>
 							</div>
 						</div>
 					</div>
 					<div class="o-posts-inner-page-action">
 						<div class="o-posts-inner-page-action__details">
-							<div class="o-latest-channel-info-head__members members-list">
+							<!-- <div class="o-latest-channel-info-head__members members-list">
 								<div class="members-circle members-circle1"><img src="assets/demo/avatar.png" alt="">
 								</div>
 								<div class="members-circle members-circle2"><img src="assets/demo/avatar.png" alt="">
 								</div>
 								<div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt="">
 								</div>
-							</div>
+							</div> -->
 							<div class="text-sm grey">{{count}} liked this post</div>
 							<div class="text-sm grey m-16">46 shared this post</div>
 							<div class="text-sm grey m-16">13 contributed this post</div>
