@@ -1,113 +1,9 @@
 <div class="o-settings-block__content">
     <div class="tabs-settings">
         <div id="notifications" class="tab">
-        <!-- <div class="o-settings-fields o-settings-notifications">
-        <div class="o-settings-notification-header">
-            <h5 class="f500">Notification Settings</h5>
             <div class="text-md grey">
-                Notifications that you receive.
+                <button type="button" class="btn btn-primary" (click)="save()">Save</button>
             </div>
-        </div>
-        </div>
-        <div class="o-settings-fields o-settings-notifications">
-        <div class="o-settings-notification-header">
-            <h5 class="f500">Comments</h5>
-            <div class="text-md grey">
-                Notifications for comments on your posts and replies to your comments.
-            </div>
-        </div>
-        <div class="o-settings-toggle">
-            <label class="switch ">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-            </label> 
-        </div>
-        </div>
-        <div class="o-settings-fields o-settings-notifications">
-        <div class="o-settings-notification-header">
-            <h5 class="f500">Mentions</h5>
-            <div class="text-md grey">
-                Notifications for when someone mentions you on posts or comments. 
-            </div>
-        </div>
-        <div class="o-settings-toggle">
-            <label class="switch ">
-                <input type="checkbox">
-                <span class="slider round"></span>
-            </label> 
-        </div>
-        </div>
-        <div class="o-settings-fields o-settings-notifications">
-        <div class="o-settings-notification-header">
-            <h5 class="f500">Followers</h5>
-            <div class="text-md grey">
-                Notifications for when someone send you a follow request or a request you've sent is accepted.
-            </div>
-        </div>
-        <div class="o-settings-toggle">
-            <label class="switch ">
-                <input type="checkbox">
-                <span class="slider round"></span>
-            </label> 
-        </div>
-        </div>
-        <div class="o-settings-fields o-settings-notifications">
-        <div class="o-settings-notification-header">
-            <h5 class="f500">Community</h5>
-            <div class="text-md grey">
-                Notifications about communities you have joined or are the admin of.
-            </div>
-        </div>
-        <div class="o-settings-toggle">
-            <label class="switch ">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-            </label> 
-        </div>
-        </div>
-        <div class="o-settings-fields o-settings-notifications">
-        <div class="o-settings-notification-header">
-            <h5 class="f500">Contribution</h5>
-            <div class="text-md grey">
-                Notifications for contributions that you give or receive. 
-            </div>
-        </div>
-        <div class="o-settings-toggle">
-            <label class="switch ">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-            </label> 
-        </div>
-        </div>
-        <div class="o-settings-fields o-settings-notifications">
-        <div class="o-settings-notification-header">
-            <h5 class="f500">Network</h5>
-            <div class="text-md grey">
-                Notifications for when someone sends a network request or accepts your request. 
-            </div>
-        </div>
-        <div class="o-settings-toggle">
-            <label class="switch ">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-            </label> 
-        </div>
-        </div>
-        <div class="o-settings-fields o-settings-notifications">
-        <div class="o-settings-notification-header">
-            <h5 class="f500">Mail</h5>
-            <div class="text-md grey">
-            Receive emails about the activities and notifications happening on your feed.
-            </div>
-        </div>
-        <div class="o-settings-toggle">
-            <label class="switch ">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-            </label> 
-        </div>
-        </div> -->
-
         <h5 class="f500 o-settings-notifications-email-mb18px">Email me when</h5>
         <div class="o-settings-fields o-settings-notifications o-settings-notifications-email">
             <div class="o-settings-notification-header">
@@ -117,7 +13,10 @@
             </div>
             <div class="o-settings-toggle">
                 <label class="switch ">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" id="unread-notifications"
+                    name="unread-notifications"
+                    (click)="change()"
+                    [(ngModel)]="notifications.when.unread_notifications">
                     <span class="slider round"></span>
                 </label> 
             </div>
@@ -130,7 +29,10 @@
             </div>
             <div class="o-settings-toggle">
                 <label class="switch ">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" id="wire-received"
+                    name="wire-received"
+                    (click)="change()"
+                    [(ngModel)]="notifications.when.wire_received">
                     <span class="slider round"></span>
                 </label> 
             </div>
@@ -143,7 +45,10 @@
             </div>
             <div class="o-settings-toggle">
                 <label class="switch ">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" id="boost-completed"
+                    name="boost-completed"
+                    (click)="change()"
+                    [(ngModel)]="notifications.when.boost_completed">
                     <span class="slider round"></span>
                 </label> 
             </div>
@@ -153,12 +58,37 @@
         <div class="o-settings-fields o-settings-notifications o-settings-notifications-email">
             <div class="o-settings-notification-header">
                 <div class="text-md grey">
+                    Top posts from my network
+                </div>
+            </div>
+            <div class="o-settings-toggle">
+                <label class="switch ">
+                    <input type="checkbox" id="top-posts"
+                    name="top-posts"
+                    (click)="change()"
+                    [ngModel]="!!notifications.with.top_posts"
+                    (ngModelChange)="onTopPostsCheckboxChange($event)">
+                    <span class="slider round"></span>
+                </label> 
+            </div>
+            <select id="top-posts-dropdown" name="top-posts" [disabled]="!notifications.with.top_posts" (click)="change()" [(ngModel)]="notifications.with.top_posts">
+                <option value="periodically">Periodically</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+            </select>
+        </div>
+        <div class="o-settings-fields o-settings-notifications o-settings-notifications-email">
+            <div class="o-settings-notification-header">
+                <div class="text-md grey">
                     Tips on how to improve my profile
                 </div>
             </div>
             <div class="o-settings-toggle">
                 <label class="switch ">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" id="channel-improvement-tips"
+                    name="channel-improvement-tips"
+                    (click)="change()"
+                    [(ngModel)]="notifications.with.channel_improvement_tips">
                     <span class="slider round"></span>
                 </label> 
             </div>
@@ -171,7 +101,10 @@
             </div>
             <div class="o-settings-toggle">
                 <label class="switch ">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" id="missed-since-login"
+                    name="missed-since-login"
+                    (click)="change()"
+                    [(ngModel)]="notifications.with.posts_missed_since_login">
                     <span class="slider round"></span>
                 </label> 
             </div>
@@ -184,7 +117,10 @@
             </div>
             <div class="o-settings-toggle">
                 <label class="switch ">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" id="new-channels"
+                    name="new-channels"
+                    (click)="change()"
+                    [(ngModel)]="notifications.with.new_channels">
                     <span class="slider round"></span>
                 </label> 
             </div>
@@ -199,7 +135,10 @@
             </div>
             <div class="o-settings-toggle">
                 <label class="switch ">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" id="opspot-news"
+                    name="opspot-news"
+                    (click)="change()"
+                    [(ngModel)]="notifications.global.opspot_news">
                     <span class="slider round"></span>
                 </label> 
             </div>
@@ -212,7 +151,10 @@
             </div>
             <div class="o-settings-toggle">
                 <label class="switch ">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" id="opspot-tips"
+                    name="opspot-tips"
+                    (click)="change()"
+                    [(ngModel)]="notifications.global.opspot_tips">
                     <span class="slider round"></span>
                 </label> 
             </div>
@@ -225,7 +167,10 @@
             </div>
             <div class="o-settings-toggle">
                 <label class="switch ">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" id="exclusive-promotions"
+                    name="exclusive-promotions"
+                    (click)="change()"
+                    [(ngModel)]="notifications.global.exclusive_promotions">
                     <span class="slider round"></span>
                 </label> 
             </div>
