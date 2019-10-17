@@ -14,6 +14,7 @@ export class PrivacySecurityComponent implements OnInit {
   form: FormGroup;
   guid: string = '';
   openSessions: number = 1;
+  incorrectPassword: boolean = false;
   constructor(
     fb: FormBuilder,
     public session: Session,
@@ -21,7 +22,7 @@ export class PrivacySecurityComponent implements OnInit {
     public router: Router,
   ) {
     this.form = fb.group({
-      currentPassword:[''],
+      currentPassword:['', Validators.required],
       newPassword: ['', [Validators.required, this.checkPassword]],
       confirmpassword: ['', Validators.required]
     },
@@ -36,6 +37,11 @@ export class PrivacySecurityComponent implements OnInit {
       });
   }
   changePassword(){
+    this.form.reset();
+
+    if(this.incorrectPassword)
+    this.incorrectPassword = false;
+
     if(this.displayPassword) this.displayPassword = false;
     else this.displayPassword = true;
   }
@@ -58,5 +64,22 @@ export class PrivacySecurityComponent implements OnInit {
   }
   closeAllSessions() {
     this.router.navigate(['/logout/all']);
+  }
+  save() {
+    if(!this.form.valid) return;
+    this.client.post('api/v1/settings/' + this.guid,
+      {
+        password: this.form.value.currentPassword,
+        new_password: this.form.value.newPassword,
+      })
+      .then((response: any) => {
+        if(response.status === 'success'){
+          this.form.reset();
+        }
+      }).catch(e=> {
+        if(e.status === 'error'){
+          this.incorrectPassword = true;
+        }
+      })
   }
 }
