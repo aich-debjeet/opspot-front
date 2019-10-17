@@ -55,7 +55,7 @@
       [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"
       (click)="activity.mature && !activity.mature_visibility ? activity.mature_visibility = !activity.mature_visibility : null">
     </span>
-    <m-read-more--button></m-read-more--button>
+    <!-- <m-read-more--button></m-read-more--button> -->
   </div>
 
   <m-translate [open]="translateToggle" [entity]="activity" [translateEvent]="translateEvent"
@@ -89,42 +89,21 @@
   </div>
 
   <!-- Album post-->
-  <div *ngIf = "showAlbum && !showOpportunity && !showBlueStore && !showTimez">
-  <!-- <div class="feed-head">  
-      <div class="o-posts-discription">
-          <p class="text-md grey-darker">
-             {{activity?.message}}
-          </p>
-      </div>
-  </div> -->
-  <!-- <div class="feed-media">
-      <a class="feed-media__link"><img src="assets/demo/m1.jpg" alt="" class="feed-media__img"></a>
-      <a class="feed-media__link">
-          <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
-          <div class="feed-media-overlay">
-              <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
-          </div>
+  <div *ngIf="showAlbum && !showOpportunity && !showBlueStore && !showTimez">
+    <div class="feed-media" *ngIf="activity?.custom_data" [routerLink]="['/media', activity.guid]">
+      <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+        <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
+        <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
+          (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+        <img [src]="media.thumbnail_src" alt="" class="feed-media__img" *ngIf="media.entity_type === 'video'"
+          (error)="media.thumbnail_src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+        <div *ngIf="i >= 2 && activity?.custom_data.length > 4" class="feed-media-overlay">
+          <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
+        </div>
+        <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
+          <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+        </div>
       </a>
-      <a class="feed-media__link">
-          <img src="assets/demo/m3.jpg" alt="" class="feed-media__img">
-          <div class="feed-media-overlay"><h3 class="white">+2</h3></div>
-      </a>
-  </div> -->
-    <div class="feed-media" *ngIf="activity?.custom_data">
-        <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
-          <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
-          <img [src]="media.src" alt="" class="feed-media__img"
-            (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
-          <div *ngIf="i >= 2 && activity?.custom_data.length > 4" class="feed-media-overlay">
-            <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
-          </div>
-        </a>
-        <!-- <a class="feed-media__link">
-                <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
-                <div class="feed-media-overlay">
-                    <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
-                </div>
-            </a> -->
     </div>
   </div>
 
@@ -144,7 +123,7 @@
           <div class="text-md grey">
             {{activity?.location}}
           </div>
-          <button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+          <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != activity.owner_guid">Reach Out</button>
         </div>
         <div class="opportunity-button">
           {{activity?.category}}
@@ -164,18 +143,17 @@
     <div class="feed-media" *ngIf="activity?.custom_data">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
         <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
-        <img [src]="media.src" alt="" class="feed-media__img"
+        <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
           (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+        <img [src]="media.thumbnail_src" alt="" class="feed-media__img" *ngIf="media.entity_type === 'video'"
+          (error)="media.thumbnail_src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+        <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
+           <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+        </div>
         <div *ngIf="i >= 2 && activity?.custom_data.length > 4" class="feed-media-overlay">
           <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
         </div>
       </a>
-      <!-- <a class="feed-media__link">
-              <img src="assets/demo/m2.jpg" alt="" class="feed-media__img">
-              <div class="feed-media-overlay">
-                  <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
-              </div>
-          </a> -->
     </div>
     <div class="feed-card-event-block">
       <div class="feed-card-event-block__left">
@@ -186,11 +164,11 @@
           {{activity?.blurb | truncate:[100, '...']}}
         </div>
         <div class="text-rate">
-          ₹ {{activity?.price}}.00 <span class="text-md grey">per piece</span>
+          ₹ {{activity?.price}} <span class="text-md grey">per piece</span>
         </div>
       </div>
       <div class="feed-card-event-block__right ">
-        <button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+        <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != activity.owner_guid">Reach Out</button>
       </div>
     </div>
   </div>
@@ -201,9 +179,11 @@
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
     <div class="feed-media">
       <div class="feed-media-event-image">
-        <img [src]="activity?.custom_data[0] ? activity?.custom_data[0].src:''"
+        
+          <img [src]="activity?.custom_data[0] ? activity?.custom_data[0].src:''"
           (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
           *ngIf="activity?.custom_data">
+       
         <div class="event-date">
           <div class="text-red">{{activity.startTimeDate | date:'dd'}} </div>
           <div class="text-md">{{activity.startTimeDate | date:'MMM'}} </div>
@@ -220,7 +200,7 @@
         </div>
       </div>
       <div class="feed-card-event-block__right">
-        <button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+        <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != activity.owner_guid">Reach Out</button>
       </div>
     </div>
   </div>
@@ -250,9 +230,9 @@
       (click)="activity.title = titleEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
   </div>
 
-  <div class="item item-image item-image-video m-activity--video"
+  <div class="item item-image item-image-video m-activity--video" 
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
-    *ngIf="activity.custom_type == 'video'">
+    *ngIf="activity.custom_type == 'video'" [routerLink]="['/media', activity.guid]">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
@@ -280,7 +260,7 @@
       </span>
     </div>
 
-    <a [routerLink]="['/media', activity.entity_guid]">
+    <a [routerLink]="['/media', activity.guid]">
       <img [src]="activity.thumbnail_src" (error)="activity.thumbnail_src = null">
     </a>
   </div>
@@ -295,7 +275,7 @@
         <span i18n="@@M__COMMON__CONFIRM_18">Click to confirm your are 18+</span>
       </span>
     </div>
-    <a [routerLink]="['/media', activity.entity_guid]">
+    <a [routerLink]="['/media', activity.guid]">
       <img [src]="activity.custom_data[0]?activity.custom_data[0].src:''" style="width:100%"
         (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
         *ngIf="activity.custom_data">

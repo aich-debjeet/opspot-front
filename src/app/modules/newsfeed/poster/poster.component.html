@@ -131,7 +131,7 @@
             <div class="text-md primary f500 o-create-post-write-blog">Write Blog</div>
             <div class="close" (click)="close()"><i class="icon-x"></i></div>
         </div>
-        <form (submit)="post()">
+        <!-- <form (submit)="post()">
             <div class="o-create-post-body o-create-post-body--flex">
                 <div class="o-crete-post-userinfo">
                     <div class="o-crete-post-userinfo__avatar">
@@ -146,7 +146,6 @@
                 <div class="o-create-post-fileupload" *ngIf="attachment.meta.attachment_guid.length == 0">
                     <div class="fileUpload">
                         <span class="icon-paperclip-2"></span>
-                        <!-- <input type="file" class="upload"> -->
                         <input type="file" id="file" #file class="upload" name="attachment"
                             (change)="uploadAttachment(file, $event)" />
                     </div>
@@ -208,7 +207,8 @@
                     <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
                 </div>
             </div>
-        </form>
+        </form> -->
+        <app-post-form (load)="emitEvent($event)" [object]="''"></app-post-form>
     </div>
 
     <app-showtimez-form *ngIf="display == '#Showtimez'" [object]="''" (ChangeDefault)="changeToDefault()"

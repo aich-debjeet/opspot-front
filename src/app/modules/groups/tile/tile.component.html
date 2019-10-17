@@ -1,4 +1,4 @@
-<div class="m-groups--tile m-border" [class.m-groupTile--hasUpdates]="hasMarker">
+<!-- <div class="m-groups--tile m-border" [class.m-groupTile--hasUpdates]="hasMarker">
     
   <div class="m-groups--tile-banner">
     <div class="m-groups--tile-banner-img"
@@ -30,4 +30,34 @@
     <m-safe-toggle *ngIf="session.isAdmin()" [(entity)]="entity"></m-safe-toggle>
   </div>
   
+</div> -->
+
+
+  <div class="o-community-landing-block-design__item">
+  <div class="o-community-card">
+    <div class="o-community-card-section mr-6">
+      <div class="o-community-card-cover">
+        <img [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity.icontime" alt="cover">
+      </div>
+      <!--cover ends-->
+      <div class="o-community-card-profile" [routerLink]="['/groups/profile', entity.guid]"  >
+        <img  src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large"  alt="cover">
+      </div>
+      <!--frofile ends-->
+      <div class="o-community-card-header">
+        <div class="f500 text-lg">{{entity.name}}</div>
+      </div>
+   
+      <div class="o-community-card-action">
+          <opspot-groups-join-button *ngIf="!entity['is:member']; else isMember" [group]="entity"></opspot-groups-join-button>
+          <ng-template #isMember>
+              <button class="btn btn-primary btn-xs" [routerLink]="['/groups/profile', entity.guid]" i18n="@@GROUPS__TILE__OPEN_ACTION">
+                Open
+              </button>
+          </ng-template>
+        </div>
+    </div>
+  </div>
 </div>
+
+  <!--community card ends-->

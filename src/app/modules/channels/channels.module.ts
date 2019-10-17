@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule as NgFormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormsModule as NgFormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 
 import { CommonModule } from '../../common/common.module';
 import { LegacyModule } from '../legacy/legacy.module';
@@ -32,11 +35,18 @@ import { EducationComponent } from './profile-edit/education/education.component
 import { AwardsComponent } from './profile-edit/awards/awards.component';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { TagInputModule } from 'ngx-chips';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { UserPrivacyComponent } from './profile-edit/user-privacy/user-privacy.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { ChannelBlogsComponent } from './blogs/blogs';
+import { ChannelGroupsComponent } from './groups/groups';
+import { ChannelMarketplaceComponent } from './marketplace/marketplace';
+import { ChannelOpportunitiesComponent } from './opportunities/opportunities';
 
 const routes: Routes = [
   { path: 'channels/:filter', component: ChannelsListComponent },
-  { path: 'channels', redirectTo: '/channels/top', pathMatch: 'full' },
+  { path: 'channels', redirectTo: '/channels/top', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -55,9 +65,10 @@ const routes: Routes = [
     HashtagsModule,
     NgxUsefulSwiperModule,
     TagInputModule,
+    BsDatepickerModule.forRoot(),
+    TooltipModule.forRoot(),
+    NgxIntlTelInputModule
   ],
-
-
   declarations: [
     ChannelModulesComponent,
     ChannelComponent,
@@ -77,6 +88,11 @@ const routes: Routes = [
     WorkComponent,
     EducationComponent,
     AwardsComponent,
+    UserPrivacyComponent,
+    ChannelBlogsComponent,
+    ChannelGroupsComponent,
+    ChannelMarketplaceComponent,
+    ChannelOpportunitiesComponent
   ],
   exports: [
     ChannelModulesComponent,
@@ -85,12 +101,8 @@ const routes: Routes = [
     ChannelSubscriptions,
     ChannelSocialProfiles,
     ChannelFeedComponent,
-    ChannelSidebar,
+    ChannelSidebar
   ],
-  entryComponents: [
-    ChannelComponent,
-    ChannelsListComponent,
-  ],
+  entryComponents: [ChannelComponent, ChannelsListComponent]
 })
-export class ChannelsModule {
-}
+export class ChannelsModule {}

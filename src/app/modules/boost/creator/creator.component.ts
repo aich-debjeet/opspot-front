@@ -10,6 +10,7 @@ import { BoostContractService } from '../../blockchain/contracts/boost-contract.
 import { Web3WalletService } from '../../blockchain/web3-wallet.service';
 import { OffchainPaymentService } from '../../blockchain/offchain-payment.service';
 import { Router } from '@angular/router';
+import { SpotcoinsComponent } from '../../blockchain/marketing/spotcoins/spotcoins.component';
 
 
 type CurrencyType = 'offchain' | 'usd' | 'onchain' | 'creditcard';
@@ -44,6 +45,7 @@ export class VisibleBoostError extends Error {
 export class BoostCreatorComponent implements AfterViewInit,OnInit {
 
   object: any = {};
+  showTokenOptions: boolean = false;
 
   boost: BoostStruc = {
     amount: 1000,
@@ -666,8 +668,14 @@ export class BoostCreatorComponent implements AfterViewInit,OnInit {
   }
  
   buyTokens() {
-    this.overlayService.dismiss();
-    this.router.navigate(['/token']);
+    // this.overlayService.dismiss();
+    // this.router.navigate(['/token']);
+    const tokenModal = this.overlayModal.create(SpotcoinsComponent,'',  { class: 'modalChanger' });
+
+    tokenModal.onDidDismiss(() => {
+      this.showTokenOptions = false;
+    });
+    tokenModal.present();
   }
 
 }

@@ -51,7 +51,7 @@
   </div>
   <div class="o-drop-title__action">
       <a href="#" class="text-sm primary" title="Mark all as read">Mark all as read</a>
-      <a href="#" class="o-drop-title-icons" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a>
+      <!-- <a href="#" class="o-drop-title-icons" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
   </div>
 </div>
 
@@ -67,11 +67,11 @@
                 <form>
                     <div class="c-checkbox__md">
                         <label (click)="changeFilter('all')"  class="c-checkbox">All
-                            <input type="checkbox" checked="checked">
+                            <input type="radio" [checked]="this._filter == 'all'" value="all" name="all">
                             <span class="checkmark"></span>
                         </label>
                         <label (click)="changeFilter('comments')" class="c-checkbox">Likes and Comments
-                            <input type="checkbox">
+                            <input type="radio" value="comments" [checked]="this._filter == 'comments'" name="comments">
                             <span class="checkmark"></span>
                         </label>
                         <!-- <label class="c-checkbox">Channels
@@ -79,19 +79,19 @@
                             <span class="checkmark"></span>
                         </label> -->
                         <label (click)="changeFilter('subscriptions')" class="c-checkbox">Following
-                            <input type="checkbox">
+                            <input type="radio" value="subscriptions" [checked]="this._filter == 'subscriptions'" name="subscriptions">
                             <span class="checkmark"></span>
                         </label>
                         <label (click)="changeFilter('subscriptions')" class="c-checkbox">Followers
-                            <input type="checkbox">
+                            <input type="radio" value="subscriptions" [checked]="this._filter == 'subscriptions'" name="subscriptions">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="c-checkbox">Network
-                            <input type="checkbox">
+                        <label (click)="changeFilter('Network')" class="c-checkbox">Network
+                            <input type="radio" value="Network" [checked]="this._filter == 'Network'" name="Network">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="c-checkbox">Request
-                            <input type="checkbox">
+                        <label (click)="changeFilter('Request')" class="c-checkbox">Request
+                            <input type="radio" value="Request" [checked]="this._filter == 'Request'" name="Request">
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -108,7 +108,7 @@
             </div>
             <div class="o-noti-title__action">
                 <a href="#" class="text-sm primary" title="Mark all as read">Mark all as read</a>
-                <a href="#" class="o-noti-settings" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a>
+                <!-- <a href="#" class="o-noti-settings" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
             </div>
         </div>
         <opspot-notification

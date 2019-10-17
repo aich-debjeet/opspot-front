@@ -2,10 +2,10 @@
     <i class="material-icons">trending_up</i> <ng-container i18n="@@OPSPOT__NEWSFEED__200_FREE_VIEWS">Have 200 free views on us. Hit post to be boosted.</ng-container>
 </div>
 <opspot-newsfeed-poster (load)="prepend($event)" [message]="message" #poster></opspot-newsfeed-poster>
-<!-- <app-suggestions></app-suggestions> -->
 <div class="opspot-list">
   <opspot-activity *ngFor="let preActivity of prepended" [object]="preActivity" [boostToggle]="preActivity.boostToggle" (delete)="delete(preActivity)" [showRatingToggle]="true" class="mdl-card m-border item"></opspot-activity>
   <m-newsfeed--boost-rotator interval="4" *ngIf="showBoostRotator"></m-newsfeed--boost-rotator>
+  <m-suggestions__slider></m-suggestions__slider>
   <opspot-activity *ngFor="let activity of newsfeed" [object]="activity" [boostToggle]="activity.boostToggle" (delete)="delete(activity)" [showRatingToggle]="true" class="mdl-card m-border item"></opspot-activity>
   <infinite-scroll
     distance="25%"

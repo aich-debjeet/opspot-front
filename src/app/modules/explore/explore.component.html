@@ -1,19 +1,15 @@
 <div class="o-explore-tag-sec">
-    <div class="o-explore-tag tag-slik">
-        <ng-container *ngFor="let tags of hashtags">
-            <a (click)="switchCategoryType(tags.value)" class="o-tag">{{tags.value}}</a>
-        </ng-container>
-
-        <!-- <ngu-carousel [inputs]="exploreSlider">
-            <ngu-item NguCarouselItem class="" *ngFor="let tags of hashtags">
-                <a (click)="switchCategoryType(tags.value)" class="o-tag">{{tags.value}}</a>
-            </ngu-item>
-            <button NguCarouselPrev class='leftRs'>&lt;</button>
-            <button NguCarouselNext class='rightRs'>&gt;</button>
-        </ngu-carousel> -->
-    </div><!-- tag block end -->
+    <ngx-slick-carousel class="carousel o-explore-tag tag-slik" #slickModal="slick-carousel" [config]="slideConfig"
+        (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+        (beforeChange)="beforeChange($event)">
+        <div ngxSlickItem *ngFor="let tags of hashtags; let i = index;" class="slide o-tag">
+            <a (click)="switchCategoryType(tags.value)" class="">{{tags.value}}</a>
+        </div>
+    </ngx-slick-carousel>
+    <!-- <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+            <button class="btn-next" (click)="slickModal.slickNext()">next</button> -->
+    <!--tag block end -->
 </div><!-- tag section end-->
-
 <section class="o-explore-content-sec">
     <div class="container">
         <div class="o-explore-action">
@@ -21,30 +17,29 @@
                 <form>
                     <div class="form-group">
                         <select class="form-control" (change)="onChange($event.target.value)">
-                            <option value="All" selected>All</option>
-                            <option value="Image">Image</option>
-                            <option value="Audio">Audio</option>
-                            <option value="Video">Video</option>
-                            <option value="Blogs">Blogs</option>
+                            <option value="activities" selected>All</option>
+                            <option value="images">Image</option>
+                            <option value="audios">Audio</option>
+                            <option value="videos">Video</option>
+                            <option value="blogs">Blogs</option>
                         </select>
                     </div>
                 </form>
             </div>
             <div class="o-explore-action__search">
                 <div class="form-group c-form_righticon-lg">
-                    <input type="text" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q" name="q" autocomplete="off" #searchInput>
+                    <input type="text" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q"
+                        name="q" autocomplete="off" #searchInput>
                     <span class="c-svg_eye"><i class="icon-search"></i></span>
                 </div>
             </div>
-        </div><!--filter and search section-->
+        </div>
+        <!--filter and search section-->
         <div class="o-explore-media-part">
-            <opspot-masonry-container [entities]="entities"></opspot-masonry-container>
-            <!-- <infinite-scroll
-            distance="25%"
-            (load)="searchMore()"
-            [moreData]="moreData"
-            [inProgress]="inProgress">
-        </infinite-scroll> -->
-        </div><!--media section-->
+            <opspot-masonry-container [entities]="filteredArray"></opspot-masonry-container>
+            <infinite-scroll distance="25%" (load)="searchMore()" [moreData]="moreData" [inProgress]="inProgress">
+            </infinite-scroll>
+        </div>
+        <!--media section-->
     </div>
 </section>

@@ -26,75 +26,55 @@ export class MyJourneyFormComponent implements OnInit {
     wire_threshold: null
   };
   tags = [];
-  isNSFW: boolean =false;
-  
-  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
+  isNSFW: boolean = false;
+
+  constructor(
+    public session: Session, 
+    public client: Client, 
+    public upload: Upload, 
+    public attachment: AttachmentService, 
+    private formBuilder: FormBuilder) {
     this.opspot = window.Opspot;
     this.cards = [];
-   }
+  }
+
 
   ngOnInit() {
   }
+
   changeToDefault() {
     this.ChangeDefault.emit();
   }
-  close(){
+
+  close() {
     this.Close.emit();
   }
-  
+
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    console.log(file, imageId)
-    // if (this.inProgress) {
-    //   this.attachment.abort();
-    //   this.canPost = true;
-    //   this.inProgress = false;
-    //   this.errorMessage = '';
-    //   return;
-    // }
-
-    // if we're not uploading a file right now
-    // this.attachment.setPendingDelete(false);
-    // this.canPost = false;
-    // this.inProgress = true;
-
-    
-
     this.attachment.remove(file, imageId).then((guid) => {
       file.value = '';
       this.cards = _remove(this.cards, function (n) {
         return n.guid !== guid;
       });
-      console.log(this.cards)
     }).catch(e => {
       console.error(e);
-      // this.inProgress = false;
-      // this.canPost = true;
     });
   }
-  uploadAttachment(file: HTMLInputElement, event) {
-    console.log(file, event, this.attachment)
-    if (file.value) { // this prevents IE from executing this code twice
-      
 
+  uploadAttachment(file: HTMLInputElement, event) {
+    if (file.value) { // this prevents IE from executing this code twice
       this.attachment.upload(file)
         .then(guid => {
           let obj = {};
           obj['guid'] = guid;
           obj['imageLink'] = this.attachment.getPreview();
-          console.log(guid)
-          console.log(obj)
           this.cards.push(obj);
-          console.log(this.cards)
-          
-          // if (this.attachment.isPendingDelete()) {
-          //   this.removeAttachment(file);
-          // }
           file.value = null;
+          // this.attachment.reset();
         })
         .catch(e => {
-          console.log(e)
           if (e && e.message) {
-            
+
           }
 
           file.value = null;
@@ -102,26 +82,17 @@ export class MyJourneyFormComponent implements OnInit {
         });
     }
   }
+
   post() {
-    console.log('clicked')
     if (!this.meta.message && !this.attachment.has()) {
       return;
     }
-    // if (this.hashtagsSelector.tags.length > 5) {
-    //   this.showTagsError();
-    //   return;
-    // }
-
-    
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
+    this.tags.push('myjourney' + this.session.getLoggedInUser().username);
     data.tags = this.tags;
-    data.isNSFW = this.isNSFW
-    console.log(data);
-    console.log(this.meta);
-    console.log(this.attachment.exportMeta());
-
+    data.isNSFW = this.isNSFW;
     this.client.post('api/v1/newsfeed', data)
       .then((data: any) => {
         data.activity.boostToggle = true;
@@ -130,24 +101,22 @@ export class MyJourneyFormComponent implements OnInit {
         this.attachment.reset();
         this.meta = { wire_threshold: null };
         this.cards = [];
-        
       })
       .catch((e) => {
-        
-        alert(e.message);
+        console.log(e.message);
+        // this.attachment.reset();
       });
   }
+
   getPostPreview(message) {
     if (!message.value) {
       return;
     }
-
     this.attachment.preview(message.value);
   }
-  onMessageChange($event) {
-    
-    this.meta.message = $event;
 
+  onMessageChange($event) {
+    this.meta.message = $event;
     const regex = /(^|\s||)#(\w+)/gim;
     this.tags = [];
     let match;

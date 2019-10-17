@@ -47,7 +47,7 @@ export const OpspotAppRoutes: Routes = [
 
   { path: 'claim-rewards/:uuid', component: RewardsComponent },
   {
-    path: 'profile_edit',
+    path: 'profile',
     component: ProfileEditComponent,
     children: [
       { path: '', redirectTo: 'general', pathMatch: 'full' },
@@ -58,6 +58,10 @@ export const OpspotAppRoutes: Routes = [
       { path: 'education', component: EducationComponent },
       { path: 'awards', component: AwardsComponent }
     ]
+  },
+  {
+    path: 'invite',
+    loadChildren: './modules/invite-friends/invite-friends.module#InviteFriendsModule'
   },
   {
     path: ':username/:filter',
