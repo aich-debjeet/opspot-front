@@ -7,7 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 // TODO @gayatri: handle all other requests
 const bigeventRoutes: Routes = [
   {
-    path: 'bigevent/create',
+    path: 'event/create',
     component: BigEventComponent,
   }
   // {
