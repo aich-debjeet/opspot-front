@@ -194,4 +194,11 @@ export class SettingsWireComponent implements OnInit {
     this.cd.markForCheck();
     this.cd.detectChanges();
   }
+  removeFile(){
+    this.backgroundFile = null;
+    this.preview = {src: ''};
+    this.exclusive.intro='';
+    this.updatePreviewEntity();
+    this.detectChanges();
+  }
 }

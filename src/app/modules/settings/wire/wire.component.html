@@ -1,4 +1,4 @@
-<div class="o-settings-block__content">
+<!-- <div class="o-settings-block__content">
   <div class="tabs-settings">
     <div class="m-settings--section m-layout--row m-border">
 
@@ -49,44 +49,54 @@
 
     </div>
   </div>
-</div>
-
-<!-- <div id="wire" class="tab">
-  <div class="o-settings-wire">
-      <div class="text-md m-26">
-          The below description and preview image is what your subscribers will see on your exclusive posts until they become a supporter.
-      </div>
-      <div class="form-group">
-          <label>Description</label>
-          <textarea class="form-control" rows="4">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-          </textarea>
-      </div>
-      <div class="fileUpload">
-          <span class="icon-plus f500"></span><span class="text-md grey">Background image</span>
-          <input type="file" class="upload" #backgroundFile name="preview" (change)="updatePreview(backgroundFile)" accept="image/*"/>
-      </div>
-      <h5 class="f500">Preview</h5>
-          <div class="o-settings-preview">
-              <div class="o-settings-preview__item">
-                  <div class="o-avatar-md"><img src="assets/demo/avatar.png" alt=""></div>
-                  <div class="o-settings-preview-info">
-                      <div class="text-md f500">Gowtham Kumar</div>
-                      <div class="text-sm grey">10 mins ago<span class="icon-public"> </span></div>
-                  </div>
-              </div>
-              <div class="text-md prview-text">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-              </div>
-              <div class="o-settings-spot">
-                  <h4 class="white">1 Spot Coin / Month</h4>
-                  <div class="text-md grey">
-                      This post can only be seen by supporters
-                      who wire over 1 spot coin / month to @gowtham42
-                  </div>
-                  <button type="button" class="btn btn-primary btn-sm">UNLOCK THIS POST</button> -->
-<!-- </div>spot ends
-          </div>preview ends
-          <button type="button" class="btn btn-primary btn-lg pading-right disabled">Save</button>
-          <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
-  </div>
 </div> -->
+<div class="o-settings-block__content">
+  <div class="tabs-settings">
+    <div id="wire" class="tab">
+      <div class="o-settings-wire">
+        <div class="text-md m-26">
+          The below description and preview image is what your subscribers will see on your exclusive posts until they
+          become a supporter.
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" rows="4" [(ngModel)]="exclusive.intro"
+            (keyup)="exclusive.saved = false; updatePreviewEntity()">
+            </textarea>
+        </div>
+        <div class="fileUpload">
+          <span class="icon-plus f500"></span><span class="text-md grey">Background image</span>
+          <input type="file" class="upload" #backgroundFile name="preview" (change)="updatePreview(backgroundFile)"
+            accept="image/*" />
+        </div>
+        <h5 class="f500">Preview</h5>
+        <div class="o-settings-preview">
+          <div class="o-settings-preview__item">
+            <!-- <div class="o-avatar-md"><img src="assets/demo/avatar.png" alt=""></div>
+                    <div class="o-settings-preview-info">
+                        <div class="text-md f500">Gowtham Kumar</div>
+                        <div class="text-sm grey">10 mins ago<span class="icon-public"> </span></div>
+                    </div>
+                </div>
+                <div class="text-md prview-text">
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+                </div>
+                <div class="o-settings-spot">
+                    <h4 class="white">1 Spot Coin / Month</h4>
+                    <div class="text-md grey">
+                        This post can only be seen by supporters
+                        who wire over 1 spot coin / month to @gowtham42
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm">UNLOCK THIS POST</button>
+                </div> -->
+            <m-wire--lock-screen *ngIf="previewEntity" [preview]="true" [entity]="previewEntity"
+              class="mdl-shadow--4dp"></m-wire--lock-screen>
+          </div>
+
+        </div>
+        <button type="button" class="btn btn-primary btn-lg pading-right" style="margin-right: 9px"
+          [hidden]="exclusive.saved && rewardsSaved" (click)="save()">Save</button>
+        <button type="button" class="btn btn-outline-primary btn-lg" (click)="removeFile()">Cancel</button>
+      </div>
+    </div>
+  </div>
