@@ -1,0 +1,254 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+@import "src/assets/scss/base/typography";
+
+
+// events inner page style
+
+.o-events-inner-sec{
+    width: 100%;
+    float: left;
+    background-color: #FAFAFA;
+}
+.o-big-events-inner-block{
+    width: 100%;
+    max-width: 1070px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+		flex-direction: column;
+	}
+    &__main{
+        width: calc(100% - 265px);
+        margin-right: 8px;
+        border: 1px solid #ECEFF1;
+        background: #fff;
+        height: 100vh;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    }
+    &__sidebar{
+        width: 265px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+        }
+    }
+}
+
+// inner cover
+
+.o-big-events-inner-cover{
+    width: 100%;
+    height: 275px;
+    position: relative;
+    &__media{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        img{
+            width: 100%;
+        }
+    }
+}
+.o-big-events-inner-date-info{
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 0px 0px 15px 15px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1.75) 0%, rgba(0, 0, 0, 0) 100%);
+    .o-big-event-date{
+        padding: 6px 12px;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        position: unset;
+    }
+    .o-big-event-type{
+        height: 26px;	
+        width: 67px;
+        border-radius: 2px;	
+        background: none;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #90A4AE;
+        margin-left: 18px;
+    }
+}
+
+// big event inner info
+
+.o-big-events-inner-info{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        width: 100%;
+        padding: 20px 15px;
+        flex-direction: column;
+    }
+    &__content{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        .text-lg{
+            @include mq($from: $mobile_sm, $until: $tablet) {
+               font-size: 11px;
+            }
+        }
+        .m-t{
+            margin-top: 13px;
+        }
+    }
+    &__action{
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            margin-top: 12px;
+        }
+    }
+}
+
+// hashtag
+
+.o-big-events-inner-hashtag{
+    width: 100%;
+    padding: 5px 30px 20px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        width: 100%;
+        padding: 20px 15px;
+    }
+}
+
+// discrptn
+
+.o-big-events-inner-details-discrptn{
+    width: 495px;
+    padding: 0px 0px 0px 30px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        width: 100%;
+        padding: 0px 15px;
+    }
+    p{
+        margin-bottom: 20px;
+    }
+}
+
+// created by
+
+.o-big-event-created-by{
+    width: 100%;
+    background: #fff;
+    padding: 16px;
+    float: left;
+    margin-bottom: 9px;
+    border: 1px solid #ECEFF1;	
+    border-radius: 4px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        border: none;
+    }
+}
+.o-big-event-created-prof{
+    padding: 16px 0px 8px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    .o-avatar-info{
+        width: calc(100% - 50px);
+        margin-left: 10px;
+    }
+}
+
+// for options dropdown
+
+.o-events-option-drop__btn {
+    cursor: pointer;
+}
+.o-events-option-drop {
+    display: inline-block;
+    margin-left: 12px;
+    top: -1px;
+    right: -108px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+		right: -150px;
+        top: -20px;
+	}
+}
+
+.o-events-option-drop__block {
+    display: none;
+    position: absolute;
+    overflow: auto;
+    z-index: 1;
+    width: 75px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 10px 0 rgba(144, 164, 174, 0.16), 0 1px 12px 0 rgba(144, 164, 174, 0.18), 0 3px 5px 0 rgba(144, 164, 174, 0.2);
+    left: -48px;
+    top: -2px;
+    padding: 14px 13px 0px 13px;
+}
+
+.o-events-option-drop__block a {
+    color: black;
+    padding-bottom: 14px;
+    text-decoration: none;
+    display: block;
+    @extend .text-md ;
+}
+
+.show {display: block;}
+
+// ticket price
+
+.o-big-event-ticket-price{
+    margin-top: 20px;
+}
+
+// interested people
+
+.o-big-event-intrsted-people{
+    width: 100%;
+    background: #fff;
+    padding: 16px;
+    float: left;
+    margin-bottom: 9px;
+    border: 1px solid #ECEFF1;	
+    border-radius: 4px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        border: none;
+    }
+}
+.o-big-event-intersted-prof{
+    padding: 16px 0px 8px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    &__link{
+        width: calc(100% - 12px);
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .o-avatar-info{
+        width: calc(100% - 50px);
+        margin-left: 10px;
+    }
+}

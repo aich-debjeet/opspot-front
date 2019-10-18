@@ -35,7 +35,7 @@
                         <label>Event Category</label>
                         <select class="form-control form-control-lg" formControlName="eventCategory">
                             <option value="" disabled selected>Select Category</option>
-                            <option *ngFor = "let type of eventTypeList" value="{{ type.value }}">{{ type.label}}</option>      
+                            <option *ngFor = "let type of eventCategoryList" value="{{ type.value }}">{{ type.label}}</option>      
                         </select>
                         <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventCategory').errors?.required">
                             This is required</div>
