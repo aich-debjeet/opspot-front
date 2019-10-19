@@ -86,14 +86,14 @@ export class OpportunityComponent implements OnInit {
 
     this.inProgress = true;
 
-    this.client.get('api/v3/opportunity/' + this.guid)
+    this.client.get('api/v1/newsfeed/single/' + this.guid)
       .then((data: any) => {
-        if (data.opportunity) {
-          this.opportunity = data.opportunity;
+        if (data.activity) {
+          this.opportunity = data.activity;
           this.count = this.opportunity['thumbs:up:count'];
 
-          if (data.opportunity.owner_obj) {
-            this.opportunity['ownerObj'] = data.opportunity.owner_obj;
+          if (data.activity.owner_obj) {
+            this.opportunity['ownerObj'] = data.activity.owner_obj;
           }
           this.inProgress = false;
         }
@@ -117,7 +117,7 @@ export class OpportunityComponent implements OnInit {
     if ($event.inProgress) {
       $event.inProgress.emit(true);
     }
-    this.client.delete(`api/v1/newsfeed/${this.opportunity.guid}`)
+    this.client.delete(`api/v3/opportunity/${this.opportunity.guid}`)
       .then((response: any) => {
         if ($event.inProgress) {
           $event.inProgress.emit(false);
