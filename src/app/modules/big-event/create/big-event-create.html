@@ -105,7 +105,10 @@
                                 <img [src]="coverImage" alt="">
                             </a>
                         </div><!--file preview ends-->
-                    </div>  
+                    </div>
+                    <div class="error text-sm" *ngIf="coverImageUploadError">
+                            This is required
+                    </div>
                     <div class="grey text-sm paddng-top">Use a comma to separate skills, or choose from the list.</div>                    
                 </div><!--Profile Picture ends-->
                 <div class="o-create-big-event-action">

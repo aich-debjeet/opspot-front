@@ -21,9 +21,10 @@ export class BigEventCreate implements OnInit {
   eventForm: FormGroup;
   eventTypeList = EVENT_TYPES;
   eventCategoryList = EVENT_CATEGORY;
-  eventSubmitted = false;
+  eventSubmitted: boolean;
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  coverImageUploadError: boolean;
 
   coverImage: any;
 
@@ -135,6 +136,10 @@ export class BigEventCreate implements OnInit {
 
   submitEvent() {
     this.eventSubmitted = true;
+    this.coverImageUploadError = false;
+    if (this.reqBody.attachment_guid == '') {
+      this.coverImageUploadError = true;
+    }
 
     var startTime = this.convertDateToMillis(this.eventForm.value.eventStartDate, this.eventForm.value.eventStartTime)
     var endTime = this.convertDateToMillis(this.eventForm.value.eventEndDate, this.eventForm.value.eventEndTime)
