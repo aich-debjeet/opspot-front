@@ -6,6 +6,7 @@ import { AttachmentService } from '../../../services/attachment';
 import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
 import * as moment from 'moment';
+import { FormValidator } from '../../../helpers/form.validator';
 
 
 
@@ -61,8 +62,8 @@ export class BigEventCreate implements OnInit {
       eventType: ['', [Validators.required]],
       eventCategory: ['', [Validators.required]],
       eventLocation: ['', [Validators.required]],
-      eventStartDate: ['', [Validators.required]],
-      eventEndDate: ['', [Validators.required]],
+      eventStartDate: ['', [Validators.required, FormValidator.datevalidation]],
+      eventEndDate: ['', [Validators.required, FormValidator.datevalidation]],
       eventStartTime: ['', [Validators.required]],
       eventEndTime: ['', [Validators.required]],
       eventCoverImage: ['', []]
@@ -113,21 +114,23 @@ export class BigEventCreate implements OnInit {
   }
 
   convertDateToMillis(inputDate, inputTime) {
-    var timeString = this.formatTime(inputTime)
-    const d = moment(inputDate).format('L'); // d = "12/12/2017" 
-    var myDate = new Date(d);  
-    var timeReg = /(\d+)\:(\d+)(\w+)/;
-    if (timeString) {
-      var parts = timeString.match(timeReg);
+    if (inputTime) {
+      var timeString = this.formatTime(inputTime)
+      const d = moment(inputDate).format('L'); // d = "12/12/2017" 
+      var myDate = new Date(d);
+      var timeReg = /(\d+)\:(\d+)(\w+)/;
+      if (timeString) {
+        var parts = timeString.match(timeReg);
+      }
+      var hours = /am/i.test(parts[3]) ?
+        function (am) { return am < 12 ? am : 0 }(parseInt(parts[1], 10)) :
+        function (pm) { return pm < 12 ? pm + 12 : 12 }(parseInt(parts[1], 10));
+      var minutes = parseInt(parts[2], 10);
+      var date = new Date(myDate.getTime());
+      date.setHours(hours);
+      date.setMinutes(minutes);
+      return date;
     }
-    var hours = /am/i.test(parts[3]) ?
-      function (am) { return am < 12 ? am : 0 }(parseInt(parts[1], 10)) :
-      function (pm) { return pm < 12 ? pm + 12 : 12 }(parseInt(parts[1], 10));
-    var minutes = parseInt(parts[2], 10);
-    var date = new Date(myDate.getTime());
-    date.setHours(hours);
-    date.setMinutes(minutes);
-    return date;
   }
 
   submitEvent() {
