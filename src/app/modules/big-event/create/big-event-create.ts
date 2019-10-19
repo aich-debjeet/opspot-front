@@ -5,6 +5,8 @@ import { Session } from '../../../services/session';
 import { AttachmentService } from '../../../services/attachment';
 import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
+import * as moment from 'moment';
+
 
 
 @Component({
@@ -23,6 +25,13 @@ export class BigEventCreate implements OnInit {
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   coverImage: any;
+
+  bsConfig = {
+    containerClass: 'theme-dark-blue',
+    adaptivePosition: true,
+    dateInputFormat: 'DD-MM-YYYY'
+  }
+
 
   reqBody = {
     title: null,
@@ -95,27 +104,48 @@ export class BigEventCreate implements OnInit {
     }
   }
 
+  formatTime(inputTime) {
+    var timeString = inputTime;
+    var H = +timeString.substr(0, 2);
+    var h = H % 12 || 12;
+    var ampm = (H < 12 || H === 24) ? "AM" : "PM";
+    return timeString = h + timeString.substr(2, 3) + ampm;
+  }
 
+  convertDateToMillis(inputDate, inputTime) {
+    var timeString = this.formatTime(inputTime)
+    const d = moment(inputDate).format('L'); // d = "12/12/2017" 
+    var myDate = new Date(d);  
+    var timeReg = /(\d+)\:(\d+)(\w+)/;
+    if (timeString) {
+      var parts = timeString.match(timeReg);
+    }
+    var hours = /am/i.test(parts[3]) ?
+      function (am) { return am < 12 ? am : 0 }(parseInt(parts[1], 10)) :
+      function (pm) { return pm < 12 ? pm + 12 : 12 }(parseInt(parts[1], 10));
+    var minutes = parseInt(parts[2], 10);
+    var date = new Date(myDate.getTime());
+    date.setHours(hours);
+    date.setMinutes(minutes);
+    return date;
+  }
 
   submitEvent() {
     this.eventSubmitted = true;
-    console.log(this.eventForm.value.eventEndDate)
-    console.log(this.eventForm.value.eventEndTime);
-    
+
+    var startTime = this.convertDateToMillis(this.eventForm.value.eventStartDate, this.eventForm.value.eventStartTime)
+    var endTime = this.convertDateToMillis(this.eventForm.value.eventEndDate, this.eventForm.value.eventEndTime)
 
     this.reqBody.title = this.eventForm.value.eventTitle;
     this.reqBody.description = this.eventForm.value.eventDesc;
     this.reqBody.event_type = this.eventForm.value.eventType;
     this.reqBody.category = this.eventForm.value.eventCategory;
     this.reqBody.location = this.eventForm.value.eventLocation;
-    this.reqBody.start_time_date = new Date(`${this.eventForm.value.eventStartDate} ${this.eventForm.value.eventStartTime}`);
-    this.reqBody.end_time_date = new Date(`${this.eventForm.value.eventEndDate} ${this.eventForm.value.eventEndTime}`);
+    this.reqBody.start_time_date = startTime.getTime();
+    this.reqBody.end_time_date = endTime.getTime();
 
-    if (this.eventForm.valid && this.reqBody.attachment_guid) {
+    if (this.eventForm.valid && this.reqBody.attachment_guid != '' && this.reqBody.start_time_date != '' && this.reqBody.end_time_date != '') {
       let endpoint = 'api/v3/event';
-
-      console.log("RequestBody: ", this.reqBody);
-
 
       this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
