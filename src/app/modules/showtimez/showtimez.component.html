@@ -55,7 +55,7 @@
                 </div>
               </div>
               <div class="feed-card-event-block__right ">
-                <button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+                <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != showTimez?.owner_guid">Reach Out</button>
               </div>
             </div>
           </div>

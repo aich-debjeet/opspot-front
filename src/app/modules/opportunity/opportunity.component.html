@@ -51,7 +51,7 @@
                   <div class="text-md grey" *ngIf="opportunity?.location">
                     {{ opportunity?.location }}
                   </div>
-                  <button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+                  <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != opportunity?.owner_guid">Reach Out</button>
                 </div>
                 <div class="opportunity-button" *ngIf="opportunity?.category">
                   {{opportunity?.category}}
