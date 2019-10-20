@@ -180,7 +180,7 @@ export class BluestoreComponent implements OnInit {
     if ($event.inProgress) {
       $event.inProgress.emit(true);
     }
-    this.client.delete(`api/v1/newsfeed/${this.marketplace.guid}`)
+    this.client.delete(`api/v3/marketplace/${this.marketplace.entity_guid}`)
       .then((response: any) => {
         if ($event.inProgress) {
           $event.inProgress.emit(false);

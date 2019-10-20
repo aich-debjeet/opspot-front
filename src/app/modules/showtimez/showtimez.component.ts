@@ -107,7 +107,7 @@ export class ShowtimezComponent implements OnInit {
     if ($event.inProgress) {
       $event.inProgress.emit(true);
     }
-    this.client.delete(`api/v1/newsfeed/${this.showTimez.guid}`)
+    this.client.delete(`api/v3/event/${this.showTimez.entity_guid}`)
       .then((response: any) => {
         if ($event.inProgress) {
           $event.inProgress.emit(false);
