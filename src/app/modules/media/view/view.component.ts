@@ -241,6 +241,20 @@ export class MediaViewComponent {
     }
   }
 
+  async togglePin() {
+    this.entity.bookmark = !this.entity.bookmark;
+    const url: string = `api/v3/bookmark/${this.entity.guid}/image`;
+    try {
+      if (this.entity.bookmark) {
+        await this.client.post(url);
+      } else {
+        await this.client.delete(url);
+      }
+    } catch (e) {
+      this.entity.bookmark = !this.entity.bookmark;
+    }
+  }
+
   private detectChanges() {
     this.cd.markForCheck();
     this.cd.detectChanges();

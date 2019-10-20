@@ -218,8 +218,16 @@ opspot-button-remind{
             </div>
             <div class="o-feed-head-action o-post-inner-profile-button">
               <button type="button" class="btn btn-primary btn-sm">Boost</button>
-              <a href="#" class="head-action__link">
+              <!-- <a href="#" class="head-action__link">
                 <img src="assets/svg/bookmark.svg" alt="" class="head-action__icon hidden-mob">
+              </a> -->
+              <a class="head-action__link" *ngIf="session.getLoggedInUser().guid != entity.owner_guid" (click)="togglePin()">
+                <m-tooltip icon="turned_in" *ngIf="entity?.bookmark">
+                  This post is Bookmarked
+                </m-tooltip>
+                <m-tooltip *ngIf="!entity?.bookmark" icon="turned_in_not">
+                  Click to bookmark this post to the top of your channel feed
+                </m-tooltip>
               </a>
               <!-- <div class="o-option-drop"> -->
                 <m-post-menu [entity]="entity" [canDelete]="canDelete" [isTranslatable]="isTranslatable"
