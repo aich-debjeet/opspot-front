@@ -355,9 +355,10 @@
   Boost this post to reach more people!
 </div>
 
+<!-- TODO @gayatri need to check this part bacuse of shshis impl-->
 <div class="mdl-card__menu mdl-color-text--blue-grey-300" #toggle *ngIf="!hideTabs">
   <button class="mdl-button m-pin-button mdl-button--icon" (click)="togglePin()"
-    *ngIf="session.getLoggedInUser().guid != activity.owner_guid ">
+    *ngIf="session.getLoggedInUser().guid != activity.owner_guid && !showOpportunity && !showBlueStore && !showTimez">
     <m-tooltip icon="turned_in" *ngIf="activity.bookmark">
       This post is Bookmarked
     </m-tooltip>
