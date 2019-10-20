@@ -22,6 +22,7 @@ import { PortfolioFormComponent } from './portfolio-form/portfolio-form.componen
 import { MyJourneyFormComponent } from './my-journey-form/my-journey-form.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { PostFormComponent } from './post-form/post-form.component';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 // import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
@@ -35,6 +36,8 @@ import { PostFormComponent } from './post-form/post-form.component';
     ExperimentsModule,
     NgxIntlTelInputModule,
     TextMaskModule,
+    BsDatepickerModule.forRoot(),
+
   ],
   declarations: [
     LoginForm,
