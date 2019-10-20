@@ -69,7 +69,7 @@ export class FormValidator {
     static datevalidation(AC: AbstractControl) {
         console.log("Value: ",AC.value);
         
-        const date = AC.value;
+        const date = AC.value.split('-').reverse().join('-');
         const currentDate = moment().format('YYYYMMDD');
         const chooseDate = moment(date).format('YYYYMMDD');
 

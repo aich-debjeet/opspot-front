@@ -117,7 +117,7 @@ export class BigEventCreate implements OnInit {
   convertDateToMillis(inputDate, inputTime) {
     if (inputTime) {
       var timeString = this.formatTime(inputTime)
-      const d = moment(inputDate).format('L'); // d = "12/12/2017" 
+      const d = moment(inputDate.split('-').reverse().join('-')).format('L'); // d = "12/12/2017" 
       var myDate = new Date(d);
       var timeReg = /(\d+)\:(\d+)(\w+)/;
       if (timeString) {

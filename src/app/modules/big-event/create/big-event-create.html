@@ -55,8 +55,7 @@
                 <div class="o-create-big-event-row">
                     <div class="form-group select-big-event mr13">
                         <label>Start Date</label>
-                        <input type="text" class="form-control form-control-lg" placeholder="Select Date" formControlName="eventStartDate" bsDatepicker [bsConfig]="bsConfig">
-                        <!-- <input type="text" class="form-control form-control-lg" placeholder="Select Date" formControlName="eventStartDate" > -->
+                         <input type="text" class="form-control form-control-lg" placeholder="Select Date" [textMask]="{mask: dateMask}" formControlName="eventStartDate" >
                         <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventStartDate').errors?.required">
                             This is required
                         </div>
@@ -75,9 +74,8 @@
                 <div class="o-create-big-event-row">
                     <div class="form-group select-big-event mr13">
                         <label>End Date</label>
-                        <input type="text" class="form-control form-control-lg" placeholder="Select Date" formControlName="eventEndDate" bsDatepicker [bsConfig]="bsConfig">
-                        <!-- <input type="text" class="form-control form-control-lg" [textMask]="{mask: dateMask}" placeholder="Select Date" formControlName="eventEndDate"> -->
-                        <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventEndDate').errors?.required">
+                        <input type="text" class="form-control form-control-lg" placeholder="Select Date" [textMask]="{mask: dateMask}" formControlName="eventEndDate" >
+                         <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventEndDate').errors?.required">
                             This is required
                         </div>
                         <div class="error text-sm" *ngIf="eventForm.get('eventEndDate').errors?.oldate">
