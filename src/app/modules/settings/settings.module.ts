@@ -27,6 +27,7 @@ import { SettingsP2PMediaComponent } from './p2pmedia/p2pmedia.component';
 import { PrivacySecurityComponent } from './privacy-security/privacy-security.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { SupportComponent } from './support/support.component';
+import { CommentsModule } from '../comments/comments.module';
 
 
 const settingsRoutes : Routes = [
@@ -63,6 +64,7 @@ const settingsRoutes : Routes = [
     ReportModule,
     PaymentsModule,
     WireModule,
+    CommentsModule,
   ],
   declarations: [
     SettingsComponent,
