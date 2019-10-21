@@ -1,9 +1,9 @@
 <div class="o-settings-block__content">
     <div class="tabs-settings">
         <div id="notifications" class="tab">
-            <div class="text-md grey">
+            <!-- <div class="text-md grey">
                 <button type="button" class="btn btn-primary" (click)="save()">Save</button>
-            </div>
+            </div> -->
         <h5 class="f500 o-settings-notifications-email-mb18px">Email me when</h5>
         <div class="o-settings-fields o-settings-notifications o-settings-notifications-email">
             <div class="o-settings-notification-header">
@@ -71,11 +71,11 @@
                     <span class="slider round"></span>
                 </label> 
             </div>
-            <select id="top-posts-dropdown" name="top-posts" [disabled]="!notifications.with.top_posts" (click)="change()" [(ngModel)]="notifications.with.top_posts">
+            <!-- <select id="top-posts-dropdown" name="top-posts" [disabled]="!notifications.with.top_posts" (click)="change()" [(ngModel)]="notifications.with.top_posts">
                 <option value="periodically">Periodically</option>
                 <option value="daily">Daily</option>
                 <option value="weekly">Weekly</option>
-            </select>
+            </select> -->
         </div>
         <div class="o-settings-fields o-settings-notifications o-settings-notifications-email">
             <div class="o-settings-notification-header">
@@ -175,6 +175,9 @@
                 </label> 
             </div>
         </div><!--notificatin toggle settings fields-->
+        <div class="o-settings-pdngtpbtm-button">
+            <button type="button" class="btn btn-primary btn-lg pading-right" (click)="save()">Save</button>
+        </div>
         </div>
     </div>
 <div>
