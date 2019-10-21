@@ -51,7 +51,7 @@ export class ShowtimezFormComponent implements OnInit {
 
 
   @Input('object') set data(object) {
-    this.event = object;
+    this.event = object;  
     if (this.event) {
       this.eventGuid = object['entity_guid'];
       this.label = "Edit"
