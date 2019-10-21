@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { EVENT_TYPES, EVENT_CATEGORY } from '../../../services/list-options';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Session } from '../../../services/session';
@@ -10,12 +10,10 @@ import { FormValidator } from '../../../helpers/form.validator';
 import { Router } from '@angular/router';
 
 
-
-
 @Component({
-    selector: 'app-big-event-form',
-    templateUrl: './big-event-form.html',
-    styleUrls: ['./big-event-form.scss']
+  selector: 'app-big-event-form',
+  templateUrl: './big-event-form.html',
+  styleUrls: ['./big-event-form.scss']
 })
 export class BigEventForm implements OnInit {
 
@@ -26,8 +24,10 @@ export class BigEventForm implements OnInit {
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   coverImageUploadError: boolean;
+  lable: string;
 
   coverImage: any;
+  bigEvent: any;
 
   bsConfig = {
     containerClass: 'theme-dark-blue',
@@ -49,6 +49,18 @@ export class BigEventForm implements OnInit {
     published: 1
   };
 
+  @Input('object') set data(object) {
+    this.bigEvent = object;
+    console.log("BigEvent: ", this.bigEvent);
+    
+    if(this.bigEvent){
+      this.lable = "Edit"
+      this.buildForm(this.bigEvent);
+    }else{
+      this.lable = "Create"
+      this.buildForm();
+    }
+  }
 
 
   constructor(
@@ -58,22 +70,40 @@ export class BigEventForm implements OnInit {
     public upload: Upload,
     public attachment: AttachmentService,
     public router: Router
-  ) {
-    this.eventForm = this.formBuilder.group({
-      eventTitle: ['', [Validators.required]],
-      eventDesc: ['', [Validators.required]],
-      eventType: ['', [Validators.required]],
-      eventCategory: ['', [Validators.required]],
-      eventLocation: ['', [Validators.required]],
-      eventStartDate: ['', [Validators.required, FormValidator.datevalidation]],
-      eventEndDate: ['', [Validators.required, FormValidator.datevalidation]],
-      eventStartTime: ['', [Validators.required]],
-      eventEndTime: ['', [Validators.required]],
-      eventCoverImage: ['', []]
-    })
-  }
+  ) { }
 
   ngOnInit() {
+  }
+
+  buildForm(data?) {
+    if (data) {
+      this.eventForm = this.formBuilder.group({
+        eventTitle: [data['title'] ? data['title'] : '', [Validators.required]],
+        eventDesc: [data['title'] ? data['title'] : '', [Validators.required]],
+        eventType: [data['entity_type'] ? data['entity_type'] : '', [Validators.required]],
+        eventCategory: [data['title'] ? data['title'] : '', [Validators.required]],
+        eventLocation: [data['location'] ? data['location'] : '', [Validators.required]],
+        eventStartDate: [data['start_time_date'] ? data['start_time_date'] : '', [Validators.required, FormValidator.datevalidation]],
+        eventEndDate: [data['end_time_date'] ? data['end_time_date'] : '', [Validators.required, FormValidator.datevalidation]],
+        eventStartTime: [data['title'] ? data['title'] : '', [Validators.required]],
+        eventEndTime: [data['title'] ? data['title'] : '', [Validators.required]],
+        eventCoverImage: ['', []]
+      })
+    } else {
+      this.eventForm = this.formBuilder.group({
+        eventTitle: ['', [Validators.required]],
+        eventDesc: ['', [Validators.required]],
+        eventType: ['', [Validators.required]],
+        eventCategory: ['', [Validators.required]],
+        eventLocation: ['', [Validators.required]],
+        eventStartDate: ['', [Validators.required, FormValidator.datevalidation]],
+        eventEndDate: ['', [Validators.required, FormValidator.datevalidation]],
+        eventStartTime: ['', [Validators.required]],
+        eventEndTime: ['', [Validators.required]],
+        eventCoverImage: ['', []]
+      })
+    }
+
   }
 
 
@@ -156,13 +186,16 @@ export class BigEventForm implements OnInit {
 
     if (this.eventForm.valid && this.reqBody.attachment_guid != '' && this.reqBody.start_time_date != '' && this.reqBody.end_time_date != '') {
       let endpoint = 'api/v3/event';
+      if (this.eventGuid) {
+        endpoint = 'api/v3/event/' + this.eventGuid;
+      }
 
       this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
 
           console.log("Response: ", resp);
-          if(resp && resp.activity && resp.activity['entity_guid'] != ''){
-            this.router.navigate(['/events/view/' +resp.activity['entity_guid'] ]);
+          if (resp && resp.activity && resp.activity['entity_guid'] != '') {
+            this.router.navigate(['/events/view/' + resp.activity['entity_guid']]);
           }
 
 
