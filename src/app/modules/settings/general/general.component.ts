@@ -103,7 +103,6 @@ export class SettingsGeneralComponent {
   load(remote: boolean = false) {
     if (!remote) {
       const user = this.session.getLoggedInUser();
-      console.log(user)
       this.name = user.name;
       this.userName = user.username;
       this.email = user.email;
@@ -112,7 +111,6 @@ export class SettingsGeneralComponent {
 
     this.client.get('api/v1/settings/' + this.guid)
       .then((response: any) => {
-        console.log('LOAD', response.channel);
         // this.email = response.channel.email;
         this.mature = !!parseInt(response.channel.mature, 10);
         this.enabled_mails = !parseInt(response.channel.disabled_emails, 10);

@@ -99,7 +99,7 @@
 </div> -->
 
 
-<section class="o-settings-sec">
+<section class="o-settings-sec" *ngIf="session.isLoggedIn()">
   <div class="container">
       <div class="o-settings-header">
           <h4 class="f500">Settings</h4>

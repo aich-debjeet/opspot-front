@@ -293,9 +293,9 @@
           <div id="delete" class="o-settings-deactivate-account" *ngIf="reasonDelete">
               <div class="o-settings-info">
                   <div class="o-avatar-md">
-                      <img src="assets/demo/avatar.png" alt="">
+                      <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="">
                   </div>
-                  <div class="text-lg f500">Gowtham Kumar</div>
+                  <div class="text-lg f500">{{name}}</div>
               </div>
               <div class="text-md">
                   Just type your password to delete your account
