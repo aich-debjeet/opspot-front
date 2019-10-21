@@ -7,6 +7,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { TextMaskModule } from 'angular2-text-mask';
 import { BigEventView } from './view/big-event-view';
 import { CommonModule } from '../../common/common.module';
+import { BigEventForm } from './form/big-event-form';
+import { BigEventEdit } from './edit/big-event-edit';
 
 
 
@@ -15,6 +17,10 @@ const bigeventRoutes: Routes = [
   {
     path: 'event/create',
     component: BigEventCreate,
+  },
+  {
+    path: 'event/edit/:guid',
+    component: BigEventEdit,
   },
   {
     path: 'events/view/:guid',
@@ -29,7 +35,9 @@ const bigeventRoutes: Routes = [
 @NgModule({
   declarations: [
     BigEventCreate,
-    BigEventView
+    BigEventView,
+    BigEventForm,
+    BigEventEdit
   ],
   imports: [
     CommonModule,
