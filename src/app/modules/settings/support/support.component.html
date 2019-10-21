@@ -6,8 +6,8 @@
                     <select class="form-control o-settings-thread-dropdown__select" (change)="onChange($event.target.value)">
                         <option value="review" selected="selected">Review Pending</option>
                         <option value="pending">Appealed</option>
-                        <option value="approved">Rejected</option>
-                        <option value="rejected">Approved</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="approved">Approved</option>
                     </select>
                 </div>
                 <div *ngFor="let appeal of appeals; let i = index"

@@ -28,6 +28,7 @@ export class SupportComponent implements OnInit {
       this.inProgress = false;
       this.offset = '';
       this.moreData = true;
+      this.appeals = [];
     }
 
     this.inProgress = true;
@@ -41,15 +42,21 @@ export class SupportComponent implements OnInit {
       if (refresh) {
         this.appeals = [];
       }
-
-      if (response.data) {
-        this.appeals.push(...response.data);
-      }
-
-      if (response['load-next']) {
-        this.offset = response['load-next'];
-      } else {
+      if (response.data.length === 0) {
+        this.inProgress = false;
         this.moreData = false;
+      } else {
+        if (this.appeals && !refresh) {
+          this.appeals.push(...response.data);
+        } else {
+          this.appeals = response.data
+        }
+
+        if (response['load-next']) {
+          this.offset = response['load-next'];
+        } else {
+          this.moreData = false;
+        }
       }
     } catch (e) {
       // TODO: show error
@@ -78,7 +85,7 @@ export class SupportComponent implements OnInit {
       action;
   }
 
-  onChange(filter){
+  onChange(filter) {
     console.log(filter)
     this.filter = filter;
     this.load(true);
