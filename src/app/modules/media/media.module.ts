@@ -24,6 +24,8 @@ import { MediaViewRecommendedComponent } from './view/recommended/recommended.co
 import { ThumbnailSelectorComponent } from './components/thumbnail-selector.component';
 import { CommentsModule } from '../comments/comments.module';
 import { HashtagsModule } from '../hashtags/hashtags.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
 
 const routes: Routes = [
   { path: 'media/videos/:filter', component: MediaVideosListComponent },
@@ -56,6 +58,7 @@ const routes: Routes = [
     PostMenuModule,
     VideoModule,
     HashtagsModule,
+    SlickCarouselModule
   ],
   declarations: [
     MediaVideosListComponent,

@@ -21,6 +21,7 @@ import { BlueStoreFormComponent } from './blue-store-form/blue-store-form.compon
 import { PortfolioFormComponent } from './portfolio-form/portfolio-form.component';
 import { MyJourneyFormComponent } from './my-journey-form/my-journey-form.component';
 import { TextMaskModule } from 'angular2-text-mask';
+import { PostFormComponent } from './post-form/post-form.component';
 // import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
@@ -47,7 +48,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     ShowtimezFormComponent,
     BlueStoreFormComponent,
     PortfolioFormComponent,
-    MyJourneyFormComponent
+    MyJourneyFormComponent,
+    PostFormComponent
   ],
   exports: [
     LoginForm,
@@ -61,12 +63,14 @@ import { TextMaskModule } from 'angular2-text-mask';
     ShowtimezFormComponent,
     BlueStoreFormComponent,
     PortfolioFormComponent,
-    MyJourneyFormComponent
+    MyJourneyFormComponent,
+    PostFormComponent
   ],
   entryComponents: [
     OpportunityFormComponent,
     BlueStoreFormComponent,
-    ShowtimezFormComponent
+    ShowtimezFormComponent,
+    PostFormComponent
   ]
 })
 export class OpspotFormsModule {

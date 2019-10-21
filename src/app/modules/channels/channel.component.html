@@ -39,13 +39,13 @@
       <m-channel--sidebar [user]="user" [editing]="editing" (changeEditing)="toggleEditing($event)">
       </m-channel--sidebar>
     </section>
+
     <!-- Feed list -->
     <section class="o-center-block" *ngIf="filter == 'feed'">
       <m-channel--feed [user]="user" #feed></m-channel--feed>
     </section>
 
     <section class="o-right-block hidden-mob">
-      <div class="o-title caption-medium">My Journey<a href="#" class="text-md primary float-right">See All</a></div>
       <app-myjourney-widget [user]="user"></app-myjourney-widget>
     </section>
 
@@ -115,5 +115,35 @@
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
+  }
+  .tabs {
+    padding: 0;
+  }
+  .tabs .tabs-list {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 1px solid #dde4e8;
+    display: flex;
+    margin-bottom: 9px;
+    display: inline-block;
+  }
+  .tabs .tabs-list li.active {
+    color: #0288D1 !important;
+    border-bottom: 2px solid #0288D1;
+  }
+  .tabs .tabs-list li {
+    float: left;
+    margin: 0px;
+    margin: 15px 12px 0px;
+    text-align: center;
+    background-color: transparent;
+  }
+  .tabs .tabs-list li.active {
+    color: #0288D1 !important;
+    border-bottom: 2px solid #0288D1;
+  }
+  .active {
+    display: block !important;
   }
 </style>

@@ -33,14 +33,23 @@
 						</div>
 					</div>
 					<div class="o-post-inner-page-myjourney-image">
-						<img [src]="largeImage" (error)="opspot.cdn_assets_url + 'assets/logos/logo.svg'" alt="">
+						<img [src]="largeImage" (error)="opspot.cdn_assets_url + 'assets/logos/logo.svg'" alt="" *ngIf="!showVideo">
+						<m-video *ngIf="showVideo" style="background:#000;" [muted]="false"
+							[poster]="videoData.thumbnail_src"
+							[src]="[{ 'res': '360', 'uri': 'api/v1/media/' + videoData.guid + '/play', 'type': 'video/mp4' }]"
+							[guid]="videoData.guid" 
+							[torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
+							<!-- <video-ads [player]="player" *ngIf="marketplace??.monetized"></video-ads> -->
+            			</m-video>
 					</div>
 					<div class="o-posts-inner-page-myjourney-padding">
 						<div class="feed-media post-view-style" *ngIf="marketplace?.custom_data.length <= 5">
-							<a *ngFor="let image of marketplace?.custom_data; let i = index;" (click)="showImage(i)"
-								class="feed-media__link">
-								<img [src]="image.src" alt="" class="feed-media__img">
-								<!-- <div class="full-h-v set-bg" [style.backgroundImage]="'url(' + image.src + ')'"></div> -->
+							<a *ngFor="let media of marketplace?.custom_data; let i = index;" class="feed-media__link">
+								<img *ngIf="media.entity_type !== 'video'" [src]="media.src" alt="" class="feed-media__img" (click)="showImage(i)">
+								<img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+								<div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
+                        		<div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+                    	        </div>
 							</a>
 						</div>
 						<div class="" *ngIf="marketplace?.custom_data.length > 5">
@@ -53,11 +62,13 @@
 							(afterChange)="afterChange($event)"
 							(beforeChange)="beforeChange($event)"
 							>
-							<div ngxSlickItem *ngFor="let image of marketplace?.custom_data; let i = index;" class="slide">
-								<a (click)="showImage(i)" class="feed-media__link">
-										<!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + image.src + ')'"></div> -->
-								<img [src]="image.src" alt="" class="feed-media__img"
-									(error)="image.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+							<div ngxSlickItem *ngFor="let media of marketplace?.custom_data; let i = index;" class="slide">
+								<a class="feed-media__link">
+								<img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'" (click)="showImage(i)">
+								<img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+								<div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
+								<div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+								</div>
 								</a>
 							</div>
 							</ngx-slick-carousel>
@@ -72,28 +83,28 @@
 									{{ marketplace?.title}}
 								</h5>
 								<div class="text-md" *ngIf="marketplace?.description">
-									<span class="primary">#Marketplace</span>
+									<!-- <span class="primary">#Marketplace</span> -->
 									<span class="primary" [innerHtml]="marketplace.description | safe"></span>
 								</div>
 								<div class="text-rate" *ngIf="marketplace?.price ">
-									₹ {{ marketplace?.price  }}.00/- <span class="text-md f500">(per piece)</span>
+									₹ {{ marketplace?.price  }} /- <span class="text-md f500">(per piece)</span>
 								</div>
 							</div>
 							<div class="feed-card-event-block__right ">
-								<button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+								<button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != marketplace.owner_guid">Reach Out</button>
 							</div>
 						</div>
 					</div>
 					<div class="o-posts-inner-page-action">
 						<div class="o-posts-inner-page-action__details">
-							<div class="o-latest-channel-info-head__members members-list">
+							<!-- <div class="o-latest-channel-info-head__members members-list">
 								<div class="members-circle members-circle1"><img src="assets/demo/avatar.png" alt="">
 								</div>
 								<div class="members-circle members-circle2"><img src="assets/demo/avatar.png" alt="">
 								</div>
 								<div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt="">
 								</div>
-							</div>
+							</div> -->
 							<div class="text-sm grey">{{count}} liked this post</div>
 							<div class="text-sm grey m-16">46 shared this post</div>
 							<div class="text-sm grey m-16">13 contributed this post</div>
