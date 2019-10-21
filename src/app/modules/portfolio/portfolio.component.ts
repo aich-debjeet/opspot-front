@@ -81,18 +81,16 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     }
     this.inProgress = true;
     this.client.get('api/v2/search', this.requestParams)
-      .then((data:any) => {
-		let respData: any = data;
+      .then((data: any) => {
+        const respData: any = data;
         if (!respData.entities) {
           this.moreData = false;
           this.inProgress = false;
           return false;
         }
         if (this.entities && !refresh) {
-          console.log('added data')
           this.entities = this.entities.concat(respData.entities);
         } else {
-          console.log('added new data')
           this.entities = respData.entities;
         }
         this.offset = data['load-next'];
