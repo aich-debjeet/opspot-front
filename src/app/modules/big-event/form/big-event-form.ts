@@ -24,10 +24,16 @@ export class BigEventForm implements OnInit {
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   coverImageUploadError: boolean;
-  lable: string;
+  lable = 'Create';
 
   coverImage: any;
   bigEvent: any;
+  bigEventGuid: any;
+
+  start_date: any;
+  start_time: any;
+  end_time: any;
+  end_date: any;
 
   bsConfig = {
     containerClass: 'theme-dark-blue',
@@ -52,12 +58,28 @@ export class BigEventForm implements OnInit {
   @Input('object') set data(object) {
     this.bigEvent = object;
     console.log("BigEvent: ", this.bigEvent);
-    
-    if(this.bigEvent){
+
+    if (this.bigEvent) {
       this.lable = "Edit"
-      this.buildForm(this.bigEvent);
-    }else{
-      this.lable = "Create"
+      console.log('EDIT');
+
+      this.bigEventGuid = this.bigEvent['guid'];
+      if (this.bigEvent['start_time_date'] != '') {
+        var date = new Date(parseInt(this.bigEvent['start_time_date']));
+        this.start_date = moment(date).format('DD-MM-YYYY');
+        this.start_time = moment(date).format('HH:mm');
+      }
+      if (this.bigEvent['end_time_date']) {
+        var date = new Date(parseInt(this.bigEvent['end_time_date']));
+        this.end_date = moment(date).format('DD-MM-YYYY');
+        this.end_time = moment(date).format('HH:mm');
+      }
+      if (this.bigEvent['custom_data']) {
+        this.coverImage = this.bigEvent['custom_data'][0].src;
+        this.reqBody.attachment_guid = this.bigEvent['custom_data'][0].guid;
+      }
+      this.buildForm(this.bigEvent, this.start_date, this.start_time, this.end_date, this.end_time);
+    } else {
       this.buildForm();
     }
   }
@@ -75,18 +97,18 @@ export class BigEventForm implements OnInit {
   ngOnInit() {
   }
 
-  buildForm(data?) {
+  buildForm(data?, start_date?, start_time?, end_date?, end_time?) {
     if (data) {
       this.eventForm = this.formBuilder.group({
         eventTitle: [data['title'] ? data['title'] : '', [Validators.required]],
-        eventDesc: [data['title'] ? data['title'] : '', [Validators.required]],
-        eventType: [data['entity_type'] ? data['entity_type'] : '', [Validators.required]],
-        eventCategory: [data['title'] ? data['title'] : '', [Validators.required]],
+        eventDesc: [data['description'] ? data['description'] : '', [Validators.required]],
+        eventType: [data['event_type'] ? data['event_type'] : '', [Validators.required]],
+        eventCategory: [data['category'] ? data['category'] : '', [Validators.required]],
         eventLocation: [data['location'] ? data['location'] : '', [Validators.required]],
-        eventStartDate: [data['start_time_date'] ? data['start_time_date'] : '', [Validators.required, FormValidator.datevalidation]],
-        eventEndDate: [data['end_time_date'] ? data['end_time_date'] : '', [Validators.required, FormValidator.datevalidation]],
-        eventStartTime: [data['title'] ? data['title'] : '', [Validators.required]],
-        eventEndTime: [data['title'] ? data['title'] : '', [Validators.required]],
+        eventStartDate: [start_date, [Validators.required]],
+        eventEndDate: [end_date, [Validators.required]],
+        eventStartTime: [start_time, [Validators.required]],
+        eventEndTime: [end_time, [Validators.required]],
         eventCoverImage: ['', []]
       })
     } else {
@@ -103,7 +125,6 @@ export class BigEventForm implements OnInit {
         eventCoverImage: ['', []]
       })
     }
-
   }
 
 
@@ -186,8 +207,8 @@ export class BigEventForm implements OnInit {
 
     if (this.eventForm.valid && this.reqBody.attachment_guid != '' && this.reqBody.start_time_date != '' && this.reqBody.end_time_date != '') {
       let endpoint = 'api/v3/event';
-      if (this.eventGuid) {
-        endpoint = 'api/v3/event/' + this.eventGuid;
+      if (this.bigEventGuid) {
+        endpoint = 'api/v3/event/' + this.bigEventGuid;
       }
 
       this.client.post(endpoint, this.reqBody)
@@ -197,8 +218,6 @@ export class BigEventForm implements OnInit {
           if (resp && resp.activity && resp.activity['entity_guid'] != '') {
             this.router.navigate(['/events/view/' + resp.activity['entity_guid']]);
           }
-
-
           this.eventSubmitted = false;
 
         })

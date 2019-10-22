@@ -15,7 +15,7 @@ export class BigEventView implements OnInit {
 
   inProgress: boolean = true;
   bigEvent: any;
-  guid;
+  entity_guid;
   paramsSubscription: Subscription;
   opspot = window.Opspot;
   coverImage;
@@ -34,20 +34,13 @@ export class BigEventView implements OnInit {
   ngOnInit() {
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
-        this.guid = params.get('guid');
+        this.entity_guid = params.get('guid');
         this.load();
       }
     });
   }
 
-  getOwnerIconTime() {
-    let session = this.session.getLoggedInUser();
-    if (session && session.guid === this.bigEvent.ownerObj.guid) {
-      return session.icontime;
-    } else {
-      return this.bigEvent.ownerObj.icontime;
-    }
-  }
+  
 
   load() {
     // if (this.inProgress)
@@ -55,7 +48,7 @@ export class BigEventView implements OnInit {
 
     // this.inProgress = true;
 
-    this.client.get('api/v3/event/' + this.guid)
+    this.client.get('api/v3/event/' + this.entity_guid)
       .then((data: any) => {
         if (data.event) {
           console.log("data: ", data);
@@ -65,8 +58,7 @@ export class BigEventView implements OnInit {
           }
           if(this.bigEvent.custom_data){
             this.coverImage = this.bigEvent.custom_data[0].src;
-            console.log("this.bigEvent.custom_data[0].src: ", this.bigEvent.custom_data[0].src);
-            
+            console.log("this.bigEvent.custom_data[0].src: ", this.bigEvent.custom_data[0].src);  
           }
           this.inProgress = false;
         }
@@ -75,6 +67,15 @@ export class BigEventView implements OnInit {
       .catch((e) => {
         this.inProgress = false;
       });
+  }
+
+  getOwnerIconTime() {
+    let session = this.session.getLoggedInUser();
+    if (session && session.guid === this.bigEvent.ownerObj.guid) {
+      return session.icontime;
+    } else {
+      return this.bigEvent.ownerObj.icontime;
+    }
   }
 
   private detectChanges() {
