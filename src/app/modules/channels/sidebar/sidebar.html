@@ -168,7 +168,7 @@
 <!-- adding a new bio -->
 
 <div class="o-card o-bio">
-  <a class="o-edit" [routerLink]="['/profile/general']"><i class="icon-edit-profile f-15"></i></a>
+  <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/general']"><i class="icon-edit-profile f-15"></i></a>
   <span class="o-bio__title caption-medium">About {{user.name}}</span>
   <span *ngIf="!user.briefdescription" class="text-md">
       <a href="#" class="primary">Tell something about yourself</a>
@@ -176,7 +176,7 @@
   <span  class="text-md">
      {{user.briefdescription}}
   </span>
-  <ul class="o-bio__info">
+  <!-- <ul class="o-bio__info">
       <li class="o-bio-info__item">
           <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
           <span class="text-md float-left" *ngIf='!user.city'><a class="primary">Add Location</a></span>
@@ -203,7 +203,7 @@
               <div class="text-sm grey o-dob-title">Birthday</div>
               <div class="text-md o-dob-value"><a href="#" class="primary">Select</a></div>
           </div>
-      </li><!--gender end-->
+      </li>
       <li class="o-bio-info__item m-t-9">
           <div class="o-bio-info-left">
               <div class="text-sm grey o-gender-title">Height</div>
@@ -213,20 +213,14 @@
               <div class="text-sm grey o-dob-title">Weight</div>
               <div class="text-md o-dob-value"><a href="#" class="primary">Select</a></div>
           </div>
-      </li><!--height and weight end-->
+      </li>
       <li class="o-bio-info__item m-t-9">
           <div class="o-bio-language">
               <div class="text-sm grey w100">Languages Known</div>
               <div class="text-md w100"><a href="#" class="primary">Add Language</a></div>
           </div>
-      </li><!--language known end-->
-      <!-- <li class="o-bio-info__item m-t-9">
-          <div class="o-bio-language">
-              <div class="text-sm grey w100">Ethnicity</div>
-              <div class="text-md w100"><a href="#" class="primary">Select</a></div>
-          </div>
-      </li>language known end -->
-  </ul>
+      </li>
+  </ul> -->
 </div>
 
 <div class="o-card o-card--padding" >
