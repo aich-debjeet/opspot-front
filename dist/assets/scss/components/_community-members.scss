@@ -1,0 +1,57 @@
+.o-community-members{
+    border: 1px solid #ECEFF1;	
+    border-radius: 4px;	
+    background-color: #FFFFFF;
+    padding: 21px 16px 25px;
+    position: relative;
+    &__header{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+}
+
+// members list style 
+
+.o-community-members-list{
+    width: 100%;
+    list-style: none;
+    &__user-list{
+        width: 100%;
+        list-style-type: none;
+        margin: 9px 0px;
+        display: inline-block;
+    }
+}
+
+// user list card
+
+.o-community-members-info{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    &__option{
+        display:flex;
+        align-items: center;
+        a{
+            margin-left: 7px;
+            i{
+                font-size:14px;
+            }
+        }
+    }
+}
+.o-community-members-info-prof{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &__avatar{
+        margin-right:7px;
+        img{
+            width: 100%
+        }
+    }
+}

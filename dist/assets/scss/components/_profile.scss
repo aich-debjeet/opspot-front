@@ -1,0 +1,316 @@
+// profile page style
+
+// cover
+
+.o-cover{
+    width: 100%;
+    display: flex;
+    height: 320px;
+    position: relative;
+    left: 0;
+    top: -12px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        height: 110px;
+    }
+}
+.o-cover-edit{
+    width: 32px;
+    height: 32px;
+    border: 1px solid #FFFFFF;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        height: 19px;	
+        width: 19px;	
+        border: 1px solid #FFFFFF;
+        right: 15px;
+        bottom: 13px;
+    }
+    i{
+        color: #fff;
+        font-size: 16px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            font-size: 14px;
+        }
+    }
+
+}
+
+//////// profile section
+
+.o-prof-sec{
+    width: 100%;
+    float: left;
+    margin-top: -12px;
+    background: #fafafa;
+    min-height: 100vh;
+    height: 100%;
+}
+.o-prof-portfolio{
+    a{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        i{
+            color: $primary;
+            margin-left: 5px;
+        }
+    }
+}
+// bio others profile
+
+.o-bio{
+    width: 100%;
+    border: 1px solid $grey-light;	
+    border-radius: 4px;	
+    background-color: $white;
+    padding: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    position: relative;
+    span{
+        margin-bottom: 9px;
+    }
+}
+.o-bio__info{
+    width: 100%;
+    list-style: none;
+    margin-top: 6px;
+    .m-t-9{
+        margin-top: 9px!important;
+    }
+}
+.o-bio-info__item{
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+}
+.o-bio-info_ico{
+    width: 14px;
+    height: 14px;
+    float: left;
+    // background: $grey;
+    margin-right: 9px;
+    i{
+        font-size: 12px;
+        color: $grey-dark;
+    }
+}
+// all edit icon
+.o-edit{
+    position: absolute;
+    top: 20px;
+    right: 14px;
+}
+
+.o-card--padding{
+    padding:0px 16px;
+    background: #fff;
+}
+// work card
+
+.o-work{
+    padding:16px 0px;
+    background: #fff;
+    position: relative;
+    border-bottom: 1px solid $grey-light;
+}
+.o-work-info{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 0px;
+    &__logo{
+        width:34px;
+        height: 34px;
+        background: $grey;
+        img{
+            width: 34px;
+        }
+        &--empty{
+            background: $grey-light;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i{
+                color: $grey;
+                font-size: 14px;
+            }
+        }
+    }
+    &__det{
+        margin-left: 9px;
+    }
+}
+
+////// education
+
+.o-education{
+    padding:16px 0px;
+    background: #fff;
+    border-bottom: 1px solid $grey-light;
+}
+.o-education-info{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 0px;
+    &__logo{
+        width:34px;
+        height: 34px;
+        background: $grey;
+        img{
+            width: 34px;
+        }
+        &--empty{
+            background: $grey-light;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i{
+                color: $grey;
+                font-size: 14px;
+            }
+        }
+    }
+    &__det{
+        margin-left: 9px;
+    }
+}
+
+////// awards
+
+.o-award{
+    padding:16px 0px;
+    background: #fff;
+    border-bottom: 1px solid $grey-light;
+}
+.o-award-info{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 0px;
+    &__logo{
+        width:34px;
+        height: 34px;
+        background: $grey;
+        img{
+            width: 34px;
+        }
+        &--empty{
+            background: $grey-light;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i{
+                color: $grey;
+                font-size: 14px;
+            }
+        }
+    }
+    &__det{
+        margin-left: 9px;
+    }
+}
+
+// empty post
+
+.o-empty-post{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    &__img{
+        width: 220px;
+        margin-bottom: 30px;
+        margin-top: 80px;
+        img{
+            width: 100%;
+        }
+    }
+}
+
+// for title
+
+.o-title{
+    margin: 15px 0px 9px
+}
+
+// ////// my profile empty 
+
+.btn--create-post{
+    margin-top: 32px;
+}
+.o-complete-prof{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 9px 0px;
+    background: #fff;
+    padding: 24px 0px;
+    &__title{
+        margin-bottom: 24px;
+    }
+}
+.btn--prof-completion{
+    margin-top: 20px;
+}
+
+// my bio
+
+.o-bio-info-left{
+    min-width: 54px;
+}
+.o-bio-info-right{
+    margin-left: 16px;
+}
+
+.o-bio-language{
+    width: 100%;
+}
+
+// right bar title
+
+.o-right-bar-title{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    margin:11px 0px;
+    position: relative;
+    .o-option{
+        width: 11px;
+        position: absolute;
+        right: 2px;    
+        i{
+            font-size: 14px;
+        }
+    }
+}
+.o-info{
+    margin-left: 6px;
+    i{
+        font-size: 12px;
+        color: $grey;
+    }
+}
