@@ -8,6 +8,8 @@ import { Client } from '../../../services/api/client';
 import * as moment from 'moment';
 import { FormValidator } from '../../../helpers/form.validator';
 import { Router } from '@angular/router';
+import {Location} from '@angular/common';
+
 
 
 @Component({
@@ -91,7 +93,8 @@ export class BigEventForm implements OnInit {
     public client: Client,
     public upload: Upload,
     public attachment: AttachmentService,
-    public router: Router
+    public router: Router,
+    private _location: Location
   ) { }
 
   ngOnInit() {
@@ -227,6 +230,10 @@ export class BigEventForm implements OnInit {
         });
     }
 
+  }
+
+  backClicked() {
+    this._location.back();
   }
 
 }
