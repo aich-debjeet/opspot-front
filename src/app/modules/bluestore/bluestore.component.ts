@@ -176,6 +176,20 @@ export class BluestoreComponent implements OnInit {
   //     });
   // }
 
+  async togglePin() {
+    this.marketplace.bookmark = !this.marketplace.bookmark;
+    const url: string = `api/v3/bookmark/${this.marketplace.entity_guid}/image`;
+    try {
+      if (this.marketplace.bookmark) {
+        await this.client.post(url);
+      } else {
+        await this.client.delete(url);
+      }
+    } catch (e) {
+      this.marketplace.bookmark = !this.marketplace.bookmark;
+    }
+  }
+
   delete($event: any = {}) {
     if ($event.inProgress) {
       $event.inProgress.emit(true);

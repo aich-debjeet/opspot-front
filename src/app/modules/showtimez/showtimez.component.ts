@@ -123,19 +123,19 @@ export class ShowtimezComponent implements OnInit {
       });
   }
 
-  // async togglePin() {
-  //   this.opportunity.bookmark = !this.opportunity.bookmark;
-  //   const url: string = `api/v3/bookmark/${this.opportunity.guid}/image`;
-  //   try {
-  //     if (this.opportunity.bookmark) {
-  //       await this.client.post(url);
-  //     } else {
-  //       await this.client.delete(url);
-  //     }
-  //   } catch (e) {
-  //     this.opportunity.bookmark = !this.opportunity.bookmark;
-  //   }
-  // }
+  async togglePin() {
+    this.showTimez.bookmark = !this.showTimez.bookmark;
+    const url: string = `api/v3/bookmark/${this.showTimez.entity_guid}/image`;
+    try {
+      if (this.showTimez.bookmark) {
+        await this.client.post(url);
+      } else {
+        await this.client.delete(url);
+      }
+    } catch (e) {
+      this.showTimez.bookmark = !this.showTimez.bookmark;
+    }
+  }
 
 
   // async wireSubmitted(wire?) {

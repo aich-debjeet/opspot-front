@@ -21,6 +21,14 @@
               </div>
             </div>
             <div class="o-feed-head-action">
+              <a class="head-action__link" (click)="togglePin()">
+                <m-tooltip icon="turned_in" *ngIf="showTimez?.bookmark">
+                  This post is Bookmarked
+                </m-tooltip>
+                <m-tooltip *ngIf="!showTimez?.bookmark" icon="turned_in_not">
+                  Click to bookmark this post to the top of your channel feed
+                </m-tooltip>
+              </a>
               <m-post-menu *ngIf="showTimez" [entity]="showTimez" [canDelete]="canDelete"
                 [isTranslatable]="isTranslatable" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)">
                 <ng-container post-menu>
