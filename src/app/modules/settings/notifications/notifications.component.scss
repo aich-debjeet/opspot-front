@@ -1,8 +1,7 @@
 @import "src/assets/helpers/variables";
+
 @import "node_modules/sass-mq/_mq";
-@import "src/assets/scss/base/_typography.scss";
-@import "src/assets/scss/base/_base.scss";
-@import "src/assets/scss/components/_common.scss";
+@import "src/assets/scss/components/tab";
 
 // .m-settings--password {
 //  > div {
@@ -153,7 +152,7 @@
 }
 //add section css
 .o-settings-add-email{
-  display:none;
+  display:block;
   input{
       background-color: $white;
       }
@@ -207,7 +206,7 @@
           overflow: hidden;
           float: left;
           img {
-            width: 100%;
+            width: 100;
           }
       }
       .form-control{
@@ -526,9 +525,57 @@ margin-bottom:15px;
       }
   }
 }
-
+.o-community-members-info{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    &__option{
+        display:flex;
+        align-items: center;
+        a{
+            margin-left: 7px;
+            i{
+                font-size:14px;
+            }
+        }
+    }
+}
+.o-community-members-info-prof{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &__avatar{
+        margin-right:7px;
+        img{
+            width: 100%
+        }
+    }
+}
+.o-avatar-md {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+}
 .tabs-settings .tab {
     display: block;
+    width: 100%;
+    min-height: 250px;
+    height: auto;
+    border-radius: 0px;
+    padding: 0;
+    background-color: transparent;
+    clear: both;
+}
+.o-settings-pdngtpbtm-button{
+    padding-top:18px;
+    padding-bottom: 18px;
+    .pading-right{
+        margin-right: 9px;
+    }
 }
 .o-settings-pdngtpbtm-button--general{
     padding-top: 30px;

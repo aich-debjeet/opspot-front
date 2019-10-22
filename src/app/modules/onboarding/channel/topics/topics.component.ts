@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { TopbarHashtagsService } from "../../../hashtags/service/topbar.service";
 
 type Hashtag = {
@@ -15,6 +15,7 @@ export class TopicsOnboardingComponent implements OnInit {
   static items = ['suggested_hashtags'];
   static canSkip: boolean = true;
   @Input() pendingItems: Array<string>;
+  @Output() onClose: EventEmitter<any> = new EventEmitter();
 
   input: string = '';
   addingHashtag: boolean = false;
@@ -75,6 +76,10 @@ export class TopicsOnboardingComponent implements OnInit {
         this.addNew();
         break;
     }
+  }
+
+  close() {
+    this.onClose.emit();
   }
 
 }

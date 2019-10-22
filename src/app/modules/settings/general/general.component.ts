@@ -10,7 +10,8 @@ import { ThirdPartyNetworksService } from '../../../services/third-party-network
 @Component({
   moduleId: module.id,
   selector: 'm-settings--general',
-  templateUrl: 'general.component.html'
+  templateUrl: 'general.component.html',
+  styleUrls: ['general.component.scss']
 })
 
 export class SettingsGeneralComponent {
@@ -25,11 +26,14 @@ export class SettingsGeneralComponent {
 
   guid: string = '';
   name: string;
+  userName: string;
   email: string;
+  phone: string;
   mature: boolean = false;
+  portfolio: boolean = false;
   enabled_mails: boolean = true;
 
-  password: string;
+  password: string='';
   password1: string;
   password2: string;
 
@@ -41,6 +45,11 @@ export class SettingsGeneralComponent {
 
   paramsSubscription: Subscription;
   openSessions: number = 1;
+
+  reasonDelete: boolean = false;
+  deactivateOptions: boolean = false;
+  deleteAccountOption = [];
+  openText: boolean = false;
 
   constructor(
     public session: Session,
@@ -55,6 +64,12 @@ export class SettingsGeneralComponent {
   }
 
   ngOnInit() {
+    this.deleteAccountOption = [{name: 'duplicate', description: `I have a duplicate account` , value: 'duplicate', checked: false},
+                                    {name: 'followers', description: `I'm getting too many followers` , value: 'followers', checked: false},
+                                    {name: 'unwanted', description: `I'm receiving unwanted contact` , value: 'unwanted', checked: false},
+                                    {name: 'privacy', description: 'Receive an e-mail when other people follow you.' , value: 'privacy', checked: false},
+                                    {name: 'others', description: `others` , value: 'others', checked: false},
+          ]
     this.languages = [];
     for (let code in this.opspot.languages) {
       if (this.opspot.languages.hasOwnProperty(code)) {
@@ -89,12 +104,14 @@ export class SettingsGeneralComponent {
     if (!remote) {
       const user = this.session.getLoggedInUser();
       this.name = user.name;
+      this.userName = user.username;
+      this.email = user.email;
+      this.phone = user.phone;
     }
 
     this.client.get('api/v1/settings/' + this.guid)
       .then((response: any) => {
-        console.log('LOAD', response.channel);
-        this.email = response.channel.email;
+        // this.email = response.channel.email;
         this.mature = !!parseInt(response.channel.mature, 10);
         this.enabled_mails = !parseInt(response.channel.disabled_emails, 10);
         this.language = response.channel.language || 'en';
@@ -117,25 +134,26 @@ export class SettingsGeneralComponent {
   }
 
   canSubmit() {
-    if (!this.changed)
-      return false;
+    return this.changed;
+    // if (!this.changed)
+    //   return false;
 
-    if (this.password && !this.password1 || this.password && !this.password2)
-      return false;
+    // if (this.password && !this.password1 || this.password && !this.password2)
+    //   return false;
 
-    if (this.password1 && !this.password) {
-      this.error = 'You must enter your current password';
-      return false;
-    }
+    // if (this.password1 && !this.password) {
+    //   this.error = 'You must enter your current password';
+    //   return false;
+    // }
 
-    if (this.password1 !== this.password2) {
-      this.error = 'Your new passwords do not match';
-      return false;
-    }
+    // if (this.password1 !== this.password2) {
+    //   this.error = 'Your new passwords do not match';
+    //   return false;
+    // }
 
-    this.error = '';
+    // this.error = '';
 
-    return true;
+    // return true;
   }
 
   change() {
@@ -150,23 +168,17 @@ export class SettingsGeneralComponent {
     this.inProgress = true;
     this.client.post('api/v1/settings/' + this.guid,
       {
-        name: this.name,
         email: this.email,
-        password: this.password,
-        new_password: this.password2,
         mature: this.mature ? 1 : 0,
         disabled_emails: this.enabled_mails ? 0 : 1,
         language: this.language,
-        categories: this.selectedCategories
+        categories: this.selectedCategories,
+        portfolio: this.portfolio ? 1 : 0
       })
       .then((response: any) => {
         this.changed = false;
         this.saved = true;
         this.error = '';
-
-        this.password = '';
-        this.password1 = '';
-        this.password2 = '';
 
         if (window.Opspot.user) {
           window.Opspot.user.mature = this.mature ? 1 : 0;
@@ -246,5 +258,53 @@ export class SettingsGeneralComponent {
 
   closeAllSessions() {
     this.router.navigate(['/logout/all']);
+  }
+
+  delete(password: string){
+    if(password.length <= 0){
+      return;
+    }
+    this.client.post('api/v2/settings/delete', { password })
+      .then((response: any) => {
+        this.router.navigate(['/logout']);
+      })
+      .catch((e: any) => {
+        alert('Sorry, we could not delete your account');
+      });
+  }
+  deactivate(){
+    this.client.delete('api/v1/channel')
+      .then((response: any) => {
+        this.router.navigate(['/logout']);
+      })
+      .catch((e: any) => {
+        alert('Sorry, we could not disable your account');
+      });
+  }
+  setOption(option: string){
+    if(option == 'delete'){
+      if(!this.reasonDelete) {
+        this.reasonDelete = true;
+        this.deactivateOptions = false;
+      } else {
+        this.reasonDelete = false;
+      }
+    }
+    else if(option == 'deactivate'){
+      if(!this.deactivateOptions) {
+        this.deactivateOptions = true;
+        this.reasonDelete = false;
+      } else {
+        this.deactivateOptions = false;
+      }
+    }
+  }
+  updateCheckedOptions(option, event){
+    console.log(option,event)
+    if(option.value == 'others'){
+      if(option.checked == true)
+      this.openText = true;
+      else this.openText = false;
+    }
   }
 }
