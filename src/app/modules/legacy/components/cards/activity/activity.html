@@ -326,7 +326,7 @@
   <opspot-button-remind [object]="activity"></opspot-button-remind>
 
   <!--boost button-->
-  <a class="btn btn-primary btn-xs btn--boost" *ngIf="session.getLoggedInUser().guid == activity.owner_guid  && !showOpportunity && !showBlueStore && !showTimez"
+  <a class="btn btn-primary btn-xs btn--boost" *ngIf="session.getLoggedInUser().guid == activity?.owner_guid"
     id="boost-actions" (click)="showBoost()">
     <ng-container i18n="verb|@@M__ACTION__BOOST">Boost</ng-container>
   </a>
