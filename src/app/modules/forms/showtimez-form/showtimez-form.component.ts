@@ -55,11 +55,10 @@ export class ShowtimezFormComponent implements OnInit {
     if (this.event) {
       this.eventGuid = object['entity_guid'];
       this.label = "Edit"
-      if (this.event['startTimeDate']) {
-        var date = new Date(this.event['startTimeDate']);
+      if (this.event['start_time_date']) {
+        var date = new Date(parseInt(this.event['start_time_date']));
         var date1 = moment(date).format('DD-MM-YYYY');
         var time1 = moment(date).format('HH:mm');
-    
       }
       this.buildForm(this.event,date1,time1);
       if (this.event['custom_data']) {
@@ -118,7 +117,7 @@ export class ShowtimezFormComponent implements OnInit {
         eventTitle: ['', [Validators.required]],
         eventDescription: ['', [Validators.required]],
         eventsLocation: ['', [Validators.required]],
-        eventdate: ['', [Validators.required, FormValidator.datevalidation]],
+        eventdate: ['', [Validators.required]],
         eventTime: ['', [Validators.required]],
         eventImage: ['']
       })
