@@ -97,7 +97,9 @@ export class WireChannelComponent {
       return;
     }
 
-    const creator = this.overlayModal.create(WireCreatorComponent, this.channel, { class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms' });
+    const creator = this.overlayModal.create(WireCreatorComponent, this.channel, {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms'
+    });
     creator.present();
   }
 

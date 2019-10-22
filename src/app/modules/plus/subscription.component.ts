@@ -81,6 +81,7 @@ export class PlusSubscriptionComponent {
     this.payment.receiver = this.blockchain.plus_address;
 
     const creator = this.overlayModal.create(WirePaymentsCreatorComponent, this.payment, {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
       default: this.payment,
       onComplete: (wire) => {
         this.completed = true;
