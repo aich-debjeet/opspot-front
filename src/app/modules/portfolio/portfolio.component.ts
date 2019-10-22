@@ -15,12 +15,13 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   offset: string = '';
   q: string = '';
   type: string = '';
-  entities:Array<Object>
+  entities: Array<Object>;
   requestParams = {
     // TODO @abhijeet check for all valid request params
     taxonomies: 'activity',
     offset: '',
-    limit: 10,
+    limit: 12,
+    rating: 2,
     q: ''
   };
   channel: any;
@@ -36,7 +37,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe((params) => {
       this.username = params['username'];
-      this.requestParams.q = '#portfolio' + params['username'];
+      this.requestParams.q = 'portfolio' + params['username'];
       this.loadProfileInfo();
     });
   }
@@ -80,18 +81,16 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     }
     this.inProgress = true;
     this.client.get('api/v2/search', this.requestParams)
-      .then((data:any) => {
-		let respData: any = data;
+      .then((data: any) => {
+        const respData: any = data;
         if (!respData.entities) {
           this.moreData = false;
           this.inProgress = false;
           return false;
         }
         if (this.entities && !refresh) {
-          console.log('added data')
           this.entities = this.entities.concat(respData.entities);
         } else {
-          console.log('added new data')
           this.entities = respData.entities;
         }
         this.offset = data['load-next'];

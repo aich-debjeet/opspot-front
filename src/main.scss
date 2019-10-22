@@ -27523,6 +27523,10 @@ li{
 .o-card.feed, .feed-card-opportunity-block {
   cursor: pointer;
 }
+.o-settings-block__content {
+  width: calc(100% - 176px);
+  padding: 35px 36px;
+}
 
 // .mar-l{
 //   margin-left: 125px !important;
