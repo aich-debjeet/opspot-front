@@ -2,50 +2,38 @@
   <m-token--onboarding--rewards skippable="false"></m-token--onboarding--rewards>
 </div> -->
 <div id="withdraw" class="tab" style="display: block;">
-<div class="o-withdraw" *ngIf="session.getLoggedInUser().rewards">
+  <div class="o-withdraw" *ngIf="session.getLoggedInUser().rewards">
     <div class="caption-bold">Withdraw</div>
     <div class="o-withdraw__dis">
-  <p class="text-sm">
-    <ng-container i18n="@@WALLET__TOKENS__WITHDRAW__REQUEST_DESC">
-      You can request to withdraw your token rewards to your 'onchain' wallet below.
-      Note: a small amount of ETH will be charged to cover the transaction fee.
-      Withdrawals may take a few hours to complete.
-    </ng-container>
+      <p class="text-sm">
+        <ng-container i18n="@@WALLET__TOKENS__WITHDRAW__REQUEST_DESC">Withdrawal enables you to withdraw coins earned
+          through various activities like profile completion, daily activites, posts, contributions, etc present in the
+          wallet into your bank account.
+        </ng-container>
 
-    <ng-container *ngIf="withholding" i18n="@@WALLET__TOKENS__WITHDRAW__REQUEST_UNAVAILABLE_DESC">
-      {{ withholding | number }} tokens are unavailable due
-      to credit card payment. They will be released after 30 days the
-      payment occurred.
-    </ng-container>
-  </p>
-</div>
-  <div class="o-withdraw__amount">
-    <input type="text" class="o-withdraw-amount-input"
-      [disabled]="inProgress"
-      [ngModel]="amount | number"
-      (ngModelChange)="setAmount($event)"
-    />
+        <ng-container *ngIf="withholding" i18n="@@WALLET__TOKENS__WITHDRAW__REQUEST_UNAVAILABLE_DESC">
+          {{ withholding | number }} tokens are unavailable due
+          to credit card payment. They will be released after 30 days the
+          payment occurred.
+        </ng-container>
+      </p>
+    </div>
+    <div class="o-withdraw__amount">
+      <input type="text" class="o-withdraw-amount-input" [disabled]="inProgress" [ngModel]="amount | number"
+        (ngModelChange)="setAmount($event)" />
 
-    <button class="btn btn-primary btn-lg "
-      [disabled]="!canWithdraw()"
-      (click)="withdraw()"
-      i18n="@@WALLET__TOKENS__WITHDRAW__WITHDRAW_ACTION"
-    >
-      Withdraw
-    </button>
+      <button class="btn btn-primary btn-lg " [disabled]="!canWithdraw()" (click)="withdraw()"
+        i18n="@@WALLET__TOKENS__WITHDRAW__WITHDRAW_ACTION">
+        Withdraw
+      </button>
 
-    <div *ngIf="inProgress"
-      class="mdl-spinner mdl-js-spinner is-active"
-      [mdl]
-    ></div>
+      <div *ngIf="inProgress" class="mdl-spinner mdl-js-spinner is-active" [mdl]></div>
+    </div>
+
+    <p class="m-token-withdraw--error" *ngIf="!!error">
+      {{ error }}
+    </p>
   </div>
 
-  <p class="m-token-withdraw--error" *ngIf="!!error">
-    {{ error }}
-  </p>
-</div>
-
-<m-wallet-token--withdraw-ledger
-  [preview]="true"
-></m-wallet-token--withdraw-ledger>
+  <m-wallet-token--withdraw-ledger [preview]="true"></m-wallet-token--withdraw-ledger>
 </div>

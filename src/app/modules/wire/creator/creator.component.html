@@ -1,4 +1,4 @@
-<div class="m-wire--creator">
+<!-- <div class="m-wire--creator">
   <div class="m-wire--creator--header">
     <h2 class="m-wire-creator--header-svg">
       <i class="ion-icon ion-flash"></i>
@@ -27,9 +27,9 @@
     [sums]="sums"
   ></m-wire--creator-rewards>
 
-  <section class="m-wire--creator-section-row">
-    <!-- Amount -->
-    <section class="m-wire--creator-section">
+  <section class="m-wire--creator-section-row"> -->
+<!-- Amount -->
+<!-- <section class="m-wire--creator-section">
       <h3 class="m-wire--creator-section-title--small">
         <ng-container i18n="@@WIRE__CREATOR__AMOUNT_TITLE_HOW_MANY_TOKENS">
           How many tokens do you want to send?
@@ -83,10 +83,10 @@
           <span class="mdl-checkbox__label" i18n="@@WIRE__CREATOR__REPEAT_TRANSACTION_MONTHLY">Repeat this transaction monthly.</span>
         </label>
       </div>
-    </section>
+    </section> -->
 
-    <!-- Payment Method -->
-    <section class="m-wire--creator-section m-wire--creator-payment-section">
+<!-- Payment Method -->
+<!-- <section class="m-wire--creator-section m-wire--creator-payment-section">
       <h3 class="m-wire--creator-section-title--small" i18n="@@WIRE__CREATOR__WIRE_TYPE_TITLE">Payment Method</h3>
 
       <ul class="m-wire--creator-selector"
@@ -190,10 +190,10 @@
 
     </section>
 
-  </section>
+  </section> -->
 
-  <!-- Submit -->
-  <section class="m-wire--creator-section m-wire--creator-section--last"
+<!-- Submit -->
+<!-- <section class="m-wire--creator-section m-wire--creator-section--last"
     (mouseenter)="showErrors()"
   >
 
@@ -217,4 +217,43 @@
       </div>
     </div>
   </section>
+</div> -->
+
+<div class="o-contribute">
+  <div class="o-contribute-head o-contribute-head--border">
+    <div class="o-contribute__title text-h4 f500">Contribute</div>
+  </div>
+  <!--contribute head end-->
+  <div class="o-contribute-body o-contribute-body--flex">
+    <div class="o-contribute-discrptn text-md text-center">
+      Liked @{{owner.username}}'s work? Support their work by sending coins. <a href="javascript:void(0)" class="primary">Learn more</a>
+    </div>
+    <!--contribute discription end-->
+    <div class="o-contribute-token">
+      <div class="text-md">Coins available: <span class="f500">{{balances.token | token: 18 | number}}</span></div>
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="buyTokens()">Buy Coins</button>
+    </div>
+    <!--contribute token part end-->
+    <div class="o-contribute-action">
+      <div class="o-contribute-action__avatar">
+        <a [routerLink]="['/', owner.username]" class="o-avatar-lg">
+          <img [src]="opspot.cdn_url + 'icon/' + owner.guid + '/medium/' + owner.icontime" alt="">
+        </a>
+        <div class="text-sm">Support @{{owner.username}}'s' work by contributing coins.</div>
+      </div>
+      <div class="o-contribute-action__spend">
+        <p class="caption-regular">
+          How many Coins do you want to contribute?
+        </p>
+        <input type="number" class="o-boost-action-input" [ngModel]="wire.amount | number"
+          (ngModelChange)="setAmount($event)" (focus)="amountEditorFocus()" (blur)="amountEditorBlur()"
+          (keydown.enter)="amountEditorBlur()" (keydown.esc)="amountEditorBlur()" #amountEditor>
+      </div>
+    </div><!-- contribute action end -->
+    <div *ngIf="!inProgress && success" class="">
+      <i class="icon-check">Wired!</i>
+    </div>
+    <button type="button" class="btn btn-primary btn-block"
+      [disabled]="!canSubmit() || inProgress || success || criticalError" (click)="submit()">Contribute</button>
+  </div>
 </div>

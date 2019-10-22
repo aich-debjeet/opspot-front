@@ -48,15 +48,15 @@
   <div class="o-boost-body o-boost-body--flex">
 
       <div class="o-boost-discrptn text-md text-center">
-          Boost helps you to promote your post, increase your reach and
-          reach people with similar interests. <a  class="primary">Learn more</a>
+        Boost helps you to promote your post and increase your reach to
+         people with similar interests. <a  class="primary">Learn more</a>
       </div>
 
       <div class="o-boost-token">
-          <div class="text-md">Tokens available: <span class="f500">
+          <div class="text-md">Coins available: <span class="f500">
           {{ balances.offchain | token:18 | number }}
           </span></div>
-          <button type="button" (click)="buyTokens()" class="btn btn-outline-primary btn-sm">Buy Tokens</button>
+          <button type="button" (click)="buyTokens()" class="btn btn-outline-primary btn-sm">Buy Coins</button>
       </div>
  
   <div class="o-boost-action">
@@ -65,8 +65,8 @@
         <div class="o-boost-action__views">
         <p class="caption-regular">
             <ng-container *ngIf="boost.type != 'p2p'" i18n="@@BOOST__CREATOR__BID_TITLE">
-                How many views you
-                need for this post?
+                How many impressions do you
+                want for this post?
             </ng-container>
             <!-- <ng-container *ngIf="boost.type == 'p2p'" i18n="@@BOOST__CREATOR__OFFER_TITLE">What's your offer?</ng-container> -->
           </p>
@@ -110,8 +110,7 @@
         </div> -->
         <div class="o-boost-action__spend">
             <p class="caption-regular">
-                How many Tokens you
-                need for this post?
+                How much do you want to spend on this post?
             </p>
             <span class="o-boost-action-input">
                 <!-- <span>{{ calcCharges(boost.currency) | currency:'USD':true }}</span> -->
