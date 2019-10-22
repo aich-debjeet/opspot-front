@@ -85,6 +85,24 @@ export class MediaViewComponent {
     this.queryParamsSubscription$.unsubscribe();
   }
 
+  slideConfig = { slidesToShow: 6, slidesToScroll: 1, arrows: true };
+
+  slickInit(e) {
+    console.log('slick initialized in activity');
+  }
+  breakpoint(e) {
+    console.log('breakpoint');
+  }
+
+  afterChange(e) {
+    console.log('afterChange');
+  }
+
+  beforeChange(e) {
+    console.log('beforeChange');
+  }
+
+
   load(refresh: boolean = false) {
     if (refresh) {
       this.entity = {};
@@ -238,6 +256,20 @@ export class MediaViewComponent {
       this.showVideo = false;
       this.largeImage = this.entity.custom_data[i].src;
       console.log(" this.largeImage: ", this.largeImage);
+    }
+  }
+
+  async togglePin() {
+    this.entity.bookmark = !this.entity.bookmark;
+    const url: string = `api/v3/bookmark/${this.entity.guid}/image`;
+    try {
+      if (this.entity.bookmark) {
+        await this.client.post(url);
+      } else {
+        await this.client.delete(url);
+      }
+    } catch (e) {
+      this.entity.bookmark = !this.entity.bookmark;
     }
   }
 

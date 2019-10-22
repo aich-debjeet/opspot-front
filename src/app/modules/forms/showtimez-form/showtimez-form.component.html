@@ -39,6 +39,13 @@
                   <input type="text" class="form-control form-control-lg" [textMask]="{mask: dateMask}" placeholder="Select Date" formControlName="eventdate">
                   <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventdate').errors?.required">
                           This is required</div>
+                    <!-- <input type="text" class="form-control form-control-lg" placeholder="Select Date" formControlName="eventdate" bsDatepicker [bsConfig]="bsConfig">
+                    <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventdate').errors?.required">
+                        This is required
+                    </div> -->
+                    <div class="error text-sm" *ngIf="showTimezForm.get('eventdate').errors?.oldate">
+                        Please choose a valid date.
+                    </div>
               </div>
               <!--Date Location-->
               <div class="form-group ml-18">

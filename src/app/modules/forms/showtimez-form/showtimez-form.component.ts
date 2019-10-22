@@ -8,6 +8,9 @@ import { Client } from '../../../services/api/client';
 
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { FormValidator } from '../../../helpers/form.validator';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-showtimez-form',
@@ -40,13 +43,25 @@ export class ShowtimezFormComponent implements OnInit {
   label = "Create";
   description = '';
 
+  bsConfig = {
+    containerClass: 'theme-dark-blue',
+    adaptivePosition: true,
+    dateInputFormat: 'DD-MM-YYYY'
+  }
+
 
   @Input('object') set data(object) {
-    this.event = object;
+    this.event = object;  
     if (this.event) {
       this.eventGuid = object['entity_guid'];
       this.label = "Edit"
-      this.buildForm(this.event);
+      if (this.event['startTimeDate']) {
+        var date = new Date(this.event['startTimeDate']);
+        var date1 = moment(date).format('DD-MM-YYYY');
+        var time1 = moment(date).format('HH:mm');
+    
+      }
+      this.buildForm(this.event,date1,time1);
       if (this.event['custom_data']) {
         this.event['custom_data'].forEach(image => {
           this.reqBody.attachment_guid.push(image['guid']);
@@ -83,7 +98,7 @@ export class ShowtimezFormComponent implements OnInit {
   }
 
 
-  buildForm(data?) {
+  buildForm(data?,date?,time?) {
     if (data) {
       if (data.description) {
         this.description = data.description;
@@ -94,8 +109,8 @@ export class ShowtimezFormComponent implements OnInit {
         eventTitle: [data['title'] ? data['title'] : '', [Validators.required]],
         eventDescription: [this.description ? this.description : '', [Validators.required]],
         eventsLocation: [data['location'] ? data['location'] : '', [Validators.required]],
-        eventdate: ['', [Validators.required]],
-        eventTime: ['', [Validators.required]],
+        eventdate: [date, [Validators.required,FormValidator.datevalidation]],
+        eventTime: [time, [Validators.required]],
         eventImage: ['']
       })
     } else {
@@ -103,7 +118,7 @@ export class ShowtimezFormComponent implements OnInit {
         eventTitle: ['', [Validators.required]],
         eventDescription: ['', [Validators.required]],
         eventsLocation: ['', [Validators.required]],
-        eventdate: ['', [Validators.required]],
+        eventdate: ['', [Validators.required, FormValidator.datevalidation]],
         eventTime: ['', [Validators.required]],
         eventImage: ['']
       })
@@ -134,13 +149,13 @@ export class ShowtimezFormComponent implements OnInit {
   }
 
   addAttachment(obj) {
-    if(this.cards.length < 1){
+    if (this.cards.length < 1) {
       this.cards.push(obj);
       this.reqBody.attachment_guid.push(obj['guid']);
     }
   }
 
-  removeAttachment(guid){ 
+  removeAttachment(guid) {
     this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
     this.cards = _remove(this.cards, function (n) {
       return n.guid !== guid;
@@ -156,15 +171,49 @@ export class ShowtimezFormComponent implements OnInit {
   //     console.error(e);
   //   });
   // }
+  formatTime(inputTime) {
+    var timeString = inputTime;
+    var H = +timeString.substr(0, 2);
+    var h = H % 12 || 12;
+    var ampm = (H < 12 || H === 24) ? "AM" : "PM";
+    return timeString = h + timeString.substr(2, 3) + ampm;
+  }
+
+  convertDateToMillis(inputDate, inputTime) {
+    if (inputTime) {
+      var timeString = this.formatTime(inputTime)
+      const d = moment(inputDate.split('-').reverse().join('-')).format('MM/DD/YYYY');
+      console.log("D: ",d);
+      
+      var myDate = new Date(d);
+      var timeReg = /(\d+)\:(\d+)(\w+)/;
+      if (timeString) {
+        var parts = timeString.match(timeReg);
+      }
+      var hours = /am/i.test(parts[3]) ?
+        function (am) { return am < 12 ? am : 0 }(parseInt(parts[1], 10)) :
+        function (pm) { return pm < 12 ? pm + 12 : 12 }(parseInt(parts[1], 10));
+      var minutes = parseInt(parts[2], 10);
+      var date = new Date(myDate.getTime());
+      date.setHours(hours);
+      date.setMinutes(minutes);
+      return date;
+    }
+  }
 
   eventSubmit() {
     this.eventSubmitted = true;
+
+    console.log(this.showTimezForm.value.eventdate);
+   
+    var startTime = this.convertDateToMillis(this.showTimezForm.value.eventdate, this.showTimezForm.value.eventTime)
+
 
     this.reqBody.title = this.showTimezForm.value.eventTitle;
     this.reqBody.description = this.showTimezForm.value.eventDescription;
     this.reqBody.location = this.showTimezForm.value.eventsLocation;
 
-    this.reqBody.start_time_date = new Date(`${this.showTimezForm.value.eventdate} ${this.showTimezForm.value.eventTime}`);
+    this.reqBody.start_time_date = startTime.getTime();
 
 
     if (this.showTimezForm.valid) {
