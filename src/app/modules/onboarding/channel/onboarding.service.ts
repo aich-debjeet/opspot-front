@@ -1,21 +1,21 @@
-import { WelcomeOnboardingComponent } from "./welcome/welcome.component";
-import { TopicsOnboardingComponent } from "./topics/topics.component";
-import { SubscriptionsOnboardingComponent } from "./subscriptions/subscriptions.component";
-import { ChannelSetupOnboardingComponent } from "./channel/channel.component";
-import { TokenRewardsOnboardingComponent } from "./rewards/rewards.component";
-import { EventEmitter } from "@angular/core";
-import { Client } from "../../../services/api/client";
-import { Session } from "../../../services/session";
+// import { WelcomeOnboardingComponent } from './welcome/welcome.component';
+import { TopicsOnboardingComponent } from './topics/topics.component';
+// import { SubscriptionsOnboardingComponent } from './subscriptions/subscriptions.component';
+// import { ChannelSetupOnboardingComponent } from './channel/channel.component';
+// import { TokenRewardsOnboardingComponent } from './rewards/rewards.component';
+import { EventEmitter } from '@angular/core';
+import { Client } from '../../../services/api/client';
+import { Session } from '../../../services/session';
 
 export class ChannelOnboardingService {
 
   slides = [
-    WelcomeOnboardingComponent,
+    // WelcomeOnboardingComponent,
     TopicsOnboardingComponent,
-    SubscriptionsOnboardingComponent,
+    // SubscriptionsOnboardingComponent,
     // GroupsOnboardingComponent,
-    ChannelSetupOnboardingComponent,
-    TokenRewardsOnboardingComponent,
+    // ChannelSetupOnboardingComponent,
+    // TokenRewardsOnboardingComponent,
   ];
 
   currentSlide: number = 0;
@@ -51,8 +51,10 @@ export class ChannelOnboardingService {
   }
 
   async checkProgress() {
-    if (!this.session.isLoggedIn())
+    if (!this.session.isLoggedIn()) {
       return;
+    }
+
     try {
       const response: any = await this.client.get('api/v2/onboarding/progress');
 
@@ -115,7 +117,7 @@ export class ChannelOnboardingService {
     if (this.completedItems.length === 1) { // empty is 1 because username is always there from the beginning
       this.currentSlide++;
     } else {
-      //here we just go to the next slide with incomplete stuff
+      // here we just go to the next slide with incomplete stuff
       const i = this.currentSlide + 1;
 
       this.pendingItems = [];

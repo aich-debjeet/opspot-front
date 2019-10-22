@@ -77,7 +77,8 @@ export class PostFormComponent {
     this._opts = opts;
   }
 
-  
+  @Input('object') set data(object) {}
+
 
   constructor(
     public session: Session,
@@ -91,23 +92,24 @@ export class PostFormComponent {
 
   }
 
+  entity: any;
 
-  // set _container_guid(guid: any) {
-  //   this.attachment.setContainer(guid);
-  // }
+  set _container_guid(guid: any) {
+    this.attachment.setContainer(guid);
+  }
 
-  // set accessId(access_id: any) {
-  //   this.attachment.setAccessId(access_id);
-  // }
+  set accessId(access_id: any) {
+    this.attachment.setAccessId(access_id);
+  }
 
-  // set message(value: any) {
-  //   if (value) {
-  //     value = decodeURIComponent((value).replace(/\+/g, '%20'));
-  //     this.meta.message = value;
-  //     this.showTagsError();
-  //     this.getPostPreview({ value: value }); //a little ugly here!
-  //   }
-  // }
+  set message(value: any) {
+    if (value) {
+      value = decodeURIComponent((value).replace(/\+/g, '%20'));
+      this.meta.message = value;
+      this.showTagsError();
+      this.getPostPreview({ value: value }); //a little ugly here!
+    }
+  }
 
   onMessageChange($event) {
     this.errorMessage = "";
@@ -155,27 +157,54 @@ export class PostFormComponent {
     }
   }
 
-  entity: any;
-
-  @Input('object') set data(object) {
-    console.log("OBJECT: ", object);
-    this.entity = object;
-    var array
-    if (this.entity) {
-      if (this.entity['message']) {
-        this.meta.message = this.entity['message']
-      }
-      if (this.entity['custom_data']) {
-        this.entity['custom_data'].forEach(image => {
-           this.reqBody.attachment_guid.push(image['guid']);
-        });
-      }
-      this.cards = this.entity['custom_data'];
-      console.log("this.cards: ", this.cards);
+  /**
+   * Post to the newsfeed
+   */
+  post() {
+    console.log('clicked')
+    if (!this.meta.message && !this.attachment.has()) {
+      return;
     }
-    // else {
-    //   this.buildForm();
+    if(this.defaultCoins.length>0){
+      this.meta.wire_threshold = {
+        min: this.defaultCoins,
+        type: 'tokens'
+      }
+    }
+    // if (this.hashtagsSelector.tags.length > 5) {
+    //   this.showTagsError();
+    //   return;
     // }
+
+    this.errorMessage = "";
+
+    let data = Object.assign(this.meta, this.attachment.exportMeta());
+
+    data.tags = this.tags;
+    data.mature = this.isNSFW
+    console.log(data);
+    console.log(this.meta);
+    console.log(this.attachment.exportMeta());
+
+
+    this.inProgress = true;
+    this.client.post('api/v1/newsfeed', data)
+      .then((data: any) => {
+       // data.activity.boostToggle = true; //@gayatri hava to check this
+
+        console.log(data)
+        this.load.emit(data);
+
+        //this.load.next(data.activity);
+        this.attachment.reset();
+        this.meta = { wire_threshold: null };
+        this.inProgress = false;
+        this.cards = [];
+      })
+      .catch((e) => {
+        this.inProgress = false;
+        alert(e.message);
+      });
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
@@ -190,13 +219,16 @@ export class PostFormComponent {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
-          this.addAttachment(obj);
-          //this.cards.push(obj);
+          console.log(guid)
+          console.log(obj)
+          this.cards.push(obj);
+          console.log(this.cards)
           this.inProgress = false;
           this.canPost = true;
           file.value = null;
         })
         .catch(e => {
+          console.log(e)
           if (e && e.message) {
             this.errorMessage = e.message;
           }
@@ -208,50 +240,39 @@ export class PostFormComponent {
     }
   }
 
-  addAttachment(obj) {
-    this.cards.push(obj);
-    this.reqBody.attachment_guid.push(obj['guid']);
-  }
-
   removeRichEmbed() {
     this.attachment.reset();
   }
 
-  // removeAttachment(file: HTMLInputElement, imageId: string) {
-  //   if (this.inProgress) {
-  //     this.attachment.abort();
-  //     this.canPost = true;
-  //     this.inProgress = false;
-  //     this.errorMessage = '';
-  //     return;
-  //   }
+  removeAttachment(file: HTMLInputElement, imageId: string) {
+    console.log(file, imageId)
+    if (this.inProgress) {
+      this.attachment.abort();
+      this.canPost = true;
+      this.inProgress = false;
+      this.errorMessage = '';
+      return;
+    }
 
-  //   // if we're not uploading a file right now
-  //   this.attachment.setPendingDelete(false);
-  //   this.canPost = false;
-  //   this.inProgress = true;
+    // if we're not uploading a file right now
+    this.attachment.setPendingDelete(false);
+    this.canPost = false;
+    this.inProgress = true;
 
-  //   this.errorMessage = '';
+    this.errorMessage = '';
 
-  //   this.attachment.remove(file, imageId).then((guid) => {
-  //     this.inProgress = false;
-  //     this.canPost = true;
-  //     file.value = '';
-  //     this.cards = _remove(this.cards, function (n) {
-  //       return n.guid !== guid;
-  //     });
-  //     console.log(this.cards)
-  //   }).catch(e => {
-  //     console.error(e);
-  //     this.inProgress = false;
-  //     this.canPost = true;
-  //   });
-  // }
-  
-  removeAttachment(guid){ 
-    this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
-    this.cards = _remove(this.cards, function (n) {
-      return n.guid !== guid;
+    this.attachment.remove(file, imageId).then((guid) => {
+      this.inProgress = false;
+      this.canPost = true;
+      file.value = '';
+      this.cards = _remove(this.cards, function (n) {
+        return n.guid !== guid;
+      });
+      console.log(this.cards)
+    }).catch(e => {
+      console.error(e);
+      this.inProgress = false;
+      this.canPost = true;
     });
   }
 
@@ -259,67 +280,8 @@ export class PostFormComponent {
     if (!message.value) {
       return;
     }
+
     this.attachment.preview(message.value);
-  }
-
-  /**
-   * Post to the newsfeed
-   */
-  post() {
-    console.log('clicked')
-    if (!this.meta.message && !this.attachment.has()) {
-      return;
-    }
-    if (this.defaultCoins.length > 0) {
-      // this.meta.wire_threshold = {
-      //   min: this.defaultCoins,
-      //   type: 'tokens'
-      // }
-      this.reqBody.wire_threshold = {
-        min: this.defaultCoins,
-        type: 'tokens'
-      }
-    }
-    // if (this.hashtagsSelector.tags.length > 5) {
-    //   this.showTagsError();
-    //   return;
-    // }
-
-    this.errorMessage = "";
-
-    // let data = Object.assign(this.meta, this.attachment.exportMeta());
-    this.reqBody.message = this.meta.message;
-    this.reqBody.tags = this.tags;
-    this.reqBody.mature = this.isNSFW
-
-    this.inProgress = true;
-
-    let endpoint = 'api/v1/newsfeed';
-    if (this.entity) {
-      endpoint = 'api/v1/newsfeed/' + this.entity['guid'];
-    }
-
-    this.client.post(endpoint, this.reqBody)
-      .then((resp: any) => {
-        resp.activity.boostToggle = true;
-        console.log(this.reqBody)
-        // this.load.next(data.activity);
-        this.load.emit(resp);
-
-        this.attachment.reset();
-        this.meta = { wire_threshold: null };
-        this.inProgress = false;
-        this.cards = [];
-        if (this._opts && this._opts.onUpdate) {
-          this._opts.onUpdate(this.reqBody);
-          // close modal
-          this.closeModal();
-        }
-      })
-      .catch((e) => {
-        this.inProgress = false;
-        alert(e.message);
-      });
   }
 
   async findTrendingHashtags(searchText: string) {
@@ -330,9 +292,9 @@ export class PostFormComponent {
   }
 
 
-  getChoiceLabel(text: string) {
-    return `#${text}`;
-  }
+  // getChoiceLabel(text: string) {
+  //   return `#${text}`;
+  // }
   // createForms(type: string) {
   //   this.staticBoard = true;
   //   this.cards = [];
@@ -350,16 +312,17 @@ export class PostFormComponent {
     this.display = '';
     this.staticBoard = false;
   }
-  changeToDefault() {
+   changeToDefault() {
     this.display = 'default';
     this.attachment.reset();
   }
-  displayPaywall() {
-    if (this.displayPaywal) this.displayPaywal = false;
+  displayPaywall(){
+    if(this.displayPaywal) this.displayPaywal = false;
     else this.displayPaywal = true;
   }
-
-  closeModal() {
-    this.overlayModal.dismiss();
-  }
+ 
+  // emitEvent(data){
+  //   console.log(data)
+  //   this.load.next(data.activity);
+  // }
 }

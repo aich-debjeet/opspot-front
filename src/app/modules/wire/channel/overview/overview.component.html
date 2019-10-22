@@ -3,9 +3,9 @@
   <div class="m-wire-channel--overview--overview-count mdl-cell mdl-cell--6-col">
     <span *ngIf="ready">{{ stats.count | number:'1.0-0' }}</span>
     <div class="m-wire-channel--overview--label">
-      <label i18n="@@M__FEATURE__WIRE_PLURAL">Wires</label>
+      <label i18n="@@M__FEATURE__WIRE_PLURAL">Contribution Received</label>
       <m-tooltip icon="help" i18n="@@WIRE__CHANNEL__OVERVIEW__WIRES_CARD_TOOLTIP">
-      How many wires <span>@</span>{{channel.username}} has received in the last 30 days
+      Number of contributions <span>@</span>{{channel.username}} has received in the last 30 days.
       </m-tooltip>
     </div>
   </div>
@@ -13,9 +13,9 @@
   <div class="m-wire-channel--overview--overview-earnings mdl-cell mdl-cell--6-col">
     <span *ngIf="ready">{{ stats.tokens | token:18 | number:'1.0-0' }}</span>
     <div class="m-wire-channel--overview--label">
-      <label i18n="@@M__FEATURE__TOKENS">Tokens</label>
+      <label i18n="@@M__FEATURE__TOKENS">Coins</label>
       <m-tooltip icon="help" i18n="@@WIRE__CHANNEL__OVERVIEW__POINTS_CARD_TOOLTIP">
-        This is <span>@</span>{{channel.username}}'s total volume (gross) of all Token wires received in the last 30 days
+        Total number of coins contributed to <span>@</span>{{channel.username}} in the last 30 days.
       </m-tooltip>
     </div>
   </div>
@@ -42,9 +42,9 @@
   <div class="m-wire-channel--overview--overview-average mdl-cell mdl-cell--6-col" *ngIf="canWire()">
     <span *ngIf="ready">{{ stats.sent | token:18 | number:'1.0-4' }}</span>
     <div class="m-wire-channel--overview--label">
-      <label i18n="@@WIRE__CHANNEL__OVERVIEW__YOU_SENT_CARD_LABEL">You Sent</label>
+      <label i18n="@@WIRE__CHANNEL__OVERVIEW__YOU_SENT_CARD_LABEL">Contribution you made</label>
       <m-tooltip icon="help" i18n="@@WIRE__CHANNEL__OVERVIEW__YOU_SENT_CARD_TOOLTIP">
-        This is the amount you have wired to {{channel.name}} in the last 30 days
+        This is the amount you have contributed to {{channel.username}} in the last 30 days.
       </m-tooltip>
     </div>
   </div>

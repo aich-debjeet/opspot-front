@@ -24,14 +24,19 @@ import { SettingsService } from './settings.service';
 import { SettingsWireComponent } from './wire/wire.component';
 import { WireModule } from '../wire/wire.module';
 import { SettingsP2PMediaComponent } from './p2pmedia/p2pmedia.component';
+import { PrivacySecurityComponent } from './privacy-security/privacy-security.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { SupportComponent } from './support/support.component';
+import { CommentsModule } from '../comments/comments.module';
 
 
 const settingsRoutes : Routes = [
   { path: 'settings', component: SettingsComponent,
     children: [
       { path: '', redirectTo: 'general', pathMatch: 'full' },
-      { path: 'general/:card', component: SettingsGeneralComponent },
       { path: 'general', component: SettingsGeneralComponent },
+      // { path: 'general/:card', component: SettingsGeneralComponent },
+      { path:'privacy', component: PrivacySecurityComponent},
       { path: 'wire', component: SettingsWireComponent },
       { path: 'disable', component: SettingsDisableChannelComponent },
       { path: 'twoFactor', component: SettingsTwoFactorComponent },
@@ -39,6 +44,8 @@ const settingsRoutes : Routes = [
       { path: 'billing',  component: SettingsBillingComponent },
       { path: 'reported-content',  component: SettingsReportedContentComponent },
       { path: 'p2pmedia',  component: SettingsP2PMediaComponent },
+      { path: 'notifications', component: NotificationsComponent},
+      { path: 'support', component: SupportComponent}
     ]
   }
 ];
@@ -57,6 +64,7 @@ const settingsRoutes : Routes = [
     ReportModule,
     PaymentsModule,
     WireModule,
+    CommentsModule,
   ],
   declarations: [
     SettingsComponent,
@@ -71,6 +79,9 @@ const settingsRoutes : Routes = [
     SettingsReportedContentComponent,
     SettingsWireComponent,
     SettingsP2PMediaComponent,
+    PrivacySecurityComponent,
+    NotificationsComponent,
+    SupportComponent,
     //BillingComponent
   ],
   providers: [

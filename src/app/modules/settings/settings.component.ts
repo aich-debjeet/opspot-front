@@ -12,7 +12,8 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
 
 @Component({
   selector: 'm-settings',
-  templateUrl: 'settings.component.html'
+  templateUrl: 'settings.component.html',
+  styleUrls: ['settings.component.scss']
 })
 
 export class SettingsComponent {

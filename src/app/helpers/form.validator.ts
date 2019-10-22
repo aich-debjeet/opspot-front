@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AbstractControl } from "@angular/forms";
+import * as moment from 'moment';
 
 @Injectable()
 export class FormValidator {
@@ -62,5 +63,19 @@ export class FormValidator {
             return { passwordMismatched: true };
         }
         return null;
+    }
+
+    static datevalidation(AC: AbstractControl) {
+        console.log("Value: ",AC.value);
+        
+        const date = AC.value.split('-').reverse().join('-');
+        const currentDate = moment().format('YYYYMMDD');
+        const chooseDate = moment(date).format('YYYYMMDD');
+
+        if (currentDate > chooseDate) {
+             return { oldate: true };
+        } else {
+            return null
+        }
     }
 }

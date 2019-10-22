@@ -117,7 +117,7 @@ export class OpportunityComponent implements OnInit {
     if ($event.inProgress) {
       $event.inProgress.emit(true);
     }
-    this.client.delete(`api/v1/newsfeed/${this.opportunity.guid}`)
+    this.client.delete(`api/v3/opportunity/${this.opportunity.entity_guid}`)
       .then((response: any) => {
         if ($event.inProgress) {
           $event.inProgress.emit(false);
@@ -135,7 +135,7 @@ export class OpportunityComponent implements OnInit {
 
   async togglePin() {
     this.opportunity.bookmark = !this.opportunity.bookmark;
-    const url: string = `api/v3/bookmark/${this.opportunity.guid}/image`;
+    const url: string = `api/v3/bookmark/${this.opportunity.entity_guid}/image`;
     try {
       if (this.opportunity.bookmark) {
         await this.client.post(url);

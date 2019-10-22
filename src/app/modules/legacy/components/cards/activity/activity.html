@@ -185,8 +185,8 @@
           *ngIf="activity?.custom_data">
        
         <div class="event-date">
-          <div class="text-red">{{activity.startTimeDate | date:'dd'}} </div>
-          <div class="text-md">{{activity.startTimeDate | date:'MMM'}} </div>
+          <div class="text-red">{{activity?.start_time_date | date:'dd'}} </div>
+          <div class="text-md">{{activity?.start_time_date| date:'MMM'}} </div>
         </div>
       </div>
     </div>
@@ -326,7 +326,7 @@
   <opspot-button-remind [object]="activity"></opspot-button-remind>
 
   <!--boost button-->
-  <a class="btn btn-primary btn-xs btn--boost" *ngIf="session.getLoggedInUser().guid == activity.owner_guid"
+  <a class="btn btn-primary btn-xs btn--boost" *ngIf="session.getLoggedInUser().guid == activity?.owner_guid"
     id="boost-actions" (click)="showBoost()">
     <ng-container i18n="verb|@@M__ACTION__BOOST">Boost</ng-container>
   </a>
@@ -355,9 +355,10 @@
   Boost this post to reach more people!
 </div>
 
+<!-- TODO @gayatri need to check this part bacuse of shshis impl-->
 <div class="mdl-card__menu mdl-color-text--blue-grey-300" #toggle *ngIf="!hideTabs">
   <button class="mdl-button m-pin-button mdl-button--icon" (click)="togglePin()"
-    *ngIf="session.getLoggedInUser().guid != activity.owner_guid ">
+    *ngIf="session.getLoggedInUser().guid != activity.owner_guid">
     <m-tooltip icon="turned_in" *ngIf="activity.bookmark">
       This post is Bookmarked
     </m-tooltip>

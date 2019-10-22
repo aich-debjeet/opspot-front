@@ -166,8 +166,10 @@
         <div class="opspot-spacer opspot-spacer-2x"></div>
 
         <div class="m-newsfeed--dynamic-siderbar" *ngIf="!showRightSidebar">
-          <m-ads-boost limit="8"></m-ads-boost>
-          <div class="opspot-spacer opspot-spacer-2x"></div>
+          <opspot-widget [entityType]="'opportunity'"></opspot-widget>
+          <opspot-widget [entityType]="'event'"></opspot-widget>
+          <!-- <m-ads-boost limit="8"></m-ads-boost>
+          <div class="opspot-spacer opspot-spacer-2x"></div> -->
         </div>
 
         <div class="m-newsfeed-footer">
@@ -191,8 +193,10 @@
         <ng-container *mIfFeature="'suggested-users'">
           <m-suggestions__sidebar></m-suggestions__sidebar>
         </ng-container>
-        <m-ads-boost limit="8" *ngIf="!(session.getLoggedInUser().plus && session.getLoggedInUser().disabled_boost)"></m-ads-boost>
-        <div class="opspot-spacer opspot-spacer-2x"></div>
+        <!-- <m-ads-boost limit="8" *ngIf="!(session.getLoggedInUser().plus && session.getLoggedInUser().disabled_boost)"></m-ads-boost>
+        <div class="opspot-spacer opspot-spacer-2x"></div> -->
+        <opspot-widget [entityType]="'opportunity'"></opspot-widget>
+        <opspot-widget [entityType]="'event'"></opspot-widget>
       </div>
 
   </div>

@@ -168,7 +168,7 @@
 <!-- adding a new bio -->
 
 <div class="o-card o-bio">
-  <a class="o-edit" [routerLink]="['/profile/general']"><i class="icon-edit-profile f-15"></i> </a>
+  <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/general']"><i class="icon-edit-profile f-15"></i></a>
   <span class="o-bio__title caption-medium">About {{user.name}}</span>
   <span *ngIf="!user.briefdescription" class="text-md">
       <a href="#" class="primary">Tell something about yourself</a>
@@ -176,7 +176,7 @@
   <span  class="text-md">
      {{user.briefdescription}}
   </span>
-  <ul class="o-bio__info">
+  <!-- <ul class="o-bio__info">
       <li class="o-bio-info__item">
           <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
           <span class="text-md float-left" *ngIf='!user.city'><a class="primary">Add Location</a></span>
@@ -203,7 +203,7 @@
               <div class="text-sm grey o-dob-title">Birthday</div>
               <div class="text-md o-dob-value"><a href="#" class="primary">Select</a></div>
           </div>
-      </li><!--gender end-->
+      </li>
       <li class="o-bio-info__item m-t-9">
           <div class="o-bio-info-left">
               <div class="text-sm grey o-gender-title">Height</div>
@@ -213,60 +213,53 @@
               <div class="text-sm grey o-dob-title">Weight</div>
               <div class="text-md o-dob-value"><a href="#" class="primary">Select</a></div>
           </div>
-      </li><!--height and weight end-->
+      </li>
       <li class="o-bio-info__item m-t-9">
           <div class="o-bio-language">
               <div class="text-sm grey w100">Languages Known</div>
               <div class="text-md w100"><a href="#" class="primary">Add Language</a></div>
           </div>
-      </li><!--language known end-->
-      <!-- <li class="o-bio-info__item m-t-9">
-          <div class="o-bio-language">
-              <div class="text-sm grey w100">Ethnicity</div>
-              <div class="text-md w100"><a href="#" class="primary">Select</a></div>
-          </div>
-      </li>language known end -->
-  </ul>
+      </li>
+  </ul> -->
 </div>
 
 <div class="o-card o-card--padding" >
-  <div class="o-work">
-      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/general']"><i class="icon-edit-profile f-15"></i></a>
+  <div *ngIf="user?.work_experience?.length > 0" class="o-work">
+      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/work']"><i class="icon-edit-profile f-15"></i></a>
       <div class="o-work__title caption-medium">Work</div>
-      <!-- <div class="o-work-info">
-          <div class="o-work-info__logo"><a href="#"></a></div>
-          <div class="o-work-info__det">
-              <a href="#" class="text-md f500">UI UX Designer</a>
-              <div class="text-sm grey-dark">Aeione - Bangalore</div>
-          </div>
-      </div>work end -->
-      <!-- <div class="o-work-info-past">
-          <div class="text-sm grey">Past <a href="" class="grey-dark">BothOfUs</a> and <a href="" class="grey-dark">Mindsbeam Technologies</a></div> 
-      </div> -->
-  </div><!-- work detail end-->
-  <div class="o-education">
-      <div class="o-education__title caption-medium">Education</div>
-      <div class="o-education-info">
-          <div class="o-education-info__logo"><a href="#"></a></div>
-          <div class="o-education-info__det">
-              <!-- <a href="#" class="text-md f500">Diploma in Visual Media</a>
-              <div class="text-sm grey-dark">ICAT - Chennai</div> -->
-          </div>
+      <div *ngFor="let work of user?.work_experience" class="o-work-info">
+        <div class="o-work-info__logo">
+          <img src="assets/Work.jpg" alt="">
+        </div>
+        <div class="o-work-info__det">
+          <a class="text-md f500">{{ work?.designation }}</a>
+          <div class="text-sm grey-dark">{{ work?.company_name }} - {{ work?.location }}</div>
+        </div>
       </div>
-      <div class="o-work-info-past">
-          <!-- <div class="text-sm grey">
-              Past <a href="" class="grey-dark">Kongu Institution</a> and <a href="" class="grey-dark">Sri Vidhya Mandir
-              Higher Secondary School</a>
-          </div>  -->
+  </div><!-- work detail end-->
+  <div *ngIf="user?.education?.length > 0" class="o-education">
+      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/education']"><i class="icon-edit-profile f-15"></i></a>
+      <div class="o-education__title caption-medium">Education</div>
+      <div *ngFor="let education of user?.education" class="o-education-info">
+          <div class="o-education-info__logo">
+            <img src="assets/Education.jpg" alt="">
+          </div>
+          <div class="o-education-info__det">
+            <a class="text-md f500">{{ education?.field_of_study }}</a>
+            <div class="text-sm grey-dark">{{ education?.university }} - {{ education?.location }}</div>
+          </div>
       </div>
   </div><!-- education detail end-->
-  <div class="o-award">
+  <div *ngIf="user?.awards?.length > 0" class="o-award">
+      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/education']"><i class="icon-edit-profile f-15"></i></a>
       <div class="o-award__title caption-medium">Awards</div>
-      <div class="o-award-info">
-          <div class="o-award-info__logo o-award-info__logo--empty"><i class="icon-plus-circle"></i></div>
+      <div *ngFor="let award of user?.awards" class="o-award-info">
+          <div class="o-award-info__logo">
+            <img src="assets/Awards.jpg" alt="">
+          </div>
           <div class="o-award-info__det">
-              <a href="#" class="text-md f400 primary">Not added</a>
-              <div class="text-sm grey-dark"></div>
+            <a class="text-md f500">{{ award?.title }}</a>
+            <div class="text-sm grey-dark">{{ award?.issuer }} - {{ award?.location }}</div>
           </div>
       </div>
   </div><!-- Award detail end-->
@@ -283,31 +276,31 @@
 <div class="opspot-spacer-2x"></div>
 
 <!-- images  -->
-<m-channel--modules [owner]="user" type="image" [linksTo]="['/media/images', user.username]">
+<!-- <m-channel--modules [owner]="user" type="image" [linksTo]="['/media/images', user.username]">
 
   <a class="mdl-card__supporting-text mdl-color-text--grey-600" [routerLink]="['/media/images', user.username]">
     <ng-container i18n="@@M__COMMON__VIEW_MORE">View More</ng-container>
   </a>
 </m-channel--modules>
 
-<div class="opspot-spacer-2x"></div>
+<div class="opspot-spacer-2x"></div> -->
 
 <!-- videos  -->
-<m-channel--modules [owner]="user" type="video" limit="9" [linksTo]="['/media/videos', user.username]">
+<!-- <m-channel--modules [owner]="user" type="video" limit="9" [linksTo]="['/media/videos', user.username]">
 
   <a class="mdl-card__supporting-text mdl-color-text--grey-600" [routerLink]="['/media/videos', user.username]">
     <ng-container i18n="@@M__COMMON__VIEW_MORE">View More</ng-container>
   </a>
 </m-channel--modules>
 
-<div class="opspot-spacer-2x"></div>
+<div class="opspot-spacer-2x"></div> -->
 
 <!-- Blogs  -->
-<m-channel--modules [owner]="user" type="blog" limit="3" [linksTo]="['/blog', user.username]">
+<!-- <m-channel--modules [owner]="user" type="blog" limit="3" [linksTo]="['/blog', user.username]">
 
   <a class="mdl-card__supporting-text mdl-color-text--grey-600" [routerLink]="['/blog', user.username]">
     <ng-container i18n="@@M__COMMON__VIEW_MORE">View More</ng-container>
   </a>
 </m-channel--modules>
 
-<div class="opspot-spacer-2x"></div>
+<div class="opspot-spacer-2x"></div> -->

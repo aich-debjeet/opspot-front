@@ -6,6 +6,7 @@ import { WireRewardsStruc, WireRewardsTiers, WireRewardsType } from '../../wire/
 @Component({
   selector: 'm-settings--wire',
   templateUrl: 'wire.component.html',
+  styleUrls: ['wire.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
 })
 
@@ -192,5 +193,12 @@ export class SettingsWireComponent implements OnInit {
   detectChanges() {
     this.cd.markForCheck();
     this.cd.detectChanges();
+  }
+  removeFile(){
+    this.backgroundFile = null;
+    this.preview = {src: ''};
+    this.exclusive.intro='';
+    this.updatePreviewEntity();
+    this.detectChanges();
   }
 }

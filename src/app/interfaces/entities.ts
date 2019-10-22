@@ -68,6 +68,9 @@ export interface OpspotUser {
   is_mature?: boolean;
   mature_lock?: boolean;
   tags?: Array<string>;
+  work_experience: any[];
+  education: any[];
+  awards: any[];
 }
 
 export interface OpspotGroup {

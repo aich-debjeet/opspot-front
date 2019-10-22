@@ -1,0 +1,119 @@
+<div class="o-create-big-event">
+    <div class="o-create-big-event-content">
+          <div class="o-create-big-event-header">
+                <h4 class="f500">{{lable}} an Event</h4>
+                <div class="text-md grey">
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                  ligula eget dolor. Aenean massa. Cum sociis natoque penatibus.
+                </div>
+          </div>
+  <form [formGroup] = "eventForm">
+    <div class="o-create-big-event-content__form">
+          <div class="form-group">
+              <label>Event Title</label>
+              <input type="text" class="form-control form-control-lg"  formControlName="eventTitle">
+              <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventTitle').errors?.required">
+                  This is required
+              </div>
+          </div><!--Event Title Name ends-->
+          <div class="form-group">
+              <label>Event Description <span class="text-sm grey description-width">21/300</span></label>
+              <textarea class="form-control" rows="5" formControlName="eventDesc"></textarea>
+              <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventDesc').errors?.required">
+                  This is required
+              </div>
+          </div>
+          <div class="o-create-big-event-row">
+              <div class="form-group select-big-event mr13">
+                  <label>Event Type</label>
+                  <select class="form-control form-control-lg" formControlName="eventType">
+                      <option value="" disabled selected>Select Type</option>
+                      <option *ngFor = "let type of eventTypeList" value="{{ type.value }}">{{ type.label}}</option>       
+                  </select>
+                  <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventType').errors?.required">
+                      This is required
+                  </div>
+              </div>
+              <div class="form-group select-big-event">
+                  <label>Event Category</label>
+                  <select class="form-control form-control-lg" formControlName="eventCategory">
+                      <option value="" disabled selected>Select Category</option>
+                      <option *ngFor = "let type of eventCategoryList" value="{{ type.value }}">{{ type.label}}</option>      
+                  </select>
+                  <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventCategory').errors?.required">
+                      This is required
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label>Event Location</label>
+              <input type="text" class="form-control form-control-lg" formControlName="eventLocation">
+              <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventLocation').errors?.required">
+                  This is required
+              </div>
+          </div><!--Location ends-->
+          <div class="o-create-big-event-row">
+              <div class="form-group select-big-event mr13">
+                  <label>Start Date</label>
+                   <input type="text" class="form-control form-control-lg" placeholder="Select Date" [textMask]="{mask: dateMask}" formControlName="eventStartDate" >
+                  <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventStartDate').errors?.required">
+                      This is required
+                  </div>
+                  <div class="error text-sm" *ngIf="eventForm.get('eventStartDate').errors?.oldate">
+                      Please choose a valid date.
+                  </div>
+              </div><!--Organisation Type ends-->
+              <div class="form-group select-big-event">
+                  <label>Start Time</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="Start Time" [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventStartTime">
+                  <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventStartTime').errors?.required">
+                      This is required
+                  </div>
+              </div><!--date and tym ends-->
+          </div><!--row ends-->
+          <div class="o-create-big-event-row">
+              <div class="form-group select-big-event mr13">
+                  <label>End Date</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="Select Date" [textMask]="{mask: dateMask}" formControlName="eventEndDate" >
+                   <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventEndDate').errors?.required">
+                      This is required
+                  </div>
+                  <div class="error text-sm" *ngIf="eventForm.get('eventEndDate').errors?.oldate">
+                      Please choose a valid date.
+                  </div>
+              </div><!--Organisation Type ends-->
+              <div class="form-group select-big-event">
+                  <label>End Time</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="End Time" [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventEndTime">
+                  <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventEndTime').errors?.required">
+                      This is required
+                  </div>
+              </div><!--date and tym ends-->
+          </div><!--row ends-->
+          <div class="form-group">
+              <label>Cover Image</label>
+              <div class="o-big-event-profile-picture">
+                  <div class="fileUpload mr10" *ngIf="!coverImage">
+                      <span class="icon-plus"></span>
+                      <input type="file" id="file" #file class="upload" name="attachment"
+                      (change)="uploadAttachment(file, $event)" formControlName="eventCoverImage">
+                  </div><!--file upload ends-->
+                  <div class="fileUpload-preview" *ngIf="coverImage">
+                      <a class="o-big-event-image">
+                          <img [src]="coverImage" alt="">
+                      </a>
+                  </div><!--file preview ends-->
+              </div>
+              <div class="error text-sm" *ngIf="coverImageUploadError">
+                      This is required
+              </div>
+              <div class="grey text-sm paddng-top">Use a comma to separate skills, or choose from the list.</div>                    
+          </div><!--Profile Picture ends-->
+          <div class="o-create-big-event-action">
+              <button type="button" class="btn btn-primary mr-18" (click)="submitEvent()">{{lable}}</button>
+              <button type="button" class="btn btn-outline-primary btn-lg" (click)="backClicked()">Cancel</button>
+          </div><!--Button action ends-->
+    </div>
+  </form>
+</div>
+</div>

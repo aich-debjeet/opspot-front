@@ -5,14 +5,14 @@
     (click)="sendWire()"
   >
     <i class="ion-icon ion-flash"></i>
-
+<!--Wire has been changed to contribute in profile-->
     <span class="m-wire-channel--cta-label">
-      <span i18n="@@WIRE__CHANNEL__WIRE_ME_ACTION">Wire me</span>
+      <span i18n="@@WIRE__CHANNEL__WIRE_ME_ACTION">CONTRIBUTE</span>
     </span>
   </button>
 </div>
 
-<m-wire-channel--overview [channel]="channel"></m-wire-channel--overview>
+<!-- <m-wire-channel--overview [channel]="channel"></m-wire-channel--overview> -->
 
 <div *ngIf="shouldShow()"
   class="mdl-card mdl-shadow--2dp"
@@ -21,7 +21,7 @@
     <h2 class="mdl-card__title-text" i18n="@@WIRE__CHANNEL__REWARDS_TITLE">Rewards</h2>
 
     <m-tooltip icon="help" i18n="@@WIRE__CHANNEL__REWARDS_TOOLTIP">
-      You can configure rewards to give to your supporters in exchange for tokens
+      You can configure rewards to give to your supporters in exchange for coins
     </m-tooltip>
 
     <span *ngIf="session.getLoggedInUser().guid == channel.guid"
