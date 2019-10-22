@@ -20,6 +20,9 @@ export class BigEventView implements OnInit {
   opspot = window.Opspot;
   coverImage;
 
+  menuOptions: Array<string> = ['report'];
+
+
 
   constructor(
     private formBuilder: FormBuilder,

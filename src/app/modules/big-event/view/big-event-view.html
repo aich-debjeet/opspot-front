@@ -27,10 +27,7 @@
                         <h5>{{bigEvent?.title}}
                             <!--TODO @gayatri confirmation for the options -->
                             <!-- <div class="o-events-option-drop float-right">
-                                <div onclick="myFunction()" class="o-events-option-drop__btn head-action__link"><i class="icon-more-vertical f-15"></i> </div>
-                                <div id="o-events-option-dropdown" class="o-events-option-drop__block">
-                                    <a href="#">Report</a>
-                                </div>
+                            <m-post-menu [entity]="bigEvent" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)"></m-post-menu>
                             </div> -->
                         </h5>
                         <div class="text-lg grey">
