@@ -230,16 +230,18 @@
 </div>
 
 <div class="o-card o-card--padding" >
-  <div class="o-work">
-      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/general']"><i class="icon-edit-profile f-15"></i></a>
+  <div *ngIf="user?.work_experience" class="o-work">
+      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/work']"><i class="icon-edit-profile f-15"></i></a>
       <div class="o-work__title caption-medium">Work</div>
-      <!-- <div class="o-work-info">
-          <div class="o-work-info__logo"><a href="#"></a></div>
-          <div class="o-work-info__det">
-              <a href="#" class="text-md f500">UI UX Designer</a>
-              <div class="text-sm grey-dark">Aeione - Bangalore</div>
-          </div>
-      </div>work end -->
+      <div *ngFor="let work of user?.work_experience" class="o-work-info">
+        <div class="o-work-info__logo">
+          <img src="assets/Work.jpg" alt="">
+        </div>
+        <div class="o-work-info__det">
+          <a class="text-md f500">{{ work?.designation }}</a>
+          <div class="text-sm grey-dark">{{ work?.company_name }} - {{ work?.location }}</div>
+        </div>
+      </div>
       <!-- <div class="o-work-info-past">
           <div class="text-sm grey">Past <a href="" class="grey-dark">BothOfUs</a> and <a href="" class="grey-dark">Mindsbeam Technologies</a></div> 
       </div> -->
