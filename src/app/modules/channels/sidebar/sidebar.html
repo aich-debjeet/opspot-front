@@ -246,29 +246,37 @@
           <div class="text-sm grey">Past <a href="" class="grey-dark">BothOfUs</a> and <a href="" class="grey-dark">Mindsbeam Technologies</a></div> 
       </div> -->
   </div><!-- work detail end-->
-  <div class="o-education">
+  <div *ngIf="user?.education" class="o-education">
       <div class="o-education__title caption-medium">Education</div>
-      <div class="o-education-info">
-          <div class="o-education-info__logo"><a href="#"></a></div>
+      <div *ngFor="let education of user?.education" class="o-education-info">
+          <div class="o-education-info__logo">
+            <img src="assets/Education.jpg" alt="">
+          </div>
           <div class="o-education-info__det">
-              <!-- <a href="#" class="text-md f500">Diploma in Visual Media</a>
-              <div class="text-sm grey-dark">ICAT - Chennai</div> -->
+            <a class="text-md f500">{{ education?.field_of_study }}</a>
+            <div class="text-sm grey-dark">{{ education?.university }} - {{ education?.location }}</div>
           </div>
       </div>
-      <div class="o-work-info-past">
-          <!-- <div class="text-sm grey">
+      <!-- <div class="o-work-info-past">
+          <div class="text-sm grey">
               Past <a href="" class="grey-dark">Kongu Institution</a> and <a href="" class="grey-dark">Sri Vidhya Mandir
               Higher Secondary School</a>
-          </div>  -->
-      </div>
+          </div> 
+      </div> -->
   </div><!-- education detail end-->
-  <div class="o-award">
+  <div *ngIf="user?.awards" class="o-award">
       <div class="o-award__title caption-medium">Awards</div>
-      <div class="o-award-info">
-          <div class="o-award-info__logo o-award-info__logo--empty"><i class="icon-plus-circle"></i></div>
+      <div *ngFor="let award of user?.awards" class="o-award-info">
+          <div class="o-award-info__logo">
+            <img src="assets/Awards.jpg" alt="">
+          </div>
+          <!-- <div class="o-award-info__det">
+            <a href="#" class="text-md f400 primary">Not added</a>
+            <div class="text-sm grey-dark"></div>
+          </div> -->
           <div class="o-award-info__det">
-              <a href="#" class="text-md f400 primary">Not added</a>
-              <div class="text-sm grey-dark"></div>
+            <a class="text-md f500">{{ award?.title }}</a>
+            <div class="text-sm grey-dark">{{ award?.issuer }} - {{ award?.location }}</div>
           </div>
       </div>
   </div><!-- Award detail end-->
