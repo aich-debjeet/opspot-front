@@ -40,7 +40,7 @@ export class BigEventView implements OnInit {
     });
   }
 
-  
+
 
   load() {
     // if (this.inProgress)
@@ -51,14 +51,12 @@ export class BigEventView implements OnInit {
     this.client.get('api/v3/event/' + this.entity_guid)
       .then((data: any) => {
         if (data.event) {
-          console.log("data: ", data);
           this.bigEvent = data.event;
           if (data.event.owner_obj) {
             this.bigEvent['ownerObj'] = data.event.owner_obj;
           }
-          if(this.bigEvent.custom_data){
+          if (this.bigEvent.custom_data) {
             this.coverImage = this.bigEvent.custom_data[0].src;
-            console.log("this.bigEvent.custom_data[0].src: ", this.bigEvent.custom_data[0].src);  
           }
           this.inProgress = false;
         }

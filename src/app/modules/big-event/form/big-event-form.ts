@@ -64,7 +64,7 @@ export class BigEventForm implements OnInit {
       console.log('EDIT');
 
       this.bigEventGuid = this.bigEvent['guid'];
-      if (this.bigEvent['start_time_date'] != '') {
+      if (this.bigEvent['start_time_date']) {
         var date = new Date(parseInt(this.bigEvent['start_time_date']));
         this.start_date = moment(date).format('DD-MM-YYYY');
         this.start_time = moment(date).format('HH:mm');
