@@ -67,6 +67,31 @@ export const READABLE_REASONS : Array<any> = [
   { value: 11, label: 'Another reason' }
 ];
 
+export const EVENT_TYPES : Array<any> = [
+  { value: 'Free‎' , label: 'Free‎' },
+  { value: 'Paid', label: 'Paid' },
+  
+];
+
+export const EVENT_CATEGORY : Array<any> = [
+  { value: 'Arts Events‎' , label: 'Arts Events‎' },
+  { value: 'Award Ceremonies', label: 'Award Ceremonies' },
+  { value: 'Ball‎', label: 'Ball‎' },
+  { value: 'Concerts', label: 'Concerts' },
+  { value: 'Cultural Conferences‎', label: 'Cultural Conferences‎' },
+  { value:'Cultural Festivals', label: 'Cultural Festivals' },
+  { value: 'Exhibitions', label: 'Exhibitions' },
+  { value:'Fashion Events‎', label: 'Fashion Events‎' },
+  { value: 'Festivals by culture', label: 'Festivals by culture' },
+  { value: 'Film Festivals' , label: 'Film Festivals' },
+  { value: 'Inaugrations‎', label: 'Inaugrations‎' },
+  { value: 'Museum Events' , label: 'Museum Events' },
+  { value: 'Performances', label: 'Performances' },
+  { value: 'Technical Events‎', label: 'Technical Events‎' },
+  { value: 'Theatre', label: 'Theatre' },
+  { value: 'Trade Fairs' , label: 'Trade Fairs' }
+];
+
 export const REPORT_ACTIONS = {
   'explicit': 'Marked as Explicit',
   'spam': 'Marked as Spam',

@@ -85,6 +85,24 @@ export class MediaViewComponent {
     this.queryParamsSubscription$.unsubscribe();
   }
 
+  slideConfig = { slidesToShow: 6, slidesToScroll: 1, arrows: true };
+
+  slickInit(e) {
+    console.log('slick initialized in activity');
+  }
+  breakpoint(e) {
+    console.log('breakpoint');
+  }
+
+  afterChange(e) {
+    console.log('afterChange');
+  }
+
+  beforeChange(e) {
+    console.log('beforeChange');
+  }
+
+
   load(refresh: boolean = false) {
     if (refresh) {
       this.entity = {};
