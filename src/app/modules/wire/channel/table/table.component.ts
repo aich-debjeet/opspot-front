@@ -81,6 +81,7 @@ export class WireChannelTableComponent {
     const user = this.session.getLoggedInUser();
     if (user.guid !== this.channel.guid) {
       const creator = this.overlayModal.create(WireCreatorComponent, this.channel, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
         default: {
           min: reward.amount,
           type: this.type

@@ -247,8 +247,10 @@ export class Activity {
     if (this.session.getLoggedInUser().guid !== this.activity.owner_guid) {
       this.overlayModal.create(WireCreatorComponent,
         this.activity.remind_object ? this.activity.remind_object : this.activity,
-        { onComplete: wire => this.wireSubmitted(wire) })
-        .present();
+        {
+          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+          onComplete: wire => this.wireSubmitted(wire)
+        }).present();
     }
   }
 

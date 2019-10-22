@@ -72,6 +72,7 @@ export class WireLockScreenComponent {
     }
 
     this.overlayModal.create(WireCreatorComponent, this.entity, {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
       onComplete: () => this.wireSubmitted(),
       default: this.entity.wire_threshold
     })

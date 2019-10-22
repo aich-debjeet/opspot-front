@@ -30,6 +30,7 @@ export class WireButtonComponent {
     }
 
     const creator = this.overlayModal.create(WireCreatorComponent, this.object, {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
       default: this.object && this.object.wire_threshold,
       onComplete: (wire) => {
         if (this.object.wire_totals) {
