@@ -20320,7 +20320,7 @@ m-wire-channel {
     m-wire-channel .m-wire-channel--call-to-action .m-wire-channel--cta-label {
       -webkit-flex-grow: 1;
               flex-grow: 1;
-      letter-spacing: 2.5px;
+      letter-spacing: 0.5px;
       text-align: left; }
       m-wire-channel .m-wire-channel--call-to-action .m-wire-channel--cta-label > span {
         display: block; }
@@ -20359,7 +20359,7 @@ m-wire-channel {
     .m-wire-channel--overview .m-wire-channel--overview--label > * {
       vertical-align: middle; }
     .m-wire-channel--overview .m-wire-channel--overview--label label {
-      text-transform: uppercase;
+      // text-transform: uppercase;
       font-family: 'Roboto';
       letter-spacing: 1px;
       font-size: 14px; }

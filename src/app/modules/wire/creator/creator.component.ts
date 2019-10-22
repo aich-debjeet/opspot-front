@@ -9,6 +9,7 @@ import { Web3WalletService } from '../../blockchain/web3-wallet.service';
 import { TokenContractService } from '../../blockchain/contracts/token-contract.service';
 import { OpspotUser } from '../../../interfaces/entities';
 import { Router } from '@angular/router';
+import { SpotcoinsComponent } from '../../blockchain/marketing/spotcoins/spotcoins.component';
 
 export type PayloadType = 'onchain' | 'offchain' | 'creditcard';
 
@@ -28,11 +29,13 @@ export interface WireStruc {
   moduleId: module.id,
   providers: [CurrencyPipe],
   selector: 'm-wire--creator',
-  templateUrl: 'creator.component.html'
+  templateUrl: 'creator.component.html',
+  styleUrls: ['creator.component.scss']
 })
 export class WireCreatorComponent {
 
   opspot = window.Opspot;
+  showTokenOptions: boolean = false;
 
   wire: WireStruc = {
     amount: 1,
@@ -110,7 +113,8 @@ export class WireCreatorComponent {
     offchain: null,
     onChainAddress: '',
     isReceiverOnchain: false,
-    wireCap: null
+    wireCap: null,
+    token: 0
   };
 
   constructor(
@@ -148,8 +152,9 @@ export class WireCreatorComponent {
       if (!response) {
         return;
       }
-
+console.log(response)
       this.balances.wireCap = response.wireCap;
+      this.balances.token = response.balance;
 
       this.balances.offchain = response.addresses[1].balance;
 
@@ -460,7 +465,11 @@ export class WireCreatorComponent {
 
   buyTokens() {
     this.overlayModal.dismiss();
-    this.router.navigate(['/token']);
+    const tokenModal = this.overlayModal.create(SpotcoinsComponent,'',  { class: 'modalChanger' });
+    tokenModal.onDidDismiss(() => {
+      this.showTokenOptions = false;
+    });
+    tokenModal.present();
   }
 
   /**
