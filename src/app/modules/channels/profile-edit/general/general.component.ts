@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TopbarHashtagsService } from  '../../../hashtags/service/topbar.service';
+import { TopbarHashtagsService } from '../../../hashtags/service/topbar.service';
 import { Client } from '../../../../services/api/client';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-general',
@@ -11,48 +10,51 @@ import { Router } from '@angular/router';
 })
 export class GeneralComponent implements OnInit {
 
-  constructor(private service:TopbarHashtagsService ,private client:Client,private router:Router) {
-    this.load()
-   }
- 
-   model: any = {};
+  items;
+  data = [];
+  constructor(
+    private service: TopbarHashtagsService,
+    private client: Client,
+    private router: Router
+  ) {
+    this.load();
+  }
 
+  model: any = {};
 
-  onSubmit(){
-    let skills=this.model.skills.map(el=>el.value)
-    let info={
-      fullName:this.model.fullName,  
+  onSubmit() {
+    const skills = this.model.skills.map(el => el.value);
+    const info = {
+      fullName: this.model.fullName,
       skills
-    }
-     this.sendInfo(info)
-  }
- 
-  sendInfo(data){
-    let info={"general_info":{
-      "full_name":data.fullName,
-      "skills":data.skills
-    }}
-   this.client.post('api/v1/entities/general_info' ,info).then(res=>{
-     this.router.navigate(['/profile/about'])
-   })
+    };
+    this.sendInfo(info);
   }
 
- async load(){
-      let res=await this.service.load(50)
-      res.map(a=>{
-        this.data.push(a.value)
-      })
+  sendInfo(data) {
+    const info = {
+      general_info: {
+        full_name: data.fullName,
+        skills: data.skills
+      }
+    };
+    this.client.post('api/v1/entities/general_info', info).then(res => {
+      this.router.navigate(['/profile/about']);
+    });
   }
-  async getInfo(){
-   let res=await this.client.get('api/v1/channel/me')
-   console.log(res)
+
+  async load() {
+    const res = await this.service.load(50);
+    res.map(a => {
+      this.data.push(a.value);
+    });
+  }
+  async getInfo() {
+    const res = await this.client.get('api/v1/channel/me');
+    console.log(res);
   }
 
   ngOnInit() {
-    this.getInfo()
-
-    
+    this.getInfo();
   }
- items;
- data=[]
 }
