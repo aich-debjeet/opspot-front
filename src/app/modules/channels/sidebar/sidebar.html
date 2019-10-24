@@ -172,35 +172,35 @@
 <div class="o-card o-bio">
   <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/about']"><i class="icon-edit-profile f-15"></i></a>
   <span class="o-bio__title caption-medium">About {{user.name}}</span>
-  <span *ngIf="!user?.about?.description" class="text-md">
+  <span *ngIf="isOwner() && !user?.about?.description" class="text-md">
     <a [routerLink]="['/profile/about']" class="primary">Tell something about yourself</a>
   </span>
   <span  class="text-md">{{user?.about?.description}}</span>
   <ul class="o-bio__info">
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
-        <span class="text-md float-left" *ngIf='!user.location' [routerLink]="['/profile/contact']">
+        <span class="text-md float-left" *ngIf='isOwner() && !user.location' [routerLink]="['/profile/contact']">
           <a class="primary">Add Location</a>
         </span>
         <span class="text-md float-left">{{user.location | titlecase}}</span>
       </li>
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-mail"></i></span>
-        <span class="text-md float-left" *ngIf='!user.email' [routerLink]="['/profile/contact']">
+        <span class="text-md float-left" *ngIf='isOwner() && !user.email' [routerLink]="['/profile/contact']">
           <a class="primary">Add Email</a>
         </span>
         <span class="text-md float-left">{{user.email}}</span>
       </li>
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-phone"></i></span>
-        <span class="text-md float-left" *ngIf='!user.phone' [routerLink]="['/profile/contact']">
+        <span class="text-md float-left" *ngIf='isOwner() && !user.phone' [routerLink]="['/profile/contact']">
           <a class="primary">Add Number</a>
         </span>
         <span class="text-md float-left">{{user.phone}}</span>
       </li>
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-globe"></i></span>
-        <span class="text-md float-left" *ngIf='!user.website' [routerLink]="['/profile/contact']">
+        <span class="text-md float-left" *ngIf='isOwner() && !user.website' [routerLink]="['/profile/contact']">
           <a class="primary">Add Website</a>
         </span>
         <span class="text-md float-left">{{user.website}}</span>
