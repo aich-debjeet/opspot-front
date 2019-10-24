@@ -6,7 +6,8 @@ import { NotificationsComponent } from './notifications.component';
 @Component({
   moduleId: module.id,
   selector: 'm-notifications--flyout',
-  templateUrl: 'flyout.component.html'
+  templateUrl: 'flyout.component.html',
+  styleUrls:['flyout.component.scss']
 })
 
 export class NotificationsFlyoutComponent {

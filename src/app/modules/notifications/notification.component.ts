@@ -6,7 +6,8 @@ import { Reason, rejectionReasons } from '../../controllers/admin/boosts/rejecti
   moduleId: module.id,
   selector: 'opspot-notification',
   inputs: ['_notification: notification'],
-  templateUrl: 'notification.component.html'
+  templateUrl: 'notification.component.html',
+  styleUrls:['notification.component.scss']
 })
 export class NotificationComponent {
 

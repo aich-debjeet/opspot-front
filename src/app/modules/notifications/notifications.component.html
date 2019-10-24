@@ -5,7 +5,7 @@
     <m-tooltip icon="notifications" i18n="@@NOTIFICATIONS__NOTIFICATIONS__ALL_FILTER">All</m-tooltip>
     <span class="m-full-label" i18n="@@NOTIFICATIONS__NOTIFICATIONS__ALL_FILTER">All</span>
   </a> -->
-   <!-- <a (click)="changeFilter('tags')" class="mdl-tabs__tab"
+<!-- <a (click)="changeFilter('tags')" class="mdl-tabs__tab"
     [ngClass]="{ 'is-active': _filter == 'tags' }"
   >
     <m-tooltip icon="face" i18n="@@NOTIFICATIONS__NOTIFICATIONS__TAGS_FILTER">tags</m-tooltip>
@@ -43,99 +43,109 @@
     <span class="m-full-label" i18n="@@NOTIFICATIONS__NOTIFICATIONS__REMINDS_FILTER">Reminds</span>
   </a>-->
 <!-- </div>  -->
-<app-image-croper></app-image-croper>
+<!-- <app-image-croper></app-image-croper> -->
 <div class="o-card o-drop-title" *ngIf="loadOnDemand">
   <div class="o-drop-title__text">
-      <div class="caption-medium float-left">Notification</div>
-      <span class="o-drop-title-count text-md white float-left" title="Unread Notification"> {{opspot.notifications_count}}</span>
+    <div class="caption-medium float-left">Notification</div>
+    <span class="o-drop-title-count text-md white float-left" title="Unread Notification">
+      {{opspot.notifications_count}}</span>
   </div>
   <div class="o-drop-title__action">
-      <a href="#" class="text-sm primary" title="Mark all as read">Mark all as read</a>
-      <!-- <a href="#" class="o-drop-title-icons" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
+    <a href="javascript:void(0)" class="text-sm primary" title="Mark all as read">Mark all as read</a>
+    <!-- <a href="#" class="o-drop-title-icons" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
   </div>
 </div>
 
 <div class="container" *ngIf="!loadOnDemand" style="margin-top: 6em;">
-  <div class="o-blocks" >
+  <div class="o-blocks">
     <div class="o-left-block hidden-mob">
-        <div class="o-card o-noti-filter">
-            <div class="o-noti-filter__title">
-                <div class="caption-medium">Filter</div>
-                <div class="text-sm primary">Clear All</div>
-            </div>
-            <div class="o-noti-filter__block">
-                <form>
-                    <div class="c-checkbox__md">
-                        <label (click)="changeFilter('all')"  class="c-checkbox">All
-                            <input type="radio" [checked]="this._filter == 'all'" value="all" name="all">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label (click)="changeFilter('comments')" class="c-checkbox">Likes and Comments
-                            <input type="radio" value="comments" [checked]="this._filter == 'comments'" name="comments">
-                            <span class="checkmark"></span>
-                        </label>
-                        <!-- <label class="c-checkbox">Channels
+      <div class="o-card o-noti-filter">
+        <div class="o-noti-filter__title">
+          <div class="caption-medium">Filter</div>
+          <div class="text-sm primary">Clear All</div>
+        </div>
+        <div class="o-noti-filter__block">
+          <form>
+            <div class="c-checkbox__md">
+              <label (click)="changeFilter('all')" class="c-checkbox">All
+                <input type="radio" [checked]="this._filter == 'all'" value="all" name="all">
+                <span class="checkmark"></span>
+              </label>
+              <label (click)="changeFilter('tagged')" class="c-checkbox">Tagged
+                <input type="radio" value="tagged" [checked]="this._filter == 'tagged'" name="tagged">
+                <span class="checkmark"></span>
+              </label>
+              <label (click)="changeFilter('likes')" class="c-checkbox">Likes
+                <input type="radio" value="likes" [checked]="this._filter == 'likes'" name="likes">
+                <span class="checkmark"></span>
+              </label>
+              <label (click)="changeFilter('comments')" class="c-checkbox">Comments
+                <input type="radio" value="comments" [checked]="this._filter == 'comments'" name="comments">
+                <span class="checkmark"></span>
+              </label>
+              <label (click)="changeFilter('boost')" class="c-checkbox">Boost
+                <input type="radio" value="boost" [checked]="this._filter == 'boost'" name="boost">
+                <span class="checkmark"></span>
+              </label>
+              <!-- <label class="c-checkbox">Channels
                             <input type="checkbox">
                             <span class="checkmark"></span>
                         </label> -->
-                        <label (click)="changeFilter('subscriptions')" class="c-checkbox">Following
-                            <input type="radio" value="subscriptions" [checked]="this._filter == 'subscriptions'" name="subscriptions">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label (click)="changeFilter('subscriptions')" class="c-checkbox">Followers
-                            <input type="radio" value="subscriptions" [checked]="this._filter == 'subscriptions'" name="subscriptions">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label (click)="changeFilter('Network')" class="c-checkbox">Network
+              <!-- <label (click)="changeFilter('subscriptions')" class="c-checkbox">Following
+                <input type="radio" value="subscriptions" [checked]="this._filter == 'subscriptions'"
+                  name="subscriptions">
+                <span class="checkmark"></span>
+              </label>
+              <label (click)="changeFilter('subscriptions')" class="c-checkbox">Followers
+                <input type="radio" value="subscriptions" [checked]="this._filter == 'subscriptions'"
+                  name="subscriptions">
+                <span class="checkmark"></span>
+              </label> -->
+              <!-- <label (click)="changeFilter('Network')" class="c-checkbox">Network
                             <input type="radio" value="Network" [checked]="this._filter == 'Network'" name="Network">
                             <span class="checkmark"></span>
                         </label>
                         <label (click)="changeFilter('Request')" class="c-checkbox">Request
                             <input type="radio" value="Request" [checked]="this._filter == 'Request'" name="Request">
                             <span class="checkmark"></span>
-                        </label>
-                    </div>
-                </form>
+                        </label> -->
             </div>
+          </form>
         </div>
+      </div>
 
-    </div> 
+    </div>
     <div class="o-center-block">
-        <div class="o-card o-noti-title">
-            <div class="o-noti-title__text">
-                <div class="caption-medium float-left">Notification</div>
-                <span class="o-notification-count text-md white float-left" title="Unread Notification"> {{opspot.notifications_count}}</span>
-            </div>
-            <div class="o-noti-title__action">
-                <a href="#" class="text-sm primary" title="Mark all as read">Mark all as read</a>
-                <!-- <a href="#" class="o-noti-settings" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
-            </div>
+      <div class="o-card o-noti-title">
+        <div class="o-noti-title__text">
+          <div class="caption-medium float-left">Notification</div>
+          <span class="o-notification-count text-md white float-left" title="Unread Notification">
+            {{opspot.notifications_count}}</span>
         </div>
-        <opspot-notification
-        *ngFor="let notification of notifications"
-        [notification]="notification"
-      ></opspot-notification>
-    
-      <infinite-scroll
-        distance="25%"
-        (load)="load()"
-        [moreData]="moreData"
-        [inProgress]="inProgress"
-        *ngIf="visible"
-        >
+        <div class="o-noti-title__action">
+          <a href="javascript:void(0)" class="text-sm primary" title="Mark all as read">Mark all as read</a>
+          <!-- <a href="#" class="o-noti-settings" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
+        </div>
+      </div>
+      <opspot-notification *ngFor="let notification of notifications" [notification]="notification">
+      </opspot-notification>
+
+      <infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress" *ngIf="visible">
       </infinite-scroll>
     </div>
-    <div class="o-right-block hidden-mob"></div> 
+    <div class="o-right-block hidden-mob">
+      <app-activity-widget></app-activity-widget>
+    </div>
   </div>
 </div>
 
 <div class="m-notifications--load-new mdl-color--blue-grey-50" *ngIf="opspot.notifications_count > 0">
-  <a *ngIf="!inProgress" (click)="load(true)"> 
-    <span> {{opspot.notifications_count}}</span> 
-    <span i18n="@@NOTIFICATIONS__NOTIFICATIONS__LOAD_NEW_BUTTON">New Notifications</span>  
+  <a *ngIf="!inProgress" (click)="load(true)">
+    <span> {{opspot.notifications_count}}</span>
+    <span i18n="@@NOTIFICATIONS__NOTIFICATIONS__LOAD_NEW_BUTTON">New Notifications</span>
   </a>
-  <a *ngIf="inProgress"> 
-    <span i18n="@@NOTIFICATIONS__NOTIFICATIONS__LOADING">Loading Notifications...</span>  
+  <a *ngIf="inProgress">
+    <span i18n="@@NOTIFICATIONS__NOTIFICATIONS__LOADING">Loading Notifications...</span>
   </a>
 </div>
 <!-- <div class="" #notificationGrid >
@@ -160,24 +170,15 @@
 
 </div> -->
 
-<div *ngIf="loadOnDemand"  #notificationGrid >
+<div *ngIf="loadOnDemand" #notificationGrid>
 
-    <div >
-  
-    <opspot-notification
-      *ngFor="let notification of notifications"
-      [notification]="notification"
-    ></opspot-notification>
-  
-    <infinite-scroll
-      distance="25%"
-      (load)="load()"
-      [moreData]="moreData"
-      [inProgress]="inProgress"
-      *ngIf="visible"
-      >
-    </infinite-scroll>
-  
-    </div>
-  
+  <div class="o-drop__body">
+
+    <opspot-notification *ngFor="let notification of notifications" [notification]="notification"></opspot-notification>
+
+    <!-- <infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress" *ngIf="visible">
+    </infinite-scroll> -->
+
   </div>
+
+</div>

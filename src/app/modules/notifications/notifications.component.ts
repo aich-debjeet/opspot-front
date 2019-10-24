@@ -11,7 +11,8 @@ import { NotificationService } from './notification.service';
 @Component({
   moduleId: module.id,
   selector: 'opspot-notifications',
-  templateUrl: 'notifications.component.html'
+  templateUrl: 'notifications.component.html',
+  styleUrls:['notifications.component.scss']
 })
 
 export class NotificationsComponent {
