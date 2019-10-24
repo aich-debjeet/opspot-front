@@ -4,10 +4,10 @@
         <div class="o-portfolio-action">
             <div class="o-portfolio-action__icons hidden-mob">
                 <ul>
-                  <li><i class="icon-image icon-hover"></i></li>
-                  <li><i class="icon-film icon-hover"></i></li>
-                  <li><i class="icon-mic icon-hover"></i></li>
-                  <li><i class="icon-file-text icon-hover"></i></li>
+                    <li><i class="icon-image icon-hover"></i></li>
+                    <li><i class="icon-film icon-hover"></i></li>
+                    <li><i class="icon-mic icon-hover"></i></li>
+                    <li><i class="icon-file-text icon-hover"></i></li>
                 </ul>
             </div>
             <form class="visible-mob">
@@ -23,19 +23,17 @@
             </form>
             <div class="o-portfolio-action__search">
                 <div class="form-group c-form_righticon-lg">
-                    <input type="text" class="form-control form-control-lg" placeholder="Serach">
+                    <input type="text" class="form-control form-control-lg" placeholder="Search" [(ngModel)]="q"
+                        name="q" autocomplete="off" #searchInput>
                     <span class="c-svg_eye"><i class="icon-search"></i></span>
                 </div>
             </div>
-        </div><!--filter and search section-->
-        <opspot-masonry-container [entities]="entities"></opspot-masonry-container>
+        </div>
+        <!--filter and search section-->
+        <opspot-masonry-container [entities]="filteredArray"></opspot-masonry-container>
 
         <!-- TODO: load more -->
-        <infinite-scroll
-            distance="25%"
-            (load)="searchMore()"
-            [moreData]="moreData"
-            [inProgress]="inProgress"
-        ></infinite-scroll>
+        <infinite-scroll distance="25%" (load)="searchMore()" [moreData]="moreData" [inProgress]="inProgress">
+        </infinite-scroll>
     </div>
 </section>

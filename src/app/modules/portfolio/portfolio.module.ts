@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 // modules
 import { CommonModule } from '../../common/common.module';
 import { LegacyModule } from '../legacy/legacy.module';
+import { FormsModule } from '@angular/forms';
 
 // components
 import { PortfolioComponent } from './portfolio.component';
@@ -21,7 +22,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
     LegacyModule,
-    PostMenuModule
+    PostMenuModule,
+    FormsModule
   ]
 })
 export class PortfolioModule { }
