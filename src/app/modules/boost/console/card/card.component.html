@@ -1,118 +1,73 @@
-<opspot-card *ngIf="boost.entity"
-  [object]="boost.entity"
-  [flags]="{ hideTabs: true }"
-  hostClass="mdl-card mdl-shadow--2dp"
-></opspot-card>
+<div class="o-card feed">
+    <div class="feed-head">
+        <a class="o-avatar"><img [src]="opspot.cdn_url + 'icon/' + boost.owner.guid + '/medium/' + getOwnerIconTime()" alt=""></a>
+        <div class="o-avatar__info">
+            <div class="o-avatar-det-block">
+                <span class="text-md grey o-posts-det"><a class="o-avatar__name">{{boost.owner.name}}</a></span>
+            </div>
+            <div class="grey m-l-8 o-posts-tym">
+                <span>{{boost.time_created * 1000 | date:'medium'}}</span> 
+                <span class="o-posts-public-private"><i class="icon-public"></i></span>
+            </div>
+        </div><!--avatar info end-->
+        <div class="o-posts-discription">
+            <p class="text-md grey-darker" [innerHtml]="boost.entity.message | tags"> 
+            </p>
+        </div>
+    </div><!-- feed head end -->
+    <div class="feed-media" *ngIf="boost?.entity?.custom_data" [routerLink]="['/media', boost.guid]">
+        <a *ngFor="let media of boost.entity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+            <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
+            <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
+              (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+            <img [src]="media.thumbnail_src" alt="" class="feed-media__img" *ngIf="media.entity_type === 'video'"
+              (error)="media.thumbnail_src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+            <div *ngIf="i >= 2 && boost?.entity?.custom_data.length > 4" class="feed-media-overlay">
+              <h3 class="white">+{{ boost.entity.custom_data.length - 3}}</h3>
+            </div>
+            <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
+              <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+            </div>
+          </a>
+    </div><!--feed media end-->
+    <div class="o-boost-console-boosted-details">
+        <div class="o-boost-console-boosted-details__left">
+            <div class="mr-30">
+                <div class="text-sm grey">
+                    Views so far 
+                </div>
+                <div class="text-sm f500">
+                    {{boost.entity.impressions}} out of {{boost.impressions}} 
+                </div>
+            </div>
+            <div *ngIf="boost.state !=='rejected'">
+                <div class="text-sm grey">
+                    Target
+                </div>
+                <div class="text-sm f500">
+                    {{boost.impressions}}
+                </div>
+            </div>
+            <div *ngIf="boost.state == 'rejected'">
+                <div class="text-sm grey">
+                    Boosted Status
+                </div>
+                <!-- <div class="text-sm f500">
+                    Rejected<span class="icon-info"></span> 
+                </div> -->
+                <div>
+                    <span class="text-sm f500">{{boost.state}}
 
-<div class="m-boost-card--manager">
-  <!-- Destination, if incoming P2P -->
-  <div *ngIf="type == 'p2p' && !isIncoming()"
-    class="m-boost-card--manager-item"
-  >
-    <i class="material-icons">perm_identity</i>
-    <a [routerLink]="['/', boost.destination.username]">@{{boost.destination.username}}</a>
-  </div>
-
-  <!-- Impressions, if applicable -->
-  <div *ngIf="boost.impressions"
-    class="m-boost-card--manager-item m-boost-card--impressions"
-  >
-    <i class="material-icons">remove_red_eye</i>
-    <ng-container i18n="@@M__COMMON__VIEWS_WITH_COUNT">{{ boost.impressions | number }} views</ng-container>
-  </div>
-
-  <div *ngIf="boost.handler !== 'content' && boost.impressions"
-    class="m-boost-card--manager-item m-boost-card--met-impressions"
-  >
-    <i class="material-icons">done</i>
-    <ng-container *ngIf="boost.state !== 'completed'; else completedBlock" i18n="@@BOOST__CONSOLE__CARD__VIEWS_SO_FAR">{{ boost.met_impressions | number }} views so far</ng-container>
-    <ng-template #completedBlock i18n="@@BOOST__CONSOLE__CARD__VIEWS_DELIVERED">{{ boost.met_impressions | number }} views delivered</ng-template>
-  </div>
-
-  <!-- USD bid, if applicable -->
-  <div *ngIf="boost.method == 'usd'"
-    class="m-boost-card--manager-item"
-  >
-    <i class="material-icons">attach_money</i>
-    <ng-container i18n="@@BOOST__CONSOLE__CARD__USD_VALUE">{{ boost.bid / 100 | currency:'USD':true }} USD</ng-container>
-  </div>
-
-  <!-- Points bid, if applicable -->
-  <div *ngIf="boost.method == 'points'"
-    class="m-boost-card--manager-item"
-  >
-    <span class="icon-ops-wallet">
-                
-                </span>
-    <ng-container i18n="@@BOOST__CONSOLE__CARD__POINTS_VALUE">{{ boost.bid | number }} points</ng-container>
-  </div>
-
-  <div *ngIf="boost.method == 'tokens'"
-    class="m-boost-card--manager-item m-boost-card--bid"
-  >
-    <span class="icon-ops-wallet">
-                
-                </span>
-    <ng-container i18n="@@BOOST__CONSOLE__CARD__TOKENS_VALUE">{{ boost.bid | token:18 | number }} tokens</ng-container>
-  </div>
-
-  <!-- State (non-P2P or incoming P2P) -->
-  <div *ngIf="type != 'p2p' || !isIncoming()"
-    class="m-boost-card--manager-item m-boost-card--state"
-  >
-    <i class="material-icons">hourglass_empty</i>
-    {{ boost.state }}
-  </div>
-
-  <!-- Facebook crosspost -->
-  <div *ngIf="boost.postToFacebook"
-    class="m-boost-card--manager-item m-boost-card--post-to-facebook"
-  >
-    <svg width="32" height="32" viewBox="-2 -2 32 32" class="m-facebook-icon">
-      <path d="M17.9 14h-3v8H12v-8h-2v-2.9h2V8.7C12 6.8 13.1 5 16 5c1.2 0 2 .1 2 .1v3h-1.8c-1 0-1.2.5-1.2 1.3v1.8h3l-.1 2.8z"></path>
-    </svg>
-  </div>
-
-  <!-- Boost creation time, if not scheduled -->
-  <div *ngIf="!boost.scheduledTs"
-    class="m-boost-card--manager-item"
-  >
-    <i class="material-icons">access_time</i>
-    {{ boost.time_created * 1000 | date: 'short' }}
-  </div>
-
-  <!-- Actions -->
-  <div *ngIf="boost.scheduledTs"
-    class="m-boost-card--manager-item"
-  >
-    <i class="material-icons">access_alarm</i>
-    {{ boost.scheduledTs * 1000 | date: 'short' }}
-  </div>
-
-  <div *ngIf="canAccept() || canReject() || canRevoke()"
-    class="m-boost-card--manager-item m-boost-card--manager-item--buttons"
-  >
-    <button *ngIf="canRevoke()"
-      class="mdl-button mdl-button--raised mdl-color--red-600 mdl-color-text--white"
-      (click)="revoke()"
-      i18n="@@BOOST__CONSOLE__CARD__REVOKE_ACTION"
-    >Revoke</button>
-
-    <button *ngIf="canReject()"
-      class="mdl-button mdl-button--raised mdl-color--red-600 mdl-color-text--white"
-      (click)="reject()"
-      i18n="@@M__ACTION__REJECT"
-    >Reject</button>
-
-    <button *ngIf="canAccept()"
-      class="mdl-button mdl-button--raised mdl-color--green-400 mdl-color-text--white"
-      (click)="accept()"
-      i18n="@@M__ACTION__ACCEPT"
-    >Accept</button>
-  </div>
-</div>
-
-<div class="m-boost-card--rejection-reason" *ngIf="boost.rejection_reason && boost.rejection_reason != -1">
-  <i class="material-icons">warning</i>
-  <ng-container i18n="@@BOOST__CONSOLE__CARD__PREVIOUS_REJECTION">Your boost was rejected: {{ findReason(boost.rejection_reason)?.label }}</ng-container>
+                    </span>
+                    <!-- <span class="tooltiptext">
+                        Encourages violence
+                        among users Learn more
+                    </span> -->
+                </div>
+            </div>
+        </div>
+        <div class="o-boost-console-boosted-details__right" *ngIf="boost.state !=='rejected'">
+            <button type="button" class="boost-button btn btn-sm"><span class="text-md">Boosted</span></button>
+        </div>
+    </div>
 </div>
