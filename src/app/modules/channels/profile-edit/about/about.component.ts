@@ -32,15 +32,15 @@ export class AboutComponent implements OnInit {
     //set privacy
   }
 
-  changePrivacy(e, arg) {
-    if (arg === 'dob') {
-      this.privacy.dob = e;
-      this.toggleDob = !this.toggleDob;
-    } else if (arg === 'height') {
-      this.privacy.height = e;
-      this.toggleHeight = !this.toggleHeight;
-    }
-  }
+  // changePrivacy(e, arg) {
+  //   if (arg === 'dob') {
+  //     this.privacy.dob = e;
+  //     this.toggleDob = !this.toggleDob;
+  //   } else if (arg === 'height') {
+  //     this.privacy.height = e;
+  //     this.toggleHeight = !this.toggleHeight;
+  //   }
+  // }
 
   async load() {
     // TODO @shashi: create model for type about
@@ -50,18 +50,22 @@ export class AboutComponent implements OnInit {
     this.model.dob = new Date(dob);
     this.model.description = response.about.description;
     this.model.gender = response.about.gender;
-    this.model.dob_visibility = response.about.dob_visibility;
-    this.privacy.dob = response.about.dob_visibility;
-    this.privacy.height = response.about.height_and_weight_visibility;
-    this.model.height_and_weight_visibility =
-      response.about.height_and_weight_visibility;
+    // this.model.dob_visibility = response.about.dob_visibility;
+    // this.privacy.dob = response.about.dob_visibility;
+    // this.privacy.height = response.about.height_and_weight_visibility;
+    // this.model.height_and_weight_visibility = response.about.height_and_weight_visibility;
+    this.model.dob_visibility = 'everyone';
+    this.privacy.dob = 'everyone';
+    this.privacy.height = 'everyone';
     this.model.height = response.about.height;
     this.model.weight = response.about.weight;
     const languages = [];
-    response.about.language.map(el => {
-      languages.push({ display: el, value: el });
-    });
-    this.model.languages = languages;
+    if (response.about.languages && response.about.languages.length > 0) {
+      response.about.languages.map(el => {
+        languages.push({ display: el, value: el });
+      });
+      this.model.languages = languages;
+    }
   }
 
   onSubmit(e) {
@@ -75,10 +79,7 @@ export class AboutComponent implements OnInit {
     } else {
       this.aboutError.dobInvalid = true;
     }
-    if (
-      new Date().getFullYear() - new Date(this.model.dob).getFullYear() <
-      10
-    ) {
+    if (new Date().getFullYear() - new Date(this.model.dob).getFullYear() < 10) {
       this.aboutError.dob = true;
     }
 
@@ -94,7 +95,7 @@ export class AboutComponent implements OnInit {
           description: this.model.description,
           dob: dob,
           gender: this.model.gender,
-          language: this.model.languages.map(el => el.value),
+          languages: this.model.languages.map(el => el.value),
           height: this.model.height,
           weight: this.model.weight,
           dob_visibility: this.privacy.dob,
