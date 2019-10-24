@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Session } from '../../services/session';
 import { Reason, rejectionReasons } from '../../controllers/admin/boosts/rejection-reasons';
 
@@ -13,6 +13,7 @@ export class NotificationComponent {
 
   notification: any;
   opspot = window.Opspot;
+  @Input() status: boolean;
 
   constructor(public session: Session) { }
 
@@ -20,6 +21,7 @@ export class NotificationComponent {
     this.notification = value;
     console.log(this.notification)
   }
+  set
 
   openMessengerWindow(event) {
     if (event) {

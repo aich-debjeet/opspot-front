@@ -7,6 +7,7 @@ import { OpspotTitle } from '../../services/ux/title';
 import { Client } from '../../services/api/client';
 import { Session } from '../../services/session';
 import { NotificationService } from './notification.service';
+import { map as _map} from 'lodash';
 
 @Component({
   moduleId: module.id,
@@ -31,6 +32,7 @@ export class NotificationsComponent {
 
   opspot: any = window.Opspot;
   paramsSubscription: Subscription;
+  markedAllTrue:boolean;
   
   constructor(
     public session: Session,
@@ -135,5 +137,21 @@ export class NotificationsComponent {
       this._filter = filter;
       this.notifications = [];
       this.load(true);
+  }
+  markAllRead(){
+    console.log(this.notifications);
+    let list = [];
+    if(this.notifications.length > 0){
+      list = _map(this.notifications, 'uuid');
+      console.log(list)
+    }
+    this.client.post(`api/v1/notifications/all/read`, list)
+    .then((data: any) => {
+      if(data.status === 'success')
+      this.markedAllTrue = true;
+    })
+    .catch((e) => {
+      alert(e);
+    });;
   }
 }
