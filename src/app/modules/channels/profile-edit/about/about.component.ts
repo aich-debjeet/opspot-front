@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AboutComponent implements OnInit {
   month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  activeUser = window.Opspot.user;
 
   constructor(private client: Client, public router: Router) {
     this.data = ['Kannada', 'English', 'Hindi', 'Tamil'];

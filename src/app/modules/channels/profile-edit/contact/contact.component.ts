@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+  activeUser = window.Opspot.user;
   constructor(
     private client: Client,
     private router: Router

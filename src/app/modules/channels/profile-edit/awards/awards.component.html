@@ -102,7 +102,7 @@
     
     
        <div class="o-prof-edit-actions" style="padding-left:12px; ">
-          <button type="button" class="btn btn-outline-primary btn-lg ">Cancel</button>
+          <button type="button" class="btn btn-outline-primary btn-lg " [routerLink]="['/', activeUser?.username]">Cancel</button>
           <button type="button" class="btn btn-primary btn-lg btn--cancel" (click)="onSubmit(f)">Update</button>
       </div>
     </div>

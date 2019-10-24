@@ -97,11 +97,8 @@
         <p *ngIf="errWork&&submitted" class="error text-sm">Please add valid dates</p>
         <p *ngIf="errEndDate&&submitted" class="error text-sm">Enddate is required</p>
     
-    
-    
-    
         <div class="o-prof-edit-actions" style="padding-left:12px; ">
-            <button type="button" class="btn btn-outline-primary btn-lg ">Cancel</button>
+            <button type="button" class="btn btn-outline-primary btn-lg " [routerLink]="['/', activeUser?.username]">Cancel</button>
             <button type="button" class="btn btn-primary btn-lg btn--cancel" (click)="onSubmit(f)">Update</button>
         </div>
     </div>

@@ -22,7 +22,7 @@
           </div>
           <div class="o-prof-edit-actions">
               <button type="button" (click)="onSubmit()" class="btn btn-primary btn-lg">Save Changes</button>
-              <button type="button" class="btn btn-outline-primary btn-lg btn--cancel">Cancel</button>
+              <button type="button" class="btn btn-outline-primary btn-lg btn--cancel" [routerLink]="['/', activeUser?.username]">Cancel</button>
           </div><!-- prof edit actions end -->
       </form>
   </div>

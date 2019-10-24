@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class GeneralComponent implements OnInit {
 
+  activeUser = window.Opspot.user;
   items;
   data = [];
   model = {
