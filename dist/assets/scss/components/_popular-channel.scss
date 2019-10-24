@@ -1,0 +1,41 @@
+.o-card--popular-channel{
+    padding: 18px;
+    background: $white;
+}
+.o-popular-channel{
+    width: 100%;
+    list-style: none;
+    margin-top:16px;
+}
+.o-popular-channel__items{
+    list-style-type: none;
+    display: block;
+    display: flex;
+    margin-bottom: 14px;
+    a{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+}
+.o-popular-channel__items:nth-child(4){
+    margin-bottom: 0px;
+}
+// channel list style
+
+.o-pop-channel-avatar{
+    height: 40px;	
+    width: 48px;	
+    border-radius: 8px;	
+    background-size:cover;
+}
+.o-pop-channel-name{
+    width: calc(100% - 102px);
+    margin-left:11px;
+}
+.o-fontRemove{
+    font-size:14px !important;
+    color:#4c4949;
+    padding-right:7px;
+}

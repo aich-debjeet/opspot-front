@@ -1773,7 +1773,7 @@
         <target>Tải phần trước đó</target>
       </trans-unit>
       <trans-unit id="OPSPOT__COMMENTS__START_CONVERSATION">
-        <source>Start the conversation!</source>
+        <source>Be the first one to comment</source>
         <target>Bắt đầu cuộc đối thoại!</target>
       </trans-unit>
       <trans-unit id="COMMON__POST_MENU__UNFEATURE">

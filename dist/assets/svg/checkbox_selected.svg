@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Checkbox Base</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M2.35355339,6.14644661 C2.15829124,5.95118446 1.84170876,5.95118446 1.64644661,6.14644661 C1.45118446,6.34170876 1.45118446,6.65829124 1.64644661,6.85355339 L4.14644661,9.35355339 C4.34170876,9.54881554 4.65829124,9.54881554 4.85355339,9.35355339 L10.3535534,3.85355339 C10.5488155,3.65829124 10.5488155,3.34170876 10.3535534,3.14644661 C10.1582912,2.95118446 9.84170876,2.95118446 9.64644661,3.14644661 L4.5,8.29289322 L2.35355339,6.14644661 Z" id="path-1"></path>
+    </defs>
+    <g id="Signup" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop/Landingpage/flow3/signup/v1-without-label-entered" transform="translate(-216.000000, -714.000000)">
+            <g id="Checkbox-selected" transform="translate(216.000000, 714.000000)">
+                <g id="Checkbox-Base-Copy">
+                    <rect id="checkbox" fill="#0288D1" x="0" y="0" width="16" height="16" rx="2"></rect>
+                    <g id="Icon/check" transform="translate(2.000000, 2.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="Colour/Fill/BG-Light-" mask="url(#mask-2)" fill="#FAFAFA" fill-rule="nonzero">
+                            <rect id="Colour/Fill/Light" x="0" y="0" width="12" height="12" rx="2"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

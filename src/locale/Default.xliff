@@ -6280,7 +6280,7 @@
       </trans-unit>
       <trans-unit id="OPSPOT__COMMENTS__START_CONVERSATION" datatype="html">
         <source>
-    Start the conversation!
+    Be the first one to comment
   </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/comments/list/list.component.ts</context>

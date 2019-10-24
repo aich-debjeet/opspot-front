@@ -20321,6 +20321,7 @@ m-wire-channel {
       -webkit-flex-grow: 1;
               flex-grow: 1;
       letter-spacing: 0.5px;
+      font-size: 20px;
       text-align: left; }
       m-wire-channel .m-wire-channel--call-to-action .m-wire-channel--cta-label > span {
         display: block; }
@@ -27524,7 +27525,7 @@ li{
   cursor: pointer;
 }
 .o-settings-block__content {
-  width: calc(100% - 176px);
+  // width: calc(100% - 176px);
   padding: 35px 36px;
 }
 

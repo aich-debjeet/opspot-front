@@ -1,0 +1,464 @@
+// profile edit
+.o-prof-edit-sec{
+    width :100%;
+    background: #ECEFF1;
+    min-height: 100vh;
+    height: 100%;
+}
+.o-prof-edit{
+    min-height: 100%;	
+    width: 100%;
+    max-width: 1070px;	
+    border-radius: 4px;	
+    overflow: hidden;
+    margin: 0px auto;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+		width: 100%;
+        min-height: 100vh;
+	}
+}
+
+// HEAD SECTION
+
+.o-prof-edit-head{
+    width: 100%;
+    padding: 22px 46px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        flex-direction: column;
+        padding: 20px 0px 0px;
+	}
+    &__title{
+        width: 50%;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            width: 100%;
+            padding: 15px;
+            background: #fff;
+        }
+    }
+}
+
+// completion progress
+
+.o-prof-edit-head__progress-bar{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        background: $grey-light;
+        padding: 15px;
+    }
+}
+
+// prof edit body part (edit style)
+
+.o-prof-edit-body{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: #fff;
+    min-height: calc(100vh - 162px);
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        
+    }
+    .form-group{
+        margin-bottom: 12px!important;
+        label{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
+.o-prof-edit-title{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+.o-prof-edit-actions{
+    width: 100%;
+    text-align: left;
+    padding-right: 52px;
+    margin-top: 50px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 0px;
+    }
+    .btn--cancel{
+        margin-left: 12px;
+    }
+}
+.w-xl{
+    width: 498px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
+}
+.w-lg{
+    width: 273px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
+}
+.w-md{
+    width: 212px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
+}
+.w-sm{
+    width: 162px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
+}
+
+.o-prof-edit-item__title{
+    color: $grey-dark;
+    font-size: 13px;	
+    line-height: 20px;
+    margin-bottom: 6px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+.o-prof-edit-privacy{
+    margin-left: 20px;
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        // display: none;
+    }
+}
+.o-prof-edit-privacy__drop{
+    display: none;
+    height: 131px;
+    width: 175px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 10px 0 rgba(144, 164, 174, 0.16), 0 1px 12px 0 rgba(144, 164, 174, 0.18), 0 3px 5px 0 rgba(144, 164, 174, 0.2);
+    padding: 14px 17px;
+    position: absolute;
+    top: -57px;
+    left: 137%;
+    .o-drop__arrow{
+        text-align: right;
+        position: absolute;
+        top: 56px;
+        right: 165px;
+        transform: rotate(-90deg);
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            text-align: right;
+            position: absolute;
+            top: -11px;
+            right: 13px;
+            // -webkit-transform: rotate(-90deg); 
+            transform: none; 
+        }
+    }
+}
+.o-prof-edit-privacy-radio{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 0px!important;
+}
+
+.o-prof-edit-single-item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    .o-phone__number{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: row;
+    }
+}
+
+// general
+
+.o-prof-general{
+    width: 100%;
+    margin-top: 25px;
+}
+.form-gorup--general-edit{
+    width: 212px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
+}
+.form-gorup--general--textarea{
+    width: 52%;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
+}
+.o-prof-edit-skill{
+    height: 153px;	
+    width: 496px;	
+    border: 1px solid #90A4AE;	
+    border-radius: 4px;
+    resize: none;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
+    .o-skill-tag{
+        padding: 2px 8px;
+    }
+}
+
+// about
+
+.o-prof-edit-about{
+    width: 100%;
+    margin-top: 25px;
+}
+.o-prof-edit-about-descr{
+    width: 100%;
+    height: 94px;
+    border: 1px solid grey;
+    border-radius: 4px;
+    text-align: left;
+    padding: 15px 17px;
+}
+.o-character-limit{
+    float: right;
+    font-size: 10px;
+}
+.o-prof-edit-dob{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    flex-direction: row;
+    div:nth-child(2){
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+}
+.o-prof-edit-eternity{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.o-prof-edit-hght-wght{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    div:nth-child(2){
+        margin-left: 6px;
+    }
+}
+
+// contact
+
+.o-prof-edit-contact{
+    width: 100%;
+    margin-top: 25px;
+}
+.edit-ico{
+    width:10px;
+    position: absolute;
+    i{
+        font-size: 16px;
+        color: $primary;
+    }
+}
+
+// // work education awards
+
+.o-prof-edit-block{
+    width: 100%;
+    margin-top: 25px;
+    width: 452px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
+}
+.o-prof-edit-wea{
+    width: 100%;
+}
+.o-wea-block{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+    margin: 25px 0px;
+    cursor: pointer;
+}
+.o-wea-logo{
+    height: 72px;	
+    width: 72px;	
+    border: 1px solid #ECEFF1;	
+    border-radius: 2px;
+    overflow: hidden;
+    img{
+        width: 100%;
+    }
+}
+.o-wea-info{
+    width: calc(100% - 100px);
+    margin-left: 27px;
+    div{
+        margin: 3px 0px;
+    }
+}
+.o-wea-edit{
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+    i{
+        font-size: 16px;
+    }
+}
+.o-wea-block:hover .o-wea-edit{
+    display: block;
+}
+.o-edit-wea{
+    background: #fff;
+    width: 100%;
+    height: 600px;
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 24px 34px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        padding: 24px 15px;
+    }
+}
+#work{
+    position: relative;
+}
+.o-wea-back{
+    width: 14px;
+    margin-right: 17px;
+    i{
+        font-size: 24px;
+        color: $grey-dark;
+    }
+}
+.o-wea-back:focus .o-edit-wea{
+    display: none;
+}
+
+// wea add block
+
+.o-wea-add-block{
+    width: 100%;
+    margin-top: 25px;
+    display: flex;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: column;
+    }
+    &__left{
+        width: 315px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+        }
+    }
+    &__right{
+        width: calc(100% - 315px);
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+        }
+    }
+}
+.o-toggle-check{
+    margin: 25px 0px;
+}
+
+.o-wea-date{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    flex-direction: row;
+    div:nth-child(2){
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+    .form-group{
+        width: 132px;
+    }
+    .o-to{
+        margin-left: 12px;
+    }
+}
+
+// wea logo upload
+
+.o-wea-logo-upload{
+    height: 118px;	
+    width: 118px;	
+    border: 1px solid #ECEFF1;	
+    border-radius: 2px;
+    margin-top: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__attach{
+        width: 42px;
+        height: 42px;
+        border: 1.5px solid #90A4AE;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i{
+            font-size: 26px
+        }
+    }
+}
+.o-wea-logo-img{
+    height: 118px;	
+    width: 118px;	
+    border: 1px solid #ECEFF1;	
+    border-radius: 2px;
+    margin-top: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    img{
+        width: 118px;
+    }
+    &__edit{
+        box-sizing: border-box;
+        height: 23px;
+        width: 23px;
+        border: 1px solid #FFFFFF;
+        background-color: #0288D1;
+        position: absolute;
+        top: -11px;
+        right: -11px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i{
+            font-size: 13px;
+            color: #fff;
+        }
+    }
+}

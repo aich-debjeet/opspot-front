@@ -1,0 +1,113 @@
+//main css
+.o-community-card{
+    display: flex;
+    width: 100%;
+    margin-bottom: 13px;
+    .mr-6{
+        margin-right: 6px;
+    }
+}
+
+//join request css
+.o-community-card-section{
+    // width: 258px;
+    width:100%;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    border: 1px solid #ECEFF1;
+    padding-bottom:27px;
+}
+
+// cover image style
+.o-community-card-cover {
+    img{
+    height: 81px;
+    object-fit: cover;
+    width: 100%;
+    }
+}
+
+//profile image style
+.o-community-card-profile {
+    display: flex;
+    justify-content: center;
+    img{
+        height: 78px;	
+        width: 78px;	
+        border: 2px solid $white;
+        border-radius:50%;
+        position: absolute;
+        margin-top: -45px;
+    }
+}
+
+//header style
+.o-community-card-header{
+    text-align: center;
+    position: relative;
+    padding: 40px 0 10px;
+}
+//skills style
+.o-community-card-skills{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        flex-wrap: wrap;
+    }
+    &__tag{
+        border-radius: 2px;
+        background-color: #ECEFF1;
+        color:$grey ;
+        font-size: 11px;
+        line-height: 13px;
+        padding: 4px 7px;
+        margin: 3px; 
+    }
+
+}
+
+//action style
+.o-community-card-action{
+    text-align: center;
+}
+
+//responsive style
+@include mq($until:$tablet){
+    .o-community-join-request{
+        width:100%;
+        height: calc(110vh - 123px);
+        padding:0;
+    }
+    .o-community-join-request-action{
+        bottom: 0;
+        position: absolute;
+        margin-bottom: 19px;
+    }
+    .o-community-join-request-profile img {
+        height: 92px;
+        width: 92px;
+        margin-top: -45px;
+    }
+    .o-community-join-request-cover img{
+        height: 110px;
+    }
+    .o-community-join-request-header{
+        padding:60px 0 18px; 
+    }
+    .o-community-join-request-skills{
+        padding: 0px 63px;
+        flex-wrap: wrap;
+    }
+    .o-community-join-request-action button:nth-child(1){
+        margin-right: 16px;
+    } 
+    .o-community-join-request-action button{
+        padding: 10px 46px;
+    }
+    .o-community-join-request-memmbers-count {
+        margin: 17px 0 17px;
+    }
+}
