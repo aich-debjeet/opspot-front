@@ -1,60 +1,59 @@
 <div class="container">
-  <div class="o-prof-edit">
-      <div class="o-prof-edit-head">
-          <div class="o-prof-edit-head__title"><h4>Profile Edit</h4></div>
-          <div class="o-prof-edit-head__progress-bar">
-              <div class="text-md">Profile Completion</div>
-              <div class="c-cmplt-prof">
-                  <div class="col-12 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0">
-                      <div class="c-cmplt-prof__progress-bar">
-                          <div class="progress progress--settings" data-percentage="50">
-                              <span class="progress-left">
-                                  <span class="progress-bar"></span>
-                              </span>
-                              <span class="progress-right">
-                                  <span class="progress-bar"></span>
-                              </span>
-                              <div class="progress-value">
-                                  <div class="text-sm primary">
-                                  50%
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div><!-- progress bar end -->
-          </div><!-- profile edit head progress bar end -->
-      </div>
+    <div class="o-prof-edit">
+        <div class="o-prof-edit-head">
+            <div class="o-prof-edit-head__title">
+                <h4>Edit Profile</h4>
+            </div>
+            <div class="o-prof-edit-head__progress-bar">
+                <div class="text-md">Profile Completion</div>
+                <div class="c-cmplt-prof">
+                    <div class="col-12 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0">
+                        <div class="c-cmplt-prof__progress-bar">
+                            <div class="progress progress--settings" data-percentage="50">
+                                <span class="progress-left">
+                                    <span class="progress-bar"></span>
+                                </span>
+                                <span class="progress-right">
+                                    <span class="progress-bar"></span>
+                                </span>
+                                <div class="progress-value">
+                                    <div class="text-sm primary">
+                                        50%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- progress bar end -->
+            </div><!-- profile edit head progress bar end -->
+        </div>
 
-      <div class="o-prof-edit-body">
-          <div class="tabs--prof-edit">
-             <swiper [config]="config" >
-                 <ul class="swiper-wrapper ">
-                   <li class="swiper-slide" >
-                     <a routerLinkActive='swipActive' routerLink='/profile/general'>General Info</a>
-                   </li>
-                   <li class="swiper-slide">
-                      <a routerLinkActive='swipActive' routerLink='/profile/about'>About</a> 
-                    </li>
-                   <li class="swiper-slide">
-                      <a routerLinkActive='swipActive' routerLink='/profile/contact'>Contact</a> 
-                    </li>
-                   <li class="swiper-slide">
-                      <a routerLinkActive='swipActive' routerLink='/profile/work'>Work</a> 
-                    </li>
-                   <li class="swiper-slide">
-                      <a routerLinkActive='swipActive' routerLink='/profile/education'>Education</a> 
-                    </li>
-                   <li class="swiper-slide">
-                      <a routerLinkActive='swipActive' routerLink='/profile/awards'>Awards </a>  
-                    </li>
-                </ul>
-             </swiper>    
-
-             <router-outlet></router-outlet>
-
-          </div>
-       </div> 
-
-  </div>
+        <div class="o-prof-edit-body">
+            <div class="tabs--prof-edit">
+                <swiper [config]="config">
+                    <ul class="swiper-wrapper ">
+                        <li class="swiper-slide">
+                            <a routerLinkActive='swipActive' routerLink='/profile/general'>General Info</a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a routerLinkActive='swipActive' routerLink='/profile/about'>About</a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a routerLinkActive='swipActive' routerLink='/profile/contact'>Contact</a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a routerLinkActive='swipActive' routerLink='/profile/work'>Work</a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a routerLinkActive='swipActive' routerLink='/profile/education'>Education</a>
+                        </li>
+                        <li class="swiper-slide">
+                            <a routerLinkActive='swipActive' routerLink='/profile/awards'>Awards </a>
+                        </li>
+                    </ul>
+                </swiper>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
 </div>
