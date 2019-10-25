@@ -123,7 +123,7 @@
             {{opspot.notifications_count}}</span>
         </div>
         <div class="o-noti-title__action">
-          <a href="javascript:void(0)" class="text-sm primary" title="Mark all as read">Mark all as read</a>
+          <a (click)="markAllRead()" class="text-sm primary" title="Mark all as read">Mark all as read</a>
           <!-- <a href="#" class="o-noti-settings" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
         </div>
       </div>
@@ -174,7 +174,7 @@
 
   <div class="o-drop__body">
 
-    <opspot-notification *ngFor="let notification of notifications" [notification]="notification" [status]="markedAllTrue"></opspot-notification>
+    <opspot-notification *ngFor="let notification of notifications" [notification]="notification"></opspot-notification>
 
     <!-- <infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress" *ngIf="visible">
     </infinite-scroll> -->

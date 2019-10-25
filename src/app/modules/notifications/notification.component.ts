@@ -13,7 +13,7 @@ export class NotificationComponent {
 
   notification: any;
   opspot = window.Opspot;
-  @Input() status: boolean;
+  @Input() status: boolean = true;
 
   constructor(public session: Session) { }
 
@@ -21,7 +21,6 @@ export class NotificationComponent {
     this.notification = value;
     console.log(this.notification)
   }
-  set
 
   openMessengerWindow(event) {
     if (event) {
@@ -35,6 +34,11 @@ export class NotificationComponent {
     return rejectionReasons.find((item: Reason) => {
       return item.code === code;
     });
+  }
+
+  getClasses(){
+    if(this.notification.status === 'unread')
+      return {'o-noti-block--unread': true}
   }
 
 }

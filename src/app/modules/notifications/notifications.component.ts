@@ -32,7 +32,6 @@ export class NotificationsComponent {
 
   opspot: any = window.Opspot;
   paramsSubscription: Subscription;
-  markedAllTrue:boolean;
   
   constructor(
     public session: Session,
@@ -140,18 +139,26 @@ export class NotificationsComponent {
   }
   markAllRead(){
     console.log(this.notifications);
-    let list = [];
+    let list = {
+      uuids:[]
+    };
     if(this.notifications.length > 0){
-      list = _map(this.notifications, 'uuid');
-      console.log(list)
+      list.uuids = _map(this.notifications, 'uuid');
     }
     this.client.post(`api/v1/notifications/all/read`, list)
     .then((data: any) => {
-      if(data.status === 'success')
-      this.markedAllTrue = true;
+      if(data.status === 'success'){
+        this.notifications = this.notifications.map((notification:any) => {
+          if(notification.status === 'unread') {
+            return {...notification, status: 'read'};
+          }
+          return {...notification};
+        });
+
+      }
     })
     .catch((e) => {
       alert(e);
-    });;
+    });
   }
 }
