@@ -7,6 +7,7 @@ import { OpspotTitle } from '../../services/ux/title';
 import { Client } from '../../services/api/client';
 import { Session } from '../../services/session';
 import { NotificationService } from './notification.service';
+import { map as _map} from 'lodash';
 
 @Component({
   moduleId: module.id,
@@ -135,5 +136,28 @@ export class NotificationsComponent {
       this._filter = filter;
       this.notifications = [];
       this.load(true);
+  }
+  markAllRead(){
+    let list = {
+      uuids:[]
+    };
+    if(this.notifications.length > 0){
+      list.uuids = _map(this.notifications, 'uuid');
+    }
+    this.client.post(`api/v1/notifications/all/read`, list)
+    .then((data: any) => {
+      if(data.status === 'success'){
+        this.notifications = this.notifications.map((notification:any) => {
+          if(notification.status === 'unread') {
+            return {...notification, status: 'read'};
+          }
+          return {...notification};
+        });
+
+      }
+    })
+    .catch((e) => {
+      alert(e);
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Session } from '../../services/session';
 import { Reason, rejectionReasons } from '../../controllers/admin/boosts/rejection-reasons';
 
@@ -33,6 +33,11 @@ export class NotificationComponent {
     return rejectionReasons.find((item: Reason) => {
       return item.code === code;
     });
+  }
+
+  getClasses(){
+    if(this.notification.status === 'unread')
+      return {'o-noti-block--unread': true}
   }
 
 }

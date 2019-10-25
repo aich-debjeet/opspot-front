@@ -51,7 +51,7 @@
       {{opspot.notifications_count}}</span>
   </div>
   <div class="o-drop-title__action">
-    <a href="javascript:void(0)" class="text-sm primary" title="Mark all as read">Mark all as read</a>
+    <a (click)="markAllRead()" class="text-sm primary" title="Mark all as read">Mark all as read</a>
     <!-- <a href="#" class="o-drop-title-icons" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
   </div>
 </div>
@@ -123,7 +123,7 @@
             {{opspot.notifications_count}}</span>
         </div>
         <div class="o-noti-title__action">
-          <a href="javascript:void(0)" class="text-sm primary" title="Mark all as read">Mark all as read</a>
+          <a (click)="markAllRead()" class="text-sm primary" title="Mark all as read">Mark all as read</a>
           <!-- <a href="#" class="o-noti-settings" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
         </div>
       </div>
