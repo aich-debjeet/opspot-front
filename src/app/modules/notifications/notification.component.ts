@@ -13,7 +13,6 @@ export class NotificationComponent {
 
   notification: any;
   opspot = window.Opspot;
-  @Input() status: boolean = true;
 
   constructor(public session: Session) { }
 

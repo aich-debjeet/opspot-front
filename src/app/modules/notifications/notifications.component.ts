@@ -138,7 +138,6 @@ export class NotificationsComponent {
       this.load(true);
   }
   markAllRead(){
-    console.log(this.notifications);
     let list = {
       uuids:[]
     };
