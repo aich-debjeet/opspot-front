@@ -155,10 +155,28 @@
                      -->
                 </li>
                 
-                <li class="nav-icon__item">
-                    <a  [routerLink]="['/event/create']" title="Group" class="nav__ico" >
+                <!-- <li class="nav-icon__item">
+                    <a  [routerLink]="['/groups/create']" title="Group" class="nav__ico" >
                         <img src="assets/svg/create.svg" alt=""> 
                     </a>
+                </li> -->
+                <li class="nav-icon__item" #menu>
+                  <a class="nav__ico nav__ico-create" (click)="menu.value = !menu.value">
+                      <i class="icon-create-more"></i>
+                  </a>
+                  <div id="dropdown-create" class="o-drop-create" >
+                      <div class="o-drop-avatar__arrow"><img src="assets/droparrow.png" alt=""></div>
+                      <ul class="o-drop-prof-list" [hidden]="!menu.value">
+                          <li class="o-drop-prof-list__item">
+                              <a [routerLink]="['/groups/create']" class="text-md" (click)="menu.value = false"
+                              >Create Community</a>
+                          </li>
+                          <li class="o-drop-prof-list__item">
+                              <a [routerLink]="['/event/create']" class="text-md" (click)="menu.value = false"
+                              >Create Event</a>
+                          </li>
+                      </ul>
+                  </div><!--avatar dropdown end-->
                 </li>
                 <li class="nav-icon__item">
                     <a class="nav__ico" >

@@ -307,13 +307,7 @@ export class GroupsCreator {
       return user.guid;
     });
      this.group.moderated===false?(this.group.moderated=0):(this.group.moderated=1);
-     
-
-     ///issue  
-    //  console.log(this.group.tags,
-        
-    //   )
-     
+         
      if(Object.values(this.group.tags).length>0){
       this.group.tags=this.group.tags.map(el=>el.value)
      }
