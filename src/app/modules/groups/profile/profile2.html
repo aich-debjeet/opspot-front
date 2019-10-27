@@ -28,7 +28,7 @@
             <app-group-banner class="o-cover o-cover--community hidden-above-tablet" 
             [object]="group"
             [editMode]="editing"
-            [top]="group.banner_position"
+            [top]="group?.banner_position"
             [done]="editDone"
             (added)="add_banner($event)"
 
