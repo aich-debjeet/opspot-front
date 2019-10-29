@@ -9,8 +9,7 @@ import { GroupsService } from '../../../groups-service';
   selector: 'opspot-groups-profile-members-invite',
   inputs: ['_group : group'],
   outputs: ['invited'],
-  templateUrl: 'invite.html',
-  styleUrls: ['invite.scss' ]
+  templateUrl: 'invite.html'
 })
 
 export class GroupsProfileMembersInvite {
