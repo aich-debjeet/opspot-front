@@ -278,10 +278,10 @@
     <div class="o-discussion-actions">
         <opspot-button-thumbs-up [object]="comment" [class.has-count]="comment['thumbs:up:count'] > 0"></opspot-button-thumbs-up>
         <!-- <a href="#" class="o-discussion-actions__link text-sm"><i class="icon-heart"></i>Like</a> -->
-        <div class="dot"></div>
+        <!-- <div class="dot"></div>
         <a   (click)="toggleReplies();"
         *ngIf="comment.can_reply" class="o-discussion-actions__link text-sm">Reply</a>
-        <div class="dot"></div>
+        <div class="dot"></div> -->
         <!-- <div class="o-discussion-actions__tym text-sm">13:00</div> -->
         <span [title]="comment.time_created * 1000 | date: 'medium'" class="o-discussion-actions__tym text-sm" *ngIf="( commentAge$ | async ) as commentAge">{{ commentAge | friendlydatediff }}</span>
 
