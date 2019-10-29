@@ -214,7 +214,7 @@ export class ExploreComponent implements OnInit {
           sync: '1',
           as_activities: '1',
           from_timestamp: '',
-          limit: 10,
+          limit: 24,
           offset: this.offset
         },
         { cache: true }
