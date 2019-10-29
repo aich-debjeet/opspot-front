@@ -20,14 +20,12 @@ import { filter } from "rxjs/operators";
 
 @Component({
   selector: 'm-groups--profile',
-  templateUrl: 'profile2.html',
-  styleUrls: ['profile.component.scss']
- 
+  templateUrl: 'profile2.html'
 })
 
 export class GroupsProfile {
 
- 
+  // dev: boolean = false;
   guid;
   filter = 'activity';
   group;
