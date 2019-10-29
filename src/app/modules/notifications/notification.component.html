@@ -1,4 +1,4 @@
-<div class="o-card o-noti-block">
+<div class="o-card o-noti-block" [ngClass]="getClasses()">
     <div class="o-noti-head">
         <div class="o-noti-head__avatar">
             <a [routerLink]="['/', notification.fromObj.username || '']" *ngIf="notification.fromObj">
