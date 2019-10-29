@@ -92,9 +92,7 @@
     <div class="o-dis-msgs-footer">
 
         <div class="o-dis-msgs-type" >
-            <form (submit)="post($event)" style="width: 100%;
-            margin-top: -9px;
-            border: none;">
+            <form (submit)="post($event)" style="width: 100%; border: none;">
                 <opspot-textarea
                 style="border: none !important"
                   #message="Textarea"
@@ -106,11 +104,11 @@
                   [placeholder]="conversation ? 'Enter your message' : 'Enter your comment'"
                 ></opspot-textarea>
             </form>
-            <div class="o-dis-msgs-type__addon">
+            <!-- <div class="o-dis-msgs-type__addon">
               <a   class="o-dis-msgs-type__link">
                   <i (click)="fileUploaderBtn()" class="icon-plus-circle"></i>
               </a>
-            </div>
+            </div> -->
             <div class="opspot-comment-span mdl-color-text--red-500" *ngIf="!canPost && triedToPost">
               <ng-container i18n="@@M__COMMON__WAIT_UPLOAD">Please wait until the upload is complete.</ng-container>
             </div>
