@@ -1,10 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from '../../services/api';
 
 @Component({
   selector: 'app-portfolio',
+  host: {
+    '(keyup)': 'keyup($event)'
+  },
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss']
 })
@@ -15,6 +18,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   offset: string = '';
   q: string = '';
   type: string = '';
+  filteredArray: Array<Object>;
   entities: Array<Object>;
   requestParams = {
     // TODO @abhijeet check for all valid request params
@@ -28,6 +32,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   username: string;
   inProgress = false;
   moreData: any;
+  @ViewChild('searchInput') searchInput: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -83,22 +88,36 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     this.client.get('api/v2/search', this.requestParams)
       .then((data: any) => {
         const respData: any = data;
-        if (!respData.entities) {
+        if (respData.entities.length == 0) {
           this.moreData = false;
           this.inProgress = false;
           return false;
         }
-        if (this.entities && !refresh) {
-          this.entities = this.entities.concat(respData.entities);
+        if (this.filteredArray && !refresh) {
+          this.filteredArray = this.entities = this.entities.concat(respData.entities);
         } else {
-          this.entities = respData.entities;
+          this.filteredArray = this.entities = respData.entities;
         }
+        this.moreData = true;
         this.offset = data['load-next'];
         this.inProgress = false;
       })
       .catch((e) => {
         this.inProgress = false;
       });
+  }
+  keyup(e) {
+    if (e.keyCode === 13) {
+      console.log(this.q);
+      if (!this.filteredArray || !this.q) {
+        return this.filteredArray = this.entities;
+      }
+      if (this.entities.find((item:any) => item.message.toString().toLowerCase() === this.q.toLowerCase())) {
+        // console.log('Before filter', this.filteredArray)
+        this.filteredArray = this.entities.filter((item:any) => item.message.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1)
+        // console.log('After filter', this.filteredArray)
+      }
+    }
   }
 
 }

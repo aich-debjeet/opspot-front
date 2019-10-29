@@ -1,14 +1,19 @@
 
 <div class="o-card o-prof-info o-prof-info--radius o-prof-info--shadow">
-  <opspot-avatar class="opAvatar"  [object]="user"  [profileEdit]='profEdit'  [editMode]="editing" (added)="upload_avatar($event)"></opspot-avatar>
+  <opspot-avatar
+    class="opAvatar"
+    [object]="user"
+    [profileEdit]='profEdit'
+    [editMode]="editing"
+    (added)="upload_avatar($event)"
+  ></opspot-avatar>
   <div class="o-prof-name">
     <div class="caption-bold f700">{{user.name}}</div>
     <opspot-button-user-dropdown
-    [(user)]="user"
-    *ngIf="session.getLoggedInUser().guid != user.guid"
-  ></opspot-button-user-dropdown>
+      [(user)]="user"
+      *ngIf="session.getLoggedInUser().guid != user.guid"
+    ></opspot-button-user-dropdown>
     <span class="text-md grey">@{{user.username}}</span>
-
     <span class="opspot-button-edit dis-inh" (click)="toggleEditing()" *ngIf="session.getLoggedInUser().guid == user.guid">
       <button [hidden]="editing">Edit Cover</button>
       <button [hidden]="!editing">Save Cover</button>
@@ -16,9 +21,8 @@
   </div>
   <!-- <div class="m-channel--username">
     <h2><span>@</span>{{user.username}}</h2>
- 
   </div> -->
-  <div *ngIf='!isOwner()' class="o-prof-others-action o-prof-others-action--margin">
+  <div *ngIf="!isOwner()" class="o-prof-others-action o-prof-others-action--margin">
     <opspot-button-subscribe [sideBar]="sidebarMsg" [user]="user"  *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != user.guid && !user.blocked "></opspot-button-subscribe>
     <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button> -->
     <button type="button" class="btn btn-outline-primary btn-sm btn--prof">Network</button>
@@ -105,8 +109,6 @@
   </div>
 
 <!-- added new bio part -->
-   
-
 
   <!-- <div class="m-channel--stats  mdl-tabs__tab-bar">
     <a [routerLink]="['/', user.username, 'feed']" class="mdl-tabs__tab mdl-color-text--blue-grey-500" *ngIf="user.activity_count">
@@ -168,59 +170,67 @@
 <!-- adding a new bio -->
 
 <div class="o-card o-bio">
-  <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/general']"><i class="icon-edit-profile f-15"></i></a>
+  <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/about']"><i class="icon-edit-profile f-15"></i></a>
   <span class="o-bio__title caption-medium">About {{user.name}}</span>
-  <span *ngIf="!user.briefdescription" class="text-md">
-      <a href="#" class="primary">Tell something about yourself</a>
+  <span *ngIf="isOwner() && !user?.about?.description" class="text-md">
+    <a [routerLink]="['/profile/about']" class="primary">Tell something about yourself</a>
   </span>
-  <span  class="text-md">
-     {{user.briefdescription}}
-  </span>
-  <!-- <ul class="o-bio__info">
+  <span  class="text-md">{{user?.about?.description}}</span>
+  <ul class="o-bio__info">
       <li class="o-bio-info__item">
-          <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
-          <span class="text-md float-left" *ngIf='!user.city'><a class="primary">Add Location</a></span>
-          <span class="text-md float-left">{{user.city}}</span>
-        </li>
-      <li class="o-bio-info__item">
-          <span class="o-bio-info_ico"><i class="icon-mail"></i></span>
-          <span class="text-md float-left"><a class="primary">Add Email</a></span><a class="primary">
-      </a></li><a class="primary">
-      <li class="o-bio-info__item">
-          <span class="o-bio-info_ico"><i class="icon-phone"></i></span>
-          <span class="text-md float-left"><a class="primary"> Add Number</a></span>
+        <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
+        <span class="text-md float-left" *ngIf="isOwner() && !user.location" [routerLink]="['/profile/contact']">
+          <a class="primary">Add Location</a>
+        </span>
+        <span class="text-md float-left">{{user.location | titlecase}}</span>
       </li>
-      </a><li class="o-bio-info__item"><a class="primary">
-          <span class="o-bio-info_ico"><i class="icon-globe"></i></span>
-          <span class="text-md float-left"></span></a><a class="primary">Add Website
-      </a></li><a class="primary">
-      </a><li class="o-bio-info__item m-t-9"><a class="primary">
-          </a><div class="o-bio-info-left"><a class="primary">
-              <div class="text-sm grey o-gender-title">Gender</div>
-              </a><div class="text-md o-gender-value"><a class="primary"></a><a href="#" class="primary">Select</a></div>
-          </div>
-          <div class="o-bio-info-right">
-              <div class="text-sm grey o-dob-title">Birthday</div>
-              <div class="text-md o-dob-value"><a href="#" class="primary">Select</a></div>
-          </div>
+      <li class="o-bio-info__item">
+        <span class="o-bio-info_ico"><i class="icon-mail"></i></span>
+        <span class="text-md float-left" *ngIf="isOwner() && !user.email" [routerLink]="['/profile/contact']">
+          <a class="primary">Add Email</a>
+        </span>
+        <span class="text-md float-left">{{user.email}}</span>
+      </li>
+      <li class="o-bio-info__item">
+        <span class="o-bio-info_ico"><i class="icon-phone"></i></span>
+        <span class="text-md float-left" *ngIf="isOwner() && !user.phone" [routerLink]="['/profile/contact']">
+          <a class="primary">Add Number</a>
+        </span>
+        <span class="text-md float-left">{{user.phone}}</span>
+      </li>
+      <li class="o-bio-info__item">
+        <span class="o-bio-info_ico"><i class="icon-globe"></i></span>
+        <span class="text-md float-left" *ngIf="isOwner() && !user.website" [routerLink]="['/profile/contact']">
+          <a class="primary">Add Website</a>
+        </span>
+        <span class="text-md float-left">{{user.website}}</span>
       </li>
       <li class="o-bio-info__item m-t-9">
-          <div class="o-bio-info-left">
-              <div class="text-sm grey o-gender-title">Height</div>
-              <div class="text-md o-gender-value"><a href="#" class="primary">Select</a></div>
+        <div class="o-bio-info-left">
+          <div class="text-sm grey o-gender-title">Height</div>
+          <div class="text-md o-gender-value" *ngIf="isOwner() && !user.height">
+            <a class="primary" [routerLink]="['/profile/about']">Select</a>
           </div>
-          <div class="o-bio-info-right">
-              <div class="text-sm grey o-dob-title">Weight</div>
-              <div class="text-md o-dob-value"><a href="#" class="primary">Select</a></div>
+          <span class="text-md float-left">{{user.height}}</span>
+        </div>
+        <div class="o-bio-info-right">
+          <div class="text-sm grey o-dob-title">Weight</div>
+          <div class="text-md o-dob-value" *ngIf="isOwner() && !user.weight">
+            <a class="primary" [routerLink]="['/profile/about']">Select</a>
           </div>
+          <span class="text-md float-left">{{user.weight}}</span>
+        </div>
       </li>
       <li class="o-bio-info__item m-t-9">
-          <div class="o-bio-language">
-              <div class="text-sm grey w100">Languages Known</div>
-              <div class="text-md w100"><a href="#" class="primary">Add Language</a></div>
+        <div class="o-bio-language">
+          <div class="text-sm grey w100">Languages Known</div>
+          <div class="text-md w100" *ngIf="isOwner() && !user?.about?.languages">
+            <a [routerLink]="['/profile/about']" class="primary">Add Language</a>
           </div>
+          <span class="text-md float-left">{{user?.about?.languages?.join(', ') | truncate:[100, '...']}}</span>
+        </div>
       </li>
-  </ul> -->
+  </ul>
 </div>
 
 <div class="o-card o-card--padding" >
@@ -265,13 +275,11 @@
   </div><!-- Award detail end-->
 </div>
 
-
-
-<m-wire-channel #wire
+<!-- <m-wire-channel #wire
   [(rewards)]="user.wire_rewards"
   [channel]="user"
   [editing]="editing"
-></m-wire-channel>
+></m-wire-channel> -->
 
 <div class="opspot-spacer-2x"></div>
 
