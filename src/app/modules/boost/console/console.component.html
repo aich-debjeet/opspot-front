@@ -103,11 +103,11 @@
           <div class="text-lg f500">
             My Posts
           </div>
-          <div class="text-sm primary">
+          <a class="text-sm primary" [routerLink]="['/', session.getLoggedInUser().username]">
             See All
-          </div>
+          </a>
         </div>
-        <!-- <opspot-post-card [entity]="feed"></opspot-post-card> -->
+        <opspot-post-card [entity]="feed" *ngFor="let feed of feed"></opspot-post-card>
       </div>
     </div><!-- wallet block end -->
   </div>

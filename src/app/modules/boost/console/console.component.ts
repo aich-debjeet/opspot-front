@@ -5,16 +5,17 @@ import { OpspotTitle } from '../../../services/ux/title';
 import { BoostService } from '../boost.service';
 import { Client } from '../../../services/api';
 import { OpspotUser, OpspotActivityObject } from '../../../interfaces/entities';
+import { Session } from '../../../services/session';
 
 export type BoostConsoleType = 'newsfeed' | 'content' | 'offers' | 'publisher';
 export type BoostConsoleFilter = 'create' | 'history' | 'earnings' | 'payouts' | 'settings' | 'inbox' | 'outbox';
 
 @Component({
   moduleId: module.id,
-  providers:[BoostService],
+  providers: [BoostService],
   selector: 'm-boost-console',
   templateUrl: 'console.component.html',
-  styleUrls:['console.component.scss']
+  styleUrls: ['console.component.scss']
 })
 export class BoostConsoleComponent {
 
@@ -27,20 +28,17 @@ export class BoostConsoleComponent {
   moreData = true;
   feed: Array<Object> = [];
   error: string = '';
-  user: OpspotUser;
 
-  constructor(private router: Router, private route: ActivatedRoute, public title: OpspotTitle, public service: BoostService, public client: Client) {
+  constructor(public session: Session,private router: Router, private route: ActivatedRoute, public title: OpspotTitle, public service: BoostService, public client: Client) {
     this.title.setTitle('Boost Console');
-    // this.getMyPosts();
   }
 
   ngOnInit() {
-  
     // this.route.firstChild.url.subscribe(segments => {
     //   console.log(segments);
     //   this.type = <BoostConsoleType>segments[0].path;
     // });
-    
+    this.getMyPosts();
     this.load(true);
 
   }
@@ -81,23 +79,30 @@ export class BoostConsoleComponent {
         this.error = (e && e.message) || '';
       });
   }
-  // getMyPosts(){
-  //   console.log('get my post')
-  //   let params: any = {
-  //     limit: 12,
-  //     offset: ''
-  //   }
-  //   this.client.get('api/v1/newsfeed/personal/' + this.user.guid, params, { cache: true })
-  //     .then((data: OpspotActivityObject) => {
-  //       this.feed = data.activity
-  //       if(data.activity){
-  //         for (let activity of data.activity) {
-  //           this.feed.push(activity);
-  //         }
-  //       }
-  //     })
-  //     .catch(function (e) {
-        
-  //     });
-  // }
+  getMyPosts(){
+    console.log('get my post')
+    let params: any = {
+      limit: 3,
+      offset: ''
+    }
+    this.client.get('api/v1/newsfeed/personal/' + this.opspot.user.guid, params, { cache: true })
+      .then((data: OpspotActivityObject) => {
+        if (!data.activity) {
+          // this.moreData = false;
+          // this.inProgress = false;
+          return false;
+        }
+        if(data.activity){
+          // for (let activity of data.activity) {
+          //   console.log(activity);
+          //   this.feed.push(activity);
+          // }
+          this.feed = data.activity;
+          console.log(data)
+        }
+      })
+      .catch(function (e) {
+
+      });
+  }
 }
