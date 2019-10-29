@@ -218,6 +218,7 @@ import { GroupsService } from '../groups-service';
 import { OpspotTitle } from '../../../services/ux/title';
 import { Session } from '../../../services/session';
 import FileHandler from '../../../utils/file-handle';
+import {Location} from '@angular/common';
 
 @Component({
   moduleId: module.id,
@@ -256,7 +257,14 @@ export class GroupsCreator {
   editDone: boolean = false;
   inProgress: boolean = false;
 
-  constructor(public session: Session, public service: GroupsService, public router: Router, public title: OpspotTitle ,public route:ActivatedRoute) {
+  constructor(
+    public session: Session, 
+    public service: GroupsService, 
+    public router: Router, 
+    public title: OpspotTitle ,
+    public route:ActivatedRoute,
+    private _location: Location
+    ) {
     this.title.setTitle('Create Group');
   }
 
@@ -411,7 +419,7 @@ export class GroupsCreator {
  // fix: AOT
  // TODO @shashi: required? 
  groupReset() {
-
+  this._location.back();
  }
 
 }
