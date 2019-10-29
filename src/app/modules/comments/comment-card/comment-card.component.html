@@ -269,10 +269,11 @@
 
     </div>
     <div class="o-discussions-mine-option-drop">
-        <div (click)="toggle.value = !toggle.value" class="o-discussions-mine-option-drop__btn head-action__link"><i class="icon-more-vertical f-15"></i> </div>
+      <!-- TODO @Gayatri temporary hide-->
+        <!-- <div (click)="toggle.value = !toggle.value" class="o-discussions-mine-option-drop__btn head-action__link"><i class="icon-more-vertical f-15"></i> </div>
         <div id="o-discussions-mine-option-dropdown" class="o-discussions-mine-option-drop__block">
             <a href="#">Report</a>
-        </div>
+        </div> -->
     </div><!-- options dropdown end-->
     <div class="o-discussion-actions">
         <opspot-button-thumbs-up [object]="comment" [class.has-count]="comment['thumbs:up:count'] > 0"></opspot-button-thumbs-up>
