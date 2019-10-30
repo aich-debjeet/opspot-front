@@ -141,6 +141,7 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { CanDeactivateGroupService } from "./profile/can-deactivate/can-deactivate-group.service";
 import { MobileMembersComponent } from './profile/members/mobile-members/mobile-members.component';
 import { MobileInviteComponent } from './profile/members/mobile-invite/mobile-invite.component';
+import { VideoChatComponent } from '../videochat/videochat.component';
 
 const routes: Routes = [
   { path: 'groups/profile/:guid', component: GroupsProfile, canDeactivate: [CanDeactivateGroupService], children: [
@@ -150,6 +151,8 @@ const routes: Routes = [
       { path: 'activity', redirectTo: 'feed' },
       { path: 'members', component: GroupsProfileMembers },
       { path: 'requests',  component: GroupsProfileRequests },
+      // { path: 'gathering',  component: VideoChatComponent}
+
     ],
   },
   { path: 'groups/create', component: GroupsCreator },
@@ -157,7 +160,10 @@ const routes: Routes = [
   { path: 'groups/:filter', component: GroupsListComponent },
   { path: 'groups', redirectTo: '/groups/top', pathMatch: 'full' },
   { path: 'groups/:guid/members' ,component:MobileMembersComponent},
-  { path: 'groups/:guid/invite' ,component:MobileInviteComponent}
+  { path: 'groups/:guid/invite' ,component:MobileInviteComponent},
+  { path: 'groups/gathering',  component: VideoChatComponent}
+
+
 
 
 ];

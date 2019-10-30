@@ -17,6 +17,7 @@ import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.comp
 import { VideoChatService } from '../../videochat/videochat.service';
 import { UpdateMarkersService } from '../../../common/services/update-markers.service';
 import { filter } from "rxjs/operators";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'm-groups--profile',
@@ -62,6 +63,8 @@ export class GroupsProfile {
   private socketSubscription: any;
   private videoChatActiveSubscription;
   private updateMarkersSubscription;
+  showGathering = false;
+
 
   constructor(
     public session: Session,
@@ -76,6 +79,7 @@ export class GroupsProfile {
     public videochat: VideoChatService,
     private cd: ChangeDetectorRef,
     private updateMarkers: UpdateMarkersService,
+    // private _location: Location
   ) { }
 
   ngOnInit() {
@@ -131,7 +135,7 @@ export class GroupsProfile {
       this.reviewCountLoad();
     }, 120 * 1000);
 
-    this.videoChatActiveSubscription = this.videochat.activate$.subscribe(next => window.scrollTo(0, 0));
+    this.videoChatActiveSubscription = this.videochat.activate$.subscribe(next => window.scrollTo(0, 0));    
   }
 
   setFilter(url: string) {
@@ -438,5 +442,13 @@ export class GroupsProfile {
      let members= await this.client.get(endpoint, params)
      console.log(members)
      this.membersMobile=members['members']
-    } 
+    }
+    
+  showGathering1(){
+   this.showGathering = true;
+  }
+
+  // backClicked() {
+  //   this._location.back();
+  // }
 }
