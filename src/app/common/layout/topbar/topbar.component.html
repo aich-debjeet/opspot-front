@@ -26,6 +26,12 @@
 .o-avatar img {
   width: 100%;
 }
+.pos-rel {
+  position: relative;
+}
+.pos-rel .m-dropdown__list {
+  margin-top: 45px;
+}
 </style>
 
 <header class="header">
@@ -163,9 +169,26 @@
         </li>
 
         <li class="nav-icon__item">
-          <a [routerLink]="['/event/create']" title="Group" class="nav__ico">
-            <img src="assets/svg/create.svg" alt="">
-          </a>
+          <div class="pos-rel" #menu>
+            <a title="Group" class="nav__ico" (click)="menu.value = !menu.value">
+              <img src="assets/svg/create.svg" alt="">
+            </a>
+            <ul class="m-dropdown__list" [hidden]="!menu.value">
+              <li class="m-dropdownList__item" (click)="menu.value = false">
+                <a [routerLink]="['/groups/create']">
+                  <!-- <i class="material-icons">trending_up</i> -->
+                  <span>Create Community</span>
+                </a>
+              </li>
+              <li class="m-dropdownList__item" (click)="menu.value = false">
+                <a [routerLink]="['/event/create']">
+                  <!-- <i class="material-icons">trending_up</i> -->
+                  <span>Create Event</span>
+                </a>
+              </li>
+            </ul>
+            <div class="opspot-bg-overlay" (click)="menu.value = !menu.value" [hidden]="!menu.value"></div>
+          </div>
         </li>
         <!-- <li class="nav-icon__item" #menu>
                   <a class="nav__ico nav__ico-create" (click)="menu.value = !menu.value">
