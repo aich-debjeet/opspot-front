@@ -162,7 +162,7 @@
         <!-- </div> -->
         <div class="o-left-gather-block o-left-block--community" *ngIf="showGathering">
             <div class="o-community-gather">
-                <a><i class="icon-arrow-left o-community-gather--icon"></i> </a>
+                <a><i class="icon-arrow-left o-community-gather--icon" (click)='backClicked()'></i> </a>
                 <div class=" caption-bold f500">Gathering</div>
             </div>
             <m-videochat></m-videochat>

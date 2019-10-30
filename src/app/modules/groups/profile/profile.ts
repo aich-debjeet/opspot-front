@@ -448,7 +448,7 @@ export class GroupsProfile {
    this.showGathering = true;
   }
 
-  // backClicked() {
-  //   this._location.back();
-  // }
+  backClicked() {
+    this.showGathering = false;
+  }
 }
