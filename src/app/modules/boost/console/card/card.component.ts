@@ -2,21 +2,24 @@ import { Component, Input } from '@angular/core';
 
 import { BoostService } from '../../boost.service';
 import { Reason, rejectionReasons } from '../../../../controllers/admin/boosts/rejection-reasons';
+import { Session } from '../../../../services/session';
 
 @Component({
   moduleId: module.id,
   providers: [BoostService],
   selector: 'm-boost-console-card',
-  templateUrl: 'card.component.html'
+  templateUrl: 'card.component.html',
+  styleUrls:['card.component.scss']
 })
 export class BoostConsoleCard {
 
+  opspot = window.Opspot;
   boost: any;
   type: string;
 
   reasons: Array<Reason> = rejectionReasons;
 
-  constructor(public service: BoostService) {
+  constructor(public service: BoostService,public session: Session) {
   }
 
   @Input('boost')
@@ -71,6 +74,14 @@ export class BoostConsoleCard {
     return rejectionReasons.find((item: Reason) => {
       return item.code == code;
     });
+  }
+  getOwnerIconTime() {
+    let session = this.session.getLoggedInUser();
+    if (session && session.guid === this.boost.owner.guid) {
+      return session.icontime;
+    } else {
+      return this.boost.owner.icontime;
+    }
   }
 
 }
