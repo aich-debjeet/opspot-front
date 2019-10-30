@@ -1,69 +1,129 @@
-<div class="m-group-saving-overlay" [hidden]="!inProgress">
-  <div class="mdl-spinner mdl-js-spinner is-active" [mdl]></div>
+<style>
+  .enabl {
+    display: flex;
+    align-items: center;
+  }
+
+  .create-community-img img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+
+  }
+
+  ::ng-deep app-image-croper .m-modal-container {
+    min-width: auto !important;
+
+  }
+  ::ng-deep app-image-croper .mdl-card__menu{
+    display: none !important;
+  }
+
+</style>
+<div class="container bg-white hidden-above-tablet">
+    <div class="without-nav-header">
+        <a routerLink=".."><i class="icon-arrow-left"></i> </a>
+        <div class="without-nav-header__title caption-bold f500">{{editCommunity?"Edit":"Create"}} Community</div>
+    </div>
 </div>
 
-<header>
-  <opspot-banner [editMode]="editing" [done]="editDone" (added)="addBanner($event)"></opspot-banner>
-  <div class="avatar-wrapper">
-    <opspot-avatar [editMode]="editing" (added)="addAvatar($event)"></opspot-avatar>
-  </div>
-</header>
-
-<form (submit)="save($event)" class="mdl-grid groups-grid" style="max-width:900px">
-
-  <div class="mdl-cell mdl-cell--8-col m-group-info">
-
-    <div class="mdl-card mdl-shadow--2dp" style="overflow: visible">
-
-      <div class="m-group-info-name mdl-color-text--blue-grey-300">
-        <input type="text" class="h1" name="name" [(ngModel)]="group.name" placeholder="Enter a name" i18n-placeholder="@@GROUPS__NAME_PLACEHOLDER" />
+<div class="o-create-community">
+  <div class="o-create-community-content">
+    <div class="o-create-community-header">
+      <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage" [croperType]="'circle'" (imgResult)="crop($event)">
+      </app-image-croper>
+      <h4 class="hidden-under-tablet">Create a Community</h4>
+      <div class="text-md grey">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+        ligula eget dolor. Aenean massa. Cum sociis natoque penatibus.
       </div>
-
-      <div class="m-group-info-brief-description mdl-color-text--blue-grey-300">
-        <textarea name="briefdescription" [(ngModel)]="group.briefdescription" placeholder="Enter a brief description" i18n-placeholder="@@GROUPS__DESCRIPTION_PLACEHOLDER"></textarea>
-      </div>
-
-      <div class="m-group-info-tags mdl-color-text--blue-grey-300">
-        <i class="material-icons mdl-color-text--blue-grey-300">local_offer</i>
-        <m-hashtags-selector #hashtagsSelector
-          [alignLeft]="true"
-          (tagsChange)="onTagsChange($event)"
-          (tagsAdded)="onTagsAdded($event)"
-          (tagsRemoved)="onTagsRemoved($event)"
-          *ngIf="editing"
-        ></m-hashtags-selector>
-      </div>
-
-      <div class="m-group-info-membership mdl-color-text--blue-grey-300">
-          <i class="material-icons mdl-color-text--blue-grey-300">{{ group.membership == 2 ? 'public' : 'lock' }}</i>
-          <select class="icon-prefix" name="membership" [ngModel]="group.membership" (change)="group.membership = $event.target.value">
-            <option value="2" i18n="@@GROUPS__OPEN_GROUP">Open Group</option>
-            <option value="0" i18n="@@GROUPS__CLOSED_GROUP">Closed Group</option>
-          </select>
-      </div>
-
-      <div class="m-group-info-moderated mdl-color-text--blue-grey-300">
-          <i class="material-icons mdl-color-text--blue-grey-300">rate_review</i>
-          <select class="icon-prefix" name="moderated" [ngModel]="group.moderated" (change)="group.moderated = $event.target.value">
-            <option value="0" i18n="@@GROUPS__ANYONE_CAN_POST">Anyone can post</option>
-            <option value="1" i18n="@@GROUPS__POSTS_ARE_MODERATED">Posts are moderated</option>
-          </select>
-      </div>
-
-      <div class="m-group-info-default-view mdl-color-text--blue-grey-300">
-          <i class="material-icons mdl-color-text--blue-grey-300" title="Default view" i18n="@@GROUPS__DEFAULT_VIEW_TOOLTIP">pageview</i>
-          <select class="icon-prefix" name="default_view" [ngModel]="group.default_view" (change)="group.default_view = $event.target.value">
-            <option value="0" i18n="@@GROUPS__DEFAULT_VIEW_FEED">Default view: Feed</option>
-            <option value="1" i18n="@@GROUPS__DEFAULT_VIEW_CONVERSATIONS">Default view: Conversations</option>
-          </select>
-      </div>
-
-      <div class="m-groups-save">
-       <button class="mdl-button mdl-button--raised mdl-button--colored" [disabled]="!group.name" i18n="@@M__ACTION__CREATE">Create</button>
-      </div>
-
     </div>
+    <!--header ends-->
+    <div class="o-create-community-content__form">
+      <div class="form-group">
+        <label>Community Type</label>
+        <div class="o-create-community-radio">
+          <label class="radio-container">
+            <!-- Wrapper for all elements -->
+            <input type="radio" name="Community Type" [(ngModel)]="group.membership" [value]="2" checked>
+            <!-- Radio Button -->
+            <div class="custom-check">
+              <span class="icon-unlock primary"></span>
+              <div class="text-md">
+                public
+              </div>
+            </div><!-- Custom Radio button style ends-->
+          </label>
+          <!--radio button ends-->
+          <label class="radio-container">
+            <input type="radio" name="Community Type" [(ngModel)]="group.membership" [value]="0">
+            <!-- Radio Button -->
+            <div class="custom-check">
+              <span class="icon-lock primary"></span>
+              <div class="text-md">
+                Private
+              </div>
+            </div><!-- Custom Radio button style ends-->
+          </label>
+          <!--radio button ends-->
+        </div>
+        <!--radio button main class ends-->
+      </div>
+      <!--Community type ends-->
+      <div class="form-group">
+        <label>Community Name</label>
+        <input [(ngModel)]="group.name" type="text" class="form-control form-control-lg">
+      </div>
+      <!--Community Name ends-->
+      <div class="form-group">
+        <label>Description</label>
+        <textarea [(ngModel)]="group.briefdescription" class="form-control" rows="5"></textarea>
+      </div>
+      <!--Description ends-->
+      <div class="form-group ">
+        <label>Hashtags</label>
+        <app-skills [(inputTagsValue)]=group.tags></app-skills>
+        <div class="grey text-sm paddng-top">Use a comma to separate skills, or choose from the list.</div>
+      </div>
+      <!--Hashtags ends-->
+      <div class="form-group enabl">
+        <label class="switch">
+          <input [(ngModel)]="group.moderated" type="checkbox">
+          <span class="slider round"></span>
+        </label> <span class="text-md">Enable members can post in community</span>
+      </div>
+      <!--Description ends-->
+      <div class="form-group">
+        <label>Profile Picture</label>
+        <div class="o-community-profile-picture">
+          <div class="fileUpload" *ngIf="!editCommunity">
+            <span *ngIf="!croppieImage&&!editCommunity" class="icon-plus"></span>
+    
+            <input type="file" #editImgcomp onclick="this.value = null" (change)="add($event)" class="upload" />
+            <div *ngIf="croppieImage&&!editCommunity" class="fileUpload-preview">
+              <a class="create-community-img" (click)="openCropper()">
+                <img *ngIf="!editCommunity" [src]="cropedImg" >
+              </a>
+            </div>
+          </div>
 
+          <div *ngIf="editCommunity&&cropedImg" class="fileUpload-preview">
+              <input type="file" #editImgcomp onclick="this.value = null" (change)="add($event)" class="upload" />
+            <a class="create-community-img" (click)="openCropper()">
+                  <img [src]="cropedImg" alt="">
+              </a>
+          </div>
+          <!--file upload ends-->
+          <!--file preview ends-->
+        </div>
+      </div>
+      <!--Profile Picture ends-->
+      <div class="o-create-community-action">
+        <button (click)="save($event)" type="button" [disabled]="!group.name"
+          class="btn btn-primary btn-lg">{{editCommunity?"Update":"Create"}}</button>
+        <button type="button" (click)="groupReset()" class="btn btn-outline-primary btn-lg">Cancel</button>
+      </div>
+      <!--Button action ends-->
+    </div>
   </div>
-
-</form>
+</div>

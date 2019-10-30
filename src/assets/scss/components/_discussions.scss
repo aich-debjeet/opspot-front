@@ -5,6 +5,7 @@
     max-height: calc(100vh - 58px);
     min-height: calc(100vh - 58px);
     position: sticky;
+    top:60px;
     @include mq($from: $mobile_sm, $until: $tablet) {
         border: none;
     }
@@ -22,6 +23,7 @@
     -webkit-box-direction: normal;
     flex-direction: column;
     height: calc(100vh - 242px);
+    position: relative;
    
     @include mq($from: $mobile_sm, $until: $tablet) {
 		height: calc(100vh - 115px);
@@ -263,7 +265,7 @@
     /* height: 40px; */
     border-radius: 4px;
     background-color: #ECEFF1;
-    padding: 11px 14px;
+    //padding: 11px 14px;
     display: -webkit-box;
     display: flex;
     justify-content: center;

@@ -8,6 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { TopbarHashtagsComponent } from './topbar/topbar.component';
 import { TopbarHashtagsService } from './service/topbar.service';
+import { SkillsTag } from './skills.component';
+import { TagInputModule } from 'ngx-chips';
+
 
 @NgModule({
   imports: [
@@ -15,18 +18,21 @@ import { TopbarHashtagsService } from './service/topbar.service';
     CommonModule,
     FormsModule,
     TextInputAutocompleteModule,
+    TagInputModule
   ],
   declarations: [
     HashtagsSelectorComponent,
     HashtagsSelectorModalComponent,
     TagsInput,
     TopbarHashtagsComponent,
+    SkillsTag
   ],
   exports: [
     HashtagsSelectorComponent,
     HashtagsSelectorModalComponent,
     TagsInput,
     TopbarHashtagsComponent,
+    SkillsTag
   ],
   providers: [
     TopbarHashtagsService,

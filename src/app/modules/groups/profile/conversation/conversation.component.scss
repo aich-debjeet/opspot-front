@@ -17,14 +17,14 @@
 }
 
 opspot-groups-profile-conversation {
-  position: fixed;
-  //right: 0;
-  top: 52px;
-  //width: 100%;
-  width: calc(33% - 12px); //1/3rd of screen
-  display: block;
-  margin-bottom: 0;
-  flex: 1;
+  // position: fixed;
+  // //right: 0;
+  // top: 52px;
+  // //width: 100%;
+  // width: calc(33% - 12px); //1/3rd of screen
+  // display: block;
+  // margin-bottom: 0;
+  // flex: 1;
 
   @media screen and (max-width: 700px) {
     width: 100%;
