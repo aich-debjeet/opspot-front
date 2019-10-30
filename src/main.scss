@@ -11660,7 +11660,7 @@ m-group--members-module .opspot-group-sidebar-loader {
     box-sizing: border-box;
     padding-bottom: 24px;
     overflow-y: scroll;
-    height: calc(100% - 115px);
+    height: calc(100% + 10px);
     top: 0;
     padding-top: 15px;
     width: 100%;

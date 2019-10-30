@@ -37,7 +37,7 @@
   <div class="o-community-card">
     <div class="o-community-card-section mr-6">
       <div class="o-community-card-cover">
-        <img [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity.icontime" alt="cover">
+        <img [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
       </div>
       <!--cover ends-->
       <div class="o-community-card-profile" [routerLink]="['/groups/profile', entity.guid]"  >
