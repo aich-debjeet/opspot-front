@@ -11660,7 +11660,7 @@ m-group--members-module .opspot-group-sidebar-loader {
     box-sizing: border-box;
     padding-bottom: 24px;
     overflow-y: scroll;
-    height: calc(100% - 115px);
+    height: calc(100% + 10px);
     top: 0;
     padding-top: 15px;
     width: 100%;
@@ -27532,3 +27532,41 @@ li{
 // .mar-l{
 //   margin-left: 125px !important;
 // }
+
+.o-boost-console-block__right .o-explore-card {
+  margin-bottom: 8px;
+}
+
+.o-left-gather-block {
+  width: 797px;
+  order: 1;
+  z-index: 1;
+  padding-right: 8px;
+  @include mq($from: $mobile_sm, $until:$mobile_lg) {
+    width:100%;
+    padding-right: 0px;
+  }
+  img {
+    width:100%;
+    height: 496px;
+    object-fit: cover;
+    @include mq($from: $mobile_sm, $until:$mobile_lg) {
+      height: 200px;
+    }
+  }
+}
+
+.o-community-gather {
+  display:flex;
+  padding: 13px 0;
+  @include mq($from: $mobile_sm, $until:$mobile_lg) {
+    padding: 13px 13px;
+  }
+  a {
+    padding-right: 10px;
+  }
+}
+
+.o-community-gather--icon {
+  color:#263238!important;
+}

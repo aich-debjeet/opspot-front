@@ -1,300 +1,351 @@
-<header class="header">
-    <div class="logo_main"><a  routerLink="/newsfeed" ><img src="assets/ops_icon.png"></a></div>
-    <div class="nav-bar hidden-under-tablet">
-        <div class="nav-menu">
-            <ul class="nav-list m-l-8">
-            <li class="nav__item">
-                <a class="nav__link nav__link--text" 
-                routerLink="/newsfeed"
-                routerLinkActive="m-topbar--navigation--item-active"
-                title="Newsfeed"
-                i18n-title="@@M_TOPBAR_NEWSFEED"
-                >Home</a>
-            </li>
-            <li class="nav__item">
-                <a class="nav__link nav__link--text" [routerLink]="['/explore']" [queryParams]="{type:'activities',q:'', ref:''}">Explore</a>
-            </li>
-            <li class="nav__item">
-              <a class="nav__link nav__link--text" routerLink='/wallet/tokens/overview' >Wallet</a>
-          </li>
-            </ul><!-- first nav end -->
-        </div><!-- main nav bar end -->
-        <div class="global-search">
-            <ng-content select="[search]"></ng-content>
-       </div>   <!-- search end -->
-        <div class="nav-action">
-            <ul class="nav-icon-list">
-                <li class="nav-icon__item">
+<style>
+.profile-menu {
+  width: 200px;
+}
+.profile-image {
+  max-height: 50px;
+}
+.o-prof-avatar-name {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+.o-prof-avatar-name__block {
+  width: calc(100% - 53px);
+  margin-left: 11px;
+}
+.o-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  float: left;
+}
+.o-avatar img {
+  width: 100%;
+}
+.pos-rel {
+  position: relative;
+}
+.pos-rel .m-dropdown__list {
+  margin-top: 45px;
+}
+</style>
 
-  <div class="m-topbar--account" *ngIf="session.isLoggedIn()" #menu>
-      <a class="" (click)="menu.value = !menu.value">
-        <img alt="menu" src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" />
-      </a>
-      <ul class="m-dropdown__list" [hidden]="!menu.value">
-        <li class="m-dropdownList__item"
-            *ngIf="session.isLoggedIn()"
-            (click)="menu.value = false"
-        >
-          <a
-            [routerLink]="['/', session.getLoggedInUser().username]"
-            i18n="@@OPSPOT__TOPBAR__VIEW_CHANNEL"
-          >
-            <i class="material-icons">people</i>
-            <span>View Channel</span>
-          </a>
+<header class="header">
+  <div class="logo_main"><a routerLink="/newsfeed"><img src="assets/ops_icon.png"></a></div>
+  <div class="nav-bar hidden-under-tablet">
+    <div class="nav-menu">
+      <ul class="nav-list m-l-8">
+        <li class="nav__item">
+          <a class="nav__link nav__link--text" routerLink="/newsfeed"
+            routerLinkActive="m-topbar--navigation--item-active" title="Newsfeed"
+            i18n-title="@@M_TOPBAR_NEWSFEED">Home</a>
         </li>
-        <li class="m-dropdownList__item"
-            *ngIf="session.isLoggedIn() && session.isAdmin()"
-            (click)="menu.value = false"
-        >
-          <a
-            [routerLink]="['/admin/analytics']"
-            i18n="@@OPSPOT__TOPBAR__ADMIN"
-          >
-            <i class="material-icons">build</i>
-            <span>Admin</span>
-          </a>
+        <li class="nav__item">
+          <a class="nav__link nav__link--text" [routerLink]="['/explore']"
+            [queryParams]="{type:'activities',q:'', ref:''}">Explore</a>
         </li>
-        <li class="m-dropdownList__item" >
-            <a  [routerLink]="['/boost/console/newsfeed/history']" >
-              <i class="material-icons">trending_up</i>
-                <span>Boost Console</span>
+        <li class="nav__item">
+          <a class="nav__link nav__link--text" routerLink='/wallet/tokens/overview'>Wallet</a>
+        </li>
+      </ul><!-- first nav end -->
+    </div><!-- main nav bar end -->
+    <div class="global-search">
+      <ng-content select="[search]"></ng-content>
+    </div> <!-- search end -->
+    <div class="nav-action">
+      <ul class="nav-icon-list">
+        <li class="nav-icon__item">
+
+          <div class="m-topbar--account" *ngIf="session.isLoggedIn()" #menu>
+            <a class="" (click)="menu.value = !menu.value">
+              <img alt="menu" src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" />
             </a>
+            <ul class="m-dropdown__list profile-menu" [hidden]="!menu.value">
+              <!-- <li class="m-dropdownList__item" *ngIf="session.isLoggedIn()" (click)="menu.value = false">
+                <a [routerLink]="['/', session.getLoggedInUser().username]" i18n="@@OPSPOT__TOPBAR__VIEW_CHANNEL">
+                  <i class="material-icons">people</i>
+                  <span>View Channel</span>
+                </a>
+              </li> -->
+              <li class="m-dropdownList__item" *ngIf="session.isLoggedIn()" (click)="menu.value = false">
+                <div class="o-prof-avatar-name">
+                  <div class="o-avatar">
+                    <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="profile-image" class="profile-image">
+                  </div>
+                  <div class="o-prof-avatar-name__block">
+                      <div class="text-lg f500">{{ session.getLoggedInUser().name | truncate:[15, '...'] }}</div>
+                      <a [routerLink]="['/', session.getLoggedInUser().username]" class="text-sm primary">View Profile</a>
+                  </div>
+                </div>
+              </li>
+              <li class="m-dropdownList__item"
+                *ngIf="session.isLoggedIn() && session.isAdmin()"
+                (click)="menu.value = false">
+                <a [routerLink]="['/admin/analytics']" i18n="@@OPSPOT__TOPBAR__ADMIN">
+                  <i class="material-icons">build</i>
+                  <span>Admin</span>
+                </a>
+              </li>
+              <li class="m-dropdownList__item" (click)="menu.value = false">
+                <a [routerLink]="['/']">
+                  <!-- <i class="material-icons">trending_up</i> -->
+                  <span>Create Organisation</span>
+                </a>
+              </li>
+              <li class="m-dropdownList__item" (click)="menu.value = false">
+                <a [routerLink]="['/boost/console']">
+                  <!-- <i class="material-icons">trending_up</i> -->
+                  <span>Boost Console</span>
+                </a>
+              </li>
+              <li class="m-dropdownList__item" (click)="menu.value = false">
+                <a [routerLink]="['/invite']">
+                  <!-- <i class="material-icons">trending_up</i> -->
+                  <span>Invite Friends</span>
+                </a>
+              </li>
+              <li class="m-dropdownList__item" *ngIf="session.isLoggedIn()" (click)="menu.value = false">
+                <a [routerLink]="['/settings/general']" i18n="@@OPSPOT__TOPBAR__SETTINGS">
+                  <!-- <i class="material-icons">settings</i> -->
+                  <span>Settings</span>
+                </a>
+              </li>
+              <li class="m-dropdownList__item" (click)="menu.value = false">
+                <a [routerLink]="['/about']">
+                  <!-- <i class="material-icons">trending_up</i> -->
+                  <span>About One Page Spotlight</span>
+                </a>
+              </li>
+              <li class="m-dropdownList__item" *ngIf="session.isLoggedIn()" (click)="menu.value = false">
+                <a [routerLink]="['/logout']" i18n="@@OPSPOT__TOPBAR__LOGOUT">
+                  <!-- <i class="material-icons">exit_to_app</i> -->
+                  <span>Sign Out</span>
+                </a>
+              </li>
+              <!-- <ng-container *mIfFeature="'helpdesk'; else faq">
+              </ng-container>
+              <ng-template #faq>
+                <li class="m-dropdownList__item" (click)="menu.value = false">
+                  <a [routerLink]="['/faq']" i18n="@@OPSPOT__TOPBAR__FAQ">
+                    <i class="material-icons">help_outline</i>
+                    <span>FAQ</span>
+                  </a>
+                </li>
+              </ng-template>
+              <li class="m-dropdownList__item" (click)="menu.value = false">
+                <ng-container *mIfFeature="'helpdesk'; else helpAndSupport">
+                  <a routerLink="/help" i18n="@@OPSPOT__TOPBAR__HELPDESK">
+                    <i class="material-icons">help_outline</i>
+                    <span>Help Desk</span>
+                  </a>
+                </ng-container>
+                <ng-template #helpAndSupport>
+                  <a [routerLink]="['/groups/profile/', '100000000000000681']" i18n="@@OPSPOT__TOPBAR__HS_GROUP">
+                    <i class="material-icons">help_outline</i>
+                    <span>Help & Support</span>
+                  </a>
+                </ng-template>
+              </li>
+              <li class="m-dropdownList__item">
+                <a target="_blank" [href]="opspot.cdn_assets_url + 'assets/documents/Whitepaper-v0.3.pdf'">
+                  <i class="material-icons">description</i>
+                  <span>Whitepaper</span>
+                </a>
+              </li>
+              <li class="m-dropdownList__item" *ngIf="session.isLoggedIn()" (click)="menu.value = false">
+                <a [routerLink]="['/canary']" i18n="@@OPSPOT__TOPBAR__MENU__EXPERIMENTS">
+                  <i class="material-icons">new_releases</i>
+                  <span *ngIf="!session.getLoggedInUser().canary">Opt-in to Experiments</span>
+                  <span *ngIf="session.getLoggedInUser().canary">Canary</span>
+                </a>
+              </li> -->
+            </ul>
+            <div class="opspot-bg-overlay" (click)="menu.value = !menu.value" [hidden]="!menu.value"></div>
+          </div>
         </li>
-        <!-- /boost/console/newsfeed/history -->
-        <li class="m-dropdownList__item"
-            *ngIf="session.isLoggedIn()"
-            (click)="menu.value = false"
-        >
-          <a
-            [routerLink]="['/settings/general']"
-            i18n="@@OPSPOT__TOPBAR__SETTINGS"
-          >
-            <i class="material-icons">settings</i>
-            <span>Settings</span>
+
+        <li class="nav-icon__item">
+          <div class="pos-rel" #menu>
+            <a title="Group" class="nav__ico" (click)="menu.value = !menu.value">
+              <img src="assets/svg/create.svg" alt="">
+            </a>
+            <ul class="m-dropdown__list" [hidden]="!menu.value">
+              <li class="m-dropdownList__item" (click)="menu.value = false">
+                <a [routerLink]="['/groups/create']">
+                  <!-- <i class="material-icons">trending_up</i> -->
+                  <span>Create Community</span>
+                </a>
+              </li>
+              <li class="m-dropdownList__item" (click)="menu.value = false">
+                <a [routerLink]="['/event/create']">
+                  <!-- <i class="material-icons">trending_up</i> -->
+                  <span>Create Event</span>
+                </a>
+              </li>
+            </ul>
+            <div class="opspot-bg-overlay" (click)="menu.value = !menu.value" [hidden]="!menu.value"></div>
+          </div>
+        </li>
+        <!-- <li class="nav-icon__item" #menu>
+                  <a class="nav__ico nav__ico-create" (click)="menu.value = !menu.value">
+                      <i class="icon-create-more"></i>
+                  </a>
+                  <div id="dropdown-create" class="o-drop-create" >
+                      <div class="o-drop-avatar__arrow"><img src="assets/droparrow.png" alt=""></div>
+                      <ul class="o-drop-prof-list" [hidden]="!menu.value">
+                          <li class="o-drop-prof-list__item">
+                              <a [routerLink]="['/groups/create']" class="text-md" (click)="menu.value = false"
+                              >Create Community</a>
+                          </li>
+                          <li class="o-drop-prof-list__item">
+                              <a [routerLink]="['/event/create']" class="text-md" (click)="menu.value = false"
+                              >Create Event</a>
+                          </li>
+                      </ul>
+                  </div>
+                </li> -->
+        <li class="nav-icon__item">
+          <a class="nav__ico">
+            <!-- <img src="assets/svg/bell.svg" alt=""> -->
+            <!-- <span class="noti-count">3</span> -->
+            <ng-content select="[icons]"></ng-content>
+
+
           </a>
         </li>
-        <ng-container *mIfFeature="'helpdesk'; else faq">
-        </ng-container>
-        <ng-template #faq>
-          <li class="m-dropdownList__item"
-            (click)="menu.value = false"
-          >
-            <a
-              [routerLink]="['/faq']"
-              i18n="@@OPSPOT__TOPBAR__FAQ"
-            >
-              <i class="material-icons">help_outline</i>
-              <span>FAQ</span>
-            </a>
-          </li>
-        </ng-template>
-        <li class="m-dropdownList__item"
-            (click)="menu.value = false"
-        >
-          <ng-container *mIfFeature="'helpdesk'; else helpAndSupport">
-            <a
-              routerLink="/help"
-              i18n="@@OPSPOT__TOPBAR__HELPDESK"
-            >
-              <i class="material-icons">help_outline</i>
-              <span>Help Desk</span>
-            </a>
-          </ng-container>
-          <ng-template #helpAndSupport>
-            <a
-              [routerLink]="['/groups/profile/', '100000000000000681']"
-              i18n="@@OPSPOT__TOPBAR__HS_GROUP"
-            >
-              <i class="material-icons">help_outline</i>
-              <span>Help & Support</span>
-            </a>
-          </ng-template>
-        </li>
-        <li class="m-dropdownList__item"
-        >
-          <a
-            target="_blank"
-            [href]="opspot.cdn_assets_url + 'assets/documents/Whitepaper-v0.3.pdf'"
-          >
-            <i class="material-icons">description</i>
-            <span>Whitepaper</span>
+        <li class="nav-icon__item">
+          <a class="nav__ico" href="#">
+            <img src="assets/svg/mail.svg" alt="">
           </a>
         </li>
-        <li class="m-dropdownList__item"
-            *ngIf="session.isLoggedIn()"
-            (click)="menu.value = false"
-        >
-          <a
-            [routerLink]="['/canary']"
-            i18n="@@OPSPOT__TOPBAR__MENU__EXPERIMENTS"
-          >
-            <i class="material-icons">new_releases</i>
-            <span *ngIf="!session.getLoggedInUser().canary">Opt-in to Experiments</span>
-            <span *ngIf="session.getLoggedInUser().canary">Canary</span>
-          </a>
-        </li>
-        <li class="m-dropdownList__item"
-            *ngIf="session.isLoggedIn()"
-            (click)="menu.value = false"
-        >
-          <a
-            [routerLink]="['/logout']"
-            i18n="@@OPSPOT__TOPBAR__LOGOUT"
-          >
-            <i class="material-icons">exit_to_app</i>
-            <span>Logout</span>
+        <li class="nav-icon__item">
+          <a class="nav__ico" title="Blog" [routerLink]="['blog/edit/new']">
+            <img src="assets/svg/create_post.svg" alt="">
           </a>
         </li>
       </ul>
-      <div class="opspot-bg-overlay" (click)="menu.value = !menu.value" [hidden]="!menu.value"></div>
     </div>
-                    <!-- <a class="nav__prof-img"  >
-                        <img src="assets/demo/avatar.png" alt="">
-                    </a>
-                     -->
-                </li>
-                
-                <li class="nav-icon__item">
-                    <a  [routerLink]="['/event/create']" title="Group" class="nav__ico" >
-                        <img src="assets/svg/create.svg" alt=""> 
-                    </a>
-                </li>
-                <li class="nav-icon__item">
-                    <a class="nav__ico" >
-                        <!-- <img src="assets/svg/bell.svg" alt=""> -->
-                        <!-- <span class="noti-count">3</span> -->
-                     <ng-content select="[icons]"></ng-content>
+  </div><!-- nav-bar end -->
 
- 
-                    </a>
-                </li>
-                <li class="nav-icon__item">
-                    <a class="nav__ico" href="#">
-                        <img src="assets/svg/mail.svg" alt="">
-                    </a>
-                </li>
-                <li class="nav-icon__item">
-                    <a class="nav__ico" title="Blog" [routerLink]="['blog/edit/new']">
-                        <img src="assets/svg/create_post.svg" alt="">
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div><!-- nav-bar end -->
-
-    <!-- mobile hamburger menu -->
-    <div class="app-nav hidden-above-tablet">
-        <a href="javascript:void(0);" class="app-nav__ico" (click)="hamburgerMenu()" id="app-nav">
-            <img src="assets/svg/m_nav_ico/hamburgermenu.svg" class="app-nav__ico-hamburg" alt="">
+  <!-- mobile hamburger menu -->
+  <div class="app-nav hidden-above-tablet">
+    <a href="javascript:void(0);" class="app-nav__ico" (click)="hamburgerMenu()" id="app-nav">
+      <img src="assets/svg/m_nav_ico/hamburgermenu.svg" class="app-nav__ico-hamburg" alt="">
+    </a>
+  </div>
+  <div id="app-nav-block" class="hidden-above-tablet">
+    <div class="app-nav-block__close" id="app-nav-close" (click)="closeNav()"><img src="assets/svg/m_nav_ico/close.svg"
+        alt=""></div>
+    <div class="app-nav-head">
+      <a [routerLink]="['/',user.username]" class="o-avatar"><img
+          src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt=""></a>
+      <div class="app-nav-head__info">
+        <a class="grey-dark app-nav-head__name">{{user.name}}</a>
+        <a [routerLink]="['/',user.username]" (click)='closeNav()' class="text-sm primary">View Profile</a>
+      </div>
+    </div>
+    <!--app nav head end-->
+    <div class="app-nav-link">
+      <ul class="app-nav-link-block">
+        <li class="app-nav-link_-item">
+          <a routerLink="/newsfeed" (click)='closeNav()'>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_home.svg" alt=""></div>
+            <div class="app-nav-link__text">Home</div>
+          </a>
+        </li>
+        <li class="app-nav-link_-item">
+          <a>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_explore.svg" alt=""></div>
+            <div class="app-nav-link__text">Explore</div>
+          </a>
+        </li>
+        <li class="app-nav-link_-item">
+          <a>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_bookmark.svg" alt=""></div>
+            <div class="app-nav-link__text">Saved Posts</div>
+          </a>
+        </li>
+        <li class="app-nav-link_-item">
+          <a [routerLink]="['/groups/create']" (click)='closeNav()'>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_events.svg" alt=""></div>
+            <div class="app-nav-link__text">Group</div>
+          </a>
+        </li>
+        <li class="app-nav-link_-item">
+          <a [routerLink]="['blog/edit/new']" (click)='closeNav()'>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_jobs.svg" alt=""></div>
+            <div class="app-nav-link__text">Blog</div>
+          </a>
+        </li>
+        <li class="app-nav-link_-item">
+          <a routerLink='/settings/general' (click)='closeNav()'>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_settings.svg" alt=""></div>
+            <div class="app-nav-link__text">Settings</div>
+          </a>
+        </li>
+      </ul>
+      <div class="app-nav-link_-item app-nav-link_-item--logout">
+        <a routerLink="/logout" (click)='closeNav()'>
+          <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_logout.svg" alt=""></div>
+          <div class="app-nav-link__text">logout</div>
         </a>
+      </div>
     </div>
-    <div id="app-nav-block" class="hidden-above-tablet">
-        <div class="app-nav-block__close" id="app-nav-close" (click)="closeNav()"><img src="assets/svg/m_nav_ico/close.svg" alt=""></div>
-        <div class="app-nav-head">
-            <a [routerLink]="['/',user.username]" class="o-avatar"><img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}"alt=""></a>
-            <div class="app-nav-head__info">
-                <a class="grey-dark app-nav-head__name">{{user.name}}</a>
-                <a [routerLink]="['/',user.username]" (click)='closeNav()' class="text-sm primary">View Profile</a>
-            </div>
-        </div><!--app nav head end-->
-        <div class="app-nav-link">
-            <ul class="app-nav-link-block">
-                <li class="app-nav-link_-item">
-                    <a  routerLink="/newsfeed" (click)='closeNav()' > 
-                        <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_home.svg" alt=""></div>
-                        <div class="app-nav-link__text">Home</div>
-                    </a>
-                </li>
-                <li class="app-nav-link_-item">
-                    <a >
-                        <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_explore.svg" alt=""></div>
-                        <div class="app-nav-link__text">Explore</div>
-                    </a>
-                </li>
-                <li class="app-nav-link_-item">
-                    <a >
-                        <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_bookmark.svg" alt=""></div>
-                        <div class="app-nav-link__text">Saved Posts</div>
-                    </a>
-                </li>
-                <li class="app-nav-link_-item">
-                    <a  [routerLink]="['/groups/create']" (click)='closeNav()'  >
-                        <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_events.svg" alt=""></div>
-                        <div class="app-nav-link__text">Group</div>
-                    </a>
-                </li>
-                <li class="app-nav-link_-item">
-                    <a  [routerLink]="['blog/edit/new']" (click)='closeNav()' >
-                        <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_jobs.svg" alt=""></div>
-                        <div class="app-nav-link__text">Blog</div>
-                    </a>
-                </li>
-                <li class="app-nav-link_-item">
-                    <a routerLink='/settings/general' (click)='closeNav()' >
-                        <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_settings.svg" alt=""></div>
-                        <div class="app-nav-link__text">Settings</div>
-                    </a>
-                </li>
-            </ul>
-            <div class="app-nav-link_-item app-nav-link_-item--logout">
-                <a routerLink="/logout" (click)='closeNav()' >
-                    <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_logout.svg" alt=""></div>
-                    <div class="app-nav-link__text">logout</div>
-                </a>
-            </div>
-        </div>
-        <footer>
-            <ul class="o-footer-link">
-                <li class="o-footer-link__item">
-                    <a href="#" class="text-md">About</a>
-                </li>
-                <li class="o-footer-link__item">
-                    <a href="#" class="text-md">Help</a>
-                </li>
-                <li class="o-footer-link__item">
-                    <a href="#" class="text-md">Terms</a>
-                </li>
-                <li class="o-footer-link__item">
-                    <a href="#" class="text-md">Privacy</a>
-                </li>
-                <li class="o-footer-link__item">
-                    <a href="#" class="text-md">Jobs</a>
-                </li>
-            </ul>
-        </footer>
-    </div>
+    <footer>
+      <ul class="o-footer-link">
+        <li class="o-footer-link__item">
+          <a href="#" class="text-md">About</a>
+        </li>
+        <li class="o-footer-link__item">
+          <a href="#" class="text-md">Help</a>
+        </li>
+        <li class="o-footer-link__item">
+          <a href="#" class="text-md">Terms</a>
+        </li>
+        <li class="o-footer-link__item">
+          <a href="#" class="text-md">Privacy</a>
+        </li>
+        <li class="o-footer-link__item">
+          <a href="#" class="text-md">Jobs</a>
+        </li>
+      </ul>
+    </footer>
+  </div>
 
 </header>
 
 <!-- mobile nav -->
 <div class="header_mobile hidden-above-tablet">
-    <div class="mobile-nav-ico">
-        <a  routerLink="/newsfeed" class="mobile-nav-icon__item">
-            <img src="assets/svg/m_nav_ico/home_main.svg" alt="home" class="mobile-nav-icon--lg">
-            <img src="assets/svg/m_nav_ico/home_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
-        </a>
-        <!-- wallet/tokens/contributions -->
-        <a [routerLink]="['wallet/tokens/contributions']" class="mobile-nav-icon__item">
-          <i style="color: #999999;" class="material-icons">account_balance</i>
-            <!-- <div class="o-noti-count"></div> -->
+  <div class="mobile-nav-ico">
+    <a routerLink="/newsfeed" class="mobile-nav-icon__item">
+      <img src="assets/svg/m_nav_ico/home_main.svg" alt="home" class="mobile-nav-icon--lg">
+      <img src="assets/svg/m_nav_ico/home_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
+    </a>
+    <!-- wallet/tokens/contributions -->
+    <a [routerLink]="['wallet/tokens/contributions']" class="mobile-nav-icon__item">
+      <i style="color: #999999;" class="material-icons">account_balance</i>
+      <!-- <div class="o-noti-count"></div> -->
 
-        </a>
-        <a [routerLink]="['/notifications']" class="mobile-nav-icon__item">
-            <img src="assets/svg/m_nav_ico/notification_main.svg" alt="home" class="mobile-nav-icon--lg">
-            <img src="assets/svg/m_nav_ico/notification_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
-            <!-- <div class="o-noti-count"></div> -->
-        </a>
-        <a class="mobile-nav-icon__item">
-            <img src="assets/svg/m_nav_ico/search_main.svg" alt="home" class="mobile-nav-icon--lg">
-            <img src="assets/svg/m_nav_ico/search_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
-        </a>
+    </a>
+    <a [routerLink]="['/notifications']" class="mobile-nav-icon__item">
+      <img src="assets/svg/m_nav_ico/notification_main.svg" alt="home" class="mobile-nav-icon--lg">
+      <img src="assets/svg/m_nav_ico/notification_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
+      <!-- <div class="o-noti-count"></div> -->
+    </a>
+    <a class="mobile-nav-icon__item">
+      <img src="assets/svg/m_nav_ico/search_main.svg" alt="home" class="mobile-nav-icon--lg">
+      <img src="assets/svg/m_nav_ico/search_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
+    </a>
 
-    </div>
+  </div>
 </div>
-    
+
 <div class="clearfix"></div>
-      
+
 
 <!-- 
 <div class="m-topbar--row">
@@ -443,6 +494,5 @@
 </div>
 
 <div class="m-topbar--toaster">
-   <!--  *ngIf="session.isLoggedIn() && notifications"  -->
-  <!-- <ng-template dynamic-host></ng-template>
+  <ng-template dynamic-host></ng-template>
 </div>  -->

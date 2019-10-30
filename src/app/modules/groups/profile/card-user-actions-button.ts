@@ -6,8 +6,8 @@ import { GroupsService } from '../groups-service';
   selector: 'opspot-groups-card-user-actions-button',
   inputs: ['group', 'user'],
   template: `
-  <button *ngIf="group['is:owner'] || (group['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
-    <i class="material-icons">settings</i>
+  <button class="icon-more-vertical btnDefault" *ngIf="group['is:owner'] || (group['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
+
   </button>
 
   <ul class="opspot-dropdown-menu" [hidden]="!showMenu">

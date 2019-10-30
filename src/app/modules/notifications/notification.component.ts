@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Session } from '../../services/session';
 import { Reason, rejectionReasons } from '../../controllers/admin/boosts/rejection-reasons';
 
@@ -6,7 +6,8 @@ import { Reason, rejectionReasons } from '../../controllers/admin/boosts/rejecti
   moduleId: module.id,
   selector: 'opspot-notification',
   inputs: ['_notification: notification'],
-  templateUrl: 'notification.component.html'
+  templateUrl: 'notification.component.html',
+  styleUrls:['notification.component.scss']
 })
 export class NotificationComponent {
 
@@ -32,6 +33,11 @@ export class NotificationComponent {
     return rejectionReasons.find((item: Reason) => {
       return item.code === code;
     });
+  }
+
+  getClasses(){
+    if(this.notification.status === 'unread')
+      return {'o-noti-block--unread': true}
   }
 
 }
