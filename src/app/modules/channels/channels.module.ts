@@ -18,6 +18,7 @@ import { ChannelSubscribers } from './subscribers/subscribers';
 import { ChannelSubscriptions } from './subscriptions/subscriptions';
 import { ChannelSidebar } from './sidebar/sidebar';
 import { ChannelFeedComponent } from './feed/feed';
+import { ChannelFilterComponent } from './filter/filter';
 import { ChannelSocialProfiles } from './social-profiles/social-profiles';
 import { ChannelComponent } from './channel.component';
 import { ChannelsListComponent } from './list.component';
@@ -79,6 +80,7 @@ const routes: Routes = [
     ChannelsListComponent,
     ChannelsTileComponent,
     ChannelFeedComponent,
+    ChannelFilterComponent,
     ChannelSidebar,
     ExplicitOverlayComponent,
     ProfileEditComponent,
@@ -101,6 +103,7 @@ const routes: Routes = [
     ChannelSubscriptions,
     ChannelSocialProfiles,
     ChannelFeedComponent,
+    ChannelFilterComponent,
     ChannelSidebar
   ],
   entryComponents: [ChannelComponent, ChannelsListComponent]
