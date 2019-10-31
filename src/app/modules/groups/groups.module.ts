@@ -142,6 +142,7 @@ import { CanDeactivateGroupService } from "./profile/can-deactivate/can-deactiva
 import { MobileMembersComponent } from './profile/members/mobile-members/mobile-members.component';
 import { MobileInviteComponent } from './profile/members/mobile-invite/mobile-invite.component';
 import { VideoChatComponent } from '../videochat/videochat.component';
+import { GroupJoinRequestComponent } from './group-join-request/group-join-request.component';
 
 const routes: Routes = [
   { path: 'groups/profile/:guid', component: GroupsProfile, canDeactivate: [CanDeactivateGroupService], children: [
@@ -204,6 +205,7 @@ const routes: Routes = [
     GroupsSidebarMarkersComponent,
     MobileMembersComponent,
     MobileInviteComponent,
+    GroupJoinRequestComponent,
   ],
   exports: [
     GroupsListComponent,
