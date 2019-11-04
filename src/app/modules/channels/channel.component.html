@@ -54,11 +54,6 @@
       </div>
       <m-channel--feed [user]="user" *ngIf="filter === 'feed'" #feed></m-channel--feed>
       <m-channel--filter [user]="user" [filter]="filter" *ngIf="filter !== 'feed'"></m-channel--filter>
-      <!-- <m-channel--opportunities *ngIf="filter == 'opportunities'" [user]="user"></m-channel--opportunities>
-      <m-channel--groups *ngIf="filter == 'groups'" [user]="user"></m-channel--groups>
-      <m-channel--blogs *ngIf="filter == 'blogs'" [user]="user"></m-channel--blogs>
-      <m-channel--events *ngIf="filter == 'events'" [user]="user"></m-channel--events>
-      <m-channel--marketplace *ngIf="filter == 'marketplace'" [user]="user"></m-channel--marketplace> -->
     </section>
 
     <section class="o-right-block hidden-mob">
