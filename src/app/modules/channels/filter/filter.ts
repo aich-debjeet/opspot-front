@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
@@ -19,15 +19,13 @@ import { WireChannelComponent } from '../../../modules/wire/channel/channel.comp
   inputs: ['user', 'openWireModal'],
   templateUrl: 'filter.html'
 })
-
 export class ChannelFilterComponent {
-
   opspot = window.Opspot;
-  filter: any = 'feed';
   isLocked: boolean = false;
+  @Input() filter: any;
+  @Input() user: OpspotUser;
 
   username: string;
-  user: OpspotUser;
   feed: Array<Object> = [];
   pinned: Array<Object> = [];
   offset: string = '';
@@ -47,16 +45,22 @@ export class ChannelFilterComponent {
     public session: Session,
     public client: Client,
     public upload: Upload,
-    public scroll: ScrollService,
-  ) { }
+    public scroll: ScrollService
+  ) {}
 
   ngOnInit() {
+    console.log('FILTER: ', this.filter);
+    this.loadFeed(true);
+    this.onScroll();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('FILTER UPDATED: ', this.filter);
     this.loadFeed(true);
     this.onScroll();
   }
 
   loadFeed(refresh: boolean = false) {
-
     if (this.openWireModal) {
       setTimeout(() => {
         this.wire.sendWire();
@@ -74,18 +78,22 @@ export class ChannelFilterComponent {
 
     let params: any = {
       limit: 12,
-      offset: ''
-    }
+      offset: '',
+      sync: 1,
+      as_activities: 0,
+      container_guid: this.user.guid
+    };
 
-    if(!this.offset && this.user.pinned_posts.length > 0){
+    if (!this.offset && this.user.pinned_posts.length > 0) {
       params.pinned = this.user.pinned_posts;
     }
 
     this.inProgress = true;
 
     params.offset = this.offset;
-    
-    this.client.get('api/v1/newsfeed/personal/' + this.user.guid, params, { cache: true })
+
+    this.client
+      .get(`api/v2/feeds/container/${this.user.guid}/${this.filter}`, params)
       .then((data: OpspotActivityObject) => {
         if (!data.activity) {
           this.moreData = false;
@@ -103,7 +111,7 @@ export class ChannelFilterComponent {
         this.offset = data['load-next'];
         this.inProgress = false;
       })
-      .catch(function (e) {
+      .catch(function(e) {
         this.inProgress = false;
       });
   }
@@ -112,22 +120,22 @@ export class ChannelFilterComponent {
     return this.session.getLoggedInUser().guid === this.user.guid;
   }
 
-  filterPinned(activities){
-    return activities.filter( (activity) => {
-      if (this.user.pinned_posts.indexOf(activity.guid) >= 0) {
-        activity.pinned = true;
-      } else {
-        return activity;
-      }
-    }).filter(x=>!!x);
+  filterPinned(activities) {
+    return activities
+      .filter(activity => {
+        if (this.user.pinned_posts.indexOf(activity.guid) >= 0) {
+          activity.pinned = true;
+        } else {
+          return activity;
+        }
+      })
+      .filter(x => !!x);
   }
 
   onScroll() {
-    var listen = this.scroll.listen((view) => {
-      if (view.top > 250)
-        this.isLocked = true;
-      if (view.top < 250)
-        this.isLocked = false;
+    var listen = this.scroll.listen(view => {
+      if (view.top > 250) this.isLocked = true;
+      if (view.top < 250) this.isLocked = false;
     });
   }
 
@@ -147,8 +155,7 @@ export class ChannelFilterComponent {
   }
 
   canDeactivate() {
-    if (!this.poster || !this.poster.attachment)
-      return true;
+    if (!this.poster || !this.poster.attachment) return true;
     const progress = this.poster.attachment.getUploadProgress();
     if (progress > 0 && progress < 100) {
       return confirm('Your file is still uploading. Are you sure?');
