@@ -5,6 +5,7 @@ import { WireRewardsStruc } from '../modules/wire/interfaces/wire.interfaces';
 
 export interface OpspotActivityObject {
   activity: Array<any>;
+  entities: Array<any>;
   pinned: Array<any>;
 }
 
