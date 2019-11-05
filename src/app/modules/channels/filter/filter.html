@@ -1,4 +1,4 @@
-<!-- <opspot-newsfeed-poster (load)="prepend($event)" *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid == user.guid" #poster></opspot-newsfeed-poster>
+<opspot-newsfeed-poster (load)="prepend($event)" *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid == user.guid" #poster></opspot-newsfeed-poster>
 
 <div class="opspot-list">
   <opspot-activity *ngFor="let activity of feed" [object]="activity" [boostToggle]="activity.boostToggle" class="mdl-card m-border item" (delete)="delete(activity)"></opspot-activity>
@@ -8,6 +8,4 @@
     [moreData]="moreData"
     [inProgress]="inProgress">
   </infinite-scroll>
-</div> -->
-
-<p>Filter: {{ filter }}</p>
+</div>

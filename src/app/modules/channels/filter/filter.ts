@@ -95,17 +95,17 @@ export class ChannelFilterComponent {
     this.client
       .get(`api/v2/feeds/container/${this.user.guid}/${this.filter}`, params)
       .then((data: OpspotActivityObject) => {
-        if (!data.activity) {
+        if (!data.entities) {
           this.moreData = false;
           this.inProgress = false;
           return false;
         }
         if (this.feed && !refresh) {
-          for (let activity of data.activity) {
+          for (let activity of data.entities) {
             this.feed.push(activity);
           }
         } else {
-          this.feed = this.filterPinned(data.activity);
+          this.feed = this.filterPinned(data.entities);
           this.pinned = data.pinned;
         }
         this.offset = data['load-next'];
