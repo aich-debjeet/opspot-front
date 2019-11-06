@@ -50,7 +50,7 @@
         <div class="f500 text-lg">{{entity.name}}</div>
       </div>
       <div class="o-community-card-skills" *ngIf="entity?.tags.length > 0; else emptyTag">
-        <a *ngFor="let tag of entity?.tags" class="o-community-card-skills__tag">{{tag}}</a>
+        <a *ngFor="let tag of entity?.tags | slice:0:3" class="o-community-card-skills__tag">{{tag}}</a>
       </div>
       <ng-template #emptyTag>
         <p class="o-community-card-skills">
@@ -59,18 +59,21 @@
       </ng-template>
       <!--tag ends-->
       <div class="o-community-card-action">
-        <opspot-groups-join-button *ngIf="(!entity['is:member'] && entity.membership === 2) && !entity['is:awaiting']" [group]="entity">
+        <opspot-groups-join-button *ngIf="(!entity['is:member'] && entity.membership === 2) && !entity['is:awaiting']"
+          [group]="entity">
         </opspot-groups-join-button>
         <button type="button" *ngIf="(!entity['is:member'] && entity.membership !== 2) && !entity['is:awaiting']"
-          class="btn btn-primary btn-sm" (click)='trigger(entity)' >Join</button>
+          class="btn btn-primary btn-sm" (click)='trigger(entity)'>Join</button>
         <!-- <ng-template> -->
-          <button  *ngIf="entity['is:member']" class="btn btn-primary btn-sm" i18n="@@GROUPS__TILE__OPEN_ACTION" (click)='trigger(entity)'>
-            Open
-          </button>
+        <button *ngIf="entity['is:member']" class="btn btn-primary btn-sm" i18n="@@GROUPS__TILE__OPEN_ACTION"
+          (click)='trigger(entity)'>
+          Open
+        </button>
         <!-- </ng-template> -->
-          <button class="btn btn-primary btn-sm" *ngIf="entity['is:awaiting']" (click)="cancleRequest()" i18n="@@GROUPS__TILE__OPEN_ACTION">
-            Cancle
-          </button>
+        <button class="btn btn-primary btn-sm" *ngIf="entity['is:awaiting']" (click)="cancleRequest()"
+          i18n="@@GROUPS__TILE__OPEN_ACTION">
+          Cancle
+        </button>
       </div>
     </div>
   </div>
