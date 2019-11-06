@@ -1,4 +1,4 @@
-<div class="m-toolbar">
+<!-- <div class="m-toolbar">
   <div class="m-topbar--row">
     <div class="m-topbar--navigation m-topbar--navigation--text-only">
       <a class="m-topbar--navigation--item"
@@ -67,3 +67,48 @@
 <div class="m-boost-console--wrapper">
   <router-outlet></router-outlet>
 </div>
+ -->
+
+
+
+<section class="o-boost-console-sec">
+  <div class="container">
+    <div class="o-boost-console-block">
+      <div class="o-boost-console-block__tab">
+        <div class="tabs-boost-console">
+          <ul class="tabs-list boost-console-tabs">
+            <li class="active"><a href="#boosted-posts">Boosted Posts</a></li>
+            <li><a href="#completed-targets">Completed Targets</a></li>
+            <li><a href="#rejected-posts">Rejected Posts</a></li>
+          </ul>
+        </div>
+        <!--tab end-->
+      </div>
+      <div class="o-boost-console-block__content">
+        <div class="tabs-boost-console">
+          <div id="boosted-posts" class="tab active">
+            <m-boost-console-card *ngFor="let boost of boosts; let i = index" class="mdl-card mdl-shadow--4dp"
+              [boost]="boost"></m-boost-console-card>
+          </div>
+          <!-- <div id="completed-targets" class="tab">
+          </div>
+          <div id="rejected-posts" class="tab">
+          </div> -->
+        </div>
+        <!--tab content end-->
+      </div>
+      <!--content ends-->
+      <div class="o-boost-console-block__right hidden-mob">
+        <div class="title">
+          <div class="text-lg f500">
+            My Posts
+          </div>
+          <a class="text-sm primary" [routerLink]="['/', session.getLoggedInUser().username]">
+            See All
+          </a>
+        </div>
+        <opspot-post-card [entity]="feed" *ngFor="let feed of feed"></opspot-post-card>
+      </div>
+    </div><!-- wallet block end -->
+  </div>
+</section>

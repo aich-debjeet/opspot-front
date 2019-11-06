@@ -34,7 +34,7 @@ export class GroupBannerComponent  {
     if(!this.object.banner)  {
       this.src='assets/demo/m2.jpg'
     }else{
-     this.src = '/fs/v1/banners/' + this.object.guid + '/' + this.top + '/' + this.object.banner;
+     this.src = this.opspot.cdn_url+ 'fs/v1/banners/' + this.object.guid + '/' + this.top + '/' + this.object.banner;
     }  
   }
   set _top(value: number) {

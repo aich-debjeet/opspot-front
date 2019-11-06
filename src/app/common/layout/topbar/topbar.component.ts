@@ -1,4 +1,9 @@
-import { Component, ComponentFactoryResolver, ViewChild, OnInit } from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  ViewChild,
+  OnInit
+} from '@angular/core';
 import { Storage } from '../../../services/storage';
 import { Sidebar } from '../../../services/ui/sidebar';
 import { Session } from '../../../services/session';
@@ -9,39 +14,42 @@ import { NotificationsToasterComponent } from '../../../modules/notifications/to
   moduleId: module.id,
   selector: 'm-topbar',
   templateUrl: 'topbar.component.html',
-  styleUrls:['topbar.component.scss']
+  styleUrls: ['topbar.component.scss']
 })
-
-export class TopbarComponent implements OnInit{
-
+export class TopbarComponent implements OnInit {
   @ViewChild(DynamicHostDirective) host: DynamicHostDirective;
 
-  opspot:any = window.Opspot;
-  avatarSize='small';
-  user:any={}
+  opspot: any = window.Opspot;
+  avatarSize = 'small';
+  user: any = {};
   componentRef;
   componentInstance: NotificationsToasterComponent;
 
-  constructor(public session: Session, public storage: Storage, public sidebar: Sidebar, private _componentFactoryResolver: ComponentFactoryResolver) {
-  }
+  constructor(
+    public session: Session,
+    public storage: Storage,
+    public sidebar: Sidebar,
+    private _componentFactoryResolver: ComponentFactoryResolver
+  ) {}
 
   ngAfterViewInit() {
     // this.loadComponent();
-
   }
-  ngOnInit(){
-    this.user=this.opspot.user
+  ngOnInit() {
+    this.user = this.opspot.user;
   }
 
-	/**
-	 * Open the navigation
-	 */
+  /**
+   * Open the navigation
+   */
   openNav() {
     this.sidebar.open();
   }
 
   loadComponent() {
-    const componentFactory = this._componentFactoryResolver.resolveComponentFactory(NotificationsToasterComponent),
+    const componentFactory = this._componentFactoryResolver.resolveComponentFactory(
+        NotificationsToasterComponent
+      ),
       viewContainerRef = this.host.viewContainerRef;
 
     viewContainerRef.clear();
@@ -51,23 +59,21 @@ export class TopbarComponent implements OnInit{
     this.componentInstance = this.componentRef.instance;
   }
 
-  hamburgerMenu(){
-    
-          var x = document.getElementById("app-nav-block");
-              if (x.style.display === "block") {
-                  x.style.display = "none";
-              } else {
-                  x.style.display = "block";
-              }
-     }
-
-   closeNav(){
-    var x = document.getElementById("app-nav-block");
-    console.log(x.style)
-    if (x.style.display === "block") {
-        x.style.display = "none";
+  hamburgerMenu() {
+    var x = document.getElementById('app-nav-block');
+    if (x.style.display === 'block') {
+      x.style.display = 'none';
     } else {
-        x.style.display = "block";
+      x.style.display = 'block';
     }
-   }   
+  }
+
+  closeNav() {
+    var x = document.getElementById('app-nav-block');
+    if (x.style.display === 'block') {
+      x.style.display = 'none';
+    } else {
+      x.style.display = 'block';
+    }
+  }
 }

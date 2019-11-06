@@ -23,8 +23,10 @@ export class BoostConsoleTypesComponent {
 
   ngOnInit() {
     this.route.url.subscribe(segments => {
+      console.log(segments)
       this.type = <BoostConsoleType>segments[0].path;
     }); 
+    console.log(this.route.children)
   }
 
 }

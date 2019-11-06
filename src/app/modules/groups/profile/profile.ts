@@ -17,17 +17,16 @@ import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.comp
 import { VideoChatService } from '../../videochat/videochat.service';
 import { UpdateMarkersService } from '../../../common/services/update-markers.service';
 import { filter } from "rxjs/operators";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'm-groups--profile',
-  templateUrl: 'profile.html'
+  templateUrl: 'profile2.html'
 })
 
 export class GroupsProfile {
 
-  // fix: AOT
-  // TODO @shashi: dev? please fix
-  dev: any;
+  // dev: boolean = false;
   guid;
   filter = 'activity';
   group;
@@ -48,10 +47,15 @@ export class GroupsProfile {
   paramsSubscription: Subscription;
   childParamsSubscription: Subscription;
   queryParamsSubscripton: Subscription;
+  totalMembers;
 
   socketRoomName: string;
   newConversationMessages: boolean = false;
 
+  inviteToggle:boolean=false;
+  memberToggle:boolean=false;
+  membersMobile;
+  memberSrc=`${this.opspot.cdn_url}icon/`
   @ViewChild('feed') private feed: GroupsProfileFeed;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
@@ -59,6 +63,8 @@ export class GroupsProfile {
   private socketSubscription: any;
   private videoChatActiveSubscription;
   private updateMarkersSubscription;
+  showGathering = false;
+
 
   constructor(
     public session: Session,
@@ -73,6 +79,7 @@ export class GroupsProfile {
     public videochat: VideoChatService,
     private cd: ChangeDetectorRef,
     private updateMarkers: UpdateMarkersService,
+    // private _location: Location
   ) { }
 
   ngOnInit() {
@@ -80,14 +87,15 @@ export class GroupsProfile {
     this.listenForNewMessages();
     this.detectWidth();
     this.detectConversationsState();
-
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {
+       this.loadMembers(params['guid'])
+
         let changed = params['guid'] !== this.guid;
 
         this.guid = params['guid'];
         this.postMeta.container_guid = this.guid;
-
+        
         if (changed) {
           this.group = void 0;
 
@@ -118,7 +126,6 @@ export class GroupsProfile {
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event) => {
       const url = this.router.routerState.snapshot.url;
-
       this.setFilter(url);
     });
 
@@ -128,7 +135,7 @@ export class GroupsProfile {
       this.reviewCountLoad();
     }, 120 * 1000);
 
-    this.videoChatActiveSubscription = this.videochat.activate$.subscribe(next => window.scrollTo(0, 0));
+    this.videoChatActiveSubscription = this.videochat.activate$.subscribe(next => window.scrollTo(0, 0));    
   }
 
   setFilter(url: string) {
@@ -173,6 +180,7 @@ export class GroupsProfile {
     // Load group
     try { 
       this.group = await this.service.load(this.guid);
+
     } catch (e) {
       this.error = e.message;
       return;
@@ -408,4 +416,39 @@ export class GroupsProfile {
     this.cd.detectChanges();
   }
 
+  groupCount(e){
+   this.totalMembers=e
+  }
+
+  openInvite(){
+  if(window.innerWidth>785){
+    this.inviteToggle=!this.inviteToggle;
+     }else{
+       this.router.navigate([`/groups/${this.guid}/invite`])
+     } 
+  }
+   
+  showMembers(){
+    if(window.innerWidth>785){
+   this.memberToggle=!this.memberToggle;
+    }else{
+      this.router.navigate([`/groups/${this.guid}/members`])
+    } 
+  }
+ 
+ async loadMembers(guid){
+    let endpoint = `api/v1/groups/membership/${guid}`
+    let  params = { limit: 4, offset: this.offset };
+     let members= await this.client.get(endpoint, params)
+     console.log(members)
+     this.membersMobile=members['members']
+    }
+    
+  showGathering1(){
+   this.showGathering = true;
+  }
+
+  backClicked() {
+    this.showGathering = false;
+  }
 }
