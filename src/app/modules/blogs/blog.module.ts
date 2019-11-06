@@ -17,6 +17,7 @@ import { BlogTileComponent } from './tile/tile.component';
 import { WireModule } from '../wire/wire.module';
 import { CommentsModule } from '../comments/comments.module';
 import { HashtagsModule } from '../hashtags/hashtags.module';
+import { BlogPreviewComponent } from './edit/blog-preview/blog-preview.component';
 
 const routes: Routes = [
   { path: 'blog/view/:guid/:title', component: BlogViewInfinite },
@@ -49,6 +50,7 @@ const routes: Routes = [
     BlogEdit,
     BlogListComponent,
     BlogTileComponent,
+    BlogPreviewComponent,
   ],
   exports: [
     BlogView,
@@ -59,7 +61,8 @@ const routes: Routes = [
     BlogTileComponent,
   ],
   entryComponents: [
-    BlogCard
+    BlogCard,
+    BlogPreviewComponent
   ]
 })
 export class BlogModule {

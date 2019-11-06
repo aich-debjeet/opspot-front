@@ -1,13 +1,13 @@
-<header *ngIf="blog">
+<!-- <header *ngIf="blog">
   <opspot-banner
     [object]="blog"
     editMode="true"
     (added)="add_banner($event)"
     [done]="banner_prompt"
     ></opspot-banner>
-</header>
+</header> -->
 
-<form (submit)="save()" class="mdl-grid blogs-grid m-blog-container mdl-color--white" style="max-width:740px" *ngIf="blog.guid">
+<!-- <form (submit)="save()" class="mdl-grid blogs-grid m-blog-container mdl-color--white" style="max-width:740px" *ngIf="blog.guid">
 
   <div class="mdl-grid" style="width: 100%">
     <div class="mdl-cell mdl-cell--12-col">
@@ -19,7 +19,7 @@
         i18n-placeholder="@@BLOGS__EDIT__TITLE_PLACEHOLDER"
        ></opspot-textarea>
      </div>
-     <!-- Owner box -->
+     
     <div class="mdl-cell mdl-cell--5-col opspot-blog-ownerblock">
 
       <div class="opspot-avatar" [hovercard]="session.getLoggedInUser().guid">
@@ -148,4 +148,107 @@
     </div>
   </div>
 
-</form>
+</form> -->
+
+
+<div class="o-blog-write-sec">
+  <div class="container">
+    <div class="container hidden-above-tablet o-search-filter-mob-header">
+      <div class="without-nav-header o-reg-skill-mob-header">
+        <a href="community_admin.html"><i class="icon-arrow-left"></i> </a>
+        <h4 class="without-nav-header__title f500">Blog</h4>
+        <div class="text-md grey">Saved</div>
+      </div>
+    </div><!-- without nav header end -->
+    <div class="o-blog-write-tab">
+      <div class="tabs-blog">
+        <ul class="tabs-list">
+          <li class="active"><a href="#write">Write Blog</a></li>
+          <li><a href="#draft">Draft</a></li>
+          <li><a href="#published">Published</a></li>
+        </ul>
+      </div><!-- tabs blog end-->
+      <div class="o-blog-preview-btn-block hidden-mob">
+        <a href="" class="text-md grey">Saved</a>
+        <a class="btn btn-primary btn-sm" (click)="save()">Preview and Publish</a>
+        <!-- <button class="btn btn-primary btn-sm" (click)="blog.published = 1" [disabled]="!canSave || pendingUploads.length !== 0 || !validThreshold" i18n="@@BLOGS__EDIT__PUBLISH_ACTION">Preview and Publish</button> -->
+      </div>
+    </div><!-- blog write tab end-->
+    <div class="o-blog-write-tab-content tabs-blog">
+      <div id="write" class="tab active">
+        <form (submit)="save()" *ngIf="blog.guid">
+          <!-- <div class="o-blog-content" contentEditable="true">
+                  Title
+              </div> -->
+          <opspot-textarea name="title" [(mModel)]="blog.title" class="o-blog-content" placeholder="Title"
+            i18n-placeholder="@@BLOGS__EDIT__TITLE_PLACEHOLDER"></opspot-textarea>
+            <m-inline-editor name="description" [(ngModel)]="blog.description" placeholder="Go ahead and write some content!" i18n-placeholder="@@BLOGS__EDIT__INLINE_EDITOR_PLACEHOLDER" #inlineEditor></m-inline-editor>
+          <!-- <div id="o-blog-add-block">
+            <div class="o-blog-add-menus" style="display:none;">
+              <div class="o-blog-avatar__arrow"><img src="assets/droparrow.png" alt=""></div>
+              <a class="o-blog-add-menus__item">
+                <div class="o-blog-add-menus-icon"><img src="assets/blog/paragraph.svg"></div>
+                <div class="text-sm">Paragraph</div>
+              </a>
+              <a class="o-blog-add-menus__item">
+                <div class="o-blog-add-menus-icon"><i class="icon-image"></i></div>
+                <div class="text-sm">Image</div>
+              </a>
+              <a class="o-blog-add-menus__item">
+                <div class="o-blog-add-menus-icon"><i class="icon-video"></i></div>
+                <div class="text-sm">Video</div>
+              </a>
+              <a class="o-blog-add-menus__item">
+                <div class="o-blog-add-menus-icon"><i class="icon-mic"></i></div>
+                <div class="text-sm">Audio</div>
+              </a>
+              <a class="o-blog-add-menus__item">
+                <div class="o-blog-add-menus-icon"><i class="icon-code"></i></div>
+                <div class="text-sm">Embedded</div>
+              </a>
+              <a class="o-blog-add-menus__item">
+                <div class="o-blog-add-menus-icon o-blog-add-menus-icon--m17"><img src="assets/blog/divider.svg"></div>
+                <div class="text-sm">Divider</div>
+              </a>
+            </div>
+            <div class="fab-button o-blog-add-btn">
+              <i class="icon-plus-circle" aria-hidden="true"></i>
+            </div>
+          </div> -->
+          
+        </form>
+      </div>
+
+      <div id="draft" class="tab">
+        <div class="o-blog-write-padding-published o-blog-draft">
+
+        </div>
+        <div class="o-blog-write-published-line"></div>
+        <div class="o-blog-write-published-dropdown-none o-blog-write-padding-published o-blog-draft">
+
+        </div>
+        <div class="o-blog-write-published-line"></div>
+        <div class="o-blog-write-published-dropdown-none o-blog-write-padding-published o-blog-draft">
+
+        </div>
+      </div>
+      <div id="published" class="tab">
+        <div class="o-blog-write-padding-published">
+
+        </div>
+        <div class="o-blog-write-published-line"></div>
+        <div class="o-blog-write-published-dropdown-none o-blog-write-padding-published">
+
+        </div>
+        <div class="o-blog-write-published-line"></div>
+        <div class="o-blog-write-published-dropdown-none o-blog-write-padding-published">
+
+        </div>
+      </div>
+    </div>
+    <div class="o-blog-wrire-mob">
+      <button type="button" class="btn btn-primary btn-block o-blog-wrire-mob-button">Preview and Publish <i
+          class="icon-arrow-right mobile-icon"></i></button>
+    </div>
+  </div>
+</div>
