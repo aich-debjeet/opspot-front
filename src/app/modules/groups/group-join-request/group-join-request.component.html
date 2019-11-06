@@ -1,3 +1,28 @@
-<p>
-  group-join-request works!
-</p>
+<div class="o-community-join-request">
+    <div class="o-community-join-request-cover">
+        <img *ngIf='entity?.banner != "" '
+            [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
+        <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
+    </div>
+    <div class="o-community-join-request-profile">
+        <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="cover">
+    </div>
+    <!--frofile ends-->
+    <div class="o-community-join-request-header">
+        <h3 class="f500">{{entity?.name}}</h3>
+    </div>
+    <!--header ends-->
+    <div class="o-community-join-request-skills" *ngIf="entity?.tags">
+        <a *ngFor="let tag of entity?.tags" class="o-community-join-request-skills__tag">{{tag}}</a>
+    </div>
+    <!--tag ends-->
+    <div class="o-community-join-request-memmbers-count">
+        <h4 class="f500">105</h4>
+        <div class="text-lg grey">Members</div>
+    </div>
+    <div class="o-community-join-request-action">
+        <opspot-groups-join-button [group]="entity">
+        </opspot-groups-join-button>
+        <!-- <button type="button" class="btn btn-primary btn-lg">Request</button> -->
+    </div>
+</div>

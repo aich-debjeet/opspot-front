@@ -227,6 +227,7 @@ const routes: Routes = [
   entryComponents: [
     GroupsCard,
     GroupsSidebarMarkersComponent,
+    GroupJoinRequestComponent
   ],
   providers: [
     CanDeactivateGroupService

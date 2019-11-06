@@ -1,4 +1,4 @@
-import { Component, Inject, EventEmitter } from '@angular/core';
+import { Component, Inject, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { GroupsService } from './groups-service';
@@ -23,8 +23,8 @@ import { LoginReferrerService } from '../../services/login-referrer.service';
       <button class="m-btn m-btn--slim m-btn--action" (click)="accept()" i18n="@@M__ACTION__ACCEPT">Accept</button>
       <button class="m-btn m-btn--slim m-btn--action" (click)="decline()" i18n="@@GROUPS__JOIN_BUTTON__DECLINE_ACTION">Decline</button>
     </span>
-    <button class="btn btn-primary btn-sm " *ngIf="group['is:member']" (click)="leave()" i18n="@@GROUPS__JOIN_BUTTON__LEAVE_ACTION">Leave</button>
-    <button class="m-btn m-btn--slim awaiting" *ngIf="group['is:awaiting']" (click)="cancelRequest()" i18n="@@GROUPS__JOIN_BUTTON__CANCEL_REQ_ACTION">Cancel request</button>
+    <button class="btn btn-primary btn-sm" *ngIf="group['is:member']" (click)="leave()" i18n="@@GROUPS__JOIN_BUTTON__LEAVE_ACTION">Leave</button>
+    <button class="btn btn-primary btn-sm" *ngIf="group['is:awaiting']" (click)="cancelRequest()" i18n="@@GROUPS__JOIN_BUTTON__CANCEL_REQ_ACTION">Cancel</button>
     <m-modal-signup-on-action
       [open]="showModal"
       (closed)="join(); showModal = false;"
@@ -43,6 +43,8 @@ export class GroupsJoinButton {
   group: any;
   membership: EventEmitter<any> = new EventEmitter();
   inProgress: boolean = false;
+  @Input() small: boolean = false;
+
 
   constructor(
     public session: Session,
@@ -78,13 +80,12 @@ export class GroupsJoinButton {
   /**
    * Join a group
    */
- join() {
- 
-   if (!this.session.isLoggedIn()) {
-     //this.showModal = true;
-     this.loginReferrer.register(`/groups/profile/${this.group.guid}/feed?join=true`);
-     this.router.navigate(['/login']);
-     return;
+  join() {
+    if (!this.session.isLoggedIn()) {
+      //this.showModal = true;
+      this.loginReferrer.register(`/groups/profile/${this.group.guid}/feed?join=true`);
+      this.router.navigate(['/login']);
+      return;
     }
     this.inProgress = true;
     this.service.join(this.group)
@@ -111,6 +112,8 @@ export class GroupsJoinButton {
             break;
           default:
             error = e.error;
+            console.log("error: ", error);
+            
             break;
         }
         this.group['is:member'] = false;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-group-join-request',
@@ -10,6 +10,12 @@ export class GroupJoinRequestComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+  entity: any;
+  opspot = window.Opspot;
+
+  @Input('object') set data (object){
+    this.entity = object;
   }
 
 }
