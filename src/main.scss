@@ -22528,8 +22528,10 @@ opspot-newsfeed-single .opspot-comments-container {
     text-decoration: none;
     font-weight: 500;
     color: #333; }
-  .m-owner-block span {
+  .m-owner-block span, .m-edited-text, .mdl-card__supporting-text {
     color: #888;
+    font-weight: initial !important;
+    letter-spacing: initial !important;
     font-size: 11px; }
   .m-owner-block img {
     border-radius: 3px; }
@@ -23339,7 +23341,7 @@ input[type="number"] {
 .m-mature-message {
   white-space: inherit !important; }
   .m-mature-message .m-mature-message-content {
-    white-space: pre-line; }
+    white-space: pre-line; font-size: 13px; }
 
 .m-mature-thumbnail {
   -webkit-filter: blur(15px) grayscale(100%);
@@ -27569,4 +27571,12 @@ li{
 
 .o-community-gather--icon {
   color:#263238!important;
+}
+
+.mdl-button:hover {
+  background-color: transparent;
+}
+
+.icon-more-horizontal {
+  font-size: 20px !important;
 }
