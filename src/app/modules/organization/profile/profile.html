@@ -1,0 +1,170 @@
+<style>
+        ::ng-deep .memberToggle .m-modal-container {
+            width: 543px !important;
+            min-width: 0;
+            min-height: 0;
+        }
+    
+    
+        ::ng-deep .memberToggle .mdl-card {
+            padding: 46px 40px !important;
+            border-radius: 4px !important;
+        }
+    
+        ::ng-deep .inviteToggle .m-modal-container {
+            width: 543px !important;
+            min-width: 0;
+            min-height: 0;
+        }
+    
+        ::ng-deep .inviteToggle .mdl-card {
+            padding: 46px 40px !important;
+            border-radius: 4px !important;
+        }
+    
+        .sticky-wrapper {
+            position: sticky;
+            top: 60px;
+        }
+    </style>
+    
+    <div class="container hidden-above-tablet">
+        <div class="without-nav-header">
+            <a routerLink=".."><i class="icon-arrow-left"></i> </a>
+            <div class="without-nav-header__title caption-bold f500">Community</div>
+        </div>
+    </div>
+    <div [hidden]="organization || error" style="width:100%; text-align:center; ">
+        <div class="mdl-spinner mdl-js-spinner is-active" [mdl] style="margin: 16px auto;"></div>
+    </div>
+    <div class="m-error-splash" *ngIf="error && !organization">
+        <img [src]="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+        <h3 class="mdl-color-text--red-300">{{error}}</h3>
+        <span class="mdl-color-text--blue-grey-300">Check the url is correct</span>
+        <router-outlet></router-outlet>
+    </div>
+    <div *ngIf="!error" class="container">
+        <div class="o-blocks o-blocks--flex">
+            <!-- <div> -->
+            <div class="o-left-block o-left-block--community" *ngIf="!showGathering">
+                <div class="sticky-wrapper">
+                    <app-group-banner class="o-cover o-cover--community hidden-above-tablet" [object]="organization"
+                        [editMode]="editing" [top]="organization?.banner_position" [done]="editDone" (added)="add_banner($event)">
+                    </app-group-banner>
+                    <div class="o-card o-community-info o-community-info--radius o-community-info--shadow">
+                        <div class="o-community-option-drop">
+                            <!-- <div  class="o-community-option-drop__btn head-action__link"><i class="icon-more-vertical f-15"></i> </div> -->
+                            <opspot-groups-settings-button [(group)]="organization"
+                                class="o-community-option-drop__btn head-action__link" (change)="onOptionsChange($event)">
+                            </opspot-groups-settings-button>
+                            <div id="o-community-option-dropdown" class="o-community-option-drop__block">
+                                <a href="#">comming ..</a>
+                            </div>
+                        </div>
+                        <div class="o-community-img-block">
+                            <opspot-avatar [object]="organization" [editMode]="editing" [profileEdit]="true"
+                                (added)="upload_avatar($event)">
+                            </opspot-avatar>
+                            <!-- <a class="o-community-img-edit"><i class="icon-edit-profile"></i></a> -->
+                        </div>
+                        <div class="o-community-name">
+                            <h5 class="f700">{{organization.name}}</h5>
+                        </div>
+                        <div class="o-community-skills" *ngIf="!editing && organization?.tags">
+                            <a *ngFor="let tag of organization?.tags" href="" class="o-community-skills__tag">#{{tag}}</a>
+                        </div>
+                        <!-- <opspot-groups-join-button style="margin-bottom: 6px;" [group]="group"
+                            (membership)="change_membership($event)"
+                            *ngIf="(!group['is:creator'] || (session.isAdmin()) && !group['is:invited'])">
+                        </opspot-groups-join-button> -->
+                        <!--doubt -->
+                        <div class="o-community-members-top o-community-members-top--mob hidden-above-tablet">
+                            <a class="o-community-members-top__count-mob" *ngFor="let member of membersMobile">
+                                <span class="o-community-members-list-mob-single"><img [src]="memberSrc+member.guid"
+                                        alt=""></span>
+                            </a>
+                            <a (click)="openInvite()" class="o-community-add-members-mob"><i class="icon-plus"></i></a>
+                        </div>
+                        <!-- <m-videochat></m-videochat> -->
+                        <div class="o-community-members-top ">
+                            <a (click)="showMembers()" class="o-community-members-top__count">
+                                <div class="caption-bold">{{totalMembers|abbr}}</div>
+                                <div class="text-sm grey">Members</div>
+                            </a>
+                        </div>
+                        <!-- <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle">
+                            <opspot-groups-profile-members-invite [group]="group">
+                            </opspot-groups-profile-members-invite>
+                        </m-modal>
+                        <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle">
+                            <opspot-groups-profile-members></opspot-groups-profile-members>
+                        </m-modal> -->
+                        <!-- <div class="o-community-discrptn">
+                            <div class="text-md">
+                                <a *ngIf="(group.briefdescription?group.briefdescription.length<30:true); else readMo">
+                                    {{group.briefdescription}} </a>
+                                <ng-template #readMo>
+                                    <readMore>
+                                        {{group.briefdescription}}
+                                    </readMore>
+                                </ng-template>
+                            </div>
+    
+                        </div> -->
+                    </div>
+                    <div class="o-cards o-community-members hidden-under-tablet">
+                        <div class="o-community-members__header">
+                            <div class="text-lg f500">
+                                Community Members
+                            </div>
+                            <span (click)="openInvite()" style="font-size: 24px !important;"
+                                class="icon-plus-circle primary">
+                            </span>
+                        </div>
+                        <!-- <opspot-groups-profile-members (totalGroup)="groupCount($event)" [frmGroup]="true">
+                        </opspot-groups-profile-members> -->
+                    </div>
+                </div>
+            </div>
+            <div class="o-center-block" *ngIf="!showGathering">
+                <div class=" hidden-under-tablet" style="width:100%; height: 187px; margin-bottom:9px;">
+                    <app-group-banner [object]="organization" [editMode]="editing" [top]="organization.banner_position" [done]="editDone"
+                        (added)="add_banner($event)"></app-group-banner>
+                </div>
+                <!-- <div class="tabs-community">
+                    <ul class="tabs-list"
+                        *ngIf="filter == 'activity' && (group['is:owner']||group['is:moderator']) && group['adminqueue:count']">
+                        <li routerLinkActive="active" routerLink="feed" [routerLinkActiveOptions]="{exact:
+                            true}"> <a> Feed</a></li>
+                        <li routerLinkActive="active" routerLink="feed/review"> <a> Review queue
+                                <div class="review-count text-md white">
+                                    {{ group['adminqueue:count'] }}
+                                </div></a></li>
+                    </ul>
+                </div> -->
+                <router-outlet></router-outlet>
+            </div>
+            <!-- </div> -->
+            <!-- <div class="o-left-gather-block o-left-block--community" *ngIf="showGathering">
+                <div class="o-community-gather">
+                    <a><i class="icon-arrow-left o-community-gather--icon" (click)='backClicked()'></i> </a>
+                    <div class=" caption-bold f500">Gathering</div>
+                </div>
+                <m-videochat></m-videochat>
+            </div> -->
+            <!--left block end-->
+            <!-- <div class="o-right-block hidden-mob">
+                <div class="o-discussions">
+                    <div class="o-discussions-title">
+                        <div class="text-lg f500">
+                            Discussions
+                        </div>
+                    </div>
+                    <div class="o-discussions-body">
+                        <opspot-groups-profile-conversation [group]="group">
+                        </opspot-groups-profile-conversation>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
