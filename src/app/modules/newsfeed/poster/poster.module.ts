@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { HashtagsModule } from '../../hashtags/hashtags.module';
 import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { TextMaskModule } from 'angular2-text-mask';
+import { PostMenuModule } from '../../../common/components/post-menu/post-menu.module';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     ReactiveFormsModule,
     TextMaskModule,
     OpspotFormsModule,
+    PostMenuModule
   ],
   declarations: [
     PosterComponent,

@@ -35,6 +35,7 @@ type Option =
 
 export class PostMenuComponent {
   @Input() entity: any;
+  @Input() iconType: string = '';
   @Input() options: Array<Option>;
   @Output() optionSelected: EventEmitter<Option> = new EventEmitter<Option>();
   @Input() canDelete: boolean = false;
@@ -57,7 +58,13 @@ export class PostMenuComponent {
 
   categories: Array<any> = [];
 
-  constructor(public session: Session, private client: Client, private cd: ChangeDetectorRef, private overlayModal: OverlayModalService, public signupModal: SignupModalService) {
+  constructor(
+    public session: Session,
+    private client: Client,
+    private cd: ChangeDetectorRef,
+    private overlayModal: OverlayModalService,
+    public signupModal: SignupModalService
+  ) {
     this.initCategories();
   }
 

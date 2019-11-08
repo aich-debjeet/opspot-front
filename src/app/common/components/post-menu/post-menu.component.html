@@ -1,8 +1,49 @@
-<button class="mdl-button opspot-more mdl-button--icon" (click)="cardMenuHandler()">
+<button class="mdl-button opspot-more mdl-button--icon"
+  (click)="cardMenuHandler()"
+  *ngIf="iconType === ''"
+>
   <i class="icon-more-horizontal"></i>
 </button>
 
+<span class="icon-box-design"
+  *ngIf="iconType === 'arrow'"
+  (click)="cardMenuHandler()">
+  <span class="icon-chevron-down"></span>
+</span>
+
 <ul class="opspot-dropdown-menu" [hidden]="!opened">
+  <!-- SPECIAL HASHTAGS -->
+  <li class="mdl-menu__item"
+    *ngIf="options.indexOf('create-showtimez') !== -1"
+    (click)="selectOption('create-showtimez')"
+    i18n="@@M__ACTION__CREATE_SHOWTIMEZ"
+  >On #Showtimez</li>
+
+  <li class="mdl-menu__item"
+    *ngIf="options.indexOf('create-opportunity') !== -1"
+    (click)="selectOption('create-opportunity')"
+    i18n="@@M__ACTION__CREATE_OPPORTUNITY"
+  >On #Opportunity</li>
+
+  <li class="mdl-menu__item"
+    *ngIf="options.indexOf('create-the-bluestore') !== -1"
+    (click)="selectOption('create-the-bluestore')"
+    i18n="@@M__ACTION__CREATE_BLUE_STORE"
+  >On #TheBlueStore</li>
+
+  <li class="mdl-menu__item"
+    *ngIf="options.indexOf('create-portfolio') !== -1"
+    (click)="selectOption('create-portfolio')"
+    i18n="@@M__ACTION__CREATE_PORTFOLIO"
+  >On #Portfolio</li>
+
+  <li class="mdl-menu__item"
+    *ngIf="options.indexOf('create-my-journey') !== -1"
+    (click)="selectOption('create-my-journey')"
+    i18n="@@M__ACTION__CREATE_MY_JOURNEY"
+  >On #MyJourney</li>
+  <!-- SPECIAL HASHTAGS -->
+  
   <li class="mdl-menu__item" *ngIf="options.indexOf('edit') !== -1 && entity.owner_guid == session.getLoggedInUser().guid || session.isAdmin()" (click)="selectOption('edit')" i18n="@@M__ACTION__EDIT">Edit</li>
   <li class="mdl-menu__item" *ngIf="options.indexOf('share') !== -1" (click)="share()" i18n="@@M__ACTION__SHARE">Share</li>
   <li class="mdl-menu__item" *ngIf="options.indexOf('translate') !== -1  && isTranslatable" (click)="selectOption('translate')" i18n="@@M__ACTION__TRANSLATE">Translate</li>

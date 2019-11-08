@@ -53,6 +53,7 @@ export class PosterComponent {
   isNSFW: boolean = false;
   displayPaywal: boolean = false;
   defaultCoins: string = '';
+  menuOptions: Array<string> = ['create-showtimez', 'create-opportunity', 'create-the-bluestore', 'create-portfolio', 'create-my-journey'];
 
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
@@ -135,7 +136,7 @@ export class PosterComponent {
    * Post to the newsfeed
    */
   post() {
-    console.log('clicked');
+    // console.log('clicked');
     if (!this.meta.message && !this.attachment.has()) {
       return;
     }
@@ -156,16 +157,16 @@ export class PosterComponent {
 
     data.tags = this.tags;
     data.mature = this.isNSFW;
-    console.log(data);
-    console.log(this.meta);
-    console.log(this.attachment.exportMeta());
+    // console.log(data);
+    // console.log(this.meta);
+    // console.log(this.attachment.exportMeta());
 
     this.inProgress = true;
     this.client
       .post('api/v1/newsfeed', data)
       .then((data: any) => {
         data.activity.boostToggle = true;
-        console.log(data);
+        // console.log(data);
         this.load.next(data.activity);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
@@ -179,7 +180,7 @@ export class PosterComponent {
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
-    console.log(file, event, this.attachment);
+    // console.log(file, event, this.attachment);
     if (file.value) {
       // this prevents IE from executing this code twice
       this.canPost = false;
@@ -192,16 +193,16 @@ export class PosterComponent {
           let obj = {};
           obj['guid'] = guid;
           obj['imageLink'] = this.attachment.getPreview();
-          console.log(guid);
-          console.log(obj);
+          // console.log(guid);
+          // console.log(obj);
+          // console.log(this.cards);
           this.cards.push(obj);
-          console.log(this.cards);
           this.inProgress = false;
           this.canPost = true;
           file.value = null;
         })
         .catch(e => {
-          console.log(e);
+          // console.log(e);
           if (e && e.message) {
             this.errorMessage = e.message;
           }
@@ -218,7 +219,7 @@ export class PosterComponent {
   }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    console.log(file, imageId);
+    // console.log(file, imageId);
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -243,10 +244,10 @@ export class PosterComponent {
         this.cards = _remove(this.cards, function(n) {
           return n.guid !== guid;
         });
-        console.log(this.cards);
+        // console.log(this.cards);
       })
       .catch(e => {
-        console.error(e);
+        // console.error(e);
         this.inProgress = false;
         this.canPost = true;
       });
@@ -278,14 +279,14 @@ export class PosterComponent {
     this.renderForms(type);
   }
   renderForms(type: string) {
-    console.log(type);
+    // console.log(type);
     this.display = type;
     this.attachment.reset();
     // this.buildForm(type);
   }
 
   close() {
-    console.log('close');
+    // console.log('close');
     this.display = '';
     this.staticBoard = false;
   }
@@ -299,7 +300,27 @@ export class PosterComponent {
   }
 
   emitEvent(data) {
-    console.log(data);
+    // console.log(data);
     this.load.next(data.activity);
+  }
+
+  menuOptionSelected(option: string) {
+    switch (option) {
+      case 'create-showtimez':
+        this.createForms('#Showtimez');
+        break;
+      case 'create-opportunity':
+        this.createForms('#Opportunity');
+        break;
+      case 'create-the-bluestore':
+        this.createForms('#TheBlueStore');
+        break;
+      case 'create-portfolio':
+        this.createForms('#Portfolio');
+        break;
+      case 'create-my-journey':
+        this.createForms('#MyJourney');
+        break;
+    }
   }
 }
