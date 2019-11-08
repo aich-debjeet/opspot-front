@@ -359,25 +359,9 @@ export class BlogEdit {
         this.inProgress = false;
       });
   }
-  menuOptionSelected(option: string) {
-    switch (option) {
-      case 'edit':
-        this.router.navigate(['/blog/edit', this.selectedGuid]);
-        break;
-      case 'delete':
-        this.delete();
-        break;
-    }
-  }
-
-  delete() {
-    this.client.delete('api/v1/blog/' + this.selectedGuid)
-      .then((response: any) => {
-        this.router.navigate(['/blog/owner']);
-      });
-  }
-  entityGuid(guid: string){
-    this.selectedGuid = guid;
-  }
+ 
+  // entityGuid(guid: string){
+  //   this.selectedGuid = guid;
+  // }
 }
 
