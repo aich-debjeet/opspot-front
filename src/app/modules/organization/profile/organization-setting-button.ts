@@ -24,11 +24,11 @@ import { Session } from '../../../services/session';
       <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.videoChatDisabled" (click)="toggleVideoChat(true)">Enable Gathering</li>
       <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.videoChatDisabled" (click)="toggleVideoChat(false)">Disable Gathering</li> -->
 
-      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.moderated" (click)="toggleModeration(false)">Disable moderation</li>
-      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.moderated" (click)="toggleModeration(true)">Enable moderation</li>
+      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.moderated" (click)="toggleModeration(false)">Disable moderation</li>
+      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.moderated" (click)="toggleModeration(true)">Enable moderation</li>-->
 
-      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.membership" (click)="togglePublic(true)">Make public</li>
-      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.membership" (click)="togglePublic(false)">Make closed</li>
+      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.membership" (click)="togglePublic(true)">Make public</li>
+      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.membership" (click)="togglePublic(false)">Make closed</li>-->
 
       <!-- Member functions -->
       <li class="mdl-menu__item" [hidden]="organization['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS">Disable Notifications</li>
@@ -221,7 +221,7 @@ export class OrganizationSettingButton {
         this.organization.deleted = deleted;
 
         if (deleted) {
-          this.router.navigate(['/organizations/member']);
+          this.router.navigate(['/newsfeed/subscribed']);
         }
       });
 

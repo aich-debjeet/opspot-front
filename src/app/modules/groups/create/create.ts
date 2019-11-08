@@ -416,8 +416,6 @@ export class GroupsCreator {
    }
  }
 
- // fix: AOT
- // TODO @shashi: required? 
  groupReset() {
   this._location.back();
  }
