@@ -233,40 +233,7 @@
             </div>
           </form>
         </div>
-        <div class="o-blog-write-padding-published o-blog-write-padding-published o-blog-draft"
-          *ngFor="let entity of filteredArray; let i = index">
-          <a class="o-blog-published-sec" [routerLink]="['/blog/view', entity.guid]">
-            <div class="o-blog-published-block">
-              <div class="o-blog-published-block__cover">
-                <img src="assets/demo/m1.jpg">
-              </div>
-              <!--cover ends-->
-              <div class="o-blog-published-block__details">
-                <h4 class="f500">{{ entity.title | excerpt: 140 }}</h4>
-                <div class="text-md mt3b12">{{ entity.excerpt | excerpt:140 }}</div>
-                <div class="text-md grey">
-                  {{ entity.time_created * 1000 | date:'mediumDate' }}
-                </div>
-              </div>
-              <!--details ends-->
-            </div>
-            <!--block ends-->
-          </a>
-          <div class="o-blog-published-dropdown">
-            <m-post-menu [entity]="entity" [user]="entity.ownerObj"
-              [askForCategoriesWhenFeaturing]="true"
-              [canDelete]="entity.ownerObj.guid == session.getLoggedInUser().guid || session.isAdmin()"
-              [isTranslatable]="isTranslatable" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)" (entityGuid)="entityGuid($event)"
-              *ngIf="entity.ownerObj.guid == session.getLoggedInUser().guid || session.isAdmin()">
-              <ng-container post-menu>
-                <ng-content select="[post-menu]"></ng-content>
-              </ng-container>
-            </m-post-menu>
-          </div>
-          <div class="o-blog-write-published-line"></div>
-        </div>
-        <!-- <infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress">
-        </infinite-scroll> -->
+        <app-blog-view [entity]="entity" *ngFor="let entity of filteredArray; let i = index"></app-blog-view>
       </div>
     </div>
     <div class="o-blog-wrire-mob">
