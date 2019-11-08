@@ -24,7 +24,12 @@ type Option =
   | 'subscribe'
   | 'unsubscribe'
   | 'rating'
-  | 'block';
+  | 'block'
+  | 'create-showtimez'
+  | 'create-opportunity'
+  | 'create-the-bluestore'
+  | 'create-portfolio'
+  | 'create-my-journey';
 
 @Component({
   moduleId: module.id,
