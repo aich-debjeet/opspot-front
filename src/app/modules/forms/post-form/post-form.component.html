@@ -2,7 +2,7 @@
     <div class="o-create-post-body o-create-post-body--flex">
         <div class="o-crete-post-userinfo">
             <div class="o-crete-post-userinfo__avatar">
-                <img src="assets/demo/avatar.png" alt="">
+                <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="">
             </div>
             <div class="o-crete-post-userinfo__mesaage">
                 <textarea type="text" id="message" #message name="message" placeholder="Write Something"
