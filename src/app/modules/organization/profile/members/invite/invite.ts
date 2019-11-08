@@ -7,16 +7,16 @@ import { GroupsService } from '../../../../../modules/groups/groups-service';
 @Component({
   moduleId: module.id,
   selector: 'opspot-organization-profile-members-invite',
-  inputs: ['_group : group'],
+  inputs: ['_organization : organization'],
   outputs: ['invited'],
   templateUrl: 'invite.html'
 })
 
-export class GroupsProfileMembersInvite {
+export class OrganizationProfileMembersInvite {
 
   opspot = window.Opspot;
 
-  group: any;
+  organization: any;
   invited: EventEmitter<any> = new EventEmitter();
   mobileView;
   users: Array<any> = [];
@@ -35,8 +35,8 @@ export class GroupsProfileMembersInvite {
    if(window.innerWidth<775){this.mobileView=true;}
   }
 
-  set _group(value: any) {
-    this.group = value;
+  set _organization(value: any) {
+    this.organization = value;
   }
 
   invite(user) {
@@ -49,14 +49,14 @@ export class GroupsProfileMembersInvite {
 
     this.q = '';
     this.users = [];
-    if (!this.group) {
+    if (!this.organization) {
       return;
     }
     this.inviteInProgress = true;
     this.inviteLastUser = '';
     this.inviteError = '';
 
-    this.service.invite(this.group, user)
+    this.service.invite(this.organization, user)
       .then(() => {
         this.inviteInProgress = false;
       })

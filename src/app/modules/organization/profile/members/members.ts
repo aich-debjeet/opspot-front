@@ -21,7 +21,7 @@ opspot = window.Opspot;
   organization: any;
   $organization;
   @Input()frmGroup;
-  @Output()totalGroup:EventEmitter<any>=new EventEmitter()
+  @Output()totalOrganization:EventEmitter<any>=new EventEmitter()
 
   invitees: any = [];
   members: Array<any> = [];
@@ -86,7 +86,7 @@ opspot = window.Opspot;
     this.inProgress = true;
     this.httpSubscription = this.client.get(endpoint, params)
       .subscribe((response: any) => {
-        this.totalGroup.emit(response.total)
+        this.totalOrganization.emit(response.total)
         if (!response.members) {
           this.moreData = false;
           this.inProgress = false;

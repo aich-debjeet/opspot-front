@@ -77,7 +77,6 @@
                             (membership)="change_membership($event)"
                             *ngIf="(!group['is:creator'] || (session.isAdmin()) && !group['is:invited'])">
                         </opspot-groups-join-button> -->
-                        <!--doubt -->
                         <div class="o-community-members-top o-community-members-top--mob hidden-above-tablet">
                             <a class="o-community-members-top__count-mob" *ngFor="let member of membersMobile">
                                 <span class="o-community-members-list-mob-single"><img [src]="memberSrc+member.guid"
@@ -92,15 +91,15 @@
                                 <div class="text-sm grey">Members</div>
                             </a>
                         </div>
-                        <!-- <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle">
-                            <opspot-groups-profile-members-invite [group]="group">
-                            </opspot-groups-profile-members-invite>
-                        </m-modal>-->
+                        <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle">
+                            <opspot-organization-profile-members-invite [organization]="organization">
+                            </opspot-organization-profile-members-invite>
+                        </m-modal>
                         <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle">
                             <opspot-organization-profile-members></opspot-organization-profile-members>
                         </m-modal> 
                     </div>
-                    <!-- <div class="o-cards o-community-members hidden-under-tablet">
+                    <div class="o-cards o-community-members hidden-under-tablet">
                         <div class="o-community-members__header">
                             <div class="text-lg f500">
                                 Organization Members
@@ -109,9 +108,9 @@
                                 class="icon-plus-circle primary">
                             </span>
                         </div>
-                        <opspot-organization-profile-members (totalGroup)="groupCount($event)" [frmGroup]="true">
+                        <opspot-organization-profile-members (totalOrganization)="groupCount($event)" [frmGroup]="true">
                         </opspot-organization-profile-members>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="o-center-block" *ngIf="!showGathering">

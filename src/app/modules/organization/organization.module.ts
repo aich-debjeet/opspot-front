@@ -13,7 +13,7 @@ import { VideoChatModule } from '../videochat/videochat.module';
 
 import { OrganizationCreator } from './create/create';
 // import { GroupsJoinButton } from './groups-join-button';
-// import { GroupsProfileMembersInvite } from './profile/members/invite/invite';
+import { OrganizationProfileMembersInvite } from './profile/members/invite/invite';
 // import { GroupsCard } from './card/card';
 import { OrganizationCardUserActionsButton } from './profile/card-user-action-button';
 import { GroupsSettingsButton } from '../groups/profile/groups-settings-button';
@@ -53,7 +53,7 @@ const routes: Routes = [
     ],
   },
   { path: 'organization/create', component: OrganizationCreator },
-  { path: 'organization/edit/:guid', component: OrganizationCreator,canDeactivate: [CanDeactivateGroupService] },
+  { path: 'organization/edit/:guid', component: OrganizationCreator, canDeactivate: [CanDeactivateGroupService] },
   //   { path: 'groups/:filter', component: GroupsListComponent },
   //   { path: 'groups', redirectTo: '/groups/top', pathMatch: 'full' },
   //   { path: 'groups/:guid/members' ,component:MobileMembersComponent},
@@ -83,7 +83,7 @@ const routes: Routes = [
     OrganizationProfile,
     OrganizationCreator,
     // GroupsJoinButton,
-    // GroupsProfileMembersInvite,
+    OrganizationProfileMembersInvite,
     // GroupsCard,
     OrganizationCardUserActionsButton,
     OrganizationProfileMembers,
@@ -103,7 +103,7 @@ const routes: Routes = [
     OrganizationProfile,
     OrganizationCreator,
     // GroupsJoinButton,
-    // GroupsProfileMembersInvite,
+    OrganizationProfileMembersInvite,
     // GroupsCard,
     OrganizationCardUserActionsButton,
     OrganizationProfileMembers,

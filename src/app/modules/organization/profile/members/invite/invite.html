@@ -10,12 +10,12 @@
     <div class="o-community-member-popup-body"> -->
     <div class="o-community-member-popup-body__title">
       <h3  *ngIf="!mobileView" class="text-h3" i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__NAME_TITLE">
-        <ng-container *ngIf="group">Invite members to {{ group.name }}</ng-container>
-        <ng-container *ngIf="!group">Invite</ng-container>
+        <ng-container *ngIf="organization">Invite members to {{ organization.name }}</ng-container>
+        <ng-container *ngIf="!organization">Invite</ng-container>
         <span class="m-layout--spacer"></span>
         <!-- <a routerLink="../requests" class="selected">
           Requests
-          <ng-container *ngIf="group['requests:count']">({{group['requests:count']}})</ng-container>
+          <ng-container *ngIf="organization['requests:count']">({{organization['requests:count']}})</ng-container>
         </a> -->
       </h3>
       
