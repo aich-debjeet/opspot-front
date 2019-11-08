@@ -37,7 +37,7 @@ import { Session } from '../../../services/session';
       <!-- admin functions -->
       <li class="mdl-menu__item" *ngIf="session.isAdmin() && !organization.mature" (click)="setExplicit(true)" i18n="@@M__ACTION__SET_EXPLICIT">Set Explicit</li>
       <li class="mdl-menu__item" *ngIf="session.isAdmin() && organization.mature" (click)="setExplicit(false)" i18n="@@M__ACTION__REMOVE_EXPLICIT">Remove Explicit</li>
-      <li class="mdl-menu__item" (click)="report(); showMenu = false" i18n="@@M__ACTION__REPORT">Report</li>
+      <li class="mdl-menu__item" *ngIf="!organization['is:owner'] && !organization['is:creator']" (click)="report(); showMenu = false" i18n="@@M__ACTION__REPORT">Report</li>
       <li class="mdl-menu__item" *ngIf="organization['is:creator']" [hidden]="organization.deleted" (click)="deletePrompt()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP">Delete Organization</li>
     </ul>
     <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
