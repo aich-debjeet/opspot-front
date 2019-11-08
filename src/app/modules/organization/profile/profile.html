@@ -54,9 +54,9 @@
                     <div class="o-card o-community-info o-community-info--radius o-community-info--shadow">
                         <div class="o-community-option-drop">
                             <!-- <div  class="o-community-option-drop__btn head-action__link"><i class="icon-more-vertical f-15"></i> </div> -->
-                            <opspot-groups-settings-button [(group)]="organization"
+                            <opspot-organization-settings-button [(organization)]="organization"
                                 class="o-community-option-drop__btn head-action__link" (change)="onOptionsChange($event)">
-                            </opspot-groups-settings-button>
+                            </opspot-organization-settings-button>
                             <div id="o-community-option-dropdown" class="o-community-option-drop__block">
                                 <a href="#">comming ..</a>
                             </div>
@@ -95,35 +95,23 @@
                         <!-- <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle">
                             <opspot-groups-profile-members-invite [group]="group">
                             </opspot-groups-profile-members-invite>
-                        </m-modal>
+                        </m-modal>-->
                         <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle">
-                            <opspot-groups-profile-members></opspot-groups-profile-members>
-                        </m-modal> -->
-                        <!-- <div class="o-community-discrptn">
-                            <div class="text-md">
-                                <a *ngIf="(group.briefdescription?group.briefdescription.length<30:true); else readMo">
-                                    {{group.briefdescription}} </a>
-                                <ng-template #readMo>
-                                    <readMore>
-                                        {{group.briefdescription}}
-                                    </readMore>
-                                </ng-template>
-                            </div>
-    
-                        </div> -->
+                            <opspot-organization-profile-members></opspot-organization-profile-members>
+                        </m-modal> 
                     </div>
-                    <div class="o-cards o-community-members hidden-under-tablet">
+                    <!-- <div class="o-cards o-community-members hidden-under-tablet">
                         <div class="o-community-members__header">
                             <div class="text-lg f500">
-                                Community Members
+                                Organization Members
                             </div>
                             <span (click)="openInvite()" style="font-size: 24px !important;"
                                 class="icon-plus-circle primary">
                             </span>
                         </div>
-                        <!-- <opspot-groups-profile-members (totalGroup)="groupCount($event)" [frmGroup]="true">
-                        </opspot-groups-profile-members> -->
-                    </div>
+                        <opspot-organization-profile-members (totalGroup)="groupCount($event)" [frmGroup]="true">
+                        </opspot-organization-profile-members>
+                    </div> -->
                 </div>
             </div>
             <div class="o-center-block" *ngIf="!showGathering">

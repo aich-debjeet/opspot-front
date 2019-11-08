@@ -8,7 +8,7 @@
 <div *ngIf="!frmGroup">
     <div class="o-community-member-popup-body__title" style="margin-bottom: 8px;">
         <div class="text-h3">
-            Community Members
+            Organization Members
         </div>
     </div>
     <div class="form-group form-group--member-search" #el>
@@ -23,9 +23,9 @@
 <ul class="o-community-members-list scrollbar scrollbar-default" *ngFor="let member of members">
     <li class="o-community-members-list__user-list">
         <app-appuser [object]="member">
-            <opspot-groups-card-user-actions-button style="position: relative;"
+            <opspot-organization-card-user-actions-button style="position: relative;"
                 *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid" [organization]="organization"
-                [user]="member"></opspot-groups-card-user-actions-button>
+                [user]="member"></opspot-organization-card-user-actions-button>
         </app-appuser>
     </li>
 </ul>

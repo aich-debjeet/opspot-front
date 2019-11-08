@@ -11,13 +11,13 @@ import { ChannelsModule } from '../channels/channels.module';
 import { ModalsModule } from '../modals/modals.module';
 import { VideoChatModule } from '../videochat/videochat.module';
 
-import { OrganizationCreator} from './create/create';
+import { OrganizationCreator } from './create/create';
 // import { GroupsJoinButton } from './groups-join-button';
 // import { GroupsProfileMembersInvite } from './profile/members/invite/invite';
 // import { GroupsCard } from './card/card';
-// import { GroupsCardUserActionsButton } from './profile/card-user-actions-button';
+import { OrganizationCardUserActionsButton } from './profile/card-user-action-button';
 import { GroupsSettingsButton } from '../groups/profile/groups-settings-button';
-// import { GroupsProfileMembers } from './profile/members/members';
+import { OrganizationProfileMembers } from './profile/members/members';
 // import { GroupsProfileRequests } from './profile/requests/requests';
 import { GroupsProfileFeed } from '../groups/profile/feed/feed';
 // import { GroupsProfileConversation } from './profile/conversation/conversation.component';
@@ -40,24 +40,25 @@ import { OrganizationSettingButton } from './profile/organization-setting-button
 // import { VideoChatComponent } from '../videochat/videochat.component';
 
 const routes: Routes = [
-  { path: 'organization/profile/:guid', component: OrganizationProfile, canDeactivate: [CanDeactivateGroupService], children: [
+  {
+    path: 'organization/profile/:guid', component: OrganizationProfile, canDeactivate: [CanDeactivateGroupService], children: [
       { path: '', redirectTo: 'feed', pathMatch: 'full' },
-    //   { path: 'feed/:filter', component: GroupsProfileFeed },
+      //   { path: 'feed/:filter', component: GroupsProfileFeed },
       { path: 'feed', component: GroupsProfileFeed },
-    //   { path: 'activity', redirectTo: 'feed' },
-    //   { path: 'members', component: GroupsProfileMembers },
-    //   { path: 'requests',  component: GroupsProfileRequests },
+      //   { path: 'activity', redirectTo: 'feed' },
+      { path: 'members', component: OrganizationProfileMembers },
+      //   { path: 'requests',  component: GroupsProfileRequests },
       // { path: 'gathering',  component: VideoChatComponent}
 
     ],
   },
   { path: 'organization/create', component: OrganizationCreator },
-//   { path: 'groups/edit/:guid', component: GroupsCreator,canDeactivate: [CanDeactivateGroupService] },
-//   { path: 'groups/:filter', component: GroupsListComponent },
-//   { path: 'groups', redirectTo: '/groups/top', pathMatch: 'full' },
-//   { path: 'groups/:guid/members' ,component:MobileMembersComponent},
-//   { path: 'groups/:guid/invite' ,component:MobileInviteComponent},
-//   { path: 'groups/gathering',  component: VideoChatComponent}
+  { path: 'organization/edit/:guid', component: OrganizationCreator,canDeactivate: [CanDeactivateGroupService] },
+  //   { path: 'groups/:filter', component: GroupsListComponent },
+  //   { path: 'groups', redirectTo: '/groups/top', pathMatch: 'full' },
+  //   { path: 'groups/:guid/members' ,component:MobileMembersComponent},
+  //   { path: 'groups/:guid/invite' ,component:MobileInviteComponent},
+  //   { path: 'groups/gathering',  component: VideoChatComponent}
 ];
 
 @NgModule({
@@ -84,8 +85,8 @@ const routes: Routes = [
     // GroupsJoinButton,
     // GroupsProfileMembersInvite,
     // GroupsCard,
-    // GroupsCardUserActionsButton,
-    // GroupsProfileMembers,
+    OrganizationCardUserActionsButton,
+    OrganizationProfileMembers,
     // GroupsProfileFeed,
     // GroupsProfileRequests,
     OrganizationSettingButton    // GroupsProfileConversation,
@@ -104,8 +105,8 @@ const routes: Routes = [
     // GroupsJoinButton,
     // GroupsProfileMembersInvite,
     // GroupsCard,
-    // GroupsCardUserActionsButton,
-    // GroupsProfileMembers,
+    OrganizationCardUserActionsButton,
+    OrganizationProfileMembers,
     // GroupsProfileFeed,
     // GroupsProfileRequests,
     OrganizationSettingButton    // GroupsProfileConversation,

@@ -20,7 +20,7 @@ import { filter } from "rxjs/operators";
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'm-groups--profile',
+  selector: 'm-organization--profile',
   templateUrl: 'profile.html'
 })
 
