@@ -39,7 +39,7 @@
             <!--organisation Name ends-->
             <div class="form-group select-organisation">
                 <label>Organisation Type</label>
-                <select class="form-control form-control-lg" [ngModel]="type">
+                <select class="form-control form-control-lg" [(ngModel)]="type">
                         <option value="not-selected">Select Type</option>
                         <option *ngFor = "let type of organizationTypeList" [value]="type.value">{{ type.label}}</option>       
                 </select>
@@ -48,11 +48,7 @@
             <div class="form-group">
                 <label>Add Services</label>
                 <app-skills [(inputTagsValue)]=organization.tags></app-skills>
-                <!-- <textarea class="form-control" rows="5"></textarea> -->
                 <div class="grey text-sm paddng-top">Use a comma to separate skills, or choose from the list.</div>
-                <!-- <div class="all-service-option">
-                            Photography <a class="icon-x"></a>
-                    </div> -->
             </div>
             <!--Add Services ends-->
             <div class="form-group">
@@ -63,19 +59,19 @@
             <div class="form-group">
                 <label>Profile Picture</label>
                 <div class="o-community-profile-picture">
-                    <div class="fileUpload" *ngIf="!editCommunity">
-                        <span *ngIf="!croppieImage&&!editCommunity" class="icon-plus"></span>
+                    <div class="fileUpload" *ngIf="!editOrganization">
+                        <span *ngIf="!croppieImage&&!editOrganization" class="icon-plus"></span>
 
                         <input type="file" #editImgcomp onclick="this.value = null" (change)="add($event)"
                             class="upload" />
-                        <div *ngIf="croppieImage&&!editCommunity" class="fileUpload-preview">
+                        <div *ngIf="croppieImage&&!editOrganization" class="fileUpload-preview">
                             <a class="create-community-img" (click)="openCropper()">
-                                <img *ngIf="!editCommunity" [src]="cropedImg">
+                                <img *ngIf="!editOrganization" [src]="cropedImg">
                             </a>
                         </div>
                     </div>
 
-                    <div *ngIf="editCommunity&&cropedImg" class="fileUpload-preview">
+                    <div *ngIf="editOrganization&&cropedImg" class="fileUpload-preview">
                         <input type="file" #editImgcomp onclick="this.value = null" (change)="add($event)"
                             class="upload" />
                         <a class="create-community-img" (click)="openCropper()">

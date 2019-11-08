@@ -239,7 +239,7 @@ export class OrganizationSettingButton {
   }
 
   toggleEdit() {
-    this.router.navigate([`/organizations/edit/${this.organization.guid}`])
+    this.router.navigate([`/organization/edit/${this.organization.guid}`])
   }
 
   toggleVideoChat(enabled: boolean) {

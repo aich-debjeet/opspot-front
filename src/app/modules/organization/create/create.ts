@@ -27,7 +27,7 @@ export class OrganizationCreator {
   skills;
   croppieImage;
   open=false;
-  editCommunity;
+  editOrganization;
   organizationTypeList = ORGANIZATION_TYPE;
 
   //
@@ -165,7 +165,7 @@ export class OrganizationCreator {
   this.route.params.subscribe(params=>{
    if(params['guid']){
      this.load(params['guid'])
-     this.editCommunity=true;
+     this.editOrganization=true;
    }
   })
  }
