@@ -61,7 +61,6 @@
                 <div class="o-community-profile-picture">
                     <div class="fileUpload" *ngIf="!editOrganization">
                         <span *ngIf="!croppieImage&&!editOrganization" class="icon-plus"></span>
-
                         <input type="file" #editImgcomp onclick="this.value = null" (change)="add($event)"
                             class="upload" />
                         <div *ngIf="croppieImage&&!editOrganization" class="fileUpload-preview">
@@ -70,7 +69,6 @@
                             </a>
                         </div>
                     </div>
-
                     <div *ngIf="editOrganization&&cropedImg" class="fileUpload-preview">
                         <input type="file" #editImgcomp onclick="this.value = null" (change)="add($event)"
                             class="upload" />
@@ -84,7 +82,7 @@
             </div>
             <div class="o-create-organisation-action">
                 <button type="button" class="btn btn-primary disabled mr-18" (click)="save($event)">{{editOrganization?"Update":"Create"}}</button>
-                <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
+                <button type="button" class="btn btn-outline-primary btn-lg" (click)="organizationReset()">Cancel</button>
             </div>
             <!--Button action ends-->
         </div>

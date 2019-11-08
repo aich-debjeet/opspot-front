@@ -205,16 +205,15 @@ export class OrganizationCreator {
        this.organization.tags=this.organization.tags.filter(el=>el.display)
        this.cropedImg=`${this.opspot.cdn_url}fs/v1/avatars/${guid}`;
       }
-      console.log(organization)
+      // console.log(organization)
    }
    catch(e){
      console.log(e)
    }
  }
 
- // fix: AOT
- // TODO @shashi: required? 
- groupReset() {
+ 
+ organizationReset() {
   this._location.back();
  }
 
