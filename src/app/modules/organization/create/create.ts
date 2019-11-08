@@ -8,7 +8,7 @@ import { OpspotTitle } from '../../../services/ux/title';
 import { Session } from '../../../services/session';
 import FileHandler from '../../../utils/file-handle';
 import {Location} from '@angular/common';
-import { EVENT_TYPES, EVENT_CATEGORY } from '../../../services/list-options';
+import { ORGANIZATION_TYPE} from '../../../services/list-options';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class OrganizationCreator {
   croppieImage;
   open=false;
   editCommunity;
-  eventTypeList = EVENT_TYPES;
+  organizationTypeList = ORGANIZATION_TYPE;
 
   //
   @ViewChild('editImgcomp')editImgcomp:ElementRef;

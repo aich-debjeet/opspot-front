@@ -39,9 +39,9 @@
             <!--organisation Name ends-->
             <div class="form-group select-organisation">
                 <label>Organisation Type</label>
-                <select class="form-control form-control-lg">
-                        <option value="" disabled selected>Select Type</option>
-                        <option *ngFor = "let type of eventTypeList" value="{{ type.value }}">{{ type.label}}</option>       
+                <select class="form-control form-control-lg" [ngModel]="type">
+                        <option value="not-selected">Select Type</option>
+                        <option *ngFor = "let type of organizationTypeList" [value]="type.value">{{ type.label}}</option>       
                 </select>
             </div>
             <!--Organisation Type ends-->
@@ -57,7 +57,7 @@
             <!--Add Services ends-->
             <div class="form-group">
                 <label>Location</label>
-                <input type="text" class="form-control form-control-lg">
+                <input [(ngModel)]="organization.location" type="text" class="form-control form-control-lg">
             </div>
             <!--Location ends-->
             <div class="form-group">
