@@ -30,7 +30,8 @@ import { GroupsProfileFeed } from '../groups/profile/feed/feed';
 import { HashtagsModule } from '../hashtags/hashtags.module';
 import { OrganizationProfile } from './profile/profile';
 import { CanDeactivateGroupService } from '../groups/profile/can-deactivate/can-deactivate-group.service';
-import { GroupsModule } from '../groups/groups.module';
+import { OrganizationSettingButton } from './profile/organization-setting-button';
+// import { GroupsModule } from '../groups/groups.module';
 // import { GroupMemberPreviews } from './profile/member-previews/member-previews.component';
 // import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 // import { CanDeactivateGroupService } from "./profile/can-deactivate/can-deactivate-group.service";
@@ -72,7 +73,7 @@ const routes: Routes = [
     // ModalsModule,
     // PosterModule,
     HashtagsModule,
-    GroupsModule
+    // GroupsModule
     // TextInputAutocompleteModule,
     // VideoChatModule,
   ],
@@ -87,8 +88,7 @@ const routes: Routes = [
     // GroupsProfileMembers,
     // GroupsProfileFeed,
     // GroupsProfileRequests,
-    // GroupsSettingsButton,
-    // GroupsProfileConversation,
+    OrganizationSettingButton    // GroupsProfileConversation,
     // GroupsProfileFilterSelector,
     // GroupsMembersModuleComponent,
     // GroupsTileComponent,
@@ -108,8 +108,7 @@ const routes: Routes = [
     // GroupsProfileMembers,
     // GroupsProfileFeed,
     // GroupsProfileRequests,
-    // GroupsSettingsButton,
-    // GroupsProfileConversation,
+    OrganizationSettingButton    // GroupsProfileConversation,
     // GroupsProfileFilterSelector,
     // GroupsMembersModuleComponent,
     // GroupsSidebarMarkersComponent,
