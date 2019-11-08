@@ -1,4 +1,4 @@
-import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild, Input } from '@angular/core';
 import { Session } from '../../../services/session';
 
 import { AttachmentService } from '../../../services/attachment';
