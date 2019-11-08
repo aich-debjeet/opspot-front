@@ -101,7 +101,6 @@ export class Activity {
     if (!value)
       return;
     this.activity = value;
-    console.log("this.activity: ",this.activity);
     
     this.activity.url = window.Opspot.site_url + 'newsfeed/' + value.guid;
 
