@@ -1,17 +1,22 @@
-import { Component, EventEmitter, ViewChild, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  ViewChild,
+  Input,
+  Output
+} from '@angular/core';
 import { Session } from '../../../services/session';
 
 import { AttachmentService } from '../../../services/attachment';
-import { ThirdPartyNetworksSelector } from '../../third-party-networks/selector';
+// import { ThirdPartyNetworksSelector } from '../../third-party-networks/selector';
 import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
 import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.component';
 import { Tag } from '../../hashtags/types/tag';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+// import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
-import { OverlayModalService } from '../../../services/ux/overlay-modal';
-import { LoginComponent } from '../../auth/login.component';
-
+// import { OverlayModalService } from '../../../services/ux/overlay-modal';
+// import { LoginComponent } from '../../auth/login.component';
 
 @Component({
   selector: 'app-post-form',
@@ -20,11 +25,6 @@ import { LoginComponent } from '../../auth/login.component';
 })
 export class PostFormComponent {
 
-  // constructor() { }
-
-  ngOnInit() {
-  }
-
   reqBody = {
     message: '',
     tags: [],
@@ -32,15 +32,15 @@ export class PostFormComponent {
     access_id: 2,
     // published: 1,
     attachment_guid: [],
-    thumbnail: "",
-    title: "",
-    url: "",
+    thumbnail: '',
+    title: '',
+    url: '',
     wire_threshold: null,
     is_rich: 0,
-    description: ""
+    description: ''
   };
 
-  display: string = '';
+  display = '';
   startDate: string;
   content = '';
   meta: any = {
@@ -49,24 +49,20 @@ export class PostFormComponent {
   };
   tags = [];
   opspot;
-  inProgress: boolean = false;
+  inProgress = false;
 
-  canPost: boolean = true;
-  validThreshold: boolean = true;
-  tooManyTags: boolean = false;
+  canPost = true;
+  validThreshold = true;
+  tooManyTags = false;
 
-  errorMessage: string = null;
-  staticBoard: boolean = false;
-  // showTimezForm:FormGroup
-  // opportunityForm: FormGroup;
-  // blueStoreForm: FormGroup;
+  errorMessage = null;
+  staticBoard = false;
   submitted = false;
-  // eventSubmitted: boolean = false;
-  // blueStoreSubmitted: boolean = false;
   cards = [];
-  isNSFW: boolean = false;
-  displayPaywal: boolean = false;
-  defaultCoins: string = '';
+  isNSFW = false;
+  displayPaywal = false;
+  defaultCoins = '';
+  entity: any;
 
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
@@ -79,20 +75,17 @@ export class PostFormComponent {
 
   @Input('object') set data(object) {}
 
-
   constructor(
     public session: Session,
     public client: Client,
     public upload: Upload,
     public attachment: AttachmentService,
-    private formBuilder: FormBuilder,
-    private overlayModal: OverlayModalService) {
-    this.opspot = window.Opspot
+    // private formBuilder: FormBuilder,
+    // private overlayModal: OverlayModalService
+  ) {
+    this.opspot = window.Opspot;
     this.cards = [];
-
   }
-
-  entity: any;
 
   set _container_guid(guid: any) {
     this.attachment.setContainer(guid);
@@ -104,15 +97,15 @@ export class PostFormComponent {
 
   set message(value: any) {
     if (value) {
-      value = decodeURIComponent((value).replace(/\+/g, '%20'));
+      value = decodeURIComponent(value.replace(/\+/g, '%20'));
       this.meta.message = value;
       this.showTagsError();
-      this.getPostPreview({ value: value }); //a little ugly here!
+      this.getPostPreview({ value: value }); // a little ugly here!
     }
   }
 
   onMessageChange($event) {
-    this.errorMessage = "";
+    this.errorMessage = '';
     this.meta.message = $event;
 
     const regex = /(^|\s||)#(\w+)/gim;
@@ -126,11 +119,11 @@ export class PostFormComponent {
 
   onTagsChange(tags: string[]) {
     if (this.hashtagsSelector.tags.length > 5) {
-      this.errorMessage = "You can only select up to 5 hashtags";
+      this.errorMessage = 'You can only select up to 5 hashtags';
       this.tooManyTags = true;
     } else {
       this.tooManyTags = false;
-      if (this.errorMessage === "You can only select up to 5 hashtags") {
+      if (this.errorMessage === 'You can only select up to 5 hashtags') {
         this.errorMessage = '';
       }
     }
@@ -161,74 +154,75 @@ export class PostFormComponent {
    * Post to the newsfeed
    */
   post() {
-    console.log('clicked')
     if (!this.meta.message && !this.attachment.has()) {
       return;
     }
-    if(this.defaultCoins.length>0){
+    if (this.defaultCoins.length > 0) {
       this.meta.wire_threshold = {
         min: this.defaultCoins,
         type: 'tokens'
-      }
+      };
     }
     // if (this.hashtagsSelector.tags.length > 5) {
     //   this.showTagsError();
     //   return;
     // }
 
-    this.errorMessage = "";
+    this.errorMessage = '';
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
     data.tags = this.tags;
-    data.mature = this.isNSFW
-    console.log(data);
-    console.log(this.meta);
-    console.log(this.attachment.exportMeta());
-
+    data.mature = this.isNSFW;
+    // console.log(data);
+    // console.log(this.meta);
+    // console.log(this.attachment.exportMeta());
 
     this.inProgress = true;
-    this.client.post('api/v1/newsfeed', data)
+    this.client
+      .post('api/v1/newsfeed', data)
       .then((data: any) => {
-       // data.activity.boostToggle = true; //@gayatri hava to check this
+        // data.activity.boostToggle = true; //@gayatri hava to check this
 
-        console.log(data)
+        // console.log(data);
         this.load.emit(data);
 
-        //this.load.next(data.activity);
+        // this.load.next(data.activity);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
         this.inProgress = false;
         this.cards = [];
       })
-      .catch((e) => {
+      .catch(e => {
         this.inProgress = false;
         alert(e.message);
       });
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
-    console.log(file, event, this.attachment)
-    if (file.value) { // this prevents IE from executing this code twice
+    // console.log(file, event, this.attachment);
+    if (file.value) {
+      // this prevents IE from executing this code twice
       this.canPost = false;
       this.inProgress = true;
       this.errorMessage = null;
 
-      this.attachment.upload(file)
+      this.attachment
+        .upload(file)
         .then(guid => {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
-          console.log(guid)
-          console.log(obj)
+          // console.log(guid);
+          // console.log(obj);
           this.cards.push(obj);
-          console.log(this.cards)
+          // console.log(this.cards);
           this.inProgress = false;
           this.canPost = true;
           file.value = null;
         })
         .catch(e => {
-          console.log(e)
+          // console.log(e);
           if (e && e.message) {
             this.errorMessage = e.message;
           }
@@ -245,7 +239,7 @@ export class PostFormComponent {
   }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    console.log(file, imageId)
+    // console.log(file, imageId);
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -261,36 +255,39 @@ export class PostFormComponent {
 
     this.errorMessage = '';
 
-    this.attachment.remove(file, imageId).then((guid) => {
-      this.inProgress = false;
-      this.canPost = true;
-      file.value = '';
-      this.cards = _remove(this.cards, function (n) {
-        return n.guid !== guid;
+    this.attachment
+      .remove(file, imageId)
+      .then(guid => {
+        this.inProgress = false;
+        this.canPost = true;
+        file.value = '';
+        this.cards = _remove(this.cards, function(n) {
+          return n.guid !== guid;
+        });
+        // console.log(this.cards);
+      })
+      .catch(e => {
+        // console.error(e);
+        this.inProgress = false;
+        this.canPost = true;
       });
-      console.log(this.cards)
-    }).catch(e => {
-      console.error(e);
-      this.inProgress = false;
-      this.canPost = true;
-    });
   }
 
   getPostPreview(message) {
     if (!message.value) {
       return;
     }
-
     this.attachment.preview(message.value);
   }
 
   async findTrendingHashtags(searchText: string) {
-    const response: any = await this.client.get('api/v2/search/suggest/tags', { q: searchText });
+    const response: any = await this.client.get('api/v2/search/suggest/tags', {
+      q: searchText
+    });
     return response.tags
       .filter(item => item.toLowerCase().includes(searchText.toLowerCase()))
       .slice(0, 5);
   }
-
 
   // getChoiceLabel(text: string) {
   //   return `#${text}`;
@@ -308,19 +305,24 @@ export class PostFormComponent {
   // }
 
   close() {
-    console.log('close');
+    // console.log('close');
     this.display = '';
     this.staticBoard = false;
   }
-   changeToDefault() {
+
+  changeToDefault() {
     this.display = 'default';
     this.attachment.reset();
   }
-  displayPaywall(){
-    if(this.displayPaywal) this.displayPaywal = false;
-    else this.displayPaywal = true;
+
+  displayPaywall() {
+    if (this.displayPaywal) {
+      this.displayPaywal = false;
+    } else {
+      this.displayPaywal = true;
+    }
   }
- 
+
   // emitEvent(data){
   //   console.log(data)
   //   this.load.next(data.activity);
