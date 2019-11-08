@@ -1,8 +1,8 @@
-import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild, Input } from '@angular/core';
 import { Session } from '../../../services/session';
 
 import { AttachmentService } from '../../../services/attachment';
-import { ThirdPartyNetworksSelector } from '../../third-party-networks/selector';
+// import { ThirdPartyNetworksSelector } from '../../third-party-networks/selector';
 import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
 import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.component';
@@ -22,11 +22,10 @@ import { remove as _remove, findIndex as _findIndex } from 'lodash';
       deps: [Session, Client, Upload]
     }
   ],
-  templateUrl: 'poster.component.html',
+  templateUrl: 'poster.component.html'
 })
-
 export class PosterComponent {
-
+  @Input() showCommunityPost: boolean;
   display: string = '';
   startDate: string;
   content = '';
@@ -45,26 +44,31 @@ export class PosterComponent {
 
   errorMessage: string = null;
   staticBoard: boolean = false;
-  showTimezForm:FormGroup
+  showTimezForm: FormGroup;
   opportunityForm: FormGroup;
   blueStoreForm: FormGroup;
   submitted = false;
   eventSubmitted: boolean = false;
   blueStoreSubmitted: boolean = false;
   cards = [];
-  isNSFW: boolean =false;
+  isNSFW: boolean = false;
   displayPaywal: boolean = false;
-  defaultCoins: string ='';
+  defaultCoins: string = '';
+  menuOptions: Array<string> = ['create-showtimez', 'create-opportunity', 'create-the-bluestore', 'create-portfolio', 'create-my-journey'];
 
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
-  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
+  constructor(
+    public session: Session,
+    public client: Client,
+    public upload: Upload,
+    public attachment: AttachmentService,
+    private formBuilder: FormBuilder
+  ) {
     this.opspot = window.Opspot;
     this.cards = [];
-    
   }
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   set _container_guid(guid: any) {
     this.attachment.setContainer(guid);
@@ -76,7 +80,7 @@ export class PosterComponent {
 
   set message(value: any) {
     if (value) {
-      value = decodeURIComponent((value).replace(/\+/g, '%20'));
+      value = decodeURIComponent(value.replace(/\+/g, '%20'));
       this.meta.message = value;
       this.showTagsError();
       this.getPostPreview({ value: value }); //a little ugly here!
@@ -84,7 +88,7 @@ export class PosterComponent {
   }
 
   onMessageChange($event) {
-    this.errorMessage = "";
+    this.errorMessage = '';
     this.meta.message = $event;
 
     const regex = /(^|\s||)#(\w+)/gim;
@@ -98,11 +102,11 @@ export class PosterComponent {
 
   onTagsChange(tags: string[]) {
     if (this.hashtagsSelector.tags.length > 5) {
-      this.errorMessage = "You can only select up to 5 hashtags";
+      this.errorMessage = 'You can only select up to 5 hashtags';
       this.tooManyTags = true;
     } else {
       this.tooManyTags = false;
-      if (this.errorMessage === "You can only select up to 5 hashtags") {
+      if (this.errorMessage === 'You can only select up to 5 hashtags') {
         this.errorMessage = '';
       }
     }
@@ -133,71 +137,73 @@ export class PosterComponent {
    * Post to the newsfeed
    */
   post() {
-    console.log('clicked')
+    // console.log('clicked');
     if (!this.meta.message && !this.attachment.has()) {
       return;
     }
-    if(this.defaultCoins.length>0){
+    if (this.defaultCoins.length > 0) {
       this.meta.wire_threshold = {
         min: this.defaultCoins,
         type: 'tokens'
-      }
+      };
     }
     // if (this.hashtagsSelector.tags.length > 5) {
     //   this.showTagsError();
     //   return;
     // }
 
-    this.errorMessage = "";
+    this.errorMessage = '';
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
     data.tags = this.tags;
-    data.mature = this.isNSFW
-    console.log(data);
-    console.log(this.meta);
-    console.log(this.attachment.exportMeta());
-
+    data.mature = this.isNSFW;
+    // console.log(data);
+    // console.log(this.meta);
+    // console.log(this.attachment.exportMeta());
 
     this.inProgress = true;
-    this.client.post('api/v1/newsfeed', data)
+    this.client
+      .post('api/v1/newsfeed', data)
       .then((data: any) => {
         data.activity.boostToggle = true;
-        console.log(data)
+        // console.log(data);
         this.load.next(data.activity);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
         this.inProgress = false;
         this.cards = [];
       })
-      .catch((e) => {
+      .catch(e => {
         this.inProgress = false;
         alert(e.message);
       });
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
-    console.log(file, event, this.attachment)
-    if (file.value) { // this prevents IE from executing this code twice
+    // console.log(file, event, this.attachment);
+    if (file.value) {
+      // this prevents IE from executing this code twice
       this.canPost = false;
       this.inProgress = true;
       this.errorMessage = null;
 
-      this.attachment.upload(file)
+      this.attachment
+        .upload(file)
         .then(guid => {
           let obj = {};
           obj['guid'] = guid;
           obj['imageLink'] = this.attachment.getPreview();
-          console.log(guid)
-          console.log(obj)
+          // console.log(guid);
+          // console.log(obj);
+          // console.log(this.cards);
           this.cards.push(obj);
-          console.log(this.cards)
           this.inProgress = false;
           this.canPost = true;
           file.value = null;
         })
         .catch(e => {
-          console.log(e)
+          // console.log(e);
           if (e && e.message) {
             this.errorMessage = e.message;
           }
@@ -214,7 +220,7 @@ export class PosterComponent {
   }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    console.log(file, imageId)
+    // console.log(file, imageId);
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -230,19 +236,22 @@ export class PosterComponent {
 
     this.errorMessage = '';
 
-    this.attachment.remove(file, imageId).then((guid) => {
-      this.inProgress = false;
-      this.canPost = true;
-      file.value = '';
-      this.cards = _remove(this.cards, function (n) {
-        return n.guid !== guid;
+    this.attachment
+      .remove(file, imageId)
+      .then(guid => {
+        this.inProgress = false;
+        this.canPost = true;
+        file.value = '';
+        this.cards = _remove(this.cards, function(n) {
+          return n.guid !== guid;
+        });
+        // console.log(this.cards);
+      })
+      .catch(e => {
+        // console.error(e);
+        this.inProgress = false;
+        this.canPost = true;
       });
-      console.log(this.cards)
-    }).catch(e => {
-      console.error(e);
-      this.inProgress = false;
-      this.canPost = true;
-    });
   }
 
   getPostPreview(message) {
@@ -254,12 +263,13 @@ export class PosterComponent {
   }
 
   async findTrendingHashtags(searchText: string) {
-    const response: any = await this.client.get('api/v2/search/suggest/tags', { q: searchText });
+    const response: any = await this.client.get('api/v2/search/suggest/tags', {
+      q: searchText
+    });
     return response.tags
       .filter(item => item.toLowerCase().includes(searchText.toLowerCase()))
       .slice(0, 5);
   }
-
 
   getChoiceLabel(text: string) {
     return `#${text}`;
@@ -270,28 +280,48 @@ export class PosterComponent {
     this.renderForms(type);
   }
   renderForms(type: string) {
-    console.log(type)
+    // console.log(type);
     this.display = type;
     this.attachment.reset();
     // this.buildForm(type);
   }
 
   close() {
-    console.log('close');
+    // console.log('close');
     this.display = '';
     this.staticBoard = false;
   }
-   changeToDefault() {
+  changeToDefault() {
     this.display = 'default';
     this.attachment.reset();
   }
-  displayPaywall(){
-    if(this.displayPaywal) this.displayPaywal = false;
+  displayPaywall() {
+    if (this.displayPaywal) this.displayPaywal = false;
     else this.displayPaywal = true;
   }
- 
-  emitEvent(data){
-    console.log(data)
+
+  emitEvent(data) {
+    // console.log(data);
     this.load.next(data.activity);
+  }
+
+  menuOptionSelected(option: string) {
+    switch (option) {
+      case 'create-showtimez':
+        this.createForms('#Showtimez');
+        break;
+      case 'create-opportunity':
+        this.createForms('#Opportunity');
+        break;
+      case 'create-the-bluestore':
+        this.createForms('#TheBlueStore');
+        break;
+      case 'create-portfolio':
+        this.createForms('#Portfolio');
+        break;
+      case 'create-my-journey':
+        this.createForms('#MyJourney');
+        break;
+    }
   }
 }

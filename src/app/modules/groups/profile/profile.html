@@ -496,6 +496,7 @@
              <div class="o-center-block">
                <div class=" hidden-under-tablet" style="width:100%; height: 187px; margin-bottom:9px;">
                    <app-group-banner
+                   *ngIf = "group"
                    [object]="group"
                    [editMode]="editing"
                    [top]="group.banner_position"
