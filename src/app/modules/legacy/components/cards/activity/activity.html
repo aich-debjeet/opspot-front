@@ -78,8 +78,8 @@
     <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
     <textarea class="mdl-card__supporting-text message" name="message" [ngModel]="activity.message" #messageEdit
       [autoGrow]></textarea>
-    <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
-    </m-wire-threshold-input>
+    <!-- <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
+    </m-wire-threshold-input> -->
     <button class="mdl-button mdl-button--raised mdl-color--blue-grey-100"
       (click)="messageEdit.value = activity.message; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
     <button class="mdl-button mdl-button--colored mdl-button--raised"
@@ -233,8 +233,8 @@
     <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
     <textarea class="mdl-card__supporting-text message" name="title" [ngModel]="activity.title" #titleEdit
       [autoGrow]></textarea>
-    <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
-    </m-wire-threshold-input>
+    <!-- <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
+    </m-wire-threshold-input> -->
     <button class="mdl-button mdl-button--raised mdl-color--blue-grey-100"
       (click)="titleEdit.value = activity.title; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
     <button class="mdl-button mdl-button--colored mdl-button--raised"
