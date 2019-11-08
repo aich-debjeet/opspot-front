@@ -64,7 +64,7 @@ export class OrganizationProfile {
   private socketSubscription: any;
   private videoChatActiveSubscription;
   private updateMarkersSubscription;
-  showGathering = false;
+  // showGathering = false;
 
 
   constructor(
@@ -445,11 +445,11 @@ export class OrganizationProfile {
      this.membersMobile=members['members']
     }
     
-  showGathering1(){
-   this.showGathering = true;
-  }
+  // showGathering1(){
+  //  this.showGathering = true;
+  // }
 
-  backClicked() {
-    this.showGathering = false;
-  }
+  // backClicked() {
+  //   this.showGathering = false;
+  // }
 }

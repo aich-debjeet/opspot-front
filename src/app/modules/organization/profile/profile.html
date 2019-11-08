@@ -31,7 +31,7 @@
     <div class="container hidden-above-tablet">
         <div class="without-nav-header">
             <a routerLink=".."><i class="icon-arrow-left"></i> </a>
-            <div class="without-nav-header__title caption-bold f500">Community</div>
+            <div class="without-nav-header__title caption-bold f500">Organization</div>
         </div>
     </div>
     <div [hidden]="organization || error" style="width:100%; text-align:center; ">
@@ -46,7 +46,7 @@
     <div *ngIf="!error" class="container">
         <div class="o-blocks o-blocks--flex">
             <!-- <div> -->
-            <div class="o-left-block o-left-block--community" *ngIf="!showGathering">
+            <div class="o-left-block o-left-block--community">
                 <div class="sticky-wrapper">
                     <app-group-banner class="o-cover o-cover--community hidden-above-tablet" [object]="organization"
                         [editMode]="editing" [top]="organization?.banner_position" [done]="editDone" (added)="add_banner($event)">
@@ -68,7 +68,7 @@
                             <!-- <a class="o-community-img-edit"><i class="icon-edit-profile"></i></a> -->
                         </div>
                         <div class="o-community-name">
-                            <h5 class="f700">{{organization.name}}</h5>
+                            <h5 class="f700">{{organization?.name}}</h5>
                         </div>
                         <div class="o-community-skills" *ngIf="!editing && organization?.tags">
                             <a *ngFor="let tag of organization?.tags" href="" class="o-community-skills__tag">#{{tag}}</a>
@@ -113,9 +113,9 @@
                     </div>
                 </div>
             </div>
-            <div class="o-center-block" *ngIf="!showGathering">
+            <div class="o-center-block">
                 <div class=" hidden-under-tablet" style="width:100%; height: 187px; margin-bottom:9px;">
-                    <app-group-banner [object]="organization" [editMode]="editing" [top]="organization.banner_position" [done]="editDone"
+                    <app-group-banner [object]="organization" [editMode]="editing" [top]="organization?.banner_position" [done]="editDone"
                         (added)="add_banner($event)"></app-group-banner>
                 </div>
                 <!-- <div class="tabs-community">
