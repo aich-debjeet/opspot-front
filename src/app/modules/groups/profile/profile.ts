@@ -285,9 +285,9 @@ export class GroupsProfile {
       guid: this.group.guid
     }, { avatar: file });
   }
-
+ 
   change_membership(membership: any) {
-    if (!membership.error || membership.error === 'already_a_member') {
+    if (!membership.error || membership.error === 'already_a_member' || membership.error === 'Error unmuting group') {
       this.load();
     } else {
       this.error = membership.error;

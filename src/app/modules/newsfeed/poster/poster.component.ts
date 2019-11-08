@@ -25,6 +25,7 @@ import { remove as _remove, findIndex as _findIndex } from 'lodash';
   templateUrl: 'poster.component.html'
 })
 export class PosterComponent {
+  @Input() showCommunityPost: boolean;
   display: string = '';
   startDate: string;
   content = '';

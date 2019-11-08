@@ -1,230 +1,231 @@
 <div class="mdl-card m-border post" *ngIf="session.isLoggedIn() && !staticBoard">
-    <div class="mdl-card__supporting-text">
-        <div class="opspot-avatar">
-            <a [routerLink]="['/', session.getLoggedInUser().username]">
-                <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/"
-                    class="m-border" />
-            </a>
-        </div>
-
-        <form (submit)="post()">
-            <mwl-text-input-autocomplete-container>
-                <!-- <textarea
-              class="mdl-textfield__input"
-              type="text"
-              id="message"
-              #message
-              name="message"
-              [ngModel]="meta.message"
-              (ngModelChange)="onMessageChange($event)"
-              (keyup)="getPostPreview(message);"
-              placeholder="Speak your mind..."
-              i18n-placeholder="@@OPSPOT__POSTER__SPEAK_YOUR_MIND"
-              [autoGrow]
-              mwlTextInputAutocomplete
-              [findChoices]="findTrendingHashtags.bind(this)"
-              [getChoiceLabel]="getChoiceLabel"
-              [triggerCharacter]="'#'"
-            ></textarea> -->
-                <textarea class="mdl-textfield__input" type="text" placeholder="Speak your mind..."
-                    i18n-placeholder="@@OPSPOT__POSTER__SPEAK_YOUR_MIND" (click)="createForms('default')"></textarea>
-            </mwl-text-input-autocomplete-container>
-            <!-- <div class="mdl-card__actions">
-         Attachments
-        <div class="attachment-button" [ngClass]="{ 'mdl-color-text--amber-500': attachment.hasFile() }">
-          <span class="icon-paperclip-2"></span>
-          <input type="file" id="file" #file name="attachment" (change)="uploadAttachment(file, $event)"/>
-        </div>
-
-                <a class="m-mature-button" [ngClass]="{ 'mdl-color-text--red-500': attachment.isMature() }"
-                    (click)="attachment.toggleMature()" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">
-                    <i class="material-icons">explicit</i>
-                    <span *ngIf="attachment.isMature()" i18n="@@M__COMMON__MATURE_CONTENT">Mature content</span>
+        <div class="mdl-card__supporting-text">
+            <div class="opspot-avatar">
+                <a [routerLink]="['/', session.getLoggedInUser().username]">
+                    <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/"
+                        class="m-border" />
                 </a>
-
-                <m-hashtags-selector #hashtagsSelector [tags]="tags" (tagsChange)="onTagsChange($event)"
-                    (tagsAdded)="onTagsAdded($event)" (tagsRemoved)="onTagsRemoved($event)"></m-hashtags-selector>
-
-                <m-wire-threshold-input [(threshold)]="meta.wire_threshold" (validThreshold)="validThreshold = $event">
-                </m-wire-threshold-input>
-
-        <button
-          type="submit"
-          class="m-btn m-btn--slim m-btn m-btn--with-icon"
-          [disabled]="!canPost || !validThreshold || inProgress"
-        >
-          <span class="myHiddden" i18n="Action of posting@@OPSPOT__POSTER__POST_ACTION">Post</span>
-          <i class="icon-paper-plane-1"></i>
-        </button>
-      </div> -->
-
-        </form>
-    </div>
-    <!-- <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp" style="min-height:0;"
-    *ngIf="errorMessage">
-    <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-      {{errorMessage}}
-    </div>
-  </div> -->
-    <!-- Rich embed preview -->
-    <!-- <div class="post-preview" *ngIf="attachment.isRich()">
-    <div class="mdl-spinner mdl-js-spinner is-active" [mdl] [hidden]="attachment.getMeta().title"></div>
-    <div class="m-rich-embed" *ngIf="attachment.getMeta().title">
-      <div class="attachment-preview-delete" (click)="removeRichEmbed()">
-        <i class="material-icons">delete</i>
-      </div>
-      <opspot-rich-embed
-        [preview]="attachment.getMeta()"
-      ></opspot-rich-embed>
-    </div>
-  </div> -->
-
-    <!-- Attachment preview -->
-    <!-- <div class="post-preview" *ngIf="attachment.hasFile() || attachment.getUploadProgress() > 0"
-    (click)="removeAttachment(file)">
-    <div class="mdl-progress mdl-js-progress"
-      [mdlUpload]
-      [progress]="attachment.getUploadProgress()"
-      [hidden]="attachment.getUploadProgress() == 0"
-      [ngClass]="{ 'complete': attachment.getUploadProgress()  == 100 }"
-    ></div>
-    <div *ngIf="attachment.getMime() == 'video'" class="attachment-preview video-placeholder mdl-color--blue-grey-600">
-      <i class="material-icons" *ngIf="!attachment.isPendingDelete()">videocam</i>
-    </div> -->
-
-    <!-- <ng-container>
-      <img *ngIf="attachment.getMime() != 'video'" [src]="attachment.getPreview()" class="attachment-preview"/>
-      <div class="attachment-preview-delete" *ngIf="!attachment.isPendingDelete()">
-        <i class="material-icons">delete</i>
-      </div>
-      <div class="mdl-spinner attachment-preview-delete-in-progress mdl-js-spinner is-active" [mdl]
-        *ngIf="attachment.isPendingDelete()"></div>
-
-    </ng-container> -->
-    <!--<div class="attachment-preview-delete-in-progress" *ngIf="attachment.isPendingDelete()">-->
-    <!--<div class="mdl-spinner mdl-js-spinner is-active" [mdl]></div>-->
-    <!--</div>-->
-    <!-- </div> -->
-
-</div>
-
-<div *ngIf="staticBoard">
-    <div class="o-create-post" *ngIf="display == 'default'">
-        <div class="o-create-post-head o-create-post-head--border">
-            <div class="o-create-post__title text-lg f500">Create a post 
-                <!-- <span class="icon-box-design" #postType>
-                    <span class="icon-chevron-down" (click)="postType.value = !postType.value">
-                    </span>
-                </span> -->
             </div>
-            <!-- <div class="o-create-post-dropdown" [hidden]="!postType.value">
-                <div class="o-create-post-dropdown-content">
-                    <ul>
-                        <li class="text-md" (click)="createForms('#Showtimez')">On #Showtimez</li>
-                        <li class="text-md" (click)="createForms('#Opportunity')">On #Opportunity</li>
-                        <li class="text-md" (click)="createForms('#TheBlueStore')">On #TheBlueStore</li>
-                        <li class="text-md" (click)="createForms('#Portfolio')"> On #Portfolio</li>
-                        <li class="text-md" (click)="createForms('#MyJourney')">On #MyJourney</li>
-                    </ul>
-                </div>
-            </div> -->
-            <m-post-menu
-                [iconType]="'arrow'"
-                [options]="menuOptions"
-                [user]="opspot.user"
-                (optionSelected)="menuOptionSelected($event)"
-            ></m-post-menu>
-            <div class="text-md primary f500 o-create-post-write-blog">Write Blog</div>
-            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+    
+            <form (submit)="post()">
+                <mwl-text-input-autocomplete-container>
+                    <!-- <textarea
+                  class="mdl-textfield__input"
+                  type="text"
+                  id="message"
+                  #message
+                  name="message"
+                  [ngModel]="meta.message"
+                  (ngModelChange)="onMessageChange($event)"
+                  (keyup)="getPostPreview(message);"
+                  placeholder="Speak your mind..."
+                  i18n-placeholder="@@OPSPOT__POSTER__SPEAK_YOUR_MIND"
+                  [autoGrow]
+                  mwlTextInputAutocomplete
+                  [findChoices]="findTrendingHashtags.bind(this)"
+                  [getChoiceLabel]="getChoiceLabel"
+                  [triggerCharacter]="'#'"
+                ></textarea> -->
+                    <textarea class="mdl-textfield__input" type="text" placeholder="Speak your mind..."
+                        i18n-placeholder="@@OPSPOT__POSTER__SPEAK_YOUR_MIND" (click)="createForms('default')"></textarea>
+                </mwl-text-input-autocomplete-container>
+                <!-- <div class="mdl-card__actions">
+             Attachments
+            <div class="attachment-button" [ngClass]="{ 'mdl-color-text--amber-500': attachment.hasFile() }">
+              <span class="icon-paperclip-2"></span>
+              <input type="file" id="file" #file name="attachment" (change)="uploadAttachment(file, $event)"/>
+            </div>
+    
+                    <a class="m-mature-button" [ngClass]="{ 'mdl-color-text--red-500': attachment.isMature() }"
+                        (click)="attachment.toggleMature()" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">
+                        <i class="material-icons">explicit</i>
+                        <span *ngIf="attachment.isMature()" i18n="@@M__COMMON__MATURE_CONTENT">Mature content</span>
+                    </a>
+    
+                    <m-hashtags-selector #hashtagsSelector [tags]="tags" (tagsChange)="onTagsChange($event)"
+                        (tagsAdded)="onTagsAdded($event)" (tagsRemoved)="onTagsRemoved($event)"></m-hashtags-selector>
+    
+                    <m-wire-threshold-input [(threshold)]="meta.wire_threshold" (validThreshold)="validThreshold = $event">
+                    </m-wire-threshold-input>
+    
+            <button
+              type="submit"
+              class="m-btn m-btn--slim m-btn m-btn--with-icon"
+              [disabled]="!canPost || !validThreshold || inProgress"
+            >
+              <span class="myHiddden" i18n="Action of posting@@OPSPOT__POSTER__POST_ACTION">Post</span>
+              <i class="icon-paper-plane-1"></i>
+            </button>
+          </div> -->
+    
+            </form>
         </div>
-        <!-- <form (submit)="post()">
-            <div class="o-create-post-body o-create-post-body--flex">
-                <div class="o-crete-post-userinfo">
-                    <div class="o-crete-post-userinfo__avatar">
-                        <img src="assets/demo/avatar.png" alt="">
-                    </div>
-                    <div class="o-crete-post-userinfo__mesaage">
-                        <textarea type="text" id="message" #message name="message" placeholder="Write Something"
-                            [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
-                            (keyup)="getPostPreview(message);"></textarea>
-                    </div>
+        <!-- <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp" style="min-height:0;"
+        *ngIf="errorMessage">
+        <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+          {{errorMessage}}
+        </div>
+      </div> -->
+        <!-- Rich embed preview -->
+        <!-- <div class="post-preview" *ngIf="attachment.isRich()">
+        <div class="mdl-spinner mdl-js-spinner is-active" [mdl] [hidden]="attachment.getMeta().title"></div>
+        <div class="m-rich-embed" *ngIf="attachment.getMeta().title">
+          <div class="attachment-preview-delete" (click)="removeRichEmbed()">
+            <i class="material-icons">delete</i>
+          </div>
+          <opspot-rich-embed
+            [preview]="attachment.getMeta()"
+          ></opspot-rich-embed>
+        </div>
+      </div> -->
+    
+        <!-- Attachment preview -->
+        <!-- <div class="post-preview" *ngIf="attachment.hasFile() || attachment.getUploadProgress() > 0"
+        (click)="removeAttachment(file)">
+        <div class="mdl-progress mdl-js-progress"
+          [mdlUpload]
+          [progress]="attachment.getUploadProgress()"
+          [hidden]="attachment.getUploadProgress() == 0"
+          [ngClass]="{ 'complete': attachment.getUploadProgress()  == 100 }"
+        ></div>
+        <div *ngIf="attachment.getMime() == 'video'" class="attachment-preview video-placeholder mdl-color--blue-grey-600">
+          <i class="material-icons" *ngIf="!attachment.isPendingDelete()">videocam</i>
+        </div> -->
+    
+        <!-- <ng-container>
+          <img *ngIf="attachment.getMime() != 'video'" [src]="attachment.getPreview()" class="attachment-preview"/>
+          <div class="attachment-preview-delete" *ngIf="!attachment.isPendingDelete()">
+            <i class="material-icons">delete</i>
+          </div>
+          <div class="mdl-spinner attachment-preview-delete-in-progress mdl-js-spinner is-active" [mdl]
+            *ngIf="attachment.isPendingDelete()"></div>
+    
+        </ng-container> -->
+        <!--<div class="attachment-preview-delete-in-progress" *ngIf="attachment.isPendingDelete()">-->
+        <!--<div class="mdl-spinner mdl-js-spinner is-active" [mdl]></div>-->
+        <!--</div>-->
+        <!-- </div> -->
+    
+    </div>
+    
+    <div *ngIf="staticBoard">
+        <div class="o-create-post" *ngIf="display == 'default'">
+            <div class="o-create-post-head o-create-post-head--border">
+                <div class="o-create-post__title text-lg f500">Create a post 
+                    <!-- <span class="icon-box-design" #postType>
+                        <span class="icon-chevron-down" (click)="postType.value = !postType.value">
+                        </span>
+                    </span> -->
                 </div>
-                <div class="o-create-post-fileupload" *ngIf="attachment.meta.attachment_guid.length == 0">
-                    <div class="fileUpload">
-                        <span class="icon-paperclip-2"></span>
-                        <input type="file" id="file" #file class="upload" name="attachment"
-                            (change)="uploadAttachment(file, $event)" />
+                <!-- <div class="o-create-post-dropdown" [hidden]="!postType.value">
+                    <div class="o-create-post-dropdown-content">
+                        <ul>
+                            <li class="text-md" (click)="createForms('#Showtimez')">On #Showtimez</li>
+                            <li class="text-md" (click)="createForms('#Opportunity')">On #Opportunity</li>
+                            <li class="text-md" (click)="createForms('#TheBlueStore')">On #TheBlueStore</li>
+                            <li class="text-md" (click)="createForms('#Portfolio')"> On #Portfolio</li>
+                            <li class="text-md" (click)="createForms('#MyJourney')">On #MyJourney</li>
+                        </ul>
                     </div>
-                    <div class="text-md grey">
-                        Add Image, Video or Audio
-                    </div>
-                </div>
-                <div class="o-create-post-filled-fileupload" *ngIf="attachment.meta.attachment_guid.length > 0">
-                    <div class="fileUpload-preview-new mr-9" *ngFor="let image of cards">
-                        <a class="fileUpload-preview-new-close" (click)="removeAttachment(file,image.guid)"><i
-                                class="ico-x white"></i></a>
-                        <a class="o-create-post-filled-avatar" href="javascript:void(0)">
-                            <img [src]="image.imageLink" alt="">
-                        </a>
-                    </div>
-                    <div class="fileUpload">
-                        <span class="icon-plus"></span>
-                        <input type="file" id="file" #file class="upload" class="upload" name="attachment"
-                            (change)="uploadAttachment(file, $event)" />
-                    </div>
-                </div>
+                </div> -->
+                <m-post-menu
+                    [iconType]="'arrow'"
+                    [options]="menuOptions"
+                    [user]="opspot.user"
+                    (optionSelected)="menuOptionSelected($event)"
+                ></m-post-menu>
+                <div class="text-md primary f500 o-create-post-write-blog">Write Blog</div>
+                <div class="close" (click)="close()"><i class="icon-x"></i></div>
             </div>
-            <div class="o-create-post-footer">
-                <div class="o-create-post-left">
-                    <div class="o-create-post-toggle">
-                        <div class="switch">
-                            <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW">
-                            <span class="slider round"></span>
+            <!-- <form (submit)="post()">
+                <div class="o-create-post-body o-create-post-body--flex">
+                    <div class="o-crete-post-userinfo">
+                        <div class="o-crete-post-userinfo__avatar">
+                            <img src="assets/demo/avatar.png" alt="">
+                        </div>
+                        <div class="o-crete-post-userinfo__mesaage">
+                            <textarea type="text" id="message" #message name="message" placeholder="Write Something"
+                                [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
+                                (keyup)="getPostPreview(message);"></textarea>
                         </div>
                     </div>
-                    <span class="text-md grey f500">
-                        isNSFW<span class="icon-info"></span>
-                    </span>
+                    <div class="o-create-post-fileupload" *ngIf="attachment.meta.attachment_guid.length == 0">
+                        <div class="fileUpload">
+                            <span class="icon-paperclip-2"></span>
+                            <input type="file" id="file" #file class="upload" name="attachment"
+                                (change)="uploadAttachment(file, $event)" />
+                        </div>
+                        <div class="text-md grey">
+                            Add Image, Video or Audio
+                        </div>
+                    </div>
+                    <div class="o-create-post-filled-fileupload" *ngIf="attachment.meta.attachment_guid.length > 0">
+                        <div class="fileUpload-preview-new mr-9" *ngFor="let image of cards">
+                            <a class="fileUpload-preview-new-close" (click)="removeAttachment(file,image.guid)"><i
+                                    class="ico-x white"></i></a>
+                            <a class="o-create-post-filled-avatar" href="javascript:void(0)">
+                                <img [src]="image.imageLink" alt="">
+                            </a>
+                        </div>
+                        <div class="fileUpload">
+                            <span class="icon-plus"></span>
+                            <input type="file" id="file" #file class="upload" class="upload" name="attachment"
+                                (change)="uploadAttachment(file, $event)" />
+                        </div>
+                    </div>
                 </div>
-                <div class="o-create-post-right">
-                    <div class="o-create-post-right__status">
-                        <div class="float-left" *ngIf="defaultCoins.length == 0">
-                            <span class="o-create-post-right__icon"><span class="icon-users"></span></span>
-                            <span class="text-md f500">Paywall</span>
+                <div class="o-create-post-footer">
+                    <div class="o-create-post-left">
+                        <div class="o-create-post-toggle">
+                            <div class="switch">
+                                <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW">
+                                <span class="slider round"></span>
+                            </div>
                         </div>
-                        <div class="float-left" *ngIf="defaultCoins.length > 0">
-                            <span class="text-md f500">{{defaultCoins}} spotcoins</span>
-                        </div>
-                        <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span
-                                class="icon-chevron-down"></span></a>
-                        <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
-                            <div class="o-create-post-dropdown-footer__paywall">
-                                <div class="text-sm grey">Visible to supporter who send over</div>
-                                <div class="paywall-coins">
-                                    <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins"
-                                        placeholder="0 Spot Coins">
-                                    <button type="button" class="btn btn-primary btn-sm disabled"
-                                        (click)="displayPaywall()">Add</button>
+                        <span class="text-md grey f500">
+                            isNSFW<span class="icon-info"></span>
+                        </span>
+                    </div>
+                    <div class="o-create-post-right">
+                        <div class="o-create-post-right__status">
+                            <div class="float-left" *ngIf="defaultCoins.length == 0">
+                                <span class="o-create-post-right__icon"><span class="icon-users"></span></span>
+                                <span class="text-md f500">Paywall</span>
+                            </div>
+                            <div class="float-left" *ngIf="defaultCoins.length > 0">
+                                <span class="text-md f500">{{defaultCoins}} spotcoins</span>
+                            </div>
+                            <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span
+                                    class="icon-chevron-down"></span></a>
+                            <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
+                                <div class="o-create-post-dropdown-footer__paywall">
+                                    <div class="text-sm grey">Visible to supporter who send over</div>
+                                    <div class="paywall-coins">
+                                        <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins"
+                                            placeholder="0 Spot Coins">
+                                        <button type="button" class="btn btn-primary btn-sm disabled"
+                                            (click)="displayPaywall()">Add</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+    
+                        <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
                     </div>
-
-                    <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
                 </div>
-            </div>
-        </form> -->
-        <app-post-form (load)="emitEvent($event)" [object]="''"></app-post-form>
+            </form> -->
+            <app-post-form (load)="emitEvent($event)" [object]="''"></app-post-form>
+        </div>
+    
+        <app-showtimez-form *ngIf="display == '#Showtimez'" [object]="''" (ChangeDefault)="changeToDefault()"
+            (Close)="close()" (load)="emitEvent($event)"></app-showtimez-form>
+        <app-opportunity-form *ngIf="display == '#Opportunity'" [object]="''" (ChangeDefault)="changeToDefault()"
+            (Close)="close()" (load)="emitEvent($event)"></app-opportunity-form>
+        <app-blue-store-form *ngIf="display == '#TheBlueStore'" [object]="''" (ChangeDefault)="changeToDefault()"
+            (Close)="close()" (load)="emitEvent($event)"></app-blue-store-form>
+        <app-portfolio-form *ngIf="display == '#Portfolio'" (ChangeDefault)="changeToDefault()" (Close)="close()"
+            (load)="emitEvent($event)"></app-portfolio-form>
+        <app-my-journey-form *ngIf="display == '#MyJourney'" (ChangeDefault)="changeToDefault()" (Close)="close()"
+            (load)="emitEvent($event)"></app-my-journey-form>
     </div>
-
-    <app-showtimez-form *ngIf="display == '#Showtimez'" [object]="''" (ChangeDefault)="changeToDefault()"
-        (Close)="close()" (load)="emitEvent($event)"></app-showtimez-form>
-    <app-opportunity-form *ngIf="display == '#Opportunity'" [object]="''" (ChangeDefault)="changeToDefault()"
-        (Close)="close()" (load)="emitEvent($event)"></app-opportunity-form>
-    <app-blue-store-form *ngIf="display == '#TheBlueStore'" [object]="''" (ChangeDefault)="changeToDefault()"
-        (Close)="close()" (load)="emitEvent($event)"></app-blue-store-form>
-    <app-portfolio-form *ngIf="display == '#Portfolio'" (ChangeDefault)="changeToDefault()" (Close)="close()"
-        (load)="emitEvent($event)"></app-portfolio-form>
-    <app-my-journey-form *ngIf="display == '#MyJourney'" (ChangeDefault)="changeToDefault()" (Close)="close()"
-        (load)="emitEvent($event)"></app-my-journey-form>
-</div>
+    

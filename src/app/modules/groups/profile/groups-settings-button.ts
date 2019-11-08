@@ -185,7 +185,9 @@ export class GroupsSettingsButton {
   }
 
   report() {
-    this.overlayService.create(ReportCreatorComponent, this.group)
+    this.overlayService.create(ReportCreatorComponent, this.group, {
+      class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium',
+    })
       .present();
   }
 
