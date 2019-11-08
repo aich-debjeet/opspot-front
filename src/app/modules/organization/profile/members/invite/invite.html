@@ -1,0 +1,64 @@
+<style>
+    input:focus{
+      box-shadow: none ;
+    }
+    ::ng-deep .bg-grey-light{ 
+      background-color: #ECEFF1
+              }
+    </style>
+    <!-- <div class="o-community-member-popup">
+    <div class="o-community-member-popup-body"> -->
+    <div class="o-community-member-popup-body__title">
+      <h3  *ngIf="!mobileView" class="text-h3" i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__NAME_TITLE">
+        <ng-container *ngIf="group">Invite members to {{ group.name }}</ng-container>
+        <ng-container *ngIf="!group">Invite</ng-container>
+        <span class="m-layout--spacer"></span>
+        <!-- <a routerLink="../requests" class="selected">
+          Requests
+          <ng-container *ngIf="group['requests:count']">({{group['requests:count']}})</ng-container>
+        </a> -->
+      </h3>
+      
+      <!-- <ul class="m-groupMemberInvite__instructions">
+        <li i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_ONLY_SUBSCRIBERS">You can only invite users who are your subscribers</li>
+        <li i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_NOTIFICATION_INFO">They will receive a notification to confirm they want to be a member of this group</li>
+        <li *ngIf="group" [hidden]="!group['is:owner']" i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_BAN_REINVITE">If the user was banned from the group, inviting them will lift the ban</li>
+      </ul>
+       -->
+      <div [hidden]="!inviteInProgress">
+        <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" width="width: 100%;" [mdl]></div>
+        <div class="mdl-card__supporting-text">
+          <ng-container i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__INVITING">Inviting...</ng-container>
+        </div>
+      </div>
+    
+      <div class="m-search-inline" [hidden]="destination">
+        <input
+        class="form-control form-control-lg bg-grey-light"
+        style="border: 0px;
+        margin: 30px 0px 0px;
+        padding: 1.3rem 0.85rem; box-shadow: none;"
+         type="text" name="q" [(ngModel)]="q" (keyup)="search(q)" placeholder="Search Members" i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__INVITE__SEARCH_PLACEHOLDER" />
+        <ul class="o-community-members-list scrollbar scrollbar-default" [hidden]="users.length == 0 || !searching">
+          <li *ngFor="let user of users" (click)="invite(user);" class="o-community-members-list__user-list">
+            <div class="o-community-members-list__user-list">
+              <div class="o-community-members-info">
+                <div class="o-community-members-info-prof">
+                  <div class="o-community-members-info-prof__avatar o-avatar-md">
+                      <img src="{{opspot.cdn_url}}icon/{{user.guid}}/small/{{user.icontime}}" />           
+                    </div>
+                    <div class="caption-bold" id="user.username">
+                        @{{user.username}}
+                    </div>
+                  </div> 
+                  <div class="o-community-members-info__option">
+                     <button  (click)="invite(user);" class="btn btn-outline-primary btn-sm">{{user['is:member']?'Invited':'Invite'}}</button>
+                  </div>
+              </div>
+            </div>     
+          </li>
+        </ul>
+      </div>  
+    </div>
+  <!-- </div>
+  </div> -->
