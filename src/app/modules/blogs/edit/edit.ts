@@ -21,13 +21,13 @@ import { BlogPreviewComponent } from './blog-preview/blog-preview.component';
     'class': 'm-blog'
   },
   templateUrl: 'edit.html',
-  styleUrls:['edit.scss']
+  styleUrls: ['edit.scss']
 })
 
 export class BlogEdit {
 
   opspot = window.Opspot;
-
+  open: boolean = false;
   guid: string;
   blog: any = {
     guid: 'new',
@@ -62,13 +62,29 @@ export class BlogEdit {
 
   licenses = LICENSES;
   access = ACCESS;
+  view: string = 'writeBlog';
+  canDelete: boolean = false;
+  isTranslatable: boolean;
+  menuOptions: Array<string> = ['edit', 'delete'];
+
+
+  offset: string = '';
+  moreData: boolean = true;
+  myBlogInProgress: boolean = false;
+  entities_0: Array<any> = [];
+  entities_1: Array<any> = [];
+  filter: string = 'featured';
+  _filter2: string = '';
+  rating: number = 1;
+  filteredArray = [];
+  selectedGuid: string;
 
   paramsSubscription: Subscription;
   @ViewChild('inlineEditor') inlineEditor: InlineEditorComponent;
   @ViewChild('thresholdInput') thresholdInput: WireThresholdInputComponent;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
-  constructor(public session: Session,private overlayModal: OverlayModalService, public client: Client, public upload: Upload, public router: Router, public route: ActivatedRoute, public title: OpspotTitle, private cd: ChangeDetectorRef) {
+  constructor(public session: Session, private overlayModal: OverlayModalService, public client: Client, public upload: Upload, public router: Router, public route: ActivatedRoute, public title: OpspotTitle, private cd: ChangeDetectorRef) {
     this.getCategories();
 
     window.addEventListener('attachment-preview-loaded', (event: CustomEvent) => {
@@ -144,7 +160,7 @@ export class BlogEdit {
       });
     }
 
-    this.categories.sort((a, b) => a.label > b.label ? 1: -1);
+    this.categories.sort((a, b) => a.label > b.label ? 1 : -1);
   }
 
   load() {
@@ -202,8 +218,8 @@ export class BlogEdit {
 
     if (!this.validate())
       return;
-      
-      this.inlineEditor.prepareForSave().then(() => {
+
+    this.inlineEditor.prepareForSave().then(() => {
       // const blog = Object.assign({}, this.blog);
 
       // only allowed props
@@ -212,8 +228,8 @@ export class BlogEdit {
       // blog.monetized = blog.monetized ? 1: 0;
       // this.inProgress = true;
       // this.canSave = false;
-      
-      this.overlayModal.create(BlogPreviewComponent,{blog:this.blog, guid:this.guid},{class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium-extra-large'}).present();
+
+      this.overlayModal.create(BlogPreviewComponent, { blog: this.blog, guid: this.guid }, { class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium-extra-large' }).present();
       // this.check_for_banner().then(() => {
       //   this.upload.post('api/v1/blog/' + this.guid, [this.banner], blog)
       //     .then((response: any) => {
@@ -226,20 +242,20 @@ export class BlogEdit {
       //       this.inProgress = false;
       //     });
       // })
-        // .catch(() => {
-        //   this.client.post('api/v1/blog/' + this.guid, this.blog)
-        //     .then((response: any) => {
-        //       if (response.guid) {
-        //         this.router.navigate(response.route ? ['/' + response.route]: ['/blog/view', response.guid]);
-        //       }
-        //       this.inProgress = false;
-        //       this.canSave = true;
-        //     })
-        //     .catch((e) => {
-        //       this.inProgress = false;
-        //       this.canSave = true;
-        //     });
-        // });
+      // .catch(() => {
+      //   this.client.post('api/v1/blog/' + this.guid, this.blog)
+      //     .then((response: any) => {
+      //       if (response.guid) {
+      //         this.router.navigate(response.route ? ['/' + response.route]: ['/blog/view', response.guid]);
+      //       }
+      //       this.inProgress = false;
+      //       this.canSave = true;
+      //     })
+      //     .catch((e) => {
+      //       this.inProgress = false;
+      //       this.canSave = true;
+      //     });
+      // });
     })
   }
 
@@ -271,7 +287,7 @@ export class BlogEdit {
       return;
     }
 
-    this.blog.monetized = this.blog.monetized ? 0: 1;
+    this.blog.monetized = this.blog.monetized ? 0 : 1;
   }
 
   checkMonetized() {
@@ -292,4 +308,76 @@ export class BlogEdit {
       this.blog.categories.splice(this.blog.categories.indexOf(category.id), 1);
     }
   }
+  //to switch between write blog and my Blogs
+  changeTabs(tab: string) {
+    console.log('tab', tab)
+    if (tab == 'writeblog') this.view = 'writeblog';
+    else if (tab == 'myBlogs') {
+      this.view = 'myBlogs';
+      this.loadMyBlogs(true)
+    }
+  }
+  onChange(e: any) {
+    console.log(e);
+    if (e == 'MyBlogs') {
+      this.filteredArray = this.entities_0
+    }
+    else if (e == 'Drafts') {
+      this.filteredArray = this.entities_0.filter(item => item.access_id != '2');
+    }
+    else if (e == 'Published') {
+      this.filteredArray = this.entities_0.filter(item => item.access_id == '2');
+    }
+  }
+
+  loadMyBlogs(refresh: boolean = false) {
+    this._filter2 = this.session.getLoggedInUser().guid;
+    let endpoint = 'api/v2/feeds/container/' + this._filter2 + '/blogs';
+
+    this.client.get(endpoint, {
+      limit: 150,
+      offset: this.offset,
+      sync: this.rating,
+      container_guid: this._filter2,
+      as_activities: 0,
+    })
+      .then((response: any) => {
+
+        if (!response.entities || !response.entities.length) {
+          this.moreData = false;
+          this.inProgress = false;
+          return false;
+        }
+        this.filteredArray = this.entities_0 = response.entities;
+        this.offset = response['load-next'];
+        if (!this.offset) {
+          this.moreData = false;
+        }
+        this.inProgress = false;
+      })
+      .catch((e) => {
+        this.inProgress = false;
+      });
+  }
+  menuOptionSelected(option: string) {
+    switch (option) {
+      case 'edit':
+        this.router.navigate(['/blog/edit', this.selectedGuid]);
+        break;
+      case 'delete':
+        this.delete();
+        break;
+    }
+  }
+
+  delete() {
+    this.client.delete('api/v1/blog/' + this.selectedGuid)
+      .then((response: any) => {
+        this.router.navigate(['/blog/owner']);
+      });
+  }
+  entityGuid(guid: string){
+    this.selectedGuid = guid;
+  }
 }
+

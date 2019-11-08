@@ -107,7 +107,8 @@ li.active a{
 
 //padding for published tab
 .o-blog-write-padding-published{
-    padding:21px 33px!important;
+    position: relative;
+    padding:21px 33px 0px!important;
     @include mq($from:$mobile_sm, $until:$desktop_sm){
         padding: 16px 14px !important;
         h4{
@@ -117,6 +118,7 @@ li.active a{
 }
 .o-blog-write-published-line{
     border-bottom: 1px solid #ECEFF1;
+    padding: 15px 0px;
 }
 .o-blog-write-published-dropdown-none{
     .o-blog-published-dropdown__content{
@@ -267,4 +269,69 @@ li.active a{
         margin-left: 0;
     }
 
+}
+
+//sec style
+.o-blog-published-sec{
+    display: flex;
+    justify-content: space-between;
+}
+
+//block style
+.o-blog-published-block{
+    display: flex;
+    &__cover{
+        img{
+            height: 101px;	
+            width: 175px;	
+            border-radius: 2px;
+            object-fit: fill;
+            @include mq($from:$mobile_sm, $until:$desktop_sm){
+                display:none;
+            }
+        }
+    }
+    &__details{
+        display:flex;
+        flex-direction: column;
+        margin-left:31px;
+        justify-content: center;
+        @include mq($from:$mobile_sm, $until:$desktop_sm){
+            margin-left:0px;
+        }
+        .mt3b12{
+            margin-top:6px;
+            margin-bottom:12px;
+        }
+    }
+}
+
+//dropdown style
+.o-blog-published-dropdown{
+    // position: relative;
+    position: absolute;
+    right: 100px;
+    top: 30px;
+
+    &__content{
+        // display:none;
+        position: absolute;
+        background:$white;
+        padding: 7px 6px;
+        left: 0;
+        top: 0;
+        margin-left: 20px;
+        box-shadow: 0 6px 10px 0 rgba(144,164,174,0.16), 0 1px 12px 0 rgba(144,164,174,0.18), 0 3px 5px 0 rgba(144,164,174,0.2);
+        .list-item{
+            list-style-type: none;
+            padding:4px 13px;
+        }
+    }
+}
+.blogs-action-filter{
+    width: 180px;
+    padding: 21px 33px 0px!important;
+    .form-group{
+        margin-bottom: 0px;
+    }
 }

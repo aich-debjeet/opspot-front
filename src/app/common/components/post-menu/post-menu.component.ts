@@ -37,6 +37,7 @@ export class PostMenuComponent {
   @Input() entity: any;
   @Input() options: Array<Option>;
   @Output() optionSelected: EventEmitter<Option> = new EventEmitter<Option>();
+  @Output() entityGuid: EventEmitter<Option> = new EventEmitter<Option>();
   @Input() canDelete: boolean = false;
   @Input() isTranslatable: boolean = false;
   @Input() askForCategoriesWhenFeaturing: boolean = false;
@@ -59,6 +60,7 @@ export class PostMenuComponent {
 
   constructor(public session: Session, private client: Client, private cd: ChangeDetectorRef, private overlayModal: OverlayModalService, public signupModal: SignupModalService) {
     this.initCategories();
+    console.log(this.entity,this.options)
   }
 
   initCategories() {
@@ -289,6 +291,7 @@ export class PostMenuComponent {
 
   selectOption(option: Option) {
     this.optionSelected.emit(option);
+    this.entityGuid.emit(this.entity.guid)
     this.opened = false;
 
     this.detectChanges();

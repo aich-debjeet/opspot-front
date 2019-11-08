@@ -18,6 +18,7 @@ import { WireModule } from '../wire/wire.module';
 import { CommentsModule } from '../comments/comments.module';
 import { HashtagsModule } from '../hashtags/hashtags.module';
 import { BlogPreviewComponent } from './edit/blog-preview/blog-preview.component';
+import { BlogViewComponent } from './blog-view/blog-view.component';
 
 const routes: Routes = [
   { path: 'blog/view/:guid/:title', component: BlogViewInfinite },
@@ -51,6 +52,7 @@ const routes: Routes = [
     BlogListComponent,
     BlogTileComponent,
     BlogPreviewComponent,
+    BlogViewComponent,
   ],
   exports: [
     BlogView,
