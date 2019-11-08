@@ -1,78 +1,78 @@
 <form (submit)="post()">
-  <div class="o-create-post-body o-create-post-body--flex">
-      <div class="o-crete-post-userinfo">
-          <div class="o-crete-post-userinfo__avatar">
-              <img src="assets/demo/avatar.png" alt="">
-          </div>
-          <div class="o-crete-post-userinfo__mesaage">
-              <textarea type="text" id="message" #message name="message" placeholder="Write Something"
-                  [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
-                  (keyup)="getPostPreview(message);"></textarea>
-          </div>
-      </div>
-      <div class="o-create-post-fileupload" *ngIf="cards.length == 0">
-          <div class="fileUpload">
-              <span class="icon-paperclip-2"></span>
-              <!-- <input type="file" class="upload"> -->
-              <input type="file" id="file" #file class="upload" name="attachment"
-                  (change)="uploadAttachment(file, $event)" />
-          </div>
-          <div class="text-md grey">
-              Add Image, Video or Audio
-          </div>
-      </div>
-      <div class="o-create-post-filled-fileupload" *ngIf="cards.length > 0">
-          <div class="fileUpload-preview-new mr-9" *ngFor="let image of cards">
-              <a class="fileUpload-preview-new-close" (click)="removeAttachment(image.guid)"><i
-                      class="ico-x white"></i></a>
-              <a class="o-create-post-filled-avatar" href="javascript:void(0)">
-                  <img [src]="image.src" alt="">
-              </a>
-          </div>
-          <div class="fileUpload">
-              <span class="icon-plus"></span>
-              <input type="file" id="file" #file class="upload" class="upload" name="attachment"
-                  (change)="uploadAttachment(file, $event)" />
-          </div>
-      </div>
-  </div>
-  <div class="o-create-post-footer">
-      <div class="o-create-post-left">
-          <div class="o-create-post-toggle">
-              <div class="switch">
-                  <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW">
-                  <span class="slider round"></span>
-              </div>
-          </div>
-          <span class="text-md grey f500">
-              isNSFW<span class="icon-info"></span>
-          </span>
-      </div>
-      <div class="o-create-post-right">
-          <div class="o-create-post-right__status">
-              <div class="float-left" *ngIf="defaultCoins.length == 0">
-                  <span class="o-create-post-right__icon"><span class="icon-users"></span></span>
-                  <span class="text-md f500">Paywall</span>
-              </div>
-              <div class="float-left" *ngIf="defaultCoins.length > 0">
-                  <span class="text-md f500">{{defaultCoins}} spotcoins</span>
-              </div>
-              <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span
-                      class="icon-chevron-down"></span></a>
-              <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
-                  <div class="o-create-post-dropdown-footer__paywall">
-                      <div class="text-sm grey">Visible to supporter who send over</div>
-                      <div class="paywall-coins">
-                          <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins"
-                              placeholder="0 Spot Coins">
-                          <button type="button" class="btn btn-primary btn-sm disabled"
-                              (click)="displayPaywall()">Add</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
+    <div class="o-create-post-body o-create-post-body--flex">
+        <div class="o-crete-post-userinfo">
+            <div class="o-crete-post-userinfo__avatar">
+                <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="">
+            </div>
+            <div class="o-crete-post-userinfo__mesaage">
+                <textarea type="text" id="message" #message name="message" placeholder="Write Something"
+                    [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
+                    (keyup)="getPostPreview(message);"></textarea>
+            </div>
+        </div>
+        <div class="o-create-post-fileupload" *ngIf="cards.length == 0">
+            <div class="fileUpload">
+                <span class="icon-paperclip-2"></span>
+                <!-- <input type="file" class="upload"> -->
+                <input type="file" id="file" #file class="upload" name="attachment"
+                    (change)="uploadAttachment(file, $event)" />
+            </div>
+            <div class="text-md grey">
+                Add Image, Video or Audio
+            </div>
+        </div>
+        <div class="o-create-post-filled-fileupload" *ngIf="cards.length > 0">
+            <div class="fileUpload-preview-new mr-9" *ngFor="let image of cards">
+                <a class="fileUpload-preview-new-close" (click)="removeAttachment(image.guid)"><i
+                        class="ico-x white"></i></a>
+                <a class="o-create-post-filled-avatar" href="javascript:void(0)">
+                    <img [src]="image.src" alt="">
+                </a>
+            </div>
+            <div class="fileUpload">
+                <span class="icon-plus"></span>
+                <input type="file" id="file" #file class="upload" class="upload" name="attachment"
+                    (change)="uploadAttachment(file, $event)" />
+            </div>
+        </div>
+    </div>
+    <div class="o-create-post-footer">
+        <div class="o-create-post-left">
+            <div class="o-create-post-toggle">
+                <div class="switch">
+                    <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW">
+                    <span class="slider round"></span>
+                </div>
+            </div>
+            <span class="text-md grey f500">
+                isNSFW<span class="icon-info"></span>
+            </span>
+        </div>
+        <div class="o-create-post-right">
+            <div class="o-create-post-right__status">
+                <div class="float-left" *ngIf="defaultCoins.length == 0">
+                    <span class="o-create-post-right__icon"><span class="icon-users"></span></span>
+                    <span class="text-md f500">Paywall</span>
+                </div>
+                <div class="float-left" *ngIf="defaultCoins.length > 0">
+                    <span class="text-md f500">{{defaultCoins}} spotcoins</span>
+                </div>
+                <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span
+                        class="icon-chevron-down"></span></a>
+                <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
+                    <div class="o-create-post-dropdown-footer__paywall">
+                        <div class="text-sm grey">Visible to supporter who send over</div>
+                        <div class="paywall-coins">
+                            <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins"
+                                placeholder="0 Spot Coins">
+                            <button type="button" class="btn btn-primary btn-sm disabled"
+                                (click)="displayPaywall()">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-          <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
-      </div>
-  </div>
+            <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
+        </div>
+    </div>
 </form>
