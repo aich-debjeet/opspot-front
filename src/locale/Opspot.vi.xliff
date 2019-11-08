@@ -40,7 +40,7 @@
         <target>Thiết lập lại</target>
       </trans-unit>
       <trans-unit id="OPSPOT__POSTER__SPEAK_YOUR_MIND">
-        <source>Speak your mind...</source>
+        <source>Write something...</source>
         <target>Bạn đang nghĩ rằng...</target>
       </trans-unit>
       <trans-unit id="OPSPOT__POSTER__POST_ACTION">

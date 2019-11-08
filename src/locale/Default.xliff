@@ -2977,7 +2977,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="OPSPOT__POSTER__SPEAK_YOUR_MIND" datatype="html">
-        <source>Speak your mind...</source>
+        <source>Write something...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/newsfeed/poster/poster.component.ts</context>
           <context context-type="linenumber">22</context>
