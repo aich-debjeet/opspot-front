@@ -1888,7 +1888,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="M__COMMON__CONFIRM_18" datatype="html">
-        <source>Click to confirm your are 18+</source>
+        <source>Warning! Mature content (18+)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/legacy/components/cards/activity/activity.ts</context>
           <context context-type="linenumber">86</context>
@@ -2977,7 +2977,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="OPSPOT__POSTER__SPEAK_YOUR_MIND" datatype="html">
-        <source>Speak your mind...</source>
+        <source>Write something...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/newsfeed/poster/poster.component.ts</context>
           <context context-type="linenumber">22</context>

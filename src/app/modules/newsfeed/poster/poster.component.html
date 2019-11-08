@@ -18,7 +18,7 @@
                   [ngModel]="meta.message"
                   (ngModelChange)="onMessageChange($event)"
                   (keyup)="getPostPreview(message);"
-                  placeholder="Speak your mind..."
+                  placeholder="Write something..."
                   i18n-placeholder="@@OPSPOT__POSTER__SPEAK_YOUR_MIND"
                   [autoGrow]
                   mwlTextInputAutocomplete
@@ -26,7 +26,7 @@
                   [getChoiceLabel]="getChoiceLabel"
                   [triggerCharacter]="'#'"
                 ></textarea> -->
-                    <textarea class="mdl-textfield__input" type="text" placeholder="Speak your mind..."
+                    <textarea class="mdl-textfield__input" type="text" placeholder="Write something..."
                         i18n-placeholder="@@OPSPOT__POSTER__SPEAK_YOUR_MIND" (click)="createForms('default')"></textarea>
                 </mwl-text-input-autocomplete-container>
                 <!-- <div class="mdl-card__actions">
