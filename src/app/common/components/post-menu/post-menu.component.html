@@ -11,7 +11,7 @@
   <span class="icon-chevron-down"></span>
 </span>
 
-<ul class="opspot-dropdown-menu" [hidden]="!opened">
+<ul class="opspot-dropdown-menu" [class.center-dropdown]="iconType == 'arrow'" [hidden]="!opened">
   <!-- SPECIAL HASHTAGS -->
   <li class="mdl-menu__item"
     *ngIf="options.indexOf('create-showtimez') !== -1"
