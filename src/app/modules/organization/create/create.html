@@ -30,32 +30,27 @@
                 ligula eget dolor. Aenean massa. Cum sociis natoque penatibus.
             </div>
         </div>
-        <!--header ends-->
         <div class="o-create-organisation-content__form">
             <div class="form-group">
                 <label>Organisation Name</label>
                 <input [(ngModel)]="organization.name" type="text" class="form-control form-control-lg">
             </div>
-            <!--organisation Name ends-->
             <div class="form-group select-organisation">
                 <label>Organisation Type</label>
-                <select class="form-control form-control-lg" [(ngModel)]="type">
+                <select class="form-control form-control-lg" [(ngModel)]="organization.category">
                         <option value="not-selected">Select Type</option>
                         <option *ngFor = "let type of organizationTypeList" [value]="type.value">{{ type.label}}</option>       
                 </select>
             </div>
-            <!--Organisation Type ends-->
             <div class="form-group">
                 <label>Add Services</label>
                 <app-skills [(inputTagsValue)]=organization.tags></app-skills>
                 <div class="grey text-sm paddng-top">Use a comma to separate skills, or choose from the list.</div>
             </div>
-            <!--Add Services ends-->
             <div class="form-group">
                 <label>Location</label>
                 <input [(ngModel)]="organization.location" type="text" class="form-control form-control-lg">
             </div>
-            <!--Location ends-->
             <div class="form-group">
                 <label>Profile Picture</label>
                 <div class="o-community-profile-picture">
@@ -81,7 +76,7 @@
                 </div>
             </div>
             <div class="o-create-organisation-action">
-                <button type="button" class="btn btn-primary disabled mr-18" (click)="save($event)">{{editOrganization?"Update":"Create"}}</button>
+                <button type="button" class="btn btn-primary btn-lg" (click)="save($event)" [disabled]="!organization.name">{{editOrganization?"Update":"Create"}}</button>
                 <button type="button" class="btn btn-outline-primary btn-lg" (click)="organizationReset()">Cancel</button>
             </div>
             <!--Button action ends-->

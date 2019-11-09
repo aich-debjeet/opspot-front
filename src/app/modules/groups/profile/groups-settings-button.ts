@@ -24,8 +24,8 @@ import { Session } from '../../../services/session';
       <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.videoChatDisabled" (click)="toggleVideoChat(true)">Enable Gathering</li>
       <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.videoChatDisabled" (click)="toggleVideoChat(false)">Disable Gathering</li>
 
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.moderated" (click)="toggleModeration(false)">Disable moderation</li>
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.moderated" (click)="toggleModeration(true)">Enable moderation</li>
+      <!-- <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.moderated" (click)="toggleModeration(false)">Disable moderation</li>
+      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.moderated" (click)="toggleModeration(true)">Enable moderation</li> -->
 
       <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.membership" (click)="togglePublic(true)">Make public</li>
       <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.membership" (click)="togglePublic(false)">Make closed</li>

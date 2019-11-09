@@ -44,11 +44,11 @@ export class OrganizationCreator {
     moderated:0,
     default_view: 0,
     //EXTRA PARAMETERS FOR ORGANIZATION
-    type:'',
+    category:'',
     location: ''
   };
   cropedImg;
-  invitees: Array<any> = [];
+  // invitees: Array<any> = [];
   editing: boolean = true;
   editDone: boolean = false;
   inProgress: boolean = false;
@@ -205,7 +205,6 @@ export class OrganizationCreator {
        this.organization.tags=this.organization.tags.filter(el=>el.display)
        this.cropedImg=`${this.opspot.cdn_url}fs/v1/avatars/${guid}`;
       }
-      // console.log(organization)
    }
    catch(e){
      console.log(e)
