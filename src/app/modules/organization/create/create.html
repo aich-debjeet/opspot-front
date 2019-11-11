@@ -1,0 +1,86 @@
+<style>
+    .enabl {
+        display: flex;
+        align-items: center;
+    }
+    
+    .create-community-img img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+    
+    }
+    
+    ::ng-deep app-image-croper .m-modal-container {
+        min-width: auto !important;
+    
+    }
+    ::ng-deep app-image-croper .mdl-card__menu{
+        display: none !important;
+    }      
+</style>
+<div class="o-create-organisation">
+    <div class="o-create-organisation-content">
+        <div class="o-create-organisation-header">
+            <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage" [croperType]="'circle'" (imgResult)="crop($event)">
+            </app-image-croper>
+            <h4>{{editOrganization?"Edit":"Create"}} a Organisation</h4>
+            <div class="text-md grey">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus.
+            </div>
+        </div>
+        <div class="o-create-organisation-content__form">
+            <div class="form-group">
+                <label>Organisation Name</label>
+                <input [(ngModel)]="organization.name" type="text" class="form-control form-control-lg">
+            </div>
+            <div class="form-group select-organisation">
+                <label>Organisation Type</label>
+                <select class="form-control form-control-lg" [(ngModel)]="organization.category">
+                        <option value="not-selected">Select Type</option>
+                        <option *ngFor = "let type of organizationTypeList" [value]="type.value">{{ type.label}}</option>       
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Add Services</label>
+                <app-skills [(inputTagsValue)]=organization.tags></app-skills>
+                <div class="grey text-sm paddng-top">Use a comma to separate skills, or choose from the list.</div>
+            </div>
+            <div class="form-group">
+                <label>Location</label>
+                <input [(ngModel)]="organization.location" type="text" class="form-control form-control-lg">
+            </div>
+            <div class="form-group">
+                <label>Profile Picture</label>
+                <div class="o-community-profile-picture">
+                    <div class="fileUpload" *ngIf="!editOrganization">
+                        <span *ngIf="!croppieImage&&!editOrganization" class="icon-plus"></span>
+                        <input type="file" #editImgcomp onclick="this.value = null" (change)="add($event)"
+                            class="upload" />
+                        <div *ngIf="croppieImage&&!editOrganization" class="fileUpload-preview">
+                            <a class="create-community-img" (click)="openCropper()">
+                                <img *ngIf="!editOrganization" [src]="cropedImg">
+                            </a>
+                        </div>
+                    </div>
+                    <div *ngIf="editOrganization&&cropedImg" class="fileUpload-preview">
+                        <input type="file" #editImgcomp onclick="this.value = null" (change)="add($event)"
+                            class="upload" />
+                        <a class="create-community-img" (click)="openCropper()">
+                            <img [src]="cropedImg" alt="">
+                        </a>
+                    </div>
+                    <!--file upload ends-->
+                    <!--file preview ends-->
+                </div>
+            </div>
+            <div class="o-create-organisation-action">
+                <button type="button" class="btn btn-primary btn-lg mr-18" (click)="save($event)" [disabled]="!organization.name">{{editOrganization?"Update":"Create"}}</button>
+                <button type="button" class="btn btn-outline-primary btn-lg" (click)="organizationReset()">Cancel</button>
+            </div>
+            <!--Button action ends-->
+        </div>
+    </div>
+</div>
+<!--Main community ends-->

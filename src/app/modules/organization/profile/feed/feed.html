@@ -1,0 +1,83 @@
+<ng-container *ngIf="organization">
+  <opspot-newsfeed-poster 
+  #poster 
+  (load)="prepend($event)" 
+  [containerGuid]="organization.guid"
+  [accessId]="organization.guid" 
+  *ngIf="filter == 'activity' && organization['is:member']"
+  [showCommunityPost]='true'>
+  </opspot-newsfeed-poster>
+
+  <div class="mdl-shadow--4dp mdl-color--blue-grey-50 mdl-color-text--blue-grey-500 m-newsfeed-message"
+    (click)="pollingLoadNew()" *ngIf="filter == 'activity' && pollingNewPosts">
+    <i class="material-icons">update</i> {{ pollingNewPosts }} new {{ pollingNewPosts === 1 ? 'post' : 'posts' }}
+  </div>
+
+  <!-- <a class="mdl-shadow--4dp mdl-color--blue-grey-50 mdl-color-text--blue-grey-500 m-newsfeed-message"
+      routerLink="review"
+      *ngIf="filter == 'activity' && (organization['is:owner']||organization['is:moderator']) && organization['adminqueue:count']"
+    >
+      <i class="material-icons">rate_review</i>
+      {{ organization['adminqueue:count'] }} new {{ organization['adminqueue:count'] === 1 ? 'post' : 'posts' }} in review queue
+    </a> -->
+  <div [class.m-groupProfileFeed__mediaList]="filter !== 'activity'">
+
+    <opspot-activity 
+    *ngFor="let activity of pinned" [object]="activity"
+    [canDelete]="organization['is:owner'] || organization['is:moderator']" 
+    (delete)="delete(a)"
+    [showRatingToggle]="true" 
+    class="mdl-card item">
+    </opspot-activity>
+
+    <!-- <opspot-activity 
+    *ngFor="let a of activity; let i = index" 
+    class="mdl-card item" [object]="a"
+    [canDelete]="organization['is:owner'] || organization['is:moderator']" 
+    (delete)="delete(a)"
+    [hideTabs]="filter == 'review'">
+    <li post-menu class="mdl-menu__item" *ngIf="organization['is:owner']" (click)="removePrompt(a?.ownerObj)"
+     i18n="@@GROUPS__PROFILE__FEED__REMOVE_USER">Remove user</li>
+    <div bottom-content *ngIf="filter == 'review'" style="display: flex;flex-flow:row-reverse; padding: 15px;"
+    class="o-actions-moderate-community">
+    <button class="btn btn-primary btn-sm float-right btn--commu" (click)="approve(a, i)"
+          i18n="@@M__ACTION__APPROVE">Accept</button>
+
+        <button class="btn btn-outline-primary btn-sm float-rights" (click)="reject(a, i)" i18n="@@M__ACTION__REJECT"
+          style="margin-right: 10px;">Reject</button>
+      </div>
+    </opspot-activity> -->
+
+    <infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress">
+    </infinite-scroll>
+  </div>
+
+  <m-modal [open]="kickPrompt" *ngIf="kickUser">
+    <div class="mdl-card__supporting-text">
+      <p i18n="@@GROUPS__REMOVE_X_FROM_Y_CONFIRM">Are you sure you want to remove {{ kickUser.username }} from
+        {{ organization.name }}?</p>
+      <p><input type="checkbox" #ban>
+        <ng-container i18n="@@M__COMMON__BAN_PERMANENTLY">Ban permanently</ng-container>
+      </p>
+    </div>
+    <div class="opspot-modal-dialog-actions">
+      <button (click)="kick(ban.checked)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
+      </button>
+      <button (click)="cancelRemove()" class="mdl-button mdl-js-button mdl-button--colored">
+        <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
+      </button>
+    </div>
+  </m-modal>
+
+  <m-modal [open]="kickSuccess">
+    <div class="mdl-card__supporting-text">
+      <p i18n="@@GROUPS__PROFILE__FEED__USER_WAS_KICKED">User was kicked from {{ organization.name }}.</p>
+    </div>
+    <div class="opspot-modal-dialog-actions">
+      <button (click)="kickSuccess = false" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        <ng-container i18n="@@GROUPS__PROFILE__FEED__OK_ACTION">Ok</ng-container>
+      </button>
+    </div>
+  </m-modal>
+</ng-container>

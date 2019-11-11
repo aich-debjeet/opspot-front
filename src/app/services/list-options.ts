@@ -92,6 +92,53 @@ export const EVENT_CATEGORY : Array<any> = [
   { value: 'Trade Fairs' , label: 'Trade Fairs' }
 ];
 
+export const ORGANIZATION_TYPE: Array<any> = [ 
+  { 
+     value:'Education - University / Academy / School / College',
+     label:'Education - University / Academy / School / College'
+  },
+  { 
+     value:'Production House / Play Production',
+     label:'Production House / Play Production'
+  },
+  { 
+     value:'Band / Artist Group',
+     label:'Band / Artist Group'
+  },
+  { 
+     value:'Club / Association / Union',
+     label:'Club / Association / Union'
+  },
+  { 
+     value:'Media / Broadcasting',
+     label:'Media / Broadcasting'
+  },
+  { 
+     value:'Brands / Business / Retailer',
+     label:'Brands / Business / Retailer'
+  },
+  { 
+     value:'Internet - Online Market Place / Social Media',
+     label:'Internet - Online Market Place / Social Media'
+  },
+  { 
+     value:'Location / Landmark',
+     label:'Location / Landmark'
+  },
+  { 
+     value:'Festivals / Awards',
+     label:'Festivals / Awards'
+  },
+  { 
+     value:'Research & Developement / Science / Technology',
+     label:'Research & Developement / Science / Technology'
+  },
+  { 
+     value:'Corporate / Industrial Company',
+     label:'Corporate / Industrial Company'
+  }
+]
+
 export const REPORT_ACTIONS = {
   'explicit': 'Marked as Explicit',
   'spam': 'Marked as Spam',
