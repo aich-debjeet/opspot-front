@@ -20,7 +20,6 @@
     <m-post-menu [entity]="entity" [user]="entity.ownerObj" [askForCategoriesWhenFeaturing]="true"
       [canDelete]="entity.ownerObj.guid == session.getLoggedInUser().guid || session.isAdmin()"
       [isTranslatable]="isTranslatable" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)"
-      (entityGuid)="entityGuid($event)"
       *ngIf="entity.ownerObj.guid == session.getLoggedInUser().guid || session.isAdmin()">
       <ng-container post-menu>
         <ng-content select="[post-menu]"></ng-content>

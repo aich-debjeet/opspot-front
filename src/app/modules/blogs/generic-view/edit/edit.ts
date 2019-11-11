@@ -3,15 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { OpspotTitle } from '../../../services/ux/title';
-import { ACCESS, LICENSES } from '../../../services/list-options';
-import { Client, Upload } from '../../../services/api';
-import { Session } from '../../../services/session';
-import { InlineEditorComponent } from '../../../common/components/editors/inline-editor.component';
-import { WireThresholdInputComponent } from '../../wire/threshold-input/threshold-input.component';
-import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.component';
-import { Tag } from '../../hashtags/types/tag';
-import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { OpspotTitle } from '../../../../services/ux/title';
+import { ACCESS, LICENSES } from '../../../../services/list-options';
+import { Client, Upload } from '../../../../services/api';
+import { Session } from '../../../../services/session';
+import { InlineEditorComponent } from '../../../../common/components/editors/inline-editor.component';
+import { WireThresholdInputComponent } from '../../../wire/threshold-input/threshold-input.component';
+import { HashtagsSelectorComponent } from '../../../hashtags/selector/selector.component';
+import { Tag } from '../../../hashtags/types/tag';
+import { OverlayModalService } from '../../../../services/ux/overlay-modal';
 import { BlogPreviewComponent } from './blog-preview/blog-preview.component';
 
 @Component({
@@ -62,22 +62,22 @@ export class BlogEdit {
 
   licenses = LICENSES;
   access = ACCESS;
-  view: string = 'writeBlog';
-  canDelete: boolean = false;
-  isTranslatable: boolean;
-  menuOptions: Array<string> = ['edit', 'delete'];
+  // view: string = 'writeBlog';
+  // canDelete: boolean = false;
+  // isTranslatable: boolean;
+  // menuOptions: Array<string> = ['edit', 'delete'];
 
 
-  offset: string = '';
-  moreData: boolean = true;
-  myBlogInProgress: boolean = false;
-  entities_0: Array<any> = [];
-  entities_1: Array<any> = [];
-  filter: string = 'featured';
-  _filter2: string = '';
-  rating: number = 1;
-  filteredArray = [];
-  selectedGuid: string;
+  // offset: string = '';
+  // moreData: boolean = true;
+  // myBlogInProgress: boolean = false;
+  // entities_0: Array<any> = [];
+  // entities_1: Array<any> = [];
+  // filter: string = 'featured';
+  // _filter2: string = '';
+  // rating: number = 1;
+  // filteredArray = [];
+  // selectedGuid: string;
 
   paramsSubscription: Subscription;
   @ViewChild('inlineEditor') inlineEditor: InlineEditorComponent;
@@ -309,56 +309,56 @@ export class BlogEdit {
     }
   }
   //to switch between write blog and my Blogs
-  changeTabs(tab: string) {
-    console.log('tab', tab)
-    if (tab == 'writeblog') this.view = 'writeblog';
-    else if (tab == 'myBlogs') {
-      this.view = 'myBlogs';
-      this.loadMyBlogs(true)
-    }
-  }
-  onChange(e: any) {
-    console.log(e);
-    if (e == 'MyBlogs') {
-      this.filteredArray = this.entities_0
-    }
-    else if (e == 'Drafts') {
-      this.filteredArray = this.entities_0.filter(item => item.access_id != '2');
-    }
-    else if (e == 'Published') {
-      this.filteredArray = this.entities_0.filter(item => item.access_id == '2');
-    }
-  }
+  // changeTabs(tab: string) {
+  //   console.log('tab', tab)
+  //   if (tab == 'writeblog') this.view = 'writeblog';
+  //   else if (tab == 'myBlogs') {
+  //     this.view = 'myBlogs';
+  //     this.loadMyBlogs(true)
+  //   }
+  // }
+  // onChange(e: any) {
+  //   console.log(e);
+  //   if (e == 'MyBlogs') {
+  //     this.filteredArray = this.entities_0
+  //   }
+  //   else if (e == 'Drafts') {
+  //     this.filteredArray = this.entities_0.filter(item => item.access_id != '2');
+  //   }
+  //   else if (e == 'Published') {
+  //     this.filteredArray = this.entities_0.filter(item => item.access_id == '2');
+  //   }
+  // }
 
-  loadMyBlogs(refresh: boolean = false) {
-    this._filter2 = this.session.getLoggedInUser().guid;
-    let endpoint = 'api/v2/feeds/container/' + this._filter2 + '/blogs';
+  // loadMyBlogs(refresh: boolean = false) {
+  //   this._filter2 = this.session.getLoggedInUser().guid;
+  //   let endpoint = 'api/v2/feeds/container/' + this._filter2 + '/blogs';
 
-    this.client.get(endpoint, {
-      limit: 150,
-      offset: this.offset,
-      sync: this.rating,
-      container_guid: this._filter2,
-      as_activities: 0,
-    })
-      .then((response: any) => {
+  //   this.client.get(endpoint, {
+  //     limit: 150,
+  //     offset: this.offset,
+  //     sync: this.rating,
+  //     container_guid: this._filter2,
+  //     as_activities: 0,
+  //   })
+  //     .then((response: any) => {
 
-        if (!response.entities || !response.entities.length) {
-          this.moreData = false;
-          this.inProgress = false;
-          return false;
-        }
-        this.filteredArray = this.entities_0 = response.entities;
-        this.offset = response['load-next'];
-        if (!this.offset) {
-          this.moreData = false;
-        }
-        this.inProgress = false;
-      })
-      .catch((e) => {
-        this.inProgress = false;
-      });
-  }
+  //       if (!response.entities || !response.entities.length) {
+  //         this.moreData = false;
+  //         this.inProgress = false;
+  //         return false;
+  //       }
+  //       this.filteredArray = this.entities_0 = response.entities;
+  //       this.offset = response['load-next'];
+  //       if (!this.offset) {
+  //         this.moreData = false;
+  //       }
+  //       this.inProgress = false;
+  //     })
+  //     .catch((e) => {
+  //       this.inProgress = false;
+  //     });
+  // }
  
   // entityGuid(guid: string){
   //   this.selectedGuid = guid;

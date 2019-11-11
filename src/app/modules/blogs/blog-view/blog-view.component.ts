@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { Router } from '@angular/router';
@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./blog-view.component.scss']
 })
 export class BlogViewComponent implements OnInit {
-  
-  @Input() entity: any;
 
+  @Input() entity: any;
+  @Output() deletedBlog: EventEmitter<any> = new EventEmitter();
   canDelete: boolean = false;
   isTranslatable: boolean;
   menuOptions: Array<string> = ['edit', 'delete'];
@@ -38,7 +38,8 @@ export class BlogViewComponent implements OnInit {
   delete() {
     this.client.delete('api/v1/blog/' + this.entity.guid)
       .then((response: any) => {
-        this.router.navigate(['/blog/owner']);
+        // this.router.navigate(['/blog/owner']);
+        this.deletedBlog.emit(this.entity.guid)
       });
   }
 }

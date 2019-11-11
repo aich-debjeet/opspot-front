@@ -141,8 +141,10 @@ li.active a{
 
 .o-blog-preview-btn-block{
     display: flex;
-    align-items: center;
-    flex-direction: row;
+    align-items: flex-start;
+    position: absolute;
+    right: 15px;
+    top: 15px;
     .btn{
         margin-left: 45px;
     }
