@@ -10,7 +10,7 @@ import { OpspotTitle } from '../../../services/ux/title';
 import { Session } from '../../../services/session';
 import { SocketsService } from '../../../services/sockets';
 
-import { GroupsProfileFeed } from '../../../modules/groups/profile/feed/feed';
+import { OrganizationProfileFeed } from './feed/feed';
 import { ContextService } from '../../../services/context.service';
 import { Client } from '../../../services/api';
 import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.component';
@@ -57,7 +57,7 @@ export class OrganizationProfile {
   memberToggle:boolean=false;
   membersMobile;
   memberSrc=`${this.opspot.cdn_url}icon/`
-  @ViewChild('feed') private feed: GroupsProfileFeed;
+  @ViewChild('feed') private feed: OrganizationProfileFeed;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
   private reviewCountInterval: any;

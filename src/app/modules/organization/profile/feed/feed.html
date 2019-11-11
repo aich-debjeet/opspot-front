@@ -30,7 +30,7 @@
     class="mdl-card item">
     </opspot-activity>
 
-    <!-- <opspot-activity 
+    <opspot-activity 
     *ngFor="let a of activity; let i = index" 
     class="mdl-card item" [object]="a"
     [canDelete]="organization['is:owner'] || organization['is:moderator']" 
@@ -46,7 +46,7 @@
         <button class="btn btn-outline-primary btn-sm float-rights" (click)="reject(a, i)" i18n="@@M__ACTION__REJECT"
           style="margin-right: 10px;">Reject</button>
       </div>
-    </opspot-activity> -->
+    </opspot-activity>
 
     <infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress">
     </infinite-scroll>

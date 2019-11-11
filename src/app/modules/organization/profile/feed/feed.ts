@@ -24,7 +24,7 @@ interface OpspotOrganizationResponse {
     templateUrl: 'feed.html'
   })
   
-  export class GroupsProfileFeed {
+  export class OrganizationProfileFeed {
   
     guid;
     organization: any;
