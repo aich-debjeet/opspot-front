@@ -47,17 +47,20 @@ export class InlineEditorComponent implements ControlValueAccessor, OnInit, OnDe
 
   private buttons = new ButtonsPlugin({
     addons: {
-      'images': `<i class="material-icons">photo_camera</i>`,
-      'videos': `<i class="material-icons">play_arrow</i>`
+      'images': `<i class="icon-image"></i>`,
+      'videos': `<i class="icon-video"></i>`,
+      'audio': `<i class="icon-mic"></i>`,
     },
     placeholder: 'Paste your link and then press Enter',
     uploadFunction: this.attachment.upload.bind(this.attachment)
   });
   private images = new EmbedImage({
-    buttonText: `<i class=\"material-icons\">photo_camera</i>`,
+    buttonText: `<i class="icon-image"></i>`,
     placeholder: 'Type caption for image (optional)'
   });
-  private videos = new EmbedVideo({ buttonText: `<i class="material-icons">play_arrow</i>` });
+  private videos = new EmbedVideo({ buttonText: `<i class="icon-video"></i>` });
+  private audio = new EmbedVideo({ buttonText: `<i class="icon-mic"></i>>` });
+  // private embedded = new EmbedVideo({ buttonText: `<i class="icon-code"></i>` });
 
   propagateChange = (_: any) => {
   };
@@ -129,11 +132,13 @@ export class InlineEditorComponent implements ControlValueAccessor, OnInit, OnDe
       extensions: {
         'buttonsPlugin': this.buttons,
         'embedImage': this.images,
-        'embedVideo': this.videos
+        'embedVideo': this.videos,
+        'embedAudio': this.audio
       }
     };
 
     if (this.placeholder) {
+      console.log(this.placeholder)
       Object.assign(options, {
         'placeholder': {
           text: this.placeholder,
@@ -141,7 +146,7 @@ export class InlineEditorComponent implements ControlValueAccessor, OnInit, OnDe
         }
       });
     }
-
+console.log(this.host.nativeElement, options)
     this.editor = new MediumEditor(this.host.nativeElement, options);
     this.host.nativeElement.focus();
     this.editor.subscribe('editableInput', (event: any, editable: any) => {

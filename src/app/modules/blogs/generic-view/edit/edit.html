@@ -1,13 +1,13 @@
-<header *ngIf="blog">
+<!-- <header *ngIf="blog">
   <opspot-banner
     [object]="blog"
     editMode="true"
     (added)="add_banner($event)"
     [done]="banner_prompt"
     ></opspot-banner>
-</header>
+</header> -->
 
-<form (submit)="save()" class="mdl-grid blogs-grid m-blog-container mdl-color--white" style="max-width:740px" *ngIf="blog.guid">
+<!-- <form (submit)="save()" class="mdl-grid blogs-grid m-blog-container mdl-color--white" style="max-width:740px" *ngIf="blog.guid">
 
   <div class="mdl-grid" style="width: 100%">
     <div class="mdl-cell mdl-cell--12-col">
@@ -19,7 +19,7 @@
         i18n-placeholder="@@BLOGS__EDIT__TITLE_PLACEHOLDER"
        ></opspot-textarea>
      </div>
-     <!-- Owner box -->
+     
     <div class="mdl-cell mdl-cell--5-col opspot-blog-ownerblock">
 
       <div class="opspot-avatar" [hovercard]="session.getLoggedInUser().guid">
@@ -148,4 +148,42 @@
     </div>
   </div>
 
-</form>
+</form> -->
+
+
+
+<!-- <div class="o-blog-write-tab-content tabs-blog"> -->
+<div id="write" class="tab active">
+  <form (submit)="save()" *ngIf="blog.guid">
+    <div class="o-blog-preview-btn-block hidden-mob">
+      <button type="submit" class="btn btn-primary btn-sm"
+        [disabled]="!canSave || pendingUploads.length !== 0 || !validThreshold"
+        i18n="@@BLOGS__EDIT__PUBLISH_ACTION">Preview and Publish</button>
+    </div>
+    <opspot-textarea name="title" [(mModel)]="blog.title" class="o-blog-content" placeholder="Title"
+      i18n-placeholder="@@BLOGS__EDIT__TITLE_PLACEHOLDER"></opspot-textarea>
+    <m-inline-editor name="description" [(ngModel)]="blog.description" placeholder="Go ahead and write some content!"
+      i18n-placeholder="@@BLOGS__EDIT__INLINE_EDITOR_PLACEHOLDER" #inlineEditor></m-inline-editor>
+
+  </form>
+</div>
+
+<!-- <div id="myBlogs" class="tab active" *ngIf="view =='myBlogs'">
+        <div class="blogs-action-filter">
+          <form>
+            <div class="form-group">
+              <select class="form-control form-control-sm" (change)="onChange($event.target.value)">
+                <option value="MyBlogs" selected>My Blogs</option>
+                <option value="Drafts">Drafts</option>
+                <option value="Published">Published</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <app-blog-view [entity]="entity" *ngFor="let entity of filteredArray; let i = index"></app-blog-view>
+      </div> -->
+<!-- </div> -->
+<div class="o-blog-wrire-mob">
+  <button type="button" class="btn btn-primary btn-block o-blog-wrire-mob-button">Preview and Publish <i
+      class="icon-arrow-right mobile-icon"></i></button>
+</div>

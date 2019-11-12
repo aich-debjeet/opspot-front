@@ -205,4 +205,4 @@ export class BlogListComponent {
 
 export { BlogView } from './view/view';
 export { BlogViewInfinite } from './view/infinite';
-export { BlogEdit } from './edit/edit';
+export { BlogEdit } from './generic-view/edit/edit';

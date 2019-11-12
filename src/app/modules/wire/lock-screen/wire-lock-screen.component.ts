@@ -8,7 +8,7 @@ import { SignupModalService } from '../../modals/signup/service';
 @Component({
   moduleId: module.id,
   selector: 'm-wire--lock-screen',
-  templateUrl: 'wire-lock-screen.component.html',
+  templateUrl: 'wire-lock-screen.component2.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

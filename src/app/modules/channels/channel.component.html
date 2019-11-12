@@ -46,9 +46,10 @@
     </section>
 
     <section class="o-right-block hidden-mob">
-      <app-myjourney-widget [user]="user"></app-myjourney-widget>
+      <div class="sticky-widget">
+        <app-myjourney-widget [user]="user"></app-myjourney-widget>
+      </div>
     </section>
-
 
     <!-- Supporters list -->
     <section class="mdl-cell mdl-cell--8-col" *ngIf="filter == 'supporters'">
@@ -145,5 +146,9 @@
   }
   .active {
     display: block !important;
+  }
+  .sticky-widget {
+    position: sticky;
+    top: 70px;
   }
 </style>

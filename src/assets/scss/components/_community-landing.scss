@@ -89,6 +89,7 @@
     flex-wrap: wrap;
     &__item{
         width:257px;
+        cursor: pointer;
         @include mq($from:$mobile-sm, $until:$desktop-sm){
             width:100%;
         }

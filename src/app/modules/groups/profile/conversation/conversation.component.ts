@@ -17,6 +17,8 @@ export class GroupsProfileConversation {
   constructor(public session: Session, private router: Router) { }
 
   ngOnInit() {
+    console.log("group: ", this.group);
+    
     if (!this.group['is:member'] && this.group.membership != 2) {
       this.router.navigate(['/groups/profile', this.group.guid, 'activity']);
       return;

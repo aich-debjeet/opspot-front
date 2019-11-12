@@ -24,8 +24,8 @@ import { Session } from '../../../services/session';
       <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.videoChatDisabled" (click)="toggleVideoChat(true)">Enable Gathering</li>
       <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.videoChatDisabled" (click)="toggleVideoChat(false)">Disable Gathering</li>
 
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.moderated" (click)="toggleModeration(false)">Disable moderation</li>
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.moderated" (click)="toggleModeration(true)">Enable moderation</li>
+      <!-- <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.moderated" (click)="toggleModeration(false)">Disable moderation</li>
+      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.moderated" (click)="toggleModeration(true)">Enable moderation</li> -->
 
       <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.membership" (click)="togglePublic(true)">Make public</li>
       <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.membership" (click)="togglePublic(false)">Make closed</li>
@@ -37,8 +37,8 @@ import { Session } from '../../../services/session';
       <!-- admin functions -->
       <li class="mdl-menu__item" *ngIf="session.isAdmin() && !group.mature" (click)="setExplicit(true)" i18n="@@M__ACTION__SET_EXPLICIT">Set Explicit</li>
       <li class="mdl-menu__item" *ngIf="session.isAdmin() && group.mature" (click)="setExplicit(false)" i18n="@@M__ACTION__REMOVE_EXPLICIT">Remove Explicit</li>
-      <li class="mdl-menu__item" (click)="report(); showMenu = false" i18n="@@M__ACTION__REPORT">Report</li>
-      <li class="mdl-menu__item" *ngIf="group['is:creator']" [hidden]="group.deleted" (click)="deletePrompt()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP">Delete Group</li>
+      <li class="mdl-menu__item" *ngIf="!group['is:owner'] && !group['is:creator']" (click)="report(); showMenu = false" i18n="@@M__ACTION__REPORT">Report</li>
+      <li class="mdl-menu__item" *ngIf="group['is:creator']" [hidden]="group.deleted" (click)="deletePrompt()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP">Delete Community</li>
     </ul>
     <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
 
@@ -185,7 +185,9 @@ export class GroupsSettingsButton {
   }
 
   report() {
-    this.overlayService.create(ReportCreatorComponent, this.group)
+    this.overlayService.create(ReportCreatorComponent, this.group, {
+      class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium',
+    })
       .present();
   }
 

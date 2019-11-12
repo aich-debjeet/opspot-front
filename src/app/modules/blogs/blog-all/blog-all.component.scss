@@ -1,0 +1,17 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+@import "src/assets/scss/base/_typography.scss";
+@import "src/assets/scss/base/_base.scss";
+@import "src/assets/scss/components/_common.scss";
+
+.blogs-action-filter{
+    width: 180px;
+    padding: 21px 33px 0px!important;
+    .form-group{
+        margin-bottom: 0px;
+    }
+}
+
+.active{
+    display:block !important;
+}

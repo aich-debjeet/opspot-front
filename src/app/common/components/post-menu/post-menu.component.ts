@@ -24,7 +24,12 @@ type Option =
   | 'subscribe'
   | 'unsubscribe'
   | 'rating'
-  | 'block';
+  | 'block'
+  | 'create-showtimez'
+  | 'create-opportunity'
+  | 'create-the-bluestore'
+  | 'create-portfolio'
+  | 'create-my-journey';
 
 @Component({
   moduleId: module.id,
@@ -35,8 +40,10 @@ type Option =
 
 export class PostMenuComponent {
   @Input() entity: any;
+  @Input() iconType: string = '';
   @Input() options: Array<Option>;
   @Output() optionSelected: EventEmitter<Option> = new EventEmitter<Option>();
+  @Output() entityGuid: EventEmitter<Option> = new EventEmitter<Option>();
   @Input() canDelete: boolean = false;
   @Input() isTranslatable: boolean = false;
   @Input() askForCategoriesWhenFeaturing: boolean = false;
@@ -57,8 +64,15 @@ export class PostMenuComponent {
 
   categories: Array<any> = [];
 
-  constructor(public session: Session, private client: Client, private cd: ChangeDetectorRef, private overlayModal: OverlayModalService, public signupModal: SignupModalService) {
+  constructor(
+    public session: Session,
+    private client: Client,
+    private cd: ChangeDetectorRef,
+    private overlayModal: OverlayModalService,
+    public signupModal: SignupModalService
+  ) {
     this.initCategories();
+    console.log(this.entity,this.options)
   }
 
   initCategories() {
@@ -289,6 +303,7 @@ export class PostMenuComponent {
 
   selectOption(option: Option) {
     this.optionSelected.emit(option);
+    this.entityGuid.emit(this.entity.guid)
     this.opened = false;
 
     this.detectChanges();
