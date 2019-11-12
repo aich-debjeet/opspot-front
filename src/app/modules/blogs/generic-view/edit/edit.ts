@@ -1,16 +1,18 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { OpspotTitle } from '../../../services/ux/title';
-import { ACCESS, LICENSES } from '../../../services/list-options';
-import { Client, Upload } from '../../../services/api';
-import { Session } from '../../../services/session';
-import { InlineEditorComponent } from '../../../common/components/editors/inline-editor.component';
-import { WireThresholdInputComponent } from '../../wire/threshold-input/threshold-input.component';
-import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.component';
-import { Tag } from '../../hashtags/types/tag';
+import { OpspotTitle } from '../../../../services/ux/title';
+import { ACCESS, LICENSES } from '../../../../services/list-options';
+import { Client, Upload } from '../../../../services/api';
+import { Session } from '../../../../services/session';
+import { InlineEditorComponent } from '../../../../common/components/editors/inline-editor.component';
+import { WireThresholdInputComponent } from '../../../wire/threshold-input/threshold-input.component';
+import { HashtagsSelectorComponent } from '../../../hashtags/selector/selector.component';
+import { Tag } from '../../../hashtags/types/tag';
+import { OverlayModalService } from '../../../../services/ux/overlay-modal';
+import { BlogPreviewComponent } from './blog-preview/blog-preview.component';
 
 @Component({
   moduleId: module.id,
@@ -18,13 +20,14 @@ import { Tag } from '../../hashtags/types/tag';
   host: {
     'class': 'm-blog'
   },
-  templateUrl: 'edit.html'
+  templateUrl: 'edit.html',
+  styleUrls: ['edit.scss']
 })
 
 export class BlogEdit {
 
   opspot = window.Opspot;
-
+  open: boolean = false;
   guid: string;
   blog: any = {
     guid: 'new',
@@ -59,13 +62,29 @@ export class BlogEdit {
 
   licenses = LICENSES;
   access = ACCESS;
+  // view: string = 'writeBlog';
+  // canDelete: boolean = false;
+  // isTranslatable: boolean;
+  // menuOptions: Array<string> = ['edit', 'delete'];
+
+
+  // offset: string = '';
+  // moreData: boolean = true;
+  // myBlogInProgress: boolean = false;
+  // entities_0: Array<any> = [];
+  // entities_1: Array<any> = [];
+  // filter: string = 'featured';
+  // _filter2: string = '';
+  // rating: number = 1;
+  // filteredArray = [];
+  // selectedGuid: string;
 
   paramsSubscription: Subscription;
   @ViewChild('inlineEditor') inlineEditor: InlineEditorComponent;
   @ViewChild('thresholdInput') thresholdInput: WireThresholdInputComponent;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
-  constructor(public session: Session, public client: Client, public upload: Upload, public router: Router, public route: ActivatedRoute, public title: OpspotTitle) {
+  constructor(public session: Session, private overlayModal: OverlayModalService, public client: Client, public upload: Upload, public router: Router, public route: ActivatedRoute, public title: OpspotTitle, private cd: ChangeDetectorRef) {
     this.getCategories();
 
     window.addEventListener('attachment-preview-loaded', (event: CustomEvent) => {
@@ -141,13 +160,14 @@ export class BlogEdit {
       });
     }
 
-    this.categories.sort((a, b) => a.label > b.label ? 1: -1);
+    this.categories.sort((a, b) => a.label > b.label ? 1 : -1);
   }
 
   load() {
     this.client.get('api/v1/blog/' + this.guid, {})
       .then((response: any) => {
         if (response.blog) {
+          console.log(response.blog)
           this.blog = response.blog;
           this.guid = response.blog.guid;
           this.title.setTitle(this.blog.title);
@@ -167,15 +187,15 @@ export class BlogEdit {
       });
   }
 
-  onTagsChange(tags: string[]) {
-    this.blog.tags = tags;
-  }
+  // onTagsChange(tags: string[]) {
+  //   this.blog.tags = tags;
+  // }
 
-  onTagsAdded(tags: Tag[]) {
-  }
+  // onTagsAdded(tags: Tag[]) {
+  // }
 
-  onTagsRemoved(tags: Tag[]) {
-  }
+  // onTagsRemoved(tags: Tag[]) {
+  // }
 
   validate() {
     this.error = '';
@@ -200,40 +220,42 @@ export class BlogEdit {
       return;
 
     this.inlineEditor.prepareForSave().then(() => {
-      const blog = Object.assign({}, this.blog);
+      // const blog = Object.assign({}, this.blog);
 
       // only allowed props
-      blog.mature = blog.mature ? 1: 0;
-      blog.monetization = blog.monetization ? 1: 0;
-      blog.monetized = blog.monetized ? 1: 0;
-      this.inProgress = true;
-      this.canSave = false;
-      this.check_for_banner().then(() => {
-        this.upload.post('api/v1/blog/' + this.guid, [this.banner], blog)
-          .then((response: any) => {
-            this.router.navigate(response.route ? ['/' + response.route]: ['/blog/view', response.guid]);
-            this.canSave = true;
-            this.inProgress = false;
-          })
-          .catch((e) => {
-            this.canSave = true;
-            this.inProgress = false;
-          });
-      })
-        .catch(() => {
-          this.client.post('api/v1/blog/' + this.guid, this.blog)
-            .then((response: any) => {
-              if (response.guid) {
-                this.router.navigate(response.route ? ['/' + response.route]: ['/blog/view', response.guid]);
-              }
-              this.inProgress = false;
-              this.canSave = true;
-            })
-            .catch((e) => {
-              this.inProgress = false;
-              this.canSave = true;
-            });
-        });
+      // blog.mature = blog.mature ? 1: 0;
+      // blog.monetization = blog.monetization ? 1: 0;
+      // blog.monetized = blog.monetized ? 1: 0;
+      // this.inProgress = true;
+      // this.canSave = false;
+
+      this.overlayModal.create(BlogPreviewComponent, { blog: this.blog, guid: this.guid }, { class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium-extra-large' }).present();
+      // this.check_for_banner().then(() => {
+      //   this.upload.post('api/v1/blog/' + this.guid, [this.banner], blog)
+      //     .then((response: any) => {
+      //       this.router.navigate(response.route ? ['/' + response.route]: ['/blog/view', response.guid]);
+      //       this.canSave = true;
+      //       this.inProgress = false;
+      //     })
+      //     .catch((e) => {
+      //       this.canSave = true;
+      //       this.inProgress = false;
+      //     });
+      // })
+      // .catch(() => {
+      //   this.client.post('api/v1/blog/' + this.guid, this.blog)
+      //     .then((response: any) => {
+      //       if (response.guid) {
+      //         this.router.navigate(response.route ? ['/' + response.route]: ['/blog/view', response.guid]);
+      //       }
+      //       this.inProgress = false;
+      //       this.canSave = true;
+      //     })
+      //     .catch((e) => {
+      //       this.inProgress = false;
+      //       this.canSave = true;
+      //     });
+      // });
     })
   }
 
@@ -265,7 +287,7 @@ export class BlogEdit {
       return;
     }
 
-    this.blog.monetized = this.blog.monetized ? 0: 1;
+    this.blog.monetized = this.blog.monetized ? 0 : 1;
   }
 
   checkMonetized() {
@@ -286,4 +308,60 @@ export class BlogEdit {
       this.blog.categories.splice(this.blog.categories.indexOf(category.id), 1);
     }
   }
+  //to switch between write blog and my Blogs
+  // changeTabs(tab: string) {
+  //   console.log('tab', tab)
+  //   if (tab == 'writeblog') this.view = 'writeblog';
+  //   else if (tab == 'myBlogs') {
+  //     this.view = 'myBlogs';
+  //     this.loadMyBlogs(true)
+  //   }
+  // }
+  // onChange(e: any) {
+  //   console.log(e);
+  //   if (e == 'MyBlogs') {
+  //     this.filteredArray = this.entities_0
+  //   }
+  //   else if (e == 'Drafts') {
+  //     this.filteredArray = this.entities_0.filter(item => item.access_id != '2');
+  //   }
+  //   else if (e == 'Published') {
+  //     this.filteredArray = this.entities_0.filter(item => item.access_id == '2');
+  //   }
+  // }
+
+  // loadMyBlogs(refresh: boolean = false) {
+  //   this._filter2 = this.session.getLoggedInUser().guid;
+  //   let endpoint = 'api/v2/feeds/container/' + this._filter2 + '/blogs';
+
+  //   this.client.get(endpoint, {
+  //     limit: 150,
+  //     offset: this.offset,
+  //     sync: this.rating,
+  //     container_guid: this._filter2,
+  //     as_activities: 0,
+  //   })
+  //     .then((response: any) => {
+
+  //       if (!response.entities || !response.entities.length) {
+  //         this.moreData = false;
+  //         this.inProgress = false;
+  //         return false;
+  //       }
+  //       this.filteredArray = this.entities_0 = response.entities;
+  //       this.offset = response['load-next'];
+  //       if (!this.offset) {
+  //         this.moreData = false;
+  //       }
+  //       this.inProgress = false;
+  //     })
+  //     .catch((e) => {
+  //       this.inProgress = false;
+  //     });
+  // }
+ 
+  // entityGuid(guid: string){
+  //   this.selectedGuid = guid;
+  // }
 }
+

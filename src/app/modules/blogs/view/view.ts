@@ -19,7 +19,8 @@ import { optimizedResize } from '../../../utils/optimized-resize';
   host: {
     'class': 'm-blog'
   },
-  templateUrl: 'view.html'
+  templateUrl: 'view.html',
+  styleUrls:['view.scss']
 })
 
 export class BlogView {
@@ -37,7 +38,7 @@ export class BlogView {
 
   visible: boolean = false;
   index: number = 0;
-
+  sidebarMsg = true;
   scroll_listener;
 
   menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'subscribe', 'set-explicit', 'remove-explicit', 'rating'];

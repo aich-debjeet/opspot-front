@@ -30,6 +30,7 @@ export class ButtonsPlugin {
   }
 
   public init() {
+    console.log('creating a div');
     this.$element = document.querySelector('.medium-editor-element');
 
     this.$element.classList.add('medium-editor-insert-plugin');
@@ -205,8 +206,8 @@ export class ButtonsPlugin {
     if ($p) {
       const pRect = $p.getBoundingClientRect();
 
-      $buttons.style.left = pRect.left + document.body.scrollLeft - 40 + 'px';
-      $buttons.style.top = pRect.top + document.body.scrollTop + 'px';
+      $buttons.style.left = pRect.left + document.body.scrollLeft - 405 + 'px';
+      $buttons.style.top = pRect.top + document.body.scrollTop - 116 + 'px';
 
       if (activeAddon) {
         $buttons.style.left += pRect.width - $buttons.querySelector('.medium-insert-buttons-show').getBoundingClientRect().width - 10 + 'px';

@@ -1,11 +1,196 @@
-@import 'defaults.scss';
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+@import "src/assets/scss/base/_typography.scss";
+@import "src/assets/scss/base/_base.scss";
+@import "src/assets/scss/components/_common.scss";
 
-@media screen and (max-width: $max-mobile) {
-  .m-blog--title {
-    font-size: 32px;
+//inner page sec 
+.o-blog-inner-page-sec{
+  width: 100%;
+  min-height: 200vh;
+  background-color: #FAFAFA;
+  float: left;
+}
+
+//block style
+.o-blog-inner-page-block{
+  background:$white;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  min-height: 200vh;
+}
+
+//cover section style
+.o-blog-inner-page-cover{
+  position: relative;
+  height: 409px;
+      @include mq($from:$mobile_sm, $until:$desktop_sm){
+          height: 111px;  
+          margin:0 16px;
+      }
+  &__title{
+      min-height: 186px;
+      position:absolute;
+      bottom: 0px;
+      color: #fff;
+      display: flex;
+      width: 100%;
+      align-items: flex-end;
+      justify-content: center;
+      background: linear-gradient(0deg, #000000 0%, rgba(0,0,0,0) 100%);
+      padding: 0px 0px 25px;
+      h2{
+          color: #fff;
+          max-width: 665px;
+          width: 100%;
+      }
   }
-  .medium-insert-embeds {
-    max-width: 100%;
-    margin: 0;
+}
+
+//body style
+.o-blog-inner-page-body{
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  max-width:658px; 
+  @include mq($from:$mobile_sm, $until:$desktop_sm){
+      padding:14px 30px 29px 30px;
+  } 
+}
+
+//header style
+.o-blog-inner-page-header{
+  display:flex;
+  width:100%;
+  justify-content:space-between;
+  padding:29px 0 21px;
+  @include mq($from:$mobile_sm, $until:$desktop_sm){
+      flex-direction: column; 
   }
+  &__info{
+      display:flex;
+      width: 100%;
+      align-items: flex-start;
+      .o-user-info{
+          margin-left:11px;
+          margin-right:21px;
+      }
+      .fnt-sz{
+          font-size:10px;
+          margin-left:7px;
+      }
+      .btn-xs{
+          padding: 2.5px 13px; 
+      }
+  }
+}
+// for action
+
+.o-blog-inner-page-header-action{
+  display:flex;
+  @include mq($from:$mobile_sm, $until:$desktop_sm){
+      justify-content: flex-end;
+  }
+  &__link{
+      padding: 9px;
+      i{
+          font-size:20px;
+      }
+  }
+}
+
+//content style
+.o-blog-inner-page-content{
+  .mt25{
+      margin-top:25px
+  }
+  .italic-text{
+      font-size:20px;
+      text-align:center;
+      font-style: italic;
+      margin:16px 0 20px;
+  }
+  &__imagegrid{
+      display:flex;
+      justify-content: space-between;
+      margin:32px 0 8px;
+      @include mq($from:$mobile_sm, $until:$desktop_sm){
+          flex-direction: column;
+          .mrbtm-15{
+              margin-bottom: 15px;
+          }
+      }
+      img{
+          width:213px;
+          height:200px;
+          @include mq($from:$mobile_sm, $until:$desktop_sm){
+              width:100%;
+              height: 240px;
+          }
+      }
+  }
+}
+
+//tag style
+.o-blog-inner-page-tag{
+  margin:31px 0 6px;
+}
+.o-blog-inner-page-tag-list{
+  display:flex;
+  list-style-type:none;
+  @include mq($from:$mobile_sm, $until:$desktop_sm){
+      flex-wrap: wrap;
+  }
+  &__item{
+      background-color: #ECEFF1;
+      border-radius:4px;
+      margin-right:12px; 
+      padding:5px 8px;
+      @include mq($from:$mobile_sm, $until:$desktop_sm){
+          margin-bottom: 12px;
+      }
+  }
+}
+
+//more block
+.o-blog-inner-page-more-block{
+  display:flex;
+  justify-content: space-between;
+  flex-direction: row;
+  @include mq($from:$mobile_sm, $until:$desktop_sm){
+      overflow:scroll;
+  }
+  &__list{
+      display:flex;
+      flex-direction: column;
+      margin-top:15px;
+      @include mq($from:$mobile_sm, $until:$desktop_sm){
+          margin-right: 12px;
+      }
+  }
+}
+
+//comment section
+.o-blog-inner-page-comment{
+  margin-top:21px;
+  .o-comments-compose{
+      padding: 2px 0px 17px; 
+  }
+  .o-comments-block{
+      padding: 0px 0px 27px; 
+  }
+}
+
+//mob class style
+.visible-mob{
+  display:none;
+  @include mq($from:$mobile_sm, $until:$desktop_sm){
+     display:block;
+     padding:32px 30px 14px 30px;
+  }
+}
+.o-blog-inner-page-cover{
+  position: relative;
+  height: 0px;
 }

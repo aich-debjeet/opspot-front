@@ -1,0 +1,15 @@
+<div id="myBlogs" class="tab active">
+  <div class="blogs-action-filter">
+    <form>
+      <div class="form-group">
+        <select class="form-control form-control-sm" (change)="onChange($event.target.value)">
+          <option value="MyBlogs" selected>My Blogs</option>
+          <option value="Drafts">Drafts</option>
+          <option value="Published">Published</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <app-blog-view [entity]="entity" *ngFor="let entity of filteredArray; let i = index"
+    (deletedBlog)="deleteBlog($event)"></app-blog-view>
+</div>

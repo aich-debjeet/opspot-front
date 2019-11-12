@@ -35,9 +35,6 @@ import { Client } from '../../../../services/api';
       <span class="opspot-button-edit cancel-button" (click)="cancel()">
         <button i18n="@@M__ACTION__CANCEL">Cancel</button>
       </span>
-      <span class="opspot-button-edit save-button" (click)="done()">
-        <button i18n="@@M__ACTION__SAVE">Save</button>
-      </span>
     </div>
     <input type="file" id="file" (change)="add($event)" [hidden]="file" />
   </div>
@@ -62,6 +59,7 @@ export class OpspotBanner {
   overlay: any; // @todo: ??
 
   set _object(value: any) {
+    console.log(value)
     if (!value)
       return;
     this.object = value;
@@ -69,16 +67,19 @@ export class OpspotBanner {
   }
 
   set _src(value: any) {
+    console.log(value)
     this.src = value;
   }
 
   set _top(value: number) {
+    console.log(value)
     if (!value)
       return;
     this.top = value;
   }
 
   set _editMode(value: boolean) {
+    console.log(value)
     this.editing = value;
   }
 

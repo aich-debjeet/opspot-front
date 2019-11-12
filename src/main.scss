@@ -3345,11 +3345,11 @@ opspot-textarea {
   display: inline-block;
   width: 100%;
   padding: 8px;
-  box-sizing: border-box;
-  background: #ECEFF1;
-  border: 1px solid #dddddd;
+  // box-sizing: border-box;
+  // background: #ECEFF1;
+  // border: 1px solid #dddddd;
   overflow: hidden;
-  border-radius: 2px;
+  // border-radius: 2px;
   font-size: 11px;
   line-height: 18px; }
   opspot-textarea > .m-editor {
@@ -3609,6 +3609,8 @@ m-cookies-notice {
     max-width: 990px; }
   .m-overlay-modal.m-overlay-modal--medium-large {
     max-width: 800px; }
+    .m-overlay-modal.m-overlay-modal--medium-extra-large {
+      max-width: 1170px; }
   .m-overlay-modal.m-overlay-modal--medium {
     max-width: 600px; }
   .m-overlay-modal.m-overlay-modal--medium-report {

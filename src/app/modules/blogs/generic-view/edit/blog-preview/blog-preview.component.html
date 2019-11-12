@@ -1,0 +1,66 @@
+<div class="o-blog-preview-popup">
+    <form (submit)="createEditBlog()">
+        <div class="o-blog-preview-popup-body">
+            <div class="o-blog-preview-popup-left">
+                <div class="o-blog-preview-popup-left__header">
+                    <div class="text-lg">
+                        Blog Preview
+                    </div>
+                    <button type="submit" (click)="blog.published = 0" class="btn btn-outline-primary btn-xs drft-btn">Draft</button>
+                </div>
+                <div class="o-blog-preview-cover">
+                    <opspot-banner [object]="blog" [src]="blog.thumbnail_src" [done]="banner_prompt">
+                        </opspot-banner>
+                    <div class="o-blog-preview-cover__title hidden-mob">
+                        <h3 class="f500">{{blog.title}}</h3>
+                    </div>
+                    <!--title ends-->
+                </div>
+                <!--cover ends-->
+                <div style="width:100%; padding:8px; position:relative;">
+                    <div class="o-blog-preview-body" >
+                        <div class="o-blog-preview-content" [innerHtml]="blog.description | safe">
+                        </div>
+                        <!--content ends-->
+                    </div></div>
+                <!--body ends-->
+            </div>
+            <!--left ends-->
+            <div class="o-blog-preview-popup-right">
+                <div class="o-blog-preview-popup-right__title">
+                    <div class="text-lg">
+                        Upload Cover Image
+                    </div>
+                </div>
+                <!--title ends-->
+                <opspot-banner [object]="blog" editMode="true" [done]="banner_prompt" (added)="add_banner($event)">
+                </opspot-banner>
+                <div class="o-blog-preview-popup-right__title">
+                    <div class="text-lg" (click)="detect()">
+                        Add Tags
+                    </div>
+                </div>
+                <!--title ends-->
+                <div class="o-blog-preview-tag">
+                    <m-hashtags-selector #hashtagsSelector [tags]="blog.tags.slice(0)" (tagsChange)="onTagsChange($event)"
+                        (tagsAdded)="onTagsAdded($event)" (tagsRemoved)="onTagsRemoved($event)"></m-hashtags-selector>
+
+                    <!-- <div class="text-sm grey">Use a comma to separate skills, or choose from the list.</div> -->
+                    <!--tag style-->
+                    <!-- <div class="tag-style">
+                        <div class="text-md">
+                            Photography
+                        </div>
+                        <a class="#"><i class="icon-x tag-close"></i></a>
+                    </div> -->
+                </div>
+                <div class="o-blog-preview-button-set">
+                    <button type="button" class="btn btn-primary btn-lg mrgr15" (click)="overlayModal.dismiss()">Cancel</button>
+                    <button type="submit" (click)="blog.published = 1" class="btn btn-primary btn-lg">Publish Now</button>
+                </div>
+            </div>
+            <!--right ends-->
+        </div>
+    </form>
+</div>
+<!--blog preview popup ends-->

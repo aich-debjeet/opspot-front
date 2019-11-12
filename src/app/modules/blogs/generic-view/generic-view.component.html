@@ -1,0 +1,32 @@
+<div class="o-blog-write-sec">
+  <div class="container">
+    <!-- <div class="container hidden-above-tablet o-search-filter-mob-header">
+      <div class="without-nav-header o-reg-skill-mob-header">
+        <a href="community_admin.html"><i class="icon-arrow-left"></i> </a>
+        <h4 class="without-nav-header__title f500">Blog</h4>
+        <div class="text-md grey">Saved</div>
+      </div>
+    </div> -->
+    <div class="o-blog-write-tab">
+      <div class="tabs-blog">
+        <ul class="tabs-list">
+          <li routerLinkActive="active"><a [routerLink]="['edit/new']">Write Blog</a></li>
+          <li routerLinkActive="active"><a [routerLink]="['myBlogs']">My Blogs</a></li>
+          <!-- <li><a href="#published">Published</a></li> -->
+        </ul>
+      </div><!-- tabs blog end-->
+      <!-- <div class="o-blog-preview-btn-block hidden-mob">
+        <a href="" class="text-md grey">Saved</a>
+        <a class="btn btn-primary btn-sm" (click)="save()">Preview and Publish</a> -->
+      <!-- <button class="btn btn-primary btn-sm" (click)="blog.published = 1" [disabled]="!canSave || pendingUploads.length !== 0 || !validThreshold" i18n="@@BLOGS__EDIT__PUBLISH_ACTION">Preview and Publish</button> -->
+      <!-- </div> -->
+    </div><!-- blog write tab end-->
+    <div class="o-blog-write-tab-content tabs-blog">
+      <router-outlet></router-outlet>
+      <!-- <div class="o-blog-wrire-mob">
+      <button type="button" class="btn btn-primary btn-block o-blog-wrire-mob-button">Preview and Publish <i
+          class="icon-arrow-right mobile-icon"></i></button>
+    </div> -->
+    </div>
+  </div>
+</div>

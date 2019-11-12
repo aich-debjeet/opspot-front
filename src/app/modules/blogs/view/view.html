@@ -1,4 +1,4 @@
-<div class="m--spam-notice mdl-shadow--8dp" *ngIf="blog?.spam || blog?.deleted">
+<!-- <div class="m--spam-notice mdl-shadow--8dp" *ngIf="blog?.spam || blog?.deleted">
   <ng-container *ngIf="blog?.spam" i18n="@@BLOGS__VIEW__FLAGGED_AS_SPAM">This blog was flagged as spam.</ng-container>
   <ng-container *ngIf="blog?.deleted" i18n="@@BLOGS__VIEW__FLAGGED_AS_DELETED">This blog was flagged as deleted.</ng-container>
 
@@ -30,7 +30,7 @@
       <h1 class="m-blog--title">{{blog.title}}</h1>
     </div>
 
-    <!-- Owner box -->
+    Owner box
     <div class="mdl-cell mdl-cell--5-col opspot-blog-ownerblock">
       <div class="opspot-avatar" [hovercard]="blog.ownerObj.guid">
         <a [routerLink]="['/', blog.ownerObj.username]">
@@ -60,7 +60,7 @@
     ></div>
   </div>
 
-  <!-- Additional block -->
+  Additional block
   <div class="mdl-cell mdl-cell--12-col m-additional-block mdl-color-text--blue-grey-200">
 
     <div class="m-license-info">
@@ -104,3 +104,147 @@
       <ng-container i18n="@@BLOGS__VIEW__DELETION_CONFIRMATION">The blog has been deleted.</ng-container>
   </p>
 </m-modal-confirm>
+
+
+ -->
+
+ <div class="m--spam-notice mdl-shadow--8dp" *ngIf="blog?.spam || blog?.deleted">
+  <ng-container *ngIf="blog?.spam" i18n="@@BLOGS__VIEW__FLAGGED_AS_SPAM">This blog was flagged as spam.</ng-container>
+  <ng-container *ngIf="blog?.deleted" i18n="@@BLOGS__VIEW__FLAGGED_AS_DELETED">This blog was flagged as deleted.</ng-container>
+
+  <ng-container *ngIf="!session.isAdmin()" i18n="@@M__ACTION__APPEAL_MARK">
+    If you wish to appeal, please check your <a routerLink="/settings/reported-content">Reported Content console</a>.
+  </ng-container>
+</div>
+
+<div class="o-blog-inner-page-sec">
+  <div class="container">
+    <div class="o-blog-inner-page-block">
+      <div class="container hidden-above-tablet o-search-filter-mob-header">
+        <div class="without-nav-header o-reg-skill-mob-header">
+          <a href="community_admin.html"><i class="icon-arrow-left"></i> </a>
+          <h4 class="without-nav-header__title f500">Blog</h4>
+        </div>
+      </div><!-- without nav header end -->
+      <div class="visible-mob">
+        <h2 class="f500">{{blog.title}}</h2>
+      </div>
+      <!--title ends-->
+      <header *ngIf="blog"
+        [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(blog), 'm-mature-content-shown': attachment.isForcefullyShown(blog) }">
+        <div class="m-mature-overlay" (click)="blog.mature_visibility = !blog.mature_visibility">
+          <span class="m-mature-overlay-note">
+            <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
+            <span i18n="@@M__COMMON__CONFIRM_18">Click to confirm your are 18+</span>
+          </span>
+        </div>
+        <opspot-banner [src]="blog.thumbnail_src" [object]="blog" *ngIf="blog.header_bg"></opspot-banner>
+      </header>
+      <div class="o-blog-inner-page-cover">
+        <div class="o-blog-inner-page-cover__title hidden-mob">
+          <h2 class="f500">{{blog.title}}</h2>
+        </div>
+      </div>
+      <div class="o-blog-inner-page-body">
+        <div class="o-blog-inner-page-header">
+          <div class="o-blog-inner-page-header__info">
+            <a class="o-avatar">
+              <img src="{{opspot.cdn_url}}icon/{{blog.ownerObj.guid}}/">
+            </a>
+            <!--avatar ends-->
+            <div class="o-user-info">
+              <a class="text-lg f500" [routerLink]="['/', blog.ownerObj.username]">
+                {{blog.ownerObj.name}}
+              </a>
+              <div class="text-md grey" *ngIf="blog.time_published || blog.time_created">
+                {{ (blog.time_published ? blog.time_published : blog.time_created) * 1000 | date: 'medium'}}<i
+                  class="icon-public fnt-sz"></i>
+              </div>
+            </div>
+            <!--name ends-->
+            <opspot-button-subscribe [sideBar]="sidebarMsg" [user]="blog.ownerObj"  *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != blog.ownerObj.guid "></opspot-button-subscribe>
+          </div>
+          <!--info ends-->
+          <div class="o-blog-inner-page-header-action">
+            <m-post-menu [entity]="blog" [user]="blog.ownerObj" [askForCategoriesWhenFeaturing]="true"
+              [canDelete]="blog.ownerObj.guid == session.getLoggedInUser().guid || session.isAdmin()"
+              [options]="menuOptions" (optionSelected)="menuOptionSelected($event)"></m-post-menu>
+            <opspot-button-remind [object]="blog"></opspot-button-remind>
+            <opspot-button-thumbs-up [object]="blog"></opspot-button-thumbs-up>
+            <opspot-button-thumbs-down [object]="blog"></opspot-button-thumbs-down>
+          </div>
+          <!--action ends-->
+        </div>
+        <!--header ends-->
+        <div class="o-blog-inner-page-content" [innerHtml]="blog.description | safe"
+          [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(blog) }" [hidden]="!blog.description">
+        </div>
+        <div class="o-blog-inner-page-tag " *ngIf="blog.tags.length > 0">
+          <ul class="o-blog-inner-page-tag-list">
+            <li class="o-blog-inner-page-tag-list__item" *ngFor="let tag of blog?.tags">#{{tag}}</li>
+          </ul>
+        </div><!-- tags end -->
+        <!-- <div class="o-blog-inner-page-header">
+                  <div class="o-blog-inner-page-header__info">
+                      <a class="o-avatar">
+                          <img src="{{opspot.cdn_url}}icon/{{blog.ownerObj.guid}}/">
+                      </a>
+                      <div class="o-user-info">
+                          <a class="text-lg f500" [routerLink]="['/', blog.ownerObj.username]">
+                            {{blog.ownerObj.name}}
+                          </a>
+                          <div class="text-md grey">
+                            {{ (blog.time_published ? blog.time_published : blog.time_created) * 1000 | date: 'medium'}}<i class="icon-public fnt-sz"></i>
+                          </div>
+                      </div>
+                      <button type="button" class="btn btn-outline-primary btn-xs">Follow</button>
+                  </div>
+                  <div class="o-blog-inner-page-header-action">
+                      <a href="#" class="o-blog-inner-page-header-action__link"><i class="icon-bookmark mr22"></i></a>
+                      <a href="#" class="o-blog-inner-page-header-action__link"><i class="icon-share-2 mr22"></i></a>
+                      <a href="#" class="o-blog-inner-page-header-action__link"><i class="icon-more-horizontal"></i></a>
+                  </div>
+              </div> -->
+        <!--bottom header ends-->
+        <!-- <div class="o-blog-inner-page-more">
+                  <div class="text-lg f500">
+                      More from Carmen Sample
+                  </div>
+                  <div class="o-blog-inner-page-more-block"> 
+                      <div class="o-blog-inner-page-more-block__list">
+                      
+                      </div>
+                      <div class="o-blog-inner-page-more-block__list">
+                          
+                      </div>
+                      <div class="o-blog-inner-page-more-block__list">
+                          
+                      </div>
+                  </div>
+              </div>more ends -->
+        <div class="mdl-cell mdl-cell--12-col m-additional-block mdl-color-text--blue-grey-200">
+          <div class="m-license-info">
+            <i class="material-icons">public</i>
+            <span [hidden]="!blog.license">{{blog.license}}</span>
+            <span [hidden]="blog.license" i18n="@@M__COMMON__LICENSE_ALL_RIGHT_RESERVED">All Rights Reserved</span>
+          </div>
+          <div class="m-visibility-info"
+            *ngIf="blog.ownerObj.guid == session.getLoggedInUser().guid || session.isAdmin()">
+            <i class="material-icons">visibility</i>
+            <span [hidden]="blog.access_id != 2" i18n="@@M__COMMON__VISIBILITY_PUBLIC">Public</span>
+            <span [hidden]="blog.access_id != 0" i18n="@@M__COMMON__VISIBILITY_UNLISTED">Unlisted</span>
+          </div>
+          <div class="m-share-buttons mdl-color-text--green-300" style="padding-right:8px" (click)="sharetoggle = true">
+            <i class="material-icons" style="cursor:pointer">share</i>
+            <span i18n="@@BLOGS__VIEW__SHARE">SHARE</span>
+          </div>
+          <m-modal-share *ngIf="sharetoggle" [open]="true" (closed)="sharetoggle = false"
+            [url]="opspot.site_url + (blog.route ? blog.route : 'blog/view/' + blog.guid)"></m-modal-share>
+          <opspot-button-boost [object]="blog" *ngIf="session.isLoggedIn()"></opspot-button-boost>
+        </div>
+        <m-wire--lock-screen [(entity)]="blog" *ngIf="blog.paywall" #lockScreen></m-wire--lock-screen>
+        <opspot-comments [object]="blog"></opspot-comments>
+      </div>
+    </div>
+  </div>
+</div>
