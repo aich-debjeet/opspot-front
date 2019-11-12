@@ -102,5 +102,16 @@ export class BlogPreviewComponent implements OnInit {
       });
   }
 
+  /**
+   * fix: AOT
+   */
+  detect() {}
+
+  /**
+   * close modal
+   */
+  closeModal() {
+    this.overlayModal.dismiss();
+  }
 
 }
