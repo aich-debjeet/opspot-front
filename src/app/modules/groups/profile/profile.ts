@@ -369,7 +369,7 @@ export class GroupsProfile {
   onTagsRemoved(tags) {
     for (let tag of tags) {
       for (let i in this.group.tags) {
-        console.log(this.group.tags[i]);
+        // console.log(this.group.tags[i]);
         if (this.group.tags[i] == tag.value) {
           this.group.tags.splice(i, 1);
         }
@@ -440,7 +440,7 @@ export class GroupsProfile {
     let endpoint = `api/v1/groups/membership/${guid}`
     let  params = { limit: 4, offset: this.offset };
      let members= await this.client.get(endpoint, params)
-     console.log(members)
+    //  console.log(members)
      this.membersMobile=members['members']
     }
     

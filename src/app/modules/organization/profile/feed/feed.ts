@@ -24,7 +24,7 @@ interface OpspotOrganizationResponse {
     templateUrl: 'feed.html'
   })
   
-  export class GroupsProfileFeed {
+  export class OrganizationProfileFeed {
   
     guid;
     organization: any;
@@ -53,15 +53,22 @@ interface OpspotOrganizationResponse {
     constructor(public session: Session, public client: Client, public service: GroupsService, private route: ActivatedRoute) { }
   
     ngOnInit() {
-      this.$organization = this.service.$group.subscribe((organization) => {
-        this.organization = organization;
-        if (this.organization)
-          this.guid = organization.guid;
+      this.$organization = this.service.$group.subscribe((org) => {
+        // console.log("OrganizationFeed org: ", org);
+        this.organization = org;
+        // if (this.organization) {
+        //   this.guid = org.guid;
+        // }
+        if (org && org.guid) {
+          this.guid = org.guid;
+          this.load(true);
+          this.setUpPoll();
+        }
       });
   
       this.paramsSubscription = this.route.params.subscribe(params => {
         this.filter = params['filter'] ? params['filter'] : 'activity';
-  
+       
         this.load(true);
         this.setUpPoll();
       });
@@ -98,6 +105,7 @@ interface OpspotOrganizationResponse {
     }
    
     loadActivities(refresh: boolean = false) {
+      console.log("loadActivities IN")
       this.inProgress = true;
   
       let endpoint = `api/v1/newsfeed/container/${this.guid}`;
@@ -233,7 +241,8 @@ interface OpspotOrganizationResponse {
      * Load a groups newsfeed
      */
     load(refresh: boolean = false) {
-  
+      console.log('OrganizationFeed load()', this.organization);
+    
       if (!this.organization)
         return;
   
@@ -251,6 +260,7 @@ interface OpspotOrganizationResponse {
       switch(this.filter) {
         case 'activity':
         case 'review':
+          console.log('OrganizationFeed loadActivities()');
           return this.loadActivities(refresh);
         case 'image':
         case 'video':
