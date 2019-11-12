@@ -27,6 +27,7 @@ export interface OpspotBlogEntity {
   time_published?: number;
   access_id?: number;
   license?: string;
+  tags: any[];
 }
 
 export interface Message {}

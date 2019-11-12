@@ -171,7 +171,7 @@
               [options]="menuOptions" (optionSelected)="menuOptionSelected($event)"></m-post-menu>
             <opspot-button-remind [object]="blog"></opspot-button-remind>
             <opspot-button-thumbs-up [object]="blog"></opspot-button-thumbs-up>
-            <opspot-button-thumbs-down [object]="blog"></opspot-button-thumbs-down>
+            <!-- <opspot-button-thumbs-down [object]="blog"></opspot-button-thumbs-down> -->
           </div>
           <!--action ends-->
         </div>
@@ -234,13 +234,13 @@
             <span [hidden]="blog.access_id != 2" i18n="@@M__COMMON__VISIBILITY_PUBLIC">Public</span>
             <span [hidden]="blog.access_id != 0" i18n="@@M__COMMON__VISIBILITY_UNLISTED">Unlisted</span>
           </div>
-          <div class="m-share-buttons mdl-color-text--green-300" style="padding-right:8px" (click)="sharetoggle = true">
+          <!-- <div class="m-share-buttons mdl-color-text--green-300" style="padding-right:8px" (click)="sharetoggle = true">
             <i class="material-icons" style="cursor:pointer">share</i>
             <span i18n="@@BLOGS__VIEW__SHARE">SHARE</span>
           </div>
           <m-modal-share *ngIf="sharetoggle" [open]="true" (closed)="sharetoggle = false"
             [url]="opspot.site_url + (blog.route ? blog.route : 'blog/view/' + blog.guid)"></m-modal-share>
-          <opspot-button-boost [object]="blog" *ngIf="session.isLoggedIn()"></opspot-button-boost>
+          <opspot-button-boost [object]="blog" *ngIf="session.isLoggedIn()"></opspot-button-boost> -->
         </div>
         <m-wire--lock-screen [(entity)]="blog" *ngIf="blog.paywall" #lockScreen></m-wire--lock-screen>
         <opspot-comments [object]="blog"></opspot-comments>
