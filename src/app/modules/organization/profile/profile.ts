@@ -370,7 +370,7 @@ export class OrganizationProfile {
   onTagsRemoved(tags) {
     for (let tag of tags) {
       for (let i in this.organization.tags) {
-        console.log(this.organization.tags[i]);
+        // console.log(this.organization.tags[i]);
         if (this.organization.tags[i] == tag.value) {
           this.organization.tags.splice(i, 1);
         }
@@ -441,7 +441,7 @@ export class OrganizationProfile {
     let endpoint = `api/v1/groups/membership/${guid}`
     let  params = { limit: 4, offset: this.offset };
      let members= await this.client.get(endpoint, params)
-     console.log(members)
+    //  console.log(members)
      this.membersMobile=members['members']
     }
     
