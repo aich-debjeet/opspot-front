@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
 import { BoostContractService } from '../blockchain/contracts/boost-contract.service';
+import { isRejected } from 'q';
 
 @Injectable()
 export class BoostService {
@@ -12,14 +13,16 @@ export class BoostService {
   /**
    * Returns a promise with a collection of boosts.
    */
-  load(type: string, filter: string, { limit, offset }: { limit?: number, offset?: string } = {}): Promise<{ boosts, loadNext }> {
+  load(type: string, filter: string, { limit, offset }: { limit?: number, offset?: string } = {}): Promise<{ boosts,completed,rejected,loadNext }> {
     return this.client.get(`api/v2/boost/${type}/${filter}`, {
       limit: limit || 12,
       offset: offset || ''
     })
-      .then(({ boosts, 'load-next': loadNext }) => {
+      .then(({ boosts,completed,rejected, 'load-next': loadNext }) => {
         return {
           boosts: boosts && boosts.length ? boosts : [],
+          completed: completed && completed.length ? completed: [],
+          rejected: rejected && rejected.length ? rejected: [],
           loadNext: loadNext || ''
         };
       });

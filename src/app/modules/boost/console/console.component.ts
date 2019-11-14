@@ -24,10 +24,13 @@ export class BoostConsoleComponent {
   initialized: boolean = false;
   inProgress: boolean = false;
   boosts: any[] = [];
+  completed: any[] = [];
+  rejected:any[] = [];
   offset = '';
   moreData = true;
   feed: Array<Object> = [];
   error: string = '';
+  postArray: any[] = [];
 
   constructor(public session: Session,private router: Router, private route: ActivatedRoute, public title: OpspotTitle, public service: BoostService, public client: Client) {
     this.title.setTitle('Boost Console');
@@ -51,6 +54,9 @@ export class BoostConsoleComponent {
 
     if (refresh) {
       this.boosts = [];
+      this.postArray = [];
+      this.rejected =[];
+      this.completed = [];
       this.offset = '';
       this.moreData = true;
     }
@@ -60,7 +66,7 @@ export class BoostConsoleComponent {
     this.service.load(type, '', {
       offset: this.offset
     })
-      .then(({ boosts, loadNext }) => {
+      .then(({ boosts,completed,rejected, loadNext }) => {
         console.log(boosts)
         this.inProgress = false;
 
@@ -70,6 +76,11 @@ export class BoostConsoleComponent {
         }
 
         this.boosts.push(...boosts);
+        this.postArray.push(...boosts)
+        this.completed.push(...completed);
+        this.rejected.push(...rejected);
+        
+        
         this.offset = loadNext;
         this.moreData = !!loadNext;
       })
@@ -104,5 +115,16 @@ export class BoostConsoleComponent {
       .catch(function (e) {
 
       });
+  }
+
+  loadData(str: string){
+    if(str === 'boosted'){
+      this.postArray = this.boosts;
+    } else if(str === 'completed'){
+      this.postArray = this.completed;
+    }
+    else if(str === 'rejected'){
+      this.postArray = this.rejected;
+    }
   }
 }
