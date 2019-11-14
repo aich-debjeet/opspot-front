@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NetworkComponent } from './network/network.component';
+import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+
+import { NetworkComponent } from './network.component';
+import { NetworkUserlist } from './userlist/userlist.component';
 
 const routes: Routes = [
   { path: '', component: NetworkComponent }
@@ -9,11 +11,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    NetworkComponent
+    NetworkComponent,
+    NetworkUserlist
   ],
   imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
+    NgCommonModule,
+    RouterModule.forChild(routes)
   ],
   entryComponents: [
     NetworkComponent
