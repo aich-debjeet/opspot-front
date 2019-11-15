@@ -204,13 +204,13 @@
         <li [class.active]="type == 'user'">
           <a [routerLink]="['/search', { q: q, type: 'user', ref: ref }]">Profile</a>
         </li>
-        <li [class.active]="type == 'bluestore'">
+        <li [class.active]="type == 'object:item'">
           <a [routerLink]="['/search', { q: q, type: 'object:item', ref: ref }]">TheBlueStore</a>
         </li>
-        <li [class.active]="type == 'opportunity'">
+        <li [class.active]="type == 'object:opportunity'">
           <a [routerLink]="['/search', { q: q, type: 'object:opportunity', ref: ref }]">Opportunity</a>
         </li>
-        <li [class.active]="type == 'showtimez'">
+        <li [class.active]="type == 'object:event'">
           <a [routerLink]="['/search', { q: q, type: 'object:event', ref: ref }]">Showtimez</a>
         </li>
       </ul>
