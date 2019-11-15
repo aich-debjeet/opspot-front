@@ -30,7 +30,8 @@ export class BoostConsoleComponent {
   moreData = true;
   feed: Array<Object> = [];
   error: string = '';
-  postArray: any[] = [];
+  // postArray: any[] = [];
+  postType: string = 'boosted';
 
   constructor(public session: Session,private router: Router, private route: ActivatedRoute, public title: OpspotTitle, public service: BoostService, public client: Client) {
     this.title.setTitle('Boost Console');
@@ -54,7 +55,7 @@ export class BoostConsoleComponent {
 
     if (refresh) {
       this.boosts = [];
-      this.postArray = [];
+      // this.postArray = [];
       this.rejected =[];
       this.completed = [];
       this.offset = '';
@@ -67,7 +68,6 @@ export class BoostConsoleComponent {
       offset: this.offset
     })
       .then(({ boosts,completed,rejected, loadNext }) => {
-        console.log(boosts)
         this.inProgress = false;
 
         if (!boosts.length) {
@@ -76,10 +76,9 @@ export class BoostConsoleComponent {
         }
 
         this.boosts.push(...boosts);
-        this.postArray.push(...boosts)
+        // this.postArray.push(...boosts)
         this.completed.push(...completed);
         this.rejected.push(...rejected);
-        
         
         this.offset = loadNext;
         this.moreData = !!loadNext;
@@ -91,7 +90,6 @@ export class BoostConsoleComponent {
       });
   }
   getMyPosts(){
-    console.log('get my post')
     let params: any = {
       limit: 3,
       offset: ''
@@ -99,17 +97,10 @@ export class BoostConsoleComponent {
     this.client.get('api/v1/newsfeed/personal/' + this.opspot.user.guid, params, { cache: true })
       .then((data: OpspotActivityObject) => {
         if (!data.activity) {
-          // this.moreData = false;
-          // this.inProgress = false;
           return false;
         }
         if(data.activity){
-          // for (let activity of data.activity) {
-          //   console.log(activity);
-          //   this.feed.push(activity);
-          // }
           this.feed = data.activity;
-          console.log(data)
         }
       })
       .catch(function (e) {
@@ -118,13 +109,14 @@ export class BoostConsoleComponent {
   }
 
   loadData(str: string){
+    this.postType = str;
     if(str === 'boosted'){
-      this.postArray = this.boosts;
+      // this.postArray = this.boosts;
     } else if(str === 'completed'){
-      this.postArray = this.completed;
+      // this.postArray = this.completed;
     }
     else if(str === 'rejected'){
-      this.postArray = this.rejected;
+      // this.postArray = this.rejected;
     }
   }
 }

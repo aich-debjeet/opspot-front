@@ -15,7 +15,7 @@ export class BoostService {
    */
   load(type: string, filter: string, { limit, offset }: { limit?: number, offset?: string } = {}): Promise<{ boosts,completed,rejected,loadNext }> {
     return this.client.get(`api/v2/boost/${type}/${filter}`, {
-      limit: limit || 12,
+      limit: limit || 24,
       offset: offset || ''
     })
       .then(({ boosts,completed,rejected, 'load-next': loadNext }) => {

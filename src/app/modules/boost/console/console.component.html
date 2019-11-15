@@ -77,23 +77,27 @@
       <div class="o-boost-console-block__tab">
         <div class="tabs-boost-console">
           <ul class="tabs-list boost-console-tabs">
-            <li class="active"><a (click)="loadData('boosted')">Boosted Posts</a></li>
-            <li><a (click)="loadData('completed')">Completed Targets</a></li>
-            <li><a (click)="loadData('rejected')">Rejected Posts</a></li>
+            <li [ngClass]="{'active': postType == 'boosted'}"><a (click)="loadData('boosted')">Boosted Posts</a></li>
+            <li [ngClass]="{'active': postType == 'completed'}"><a (click)="loadData('completed')">Completed Targets</a></li>
+            <li [ngClass]="{'active': postType == 'rejected'}"><a (click)="loadData('rejected')">Rejected Posts</a></li>
           </ul>
         </div>
         <!--tab end-->
       </div>
       <div class="o-boost-console-block__content">
         <div class="tabs-boost-console">
-          <div id="boosted-posts" class="tab active">
-            <m-boost-console-card *ngFor="let boost of postArray; let i = index" class="mdl-card mdl-shadow--4dp"
+          <div id="boosted-posts" class="tab active" *ngIf="this.postType == 'boosted'">
+            <m-boost-console-card *ngFor="let boost of boosts; let i = index" class="mdl-card mdl-shadow--4dp"
               [boost]="boost"></m-boost-console-card>
           </div>
-          <!-- <div id="completed-targets" class="tab">
+          <div id="completed-targets" class="tab active" *ngIf="this.postType == 'completed'">
+              <m-boost-console-card *ngFor="let boost of completed; let i = index" class="mdl-card mdl-shadow--4dp"
+              [boost]="boost"></m-boost-console-card>
           </div>
-          <div id="rejected-posts" class="tab">
-          </div> -->
+          <div id="rejected-posts" class="tab active" *ngIf="this.postType == 'rejected'">
+              <m-boost-console-card *ngFor="let boost of rejected; let i = index" class="mdl-card mdl-shadow--4dp"
+              [boost]="boost"></m-boost-console-card>
+          </div>
         </div>
         <!--tab content end-->
       </div>
