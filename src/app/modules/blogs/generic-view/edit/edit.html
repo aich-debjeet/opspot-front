@@ -154,8 +154,8 @@
 
 <!-- <div class="o-blog-write-tab-content tabs-blog"> -->
 <div id="write" class="tab active">
-  <form (submit)="save()" *ngIf="blog.guid">
-    <div class="o-blog-preview-btn-block hidden-mob">
+  <form (submit)="save()" *ngIf="blog.guid" class="blog-create-form">
+    <div class="o-blog-preview-btn-block ">
       <button type="submit" class="btn btn-primary btn-sm"
         [disabled]="!canSave || pendingUploads.length !== 0 || !validThreshold"
         i18n="@@BLOGS__EDIT__PUBLISH_ACTION">Preview and Publish</button>
@@ -183,7 +183,7 @@
         <app-blog-view [entity]="entity" *ngFor="let entity of filteredArray; let i = index"></app-blog-view>
       </div> -->
 <!-- </div> -->
-<div class="o-blog-wrire-mob">
+<!-- <div class="o-blog-wrire-mob">
   <button type="button" class="btn btn-primary btn-block o-blog-wrire-mob-button">Preview and Publish <i
       class="icon-arrow-right mobile-icon"></i></button>
-</div>
+</div> -->

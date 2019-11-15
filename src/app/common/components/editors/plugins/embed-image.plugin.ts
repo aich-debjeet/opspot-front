@@ -113,7 +113,11 @@ export class EmbedImage {
     }
 
     img.src = imgSrc;
+    img.onload = function () {
+      img.classList.add('display');
+    }
     img.onerror = function () {
+      this.classList.remove('display');
       this.classList.add('m--img-not-found');
     };
     img.addEventListener('click', this.selectImage.bind(this));
