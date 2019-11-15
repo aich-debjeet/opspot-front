@@ -7,6 +7,7 @@ import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
 
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
+import { SpecialHashtg } from '../../../helpers/special-hashtag';
 
 @Component({
   selector: 'app-my-journey-form',
@@ -90,7 +91,7 @@ export class MyJourneyFormComponent implements OnInit {
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
-    this.tags.push('myjourney' + this.session.getLoggedInUser().username);
+    this.tags.push(SpecialHashtg.concat('myjourney',this.session.getLoggedInUser().username));
     data.tags = this.tags;
     data.isNSFW = this.isNSFW;
     this.client.post('api/v1/newsfeed', data)

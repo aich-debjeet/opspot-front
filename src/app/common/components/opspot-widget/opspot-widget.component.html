@@ -1,14 +1,26 @@
+<style>
+    .widget {
+        overflow-y: scroll;
+        max-height: 300px
+    }
+</style>
 
 <div class="o-card o-card--opportunities">
-    <div class="text-md f500">{{ reqType | titlecase }} <a class="text-sm grey float-right">See All</a></div>
-    <div *ngIf="entityType == 'opportunity'">
+    <div class="text-md f500">{{ reqType | titlecase }} <a *ngIf="reqType === 'events'"
+            [routerLink]="['/event/view', entities[0].entity_guid]" class="text-sm grey float-right">See All</a></div>
+    <div *ngIf="entityType == 'opportunity'" class="widget">
         <div *ngFor="let entity of entities">
-        <app-opportunity-list-card [object]="entity"></app-opportunity-list-card>
+            <app-opportunity-list-card [object]="entity"></app-opportunity-list-card>
         </div>
     </div>
-    <div *ngIf="entityType == 'event'">
+    <div *ngIf="entityType == 'event'" class="widget">
         <div *ngFor="let entity of entities">
-        <app-showtime-list-card [object]="entity"></app-showtime-list-card>
+            <app-showtime-list-card [object]="entity"></app-showtime-list-card>
+        </div>
+    </div>
+    <div *ngIf="entityType == 'myjourney'" class="widget">
+        <div *ngFor="let entity of entities">
+            <app-myjourney-list-card [object]="entity"></app-myjourney-list-card>
         </div>
     </div>
 </div>

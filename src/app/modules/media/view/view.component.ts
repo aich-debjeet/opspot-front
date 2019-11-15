@@ -49,6 +49,7 @@ export class MediaViewComponent {
   paramsSubscription: Subscription;
   queryParamsSubscription$: Subscription;
   focusedCommentGuid: string = '';
+  showMyJourneyWidget= false;
 
   constructor(
     public session: Session,
@@ -142,6 +143,13 @@ export class MediaViewComponent {
 
           if (this.entity.title) {
             this.title.setTitle(this.entity.title);
+          }
+
+          if(this.entity.tags.length > 0){
+            var hashtag = 'myjourney'+ this.entity.ownerObj.username
+            if(this.entity.tags[0] === hashtag){
+              this.showMyJourneyWidget = true;
+            }
           }
         }
 

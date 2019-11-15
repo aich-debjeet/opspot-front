@@ -11,7 +11,7 @@
                 <div class="o-trending-post__info">
                     <div class="text-md f500">{{event?.title}}</div>
                     <div class="text-sm m-t-6">
-                        <span class="o-event-date">{{event?.start_time_date}}</span>{{event?.location}}
+                        <span class="o-event-date">{{event?.start_time_date | date:'MMM d'}}</span>{{event?.location}}
                     </div>
                 </div>
             </a>
