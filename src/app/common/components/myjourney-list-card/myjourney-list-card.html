@@ -1,0 +1,20 @@
+<div>
+    <ul class="o-trending-post">
+        <li class="o-trending-post__item">
+            <a [routerLink]="['/media/view', myjourney?.guid]">
+                <div class="o-trending-post__cover">
+                    <img [src]="myjourney?.custom_data[0] ? myjourney?.custom_data[0].thumbnail_src:''"
+                        (error)="showTimez.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'"
+                        *ngIf="myjourney?.custom_data">
+                    <img *ngIf="!myjourney?.custom_data" src="assets/ops_icon.png">
+                </div>
+                <div class="o-trending-post__info">
+                    <div class="text-md f500" *ngIf = "myjourney?.message">{{myjourney?.message}}</div>
+                    <div class="text-sm m-t-6">
+                        <!-- <span class="o-event-date">{{event?.start_time_date}}</span>{{event?.location}} -->
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
