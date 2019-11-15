@@ -249,7 +249,8 @@ export class GroupsCreator {
     tags: [],
     invitees: '',
     moderated:0,
-    default_view: 0
+    default_view: 0,
+    entity_type: 'community'
   };
   cropedImg;
   invitees: Array<any> = [];
