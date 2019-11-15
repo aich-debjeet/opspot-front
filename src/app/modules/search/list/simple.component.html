@@ -14,7 +14,7 @@
 <div class="o-serach-post">
   <opspot-card *ngFor="let entity of entities"
     class="col-4 pad-0 bg-trans user-card"
-    [class.col-12]="entity.type == 'activity'"
+    [class.col-12]="entity.type == 'activity' || entity.type == 'object'"
     [class.user-card]="entity.type == 'user'"
     hostClass="mdl-card mdl-color--white m-border m-search--entity"
     [object]="entity"

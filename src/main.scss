@@ -27545,6 +27545,11 @@ li{
 //   margin-left: 125px !important;
 // }
 
+.sticky-card-wrapper {
+  position: sticky;
+  top: 70px;
+}
+
 .o-boost-console-block__right .o-explore-card {
   margin-bottom: 8px;
 }

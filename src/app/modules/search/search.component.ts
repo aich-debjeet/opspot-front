@@ -93,8 +93,9 @@ export class SearchComponent {
   }
 
   ngOnDestroy() {
-    if (this.paramsSubscription)
+    if (this.paramsSubscription) {
       this.paramsSubscription.unsubscribe();
+    }
   }
 
   /**
@@ -106,7 +107,7 @@ export class SearchComponent {
     }
 
     this.inProgress = true;
-    this.searchType = !this.type || this.type == 'latest' ? 'hybrid' : 'simple';
+    this.searchType = !this.type || this.type === 'latest' ? 'hybrid' : 'simple';
 
     if (refresh) {
       this.reset();
@@ -126,7 +127,7 @@ export class SearchComponent {
         offset: this.offset
       };
 
-      if (searchType == 'hybrid') {
+      if (searchType === 'hybrid') {
         endpoint = 'api/v2/search/top';
         data['sort'] = this.type;
 
