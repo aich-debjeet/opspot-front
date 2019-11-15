@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NetworkComponent } from './network.component';
 import { NetworkUserlist } from './userlist/userlist.component';
+import { NetworkConversation } from './conversation/conversation.component';
 
 const routes: Routes = [
   { path: '', component: NetworkComponent }
@@ -12,7 +13,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     NetworkComponent,
-    NetworkUserlist
+    NetworkUserlist,
+    NetworkConversation
   ],
   imports: [
     NgCommonModule,
