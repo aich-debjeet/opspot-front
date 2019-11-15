@@ -31,7 +31,6 @@ export class OpportunityListCardComponent implements OnInit {
 
   set _object(value){
     this.opportunity = value;
-    console.log('this.opportunity: ', this.opportunity);
   }
 
 
