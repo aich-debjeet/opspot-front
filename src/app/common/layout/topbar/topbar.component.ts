@@ -9,6 +9,7 @@ import { Sidebar } from '../../../services/ui/sidebar';
 import { Session } from '../../../services/session';
 import { DynamicHostDirective } from '../../directives/dynamic-host.directive';
 import { NotificationsToasterComponent } from '../../../modules/notifications/toaster.component';
+import { Client } from '../../../services/api';
 
 @Component({
   moduleId: module.id,
@@ -29,8 +30,9 @@ export class TopbarComponent implements OnInit {
     public session: Session,
     public storage: Storage,
     public sidebar: Sidebar,
-    private _componentFactoryResolver: ComponentFactoryResolver
-  ) {}
+    private _componentFactoryResolver: ComponentFactoryResolver,
+    private client: Client
+  ) { }
 
   ngAfterViewInit() {
     // this.loadComponent();
@@ -48,8 +50,8 @@ export class TopbarComponent implements OnInit {
 
   loadComponent() {
     const componentFactory = this._componentFactoryResolver.resolveComponentFactory(
-        NotificationsToasterComponent
-      ),
+      NotificationsToasterComponent
+    ),
       viewContainerRef = this.host.viewContainerRef;
 
     viewContainerRef.clear();
@@ -75,5 +77,51 @@ export class TopbarComponent implements OnInit {
     } else {
       x.style.display = 'block';
     }
+  }
+
+  // getUsersOrganization() {
+
+  // }
+
+  offset = '';
+  entities = [];
+  moreData = false;
+  inProgress = false;
+  rating: number = 1;
+
+
+  getUsersOrganization(refresh) {
+    let key = 'groups';
+    let endpoint = `api/v1/groups/members`;
+
+    this.client.get(endpoint, {
+      limit: 12,
+      offset: this.offset,
+      rating: this.rating
+    })
+      .then((response) => {
+        if (!response[key] || response[key].length === 0) {
+          this.moreData = false;
+          this.inProgress = false;
+        }
+        if (refresh) {
+          this.entities = response[key];
+        } else {
+          if (this.offset)
+            response[key].shift();
+
+          this.entities.push(...response[key]);
+        }
+
+        this.offset = response['load-next'];
+        if (!this.offset) {
+          this.moreData = false;
+        }
+        this.inProgress = false;
+      })
+      .catch((e) => {
+        this.inProgress = false;
+      });
+
   }
 }

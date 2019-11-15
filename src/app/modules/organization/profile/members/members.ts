@@ -67,8 +67,7 @@ opspot = window.Opspot;
     }
 
     // TODO: [emi] Send this via API
-    this.canInvite = false;
-
+    this.canInvite = false;    
     if (this.organization['is:owner']) {
       this.canInvite = true;
     } else if (this.organization.membership === 2 && this.organization['is:member']) {

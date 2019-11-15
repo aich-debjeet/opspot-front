@@ -45,7 +45,8 @@ export class OrganizationCreator {
     default_view: 0,
     //EXTRA PARAMETERS FOR ORGANIZATION
     category:'',
-    location: ''
+    location: '',
+    entity_type:'organization'
   };
   cropedImg;
   // invitees: Array<any> = [];

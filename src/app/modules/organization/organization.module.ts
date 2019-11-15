@@ -19,14 +19,14 @@ import { OrganizationCardUserActionsButton } from './profile/card-user-action-bu
 import { GroupsSettingsButton } from '../groups/profile/groups-settings-button';
 import { OrganizationProfileMembers } from './profile/members/members';
 // import { GroupsProfileRequests } from './profile/requests/requests';
-import { GroupsProfileFeed } from '../groups/profile/feed/feed';
+import { OrganizationProfileFeed } from './profile/feed/feed';
 // import { GroupsProfileConversation } from './profile/conversation/conversation.component';
 // import { GroupsProfileFilterSelector } from './profile/filter-selector/filter-selector.component';
 // import { GroupsMembersModuleComponent } from './members/members';
 // import { GroupsTileComponent } from './tile/tile.component';
 // import { GroupsSidebarMarkersComponent } from './sidebar-markers/sidebar-markers.component';
 // import { CommentsModule } from '../comments/comments.module';
-// import { PosterModule } from '../newsfeed/poster/poster.module';
+import { PosterModule } from '../newsfeed/poster/poster.module';
 import { HashtagsModule } from '../hashtags/hashtags.module';
 import { OrganizationProfile } from './profile/profile';
 import { CanDeactivateGroupService } from '../groups/profile/can-deactivate/can-deactivate-group.service';
@@ -43,9 +43,9 @@ const routes: Routes = [
   {
     path: 'organization/profile/:guid', component: OrganizationProfile, canDeactivate: [CanDeactivateGroupService], children: [
       { path: '', redirectTo: 'feed', pathMatch: 'full' },
-      //   { path: 'feed/:filter', component: GroupsProfileFeed },
-      { path: 'feed', component: GroupsProfileFeed },
-      //   { path: 'activity', redirectTo: 'feed' },
+      { path: 'feed/:filter', component: OrganizationProfileFeed },
+      { path: 'feed', component: OrganizationProfileFeed },
+      { path: 'activity', redirectTo: 'feed' },
       { path: 'members', component: OrganizationProfileMembers },
       //   { path: 'requests',  component: GroupsProfileRequests },
       // { path: 'gathering',  component: VideoChatComponent}
@@ -72,7 +72,7 @@ const routes: Routes = [
     LegacyModule,
     // ChannelsModule,
     // ModalsModule,
-    // PosterModule,
+    PosterModule,
     HashtagsModule,
     // GroupsModule
     // TextInputAutocompleteModule,
@@ -87,8 +87,7 @@ const routes: Routes = [
     // GroupsCard,
     OrganizationCardUserActionsButton,
     OrganizationProfileMembers,
-    // GroupsProfileFeed,
-    // GroupsProfileRequests,
+    OrganizationProfileFeed,    // GroupsProfileRequests,
     OrganizationSettingButton    // GroupsProfileConversation,
     // GroupsProfileFilterSelector,
     // GroupsMembersModuleComponent,
@@ -107,8 +106,7 @@ const routes: Routes = [
     // GroupsCard,
     OrganizationCardUserActionsButton,
     OrganizationProfileMembers,
-    // GroupsProfileFeed,
-    // GroupsProfileRequests,
+    OrganizationProfileFeed,    // GroupsProfileRequests,
     OrganizationSettingButton    // GroupsProfileConversation,
     // GroupsProfileFilterSelector,
     // GroupsMembersModuleComponent,
