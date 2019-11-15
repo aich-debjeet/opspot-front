@@ -68,14 +68,14 @@
                         <!-- <a class="o-community-img-edit"><i class="icon-edit-profile"></i></a> -->
                     </div>
                     <div class="o-community-name">
-                        <h5 class="f700">{{group.name}}</h5>
+                        <h5 class="f700">{{group?.name}}</h5>
                     </div>
                     <div class="o-community-skills" *ngIf="!editing && group?.tags">
-                        <a *ngFor="let tag of group?.tags" href="" class="o-community-skills__tag">#{{tag}}</a>
+                        <a *ngFor="let tag of group?.tags" class="o-community-skills__tag">#{{tag}}</a>
                     </div>
                     <opspot-groups-join-button style="margin-bottom: 6px;" [group]="group"
                         (membership)="change_membership($event)"
-                        *ngIf="(!group['is:creator'] || (session.isAdmin()) && !group['is:invited'])">
+                        *ngIf="(group && (!group['is:creator'] || (session.isAdmin()) && !group['is:invited']))">
                     </opspot-groups-join-button>
                     <!--doubt -->
                     <div class="o-community-members-top o-community-members-top--mob hidden-above-tablet">
@@ -83,20 +83,11 @@
                             <span class="o-community-members-list-mob-single"><img [src]="memberSrc+member.guid"
                                     alt=""></span>
                         </a>
-                        <!-- <a href="community_member_popup_mob.html" class="o-community-members-top__count-mob">
-                                <span class="o-community-members-list-mob-single"><img src="assets/demo/avatar.png"
-                                        alt=""></span>
-                                <span class="o-community-members-list-mob-single"><img src="assets/demo/avatar.png"
-                                        alt=""></span>
-                                <span class="o-community-members-list-mob-single"><img src="assets/demo/avatar.png"
-                                        alt=""></span>
-                                <span class="text-sm m-l-r-6 grey">+4</span>
-                            </a> -->
                         <a (click)="openInvite()" class="o-community-add-members-mob"><i class="icon-plus"></i></a>
                     </div>
                     <!-- <m-videochat></m-videochat> -->
                     <div class="o-community-gathering-block">
-                        <a (click)="videochat.activate(group); showGathering1()" *ngIf="!group.videoChatDisabled"
+                        <a (click)="videochat.activate(group); showGathering1()" *ngIf="!group?.videoChatDisabled"
                             class="o-community-gathering"><i class="icon-video"></i> <span
                                 class="text-sm f500 primary">Gathering</span></a>
                         <!-- class="text-sm f500 primary" routerLink = 'groups/gathering'>Gathering</span></a> -->
@@ -108,7 +99,7 @@
                         </a>
                     </div>
                     <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle">
-                        <opspot-groups-profile-members-invite [group]="group">
+                        <opspot-groups-profile-members-invite *ngIf="group" [group]="group">
                         </opspot-groups-profile-members-invite>
                     </m-modal>
                     <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle">
@@ -116,11 +107,11 @@
                     </m-modal>
                     <div class="o-community-discrptn">
                         <div class="text-md">
-                            <a *ngIf="(group.briefdescription?group.briefdescription.length<30:true); else readMo">
-                                {{group.briefdescription}} </a>
+                            <a *ngIf="(group?.briefdescription ? group?.briefdescription.length<30:true); else readMo">
+                                {{group?.briefdescription}} </a>
                             <ng-template #readMo>
                                 <readMore>
-                                    {{group.briefdescription}}
+                                    {{group?.briefdescription}}
                                 </readMore>
                             </ng-template>
                         </div>
@@ -176,7 +167,7 @@
                     </div>
                 </div>
                 <div class="o-discussions-body">
-                    <opspot-groups-profile-conversation [group]="group">
+                    <opspot-groups-profile-conversation *ngIf="group" [group]="group">
                     </opspot-groups-profile-conversation>
                 </div>
             </div>

@@ -36,6 +36,9 @@
     &__sidebar{
         width: 265px;
         padding: 15px 10px;
+        max-height: 600px;
+        overflow-y: scroll;
+
         button{
             padding:8px 15px;
             margin:20px 0 33px;
@@ -89,6 +92,7 @@
     flex-wrap: wrap;
     &__item{
         width:257px;
+        cursor: pointer;
         @include mq($from:$mobile-sm, $until:$desktop-sm){
             width:100%;
         }

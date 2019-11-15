@@ -40,7 +40,7 @@
         <target>Thiết lập lại</target>
       </trans-unit>
       <trans-unit id="OPSPOT__POSTER__SPEAK_YOUR_MIND">
-        <source>Speak your mind...</source>
+        <source>Write something...</source>
         <target>Bạn đang nghĩ rằng...</target>
       </trans-unit>
       <trans-unit id="OPSPOT__POSTER__POST_ACTION">
@@ -2539,7 +2539,7 @@
         <target>Xem thêm</target>
       </trans-unit>
       <trans-unit id="M__COMMON__CONFIRM_18">
-        <source>Click to confirm your are 18+</source>
+        <source>Warning! Mature content (18+)</source>
         <target>Nhấn để xác nhận bạn trên 18 tuổi</target>
       </trans-unit>
       <trans-unit id="M__COMMON__VIEWS_WITH_COUNT">

@@ -1,0 +1,36 @@
+<div class="m-wire--lock-screen--transaction-made-notice" *ngIf="showSubmittedInfo" i18n="@@WIRE__LOCK_SCREEN__RECEIVED_TIMEOUT_LABEL">
+  We've received your transaction. Please try unlocking this post after it gets processed. We estimate it may take around 5 minutes.
+</div>
+
+<div class="feed-paywall" *ngIf="!isOwner()">
+  
+  <h4 class="white">{{ entity.wire_threshold.min | number }} tokens </h4>
+
+  <div class="text-md grey">
+    This post can only be seen by supporters
+    who wire 
+    <ng-container *ngIf="entity?.wire_threshold?.type == 'tokens'" i18n="@@WIRE__LOCK_SCREEN__OVER_TOKENS_PER_MONTH">
+      over {{ entity.wire_threshold.min | number }} Tokens 
+    </ng-container>
+    <ng-container *ngIf="entity?.ownerObj?.username" i18n="@@WIRE__LOCK_SCREEN__TO_USERNAME_PART">
+      to @{{ entity.ownerObj.username }}
+    </ng-container>
+  </div>
+  
+  <button class="btn btn-primary btn-sm" (click)="unlock()">
+    <span>
+      <ng-container i18n="@@WIRE__LOCK_SCREEN__UNLOCK_ACTION">UNLOCK THIS POST</ng-container>
+    </span>
+  </button>
+
+  <div [hidden]="!inProgress" class="m-spinner">
+    <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" [mdl]></div>
+  </div>
+
+</div>
+
+<style>
+.feed-paywall button {
+  margin-top: 35px;
+}
+</style>

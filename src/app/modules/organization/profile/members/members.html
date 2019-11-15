@@ -1,0 +1,34 @@
+<!-- <a class="m-group__goBack" routerLink="..">&lt; Back to feed</a> -->
+<style>
+    input:focus {
+        box-shadow: none;
+    }
+</style>
+
+<div *ngIf="!frmGroup">
+    <div class="o-community-member-popup-body__title" style="margin-bottom: 8px;">
+        <div class="text-h3">
+            Organization Members
+        </div>
+    </div>
+    <div class="form-group form-group--member-search" #el>
+        <input type="text" name="q" [(ngModel)]="q" (keyup)="search(q)" placeholder="Search Members"
+            i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__SEARCH_PLACEHOLDER"
+            class="form-control form-control-lg bg-grey-light " style="border: 0px;
+        margin: 30px 0px 0px;
+        padding: 1.3rem 0.85rem; box-shadow: none;" />
+        <i class="icon-search" style="position: absolute; top: 9px; right: 12px;"></i>
+    </div>
+</div>
+<ul class="o-community-members-list scrollbar scrollbar-default" *ngFor="let member of members">
+    <li class="o-community-members-list__user-list">
+        <app-appuser [object]="member">
+            <opspot-organization-card-user-actions-button style="position: relative;"
+                *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid" [organization]="organization"
+                [user]="member"></opspot-organization-card-user-actions-button>
+        </app-appuser>
+    </li>
+</ul>
+
+<infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress">
+</infinite-scroll>

@@ -30,6 +30,7 @@ export class GroupsListComponent {
   rating: number = 1;
   preventHashtagOverflow: boolean = false;
   dev = false;
+  showMyCommunities: boolean = false;
 
   constructor(
     public client: Client,
@@ -76,6 +77,16 @@ export class GroupsListComponent {
   reloadTags(all: boolean) {
     this.all = all;
     this.load(true);
+  }
+
+
+  showMyCommunities1(val) {
+    if (val === 'show') {
+    this.showMyCommunities = false;
+    }
+    else if (val === 'hide') {
+      this.showMyCommunities = true;
+    }
   }
 
   load(refresh: boolean = false) {

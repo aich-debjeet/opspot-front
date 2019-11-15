@@ -18,23 +18,26 @@
       [routerLink]="['/groups/profile', activity.containerObj.guid]" class="mdl-color-text--blue-grey-300">
       <strong>({{activity.containerObj.name}})</strong>
     </a>
-    <a [routerLink]="['/newsfeed', activity.guid]" class="permalink" *ngIf="activity.guid && !activity.remind_object">
+    <div class="grey m-l-8 o-posts-tym"
+      *ngIf="activity.guid && !activity.remind_object">
       <span>{{activity.time_created * 1000 | date:'medium'}}</span>
+      <!-- <span class="o-posts-public-private"><i class="icon-public"></i></span> -->
       <span *ngIf="activity.edited" class="m-edited-text" i18n="@@M__COMMON__EDITED">edited</span>
       <div class="mdl-card__supporting-text is-boosted" *ngIf="boosted">
         <i class="material-icons">trending_up</i>
         <a i18n="@@OPSPOT__CARDS__ACTIVITY__BOOSTED_LABEL">Boosted</a>
       </div>
-    </a>
-    <a [routerLink]="['/newsfeed/', activity.entity_guid]" class="permalink"
+    </div>
+    <div class="grey m-l-8 o-posts-tym"
       *ngIf="!activity.guid && activity.entity_guid && !activity.remind_object">
       <span>{{activity.time_created * 1000 | date:'medium'}}</span>
+      <!-- <span class="o-posts-public-private"><i class="icon-public"></i></span> -->
       <span *ngIf="activity.edited" class="m-edited-text" i18n="@@M__COMMON__EDITED">edited</span>
       <div class="mdl-card__supporting-text is-boosted" *ngIf="boosted">
         <i class="material-icons">trending_up</i>
         <a i18n="@@OPSPOT__CARDS__ACTIVITY__BOOSTED_LABEL">Boosted</a>
       </div>
-    </a>
+    </div>
   </div>
 </div>
 
@@ -43,35 +46,43 @@
 <ng-container *ngIf="!activity.paywall || editing">
 
   <!-- Messages -->
-  <div m-read-more class="mdl-card__supporting-text message m-mature-message"
-    [class.m-activity--message-remind]="activity.remind_object" [hidden]="!activity.message || editing">
+  <!-- <div m-read-more> -->
+  <div class="mdl-card__supporting-text message m-mature-message text-md grey-darker"
+    [class.m-activity--message-remind]="activity.remind_object"
+    [hidden]="!activity.message || editing">
     <a class="m-mature-text-toggle" (click)="activity.mature_visibility = !activity.mature_visibility"
       *ngIf="attachment.shouldBeBlurred(activity) || attachment.isForcefullyShown(activity)"
       [ngClass]="{ 'mdl-color-text--red-500': attachment.isForcefullyShown(activity) }">
-      <i class="material-icons m-material-icons-inline">explicit</i>
+      <!-- <i class="material-icons m-material-icons-inline">explicit</i> -->
     </a>
 
-    <span class="m-mature-message-content" [innerHtml]="activity.message | tags"
+    <span class="m-mature-message-content"
+      [innerHtml]="activity.message | tags"
       [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"
-      (click)="activity.mature && !activity.mature_visibility ? activity.mature_visibility = !activity.mature_visibility : null">
-    </span>
+      (click)="activity.mature && !activity.mature_visibility ? activity.mature_visibility = !activity.mature_visibility : null"
+    ></span>
     <!-- <m-read-more--button></m-read-more--button> -->
   </div>
 
-  <m-translate [open]="translateToggle" [entity]="activity" [translateEvent]="translateEvent"
-    (onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
-    (onTranslateError)="translateToggle = false" #translate></m-translate>
+  <m-translate
+    [open]="translateToggle"
+    [entity]="activity"
+    [translateEvent]="translateEvent"
+    (onTranslateInit)="propagateTranslation($event)"
+    (onTranslate)="translateToggle = false"
+    (onTranslateError)="translateToggle = false" #translate
+  ></m-translate>
 
   <div class="opspot-editable-container"
     *ngIf="editing && (!activity.custom_type || (activity.custom_type && !activity.title))">
     <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
     <textarea class="mdl-card__supporting-text message" name="message" [ngModel]="activity.message" #messageEdit
       [autoGrow]></textarea>
-    <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
-    </m-wire-threshold-input>
-    <button class="mdl-button mdl-button--raised mdl-color--blue-grey-100"
+    <!-- <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
+    </m-wire-threshold-input> -->
+    <button class="btn btn-outline-primary btn-lg"
       (click)="messageEdit.value = activity.message; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
-    <button class="mdl-button mdl-button--colored mdl-button--raised"
+    <button class="btn btn-primary btn-lg"
       (click)="activity.message = messageEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
   </div>
 
@@ -81,8 +92,8 @@
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
-        <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
-        <span i18n="@@M__COMMON__CONFIRM_18">Click to confirm your are 18+</span>
+        <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
+        <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
       </span>
     </div>
     <opspot-rich-embed [src]="activity" [maxheight]="480"></opspot-rich-embed>
@@ -222,11 +233,11 @@
     <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
     <textarea class="mdl-card__supporting-text message" name="title" [ngModel]="activity.title" #titleEdit
       [autoGrow]></textarea>
-    <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
-    </m-wire-threshold-input>
-    <button class="mdl-button mdl-button--raised mdl-color--blue-grey-100"
+    <!-- <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
+    </m-wire-threshold-input> -->
+    <button class="btn btn-outline-primary btn-lg"
       (click)="titleEdit.value = activity.title; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
-    <button class="mdl-button mdl-button--colored mdl-button--raised"
+    <button class="btn btn-primary btn-lg"
       (click)="activity.title = titleEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
   </div>
 
@@ -235,8 +246,8 @@
     *ngIf="activity.custom_type == 'video'" [routerLink]="['/media', activity.guid]">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
-        <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
-        <span i18n="@@M__COMMON__CONFIRM_18">Click to confirm your are 18+</span>
+        <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
+        <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
       </span>
     </div>
 
@@ -255,8 +266,8 @@
     *ngIf="activity.thumbnail_src && !activity.perma_url">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
-        <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
-        <span i18n="@@M__COMMON__CONFIRM_18">Click to confirm your are 18+</span>
+        <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
+        <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
       </span>
     </div>
 
@@ -271,8 +282,8 @@
     *ngIf="activity.custom_type == 'batch' && !showOpportunity && !showBlueStore && !showTimez  && !showAlbum">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
-        <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
-        <span i18n="@@M__COMMON__CONFIRM_18">Click to confirm your are 18+</span>
+        <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
+        <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
       </span>
     </div>
     <a [routerLink]="['/media', activity.guid]">
@@ -291,6 +302,13 @@
 </ng-container>
 
 <ng-content select="[bottom-content]"></ng-content>
+
+<!-- mature toggle button -->
+<div *ngIf="activity.mature" class="o-feed-nsfw-cover-btn ">
+  <a *ngIf="activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md">Cover</a>
+  <a *ngIf="!activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md">Uncover</a>
+</div>
+<!-- mature toggle button -->
 
 <!-- actions bar(like, comments, share, wire, boost)-->
 <div class="o-actions" *ngIf="!hideTabs">
@@ -367,10 +385,10 @@
     </m-tooltip>
   </button>
   <m-safe-toggle *ngIf="showRatingToggle && session.isAdmin()" [(entity)]="activity"></m-safe-toggle>
-  <button class="mdl-button m-translate-button mdl-button--icon" *ngIf="isTranslatable"
+  <!-- <button class="mdl-button m-translate-button mdl-button--icon" *ngIf="isTranslatable"
     (click)="translateToggle = true;">
     <i class="material-icons">public</i>
-  </button>
+  </button> -->
   <m-post-menu [entity]="activity" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
     (optionSelected)="menuOptionSelected($event)">
     <ng-container post-menu>
