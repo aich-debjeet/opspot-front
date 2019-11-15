@@ -219,6 +219,13 @@ export class ChannelComponent {
       .store('recent', this.user, entry => entry.guid == this.user.guid)
       .splice('recent', 50);
   }
+
+  isActive(filter: string) {
+    if (this.filter === filter) {
+      return true;
+    }
+    return false;
+  }
 }
 
 export { ChannelSubscribers } from './subscribers/subscribers';
