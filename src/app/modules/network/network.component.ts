@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Session } from './../../services/session';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-network',
@@ -7,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NetworkComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private session: Session,
+    private router:  Router
+  ) {
+    if (!this.session.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+  }
 
   ngOnInit() {
   }
