@@ -18,6 +18,7 @@ import { ChannelSubscribers } from './subscribers/subscribers';
 import { ChannelSubscriptions } from './subscriptions/subscriptions';
 import { ChannelSidebar } from './sidebar/sidebar';
 import { ChannelFeedComponent } from './feed/feed';
+import { ChannelFilterComponent } from './filter/filter';
 import { ChannelSocialProfiles } from './social-profiles/social-profiles';
 import { ChannelComponent } from './channel.component';
 import { ChannelsListComponent } from './list.component';
@@ -39,10 +40,6 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { UserPrivacyComponent } from './profile-edit/user-privacy/user-privacy.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
-import { ChannelBlogsComponent } from './blogs/blogs';
-import { ChannelGroupsComponent } from './groups/groups';
-import { ChannelMarketplaceComponent } from './marketplace/marketplace';
-import { ChannelOpportunitiesComponent } from './opportunities/opportunities';
 
 const routes: Routes = [
   { path: 'channels/:filter', component: ChannelsListComponent },
@@ -79,6 +76,7 @@ const routes: Routes = [
     ChannelsListComponent,
     ChannelsTileComponent,
     ChannelFeedComponent,
+    ChannelFilterComponent,
     ChannelSidebar,
     ExplicitOverlayComponent,
     ProfileEditComponent,
@@ -88,11 +86,7 @@ const routes: Routes = [
     WorkComponent,
     EducationComponent,
     AwardsComponent,
-    UserPrivacyComponent,
-    ChannelBlogsComponent,
-    ChannelGroupsComponent,
-    ChannelMarketplaceComponent,
-    ChannelOpportunitiesComponent
+    UserPrivacyComponent
   ],
   exports: [
     ChannelModulesComponent,
@@ -101,6 +95,7 @@ const routes: Routes = [
     ChannelSubscriptions,
     ChannelSocialProfiles,
     ChannelFeedComponent,
+    ChannelFilterComponent,
     ChannelSidebar
   ],
   entryComponents: [ChannelComponent, ChannelsListComponent]

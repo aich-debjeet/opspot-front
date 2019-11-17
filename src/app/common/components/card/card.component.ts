@@ -90,7 +90,7 @@ export class OpspotCard implements AfterViewInit {
 
     if (object.type === 'user') {
       return UserCard;
-    } else if (object.type === 'activity') {
+    } else if (object.type === 'activity' || object.type === 'object') {
       return Activity;
     } else if (object.type === 'group') {
       return GroupsCard;
@@ -139,7 +139,7 @@ export class OpspotCard implements AfterViewInit {
     } else {
       this.componentInstance.object = this.object;
 
-      if (this.object.type === 'activity') {
+      if (this.object.type === 'activity' || this.object.type === 'object') {
         (<Activity>this.componentInstance).hideTabs = this.flags.hideTabs || false;
       }
 

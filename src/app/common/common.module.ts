@@ -92,6 +92,7 @@ import { ShowtimeListCardComponent } from './components/showtime-list-card/showt
 import { MyjourneyWidgetComponent } from './components/myjourney-widget/myjourney-widget.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ActivityWidgetComponent } from './components/activity-widget/activity-widget.component';
+import { MyjourneyListCardComponent } from './components/myjourney-list-card/myjourney-list-card';
 
 @NgModule({
   imports: [
@@ -184,7 +185,8 @@ import { ActivityWidgetComponent } from './components/activity-widget/activity-w
     ShowtimeWidgetComponent,
     ShowtimeListCardComponent,
     MyjourneyWidgetComponent,
-    ActivityWidgetComponent
+    ActivityWidgetComponent,
+    MyjourneyListCardComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -267,7 +269,9 @@ import { ActivityWidgetComponent } from './components/activity-widget/activity-w
     ShowtimeWidgetComponent,
     MasonryContainerComponent,
     MyjourneyWidgetComponent,
-    ActivityWidgetComponent
+    ActivityWidgetComponent,
+    MyjourneyListCardComponent
+    
   ],
   providers: [
     {

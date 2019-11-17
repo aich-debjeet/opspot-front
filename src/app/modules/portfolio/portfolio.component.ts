@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from '../../services/api';
+import { SpecialHashtg } from '../../helpers/special-hashtag';
 
 @Component({
   selector: 'app-portfolio',
@@ -42,7 +43,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe((params) => {
       this.username = params['username'];
-      this.requestParams.q = 'portfolio' + params['username'];
+      this.requestParams.q = SpecialHashtg.concat('portfolio', params['username'])
       this.loadProfileInfo();
     });
   }
@@ -57,21 +58,21 @@ export class PortfolioComponent implements OnInit, OnDestroy {
         console.error('Error: ', e);
       });
   }
-/**
- * this method has been replaced with searchMore()
- */
-//   loadPortfolio() {
-//     this.client.get('api/v2/search', this.requestParams)
-//       .then((response: any) => {
-//         this.inProgress = false;
-//         // TODO @debjeet continue here
-//         // this.entities = response['entities'];
-//         console.log('Search result: ', response);
-//       })
-//       .catch(e => {
-//         console.error('Error: ', e);
-//       });
-//   }
+  /**
+   * this method has been replaced with searchMore()
+   */
+  //   loadPortfolio() {
+  //     this.client.get('api/v2/search', this.requestParams)
+  //       .then((response: any) => {
+  //         this.inProgress = false;
+  //         // TODO @debjeet continue here
+  //         // this.entities = response['entities'];
+  //         console.log('Search result: ', response);
+  //       })
+  //       .catch(e => {
+  //         console.error('Error: ', e);
+  //       });
+  //   }
 
   ngOnDestroy() {
     this.paramsSub.unsubscribe();
@@ -112,9 +113,9 @@ export class PortfolioComponent implements OnInit, OnDestroy {
       if (!this.filteredArray || !this.q) {
         return this.filteredArray = this.entities;
       }
-      if (this.entities.find((item:any) => item.message.toString().toLowerCase() === this.q.toLowerCase())) {
+      if (this.entities.find((item: any) => item.message.toString().toLowerCase() === this.q.toLowerCase())) {
         // console.log('Before filter', this.filteredArray)
-        this.filteredArray = this.entities.filter((item:any) => item.message.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1)
+        this.filteredArray = this.entities.filter((item: any) => item.message.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1)
         // console.log('After filter', this.filteredArray)
       }
     }
