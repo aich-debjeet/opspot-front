@@ -14,7 +14,7 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
       <i class="icon-share-2"></i>
       <span class="opspot-counter" *ngIf="object.reminds > 0">{{object.reminds | number}}</span>
     </a>
-    <div class="icon-posts-box" *ngIf = "large" (click)="remind()" [ngClass]="{'selected': object.reminded }">
+    <div class="" *ngIf = "large" (click)="remind()" [ngClass]="{'selected': object.reminded }">
     <span class="icon-share-2"></span><span class="text-md f500">Share</span>
     </div>
     <m-modal-remind-composer *ngIf="remindOpen"

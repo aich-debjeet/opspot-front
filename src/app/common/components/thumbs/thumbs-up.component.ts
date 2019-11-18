@@ -16,7 +16,7 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
       <i class='spot-ico' [ngClass]="{'icon-heart-filled': has(),'icon-heart':!has() }"></i>
       <span class="o-action-count text-sm grey" *ngIf="object['thumbs:up:count'] > -1"><span>{{object['thumbs:up:count'] | number}}</span></span>
     </a>
-    <div *ngIf="large" class="icon-posts-box" (click)="thumb()">
+    <div *ngIf="large" class="" (click)="thumb()">
     <i class='spot-ico' [ngClass]="{'icon-heart-filled': has(),'icon-heart':!has() }">
     </i>
     <span class="text-md f500">Like</span> 

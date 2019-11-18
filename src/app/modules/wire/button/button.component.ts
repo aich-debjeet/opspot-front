@@ -8,7 +8,10 @@ import { Session } from '../../../services/session';
 @Component({
   selector: 'm-wire-button',
   template: `
-   <a class="o-actions__link o-actions__link--coin" (click)="wire()">
+  <div class="" *ngIf="large" (click)="wire()">
+  <span class="icon-coins"></span><span class="text-md f500">Contribute</span>
+  </div> 
+   <a *ngIf = "!large" class="o-actions__link o-actions__link--coin" (click)="wire()">
       <i class="icon-coins f-15"></i>
       <span class='o-action-count text-sm grey'>
       <span>{{(object.wire_totals?object.wire_totals.tokens:0)|token:18 | number}}</span>
@@ -18,6 +21,7 @@ import { Session } from '../../../services/session';
 })
 export class WireButtonComponent {
   @Input() object: any;
+  @Input() large: boolean = false;
   @Output('done') doneEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(public session: Session, private overlayModal: OverlayModalService, private modal: SignupModalService) { }
