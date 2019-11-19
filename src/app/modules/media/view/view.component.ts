@@ -49,6 +49,7 @@ export class MediaViewComponent {
   paramsSubscription: Subscription;
   queryParamsSubscription$: Subscription;
   focusedCommentGuid: string = '';
+  showMyJourneyWidget = false;
 
   constructor(
     public session: Session,
@@ -121,7 +122,7 @@ export class MediaViewComponent {
           this.entity = response.activity;
           console.log("ENTITY: ", this.entity);
           if (this.entity['custom_data'][0]['entity_type'] === 'video') {
-            this.showImage(0,this.entity['custom_data'][0]);
+            this.showImage(0, this.entity['custom_data'][0]);
           } else {
             this.showImage(0);
           }
@@ -142,6 +143,16 @@ export class MediaViewComponent {
 
           if (this.entity.title) {
             this.title.setTitle(this.entity.title);
+          }
+
+          if (this.entity.tags.length > 0) {
+            for (var i = 0; i < this.entity['tags'].length; i++) {
+              var specialHashtag = 'myjourney' + this.entity.ownerObj.username
+              if (specialHashtag == this.entity['tags'][i]) {
+                this.showMyJourneyWidget = true;
+                break;
+              }
+            }
           }
         }
 
@@ -189,7 +200,7 @@ export class MediaViewComponent {
     switch (option) {
       case 'edit':
         //this.router.navigate(['/media/edit', this.entity.guid]);
-       // this.editOptions();
+        // this.editOptions();
         break;
       case 'delete':
         this.delete();

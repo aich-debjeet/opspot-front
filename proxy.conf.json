@@ -1,7 +1,7 @@
 {
     "/api": {
         "target":  {
-            "host": "ops.doesntexist.com",
+            "host": "www.opsplt.com",
             "protocol": "https:",
             "port": 443
         },

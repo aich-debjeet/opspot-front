@@ -202,10 +202,10 @@ opspot-button-remind{
       <div class="o-posts-inner-page__left">
         <div class="o-card feed o-post-inner-minheight">
           <div class="feed-head">
-              <a *ngIf="entity?.ownerObj && entity?.ownerObj?.username"
-              [routerLink]="['/', entity?.ownerObj?.username]" class="o-avatar">
-              <img [src]="opspot.cdn_url + 'icon/' + entity?.ownerObj?.guid + '/' " class="mdl-shadow--2dp"/>
-              </a>
+            <a *ngIf="entity?.ownerObj && entity?.ownerObj?.username" [routerLink]="['/', entity?.ownerObj?.username]"
+              class="o-avatar">
+              <img [src]="opspot.cdn_url + 'icon/' + entity?.ownerObj?.guid + '/' " class="mdl-shadow--2dp" />
+            </a>
             <div class="o-avatar__info">
               <div class="o-avatar-det-block">
                 <span class="text-lg grey o-posts-det"><a class="o-avatar__name">{{entity?.ownerObj?.name}}</a>added 4
@@ -221,7 +221,8 @@ opspot-button-remind{
               <!-- <a href="#" class="head-action__link">
                 <img src="assets/svg/bookmark.svg" alt="" class="head-action__icon hidden-mob">
               </a> -->
-              <a class="head-action__link" *ngIf="session.getLoggedInUser().guid != entity.owner_guid" (click)="togglePin()">
+              <a class="head-action__link" *ngIf="session.getLoggedInUser().guid != entity.owner_guid"
+                (click)="togglePin()">
                 <m-tooltip icon="turned_in" *ngIf="entity?.bookmark">
                   This post is Bookmarked
                 </m-tooltip>
@@ -230,64 +231,59 @@ opspot-button-remind{
                 </m-tooltip>
               </a>
               <!-- <div class="o-option-drop"> -->
-                <m-post-menu [entity]="entity" [canDelete]="canDelete" [isTranslatable]="isTranslatable"
-                  [options]="menuOptions" (optionSelected)="menuOptionSelected($event)" class="mar-l">
-                  <ng-container post-menu>
-                    <ng-content select="[post-menu]"></ng-content>
-                  </ng-container>
-                </m-post-menu>
-                <!-- <m-post-menu [entity]="entity" [canDelete]="entity.ownerObj.guid == session.getLoggedInUser().guid || entity.canEdit || session.isAdmin()" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)" askForCategoriesWhenFeaturing="true"></m-post-menu> -->
+              <m-post-menu [entity]="entity" [canDelete]="canDelete" [isTranslatable]="isTranslatable"
+                [options]="menuOptions" (optionSelected)="menuOptionSelected($event)" class="mar-l">
+                <ng-container post-menu>
+                  <ng-content select="[post-menu]"></ng-content>
+                </ng-container>
+              </m-post-menu>
+              <!-- <m-post-menu [entity]="entity" [canDelete]="entity.ownerObj.guid == session.getLoggedInUser().guid || entity.canEdit || session.isAdmin()" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)" askForCategoriesWhenFeaturing="true"></m-post-menu> -->
               <!-- </div> -->
             </div>
           </div>
           <div class="o-post-inner-page-myjourney-image">
             <img [src]="largeImage" alt="" *ngIf="!showVideo">
-            <m-video *ngIf="showVideo" style="background:#000;" [muted]="false"
-                    [poster]="videoData.thumbnail_src"
-                    [src]="[{ 'res': '360', 'uri': 'api/v1/media/' + videoData.guid + '/play', 'type': 'video/mp4' }]"
-                    [guid]="videoData.guid" 
-                    [torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
-                    <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
+            <m-video *ngIf="showVideo" style="background:#000;" [muted]="false" [poster]="videoData.thumbnail_src"
+              [src]="[{ 'res': '360', 'uri': 'api/v1/media/' + videoData.guid + '/play', 'type': 'video/mp4' }]"
+              [guid]="videoData.guid" [torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
+              <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
             </m-video>
           </div>
           <div class="o-posts-inner-page-myjourney-padding">
-              <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">
-                <div *ngFor="let media of entity?.custom_data; let i = index;">
+            <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">
+              <div *ngFor="let media of entity?.custom_data; let i = index;">
+                <a class="feed-media__link">
+                  <img *ngIf="media.entity_type !== 'video'" [src]="media.src" alt="" class="feed-media__img"
+                    (click)="showImage(i)">
+                  <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+                  <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
+                    <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="" *ngIf="entity?.custom_data?.length > 5">
+              <ngx-slick-carousel class="carousel feed-media post-view-style" #slickModal="slick-carousel"
+                [config]="slideConfig" (init)="slickInit($event)" (breakpoint)="breakpoint($event)"
+                (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+                <div ngxSlickItem *ngFor="let media of entity?.custom_data; let i = index;" class="slide">
                   <a class="feed-media__link">
-                    <img *ngIf="media.entity_type !== 'video'" [src]="media.src" alt="" class="feed-media__img" (click)="showImage(i)">
-                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+                    <!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + media.src + ')'"></div> -->
+                    <!-- <img [src]="media.src" alt="" class="feed-media__img"
+                      (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
+                    <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'"
+                      (click)="showImage(i)">
+                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt=""
+                      class="feed-media__img">
                     <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
-                        <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+                      <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
                     </div>
                   </a>
                 </div>
-              </div>
-              <div class="" *ngIf="entity?.custom_data?.length > 5">
-                  <ngx-slick-carousel 
-                  class="carousel feed-media post-view-style"
-                  #slickModal="slick-carousel" 
-                  [config]="slideConfig" 
-                  (init)="slickInit($event)"
-                  (breakpoint)="breakpoint($event)" 
-                  (afterChange)="afterChange($event)"
-                  (beforeChange)="beforeChange($event)"
-                  >
-                  <div ngxSlickItem *ngFor="let media of entity?.custom_data; let i = index;" class="slide">
-                    <a class="feed-media__link">
-                        <!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + media.src + ')'"></div> -->
-                      <!-- <img [src]="media.src" alt="" class="feed-media__img"
-                      (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
-                      <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'" (click)="showImage(i)">
-                      <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
-                      <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
-                          <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
-                      </div>
-                    </a>
-                  </div>
-                  </ngx-slick-carousel>
-                  <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
-                  <button class="btn-next" (click)="slickModal.slickNext()">next</button>
-              </div>
+              </ngx-slick-carousel>
+              <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+              <button class="btn-next" (click)="slickModal.slickNext()">next</button>
+            </div>
             <div class="text-md">{{ entity?.message}}</div>
           </div>
           <div class="o-posts-inner-page-action">
@@ -311,16 +307,14 @@ opspot-button-remind{
               </div>
             </div>
           </div>
-            <opspot-comments
-              *ngIf="entity.guid"
-              [object]="entity" 
-              [focusedCommentGuid]="focusedCommentGuid">
-            </opspot-comments>
+          <opspot-comments *ngIf="entity.guid" [object]="entity" [focusedCommentGuid]="focusedCommentGuid">
+          </opspot-comments>
         </div>
       </div>
       <div class="o-posts-inner-page__right hidden-mob">
-        <opspot-widget [entityType]="'opportunity'"></opspot-widget>
-        <opspot-widget [entityType]="'event'"></opspot-widget>
+        <opspot-widget *ngIf="!showMyJourneyWidget" [entityType]="'opportunity'"></opspot-widget>
+        <opspot-widget  *ngIf="!showMyJourneyWidget" [entityType]="'event'"></opspot-widget>
+        <opspot-widget *ngIf= "entity?.ownerObj && showMyJourneyWidget" [entityType]="'myjourney'" [user]="entity?.ownerObj"></opspot-widget>
       </div>
     </div>
   </div>

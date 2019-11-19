@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OpspotActivityObject, OpspotUser } from '../../../../app/interfaces/entities';
 import { Session } from '../../../../app/services/session';
 import { Client } from '../../../../app/services/api';
+import { SpecialHashtg } from '../../../helpers/special-hashtag';
 
 @Component({
   inputs: ['user'],
@@ -40,7 +41,7 @@ export class MyjourneyWidgetComponent implements OnInit {
       return false;
     }
 
-    this.params.q = 'myjourney' + this.user.username;
+    this.params.q = SpecialHashtg.concat('myjourney', this.user.username)
     this.inProgress = true;
 
     this.client.get('api/v2/search', this.params)
