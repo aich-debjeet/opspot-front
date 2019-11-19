@@ -1,10 +1,11 @@
 import { Component, OnInit, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OpportunityFormComponent } from '../forms/opportunity-form/opportunity-form.component';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { Subscription } from 'rxjs';
+import { TranslationService } from '../../services/translation';
 
 
 @Component({
@@ -23,17 +24,19 @@ export class OpportunityComponent implements OnInit {
     public session: Session,
     public client: Client,
     private cd: ChangeDetectorRef,
-    public overlayModal: OverlayModalService
+    public overlayModal: OverlayModalService,
+    private router: Router,
+    public translationService: TranslationService,
   ) { }
 
   ngOnInit() {
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
-        this.guid = params.get('guid');  
+        this.guid = params.get('guid');
         this.load();
       }
     });
-}
+  }
 
   // activity: any;
   opspot = window.Opspot;
@@ -73,7 +76,7 @@ export class OpportunityComponent implements OnInit {
   offset = '';
 
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
-  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
 
   load() {
     // if (refresh) {
@@ -86,22 +89,26 @@ export class OpportunityComponent implements OnInit {
 
     this.inProgress = true;
 
-    this.client.get('api/v3/opportunity/' + this.guid)
+    this.client.get('api/v1/newsfeed/single/' + this.guid)
       .then((data: any) => {
-        if (data.opportunity) {
-          this.opportunity = data.opportunity;
+        if (data.activity) {
+          this.opportunity = data.activity;
           this.count = this.opportunity['thumbs:up:count'];
 
-          if (data.opportunity.owner_obj) {
-            this.opportunity['ownerObj'] = data.opportunity.owner_obj;
+          if (data.activity.owner_obj) {
+            this.opportunity['ownerObj'] = data.activity.owner_obj;
           }
           this.inProgress = false;
         }
+
+        this.isTranslatable = (
+          this.translationService.isTranslatable(this.opportunity)
+        );
         this.detectChanges();
-      }) 
+      })
       .catch((e) => {
         this.inProgress = false;
-      });  
+      });
   }
 
   getOwnerIconTime() {
@@ -123,7 +130,8 @@ export class OpportunityComponent implements OnInit {
           $event.inProgress.emit(false);
           $event.completed.emit(0);
         }
-        this._delete.next(this.opportunity);
+        this.router.navigate([`newsfeed/subscribed`]);
+        // this._delete.next(this.opportunity);
       })
       .catch(e => {
         if ($event.inProgress) {
@@ -166,15 +174,15 @@ export class OpportunityComponent implements OnInit {
       case 'delete':
         this.delete();
         break;
-      case 'set-explicit':
-        //this.setExplicit(true);
-        break;
-      case 'remove-explicit':
-        //this.setExplicit(false);
-        break;
-      case 'translate':
-        this.translateToggle = true;
-        break;
+      // case 'set-explicit':
+      //   //this.setExplicit(true);
+      //   break;
+      // case 'remove-explicit':
+      //   //this.setExplicit(false);
+      //   break;
+      // case 'translate':
+      //   this.translateToggle = true;
+      //   break;
     }
   }
 
@@ -195,9 +203,15 @@ export class OpportunityComponent implements OnInit {
 
   udpateOpportunity(data: any) {
     this.opportunity.category = data.category;
-    this.opportunity.description = data.description;
+    this.opportunity.blurb = data.description;
     this.opportunity.location = data.location;
     this.opportunity.title = data.title;
+    if (data.attachment_guid.length > 0) {
+      // this.opportunity.custom_data[0].src = data.custom_data[0].src;
+      this.opportunity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    } else {
+      this.opportunity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/ops_icon.png'
+    }
     // trigger component observe new changes
     this.detectChanges();
   }
@@ -218,30 +232,5 @@ export class OpportunityComponent implements OnInit {
     }
   }
 
-  // setExplicit(value: boolean) {
-  //   let oldValue = this.activity.mature,
-  //     oldMatureVisibility = this.activity.mature_visibility;
-
-  //   this.activity.mature = value;
-  //   this.activity.mature_visibility = void 0;
-
-  //   if (this.activity.custom_data && this.activity.custom_data[0]) {
-  //     this.activity.custom_data[0].mature = value;
-  //   } else if (this.activity.custom_data) {
-  //     this.activity.custom_data.mature = value;
-  //   }
-
-  //   this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
-  //     .catch(e => {
-  //       this.activity.mature = oldValue;
-  //       this.activity.mature_visibility = oldMatureVisibility;
-
-  //       if (this.activity.custom_data && this.activity.custom_data[0]) {
-  //         this.activity.custom_data[0].mature = oldValue;
-  //       } else if (this.activity.custom_data) {
-  //         this.activity.custom_data.mature = oldValue;
-  //       }
-  //     });
-  // }
 
 }

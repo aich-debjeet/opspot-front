@@ -10,11 +10,10 @@
                 alt=""></a>
             <div class="o-avatar__info">
               <div class="o-avatar-det-block">
-                <span class="text-lg grey o-posts-det" *ngIf="opportunity?.ownerObj?.name"><a
-                    class="o-avatar__name">{{opportunity?.ownerObj?.name}}</a>
-                  added 4 medias to <a class="grey-dark f500">#Opportunity</a></span>
+                <span class="text-lg grey o-posts-det"><a class="o-avatar__name">{{opportunity?.ownerObj?.name}}</a>
+                  created an <a class="grey-dark f500">#Opportunity</a></span>
               </div>
-              <div class="grey m-l-8 o-posts-tym" *ngIf="opportunity?.time_created">
+              <div class="grey m-l-8 o-posts-tym">
                 <span>{{opportunity?.time_created * 1000 | date:'medium'}}</span>
                 <span class="o-posts-public-private" *ngIf="isTranslatable" (click)="translateToggle = true;"><i
                     class="icon-public"></i></span>
@@ -29,8 +28,8 @@
                   Click to bookmark this post to the top of your channel feed
                 </m-tooltip>
               </a>
-              <m-post-menu *ngIf="opportunity" [entity]="opportunity" [canDelete]="canDelete"
-                [isTranslatable]="isTranslatable" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)">
+              <m-post-menu *ngIf="opportunity" [entity]="opportunity" [canDelete]="canDelete" [options]="menuOptions"
+                (optionSelected)="menuOptionSelected($event)">
                 <ng-container post-menu>
                   <ng-content select="[post-menu]"></ng-content>
                 </ng-container>
@@ -51,16 +50,16 @@
                   <div class="text-md grey" *ngIf="opportunity?.location">
                     {{ opportunity?.location }}
                   </div>
-                  <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != opportunity?.owner_guid">Reach Out</button>
+                  <button type="button" class="btn btn-primary btn-lg"
+                    *ngIf="session.getLoggedInUser().guid != opportunity?.owner_guid">Reach Out</button>
                 </div>
                 <div class="opportunity-button" *ngIf="opportunity?.category">
                   {{opportunity?.category}}
                 </div>
               </div>
               <div class="feed-card-opportunity-block__bottom hidden-mob">
-                <div class="text-md" *ngIf="opportunity?.description">
-                  <!-- <span class="primary">#Opportunity</span> -->
-                  <span class="primary" [innerHtml]="opportunity?.description | safe"></span>
+                <div class="text-md" *ngIf="opportunity?.blurb">
+                  <span [innerHtml]="opportunity?.blurb | safe"></span>
                 </div>
               </div>
             </div>
@@ -74,22 +73,28 @@
                 <div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt=""></div>
               </div> -->
               <div class="text-sm grey">{{count}} liked this post</div>
-              <div class="text-sm grey m-16">46 shared this post</div>
-              <div class="text-sm grey m-16">13 contributed this post</div>
-              <div class="text-sm grey m-16">2k viewed this post</div>
+              <div class="text-sm grey m-16">{{opportunity?.reminds}} shared this post</div>
+              <div class="text-sm grey m-16">{{opportunity?.wire_totals.tokens | token:18 | abbr}} contributed this post
+              </div>
+              <div class="text-sm grey m-16">{{opportunity?.impressions}} viewed this post</div>
             </div>
             <div class="o-posts-inner-page-action__icons">
-              <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="opportunity">
-              </opspot-button-thumbs-up>
-              <opspot-button-remind *ngIf="opportunity" [object]="opportunity" [large]="'true'"></opspot-button-remind>
-              <div class="icon-posts-box">
+              <a class="icon-posts-box">
+                <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="opportunity">
+                </opspot-button-thumbs-up>
+              </a>
+              <a class="icon-posts-box">
+                <opspot-button-remind *ngIf="opportunity" [object]="opportunity" [large]="'true'">
+                </opspot-button-remind>
+              </a>
+              <!-- <div class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != opportunity?.owner_guid">
                 <span class="icon-coins"></span><span class="text-md f500">Contribute</span>
-              </div>
-              <!-- <m-wire-button
-                *ngIf="session.getLoggedInUser().guid != (opportunity?.remind_object ? opportunity?.remind_object?.owner_guid : opportunity?.owner_guid)"
-                [object]="opportunity?.remind_object ? opportunity?.remind_object : opportunity" (done)="wireSubmitted($event)">
-              </m-wire-button> -->
-
+              </div> -->
+              <a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != opportunity?.owner_guid">
+                <m-wire-button [object]="opportunity?.remind_object ? opportunity?.remind_object : opportunity"
+                  (done)="wireSubmitted($event)" [large]="true">
+                </m-wire-button>
+              </a>
             </div>
           </div>
           <!--action ends-->
@@ -99,8 +104,8 @@
         </div>
       </div>
       <div class="o-posts-inner-page__right hidden-mob">
-          <opspot-widget [entityType]="'opportunity'"></opspot-widget>
-          <opspot-widget [entityType]="'event'"></opspot-widget>
+        <opspot-widget [entityType]="'opportunity'"></opspot-widget>
+        <opspot-widget [entityType]="'event'"></opspot-widget>
       </div>
     </div>
   </div>
