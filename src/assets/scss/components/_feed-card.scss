@@ -24,7 +24,7 @@
     float: left;
 }
 .o-avatar__name{
-    color: $grey-dark;
+    color: $grey-dark !important;
     font-size: 13px;
     line-height: 18px;
     display: inline-block;
@@ -39,8 +39,25 @@
 }
 .o-posts-tym{
     width: 100%;
-    display: block;
-    margin:4px 0px 0px 0px;
+    display: flex;
+    margin:6px 0px 0px 0px;
+    font-size: 11px;
+}
+.o-posts-public-private{
+    width: 8px;
+    height: 8px;
+    margin-left: 4px;
+    margin-top: 1px;
+    i{
+        font-size: 10px;
+        color: $grey;
+    }
+}
+.o-posts-sponsored{
+    padding: 2px 8px;
+    border-radius: 2px;	
+    background-color: $grey-light;
+    margin-left: 10px;
 }
 
 //discription
@@ -58,7 +75,9 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    a{
+    position: relative;
+    overflow: hidden;
+    &__link{
         flex:1;
         max-height: 900px;
         line-height: 0;
@@ -101,6 +120,47 @@
     justify-content: center;
 }
 
+// nsfw
+.feed-media__adult-blur {
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+}
+.feed-media__nsfw{
+    width: 100%;
+    min-height: 100%;
+    max-height: 900px;
+    background: linear-gradient(180deg, rgba(65,65,65,0.5) 0%, rgba(65,65,65,0.5) 100%);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.uncover-btn{
+    border: 1px solid #FFFFFF;	
+    border-radius: 4px;
+    font-size: 11px;	
+    font-weight: 500;	
+    line-height: 22px;	
+    text-align: center;
+    padding: 6px 32px;
+    color: #fff;
+}
+
+.feed-media__nsfw-text{
+    width: 295px;
+    margin-bottom: 35px;
+}
+
+.feed-media--nsfw-show{
+    .feed-media__nsfw{
+        display: none;
+    }
+    .feed-media__adult-blur{
+        filter: none;
+    }
+}
+
 //head action
 
 .o-feed-head-action{
@@ -125,8 +185,6 @@
     padding: 12px 17px;
     display: flex;
     position: relative;
-    justify-content: flex-start;
-    align-items: center;
     @include mq($from: $mobile_sm, $until: $desktop_sm) {
         padding: 12px 14px;
     }
@@ -137,6 +195,9 @@
         @include mq($from: $mobile_sm, $until: $desktop_sm) {
             margin-right: 8px;
         }
+        i{
+            font-size: 10px;
+        }
     }
     .btn--boost{
         position: absolute;
@@ -145,7 +206,7 @@
     }
     .o-actions__link--coin{
         position: absolute;
-        right: 25px;
+        right: 5px;
         top: 12px;
     }
 }
@@ -166,9 +227,16 @@
 .o-add-channel{
     position: absolute;
     right: 0;
-    top:13px;
 }
-
+.spot-ico{
+    font-size: 23px !important;
+    -webkit-text-stroke: 1px #000;
+    color: #fff!important;
+    &--filled{
+        color: $error!important;
+        -webkit-text-stroke: 0px #000;
+    }
+}
 // comments
 
 .o-comments-compose{
@@ -337,8 +405,6 @@
     visibility: visible;
 }
 
-// 17 oct updated style in angular
-
 // cover btn
 
 .o-feed-nsfw-cover-btn{
@@ -444,11 +510,10 @@
 // events component style
 .feed-media-event-image{
     position:relative;
-    width: 100%;
     img{
         height: 180px;
         width:100%;
-        object-fit: cover; 
+        object-fit: fill; 
     }
     .event-date{
         height: 50px;
@@ -534,7 +599,6 @@
             img{
                 width:101px;
                 height:101px;
-                object-fit: cover;
                 @include mq($from: $mobile_sm, $until: $desktop_sm) {
                     margin-bottom: 20px;
                 }
@@ -549,8 +613,7 @@
             right: 16px;
             font-size:11px;
             @include mq($from: $mobile_sm, $until: $desktop_sm) {
-                right:0;
-                top: 0px;
+                right:inherit;
             }
         }
         .opportunity-details{
@@ -587,5 +650,4 @@
         margin-bottom:9px;
     }
    }
-   
 }
