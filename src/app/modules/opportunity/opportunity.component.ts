@@ -76,7 +76,7 @@ export class OpportunityComponent implements OnInit {
   offset = '';
 
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
-  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
   load() {
     // if (refresh) {
@@ -180,9 +180,9 @@ export class OpportunityComponent implements OnInit {
       // case 'remove-explicit':
       //   //this.setExplicit(false);
       //   break;
-      // case 'translate':
-      //   this.translateToggle = true;
-      //   break;
+      case 'translate':
+        this.translateToggle = true;
+        break;
     }
   }
 

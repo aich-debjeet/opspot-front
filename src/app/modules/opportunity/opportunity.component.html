@@ -15,7 +15,7 @@
               </div>
               <div class="grey m-l-8 o-posts-tym">
                 <span>{{opportunity?.time_created * 1000 | date:'medium'}}</span>
-                <span class="o-posts-public-private" *ngIf="isTranslatable" (click)="translateToggle = true;"><i
+                <span class="o-posts-public-private"><i
                     class="icon-public"></i></span>
               </div>
             </div>
@@ -28,7 +28,7 @@
                   Click to bookmark this post to the top of your channel feed
                 </m-tooltip>
               </a>
-              <m-post-menu *ngIf="opportunity" [entity]="opportunity" [canDelete]="canDelete" [options]="menuOptions"
+              <m-post-menu *ngIf="opportunity" [entity]="opportunity" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
                 (optionSelected)="menuOptionSelected($event)">
                 <ng-container post-menu>
                   <ng-content select="[post-menu]"></ng-content>
@@ -36,6 +36,14 @@
               </m-post-menu>
             </div>
           </div>
+          <m-translate
+          [open]="translateToggle"
+          [entity]="opportunity"
+          [translateEvent]="translateEvent"
+          (onTranslateInit)="propagateTranslation($event)"
+          (onTranslate)="translateToggle = false"
+          (onTranslateError)="translateToggle = false" #translate
+        ></m-translate>       
           <div>
             <div class="feed-card-opportunity-block">
               <div class="feed-card-opportunity-block__top">
