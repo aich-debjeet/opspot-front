@@ -82,7 +82,7 @@
               </div> -->
               <div class="text-sm grey">{{count}} liked this post</div>
               <div class="text-sm grey m-16">{{opportunity?.reminds}} shared this post</div>
-              <div class="text-sm grey m-16">{{opportunity?.wire_totals.tokens | token:18 | abbr}} contributed this post
+              <div class="text-sm grey m-16" *ngIf = "opportunity?.wire_totals">{{opportunity?.wire_totals.tokens | token:18 | abbr}} contributed this post
               </div>
               <div class="text-sm grey m-16">{{opportunity?.impressions}} viewed this post</div>
             </div>

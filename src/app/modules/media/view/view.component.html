@@ -217,12 +217,12 @@ opspot-button-remind{
               </div>
             </div>
             <div class="o-feed-head-action o-post-inner-profile-button">
-              <button type="button" class="btn btn-primary btn-sm" (click)="showBoost()">Boost</button>
+              <button type="button" class="btn btn-primary btn-sm"
+                *ngIf="session.getLoggedInUser().guid == entity?.owner_guid" (click)="showBoost()">Boost</button>
               <!-- <a href="#" class="head-action__link">
                 <img src="assets/svg/bookmark.svg" alt="" class="head-action__icon hidden-mob">
               </a> -->
-              <a class="head-action__link" *ngIf="session.getLoggedInUser().guid != entity.owner_guid"
-                (click)="togglePin()">
+              <a class="head-action__link" (click)="togglePin()">
                 <m-tooltip icon="turned_in" *ngIf="entity?.bookmark">
                   This post is Bookmarked
                 </m-tooltip>
@@ -242,8 +242,8 @@ opspot-button-remind{
             </div>
           </div>
           <m-translate [open]="translateToggle" [entity]="opportunity" [translateEvent]="translateEvent"
-          (onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
-          (onTranslateError)="translateToggle = false" #translate></m-translate>
+            (onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
+            (onTranslateError)="translateToggle = false" #translate></m-translate>
           <div class="o-post-inner-page-myjourney-image">
             <img [src]="largeImage" alt="" *ngIf="!showVideo">
             <m-video *ngIf="showVideo" style="background:#000;" [muted]="false" [poster]="videoData.thumbnail_src"
@@ -298,7 +298,8 @@ opspot-button-remind{
               </div> -->
               <div class="text-sm grey">{{count}} liked this post</div>
               <div class="text-sm grey m-16">{{entity?.reminds}} shared this post</div>
-              <div class="text-sm grey m-16" *ngIf="entity?.wire_totals">{{entity?.wire_totals.tokens}} contributed this post</div>
+              <div class="text-sm grey m-16" *ngIf="entity?.wire_totals">{{entity?.wire_totals.tokens | token:18 | abbr}} contributed this
+                post</div>
               <div class="text-sm grey m-16">{{entity?.impressions}} viewed this post</div>
             </div>
             <div class="o-posts-inner-page-action__icons">
