@@ -41,6 +41,9 @@
 							</m-post-menu>
 						</div>
 					</div>
+					<m-translate [open]="translateToggle" [entity]="marketplace" [translateEvent]="translateEvent"
+						(onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
+						(onTranslateError)="translateToggle = false" #translate></m-translate>
 					<div class="o-post-inner-page-myjourney-image">
 						<img [src]="largeImage" (error)="opspot.cdn_assets_url + 'assets/logos/logo.svg'" alt=""
 							*ngIf="!showVideo">
@@ -104,7 +107,7 @@
 							</div>
 							<div class="feed-card-event-block__right ">
 								<button type="button" class="btn btn-primary btn-lg"
-									*ngIf="session.getLoggedInUser().guid != marketplace.owner_guid">Reach Out</button>
+									*ngIf="session.getLoggedInUser().guid != marketplace?.owner_guid">Reach Out</button>
 							</div>
 						</div>
 					</div>
@@ -120,7 +123,8 @@
 							</div> -->
 							<div class="text-sm grey">{{count}} liked this post</div>
 							<div class="text-sm grey m-16">{{marketplace?.reminds}} shared this post</div>
-							<div class="text-sm grey m-16" *ngIf="marketplace?.wire_totals">{{marketplace?.wire_totals.tokens | token:18 | abbr}} contributed this post</div>
+							<div class="text-sm grey m-16" *ngIf="marketplace?.wire_totals">
+								{{marketplace?.wire_totals.tokens | token:18 | abbr}} contributed this post</div>
 							<div class="text-sm grey m-16">{{marketplace?.impressions}} viewed this post</div>
 						</div>
 						<div class="o-posts-inner-page-action__icons">

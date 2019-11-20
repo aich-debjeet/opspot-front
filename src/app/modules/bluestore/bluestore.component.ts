@@ -4,6 +4,7 @@ import { Session } from '../../services/session';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { BlueStoreFormComponent } from '../forms/blue-store-form/blue-store-form.component';
+import { TranslationService } from '../../services/translation';
 
 
 
@@ -43,7 +44,8 @@ export class BluestoreComponent implements OnInit {
     public client: Client,
     private cd: ChangeDetectorRef,
     public overlayModal: OverlayModalService,
-    private router: Router
+    private router: Router,
+    public translationService: TranslationService
   ) { }
 
   ngOnInit() {
@@ -75,6 +77,9 @@ export class BluestoreComponent implements OnInit {
           }
           this.inProgress = false;
         }
+        this.isTranslatable = (
+          this.translationService.isTranslatable(this.marketplace)
+        );
         this.detectChanges();
       })
       .catch((e) => {
@@ -130,11 +135,13 @@ export class BluestoreComponent implements OnInit {
     this.marketplace.blurb = data.description;
     this.marketplace.title = data.title;
     // this.marketplace.attachment_guid = data.attachment_guid;
-    this.marketplace.price = data.blueStorePrice;
-    this.marketplace.item_count = data.blueStoreUnits;
-    // this.marketplace.currency = 'INR';
-    // this.marketplace.published = 1;
-    // trigger component observe new changes
+    this.marketplace.price = data.price;
+    this.marketplace.item_count =  data.item_count;
+    // if (data.attachment_guid.length > 0) {
+    //   this.marketplace.custom_data= this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    // } else {
+    //   this.marketplace.custom_data = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
+    // }
     this.detectChanges();
   }
 
@@ -234,6 +241,15 @@ export class BluestoreComponent implements OnInit {
       this.showVideo = false;
       this.largeImage = this.marketplace.custom_data[i].src;
       console.log(" this.largeImage: ", this.largeImage);
+    }
+  }
+
+  async wireSubmitted(wire?) {
+    if (wire && this.marketplace.wire_totals) {
+      this.marketplace.wire_totals.tokens =
+        parseFloat(this.marketplace.wire_totals.tokens) + (wire.amount * Math.pow(10, 18));
+
+      this.detectChanges();
     }
   }
 }
