@@ -1,12 +1,11 @@
 import { Component, OnInit, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
-import { OpspotActivityObject } from '../../interfaces/entities';
-import { ActivatedRoute } from '@angular/router';
-import { OpportunityFormComponent } from '../forms/opportunity-form/opportunity-form.component';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { ShowtimezFormComponent } from '../forms/showtimez-form/showtimez-form.component';
 import { Subscription } from 'rxjs';
+import { TranslationService } from '../../services/translation';
 
 
 @Component({
@@ -23,17 +22,15 @@ export class ShowtimezComponent implements OnInit {
     public session: Session,
     public client: Client,
     private cd: ChangeDetectorRef,
-    public overlayModal: OverlayModalService
+    public overlayModal: OverlayModalService,
+    public translationService: TranslationService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
-    // this.route.params.subscribe((params) => {
-    //   this.guid = params['guid'];
-    // });
-    // this.load();
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
-        this.guid = params.get('guid');  
+        this.guid = params.get('guid');
         this.load();
       }
     });
@@ -45,7 +42,7 @@ export class ShowtimezComponent implements OnInit {
   boosted: boolean = false;
   commentsToggle: boolean = false;
   translateToggle: boolean = false;
-  translateEvent: EventEmitter<any> = new EventEmitter();
+  // translateEvent: EventEmitter<any> = new EventEmitter();
   showBoostOptions: boolean = false;
   private _showBoostMenuOptions: boolean = false;
   count;
@@ -53,7 +50,6 @@ export class ShowtimezComponent implements OnInit {
   inProgress: boolean = false;
   showTimez: any;
 
-  // editing: boolean = false;
 
   _delete: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
@@ -68,25 +64,26 @@ export class ShowtimezComponent implements OnInit {
   offset = '';
 
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
-  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
 
   load() {
     if (this.inProgress)
       return false;
-
     this.inProgress = true;
-
-    this.client.get('api/v3/event/' + this.guid)
+    this.client.get('api/v1/newsfeed/single/' + this.guid)
       .then((data: any) => {
-        if (data.event) {
-          this.showTimez = data.event;
+        if (data.activity) {
+          this.showTimez = data.activity;
           this.count = this.showTimez['thumbs:up:count'];
 
-          if (data.event.owner_obj) {
-            this.showTimez['ownerObj'] = data.event.owner_obj;
+          if (data.activity.owner_obj) {
+            this.showTimez['ownerObj'] = data.activity.owner_obj;
           }
           this.inProgress = false;
         }
+        this.isTranslatable = (
+          this.translationService.isTranslatable(this.showTimez)
+        );
         this.detectChanges();
       })
       .catch((e) => {
@@ -104,22 +101,13 @@ export class ShowtimezComponent implements OnInit {
   }
 
   delete($event: any = {}) {
-    if ($event.inProgress) {
-      $event.inProgress.emit(true);
-    }
     this.client.delete(`api/v3/event/${this.showTimez.entity_guid}`)
       .then((response: any) => {
-        if ($event.inProgress) {
-          $event.inProgress.emit(false);
-          $event.completed.emit(0);
-        }
-        this._delete.next(this.showTimez);
+        this.router.navigate([`newsfeed/subscribed`]);
+        // this._delete.next(this.showTimez);
       })
       .catch(e => {
-        if ($event.inProgress) {
-          $event.inProgress.emit(false);
-          $event.completed.emit(1);
-        }
+        alert((e && e.message) || 'Server error');
       });
   }
 
@@ -138,14 +126,13 @@ export class ShowtimezComponent implements OnInit {
   }
 
 
-  // async wireSubmitted(wire?) {
-  //   if (wire && this.opportunity.wire_totals) {
-  //     this.opportunity.wire_totals.tokens =
-  //       parseFloat(this.opportunity.wire_totals.tokens) + (wire.amount * Math.pow(10, 18));
-
-  //     this.detectChanges();
-  //   }
-  // }
+  async wireSubmitted(wire?) {
+    if (wire && this.showTimez.wire_totals) {
+      this.showTimez.wire_totals.tokens =
+        parseFloat(this.showTimez.wire_totals.tokens) + (wire.amount * Math.pow(10, 18));
+      this.detectChanges();
+    }
+  }
 
   menuOptionSelected(option: string) {
     switch (option) {
@@ -157,7 +144,7 @@ export class ShowtimezComponent implements OnInit {
         this.delete();
         break;
       case 'set-explicit':
-       // this.setExplicit(true);
+        // this.setExplicit(true);
         break;
       case 'remove-explicit':
         //this.setExplicit(false);
@@ -184,11 +171,10 @@ export class ShowtimezComponent implements OnInit {
 
 
   updateShowTimez(data: any) {
-    this.showTimez.description = data.description;
+    this.showTimez.blurb = data.description;
     this.showTimez.location = data.location;
     this.showTimez.title = data.title;
-    this.showTimez.eventdate = data.start_time_date;
-    //this.showTimez.eventtime = data.start_time_date;
+    this.showTimez.start_time_date = data.start_time_date;
     this.showTimez.attachment_guid = data.attachment_guid;
     // trigger component observe new changes
     this.detectChanges();
