@@ -101,7 +101,7 @@ export class Activity {
     if (!value)
       return;
     this.activity = value;
-    
+
     this.activity.url = window.Opspot.site_url + 'newsfeed/' + value.guid;
 
     if (
@@ -288,8 +288,6 @@ export class Activity {
         class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
         // listen to the update callback
         onUpdate: (payload: any) => {
-          // make update to local var
-          console.log("payload: ", payload);
           this.udpateOpportunity(payload);
         }
       }).present();
@@ -335,6 +333,11 @@ export class Activity {
     this.activity.blurb = data.description;
     this.activity.location = data.location;
     this.activity.title = data.title;
+    if (data.attachment_guid.length > 0) {
+      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    } else {
+      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/ops_icon.png'
+    }
     // trigger component observe new changes
     this.detectChanges();
   }
@@ -353,9 +356,15 @@ export class Activity {
 
   udpateShowtime(data: any) {
     this.activity.blurb = data.description;
-    this.activity.title = data.title;
     //this.activity.attachment_guid = data.attachment_guid;
-
+    this.activity.location = data.location;
+    this.activity.title = data.title;
+    this.activity.start_time_date = data.start_time_date;
+    if (data.attachment_guid.length > 0) {
+      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    } else {
+      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
+    }
     // trigger component observe new changes
     this.detectChanges();
   }

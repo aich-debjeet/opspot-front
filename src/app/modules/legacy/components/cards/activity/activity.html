@@ -120,7 +120,7 @@
 
   <!-- opportunity -->
   <div *ngIf="showOpportunity && !showBlueStore && !showTimez && !showAlbum">
-    <div class="feed-card-opportunity-block" [routerLink]="['/opportunity/view',activity.entity_guid]">
+    <div class="feed-card-opportunity-block" [routerLink]="['/opportunity/view',activity.guid]">
       <div class="feed-card-opportunity-block__top">
         <div class="opportunity-image">
           <img *ngIf="activity?.custom_data" [src]="activity?.custom_data[0]?activity?.custom_data[0].src:''"
@@ -186,7 +186,7 @@
 
   <!--Showtime-->
   <div class="o-card feed" *ngIf="showTimez && !showBlueStore && !showOpportunity && !showAlbum"
-    [routerLink]="['/event/view', activity.entity_guid]">
+    [routerLink]="['/event/view', activity.guid]">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
     <div class="feed-media">
       <div class="feed-media-event-image">
@@ -385,10 +385,10 @@
     </m-tooltip>
   </button>
   <m-safe-toggle *ngIf="showRatingToggle && session.isAdmin()" [(entity)]="activity"></m-safe-toggle>
-  <!-- <button class="mdl-button m-translate-button mdl-button--icon" *ngIf="isTranslatable"
+  <button class="mdl-button m-translate-button mdl-button--icon" *ngIf="isTranslatable"
     (click)="translateToggle = true;">
     <i class="material-icons">public</i>
-  </button> -->
+  </button>
   <m-post-menu [entity]="activity" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
     (optionSelected)="menuOptionSelected($event)">
     <ng-container post-menu>
