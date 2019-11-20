@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { BlueStoreFormComponent } from '../forms/blue-store-form/blue-store-form.component';
 
@@ -35,14 +35,15 @@ export class BluestoreComponent implements OnInit {
 
 
   // private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
-  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
 
   constructor(
     private route: ActivatedRoute,
     public session: Session,
     public client: Client,
     private cd: ChangeDetectorRef,
-    public overlayModal: OverlayModalService
+    public overlayModal: OverlayModalService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -58,10 +59,10 @@ export class BluestoreComponent implements OnInit {
 
     this.inProgress = true;
 
-    this.client.get('api/v3/marketplace/' + this.guid)
+    this.client.get('api/v1/newsfeed/single/' + this.guid)
       .then((data: any) => {
-        if (data.marketplace) {
-          this.marketplace = data.marketplace;
+        if (data.activity) {
+          this.marketplace = data.activity;
           if (this.marketplace['custom_data'][0]['entity_type'] === 'video') {
             this.showImage(0,this.marketplace['custom_data'][0]);
           } else {
@@ -69,8 +70,8 @@ export class BluestoreComponent implements OnInit {
           }
           this.count = this.marketplace['thumbs:up:count'];
 
-          if (data.marketplace.owner_obj) {
-            this.marketplace['ownerObj'] = data.marketplace.owner_obj;
+          if (data.activity.owner_obj) {
+            this.marketplace['ownerObj'] = data.activity.owner_obj;
           }
           this.inProgress = false;
         }
@@ -126,7 +127,7 @@ export class BluestoreComponent implements OnInit {
   }
 
   udpateMarketPlace(data: any) {
-    this.marketplace.description = data.description;
+    this.marketplace.blurb = data.description;
     this.marketplace.title = data.title;
     // this.marketplace.attachment_guid = data.attachment_guid;
     this.marketplace.price = data.blueStorePrice;
@@ -196,17 +197,10 @@ export class BluestoreComponent implements OnInit {
     }
     this.client.delete(`api/v3/marketplace/${this.marketplace.entity_guid}`)
       .then((response: any) => {
-        if ($event.inProgress) {
-          $event.inProgress.emit(false);
-          $event.completed.emit(0);
-        }
-        this._delete.next(this.marketplace);
+        this.router.navigate([`newsfeed/subscribed`]);
       })
       .catch(e => {
-        if ($event.inProgress) {
-          $event.inProgress.emit(false);
-          $event.completed.emit(1);
-        }
+        alert((e && e.message) || 'Server error');
       });
   }
 
