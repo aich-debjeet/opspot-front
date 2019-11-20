@@ -13,6 +13,7 @@ import { OpspotTitle } from '../../../services/ux/title';
 import { PostFormComponent } from '../../forms/post-form/post-form.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { BoostCreatorComponent } from '../../boost/creator/creator.component';
+import { TranslationService } from '../../../services/translation';
 
 @Component({
   moduleId: module.id,
@@ -44,7 +45,7 @@ export class MediaViewComponent {
 
   // menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'subscribe', 'remove-explicit', 'rating'];
 
-  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'rating'];
 
 
   paramsSubscription: Subscription;
@@ -52,6 +53,7 @@ export class MediaViewComponent {
   focusedCommentGuid: string = '';
   showMyJourneyWidget = false;
   showBoostOptions: boolean = false;
+  translateToggle = false;
 
 
   constructor(
@@ -63,7 +65,9 @@ export class MediaViewComponent {
     public attachment: AttachmentService,
     public context: ContextService,
     private cd: ChangeDetectorRef,
-    public overlayModal: OverlayModalService
+    public overlayModal: OverlayModalService,
+    public translationService: TranslationService,
+
   ) { }
 
   ngOnInit() {
@@ -121,7 +125,6 @@ export class MediaViewComponent {
         // }
         if (response.activity) {
           this.entity = response.activity;
-          console.log("ENTITY: ", this.entity);
           if (this.entity['custom_data'][0]['entity_type'] === 'video') {
             this.showImage(0, this.entity['custom_data'][0]);
           } else {
@@ -129,8 +132,7 @@ export class MediaViewComponent {
           }
           this.count = this.entity['thumbs:up:count'];
 
-          console.log("this tokens: ", this.entity.wire_totals.tokens);
-          
+
 
           // switch (this.entity.subtype) {
           //   case 'video':
@@ -159,6 +161,10 @@ export class MediaViewComponent {
             }
           }
         }
+
+        this.isTranslatable = (
+          this.translationService.isTranslatable(this.entity)
+        );
 
         this.detectChanges();
       })
@@ -214,6 +220,9 @@ export class MediaViewComponent {
         break;
       case 'remove-explicit':
         this.setExplicit(false);
+        break;
+      case 'translate':
+        this.translateToggle = true;
         break;
 
     }
@@ -274,11 +283,9 @@ export class MediaViewComponent {
     if (data) {
       this.showVideo = true;
       this.videoData = data;
-      console.log("video: ", data);
     } else {
       this.showVideo = false;
       this.largeImage = this.entity.custom_data[i].src;
-      console.log(" this.largeImage: ", this.largeImage);
     }
   }
 
@@ -311,5 +318,5 @@ export class MediaViewComponent {
     this.cd.detectChanges();
   }
 
-  
+
 }

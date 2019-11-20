@@ -241,6 +241,9 @@ opspot-button-remind{
               <!-- </div> -->
             </div>
           </div>
+          <m-translate [open]="translateToggle" [entity]="opportunity" [translateEvent]="translateEvent"
+          (onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
+          (onTranslateError)="translateToggle = false" #translate></m-translate>
           <div class="o-post-inner-page-myjourney-image">
             <img [src]="largeImage" alt="" *ngIf="!showVideo">
             <m-video *ngIf="showVideo" style="background:#000;" [muted]="false" [poster]="videoData.thumbnail_src"
