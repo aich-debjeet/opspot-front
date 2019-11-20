@@ -217,7 +217,7 @@ opspot-button-remind{
               </div>
             </div>
             <div class="o-feed-head-action o-post-inner-profile-button">
-              <button type="button" class="btn btn-primary btn-sm">Boost</button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="showBoost()">Boost</button>
               <!-- <a href="#" class="head-action__link">
                 <img src="assets/svg/bookmark.svg" alt="" class="head-action__icon hidden-mob">
               </a> -->
@@ -294,17 +294,23 @@ opspot-button-remind{
                 <div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt=""></div>
               </div> -->
               <div class="text-sm grey">{{count}} liked this post</div>
-              <div class="text-sm grey m-16">46 shared this post</div>
-              <div class="text-sm grey m-16">13 contributed this post</div>
-              <div class="text-sm grey m-16">2k viewed this post</div>
+              <div class="text-sm grey m-16">{{entity?.reminds}} shared this post</div>
+              <div class="text-sm grey m-16" *ngIf="entity?.wire_totals">{{entity?.wire_totals.tokens}} contributed this post</div>
+              <div class="text-sm grey m-16">{{entity?.impressions}} viewed this post</div>
             </div>
             <div class="o-posts-inner-page-action__icons">
-              <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="entity">
-              </opspot-button-thumbs-up>
-              <opspot-button-remind [object]="entity" [large]="'true'"></opspot-button-remind>
-              <div class="icon-posts-box">
-                <span class="icon-coins"></span><span class="text-md f500">Contribute</span>
-              </div>
+              <a class="icon-posts-box">
+                <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="entity">
+                </opspot-button-thumbs-up>
+              </a>
+              <a class="icon-posts-box">
+                <opspot-button-remind [object]="entity" [large]="'true'"></opspot-button-remind>
+              </a>
+              <a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != entity?.owner_guid">
+                <m-wire-button [object]="entity?.remind_object ? entity?.remind_object : entity"
+                  (done)="wireSubmitted($event)" [large]="true">
+                </m-wire-button>
+              </a>
             </div>
           </div>
           <opspot-comments *ngIf="entity.guid" [object]="entity" [focusedCommentGuid]="focusedCommentGuid">
@@ -313,8 +319,9 @@ opspot-button-remind{
       </div>
       <div class="o-posts-inner-page__right hidden-mob">
         <opspot-widget *ngIf="!showMyJourneyWidget" [entityType]="'opportunity'"></opspot-widget>
-        <opspot-widget  *ngIf="!showMyJourneyWidget" [entityType]="'event'"></opspot-widget>
-        <opspot-widget *ngIf= "entity?.ownerObj && showMyJourneyWidget" [entityType]="'myjourney'" [user]="entity?.ownerObj"></opspot-widget>
+        <opspot-widget *ngIf="!showMyJourneyWidget" [entityType]="'event'"></opspot-widget>
+        <opspot-widget *ngIf="entity?.ownerObj && showMyJourneyWidget" [entityType]="'myjourney'"
+          [user]="entity?.ownerObj"></opspot-widget>
       </div>
     </div>
   </div>
