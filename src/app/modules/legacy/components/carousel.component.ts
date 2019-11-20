@@ -4,10 +4,10 @@ import { Client } from '../../../services/api';
 
 @Component({
   selector: 'm-channel--carousel',
-  inputs: ['_banners: banners', '_editMode: editMode'],
+  inputs: ['_banners: banners', '_editMode: editMode', 'hideArrows: hideArrows'],
   outputs: ['done_event: done', 'delete_event: delete'],
   template: `
-    <i class="material-icons left" (click)="prev()" [hidden]="banners.length <= 1">keyboard_arrow_left</i>
+    <i class="material-icons left" *ngIf="!hideArrows" (click)="prev()" [hidden]="banners.length <= 1">keyboard_arrow_left</i>
     <div *ngFor="let banner of banners; let i = index">
       <opspot-banner
         [src]="banner.src"
@@ -23,7 +23,7 @@ import { Client } from '../../../services/api';
           <button class="mdl-button mdl-button--raised mdl-button--colored material-icons">X</button>
         </div>
       </div>
-    <i class="material-icons right" (click)="next()" [hidden]="banners.length <= 1">keyboard_arrow_right</i>
+    <i class="material-icons right" *ngIf="!hideArrows" (click)="next()" [hidden]="banners.length <= 1">keyboard_arrow_right</i>
   `
 })
 

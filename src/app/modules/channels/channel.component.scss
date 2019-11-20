@@ -13,6 +13,26 @@ m-channel{
     position:relative;
     overflow:visible;
 
+    .o-cover-edit {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #FFFFFF;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button {
+      z-index: 99999;
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+    }
+
     @media screen and (max-width: 720px){
       height: 160px;
     }
