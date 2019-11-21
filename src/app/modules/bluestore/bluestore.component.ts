@@ -28,6 +28,8 @@ export class BluestoreComponent implements OnInit {
   canDelete: boolean = false;
   translateToggle: boolean = false;
   _delete: EventEmitter<any> = new EventEmitter();
+  childEventsEmitter: EventEmitter<any> = new EventEmitter();
+
 
   // showBoostOptions: boolean = false;
   // private _showBoostMenuOptions: boolean = false;
@@ -243,6 +245,16 @@ export class BluestoreComponent implements OnInit {
       console.log(" this.largeImage: ", this.largeImage);
     }
   }
+
+  propagateTranslation($event) {
+    if (this.marketplace.remind_object && this.translationService.isTranslatable(this.marketplace.remind_object)) {
+      this.childEventsEmitter.emit({
+        action: 'translate',
+        args: [$event]
+      });
+    }
+  }
+
 
   async wireSubmitted(wire?) {
     if (wire && this.marketplace.wire_totals) {

@@ -62,6 +62,7 @@ export class ShowtimezComponent implements OnInit {
   canDelete: boolean = false;
   showRatingToggle: boolean = false;
   offset = '';
+  
 
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
@@ -200,6 +201,16 @@ export class ShowtimezComponent implements OnInit {
       this.count = this.showTimez['thumbs:up:count']
     }
   }
+
+  propagateTranslation($event) {
+    if (this.showTimez.remind_object && this.translationService.isTranslatable(this.showTimez.remind_object)) {
+      this.childEventsEmitter.emit({
+        action: 'translate',
+        args: [$event]
+      });
+    }
+  }
+
 
   // setExplicit(value: boolean) {
   //   let oldValue = this.activity.mature,

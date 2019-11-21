@@ -75,6 +75,7 @@ export class OpportunityComponent implements OnInit {
   showRatingToggle: boolean = false;
   offset = '';
 
+
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
 
@@ -231,6 +232,16 @@ export class OpportunityComponent implements OnInit {
       this.count = this.opportunity['thumbs:up:count']
     }
   }
+
+  propagateTranslation($event) {
+    if (this.opportunity.remind_object && this.translationService.isTranslatable(this.opportunity.remind_object)) {
+      this.childEventsEmitter.emit({
+        action: 'translate',
+        args: [$event]
+      });
+    }
+  }
+
 
 
 }

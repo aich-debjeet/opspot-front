@@ -36,7 +36,7 @@
               </m-post-menu>
             </div>
           </div>
-          <m-translate [open]="translateToggle" [entity]="opportunity" [translateEvent]="translateEvent"
+          <m-translate [open]="translateToggle" [entity]="showTimez" [translateEvent]="translateEvent"
             (onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
             (onTranslateError)="translateToggle = false" #translate></m-translate>
           <div class="feed-media o-posts-inner-event-image">
