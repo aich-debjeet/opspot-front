@@ -4,7 +4,7 @@ import { Client } from '../../../services/api';
 
 @Component({
   selector: 'm-channel--carousel',
-  inputs: ['_banners: banners', '_editMode: editMode', 'hideArrows: hideArrows'],
+  inputs: ['_banners: banners', '_editMode: editMode', 'hideArrows'],
   outputs: ['done_event: done', 'delete_event: delete'],
   template: `
     <i class="material-icons left" *ngIf="!hideArrows" (click)="prev()" [hidden]="banners.length <= 1">keyboard_arrow_left</i>
@@ -43,6 +43,7 @@ export class CarouselComponent {
   rotate_timeout; //the timeout for the rotator
   interval: number = 3000; //the interval for each banner to stay before rotating
   index: number = 0; //the current visible index of the carousel.
+  hideArrows: boolean = false;
 
   constructor() {
     this.run();
