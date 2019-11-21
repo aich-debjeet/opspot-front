@@ -241,7 +241,7 @@ opspot-button-remind{
               <!-- </div> -->
             </div>
           </div>
-          <m-translate [open]="translateToggle" [entity]="opportunity" [translateEvent]="translateEvent"
+          <m-translate [open]="translateToggle" [entity]="entity" [translateEvent]="translateEvent"
             (onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
             (onTranslateError)="translateToggle = false" #translate></m-translate>
           <div class="o-post-inner-page-myjourney-image">

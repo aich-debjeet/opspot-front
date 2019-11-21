@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
@@ -54,6 +54,8 @@ export class MediaViewComponent {
   showMyJourneyWidget = false;
   showBoostOptions: boolean = false;
   translateToggle = false;
+  childEventsEmitter: EventEmitter<any> = new EventEmitter();
+
 
 
   constructor(
@@ -316,6 +318,15 @@ export class MediaViewComponent {
   private detectChanges() {
     this.cd.markForCheck();
     this.cd.detectChanges();
+  }
+
+  propagateTranslation($event) {
+    if (this.entity.remind_object && this.translationService.isTranslatable(this.entity.remind_object)) {
+      this.childEventsEmitter.emit({
+        action: 'translate',
+        args: [$event]
+      });
+    }
   }
 
 
