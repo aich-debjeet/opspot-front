@@ -29,6 +29,7 @@ export class BluestoreComponent implements OnInit {
   translateToggle: boolean = false;
   _delete: EventEmitter<any> = new EventEmitter();
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
+  translateEvent: EventEmitter<any> = new EventEmitter();
 
 
   // showBoostOptions: boolean = false;

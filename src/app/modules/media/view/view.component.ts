@@ -55,6 +55,7 @@ export class MediaViewComponent {
   showBoostOptions: boolean = false;
   translateToggle = false;
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
+  translateEvent: EventEmitter<any> = new EventEmitter();
 
 
 
