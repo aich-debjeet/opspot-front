@@ -145,6 +145,11 @@ li.active a{
     position: absolute;
     right: 15px;
     top: 15px;
+    @include mq($from:$mobile_sm, $until:$mobile_lg){
+        right: 15px;
+        bottom: 15px;
+        top: unset!important;
+    }
     .btn{
         margin-left: 45px;
     }
@@ -335,5 +340,13 @@ li.active a{
     padding: 21px 33px 0px!important;
     .form-group{
         margin-bottom: 0px;
+    }
+}
+
+
+.blog-create-form{
+    @include mq($from:$mobile_sm, $until:$tablet){
+        min-height: calc(100vh - 196px);
+        padding-bottom: 29px;
     }
 }

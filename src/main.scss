@@ -7721,6 +7721,10 @@ m-blog-view img.m--img-not-found, opspot-blog-edit img.m--img-not-found {
   height: 300px !important;
   background-image: url("https://ops.doesntexist.com/en/assets/image-not-found.png"); }
 
+m-blog-view img.display {
+  width:100%;
+}
+
 m-blog-view ul.m-blog--categories-list, opspot-blog-edit ul.m-blog--categories-list {
   border-top: 1px solid #ddd;
   list-style: none;

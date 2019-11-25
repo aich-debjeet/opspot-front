@@ -62,23 +62,6 @@ export class BlogEdit {
 
   licenses = LICENSES;
   access = ACCESS;
-  // view: string = 'writeBlog';
-  // canDelete: boolean = false;
-  // isTranslatable: boolean;
-  // menuOptions: Array<string> = ['edit', 'delete'];
-
-
-  // offset: string = '';
-  // moreData: boolean = true;
-  // myBlogInProgress: boolean = false;
-  // entities_0: Array<any> = [];
-  // entities_1: Array<any> = [];
-  // filter: string = 'featured';
-  // _filter2: string = '';
-  // rating: number = 1;
-  // filteredArray = [];
-  // selectedGuid: string;
-
   paramsSubscription: Subscription;
   @ViewChild('inlineEditor') inlineEditor: InlineEditorComponent;
   @ViewChild('thresholdInput') thresholdInput: WireThresholdInputComponent;
@@ -167,7 +150,6 @@ export class BlogEdit {
     this.client.get('api/v1/blog/' + this.guid, {})
       .then((response: any) => {
         if (response.blog) {
-          console.log(response.blog)
           this.blog = response.blog;
           this.guid = response.blog.guid;
           this.title.setTitle(this.blog.title);
