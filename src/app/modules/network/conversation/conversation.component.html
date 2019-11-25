@@ -127,8 +127,8 @@
 <div class="o-net-msgs">
     <div class="o-net-msgs__head">
         <div class="o-net-msgs-user-info">
-            <div class="o-avatar-md"><img src="assets/demo/avatar.png" alt=""></div>
-            <div class="caption-bold m-l-9">Aradhya Mistry</div>
+            <div class="o-avatar-md"><img [src]="opspot.cdn_url + 'icon/' + conversation.participants[0].guid" alt=""></div>
+            <div class="caption-bold m-l-9">{{ conversation.name }}</div>
         </div>
         <div class="o-option-drop">
             <div onclick="myFunction()" class="o-option-drop__btn head-action__link">
@@ -140,7 +140,7 @@
             </div>
         </div><!--action drop-->
     </div><!-- network msgs head end -->
-    <div class="o-net-msgs-body">
+    <div *ngIf="messages; else emptyConversation" class="o-net-msgs-body">
         <div class="o-net-msg-block">
             <div class="o-net-my-msg">
                 <p class="text-md white">
@@ -187,6 +187,9 @@
             </div>
         </div><!-- others msg end -->
     </div><!-- network body part end -->
+    <ng-template #emptyConversation>
+      <p>No messages found!</p>
+    </ng-template>
     <div class="o-net-msgs-footer">
         <div class="o-net-msgs-type">
             <input type="text">

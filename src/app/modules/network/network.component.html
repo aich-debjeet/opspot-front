@@ -21,10 +21,10 @@
                         <i class="icon-arrow-right"></i>
                     </div>
                 </a><!-- network request end -->
-                <m-network--userlist #userList></m-network--userlist>
+                <m-network--userlist (loadConversation)="loadConversation($event)" #userList></m-network--userlist>
             </div>
             <div class="o-net-block__right">
-                <m-network--conversation></m-network--conversation>
+                <m-network--conversation *ngIf="conversation" [conversation]="conversation"></m-network--conversation>
             </div>
         </div>
     </div>

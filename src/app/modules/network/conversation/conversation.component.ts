@@ -25,7 +25,7 @@ import { SocketsService } from '../../../services/sockets';
     '(window:focus)': 'onFocus($event)',
     '(window:blur)': 'onBlur($event)'
   },
-  inputs: ['conversation'],
+  inputs: ['_conversation: conversation'],
   styleUrls: ['./conversation.component.scss'],
   templateUrl: 'conversation.component.html'
 })
@@ -70,6 +70,12 @@ export class NetworkConversation {
 
   invitable: any[] | null = null;
   invited: boolean = false;
+
+  set _conversation(value: any) {
+    this.conversation = value;
+    // console.log('NetworkConversation @input conv: ', this.conversation);
+    this.initialLoad();
+  }
 
   constructor(
     public session: Session,

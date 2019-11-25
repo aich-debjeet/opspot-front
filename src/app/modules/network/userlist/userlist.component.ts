@@ -1,4 +1,4 @@
-import { Component, Injector, ViewChild } from '@angular/core';
+import { Component, Injector, ViewChild, EventEmitter, Output } from '@angular/core';
 
 import { SocketsService } from '../../../services/sockets';
 
@@ -20,6 +20,8 @@ import { Session } from '../../../services/session';
 export class NetworkUserlist {
   // sounds = new MessengerSounds();
 
+  @Output() loadConversation: EventEmitter<any> = new EventEmitter();
+
   conversations: Array<any> = [];
   offset: string = '';
 
@@ -36,6 +38,7 @@ export class NetworkUserlist {
   };
 
   search_timeout;
+  convLoaded = false;
 
   constructor(
     public session: Session,
@@ -43,7 +46,7 @@ export class NetworkUserlist {
     public sockets: SocketsService,
     // public encryption: MessengerEncryptionService,
     // public dockpanes: MessengerConversationDockpanesService
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (this.session.isLoggedIn()) {
@@ -89,6 +92,11 @@ export class NetworkUserlist {
           this.conversations = this.conversations.concat(
             response.conversations
           );
+        }
+
+        if (!this.convLoaded) {
+          // load first conversation
+          this.loadConversation.emit(this.conversations[0]);
         }
 
         this.offset = response['load-next'];
@@ -139,6 +147,13 @@ export class NetworkUserlist {
           this.inProgress = false;
         });
     }, 300);
+  }
+
+  openConversation(conversation) {
+    // conversation.open = true;
+    // console.log('conversation', conversation);
+    // this.dockpanes.open(conversation);
+    this.loadConversation.emit(conversation);
   }
 
   // openConversation(conversation) {

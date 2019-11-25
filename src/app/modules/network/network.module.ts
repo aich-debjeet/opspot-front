@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NetworkComponent } from './network.component';
 import { NetworkUserlist } from './userlist/userlist.component';
 import { NetworkConversation } from './conversation/conversation.component';
+import { NetworkConversationService } from './conversation.service';
+import { Session } from './../../services/session';
 
 const routes: Routes = [
   { path: '', component: NetworkComponent }
@@ -22,6 +24,13 @@ const routes: Routes = [
   ],
   entryComponents: [
     NetworkComponent
+  ],
+  providers: [
+    {
+      provide: NetworkConversationService,
+      useFactory: NetworkConversationService._,
+      deps: [Session]
+    },
   ]
 })
 export class NetworkModule { }

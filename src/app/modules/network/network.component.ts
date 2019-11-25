@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./network.component.scss']
 })
 export class NetworkComponent implements OnInit {
+  conversation: any;
 
   constructor(
     private session: Session,
@@ -20,6 +21,10 @@ export class NetworkComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  loadConversation(conversation: any) {
+    this.conversation = conversation;
   }
 
 }
