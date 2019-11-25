@@ -25,6 +25,7 @@ export class NetworkComponent implements OnInit {
 
   loadConversation(conversation: any) {
     this.conversation = conversation;
+    this.conversation['isActive'] = true;
   }
 
 }

@@ -140,39 +140,29 @@
             </div>
         </div><!--action drop-->
     </div><!-- network msgs head end -->
-    <div *ngIf="messages; else emptyConversation" class="o-net-msgs-body">
-        <div *ngFor="let message of messages;" class="o-net-msg-block">
-            <div
-              [class.o-net-my-msg]="message.owner.guid == session.getLoggedInUser().guid"
-              [class.o-net-others-msg]="message.owner.guid != session.getLoggedInUser().guid"
-            >
-                <p
-                  class="text-md" 
-                  [class.white]="message.owner.guid == session.getLoggedInUser().guid"
-                  [class.grey-dark]="message.owner.guid != session.getLoggedInUser().guid"
-                  [innerHtml]="message.message"
-                ></p>
+    <div class="o-net-msgs-body">
+        <div class="mdl-spinner mdl-js-spinner is-active" [hidden]="!inProgress"></div>
+        <ng-container *ngIf="!inProgress">
+            <div *ngFor="let message of messages;" class="o-net-msg-block">
                 <div
-                  class="text-sm o-net-msg-tym"
-                  [class.white]="message.owner.guid == session.getLoggedInUser().guid"
-                  [class.grey]="message.owner.guid != session.getLoggedInUser().guid"
-                >{{ message.time_created * 1000 | date: 'medium' }}</div>
+                  [class.o-net-my-msg]="message.owner.guid == session.getLoggedInUser().guid"
+                  [class.o-net-others-msg]="message.owner.guid != session.getLoggedInUser().guid"
+                >
+                    <p
+                      class="text-md" 
+                      [class.white]="message.owner.guid == session.getLoggedInUser().guid"
+                      [class.grey-dark]="message.owner.guid != session.getLoggedInUser().guid"
+                      [innerHtml]="message.message"
+                    ></p>
+                    <div
+                      class="text-sm o-net-msg-tym"
+                      [class.white]="message.owner.guid == session.getLoggedInUser().guid"
+                      [class.grey]="message.owner.guid != session.getLoggedInUser().guid"
+                    >{{ message.time_created * 1000 | date: 'medium' }}</div>
+                </div>
             </div>
-        </div><!-- my msg end -->
-        <!-- <div class="o-net-msg-block">
-            <div class="o-net-others-msg">
-                <p class="text-md grey-dark">
-                    Oh, Hi I'm have got a new job now
-                    and is going great. How about you?
-                </p>
-                <div class="text-sm grey o-net-msg-tym">11:00</div>
-            </div>
-        </div> -->
-        <!-- others msg end -->
+        </ng-container>
     </div><!-- network body part end -->
-    <ng-template #emptyConversation>
-      <p>No messages found!</p>
-    </ng-template>
     <div class="o-net-msgs-footer">
         <div class="o-net-msgs-type">
             <input type="text">
