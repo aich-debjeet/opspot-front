@@ -186,7 +186,7 @@
 
   <!--Showtime-->
   <div class="o-card feed" *ngIf="showTimez && !showBlueStore && !showOpportunity && !showAlbum"
-    [routerLink]="['/event/view', activity.guid]">
+    [routerLink]="[routerLink1, activity.guid]">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
     <div class="feed-media">
       <div class="feed-media-event-image">

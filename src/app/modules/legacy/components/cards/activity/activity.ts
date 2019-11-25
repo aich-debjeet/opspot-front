@@ -13,6 +13,7 @@ import { OpportunityFormComponent } from '../../../../../modules/forms/opportuni
 import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-form/blue-store-form.component';
 import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
 import { PostFormComponent } from '../../../../../modules/forms/post-form/post-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -76,7 +77,7 @@ export class Activity {
   isTranslatable: boolean;
   canDelete: boolean = false;
   showRatingToggle: boolean = false;
-
+  routerLink1 = "";
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
   menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
@@ -91,7 +92,8 @@ export class Activity {
     public attachment: AttachmentService,
     public translationService: TranslationService,
     private overlayModal: OverlayModalService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router
   ) {
     this.element = _element.nativeElement;
     this.isVisible();
@@ -130,11 +132,18 @@ export class Activity {
 
     if (this.activity.entity_type === "event") {
       this.showTimez = true;
+      if (this.activity.end_time_date) {
+        this.routerLink1 = "/event/view"
+      } else {
+        this.routerLink1 = "/showtime/view"
+      }
     }
 
     if (this.activity.entity_type === "album") {
       this.showAlbum = true;
     }
+
+
 
     this.boosted = this.activity.boosted || this.activity.p2p_boosted;
 
@@ -303,14 +312,19 @@ export class Activity {
       }).present()
     }
     else if (this.activity.entity_type === 'event') {
-      this.overlayModal.create(ShowtimezFormComponent, this.activity, {
-        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
-        // listen to the update callback
-        onUpdate: (payload: any) => {
-          // make update to local var
-          this.udpateShowtime(payload);
-        }
-      }).present()
+      if (this.activity.end_time_date) {
+        this.router.navigateByUrl('/event/edit/' + this.activity.guid)
+      } else {
+        this.overlayModal.create(ShowtimezFormComponent, this.activity, {
+          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+          // listen to the update callback
+          onUpdate: (payload: any) => {
+            // make update to local var
+            this.udpateShowtime(payload);
+          }
+        }).present()
+      }
+
     }
     // TODO @gayatri need to check for edit
     // else if (this.activity.entity_type === 'album' || this.activity.entity_type === 'image') {

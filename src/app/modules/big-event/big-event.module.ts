@@ -25,7 +25,7 @@ const bigeventRoutes: Routes = [
     component: BigEventEdit,
   },
   {
-    path: 'events/view/:guid',
+    path: 'event/view/:guid',
     component: BigEventView,
   }
   // {

@@ -12,7 +12,7 @@ import { TranslateModule } from '../translate/translate.module';
 // TODO @gayatri: handle all other requests
 const showtimeRoutes: Routes = [
   {
-    path: 'event/view/:guid',
+    path: 'showtime/view/:guid',
     component: ShowtimezComponent,
   }
   // {

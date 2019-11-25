@@ -24,7 +24,7 @@ export class BigEventEdit implements OnInit {
     public client: Client,
     private cd: ChangeDetectorRef
   ) { }
- 
+
   guid: any;
 
   ngOnInit() {
@@ -42,16 +42,16 @@ export class BigEventEdit implements OnInit {
 
     // this.inProgress = true;
 
-    this.client.get('api/v3/event/' + this.guid)
+    this.client.get('api/v1/newsfeed/single/' + this.guid)
       .then((data: any) => {
-        if (data.event) {
-          this.bigEvent = data.event;
-          if (data.event.owner_obj) {
-            this.bigEvent['ownerObj'] = data.event.owner_obj;
+        if (data.activity) {
+          this.bigEvent = data.activity;
+          if (data.activity.owner_obj) {
+            this.bigEvent['ownerObj'] = data.activity.owner_obj;
           }
-          if(this.bigEvent.custom_data){
+          if (this.bigEvent.custom_data) {
             this.coverImage = this.bigEvent.custom_data[0].src;
-            
+
           }
           this.inProgress = false;
         }
