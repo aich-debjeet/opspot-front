@@ -22840,11 +22840,24 @@ m-channel--carousel {
     position: absolute;
     top: 8px;
     right: 8px;
-    z-index: 999; }
+    z-index: 999;
+    button {
+      background: transparent !important;
+    }
+  }
+  m-channel {
+    header {
+      button {
+        bottom: 30px;
+        right: 40px;
+        position: absolute;
+      }
+    }
+  }
     m-channel--carousel .delete-button > * {
       font-size: 11px; }
   m-channel--carousel .add-button {
-    display: block !important;
+    display: none !important;
     position: absolute;
     top: 8px;
     right: 80px;

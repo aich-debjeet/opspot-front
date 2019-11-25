@@ -179,6 +179,7 @@ export class ChannelComponent {
       this.upload
         .post('api/v1/channel/carousel', [banner.file], options)
         .then((response: any) => {
+          console.log('banners', response);
           response.index = banner.index;
           if (!this.user.carousels) {
             this.user.carousels = [];
