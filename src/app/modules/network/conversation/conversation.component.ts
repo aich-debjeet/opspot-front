@@ -105,13 +105,13 @@ export class NetworkConversation {
   }
 
   initialLoad() {
-    this.load({ limit: 8 });
+    this.load({ limit: 24 });
   }
 
   load(opts: any = {}) {
     opts = (<any>Object).assign(
       {
-        limit: 12,
+        limit: 24,
         offset: '',
         finish: ''
       },
@@ -151,6 +151,8 @@ export class NetworkConversation {
           this.offset = response['load-previous'];
           this.scrollEmitter.next(true);
         }
+
+        console.log('messages', this.messages);
 
         if (this.conversation.open) {
           this.conversation.unread = false;
