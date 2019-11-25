@@ -86,17 +86,18 @@
   width: 100%;
   height: calc(100vh - 200px);
   display: flex;
-  justify-content: end;
-  flex-direction: column-reverse;
+  justify-content: flex-end;
+  flex-direction: column;
+  overflow-y: scroll;
 }
 .o-net-msg-block{
   width: 100%;
-  min-height: 63px;
+  // min-height: 63px;
   padding: 14px 19px;
 }
 .o-net-my-msg{
   max-width: 221px;
-  min-height: 63px;
+  // min-height: 63px;
   border-radius: 20px 20px 0 20px;	
   background-color: $primary;
   padding: 15px 12px 15px 14px;

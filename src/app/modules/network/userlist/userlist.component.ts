@@ -138,6 +138,11 @@ export class NetworkUserlist {
           }
 
           this.conversations = response.conversations;
+          this.conversations = this.conversations.map((el) => {
+            const o = Object.assign({}, el);
+            o.isActive = false;
+            return o;
+          });
 
           this.offset = response['load-next'];
           this.inProgress = false;
@@ -153,6 +158,13 @@ export class NetworkUserlist {
     // conversation.open = true;
     // console.log('conversation', conversation);
     // this.dockpanes.open(conversation);
+    this.conversations.map((el) => {
+      if (el.guid === conversation.guid) {
+        el.isActive = true;
+      } else {
+        el.isActive = false;
+      }
+    });
     this.loadConversation.emit(conversation);
   }
 

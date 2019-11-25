@@ -66,7 +66,11 @@
 
 <ul *ngIf="conversations?.length > 0" class="o-net-list">
   <ng-container *ngFor="let conversation of conversations;">
-    <li class="o-net-list__item" [class.o-net-list__item--unread]="conversation.unread == 0">
+    <li
+      class="o-net-list__item"
+      [class.o-net-list__item--unread]="conversation.unread == 0"
+      [class.o-net-list__item--active]="conversation.isActive == true"
+    >
       <a (click)="openConversation(conversation)" class="o-net-user-list">
         <div class="o-net-user-list__avatar o-avatar-md">
           <img [src]="opspot.cdn_url + 'icon/' + conversation.participants[0].guid" alt="">
