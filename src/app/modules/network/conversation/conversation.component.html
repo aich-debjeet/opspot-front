@@ -165,15 +165,27 @@
     </div><!-- network body part end -->
     <div class="o-net-msgs-footer">
         <div class="o-net-msgs-type">
-            <input type="text">
-            <div class="o-net-msgs-type__addon">
+            <textarea placeholder="Send a message..."
+              i18n-placeholder="@@MESSENGER__CONVERSATION__SEND_A_MESSAGE"
+              name="message"
+              (keydown.enter)="send($event);"
+              [(ngModel)]="message"
+              [disabled]="blockingActionInProgress"
+              autoGrow
+              maxlength="180"
+              rows="1"
+            ></textarea>
+              <!-- <i class="material-icons mdl-color-text--blue-grey-600" (emoji)="message = message + $event.character" #emoji="emoji">mood</i>
+              <i class="material-icons mdl-color-text--blue-grey-600" (click)="send($event); emoji.close()">send_arrow</i> -->
+            <!-- <opspot-emoji [localDirective]="emoji"></opspot-emoji> -->
+            <!-- <div class="o-net-msgs-type__addon">
                 <a href="javascript:void(0)" class="o-net-msgs-type__link">
                     <img src="assets/svg/emoji.svg" alt="">
                 </a>
                 <a href="javascript:void(0)" class="o-net-msgs-type__link">
                     <i class="icon-plus-circle"></i>
                 </a>
-            </div>
+            </div> -->
         </div>
         <div class="o-net-msgs-send"><i class="icon-send"></i></div>
     </div><!-- network msgs footer end -->
