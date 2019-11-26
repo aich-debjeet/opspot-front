@@ -6,6 +6,8 @@ import { OpportunityFormComponent } from '../forms/opportunity-form/opportunity-
 import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../services/translation';
+import { ScrollService } from '../../services/ux/scroll';
+
 
 
 @Component({
@@ -27,6 +29,7 @@ export class OpportunityComponent implements OnInit {
     public overlayModal: OverlayModalService,
     private router: Router,
     public translationService: TranslationService,
+    public scroll: ScrollService
   ) { }
 
   ngOnInit() {
@@ -36,6 +39,7 @@ export class OpportunityComponent implements OnInit {
         this.load();
       }
     });
+    this.onScroll();
   }
 
   // activity: any;
@@ -74,6 +78,8 @@ export class OpportunityComponent implements OnInit {
   canDelete: boolean = false;
   showRatingToggle: boolean = false;
   offset = '';
+  isLocked: boolean = false;
+
 
 
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
@@ -242,6 +248,12 @@ export class OpportunityComponent implements OnInit {
     }
   }
 
+  onScroll() {
+    var listen = this.scroll.listen(view => {
+      if (view.top > 250) this.isLocked = true;
+      if (view.top < 250) this.isLocked = false;
+    });
+  }
 
 
 }

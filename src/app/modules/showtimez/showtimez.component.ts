@@ -6,6 +6,7 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { ShowtimezFormComponent } from '../forms/showtimez-form/showtimez-form.component';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../services/translation';
+import { ScrollService } from '../../services/ux/scroll';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class ShowtimezComponent implements OnInit {
     public overlayModal: OverlayModalService,
     public translationService: TranslationService,
     private router: Router,
+    public scroll: ScrollService
   ) { }
 
   ngOnInit() {
@@ -34,6 +36,8 @@ export class ShowtimezComponent implements OnInit {
         this.load();
       }
     });
+
+    this.onScroll();
   }
 
   // activity: any;
@@ -54,6 +58,8 @@ export class ShowtimezComponent implements OnInit {
   _delete: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
   scroll_listener;
+  isLocked: boolean = false;
+
 
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
   onViewed: EventEmitter<{ activity, visible }> = new EventEmitter<{ activity, visible }>();
@@ -209,6 +215,13 @@ export class ShowtimezComponent implements OnInit {
         args: [$event]
       });
     }
+  }
+
+  onScroll() {
+    var listen = this.scroll.listen(view => {
+      if (view.top > 250) this.isLocked = true;
+      if (view.top < 250) this.isLocked = false;
+    });
   }
 
 
