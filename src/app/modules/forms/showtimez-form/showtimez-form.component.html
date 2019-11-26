@@ -77,7 +77,7 @@
       </div>
       <!--body ends-->
       <div class="o-create-show-timez-footer">
-          <button type="button" class="btn btn-primary btn-sm disabled" (click)="eventSubmit()">Post</button>
+          <button type="button" class="btn btn-primary btn-sm" [disabled]="!showTimezForm.valid" (click)="eventSubmit()">Post</button>
           <!--for event page-->
       </div>
   </form>
