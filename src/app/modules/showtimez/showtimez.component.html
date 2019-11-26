@@ -45,10 +45,10 @@
                 (error)="showTimez.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
                 *ngIf="showTimez?.custom_data">
               <img *ngIf="!showTimez?.custom_data" src="opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
-              <img *ngIf="showTimez?.custom_data"
-                [src]="showTimez?.custom_data[0] ?showTimez?.custom_data[0].src:''"
+              <img *ngIf="showTimez?.custom_data.length > 0"
+                [src]="showTimez?.custom_data[0] ? showTimez?.custom_data[0].src:''"
                 (error)="showTimez?.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
-              <img *ngIf="!showTimez?.custom_data" src="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+              <img *ngIf="showTimez?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
               <div class="event-date">
                 <div class="text-red">{{showTimez?.start_time_date | date:'dd'}} </div>
                 <div class="text-md">{{showTimez?.start_time_date | date:'MMM'}} </div>
