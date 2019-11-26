@@ -12372,7 +12372,7 @@ opspot-banner-fat {
     padding: 4px;
     font-size: 24px; }
 
-.opspot-button-edit:focus, .opspot-button-edit > button:focus, opspot-button-user-dropdown:focus, opspot-button-user-dropdown > button:focus, .m-button:focus, .m-button > button:focus {
+.opspot-button-edit:focus, .opspot-button-edit > , opspot-button-user-dropdown:focus, opspot-button-user-dropdown > button:focus, .m-, .m-button > button:focus {
   outline: none;
   -webkit-appearance: none; }
 
