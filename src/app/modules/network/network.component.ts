@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NetworkComponent implements OnInit {
   conversation: any;
+  q: string;
 
   constructor(
     private session: Session,

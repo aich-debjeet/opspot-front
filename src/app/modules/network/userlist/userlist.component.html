@@ -64,8 +64,8 @@
   </div>
 </div> -->
 
-<ul *ngIf="conversations?.length > 0" class="o-net-list">
-  <ng-container *ngFor="let conversation of conversations;">
+<ul *ngIf="filteredConversations?.length > 0" class="o-net-list">
+  <ng-container *ngFor="let conversation of filteredConversations;">
     <li
       class="o-net-list__item"
       [class.o-net-list__item--unread]="conversation.unread == 0"

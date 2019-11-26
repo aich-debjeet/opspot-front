@@ -10,7 +10,13 @@
                     </a> -->
                 </div>
                 <div class="o-network-search">
-                    <input type="text" class="o-network-search__input" placeholder="Search">
+                    <input
+                        [(ngModel)]="q"
+                        name="q"
+                        type="text"
+                        class="o-network-search__input"
+                        placeholder="Search"
+                    />
                     <div class="o-network-search__icon"><i class="icon-search"></i></div>
                 </div>
                 <!-- <a class="o-network-request">
@@ -22,7 +28,7 @@
                         <i class="icon-arrow-right"></i>
                     </div>
                 </a> -->
-                <m-network--userlist (loadConversation)="loadConversation($event)" #userList></m-network--userlist>
+                <m-network--userlist [q]="q" (loadConversation)="loadConversation($event)" #userList></m-network--userlist>
             </div>
             <div class="o-net-block__right">
                 <m-network--conversation *ngIf="conversation" [conversation]="conversation"></m-network--conversation>

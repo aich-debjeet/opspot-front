@@ -7,6 +7,7 @@ import { NetworkUserlist } from './userlist/userlist.component';
 import { NetworkConversation } from './conversation/conversation.component';
 import { NetworkConversationService } from './conversation.service';
 import { Session } from './../../services/session';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: NetworkComponent }
@@ -20,6 +21,7 @@ const routes: Routes = [
   ],
   imports: [
     NgCommonModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ],
   entryComponents: [

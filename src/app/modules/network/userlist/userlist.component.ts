@@ -1,4 +1,4 @@
-import { Component, Injector, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, Injector, ViewChild, EventEmitter, Output, Input } from '@angular/core';
 
 import { SocketsService } from '../../../services/sockets';
 
@@ -21,8 +21,10 @@ export class NetworkUserlist {
   // sounds = new MessengerSounds();
 
   @Output() loadConversation: EventEmitter<any> = new EventEmitter();
+  q: string = '';
 
   conversations: Array<any> = [];
+  filteredConversations: Array<any> = [];
   offset: string = '';
 
   setup: boolean = false;
@@ -54,6 +56,18 @@ export class NetworkUserlist {
       // this.listen();
       this.autoRefresh();
     }
+  }
+
+  @Input('q') set _q(value: string) {
+    this.q = value || '';
+    this.filterUsers();
+  }
+
+  filterUsers() {
+    this.filteredConversations = this.conversations.filter((item) => {
+      return item.name.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1
+          || item.username.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1;
+    });
   }
 
   load(opts) {
@@ -94,6 +108,9 @@ export class NetworkUserlist {
           );
         }
 
+        // copy to ref array
+        this.filteredConversations = this.conversations;
+
         if (!this.convLoaded) {
           // load first conversation
           this.loadConversation.emit(this.conversations[0]);
@@ -114,6 +131,9 @@ export class NetworkUserlist {
     }
 
     this.conversations = [];
+
+    // copy to ref array
+    this.filteredConversations = this.conversations;
 
     if (typeof (<HTMLInputElement>q).value !== 'undefined') {
       q = (<HTMLInputElement>q).value;
@@ -144,11 +164,13 @@ export class NetworkUserlist {
             return o;
           });
 
+          // copy to ref array
+          this.filteredConversations = this.conversations;
+
           this.offset = response['load-next'];
           this.inProgress = false;
         })
         .catch(error => {
-          console.log('got error' + error);
           this.inProgress = false;
         });
     }, 300);
