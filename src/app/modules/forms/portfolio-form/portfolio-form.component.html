@@ -13,8 +13,8 @@
         <div class="o-create-portfolio-body o-create-portfolio-body--flex">
             <div class="o-crete-portfolio-userinfo">
                 <div class="o-crete-portfolio-userinfo__avatar">
-                    <img src="assets/demo/avatar.png" alt="">
-                </div>
+                        <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="">
+                    </div>
                 <div class="o-crete-portfolio-userinfo__mesaage">
                     <textarea type="text" id="message" #message name="message" placeholder="Write Something"
                         [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
