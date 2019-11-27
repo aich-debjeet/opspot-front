@@ -47,6 +47,7 @@ export class BlueStoreFormComponent implements OnInit {
   label = "Create"
 
   description = '';
+  imageUploadError: boolean;
 
   constructor(
     public session: Session,
@@ -95,7 +96,7 @@ export class BlueStoreFormComponent implements OnInit {
         blueStoreTitle: ['', [Validators.required]],
         blueStoreDescription: ['', [Validators.required]],
         blueStoreUnits: ['', [Validators.required]],
-        blueStorePrice: ['', []]
+        blueStorePrice: ['', [Validators.required]]
       });
     }
   }
@@ -109,8 +110,12 @@ export class BlueStoreFormComponent implements OnInit {
   close() {
     this.Close.emit();
   }
-  blueStoreSubmit() {
+  blueStoreSubmit() {    
     this.blueStoreSubmitted = true;
+    this.imageUploadError = false;
+    if(this.reqBody.attachment_guid.length == 0) {
+      this.imageUploadError = true;
+    }
     // if (this.attachment) {
     //   this.reqBody = Object.assign(this.meta, this.attachment.exportMeta());
     //   console.log('this.reqBody', this.reqBody);
@@ -127,7 +132,7 @@ export class BlueStoreFormComponent implements OnInit {
     // console.log('this.reqBody', this.reqBody);
     // return;
 
-    if (this.blueStoreForm.valid) {
+    if (this.blueStoreForm.valid && !this.imageUploadError) {
       let endpoint = 'api/v3/marketplace';
       if (this.bluestoreGuid) {
         endpoint = 'api/v3/marketplace/' + this.bluestoreGuid;

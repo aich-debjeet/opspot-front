@@ -8,6 +8,8 @@ import { CommentsModule } from '../comments/comments.module';
 import { LegacyModule } from '../legacy/legacy.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { VideoModule } from '../../modules/media/components/video/video.module';
+import { WireModule } from '../wire/wire.module';
+import { TranslateModule } from '../translate/translate.module';
 
 
 // TODO @gayatri: handle all other requests
@@ -32,7 +34,9 @@ const blueStoreRoutes: Routes = [
     CommentsModule,
     LegacyModule,
     SlickCarouselModule,
-    VideoModule
+    VideoModule,
+    WireModule,
+    TranslateModule
   ]
 })
 export class BluestoreModule { }

@@ -50,7 +50,7 @@
                         <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != bigEvent?.owner_guid">Reach Out</button>
                     </div><!-- info action end -->
                     <div class="o-big-events-inner-info__action">
-                        <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid == bigEvent?.owner_guid"  [routerLink]="['/event/edit/' + bigEvent?.guid]">Edit</button>
+                        <button type="button" class="btn btn-primary btn-lg" *ngIf="bigEvent && bigEvent?.guid && session.getLoggedInUser().guid == bigEvent?.owner_guid"  [routerLink]="['/event/edit/' + bigEvent?.guid]">Edit</button>
                     </div><!-- info action end -->
                 </div><!-- big events inner info end -->
                 <!-- <div class="o-big-events-inner-hashtag">
@@ -60,7 +60,7 @@
                     <a href="#" class="text-md primary">#Design</a>
                 </div> -->
                 <div class="o-big-events-inner-details-discrptn">
-                    <p class="text-md" [innerHtml]="bigEvent?.description | safe">
+                    <p class="text-md white-space" [innerHtml]="bigEvent?.blurb | tags">
                     </p>
                 </div><!-- discription end -->
             </div><!-- big events inner main block end -->

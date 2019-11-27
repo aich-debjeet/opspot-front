@@ -3,7 +3,7 @@
         <div class="o-create-blue-store__title text-lg f500">{{label}} a post
             <span class="o-create-dropdown-style">
                 <span class="text-md primary f500">On #TheBlueStore
-                  <span class="icon-x" (click)="changeToDefault()"></span>
+                    <span class="icon-x" (click)="changeToDefault()"></span>
                 </span>
             </span>
         </div>
@@ -17,34 +17,41 @@
                     <div class="fileUpload">
                         <span class="icon-plus"></span>
                         <input type="file" id="file" #file class="upload" name="attachment"
-                        (change)="uploadAttachment(file, $event)"/>
+                            (change)="uploadAttachment(file, $event)" />
                     </div>
                     <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
                         <a class="o-create-blue-store-cover-image__avatar">
-                            <a class="fileUpload-close-temp" (click)="removeAttachment(image.guid)"><i class="icon-x"></i></a>
+                            <a class="fileUpload-close-temp" (click)="removeAttachment(image.guid)"><i
+                                    class="icon-x"></i></a>
                             <img [src]="image.src" alt="">
                         </a>
                     </div>
+                </div>
+                <div class="error text-sm" *ngIf="imageUploadError">
+                    This is required
                 </div>
             </div>
             <div class="form-group">
                 <label>Title</label>
                 <input type="text" class="form-control form-control-lg" formControlName="blueStoreTitle">
-                <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreTitle').errors?.required">
-                        This is required</div>
+                <div class="error text-sm"
+                    *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreTitle').errors?.required">
+                    This is required</div>
             </div>
             <div class="form-group">
                 <label>Description<span class="text-sm grey description-width">21/300</span></label>
                 <textarea class="form-control" rows="5" formControlName="blueStoreDescription"></textarea>
-                <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreDescription').errors?.required">
-                        This is required</div>
+                <div class="error text-sm"
+                    *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreDescription').errors?.required">
+                    This is required</div>
             </div>
             <div class="o-create-blue-store-unit-price">
                 <div class="form-group">
                     <label>No of Units <span class="icon-info"></span></label>
                     <input type="number" class="form-control form-control-lg" formControlName="blueStoreUnits">
-                    <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreUnits').errors?.required">
-                            This is required</div>
+                    <div class="error text-sm"
+                        *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreUnits').errors?.required">
+                        This is required</div>
                 </div>
                 <div class="form-group ml-18">
                     <label>Price <span class="icon-info"></span></label>
@@ -57,15 +64,15 @@
                         </div>
                         <input type="number" class="form-control form-control-lg  ml-8" placeholder="Enter Price"
                             formControlName="blueStorePrice">
-                            <div class="error text-sm" *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStorePrice').errors?.required">
-                                    This is required</div>
+                        <div class="error text-sm"
+                            *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStorePrice').errors?.required">
+                            This is required</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="o-create-blue-store-footer">
-            <button type="button" class="btn btn-primary btn-sm disabled" 
-            (click)="blueStoreSubmit()">Post</button>
+            <button type="button" class="btn btn-primary btn-sm" [disabled]="!blueStoreForm.valid" (click)="blueStoreSubmit()">Post</button>
         </div>
     </form>
-  </div>
+</div>

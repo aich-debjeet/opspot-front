@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="o-create-opportunity-footer">
-            <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
+            <button type="submit" class="btn btn-primary btn-sm" [disabled]="!opportunityForm.valid">Post</button>
         </div>
     </form>
 </div>
