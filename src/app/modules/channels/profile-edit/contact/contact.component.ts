@@ -16,10 +16,10 @@ export class ContactComponent implements OnInit {
   ) {}
 
   privacy = {
-    location: 'Everyone',
-    email: 'Everyone',
-    phone: 'Everyone',
-    website: 'Everyone'
+    location: 'Visible to Everyone',
+    email: 'Visible to Everyone',
+    phone: 'Visible to Everyone',
+    website: 'Visible to Everyone'
   };
   toggleLocation;
   toggleEmail;

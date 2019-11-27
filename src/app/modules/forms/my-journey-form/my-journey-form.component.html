@@ -15,7 +15,7 @@
                     <img src="assets/demo/avatar.png" alt="">
                 </div>
                 <div class="o-crete-myjourney-userinfo__mesaage">
-                    <textarea type="text" id="message" #message name="message" placeholder="Write Something"
+                    <textarea type="text" id="message" #message name="message" placeholder="What have you created today?"
                         [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
                         (keyup)="getPostPreview(message);"></textarea>
                 </div>

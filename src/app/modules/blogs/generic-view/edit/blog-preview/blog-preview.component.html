@@ -29,7 +29,7 @@
             <div class="o-blog-preview-popup-right">
                 <div class="o-blog-preview-popup-right__title">
                     <div class="text-lg">
-                        Upload Cover Image
+                        Add Cover Image
                     </div>
                 </div>
                 <!--title ends-->
@@ -37,7 +37,7 @@
                 </opspot-banner>
                 <div class="o-blog-preview-popup-right__title">
                     <div class="text-lg" (click)="detect()">
-                        Add Tags
+                        Add Hashtags
                     </div>
                 </div>
                 <!--title ends-->
@@ -45,7 +45,7 @@
                     <m-hashtags-selector #hashtagsSelector [tags]="blog.tags.slice(0)" (tagsChange)="onTagsChange($event)"
                         (tagsAdded)="onTagsAdded($event)" (tagsRemoved)="onTagsRemoved($event)"></m-hashtags-selector>
 
-                    <!-- <div class="text-sm grey">Use a comma to separate skills, or choose from the list.</div> -->
+                    <!-- <div class="text-sm grey">Use a comma to separate hashtags or choose from the list.</div> -->
                     <!--tag style-->
                     <!-- <div class="tag-style">
                         <div class="text-md">

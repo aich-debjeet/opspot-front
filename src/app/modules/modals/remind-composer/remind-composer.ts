@@ -16,7 +16,7 @@ import { ActivityPreview } from '../../legacy/components/cards/activity/preview'
 
         <textarea name="message"
           [(ngModel)]="message"
-          placeholder="Write something (optional)"
+          placeholder="What have you created today? (optional)"
           i18n-placeholder="@@MODALS__REMIND_COMPOSER__PLACEHOLDER"
           [autoGrow]
           ></textarea>

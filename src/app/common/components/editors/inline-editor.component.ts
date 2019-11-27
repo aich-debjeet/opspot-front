@@ -51,7 +51,7 @@ export class InlineEditorComponent implements ControlValueAccessor, OnInit, OnDe
       'videos': `<i class="icon-video"></i>`,
       'audio': `<i class="icon-mic"></i>`,
     },
-    placeholder: 'Paste your link and then press Enter',
+    placeholder: 'Upload your video/audio or external URL link',
     uploadFunction: this.attachment.upload.bind(this.attachment)
   });
   private images = new EmbedImage({
