@@ -178,16 +178,17 @@ export class ShowtimezComponent implements OnInit {
 
 
   updateShowTimez(data: any) {
-    this.showTimez.blurb = data.description;
-    this.showTimez.location = data.location;
-    this.showTimez.title = data.title;
-    this.showTimez.start_time_date = data.start_time_date;
-    this.showTimez.attachment_guid = data.attachment_guid;
-    if (data.attachment_guid.length > 0) {
-      this.showTimez.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
-    } else {
-      this.showTimez.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
-    }
+    this.load();
+    // this.showTimez.blurb = data.description;
+    // this.showTimez.location = data.location;
+    // this.showTimez.title = data.title;
+    // this.showTimez.start_time_date = data.start_time_date;
+    // this.showTimez.attachment_guid = data.attachment_guid;
+    // if (data.attachment_guid.length > 0) {
+    //   this.showTimez.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    // } else {
+    //   this.showTimez.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
+    // }
     // trigger component observe new changes
     this.detectChanges();
   }

@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { BlueStoreFormComponent } from '../forms/blue-store-form/blue-store-form.component';
 import { TranslationService } from '../../services/translation';
+import { ScrollService } from '../../services/ux/scroll';
+import { Subscription } from 'rxjs';
+
 
 
 
@@ -30,7 +33,8 @@ export class BluestoreComponent implements OnInit {
   _delete: EventEmitter<any> = new EventEmitter();
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
   translateEvent: EventEmitter<any> = new EventEmitter();
-
+  isLocked = false;
+  paramsSubscription: Subscription;
 
   // showBoostOptions: boolean = false;
   // private _showBoostMenuOptions: boolean = false;
@@ -48,14 +52,19 @@ export class BluestoreComponent implements OnInit {
     private cd: ChangeDetectorRef,
     public overlayModal: OverlayModalService,
     private router: Router,
-    public translationService: TranslationService
+    public translationService: TranslationService,
+    public scroll: ScrollService
+
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.guid = params['guid'];
+    this.paramsSubscription = this.route.paramMap.subscribe(params => {
+      if (params.get('guid')) {
+        this.guid = params.get('guid');
+        this.load();
+      }
     });
-    this.load();
+    this.onScroll();
   }
 
   load() {
@@ -69,7 +78,7 @@ export class BluestoreComponent implements OnInit {
         if (data.activity) {
           this.marketplace = data.activity;
           if (this.marketplace['custom_data'][0]['entity_type'] === 'video') {
-            this.showImage(0,this.marketplace['custom_data'][0]);
+            this.showImage(0, this.marketplace['custom_data'][0]);
           } else {
             this.showImage(0);
           }
@@ -135,11 +144,12 @@ export class BluestoreComponent implements OnInit {
   }
 
   udpateMarketPlace(data: any) {
-    this.marketplace.blurb = data.description;
-    this.marketplace.title = data.title;
-    // this.marketplace.attachment_guid = data.attachment_guid;
-    this.marketplace.price = data.price;
-    this.marketplace.item_count =  data.item_count;
+    this.load();
+    // this.marketplace.blurb = data.description;
+    // this.marketplace.title = data.title;
+    // // this.marketplace.attachment_guid = data.attachment_guid;
+    // this.marketplace.price = data.price;
+    // this.marketplace.item_count =  data.item_count;
     // if (data.attachment_guid.length > 0) {
     //   this.marketplace.custom_data= this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
     // } else {
@@ -231,7 +241,7 @@ export class BluestoreComponent implements OnInit {
     console.log('beforeChange');
   }
 
-  
+
   showVideo = false;
   videoData: any;
 
@@ -265,4 +275,12 @@ export class BluestoreComponent implements OnInit {
       this.detectChanges();
     }
   }
+
+  onScroll() {
+    var listen = this.scroll.listen(view => {
+      if (view.top > 250) this.isLocked = true;
+      if (view.top < 250) this.isLocked = false;
+    });
+  }
+
 }

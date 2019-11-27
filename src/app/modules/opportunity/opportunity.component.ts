@@ -209,16 +209,17 @@ export class OpportunityComponent implements OnInit {
 
 
   udpateOpportunity(data: any) {
-    this.opportunity.category = data.category;
-    this.opportunity.blurb = data.description;
-    this.opportunity.location = data.location;
-    this.opportunity.title = data.title;
-    if (data.attachment_guid.length > 0) {
-      // this.opportunity.custom_data[0].src = data.custom_data[0].src;
-      this.opportunity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
-    } else {
-      this.opportunity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/ops_icon.png'
-    }
+    this.load();
+    // this.opportunity.category = data.category;
+    // this.opportunity.blurb = data.description;
+    // this.opportunity.location = data.location;
+    // this.opportunity.title = data.title;
+    // if (data.attachment_guid.length > 0) {
+    //   // this.opportunity.custom_data[0].src = data.custom_data[0].src;
+    //   this.opportunity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    // } else {
+    //   this.opportunity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/ops_icon.png'
+    // }
     // trigger component observe new changes
     this.detectChanges();
   }
