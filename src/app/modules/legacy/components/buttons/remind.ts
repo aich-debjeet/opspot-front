@@ -7,7 +7,7 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
 // had forwardRef(() => RemindComposerModal)
 @Component({
   selector: 'opspot-button-remind',
-  inputs: ['_object: object'],
+  inputs: ['_object: object', '_entityType: entityType'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a class="o-actions__link"  *ngIf = "!large" (click)="remind()" [ngClass]="{'selected': object.reminded }">
@@ -19,6 +19,7 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
     </div>
     <m-modal-remind-composer *ngIf="remindOpen"
     [object]="object"
+    [entityType]="entityType"
     [open]="true"
     [default]="message"
     (closed)="remindOpen = false"
@@ -42,6 +43,7 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
 export class RemindButton {
 
   object;
+  entityType;
   showModal: boolean = false;
   message: string = '';
   remindOpen: boolean = false;
@@ -52,6 +54,10 @@ export class RemindButton {
 
   set _object(value: any) {
     this.object = value;
+  }
+
+  set _entityType(value: any) {
+    this.entityType = value;
   }
 
   remind() {

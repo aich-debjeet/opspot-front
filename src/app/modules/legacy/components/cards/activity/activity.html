@@ -296,7 +296,12 @@
 
   <!-- Reminds -->
   <div *ngIf="activity.remind_object">
-    <opspot-remind [object]="activity.remind_object" [events]="childEventsEmitter" [boosted]="activity.boosted">
+    <!-- todo @gayatri: make entityType dynamic -->
+    <opspot-remind
+      [entityType]="'showBlueStore'"
+      [object]="activity.remind_object"
+      [events]="childEventsEmitter"
+      [boosted]="activity.boosted">
     </opspot-remind>
   </div>
 
@@ -342,7 +347,7 @@
   </m-wire-button>
 
   <!--share button-->
-  <opspot-button-remind [object]="activity"></opspot-button-remind>
+  <opspot-button-remind [entityType]="'showBlueStore'" [object]="activity"></opspot-button-remind>
 
   <!--boost button-->
   <a class="btn btn-primary btn-xs btn--boost" *ngIf="session.getLoggedInUser().guid == activity?.owner_guid"
