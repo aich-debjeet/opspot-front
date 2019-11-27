@@ -149,7 +149,7 @@
   </div>
 
   <!--BlueStore-->
-  <div class="o-card feed" *ngIf="showBlueStore && !showOpportunity && !showTimez  && !showAlbum"
+  <div *ngIf="showBlueStore && !showOpportunity && !showTimez  && !showAlbum"
     [routerLink]="['/item/view', activity.entity_guid]">
     <div class="feed-media" *ngIf="activity?.custom_data">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
@@ -185,7 +185,7 @@
   </div>
 
   <!--Showtime-->
-  <div class="o-card feed" *ngIf="showTimez && !showBlueStore && !showOpportunity && !showAlbum"
+  <div *ngIf="showTimez && !showBlueStore && !showOpportunity && !showAlbum"
     [routerLink]="['/event/view', activity.entity_guid]">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
     <div class="feed-media">
