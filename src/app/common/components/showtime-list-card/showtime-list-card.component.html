@@ -5,12 +5,12 @@
                 <div class="o-trending-post__cover">
                     <img *ngIf="event?.custom_data.length > 0"
                         [src]="event?.custom_data[0] ? event?.custom_data[0].src:''"
-                        (error)="showTimez.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'">
+                        (error)="event?.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'">
                     <img *ngIf="event?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/ops_icon.png'">
                 </div>
                 <div class="o-trending-post__info">
-                    <div class="text-md f500">{{event?.title}}</div>
-                    <div class="text-sm m-t-6">
+                    <div class="text-md f500 elipse elipse--w-130">{{event?.title}}</div>
+                    <div class="text-sm m-t-6 elipse elipse--w-160">
                         <span class="o-event-date">{{event?.start_time_date | date:'MMM d'}}</span>{{event?.location}}
                     </div>
                 </div>
