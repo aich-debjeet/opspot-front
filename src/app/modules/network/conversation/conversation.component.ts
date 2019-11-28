@@ -253,8 +253,10 @@ export class NetworkConversation {
   //   }
   // }
 
-  send(e) {
-    e.preventDefault();
+  send(e?) {
+    if (e) {
+      e.preventDefault();
+    }
 
     if (this.blocked || !this.message) {
       return;
