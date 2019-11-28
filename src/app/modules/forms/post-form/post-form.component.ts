@@ -169,9 +169,12 @@ export class PostFormComponent {
     // }
 
     this.errorMessage = '';
-
+  // console.log("this.attachment.exportMeta(): ", this.attachment.exportMeta());
+  
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-
+    // console.log("data: ", data);
+    
+     
     data.tags = this.tags;
     data.mature = this.isNSFW;
     // console.log(data);
