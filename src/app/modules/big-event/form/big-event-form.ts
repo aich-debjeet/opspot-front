@@ -8,7 +8,7 @@ import { Client } from '../../../services/api/client';
 import * as moment from 'moment';
 import { FormValidator } from '../../../helpers/form.validator';
 import { Router } from '@angular/router';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 
 
@@ -25,10 +25,10 @@ export class BigEventForm implements OnInit {
   eventSubmitted: boolean;
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-  coverImageUploadError: boolean;
+  coverImageUploadError: boolean = false;
   lable = 'Create';
 
-  coverImage: any;
+  coverImage = '';
   bigEvent: any;
   bigEventGuid: any;
 
@@ -37,13 +37,22 @@ export class BigEventForm implements OnInit {
   end_time: any;
   end_date: any;
 
+  meta: any = {
+    message: '',
+    wire_threshold: null
+  };
+
   bsConfig = {
     containerClass: 'theme-dark-blue',
     adaptivePosition: true,
     dateInputFormat: 'DD-MM-YYYY'
   }
 
-
+  imageGuid = '';
+  attach_guid = [];
+  canPost: boolean = true;
+  inProgress = false;
+  errorMessage = '';
   reqBody = {
     title: null,
     description: null,
@@ -74,7 +83,9 @@ export class BigEventForm implements OnInit {
       }
       if (this.bigEvent['custom_data']) {
         this.coverImage = this.bigEvent['custom_data'][0].src;
-        this.reqBody.attachment_guid = this.bigEvent['custom_data'][0].guid;
+        this.imageGuid = this.bigEvent['custom_data'][0].guid;
+
+        this.attach_guid.push(this.imageGuid);
       }
       this.buildForm(this.bigEvent, this.start_date, this.start_time, this.end_date, this.end_time);
     } else {
@@ -137,12 +148,12 @@ export class BigEventForm implements OnInit {
 
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) {
-      this.attachment.upload(file)
+      this.attachment.upload(file, this.attach_guid)
         .then(guid => {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
-          this.reqBody.attachment_guid = obj['guid'];
+          // this.reqBody.attachment_guid = obj['guid'];
           this.coverImage = obj['src'];
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
@@ -157,6 +168,52 @@ export class BigEventForm implements OnInit {
         });
     }
   }
+
+
+  removeAttachment(file: HTMLInputElement, imageId: string) {
+    // alert(imageId)
+    if (this.inProgress) {
+      this.attachment.abort();
+      this.canPost = true;
+      this.inProgress = false;
+      this.errorMessage = '';
+      return;
+    }
+
+    // if we're not uploading a file right now
+    this.attachment.setPendingDelete(false);
+    this.canPost = false;
+    this.inProgress = true;
+
+    this.errorMessage = '';
+    // console.log("this.attach: ", this.attach_guid);
+    
+    // console.log(file, imageId);
+    this.attachment
+      .remove(file, imageId, this.attach_guid)
+      .then(guid => {
+        // alert();
+        this.inProgress = false;
+        this.canPost = true;
+        this.coverImage = '';
+        // console.log("jbjasdhfbshfr");
+        
+        // console.log("this coverimage: ", this.coverImage);
+        
+
+        file.value = '';
+        // this.cards = _remove(this.cards, function (n) {
+        //   return n.guid !== guid;
+        // });
+        // console.log(this.cards);
+      })
+      .catch(e => {
+        // console.error(e);
+        this.inProgress = false;
+        this.canPost = true;
+      });
+  }
+
 
   formatTime(inputTime) {
     var timeString = inputTime;
@@ -188,10 +245,20 @@ export class BigEventForm implements OnInit {
 
   submitEvent() {
     this.eventSubmitted = true;
-    this.coverImageUploadError = false;
     if (this.reqBody.attachment_guid == '') {
       this.coverImageUploadError = true;
     }
+
+    let data = Object.assign(this.meta, this.attachment.exportMeta());
+    // console.log("data: ", data);
+    // console.log("datta: ", data);
+    // console.log("attach guid: ", this.attach_guid);
+    if (data.attachment_guid) {
+      this.reqBody.attachment_guid = data.attachment_guid;
+    } else if (this.attach_guid.length === 1) {
+      this.reqBody.attachment_guid = this.attach_guid[0];
+    }
+
 
     var startTime = this.convertDateToMillis(this.eventForm.value.eventStartDate, this.eventForm.value.eventStartTime)
     var endTime = this.convertDateToMillis(this.eventForm.value.eventEndDate, this.eventForm.value.eventEndTime)
@@ -220,7 +287,7 @@ export class BigEventForm implements OnInit {
         })
         .catch((e) => {
           this.eventSubmitted = false;
-          alert(e.message);
+          // alert(e.message);
         });
     }
 
