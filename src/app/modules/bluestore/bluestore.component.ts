@@ -36,6 +36,8 @@ export class BluestoreComponent implements OnInit {
   isLocked = false;
   paramsSubscription: Subscription;
 
+
+
   // showBoostOptions: boolean = false;
   // private _showBoostMenuOptions: boolean = false;
 
@@ -98,6 +100,7 @@ export class BluestoreComponent implements OnInit {
         this.inProgress = false;
       });
   }
+
 
   getOwnerIconTime() {
     let session = this.session.getLoggedInUser();
@@ -249,11 +252,11 @@ export class BluestoreComponent implements OnInit {
     if (data) {
       this.showVideo = true;
       this.videoData = data;
-      console.log("video: ", data);
+      // console.log("video: ", data);
     } else {
       this.showVideo = false;
       this.largeImage = this.marketplace.custom_data[i].src;
-      console.log(" this.largeImage: ", this.largeImage);
+      // console.log(" this.largeImage: ", this.largeImage);
     }
   }
 
