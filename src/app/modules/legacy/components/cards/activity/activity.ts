@@ -57,10 +57,10 @@ export class Activity {
   type: string;
   element: any;
   visible: boolean = false;
-  showOpportunity = false;
-  showBlueStore = false;
-  showTimez = false;
-  showAlbum = false;
+  // showOpportunity = false;
+  // showBlueStore = false;
+  // showTimez = false;
+  // showAlbum = false;
 
 
   editing: boolean = false;
@@ -122,16 +122,16 @@ export class Activity {
       this.activity.title = '';
     }
 
-    if (this.activity.entity_type === "opportunity") {
-      this.showOpportunity = true;
-    }
+    // if (this.activity.entity_type === "opportunity") {
+    //   this.showOpportunity = true;
+    // }
 
-    if (this.activity.entity_type === "item") {
-      this.showBlueStore = true;
-    }
+    // if (this.activity.entity_type === "item") {
+    //   this.showBlueStore = true;
+    // }
 
     if (this.activity.entity_type === "event") {
-      this.showTimez = true;
+      // this.showTimez = true;
       if (this.activity.end_time_date) {
         this.routerLink1 = "/event/view"
       } else {
@@ -139,9 +139,17 @@ export class Activity {
       }
     }
 
-    if (this.activity.entity_type === "album") {
-      this.showAlbum = true;
-    }
+    // if (this.activity.remind_object && this.activity.remind_object.entity_type === 'event') {
+    //   if (this.activity.remind_object.end_time_date) {
+    //     this.routerLink1 = "/event/view"
+    //   } else {
+    //     this.routerLink1 = "/showtime/view"
+    //   }
+    // }
+
+    // if (this.activity.entity_type === "album") {
+    //   this.showAlbum = true;
+    // }
 
 
 
