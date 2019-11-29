@@ -238,10 +238,10 @@ export class AttachmentService {
 
   exportMeta() {
     let result = {};
-    // console.log(this.meta)
-    if(this.meta.attachment_guid.length === 1) {
-      this.meta.attachment_guid = this.meta.attachment_guid.toString();
-    } else if (this.meta.attachment_guid.length > 1) {
+    // console.log('this.meta', this.meta);
+    if(typeof this.meta.attachment_guid === 'string') {
+      return this.meta.attachment_guid;
+    } else if (this.meta.attachment_guid instanceof Array && this.meta.attachment_guid.length > 0) {
       for (var prop in this.meta) {
         if (this.meta.hasOwnProperty(prop)) {
           result[prop] = this.meta[prop];
