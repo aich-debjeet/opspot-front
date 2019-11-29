@@ -9,9 +9,9 @@ import { ActivityPreview } from '../../legacy/components/cards/activity/preview'
   inputs: ['_default: default', 'open', '_object: object', '_entityType: entityType'],
   outputs: ['closed', 'post'],
   template: `
-    <m-modal [open]="open" (closed)="close($event)" class="mdl-color-text--blue-grey-700">
+    <m-modal [open]="open" (closed)="close($event)">
 
-      <div class="m-modal-remind-composer">
+     <!-- <div class="m-modal-remind-composer">
         <h3 class="m-modal-remind-title" i18n="@@MODALS__REMIND_COMPOSER__REMIND_TITLE">Repost on your timeline</h3>
 
         <textarea name="message"
@@ -26,11 +26,40 @@ import { ActivityPreview } from '../../legacy/components/cards/activity/preview'
             <i class="material-icons">send</i>
           </a>
         </div>
-      </div>
+      </div> -->
 
-      <ng-template dynamic-host></ng-template>
+      
+
+      <!-- <ng-template dynamic-host></ng-template> -->
+
+      <div class="o-repost">
+        <div class="o-repost-header">
+            <div class="caption-regular f500">Repost on your timeline</div>
+            <!-- <a class="close"><i class="icon-x"></i></a> -->
+        </div><!-- repost header end -->
+        <div class="o-repost-body">
+        <div class="o-repost-body__textarea">
+        <textarea 
+        class="text-md"
+        name="message"
+        [(ngModel)]="message" 
+        placeholder="Write Something"
+        i18n-placeholder="@@MODALS__REMIND_COMPOSER__PLACEHOLDER"
+        [autoGrow] 
+        ></textarea>
+        </div><!-- textarea end -->
+        <ng-template dynamic-host></ng-template>
+        </div>
+        <div class="o-repost-footer">
+            <button type="button" class="btn btn-primary btn-sm disabled" (click)="close($event)">Cancel</button>
+            <button type="button" class="btn btn-primary btn-sm" (click)="send()">Share</button>
+        </div>
+    </div>
     </m-modal>
-  `
+  ` ,
+  styleUrls:['reminds.scss']
+
+  
 })
 
 export class RemindComposerModal {
