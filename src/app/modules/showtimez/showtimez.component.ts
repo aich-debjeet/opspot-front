@@ -40,6 +40,10 @@ export class ShowtimezComponent implements OnInit {
     this.onScroll();
   }
 
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+  }
+
   // activity: any;
   opspot = window.Opspot;
 

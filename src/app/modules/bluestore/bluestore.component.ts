@@ -286,4 +286,8 @@ export class BluestoreComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+  }
+
 }
