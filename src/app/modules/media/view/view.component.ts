@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
@@ -12,6 +12,8 @@ import { ContextService } from '../../../services/context.service';
 import { OpspotTitle } from '../../../services/ux/title';
 import { PostFormComponent } from '../../forms/post-form/post-form.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { BoostCreatorComponent } from '../../boost/creator/creator.component';
+import { TranslationService } from '../../../services/translation';
 
 @Component({
   moduleId: module.id,
@@ -43,13 +45,19 @@ export class MediaViewComponent {
 
   // menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'subscribe', 'remove-explicit', 'rating'];
 
-  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'rating'];
 
 
   paramsSubscription: Subscription;
   queryParamsSubscription$: Subscription;
   focusedCommentGuid: string = '';
   showMyJourneyWidget = false;
+  showBoostOptions: boolean = false;
+  translateToggle = false;
+  childEventsEmitter: EventEmitter<any> = new EventEmitter();
+  translateEvent: EventEmitter<any> = new EventEmitter();
+
+
 
   constructor(
     public session: Session,
@@ -60,7 +68,9 @@ export class MediaViewComponent {
     public attachment: AttachmentService,
     public context: ContextService,
     private cd: ChangeDetectorRef,
-    public overlayModal: OverlayModalService
+    public overlayModal: OverlayModalService,
+    public translationService: TranslationService,
+
   ) { }
 
   ngOnInit() {
@@ -112,21 +122,20 @@ export class MediaViewComponent {
     this.inProgress = true;
     this.client.get('api/v1/newsfeed/single/' + this.guid, { children: false })
       .then((response: any) => {
-        console.log("RESPONSE: ", response);
-
         this.inProgress = false;
         // if (response.activity.type !== 'object') {
         //   return;
         // }
         if (response.activity) {
           this.entity = response.activity;
-          console.log("ENTITY: ", this.entity);
           if (this.entity['custom_data'][0]['entity_type'] === 'video') {
             this.showImage(0, this.entity['custom_data'][0]);
           } else {
             this.showImage(0);
           }
           this.count = this.entity['thumbs:up:count'];
+
+
 
           // switch (this.entity.subtype) {
           //   case 'video':
@@ -156,6 +165,10 @@ export class MediaViewComponent {
           }
         }
 
+        this.isTranslatable = (
+          this.translationService.isTranslatable(this.entity)
+        );
+
         this.detectChanges();
       })
       .catch((e) => {
@@ -168,7 +181,7 @@ export class MediaViewComponent {
     this.client.delete('api/v1/media/' + this.guid)
       .then((response: any) => {
         const type: string = this.entity.subtype === 'video' ? 'videos' : 'images';
-        this.router.navigate([`/media/${type}/my`]);
+        this.router.navigate([`newsfeed/subscribed`]);
       })
       .catch(e => {
         alert((e && e.message) || 'Server error');
@@ -211,6 +224,9 @@ export class MediaViewComponent {
       case 'remove-explicit':
         this.setExplicit(false);
         break;
+      case 'translate':
+        this.translateToggle = true;
+        break;
 
     }
   }
@@ -226,6 +242,14 @@ export class MediaViewComponent {
           //this.udpateMarketPlace(payload);
         }
       }).present();
+    }
+  }
+
+  async wireSubmitted(wire?) {
+    if (wire && this.entity.wire_totals) {
+      this.entity.wire_totals.tokens =
+        parseFloat(this.entity.wire_totals.tokens) + (wire.amount * Math.pow(10, 18));
+      this.detectChanges();
     }
   }
 
@@ -262,11 +286,9 @@ export class MediaViewComponent {
     if (data) {
       this.showVideo = true;
       this.videoData = data;
-      console.log("video: ", data);
     } else {
       this.showVideo = false;
       this.largeImage = this.entity.custom_data[i].src;
-      console.log(" this.largeImage: ", this.largeImage);
     }
   }
 
@@ -284,8 +306,29 @@ export class MediaViewComponent {
     }
   }
 
+  showBoost() {
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.entity, { class: 'modalChanger' });
+
+    boostModal.onDidDismiss(() => {
+      this.showBoostOptions = false;
+    });
+
+    boostModal.present();
+  }
+
   private detectChanges() {
     this.cd.markForCheck();
     this.cd.detectChanges();
   }
+
+  propagateTranslation($event) {
+    if (this.entity.remind_object && this.translationService.isTranslatable(this.entity.remind_object)) {
+      this.childEventsEmitter.emit({
+        action: 'translate',
+        args: [$event]
+      });
+    }
+  }
+
+
 }

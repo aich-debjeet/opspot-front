@@ -1,9 +1,13 @@
 import { Component, OnInit, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { BlueStoreFormComponent } from '../forms/blue-store-form/blue-store-form.component';
+import { TranslationService } from '../../services/translation';
+import { ScrollService } from '../../services/ux/scroll';
+import { Subscription } from 'rxjs';
+
 
 
 
@@ -27,6 +31,10 @@ export class BluestoreComponent implements OnInit {
   canDelete: boolean = false;
   translateToggle: boolean = false;
   _delete: EventEmitter<any> = new EventEmitter();
+  childEventsEmitter: EventEmitter<any> = new EventEmitter();
+  translateEvent: EventEmitter<any> = new EventEmitter();
+  isLocked = false;
+  paramsSubscription: Subscription;
 
   // showBoostOptions: boolean = false;
   // private _showBoostMenuOptions: boolean = false;
@@ -35,21 +43,28 @@ export class BluestoreComponent implements OnInit {
 
 
   // private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
-  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
 
   constructor(
     private route: ActivatedRoute,
     public session: Session,
     public client: Client,
     private cd: ChangeDetectorRef,
-    public overlayModal: OverlayModalService
+    public overlayModal: OverlayModalService,
+    private router: Router,
+    public translationService: TranslationService,
+    public scroll: ScrollService
+
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.guid = params['guid'];
+    this.paramsSubscription = this.route.paramMap.subscribe(params => {
+      if (params.get('guid')) {
+        this.guid = params.get('guid');
+        this.load();
+      }
     });
-    this.load();
+    this.onScroll();
   }
 
   load() {
@@ -58,22 +73,25 @@ export class BluestoreComponent implements OnInit {
 
     this.inProgress = true;
 
-    this.client.get('api/v3/marketplace/' + this.guid)
+    this.client.get('api/v1/newsfeed/single/' + this.guid)
       .then((data: any) => {
-        if (data.marketplace) {
-          this.marketplace = data.marketplace;
+        if (data.activity) {
+          this.marketplace = data.activity;
           if (this.marketplace['custom_data'][0]['entity_type'] === 'video') {
-            this.showImage(0,this.marketplace['custom_data'][0]);
+            this.showImage(0, this.marketplace['custom_data'][0]);
           } else {
             this.showImage(0);
           }
           this.count = this.marketplace['thumbs:up:count'];
 
-          if (data.marketplace.owner_obj) {
-            this.marketplace['ownerObj'] = data.marketplace.owner_obj;
+          if (data.activity.owner_obj) {
+            this.marketplace['ownerObj'] = data.activity.owner_obj;
           }
           this.inProgress = false;
         }
+        this.isTranslatable = (
+          this.translationService.isTranslatable(this.marketplace)
+        );
         this.detectChanges();
       })
       .catch((e) => {
@@ -126,14 +144,17 @@ export class BluestoreComponent implements OnInit {
   }
 
   udpateMarketPlace(data: any) {
-    this.marketplace.description = data.description;
-    this.marketplace.title = data.title;
-    // this.marketplace.attachment_guid = data.attachment_guid;
-    this.marketplace.price = data.blueStorePrice;
-    this.marketplace.item_count = data.blueStoreUnits;
-    // this.marketplace.currency = 'INR';
-    // this.marketplace.published = 1;
-    // trigger component observe new changes
+    this.load();
+    // this.marketplace.blurb = data.description;
+    // this.marketplace.title = data.title;
+    // // this.marketplace.attachment_guid = data.attachment_guid;
+    // this.marketplace.price = data.price;
+    // this.marketplace.item_count =  data.item_count;
+    // if (data.attachment_guid.length > 0) {
+    //   this.marketplace.custom_data= this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    // } else {
+    //   this.marketplace.custom_data = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
+    // }
     this.detectChanges();
   }
 
@@ -196,17 +217,10 @@ export class BluestoreComponent implements OnInit {
     }
     this.client.delete(`api/v3/marketplace/${this.marketplace.entity_guid}`)
       .then((response: any) => {
-        if ($event.inProgress) {
-          $event.inProgress.emit(false);
-          $event.completed.emit(0);
-        }
-        this._delete.next(this.marketplace);
+        this.router.navigate([`newsfeed/subscribed`]);
       })
       .catch(e => {
-        if ($event.inProgress) {
-          $event.inProgress.emit(false);
-          $event.completed.emit(1);
-        }
+        alert((e && e.message) || 'Server error');
       });
   }
 
@@ -227,7 +241,7 @@ export class BluestoreComponent implements OnInit {
     console.log('beforeChange');
   }
 
-  
+
   showVideo = false;
   videoData: any;
 
@@ -242,4 +256,31 @@ export class BluestoreComponent implements OnInit {
       console.log(" this.largeImage: ", this.largeImage);
     }
   }
+
+  propagateTranslation($event) {
+    if (this.marketplace.remind_object && this.translationService.isTranslatable(this.marketplace.remind_object)) {
+      this.childEventsEmitter.emit({
+        action: 'translate',
+        args: [$event]
+      });
+    }
+  }
+
+
+  async wireSubmitted(wire?) {
+    if (wire && this.marketplace.wire_totals) {
+      this.marketplace.wire_totals.tokens =
+        parseFloat(this.marketplace.wire_totals.tokens) + (wire.amount * Math.pow(10, 18));
+
+      this.detectChanges();
+    }
+  }
+
+  onScroll() {
+    var listen = this.scroll.listen(view => {
+      if (view.top > 250) this.isLocked = true;
+      if (view.top < 250) this.isLocked = false;
+    });
+  }
+
 }

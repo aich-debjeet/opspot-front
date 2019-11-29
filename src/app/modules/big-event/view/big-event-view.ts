@@ -51,12 +51,12 @@ export class BigEventView implements OnInit {
 
     // this.inProgress = true;
 
-    this.client.get('api/v3/event/' + this.entity_guid)
+    this.client.get('api/v1/newsfeed/single/' + this.entity_guid)
       .then((data: any) => {
-        if (data.event) {
-          this.bigEvent = data.event;
-          if (data.event.owner_obj) {
-            this.bigEvent['ownerObj'] = data.event.owner_obj;
+        if (data.activity) {
+          this.bigEvent = data.activity;
+          if (data.activity.owner_obj) {
+            this.bigEvent['ownerObj'] = data.activity.owner_obj;
           }
           if (this.bigEvent.custom_data) {
             this.coverImage = this.bigEvent.custom_data[0].src;

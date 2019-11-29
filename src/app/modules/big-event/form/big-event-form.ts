@@ -59,13 +59,9 @@ export class BigEventForm implements OnInit {
 
   @Input('object') set data(object) {
     this.bigEvent = object;
-    console.log("BigEvent: ", this.bigEvent);
-
     if (this.bigEvent) {
       this.lable = "Edit"
-      console.log('EDIT');
-
-      this.bigEventGuid = this.bigEvent['guid'];
+      this.bigEventGuid = this.bigEvent['entity_guid'];
       if (this.bigEvent['start_time_date']) {
         var date = new Date(parseInt(this.bigEvent['start_time_date']));
         this.start_date = moment(date).format('DD-MM-YYYY');
@@ -104,7 +100,7 @@ export class BigEventForm implements OnInit {
     if (data) {
       this.eventForm = this.formBuilder.group({
         eventTitle: [data['title'] ? data['title'] : '', [Validators.required]],
-        eventDesc: [data['description'] ? data['description'] : '', [Validators.required]],
+        eventDesc: [data['blurb'] ? data['blurb'] : '', [Validators.required]],
         eventType: [data['event_type'] ? data['event_type'] : '', [Validators.required]],
         eventCategory: [data['category'] ? data['category'] : '', [Validators.required]],
         eventLocation: [data['location'] ? data['location'] : '', [Validators.required]],
@@ -216,10 +212,8 @@ export class BigEventForm implements OnInit {
 
       this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
-
-          console.log("Response: ", resp);
-          if (resp && resp.activity && resp.activity['entity_guid'] != '') {
-            this.router.navigate(['/events/view/' + resp.activity['entity_guid']]);
+          if (resp && resp.activity && resp.activity['guid'] != '') {
+            this.router.navigate(['/event/view/' + resp.activity['guid']]);
           }
           this.eventSubmitted = false;
 

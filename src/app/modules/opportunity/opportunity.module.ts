@@ -7,6 +7,7 @@ import { PostMenuModule } from '../../common/components/post-menu/post-menu.modu
 import { CommentsModule } from '../comments/comments.module';
 import { WireModule } from '../wire/wire.module';
 import { LegacyModule } from '../legacy/legacy.module';
+import { TranslateModule } from '../translate/translate.module';
 
 
 // TODO @gayatri: handle all other requests
@@ -23,7 +24,7 @@ const opportunityRoutes: Routes = [
 
 @NgModule({
   declarations: [OpportunityComponent],
-  imports:[
+  imports: [
     CommonModule,
     NgCommonModule,
     RouterModule.forChild(opportunityRoutes),
@@ -31,7 +32,9 @@ const opportunityRoutes: Routes = [
     PostMenuModule,
     CommentsModule,
     WireModule,
-    LegacyModule
+    LegacyModule,
+    TranslateModule
+
   ]
 })
 export class OpportunityModule { }
