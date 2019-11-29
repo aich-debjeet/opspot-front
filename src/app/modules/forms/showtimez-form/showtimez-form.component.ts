@@ -187,7 +187,7 @@ export class ShowtimezFormComponent implements OnInit {
   // }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    alert();
+    // alert();
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
