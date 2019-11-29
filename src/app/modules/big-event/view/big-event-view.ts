@@ -84,6 +84,10 @@ export class BigEventView implements OnInit {
     this.cd.detectChanges();
   }
 
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+  }
+
 
 
 

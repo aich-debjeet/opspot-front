@@ -7,6 +7,7 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../services/translation';
 import { ScrollService } from '../../services/ux/scroll';
+import { BoostCreatorComponent } from '../boost/creator/creator.component';
 
 
 
@@ -249,6 +250,17 @@ export class OpportunityComponent implements OnInit {
     }
   }
 
+  showBoost() {
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.opportunity, { class: 'modalChanger' });
+
+    boostModal.onDidDismiss(() => {
+      this.showBoostOptions = false;
+    });
+
+    boostModal.present();
+  }
+
+
   onScroll() {
     var listen = this.scroll.listen(view => {
       if (view.top > 250) this.isLocked = true;
@@ -256,5 +268,8 @@ export class OpportunityComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+  }
 
 }

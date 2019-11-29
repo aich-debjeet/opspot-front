@@ -77,6 +77,8 @@ export class PortfolioFormComponent implements OnInit {
     if (!this.meta.message && !this.attachment.has()) {
       return;
     }
+    // console.log(" this.attachment.exportMeta(): ", this.attachment.exportMeta());
+
     let data = Object.assign(this.meta, this.attachment.exportMeta());
     this.tags.push(SpecialHashtg.concat('portfolio' ,this.session.getLoggedInUser().username))
     data.tags = this.tags;

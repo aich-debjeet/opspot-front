@@ -7,6 +7,7 @@ import { BlueStoreFormComponent } from '../forms/blue-store-form/blue-store-form
 import { TranslationService } from '../../services/translation';
 import { ScrollService } from '../../services/ux/scroll';
 import { Subscription } from 'rxjs';
+import { BoostCreatorComponent } from '../boost/creator/creator.component';
 
 
 
@@ -36,7 +37,9 @@ export class BluestoreComponent implements OnInit {
   isLocked = false;
   paramsSubscription: Subscription;
 
-  // showBoostOptions: boolean = false;
+
+
+  showBoostOptions: boolean = false;
   // private _showBoostMenuOptions: boolean = false;
 
   @Input() focusedCommentGuid: string;
@@ -98,6 +101,7 @@ export class BluestoreComponent implements OnInit {
         this.inProgress = false;
       });
   }
+
 
   getOwnerIconTime() {
     let session = this.session.getLoggedInUser();
@@ -249,11 +253,11 @@ export class BluestoreComponent implements OnInit {
     if (data) {
       this.showVideo = true;
       this.videoData = data;
-      console.log("video: ", data);
+      // console.log("video: ", data);
     } else {
       this.showVideo = false;
       this.largeImage = this.marketplace.custom_data[i].src;
-      console.log(" this.largeImage: ", this.largeImage);
+      // console.log(" this.largeImage: ", this.largeImage);
     }
   }
 
@@ -276,11 +280,25 @@ export class BluestoreComponent implements OnInit {
     }
   }
 
+  showBoost() {
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.marketplace, { class: 'modalChanger' });
+
+    boostModal.onDidDismiss(() => {
+      this.showBoostOptions = false;
+    });
+
+    boostModal.present();
+  }
+
   onScroll() {
     var listen = this.scroll.listen(view => {
       if (view.top > 250) this.isLocked = true;
       if (view.top < 250) this.isLocked = false;
     });
+  }
+
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
   }
 
 }

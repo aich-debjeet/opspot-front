@@ -30,10 +30,10 @@ export class MyJourneyFormComponent implements OnInit {
   isNSFW: boolean = false;
 
   constructor(
-    public session: Session, 
-    public client: Client, 
-    public upload: Upload, 
-    public attachment: AttachmentService, 
+    public session: Session,
+    public client: Client,
+    public upload: Upload,
+    public attachment: AttachmentService,
     private formBuilder: FormBuilder) {
     this.opspot = window.Opspot;
     this.cards = [];
@@ -89,9 +89,12 @@ export class MyJourneyFormComponent implements OnInit {
       return;
     }
 
+    //console.log(" this.attachment.exportMeta(): ", this.attachment.exportMeta());
+
+
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
-    this.tags.push(SpecialHashtg.concat('myjourney',this.session.getLoggedInUser().username));
+    this.tags.push(SpecialHashtg.concat('myjourney', this.session.getLoggedInUser().username));
     data.tags = this.tags;
     data.isNSFW = this.isNSFW;
     this.client.post('api/v1/newsfeed', data)

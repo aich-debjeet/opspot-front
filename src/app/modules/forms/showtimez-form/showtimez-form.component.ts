@@ -35,13 +35,23 @@ export class ShowtimezFormComponent implements OnInit {
     access_id: 2,
     published: 1,
     start_time_date: null,
-    attachment_guid: []
+    attachment_guid: ''
+  };
+
+  meta: any = {
+    message: '',
+    wire_threshold: null
   };
 
   event: any;
   eventGuid: string;
   label = "Create";
   description = '';
+  attach_guid = [];
+
+  canPost: boolean = true;
+  inProgress = false;
+  errorMessage = '';
 
   bsConfig = {
     containerClass: 'theme-dark-blue',
@@ -49,9 +59,10 @@ export class ShowtimezFormComponent implements OnInit {
     dateInputFormat: 'DD-MM-YYYY'
   }
 
+  imageUploadError: boolean;
 
   @Input('object') set data(object) {
-    this.event = object;  
+    this.event = object;
     if (this.event) {
       this.eventGuid = object['entity_guid'];
       this.label = "Edit"
@@ -60,13 +71,17 @@ export class ShowtimezFormComponent implements OnInit {
         var date1 = moment(date).format('DD-MM-YYYY');
         var time1 = moment(date).format('HH:mm');
       }
-      this.buildForm(this.event,date1,time1);
+      this.buildForm(this.event, date1, time1);
       if (this.event['custom_data']) {
+        // this.event['custom_data'].forEach(image => {
+        //   this.reqBody.attachment_guid.push(image['guid']);
+        // });
         this.event['custom_data'].forEach(image => {
-          this.reqBody.attachment_guid.push(image['guid']);
+          this.attach_guid.push(image['guid']);
         });
-        this.cards = this.event['custom_data'];
       }
+      this.cards = this.event['custom_data'];
+
     } else {
       this.buildForm();
     }
@@ -97,7 +112,7 @@ export class ShowtimezFormComponent implements OnInit {
   }
 
 
-  buildForm(data?,date?,time?) {
+  buildForm(data?, date?, time?) {
     if (data) {
       if (data.description) {
         this.description = data.description;
@@ -108,7 +123,7 @@ export class ShowtimezFormComponent implements OnInit {
         eventTitle: [data['title'] ? data['title'] : '', [Validators.required]],
         eventDescription: [this.description ? this.description : '', [Validators.required]],
         eventsLocation: [data['location'] ? data['location'] : '', [Validators.required]],
-        eventdate: [date, [Validators.required,FormValidator.datevalidation]],
+        eventdate: [date, [Validators.required, FormValidator.datevalidation]],
         eventTime: [time, [Validators.required]],
         eventImage: ['']
       })
@@ -127,7 +142,7 @@ export class ShowtimezFormComponent implements OnInit {
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
 
-      this.attachment.upload(file)
+      this.attachment.upload(file, this.attach_guid)
         .then(guid => {
           let obj = {};
           obj['guid'] = guid;
@@ -150,16 +165,16 @@ export class ShowtimezFormComponent implements OnInit {
   addAttachment(obj) {
     if (this.cards.length < 1) {
       this.cards.push(obj);
-      this.reqBody.attachment_guid.push(obj['guid']);
+      // this.reqBody.attachment_guid.push(obj['guid']);
     }
   }
 
-  removeAttachment(guid) {
-    this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
-    this.cards = _remove(this.cards, function (n) {
-      return n.guid !== guid;
-    });
-  }
+  // removeAttachment(guid) {
+  //   this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
+  //   this.cards = _remove(this.cards, function (n) {
+  //     return n.guid !== guid;
+  //   });
+  // }
   // removeAttachment(file: HTMLInputElement, imageId: string) {
   //   this.attachment.remove(file, imageId).then((guid) => {
   //     file.value = '';
@@ -170,6 +185,42 @@ export class ShowtimezFormComponent implements OnInit {
   //     console.error(e);
   //   });
   // }
+
+  removeAttachment(file: HTMLInputElement, imageId: string) {
+    // alert();
+    if (this.inProgress) {
+      this.attachment.abort();
+      this.canPost = true;
+      this.inProgress = false;
+      this.errorMessage = '';
+      return;
+    }
+
+    // if we're not uploading a file right now
+    this.attachment.setPendingDelete(false);
+    this.canPost = false;
+    this.inProgress = true;
+
+    this.errorMessage = '';
+    // console.log(file, imageId);
+    this.attachment
+      .remove(file, imageId, this.attach_guid)
+      .then(guid => {
+        this.inProgress = false;
+        this.canPost = true;
+        // file.value = '';
+        this.cards = _remove(this.cards, function (n) {
+          return n.guid !== guid;
+        });
+        // console.log(this.cards);
+      })
+      .catch(e => {
+        // console.error(e);
+        // this.inProgress = false;
+        // this.canPost = true;
+      });
+  }
+
   formatTime(inputTime) {
     var timeString = inputTime;
     var H = +timeString.substr(0, 2);
@@ -182,8 +233,7 @@ export class ShowtimezFormComponent implements OnInit {
     if (inputTime) {
       var timeString = this.formatTime(inputTime)
       const d = moment(inputDate.split('-').reverse().join('-')).format('MM/DD/YYYY');
-      console.log("D: ",d);
-      
+
       var myDate = new Date(d);
       var timeReg = /(\d+)\:(\d+)(\w+)/;
       if (timeString) {
@@ -201,11 +251,23 @@ export class ShowtimezFormComponent implements OnInit {
   }
 
   eventSubmit() {
+    this.imageUploadError = false;
     this.eventSubmitted = true;
 
-    console.log(this.showTimezForm.value.eventdate);
-   
     var startTime = this.convertDateToMillis(this.showTimezForm.value.eventdate, this.showTimezForm.value.eventTime)
+
+    let data = Object.assign(this.meta, this.attachment.exportMeta());
+    // console.log("data: ", data);
+
+    if (data.attachment_guid) {
+      this.reqBody.attachment_guid = data.attachment_guid;
+    } else if (this.attach_guid.length === 1) {
+      this.reqBody.attachment_guid = this.attach_guid[0];
+    }
+
+    if (this.reqBody.attachment_guid == '') {
+      this.imageUploadError = true;
+    }
 
 
     this.reqBody.title = this.showTimezForm.value.eventTitle;
@@ -215,7 +277,7 @@ export class ShowtimezFormComponent implements OnInit {
     this.reqBody.start_time_date = startTime.getTime();
 
 
-    if (this.showTimezForm.valid) {
+    if (this.showTimezForm.valid && this.reqBody.attachment_guid != '') {
       let endpoint = 'api/v3/event';
       if (this.eventGuid) {
         endpoint = 'api/v3/event/' + this.eventGuid;
@@ -232,18 +294,17 @@ export class ShowtimezFormComponent implements OnInit {
             // close modal
             this.closeModal();
           }
-
           this.eventSubmitted = false;
           this.changeToDefault();
         })
         .catch((e) => {
-
           this.eventSubmitted = false;
           alert(e.message);
 
         });
     }
   }
+
   changeToDefault() {
     this.ChangeDefault.emit();
   }

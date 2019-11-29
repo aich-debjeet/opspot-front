@@ -221,3 +221,16 @@
 .m-b-16{
     margin-bottom: 16px;
 }
+
+.elipse{
+    text-overflow: ellipsis;
+    overflow: hidden;  
+    white-space: nowrap; 
+    &--w-130{
+        width: 130px;
+    }
+    &--w-160{
+        width: 160px;
+    }
+    
+}

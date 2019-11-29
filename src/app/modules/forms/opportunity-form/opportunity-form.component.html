@@ -52,17 +52,20 @@
                 <div class="o-create-opportunity-cover-image">
                     <div class="fileUpload" *ngIf="this.cards.length == 0">
                         <span class="icon-plus"></span>
-                        <input type="file" class="upload" formControlName="opportunityImage" #file name="attachment"
+                        <input type="file" accept="image/*" class="upload" formControlName="opportunityImage" #file name="attachment"
                             (change)="uploadAttachment(file, $event)">
                     </div>
                     <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
                         <a class="o-create-opportunity-cover-image__avatar">
-                            <a class="fileUpload-close-temp" (click)="removeAttachment(image.guid)">
+                            <a class="fileUpload-close-temp" (click)="removeAttachment(file, image.guid)">
                                 <i class="icon-x"></i>
                             </a>
                             <img [src]="image.src" alt="">
                         </a>
                     </div>
+                </div>
+                <div class="error text-sm" *ngIf="imageUploadError">
+                    This is required
                 </div>
                 <div class="text-sm grey">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>
             </div>
