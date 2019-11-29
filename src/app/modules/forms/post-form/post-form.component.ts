@@ -158,6 +158,10 @@ export class PostFormComponent {
       return;
     }
     if (this.defaultCoins.length > 0) {
+      if(!/\d/.test(this.defaultCoins)){
+        alert('Invalid Wire threshold');
+        return;
+      }
       this.meta.wire_threshold = {
         min: this.defaultCoins,
         type: 'tokens'
