@@ -7,6 +7,7 @@ import { BlueStoreFormComponent } from '../forms/blue-store-form/blue-store-form
 import { TranslationService } from '../../services/translation';
 import { ScrollService } from '../../services/ux/scroll';
 import { Subscription } from 'rxjs';
+import { BoostCreatorComponent } from '../boost/creator/creator.component';
 
 
 
@@ -38,7 +39,7 @@ export class BluestoreComponent implements OnInit {
 
 
 
-  // showBoostOptions: boolean = false;
+  showBoostOptions: boolean = false;
   // private _showBoostMenuOptions: boolean = false;
 
   @Input() focusedCommentGuid: string;
@@ -277,6 +278,16 @@ export class BluestoreComponent implements OnInit {
 
       this.detectChanges();
     }
+  }
+
+  showBoost() {
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.marketplace, { class: 'modalChanger' });
+
+    boostModal.onDidDismiss(() => {
+      this.showBoostOptions = false;
+    });
+
+    boostModal.present();
   }
 
   onScroll() {

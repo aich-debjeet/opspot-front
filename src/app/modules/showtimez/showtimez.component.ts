@@ -7,6 +7,7 @@ import { ShowtimezFormComponent } from '../forms/showtimez-form/showtimez-form.c
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../services/translation';
 import { ScrollService } from '../../services/ux/scroll';
+import { BoostCreatorComponent } from '../boost/creator/creator.component';
 
 
 @Component({
@@ -211,6 +212,16 @@ export class ShowtimezComponent implements OnInit {
     } else {
       this.count = this.showTimez['thumbs:up:count']
     }
+  }
+
+  showBoost() {
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.showTimez, { class: 'modalChanger' });
+
+    boostModal.onDidDismiss(() => {
+      this.showBoostOptions = false;
+    });
+
+    boostModal.present();
   }
 
   propagateTranslation($event) {
