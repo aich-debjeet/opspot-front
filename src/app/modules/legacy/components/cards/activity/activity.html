@@ -88,7 +88,7 @@
 
   <!-- Rich content -->
   <div class="m-rich-embed"
-    *ngIf="activity.perma_url && activity.title && !showOpportunity && !showBlueStore && !showTimez  && !showAlbum"
+    *ngIf="activity.perma_url && activity.title && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
@@ -100,7 +100,7 @@
   </div>
 
   <!-- Album post-->
-  <div *ngIf="showAlbum && !showOpportunity && !showBlueStore && !showTimez">
+  <div *ngIf="activity.entity_type === 'album' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'">
     <div class="feed-media" *ngIf="activity?.custom_data" [routerLink]="['/media', activity.guid]">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
         <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
@@ -119,7 +119,7 @@
   </div>
 
   <!-- opportunity -->
-  <div *ngIf="showOpportunity && !showBlueStore && !showTimez && !showAlbum">
+  <div *ngIf="activity.entity_type === 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event' && activity.entity_type !== 'album'">
     <div class="feed-card-opportunity-block" [routerLink]="['/opportunity/view',activity.guid]">
       <div class="feed-card-opportunity-block__top">
         <div class="opportunity-image">
@@ -149,7 +149,7 @@
   </div>
 
   <!--BlueStore-->
-  <div class="o-card feed" *ngIf="showBlueStore && !showOpportunity && !showTimez  && !showAlbum"
+  <div class="o-card feed" *ngIf="activity.entity_type === 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'"
     [routerLink]="['/item/view', activity.guid]">
     <div class="feed-media" *ngIf="activity?.custom_data">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
@@ -185,7 +185,7 @@
   </div>
 
   <!--Showtime-->
-  <div class="o-card feed" *ngIf="showTimez && !showBlueStore && !showOpportunity && !showAlbum"
+  <div class="o-card feed" *ngIf="activity.entity_type === 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'"
     [routerLink]="[routerLink1, activity.guid]">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
     <div class="feed-media">
@@ -230,7 +230,7 @@
   <!-- End translation -->
 
   <div class="opspot-editable-container"
-    *ngIf="editing && activity.custom_type && activity.title &&  !showOpportunity && !showBlueStore && !showTimez  && !showAlbum">
+    *ngIf="editing && activity.custom_type && activity.title &&  activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'">
     <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
     <textarea class="mdl-card__supporting-text message" name="title" [ngModel]="activity.title" #titleEdit
       [autoGrow]></textarea>
@@ -280,7 +280,7 @@
   <!-- Custom type:: batch -->
   <div class="item item-image allow-select"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
-    *ngIf="activity.custom_type == 'batch' && !showOpportunity && !showBlueStore && !showTimez  && !showAlbum">
+    *ngIf="activity.custom_type == 'batch' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
@@ -296,7 +296,12 @@
 
   <!-- Reminds -->
   <div *ngIf="activity.remind_object">
-    <opspot-remind [object]="activity.remind_object" [events]="childEventsEmitter" [boosted]="activity.boosted">
+    <!-- todo @gayatri: make entityType dynamic -->
+    <opspot-remind
+      [entityType]="activity.entity_type"
+      [object]="activity.remind_object"
+      [events]="childEventsEmitter"
+      [boosted]="activity.boosted">
     </opspot-remind>
   </div>
 
@@ -342,7 +347,7 @@
   </m-wire-button>
 
   <!--share button-->
-  <opspot-button-remind [object]="activity"></opspot-button-remind>
+  <opspot-button-remind [entityType]="'showBlueStore'" [object]="activity"></opspot-button-remind>
 
   <!--boost button-->
   <a class="btn btn-primary btn-xs btn--boost" *ngIf="session.getLoggedInUser().guid == activity?.owner_guid"
