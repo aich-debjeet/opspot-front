@@ -130,6 +130,9 @@ export class MediaViewComponent {
         // }
         if (response.activity) {
           this.entity = response.activity;
+
+          this.entity.url  = window.Opspot.site_url + 'media/' + this.entity.guid;
+
           if (this.entity['custom_data'][0]['entity_type'] === 'video') {
             this.showImage(0, this.entity['custom_data'][0]);
           } else {

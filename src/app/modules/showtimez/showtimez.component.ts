@@ -89,6 +89,9 @@ export class ShowtimezComponent implements OnInit {
       .then((data: any) => {
         if (data.activity) {
           this.showTimez = data.activity;
+
+          this.showTimez.url  = window.Opspot.site_url + 'showtime/view/' + this.showTimez.guid;
+
           this.count = this.showTimez['thumbs:up:count'];
 
           if (data.activity.owner_obj) {

@@ -103,6 +103,9 @@ export class OpportunityComponent implements OnInit {
       .then((data: any) => {
         if (data.activity) {
           this.opportunity = data.activity;
+          
+          this.opportunity.url  = window.Opspot.site_url + 'opportunity/view/' + this.opportunity.guid;
+
           this.count = this.opportunity['thumbs:up:count'];
 
           if (data.activity.owner_obj) {

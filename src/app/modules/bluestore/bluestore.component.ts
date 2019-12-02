@@ -84,6 +84,9 @@ export class BluestoreComponent implements OnInit {
       .then((data: any) => {
         if (data.activity) {
           this.marketplace = data.activity;
+
+          this.marketplace.url  = window.Opspot.site_url + 'item/view/' + this.marketplace.guid;
+
           if (this.marketplace['custom_data'][0]['entity_type'] === 'video') {
             this.showImage(0, this.marketplace['custom_data'][0]);
           } else {
