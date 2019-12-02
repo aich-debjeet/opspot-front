@@ -108,8 +108,7 @@ export class ForgotPasswordComponent {
       }, { validators: FormValidator.otpValidation });
     } else if (val === 'password') {
       this.updatePasswordForm = this.formBuilder.group({
-        // newPassword: ['', [Validators.required, FormValidator.checkPassword]],
-        newPassword: ['', Validators.required],
+        newPassword: ['', [Validators.required, FormValidator.checkPassword]],
         confirmPassword: ['',Validators.required]
       }, { validators: FormValidator.passwordConfirmcheck });
     }
