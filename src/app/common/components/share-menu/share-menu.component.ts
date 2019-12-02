@@ -18,19 +18,27 @@ type Option =
 export class ShareMenuComponent {
   @Input() entity: any;
   @Input() options: Array<Option>;
+  @Input() large: boolean
   @Output() optionSelected: EventEmitter<Option> = new EventEmitter<Option>();
   @Output() entityGuid: EventEmitter<Option> = new EventEmitter<Option>();
 
   opened: boolean = false;
   shareToggle: boolean = false;
   categories: Array<any> = [];
+  url = '';
+  encodedUrl = '';
+
+  // @Input('url') set data(url) {
+  //   this.rawUrl = url;
+  //   this.encodedRawUrl = encodeURI(this.rawUrl);
+  // }
+
 
   constructor(
     public session: Session,
     private client: Client,
     private cd: ChangeDetectorRef
   ) {
-    console.log(this.entity, this.options);
   }
 
   shareMenuHandler() {
@@ -52,4 +60,38 @@ export class ShareMenuComponent {
   detectChanges() {
     this.cd.markForCheck();
   }
+
+  //  set _url(value: string) {
+  //    console.log("url1: ", value);
+
+  //   this.url = value;
+  //   this.encodedUrl = encodeURI(this.url);
+  // }
+
+  openTwitter() {
+    const url =
+      'https://twitter.com/intent/tweet?tw_p=tweetbutton&url=' +
+      encodeURI(this.entity.url);
+    window.open(url, '_blank', 'width=620, height=220, left=80, top=80');
+  }
+
+  openFacebook() {
+    this.openWindow(
+      'https://www.facebook.com/sharer/sharer.php?href=' +
+      encodeURI(this.entity.url) +
+      '&display=popup&ref=plugin&src=share_button'
+    );
+  }
+
+  openWhatsapp() {
+    this.openWindow(
+      'https://api.whatsapp.com/send?text=' + encodeURI(this.entity.url)
+    );
+  }
+
+
+  openWindow(url: string) {
+    window.open(url, '_blank', 'width=600, height=300, left=80, top=80');
+  }
+
 }
