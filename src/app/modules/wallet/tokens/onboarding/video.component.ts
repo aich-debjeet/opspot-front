@@ -38,7 +38,7 @@ export class TokenOnboardingVideoComponent {
   }
 
   ngOnInit() {
-    console.log(this.videoEl);
+    // console.log(this.videoEl);
     this.videoEl.nativeElement.addEventListener("play", () => {
       this.detectChanges();
     });

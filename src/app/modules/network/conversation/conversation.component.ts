@@ -152,7 +152,7 @@ export class NetworkConversation {
           this.scrollEmitter.next(true);
         }
 
-        console.log('messages', this.messages);
+        // console.log('messages', this.messages);
 
         if (this.conversation.open) {
           this.conversation.unread = false;

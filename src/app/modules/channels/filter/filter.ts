@@ -49,13 +49,13 @@ export class ChannelFilterComponent {
   ) {}
 
   ngOnInit() {
-    console.log('FILTER: ', this.filter);
+    // console.log('FILTER: ', this.filter);
     this.loadFeed(true);
     this.onScroll();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('FILTER UPDATED: ', this.filter);
+    // console.log('FILTER UPDATED: ', this.filter);
     this.loadFeed(true);
     this.onScroll();
   }

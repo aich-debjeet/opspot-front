@@ -148,7 +148,7 @@ export class ChannelComponent {
           this.error = 'Sorry, there was a timeout error.';
         } else {
           this.error = 'Sorry, the channel couldn\'t be found';
-          console.log('couldnt load channel', e);
+          // console.log('couldnt load channel', e);
         }
       });
   }

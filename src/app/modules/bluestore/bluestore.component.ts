@@ -231,18 +231,18 @@ export class BluestoreComponent implements OnInit {
   slideConfig = { slidesToShow: 6, slidesToScroll: 1, arrows: true };
 
   slickInit(e) {
-    console.log('slick initialized in activity');
+    // console.log('slick initialized in activity');
   }
   breakpoint(e) {
-    console.log('breakpoint');
+    // console.log('breakpoint');
   }
 
   afterChange(e) {
-    console.log('afterChange');
+    // console.log('afterChange');
   }
 
   beforeChange(e) {
-    console.log('beforeChange');
+    // console.log('beforeChange');
   }
 
 

@@ -100,14 +100,14 @@ export class MyJourneyFormComponent implements OnInit {
     this.client.post('api/v1/newsfeed', data)
       .then((data: any) => {
         data.activity.boostToggle = true;
-        console.log(data)
+        // console.log(data)
         this.load.emit(data);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
         this.cards = [];
       })
       .catch((e) => {
-        console.log(e.message);
+        // console.log(e.message);
         // this.attachment.reset();
       });
   }

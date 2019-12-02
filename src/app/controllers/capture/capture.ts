@@ -55,7 +55,7 @@ export class Capture {
       .then((response: any) => {
         if (!response.entities)
           return;
-        console.log(response);
+        // console.log(response);
         self.albums = response.entities;
       });
   }

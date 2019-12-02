@@ -410,10 +410,10 @@ export class GroupsCreator {
        this.group.tags=this.group.tags.filter(el=>el.display)
        this.cropedImg=`${this.opspot.cdn_url}fs/v1/avatars/${guid}`;
       }
-      console.log(group)
+      // console.log(group)
    }
    catch(e){
-     console.log(e)
+    //  console.log(e)
    }
  }
 
