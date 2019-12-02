@@ -44,6 +44,10 @@ export class BluestoreComponent implements OnInit {
 
   @Input() focusedCommentGuid: string;
 
+  remindOpen = false;
+  remindMessage = '';
+
+
 
   // private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
@@ -296,6 +300,31 @@ export class BluestoreComponent implements OnInit {
       if (view.top < 250) this.isLocked = false;
     });
   }
+
+  shareOptionSelected(option: string) {
+    // console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.marketplace.reminded = true;
+    this.marketplace.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.marketplace.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.marketplace.reminded = false;
+        this.marketplace.reminds--;
+      });
+  }
+
 
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();

@@ -141,8 +141,22 @@
 									[object]="marketplace"></opspot-button-thumbs-up>
 							</a>
 							<a class="icon-posts-box">
-								<opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'">
-								</opspot-button-remind>
+								<!-- <opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'">
+								</opspot-button-remind> -->
+								<m-modal-remind-composer *ngIf="remindOpen"
+								[object]="marketplace?.remind_object ? marketplace?.remind_object : marketplace"
+								[entityType]="marketplace.entity_type"
+								[open]="true"
+								[default]="remindMessage"
+								(closed)="remindOpen = false"
+								(post)="remindPost($event)"
+								></m-modal-remind-composer>
+								<m-share-menu
+								[entity]="marketplace"
+								[options]="menuOptions"
+								(optionSelected)="shareOptionSelected($event)"
+								[large]=true
+								></m-share-menu>
 							</a>
 							<a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != marketplace?.owner_guid">
 								<m-wire-button
