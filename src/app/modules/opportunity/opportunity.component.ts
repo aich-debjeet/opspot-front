@@ -80,6 +80,8 @@ export class OpportunityComponent implements OnInit {
   showRatingToggle: boolean = false;
   offset = '';
   isLocked: boolean = false;
+  remindOpen = false;
+  remindMessage = '';
 
 
 
@@ -266,6 +268,30 @@ export class OpportunityComponent implements OnInit {
       if (view.top > 250) this.isLocked = true;
       if (view.top < 250) this.isLocked = false;
     });
+  }
+
+  shareOptionSelected(option: string) {
+    console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.opportunity.reminded = true;
+    this.opportunity.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.opportunity.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.opportunity.reminded = false;
+        this.opportunity.reminds--;
+      });
   }
 
   ngOnDestroy() {
