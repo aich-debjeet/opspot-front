@@ -347,7 +347,15 @@
   </m-wire-button>
 
   <!--share button-->
-  <!-- <opspot-button-remind [entityType]="'showBlueStore'" [object]="activity"></opspot-button-remind> -->
+  <!-- <opspot-button-remind [entityType]="activity.entity_type" [object]="activity" #remindButton></opspot-button-remind> -->
+  <m-modal-remind-composer *ngIf="remindOpen"
+    [object]="activity.remind_object ? activity.remind_object : activity"
+    [entityType]="activity.entity_type"
+    [open]="true"
+    [default]="remindMessage"
+    (closed)="remindOpen = false"
+    (post)="remindPost($event)"
+  ></m-modal-remind-composer>
   <m-share-menu
     [entity]="activity"
     [options]="menuOptions"

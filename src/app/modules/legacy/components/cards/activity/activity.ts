@@ -14,6 +14,7 @@ import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-
 import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
 import { PostFormComponent } from '../../../../../modules/forms/post-form/post-form.component';
 import { Router } from '@angular/router';
+// import { RemindButton } from '../../buttons/remind';
 
 @Component({
   moduleId: module.id,
@@ -61,7 +62,8 @@ export class Activity {
   // showBlueStore = false;
   // showTimez = false;
   // showAlbum = false;
-
+  remindOpen = false;
+  remindMessage = '';
 
   editing: boolean = false;
   @Input() hideTabs: boolean;
@@ -82,6 +84,7 @@ export class Activity {
   menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
   @ViewChild('player') player: OpspotVideoComponent;
+  // @ViewChild('remindButton') remindButton: RemindButton;
 
   constructor(
     public session: Session,
@@ -299,7 +302,29 @@ export class Activity {
     }
   }
 
-  shareOptionSelected(option: string) {}
+  shareOptionSelected(option: string) {
+    console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.activity.reminded = true;
+    this.activity.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.activity.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.activity.reminded = false;
+        this.activity.reminds--;
+      });
+  }
 
   editOptions() {
     if (this.activity.entity_type === 'opportunity') {
