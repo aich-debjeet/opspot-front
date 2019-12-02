@@ -109,7 +109,7 @@ export class ForgotPasswordComponent {
     } else if (val === 'password') {
       this.updatePasswordForm = this.formBuilder.group({
         newPassword: ['', [Validators.required, FormValidator.checkPassword]],
-        confirmPassword: ['']
+        confirmPassword: ['',Validators.required]
       }, { validators: FormValidator.passwordConfirmcheck });
     }
   }
