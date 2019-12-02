@@ -1,0 +1,73 @@
+<a class="o-actions__link" (click)="shareMenuHandler()">
+  <i class="icon-share-2"></i>
+  <!-- <span class="opspot-counter" *ngIf="object.reminds > 0">{{object.reminds | number}}</span> -->
+</a>
+
+<div class="o-share" [hidden]="!opened">
+    <button type="button" class="btn btn-outline-primary btn-sm btn-block">Repost this to your timeline</button>
+    <div class="o-share__title text-sm">Share this post</div>
+    <div class="o-share__social-media">
+        <a href="#" class="o-share-social-media-item"><img src="assets/share/fb.svg" alt=""></a>
+        <a href="#" class="o-share-social-media-item"><img src="assets/share/insta.svg" alt=""></a>
+        <a href="#" class="o-share-social-media-item"><img src="assets/share/twitter.svg" alt=""></a>
+        <a href="#" class="o-share-social-media-item"><img src="assets/share/in.svg" alt=""></a>
+        <a href="#" class="o-share-social-media-item"><img src="assets/share/whats.svg" alt=""></a>
+    </div><!-- social media end -->
+    <div class="o-share__title text-sm">Or send to</div>
+    <div class="o-share__search">
+        <div class="form-group c-form_righticon-lg">
+            <input type="text" class="form-control form-control-lg" placeholder="search">
+            <span class="c-svg_eye"><i class="icon-search"></i></span>
+        </div>
+    </div><!--search end-->
+    <div class="o-share__users-list">
+        <div class="o-share-user-block">
+            <div class="o-share-user-block-user-info">
+                <div class="o-share-user-block-user-info__avatar">
+                    <img src="assets/demo/avatar.png" alt="">
+                </div>
+                <div class="o-share-user-block-user-info__info">
+                    <div class="text-md f500">Mythili Rajendran</div>
+                    <div class="text-sm grey">@mythili</div>
+                </div>
+            </div>
+            <a class="btn btn-primary btn-xs">Send</a>
+        </div>
+        <div class="o-share-user-block">
+            <div class="o-share-user-block-user-info">
+                <div class="o-share-user-block-user-info__avatar">
+                    <img src="assets/demo/avatar.png" alt="">
+                </div>
+                <div class="o-share-user-block-user-info__info">
+                    <div class="text-md f500">Mythili Rajendran</div>
+                    <div class="text-sm grey">@mythili</div>
+                </div>
+            </div>
+            <a class="btn btn-primary btn-xs">Send</a>
+        </div>
+        <div class="o-share-user-block">
+            <div class="o-share-user-block-user-info">
+                <div class="o-share-user-block-user-info__avatar">
+                    <img src="assets/demo/avatar.png" alt="">
+                </div>
+                <div class="o-share-user-block-user-info__info">
+                    <div class="text-md f500">Mythili Rajendran</div>
+                    <div class="text-sm grey">@mythili</div>
+                </div>
+            </div>
+            <a class="btn btn-primary btn-xs">Send</a>
+        </div>
+        <div class="o-share-user-block">
+            <div class="o-share-user-block-user-info">
+                <div class="o-share-user-block-user-info__avatar">
+                    <img src="assets/demo/avatar.png" alt="">
+                </div>
+                <div class="o-share-user-block-user-info__info">
+                    <div class="text-md f500">Mythili Rajendran</div>
+                    <div class="text-sm grey">@mythili</div>
+                </div>
+            </div>
+            <a class="btn btn-primary btn-xs">Send</a>
+        </div>
+    </div>
+</div>

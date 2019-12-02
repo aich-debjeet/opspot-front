@@ -347,7 +347,12 @@
   </m-wire-button>
 
   <!--share button-->
-  <opspot-button-remind [entityType]="'showBlueStore'" [object]="activity"></opspot-button-remind>
+  <!-- <opspot-button-remind [entityType]="'showBlueStore'" [object]="activity"></opspot-button-remind> -->
+  <m-share-menu
+    [entity]="activity"
+    [options]="menuOptions"
+    (optionSelected)="shareOptionSelected($event)"
+  ></m-share-menu>
 
   <!--boost button-->
   <a class="btn btn-primary btn-xs btn--boost" *ngIf="session.getLoggedInUser().guid == activity?.owner_guid"

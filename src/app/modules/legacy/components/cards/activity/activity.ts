@@ -299,6 +299,8 @@ export class Activity {
     }
   }
 
+  shareOptionSelected(option: string) {}
+
   editOptions() {
     if (this.activity.entity_type === 'opportunity') {
       this.overlayModal.create(OpportunityFormComponent, this.activity, {
