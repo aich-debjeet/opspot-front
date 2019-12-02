@@ -308,7 +308,21 @@ opspot-button-remind{
                 </opspot-button-thumbs-up>
               </a>
               <a class="icon-posts-box">
-                <opspot-button-remind [object]="entity" [large]="'true'"></opspot-button-remind>
+                <!-- <opspot-button-remind [object]="entity" [large]="'true'"></opspot-button-remind> -->
+                <m-modal-remind-composer *ngIf="remindOpen"
+                  [object]="entity?.remind_object ? entity?.remind_object : entity"
+                  [entityType]="entity.entity_type"
+                  [open]="true"
+                  [default]="remindMessage"
+                  (closed)="remindOpen = false"
+                  (post)="remindPost($event)"
+                ></m-modal-remind-composer>
+                <m-share-menu
+                  [entity]="entity"
+                  [options]="menuOptions"
+                  (optionSelected)="shareOptionSelected($event)"
+                  [large]=true
+                ></m-share-menu>
               </a>
               <a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != entity?.owner_guid">
                 <m-wire-button [object]="entity?.remind_object ? entity?.remind_object : entity"

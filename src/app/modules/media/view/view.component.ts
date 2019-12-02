@@ -56,6 +56,8 @@ export class MediaViewComponent {
   translateToggle = false;
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
   translateEvent: EventEmitter<any> = new EventEmitter();
+  remindOpen = false;
+  remindMessage = '';
 
 
 
@@ -329,6 +331,31 @@ export class MediaViewComponent {
       });
     }
   }
+
+  shareOptionSelected(option: string) {
+    // console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.entity.reminded = true;
+    this.entity.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.entity.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.entity.reminded = false;
+        this.entity.reminds--;
+      });
+  }
+
 
 
 }
