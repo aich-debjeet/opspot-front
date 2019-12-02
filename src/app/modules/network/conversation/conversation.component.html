@@ -140,9 +140,15 @@
             </div>
         </div><!--action drop-->
     </div><!-- network msgs head end -->
-    <div class="o-net-msgs-body">
+    <div class="o-net-msgs-body"
+      *ngIf="showMessages"
+      opspot-messenger-scroll
+      [emitter]="scrollEmitter"
+      #scrollArea
+      (previous)="load({ offset: offset, container: scrollArea })"
+    >
         <div class="mdl-spinner mdl-js-spinner is-active" [hidden]="!inProgress"></div>
-        <ng-container *ngIf="!inProgress">
+        <ng-container>
             <div *ngFor="let message of messages;" class="o-net-msg-block">
                 <div
                   [class.o-net-my-msg]="message.owner.guid == session.getLoggedInUser().guid"
