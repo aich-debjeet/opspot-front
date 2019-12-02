@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Session } from '../../../services/session';
 import { Client } from '../../../services/api/client';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../../services/translation';
+
 
 
 
@@ -25,11 +26,14 @@ export class BigEventView implements OnInit {
   canDelete: boolean = false;
   isTranslatable: boolean;
   translateToggle: boolean = false;
-  count
+  count;
+  remindMessage = '';
+  remindOpen = false;
 
 
   menuOptions: Array<string> = ['translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
+  @Input() focusedCommentGuid: string;
 
 
 
@@ -144,6 +148,30 @@ export class BigEventView implements OnInit {
       })
       .catch(e => {
         alert((e && e.message) || 'Server error');
+      });
+  }
+
+  shareOptionSelected(option: string) {
+    // console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.bigEvent.reminded = true;
+    this.bigEvent.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.bigEvent.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.bigEvent.reminded = false;
+        this.bigEvent.reminds--;
       });
   }
 

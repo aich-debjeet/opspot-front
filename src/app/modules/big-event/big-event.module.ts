@@ -12,6 +12,9 @@ import { BigEventEdit } from './edit/big-event-edit';
 import { PostMenuModule } from '../../common/components/post-menu/post-menu.module';
 import { LegacyModule } from '../legacy/legacy.module';
 import { WireModule } from '../wire/wire.module';
+import { ModalsModule } from '../modals/modals.module';
+import { CommentsModule } from '../comments/comments.module';
+// import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
 
 
 
@@ -53,7 +56,9 @@ const bigeventRoutes: Routes = [
     TextMaskModule,
     PostMenuModule,
     LegacyModule,
-    WireModule
+    WireModule,
+    ModalsModule,
+    CommentsModule
 
   ]
 })
