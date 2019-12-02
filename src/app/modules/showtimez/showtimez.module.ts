@@ -8,6 +8,8 @@ import { CommentsModule } from '../comments/comments.module';
 import { WireModule } from '../wire/wire.module';
 import { LegacyModule } from '../legacy/legacy.module';
 import { TranslateModule } from '../translate/translate.module';
+import { ModalsModule } from '../modals/modals.module';
+import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
 
 // TODO @gayatri: handle all other requests
 const showtimeRoutes: Routes = [
@@ -31,7 +33,9 @@ const showtimeRoutes: Routes = [
     CommentsModule,
     WireModule,
     LegacyModule,
-    TranslateModule
+    TranslateModule,
+    ModalsModule,
+    ShareMenuModule
   ]
 })
 export class ShowtimezModule { }
