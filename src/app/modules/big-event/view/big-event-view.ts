@@ -1,9 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Session } from '../../../services/session';
 import { Client } from '../../../services/api/client';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TranslationService } from '../../../services/translation';
+
 
 
 @Component({
@@ -20,7 +22,14 @@ export class BigEventView implements OnInit {
   opspot = window.Opspot;
   coverImage;
 
-  menuOptions: Array<string> = ['report'];
+  canDelete: boolean = false;
+  isTranslatable: boolean;
+  translateToggle: boolean = false;
+  count
+
+
+  menuOptions: Array<string> = ['translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
+  childEventsEmitter: EventEmitter<any> = new EventEmitter();
 
 
 
@@ -31,6 +40,7 @@ export class BigEventView implements OnInit {
     private cd: ChangeDetectorRef,
     public router: Router,
     public route: ActivatedRoute,
+    public translationService: TranslationService,
   ) { }
 
 
@@ -61,8 +71,14 @@ export class BigEventView implements OnInit {
           if (this.bigEvent.custom_data) {
             this.coverImage = this.bigEvent.custom_data[0].src;
           }
+
+          this.count = this.bigEvent['thumbs:up:count'];
+
           this.inProgress = false;
         }
+        this.isTranslatable = (
+          this.translationService.isTranslatable(this.bigEvent)
+        );
         this.detectChanges();
       })
       .catch((e) => {
@@ -82,6 +98,53 @@ export class BigEventView implements OnInit {
   private detectChanges() {
     this.cd.markForCheck();
     this.cd.detectChanges();
+  }
+
+  propagateTranslation($event) {
+    if (this.bigEvent.remind_object && this.translationService.isTranslatable(this.bigEvent.remind_object)) {
+      this.childEventsEmitter.emit({
+        action: 'translate',
+        args: [$event]
+      });
+    }
+  }
+
+  liked(count) {
+    if (count != this.bigEvent['thumbs:up:count:old']) {
+      this.count = count;
+    } else {
+      this.count = this.bigEvent['thumbs:up:count']
+    }
+  }
+
+  menuOptionSelected(option: string) {
+    switch (option) {
+      case 'delete':
+        this.delete();
+        break;
+      case 'set-explicit':
+        //this.setExplicit(true);
+        break;
+      case 'remove-explicit':
+        //this.setExplicit(false);
+        break;
+      case 'translate':
+        this.translateToggle = true;
+        break;
+    }
+  }
+
+  delete($event: any = {}) {
+    if ($event.inProgress) {
+      $event.inProgress.emit(true);
+    }
+    this.client.delete(`api/v3/event/${this.bigEvent.entity_guid}`)
+      .then((response: any) => {
+        this.router.navigate([`newsfeed/subscribed`]);
+      })
+      .catch(e => {
+        alert((e && e.message) || 'Server error');
+      });
   }
 
   ngOnDestroy() {

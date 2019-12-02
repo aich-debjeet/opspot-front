@@ -26,9 +26,15 @@
                     <div class="o-big-events-inner-info__content">
                         <h5>{{bigEvent?.title}}
                             <!--TODO @gayatri confirmation for the options -->
-                            <!-- <div class="o-events-option-drop float-right">
-                            <m-post-menu [entity]="bigEvent" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)"></m-post-menu>
-                            </div> -->
+                            <div class="o-events-option-drop float-right">
+                            <!-- <m-post-menu [entity]="bigEvent" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)"></m-post-menu> -->
+                             <m-post-menu *ngIf="bigEvent" [entity]="bigEvent" [canDelete]="canDelete"
+                            [isTranslatable]="isTranslatable" [options]="menuOptions" (optionSelected)="menuOptionSelected($event)">
+                            <ng-container post-menu>
+                            <ng-content select="[post-menu]"></ng-content>
+                            </ng-container>
+                            </m-post-menu>
+                            </div> 
                         </h5>
                         <div class="text-lg grey">
                             {{bigEvent?.location}}
@@ -63,6 +69,39 @@
                     <p class="text-md white-space" [innerHtml]="bigEvent?.blurb | tags">
                     </p>
                 </div><!-- discription end -->
+                <div class="o-posts-inner-page-action">
+						<div class="o-posts-inner-page-action__details">
+							<!-- <div class="o-latest-channel-info-head__members members-list">
+								<div class="members-circle members-circle1"><img src="assets/demo/avatar.png" alt="">
+								</div>
+								<div class="members-circle members-circle2"><img src="assets/demo/avatar.png" alt="">
+								</div>
+								<div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt="">
+								</div>
+							</div> -->
+							<div class="text-sm grey">{{count}} liked this post</div>
+							<div class="text-sm grey m-16">{{bigEvent?.reminds}} shared this post</div>
+							<div class="text-sm grey m-16" *ngIf="bigEvent?.wire_totals">
+								{{bigEvent?.wire_totals.tokens | token:18 | abbr}} contributed this post</div>
+							<div class="text-sm grey m-16">{{bigEvent?.impressions}} viewed this post</div>
+						</div>
+						<div class="o-posts-inner-page-action__icons">
+							<a class="icon-posts-box">
+								<opspot-button-thumbs-up *ngIf="bigEvent" (liked)="liked($event)" [large]="'true'"
+									[object]="bigEvent"></opspot-button-thumbs-up>
+							</a>
+							<a class="icon-posts-box">
+								<opspot-button-remind *ngIf="bigEvent" [object]="bigEvent" [large]="'true'">
+								</opspot-button-remind>
+							</a>
+							<a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != bigEvent?.owner_guid">
+								<m-wire-button
+									[object]="bigEvent?.remind_object ? bigEvent?.remind_object : bigEvent"
+									(done)="wireSubmitted($event)" [large]="true">
+								</m-wire-button>
+							</a>
+						</div>
+				</div>
             </div><!-- big events inner main block end -->
             <div class="o-big-events-inner-block__sidebar">
                 <div class="o-big-event-created-by">
