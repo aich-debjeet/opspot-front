@@ -72,6 +72,7 @@ export class NetworkConversation {
   invited: boolean = false;
 
   set _conversation(value: any) {
+    this.messages = [];
     this.conversation = value;
     // console.log('NetworkConversation @input conv: ', this.conversation);
     this.initialLoad();
