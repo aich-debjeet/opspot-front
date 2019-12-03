@@ -28,6 +28,8 @@ export class ShareMenuComponent {
   categories: Array<any> = [];
   url = '';
   encodedUrl = '';
+  opspot = window.Opspot;
+
 
   // @Input('url') set data(url) {
   //   this.rawUrl = url;
