@@ -1,0 +1,92 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+.o-share{	
+    position: absolute;
+    z-index: 10000;
+    width: 100%;
+    max-width: 244px;	
+    border-radius: 4px;	
+    background-color: #FFFFFF;	
+    box-shadow: 0 6px 10px 0 rgba(144,164,174,0.16), 0 1px 12px 0 rgba(144,164,174,0.18), 0 3px 5px 0 rgba(144,164,174,0.2);
+    padding: 12px;
+    &__title{
+        width: 100%;
+        position: relative;
+        text-align: center;
+        margin: 13px 0px;
+        &:before{
+            content: ' ';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 62px;
+            border: 1px solid $grey-light;
+        }
+        &:after{
+            content: ' ';
+            position: absolute;
+            right: 0;
+            top: 6px;
+            width: 62px;
+            border: 1px solid $grey-light;
+        }
+    }
+    &__social-media{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        align-items: center;
+    }
+    &__search{
+        .form-group{
+            margin: 0px;
+            .form-control{
+                border: none!important;
+                background: $grey-light!important;
+            }
+            i{
+                font-size: 13px;
+            }
+        }
+    }
+    &__users-list{
+        width: 100%;
+    }
+}
+
+// users list
+
+.o-share-user-block{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.o-share-user-block-user-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 6px 0px;
+    &__avatar{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        overflow: hidden;
+        img{
+            width: 100%;
+        }
+    }
+    &__info{
+        margin-left: 7px;
+    }
+}
+
+.o-share-social-media-item{
+    width: 30px;
+    height: 30px;
+}

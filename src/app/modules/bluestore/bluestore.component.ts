@@ -44,6 +44,10 @@ export class BluestoreComponent implements OnInit {
 
   @Input() focusedCommentGuid: string;
 
+  remindOpen = false;
+  remindMessage = '';
+
+
 
   // private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
@@ -80,6 +84,9 @@ export class BluestoreComponent implements OnInit {
       .then((data: any) => {
         if (data.activity) {
           this.marketplace = data.activity;
+
+          this.marketplace.url  = window.Opspot.site_url + 'item/view/' + this.marketplace.guid;
+
           if (this.marketplace['custom_data'][0]['entity_type'] === 'video') {
             this.showImage(0, this.marketplace['custom_data'][0]);
           } else {
@@ -296,6 +303,31 @@ export class BluestoreComponent implements OnInit {
       if (view.top < 250) this.isLocked = false;
     });
   }
+
+  shareOptionSelected(option: string) {
+    // console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.marketplace.reminded = true;
+    this.marketplace.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.marketplace.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.marketplace.reminded = false;
+        this.marketplace.reminds--;
+      });
+  }
+
 
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();

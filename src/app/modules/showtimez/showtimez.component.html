@@ -100,7 +100,22 @@
                 </opspot-button-thumbs-up>
               </a>
               <a class="icon-posts-box">
-                <opspot-button-remind *ngIf="showTimez" [object]="showTimez" [large]="'true'"></opspot-button-remind>
+                <!-- <opspot-button-remind *ngIf="showTimez" [object]="showTimez" [large]="'true'"></opspot-button-remind> -->
+                <m-modal-remind-composer *ngIf="remindOpen"
+                  [object]="showTimez?.remind_object ? showTimez?.remind_object : showTimez"
+                  [entityType]="showTimez.entity_type"
+                  [open]="true"
+                  [default]="remindMessage"
+                  (closed)="remindOpen = false"
+                  (post)="remindPost($event)"
+                ></m-modal-remind-composer>
+                <m-share-menu
+                  [entity]="showTimez"
+                  [options]="menuOptions"
+                  (optionSelected)="shareOptionSelected($event)"
+                  [large]=true
+                ></m-share-menu>
+
               </a>
               <!-- <div class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != showTimez?.owner_guid">
                 <span class="icon-coins"></span><span class="text-md f500">Contribute</span>
