@@ -5,7 +5,8 @@ import { Client } from '../../../services/api/client';
 type Option =
   'facebook'
   | 'twitter'
-  | 'whatsapp';
+  | 'whatsapp'
+  | 'repost';
 
 @Component({
   moduleId: module.id,
