@@ -200,7 +200,8 @@ export class AttachmentService {
   }
 
   has() {
-    return !!this.meta.attachment_guid || this.isRich();
+    // return !!this.meta.attachment_guid || this.isRich();
+    return !!(this.meta.attachment_guid.length == 0) || this.isRich();
   }
 
   hasFile() {

@@ -154,7 +154,9 @@ export class PostFormComponent {
    * Post to the newsfeed
    */
   post() {
-    if (!this.meta.message && !this.attachment.has()) {
+    // console.log(this.meta, this.attachment.has());
+    if (this.meta.message.length <= 0 && this.attachment.has()) {
+      alert('What have You Created today?');
       return;
     }
     if (this.defaultCoins.length > 0) {
@@ -183,24 +185,24 @@ export class PostFormComponent {
     // console.log(this.attachment.exportMeta());
 
     this.inProgress = true;
-    this.client
-      .post('api/v1/newsfeed', data)
-      .then((data: any) => {
-        // data.activity.boostToggle = true; //@gayatri hava to check this
+    // this.client
+    //   .post('api/v1/newsfeed', data)
+    //   .then((data: any) => {
+    //     // data.activity.boostToggle = true; //@gayatri hava to check this
 
-        // console.log(data);
-        this.load.emit(data);
+    //     // console.log(data);
+    //     this.load.emit(data);
 
-        // this.load.next(data.activity);
-        this.attachment.reset();
-        this.meta = { wire_threshold: null };
-        this.inProgress = false;
-        this.cards = [];
-      })
-      .catch(e => {
-        this.inProgress = false;
-        alert(e.message);
-      });
+    //     // this.load.next(data.activity);
+    //     this.attachment.reset();
+    //     this.meta = { wire_threshold: null };
+    //     this.inProgress = false;
+    //     this.cards = [];
+    //   })
+    //   .catch(e => {
+    //     this.inProgress = false;
+    //     alert(e.message);
+    //   });
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
