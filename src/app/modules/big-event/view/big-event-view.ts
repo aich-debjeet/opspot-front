@@ -37,6 +37,7 @@ export class BigEventView implements OnInit {
   menuOptions: Array<string> = ['translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
+  translateEvent: EventEmitter<any> = new EventEmitter();
 
 
 
