@@ -31,6 +31,8 @@ export class ShareMenuComponent {
   categories: Array<any> = [];
   url = '';
   encodedUrl = '';
+  opspot = window.Opspot;
+
 
   // @Input('url') set data(url) {
   //   this.rawUrl = url;
@@ -80,6 +82,7 @@ export class ShareMenuComponent {
   // }
 
   openTwitter() {
+    // alert(this.entity.url)
     const url =
       'https://twitter.com/intent/tweet?tw_p=tweetbutton&url=' +
       encodeURI(this.entity.url);
@@ -87,8 +90,9 @@ export class ShareMenuComponent {
   }
 
   openFacebook() {
+    // alert(this.entity.url)
     this.openWindow(
-      'https://www.facebook.com/sharer/sharer.php?href=' +
+      'https://www.facebook.com/sharer/sharer.php?u=' +
       encodeURI(this.entity.url) +
       '&display=popup&ref=plugin&src=share_button'
     );
