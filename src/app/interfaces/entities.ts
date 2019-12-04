@@ -29,6 +29,9 @@ export interface OpspotBlogEntity {
   access_id?: number;
   license?: string;
   tags: any[];
+  reminded?: boolean;
+  reminds?: number;
+  url?: string;
 }
 
 export interface Message {}
