@@ -252,3 +252,78 @@
         margin-left: 10px;
     }
 }
+
+.o-posts-inner-page-action{
+    padding:19px 30px 17px;
+   &__details{
+       display:flex;
+       margin-bottom: 25px;
+       @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        flex-direction: column;   
+        }
+       .o-latest-channel-info-head__members{
+           width:65px;
+           @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            margin-bottom:20px; 
+            }
+       }
+       .m-16{
+        margin:0 16px;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            margin:0 0px;
+        }
+       }
+   }
+   &__icons{	
+    display: flex;
+    justify-content: space-between;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        flex-direction: column;   
+    }
+    .icon-posts-box{
+        border: 1px solid rgba(144,164,174,0.2);
+        border-radius: 4px;	
+        background-color: #FFFFFF;
+        padding: 11px 0;
+        text-align: center;
+        margin-left: 19px;
+        flex:1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            width:100%;
+            margin-bottom: 10px;
+            margin-left: 0px;
+        }
+        &:nth-child(1){
+            margin-left: 0px;
+        }
+        i{
+            font-size:16px;
+            color:$black;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+    }
+    .icon-posts-box-profile{
+        border: 1px solid rgba(144,164,174,0.2);
+        border-radius: 4px;	
+        background-color: #FFFFFF;
+        padding: 11px 0;
+        text-align: center;
+        width:48%;
+        font-family: "Roboto", sans-serif !important;
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            width:100%;
+            margin-bottom: 10px;
+        }
+        .icon-heart,.icon-share-2,.icon-coins{
+            font-size:16px;
+            color:$black;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+    }
+   }
+}

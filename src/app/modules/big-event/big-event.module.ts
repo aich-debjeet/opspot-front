@@ -10,6 +10,12 @@ import { CommonModule } from '../../common/common.module';
 import { BigEventForm } from './form/big-event-form';
 import { BigEventEdit } from './edit/big-event-edit';
 import { PostMenuModule } from '../../common/components/post-menu/post-menu.module';
+import { LegacyModule } from '../legacy/legacy.module';
+import { WireModule } from '../wire/wire.module';
+import { ModalsModule } from '../modals/modals.module';
+import { CommentsModule } from '../comments/comments.module';
+import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
+import { TranslateModule } from '../translate/translate.module';
 
 
 
@@ -49,7 +55,13 @@ const bigeventRoutes: Routes = [
     RouterModule.forChild(bigeventRoutes),
     BsDatepickerModule.forRoot(),
     TextMaskModule,
-    PostMenuModule
+    PostMenuModule,
+    LegacyModule,
+    WireModule,
+    ModalsModule,
+    CommentsModule,
+    ShareMenuModule,
+    TranslateModule,
 
   ]
 })
