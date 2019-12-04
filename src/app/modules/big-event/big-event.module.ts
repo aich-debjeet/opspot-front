@@ -14,7 +14,8 @@ import { LegacyModule } from '../legacy/legacy.module';
 import { WireModule } from '../wire/wire.module';
 import { ModalsModule } from '../modals/modals.module';
 import { CommentsModule } from '../comments/comments.module';
-// import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
+import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
+import { TranslateModule } from '../translate/translate.module';
 
 
 
@@ -58,7 +59,9 @@ const bigeventRoutes: Routes = [
     LegacyModule,
     WireModule,
     ModalsModule,
-    CommentsModule
+    CommentsModule,
+    ShareMenuModule,
+    TranslateModule,
 
   ]
 })

@@ -5,6 +5,8 @@ import { Client } from '../../../services/api/client';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../../services/translation';
+import { BoostCreatorComponent } from '../../boost/creator/creator.component';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 
 
@@ -29,11 +31,13 @@ export class BigEventView implements OnInit {
   count;
   remindMessage = '';
   remindOpen = false;
+  showBoostOptions: boolean = false;
 
 
   menuOptions: Array<string> = ['translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
+
 
 
 
@@ -45,6 +49,7 @@ export class BigEventView implements OnInit {
     public router: Router,
     public route: ActivatedRoute,
     public translationService: TranslationService,
+    public overlayModal: OverlayModalService
   ) { }
 
 
@@ -104,14 +109,14 @@ export class BigEventView implements OnInit {
     this.cd.detectChanges();
   }
 
-  propagateTranslation($event) {
-    if (this.bigEvent.remind_object && this.translationService.isTranslatable(this.bigEvent.remind_object)) {
-      this.childEventsEmitter.emit({
-        action: 'translate',
-        args: [$event]
-      });
-    }
-  }
+  // propagateTranslation($event) {
+  //   if (this.bigEvent.remind_object && this.translationService.isTranslatable(this.bigEvent.remind_object)) {
+  //     this.childEventsEmitter.emit({
+  //       action: 'translate',
+  //       args: [$event]
+  //     });
+  //   }
+  // }
 
   liked(count) {
     if (count != this.bigEvent['thumbs:up:count:old']) {
@@ -173,6 +178,25 @@ export class BigEventView implements OnInit {
         this.bigEvent.reminded = false;
         this.bigEvent.reminds--;
       });
+  }
+
+  showBoost() {
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.bigEvent, { class: 'modalChanger' });
+
+    boostModal.onDidDismiss(() => {
+      this.showBoostOptions = false;
+    });
+
+    boostModal.present();
+  }
+
+  propagateTranslation($event) {
+    if (this.bigEvent.remind_object && this.translationService.isTranslatable(this.bigEvent.remind_object)) {
+      this.childEventsEmitter.emit({
+        action: 'translate',
+        args: [$event]
+      });
+    }
   }
 
   ngOnDestroy() {
