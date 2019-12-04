@@ -33,7 +33,7 @@ export class SpotcoinsComponent implements OnInit {
   };
 
   //amount: number = 0.25;
-  tokens: number = 10;
+  tokens: number = 1;
   address: string = '';
   ofac: boolean = false;
   use: boolean = false;
@@ -48,9 +48,11 @@ export class SpotcoinsComponent implements OnInit {
   confirmed: boolean = false;
   error: string;
 
+  @ViewChild('tokenInputField') tokenInput:ElementRef;
+
   @Input() phase: string = 'presale';
   inProgress: boolean = false;
-  rate: number = 1;    //change the rate to display the value of tokens
+  rate: number = 1/87.5;    //change the rate to display the value of tokens
 
   constructor(
     protected client: Client,
@@ -193,6 +195,10 @@ export class SpotcoinsComponent implements OnInit {
 
   }
   payment() {
+    if(Number(this.tokenInput.nativeElement.value) < 1 || Number(this.tokenInput.nativeElement.value) > 99){
+      alert('You can enter coins within the range of 1 to 99');
+      return;
+    }
     const formData = new FormData();
     formData.append('amount', this.amount.toString());
     formData.append('purpose', 'token_purchase');
