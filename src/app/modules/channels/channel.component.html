@@ -82,10 +82,10 @@
 
       <div class="mdl-card m-channel--subscribers-tabs">
         <div class="mdl-tabs__tab-bar">
-          <a [routerLink]="['/', user.username, 'subscribers']" class="mdl-tabs__tab"
+          <a [routerLink]="['/', user.username, 'subscribers']" class="mdl-tabs__tab tti"
             [ngClass]="{ 'is-active': filter === 'subscribers' }"
             i18n="@@OPSPOT__CHANNELS__SUBSCRIBERS_WITH_COUNT">Followers ({{user.subscribers_count}})</a>
-          <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab"
+          <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab tti"
             [ngClass]="{ 'is-active': filter === 'subscriptions' }"
             i18n="@@OPSPOT__CHANNELS__SUBSCRIPTIONS_WITH_COUNT">Following ({{user.subscriptions_count-1}})</a>
         </div>
@@ -100,10 +100,10 @@
 
       <div class="mdl-card m-channel--subscribers-tabs">
         <div class="mdl-tabs__tab-bar">
-          <a [routerLink]="['/', user.username, 'subscribers']" class="mdl-tabs__tab"
+          <a [routerLink]="['/', user.username, 'subscribers']" class="mdl-tabs__tab tti"
             [ngClass]="{ 'is-active': filter === 'subscribers' }"
             i18n="@@OPSPOT__CHANNELS__SUBSCRIBERS_WITH_COUNT">Followers ({{user.subscribers_count}})</a>
-          <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab"
+          <a [routerLink]="['/', user.username, 'subscriptions']" class="mdl-tabs__tab tti"
             [ngClass]="{ 'is-active': filter === 'subscriptions' }"
             i18n="@@OPSPOT__CHANNELS__SUBSCRIPTIONS_WITH_COUNT">Following ({{user.subscriptions_count-1}})</a>
         </div>
@@ -169,5 +169,8 @@
   .sticky-widget {
     position: sticky;
     top: 70px;
+  }
+  .tti {
+    text-transform: initial;
   }
 </style>
