@@ -11,9 +11,9 @@ type Option =
 @Component({
   moduleId: module.id,
   selector: 'm-share-menu',
-  host: {
-    '(document:click)': 'onClick($event)',
-  },
+  // host: {
+  //   '(document:click)': 'onClick($event)',
+  // },
   templateUrl: 'share-menu.component.html',
   styleUrls: ['share-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -48,11 +48,11 @@ export class ShareMenuComponent {
   ) {
   }
 
-  onClick(event) {
-    if (!this.ref.nativeElement.contains(event.target)) {
-      this.opened = false;
-    }
-  }
+  // onClick(event) {
+  //   if (!this.ref.nativeElement.contains(event.target)) {
+  //     this.opened = false;
+  //   }
+  // }
 
   shareMenuHandler() {
     this.opened = !this.opened;
