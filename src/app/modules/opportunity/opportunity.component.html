@@ -37,15 +37,7 @@
                 </ng-container>
               </m-post-menu>
             </div>
-          </div>
-          <m-translate
-          [open]="translateToggle"
-          [entity]="opportunity"
-          [translateEvent]="translateEvent"
-          (onTranslateInit)="propagateTranslation($event)"
-          (onTranslate)="translateToggle = false"
-          (onTranslateError)="translateToggle = false" #translate
-        ></m-translate>       
+          </div>       
           <div>
             <div class="feed-card-opportunity-block">
               <div class="feed-card-opportunity-block__top">
@@ -68,6 +60,14 @@
                 </div>
               </div>
               <div class="feed-card-opportunity-block__bottom hidden-mob">
+                <m-translate
+                  [open]="translateToggle"
+                  [entity]="opportunity"
+                  [translateEvent]="translateEvent"
+                  (onTranslateInit)="propagateTranslation($event)"
+                  (onTranslate)="translateToggle = false"
+                  (onTranslateError)="translateToggle = false" #translate
+                ></m-translate>
                 <div class="text-md white-space" *ngIf="opportunity?.blurb">
                   <span [innerHtml]="opportunity?.blurb | safe"></span>
                 </div>

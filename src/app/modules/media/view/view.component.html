@@ -241,9 +241,6 @@ opspot-button-remind{
               <!-- </div> -->
             </div>
           </div>
-          <m-translate [open]="translateToggle" [entity]="entity" [translateEvent]="translateEvent"
-            (onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
-            (onTranslateError)="translateToggle = false" #translate></m-translate>
           <div class="o-post-inner-page-myjourney-image">
             <img [src]="largeImage" alt="" *ngIf="!showVideo">
             <m-video *ngIf="showVideo" style="background:#000;" [muted]="false" [poster]="videoData.thumbnail_src"
@@ -287,7 +284,26 @@ opspot-button-remind{
               <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
               <button class="btn-next" (click)="slickModal.slickNext()">next</button>
             </div>
+            <m-translate 
+              [open]="translateToggle"
+              [entity]="entity" 
+              [translateEvent]="translateEvent"
+              (onTranslateInit)="propagateTranslation($event)" 
+              (onTranslate)="translateToggle = false"
+              (onTranslateError)="translateToggle = false" 
+              #translate>
+            </m-translate>
             <div class="text-md">{{ entity?.message}}</div>
+            <div class="opspot-editable-container"
+                *ngIf="editing">
+                <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
+                <textarea class="mdl-card__supporting-text message w100" name="message" [ngModel]="entity.message" #messageEdit
+                  [autoGrow]></textarea>
+                <button class="btn btn-outline-primary btn-lg"
+                  (click)="messageEdit.value = entity?.message; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
+                <button class="btn btn-primary btn-lg"
+                  (click)="entity.message = messageEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
+            </div>
           </div>
           <div class="o-posts-inner-page-action">
             <div class="o-posts-inner-page-action__details">

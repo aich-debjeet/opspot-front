@@ -42,6 +42,8 @@ export class MediaViewComponent {
   theaterMode: boolean = false;
   count: any;
   largeImage: string;
+  editing: boolean = false;
+
 
   // menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'subscribe', 'remove-explicit', 'rating'];
 
@@ -219,6 +221,7 @@ export class MediaViewComponent {
       case 'edit':
         //this.router.navigate(['/media/edit', this.entity.guid]);
         // this.editOptions();
+        this.editing = true;
         break;
       case 'delete':
         this.delete();
@@ -235,6 +238,13 @@ export class MediaViewComponent {
 
     }
   }
+
+  save() {
+    this.editing = false;
+    this.entity.edited = true;
+    this.client.post('api/v1/newsfeed/' + this.entity.guid, this.entity);
+  }
+
 
   editOptions() {
     if (this.entity) {
