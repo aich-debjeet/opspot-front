@@ -41,6 +41,10 @@
       <span [innerHtml]="translation.description | tags" ></span>
   </div>
 
+  <div class="mdl-card__supporting-text message" *ngIf="translation.blurb">
+      <span [innerHtml]="translation.blurb | tags" ></span>
+  </div>
+
   <div class="mdl-card__supporting-text message" *ngIf="translation.body">
       <span [innerHtml]="translation.body | tags" ></span>
   </div>
