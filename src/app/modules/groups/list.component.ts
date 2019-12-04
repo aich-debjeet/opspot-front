@@ -31,6 +31,7 @@ export class GroupsListComponent {
   preventHashtagOverflow: boolean = false;
   dev = false;
   showMyCommunities: boolean = false;
+  ownerGuid: any;
 
   constructor(
     public client: Client,
@@ -62,6 +63,7 @@ export class GroupsListComponent {
 
         if (this.session.isLoggedIn())
           this.rating = this.session.getLoggedInUser().boost_rating;
+          this.ownerGuid = this.session.getLoggedInUser().guid;
 
         this.load(true);
       }
@@ -117,7 +119,8 @@ export class GroupsListComponent {
         key = 'entities';
         break;
       default:
-        endpoint = `api/v1/groups/${this.filter}`;
+        //@gayatri  this route need to check and have to make it dynamic
+        endpoint = 'api/v1/groups/owner/'+ this.ownerGuid ;
         key = 'groups';
         if (this.all)
           this.router.navigate(['/groups/top']);
