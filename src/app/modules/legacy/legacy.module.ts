@@ -33,6 +33,7 @@ import { OpspotFatBanner } from './components/banner/fat';
 import { ActivityPreview } from './components/cards/activity/preview';
 import { SocialIcons } from './components/social-icons/social-icons';
 import { PostMenuModule } from '../../common/components/post-menu/post-menu.module';
+import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
 
 import { HovercardPopup } from './components/hovercard-popup/hovercard-popup';
 import { CarouselComponent } from './components/carousel.component';
@@ -60,6 +61,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
     ThirdPartyNetworksModule,
     WireModule,
     PostMenuModule,
+    ShareMenuModule,
     CommentsModule,
     TextInputAutocompleteModule,
     OpspotFormsModule,

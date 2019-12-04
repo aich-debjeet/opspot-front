@@ -106,7 +106,7 @@ export class UpdateMarkersService {
     if (this.muted.indexOf(entity_guid) > -1)
       return;
     this.muted.push(entity_guid);
-    console.log(this.muted);
+    // console.log(this.muted);
   }
 
   unmute(entity_guid) {

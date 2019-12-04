@@ -1,6 +1,6 @@
 <section class="o-post-inner-sec">
 	<div class="container">
-		<div class="o-posts-inner-page">
+		<div class="o-posts-inner-page o-post-inner-profile-head">
 			<div class="o-posts-inner-page__left">
 				<div class="o-card feed o-post-inner-minheight">
 					<div class="feed-head">
@@ -13,7 +13,7 @@
 							<div class="o-avatar-det-block">
 								<span class="text-lg grey o-posts-det">
 									<a class="o-avatar__name">{{marketplace?.ownerObj?.name}}</a>
-									added 4 medias to <a class="grey-dark f500">#Marketplace</a>
+									created a <a class="grey-dark f500">#Marketplace</a>
 								</span>
 							</div>
 							<div class="grey m-l-8 o-posts-tym" *ngIf="marketplace?.time_created">
@@ -23,16 +23,19 @@
 								</span>
 							</div>
 						</div>
-						<div class="o-feed-head-action">
+						<div class="o-feed-head-action o-post-inner-profile-button">
+							<button type="button" class="btn btn-primary btn-sm" *ngIf="session.getLoggedInUser().guid == marketplace?.owner_guid" 
+								  (click)="showBoost()">Boost</button>
 							<a class="head-action__link" (click)="togglePin()">
-							<m-tooltip icon="turned_in" *ngIf="marketplace?.bookmark">
-								This post is Bookmarked
-							</m-tooltip>
-							<m-tooltip *ngIf="!marketplace?.bookmark" icon="turned_in_not">
-								Click to bookmark this post to the top of your channel feed
-							</m-tooltip>
+								<m-tooltip icon="turned_in" *ngIf="marketplace?.bookmark">
+									This post is Bookmarked
+								</m-tooltip>
+								<m-tooltip *ngIf="!marketplace?.bookmark" icon="turned_in_not">
+									Click to bookmark this post to the top of your channel feed
+								</m-tooltip>
 							</a>
-							<m-post-menu *ngIf="marketplace" [entity]="marketplace" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
+							<m-post-menu *ngIf="marketplace" [entity]="marketplace" [canDelete]="canDelete"
+								[isTranslatable]="isTranslatable" [options]="menuOptions"
 								(optionSelected)="menuOptionSelected($event)">
 								<ng-container post-menu>
 									<ng-content select="[post-menu]"></ng-content>
@@ -41,44 +44,47 @@
 						</div>
 					</div>
 					<div class="o-post-inner-page-myjourney-image">
-						<img [src]="largeImage" (error)="opspot.cdn_assets_url + 'assets/logos/logo.svg'" alt="" *ngIf="!showVideo">
+						<img [src]="largeImage" (error)="opspot.cdn_assets_url + 'assets/logos/logo.svg'" alt=""
+							*ngIf="!showVideo">
 						<m-video *ngIf="showVideo" style="background:#000;" [muted]="false"
 							[poster]="videoData.thumbnail_src"
 							[src]="[{ 'res': '360', 'uri': 'api/v1/media/' + videoData.guid + '/play', 'type': 'video/mp4' }]"
-							[guid]="videoData.guid" 
-							[torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
+							[guid]="videoData.guid" [torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]"
+							#player>
 							<!-- <video-ads [player]="player" *ngIf="marketplace??.monetized"></video-ads> -->
-            			</m-video>
+						</m-video>
 					</div>
 					<div class="o-posts-inner-page-myjourney-padding">
 						<div class="feed-media post-view-style" *ngIf="marketplace?.custom_data.length <= 5">
 							<a *ngFor="let media of marketplace?.custom_data; let i = index;" class="feed-media__link">
-								<img *ngIf="media.entity_type !== 'video'" [src]="media.src" alt="" class="feed-media__img" (click)="showImage(i)">
-								<img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
-								<div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
-                        		<div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
-                    	        </div>
+								<img *ngIf="media.entity_type !== 'video'" [src]="media.src" alt=""
+									class="feed-media__img" (click)="showImage(i)">
+								<img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt=""
+									class="feed-media__img">
+								<div class="feed-media-overlay" *ngIf="media.entity_type === 'video'"
+									(click)="showImage(i,media)">
+									<div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+								</div>
 							</a>
 						</div>
 						<div class="" *ngIf="marketplace?.custom_data.length > 5">
-							<ngx-slick-carousel 
-							class="carousel feed-media post-view-style"
-							#slickModal="slick-carousel" 
-							[config]="slideConfig" 
-							(init)="slickInit($event)"
-							(breakpoint)="breakpoint($event)" 
-							(afterChange)="afterChange($event)"
-							(beforeChange)="beforeChange($event)"
-							>
-							<div ngxSlickItem *ngFor="let media of marketplace?.custom_data; let i = index;" class="slide">
-								<a class="feed-media__link">
-								<img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'" (click)="showImage(i)">
-								<img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
-								<div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
-								<div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+							<ngx-slick-carousel class="carousel feed-media post-view-style" #slickModal="slick-carousel"
+								[config]="slideConfig" (init)="slickInit($event)" (breakpoint)="breakpoint($event)"
+								(afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+								<div ngxSlickItem *ngFor="let media of marketplace?.custom_data; let i = index;"
+									class="slide">
+									<a class="feed-media__link">
+										<img [src]="media.src" alt="" class="feed-media__img"
+											*ngIf="media.entity_type != 'video'" (click)="showImage(i)">
+										<img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt=""
+											class="feed-media__img">
+										<div class="feed-media-overlay" *ngIf="media.entity_type === 'video'"
+											(click)="showImage(i,media)">
+											<div class="feed-media-video__icon"><img src="assets/svg/playfill.svg"
+													alt=""></div>
+										</div>
+									</a>
 								</div>
-								</a>
-							</div>
 							</ngx-slick-carousel>
 							<button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
 							<button class="btn-next" (click)="slickModal.slickNext()">next</button>
@@ -90,16 +96,26 @@
 								<h5 class="f500 mb-3" *ngIf="marketplace?.title">
 									{{ marketplace?.title}}
 								</h5>
-								<div class="text-md" *ngIf="marketplace?.description">
+								<div class="text-md white-space" *ngIf="marketplace?.blurb">
 									<!-- <span class="primary">#Marketplace</span> -->
-									<span class="primary" [innerHtml]="marketplace.description | safe"></span>
+									<m-translate 
+										[open]="translateToggle" 
+										[entity]="marketplace" 
+										[translateEvent]="translateEvent"
+										(onTranslateInit)="propagateTranslation($event)" 
+										(onTranslate)="translateToggle = false"
+										(onTranslateError)="translateToggle = false" 
+										#translate>
+									</m-translate>
+									<span [innerHtml]="marketplace.blurb | safe"></span>
 								</div>
 								<div class="text-rate">
 									₹ {{ marketplace?.price  }} /- <span class="text-md f500">(per piece)</span>
 								</div>
 							</div>
 							<div class="feed-card-event-block__right ">
-								<button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != marketplace.owner_guid">Reach Out</button>
+								<button type="button" class="btn btn-primary btn-lg"
+									*ngIf="session.getLoggedInUser().guid != marketplace?.owner_guid">Reach Out</button>
 							</div>
 						</div>
 					</div>
@@ -114,21 +130,44 @@
 								</div>
 							</div> -->
 							<div class="text-sm grey">{{count}} liked this post</div>
-							<div class="text-sm grey m-16">46 shared this post</div>
-							<div class="text-sm grey m-16">13 contributed this post</div>
-							<div class="text-sm grey m-16">2k viewed this post</div>
+							<div class="text-sm grey m-16">{{marketplace?.reminds}} shared this post</div>
+							<div class="text-sm grey m-16" *ngIf="marketplace?.wire_totals">
+								{{marketplace?.wire_totals.tokens | token:18 | abbr}} contributed this post</div>
+							<div class="text-sm grey m-16">{{marketplace?.impressions}} viewed this post</div>
 						</div>
 						<div class="o-posts-inner-page-action__icons">
-							<opspot-button-thumbs-up *ngIf="marketplace" (liked)="liked($event)" [large]="'true'"
-								[object]="marketplace"></opspot-button-thumbs-up>
-							<opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'">
-							</opspot-button-remind>
-							<div class="icon-posts-box">
-								<span class="icon-coins"></span><span class="text-md f500">Contribute</span>
-							</div>
+							<a class="icon-posts-box">
+								<opspot-button-thumbs-up *ngIf="marketplace" (liked)="liked($event)" [large]="'true'"
+									[object]="marketplace"></opspot-button-thumbs-up>
+							</a>
+							<a class="icon-posts-box">
+								<!-- <opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'">
+								</opspot-button-remind> -->
+								<m-modal-remind-composer *ngIf="remindOpen"
+								[object]="marketplace?.remind_object ? marketplace?.remind_object : marketplace"
+								[entityType]="marketplace.entity_type"
+								[open]="true"
+								[default]="remindMessage"
+								(closed)="remindOpen = false"
+								(post)="remindPost($event)"
+								></m-modal-remind-composer>
+								<m-share-menu
+								[entity]="marketplace"
+								[options]="menuOptions"
+								(optionSelected)="shareOptionSelected($event)"
+								[large]=true
+								></m-share-menu>
+							</a>
+							<a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != marketplace?.owner_guid">
+								<m-wire-button
+									[object]="marketplace?.remind_object ? marketplace?.remind_object : marketplace"
+									(done)="wireSubmitted($event)" [large]="true">
+								</m-wire-button>
+							</a>
 						</div>
 					</div>
-					<opspot-comments *ngIf="marketplace" [object]="marketplace" [focusOnInit]="true" [focusedCommentGuid]="focusedCommentGuid" [canEdit]="canDelete">
+					<opspot-comments *ngIf="marketplace" [object]="marketplace" [focusOnInit]="true"
+						[focusedCommentGuid]="focusedCommentGuid" [canEdit]="canDelete">
 					</opspot-comments>
 				</div>
 			</div>

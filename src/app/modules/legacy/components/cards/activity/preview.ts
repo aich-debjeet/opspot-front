@@ -8,7 +8,7 @@ import { AttachmentService } from '../../../../../services/attachment';
 @Component({
   moduleId: module.id,
   selector: 'opspot-activity-preview',
-  inputs: ['object'],
+  inputs: ['object', 'entityType'],
   templateUrl: 'activity.html',
   host: {
     class: 'mdl-shadow--8dp'
@@ -21,6 +21,8 @@ export class ActivityPreview {
   opspot = window.Opspot;
   activity: any;
   hideTabs: boolean;
+  // todo @gayatri: make it dynamic
+  showBlueStore = false;
 
   editing: boolean = false;
   commentsToggle: boolean = false;
@@ -40,6 +42,16 @@ export class ActivityPreview {
     this.activity = value;
     if (this.activity.mature) {
       this.activity.mature_visibility = true;
+    }
+  }
+
+  // todo @gayatri: make it dynamic
+  set entityType(value: any) {
+    console.log(value);
+    if (value) {
+      if (value === 'showBlueStore') {
+        this.showBlueStore = true;
+      }
     }
   }
   

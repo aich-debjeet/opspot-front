@@ -25,6 +25,9 @@ import { ThumbnailSelectorComponent } from './components/thumbnail-selector.comp
 import { CommentsModule } from '../comments/comments.module';
 import { HashtagsModule } from '../hashtags/hashtags.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { TranslateModule } from '../translate/translate.module';
+import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
+
 
 
 const routes: Routes = [
@@ -58,7 +61,9 @@ const routes: Routes = [
     PostMenuModule,
     VideoModule,
     HashtagsModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    TranslateModule,
+    ShareMenuModule
   ],
   declarations: [
     MediaVideosListComponent,

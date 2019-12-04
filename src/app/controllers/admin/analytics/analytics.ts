@@ -80,7 +80,7 @@ export class AdminAnalytics {
     this.client.get('api/v1/admin/analytics/retention')
       .then((response: any) => {
         this.retention = response.retention[0];
-        console.log(this.retention);
+        // console.log(this.retention);
       });
   }
 

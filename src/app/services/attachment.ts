@@ -23,11 +23,10 @@ export class AttachmentService {
 
   constructor(@Inject(Session) public session: Session, @Inject(Client) public clientService: Client, @Inject(Upload) public uploadService: Upload) {
     this.reset();
-    console.log(this.attachment)
   }
 
   load(object: any) {
-    console.log(object)
+    // console.log(object)
     if (!object) {
       return;
     }
@@ -113,8 +112,11 @@ export class AttachmentService {
     return this.setMature(!this.isMature());
   }
 
-  upload(fileInput: HTMLInputElement) {
-    console.log(fileInput)
+  upload(fileInput: HTMLInputElement, guidArray?) {
+
+    if(guidArray && guidArray.length > 0){
+      this.meta.attachment_guid = guidArray
+    }
     // this.reset();
 
     this.attachment.progress = 0;
@@ -130,7 +132,6 @@ export class AttachmentService {
       this.xhr.abort();
     }
     this.xhr = new XMLHttpRequest();
-    console.log(this.attachment, file, this.meta)
 
     return this.checkFileType(file)
       .then(() => {
@@ -140,8 +141,10 @@ export class AttachmentService {
         }, this.xhr);
       })
       .then((response: any) => {
-        console.log(response)
+        // console.log(response);
         this.meta.attachment_guid.push(response.guid ? response.guid : null);
+        // console.log( "vdff: ",this.meta.attachment_guid);
+        
 
         if (!this.meta.attachment_guid) {
           throw 'No GUID';
@@ -171,9 +174,14 @@ export class AttachmentService {
     }
   }
 
-  remove(fileInput: HTMLInputElement, imageId: string) {
-    console.log(fileInput)
-    console.log(this.meta.attachment_guid)
+  remove(fileInput: HTMLInputElement, imageId: string, guidArray?) {
+    // console.log("guidArray: ", guidArray);
+    // console.log("attach: ", this.meta.attachment_guid )
+    if(guidArray.length > 0){
+      this.meta.attachment_guid = guidArray;
+      // console.log("attach: ", this.meta.attachment_guid )
+      
+    }
     let idx = this.meta.attachment_guid.indexOf(imageId);
     this.attachment.progress = 0;
     this.attachment.mime = '';
@@ -188,7 +196,7 @@ export class AttachmentService {
         // this.meta.attachment_guid = null;
         if (idx !== -1) {
           this.meta.attachment_guid.splice(idx, 1);
-          console.log(this.meta.attachment_guid)
+          // console.log(this.meta.attachment_guid)
           return imageId;
         }
       })
@@ -212,7 +220,6 @@ export class AttachmentService {
   }
 
   getPreview() {
-    console.log(this.attachment)
     return this.attachment.preview;
   }
 
@@ -225,23 +232,37 @@ export class AttachmentService {
   }
 
   getMeta() {
-    console.log(this.meta)
+    // console.log(this.meta)
     return this.meta;
   }
 
   exportMeta() {
     let result = {};
-    console.log(this.meta)
-    if(this.meta.attachment_guid.length > 0 && this.meta.attachment_guid.length <= 1){
-      this.meta.attachment_guid = this.meta.attachment_guid.toString();
-    }
-    for (var prop in this.meta) {
-      if (this.meta.hasOwnProperty(prop)) {
-        result[prop] = this.meta[prop];
+    // console.log('this.meta', this.meta);
+    if(typeof this.meta.attachment_guid === 'string') {
+      return this.meta.attachment_guid;
+    } else if (this.meta.attachment_guid instanceof Array && this.meta.attachment_guid.length > 0) {
+      for (var prop in this.meta) {
+        if (this.meta.hasOwnProperty(prop)) {
+          result[prop] = this.meta[prop];
+        }
       }
+      return result;
     }
-    console.log(result)
     return result;
+
+    // let result = {};
+    // console.log(this.meta)
+    // if(this.meta.attachment_guid.length > 0 && this.meta.attachment_guid.length <= 1){
+    //   this.meta.attachment_guid = this.meta.attachment_guid.toString();
+    // }
+    // for (var prop in this.meta) {
+    //   if (this.meta.hasOwnProperty(prop)) {
+    //     result[prop] = this.meta[prop];
+    //   }
+    // }
+    // console.log(result)
+    // return result;
   }
 
   reset() {

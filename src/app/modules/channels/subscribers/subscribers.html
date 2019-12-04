@@ -1,5 +1,5 @@
 <div class="mdl-cell mdl-cell--6-col" *ngFor="let user of users">
-  <opspot-card-user [object]="user"  class="mdl-card mdl-shadow--2dp"></opspot-card-user>
+  <opspot-card [object]="user" [cardType]="'user2'" hostClass="mdl-card mdl-color--white m-border m-search--entity"></opspot-card>
 </div>
 
 <infinite-scroll

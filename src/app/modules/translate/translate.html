@@ -1,5 +1,5 @@
 <div *ngIf="open" class="mdl-card__supporting-text mdl-color-text--grey-600 m-translation-label">
-  <i class="material-icons m-material-icons-inline">public</i>
+  <!-- <i class="material-icons m-material-icons-inline">public</i> -->
     <ng-container i18n="@@TRANSLATE__TO_LABEL">Translate to:</ng-container>
     <div class="m-translate-select">
       <select class="m-translate-select-control"
@@ -28,7 +28,7 @@
 </div>
 
 <div class="mdl-card__supporting-text mdl-color-text--grey-600 m-translation-label" *ngIf="translationInProgress">
-  <i class="material-icons m-material-icons-inline">public</i>
+  <!-- <i class="material-icons m-material-icons-inline">public</i> -->
   <ng-container i18n="@@TRANSLATE__TRANSLATING_LABEL">Translating</ng-container><span *ngIf="translation.target" i18n="Translation target@@TRANSLATE__TRANSLATING_TO_PART"> to <b>{{ translation.target }}</b></span>&hellip;
 </div>
 
@@ -41,12 +41,16 @@
       <span [innerHtml]="translation.description | tags" ></span>
   </div>
 
+  <div class="mdl-card__supporting-text message" *ngIf="translation.blurb">
+      <span [innerHtml]="translation.blurb | tags" ></span>
+  </div>
+
   <div class="mdl-card__supporting-text message" *ngIf="translation.body">
       <span [innerHtml]="translation.body | tags" ></span>
   </div>
 
   <div class="mdl-card__supporting-text mdl-color-text--grey-600 m-translation-label">
-    <i class="material-icons m-material-icons-inline">public</i>
+    <!-- <i class="material-icons m-material-icons-inline">public</i> -->
     <ng-container i18n="@@TRANSLATE__TRANSLATED_LABEL">Translated</ng-container><span *ngIf="translation.source" i18n="Translation source@@TRANSLATE__TRANSLATED_FROM_PART"> from <b>{{ translation.source }}</b></span>.
     <a (click)="hideTranslation()" i18n="@@TRANSLATE__HIDE_TRANSLATION_ACTION">Hide translation</a>
     |

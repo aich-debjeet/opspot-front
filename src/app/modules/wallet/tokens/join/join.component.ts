@@ -31,7 +31,7 @@ export class WalletTokenJoinComponent {
 
   ngOnInit() {
     if (this.session.getLoggedInUser().tel_no_hash) {
-      console.log('sticking around!');
+      // console.log('sticking around!');
       //this.router.navigate(['/wallet/tokens/contributions']);
     }
   }

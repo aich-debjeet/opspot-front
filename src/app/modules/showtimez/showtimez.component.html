@@ -1,6 +1,6 @@
 <section class="o-post-inner-sec">
   <div class="container">
-    <div class="o-posts-inner-page">
+    <div class="o-posts-inner-page o-post-inner-profile-head">
       <div class="o-posts-inner-page__left">
         <div class="o-card feed o-post-inner-minheight">
           <div class="feed-head">
@@ -12,15 +12,16 @@
               <div class="o-avatar-det-block">
                 <span class="text-lg grey o-posts-det" *ngIf="showTimez?.ownerObj?.name"><a
                     class="o-avatar__name">{{showTimez?.ownerObj?.name}}</a>
-                  added 4 medias to <a class="grey-dark f500">#Event</a></span>
+                  created a <a class="grey-dark f500">#Showtimez</a></span>
               </div>
               <div class="grey m-l-8 o-posts-tym" *ngIf="showTimez?.time_created">
                 <span>{{showTimez?.time_created * 1000 | date:'medium'}}</span>
-                <span class="o-posts-public-private" *ngIf="isTranslatable" (click)="translateToggle = true;"><i
-                    class="icon-public"></i></span>
+                <span class="o-posts-public-private"><i class="icon-public"></i></span>
               </div>
             </div>
-            <div class="o-feed-head-action">
+            <div class="o-feed-head-action o-post-inner-profile-button">
+              <button type="button" class="btn btn-primary btn-sm" *ngIf="session.getLoggedInUser().guid == showTimez?.owner_guid" 
+                (click)="showBoost()">Boost</button>
               <a class="head-action__link" (click)="togglePin()">
                 <m-tooltip icon="turned_in" *ngIf="showTimez?.bookmark">
                   This post is Bookmarked
@@ -39,10 +40,14 @@
           </div>
           <div class="feed-media o-posts-inner-event-image">
             <div class="feed-media-event-image">
-              <img [src]="showTimez?.custom_data[0] ? showTimez?.custom_data[0].src:''"
+              <!-- <img [src]="showTimez?.custom_data[0] ? showTimez?.custom_data[0].src:''"
                 (error)="showTimez.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
                 *ngIf="showTimez?.custom_data">
-                <img *ngIf="!showTimez?.custom_data" src="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+              <img *ngIf="!showTimez?.custom_data" src="opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
+              <img *ngIf="showTimez?.custom_data.length > 0"
+                [src]="showTimez?.custom_data[0] ? showTimez?.custom_data[0].src:''"
+                (error)="showTimez?.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+              <img *ngIf="showTimez?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
               <div class="event-date">
                 <div class="text-red">{{showTimez?.start_time_date | date:'dd'}} </div>
                 <div class="text-md">{{showTimez?.start_time_date | date:'MMM'}} </div>
@@ -57,13 +62,22 @@
                 </h5>
                 <div class="text-lg grey">{{showTimez?.location}}<br>
                   {{showTimez?.start_time_date | date:'h:mm | dd MMMM y'}}</div>
-                <div class="text-md">
-                    <!-- <span class="primary">#Event</span> -->
-                    <span class="mt-15" [innerHtml]="showTimez?.description | safe"></span>
+                <div class="text-md white-space">
+                  <!-- <span class="primary">#Event</span> -->
+                  <m-translate 
+                      [open]="translateToggle" 
+                      [entity]="showTimez" 
+                      [translateEvent]="translateEvent"
+                      (onTranslateInit)="propagateTranslation($event)" 
+                      (onTranslate)="translateToggle = false"
+                      (onTranslateError)="translateToggle = false" #translate>
+                  </m-translate>
+                  <span class="mt-15" [innerHtml]="showTimez?.blurb | safe"></span>
                 </div>
               </div>
               <div class="feed-card-event-block__right ">
-                <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != showTimez?.owner_guid">Reach Out</button>
+                <button type="button" class="btn btn-primary btn-lg"
+                  *ngIf="session.getLoggedInUser().guid != showTimez?.owner_guid">Reach Out</button>
               </div>
             </div>
           </div>
@@ -75,31 +89,52 @@
                 <div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt=""></div>
               </div> -->
               <div class="text-sm grey">{{count}} liked this post</div>
-              <div class="text-sm grey m-16">46 shared this post</div>
-              <div class="text-sm grey m-16">13 contributed this post</div>
-              <div class="text-sm grey m-16">2k viewed this post</div>
+              <div class="text-sm grey m-16">{{showTimez?.reminds}} shared this post</div>
+              <div class="text-sm grey m-16" *ngIf = "showTimez?.wire_totals">{{showTimez?.wire_totals.tokens | token:18 | abbr}} contributed this post
+              </div>
+              <div class="text-sm grey m-16">{{showTimez?.impressions}} viewed this post</div>
             </div>
             <div class="o-posts-inner-page-action__icons">
-              <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="showTimez">
-              </opspot-button-thumbs-up>
-              <opspot-button-remind *ngIf="showTimez" [object]="showTimez" [large]="'true'"></opspot-button-remind>
-              <div class="icon-posts-box">
+              <a class="icon-posts-box">
+                <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="showTimez">
+                </opspot-button-thumbs-up>
+              </a>
+              <a class="icon-posts-box">
+                <!-- <opspot-button-remind *ngIf="showTimez" [object]="showTimez" [large]="'true'"></opspot-button-remind> -->
+                <m-modal-remind-composer *ngIf="remindOpen"
+                  [object]="showTimez?.remind_object ? showTimez?.remind_object : showTimez"
+                  [entityType]="showTimez.entity_type"
+                  [open]="true"
+                  [default]="remindMessage"
+                  (closed)="remindOpen = false"
+                  (post)="remindPost($event)"
+                ></m-modal-remind-composer>
+                <m-share-menu
+                  [entity]="showTimez"
+                  [options]="menuOptions"
+                  (optionSelected)="shareOptionSelected($event)"
+                  [large]=true
+                ></m-share-menu>
+
+              </a>
+              <!-- <div class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != showTimez?.owner_guid">
                 <span class="icon-coins"></span><span class="text-md f500">Contribute</span>
-              </div>
+              </div> -->
+              <a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != showTimez?.owner_guid">
+                <m-wire-button [object]="showTimez?.remind_object ? showTimez?.remind_object : showTimez"
+                  (done)="wireSubmitted($event)" [large]="true">
+                </m-wire-button>
+              </a>
             </div>
           </div>
-          <opspot-comments
-          *ngIf="showTimez"
-          [object]="showTimez" 
-          [focusOnInit]="true" 
-          [focusedCommentGuid]="focusedCommentGuid"
-          [canEdit]="canDelete">
+          <opspot-comments *ngIf="showTimez" [object]="showTimez" [focusOnInit]="true"
+            [focusedCommentGuid]="focusedCommentGuid" [canEdit]="canDelete">
           </opspot-comments>
         </div>
       </div>
       <div class="o-posts-inner-page__right hidden-mob">
-          <opspot-widget [entityType]="'opportunity'"></opspot-widget>
-          <opspot-widget [entityType]="'event'"></opspot-widget>
+        <opspot-widget [entityType]="'opportunity'"></opspot-widget>
+        <opspot-widget [entityType]="'event'"></opspot-widget>
       </div>
     </div>
   </div>

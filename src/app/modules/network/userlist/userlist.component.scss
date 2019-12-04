@@ -1,0 +1,47 @@
+@import "src/assets/helpers/variables";
+
+// network list
+
+.o-net-list{
+  list-style: none;
+  &__item{
+      list-style-type: none;
+      width: 100%;
+      border-bottom: 1px solid $grey-light;
+      &--unread{
+          background-color: rgba(100,181,246, 0.1);
+      }
+      &--active{
+          background-color: rgba(100,181,246, 0.1);
+          border-left: 3px solid $primary;
+      }
+  }
+}
+.o-net-user-list{
+  width: 100%;
+  padding: 12px 15px 14px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  &__info{
+      margin-left: 9px;
+      width: calc(100% - 42px);
+  }
+}
+.o-net-msg-info{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 2px;
+  &__short{
+      width: 145px;
+      text-overflow: ellipsis;
+      overflow: hidden; 
+      white-space: nowrap;
+  }
+  &__tym{
+      text-align: right;
+  }
+}

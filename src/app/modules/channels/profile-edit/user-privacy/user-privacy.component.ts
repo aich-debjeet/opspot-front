@@ -9,10 +9,10 @@ export class UserPrivacyComponent implements OnInit {
 
   privacys = [];
   constructor() {
-    this.privacys = ['Everyone', 'Followers', 'Following', 'OnlyMe'];
+    this.privacys = ['Visible to Everyone', 'Visible to people who follow you', 'Visible to people you follow', 'OnlyMe'];
   }
 
-  model = { privacy: 'Everyone' };
+  model = { privacy: 'Visible to Everyone' };
   ngOnInit() {
     if (this.inPrivacy) {
       this.model.privacy = this.inPrivacy;

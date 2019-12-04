@@ -87,7 +87,7 @@ export class SocketsService {
     // -- Rooms
 
     this.socket.on('rooms', (rooms: string[]) => {
-    console.log('rooms', rooms);
+    // console.log('rooms', rooms);
       this.nz.run(() => {
         this.rooms = rooms;
       });

@@ -13,6 +13,8 @@ import { OpportunityFormComponent } from '../../../../../modules/forms/opportuni
 import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-form/blue-store-form.component';
 import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
 import { PostFormComponent } from '../../../../../modules/forms/post-form/post-form.component';
+import { Router } from '@angular/router';
+// import { RemindButton } from '../../buttons/remind';
 
 @Component({
   moduleId: module.id,
@@ -56,11 +58,12 @@ export class Activity {
   type: string;
   element: any;
   visible: boolean = false;
-  showOpportunity = false;
-  showBlueStore = false;
-  showTimez = false;
-  showAlbum = false;
-
+  // showOpportunity = false;
+  // showBlueStore = false;
+  // showTimez = false;
+  // showAlbum = false;
+  remindOpen = false;
+  remindMessage = '';
 
   editing: boolean = false;
   @Input() hideTabs: boolean;
@@ -76,11 +79,12 @@ export class Activity {
   isTranslatable: boolean;
   canDelete: boolean = false;
   showRatingToggle: boolean = false;
-
+  routerLink1 = "";
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
   menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
   @ViewChild('player') player: OpspotVideoComponent;
+  // @ViewChild('remindButton') remindButton: RemindButton;
 
   constructor(
     public session: Session,
@@ -91,7 +95,8 @@ export class Activity {
     public attachment: AttachmentService,
     public translationService: TranslationService,
     private overlayModal: OverlayModalService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router
   ) {
     this.element = _element.nativeElement;
     this.isVisible();
@@ -101,7 +106,7 @@ export class Activity {
     if (!value)
       return;
     this.activity = value;
-    
+
     this.activity.url = window.Opspot.site_url + 'newsfeed/' + value.guid;
 
     if (
@@ -120,21 +125,36 @@ export class Activity {
       this.activity.title = '';
     }
 
-    if (this.activity.entity_type === "opportunity") {
-      this.showOpportunity = true;
-    }
+    // if (this.activity.entity_type === "opportunity") {
+    //   this.showOpportunity = true;
+    // }
 
-    if (this.activity.entity_type === "item") {
-      this.showBlueStore = true;
-    }
+    // if (this.activity.entity_type === "item") {
+    //   this.showBlueStore = true;
+    // }
 
     if (this.activity.entity_type === "event") {
-      this.showTimez = true;
+      // this.showTimez = true;
+      if (this.activity.end_time_date) {
+        this.routerLink1 = "/event/view"
+      } else {
+        this.routerLink1 = "/showtime/view"
+      }
     }
 
-    if (this.activity.entity_type === "album") {
-      this.showAlbum = true;
-    }
+    // if (this.activity.remind_object && this.activity.remind_object.entity_type === 'event') {
+    //   if (this.activity.remind_object.end_time_date) {
+    //     this.routerLink1 = "/event/view"
+    //   } else {
+    //     this.routerLink1 = "/showtime/view"
+    //   }
+    // }
+
+    // if (this.activity.entity_type === "album") {
+    //   this.showAlbum = true;
+    // }
+
+
 
     this.boosted = this.activity.boosted || this.activity.p2p_boosted;
 
@@ -282,14 +302,36 @@ export class Activity {
     }
   }
 
+  shareOptionSelected(option: string) {
+    console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.activity.reminded = true;
+    this.activity.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.activity.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.activity.reminded = false;
+        this.activity.reminds--;
+      });
+  }
+
   editOptions() {
     if (this.activity.entity_type === 'opportunity') {
       this.overlayModal.create(OpportunityFormComponent, this.activity, {
         class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
         // listen to the update callback
         onUpdate: (payload: any) => {
-          // make update to local var
-          console.log("payload: ", payload);
           this.udpateOpportunity(payload);
         }
       }).present();
@@ -305,14 +347,19 @@ export class Activity {
       }).present()
     }
     else if (this.activity.entity_type === 'event') {
-      this.overlayModal.create(ShowtimezFormComponent, this.activity, {
-        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
-        // listen to the update callback
-        onUpdate: (payload: any) => {
-          // make update to local var
-          this.udpateShowtime(payload);
-        }
-      }).present()
+      if (this.activity.end_time_date) {
+        this.router.navigateByUrl('/event/edit/' + this.activity.guid)
+      } else {
+        this.overlayModal.create(ShowtimezFormComponent, this.activity, {
+          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+          // listen to the update callback
+          onUpdate: (payload: any) => {
+            // make update to local var
+            this.udpateShowtime(payload);
+          }
+        }).present()
+      }
+
     }
     // TODO @gayatri need to check for edit
     // else if (this.activity.entity_type === 'album' || this.activity.entity_type === 'image') {
@@ -335,6 +382,11 @@ export class Activity {
     this.activity.blurb = data.description;
     this.activity.location = data.location;
     this.activity.title = data.title;
+    if (data.attachment_guid.length > 0) {
+      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    } else {
+      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/ops_icon.png'
+    }
     // trigger component observe new changes
     this.detectChanges();
   }
@@ -353,9 +405,15 @@ export class Activity {
 
   udpateShowtime(data: any) {
     this.activity.blurb = data.description;
-    this.activity.title = data.title;
     //this.activity.attachment_guid = data.attachment_guid;
-
+    this.activity.location = data.location;
+    this.activity.title = data.title;
+    this.activity.start_time_date = data.start_time_date;
+    if (data.attachment_guid.length > 0) {
+      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    } else {
+      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
+    }
     // trigger component observe new changes
     this.detectChanges();
   }

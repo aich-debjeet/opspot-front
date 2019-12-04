@@ -22,6 +22,8 @@ import { BlogPreviewComponent } from './generic-view/edit/blog-preview/blog-prev
 import { BlogViewComponent } from './blog-view/blog-view.component';
 import { BlogAllComponent } from './blog-all/blog-all.component';
 import { GenericViewComponent } from './generic-view/generic-view.component';
+// import { ModalsModule } from '../modals/modals.module';
+import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
 
 const routes: Routes = [
   { path: 'blog/view/:guid/:title', component: BlogViewInfinite },
@@ -31,7 +33,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'edit/:guid', pathMatch: 'full' },
       { path: 'edit/:guid', component: BlogEdit},
-      { path: 'myBlogs', component: BlogAllComponent }
+      { path: 'owner', component: BlogAllComponent }
     ]
   },
   // { path: 'blog/:filter', component: BlogListComponent },
@@ -54,6 +56,7 @@ const routes: Routes = [
     PostMenuModule,
     WireModule,
     HashtagsModule,
+    ShareMenuModule
   ],
   declarations: [
     BlogView,

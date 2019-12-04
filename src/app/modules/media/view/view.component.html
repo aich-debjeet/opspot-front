@@ -217,12 +217,12 @@ opspot-button-remind{
               </div>
             </div>
             <div class="o-feed-head-action o-post-inner-profile-button">
-              <button type="button" class="btn btn-primary btn-sm">Boost</button>
+              <button type="button" class="btn btn-primary btn-sm"
+                *ngIf="session.getLoggedInUser().guid == entity?.owner_guid" (click)="showBoost()">Boost</button>
               <!-- <a href="#" class="head-action__link">
                 <img src="assets/svg/bookmark.svg" alt="" class="head-action__icon hidden-mob">
               </a> -->
-              <a class="head-action__link" *ngIf="session.getLoggedInUser().guid != entity.owner_guid"
-                (click)="togglePin()">
+              <a class="head-action__link" (click)="togglePin()">
                 <m-tooltip icon="turned_in" *ngIf="entity?.bookmark">
                   This post is Bookmarked
                 </m-tooltip>
@@ -284,7 +284,26 @@ opspot-button-remind{
               <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
               <button class="btn-next" (click)="slickModal.slickNext()">next</button>
             </div>
+            <m-translate 
+              [open]="translateToggle"
+              [entity]="entity" 
+              [translateEvent]="translateEvent"
+              (onTranslateInit)="propagateTranslation($event)" 
+              (onTranslate)="translateToggle = false"
+              (onTranslateError)="translateToggle = false" 
+              #translate>
+            </m-translate>
             <div class="text-md">{{ entity?.message}}</div>
+            <div class="opspot-editable-container"
+                *ngIf="editing">
+                <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
+                <textarea class="mdl-card__supporting-text message w100" name="message" [ngModel]="entity.message" #messageEdit
+                  [autoGrow]></textarea>
+                <button class="btn btn-outline-primary btn-lg"
+                  (click)="messageEdit.value = entity?.message; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
+                <button class="btn btn-primary btn-lg"
+                  (click)="entity.message = messageEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
+            </div>
           </div>
           <div class="o-posts-inner-page-action">
             <div class="o-posts-inner-page-action__details">
@@ -294,17 +313,38 @@ opspot-button-remind{
                 <div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt=""></div>
               </div> -->
               <div class="text-sm grey">{{count}} liked this post</div>
-              <div class="text-sm grey m-16">46 shared this post</div>
-              <div class="text-sm grey m-16">13 contributed this post</div>
-              <div class="text-sm grey m-16">2k viewed this post</div>
+              <div class="text-sm grey m-16">{{entity?.reminds}} shared this post</div>
+              <div class="text-sm grey m-16" *ngIf="entity?.wire_totals">{{entity?.wire_totals.tokens | token:18 | abbr}} contributed this
+                post</div>
+              <div class="text-sm grey m-16">{{entity?.impressions}} viewed this post</div>
             </div>
             <div class="o-posts-inner-page-action__icons">
-              <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="entity">
-              </opspot-button-thumbs-up>
-              <opspot-button-remind [object]="entity" [large]="'true'"></opspot-button-remind>
-              <div class="icon-posts-box">
-                <span class="icon-coins"></span><span class="text-md f500">Contribute</span>
-              </div>
+              <a class="icon-posts-box">
+                <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="entity">
+                </opspot-button-thumbs-up>
+              </a>
+              <a class="icon-posts-box">
+                <!-- <opspot-button-remind [object]="entity" [large]="'true'"></opspot-button-remind> -->
+                <m-modal-remind-composer *ngIf="remindOpen"
+                  [object]="entity?.remind_object ? entity?.remind_object : entity"
+                  [entityType]="entity.entity_type"
+                  [open]="true"
+                  [default]="remindMessage"
+                  (closed)="remindOpen = false"
+                  (post)="remindPost($event)"
+                ></m-modal-remind-composer>
+                <m-share-menu
+                  [entity]="entity"
+                  [options]="menuOptions"
+                  (optionSelected)="shareOptionSelected($event)"
+                  [large]=true
+                ></m-share-menu>
+              </a>
+              <a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != entity?.owner_guid">
+                <m-wire-button [object]="entity?.remind_object ? entity?.remind_object : entity"
+                  (done)="wireSubmitted($event)" [large]="true">
+                </m-wire-button>
+              </a>
             </div>
           </div>
           <opspot-comments *ngIf="entity.guid" [object]="entity" [focusedCommentGuid]="focusedCommentGuid">
@@ -313,8 +353,9 @@ opspot-button-remind{
       </div>
       <div class="o-posts-inner-page__right hidden-mob">
         <opspot-widget *ngIf="!showMyJourneyWidget" [entityType]="'opportunity'"></opspot-widget>
-        <opspot-widget  *ngIf="!showMyJourneyWidget" [entityType]="'event'"></opspot-widget>
-        <opspot-widget *ngIf= "entity?.ownerObj && showMyJourneyWidget" [entityType]="'myjourney'" [user]="entity?.ownerObj"></opspot-widget>
+        <opspot-widget *ngIf="!showMyJourneyWidget" [entityType]="'event'"></opspot-widget>
+        <opspot-widget *ngIf="entity?.ownerObj && showMyJourneyWidget" [entityType]="'myjourney'"
+          [user]="entity?.ownerObj"></opspot-widget>
       </div>
     </div>
   </div>

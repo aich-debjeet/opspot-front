@@ -120,13 +120,20 @@
         background-color: #FFFFFF;
         padding: 11px 0;
         text-align: center;
-        width: 215px;
-        font-family: "Roboto", sans-serif !important;
+        margin-left: 19px;
+        flex:1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         @include mq($from: $mobile_sm, $until: $desktop_sm) {
             width:100%;
             margin-bottom: 10px;
+            margin-left: 0px;
         }
-        .icon-heart,.icon-share-2,.icon-coins{
+        &:nth-child(1){
+            margin-left: 0px;
+        }
+        i{
             font-size:16px;
             color:$black;
             margin-right: 16px;

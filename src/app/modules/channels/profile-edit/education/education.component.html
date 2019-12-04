@@ -85,7 +85,7 @@
         <div class="o-toggle-check">
             <label>
                 <input type="checkbox" name="privacy" [(ngModel)]="model.privacy">
-                <span class="text-md">Show this education in my profile page</span>
+                <span class="text-md">Show this education on my profile</span>
             </label>
         </div>
     
@@ -95,7 +95,7 @@
         <p *ngIf="!strtMonth.valid&&submitted" class="error text-sm">Please enter start Month</p>
         <p *ngIf="!strtYear.valid&&submitted" class="error text-sm">Please enter start year</p>
         <p *ngIf="errWork&&submitted" class="error text-sm">Please add valid dates</p>
-        <p *ngIf="errEndDate&&submitted" class="error text-sm">Enddate is required</p>
+        <p *ngIf="errEndDate&&submitted" class="error text-sm">End date is required</p>
     
     
     

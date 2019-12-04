@@ -35,10 +35,10 @@ export class BlueStoreFormComponent implements OnInit {
   };
 
   blueStoreForm: FormGroup;
-  // meta: any = {
-  //   message: '',
-  //   wire_threshold: null
-  // };
+  meta: any = {
+    message: '',
+    wire_threshold: null
+  };
   tags = [];
   cards = [];
   blueStoreSubmitted: boolean = false;
@@ -47,6 +47,15 @@ export class BlueStoreFormComponent implements OnInit {
   label = "Create"
 
   description = '';
+  imageUploadError: boolean;
+  attach_guid = [];
+
+  canPost: boolean = true;
+  inProgress = false;
+  errorMessage = '';
+
+
+
 
   constructor(
     public session: Session,
@@ -64,13 +73,21 @@ export class BlueStoreFormComponent implements OnInit {
       this.label = "Edit";
       this.buildForm(this.bluestore);
       this.cards = this.bluestore['custom_data'];
+      // console.log('cards', this.cards);
       if (this.bluestore['custom_data']) {
         // for(let i = 0; i > this.bluestore['custom_data'].length; i++) {
         //   this.reqBody.attachment_guid.push(this.bluestore['custom_data'][i]['guid']);
         // }
+        // this.bluestore['custom_data'].forEach(image => {
+        //   this.reqBody.attachment_guid.push(image['guid']);
+        // });
+
         this.bluestore['custom_data'].forEach(image => {
-          this.reqBody.attachment_guid.push(image['guid']);
+          // console.log("image: ", image);
+          this.attach_guid.push(image['guid']);
         });
+
+
       }
     } else {
       this.buildForm();
@@ -95,7 +112,7 @@ export class BlueStoreFormComponent implements OnInit {
         blueStoreTitle: ['', [Validators.required]],
         blueStoreDescription: ['', [Validators.required]],
         blueStoreUnits: ['', [Validators.required]],
-        blueStorePrice: ['', []]
+        blueStorePrice: ['', [Validators.required]]
       });
     }
   }
@@ -109,14 +126,148 @@ export class BlueStoreFormComponent implements OnInit {
   close() {
     this.Close.emit();
   }
+
+
+  uploadAttachment(file: HTMLInputElement, event) {
+    if (file.value) { // this prevents IE from executing this code twice
+
+      this.attachment.upload(file, this.attach_guid)
+        .then(guid => {
+          let obj = {};
+          obj['guid'] = guid;
+          obj['src'] = this.attachment.getPreview();
+          this.addAttachment(obj);
+          // if (this.attachment.isPendingDelete()) {
+          //   this.removeAttachment(file);
+          // }
+          // file.value = null;
+        })
+        .catch(e => {
+          if (e && e.message) {
+          }
+          file.value = null;
+          this.attachment.reset();
+        });
+    }
+  }
+
+  addAttachment(obj) {
+    this.cards.push(obj);
+    // console.log('cards', this.cards);
+    // this.attach_guid.push(obj['guid']);
+    // this.reqBody.attachment_guid.push(obj['guid']);
+  }
+
+  // TODO @abhijeet: check of deleting media here is required?
+  // removeAttachment(guid){
+  //   this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
+  //   this.cards = _remove(this.cards, function (n) {
+  //     return n.guid !== guid;
+  //   });
+  // }
+
+  removeAttachment(file: HTMLInputElement, imageId: string) {
+    if (this.inProgress) {
+      this.attachment.abort();
+      this.canPost = true;
+      this.inProgress = false;
+      this.errorMessage = '';
+      return;
+    }
+
+    // if we're not uploading a file right now
+    this.attachment.setPendingDelete(false);
+    this.canPost = false;
+    this.inProgress = true;
+
+    this.errorMessage = '';
+    // console.log(file, imageId);
+    this.attachment
+      .remove(file, imageId, this.attach_guid)
+      .then(guid => {
+        this.inProgress = false;
+        this.canPost = true;
+        file.value = '';
+        this.cards = _remove(this.cards, function (n) {
+          return n.guid !== guid;
+        });
+        // console.log(this.cards);
+      })
+      .catch(e => {
+        // console.error(e);
+        // this.inProgress = false;
+        // this.canPost = true;
+      });
+  }
+
+
+  // removeAttachment(file: HTMLInputElement, imageId: string) {
+
+  //   // if we're not uploading a file right now
+  //   // this.attachment.setPendingDelete(false);
+  //   // this.canPost = false;
+  //   // this.inProgress = true;
+
+  //   // this.errorMessage = '';
+
+  //   this.attachment.remove(file, imageId).then((guid) => {
+  //     file.value = '';
+  //     this.cards = _remove(this.cards, function (n) {
+  //       return n.guid !== guid;
+  //     });
+  //   }).catch(e => {
+  //     console.error(e);
+  //   });
+  // }
+
+  // //@abhijeets impl 
+  // getAttachmentGuids() {
+  //   let attGuids = [];
+  //   for (let i = 0; i < this.cards.length; i++) {
+  //     attGuids.push(this.cards[i].guid);
+  //   }
+  //   return attGuids;
+  // }
+
   blueStoreSubmit() {
     this.blueStoreSubmitted = true;
+    // this.imageUploadError = false;
+
+
+    //@abhijeets impl 
+    // let data = this.getAttachmentGuids();
+    // console.log("data: ", data);
+
+    // let atts = this.attachment.exportMeta();
+    // if (atts) { // if change in attachments either new upload or remove existing
+    //   // data = Object.assign(this.meta, atts['attachment_guid']);
+    //   let data = Object.assign(this.meta, this.attachment.exportMeta());
+    //   console.log("DATA: ", data);
+
+    //   // data = atts['attachment_guid'];
+    // }
+    // if (this.reqBody.attachment_guid.length == 0) {
+    //   this.imageUploadError = true;
+    // }
+
     // if (this.attachment) {
     //   this.reqBody = Object.assign(this.meta, this.attachment.exportMeta());
     //   console.log('this.reqBody', this.reqBody);
     //   return;
     // }
-    // this.reqBody.attachment_guid = this.reqBody.attachment_guid;
+    // console.log("this.attachment.exportMeta(: ", this.attachment.exportMeta());
+    
+    let data = Object.assign(this.meta, this.attachment.exportMeta());
+    // console.log("data: ", data);
+    
+    if (data.attachment_guid) {
+      this.reqBody.attachment_guid = data.attachment_guid;
+
+    } else if (this.attach_guid.length === 1) {
+      this.reqBody.attachment_guid = this.attach_guid[0];
+    } else {
+      this.reqBody.attachment_guid = this.attach_guid;
+    }
     this.reqBody.title = this.blueStoreForm.value.blueStoreTitle;
     this.reqBody.description = this.blueStoreForm.value.blueStoreDescription;
     this.reqBody.price = this.blueStoreForm.value.blueStorePrice;
@@ -127,7 +278,7 @@ export class BlueStoreFormComponent implements OnInit {
     // console.log('this.reqBody', this.reqBody);
     // return;
 
-    if (this.blueStoreForm.valid) {
+    if (this.blueStoreForm.valid && !this.imageUploadError) {
       let endpoint = 'api/v3/marketplace';
       if (this.bluestoreGuid) {
         endpoint = 'api/v3/marketplace/' + this.bluestoreGuid;
@@ -153,61 +304,6 @@ export class BlueStoreFormComponent implements OnInit {
         });
     }
   }
-
-  uploadAttachment(file: HTMLInputElement, event) {
-    if (file.value) { // this prevents IE from executing this code twice
-
-      this.attachment.upload(file)
-        .then(guid => {
-          let obj = {};
-          obj['guid'] = guid;
-          obj['src'] = this.attachment.getPreview();
-          this.addAttachment(obj);
-          // if (this.attachment.isPendingDelete()) {
-          //   this.removeAttachment(file);
-          // }
-          file.value = null;
-        })
-        .catch(e => {
-          if (e && e.message) {
-          }
-          file.value = null;
-          this.attachment.reset();
-        });
-    }
-  }
-
-  addAttachment(obj) {
-    this.cards.push(obj);
-    this.reqBody.attachment_guid.push(obj['guid']);
-  }
-
-  // TODO @abhijeet: check of deleting media here is required?
-  removeAttachment(guid){
-    this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
-    this.cards = _remove(this.cards, function (n) {
-      return n.guid !== guid;
-    });
-  }
-
-  // removeAttachment(file: HTMLInputElement, imageId: string) {
-
-  //   // if we're not uploading a file right now
-  //   // this.attachment.setPendingDelete(false);
-  //   // this.canPost = false;
-  //   // this.inProgress = true;
-
-  //   // this.errorMessage = '';
-
-  //   this.attachment.remove(file, imageId).then((guid) => {
-  //     file.value = '';
-  //     this.cards = _remove(this.cards, function (n) {
-  //       return n.guid !== guid;
-  //     });
-  //   }).catch(e => {
-  //     console.error(e);
-  //   });
-  // }
 
   closeModal() {
     this.overlayModal.dismiss();

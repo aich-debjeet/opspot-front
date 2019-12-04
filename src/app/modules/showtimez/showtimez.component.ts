@@ -1,12 +1,13 @@
 import { Component, OnInit, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
-import { OpspotActivityObject } from '../../interfaces/entities';
-import { ActivatedRoute } from '@angular/router';
-import { OpportunityFormComponent } from '../forms/opportunity-form/opportunity-form.component';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { ShowtimezFormComponent } from '../forms/showtimez-form/showtimez-form.component';
 import { Subscription } from 'rxjs';
+import { TranslationService } from '../../services/translation';
+import { ScrollService } from '../../services/ux/scroll';
+import { BoostCreatorComponent } from '../boost/creator/creator.component';
 
 
 @Component({
@@ -23,20 +24,25 @@ export class ShowtimezComponent implements OnInit {
     public session: Session,
     public client: Client,
     private cd: ChangeDetectorRef,
-    public overlayModal: OverlayModalService
+    public overlayModal: OverlayModalService,
+    public translationService: TranslationService,
+    private router: Router,
+    public scroll: ScrollService
   ) { }
 
   ngOnInit() {
-    // this.route.params.subscribe((params) => {
-    //   this.guid = params['guid'];
-    // });
-    // this.load();
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
-        this.guid = params.get('guid');  
+        this.guid = params.get('guid');
         this.load();
       }
     });
+
+    this.onScroll();
+  }
+
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
   }
 
   // activity: any;
@@ -45,7 +51,7 @@ export class ShowtimezComponent implements OnInit {
   boosted: boolean = false;
   commentsToggle: boolean = false;
   translateToggle: boolean = false;
-  translateEvent: EventEmitter<any> = new EventEmitter();
+  // translateEvent: EventEmitter<any> = new EventEmitter();
   showBoostOptions: boolean = false;
   private _showBoostMenuOptions: boolean = false;
   count;
@@ -53,11 +59,12 @@ export class ShowtimezComponent implements OnInit {
   inProgress: boolean = false;
   showTimez: any;
 
-  // editing: boolean = false;
 
   _delete: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
   scroll_listener;
+  isLocked: boolean = false;
+
 
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
   onViewed: EventEmitter<{ activity, visible }> = new EventEmitter<{ activity, visible }>();
@@ -66,27 +73,35 @@ export class ShowtimezComponent implements OnInit {
   canDelete: boolean = false;
   showRatingToggle: boolean = false;
   offset = '';
+  translateEvent: EventEmitter<any> = new EventEmitter();
+
+  remindOpen = false;
+  remindMessage = '';
 
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
-  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
 
   load() {
     if (this.inProgress)
       return false;
-
     this.inProgress = true;
-
-    this.client.get('api/v3/event/' + this.guid)
+    this.client.get('api/v1/newsfeed/single/' + this.guid)
       .then((data: any) => {
-        if (data.event) {
-          this.showTimez = data.event;
+        if (data.activity) {
+          this.showTimez = data.activity;
+
+          this.showTimez.url  = window.Opspot.site_url + 'showtime/view/' + this.showTimez.guid;
+
           this.count = this.showTimez['thumbs:up:count'];
 
-          if (data.event.owner_obj) {
-            this.showTimez['ownerObj'] = data.event.owner_obj;
+          if (data.activity.owner_obj) {
+            this.showTimez['ownerObj'] = data.activity.owner_obj;
           }
           this.inProgress = false;
         }
+        this.isTranslatable = (
+          this.translationService.isTranslatable(this.showTimez)
+        );
         this.detectChanges();
       })
       .catch((e) => {
@@ -104,22 +119,13 @@ export class ShowtimezComponent implements OnInit {
   }
 
   delete($event: any = {}) {
-    if ($event.inProgress) {
-      $event.inProgress.emit(true);
-    }
     this.client.delete(`api/v3/event/${this.showTimez.entity_guid}`)
       .then((response: any) => {
-        if ($event.inProgress) {
-          $event.inProgress.emit(false);
-          $event.completed.emit(0);
-        }
-        this._delete.next(this.showTimez);
+        this.router.navigate([`newsfeed/subscribed`]);
+        // this._delete.next(this.showTimez);
       })
       .catch(e => {
-        if ($event.inProgress) {
-          $event.inProgress.emit(false);
-          $event.completed.emit(1);
-        }
+        alert((e && e.message) || 'Server error');
       });
   }
 
@@ -138,14 +144,13 @@ export class ShowtimezComponent implements OnInit {
   }
 
 
-  // async wireSubmitted(wire?) {
-  //   if (wire && this.opportunity.wire_totals) {
-  //     this.opportunity.wire_totals.tokens =
-  //       parseFloat(this.opportunity.wire_totals.tokens) + (wire.amount * Math.pow(10, 18));
-
-  //     this.detectChanges();
-  //   }
-  // }
+  async wireSubmitted(wire?) {
+    if (wire && this.showTimez.wire_totals) {
+      this.showTimez.wire_totals.tokens =
+        parseFloat(this.showTimez.wire_totals.tokens) + (wire.amount * Math.pow(10, 18));
+      this.detectChanges();
+    }
+  }
 
   menuOptionSelected(option: string) {
     switch (option) {
@@ -157,7 +162,7 @@ export class ShowtimezComponent implements OnInit {
         this.delete();
         break;
       case 'set-explicit':
-       // this.setExplicit(true);
+        // this.setExplicit(true);
         break;
       case 'remove-explicit':
         //this.setExplicit(false);
@@ -184,12 +189,17 @@ export class ShowtimezComponent implements OnInit {
 
 
   updateShowTimez(data: any) {
-    this.showTimez.description = data.description;
-    this.showTimez.location = data.location;
-    this.showTimez.title = data.title;
-    this.showTimez.eventdate = data.start_time_date;
-    //this.showTimez.eventtime = data.start_time_date;
-    this.showTimez.attachment_guid = data.attachment_guid;
+    this.load();
+    // this.showTimez.blurb = data.description;
+    // this.showTimez.location = data.location;
+    // this.showTimez.title = data.title;
+    // this.showTimez.start_time_date = data.start_time_date;
+    // this.showTimez.attachment_guid = data.attachment_guid;
+    // if (data.attachment_guid.length > 0) {
+    //   this.showTimez.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    // } else {
+    //   this.showTimez.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
+    // }
     // trigger component observe new changes
     this.detectChanges();
   }
@@ -209,6 +219,57 @@ export class ShowtimezComponent implements OnInit {
       this.count = this.showTimez['thumbs:up:count']
     }
   }
+
+  showBoost() {
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.showTimez, { class: 'modalChanger' });
+
+    boostModal.onDidDismiss(() => {
+      this.showBoostOptions = false;
+    });
+
+    boostModal.present();
+  }
+
+  propagateTranslation($event) {
+    if (this.showTimez.remind_object && this.translationService.isTranslatable(this.showTimez.remind_object)) {
+      this.childEventsEmitter.emit({
+        action: 'translate',
+        args: [$event]
+      });
+    }
+  }
+
+  onScroll() {
+    var listen = this.scroll.listen(view => {
+      if (view.top > 250) this.isLocked = true;
+      if (view.top < 250) this.isLocked = false;
+    });
+  }
+
+  shareOptionSelected(option: string) {
+    // console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.showTimez.reminded = true;
+    this.showTimez.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.showTimez.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.showTimez.reminded = false;
+        this.showTimez.reminds--;
+      });
+  }
+
 
   // setExplicit(value: boolean) {
   //   let oldValue = this.activity.mature,
