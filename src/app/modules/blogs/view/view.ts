@@ -44,6 +44,9 @@ export class BlogView {
   menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'subscribe', 'set-explicit', 'remove-explicit', 'rating'];
 
   @ViewChild('lockScreen', { read: ElementRef }) lockScreen;
+  remindOpen = false;
+  remindMessage = '';
+
 
 
   constructor(
@@ -94,6 +97,9 @@ export class BlogView {
 
   set _blog(value: OpspotBlogEntity) {
     this.blog = value;
+    console.log("blog: ", this.blog);
+    this.blog.url = `${this.opspot.site_url}${this.blog.route}`;
+    
     setTimeout(() => {
       this.calculateLockScreenHeight();
     });
@@ -162,4 +168,29 @@ export class BlogView {
   onResize(event: Event) {
     this.calculateLockScreenHeight();
   }
+
+  shareOptionSelected(option: string) {
+    // console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.blog.reminded = true;
+    this.blog.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.blog.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.blog.reminded = false;
+        this.blog.reminds--;
+      });
+  }
+
 }

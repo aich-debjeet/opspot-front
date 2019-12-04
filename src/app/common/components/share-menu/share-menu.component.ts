@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, ElementRef } from '@angular/core';
 import { Session } from '../../../services/session';
 import { Client } from '../../../services/api/client';
 
@@ -11,6 +11,9 @@ type Option =
 @Component({
   moduleId: module.id,
   selector: 'm-share-menu',
+  // host: {
+  //   '(document:click)': 'onClick($event)',
+  // },
   templateUrl: 'share-menu.component.html',
   styleUrls: ['share-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,6 +31,8 @@ export class ShareMenuComponent {
   categories: Array<any> = [];
   url = '';
   encodedUrl = '';
+  opspot = window.Opspot;
+
 
   // @Input('url') set data(url) {
   //   this.rawUrl = url;
@@ -38,9 +43,16 @@ export class ShareMenuComponent {
   constructor(
     public session: Session,
     private client: Client,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private ref: ElementRef
   ) {
   }
+
+  // onClick(event) {
+  //   if (!this.ref.nativeElement.contains(event.target)) {
+  //     this.opened = false;
+  //   }
+  // }
 
   shareMenuHandler() {
     this.opened = !this.opened;
@@ -70,6 +82,7 @@ export class ShareMenuComponent {
   // }
 
   openTwitter() {
+    // alert(this.entity.url)
     const url =
       'https://twitter.com/intent/tweet?tw_p=tweetbutton&url=' +
       encodeURI(this.entity.url);
@@ -77,8 +90,9 @@ export class ShareMenuComponent {
   }
 
   openFacebook() {
+    // alert(this.entity.url)
     this.openWindow(
-      'https://www.facebook.com/sharer/sharer.php?href=' +
+      'https://www.facebook.com/sharer/sharer.php?u=' +
       encodeURI(this.entity.url) +
       '&display=popup&ref=plugin&src=share_button'
     );
