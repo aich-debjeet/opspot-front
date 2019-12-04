@@ -36,6 +36,10 @@ export class BigEventEdit implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+  }
+
   load() {
     // if (this.inProgress)
     //   return false;

@@ -1,0 +1,38 @@
+<section class="o-net-sec">
+    <div class="container">
+        <div class="o-net-block">
+            <div class="o-net-block__left">
+                <div class="o-net-title">
+                    <!-- <div class="caption-bold">Messages <span class="o-network-count text-md white">1</span></div> -->
+                    <div class="caption-bold">Messages</div>
+                    <!-- <a href="javascript:void(0)" class="o-network-settings">
+                        <i class="icon-settings"></i>
+                    </a> -->
+                </div>
+                <div class="o-network-search">
+                    <input
+                        [(ngModel)]="q"
+                        name="q"
+                        type="text"
+                        class="o-network-search__input"
+                        placeholder="Search"
+                    />
+                    <div class="o-network-search__icon"><i class="icon-search"></i></div>
+                </div>
+                <!-- <a class="o-network-request">
+                    <div class="o-network-request__info">
+                        <div class="text-sm primary">Network Requests</div>
+                        <div class="o-network-count text-md white">1</div>
+                    </div>
+                    <div class="o-network-request__icon">
+                        <i class="icon-arrow-right"></i>
+                    </div>
+                </a> -->
+                <m-network--userlist [q]="q" (loadConversation)="loadConversation($event)" #userList></m-network--userlist>
+            </div>
+            <div class="o-net-block__right">
+                <m-network--conversation *ngIf="conversation" [conversation]="conversation"></m-network--conversation>
+            </div>
+        </div>
+    </div>
+</section>

@@ -33,7 +33,7 @@ export class OpspotWidgetComponent implements OnInit {
     // TODO @abhijeet check for all valid request params
     taxonomies: 'activity',
     offset: '',
-    limit: 12,
+    limit: 4,
     rating: 2,
     q: ''
   };

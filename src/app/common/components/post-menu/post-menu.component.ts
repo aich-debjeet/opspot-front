@@ -72,7 +72,7 @@ export class PostMenuComponent {
     public signupModal: SignupModalService
   ) {
     this.initCategories();
-    console.log(this.entity,this.options)
+    // console.log(this.entity,this.options)
   }
 
   initCategories() {

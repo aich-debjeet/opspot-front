@@ -7,6 +7,7 @@ import { BlueStoreFormComponent } from '../forms/blue-store-form/blue-store-form
 import { TranslationService } from '../../services/translation';
 import { ScrollService } from '../../services/ux/scroll';
 import { Subscription } from 'rxjs';
+import { BoostCreatorComponent } from '../boost/creator/creator.component';
 
 
 
@@ -36,10 +37,16 @@ export class BluestoreComponent implements OnInit {
   isLocked = false;
   paramsSubscription: Subscription;
 
-  // showBoostOptions: boolean = false;
+
+
+  showBoostOptions: boolean = false;
   // private _showBoostMenuOptions: boolean = false;
 
   @Input() focusedCommentGuid: string;
+
+  remindOpen = false;
+  remindMessage = '';
+
 
 
   // private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
@@ -77,6 +84,9 @@ export class BluestoreComponent implements OnInit {
       .then((data: any) => {
         if (data.activity) {
           this.marketplace = data.activity;
+
+          this.marketplace.url  = window.Opspot.site_url + 'item/view/' + this.marketplace.guid;
+
           if (this.marketplace['custom_data'][0]['entity_type'] === 'video') {
             this.showImage(0, this.marketplace['custom_data'][0]);
           } else {
@@ -98,6 +108,7 @@ export class BluestoreComponent implements OnInit {
         this.inProgress = false;
       });
   }
+
 
   getOwnerIconTime() {
     let session = this.session.getLoggedInUser();
@@ -227,18 +238,18 @@ export class BluestoreComponent implements OnInit {
   slideConfig = { slidesToShow: 6, slidesToScroll: 1, arrows: true };
 
   slickInit(e) {
-    console.log('slick initialized in activity');
+    // console.log('slick initialized in activity');
   }
   breakpoint(e) {
-    console.log('breakpoint');
+    // console.log('breakpoint');
   }
 
   afterChange(e) {
-    console.log('afterChange');
+    // console.log('afterChange');
   }
 
   beforeChange(e) {
-    console.log('beforeChange');
+    // console.log('beforeChange');
   }
 
 
@@ -249,11 +260,11 @@ export class BluestoreComponent implements OnInit {
     if (data) {
       this.showVideo = true;
       this.videoData = data;
-      console.log("video: ", data);
+      // console.log("video: ", data);
     } else {
       this.showVideo = false;
       this.largeImage = this.marketplace.custom_data[i].src;
-      console.log(" this.largeImage: ", this.largeImage);
+      // console.log(" this.largeImage: ", this.largeImage);
     }
   }
 
@@ -276,11 +287,50 @@ export class BluestoreComponent implements OnInit {
     }
   }
 
+  showBoost() {
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.marketplace, { class: 'modalChanger' });
+
+    boostModal.onDidDismiss(() => {
+      this.showBoostOptions = false;
+    });
+
+    boostModal.present();
+  }
+
   onScroll() {
     var listen = this.scroll.listen(view => {
       if (view.top > 250) this.isLocked = true;
       if (view.top < 250) this.isLocked = false;
     });
+  }
+
+  shareOptionSelected(option: string) {
+    // console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.marketplace.reminded = true;
+    this.marketplace.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.marketplace.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.marketplace.reminded = false;
+        this.marketplace.reminds--;
+      });
+  }
+
+
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
   }
 
 }

@@ -7,6 +7,7 @@ import { ShowtimezFormComponent } from '../forms/showtimez-form/showtimez-form.c
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../services/translation';
 import { ScrollService } from '../../services/ux/scroll';
+import { BoostCreatorComponent } from '../boost/creator/creator.component';
 
 
 @Component({
@@ -40,6 +41,10 @@ export class ShowtimezComponent implements OnInit {
     this.onScroll();
   }
 
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+  }
+
   // activity: any;
   opspot = window.Opspot;
 
@@ -70,6 +75,9 @@ export class ShowtimezComponent implements OnInit {
   offset = '';
   translateEvent: EventEmitter<any> = new EventEmitter();
 
+  remindOpen = false;
+  remindMessage = '';
+
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
 
@@ -81,6 +89,9 @@ export class ShowtimezComponent implements OnInit {
       .then((data: any) => {
         if (data.activity) {
           this.showTimez = data.activity;
+
+          this.showTimez.url  = window.Opspot.site_url + 'showtime/view/' + this.showTimez.guid;
+
           this.count = this.showTimez['thumbs:up:count'];
 
           if (data.activity.owner_obj) {
@@ -209,6 +220,16 @@ export class ShowtimezComponent implements OnInit {
     }
   }
 
+  showBoost() {
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.showTimez, { class: 'modalChanger' });
+
+    boostModal.onDidDismiss(() => {
+      this.showBoostOptions = false;
+    });
+
+    boostModal.present();
+  }
+
   propagateTranslation($event) {
     if (this.showTimez.remind_object && this.translationService.isTranslatable(this.showTimez.remind_object)) {
       this.childEventsEmitter.emit({
@@ -223,6 +244,30 @@ export class ShowtimezComponent implements OnInit {
       if (view.top > 250) this.isLocked = true;
       if (view.top < 250) this.isLocked = false;
     });
+  }
+
+  shareOptionSelected(option: string) {
+    // console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.showTimez.reminded = true;
+    this.showTimez.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.showTimez.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.showTimez.reminded = false;
+        this.showTimez.reminds--;
+      });
   }
 
 

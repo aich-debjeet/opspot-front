@@ -32,13 +32,18 @@ export class OpportunityFormComponent implements OnInit {
     access_id: 2,
     published: 1,
     location: null,
-    attachment_guid: []
+    attachment_guid: ''
   };
 
 
   opportunity: any;
   oppGuid: string;
   label = "Create";
+  canPost: boolean = true;
+  inProgress = false;
+  errorMessage = '';
+  attach_guid = [];
+  imageUploadError: boolean;
 
   @Input('object') set data(object) {
     this.opportunity = object;
@@ -47,8 +52,11 @@ export class OpportunityFormComponent implements OnInit {
       this.label = "Edit";
       this.buildForm(this.opportunity);
       this.cards = this.opportunity['custom_data'];
+      // this.opportunity['custom_data'].forEach(image => {
+      //   this.reqBody.attachment_guid.push(image['guid']);
+      // });
       this.opportunity['custom_data'].forEach(image => {
-        this.reqBody.attachment_guid.push(image['guid']);
+        this.attach_guid.push(image['guid']);
       });
     } else {
       this.buildForm();
@@ -114,13 +122,30 @@ export class OpportunityFormComponent implements OnInit {
   }
   postOpportunity(value) {
     this.submitted = true;
+    this.imageUploadError = false;
+
+    console.log("this.attachment.exportMeta: ", this.attachment.exportMeta());
+
+
+    let data = Object.assign(this.meta, this.attachment.exportMeta());
+    // console.log("data: ", data);
+    // console.log("datta: ", data);
+    // console.log("attach guid: ", this.attach_guid);
+    if (data.attachment_guid) {
+      this.reqBody.attachment_guid = data.attachment_guid;
+    } else if (this.attach_guid.length === 1) {
+      this.reqBody.attachment_guid = this.attach_guid[0];
+    }
+    if (this.reqBody.attachment_guid == '') {
+      this.imageUploadError = true;
+    }
 
     this.reqBody.title = value.opportunityTitle;
     this.reqBody.description = value.opportunityDescription;
     this.reqBody.location = value.opportunityLocation;
     this.reqBody.category = value.category;
 
-    if (this.opportunityForm.valid) {
+    if (this.opportunityForm.valid && this.reqBody.attachment_guid != '') {
       let endpoint = 'api/v3/opportunity';
       if (this.oppGuid) {
         endpoint = 'api/v3/opportunity/' + this.oppGuid;
@@ -148,7 +173,7 @@ export class OpportunityFormComponent implements OnInit {
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
 
-      this.attachment.upload(file)
+      this.attachment.upload(file, this.attach_guid)
         .then(guid => {
           let obj = {};
           obj['guid'] = guid;
@@ -171,16 +196,16 @@ export class OpportunityFormComponent implements OnInit {
   addAttachment(obj) {
     if (this.cards.length < 1) {
       this.cards.push(obj);
-      this.reqBody.attachment_guid.push(obj['guid']);
+      // this.reqBody.attachment_guid.push(obj['guid']);
     }
   }
 
-  removeAttachment(guid) {
-    this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
-    this.cards = _remove(this.cards, function (n) {
-      return n.guid !== guid;
-    });
-  }
+  // removeAttachment(guid) {
+  //   this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
+  //   this.cards = _remove(this.cards, function (n) {
+  //     return n.guid !== guid;
+  //   });
+  // }
 
   // removeAttachment(file: HTMLInputElement, imageId: string) {
   //   this.attachment.remove(file, imageId).then((guid) => {
@@ -192,6 +217,41 @@ export class OpportunityFormComponent implements OnInit {
   //     console.error(e);
   //   });
   // }
+
+  removeAttachment(file: HTMLInputElement, imageId: string) {
+    if (this.inProgress) {
+      this.attachment.abort();
+      this.canPost = true;
+      this.inProgress = false;
+      this.errorMessage = '';
+      return;
+    }
+
+    // if we're not uploading a file right now
+    this.attachment.setPendingDelete(false);
+    this.canPost = false;
+    this.inProgress = true;
+
+    this.errorMessage = '';
+    // console.log(file, imageId);
+    this.attachment
+      .remove(file, imageId, this.attach_guid)
+      .then(guid => {
+        this.inProgress = false;
+        this.canPost = true;
+        // file.value = '';
+        this.cards = _remove(this.cards, function (n) {
+          return n.guid !== guid;
+        });
+        // console.log(this.cards);
+      })
+      .catch(e => {
+        // console.error(e);
+        // this.inProgress = false;
+        // this.canPost = true;
+      });
+  }
+
 
   closeModal() {
     this.overlayModal.dismiss();

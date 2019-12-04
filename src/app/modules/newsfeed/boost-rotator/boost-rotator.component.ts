@@ -220,20 +220,22 @@ export class NewsfeedBoostRotatorComponent {
   }
 
   next() {
-    this.activities.toArray()[this.currentPosition].hide();
-    if (this.currentPosition + 1 > this.boosts.length - 1) {
-      //this.currentPosition = 0;
-      this.load()
-        .then(() => {
-          this.currentPosition++;
-        })
-        .catch(() => {
-          this.currentPosition = 0;
-        });
-    } else {
-      this.currentPosition++;
+    if (this.activities.toArray()[this.currentPosition]) {
+      this.activities.toArray()[this.currentPosition].hide();
+      if (this.currentPosition + 1 > this.boosts.length - 1) {
+        //this.currentPosition = 0;
+        this.load()
+          .then(() => {
+            this.currentPosition++;
+          })
+          .catch(() => {
+            this.currentPosition = 0;
+          });
+      } else {
+        this.currentPosition++;
+      }
+      this.recordImpression(this.currentPosition, false);
     }
-    this.recordImpression(this.currentPosition, false);
   }
 
   onEnableChanged(value) {

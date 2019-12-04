@@ -1,6 +1,6 @@
 <section class="o-post-inner-sec">
 	<div class="container">
-		<div class="o-posts-inner-page">
+		<div class="o-posts-inner-page o-post-inner-profile-head">
 			<div class="o-posts-inner-page__left">
 				<div class="o-card feed o-post-inner-minheight">
 					<div class="feed-head">
@@ -23,7 +23,9 @@
 								</span>
 							</div>
 						</div>
-						<div class="o-feed-head-action">
+						<div class="o-feed-head-action o-post-inner-profile-button">
+							<button type="button" class="btn btn-primary btn-sm" *ngIf="session.getLoggedInUser().guid == marketplace?.owner_guid" 
+								  (click)="showBoost()">Boost</button>
 							<a class="head-action__link" (click)="togglePin()">
 								<m-tooltip icon="turned_in" *ngIf="marketplace?.bookmark">
 									This post is Bookmarked
@@ -41,9 +43,15 @@
 							</m-post-menu>
 						</div>
 					</div>
-					<m-translate [open]="translateToggle" [entity]="marketplace" [translateEvent]="translateEvent"
-						(onTranslateInit)="propagateTranslation($event)" (onTranslate)="translateToggle = false"
-						(onTranslateError)="translateToggle = false" #translate></m-translate>
+					<m-translate 
+						[open]="translateToggle" 
+						[entity]="marketplace" 
+						[translateEvent]="translateEvent"
+						(onTranslateInit)="propagateTranslation($event)" 
+						(onTranslate)="translateToggle = false"
+					    (onTranslateError)="translateToggle = false" 
+					#translate>
+				    </m-translate>
 					<div class="o-post-inner-page-myjourney-image">
 						<img [src]="largeImage" (error)="opspot.cdn_assets_url + 'assets/logos/logo.svg'" alt=""
 							*ngIf="!showVideo">
@@ -133,8 +141,22 @@
 									[object]="marketplace"></opspot-button-thumbs-up>
 							</a>
 							<a class="icon-posts-box">
-								<opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'">
-								</opspot-button-remind>
+								<!-- <opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'">
+								</opspot-button-remind> -->
+								<m-modal-remind-composer *ngIf="remindOpen"
+								[object]="marketplace?.remind_object ? marketplace?.remind_object : marketplace"
+								[entityType]="marketplace.entity_type"
+								[open]="true"
+								[default]="remindMessage"
+								(closed)="remindOpen = false"
+								(post)="remindPost($event)"
+								></m-modal-remind-composer>
+								<m-share-menu
+								[entity]="marketplace"
+								[options]="menuOptions"
+								(optionSelected)="shareOptionSelected($event)"
+								[large]=true
+								></m-share-menu>
 							</a>
 							<a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != marketplace?.owner_guid">
 								<m-wire-button

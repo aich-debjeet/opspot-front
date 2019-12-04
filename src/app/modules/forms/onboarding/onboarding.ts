@@ -49,7 +49,7 @@ export class OnboardingForm {
         this.done.next(data.user);
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         this.inProgress = false;
 
         return;
@@ -57,7 +57,7 @@ export class OnboardingForm {
   }
 
   addAvatar(file) {
-    console.log(file);
+    // console.log(file);
     this.upload.post('api/v1/channel/avatar', [file], { filekey: 'file' })
       .then((response: any) => {
         window.Opspot.user.icontime = Date.now();

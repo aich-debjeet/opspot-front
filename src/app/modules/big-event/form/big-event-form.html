@@ -59,7 +59,7 @@
                 </div>
                 <!--Location ends-->
                 <div class="o-create-big-event-row">
-                    <div class="form-group select-big-event mr13">
+                    <div class="form-group w100 mr13">
                         <label>Start Date</label>
                         <input type="text" class="form-control form-control-lg" placeholder="Select Date"
                             [textMask]="{mask: dateMask}" formControlName="eventStartDate">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <!--Organisation Type ends-->
-                    <div class="form-group select-big-event">
+                    <div class="form-group w100">
                         <label>Start Time</label>
                         <input type="text" class="form-control form-control-lg" placeholder="Start Time"
                             [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)"
@@ -86,7 +86,7 @@
                 </div>
                 <!--row ends-->
                 <div class="o-create-big-event-row">
-                    <div class="form-group select-big-event mr13">
+                    <div class="form-group w100 mr13">
                         <label>End Date</label>
                         <input type="text" class="form-control form-control-lg" placeholder="Select Date"
                             [textMask]="{mask: dateMask}" formControlName="eventEndDate">
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <!--Organisation Type ends-->
-                    <div class="form-group select-big-event">
+                    <div class="form-group w100">
                         <label>End Time</label>
                         <input type="text" class="form-control form-control-lg" placeholder="End Time"
                             [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventEndTime">
@@ -114,17 +114,17 @@
                 <div class="form-group">
                     <label>Cover Image</label>
                     <div class="o-big-event-profile-picture">
-                        <div class="fileUpload mr10" *ngIf="!coverImage">
+                        <div class="fileUpload mr10" *ngIf="coverImage == ''">
                             <span class="icon-plus"></span>
-                            <input type="file" id="file" #file class="upload" name="attachment"
+                            <input type="file" accept="image/*" id="file" #file class="upload" name="attachment"
                                 (change)="uploadAttachment(file, $event)" formControlName="eventCoverImage">
                         </div>
                         <!--file upload ends-->
                         <div class="fileUpload-preview" *ngIf="coverImage">
                             <a class="o-big-event-image">
-                                <!-- <a class="fileUpload-close-temp" (click)="removeAttachment(file,attach_guid[0])">
+                                <a class="fileUpload-close-temp" (click)="removeAttachment(file,imageGuid)">
                                     <i class="icon-x"></i>
-                                </a> -->
+                                </a>
                                 <img [src]="coverImage" alt="">
                             </a>
                         </div>

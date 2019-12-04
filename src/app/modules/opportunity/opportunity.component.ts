@@ -7,6 +7,7 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
 import { Subscription } from 'rxjs';
 import { TranslationService } from '../../services/translation';
 import { ScrollService } from '../../services/ux/scroll';
+import { BoostCreatorComponent } from '../boost/creator/creator.component';
 
 
 
@@ -79,6 +80,8 @@ export class OpportunityComponent implements OnInit {
   showRatingToggle: boolean = false;
   offset = '';
   isLocked: boolean = false;
+  remindOpen = false;
+  remindMessage = '';
 
 
 
@@ -100,6 +103,9 @@ export class OpportunityComponent implements OnInit {
       .then((data: any) => {
         if (data.activity) {
           this.opportunity = data.activity;
+          
+          this.opportunity.url  = window.Opspot.site_url + 'opportunity/view/' + this.opportunity.guid;
+
           this.count = this.opportunity['thumbs:up:count'];
 
           if (data.activity.owner_obj) {
@@ -249,6 +255,17 @@ export class OpportunityComponent implements OnInit {
     }
   }
 
+  showBoost() {
+    const boostModal = this.overlayModal.create(BoostCreatorComponent, this.opportunity, { class: 'modalChanger' });
+
+    boostModal.onDidDismiss(() => {
+      this.showBoostOptions = false;
+    });
+
+    boostModal.present();
+  }
+
+
   onScroll() {
     var listen = this.scroll.listen(view => {
       if (view.top > 250) this.isLocked = true;
@@ -256,5 +273,32 @@ export class OpportunityComponent implements OnInit {
     });
   }
 
+  shareOptionSelected(option: string) {
+    console.log('shareOptionSelected', option);
+    if (option === 'repost') {
+      this.remindOpen = true;
+    };
+  }
+
+  remindPost($event) {
+    if ($event.message) {
+      this.remindMessage = $event.message;
+    }
+
+    this.opportunity.reminded = true;
+    this.opportunity.reminds++;
+
+    this.client.post('api/v2/newsfeed/remind/' + this.opportunity.guid, {
+      message: this.remindMessage
+    })
+      .catch(e => {
+        this.opportunity.reminded = false;
+        this.opportunity.reminds--;
+      });
+  }
+
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+  }
 
 }

@@ -73,7 +73,7 @@ export class PostFormComponent {
     this._opts = opts;
   }
 
-  @Input('object') set data(object) {}
+  @Input('object') set data(object) { }
 
   constructor(
     public session: Session,
@@ -175,8 +175,12 @@ export class PostFormComponent {
     // }
 
     this.errorMessage = '';
+    console.log("this.attachment.exportMeta(): ", this.attachment.exportMeta());
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
+    // console.log("data: ", data);
+    // console.log("data: ", data);
+
 
     data.tags = this.tags;
     data.mature = this.isNSFW;
@@ -267,7 +271,7 @@ export class PostFormComponent {
         this.inProgress = false;
         this.canPost = true;
         file.value = '';
-        this.cards = _remove(this.cards, function(n) {
+        this.cards = _remove(this.cards, function (n) {
           return n.guid !== guid;
         });
         // console.log(this.cards);

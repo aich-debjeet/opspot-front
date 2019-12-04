@@ -152,7 +152,6 @@ export class WireCreatorComponent {
       if (!response) {
         return;
       }
-console.log(response)
       this.balances.wireCap = response.wireCap;
       this.balances.token = response.balance;
 
