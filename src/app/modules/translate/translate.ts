@@ -35,6 +35,7 @@ export class Translate {
     message: '',
     title: '',
     description: '',
+    blurb: '',
     body: '',
     source: ''
   };
@@ -140,6 +141,8 @@ export class Translate {
       selected: language
     };
 
+    console.log('selected lang', language);
+
     this.onTranslateInit.emit($event);
     this.changeDetectorRef.markForCheck();
 
@@ -170,6 +173,7 @@ export class Translate {
       .then((translation: any) => {
         this.translationInProgress = false;
         this.translation.source = null;
+        console.log('translationService.translate');
 
         for (let field in translation) {
           this.translation.translated = true;
