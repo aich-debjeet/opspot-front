@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, ElementRef } from '@angular/core';
 import { Session } from '../../../services/session';
 import { Client } from '../../../services/api/client';
 
@@ -11,6 +11,9 @@ type Option =
 @Component({
   moduleId: module.id,
   selector: 'm-share-menu',
+  host: {
+    '(document:click)': 'onClick($event)',
+  },
   templateUrl: 'share-menu.component.html',
   styleUrls: ['share-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -38,8 +41,15 @@ export class ShareMenuComponent {
   constructor(
     public session: Session,
     private client: Client,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private ref: ElementRef
   ) {
+  }
+
+  onClick(event) {
+    if (!this.ref.nativeElement.contains(event.target)) {
+      this.opened = false;
+    }
   }
 
   shareMenuHandler() {
