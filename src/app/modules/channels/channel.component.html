@@ -49,7 +49,7 @@
     </section>
 
     <!-- Feed list -->
-    <section class="o-center-block">
+    <section class="o-center-block" *ngIf="filter !== 'subscribers' && filter !== 'subscriptions'">
       <div class="tabs">
         <ul class="tabs-list">
           <li [class.active]="isActive('feed')"><a [routerLink]="['/', user.username, 'feed']">Feed</a></li>
