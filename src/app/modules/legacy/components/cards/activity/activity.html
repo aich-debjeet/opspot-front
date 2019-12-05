@@ -101,7 +101,10 @@
 
   <!-- Album post-->
   <div *ngIf="activity.entity_type === 'album' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'">
-    <div class="feed-media" *ngIf="activity?.custom_data" [routerLink]="['/media', activity.guid]">
+    <div
+      class="feed-media" *ngIf="activity?.custom_data" [routerLink]="['/media', activity.guid]"
+      [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
+    >
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
         <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
         <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
@@ -262,7 +265,7 @@
   </div>
 
   <!-- Images -->
-  <div class="item item-image allow-select m-activity--image"
+  <div class="item item-image allow-select m-activity--image 123"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
     *ngIf="activity.thumbnail_src && !activity.perma_url">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">

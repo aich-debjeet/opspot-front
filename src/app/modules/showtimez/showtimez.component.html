@@ -38,14 +38,6 @@
               </m-post-menu>
             </div>
           </div>
-          <m-translate 
-            [open]="translateToggle" 
-            [entity]="showTimez" 
-            [translateEvent]="translateEvent"
-            (onTranslateInit)="propagateTranslation($event)" 
-            (onTranslate)="translateToggle = false"
-            (onTranslateError)="translateToggle = false" #translate>
-        </m-translate>
           <div class="feed-media o-posts-inner-event-image">
             <div class="feed-media-event-image">
               <!-- <img [src]="showTimez?.custom_data[0] ? showTimez?.custom_data[0].src:''"
@@ -72,6 +64,14 @@
                   {{showTimez?.start_time_date | date:'h:mm | dd MMMM y'}}</div>
                 <div class="text-md white-space">
                   <!-- <span class="primary">#Event</span> -->
+                  <m-translate 
+                      [open]="translateToggle" 
+                      [entity]="showTimez" 
+                      [translateEvent]="translateEvent"
+                      (onTranslateInit)="propagateTranslation($event)" 
+                      (onTranslate)="translateToggle = false"
+                      (onTranslateError)="translateToggle = false" #translate>
+                  </m-translate>
                   <span class="mt-15" [innerHtml]="showTimez?.blurb | safe"></span>
                 </div>
               </div>
