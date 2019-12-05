@@ -48,11 +48,9 @@ export class SpotcoinsComponent implements OnInit {
   confirmed: boolean = false;
   error: string;
 
-  @ViewChild('tokenInputField') tokenInput:ElementRef;
-
   @Input() phase: string = 'presale';
   inProgress: boolean = false;
-  rate: number = 1/87.5;    //change the rate to display the value of tokens
+  rate: number = 1 / 87.5;    //change the rate to display the value of tokens
 
   constructor(
     protected client: Client,
@@ -195,10 +193,10 @@ export class SpotcoinsComponent implements OnInit {
 
   }
   payment() {
-    if(Number(this.tokenInput.nativeElement.value) < 1 || Number(this.tokenInput.nativeElement.value) > 99){
-      alert('You can enter coins within the range of 1 to 99');
-      return;
-    }
+    // if (Number(this.tokenInput.nativeElement.value) < 1 || Number(this.tokenInput.nativeElement.value) > 99) {
+    //   alert('The maximum number of coins in one purchase is 99 coins');
+    //   return;
+    // }
     const formData = new FormData();
     formData.append('amount', this.amount.toString());
     formData.append('purpose', 'token_purchase');
@@ -220,6 +218,13 @@ export class SpotcoinsComponent implements OnInit {
       },
       (err) => console.log(err)
     );
+  }
+  limit(e) {
+    let max_chars = 2;
+
+    if (e.target.value.length >= max_chars) {
+      e.preventDefault();
+    }
   }
 
 }
