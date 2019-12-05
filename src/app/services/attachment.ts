@@ -141,7 +141,6 @@ export class AttachmentService {
         }, this.xhr);
       })
       .then((response: any) => {
-        // console.log(response);
         this.meta.attachment_guid.push(response.guid ? response.guid : null);
         // console.log( "vdff: ",this.meta.attachment_guid);
         
@@ -174,13 +173,13 @@ export class AttachmentService {
     }
   }
 
-  remove(fileInput: HTMLInputElement, imageId: string, guidArray?) {
-    // console.log("guidArray: ", guidArray);
-    // console.log("attach: ", this.meta.attachment_guid )
-    if(guidArray.length > 0){
-      this.meta.attachment_guid = guidArray;
-      // console.log("attach: ", this.meta.attachment_guid )
-      
+/**
+ * TODO:
+ * -needs to be restructured to make it compatible with every feature. 
+ * */
+  remove(imageId: string, fileInput?: HTMLInputElement, guidArray?: string[]) {
+    if(guidArray && guidArray.length > 0){
+      this.meta.attachment_guid = guidArray;      
     }
     let idx = this.meta.attachment_guid.indexOf(imageId);
     this.attachment.progress = 0;
@@ -196,7 +195,6 @@ export class AttachmentService {
         // this.meta.attachment_guid = null;
         if (idx !== -1) {
           this.meta.attachment_guid.splice(idx, 1);
-          // console.log(this.meta.attachment_guid)
           return imageId;
         }
       })

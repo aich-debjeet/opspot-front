@@ -38,14 +38,12 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    this.attachment.remove(file, imageId).then((guid) => {
+    this.attachment.remove(imageId,file).then((guid) => {
       file.value = '';
       this.cards = _remove(this.cards, function (n) {
         return n.guid !== guid;
       });
-      console.log(this.cards)
     }).catch(e => {
-      console.error(e);
       // this.inProgress = false;
       // this.canPost = true;
     });

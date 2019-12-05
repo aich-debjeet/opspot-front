@@ -189,24 +189,24 @@ export class PostFormComponent {
     // console.log(this.attachment.exportMeta());
 
     this.inProgress = true;
-    // this.client
-    //   .post('api/v1/newsfeed', data)
-    //   .then((data: any) => {
-    //     // data.activity.boostToggle = true; //@gayatri hava to check this
+    this.client
+      .post('api/v1/newsfeed', data)
+      .then((data: any) => {
+        // data.activity.boostToggle = true; //@gayatri hava to check this
 
-    //     // console.log(data);
-    //     this.load.emit(data);
+        // console.log(data);
+        this.load.emit(data);
 
-    //     // this.load.next(data.activity);
-    //     this.attachment.reset();
-    //     this.meta = { wire_threshold: null };
-    //     this.inProgress = false;
-    //     this.cards = [];
-    //   })
-    //   .catch(e => {
-    //     this.inProgress = false;
-    //     alert(e.message);
-    //   });
+        // this.load.next(data.activity);
+        this.attachment.reset();
+        this.meta = { wire_threshold: null };
+        this.inProgress = false;
+        this.cards = [];
+      })
+      .catch(e => {
+        this.inProgress = false;
+        alert(e.message);
+      });
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
@@ -248,8 +248,7 @@ export class PostFormComponent {
     this.attachment.reset();
   }
 
-  removeAttachment(file: HTMLInputElement, imageId: string) {
-    // console.log(file, imageId);
+  removeAttachment(imageId: string,file?: HTMLInputElement,) {
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -265,19 +264,16 @@ export class PostFormComponent {
 
     this.errorMessage = '';
 
-    this.attachment
-      .remove(file, imageId)
+    this.attachment.remove(imageId,file)
       .then(guid => {
         this.inProgress = false;
         this.canPost = true;
-        file.value = '';
+        // file.value = '';
         this.cards = _remove(this.cards, function (n) {
-          return n.guid !== guid;
+          return n.guid != guid;
         });
-        // console.log(this.cards);
       })
       .catch(e => {
-        // console.error(e);
         this.inProgress = false;
         this.canPost = true;
       });

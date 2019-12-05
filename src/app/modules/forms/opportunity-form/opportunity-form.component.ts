@@ -233,9 +233,7 @@ export class OpportunityFormComponent implements OnInit {
     this.inProgress = true;
 
     this.errorMessage = '';
-    // console.log(file, imageId);
-    this.attachment
-      .remove(file, imageId, this.attach_guid)
+    this.attachment.remove(imageId,file,this.attach_guid)
       .then(guid => {
         this.inProgress = false;
         this.canPost = true;
@@ -243,10 +241,8 @@ export class OpportunityFormComponent implements OnInit {
         this.cards = _remove(this.cards, function (n) {
           return n.guid !== guid;
         });
-        // console.log(this.cards);
       })
       .catch(e => {
-        // console.error(e);
         // this.inProgress = false;
         // this.canPost = true;
       });

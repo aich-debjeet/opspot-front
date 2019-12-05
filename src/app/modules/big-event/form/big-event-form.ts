@@ -186,18 +186,12 @@ export class BigEventForm implements OnInit {
     this.inProgress = true;
 
     this.errorMessage = '';
-    // console.log("this.attach: ", this.attach_guid);
-    
-    // console.log(file, imageId);
-    this.attachment
-      .remove(file, imageId, this.attach_guid)
+    this.attachment.remove(imageId,file,this.attach_guid)
       .then(guid => {
         // alert();
         this.inProgress = false;
         this.canPost = true;
-        this.coverImage = '';
-        // console.log("jbjasdhfbshfr");
-        
+        this.coverImage = '';        
         // console.log("this coverimage: ", this.coverImage);
         
 
