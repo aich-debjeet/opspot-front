@@ -249,7 +249,7 @@ export class AttachmentService {
       }
       return result;
     }
-    return false;
+    return result;
 
     // let result = {};
     // console.log(this.meta)

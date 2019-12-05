@@ -82,7 +82,7 @@ export class PortfolioFormComponent implements OnInit {
     let data = Object.assign(this.meta, this.attachment.exportMeta());
     this.tags.push(SpecialHashtg.concat('portfolio' ,this.session.getLoggedInUser().username))
     data.tags = this.tags;
-    data.isNSFW = this.isNSFW
+    data.mature = this.isNSFW;
    
     this.client.post('api/v1/newsfeed', data)
       .then((data: any) => {
