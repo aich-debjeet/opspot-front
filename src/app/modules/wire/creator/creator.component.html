@@ -221,7 +221,7 @@
 
 <div class="o-contribute">
   <div class="o-contribute-head o-contribute-head--border">
-    <div class="o-contribute__title text-h4 f500">Contribute</div>
+    <div class="o-contribute__title text-h4 f500">Paywall</div>
   </div>
   <!--contribute head end-->
   <div class="o-contribute-body o-contribute-body--flex">
@@ -251,7 +251,7 @@
       </div>
     </div><!-- contribute action end -->
     <div *ngIf="!inProgress && success" class="">
-      <i class="icon-check">Wired!</i>
+      <i class="icon-check">Contributed!</i>
     </div>
     <button type="button" class="btn btn-primary btn-block"
       [disabled]="!canSubmit() || inProgress || success || criticalError" (click)="submit()">Contribute</button>
