@@ -89,6 +89,7 @@ export class GroupsProfile {
     this.detectConversationsState();
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {
+        // console.log("params: ", params['guid'])
        this.loadMembers(params['guid'])
 
         let changed = params['guid'] !== this.guid;
@@ -418,6 +419,8 @@ export class GroupsProfile {
 
   groupCount(e){
    this.totalMembers=e
+  //  console.log("total: ", this.totalMembers);
+   
   }
 
   openInvite(){
@@ -437,6 +440,7 @@ export class GroupsProfile {
   }
  
  async loadMembers(guid){
+  //  console.log('profile loadMembers', guid);
     let endpoint = `api/v1/groups/membership/${guid}`
     let  params = { limit: 4, offset: this.offset };
      let members= await this.client.get(endpoint, params)
