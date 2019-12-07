@@ -16,6 +16,8 @@ export class GroupJoinRequestComponent implements OnInit {
 
   @Input('object') set data (object){
     this.entity = object;
+    // console.log("this enetity " , this.entity);
+    
   }
 
 }

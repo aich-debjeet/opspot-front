@@ -16,13 +16,13 @@ import { Session } from '../../../../services/session';
 
 export class GroupsProfileMembers {
 
-opspot = window.Opspot;
-@ViewChild('el') el;
+  opspot = window.Opspot;
+  // @ViewChild('el') el;
 
   group: any;
-  $group;
-  @Input()frmGroup;
-  @Output()totalGroup:EventEmitter<any>=new EventEmitter()
+  // $group;
+  @Input() frmGroup;
+  @Output() totalGroup: EventEmitter<any> = new EventEmitter()
 
   invitees: any = [];
   members: Array<any> = [];
@@ -38,26 +38,36 @@ opspot = window.Opspot;
 
   httpSubscription;
 
+  set _group(value: any) {
+    this.group = value;
+    this.load(true);
+  }
+
   constructor(public session: Session, public client: OpspotHttpClient, public service: GroupsService) {
 
   }
 
   ngOnInit() {
-    this.$group = this.service.$group.subscribe((group) => {
-      this.group = group;
-      this.load(true);
-      this.el.nativeElement.scrollIntoView();
-    });
+    // this.$group = this.service.$group.subscribe((group) => {
+    //   this.group = group;
+    //   // console.log("This group: ", this.group);
+
+    //   // this.load(true);
+    // });
+
+    // this.el.nativeElement.scrollIntoView();
+
   }
 
   ngOnDestroy() {
     if (this.searchDelayTimer) {
       clearTimeout(this.searchDelayTimer);
     }
-    this.$group.unsubscribe();
+    // this.$group.unsubscribe();
   }
 
   load(refresh: boolean = false, query = null) {
+    // console.log('members load()');
     if (this.httpSubscription)
       this.httpSubscription.unsubscribe();
 
@@ -70,47 +80,62 @@ opspot = window.Opspot;
     // TODO: [emi] Send this via API
     this.canInvite = false;
 
-    if (this.group['is:owner']) {
-      this.canInvite = true;
-    } else if (this.group.membership === 2 && this.group['is:member']) {
-      this.canInvite = true;
-    }
+    // console.log("GROUP: ", this.group);
 
-    let endpoint = `api/v1/groups/membership/${this.group.guid}`,
-      params: { limit, offset, q?: string } = { limit: 12, offset: this.offset };
+    if (this.group) {
+      if (this.group['is:owner']) {
+        this.canInvite = true;
+      } else if (this.group.membership === 2 && this.group['is:member']) {
+        this.canInvite = true;
+      }
 
-    if (this.q) {
-      endpoint = `${endpoint}/search`;
-      params.q = this.q; 
-    }
 
-    this.inProgress = true;
-    this.httpSubscription = this.client.get(endpoint, params)
-      .subscribe((response: any) => {
-        this.totalGroup.emit(response.total)
-        if (!response.members) {
-          this.moreData = false;
+      let endpoint = `api/v1/groups/membership/${this.group.guid}`,
+        params: { limit, offset, q?: string } = { limit: 12, offset: this.offset };
+
+
+      // console.log("endpoint: ", endpoint);
+
+      if (this.q) {
+        endpoint = `${endpoint}/search`;
+        params.q = this.q;
+      }
+
+      this.inProgress = true;
+      this.httpSubscription = this.client.get(endpoint, params)
+        .subscribe((response: any) => {
+          // console.log("response: ", response.members.length);
+          if (response.members) {
+            // console.log("response: ", response.members);
+            
+            this.totalGroup.emit(response.members.length)
+          }
+          if (!response.members) {
+            this.moreData = false;
+            this.inProgress = false;
+            return false;
+          }
+
+          if (refresh) {
+            this.members = response.members;
+            // console.log("Response members: ", response.members);
+
+          } else {
+            this.members = this.members.concat(response.members);
+          }
+
+          if (response['load-next']) {
+            this.offset = response['load-next'];
+          } else {
+            this.moreData = false;
+          }
+
           this.inProgress = false;
-          return false;
-        }
-
-        if (refresh) {
-          this.members = response.members;
-        } else {
-          this.members = this.members.concat(response.members);
-        }
-
-        if (response['load-next']) {
-          this.offset = response['load-next'];
-        } else {
-          this.moreData = false;
-        }
-
-        this.inProgress = false;
 
         }, (err) => {
-            this.inProgress = false;
+          this.inProgress = false;
         });
+    }
   }
 
   invite(user: any) {
