@@ -115,6 +115,11 @@ export class RegisterForm {
     this.service.getOtp(numbr).then((res: any) => {
       this.noViewOtp = false;
       localStorage.setItem('phoneNumberSecret', res.secret);
+    })
+    .catch((e)=>{
+      if(e.status === 'error') {
+        alert('Enter a valid number and verify the otp to proceed further.');
+      }
     });
   }
 

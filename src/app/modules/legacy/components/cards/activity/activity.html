@@ -152,7 +152,7 @@
   </div>
 
   <!--BlueStore-->
-  <div class="o-card feed" *ngIf="activity.entity_type === 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'"
+  <div *ngIf="activity.entity_type === 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'"
     [routerLink]="['/item/view', activity.guid]">
     <div class="feed-media" *ngIf="activity?.custom_data">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
@@ -188,7 +188,7 @@
   </div>
 
   <!--Showtime-->
-  <div class="o-card feed" *ngIf="activity.entity_type === 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'"
+  <div *ngIf="activity.entity_type === 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'"
     [routerLink]="[routerLink1, activity.guid]">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
     <div class="feed-media">

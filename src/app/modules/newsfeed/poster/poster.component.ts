@@ -220,7 +220,6 @@ export class PosterComponent {
   }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    // console.log(file, imageId);
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -236,8 +235,7 @@ export class PosterComponent {
 
     this.errorMessage = '';
 
-    this.attachment
-      .remove(file, imageId)
+    this.attachment.remove(imageId,file)
       .then(guid => {
         this.inProgress = false;
         this.canPost = true;
@@ -245,7 +243,6 @@ export class PosterComponent {
         this.cards = _remove(this.cards, function(n) {
           return n.guid !== guid;
         });
-        // console.log(this.cards);
       })
       .catch(e => {
         // console.error(e);

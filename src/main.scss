@@ -13880,11 +13880,15 @@ opspot-card-album {
     width: 33%; }
 
 opspot-activity.mdl-card, opspot-activity, opspot-activity-preview {
-  width: auto;
-  min-height: 0;
-  margin-bottom: 16px;
-  border-radius: 6px;
-  overflow: visible;
+  // width: auto;
+  // min-height: 0;
+  // margin-bottom: 16px;
+  // border-radius: 6px;
+  // overflow: visible;
+  width: 100% !important;
+  border: 1px solid #ECEFF1;
+  border-radius: 4px;
+  margin-bottom: 6px;
   /**
    * Rich embeds
    */
@@ -24785,7 +24789,7 @@ app-image-croper .m-modal-container {
   .o-create-post-left{
   display:flex;
   align-items: center;
-  width: 100%;
+  // width: 100%;
   .icon-info{
   line-height: 20px;
   font-size: 11px;
@@ -24797,7 +24801,7 @@ app-image-croper .m-modal-container {
       &__status{
           padding: 8px 10px;
           height: 34px;	
-          width: 103px;	
+          // width: 103px;	
           border: 1px solid rgba(144,164,174,0.2);	
           border-radius: 4px;	
           background-color:$white;	

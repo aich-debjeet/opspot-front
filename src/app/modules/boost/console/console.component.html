@@ -87,15 +87,15 @@
       <div class="o-boost-console-block__content">
         <div class="tabs-boost-console">
           <div id="boosted-posts" class="tab active" *ngIf="this.postType == 'boosted'">
-            <m-boost-console-card *ngFor="let boost of boosts; let i = index" class="mdl-card mdl-shadow--4dp"
+            <m-boost-console-card *ngFor="let boost of boosts; let i = index" 
               [boost]="boost"></m-boost-console-card>
           </div>
           <div id="completed-targets" class="tab active" *ngIf="this.postType == 'completed'">
-              <m-boost-console-card *ngFor="let boost of completed; let i = index" class="mdl-card mdl-shadow--4dp"
+              <m-boost-console-card *ngFor="let boost of completed; let i = index" 
               [boost]="boost"></m-boost-console-card>
           </div>
           <div id="rejected-posts" class="tab active" *ngIf="this.postType == 'rejected'">
-              <m-boost-console-card *ngFor="let boost of rejected; let i = index" class="mdl-card mdl-shadow--4dp"
+              <m-boost-console-card *ngFor="let boost of rejected; let i = index" 
               [boost]="boost"></m-boost-console-card>
           </div>
         </div>
