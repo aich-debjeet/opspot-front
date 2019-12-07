@@ -147,7 +147,7 @@ import { GroupJoinRequestComponent } from './group-join-request/group-join-reque
 const routes: Routes = [
   { path: 'groups/profile/:guid', component: GroupsProfile, canDeactivate: [CanDeactivateGroupService], children: [
       { path: '', redirectTo: 'feed', pathMatch: 'full' },
-      { path: 'feed/:filter', component: GroupsProfileFeed },
+      { path: 'feed/:filter', component: GroupsProfileFeed }, 
       { path: 'feed', component: GroupsProfileFeed },
       { path: 'activity', redirectTo: 'feed' },
       { path: 'members', component: GroupsProfileMembers },
