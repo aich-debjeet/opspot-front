@@ -86,8 +86,11 @@ export class PostMenuComponent {
 
   cardMenuHandler() {
     this.opened = !this.opened;
-    this.asyncFollowFetch();
-    this.asyncBlockFetch();
+    /**
+     * Error:Cannot read property 'guid' of undefined
+     */
+    // this.asyncFollowFetch();
+    // this.asyncBlockFetch();
   }
 
   asyncFollowFetch() {
