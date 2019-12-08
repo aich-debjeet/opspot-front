@@ -89,8 +89,10 @@ export class PostMenuComponent {
     /**
      * Error:Cannot read property 'guid' of undefined
      */
-    // this.asyncFollowFetch();
-    // this.asyncBlockFetch();
+    if(this.entity){
+      this.asyncFollowFetch();
+      this.asyncBlockFetch();
+    }
   }
 
   asyncFollowFetch() {
@@ -306,9 +308,10 @@ export class PostMenuComponent {
 
   selectOption(option: Option) {
     this.optionSelected.emit(option);
-    this.entityGuid.emit(this.entity.guid)
+    if(this.entity){
+      this.entityGuid.emit(this.entity.guid)
+    }
     this.opened = false;
-
     this.detectChanges();
   }
 

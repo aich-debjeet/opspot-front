@@ -102,7 +102,7 @@ export class NewsfeedSubscribedComponent {
 
     this.client.get('api/v1/newsfeed', { limit: 12, offset: this.offset }, { cache: true })
       .then((data: OpspotActivityObject) => {
-        console.log(data)
+        // console.log(data)
         if (!data.activity) {
           this.moreData = false;
           this.inProgress = false;
