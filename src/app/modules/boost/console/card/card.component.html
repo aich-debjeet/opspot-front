@@ -10,12 +10,14 @@
                 <span class="o-posts-public-private"><i class="icon-public"></i></span>
             </div>
         </div><!--avatar info end-->
-        <div class="o-posts-discription">
-            <p class="text-md grey-darker" [innerHtml]="boost.entity.message | tags"> 
-            </p>
+        <div class="o-posts-discription" *ngIf="boost?.entity?.entity_type === 'post' || boost?.entity?.entity_type === 'album'
+        || boost?.entity?.entity_type === 'image'">
+                <p class="text-md grey-darker" [innerHtml]="boost.entity.message | tags"> 
+                </p>
         </div>
     </div><!-- feed head end -->
-    <div class="feed-media" *ngIf="boost?.entity?.custom_data" [routerLink]="['/media', boost.guid]">
+    <div class="feed-media" *ngIf="boost?.entity?.entity_type !== 'event' && boost?.entity?.entity_type !== 'item' && boost?.entity?.entity_type !== 'opportunity' &&
+     (boost?.entity?.entity_type === 'image' || boost?.entity?.entity_type === 'album' || boost?.entity?.entity_type === 'video')" [routerLink]="['/media', boost?.entity?.guid]">
         <a *ngFor="let media of boost.entity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
             <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
             <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
@@ -28,8 +30,106 @@
             <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
               <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
             </div>
-          </a>
+        </a>
     </div><!--feed media end-->
+
+    <div *ngIf="boost?.entity?.entity_type === 'opportunity'">
+        <div class="feed-card-opportunity-block" [routerLink]="['/opportunity/view',boost?.entity?.guid]">
+            <div class="feed-card-opportunity-block__top">
+            <div class="opportunity-image">
+                <img *ngIf="boost?.entity?.custom_data.length > 0" [src]="boost?.entity?.custom_data[0]?boost?.entity?.custom_data[0].src:''"
+                (error)="boost?.entity?.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'">
+                <img *ngIf="boost?.entity?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/ops_icon.png'">
+                </div>
+            <div class="opportunity-details">
+                <div class="text-lg f500 mb-3">
+                {{boost?.entity?.title}}
+                </div>
+                <div class="text-md grey">
+                {{boost?.entity?.location}}
+                </div>
+                <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != boost?.entity?.owner_guid">Reach Out</button>
+            </div>
+            <div class="opportunity-button">
+                {{boost?.entity?.category}}
+            </div>
+            </div>
+            <div class="feed-card-opportunity-block__bottom hidden-mob">
+            <div class="text-md grey">
+                {{boost?.entity?.blurb | truncate:[100, '...']}}
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="boost?.entity?.entity_type === 'item'"
+    [routerLink]="['/item/view', boost?.entity?.guid]">
+        <div class="feed-media" *ngIf="boost?.entity?.custom_data">
+        <a *ngFor="let media of boost?.entity?.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+            <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
+            <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
+            (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+            <img [src]="media.thumbnail_src" alt="" class="feed-media__img" *ngIf="media.entity_type === 'video'"
+            (error)="media.thumbnail_src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+            <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
+            <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+            </div>
+            <div *ngIf="i >= 2 && boost?.entity?.custom_data.length > 4" class="feed-media-overlay">
+            <h3 class="white">+{{ boost?.entity?.custom_data.length - 3}}</h3>
+            </div>
+        </a>
+        </div>
+        <div class="feed-card-event-block">
+        <div class="feed-card-event-block__left">
+            <div class="text-lg f500 mb-3">
+            {{boost?.entity?.title}}
+            </div>
+            <div class="text-md grey">
+            {{boost?.entity?.blurb | truncate:[100, '...']}}
+            </div>
+            <div class="text-rate">
+            ₹ {{boost?.entity?.price}} <span class="text-md grey">per piece</span>
+            </div>
+        </div>
+        <div class="feed-card-event-block__right ">
+            <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != boost?.entity?.owner_guid">Reach Out</button>
+        </div>
+        </div>
+    </div>
+
+    <div *ngIf="boost?.entity?.entity_type === 'event'"
+    [routerLink]="['/showtime/view', boost?.entity?.guid]">
+        <!-- <div class="m-mature-overlay" (click)="boost?.entity?.mature_visibility = !boost?.entity?.mature_visibility"></div> -->
+        <div class="feed-media">
+            <div class="feed-media-event-image">
+            
+                <img [src]="boost?.entity?.custom_data[0] ? boost?.entity?.custom_data[0].src:''"
+                (error)="boost?.entity?.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
+                *ngIf="boost?.entity?.custom_data.length > 0">
+                <img *ngIf="boost?.entity?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+
+            <div class="event-date">
+                <div class="text-red">{{boost?.entity?.start_time_date | date:'dd'}} </div>
+                <div class="text-md">{{boost?.entity?.start_time_date| date:'MMM'}} </div>
+            </div>
+            </div>
+        </div>
+        <div class="feed-card-event-block">
+            <div class="feed-card-event-block__left">
+            <div class="text-lg f500 mb-3">
+                {{boost?.entity?.title}}
+            </div>
+            <div class="text-md grey">
+                {{boost?.entity?.blurb | truncate:[100, '...']}}
+            </div>
+            </div>
+            <div class="feed-card-event-block__right">
+            <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != boost?.entity?.owner_guid">Reach Out</button>
+            </div>
+        </div>
+    </div>
+
+        
     <div class="o-boost-console-boosted-details">
         <div class="o-boost-console-boosted-details__left">
             <div class="mr-30">
