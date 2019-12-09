@@ -17,11 +17,12 @@ import { Client } from '../../../services/api';
         [editMode]="editing"
         [done]="done"
         (added)="added($event, i)"
+        (removed)="delete(i)"
         ></opspot-banner>
 
-        <div class="delete-button" (click)="delete(i)" [hidden]="i != index || !editing">
+        <!-- <div class="delete-button" (click)="delete(i)" [hidden]="i != index || !editing">
           <button class="mdl-button mdl-button--raised mdl-button--colored material-icons">X</button>
-        </div>
+        </div> -->
       </div>
     <i class="material-icons right" *ngIf="!hideArrows" (click)="next()" [hidden]="banners.length <= 1">keyboard_arrow_right</i>
   `
@@ -124,6 +125,7 @@ export class CarouselComponent {
   }
 
   delete(index) {
+    console.log('delete');
     this.delete_event.next(this.banners[index]);
     this.banners.splice(index, 1);
     if (this.banners.length === 0) {
