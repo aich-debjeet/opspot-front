@@ -276,22 +276,40 @@
           </a>
         </li>
         <li class="app-nav-link_-item">
-          <a>
+          <a [routerLink]="['/explore']" [queryParams]="{type:'activities',q:'', ref:''}" (click)='closeNav()'>
             <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_explore.svg" alt=""></div>
             <div class="app-nav-link__text">Explore</div>
           </a>
         </li>
         <li class="app-nav-link_-item">
-          <a>
+          <a [routerLink]="['/bookmark']" (click)='closeNav()'>
             <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_bookmark.svg" alt=""></div>
             <div class="app-nav-link__text">Saved Posts</div>
           </a>
         </li>
         <li class="app-nav-link_-item">
           <a [routerLink]="['/groups/create']" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_events.svg" alt=""></div>
-            <div class="app-nav-link__text">Group</div>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/community.svg" alt=""></div>
+            <div class="app-nav-link__text">Community</div>
           </a>
+        </li>
+        <li class="app-nav-link_-item">
+            <a [routerLink]="['/boost/console']" (click)='closeNav()'>
+                <div class="app-nav-link__ico"><i class="icon-bar-chart-2"></i></div>
+                <div class="app-nav-link__text">Boost Console</div>
+            </a>
+        </li>
+        <li class="app-nav-link_-item">
+            <a [routerLink]="['/organization/create']" (click)='closeNav()'>
+                <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
+                <div class="app-nav-link__text">Organisation</div>
+            </a>
+        </li>
+        <li class="app-nav-link_-item">
+            <a [routerLink]="['/invite']" (click)='closeNav()'>
+                <div class="app-nav-link__ico"><i class="icon-user-plus"></i></div>
+                <div class="app-nav-link__text">Invite Friends</div>
+            </a>
         </li>
         <li class="app-nav-link_-item">
           <a [routerLink]="['blog/edit/new']" (click)='closeNav()'>
@@ -308,7 +326,7 @@
       </ul>
       <div class="app-nav-link_-item app-nav-link_-item--logout">
         <a routerLink="/logout" (click)='closeNav()'>
-          <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_logout.svg" alt=""></div>
+          <div class="app-nav-link__ico"><i class="icon-power"></i></div>
           <div class="app-nav-link__text">logout</div>
         </a>
       </div>
