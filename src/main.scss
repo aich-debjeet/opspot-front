@@ -13481,7 +13481,7 @@ m-homepage .m-homepage-press {
     /* align-items: center; */
     /* display: flex; */
     text-align: center;
-    padding-top: 116px;
+    padding-top: 150px;
     cursor: pointer; }
     .opspot-banner.opspot-banner-editing .overlay i {
       font-size: 62px;
@@ -25723,7 +25723,9 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   }
 }
 
-
+[type="checkbox"]:checked:before {
+  background-color: $primary;
+}
 
 //footer style
 .o-create-portfolio-footer{

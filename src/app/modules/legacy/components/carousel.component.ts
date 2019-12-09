@@ -7,7 +7,7 @@ import { Client } from '../../../services/api';
   inputs: ['_banners: banners', '_editMode: editMode', 'hideArrows'],
   outputs: ['done_event: done', 'delete_event: delete'],
   template: `
-    <i class="material-icons left" *ngIf="!hideArrows" (click)="prev()" [hidden]="banners.length <= 1">keyboard_arrow_left</i>
+    <i class="arrow-icons icon-arrow-left-circle left" *ngIf="!hideArrows" (click)="prev()" [hidden]="banners.length <= 1"></i>
     <div *ngFor="let banner of banners; let i = index">
       <opspot-banner
         [src]="banner.src"
@@ -17,14 +17,25 @@ import { Client } from '../../../services/api';
         [editMode]="editing"
         [done]="done"
         (added)="added($event, i)"
+        (removed)="delete(i)"
         ></opspot-banner>
 
-        <div class="delete-button" (click)="delete(i)" [hidden]="i != index || !editing">
-          <button class="mdl-button mdl-button--raised mdl-button--colored material-icons">X</button>
-        </div>
+        <a (click)="delete(i)" [hidden]="i != index || !editing" class="o-cover-edit trash-icon">
+          <i class="icon-trash-2"></i>
+        </a>
       </div>
-    <i class="material-icons right" *ngIf="!hideArrows" (click)="next()" [hidden]="banners.length <= 1">keyboard_arrow_right</i>
-  `
+    <i class="arrow-icons icon-arrow-right-circle right" *ngIf="!hideArrows" (click)="next()" [hidden]="banners.length <= 1"></i>
+  `,
+  styles: [`
+    .trash-icon {
+      right: 80px;
+    }
+    .arrow-icons  {
+      font-size: 30px !important;
+      color: white;
+      padding: 20px;
+    }
+  `]
 })
 
 export class CarouselComponent {
@@ -66,10 +77,10 @@ export class CarouselComponent {
    * If the parent set edit mode
    */
   set _editMode(value: boolean) {
-    console.log('[carousel]: edit mode event received');
+    // console.log('[carousel]: edit mode event received');
     //was in edit more, now settings not in edit more
     if (this.editing && !value) {
-      console.log('[carousel]: edit mode ended');
+      // console.log('[carousel]: edit mode ended');
       this._done();
       return;
     }
@@ -78,7 +89,7 @@ export class CarouselComponent {
     if (!this.editing) {
       return;
     }
-    console.log('[carousel]: edit mode enabled');
+    // console.log('[carousel]: edit mode enabled');
     this.rotate = false;
     this.done = false;
     var blank_banner = false;
@@ -97,7 +108,7 @@ export class CarouselComponent {
    * Fired when the child component adds a new banner
    */
   added(value: any, index) {
-    console.log(this.banners[index].guid, value.file);
+    // console.log(this.banners[index].guid, value.file);
     if (!this.banners[index].guid && !value.file)
       return; //this is our 'add new' post
 
@@ -124,6 +135,7 @@ export class CarouselComponent {
   }
 
   delete(index) {
+    // console.log('delete');
     this.delete_event.next(this.banners[index]);
     this.banners.splice(index, 1);
     if (this.banners.length === 0) {
@@ -138,7 +150,7 @@ export class CarouselComponent {
   _done() {
     this.editing = false; //this should update each banner (I'd prefer even driven but change detection works..)
     this.done = true;
-    console.log('[carousel]: received done event');
+    // console.log('[carousel]: received done event');
     //after one second?
     setTimeout(() => {
       this.done_event.next(this.modified);

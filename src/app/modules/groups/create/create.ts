@@ -248,7 +248,7 @@ export class GroupsCreator {
     membership: 2,
     tags: [],
     invitees: '',
-    moderated:0,
+    moderated: false,
     default_view: 0,
     entity_type: 'community'
   };
@@ -315,7 +315,14 @@ export class GroupsCreator {
     this.group.invitees = this.invitees.map((user) => {
       return user.guid;
     });
-     this.group.moderated===false?(this.group.moderated=0):(this.group.moderated=1);
+
+     if (this.group.moderated === false) {
+      this.group.moderated = 0;
+     } else {
+      this.group.moderated = 1;
+     }
+
+     
          
      if(Object.values(this.group.tags).length>0){
       this.group.tags=this.group.tags.map(el=>el.value)

@@ -70,7 +70,7 @@ export class WireLockScreenComponent {
     if (this.preview) {
       return;
     }
-
+    this.entity.ownerObj.contributeType = 'paywall';
     this.overlayModal.create(WireCreatorComponent, this.entity, {
       class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
       onComplete: () => this.wireSubmitted(),

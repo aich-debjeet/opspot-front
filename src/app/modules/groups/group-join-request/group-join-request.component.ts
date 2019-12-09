@@ -13,9 +13,15 @@ export class GroupJoinRequestComponent implements OnInit {
   }
   entity: any;
   opspot = window.Opspot;
+  memberCount;
 
-  @Input('object') set data (object){
+  @Input('object') set data(object) {
     this.entity = object;
+    if (this.entity && this.entity['members:count']) {
+      this.memberCount = this.entity['members:count'];
+    }
+    // console.log("this enetity " , this.entity);
+
   }
 
 }

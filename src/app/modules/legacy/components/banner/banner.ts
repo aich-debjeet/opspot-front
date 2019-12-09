@@ -1,43 +1,55 @@
 import { Component, EventEmitter } from '@angular/core';
 
-import { Client } from '../../../../services/api';
-
 @Component({
   selector: 'opspot-banner',
   inputs: ['_object: object', '_src: src', '_top: top', 'overlay', '_editMode: editMode', '_done: done'],
+  // outputs: ['added', 'removed'],
   outputs: ['added'],
   template: `
   <div class="opspot-banner" *ngIf="!editing">
-    <div class="opspot-banner-img m-banner--img-cover"
-      [style.backgroundImage]="src ? 'url(' + src + ')' : null"
-    ></div>
-
+    <div class="opspot-banner-img m-banner--img-cover" [style.backgroundImage]="src ? 'url(' + src + ')' : null"></div>
     <div class="opspot-banner-overlay"></div>
   </div>
-  <div *ngIf="editing" class="opspot-banner opspot-banner-editing m-banner--img-cover"
-    [style.backgroundImage]="src ? 'url(' + src + ')' : null"
-  >
-    <div class="overlay" [hidden]="file">
-      <i class="material-icons">camera</i>
-      <span i18n="@@OPSPOT__BANNER__ADD_NEW_BANNER_W_RECOMMENDATION">
-        Click here to add a new banner<br>
-        <em>Recommended minimum size 2000px &times; 1125px (Ratio 16:9)</em>
-      </span>
-    </div>
-    <div class="opspot-banner-overlay"></div>
+  <div *ngIf="editing" class="opspot-banner opspot-banner-editing m-banner--img-cover" [style.backgroundImage]="src ? 'url(' + src + ')' : null">
+      <!-- <div class="overlay" [hidden]="file">
+        <i class="material-icons">camera</i>
+        <span i18n="@@OPSPOT__BANNER__ADD_NEW_BANNER_W_RECOMMENDATION">
+          Click here to add a new banner<br>
+          <em>Recommended minimum size 2000px &times; 1125px (Ratio 16:9)</em>
+        </span>
+      </div> -->
 
-    <button class="add-button mdl-button mdl-button--raised mdl-button--colored material-icons" (click)="onClick($event)">
-      <i class="material-icons">file_upload</i>
-    </button>
+      <div class="overlay" [hidden]="file">
+          <div class="text-lg">
+              <i class="white icon-plus-circle" (click)="chooseFile()"></i>
+              <!--<i class="white icon-minus-circle" (click)="remove()"></i>-->
+              <p class="white text-lg">Add Cover Picture</p>
+          </div>
+      </div>
 
-    <div class="save-bar" [hidden]="!file">
-      <div class="mdl-layout-spacer"></div>
-      <span class="opspot-button-edit cancel-button" (click)="cancel()">
-        <button i18n="@@M__ACTION__CANCEL">Cancel</button>
-      </span>
-    </div>
-    <input type="file" id="file" (change)="add($event)" [hidden]="file" />
+      <div class="opspot-banner-overlay"></div>
+
+      <!-- <button class="add-button mdl-button mdl-button--raised mdl-button--colored material-icons" (click)="onClick($event)">
+          <i class="material-icons">file_upload</i>
+      </button> -->
+
+      <div class="save-bar" [hidden]="!file">
+          <div class="mdl-layout-spacer"></div>
+          <span class="opspot-button-edit cancel-button" (click)="cancel()">
+          <button i18n="@@M__ACTION__CANCEL">Cancel</button>
+        </span>
+      </div>
+      <input type="file" id="file" (change)="add($event)" [hidden]="file" />
   </div>
+  <style>
+    .overlay i {
+      font-size: 40px !important;
+      color: #fff !important;
+    }
+    .relative {
+      position: relative;
+    }
+  </style>
   `
 })
 
@@ -56,6 +68,7 @@ export class OpspotBanner {
   dragging: boolean = false;
   dragTimeout;
   added: EventEmitter<any> = new EventEmitter();
+  // removed: EventEmitter<any> = new EventEmitter();
   overlay: any; // @todo: ??
 
   set _object(value: any) {
@@ -81,6 +94,11 @@ export class OpspotBanner {
   set _editMode(value: boolean) {
     console.log(value)
     this.editing = value;
+  }
+
+  chooseFile() {
+    let fileSelector: HTMLElement = document.getElementById('file') as HTMLElement;
+    fileSelector.click();
   }
 
   add(e) {
@@ -123,6 +141,14 @@ export class OpspotBanner {
     this.file = null;
     //this.editing = false;
   }
+
+  // remove() {
+  //   this.removed.next({
+  //     index: this.index
+  //   });
+  //   this.file = null;
+  //   //this.editing = false;
+  // }
 
   onClick(e) {
     e.target.parentNode.parentNode.getElementsByTagName('input')[0].click();

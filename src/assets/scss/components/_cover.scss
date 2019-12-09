@@ -44,11 +44,11 @@
     align-items: center;
     justify-content: center;
     @include mq($from: $mobile_sm, $until: $tablet) {
-        height: 19px;	
-        width: 19px;	
+        // height: 19px;
+        // width: 19px;
         border: 1px solid #FFFFFF;
         right: 15px;
-        bottom: 13px;
+        top: 30px;
     }
     &--community{
         width: 24px!important;

@@ -32,7 +32,7 @@ export class WireButtonComponent {
 
       return;
     }
-
+    this.object.ownerObj.contributeType = 'contribute';
     const creator = this.overlayModal.create(WireCreatorComponent, this.object, {
       class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
       default: this.object && this.object.wire_threshold,
