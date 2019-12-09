@@ -29,7 +29,7 @@ export class RegisterForm {
   noViewOtp=true;
   verifiedOtp = false;
   showFbForm: boolean = false;
-  
+  invalidNumberLength: boolean = false;
   enterOtpError: boolean = true;
 
   form: FormGroup;
@@ -114,11 +114,12 @@ export class RegisterForm {
    getOtp(numbr) {
     this.service.getOtp(numbr).then((res: any) => {
       this.noViewOtp = false;
+      this.invalidNumberLength = false;
       localStorage.setItem('phoneNumberSecret', res.secret);
     })
     .catch((e)=>{
       if(e.status === 'error') {
-        alert('Enter a valid number and verify the otp to proceed further.');
+        this.invalidNumberLength = true;
       }
     });
   }

@@ -37,6 +37,7 @@
               <div *ngIf="form.controls['mobileNumber'].touched && !form.controls['mobileNumber'].valid"
                 class="error text-sm">
                 <div *ngIf="form.controls['mobileNumber'].errors.required">Mobile is required</div>
+                <div *ngIf="invalidNumberLength">Enter a valid number and verify the otp to proceed further.</div>
               </div>
             </div>
 
@@ -144,7 +145,7 @@
               <p class="text-white">{{errorMessage}}</p>
             </div>
             <button type="submit" class="btn btn-primary btn-block"
-              [disabled]="!this.form.valid || inProgress || !this.verifiedOtp">Get Started</button>
+              [disabled]="!this.form.valid || inProgress || !this.verifiedOtp || this.invalidNumberLength">Get Started</button>
           </form>
         </div>
         <div class="o-signup o-signup--img">
