@@ -137,7 +137,12 @@
           <div class="text-md grey">
             {{activity?.location}}
           </div>
-          <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != activity.owner_guid">Reach Out</button>
+          <m-messenger--channel-button
+            *ngIf="session.getLoggedInUser().guid != activity.owner_guid"
+            [user]="user"
+            [message]="reachoutMessage"
+            [label]="'Reach Out'"
+          ></m-messenger--channel-button>
         </div>
         <div class="opportunity-button">
           {{activity?.category}}
@@ -182,7 +187,12 @@
         </div>
       </div>
       <div class="feed-card-event-block__right ">
-        <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != activity.owner_guid">Reach Out</button>
+        <m-messenger--channel-button
+          *ngIf="session.getLoggedInUser().guid != activity.owner_guid"
+          [user]="user"
+          [message]="reachoutMessage"
+          [label]="'Reach Out'"
+        ></m-messenger--channel-button>
       </div>
     </div>
   </div>
@@ -215,7 +225,12 @@
         </div>
       </div>
       <div class="feed-card-event-block__right">
-        <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != activity.owner_guid">Reach Out</button>
+        <m-messenger--channel-button
+          *ngIf="session.getLoggedInUser().guid != activity.owner_guid"
+          [user]="user"
+          [message]="reachoutMessage"
+          [label]="'Reach Out'"
+        ></m-messenger--channel-button>
       </div>
     </div>
   </div>

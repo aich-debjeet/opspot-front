@@ -86,6 +86,9 @@ export class Activity {
   @ViewChild('player') player: OpspotVideoComponent;
   // @ViewChild('remindButton') remindButton: RemindButton;
 
+  reachoutMessage = '';
+  user: any;
+
   constructor(
     public session: Session,
     public client: Client,
@@ -106,6 +109,17 @@ export class Activity {
     if (!value)
       return;
     this.activity = value;
+
+    // user obj for reach out
+    if (value['entity_type']
+      && value['entity_type'] == 'opportunity'
+      && value['entity_type'] == 'event'
+      && value['entity_type'] == 'item'
+    ) {
+      this.user = value.activity.ownerObj;
+      this.reachoutMessage += value.activity['perma_url'];
+    }
+    
 
     this.activity.url = window.Opspot.site_url + 'newsfeed/' + value.guid;
 
