@@ -25,13 +25,16 @@
   <m-channel--carousel
     [banners]="user.carousels"
     [editMode]="editing"
-    [hideArrows]=true
     (done)="updateCarousels($event)"
     (delete)="removeCarousel($event)"
   ></m-channel--carousel>
-  <a *ngIf="!editing" (click)="toggleEditing($event)" class="o-cover-edit" alt="edit"><i class="icon-edit-profile"></i></a>
+  <a *ngIf="isOwner() && !editing" (click)="toggleEditing($event)" class="o-cover-edit">
+    <i class="icon-edit-profile"></i>
+  </a>
   <!-- TODO @gayatri: please ask for the icons for action below -->
-  <button *ngIf="editing" (click)="toggleEditing($event)">Save</button>
+  <a *ngIf="isOwner() && editing" (click)="toggleEditing($event)" class="o-cover-edit">
+    <i class="icon-save"></i>
+  </a>
 </header>
 
 

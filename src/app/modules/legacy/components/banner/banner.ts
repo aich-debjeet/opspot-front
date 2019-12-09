@@ -5,7 +5,8 @@ import { Client } from '../../../../services/api';
 @Component({
   selector: 'opspot-banner',
   inputs: ['_object: object', '_src: src', '_top: top', 'overlay', '_editMode: editMode', '_done: done'],
-  outputs: ['added', 'removed'],
+  // outputs: ['added', 'removed'],
+  outputs: ['added'],
   template: `
   <div class="opspot-banner" *ngIf="!editing">
     <div class="opspot-banner-img m-banner--img-cover" [style.backgroundImage]="src ? 'url(' + src + ')' : null"></div>
@@ -23,8 +24,8 @@ import { Client } from '../../../../services/api';
       <div class="overlay" [hidden]="file">
           <div class="text-lg">
               <i class="white icon-plus-circle" (click)="chooseFile()"></i>
-              <i class="white icon-minus-circle" (click)="remove()"></i>
-              <p class="white text-lg">Add/Remove Cover Picture</p>
+              <!--<i class="white icon-minus-circle" (click)="remove()"></i>-->
+              <p class="white text-lg">Add Cover Picture</p>
           </div>
       </div>
 
@@ -40,7 +41,7 @@ import { Client } from '../../../../services/api';
           <button i18n="@@M__ACTION__CANCEL">Cancel</button>
         </span>
       </div>
-      <input type="file" id="file" (change)="add($event)" [hidden]="true" />
+      <input type="file" id="file" (change)="add($event)" [hidden]="file" />
   </div>
   <style>
       .overlay i {
@@ -69,7 +70,7 @@ export class OpspotBanner {
   dragging: boolean = false;
   dragTimeout;
   added: EventEmitter<any> = new EventEmitter();
-  removed: EventEmitter<any> = new EventEmitter();
+  // removed: EventEmitter<any> = new EventEmitter();
   overlay: any; // @todo: ??
 
   set _object(value: any) {
@@ -98,11 +99,13 @@ export class OpspotBanner {
   }
 
   chooseFile() {
+    console.log('OpspotBanner chooseFile()');
     let fileSelector: HTMLElement = document.getElementById('file') as HTMLElement;
     fileSelector.click();
   }
 
   add(e) {
+    console.log('OpspotBanner add()');
     if (!this.editing)
       return;
 
@@ -143,14 +146,13 @@ export class OpspotBanner {
     //this.editing = false;
   }
 
-  remove() {
-    console.log('remove');
-    this.removed.next({
-      index: this.index
-    });
-    this.file = null;
-    //this.editing = false;
-  }
+  // remove() {
+  //   this.removed.next({
+  //     index: this.index
+  //   });
+  //   this.file = null;
+  //   //this.editing = false;
+  // }
 
   onClick(e) {
     e.target.parentNode.parentNode.getElementsByTagName('input')[0].click();
