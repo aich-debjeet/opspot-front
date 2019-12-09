@@ -76,6 +76,9 @@ export class MessengerConversation {
   }
 
   ngOnInit() {
+    if (this.conversation && this.conversation['message']) {
+      this.message = this.conversation['message'];
+    }
     if (this.conversation.messages) {
       this.messages = this.conversation.messages;
     } else if (this.encryption.isOn() && this.conversation.open) {
