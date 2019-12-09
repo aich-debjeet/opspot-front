@@ -96,7 +96,7 @@
                             </opspot-organization-profile-members-invite>
                         </m-modal>
                         <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle">
-                            <opspot-organization-profile-members></opspot-organization-profile-members>
+                            <opspot-organization-profile-members [organization]="organization"></opspot-organization-profile-members>
                         </m-modal> 
                     </div>
                     <div class="o-cards o-community-members hidden-under-tablet">
@@ -108,7 +108,7 @@
                                 class="icon-plus-circle primary">
                             </span>
                         </div>
-                        <opspot-organization-profile-members (totalOrganization)="groupCount($event)" [frmGroup]="true">
+                        <opspot-organization-profile-members [organization]="organization" (totalOrganization)="groupCount($event)" [frmGroup]="true">
                         </opspot-organization-profile-members>
                     </div>
                 </div>
