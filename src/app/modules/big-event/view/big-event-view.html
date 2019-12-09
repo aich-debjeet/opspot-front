@@ -53,7 +53,7 @@
                         </div>
                     </div><!-- info content end -->
                     <div class="o-big-events-inner-info__action" *ngIf="session.getLoggedInUser().guid != bigEvent?.owner_guid">
-                        <button type="button" class="btn btn-primary btn-lg">Reach Out</button>
+                        <m-messenger--channel-button [user]="user" [message]="reachoutMessage" [label]="'Reach Out'"></m-messenger--channel-button>
                     </div><!-- info action end -->
                     <div class="o-big-events-inner-info__action" *ngIf="bigEvent && bigEvent?.guid && session.getLoggedInUser().guid == bigEvent?.owner_guid">
                         <button type="button" class="btn btn-primary btn-lg mar-l-5" [routerLink]="['/event/edit/' + bigEvent?.guid]">Edit</button>
