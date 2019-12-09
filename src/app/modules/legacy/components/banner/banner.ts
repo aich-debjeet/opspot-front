@@ -1,7 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
 
-import { Client } from '../../../../services/api';
-
 @Component({
   selector: 'opspot-banner',
   inputs: ['_object: object', '_src: src', '_top: top', 'overlay', '_editMode: editMode', '_done: done'],
@@ -44,13 +42,13 @@ import { Client } from '../../../../services/api';
       <input type="file" id="file" (change)="add($event)" [hidden]="file" />
   </div>
   <style>
-      .overlay i {
-          font-size: 40px !important;
-          color: #fff !important;
-      }
-      .relative {
-        position: relative;
-      }
+    .overlay i {
+      font-size: 40px !important;
+      color: #fff !important;
+    }
+    .relative {
+      position: relative;
+    }
   </style>
   `
 })
@@ -99,13 +97,11 @@ export class OpspotBanner {
   }
 
   chooseFile() {
-    console.log('OpspotBanner chooseFile()');
     let fileSelector: HTMLElement = document.getElementById('file') as HTMLElement;
     fileSelector.click();
   }
 
   add(e) {
-    console.log('OpspotBanner add()');
     if (!this.editing)
       return;
 
