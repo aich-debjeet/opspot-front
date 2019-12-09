@@ -87,7 +87,6 @@ export class Activity {
   // @ViewChild('remindButton') remindButton: RemindButton;
 
   reachoutMessage = '';
-  user: any;
 
   constructor(
     public session: Session,
@@ -111,13 +110,19 @@ export class Activity {
     this.activity = value;
 
     // user obj for reach out
-    if (value['entity_type']
-      && value['entity_type'] == 'opportunity'
-      && value['entity_type'] == 'event'
-      && value['entity_type'] == 'item'
+    if (value['entity_type'] &&
+      (value['entity_type'] == 'opportunity'
+      || value['entity_type'] == 'event'
+      || value['entity_type'] == 'item')
     ) {
-      this.user = value.activity.ownerObj;
-      this.reachoutMessage += value.activity['perma_url'];
+      if (value['entity_type'] == 'opportunity') {
+        this.reachoutMessage = 'Is there an opening? ';
+      } else if (value['entity_type'] == 'event') {
+        this.reachoutMessage = 'I am interested. ';
+      } else if (value['entity_type'] == 'item') {
+        this.reachoutMessage = 'Is this available? ';
+      }
+      this.reachoutMessage += value['perma_url'];
     }
     
 
