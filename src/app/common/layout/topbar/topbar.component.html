@@ -68,7 +68,7 @@
         <li class="nav-icon__item">
 
           <div class="m-topbar--account" *ngIf="session.isLoggedIn()" #menu>
-            <a class="" (click)="menu.value = !menu.value; getUsersOrganization()">
+            <a class="" (click)="menu.value = !menu.value ;">
               <img alt="menu"
                 src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" />
             </a>
@@ -99,21 +99,20 @@
                   <span>Admin</span>
                 </a>
               </li>
-              <li class="m-dropdownList__item" (click)="menu.value = false">
+              <li class="m-dropdownList__item" (click)="menu.value = false" *ngIf="!entity">
                 <a [routerLink]="['/organization/create']">
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>Create Organisation</span>
                 </a>
               </li>
-              <div *ngFor="let entity of entities">
-                <li class="m-dropdownList__item" (click)="menu.value = false"
-                  *ngIf="entity['is:creator'] && entity['is:member'] && entity.entity_type === 'organization'">
+              <!-- <div *ngFor="let entity of entities"> -->
+                <li class="m-dropdownList__item" (click)="menu.value = false" *ngIf="entity">
                   <a>
                     <!-- <i class="material-icons">trending_up</i> -->
                     <span [routerLink]="['/organization/profile/'+ entity.guid + '/feed']">{{entity.name}}</span>
                   </a>
                 </li>
-              </div>
+              <!-- </div> -->
               <li class="m-dropdownList__item" (click)="menu.value = false">
                 <a [routerLink]="['/boost/console']">
                   <!-- <i class="material-icons">trending_up</i> -->
