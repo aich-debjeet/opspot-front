@@ -36,6 +36,8 @@ export class BluestoreComponent implements OnInit {
   translateEvent: EventEmitter<any> = new EventEmitter();
   isLocked = false;
   paramsSubscription: Subscription;
+  reachoutMessage = 'Is this available? ';
+  user: any;
 
 
 
@@ -84,6 +86,9 @@ export class BluestoreComponent implements OnInit {
       .then((data: any) => {
         if (data.activity) {
           this.marketplace = data.activity;
+          // user obj for reach out
+          this.user = data.activity.ownerObj;
+          this.reachoutMessage += data.activity['perma_url'];
 
           this.marketplace.url  = window.Opspot.site_url + 'item/view/' + this.marketplace.guid;
 

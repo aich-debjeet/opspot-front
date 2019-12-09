@@ -114,8 +114,12 @@
 								</div>
 							</div>
 							<div class="feed-card-event-block__right ">
-								<button type="button" class="btn btn-primary btn-lg"
-									*ngIf="session.getLoggedInUser().guid != marketplace?.owner_guid">Reach Out</button>
+								<m-messenger--channel-button
+									*ngIf="session.getLoggedInUser().guid != marketplace?.owner_guid"
+									[user]="user"
+									[message]="reachoutMessage"
+									[label]="'Reach Out'"
+								></m-messenger--channel-button>
 							</div>
 						</div>
 					</div>
