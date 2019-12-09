@@ -6,6 +6,7 @@ import { Session } from '../../../services/session';
 import { ReCaptchaComponent } from '../../../modules/captcha/recaptcha/recaptcha.component';
 import { ExperimentsService } from '../../experiments/experiments.service';
 import { Service } from './service';
+import { MessengerEncryptionService } from '../../messenger/encryption/encryption.service';
 
 
 @Component({
@@ -47,8 +48,8 @@ export class RegisterForm {
     fb: FormBuilder,
     public zone: NgZone,
     private experiments: ExperimentsService,
-    private service: Service
-
+    private service: Service,
+    public encryption: MessengerEncryptionService
   ) {
     // this.dateOfBirth = this.dob();
     this.form = fb.group({
@@ -175,6 +176,16 @@ export class RegisterForm {
       this.inProgress = true;
       this.service.register(form)
         .then((data: any) => {
+          if (data.user && data.user.guid) {
+            // Setting up encryption key for chat
+            this.encryption.doSetup(data.user.guid)
+              .then(() => {
+                // console.log('encryption setup successful!', data.user.guid);
+              })
+              .catch(() => {
+                // console.log('encryption setup error!');
+              });
+          }
           // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
           this.inProgress = false;
           this.session.login(data.user);
