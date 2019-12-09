@@ -24673,7 +24673,7 @@ app-image-croper .m-modal-container {
 .o-create-post-body{
   width: 100%;
   padding: 15px 24px 15px;
-  height: 186px;
+  min-height: 186px;
   textarea{
       resize:none;
   }
