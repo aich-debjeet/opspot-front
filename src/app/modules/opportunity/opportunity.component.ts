@@ -20,7 +20,8 @@ export class OpportunityComponent implements OnInit {
 
   guid: string;
   paramsSubscription: Subscription;
-
+  reachoutMessage = 'Is there an opening? ';
+  user: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -102,7 +103,9 @@ export class OpportunityComponent implements OnInit {
     this.client.get('api/v1/newsfeed/single/' + this.guid)
       .then((data: any) => {
         if (data.activity) {
-          this.opportunity = data.activity;
+          this.opportunity = data.activity;// user obj for reach out
+          this.user = data.activity.ownerObj;
+          this.reachoutMessage += data.activity['perma_url'];
           
           this.opportunity.url  = window.Opspot.site_url + 'opportunity/view/' + this.opportunity.guid;
 
