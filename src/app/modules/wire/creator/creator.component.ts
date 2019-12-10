@@ -80,12 +80,6 @@ export class WireCreatorComponent {
 
   @Input('object') set data(object) {
     this.wire.guid = object ? object.guid : null;
-    if(object.ownerObj.contributeType === 'paywall'){
-      this.wire.amount = object ?  object.wire_threshold.min : 1;
-    }
-    if(object.ownerObj.contributeType === 'contribute'){
-      this.wire.amount = 1;
-    }
     if (!this.wire.guid && object.entity_guid) {
       this.wire.guid = object.entity_guid;
     }
@@ -96,6 +90,12 @@ export class WireCreatorComponent {
       if (object.type === 'user') {
         this.owner = object;
       } else if (object.ownerObj) {
+        if(object.ownerObj.contributeType === 'paywall'){
+          this.wire.amount = object ?  object.wire_threshold.min : 1;
+        }
+        if(object.ownerObj.contributeType === 'contribute'){
+          this.wire.amount = 1;
+        }
         this.owner = object.ownerObj;
       }
     }
