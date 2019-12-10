@@ -6,12 +6,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'm-helpdesk--questions',
-  templateUrl: 'questions.component.html'
+  templateUrl: 'questions.component.html',
+  styleUrls: ['./questions.component.scss']
 })
 
 export class QuestionsComponent implements OnInit {
 
   question: any = {};
+  relatedQuestions = [];
 
   opspot: Opspot = window.Opspot;
 
@@ -36,6 +38,15 @@ export class QuestionsComponent implements OnInit {
     try {
       const response: any = await this.client.get(`api/v2/helpdesk/questions/question/${uuid}`);
       this.question = response.question;
+
+      let temp: any = await this.client.get(`api/v2/helpdesk/questions`, { limit: 5000 });
+      this.relatedQuestions = temp.questions
+        .filter((question) => {
+          return this.question.category_uuid === question.category_uuid;
+        })
+        .sort((a, b) => {
+          return a.position - b.position;
+        });
       this.title.setTitle(this.question.question);
     } catch (e) {
       console.error(e);
