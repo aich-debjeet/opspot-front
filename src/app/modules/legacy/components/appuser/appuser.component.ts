@@ -21,7 +21,7 @@ export class AppuserComponent implements OnInit {
 
   set object(value: any) {
     this.user = value;
-    console.log(value)
+    // console.log("user: ", value)
     this.bannerSrc = `${this.opspot.cdn_url}fs/v1/banners/${this.user.guid}/fat/${this.user.icontime}`;
   }
 

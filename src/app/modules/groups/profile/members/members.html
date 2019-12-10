@@ -1,11 +1,11 @@
 <!-- <a class="m-group__goBack" routerLink="..">&lt; Back to feed</a> -->
 <style>
-  input:focus{
-    box-shadow: none ;
-  }
-  </style>
+input:focus{
+  box-shadow: none ;
+}
+</style>
   
-  <div *ngIf="!frmGroup"> 
+<div *ngIf="!frmGroup"> 
   <!-- <div class="">
     <opspot-groups-profile-members-invite *ngIf="canInvite" [group]="group" (invited)="invite($event)"></opspot-groups-profile-members-invite>
     <div class="invitees m-search-inline">
@@ -42,7 +42,7 @@
       />
       <i class="icon-search" style="position: absolute; top: 9px; right: 12px;"></i>
   </div>
-  </div>
+</div>
   <!-- <div class="mdl-grid m-groupMembers__list m-border">
     <div class="mdl-cell mdl-cell--6-col m-groupMembers__memberCard" *ngFor="let member of members">
         <div class="mdl-card m-border">
@@ -61,23 +61,23 @@
     </div>
   </div> -->
   
-  <ul class="o-community-members-list scrollbar scrollbar-default" *ngFor="let member of members">
-    <li class="o-community-members-list__user-list">
-    <app-appuser [object]="member">
-        <opspot-groups-card-user-actions-button
-        style="position: relative;"
-        *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid"
-        [group]="group"
-        [user]="member"
-        ></opspot-groups-card-user-actions-button>
-    </app-appuser>
-    </li>   
-  </ul>
-  
-  <infinite-scroll
-      distance="25%"
-      (load)="load()"
-      [moreData]="moreData"
-      [inProgress]="inProgress">
-  </infinite-scroll>
+<ul class="o-community-members-list scrollbar scrollbar-default" *ngFor="let member of members">
+  <li class="o-community-members-list__user-list">
+  <app-appuser [object]="member">
+      <opspot-groups-card-user-actions-button
+      style="position: relative;"
+      *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid"
+      [group]="group"
+      [user]="member"
+      ></opspot-groups-card-user-actions-button>
+  </app-appuser>
+  </li>   
+</ul>
+
+<infinite-scroll
+    distance="25%"
+    (load)="load()"
+    [moreData]="moreData"
+    [inProgress]="inProgress">
+</infinite-scroll>
   

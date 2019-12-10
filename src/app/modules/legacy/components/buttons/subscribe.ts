@@ -40,7 +40,7 @@ export class SubscribeButton {
   set user(value: any) {
     if (value !== null) {
       this._user = value;
-      console.log(this._user)
+      // console.log(this._user)
     }
   }
 

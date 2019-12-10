@@ -154,10 +154,16 @@ export class PostFormComponent {
    * Post to the newsfeed
    */
   post() {
-    if (!this.meta.message && !this.attachment.has()) {
+    // console.log(this.meta, this.attachment.has());
+    if (this.meta.message.length <= 0 && this.attachment.has()) {
+      alert('What have You Created today?');
       return;
     }
     if (this.defaultCoins.length > 0) {
+      if(!/\d/.test(this.defaultCoins)){
+        alert('Invalid Wire threshold');
+        return;
+      }
       this.meta.wire_threshold = {
         min: this.defaultCoins,
         type: 'tokens'
@@ -242,8 +248,7 @@ export class PostFormComponent {
     this.attachment.reset();
   }
 
-  removeAttachment(file: HTMLInputElement, imageId: string) {
-    // console.log(file, imageId);
+  removeAttachment(imageId: string,file?: HTMLInputElement,) {
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -259,19 +264,16 @@ export class PostFormComponent {
 
     this.errorMessage = '';
 
-    this.attachment
-      .remove(file, imageId)
+    this.attachment.remove(imageId,file)
       .then(guid => {
         this.inProgress = false;
         this.canPost = true;
-        file.value = '';
+        // file.value = '';
         this.cards = _remove(this.cards, function (n) {
-          return n.guid !== guid;
+          return n.guid != guid;
         });
-        // console.log(this.cards);
       })
       .catch(e => {
-        // console.error(e);
         this.inProgress = false;
         this.canPost = true;
       });

@@ -13481,7 +13481,7 @@ m-homepage .m-homepage-press {
     /* align-items: center; */
     /* display: flex; */
     text-align: center;
-    padding-top: 116px;
+    padding-top: 150px;
     cursor: pointer; }
     .opspot-banner.opspot-banner-editing .overlay i {
       font-size: 62px;
@@ -13880,11 +13880,15 @@ opspot-card-album {
     width: 33%; }
 
 opspot-activity.mdl-card, opspot-activity, opspot-activity-preview {
-  width: auto;
-  min-height: 0;
-  margin-bottom: 16px;
-  border-radius: 6px;
-  overflow: visible;
+  // width: auto;
+  // min-height: 0;
+  // margin-bottom: 16px;
+  // border-radius: 6px;
+  // overflow: visible;
+  width: 100% !important;
+  border: 1px solid #ECEFF1;
+  border-radius: 4px;
+  margin-bottom: 6px;
   /**
    * Rich embeds
    */
@@ -14008,7 +14012,7 @@ opspot-activity.mdl-card, opspot-activity, opspot-activity-preview {
     opspot-activity.mdl-card opspot-remind .m-owner-block, opspot-activity opspot-remind .m-owner-block, opspot-activity-preview opspot-remind .m-owner-block {
       padding-top: 0; }
   opspot-activity.mdl-card .m-activity--pending, opspot-activity .m-activity--pending, opspot-activity-preview .m-activity--pending {
-    background: #ffffdd;
+    background: #ddf2ff;
     padding: 8px 16px;
     font-size: 12px;
     font-weight: 400; }
@@ -24669,7 +24673,7 @@ app-image-croper .m-modal-container {
 .o-create-post-body{
   width: 100%;
   padding: 15px 24px 15px;
-  height: 186px;
+  min-height: 186px;
   textarea{
       resize:none;
   }
@@ -24785,7 +24789,7 @@ app-image-croper .m-modal-container {
   .o-create-post-left{
   display:flex;
   align-items: center;
-  width: 100%;
+  // width: 100%;
   .icon-info{
   line-height: 20px;
   font-size: 11px;
@@ -24797,7 +24801,7 @@ app-image-croper .m-modal-container {
       &__status{
           padding: 8px 10px;
           height: 34px;	
-          width: 103px;	
+          // width: 103px;	
           border: 1px solid rgba(144,164,174,0.2);	
           border-radius: 4px;	
           background-color:$white;	
@@ -25719,7 +25723,9 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   }
 }
 
-
+[type="checkbox"]:checked:before {
+  background-color: $primary;
+}
 
 //footer style
 .o-create-portfolio-footer{
@@ -27561,7 +27567,7 @@ li{
     z-index: 1;
   }
 .o-card.feed, .feed-card-opportunity-block {
-  cursor: pointer;
+  // cursor: pointer;
 }
 .o-settings-block__content {
   // width: calc(100% - 176px);

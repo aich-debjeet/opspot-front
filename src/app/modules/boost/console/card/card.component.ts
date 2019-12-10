@@ -18,6 +18,7 @@ export class BoostConsoleCard {
   type: string;
 
   reasons: Array<Reason> = rejectionReasons;
+  routerLink1;
 
   constructor(public service: BoostService,public session: Session) {
   }
@@ -25,6 +26,16 @@ export class BoostConsoleCard {
   @Input('boost')
   set _boost(boost: any) {
     this.boost = boost;
+
+    // if (this.boost.entity_type === "event") {
+    //   // this.showTimez = true;
+    //   if (this.boost.entity.end_time_date) {
+    //     this.routerLink1 = "/event/view"
+    //   } else {
+    //     this.routerLink1 = "/showtime/view"
+    //   }
+    // }
+    // console.log("this.boost: ", this.boost)
     this.type = this.service.getBoostType(this.boost) || '';
   }
 

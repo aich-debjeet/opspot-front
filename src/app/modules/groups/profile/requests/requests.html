@@ -1,4 +1,4 @@
-<a class="m-group__goBack" routerLink="..">&lt; Back to feed</a>
+<!-- <a class="m-group__goBack" routerLink="..">&lt; Back to feed</a>
 
 <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--2dp" *ngFor="let user of users; let i = index">
 
@@ -20,7 +20,30 @@
     <a class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="accept(user, i)" i18n="@@M__ACTION__ACCEPT">Accept</a>
     <a class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="reject(user, i)" i18n="@@M__ACTION__REJECT">Reject</a>
   </div>
-</div>
+</div> -->
+
+
+<div id="request" class="tab active">
+    <div class="o-community-admin-request"  *ngFor="let user of users; let i = index">
+        <div class="o-community-admin-request-block">
+            <div class="o-community-admin-request-block-info">
+                <div class="o-community-admin-request-block-info__avatar" [routerLink]="['/', user.username]">
+                    <img src="{{opspot.cdn_url}}icon/{{user.guid}}/small" alt="">
+                </div>
+                <div class="o-community-admin-request-block-info__info" [routerLink]="['/', user.username]">
+                    <div class="text-md f500">{{user.name}}</div>
+                    <div class="text-sm grey">@{{user.username}}</div>
+                </div>
+            </div><!--info ends-->
+            <div class="o-community-admin-request-block-button-set">
+                <button type="button" class="btn btn-outline-primary btn-sm o-community-admin-request-mr14" (click)="reject(user, i)">Reject</button>
+                <button type="button" class="btn btn-primary btn-sm float-right btn--commu" (click)="accept(user, i)">Accept</button>
+            </div><!--button-set-->
+        </div><!--admin request block-->
+        <div class="o-community-admin-request-line"></div>
+    </div><!--admin request-->
+</div><!-- request tab end-->
+
 
 <infinite-scroll
     distance="25%"

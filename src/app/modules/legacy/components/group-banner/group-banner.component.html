@@ -3,7 +3,7 @@
       [style.backgroundImage]="src ? 'url(' + src + ')' : null"
 
  class="o-cover o-cover--community hidden-under-tablet">
-    <a *ngIf="object['is:owner']" (click)="onClick($event)" class="o-cover-edit o-cover-edit--community">
+    <a *ngIf="object && object['is:owner']" (click)="onClick($event)" class="o-cover-edit o-cover-edit--community">
       <i class="icon-edit-profile"></i>
     </a>
 </div>
@@ -21,7 +21,7 @@
          style="background-size: cover;
                background-position: left;">
                <div class="o-cover__actions">
-                  <a *ngIf="object['is:owner']" class="o-cover-edit o-cover-edit--community"><i  class="icon-edit-profile"></i></a>
+                  <a *ngIf=" object && object['is:owner']" class="o-cover-edit o-cover-edit--community"><i  class="icon-edit-profile"></i></a>
                   <a  class="o-cover-community-discussion">
                       <i class="icon-message-square"></i> 
                       <i class="icon-chevron-right"></i>

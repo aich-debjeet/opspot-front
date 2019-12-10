@@ -444,6 +444,13 @@ export class OrganizationProfile {
     //  console.log(members)
      this.membersMobile=members['members']
     }
+
+  
+    groupCount(e){
+      this.totalMembers=e
+     //  console.log("total: ", this.totalMembers);
+      
+     }
     
   // showGathering1(){
   //  this.showGathering = true;

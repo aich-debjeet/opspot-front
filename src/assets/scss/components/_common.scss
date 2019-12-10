@@ -26,7 +26,7 @@
         margin-top: -106px;
         @include mq($from: $mobile_sm, $until: $tablet) {
             width: 100%;
-            margin-top: 0px;
+            margin-top: 80px;
             position: relative;
         }
     }

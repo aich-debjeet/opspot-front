@@ -41,19 +41,24 @@ opspot = window.Opspot;
 
   }
 
+  set _organization(value: any) {
+    this.organization = value;
+    this.load(true);
+  }
+
   ngOnInit() {
-    this.$organization = this.service.$group.subscribe((organization) => {
-      this.organization = organization;
-      this.load(true);
-      this.el.nativeElement.scrollIntoView();
-    });
+    // this.$organization = this.service.$group.subscribe((organization) => {
+    //   this.organization = organization;
+    //   this.load(true);
+    //   this.el.nativeElement.scrollIntoView();
+    // });
   }
 
   ngOnDestroy() {
     if (this.searchDelayTimer) {
       clearTimeout(this.searchDelayTimer);
     }
-    this.$organization.unsubscribe();
+    //this.$organization.unsubscribe();
   }
 
   load(refresh: boolean = false, query = null) {
@@ -68,6 +73,7 @@ opspot = window.Opspot;
 
     // TODO: [emi] Send this via API
     this.canInvite = false;    
+    if(this.organization){
     if (this.organization['is:owner']) {
       this.canInvite = true;
     } else if (this.organization.membership === 2 && this.organization['is:member']) {
@@ -110,6 +116,7 @@ opspot = window.Opspot;
             this.inProgress = false;
         });
   }
+}
 
   invite(user: any) {
     for (let i of this.invitees) {

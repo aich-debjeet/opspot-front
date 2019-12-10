@@ -1,15 +1,15 @@
 <div class="mdl-card m-border post" *ngIf="session.isLoggedIn() && !staticBoard">
-        <div class="mdl-card__supporting-text">
-            <div class="opspot-avatar">
-                <a [routerLink]="['/', session.getLoggedInUser().username]">
-                    <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/"
-                        class="m-border" />
-                </a>
-            </div>
-    
-            <form (submit)="post()">
-                <mwl-text-input-autocomplete-container>
-                    <!-- <textarea
+    <div class="mdl-card__supporting-text">
+        <div class="opspot-avatar">
+            <a [routerLink]="['/', session.getLoggedInUser().username]">
+                <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/"
+                    class="m-border" />
+            </a>
+        </div>
+
+        <form (submit)="post()">
+            <mwl-text-input-autocomplete-container>
+                <!-- <textarea
                   class="mdl-textfield__input"
                   type="text"
                   id="message"
@@ -26,10 +26,10 @@
                   [getChoiceLabel]="getChoiceLabel"
                   [triggerCharacter]="'#'"
                 ></textarea> -->
-                    <textarea class="mdl-textfield__input" type="text" placeholder="What have you created today?"
-                        i18n-placeholder="@@OPSPOT__POSTER__SPEAK_YOUR_MIND" (click)="createForms('default')"></textarea>
-                </mwl-text-input-autocomplete-container>
-                <!-- <div class="mdl-card__actions">
+                <textarea class="mdl-textfield__input" type="text" placeholder="What have you created today?"
+                    i18n-placeholder="@@OPSPOT__POSTER__SPEAK_YOUR_MIND" (click)="createForms('default')"></textarea>
+            </mwl-text-input-autocomplete-container>
+            <!-- <div class="mdl-card__actions">
              Attachments
             <div class="attachment-button" [ngClass]="{ 'mdl-color-text--amber-500': attachment.hasFile() }">
               <span class="icon-paperclip-2"></span>
@@ -57,17 +57,17 @@
               <i class="icon-paper-plane-1"></i>
             </button>
           </div> -->
-    
-            </form>
-        </div>
-        <!-- <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp" style="min-height:0;"
+
+        </form>
+    </div>
+    <!-- <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp" style="min-height:0;"
         *ngIf="errorMessage">
         <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
           {{errorMessage}}
         </div>
       </div> -->
-        <!-- Rich embed preview -->
-        <!-- <div class="post-preview" *ngIf="attachment.isRich()">
+    <!-- Rich embed preview -->
+    <!-- <div class="post-preview" *ngIf="attachment.isRich()">
         <div class="mdl-spinner mdl-js-spinner is-active" [mdl] [hidden]="attachment.getMeta().title"></div>
         <div class="m-rich-embed" *ngIf="attachment.getMeta().title">
           <div class="attachment-preview-delete" (click)="removeRichEmbed()">
@@ -78,9 +78,9 @@
           ></opspot-rich-embed>
         </div>
       </div> -->
-    
-        <!-- Attachment preview -->
-        <!-- <div class="post-preview" *ngIf="attachment.hasFile() || attachment.getUploadProgress() > 0"
+
+    <!-- Attachment preview -->
+    <!-- <div class="post-preview" *ngIf="attachment.hasFile() || attachment.getUploadProgress() > 0"
         (click)="removeAttachment(file)">
         <div class="mdl-progress mdl-js-progress"
           [mdlUpload]
@@ -91,8 +91,8 @@
         <div *ngIf="attachment.getMime() == 'video'" class="attachment-preview video-placeholder mdl-color--blue-grey-600">
           <i class="material-icons" *ngIf="!attachment.isPendingDelete()">videocam</i>
         </div> -->
-    
-        <!-- <ng-container>
+
+    <!-- <ng-container>
           <img *ngIf="attachment.getMime() != 'video'" [src]="attachment.getPreview()" class="attachment-preview"/>
           <div class="attachment-preview-delete" *ngIf="!attachment.isPendingDelete()">
             <i class="material-icons">delete</i>
@@ -101,23 +101,23 @@
             *ngIf="attachment.isPendingDelete()"></div>
     
         </ng-container> -->
-        <!--<div class="attachment-preview-delete-in-progress" *ngIf="attachment.isPendingDelete()">-->
-        <!--<div class="mdl-spinner mdl-js-spinner is-active" [mdl]></div>-->
-        <!--</div>-->
-        <!-- </div> -->
-    
-    </div>
-    
-    <div *ngIf="staticBoard">
-        <div class="o-create-post" *ngIf="display == 'default'">
-            <div class="o-create-post-head o-create-post-head--border" *ngIf="!showSpecialHashtags">
-                <div class="o-create-post__title text-lg f500">Create a post 
-                    <!-- <span class="icon-box-design" #postType>
+    <!--<div class="attachment-preview-delete-in-progress" *ngIf="attachment.isPendingDelete()">-->
+    <!--<div class="mdl-spinner mdl-js-spinner is-active" [mdl]></div>-->
+    <!--</div>-->
+    <!-- </div> -->
+
+</div>
+
+<div *ngIf="staticBoard">
+    <div class="o-create-post" *ngIf="display == 'default'">
+        <div class="o-create-post-head o-create-post-head--border" *ngIf="!showSpecialHashtags">
+            <div class="o-create-post__title text-lg f500">Create a post
+                <!-- <span class="icon-box-design" #postType>
                         <span class="icon-chevron-down" (click)="postType.value = !postType.value">
                         </span>
                     </span> -->
-                </div>
-                <!-- <div class="o-create-post-dropdown" [hidden]="!postType.value">
+            </div>
+            <!-- <div class="o-create-post-dropdown" [hidden]="!postType.value">
                     <div class="o-create-post-dropdown-content">
                         <ul>
                             <li class="text-md" (click)="createForms('#Showtimez')">On #Showtimez</li>
@@ -128,16 +128,12 @@
                         </ul>
                     </div>
                 </div> -->
-                <m-post-menu
-                    [iconType]="'arrow'"
-                    [options]="menuOptions"
-                    [user]="opspot.user"
-                    (optionSelected)="menuOptionSelected($event)"
-                ></m-post-menu>
-                <div class="text-md primary f500 o-create-post-write-blog">Write Blog</div>
-                <div class="close" (click)="close()"><i class="icon-x"></i></div>
-            </div>
-            <!-- <form (submit)="post()">
+            <m-post-menu [iconType]="'arrow'" [options]="menuOptions" [user]="opspot.user"
+                (optionSelected)="menuOptionSelected($event)"></m-post-menu>
+            <div class="text-md primary f500 o-create-post-write-blog" [routerLink]="['/blog/edit/new']">Write Blog</div>
+            <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        </div>
+        <!-- <form (submit)="post()">
                 <div class="o-create-post-body o-create-post-body--flex">
                     <div class="o-crete-post-userinfo">
                         <div class="o-crete-post-userinfo__avatar">
@@ -214,18 +210,24 @@
                     </div>
                 </div>
             </form> -->
-            <app-post-form (load)="emitEvent($event)" [object]="''"></app-post-form>
-        </div>
-    
-        <app-showtimez-form *ngIf="display == '#Showtimez'" [object]="''" (ChangeDefault)="changeToDefault()"
-            (Close)="close()" (load)="emitEvent($event)"></app-showtimez-form>
-        <app-opportunity-form *ngIf="display == '#Opportunity'" [object]="''" (ChangeDefault)="changeToDefault()"
-            (Close)="close()" (load)="emitEvent($event)"></app-opportunity-form>
-        <app-blue-store-form *ngIf="display == '#TheBlueStore'" [object]="''" (ChangeDefault)="changeToDefault()"
-            (Close)="close()" (load)="emitEvent($event)"></app-blue-store-form>
-        <app-portfolio-form *ngIf="display == '#Portfolio'" (ChangeDefault)="changeToDefault()" (Close)="close()"
-            (load)="emitEvent($event)"></app-portfolio-form>
-        <app-my-journey-form *ngIf="display == '#MyJourney'" (ChangeDefault)="changeToDefault()" (Close)="close()"
-            (load)="emitEvent($event)"></app-my-journey-form>
+        <app-post-form (load)="emitEvent($event)" [object]="''"></app-post-form>
     </div>
-    
+
+    <app-showtimez-form *ngIf="display == '#Showtimez'" [object]="''" (ChangeDefault)="changeToDefault()"
+        (Close)="close()" (load)="emitEvent($event)"></app-showtimez-form>
+    <app-opportunity-form *ngIf="display == '#Opportunity'" [object]="''" (ChangeDefault)="changeToDefault()"
+        (Close)="close()" (load)="emitEvent($event)"></app-opportunity-form>
+    <app-blue-store-form *ngIf="display == '#TheBlueStore'" [object]="''" (ChangeDefault)="changeToDefault()"
+        (Close)="close()" (load)="emitEvent($event)"></app-blue-store-form>
+    <app-portfolio-form *ngIf="display == '#Portfolio'" (ChangeDefault)="changeToDefault()" (Close)="close()"
+        (load)="emitEvent($event)"></app-portfolio-form>
+    <app-my-journey-form *ngIf="display == '#MyJourney'" (ChangeDefault)="changeToDefault()" (Close)="close()"
+        (load)="emitEvent($event)"></app-my-journey-form>
+</div>
+
+
+<style>
+    .o-create-post-write-blog {
+        cursor: pointer;
+    }
+</style>

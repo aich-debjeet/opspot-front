@@ -38,7 +38,8 @@ export class FormValidator {
             return;
         }
         // let passwordRegex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+        // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+        const passwordRegex = /^(?=.{8,})/;
         if (!passwordRegex.test(password)) {
             return { invalidPassword: true };
         }
@@ -66,7 +67,7 @@ export class FormValidator {
     }
 
     static datevalidation(AC: AbstractControl) {
-        console.log("Value: ",AC.value);
+        // console.log("Value: ",AC.value);
         
         const date = AC.value.split('-').reverse().join('-');
         const currentDate = moment().format('YYYYMMDD');

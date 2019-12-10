@@ -12,6 +12,7 @@ import { WireModule } from '../wire/wire.module';
 import { TranslateModule } from '../translate/translate.module';
 import { ModalsModule } from '../modals/modals.module';
 import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
+import { MessengerModule } from '../messenger/messenger.module';
 
 
 // TODO @gayatri: handle all other requests
@@ -40,7 +41,8 @@ const blueStoreRoutes: Routes = [
     WireModule,
     TranslateModule,
     ModalsModule,
-    ShareMenuModule
+    ShareMenuModule,
+    MessengerModule
   ]
 })
 export class BluestoreModule { }

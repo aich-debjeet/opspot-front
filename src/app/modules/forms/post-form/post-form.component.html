@@ -5,12 +5,19 @@
                 <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="">
             </div>
             <div class="o-crete-post-userinfo__mesaage">
-                <textarea type="text" id="message" #message name="message" placeholder="What have you created today?"
-                    [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
-                    (keyup)="getPostPreview(message);"></textarea>
+                <textarea
+                    type="text"
+                    id="message"
+                    #message
+                    name="message"
+                    placeholder="What have you created today?"
+                    [ngModel]="meta.message"
+                    (keyup)="getPostPreview(message)"
+                    (ngModelChange)="onMessageChange($event)"
+                ></textarea>
             </div>
         </div>
-        <div class="o-create-post-fileupload" *ngIf="cards.length == 0">
+        <div class="o-create-post-fileupload" *ngIf="!attachment.isRich() && cards.length == 0">
             <div class="fileUpload">
                 <span class="icon-paperclip-2"></span>
                 <!-- <input type="file" class="upload"> -->
@@ -19,6 +26,11 @@
             </div>
             <div class="text-md grey">
                 Add Image, Video or Audio
+            </div>
+        </div>
+        <div class="post-preview" *ngIf="attachment.isRich()">
+            <div class="m-rich-embed" *ngIf="attachment.getMeta().title">
+                <opspot-rich-embed [preview]="attachment.getMeta()"></opspot-rich-embed>
             </div>
         </div>
         <div class="o-create-post-filled-fileupload" *ngIf="cards.length > 0">
@@ -45,14 +57,14 @@
                 </div>
             </div>
             <span class="text-md grey f500">
-                isNSFW<span class="icon-info"></span>
+                Restricted Content<span class="icon-info"></span>
             </span>
         </div>
         <div class="o-create-post-right">
             <div class="o-create-post-right__status">
                 <div class="float-left" *ngIf="defaultCoins.length == 0">
                     <span class="o-create-post-right__icon"><span class="icon-users"></span></span>
-                    <span class="text-md f500">Paywall</span>
+                    <span class="text-md f500">Pay Per Post</span>
                 </div>
                 <div class="float-left" *ngIf="defaultCoins.length > 0">
                     <span class="text-md f500">{{defaultCoins}} spotcoins</span>

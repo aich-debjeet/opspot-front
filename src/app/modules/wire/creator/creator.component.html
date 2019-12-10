@@ -221,7 +221,8 @@
 
 <div class="o-contribute">
   <div class="o-contribute-head o-contribute-head--border">
-    <div class="o-contribute__title text-h4 f500">Contribute</div>
+    <div class="o-contribute__title text-h4 f500" *ngIf="owner.contributeType === 'paywall'">Paywall</div>
+    <div class="o-contribute__title text-h4 f500" *ngIf="owner.contributeType === 'contribute'">Contribute</div>
   </div>
   <!--contribute head end-->
   <div class="o-contribute-body o-contribute-body--flex">
@@ -250,10 +251,12 @@
           (keydown.enter)="amountEditorBlur()" (keydown.esc)="amountEditorBlur()" #amountEditor>
       </div>
     </div><!-- contribute action end -->
-    <div *ngIf="!inProgress && success" class="">
-      <i class="icon-check">Wired!</i>
+    <div *ngIf="!inProgress && success && owner.contributeType === 'contribute'" class="">
+      <i class="icon-check">Contributed!</i>
     </div>
-    <button type="button" class="btn btn-primary btn-block"
+    <button type="button" class="btn btn-primary btn-block" *ngIf="owner.contributeType === 'paywall'"
+      [disabled]="!canSubmit() || inProgress || success || criticalError" (click)="submit()">Unlock this post</button>
+      <button type="button" class="btn btn-primary btn-block" *ngIf="owner.contributeType === 'contribute'"
       [disabled]="!canSubmit() || inProgress || success || criticalError" (click)="submit()">Contribute</button>
   </div>
 </div>

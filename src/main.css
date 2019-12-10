@@ -12821,7 +12821,7 @@ opspot-activity.mdl-card, opspot-activity, opspot-activity-preview {
     opspot-activity.mdl-card opspot-remind .m-owner-block, opspot-activity opspot-remind .m-owner-block, opspot-activity-preview opspot-remind .m-owner-block {
       padding-top: 0; }
   opspot-activity.mdl-card .m-activity--pending, opspot-activity .m-activity--pending, opspot-activity-preview .m-activity--pending {
-    background: #ffffdd;
+    background: #ddf2ff;
     padding: 8px 16px;
     font-size: 12px;
     font-weight: 400; }

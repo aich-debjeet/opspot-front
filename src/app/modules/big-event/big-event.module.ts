@@ -16,6 +16,7 @@ import { ModalsModule } from '../modals/modals.module';
 import { CommentsModule } from '../comments/comments.module';
 import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
 import { TranslateModule } from '../translate/translate.module';
+import { MessengerModule } from '../messenger/messenger.module';
 
 
 
@@ -62,7 +63,7 @@ const bigeventRoutes: Routes = [
     CommentsModule,
     ShareMenuModule,
     TranslateModule,
-
+    MessengerModule
   ]
 })
 export class BigEventModule { }
