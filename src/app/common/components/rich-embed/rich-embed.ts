@@ -32,9 +32,9 @@ export class OpspotRichEmbed {
     this.src = Object.assign({}, value);
     this.type = 'src';
 
-    if (this.src.thumbnail_src) {
-      this.src.thumbnail_src = mediaProxyUrl(this.src.thumbnail_src);
-    }
+    // if (this.src.thumbnail_src) {
+    //   this.src.thumbnail_src = mediaProxyUrl(this.src.thumbnail_src);
+    // }
 
     this.init();
   }
@@ -47,9 +47,9 @@ export class OpspotRichEmbed {
     this.preview = Object.assign({}, value);
     this.type = 'preview';
 
-    if (this.preview.thumbnail) {
-      this.preview.thumbnail = mediaProxyUrl(this.preview.thumbnail);
-    }
+    // if (this.preview.thumbnail) {
+    //   this.preview.thumbnail = mediaProxyUrl(this.preview.thumbnail);
+    // }
 
     this.init();
   }

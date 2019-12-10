@@ -11,6 +11,7 @@ import { PaymentsModule } from '../payments/payments.module';
 import { BoostModule } from '../boost/boost.module';
 import { ThirdPartyNetworksModule } from '../third-party-networks/third-party-networks.module';
 import { WireModule } from '../wire/wire.module';
+import { MessengerModule } from '../messenger/messenger.module';
 
 import { Activity } from './components/cards/activity/activity';
 import { AlbumCard } from './components/cards/object/album/album';
@@ -65,6 +66,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
     CommentsModule,
     TextInputAutocompleteModule,
     OpspotFormsModule,
+    MessengerModule
     // SlickCarouselModule
   ],
   declarations: [
