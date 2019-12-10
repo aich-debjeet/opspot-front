@@ -35,11 +35,6 @@ export class MessengerEncryption implements OnInit {
   }
 
   ngOnInit() {
-    // @abhijeet-aeione TODO: added tmp work around to disable encryption
-    setTimeout(() => {
-      let user = window.Opspot.user;
-      this.unlock({ value: user.guid });
-    });
     this.username = `@${this.session.getLoggedInUser().username}` || 'user';
   }
 
