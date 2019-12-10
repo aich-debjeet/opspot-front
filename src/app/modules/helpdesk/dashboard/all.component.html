@@ -1,4 +1,4 @@
-<div class="m-helpdeskDashboard__all">
+<!-- <div class="m-helpdeskDashboard__all">
 
   <ul class="m-helpdeskDashboardAll__list">
     <li *ngFor="let category of categories" class="m-helpdeskQuestions__questions m-border">
@@ -19,4 +19,18 @@
     </li>
   </ul>
 
+</div>
+
+ -->
+
+ <div class="o-help-popular-topic-container">
+  <div class="o-popular-topic-card" *ngFor="let category of categories ; let i=index">
+      <div class="o-popular-topic-card__icon">
+          <i class="icon-user"></i>
+      </div>
+      <h4 class="f500">{{ category.title }}</h4>
+      <p class="text-md grey" *ngFor="let question of category.questions | slice:0:1; let i=index">
+          {{question.question}} <a [routerLink]="['/help/question', question.uuid]" class="primary">Read more</a>
+      </p>
+  </div><!-- popular topic card end -->
 </div>

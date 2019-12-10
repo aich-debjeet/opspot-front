@@ -131,6 +131,12 @@
                   <span>Settings</span>
                 </a>
               </li>
+              <li class="m-dropdownList__item" *ngIf="session.isLoggedIn()" (click)="menu.value = false">
+                <a [routerLink]="['/help']" i18n="@@OPSPOT__TOPBAR__LOGOUT">
+                  <!-- <i class="material-icons">exit_to_app</i> -->
+                  <span>Help Desk</span>
+                </a>
+              </li>
               <li class="m-dropdownList__item" (click)="menu.value = false">
                 <a [routerLink]="['/about']">
                   <!-- <i class="material-icons">trending_up</i> -->

@@ -5,7 +5,8 @@ import { Session } from '../../../services/session';
 
 @Component({
   selector: 'm-helpdesk--dashboard--all',
-  templateUrl: 'all.component.html'
+  templateUrl: 'all.component.html',
+  styleUrls:['./all.component.scss']
 })
 
 export class AllHelpdeskDashboardComponent implements OnInit {

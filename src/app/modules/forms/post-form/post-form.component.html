@@ -67,7 +67,7 @@
                     <span class="text-md f500">Pay Per Post</span>
                 </div>
                 <div class="float-left" *ngIf="defaultCoins.length > 0">
-                    <span class="text-md f500">{{defaultCoins}} spotcoins</span>
+                    <span class="text-md f500">{{defaultCoins}} Pay Per Post</span>
                 </div>
                 <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span
                         class="icon-chevron-down"></span></a>
@@ -76,7 +76,7 @@
                         <div class="text-sm grey">Visible to supporter who send over</div>
                         <div class="paywall-coins">
                             <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins"
-                                placeholder="0 Spot Coins">
+                                placeholder="0 Pay Per Post">
                             <button type="button" class="btn btn-primary btn-sm disabled"
                                 (click)="displayPaywall()">Add</button>
                         </div>

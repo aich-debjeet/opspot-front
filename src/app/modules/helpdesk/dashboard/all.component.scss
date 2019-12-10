@@ -1,3 +1,6 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
 .m-helpdeskDashboard__all {
   .m-helpdeskDashboardAll__list {
     list-style: none;
@@ -10,5 +13,60 @@
       padding: 0;
     }
 
+  }
+}
+.o-help-popular-topic-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 1 160px;
+  flex-direction: row;
+  flex-flow: row wrap;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  &--margin{
+      margin-top: 46px;
+  }
+}
+
+// popular topic card
+
+.o-popular-topic-card{
+  width: 295px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  @include mq($from: $tablet, $until: $desktop_md) {
+      width: 178px;
+  }
+  @include mq($from: $mobile_sm, $until: $tablet) {
+      width: 235px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+      p{
+          text-align: center;
+      }
+  }
+  &__icon{
+      height: 56px;	
+      width: 56px;	
+      border-radius: 18px;	
+      background-color: rgba(2,136,209,0.05);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      i{
+          font-size: 20px;
+          color: $primary;
+      }
+  }
+  h4{
+      margin: 20px 0px 16px;
   }
 }

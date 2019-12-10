@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-password.component';
+import { MessengerEncryptionService } from '../../messenger/encryption/encryption.service';
 
 
 
@@ -12,8 +13,8 @@ import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-passw
   selector: 'opspot-form-login',
   outputs: ['done', 'doneRegistered'],
   templateUrl: 'login.html',
-  styleUrls:['login.scss']
-   
+  styleUrls: ['login.scss']
+
 })
 
 export class LoginForm {
@@ -26,29 +27,34 @@ export class LoginForm {
   form: FormGroup;
   loginHide: boolean = true;
   invalidUser: boolean = false;
-  @Output()vwLogin=new EventEmitter()
-  submitted=false;
+  @Output() vwLogin = new EventEmitter()
+  submitted = false;
   done: EventEmitter<any> = new EventEmitter();
   doneRegistered: EventEmitter<any> = new EventEmitter();
-  regBtn=true
-  constructor(public session: Session, public client: Client, fb: FormBuilder, private zone: NgZone) {
+  regBtn = true;
 
+  constructor(
+    public session: Session,
+    public client: Client,
+    fb: FormBuilder,
+    private zone: NgZone,
+    public encryption: MessengerEncryptionService
+  ) {
     this.form = fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-
   }
-  showRegister(){
-    this.loginHide=!this.loginHide;
+  showRegister() {
+    this.loginHide = !this.loginHide;
     this.vwLogin.emit(true)
-    this.regBtn=!this.regBtn;
+    this.regBtn = !this.regBtn;
   }
-  get f(){
+  get f() {
     return this.form.controls
   }
   login() {
-    this.submitted=true;
+    this.submitted = true;
     if (this.inProgress)
       return;
 
@@ -60,6 +66,11 @@ export class LoginForm {
     this.inProgress = true;
     this.client.post('api/v1/authenticate', { username: this.form.value.username.trim(), password: this.form.value.password })
       .then((data: any) => {
+        // @abhijeet-aeione TODO: added tmp work around to disable encryption
+        setTimeout(() => {
+          let user = window.Opspot.user;
+          this.unlock(user.guid);
+        });
         // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
         this.inProgress = false;
         this.session.login(data.user);
@@ -83,7 +94,7 @@ export class LoginForm {
           // this.hideLogin = true;
         } else {
           this.errorMessage = 'Unknown error';
-      ;
+          ;
         }
 
       });
@@ -101,5 +112,15 @@ export class LoginForm {
   //       this.hideLogin = true;
   //     });
   // }
+
+  unlock(guid) {
+    this.encryption.unlock(guid)
+      .then(() => {
+        console.log('Unlocked');
+      })
+      .catch(() => {
+        console.log('Unlock error!');
+      });
+  }
 
 }

@@ -226,8 +226,12 @@
   </div>
   <!--contribute head end-->
   <div class="o-contribute-body o-contribute-body--flex">
-    <div class="o-contribute-discrptn text-md text-center">
-      Liked @{{owner.username}}'s work? Support their work by sending coins. <a href="javascript:void(0)" class="primary">Learn more</a>
+    <div class="o-contribute-discrptn text-md text-center" *ngIf="owner.contributeType === 'contribute'">
+      Liked @{{owner.username}}'s work? Support their work by sending coins. <a href="javascript:void(0)"
+        class="primary">Learn more</a>
+    </div>
+    <div class="o-contribute-discrptn text-md text-center" *ngIf="owner.contributeType === 'paywall'">
+      Unlock this post by sending coins <a href="javascript:void(0)" class="primary">Learn more</a>
     </div>
     <!--contribute discription end-->
     <div class="o-contribute-token">
@@ -243,8 +247,11 @@
         <div class="text-sm">Support @{{owner.username}}'s' work by contributing coins.</div>
       </div>
       <div class="o-contribute-action__spend">
-        <p class="caption-regular">
+        <p class="caption-regular" *ngIf="owner.contributeType === 'contribute'">
           How many Coins do you want to contribute?
+        </p>
+        <p class="caption-regular" *ngIf="owner.contributeType === 'paywall'">
+          Coins you need to spend for this post.
         </p>
         <input type="number" class="o-boost-action-input" [ngModel]="wire.amount | number"
           (ngModelChange)="setAmount($event)" (focus)="amountEditorFocus()" (blur)="amountEditorBlur()"
@@ -256,7 +263,7 @@
     </div>
     <button type="button" class="btn btn-primary btn-block" *ngIf="owner.contributeType === 'paywall'"
       [disabled]="!canSubmit() || inProgress || success || criticalError" (click)="submit()">Unlock this post</button>
-      <button type="button" class="btn btn-primary btn-block" *ngIf="owner.contributeType === 'contribute'"
+    <button type="button" class="btn btn-primary btn-block" *ngIf="owner.contributeType === 'contribute'"
       [disabled]="!canSubmit() || inProgress || success || criticalError" (click)="submit()">Contribute</button>
   </div>
 </div>
