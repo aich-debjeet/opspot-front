@@ -16,7 +16,7 @@
               </div>
               <div class="grey m-l-8 o-posts-tym" *ngIf="showTimez?.time_created">
                 <span>{{showTimez?.time_created * 1000 | date:'medium'}}</span>
-                <span class="o-posts-public-private"><i class="icon-public"></i></span>
+                <!-- <span class="o-posts-public-private"><i class="icon-public"></i></span> -->
               </div>
             </div>
             <div class="o-feed-head-action o-post-inner-profile-button">
@@ -76,8 +76,12 @@
                 </div>
               </div>
               <div class="feed-card-event-block__right ">
-                <button type="button" class="btn btn-primary btn-lg"
-                  *ngIf="session.getLoggedInUser().guid != showTimez?.owner_guid">Reach Out</button>
+                  <m-messenger--channel-button
+                    *ngIf="session.getLoggedInUser().guid != showTimez?.owner_guid"
+                    [user]="user"
+                    [message]="reachoutMessage"
+                    [label]="'Reach Out'"
+                  ></m-messenger--channel-button>
               </div>
             </div>
           </div>

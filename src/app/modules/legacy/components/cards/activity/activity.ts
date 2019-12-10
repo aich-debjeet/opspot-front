@@ -80,11 +80,13 @@ export class Activity {
   canDelete: boolean = false;
   showRatingToggle: boolean = false;
   routerLink1 = "";
-  private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
-  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
+  private defaultMenuOptions: Array<string> = ['edit', 'translate', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
   @ViewChild('player') player: OpspotVideoComponent;
   // @ViewChild('remindButton') remindButton: RemindButton;
+
+  reachoutMessage = '';
 
   constructor(
     public session: Session,
@@ -106,6 +108,23 @@ export class Activity {
     if (!value)
       return;
     this.activity = value;
+
+    // user obj for reach out
+    if (value['entity_type'] &&
+      (value['entity_type'] == 'opportunity'
+      || value['entity_type'] == 'event'
+      || value['entity_type'] == 'item')
+    ) {
+      if (value['entity_type'] == 'opportunity') {
+        this.reachoutMessage = 'Is there an opening? ';
+      } else if (value['entity_type'] == 'event') {
+        this.reachoutMessage = 'I am interested. ';
+      } else if (value['entity_type'] == 'item') {
+        this.reachoutMessage = 'Is this available? ';
+      }
+      this.reachoutMessage += value['perma_url'];
+    }
+    
 
     this.activity.url = window.Opspot.site_url + 'newsfeed/' + value.guid;
 

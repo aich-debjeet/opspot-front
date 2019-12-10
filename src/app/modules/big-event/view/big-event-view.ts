@@ -32,7 +32,8 @@ export class BigEventView implements OnInit {
   remindMessage = '';
   remindOpen = false;
   showBoostOptions: boolean = false;
-
+  reachoutMessage = 'I am interested in: ';
+  user: any;
 
   menuOptions: Array<string> = ['translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
@@ -75,6 +76,9 @@ export class BigEventView implements OnInit {
       .then((data: any) => {
         if (data.activity) {
           this.bigEvent = data.activity;
+          // user obj for reach out
+          this.user = data.activity.ownerObj;
+          this.reachoutMessage += data.activity['perma_url'];
           if (data.activity.owner_obj) {
             this.bigEvent['ownerObj'] = data.activity.owner_obj;
           }

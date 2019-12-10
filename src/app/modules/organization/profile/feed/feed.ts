@@ -105,7 +105,7 @@ interface OpspotOrganizationResponse {
     }
    
     loadActivities(refresh: boolean = false) {
-      console.log("loadActivities IN")
+      // console.log("loadActivities IN")
       this.inProgress = true;
   
       let endpoint = `api/v1/newsfeed/container/${this.guid}`;
@@ -241,7 +241,7 @@ interface OpspotOrganizationResponse {
      * Load a groups newsfeed
      */
     load(refresh: boolean = false) {
-      console.log('OrganizationFeed load()', this.organization);
+      // console.log('OrganizationFeed load()', this.organization);
     
       if (!this.organization)
         return;
@@ -260,7 +260,7 @@ interface OpspotOrganizationResponse {
       switch(this.filter) {
         case 'activity':
         case 'review':
-          console.log('OrganizationFeed loadActivities()');
+          // console.log('OrganizationFeed loadActivities()');
           return this.loadActivities(refresh);
         case 'image':
         case 'video':

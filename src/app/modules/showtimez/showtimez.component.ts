@@ -18,6 +18,8 @@ import { BoostCreatorComponent } from '../boost/creator/creator.component';
 export class ShowtimezComponent implements OnInit {
   guid: string;
   paramsSubscription: Subscription;
+  reachoutMessage = 'I am interested in: ';
+  user: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -89,6 +91,9 @@ export class ShowtimezComponent implements OnInit {
       .then((data: any) => {
         if (data.activity) {
           this.showTimez = data.activity;
+          // user obj for reach out
+          this.user = data.activity.ownerObj;
+          this.reachoutMessage += data.activity['perma_url'];
 
           this.showTimez.url  = window.Opspot.site_url + 'showtime/view/' + this.showTimez.guid;
 

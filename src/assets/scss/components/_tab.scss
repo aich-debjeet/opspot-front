@@ -562,7 +562,7 @@ li.active a{
     line-height: 18px;
     display: inline-block;
     @include mq($from: $mobile_sm, $until: $tablet) {
-        padding: 0px 0px 0px;
+        padding: 10px 0px;
         font-size: 13px;
     }
 }

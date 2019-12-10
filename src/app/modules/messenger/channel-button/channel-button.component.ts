@@ -9,13 +9,14 @@ import { MessengerConversationDockpanesService } from '../dockpanes/dockpanes.se
 @Component({
   selector: 'm-messenger--channel-button',
   templateUrl: 'channel-button.component.html',
-  inputs: ['user']
+  inputs: ['user', 'message', 'label']
 })
 
 export class MessengerChannelButton {
 
   opspot: Opspot = window.Opspot;
-
+  message: any;
+  label: any;
   user: any;
 
   constructor(
@@ -27,7 +28,7 @@ export class MessengerChannelButton {
 
   chat() {
     let conversation = this.buildConversation();
-    console.log(conversation);
+    conversation['message'] = this.message;
     this.dockpanes.open(conversation);
   }
 

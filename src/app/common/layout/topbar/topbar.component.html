@@ -68,7 +68,7 @@
         <li class="nav-icon__item">
 
           <div class="m-topbar--account" *ngIf="session.isLoggedIn()" #menu>
-            <a class="" (click)="menu.value = !menu.value; getUsersOrganization()">
+            <a class="" (click)="menu.value = !menu.value ;">
               <img alt="menu"
                 src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" />
             </a>
@@ -99,21 +99,20 @@
                   <span>Admin</span>
                 </a>
               </li>
-              <li class="m-dropdownList__item" (click)="menu.value = false">
+              <li class="m-dropdownList__item" (click)="menu.value = false" *ngIf="!entity">
                 <a [routerLink]="['/organization/create']">
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>Create Organisation</span>
                 </a>
               </li>
-              <div *ngFor="let entity of entities">
-                <li class="m-dropdownList__item" (click)="menu.value = false"
-                  *ngIf="entity['is:creator'] && entity['is:member'] && entity.entity_type === 'organization'">
+              <!-- <div *ngFor="let entity of entities"> -->
+                <li class="m-dropdownList__item" (click)="menu.value = false" *ngIf="entity">
                   <a>
                     <!-- <i class="material-icons">trending_up</i> -->
                     <span [routerLink]="['/organization/profile/'+ entity.guid + '/feed']">{{entity.name}}</span>
                   </a>
                 </li>
-              </div>
+              <!-- </div> -->
               <li class="m-dropdownList__item" (click)="menu.value = false">
                 <a [routerLink]="['/boost/console']">
                   <!-- <i class="material-icons">trending_up</i> -->
@@ -282,22 +281,40 @@
           </a>
         </li>
         <li class="app-nav-link_-item">
-          <a>
+          <a [routerLink]="['/explore']" [queryParams]="{type:'activities',q:'', ref:''}" (click)='closeNav()'>
             <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_explore.svg" alt=""></div>
             <div class="app-nav-link__text">Explore</div>
           </a>
         </li>
         <li class="app-nav-link_-item">
-          <a>
+          <a [routerLink]="['/bookmark']" (click)='closeNav()'>
             <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_bookmark.svg" alt=""></div>
             <div class="app-nav-link__text">Saved Posts</div>
           </a>
         </li>
         <li class="app-nav-link_-item">
           <a [routerLink]="['/groups/create']" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_events.svg" alt=""></div>
-            <div class="app-nav-link__text">Group</div>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/community.svg" alt=""></div>
+            <div class="app-nav-link__text">Community</div>
           </a>
+        </li>
+        <li class="app-nav-link_-item">
+            <a [routerLink]="['/boost/console']" (click)='closeNav()'>
+                <div class="app-nav-link__ico"><i class="icon-bar-chart-2"></i></div>
+                <div class="app-nav-link__text">Boost Console</div>
+            </a>
+        </li>
+        <li class="app-nav-link_-item">
+            <a [routerLink]="['/organization/create']" (click)='closeNav()'>
+                <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
+                <div class="app-nav-link__text">Organisation</div>
+            </a>
+        </li>
+        <li class="app-nav-link_-item">
+            <a [routerLink]="['/invite']" (click)='closeNav()'>
+                <div class="app-nav-link__ico"><i class="icon-user-plus"></i></div>
+                <div class="app-nav-link__text">Invite Friends</div>
+            </a>
         </li>
         <li class="app-nav-link_-item">
           <a [routerLink]="['blog/edit/new']" (click)='closeNav()'>
@@ -314,7 +331,7 @@
       </ul>
       <div class="app-nav-link_-item app-nav-link_-item--logout">
         <a routerLink="/logout" (click)='closeNav()'>
-          <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_logout.svg" alt=""></div>
+          <div class="app-nav-link__ico"><i class="icon-power"></i></div>
           <div class="app-nav-link__text">logout</div>
         </a>
       </div>
@@ -360,7 +377,7 @@
       <img src="assets/svg/m_nav_ico/notification_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
       <!-- <div class="o-noti-count"></div> -->
     </a>
-    <a class="mobile-nav-icon__item">
+    <a routerLink="/search" class="mobile-nav-icon__item">
       <img src="assets/svg/m_nav_ico/search_main.svg" alt="home" class="mobile-nav-icon--lg">
       <img src="assets/svg/m_nav_ico/search_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
     </a>

@@ -39,6 +39,7 @@ export class TopbarComponent implements OnInit {
   }
   ngOnInit() {
     this.user = this.opspot.user;
+    this.getUsersOrganization();
   }
 
   /**
@@ -88,11 +89,13 @@ export class TopbarComponent implements OnInit {
   moreData = false;
   inProgress = false;
   rating: number = 1;
+  entity: any;
 
 
-  getUsersOrganization(refresh) {
-    let key = 'groups';
-    let endpoint = `api/v1/groups/members`;
+  getUsersOrganization() {
+    let key = 'organizations';
+    let ownerGuid = this.session.getLoggedInUser().guid;
+    let endpoint = `api/v1/groups/owner/` + ownerGuid;
 
     this.client.get(endpoint, {
       limit: 12,
@@ -100,24 +103,35 @@ export class TopbarComponent implements OnInit {
       rating: this.rating
     })
       .then((response) => {
-        if (!response[key] || response[key].length === 0) {
-          this.moreData = false;
-          this.inProgress = false;
+        this.entities.push(response[key][0]);
+        if(this.entities.length){
+          this.entity = this.entities[0];
+          // console.log("this:  ",  this.entity);
+          
         }
-        if (refresh) {
-          this.entities = response[key];
-        } else {
-          if (this.offset)
-            response[key].shift();
+        // for (var i = 0; i <= this.entities.length; i++) {
+       
+        // }
+        // console.log("response: ", response);
 
-          this.entities.push(...response[key]);
-        }
+        // if (!response[key] || response[key].length === 0) {
+        //   this.moreData = false;
+        //   this.inProgress = false;
+        // }
+        // if (refresh) {
+        //   this.entities = response[key];
+        // } else {
+        //   if (this.offset)
+        //     response[key].shift();
 
-        this.offset = response['load-next'];
-        if (!this.offset) {
-          this.moreData = false;
-        }
-        this.inProgress = false;
+        //   this.entities.push(...response[key]);
+        // }
+
+        // this.offset = response['load-next'];
+        // if (!this.offset) {
+        //   this.moreData = false;
+        // }
+        // this.inProgress = false;
       })
       .catch((e) => {
         this.inProgress = false;
