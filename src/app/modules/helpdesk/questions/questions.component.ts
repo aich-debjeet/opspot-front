@@ -39,6 +39,7 @@ export class QuestionsComponent implements OnInit {
       const response: any = await this.client.get(`api/v2/helpdesk/questions/question/${uuid}`);
       this.question = response.question;
 
+      //temporary fix to get related questions since related api point had got issues
       let temp: any = await this.client.get(`api/v2/helpdesk/questions`, { limit: 5000 });
       this.relatedQuestions = temp.questions
         .filter((question) => {
