@@ -93,6 +93,7 @@ import { MyjourneyWidgetComponent } from './components/myjourney-widget/myjourne
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ActivityWidgetComponent } from './components/activity-widget/activity-widget.component';
 import { MyjourneyListCardComponent } from './components/myjourney-list-card/myjourney-list-card';
+import { BoostPostCard } from '../modules/legacy/components/cards/boost-post-card/boost-post-card';
 
 @NgModule({
   imports: [
@@ -147,6 +148,7 @@ import { MyjourneyListCardComponent } from './components/myjourney-list-card/myj
     OpspotCard,
     OpspotButton,
     PostCard,
+    BoostPostCard,
 
     ChartComponent,
     OverlayModalComponent,
@@ -230,6 +232,7 @@ import { MyjourneyListCardComponent } from './components/myjourney-list-card/myj
     OpspotCard,
     OpspotButton,
     PostCard,
+    BoostPostCard,
 
     ChartComponent,
     OverlayModalComponent,
