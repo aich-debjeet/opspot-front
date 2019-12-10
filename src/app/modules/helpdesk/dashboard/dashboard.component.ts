@@ -6,7 +6,8 @@ import { OpspotTitle } from '../../../services/ux/title';
 
 @Component({
   selector: 'm-helpdesk--dashboard',
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'dashboard.component.html',
+  styleUrls:['./dashboard.component.scss']
 })
 
 export class HelpdeskDashboardComponent implements OnInit {
