@@ -52,8 +52,12 @@
                   <div class="text-md grey" *ngIf="opportunity?.location">
                     {{ opportunity?.location }}
                   </div>
-                  <button type="button" class="btn btn-primary btn-lg"
-                    *ngIf="session.getLoggedInUser().guid != opportunity?.owner_guid">Reach Out</button>
+                  <m-messenger--channel-button
+                    *ngIf="session.getLoggedInUser().guid != opportunity?.owner_guid"
+                    [user]="user"
+                    [message]="reachoutMessage"
+                    [label]="'Reach Out'"
+                  ></m-messenger--channel-button>
                 </div>
                 <div class="opportunity-button" *ngIf="opportunity?.category">
                   {{opportunity?.category}}

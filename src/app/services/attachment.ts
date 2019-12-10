@@ -237,7 +237,6 @@ export class AttachmentService {
 
   exportMeta() {
     let result = {};
-    // console.log('this.meta', this.meta);
     if(typeof this.meta.attachment_guid === 'string') {
       return this.meta.attachment_guid;
     } else if (this.meta.attachment_guid instanceof Array && this.meta.attachment_guid.length > 0) {
@@ -247,8 +246,14 @@ export class AttachmentService {
         }
       }
       return result;
+    } else {
+      for (var prop in this.meta) {
+        if (this.meta.hasOwnProperty(prop)) {
+          result[prop] = this.meta[prop];
+        }
+      }
+      return result;
     }
-    return result;
 
     // let result = {};
     // console.log(this.meta)
