@@ -1,6 +1,6 @@
 <div>
     <ul class="o-trending-post">
-        <li class="o-trending-post__item" *ngIf="myjourney?.custom_type === 'video'">
+        <li class="o-trending-post__item">
             <a [routerLink]="['/media/view', myjourney?.guid]">
                 <div class="feed-media__link">
                     <img class="feed-media__img" [src]="myjourney?.custom_data[0] ? myjourney?.custom_data[0].thumbnail_src:''"
