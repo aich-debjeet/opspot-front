@@ -410,8 +410,7 @@
 
 <!-- TODO @gayatri need to check this part bacuse of shshis impl-->
 <div class="mdl-card__menu mdl-color-text--blue-grey-300" #toggle *ngIf="!hideTabs">
-  <button class="mdl-button m-pin-button mdl-button--icon" (click)="togglePin()"
-    *ngIf="session.getLoggedInUser().guid != activity.owner_guid">
+  <button class="mdl-button m-pin-button mdl-button--icon" (click)="togglePin()">
     <m-tooltip icon="turned_in" *ngIf="activity.bookmark">
       This post is Bookmarked
     </m-tooltip>
@@ -420,10 +419,10 @@
     </m-tooltip>
   </button>
   <m-safe-toggle *ngIf="showRatingToggle && session.isAdmin()" [(entity)]="activity"></m-safe-toggle>
-  <button class="mdl-button m-translate-button mdl-button--icon" *ngIf="isTranslatable"
+  <!-- <button class="mdl-button m-translate-button mdl-button--icon" *ngIf="isTranslatable"
     (click)="translateToggle = true;">
     <i class="material-icons">public</i>
-  </button>
+  </button> -->
   <m-post-menu [entity]="activity" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
     (optionSelected)="menuOptionSelected($event)">
     <ng-container post-menu>

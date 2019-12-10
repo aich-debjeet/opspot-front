@@ -80,8 +80,8 @@ export class Activity {
   canDelete: boolean = false;
   showRatingToggle: boolean = false;
   routerLink1 = "";
-  private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
-  menuOptions: Array<string> = ['edit', 'translate', 'share', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
+  private defaultMenuOptions: Array<string> = ['edit', 'translate', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
   @ViewChild('player') player: OpspotVideoComponent;
   // @ViewChild('remindButton') remindButton: RemindButton;
