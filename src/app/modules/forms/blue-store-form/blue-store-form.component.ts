@@ -257,7 +257,7 @@ export class BlueStoreFormComponent implements OnInit {
     let data = Object.assign(this.meta, this.attachment.exportMeta());
     // console.log("data: ", data);
     
-    if (data.attachment_guid) {
+    if (data.attachment_guid.length > 0) {
       this.reqBody.attachment_guid = data.attachment_guid;
 
     } else if (this.attach_guid.length === 1) {

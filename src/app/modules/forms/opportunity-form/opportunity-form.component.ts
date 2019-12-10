@@ -124,14 +124,14 @@ export class OpportunityFormComponent implements OnInit {
     this.submitted = true;
     this.imageUploadError = false;
 
-    console.log("this.attachment.exportMeta: ", this.attachment.exportMeta());
+    // console.log("this.attachment.exportMeta: ", this.attachment.exportMeta());
 
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
     // console.log("data: ", data);
     // console.log("datta: ", data);
     // console.log("attach guid: ", this.attach_guid);
-    if (data.attachment_guid) {
+    if (data.attachment_guid.length > 0) {
       this.reqBody.attachment_guid = data.attachment_guid;
     } else if (this.attach_guid.length === 1) {
       this.reqBody.attachment_guid = this.attach_guid[0];
