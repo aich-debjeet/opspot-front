@@ -14,7 +14,7 @@ import { TopbarHashtagsService } from '../service/topbar.service';
     <div class="m-form-tags-input-tags-tag"
       *ngFor="let tag of tags; let i = index"
       (click)="toggleTag(tag)">
-      <span>#{{tag.value}}</span>
+      <span>{{tag.value}}</span>
       <div class="m-layout--spacer"></div>
       <i class="material-icons selected m-form-tags-input-tags--check" [class.selected]="tag.selected">check</i>
     </div>
