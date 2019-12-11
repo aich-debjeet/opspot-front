@@ -67,7 +67,7 @@
       <ul class="nav-icon-list">
         <li class="nav-icon__item">
 
-          <div class="m-topbar--account" *ngIf="session.isLoggedIn()" #menu>
+          <div class="m-topbar--account" *ngIf="session.isLoggedIn(); " #menu>
             <a class="" (click)="menu.value = !menu.value ;">
               <img alt="menu"
                 src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" />
@@ -304,11 +304,17 @@
                 <div class="app-nav-link__text">Boost Console</div>
             </a>
         </li>
-        <li class="app-nav-link_-item">
+        <li class="app-nav-link_-item" *ngIf="!entity">
             <a [routerLink]="['/organization/create']" (click)='closeNav()'>
                 <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
                 <div class="app-nav-link__text">Organisation</div>
             </a>
+        </li>
+        <li class="app-nav-link_-item" *ngIf="entity">
+          <a [routerLink]="['/organization/profile/'+ entity.guid + '/feed']" (click)='closeNav()'>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
+            <div class="app-nav-link__text">{{entity.name}}</div>
+          </a>
         </li>
         <li class="app-nav-link_-item">
             <a [routerLink]="['/invite']" (click)='closeNav()'>
