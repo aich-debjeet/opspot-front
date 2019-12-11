@@ -89,8 +89,12 @@
                     </div>
                     <button type="button" class="btn btn-primary btn-sm">UNLOCK THIS POST</button>
                 </div> -->
-            <m-wire--lock-screen *ngIf="previewEntity" [preview]="true" [entity]="previewEntity"
-              class="mdl-shadow--4dp"></m-wire--lock-screen>
+            <m-wire--lock-screen
+              *ngIf="previewEntity"
+              [preview]="true"
+              [entity]="previewEntity"
+              class="mdl-shadow--4dp w100"
+            ></m-wire--lock-screen>
           </div>
 
         </div>
@@ -100,3 +104,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<style>
+.w100 {
+  width: 100%;
+}
+</style>
