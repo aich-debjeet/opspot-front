@@ -78,6 +78,8 @@ export class RegisterForm {
     let numbers;
     this.form.controls['mobileNumber'].valueChanges.subscribe(val => {
       numbers = this.removeSpace(val.internationalNumber);
+      numbers = this.removeOperators(numbers);
+      console.log(numbers)
       this.getOtp(numbers)
     });
   }
@@ -157,7 +159,7 @@ export class RegisterForm {
       const form = {
         'name': this.form.value.fullname,
         'username': this.form.value.username,
-        'number': phoneNumber,
+        'number': phoneNumber.replaceAll("[-+.^:,]",""),
         'code': otpCode,
         'secret': localStorage.getItem('phoneNumberSecret'),
         'email': this.form.value.email,

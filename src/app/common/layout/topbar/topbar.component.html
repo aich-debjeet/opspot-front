@@ -131,12 +131,11 @@
                   <span>Settings</span>
                 </a>
               </li>
-              <li class="m-dropdownList__item" *ngIf="session.isLoggedIn()" (click)="menu.value = false">
+              <!-- <li class="m-dropdownList__item" *ngIf="session.isLoggedIn()" (click)="menu.value = false">
                 <a [routerLink]="['/help']" i18n="@@OPSPOT__TOPBAR__LOGOUT">
-                  <!-- <i class="material-icons">exit_to_app</i> -->
                   <span>Help Desk</span>
                 </a>
-              </li>
+              </li> -->
               <li class="m-dropdownList__item" (click)="menu.value = false">
                 <a [routerLink]="['/about']">
                   <!-- <i class="material-icons">trending_up</i> -->
@@ -339,10 +338,10 @@
     <footer>
       <ul class="o-footer-link">
         <li class="o-footer-link__item">
-          <a href="javascript:void(0)" class="text-md">About Us</a>
+          <a [routerLink]="['/about']" class="text-md">About Us</a>
         </li>
         <li class="o-footer-link__item">
-          <a href="javascript:void(0)" class="text-md">Support</a>
+          <a [routerLink]="['/help']" class="text-md">Help</a>
         </li>
         <li class="o-footer-link__item">
           <a href="javascript:void(0)" class="text-md">Careers</a>
