@@ -4,19 +4,40 @@ import { Session } from '../../../../../services/session';
 @Component({
   selector: 'opspot-post-card',
   templateUrl: './post-card.html',
-  styleUrls: ['./post-card.scss']
+  styleUrls: ['./post-card.scss'],
+  inputs: ['_entity: entity'],
 })
 export class PostCard implements OnInit {
 
-  @Input() entity: any;
+  entity: any;
+  opspot = window.Opspot;
+  commentsCount;
+  routerlink:any;
 
-  tempUrl = 'https://ops.doesntexist.com/icon/'
+  set _entity(value) {
+    this.entity = value;
+    this.commentsCount = this.entity['comments:count'];
+    
+    if(this.entity){
+      if(this.entity.entity_type === 'event'){
+        this.routerlink = '/event/view/' + this.entity.guid;
+      }else if(this.entity.entity_type === 'opportunity'){
+        this.routerlink = '/opportunity/view/' + this.entity.guid;
+      }else if(this.entity.entity_type === 'item'){
+        this.routerlink = '/item/view/' + this.entity.guid;
+      }else{
+        this.routerlink = '/media/' + this.entity.guid;
+      }
+    }
+  }
+
+
   constructor(
     public session: Session,
   ) { }
 
   ngOnInit() {
-    console.log(this.entity)
+    // console.log(this.entity)
   }
 
 }
