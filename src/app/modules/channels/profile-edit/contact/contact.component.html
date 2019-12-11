@@ -8,74 +8,65 @@
             </div>
             <div class="o-prof-edit-single-item">
                 <div class="form-group w-lg">
-                    <input type="text" class="form-control form-control-lg" [(ngModel)]="model.location" name="location">
+                    <input type="text" class="form-control form-control-lg" [(ngModel)]="model.location"
+                        name="location">
                 </div>
                 <div class="pos">
                     <div class=" o-prof-edit-privacy Eternity text-md primary hidden-mob "
                         (click)="toggleLocation=!toggleLocation">
                         {{privacy.location}}
                     </div>
-                    <app-user-privacy
-                        (privacyChange)="changePrivacy($event,'location')"
-                        [toggleClass]="toggleLocation"
-                        class="privacy"
-                    ></app-user-privacy>
+                    <app-user-privacy (privacyChange)="changePrivacy($event,'location')" [toggleClass]="toggleLocation"
+                        class="privacy"></app-user-privacy>
                 </div>
                 <!--privacy end-->
             </div>
             <!--location end-->
-    
+
             <div class="o-prof-edit-item__title">
                 Email <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop">Everyone </div>
                 <!--privacy end-->
             </div>
             <div class="o-prof-edit-single-item">
                 <div class="form-group c-form_righticon-lg w-lg">
-                    <input type="email" class="form-control form-control-lg" [(ngModel)]="model.email" name="email">
+                    <input type="email" class="form-control form-control-lg" [(ngModel)]="model.email" name="email"
+                        readonly="readonly">
                 </div>
                 <div class="pos">
                     <div class="o-prof-edit-privacy  text-md primary hidden-mob" (click)="toggleEmail=!toggleEmail">
                         {{privacy.email}}
                     </div>
-                    <app-user-privacy
-                        (privacyChange)="changePrivacy($event,'email')"
-                        [toggleClass]="toggleEmail"
-                        class="privacy"
-                    ></app-user-privacy>
+                    <app-user-privacy (privacyChange)="changePrivacy($event,'email')" [toggleClass]="toggleEmail"
+                        class="privacy"></app-user-privacy>
                 </div>
-    
+
                 <!--privacy end-->
             </div><!-- email end -->
-    
+
             <div class="o-prof-edit-item__title">
                 Phone Number <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop">Everyone </div>
                 <!--privacy end-->
             </div>
             <div class="o-prof-edit-single-item">
                 <div class="o-phone">
-                    <ngx-intl-tel-input
-                        [cssClass]="'custom'"
-                        [preferredCountries]="['in','us', 'gb']"
-                        [enableAutoCountrySelect]="true"
-                        [enablePlaceholder]="false"
-                        name="phoneNumber"
-                        [(ngModel)]="model.phoneNumber"
-                    ></ngx-intl-tel-input>
+                    <!-- <ngx-intl-tel-input [cssClass]="'custom'"
+                        [preferredCountries]="['in','us', 'gb']" [enableAutoCountrySelect]="true"
+                        [enablePlaceholder]="false" name="phoneNumber" [(ngModel)]="model.phoneNumber">
+                    </ngx-intl-tel-input> -->
+                    <!--readonly doesnt work with 3rd party libraries.Phone number cant be edited.-->
+                    <input type="number" name="phoneNumber" class="form-control form-control-lg" [(ngModel)]="model.phoneNumber" readonly="readonly">
                 </div>
                 <div class="pos">
                     <div class="o-prof-edit-privacy  text-md primary hidden-mob" (click)="togglePhone=!togglePhone">
                         {{privacy.phone}}
                     </div>
-                    <app-user-privacy
-                        (privacyChange)="changePrivacy($event,'phone')"
-                        [toggleClass]="togglePhone"
-                        class="privacy"
-                    ></app-user-privacy>
+                    <app-user-privacy (privacyChange)="changePrivacy($event,'phone')" [toggleClass]="togglePhone"
+                        class="privacy"></app-user-privacy>
                 </div>
-    
+
             </div>
             <!--phone number end-->
-    
+
             <div class="o-prof-edit-item__title">
                 Website <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop">Everyone </div>
                 <!--privacy end-->
@@ -88,18 +79,16 @@
                     <div class="o-prof-edit-privacy text-md primary hidden-mob" (click)="toggleWebsite=!toggleWebsite">
                         {{privacy.website}}
                     </div>
-                    <app-user-privacy
-                        (privacyChange)="changePrivacy($event,'website')"
-                        [toggleClass]="toggleWebsite"
-                        class="privacy"
-                    ></app-user-privacy>
+                    <app-user-privacy (privacyChange)="changePrivacy($event,'website')" [toggleClass]="toggleWebsite"
+                        class="privacy"></app-user-privacy>
                 </div>
             </div>
-    
+
             <!--Website end-->
             <div class="o-prof-edit-actions">
                 <button type="button" (click)="onSubmit()" class="btn btn-primary btn-lg">Save Changes</button>
-                <button type="button" class="btn btn-outline-primary btn-lg btn--cancel" [routerLink]="['/', activeUser?.username]">Cancel</button>
+                <button type="button" class="btn btn-outline-primary btn-lg btn--cancel"
+                    [routerLink]="['/', activeUser?.username]">Cancel</button>
             </div><!-- prof edit actions end -->
         </div>
     </form>
