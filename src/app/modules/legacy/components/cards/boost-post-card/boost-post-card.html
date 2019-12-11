@@ -4,7 +4,7 @@
             <img *ngIf="entity.custom_data && entity?.custom_data.length> 0 && entity?.custom_data[0].entity_type === 'video'" [src]="entity?.custom_data[0]?.thumbnail_src" alt="media">
             <img *ngIf="entity.custom_data && entity?.custom_data.length> 0 && entity?.custom_data[0].entity_type === 'image'" [src]="entity?.custom_data[0]?.src" alt="media">
         </div><!-- media img end -->
-        <div class="feed-media-overlay"  *ngIf="entity?.custom_data[0].entity_type === 'video'">
+        <div class="feed-media-overlay" *ngIf="entity.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0].entity_type === 'video'">
             <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
         </div>
     </div><!-- media end -->

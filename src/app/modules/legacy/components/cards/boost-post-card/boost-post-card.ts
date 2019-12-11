@@ -10,6 +10,7 @@ import { Session } from '../../../../../services/session';
 export class BoostPostCard implements OnInit {
 
   entity: any;
+  routerlink;
 
   tempUrl = 'https://ops.doesntexist.com/icon/'
   constructor(
@@ -20,21 +21,19 @@ export class BoostPostCard implements OnInit {
     // console.log(this.entity)
   }
 
-  routerlink;
-
   set _entity(value) {
     this.entity = value;
 
-    if(this.entity){
-      if(this.entity.entity_type === 'event'){
+    if (this.entity) {
+      if (this.entity.entity_type === 'event') {
         this.routerlink = '/event/view/' + this.entity.guid;
-      }else if(this.entity.entity_type === 'opportunity'){
+      } else if (this.entity.entity_type === 'opportunity') {
         this.routerlink = '/opportunity/view/' + this.entity.guid;
-      }else if(this.entity.entity_type === 'item'){
+      } else if (this.entity.entity_type === 'item') {
         this.routerlink = '/item/view/' + this.entity.guid;
-      }else{
+      } else {
         this.routerlink = '/media/' + this.entity.guid;
       }
     }
-}
+  }
 }
