@@ -159,7 +159,7 @@ export class RegisterForm {
       const form = {
         'name': this.form.value.fullname,
         'username': this.form.value.username,
-        'number': phoneNumber.replaceAll("[-+.^:,]",""),
+        'number': phoneNumber,
         'code': otpCode,
         'secret': localStorage.getItem('phoneNumberSecret'),
         'email': this.form.value.email,
