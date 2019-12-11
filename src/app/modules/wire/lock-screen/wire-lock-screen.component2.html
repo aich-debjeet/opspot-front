@@ -2,7 +2,7 @@
   We've received your transaction. Please try unlocking this post after it gets processed. We estimate it may take around 5 minutes.
 </div>
 
-<div class="feed-paywall">
+<div class="feed-paywall bg" [style.backgroundImage]="getBackground()">
   
   <h4 class="white">{{ entity.wire_threshold.min | number }} tokens </h4>
 
@@ -32,5 +32,9 @@
 <style>
 .feed-paywall button {
   margin-top: 35px;
+}
+.bg {
+  background-position: center;
+  background-size: cover;
 }
 </style>
