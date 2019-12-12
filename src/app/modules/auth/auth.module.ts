@@ -12,6 +12,7 @@ import { LoginComponent } from './login.component';
 import { LogoutComponent } from './logout.component';
 import { RegisterComponent } from './register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'logout/all', component: LogoutComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent }
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path:'about', component: AboutUsComponent}
 ];
 
 @NgModule({
@@ -38,12 +40,14 @@ const routes: Routes = [
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
+    AboutUsComponent,
     // ForgotPasswordComponent,
   ],
   entryComponents: [
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
+    AboutUsComponent
     // ForgotPasswordComponent,
   ],exports:[
     LoginComponent,
