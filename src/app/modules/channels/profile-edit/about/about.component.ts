@@ -28,6 +28,7 @@ export class AboutComponent implements OnInit {
   toggleDob;
   aboutError = { dob: false, dobInvalid: false, gender: false };
   submitted = false;
+  invalidForm:boolean = false;
 
   ngOnInit() {
     //set privacy
@@ -106,6 +107,10 @@ export class AboutComponent implements OnInit {
 
       this.client.post('api/v1/entities/about', about).then(res => {
         this.router.navigate(['/profile/contact']);
+      }).catch((e)=> {
+        if(e.status === 'error'){
+          this.invalidForm = true;
+        } else this.invalidForm = false;
       });
     }
   }

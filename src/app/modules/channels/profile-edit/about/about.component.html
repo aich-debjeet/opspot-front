@@ -84,6 +84,7 @@
             <p *ngIf="aboutError.dobInvalid" class="error text-sm">Please select a Valid Date</p>
             <p *ngIf="!gender.valid&&submitted" class="error text-sm">Please select a gender</p>
             <p *ngIf="!languages.valid&&submitted" class="error text-sm">Please add atleast one language </p>
+            <p *ngIf="invalidForm" class="error text-sm">Please fill all the form fields </p>
 
             <div class="o-prof-edit-actions">
                 <button type="button" class="btn btn-primary btn-lg" (click)="onSubmit(f)">Save Changes</button>
