@@ -60,16 +60,17 @@ export class ContactComponent implements OnInit {
   async load() {
     let res = {};
     res = await this.client.get('api/v1/channel/me');
+    console.log(res);
     res = res['channel'];
     this.model.phoneNumber = res['phone'];
     this.model.email = res['email'];
     this.model.location = res['location'];
     this.model.website = res['website'];
-    if (res['contact_details']) {
-      this.privacy.email = res['contact_details'].email_visibility;
-      this.privacy.location = res['contact_details'].location_visibility;
-      this.privacy.website = res['contact_details'].website_visibility;
-      this.privacy.phone = res['contact_details'].phone_visibility;
+    if (res) {
+      this.privacy.email = res['email_visibility'];
+      this.privacy.location = res['location_visibility'];
+      this.privacy.website = res['website_visibility'];
+      this.privacy.phone = res['phone_number_visibility'];
     }
   }
 
