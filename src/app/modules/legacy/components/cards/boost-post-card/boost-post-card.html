@@ -1,18 +1,18 @@
 <div class="o-explore-card" *ngIf="entity" [routerLink]="routerlink">
     <div class="o-explore-card__media">
         <div class="o-explore-media-img">
-            <img *ngIf="entity?.custom_data[0].entity_type === 'video'" [src]="entity?.custom_data[0]?.thumbnail_src" alt="media">
-            <img *ngIf="entity?.custom_data[0].entity_type === 'image'" [src]="entity?.custom_data[0]?.src" alt="media">
+            <img *ngIf="entity.custom_data && entity?.custom_data.length> 0 && entity?.custom_data[0].entity_type === 'video'" [src]="entity?.custom_data[0]?.thumbnail_src" alt="media">
+            <img *ngIf="entity.custom_data && entity?.custom_data.length> 0 && entity?.custom_data[0].entity_type === 'image'" [src]="entity?.custom_data[0]?.src" alt="media">
         </div><!-- media img end -->
-        <div class="feed-media-overlay"  *ngIf="entity?.custom_data[0].entity_type === 'video'">
+        <div class="feed-media-overlay" *ngIf="entity.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0].entity_type === 'video'">
             <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
         </div>
     </div><!-- media end -->
     <div class="o-explore-card__media-info">
-        <div class="text-md f500" *ngIf="entity?.entity_type === 'image' || entity?.entity_type === 'post'
-        || entity?.entity_type === 'video' || entity?.entity_type === 'album'">{{entity?.message| truncate:[100, '...']}}</div>
-        <div class="text-md f500" *ngIf="entity?.entity_type === 'event' || entity?.entity_type === 'item'
-         || entity?.entity_type === 'opportunity'">{{entity?.blurb | truncate:[100, '...']}}</div>
+        <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'image' || entity?.entity_type === 'post'
+        || entity?.entity_type === 'video' || entity?.entity_type === 'album'">{{entity?.message}}</div>
+        <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'event' || entity?.entity_type === 'item'
+         || entity?.entity_type === 'opportunity'">{{entity?.blurb}}</div>
         <!-- <div class="o-media-hashtag">
             <a class="text-md primary"> #Music </a>
             <a class="text-md primary"> #Art </a>

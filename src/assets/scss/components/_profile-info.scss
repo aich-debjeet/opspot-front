@@ -41,6 +41,7 @@
 // prof img edit
 .o-prof-img-block{
     position: relative;
+    display: flex;
     @include mq($from: $mobile_sm, $until: $tablet) {
         position: absolute;
         display: flex;

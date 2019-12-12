@@ -12,7 +12,7 @@
 						<div class="o-avatar__info">
 							<div class="o-avatar-det-block">
 								<span class="text-lg grey o-posts-det">
-									<a class="o-avatar__name">{{marketplace?.ownerObj?.name}}</a>
+									<a class="o-avatar__name" [routerLink]="['/', marketplace?.ownerObj?.username]">{{marketplace?.ownerObj?.name}}</a>
 									created a <a class="grey-dark f500">#Marketplace</a>
 								</span>
 							</div>
@@ -96,7 +96,7 @@
 								<h5 class="f500 mb-3" *ngIf="marketplace?.title">
 									{{ marketplace?.title}}
 								</h5>
-								<div class="text-md white-space" *ngIf="marketplace?.blurb">
+								<div class="text-md white-space word-break" *ngIf="marketplace?.blurb">
 									<!-- <span class="primary">#Marketplace</span> -->
 									<m-translate 
 										[open]="translateToggle" 
