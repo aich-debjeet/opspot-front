@@ -11,7 +11,6 @@ export class Service {
 
   // to get the otp number
   async getOtp(numbr){
-    console.log(numbr)
     let response;
     return await this.client.post('api/v3/verification/mobile/verify', {
       number: numbr,
