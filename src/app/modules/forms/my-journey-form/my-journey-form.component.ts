@@ -84,7 +84,8 @@ export class MyJourneyFormComponent implements OnInit {
   }
 
   post() {
-    if (!this.meta.message && !this.attachment.has()) {
+    if (this.meta.message.length <= 0 && this.attachment.has()) {
+      alert('What have You Created today?');
       return;
     }
 

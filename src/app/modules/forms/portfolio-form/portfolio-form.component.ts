@@ -71,8 +71,8 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   post() {
-    console.log('clicked')
-    if (!this.meta.message && !this.attachment.has()) {
+    if (this.meta.message.length <= 0 && this.attachment.has()) {
+      alert('What have You Created today?');
       return;
     }
     // console.log(" this.attachment.exportMeta(): ", this.attachment.exportMeta());
