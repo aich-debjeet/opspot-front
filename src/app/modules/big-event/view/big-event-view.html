@@ -80,7 +80,7 @@
                     #translate
                 ></m-translate>
                 <div class="o-big-events-inner-details-discrptn">
-                    <p class="text-md white-space" [innerHtml]="bigEvent?.blurb | tags">
+                    <p class="text-md white-space word-break" [innerHtml]="bigEvent?.blurb | tags">
                     </p>
                 </div><!-- discription end -->
                 <div class="o-posts-inner-page-action">
@@ -140,7 +140,7 @@
                     <a class="o-big-event-created-prof" *ngIf = "bigEvent" [routerLink]="['/', bigEvent?.ownerObj?.username]" >
                         <div class="o-avatar"><img [src]="opspot.cdn_url + 'icon/' + bigEvent?.ownerObj?.guid + '/medium/' + getOwnerIconTime()" alt=""></div>
                         <div class="o-avatar-info">
-                            <div class="text-md f500">{{bigEvent?.ownerObj?.name}}</div>
+                            <div class="text-md f500" [routerLink]="['/', bigEvent?.ownerObj?.username]">{{bigEvent?.ownerObj?.name}}</div>
                             <div class="text-sm grey">@{{bigEvent?.ownerObj?.username}}</div>
                         </div>
                     </a><!-- created prof info -->

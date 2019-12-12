@@ -10,8 +10,8 @@
                 alt=""></a>
             <div class="o-avatar__info">
               <div class="o-avatar-det-block">
-                <span class="text-lg grey o-posts-det" *ngIf="showTimez?.ownerObj?.name"><a
-                    class="o-avatar__name">{{showTimez?.ownerObj?.name}}</a>
+                <span class="text-lg grey o-posts-det" *ngIf="showTimez?.ownerObj?.name">
+                  <a class="o-avatar__name" [routerLink]="['/', showTimez?.ownerObj?.username]">{{showTimez?.ownerObj?.name}}</a>
                   created a <a class="grey-dark f500">#Showtimez</a></span>
               </div>
               <div class="grey m-l-8 o-posts-tym" *ngIf="showTimez?.time_created">
@@ -62,7 +62,7 @@
                 </h5>
                 <div class="text-lg grey">{{showTimez?.location}}<br>
                   {{showTimez?.start_time_date | date:'h:mm | dd MMMM y'}}</div>
-                <div class="text-md white-space">
+                <div class="text-md white-space word-break">
                   <!-- <span class="primary">#Event</span> -->
                   <m-translate 
                       [open]="translateToggle" 

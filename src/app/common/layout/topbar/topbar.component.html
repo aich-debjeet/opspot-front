@@ -67,7 +67,7 @@
       <ul class="nav-icon-list">
         <li class="nav-icon__item">
 
-          <div class="m-topbar--account" *ngIf="session.isLoggedIn()" #menu>
+          <div class="m-topbar--account" *ngIf="session.isLoggedIn(); " #menu>
             <a class="" (click)="menu.value = !menu.value ;">
               <img alt="menu"
                 src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" />
@@ -129,6 +129,12 @@
                 <a [routerLink]="['/settings/general']" i18n="@@OPSPOT__TOPBAR__SETTINGS">
                   <!-- <i class="material-icons">settings</i> -->
                   <span>Settings</span>
+                </a>
+              </li>
+              <li class="m-dropdownList__item" *ngIf="session.isLoggedIn()" (click)="menu.value = false">
+                <a [routerLink]="['/help']" i18n="@@OPSPOT__TOPBAR__LOGOUT">
+                  <!-- <i class="material-icons">exit_to_app</i> -->
+                  <span>Help Desk</span>
                 </a>
               </li>
               <li class="m-dropdownList__item" (click)="menu.value = false">
@@ -298,11 +304,17 @@
                 <div class="app-nav-link__text">Boost Console</div>
             </a>
         </li>
-        <li class="app-nav-link_-item">
+        <li class="app-nav-link_-item" *ngIf="!entity">
             <a [routerLink]="['/organization/create']" (click)='closeNav()'>
                 <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
                 <div class="app-nav-link__text">Organisation</div>
             </a>
+        </li>
+        <li class="app-nav-link_-item" *ngIf="entity">
+          <a [routerLink]="['/organization/profile/'+ entity.guid + '/feed']" (click)='closeNav()'>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
+            <div class="app-nav-link__text">{{entity.name}}</div>
+          </a>
         </li>
         <li class="app-nav-link_-item">
             <a [routerLink]="['/invite']" (click)='closeNav()'>
@@ -333,19 +345,19 @@
     <footer>
       <ul class="o-footer-link">
         <li class="o-footer-link__item">
-          <a href="#" class="text-md">About Us</a>
+          <a href="javascript:void(0)" class="text-md">About Us</a>
         </li>
         <li class="o-footer-link__item">
-          <a href="#" class="text-md">Support</a>
+          <a href="javascript:void(0)" class="text-md">Support</a>
         </li>
         <li class="o-footer-link__item">
-          <a href="#" class="text-md">Careers</a>
+          <a href="javascript:void(0)" class="text-md">Careers</a>
         </li>
         <li class="o-footer-link__item">
-          <a href="#" class="text-md">Privacy</a>
+          <a href="javascript:void(0)" class="text-md">Privacy</a>
         </li>
         <li class="o-footer-link__item">
-          <a href="#" class="text-md">Terms</a>
+          <a href="javascript:void(0)" class="text-md">Terms</a>
         </li>
       </ul>
     </footer>

@@ -1,4 +1,4 @@
-<div class="m-helpDesk__hero m-layout__hero">
+<!-- <div class="m-helpDesk__hero m-layout__hero">
 </div>
 
 <div class="m-page m-helpdesk__wrapper">
@@ -95,4 +95,26 @@
     </m-helpdesk--questions--related>
 
   </div>
-</div>
+</div> -->
+
+
+<section class="o-help-sec">
+  <div class="container">
+    <div class="o-help-inner-main">
+      <div class="breadcrumbs">
+        <a class="breadcrumbs__link text-md f500" routerLink="/help">Back to Help</a>
+        <i class="icon-arrow-right"></i>
+        <span class="breadcrumbs__current-page text-md f500">{{question.question}}</span>
+      </div><!-- breadcrumbs end -->
+      <h2>{{question.question}}</h2>
+      <p class="text-md" [innerHTML]="question.answer | safe">
+      </p>
+      <h5 class="f500">Related articles</h5>
+      <div class="o-help-inner-related-articles">
+        <a [routerLink]="['/help/question', related.uuid]" class="o-help-inner-related-articles__link" *ngFor="let related of relatedQuestions">{{related.question}}</a>
+        <!-- <m-helpdesk--questions--suggested type="category" [question]="question" *ngIf="question.category_uuid">
+        </m-helpdesk--questions--suggested>temp fix to get related questions for a category since related api end point has got issues. -->
+      </div>
+    </div><!-- inner main div end -->
+  </div><!-- container end -->
+</section><!-- section end -->

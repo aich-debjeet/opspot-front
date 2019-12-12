@@ -1,15 +1,37 @@
-<div class="m-wire-channel--call-to-action"
+<!-- <div class="m-wire-channel--call-to-action"
   *ngIf="session.getLoggedInUser().guid != channel.guid"
 >
-  <button class="mdl-color--green mdl-color-text--white mdl-shadow--8dp"
+  <button class="btn btn-primary btn-block text-uppercase"
     (click)="sendWire()"
   >
     <i class="ion-icon ion-flash"></i>
-<!--Wire has been changed to contribute in profile-->
     <span class="m-wire-channel--cta-label">
-      <span i18n="@@WIRE__CHANNEL__WIRE_ME_ACTION">CONTRIBUTE</span>
+      <span i18n="@@WIRE__CHANNEL__WIRE_ME_ACTION">CONTRIBUTE ME</span>
     </span>
   </button>
+</div> -->
+
+<div *ngIf="session.getLoggedInUser().guid != channel.guid" class="o-card contribute-me">
+    <button
+      (click)="sendWire()"
+      i18n="@@WIRE__CHANNEL__WIRE_ME_ACTION"
+      type="button"
+      class="btn btn-primary btn-block text-uppercase"
+    >Contribute Me</button>
+    <!-- <div class="contribute-me-info">
+        <div class="contribute-me-info__item">
+            <div class="text-lg f500">15</div>
+            <div class="text-sm grey">Contribute <i class="icon-info"></i> </div>
+        </div>
+        <div class="contribute-me-info__item">
+            <div class="text-lg f500">100</div>
+            <div class="text-sm grey">Spot Coins <i class="icon-info"></i> </div>
+        </div>
+        <div class="contribute-me-info__item">
+            <div class="text-lg f500">11</div>
+            <div class="text-sm grey">Sent <i class="icon-info"></i> </div>
+        </div>
+    </div> -->
 </div>
 
 <!-- <m-wire-channel--overview [channel]="channel"></m-wire-channel--overview> -->
@@ -58,3 +80,25 @@
     </p>
   </div>
 </div>
+
+
+<style>
+.contribute-me {
+  width: 100%;
+  padding: 20px 15px 28px;
+  background: #FFFFFF;
+}
+.o-card {
+  width: 100%;
+  border: 1px solid #ECEFF1;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+.contribute-me-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 26px;
+}
+</style>

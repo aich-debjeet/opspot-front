@@ -10,7 +10,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 @Component({
   moduleId: module.id,
   selector: 'm-channel--sidebar',
-  inputs: ['user', 'editing'],
+  inputs: ['_user: user', 'editing'],
   templateUrl: 'sidebar.html'
 })
 
@@ -32,6 +32,13 @@ export class ChannelSidebar {
 
   //@todo make a re-usable city selection module to avoid duplication here
   cities: Array<any> = [];
+
+  set _user(value: any) {
+    if (!value)
+      return;
+    this.user = value;
+    this.user['contributeType'] = 'contribute';
+  }
 
   constructor(
     public client: Client,

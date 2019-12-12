@@ -1,4 +1,4 @@
-<div class="m-layout m-helpdesk__dashboard">
+<!-- <div class="m-layout m-helpdesk__dashboard">
   <section class="m-layout__hero m-helpdesk--dashboard--section">
     <div class="m-layout__inner m-layout__row">
       <div class="m-layout__cell">
@@ -114,4 +114,39 @@
       </div>
     </div>
   </section>
+</div> -->
+
+<div class="container">
+  <div class="o-help-block">
+    <div class="o-help-hero">
+      <div class="o-help-hero__content">
+        <h2>How can we help?</h2>
+        <div class="form-group c-form_righticon-lg">
+          <!-- <input type="text" name="search" class="form-control form-control-lg bg-white" placeholder="Search"> -->
+          <input placeholder="Enter your question here" class="form-control form-control-lg bg-white" (blur)="onBlur()"
+            [(ngModel)]="query" (keydown.esc)="onBlur()" (keyup)="search()">
+          <span class="c-svg_eye"><i class="icon-search"></i></span>
+        </div>
+        <div class="text-md ">Questions you may have: <span class="f500">Settings, Edit Profile, Create Community</span>
+        </div>
+        <div *ngIf="results.length > 0" class="help-desk-drop">
+          <div *ngFor="let question of results" class="help-desk-drop__item"
+            [routerLink]="['/help/question', question.uuid]">
+            <span>{{question.question}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="o-help-hero__media hidden-under-tablet"><img src="assets/help/help_hero.svg" alt=""></div>
+    </div><!-- help hero end-->
+    <div class="o-help-popular-topic">
+      <h3 class="f500">Popular Topics</h3>
+      <m-helpdesk--dashboard--all></m-helpdesk--dashboard--all>
+    </div><!-- popular topic end -->
+    <div class="o-help-footer">
+      <p class="text-md text-center">
+        Need more help on One page Spotlight?<br>
+        <span class="f500">Just drop a mail to info@onepagespotlight.com</span>
+      </p>
+    </div>
+  </div>
 </div>

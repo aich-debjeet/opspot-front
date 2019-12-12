@@ -10,7 +10,7 @@
             </div>
         </div><!--title ends-->
         <div class="o-reg-skill-body__list">
-            <span class="o-reg-skill-btn" [ngClass]="{ 'active': hashtag.selected }" *ngFor="let hashtag of hashtags" (click)="toggleSelection(hashtag)">#{{hashtag.value}}</span>
+            <span class="o-reg-skill-btn" [ngClass]="{ 'active': hashtag.selected }" *ngFor="let hashtag of hashtags" (click)="toggleSelection(hashtag)">{{hashtag.value}}</span>
         </div><!--list ends-->
         <div>
             <div class="o-reg-skill-btn-add-skill o-reg-skill-btn-add-skill--no-need">

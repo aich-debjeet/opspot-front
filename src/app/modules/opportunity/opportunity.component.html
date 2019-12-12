@@ -10,7 +10,8 @@
                 alt=""></a>
             <div class="o-avatar__info">
               <div class="o-avatar-det-block">
-                <span class="text-lg grey o-posts-det"><a class="o-avatar__name">{{opportunity?.ownerObj?.name}}</a>
+                <span class="text-lg grey o-posts-det"><a class="o-avatar__name" 
+                  [routerLink]="['/', opportunity?.ownerObj?.username]">{{opportunity?.ownerObj?.name}}</a>
                   created an <a class="grey-dark f500">#Opportunity</a></span>
               </div>
               <div class="grey m-l-8 o-posts-tym">
@@ -72,7 +73,7 @@
                   (onTranslate)="translateToggle = false"
                   (onTranslateError)="translateToggle = false" #translate
                 ></m-translate>
-                <div class="text-md white-space" *ngIf="opportunity?.blurb">
+                <div class="text-md white-space word-break" *ngIf="opportunity?.blurb">
                   <span [innerHtml]="opportunity?.blurb | safe"></span>
                 </div>
               </div>

@@ -61,7 +61,7 @@ export class ContactComponent implements OnInit {
     let res = {};
     res = await this.client.get('api/v1/channel/me');
     res = res['channel'];
-    this.model.phoneNumber = res['phone'].substring(2);
+    this.model.phoneNumber = res['phone'];
     this.model.email = res['email'];
     this.model.location = res['location'];
     this.model.website = res['website'];
@@ -78,11 +78,11 @@ export class ContactComponent implements OnInit {
       contact_details: {
         email: this.model.email,
         location: this.model.location ? this.model.location : '',
-        phone: this.model.phoneNumber.internationalNumber,
+        phone: this.model.phoneNumber,
         website: this.model.website ? this.model.website : '',
         location_visibility: this.privacy.location,
-        phone_visibility: this.privacy.email,
-        email_visibility: this.privacy.phone,
+        phone_visibility: this.privacy.phone,
+        email_visibility: this.privacy.email,
         website_visibility: this.privacy.website
       }
     };
