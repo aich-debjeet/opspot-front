@@ -34,7 +34,7 @@ export class InviteFriendsComponent implements OnInit, OnDestroy {
     this.encodedRegisterUrl =
       encodeURI(this.opspot.site_url) +
       encodeURIComponent('register' + this.referrerParam);
-    this.encodedRegisterMessage = 'Join%20me%20on%20OPS%20%f0%9f%92%a1%20';
+    this.encodedRegisterMessage = 'Join%20me%20on%20OPS';
   }
 
   //Only show Messenger/Whatsapp share buttons if mobile or tablet
@@ -95,7 +95,7 @@ export class InviteFriendsComponent implements OnInit, OnDestroy {
 
   // openSMS() {
   //   this.openWindow(
-  //     'sms:?&body=Join me on OPS%20%f0%9f%92%a1%20' + this.encodedRegisterUrl
+  //     'sms:?&body=Join me on OPS' + this.encodedRegisterUrl
   //   );
   // }
 
