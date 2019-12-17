@@ -6,7 +6,7 @@
     }
 </style>
 
-<div class="o-card o-card--opportunities">
+<div class="o-card o-card--opportunities" id="opspot-widget-handle">
     <div class="text-md f500">{{ reqType | titlecase }} <a *ngIf="reqType === 'events' && entities"
             [routerLink]="['/event/view', entities[0]?.entity_guid]" class="text-sm grey float-right">See All</a></div>
     <div *ngIf="entityType == 'opportunity'" class="widget">

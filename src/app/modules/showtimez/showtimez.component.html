@@ -4,15 +4,15 @@
       <div class="o-posts-inner-page__left">
         <div class="o-card feed o-post-inner-minheight">
           <div class="feed-head">
-            <a *ngIf="showTimez?.ownerObj && showTimez?.ownerObj?.username"
+            <a *ngIf="showTimez?.ownerObj && showTimez?.ownerObj?.username" id="showtimez-profile-image"
               [routerLink]="['/', showTimez?.ownerObj?.username]" class="o-avatar"><img
                 [src]="opspot.cdn_url + 'icon/' + showTimez?.ownerObj?.guid + '/medium/' + getOwnerIconTime()"
                 alt=""></a>
             <div class="o-avatar__info">
               <div class="o-avatar-det-block">
-                <span class="text-lg grey o-posts-det" *ngIf="showTimez?.ownerObj?.name">
+                <span class="text-lg grey o-posts-det" *ngIf="showTimez?.ownerObj?.name" id="showtimez-details">
                   <a class="o-avatar__name" [routerLink]="['/', showTimez?.ownerObj?.username]">{{showTimez?.ownerObj?.name}}</a>
-                  created a <a class="grey-dark f500">#Showtimez</a></span>
+                  created a <a class="grey-dark f500" id="showtimez">#Showtimez</a></span>
               </div>
               <div class="grey m-l-8 o-posts-tym" *ngIf="showTimez?.time_created">
                 <span>{{showTimez?.time_created * 1000 | date:'medium'}}</span>
@@ -21,8 +21,8 @@
             </div>
             <div class="o-feed-head-action o-post-inner-profile-button">
               <button type="button" class="btn btn-primary btn-sm" *ngIf="session.getLoggedInUser().guid == showTimez?.owner_guid" 
-                (click)="showBoost()">Boost</button>
-              <a class="head-action__link" (click)="togglePin()">
+                (click)="showBoost()" id="showtimez-boost">Boost</button>
+              <a class="head-action__link" (click)="togglePin()" id="showtimez-bookmark">
                 <m-tooltip icon="turned_in" *ngIf="showTimez?.bookmark">
                   This post is Bookmarked
                 </m-tooltip>
@@ -92,11 +92,11 @@
                 <div class="members-circle members-circle2"><img src="assets/demo/avatar.png" alt=""></div>
                 <div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt=""></div>
               </div> -->
-              <div class="text-sm grey">{{count}} liked this post</div>
-              <div class="text-sm grey m-16">{{showTimez?.reminds}} shared this post</div>
-              <div class="text-sm grey m-16" *ngIf = "showTimez?.wire_totals">{{showTimez?.wire_totals.tokens | token:18 | abbr}} contributed this post
+              <div class="text-sm grey" id="showtimez-liked">{{count}} liked this post</div>
+              <div class="text-sm grey m-16" id="showtimez-shared">{{showTimez?.reminds}} shared this post</div>
+              <div class="text-sm grey m-16" *ngIf = "showTimez?.wire_totals" id="showtimez-contributed">{{showTimez?.wire_totals.tokens | token:18 | abbr}} contributed this post
               </div>
-              <div class="text-sm grey m-16">{{showTimez?.impressions}} viewed this post</div>
+              <div class="text-sm grey m-16" id="showtimez-viewed">{{showTimez?.impressions}} viewed this post</div>
             </div>
             <div class="o-posts-inner-page-action__icons">
               <a class="icon-posts-box">

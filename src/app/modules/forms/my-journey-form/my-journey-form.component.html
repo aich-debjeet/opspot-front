@@ -1,18 +1,18 @@
 <div class="o-create-myjourney">
     <div class="o-create-myjourney-head o-create-myjourney-head--border">
-        <div class="o-create-show-timez__title text-lg f500">Create a post
+        <div class="o-create-show-timez__title text-lg f500" id="myjourney-form">Create a post
             <span class="o-create-dropdown-style">
-                <span class="text-md primary f500">On #MyJourney<span class="icon-x"
+                <span class="text-md primary f500">On #MyJourney<span class="icon-x" id="myjourney-exit"
                         (click)="changeToDefault()"></span></span>
             </span>
         </div>
-        <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        <div class="close" (click)="close()" id="myjourney-close"><i class="icon-x"></i></div>
     </div>
     <form (submit)="post()">
         <div class="o-create-myjourney-body o-create-myjourney-body--flex">
             <div class="o-crete-myjourney-userinfo">
                 <div class="o-crete-myjourney-userinfo__avatar">
-                    <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="">
+                    <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="" id="myjourney-profile-imgage">
                 </div>
                 <div class="o-crete-myjourney-userinfo__mesaage">
                     <textarea type="text" id="message" #message name="message" placeholder="What have you created today?"
@@ -32,7 +32,7 @@
             </div>
             <div class="o-create-myjourney-filled-fileupload" *ngIf="attachment.meta.attachment_guid.length > 0">
                 <div class="fileUpload-preview-new mr-9" *ngFor="let video of cards">
-                    <a class="fileUpload-preview-new-close" (click)="removeAttachment(file,video.guid)"><i
+                    <a class="fileUpload-preview-new-close" id="myjourney-remove-attachment" (click)="removeAttachment(file,video.guid)"><i
                             class="ico-x white"></i></a>
                     <a class="o-create-myjourney-filled-avatar" href="javascript:void(0)">
                         <img [src]="video.imageLink" alt="">
@@ -49,7 +49,7 @@
         </div>
         <!--body ends-->
         <div class="o-create-myjourney-footer">
-            <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
+            <button type="submit" id="myjourney-submit" class="btn btn-primary btn-sm disabled">Post</button>
             <!--for event page-->
         </div>
     </form>

@@ -71,7 +71,7 @@
 
           <ul class="o-side-menu">
               <li class="o-side-menu__list">
-                  <a routerLink='/groups/members' class="o-side-menu__link">
+                  <a routerLink='/groups/members' id="newsfeed-community" class="o-side-menu__link">
                       <div class="o-side-menu__icon">
                           <img src="assets/svg/briefcase.svg" alt="">
                       </div>
@@ -81,7 +81,7 @@
                   </a>
               </li>
               <!-- <li class="o-side-menu__list">
-                  <a href="#" class="o-side-menu__link">
+                  <a href="#" id="newsfeed-event" class="o-side-menu__link">
                       <div class="o-side-menu__icon">
                           <img src="assets/svg/calendar.svg" alt="">
                       </div>
@@ -90,7 +90,7 @@
                   </a>
               </li> -->
               <li class="o-side-menu__list">
-                <a routerLink="/bookmark" class="o-side-menu__link">
+                <a routerLink="/bookmark" id="newsfeed-bookmark" class="o-side-menu__link">
                     <div class="o-side-menu__icon" style="margin-left: -4px;color:#7c868b9e;" >
                         <!-- <img src="assets/svg/calendar.svg" alt=""> -->
                         <i class="material-icons" class="material-icons">turned_in_not</i>
@@ -103,19 +103,19 @@
           </ul>
           <ul class="o-inner-footer">
               <li class="o-footer-link__item">
-                <a [routerLink]="['/about']" class="text-sm">About Us</a>
+                <a [routerLink]="['/about']" id="newsfeed-about" class="text-sm">About Us</a>
               </li>
               <li class="o-footer-link__item">
-                <a [routerLink]="['/help']" class="text-sm">Help</a>
+                <a [routerLink]="['/help']" id="newsfeed-help" class="text-sm">Help</a>
               </li>
               <li class="o-footer-link__item">
-                <a href="javascript:void(0)" class="text-sm">Careers</a>
+                <a href="javascript:void(0)" id="newsfeed-careers" class="text-sm">Careers</a>
               </li>
               <li class="o-footer-link__item">
-                <a href="javascript:void(0)" class="text-sm">Privacy</a>
+                <a href="javascript:void(0)" id="newsfeed-privacy" class="text-sm">Privacy</a>
               </li>
               <li class="o-footer-link__item">
-                <a href="javascript:void(0)" class="text-sm">Terms</a>
+                <a href="javascript:void(0)" id="newsfeed-terms" class="text-sm">Terms</a>
               </li>
           </ul>
   

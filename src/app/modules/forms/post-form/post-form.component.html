@@ -2,7 +2,7 @@
     <div class="o-create-post-body o-create-post-body--flex">
         <div class="o-crete-post-userinfo">
             <div class="o-crete-post-userinfo__avatar">
-                <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="">
+                <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" id="post-form-profile-image" alt="">
             </div>
             <div class="o-crete-post-userinfo__mesaage">
                 <textarea
@@ -52,7 +52,7 @@
         <div class="o-create-post-left">
             <div class="o-create-post-toggle">
                 <div class="switch">
-                    <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW">
+                    <input type="checkbox" name="defaultPost" id="post-form-nsfw" [(ngModel)]="isNSFW">
                     <span class="slider round"></span>
                 </div>
             </div>
@@ -70,21 +70,21 @@
                     <span class="text-md f500">{{defaultCoins}} Pay Per Post</span>
                 </div>
                 <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span
-                        class="icon-chevron-down"></span></a>
+                        class="icon-chevron-down" id="post-form-set-paywall-icon"></span></a>
                 <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
                     <div class="o-create-post-dropdown-footer__paywall">
-                        <div class="text-sm grey">Visible to supporter who send over</div>
+                        <div class="text-sm grey" id="post-form-paywall-text">Visible to supporter who send over</div>
                         <div class="paywall-coins">
                             <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins"
-                                placeholder="0 Pay Per Post">
+                                placeholder="0 Pay Per Post" id="poast-set-coins">
                             <button type="button" class="btn btn-primary btn-sm disabled"
-                                (click)="displayPaywall()">Add</button>
+                                (click)="displayPaywall()" id="poast-coins-add">Add</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-sm">Post</button>
+            <button type="submit" class="btn btn-primary btn-sm" id="post-form-submit">Post</button>
         </div>
     </div>
 </form>

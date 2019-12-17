@@ -1,12 +1,12 @@
 <header>
     <div class="container">
-      <div class="logo">
+      <div class="logo" id="ops-logo">
         <img src="../../../assets/ops_logo.png" alt="logo">
       </div>
       <form (ngSubmit)="login()" [formGroup]="form">
         <div class="o-login hidden-mob">
           <div class="form-group m-8">
-            <input type="text" class="form-control form-control" formControlName="username" placeholder="Username"
+            <input type="text" id="login-username" class="form-control form-control" formControlName="username" placeholder="Username"
               i18n-placeholder="@@M__COMMON__USERNAME">
             <div *ngIf="submitted && f.username.errors" class="error text-sm">
               <div *ngIf="f.username.errors.required">Username is required</div>
@@ -19,15 +19,15 @@
           </div>
   
           <div class="form-group c-form_righticon m-8 ">
-            <input type="password" class="form-control" formControlName="password" placeholder="Password"
+            <input type="password" id="login-password" class="form-control" formControlName="password" placeholder="Password"
               i18n-placeholder="@@M__COMMON__PASSWORD">
             <span class="c-svg_eye"></span>
             <div *ngIf="submitted && f.password.errors" class="error text-sm">
               <div *ngIf="f.password.errors.required">password is required</div>
             </div>
-            <a [routerLink]="['/forgot-password']" class="text-sm grey">Forgot Password?</a>
+            <a [routerLink]="['/forgot-password']" class="text-sm grey" id="forgotpass">Forgot Password?</a>
           </div>
-          <button type="submit" class="btn btn-outline-primary btn-sm btn-login" [disabled]= !this.form.valid>Login</button>
+          <button type="submit" id="login-submit" class="btn btn-outline-primary btn-sm btn-login" [disabled]= !this.form.valid>Login</button>
         </div>
   
       </form>

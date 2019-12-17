@@ -1,40 +1,40 @@
 <div class="o-create-opportunity">
     <div class="o-create-opportunity-head o-create-opportunity-head--border">
-        <div class="o-create-opportunity__title text-lg f500">{{label}} a post
+        <div class="o-create-opportunity__title text-lg f500" id="opportunity">{{label}} a post
             <span class="o-create-dropdown-style">
-                <span class="text-md primary f500">On #Opportunity<span class="icon-x"
+                <span class="text-md primary f500">On #Opportunity<span class="icon-x" id="opportunity-exit"
                         (click)="changeToDefault()"></span></span>
             </span>
         </div>
-        <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        <div class="close" (click)="close()" id="opportunity-close"><i class="icon-x"></i></div>
     </div>
     <form [formGroup]="opportunityForm" (ngSubmit)="postOpportunity(opportunityForm.value);">
         <div class="o-create-opportunity-body o-create-opportunity-body--flex">
             <div class="form-group o-create-opportunity-icon">
                 <label>Category</label>
-                <select class="form-control form-control-lg" formControlName="category">
+                <select class="form-control form-control-lg" formControlName="category" id="opportunity-category">
                     <option value="" disabled selected>Select Category</option>
-                    <option value="audition">Audition</option>
-                    <option value="project">Project</option>
-                    <option value="job">Job</option>
-                    <option value="internship">Internship</option>
-                    <option value="freelance">Freelance</option>
-                    <option value="volunteer">Volunteer</option>
-                    <option value="others">Others - Please specify in the description</option>
+                    <option value="audition" id="opportunity-audition">Audition</option>
+                    <option value="project" id="opportunity-project">Project</option>
+                    <option value="job" id="opportunity-job">Job</option>
+                    <option value="internship" id="opportunity-internship">Internship</option>
+                    <option value="freelance" id="opportunity-freelance">Freelance</option>
+                    <option value="volunteer" id="opportunity-volunteer">Volunteer</option>
+                    <option value="others" id="opportunity-others">Others - Please specify in the description</option>
                 </select>
                 <div class="error text-sm" *ngIf="submitted && opportunityForm.get('category').errors?.required">This is
                     required</div>
             </div>
             <div class="form-group">
                 <label>Title</label>
-                <input type="text" class="form-control form-control-lg" formControlName="opportunityTitle">
+                <input type="text" id="opportunity-title" class="form-control form-control-lg" formControlName="opportunityTitle">
                 <div class="error text-sm"
                     *ngIf="submitted && opportunityForm.get('opportunityTitle').errors?.required">Title is required
                 </div>
             </div>
             <div class="form-group">
                 <label>Description<span class="text-sm grey description-width">21/300</span></label>
-                <textarea class="form-control" rows="5" formControlName="opportunityDescription">
+                <textarea class="form-control" id="opportunity-description" rows="5" formControlName="opportunityDescription">
                 </textarea>
                 <div class="error text-sm"
                     *ngIf="submitted && opportunityForm.get('opportunityDescription').errors?.required">Description
@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label>Location</label>
-                <input type="text" class="form-control form-control-lg" formControlName="opportunityLocation">
+                <input type="text" id="opportunity-location" class="form-control form-control-lg" formControlName="opportunityLocation">
                 <div class="error text-sm"
                     *ngIf="submitted && opportunityForm.get('opportunityLocation').errors?.required">Location is
                     required</div>
@@ -52,13 +52,13 @@
                 <div class="o-create-opportunity-cover-image">
                     <div class="fileUpload" *ngIf="this.cards.length == 0">
                         <span class="icon-plus"></span>
-                        <input type="file" accept="image/*" class="upload" formControlName="opportunityImage" #file name="attachment"
+                        <input type="file" id="file" accept="image/*" class="upload" formControlName="opportunityImage" #file name="attachment"
                             (change)="uploadAttachment(file, $event)">
                     </div>
                     <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
                         <a class="o-create-opportunity-cover-image__avatar">
                             <a class="fileUpload-close-temp" (click)="removeAttachment(file, image.guid)">
-                                <i class="icon-x"></i>
+                                <i class="icon-x" id="opportunity-remove-imgage"></i>
                             </a>
                             <img [src]="image.src" alt="">
                         </a>
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="o-create-opportunity-footer">
-            <button type="submit" class="btn btn-primary btn-sm" [disabled]="!opportunityForm.valid">Post</button>
+            <button type="submit" id="opportunity-submit" class="btn btn-primary btn-sm" [disabled]="!opportunityForm.valid">Post</button>
         </div>
     </form>
 </div>
