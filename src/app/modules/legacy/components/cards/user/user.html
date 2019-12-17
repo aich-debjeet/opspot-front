@@ -67,25 +67,25 @@
     
     <div class="o-prof-info" *ngIf="user.guid == session.getLoggedInUser().guid; else otherUser">
         <a [routerLink]="['/', user.username]">
-            <div class="o-avatar-lg">
+            <div class="o-avatar-lg" id="user-profile-image">
                 <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" />
             </div>
         </a>
-        <div class="o-prof-name">
-            <div class="caption-bold f700">{{user.name}}</div>
-            <span class="text-md grey">@{{user.username}}</span>
+        <div class="o-prof-name" id="user-profile-details">
+            <div class="caption-bold f700" id="user-profile-name">{{user.name}}</div>
+            <span class="text-md grey" id="user-profile-account">@{{user.username}}</span>
         </div>
-        <div class="o-prof-activity">
-            <a [routerLink]="['/', user.username, 'subscribers']">
-                <div class="caption-bold f700">{{subscriberCount?subscriberCount:0}}</div>
+        <div class="o-prof-activity" id="user-profile-activity">
+            <a [routerLink]="['/', user.username, 'subscribers']" id="user-profile-follower-details">
+                <div class="caption-bold f700" id="user-profile-follower-count">{{subscriberCount?subscriberCount:0}}</div>
                 <div class="text-sm grey">Followers</div>
             </a>
-            <a [routerLink]="['/', user.username, 'subscriptions']">
-                <div class="caption-bold f700">{{subscriptionCount?subscriptionCount:0}}</div>
+            <a [routerLink]="['/', user.username, 'subscriptions']" id="user-profile-following-details">
+                <div class="caption-bold f700" id="user-profile-following-count">{{subscriptionCount?subscriptionCount:0}}</div>
                 <div class="text-sm grey">Following</div>
             </a>
-            <a [routerLink]="['/', user.username, 'feed']">
-                <div class="caption-bold f700">{{user.impressions?user.impressions:'0' | abbr:0}}</div>
+            <a [routerLink]="['/', user.username, 'feed']" id="user-profile-view-details">
+                <div class="caption-bold f700" id="user-profile-view-count">{{user.impressions?user.impressions:'0' | abbr:0}}</div>
                 <div class="text-sm grey">Views</div>
             </a>
             <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->

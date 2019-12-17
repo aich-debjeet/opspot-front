@@ -12,7 +12,7 @@ import { Component, EventEmitter } from '@angular/core';
     <div class="m-modal-container">
       <div class="mdl-card mdl-shadow--2dp">
         <ng-content></ng-content>
-        <div class="mdl-card__menu" (click)="close($event)" *ngIf="allowClose"><i class="material-icons mdl-color-text--blue-grey-300">close</i>
+        <div class="mdl-card__menu" (click)="close($event)" *ngIf="allowClose"><i class="material-icons mdl-color-text--blue-grey-300" id="modal-close">close</i>
         </div>
       </div>
     </div>

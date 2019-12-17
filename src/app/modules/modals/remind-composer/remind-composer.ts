@@ -34,13 +34,14 @@ import { ActivityPreview } from '../../legacy/components/cards/activity/preview'
 
       <div class="o-repost">
         <div class="o-repost-header">
-            <div class="caption-regular f500">Repost on your timeline</div>
+            <div class="caption-regular f500" id="repost-timeline">Repost on your timeline</div>
             <!-- <a class="close"><i class="icon-x"></i></a> -->
         </div><!-- repost header end -->
         <div class="o-repost-body">
         <div class="o-repost-body__textarea">
         <textarea 
         class="text-md"
+        id="repost-message"
         name="message"
         [(ngModel)]="message" 
         placeholder="Write Something"
@@ -51,8 +52,8 @@ import { ActivityPreview } from '../../legacy/components/cards/activity/preview'
         <ng-template dynamic-host></ng-template>
         </div>
         <div class="o-repost-footer">
-            <button type="button" class="btn btn-primary btn-sm disabled" (click)="close($event)">Cancel</button>
-            <button type="button" class="btn btn-primary btn-sm" (click)="send()">Share</button>
+            <button type="button" class="btn btn-primary btn-sm disabled" (click)="close($event)" id="cancel">Cancel</button>
+            <button type="button" id="repost-share" class="btn btn-primary btn-sm" (click)="send()">Share</button>
         </div>
     </div>
     </m-modal>

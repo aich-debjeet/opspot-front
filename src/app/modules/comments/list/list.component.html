@@ -84,7 +84,7 @@
 <div class="m-comment m-comment--poster opspot-block" *ngIf="!readonly">
 
     <div class="opspot-avatar">
-      <a [routerLink]="['/', session.getLoggedInUser().username]">
+      <a [routerLink]="['/', session.getLoggedInUser().username]" id="list-comment-image">
         <img [src]="getAvatar()" style="height: 28px; width: 28px; margin-top: 5px;" />
       </a>
     </div>
@@ -128,11 +128,11 @@
               </a>
               -->
 
-              <a class="m-post-button"
+              <a class="m-post-button" 
               (click)="post($event)"
               [ngClass]="{ 'm-button-disabled': !postEnabled() }"
               >
-                <i class="icon-send p-r-10"></i>
+                <i class="icon-send p-r-10" id="list-comment-enter"></i>
               </a>
             </div>
 

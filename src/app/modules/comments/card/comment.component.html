@@ -2,16 +2,16 @@
   [class.m-comment--error]="error"
 >
   <div class="opspot-avatar" [hovercard]="comment.ownerObj.guid">
-    <a [routerLink]="['/', comment.ownerObj.username]">
+    <a [routerLink]="['/', comment.ownerObj.username]" id="comment-replied-userimage">
       <img src="{{opspot.cdn_url}}icon/{{comment.ownerObj.guid}}/" class="mdl-shadow--2dp"/>
       <!-- {{opspot.cdn_url}}icon/{{comment.ownerObj.guid}}/small/{{comment.ownerObj.icontime}} -->
     </a>
   </div>
   <div class="opspot-body m-l-0">
     <div class="m-comment__bubble">
-      <div class="m-commentBubble__username">
+      <div class="m-commentBubble__username" id="comment-details">
         <a [routerLink]="['/', comment.ownerObj.username]">
-          <span title="{{comment.ownerObj.name}}">{{comment.ownerObj.name}}</span>
+          <span title="{{comment.ownerObj.name}}" id="comment-name">{{comment.ownerObj.name}}</span>
           <m-channel--badges class="m-channel--badges-activity" [user]="comment.ownerObj" badges="[ 'verified' ]"></m-channel--badges>
         </a>
       </div>
@@ -33,11 +33,11 @@
       
     </div>
 
-    <button class="m-comment__ribbonBtn"
+    <button class="m-comment__ribbonBtn" id="comment-menu"
       [ngClass]="{ 'm-comment__ribbonBtn--collapsed': !toggle.value }"
       (click)="toggle.value = !toggle.value"
       >
-      <i class="material-icons">{{ !toggle.value ? 'more_vert' : 'keyboard_arrow_left' }}</i>
+      <i class="material-icons" id="comment-icon">{{ !toggle.value ? 'more_vert' : 'keyboard_arrow_left' }}</i>
     </button>
       
     <ul class="m-comment__ribbon" [hidden]="!toggle.value" #toggle>
@@ -63,7 +63,7 @@
         title="Delete"
         i18n-title="@@M__ACTION__DELETE"
         >
-        <i class="material-icons">delete</i>
+        <i class="material-icons" id="comment-delete">delete</i>
       </li>
       <!-- <li class="m-commentRibbon__item"
         *ngIf="!editing && comment.owner_guid != session.getLoggedInUser()?.guid"
@@ -180,11 +180,11 @@
               <i class="material-icons">explicit</i>
             </a>
 
-            <a class="m-post-button"
+            <a class="m-post-button" 
               (click)="applyAndSave(edit, $event)"
               [ngClass]="{ 'm-button-disabled': !saveEnabled() }"
             >
-              <i class="icon-send"></i>
+              <i class="icon-send" id="comment-enter"></i>
             </a>
           </div>
         </div>
@@ -235,7 +235,7 @@
         >
           <!-- <i class="material-icons">reply</i> -->
           <span *ngIf="comment.replies_count > 0">{{ comment.replies_count }} Replies</span>
-          <span *ngIf="comment.replies_count <= 0">Reply</span>
+          <span *ngIf="comment.replies_count <= 0" id="comment-reply">Reply</span>
         </span>
       </div>
 

@@ -1,19 +1,19 @@
 <div class="o-create-portfolio">
     <div class="o-create-portfolio-head o-create-portfolio-head--border">
-        <div class="o-create-show-timez__title text-lg f500">Create a post
+        <div class="o-create-show-timez__title text-lg f500" id="#portfolio">Create a post
             <span class="o-create-dropdown-style">
                 <span class="text-md primary f500">On #Portfolio<span class="icon-x"
-                        (click)="changeToDefault()"></span></span>
+                        (click)="changeToDefault()" id="portfolio-exit"></span></span>
             </span>
         </div>
-        <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        <div class="close" (click)="close()" id="portfolio-close"><i class="icon-x"></i></div>
     </div>
     <!--boost head end-->
     <form (submit)="post()">
         <div class="o-create-portfolio-body o-create-portfolio-body--flex">
             <div class="o-crete-portfolio-userinfo">
                 <div class="o-crete-portfolio-userinfo__avatar">
-                        <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="">
+                        <img src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" alt="" id="portfolio-profile-image">
                     </div>
                 <div class="o-crete-portfolio-userinfo__mesaage">
                     <textarea type="text" id="message" #message name="message" placeholder="What have you created today?"
@@ -42,7 +42,7 @@
             </div> -->
             <div class="o-create-post-filled-fileupload" *ngIf="attachment.meta.attachment_guid.length > 0">
                     <div class="fileUpload-preview-new mr-9" *ngFor="let image of cards">
-                        <a class="fileUpload-preview-new-close" (click)="removeAttachment(file,image.guid)"><i
+                        <a class="fileUpload-preview-new-close" (click)="removeAttachment(file,image.guid)" id="portfolio-remove-image"><i
                                 class="ico-x white"></i></a>
                         <a class="o-create-post-filled-avatar" href="javascript:void(0)">
                             <img [src]="image.imageLink" alt="">
@@ -60,7 +60,7 @@
             <div class="o-create-portfolio-left">
                 <div class="o-create-portfolio-toggle">
                     <div class="switch">
-                        <input type="checkbox" name="defaultPost" [(ngModel)]="isNSFW">
+                        <input type="checkbox" id="portfolio-nsfw" name="defaultPost" [(ngModel)]="isNSFW">
                         <span class="slider round"></span>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                 </span>
             </div>
             <!--left ends-->
-            <button type="submit" class="btn btn-primary btn-sm disabled">Post</button>
+            <button type="submit" id="portfolio-submit" class="btn btn-primary btn-sm disabled">Post</button>
             <!--for event page-->
         </div>
     </form>

@@ -1,19 +1,19 @@
 <div class="o-create-show-timez">
     <div class="o-create-show-timez-head o-create-show-timez-head--border">
-        <div class="o-create-show-timez__title text-lg f500">{{label}} a post
+        <div class="o-create-show-timez__title text-lg f500" id="#showtimez">{{label}} a post
             <span class="o-create-dropdown-style">
-                <span class="text-md primary f500">On #Showtimez<span class="icon-x"
+                <span class="text-md primary f500" >On #Showtimez<span class="icon-x" id="showtimez-exit"
                         (click)="changeToDefault()"></span></span>
             </span>
         </div>
-        <div class="close" (click)="close()"><i class="icon-x"></i></div>
+        <div class="close" (click)="close()" id="showtimez-close"><i class="icon-x"></i></div>
     </div>
     <!--boost head end-->
     <form [formGroup]="showTimezForm">
         <div class="o-create-show-timez-body o-create-show-timez-body--flex">
             <div class="form-group">
                 <label>Title</label>
-                <input type="text" class="form-control form-control-lg" formControlName="eventTitle">
+                <input type="text" id="showtimez-title" class="form-control form-control-lg" formControlName="eventTitle">
                 <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventTitle').errors?.required">
                     This is required</div>
             </div>
@@ -21,7 +21,7 @@
             <!--Event Title-->
             <div class="form-group">
                 <label>Description<span class="text-sm grey description-width">21/300</span></label>
-                <textarea class="form-control" rows="5" formControlName="eventDescription"></textarea>
+                <textarea class="form-control" id="showtimez-description" rows="5" formControlName="eventDescription"></textarea>
                 <div class="error text-sm"
                     *ngIf="eventSubmitted && showTimezForm.get('eventDescription').errors?.required">
                     This is required</div>
@@ -29,7 +29,7 @@
             <!--Event Description-->
             <div class="form-group">
                 <label>Location</label>
-                <input type="text" class="form-control form-control-lg" formControlName="eventsLocation">
+                <input type="text" id="showtimez-location" class="form-control form-control-lg" formControlName="eventsLocation">
                 <div class="error text-sm"
                     *ngIf="eventSubmitted && showTimezForm.get('eventsLocation').errors?.required">
                     This is required</div>
@@ -38,7 +38,7 @@
             <div class="o-create-show-timez-date-time">
                 <div class="form-group">
                     <label>Date</label>
-                    <input type="text" class="form-control form-control-lg" [textMask]="{mask: dateMask}"
+                    <input type="text" id="showtimez-date" class="form-control form-control-lg" [textMask]="{mask: dateMask}"
                         placeholder="Select Date" formControlName="eventdate">
                     <div class="error text-sm"
                         *ngIf="eventSubmitted && showTimezForm.get('eventdate').errors?.required">
@@ -54,7 +54,7 @@
                 <!--Date Location-->
                 <div class="form-group ml-18">
                     <label>Time</label>
-                    <input type="text" class="form-control form-control-lg" placeholder="Time"
+                    <input type="text" id="showtimez-time" class="form-control form-control-lg" placeholder="Time"
                         [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventTime">
                     <div class="error text-sm"
                         *ngIf="eventSubmitted && showTimezForm.get('eventTime').errors?.required">
@@ -73,7 +73,7 @@
                     <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
                         <a class="o-create-show-timez-cover-image__avatar">
                             <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i
-                                    class="icon-x"></i></a>
+                                    class="icon-x" id="showtimez-remove-cover"></i></a>
                             <img [src]="image.src" alt="">
                         </a>
                     </div>
@@ -87,7 +87,7 @@
         </div>
         <!--body ends-->
         <div class="o-create-show-timez-footer">
-            <button type="button" class="btn btn-primary btn-sm" [disabled]="!showTimezForm.valid"
+            <button type="button" id="showtimez-submit" class="btn btn-primary btn-sm" [disabled]="!showTimezForm.valid"
                 (click)="eventSubmit()">Post</button>
             <!--for event page-->
         </div>
