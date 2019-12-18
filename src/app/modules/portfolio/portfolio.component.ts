@@ -24,8 +24,8 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   requestParams = {
     // TODO @abhijeet check for all valid request params
     taxonomies: 'activity',
+    limit: 4,
     offset: '',
-    limit: 12,
     rating: 2,
     q: ''
   };
@@ -100,13 +100,18 @@ export class PortfolioComponent implements OnInit, OnDestroy {
           this.filteredArray = this.entities = respData.entities;
         }
         this.moreData = true;
-        this.offset = data['load-next'];
+        // console.log("data: ", data['load-next']);
+        
+        this.requestParams.offset = data['load-next'];
+        // console.log("this offset: ", this.offset);
+        
         this.inProgress = false;
       })
       .catch((e) => {
         this.inProgress = false;
       });
   }
+
   keyup(e) {
     if (e.keyCode === 13) {
       console.log(this.q);
