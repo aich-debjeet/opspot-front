@@ -24,7 +24,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   requestParams = {
     // TODO @abhijeet check for all valid request params
     taxonomies: 'activity',
-    limit: 4,
+    limit: 12,
     offset: '',
     rating: 2,
     q: ''
