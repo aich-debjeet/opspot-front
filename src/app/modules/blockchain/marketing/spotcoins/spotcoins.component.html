@@ -1,6 +1,6 @@
 <div class="o-token">
     <div class="o-token-head o-token-head--border">
-        <div class="o-token__title text-h4 f500 text-center">Buy Coins</div>
+        <div class="o-token__title text-h4 f500 text-center" id="spotcoins-title">Buy Coins</div>
     </div>
     <!--token head end-->
     <div class="o-token-body o-token-body--flex">
@@ -14,7 +14,7 @@
         <div class="o-token-purchase">
             <input type="range" min="1" max="99" step="1" value="1" data-orientation="vertical" [(ngModel)]="tokens"
                 #tokenInput>
-            <input type="number" class="o-token-action-input" maxlength="2" min="1" max="99" 
+            <input type="number" id="spotcoins-buy-coins" class="o-token-action-input" maxlength="2" min="1" max="99" 
                 (keypress)=limit($event) [(ngModel)]="tokens" #tokenInput>
         </div>
         <div class="o-purchase-detail">
@@ -32,6 +32,6 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary btn-block btn--token-buy" (click)="payment()">Buy</button>
+        <button type="button" id="spotcoins-buy-button" class="btn btn-primary btn-block btn--token-buy" (click)="payment()">Buy</button>
     </div>
 </div>

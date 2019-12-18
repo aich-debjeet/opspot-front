@@ -19,7 +19,7 @@
     <div class="o-noti-body o-noti-body--event">
       <!-- subscribed -->
       <ng-template ngSwitchCase="friends">
-        <a  [routerLink]="['/', notification.fromObj.username || '']">
+        <a  [routerLink]="['/', notification.fromObj.username || '']" id="notification-subscribed">
           <p class="o-noti-info__det text-sm grey" *ngIf="notification.fromObj.subscribed" i18n="@@NOTIFICATIONS__NOTIFICATION__FRIENDS_MATCH">{{notification.fromObj.name}} Started Following you</p>
           <p class="o-noti-info__det text-sm grey" id="notification-subscribed" *ngIf="!notification.fromObj.subscribed" i18n="@@NOTIFICATIONS__NOTIFICATION__FRIENDS">{{notification.fromObj.name}} Started Following you</p>
         </a>
@@ -53,7 +53,7 @@
       <!-- Add -->
       <ng-template ngSwitchCase="group_queue_add">
         <a [routerLink]="['/newsfeed', notification.entityObj.guid ]">
-          <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_QUEUE_ADD">
+          <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_QUEUE_ADD" id="notification-added-group">
             Your post for <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span> is awaiting approval from group administrators.
           </p>
         </a>

@@ -4,13 +4,14 @@
             <div class="o-net-block__left">
                 <div class="o-net-title">
                     <!-- <div class="caption-bold">Messages <span class="o-network-count text-md white">1</span></div> -->
-                    <div class="caption-bold">Messages</div>
+                    <div class="caption-bold" id="network-title">Messages</div>
                     <!-- <a href="javascript:void(0)" class="o-network-settings">
                         <i class="icon-settings"></i>
                     </a> -->
                 </div>
                 <div class="o-network-search">
                     <input
+                        id="network-search-user"
                         [(ngModel)]="q"
                         name="q"
                         type="text"

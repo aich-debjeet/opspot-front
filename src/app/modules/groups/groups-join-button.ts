@@ -11,7 +11,7 @@ import { LoginReferrerService } from '../../services/login-referrer.service';
   inputs: ['_group: group'],
   outputs: ['membership'],
   template: `
-    <button class="btn btn-primary btn-sm"
+    <button class="btn btn-primary btn-sm" id="group-join"
       *ngIf="!group['is:banned'] && !group['is:awaiting']
         && !group['is:invited'] && !group['is:member']"
         (click)="join()" i18n="@@GROUPS__JOIN_BUTTON__JOIN_ACTION"
@@ -20,11 +20,11 @@ import { LoginReferrerService } from '../../services/login-referrer.service';
       <ng-container *ngIf="inProgress">Joining</ng-container>
     </button>
     <span *ngIf="group['is:invited'] &amp;&amp; !group['is:member']">
-      <button class="m-btn m-btn--slim m-btn--action" (click)="accept()" i18n="@@M__ACTION__ACCEPT">Accept</button>
-      <button class="m-btn m-btn--slim m-btn--action" (click)="decline()" i18n="@@GROUPS__JOIN_BUTTON__DECLINE_ACTION">Decline</button>
+      <button class="m-btn m-btn--slim m-btn--action" id="group-accept" (click)="accept()" i18n="@@M__ACTION__ACCEPT">Accept</button>
+      <button class="m-btn m-btn--slim m-btn--action" id="group-decline" (click)="decline()" i18n="@@GROUPS__JOIN_BUTTON__DECLINE_ACTION">Decline</button>
     </span>
-    <button class="btn btn-primary btn-sm" *ngIf="group['is:member']" (click)="leave()" i18n="@@GROUPS__JOIN_BUTTON__LEAVE_ACTION">Leave</button>
-    <button class="btn btn-primary btn-sm" *ngIf="group['is:awaiting']" (click)="cancelRequest()" i18n="@@GROUPS__JOIN_BUTTON__CANCEL_REQ_ACTION">Cancel</button>
+    <button class="btn btn-primary btn-sm" id="group-leave" *ngIf="group['is:member']" (click)="leave()" i18n="@@GROUPS__JOIN_BUTTON__LEAVE_ACTION">Leave</button>
+    <button class="btn btn-primary btn-sm" id="group-cancel" *ngIf="group['is:awaiting']" (click)="cancelRequest()" i18n="@@GROUPS__JOIN_BUTTON__CANCEL_REQ_ACTION">Cancel</button>
     <m-modal-signup-on-action
       [open]="showModal"
       (closed)="join(); showModal = false;"

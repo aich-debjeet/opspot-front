@@ -10,35 +10,35 @@ import { Session } from '../../../services/session';
 @Component({
   selector: 'opspot-groups-settings-button',
   template: `
-    <button class="icon-more-vertical f-15 focusNone" style="padding: 0;background: #fff;
-    border: 0 !important;" (click)="toggleMenu($event)">
+    <button class="icon-more-vertical f-15 focusNone" style="padding: 0;background: #fff; 
+    border: 0 !important;" (click)="toggleMenu($event)" id="group-settings-menu">
     </button>
 
     <ul class="opspot-dropdown-menu" [hidden]="!showMenu" >
       <!-- owner functions -->
-      <li class="mdl-menu__item" *ngIf="group['is:owner']" (click)="toggleEdit()">
+      <li class="mdl-menu__item" *ngIf="group['is:owner']" (click)="toggleEdit()" id="group-settings-edit">
           <ng-container *ngIf="!editing">Edit</ng-container>
           <ng-container *ngIf="editing">Save</ng-container>
       </li>
 
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.videoChatDisabled" (click)="toggleVideoChat(true)">Enable Gathering</li>
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.videoChatDisabled" (click)="toggleVideoChat(false)">Disable Gathering</li>
+      <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.videoChatDisabled" (click)="toggleVideoChat(true)" id="group-settings-enable-gathering">Enable Gathering</li>
+      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.videoChatDisabled" (click)="toggleVideoChat(false)" id="group-settings-disable-gathering">Disable Gathering</li>
 
-      <!-- <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.moderated" (click)="toggleModeration(false)">Disable moderation</li>
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.moderated" (click)="toggleModeration(true)">Enable moderation</li> -->
+      <!-- <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.moderated" (click)="toggleModeration(false)" id="group-settings-disable-moderation">Disable moderation</li>
+      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.moderated" (click)="toggleModeration(true)" id="group-settings-enable-moderation">Enable moderation</li> -->
 
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.membership" (click)="togglePublic(true)">Make public</li>
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.membership" (click)="togglePublic(false)">Make closed</li>
+      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.membership" (click)="togglePublic(true)" id="group-settings-make-public">Make public</li>
+      <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.membership" (click)="togglePublic(false)" id="group-settings-make-closed">Make closed</li>
 
       <!-- Member functions -->
-      <li class="mdl-menu__item" [hidden]="group['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS">Disable Notifications</li>
-      <li class="mdl-menu__item" [hidden]="!group['is:muted']" (click)="unmute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__ENABLE_NOTIFICATIONS">Enable Notifications</li>
+      <li class="mdl-menu__item" [hidden]="group['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS" id="group-settings-disable-notification">Disable Notifications</li>
+      <li class="mdl-menu__item" [hidden]="!group['is:muted']" (click)="unmute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__ENABLE_NOTIFICATIONS" id="group-settings-enable-notification">Enable Notifications</li>
 
       <!-- admin functions -->
-      <li class="mdl-menu__item" *ngIf="session.isAdmin() && !group.mature" (click)="setExplicit(true)" i18n="@@M__ACTION__SET_EXPLICIT">Set Explicit</li>
-      <li class="mdl-menu__item" *ngIf="session.isAdmin() && group.mature" (click)="setExplicit(false)" i18n="@@M__ACTION__REMOVE_EXPLICIT">Remove Explicit</li>
-      <li class="mdl-menu__item" *ngIf="!group['is:owner'] && !group['is:creator']" (click)="report(); showMenu = false" i18n="@@M__ACTION__REPORT">Report</li>
-      <li class="mdl-menu__item" *ngIf="group['is:creator']" [hidden]="group.deleted" (click)="deletePrompt()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP">Delete Community</li>
+      <li class="mdl-menu__item" *ngIf="session.isAdmin() && !group.mature" (click)="setExplicit(true)" i18n="@@M__ACTION__SET_EXPLICIT" id="group-admin-set-explicit">Set Explicit</li>
+      <li class="mdl-menu__item" *ngIf="session.isAdmin() && group.mature" (click)="setExplicit(false)" i18n="@@M__ACTION__REMOVE_EXPLICIT" id="group-admin-remove-explicit">Remove Explicit</li>
+      <li class="mdl-menu__item" *ngIf="!group['is:owner'] && !group['is:creator']" (click)="report(); showMenu = false" i18n="@@M__ACTION__REPORT" id="group-admin-report">Report</li>
+      <li class="mdl-menu__item" *ngIf="group['is:creator']" [hidden]="group.deleted" (click)="deletePrompt()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP" id="group-settings-delete-community">Delete Community</li>
     </ul>
     <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
 
@@ -47,10 +47,10 @@ import { Session } from '../../../services/session';
         <p i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP_CONFIRM">Are you sure you want to delete {{ group.name }}? This action cannot be undone.</p>
       </div>
       <div class="mdl-card__actions">
-        <button (click)="delete()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        <button (click)="delete()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="group-confirm-button">
           <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
         </button>
-        <button (click)="cancelDelete()" class="mdl-button mdl-js-button mdl-button--colored">
+        <button (click)="cancelDelete()" class="mdl-button mdl-js-button mdl-button--colored" id="group-cancel-button">
           <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
         </button>
       </div>

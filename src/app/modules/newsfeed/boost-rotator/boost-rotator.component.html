@@ -2,10 +2,10 @@
   <div class="m-layout--spacer"></div>
   <ul class="m-boost-rotator-tabs" *ngIf="boosts.length > 0 && !disabled">
     <li (click)="prev()">
-      <i class="material-icons mdl-color-text--blue-grey-400">chevron_left</i>
+      <i class="material-icons mdl-color-text--blue-grey-400" id="boost-rotator-left">chevron_left</i>
     </li>
     <li (click)="next()">
-      <i class="material-icons mdl-color-text--blue-grey-400">chevron_right</i>
+      <i class="material-icons mdl-color-text--blue-grey-400" id="boost-rotator-right">chevron_right</i>
     </li>
   </ul>
 
