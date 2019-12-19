@@ -12,6 +12,7 @@ export class BookmarkViewComponent implements OnInit {
   offset: string = '';
   inProgress: boolean = false;
   moreData: boolean = true;
+  openFilter: boolean = false;
 
   constructor(
     private client:Client

@@ -1,0 +1,29 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+.o-book-filter-mob{
+    margin-left: 17px;
+    position: relative;
+    @include mq($from: $desktop_sm, $until: $wide_lg ) {
+		display: none!important;
+	}
+    i{
+        font-size: 16px;
+        color: $grey;
+    }
+}
+.book-filter-mob-block{
+    width: 200px;
+    position: absolute;
+    top: 31px;
+    right: -20px;
+    background: #fff;
+    height: 279px;
+    z-index: 9;
+    box-shadow: 0 6px 10px 0 rgba(144, 164, 174, 0.16), 0 1px 12px 0 rgba(144, 164, 174, 0.18), 0 3px 5px 0 rgba(144, 164, 174, 0.2);
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}

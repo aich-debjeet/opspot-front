@@ -66,7 +66,63 @@
                         title="Unread Notification">{{activity.length}}</span>
                 </div>
                 <div class="o-book-title__action">
-                    <a class="o-book-settings" title="Settings"><i class="icon-settings"></i></a>
+                    <a (click)="openFilter = !openFilter" id="filter-book" name="filter" class="o-book-filter-mob" title="Settings"><i class="icon-filter"></i></a>
+                    <div id="filter-drop" class="book-filter-mob-block" *ngIf="openFilter">
+                        <div class="o-card o-book-filter">
+                            <div class="o-book-filter__title">
+                                <div class="caption-medium">Filter</div>
+                                <div class="text-sm primary">Clear All</div>
+                            </div>
+                            <div class="o-book-filter__block">
+                                <form>
+                                    <div class="c-checkbox__md">
+                                        <label class="c-checkbox" (click)="changeFilter('all')">All
+                                            <input type="radio" [checked]="this._filter == 'all'" value="all" name="all">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('image')">Images
+                                            <input type="radio" [checked]="this._filter == 'image'" value="image" name="image">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('video')">Video
+                                            <input type="radio" [checked]="this._filter == 'video'" value="video" name="video">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('audio')">Audio
+                                            <input type="radio" [checked]="this._filter == 'audio'" value="audio" name="audio">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('blog')">Blogs
+                                            <input type="radio" [checked]="this._filter == 'blog'" value="blog" name="blog">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('Opportunity')">Opportunities
+                                            <input type="radio" [checked]="this._filter == 'Opportunity'" value="Opportunity"
+                                                name="Opportunity">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('event')">Events
+                                            <input type="radio" [checked]="this._filter == 'event'" value="event" name="event">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('album')">Album
+                                            <input type="radio" [checked]="this._filter == 'album'" value="album" name="album">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('item')">BlueStore
+                                            <input type="radio" [checked]="this._filter == 'item'" value="blueStore"
+                                                name="blueStore">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('posts')">Posts
+                                            <input type="radio" [checked]="this._filter == 'posts'" value="posts" name="posts">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div><!--filter block end-->
+                    </div>
                 </div>
             </div>
             <opspot-activity *ngFor="let activi of activity; let i = index" [object]="activi"
