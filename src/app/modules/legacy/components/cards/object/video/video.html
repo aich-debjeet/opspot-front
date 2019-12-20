@@ -16,7 +16,7 @@
 <div class="mdl-card__supporting-text mdl-color-text--grey-600 m-title-block" *ngIf="entity.ownerObj && entity.ownerObj.username">
 
 		<a [routerLink]="['/media', entity.guid]" class="mdl-color-text--blue-grey-700">
-			<strong>{{ entity.title }}</strong>
+			<strong id="video-entity-title">{{ entity.title }}</strong>
 		</a>
 
 		<div class="m-inline-owner-block">
@@ -24,7 +24,7 @@
 				<img src="/icon/{{entity.ownerObj.guid}}/small/{{entity.ownerObj.icontime}}" class="mdl-shadow--2dp"/>
 				{{entity.ownerObj.username}}
 			</a>
-			<span>{{ entity.time_created * 1000 | date:'mediumDate' }}</span>
+			<span id="video-entity-time-created">{{ entity.time_created * 1000 | date:'mediumDate' }}</span>
 		</div>
 
 </div>

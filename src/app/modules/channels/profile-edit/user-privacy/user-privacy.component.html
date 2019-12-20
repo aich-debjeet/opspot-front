@@ -3,8 +3,8 @@
   <div class="o-drop__arrow"><img src="assets/droparrow.png" alt="ss"></div>
   <div class="o-prof-edit-privacy-radio">
     <label class="radio-label radio-label--flex" *ngFor="let privacy of privacys">
-      <input type="radio" (click)="model.privacy=privacy; changePrivacy()" [checked]="privacy===model.privacy">
-      <div class="radio-widget"></div>
+      <input type="radio" id="user-privacy-radio-button" (click)="model.privacy=privacy; changePrivacy()" [checked]="privacy===model.privacy">
+      <div class="radio-widget" id="user-privacy-radio"></div>
       <div class="text-sm grey"> {{privacy}}</div>
     </label>
   </div>

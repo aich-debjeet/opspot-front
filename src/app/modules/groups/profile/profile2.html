@@ -120,11 +120,11 @@
                 </div>
                 <div class="o-cards o-community-members hidden-under-tablet">
                     <div class="o-community-members__header">
-                        <div class="text-lg f500">
+                        <div class="text-lg f500" id="profile2-community-members">
                             Community Members
                         </div>
                         <span (click)="openInvite()" style="font-size: 24px !important;"
-                            class="icon-plus-circle primary">
+                            class="icon-plus-circle primary" id="profile2-icon-plus-circle">
                         </span>
                     </div>
                     <opspot-groups-profile-members
@@ -143,13 +143,13 @@
             <div class="tabs-community">
                 <ul class="tabs-list">
                     <li routerLinkActive="active" routerLink="feed" [routerLinkActiveOptions]="{exact:true}"> 
-                        <a> Feed</a>
+                        <a id="profile2-group-feed-tab"> Feed</a>
                     </li>
                     <li *ngIf="filter == 'activity' && (group['is:owner']||group['is:moderator']) && group['adminqueue:count']" routerLinkActive="active" routerLink="feed/review"> 
-                       <a> Review queue<div class="review-count text-md white">{{ group['adminqueue:count'] }}</div></a>
+                       <a id="profile2-group-review-queue"> Review queue<div class="review-count text-md white">{{ group['adminqueue:count'] }}</div></a>
                     </li>  
                     <li routerLinkActive="active" routerLink="requests" *ngIf="group && group['is:owner'] && group['membership'] !== 2">
-                        <a> Members Request</a>
+                        <a id="profile2-group-members-request"> Members Request</a>
                         <!-- <opspot-groups-profile-requests [group]="group"></opspot-groups-profile-requests> -->
                     </li>
                 </ul>
@@ -159,8 +159,8 @@
         <!-- </div> -->
         <div class="o-left-gather-block o-left-block--community" *ngIf="showGathering">
             <div class="o-community-gather">
-                <a><i class="icon-arrow-left o-community-gather--icon" (click)='backClicked()'></i> </a>
-                <div class=" caption-bold f500">Gathering</div>
+                <a><i class="icon-arrow-left o-community-gather--icon" id="profile2-back-to-community" (click)='backClicked()'></i> </a>
+                <div class=" caption-bold f500" id="profile2-gathering-window">Gathering</div>
             </div>
             <m-videochat></m-videochat>
         </div>
@@ -168,7 +168,7 @@
         <div class="o-right-block hidden-mob">
             <div class="o-discussions">
                 <div class="o-discussions-title">
-                    <div class="text-lg f500">
+                    <div class="text-lg f500" id="profile2-community-discussion">
                         Discussions
                     </div>
                 </div>

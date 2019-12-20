@@ -10,13 +10,13 @@
   </div>
   <div class="body">
     <a class="o-avatar__name" id="activity-username" [routerLink]="['/', activity.ownerObj.username]">
-      <strong title={{activity.ownerObj.name}}>{{activity.ownerObj.name}}</strong>
+      <strong title={{activity.ownerObj.name}} id="activity-owner-obj-name">{{activity.ownerObj.name}}</strong>
       <m-channel--badges class="m-channel--badges-activity" [user]="activity.ownerObj" badges="[ 'verified' ]">
       </m-channel--badges>
     </a>
     <a *ngIf="activity.containerObj && activity.containerObj.type == 'group'"
       [routerLink]="['/groups/profile', activity.containerObj.guid]" class="mdl-color-text--blue-grey-300">
-      <strong>({{activity.containerObj.name}})</strong>
+      <strong id="activity-owner-container-name">({{activity.containerObj.name}})</strong>
     </a>
     <div class="grey m-l-8 o-posts-tym"
       *ngIf="activity.guid && !activity.remind_object">

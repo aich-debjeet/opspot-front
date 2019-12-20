@@ -1,23 +1,23 @@
 <div class="tab" style="display: block;">
-    <h5 class="o-prof-edit-title" *ngIf="!addWork" >Awards</h5>
+    <h5 class="o-prof-edit-title" *ngIf="!addWork" id="awards-title-header">Awards</h5>
     <div class="o-prof-edit-block" *ngIf="!addWork" >
-      <a class="btn btn-outline-primary btn-block showSingle"  (click)="addWork=!addWork; addWorkMove();">ADD AWARD</a>
+      <a class="btn btn-outline-primary btn-block showSingle" id="awards-add-awards" (click)="addWork=!addWork; addWorkMove();">ADD AWARD</a>
       <div class="o-prof-edit-wea">
           <div class="o-wea-block" *ngFor="let work of work.awards; let i=index;" >
               <div class="o-wea-logo"><img src="assets/Education.jpg" alt=""></div>
               <div class="o-wea-info">
-                  <div class="caption-bold">{{work.title}}</div>
-                  <div class="caption-bold f400">{{work.issuer}} - {{work.location}}</div>
-                  <div class="text-md grey">{{work.issue_period}} </div>
+                  <div class="caption-bold" id="awards-award-title">{{work.title}}</div>
+                  <div class="caption-bold f400" id="awards-issuer-loaction">{{work.issuer}} - {{work.location}}</div>
+                  <div class="text-md grey" id="awards-issue-period">{{work.issue_period}} </div>
               </div>
-              <div class="o-wea-edit"><a (click)="update(i)" ><i class="icon-edit-profile"></i></a></div> 
+              <div class="o-wea-edit"><a (click)="update(i)" id="awards-update-icon"><i class="icon-edit-profile"></i></a></div> 
           </div>
       </div>
     </div>
     
     <div *ngIf="addWork" style="display: block;">
       <h5 class="o-prof-edit-title workTitle">
-        <a (click)="goBack()" class="o-wea-back" target="2">
+        <a (click)="goBack()" class="o-wea-back" target="2" id="awards-arrow-left">
           <i class="icon-arrow-left"></i>
         </a> Add  Award</h5>
        <form #f="ngForm" >
@@ -26,15 +26,15 @@
               <div class="o-wea-add-block__left">
                   <div class="form-group w-lg">
                       <label>Title</label>
-                      <input type="text" #title="ngModel" required name="title" [(ngModel)]="model.title" class="form-control form-control-lg" placeholder="">
+                      <input type="text" id="awards-title" #title="ngModel" required name="title" [(ngModel)]="model.title" class="form-control form-control-lg" placeholder="">
                   </div><!--designation end-->
                   <div class="form-group w-lg">
                       <label>Issuer</label>
-                      <input #issuer="ngModel" required name="issuer" [(ngModel)]="model.issuer" type="text" class="form-control form-control-lg" placeholder="">
+                      <input #issuer="ngModel" id="awards-issuer" required name="issuer" [(ngModel)]="model.issuer" type="text" class="form-control form-control-lg" placeholder="">
                   </div><!--company name end-->
                   <div class="form-group w-lg">
                       <label>Location</label>
-                      <input required type="text" #location="ngModel" name="location" [(ngModel)]="model.location" class="form-control form-control-lg" placeholder="">
+                      <input required type="text" id="awards-location" #location="ngModel" name="location" [(ngModel)]="model.location" class="form-control form-control-lg" placeholder="">
                       
                   </div><!--location end-->
                   <!-- <div class="o-toggle-check">
@@ -44,18 +44,18 @@
                       </label>
                   </div> -->
                   <!-- toggle check end -->
-                  <div class="o-prof-edit-item__title">Start Date</div>
+                  <div class="o-prof-edit-item__title">Issued Date</div>
                   <div class="o-wea-date">
                       <div class="form-group">
-                          <select class="form-control" name="strtMonth" #strtMonth="ngModel" required [(ngModel)]="model.strtMonth" >
-                              <option [value]="Month" selected disabled hidden>Month</option>
-                              <option *ngFor="let month of dateOfBirth.month" [value]="month" placeholder="month"> {{month}}</option>
+                          <select class="form-control" id="awards-issued-month-selector" name="strtMonth" #strtMonth="ngModel" required [(ngModel)]="model.strtMonth" >
+                              <option [value]="Month" id="awards-issued-month" selected disabled hidden>Month</option>
+                              <option *ngFor="let month of dateOfBirth.month" id="awards-issued-month1" [value]="month" placeholder="month"> {{month}}</option>
                           </select>
                       </div>
                       <div class="form-group">
-                          <select class="form-control" name="strtYear" #strtYear="ngModel" required [(ngModel)]="model.strtYear" >
-                              <option  [value]="Year"  selected disabled hidden>Year</option>
-                               <option *ngFor="let year of dateOfBirth.year" [value]="year">{{year}}</option>
+                          <select class="form-control" id="awards-issued-year-selector" name="strtYear" #strtYear="ngModel" required [(ngModel)]="model.strtYear" >
+                              <option  [value]="Year" id="awards-issued-year"  selected disabled hidden>Year</option>
+                               <option *ngFor="let year of dateOfBirth.year" id="awards-issued-year1" [value]="year">{{year}}</option>
                           </select>
                       </div>
                   </div><!-- start date end -->
@@ -85,16 +85,16 @@
        </form>
        <div class="o-toggle-check">
           <label>
-              <input type="checkbox" name="privacy" [(ngModel)]="model.privacy">
+              <input type="checkbox" id="awards-show-on-profile" name="privacy" [(ngModel)]="model.privacy">
               <span class="text-md">Show this award on my profile</span>
           </label>
       </div>
     
-      <p *ngIf="!location.valid&&submitted" class="error text-sm">Please add Location</p>
-      <p *ngIf="!title.valid&&submitted" class="error text-sm">Please add title</p>
-      <p *ngIf="!issuer.valid&&submitted" class="error text-sm">Please add issuer</p>
-      <p *ngIf="!strtMonth.valid&&submitted" class="error text-sm">Please enter start Month</p>
-      <p *ngIf="!strtYear.valid&&submitted" class="error text-sm">Please enter start year</p>
+      <p *ngIf="!location.valid&&submitted" class="error text-sm" id="awards-add-location-error">Please add Location</p>
+      <p *ngIf="!title.valid&&submitted" class="error text-sm" id="awards-add-title-error">Please add title</p>
+      <p *ngIf="!issuer.valid&&submitted" class="error text-sm" id="awards-add-issuer-error">Please add issuer</p>
+      <p *ngIf="!strtMonth.valid&&submitted" class="error text-sm" id="awards-add-month-error">Please enter Issued Month</p>
+      <p *ngIf="!strtYear.valid&&submitted" class="error text-sm" id="awards-add-year-error">Please enter Issued year</p>
       <!-- <p *ngIf="errWork&&submitted" class="error text-sm">Please add valid dates</p>
       <p *ngIf="errEndDate&&submitted" class="error text-sm">Enddate is required</p> -->
     
@@ -102,8 +102,8 @@
     
     
        <div class="o-prof-edit-actions" style="padding-left:12px; ">
-          <button type="button" class="btn btn-outline-primary btn-lg " [routerLink]="['/', activeUser?.username]">Cancel</button>
-          <button type="button" class="btn btn-primary btn-lg btn--cancel" (click)="onSubmit(f)">Update</button>
+          <button type="button" id="awards-cancel-button" class="btn btn-outline-primary btn-lg " [routerLink]="['/', activeUser?.username]">Cancel</button>
+          <button type="button" id="awards-update-button" class="btn btn-primary btn-lg btn--cancel" (click)="onSubmit(f)">Update</button>
       </div>
     </div>
 </div>

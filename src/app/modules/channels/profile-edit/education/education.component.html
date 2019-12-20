@@ -1,23 +1,23 @@
 <div class="tab" style="display: block;">
-    <h5 class="o-prof-edit-title" *ngIf="!addWork" >Education</h5>
+    <h5 class="o-prof-edit-title" *ngIf="!addWork" id="education-details-tittle">Education</h5>
     <div class="o-prof-edit-block" *ngIf="!addWork" >
-        <a class="btn btn-outline-primary btn-block showSingle"  (click)="addWork=!addWork; addWorkMove();">ADD EDUCATION</a>
+        <a class="btn btn-outline-primary btn-block showSingle" id="education-add-education"  (click)="addWork=!addWork; addWorkMove();">ADD EDUCATION</a>
         <div class="o-prof-edit-wea">
             <div class="o-wea-block" *ngFor="let work of work.education; let i=index;" >
                 <div class="o-wea-logo"><img src="assets/Education.jpg" alt=""></div>
-                <div class="o-wea-info">
-                    <div class="caption-bold">{{work.field_of_study}}</div>
-                    <div class="caption-bold f400">{{work.university}} - {{work.location}}</div>
-                    <div class="text-md grey">{{work.start_date}} -  {{work.end_date?work.end_date:'Present'}}</div>
+                <div class="o-wea-info" id="eduaction-details">
+                    <div class="caption-bold" id="eduaction-feild-of-study">{{work.field_of_study}}</div>
+                    <div class="caption-bold f400" id="eduaction-university-location">{{work.university}} - {{work.location}}</div>
+                    <div class="text-md grey" id="eduaction-date-month">{{work.start_date}} -  {{work.end_date?work.end_date:'Present'}}</div>
                 </div>
-                <div class="o-wea-edit"><a (click)="update(i)" ><i class="icon-edit-profile"></i></a></div> 
+                <div class="o-wea-edit"><a (click)="update(i)" id="work-update-icon"><i class="icon-edit-profile"></i></a></div> 
             </div>
         </div>
     </div>
     
     <div *ngIf="addWork" style="display: block;">
         <h5 class="o-prof-edit-title workTitle">
-        <a (click)="goBack()" class="o-wea-back" target="2">
+        <a (click)="goBack()" class="o-wea-back" target="2" id="education-arrow-left">
             <i class="icon-arrow-left"></i>
         </a> Add  Education</h5>
         <form #f="ngForm" >
@@ -26,35 +26,35 @@
                 <div class="o-wea-add-block__left">
                     <div class="form-group w-lg">
                         <label>Field of Study</label>
-                        <input type="text" #field="ngModel" required name="field" [(ngModel)]="model.field" class="form-control form-control-lg" placeholder="">
+                        <input type="text" id="eduaction-field-of-study"  #field="ngModel" required name="field" [(ngModel)]="model.field" class="form-control form-control-lg" placeholder="">
                     </div><!--designation end-->
                     <div class="form-group w-lg">
                         <label>University</label>
-                        <input #university="ngModel" required name="university" [(ngModel)]="model.university" type="text" class="form-control form-control-lg" placeholder="">
+                        <input #university="ngModel" id="eduaction-university-name" required name="university" [(ngModel)]="model.university" type="text" class="form-control form-control-lg" placeholder="">
                     </div><!--company name end-->
                     <div class="form-group w-lg">
                         <label>Location</label>
-                        <input required type="text" #location="ngModel" name="location" [(ngModel)]="model.location" class="form-control form-control-lg" placeholder="">
+                        <input required type="text" id="education-lacoation" #location="ngModel" name="location" [(ngModel)]="model.location" class="form-control form-control-lg" placeholder="">
                         
                     </div><!--location end-->
                     <div class="o-toggle-check">
                         <label>
-                            <input type="checkbox" (click)="toggleEndDate()" [(ngModel)]="model.present" name="present">
+                            <input type="checkbox" id="education-currently-studing" (click)="toggleEndDate()" [(ngModel)]="model.present" name="present">
                             <span class="text-md">I’m currently studing here</span>
                         </label>
                     </div><!-- toggle check end -->
                     <div class="o-prof-edit-item__title">Start Date</div>
                     <div class="o-wea-date">
                         <div class="form-group">
-                            <select class="form-control" name="strtMonth" #strtMonth="ngModel" required [(ngModel)]="model.strtMonth" >
-                                <option [value]="Month" selected disabled hidden>Month</option>
-                                <option *ngFor="let month of dateOfBirth.month" [value]="month" placeholder="month"> {{month}}</option>
+                            <select class="form-control" id="education-start-month-selector" name="strtMonth" #strtMonth="ngModel" required [(ngModel)]="model.strtMonth" >
+                                <option [value]="Month" id="education-start-month" selected disabled hidden>Month</option>
+                                <option *ngFor="let month of dateOfBirth.month" id="education-start-month1" [value]="month" placeholder="month"> {{month}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" name="strtYear" #strtYear="ngModel" required [(ngModel)]="model.strtYear" >
-                                <option  [value]="Year"  selected disabled hidden>Year</option>
-                                <option *ngFor="let year of dateOfBirth.year" [value]="year">{{year}}</option>
+                            <select class="form-control" id="education-start-year-selector" name="strtYear" #strtYear="ngModel" required [(ngModel)]="model.strtYear" >
+                                <option  [value]="Year" id="education-start-year"  selected disabled hidden>Year</option>
+                                <option *ngFor="let year of dateOfBirth.year" id="education-start-year1" [value]="year">{{year}}</option>
                             </select>
                         </div>
                         <div class="text-md o-to">to</div>
@@ -63,15 +63,15 @@
                     <div class="o-prof-edit-item__title" >End Date</div>
                     <div class="o-wea-date">
                         <div class="form-group">
-                            <select class="form-control" name="endMonth"  [(ngModel)]="model.endMonth" >
-                                <option [value]="Month" selected disabled hidden>Month</option>
-                                <option *ngFor="let month of dateOfBirth.month" [value]="month" placeholder="month"> {{month}}</option>
+                            <select class="form-control" id="education-end-month-selector" name="endMonth"  [(ngModel)]="model.endMonth" >
+                                <option [value]="Month"  id="education-end-month" selected disabled hidden>Month</option>
+                                <option *ngFor="let month of dateOfBirth.month"  id="education-end-month1" [value]="month" placeholder="month"> {{month}}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" name="endYear" [(ngModel)]="model.endYear" >
-                                <option [value]="Year" selected disabled hidden>Year</option>
-                                <option *ngFor="let year of dateOfBirth.year" [value]="year">{{year}}</option>
+                            <select class="form-control" id="education-end-year-selector" name="endYear" [(ngModel)]="model.endYear" >
+                                <option [value]="Year" id="education-end-year" selected disabled hidden>Year</option>
+                                <option *ngFor="let year of dateOfBirth.year" id="education-end-year1" [value]="year">{{year}}</option>
                             </select>
                         </div>
                     </div><!-- end date end -->
@@ -84,25 +84,25 @@
         </form>
         <div class="o-toggle-check">
             <label>
-                <input type="checkbox" name="privacy" [(ngModel)]="model.privacy">
+                <input type="checkbox" id="education-show-on-profile" name="privacy" [(ngModel)]="model.privacy">
                 <span class="text-md">Show this education on my profile</span>
             </label>
         </div>
     
-        <p *ngIf="!location.valid&&submitted" class="error text-sm">Please add Location</p>
-        <p *ngIf="!field.valid&&submitted" class="error text-sm">Please add field of study</p>
-        <p *ngIf="!university.valid&&submitted" class="error text-sm">Please add University</p>
-        <p *ngIf="!strtMonth.valid&&submitted" class="error text-sm">Please enter start Month</p>
-        <p *ngIf="!strtYear.valid&&submitted" class="error text-sm">Please enter start year</p>
-        <p *ngIf="errWork&&submitted" class="error text-sm">Please add valid dates</p>
-        <p *ngIf="errEndDate&&submitted" class="error text-sm">End date is required</p>
+        <p *ngIf="!location.valid&&submitted" class="error text-sm" id="education-add-location-error">Please add Location</p>
+        <p *ngIf="!field.valid&&submitted" class="error text-sm" id="education-add-field-error">Please add field of study</p>
+        <p *ngIf="!university.valid&&submitted" class="error text-sm" id="education-add-university-error">Please add University</p>
+        <p *ngIf="!strtMonth.valid&&submitted" class="error text-sm" id="education-add-start-month-error">Please enter start Month</p>
+        <p *ngIf="!strtYear.valid&&submitted" class="error text-sm" id="education-add-start-year-error">Please enter start year</p>
+        <p *ngIf="errWork&&submitted" class="error text-sm" id="education-valid-date-error">Please add valid dates</p>
+        <p *ngIf="errEndDate&&submitted" class="error text-sm" id="education-end-date-error">End date is required</p>
     
     
     
     
         <div class="o-prof-edit-actions" style="padding-left:12px; ">
-            <button type="button" class="btn btn-outline-primary btn-lg " [routerLink]="['/', activeUser?.username]">Cancel</button>
-            <button type="button" class="btn btn-primary btn-lg btn--cancel" (click)="onSubmit(f)">Update</button>
+            <button type="button" id="eduaction-cancel-button" class="btn btn-outline-primary btn-lg " [routerLink]="['/', activeUser?.username]">Cancel</button>
+            <button type="button" id="education-update-button" class="btn btn-primary btn-lg btn--cancel" (click)="onSubmit(f)">Update</button>
         </div>
     </div>
 </div>

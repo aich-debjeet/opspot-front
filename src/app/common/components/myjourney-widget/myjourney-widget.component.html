@@ -1,33 +1,33 @@
 <div *ngIf="!inProgress && entities?.length > 0">
-    <div class="o-title caption-medium">
+    <div class="o-title caption-medium" id="myjourney-widget-title">
         My Journey
-        <a [routerLink]="['/media', entities[0].guid]" class="text-md primary float-right">See All</a>
+        <a [routerLink]="['/media', entities[0].guid]" class="text-md primary float-right" id="myjourney-widget-see-all">See All</a>
     </div>
     <div class="o-card journey">
         <div class="journey-media">
             <ng-container *ngFor="let entity of entities | slice:0:4; let i=index">
-                <a [routerLink]="['/media', entity.guid]" class="journey-media__one" *ngIf="i===0" [ngStyle]="{'background': '#444 url(' + entity?.custom_data[0]?.thumbnail_src + ') center center / cover'}">
+                <a [routerLink]="['/media', entity.guid]" id="myjourney-widget-myjourney-post" class="journey-media__one" *ngIf="i===0" [ngStyle]="{'background': '#444 url(' + entity?.custom_data[0]?.thumbnail_src + ') center center / cover'}">
                     <div class="journey-overlay">
                         <div class="journey-media__play-ico">
                             <img src="assets/svg/playfill.svg" alt="">
                         </div>
                     </div>
                 </a>
-                <a [routerLink]="['/media', entity.guid]" class="journey-media__two" *ngIf="i===1" [ngStyle]="{'background': '#444 url(' + entity?.custom_data[0]?.thumbnail_src + ') center center / cover'}">
+                <a [routerLink]="['/media', entity.guid]" id="myjourney-widget-myjourney-post2" class="journey-media__two" *ngIf="i===1" [ngStyle]="{'background': '#444 url(' + entity?.custom_data[0]?.thumbnail_src + ') center center / cover'}">
                     <div class="journey-overlay">
                         <div class="journey-media__play-ico">
                             <img src="assets/svg/playfill.svg" alt="">
                         </div>
                     </div>
                 </a>
-                <a [routerLink]="['/media', entity.guid]" class="journey-media__three" *ngIf="i===2" [ngStyle]="{'background': '#444 url(' + entity?.custom_data[0]?.thumbnail_src + ') center center / cover'}">
+                <a [routerLink]="['/media', entity.guid]" id="myjourney-widget-myjourney-post3" class="journey-media__three" *ngIf="i===2" [ngStyle]="{'background': '#444 url(' + entity?.custom_data[0]?.thumbnail_src + ') center center / cover'}">
                     <div class="journey-overlay">
                         <div class="journey-media__play-ico">
                             <img src="assets/svg/playfill.svg" alt="">
                         </div>
                     </div>
                 </a>
-                <a [routerLink]="['/media', entity.guid]" class="journey-media__four" *ngIf="i===3" [ngStyle]="{'background': '#444 url(' + entity?.custom_data[0]?.thumbnail_src + ') center center / cover'}">
+                <a [routerLink]="['/media', entity.guid]" id="myjourney-widget-myjourney-post4" class="journey-media__four" *ngIf="i===3" [ngStyle]="{'background': '#444 url(' + entity?.custom_data[0]?.thumbnail_src + ') center center / cover'}">
                     <div class="journey-overlay">
                         <div class="journey-media__play-ico">
                             <img src="assets/svg/playfill.svg" alt="">
