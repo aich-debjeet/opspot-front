@@ -128,8 +128,8 @@ export class BigEventForm implements OnInit {
         eventType: ['', [Validators.required]],
         eventCategory: ['', [Validators.required]],
         eventLocation: ['', [Validators.required]],
-        eventStartDate: ['', [Validators.required, FormValidator.datevalidation]],
-        eventEndDate: ['', [Validators.required, FormValidator.datevalidation]],
+        eventStartDate: ['', [Validators.required,FormValidator.validateDate, FormValidator.datevalidation]],
+        eventEndDate: ['', [Validators.required, FormValidator.validateDate,FormValidator.datevalidation]],
         eventStartTime: ['', [Validators.required]],
         eventEndTime: ['', [Validators.required]],
         eventCoverImage: ['', []]

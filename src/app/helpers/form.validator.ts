@@ -66,15 +66,26 @@ export class FormValidator {
         return null;
     }
 
+
+    static validateDate(ac: AbstractControl) {
+        const inputValue = ac.value;
+        if (inputValue === '') {
+            return;
+        }
+        const dateRegex = /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$/
+        if (!(dateRegex.test(inputValue))) {
+            return { invalidDate: true };
+        }
+        return null;
+    }
+
     static datevalidation(AC: AbstractControl) {
-        // console.log("Value: ",AC.value);
-        
         const date = AC.value.split('-').reverse().join('-');
         const currentDate = moment().format('YYYYMMDD');
         const chooseDate = moment(date).format('YYYYMMDD');
 
         if (currentDate > chooseDate) {
-             return { oldate: true };
+            return { oldate: true };
         } else {
             return null
         }

@@ -104,15 +104,15 @@ export class BlueStoreFormComponent implements OnInit {
       this.blueStoreForm = this.formBuilder.group({
         blueStoreTitle: [data['title'] ? data['title'] : '', [Validators.required]],
         blueStoreDescription: [this.description ? this.description : '', [Validators.required]],
-        blueStoreUnits: [data['item_count'] ? data['item_count'] : '', [Validators.required]],
-        blueStorePrice: [data['price'] ? data['price'] : '', []]
+        blueStoreUnits: [data['item_count'] ? data['item_count'] : '', [Validators.required,Validators.min(1)]],
+        blueStorePrice: [data['price'] ? data['price'] : '', [Validators.required,Validators.min(1)]]
       });
     } else {
       this.blueStoreForm = this.formBuilder.group({
         blueStoreTitle: ['', [Validators.required]],
         blueStoreDescription: ['', [Validators.required]],
-        blueStoreUnits: ['', [Validators.required]],
-        blueStorePrice: ['', [Validators.required]]
+        blueStoreUnits: ['', [Validators.required,Validators.min(1)]],
+        blueStorePrice: ['', [Validators.required, Validators.min(1)]]
       });
     }
   }

@@ -159,7 +159,7 @@ const routes: Routes = [
   { path: 'groups/create', component: GroupsCreator },
   { path: 'groups/edit/:guid', component: GroupsCreator,canDeactivate: [CanDeactivateGroupService] },
   { path: 'groups/:filter', component: GroupsListComponent },
-  { path: 'groups', redirectTo: '/groups/top', pathMatch: 'full' },
+  { path: 'groups', redirectTo: '/groups/members', pathMatch: 'full' },
   { path: 'groups/:guid/members' ,component:MobileMembersComponent},
   { path: 'groups/:guid/invite' ,component:MobileInviteComponent},
   { path: 'groups/gathering',  component: VideoChatComponent}

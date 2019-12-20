@@ -153,7 +153,7 @@
   display: flex;
   justify-content: flex-end;
   @include mq($from: $mobile_sm, $until: $tablet) {
-  display: none!important;
+  // display: none!important;
 }
   .btn{
       margin-left: 10px;

@@ -221,7 +221,7 @@ export class GroupsSettingsButton {
         this.group.deleted = deleted;
 
         if (deleted) {
-          this.router.navigate(['/groups/member']);
+          this.router.navigate(['/groups/members']);
         }
       });
 
