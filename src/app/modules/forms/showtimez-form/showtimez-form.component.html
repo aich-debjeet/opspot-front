@@ -47,7 +47,7 @@
                     <div class="error text-sm" *ngIf="eventSubmitted && showTimezForm.get('eventdate').errors?.required">
                         This is required
                     </div> -->
-                    <div class="error text-sm" *ngIf="showTimezForm.get('eventdate').errors?.oldate">
+                    <div class="error text-sm" *ngIf="showTimezForm.get('eventdate').errors?.invalidDate && showTimezForm.get('eventdate').errors?.oldate">
                         Please choose a valid date.
                     </div>
                 </div>

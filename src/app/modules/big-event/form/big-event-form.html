@@ -67,7 +67,7 @@
                             *ngIf="eventSubmitted && eventForm.get('eventStartDate').errors?.required">
                             This is required
                         </div>
-                        <div class="error text-sm" *ngIf="eventForm.get('eventStartDate').errors?.oldate">
+                        <div class="error text-sm" *ngIf="eventForm.get('eventStartDate').errors?.invalidDate && eventForm.get('eventStartDate').errors?.oldate">
                             Please choose a valid date.
                         </div>
                     </div>
@@ -94,7 +94,8 @@
                             *ngIf="eventSubmitted && eventForm.get('eventEndDate').errors?.required">
                             This is required
                         </div>
-                        <div class="error text-sm" *ngIf="eventForm.get('eventEndDate').errors?.oldate">
+                        <div class="error text-sm" *ngIf="eventForm.get('eventEndDate').errors?.invalidDate && 
+                        eventForm.get('eventEndDate').errors?.oldate">
                             Please choose a valid date.
                         </div>
                     </div>
