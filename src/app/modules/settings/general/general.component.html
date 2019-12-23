@@ -137,7 +137,7 @@
           </div> -->
           <div class="form-group o-settings-width">
               <label>Username</label>
-              <input type="text" class="form-control form-control-lg" [(ngModel)]="userName" readonly="readonly">
+              <input type="text" id="general-user-name-readonly" class="form-control form-control-lg" [(ngModel)]="userName" readonly="readonly">
           </div>
           <div class="o-settings-line"></div>
       </div><!--Username settings fields-->
@@ -148,7 +148,7 @@
           </div> -->
           <div class="form-group o-settings-width">
               <label>Primary Email Address</label>
-              <input type="email" class="form-control form-control-lg" [(ngModel)]="email" readonly="readonly">
+              <input type="email" id="general-email-readonly" class="form-control form-control-lg" [(ngModel)]="email" readonly="readonly">
           </div>
           <!-- <a class="text-md primary" onclick="myFunction()">Add email address</a>
           <div class="o-settings-add-email" id="email">
@@ -168,7 +168,7 @@
           </div> -->
           <div class="form-group o-settings-width">
               <label>Primary Phone Number</label>
-              <input type="text" class="form-control form-control-lg" [(ngModel)]="phone" readonly="readonly">
+              <input type="text" id="general-phone-readonly" class="form-control form-control-lg" [(ngModel)]="phone" readonly="readonly">
           </div>
           <!-- <a class="text-md primary" onclick="myFunction1()">Add phone number</a>
           <div class="o-settings-add-email" id="phone">
@@ -251,7 +251,7 @@
               <span class="text-md grey">Private</span>
           </div>
           <div class="o-settings-pdngtpbtm-button--general">
-            <button type="button" class="btn btn-primary btn-lg pading-right" (click)="save()">Save</button>
+            <button type="button" id="general-save-button" class="btn btn-primary btn-lg pading-right" (click)="save()">Save</button>
         </div>
           <div class="o-settings-line"></div>
       </div><!--Portfolio toggle settings fields-->
@@ -276,19 +276,19 @@
               </label>
           </div>
           <div id="deactivate" class="o-settings-delete-account" *ngIf="deactivateOptions">
-            <div class="text-lg f500 padng-btm1">
+            <div class="text-lg f500 padng-btm1" id="general-deactivating-text">
               Tell us why you’re deactivating your account:
             </div>
             <div class="text-md">
               Please provide a reason. It’ll help us make One Page Spotlight better
               </div>
               <label class="c-checkbox" *ngFor = "let reason of deleteAccountOption">{{reason.description}}
-                  <input type="checkbox" checked [(ngModel)]="reason.checked" (change)="updateCheckedOptions(reason, $event)">
+                  <input type="checkbox" id="general-checkbox" checked [(ngModel)]="reason.checked" (change)="updateCheckedOptions(reason, $event)">
                   <span class="checkmark"></span>
               </label>
-              <textarea class="form-control" rows="6" value="Textarea" [hidden]="!openText"></textarea>
-              <button type="button" class="btn btn-primary btn-lg pading-right" (click)="deactivate()">Confirm Deactivate</button>
-              <button type="button" class="btn btn-outline-primary btn-lg" (click)="setOption('deactivate')">Cancel</button>
+              <textarea class="form-control" id="general-textarea" rows="6" value="Textarea" [hidden]="!openText"></textarea>
+              <button type="button" id="general-confirm-deactivate-button" class="btn btn-primary btn-lg pading-right" (click)="deactivate()">Confirm Deactivate</button>
+              <button type="button" id="general-deactivate-cancel-button" class="btn btn-outline-primary btn-lg" (click)="setOption('deactivate')">Cancel</button>
           </div>
           <div id="delete" class="o-settings-deactivate-account" *ngIf="reasonDelete">
               <div class="o-settings-info">
@@ -302,10 +302,10 @@
               </div>
               <div class="form-group">
                   <label>Password</label>
-                  <input type="password" class="form-control form-control-lg" [(ngModel)]="password">
+                  <input type="password" id="general-password-delete-account" class="form-control form-control-lg" [(ngModel)]="password">
               </div>
-              <button type="button" class="btn btn-primary btn-lg pading-right" (click)="delete(password)">Confirm Delete</button>
-              <button type="button" class="btn btn-outline-primary btn-lg" (click)="setOption('delete')">Cancel</button>
+              <button type="button" id="general-confirm-delete-button" class="btn btn-primary btn-lg pading-right" (click)="delete(password)">Confirm Delete</button>
+              <button type="button" id="general-delete-cancel-button" class="btn btn-outline-primary btn-lg" (click)="setOption('delete')">Cancel</button>
           </div>
       </div><!--Delete settings fields-->
     </div>
