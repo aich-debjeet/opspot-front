@@ -23,7 +23,7 @@ import { Router } from '@angular/router';
 
   },
   inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle'],
-  outputs: ['_delete: delete', 'commentsOpened', 'onViewed'],
+  outputs: ['_delete: delete', 'commentsOpened', 'onViewed', '_deleteBookmark: deleteBookmark'],
   templateUrl: 'activity.html',
   styleUrls: ['./activity.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -69,6 +69,7 @@ export class Activity {
   @Input() hideTabs: boolean;
 
   _delete: EventEmitter<any> = new EventEmitter();
+  _deleteBookmark: EventEmitter<any> = new EventEmitter();
   commentsOpened: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
   scroll_listener;
@@ -278,6 +279,7 @@ export class Activity {
         await this.client.post(url);
       } else {
         await this.client.delete(url);
+        this._deleteBookmark.next(this.activity);
       }
     } catch (e) {
       this.activity.bookmark = !this.activity.bookmark;
