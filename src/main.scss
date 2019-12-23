@@ -27187,6 +27187,7 @@ li{
   width:100%;
   height:auto;
   margin:0 auto;
+  position: relative;
 }
 /* tab list item */
 .tabs-search .tabs-list{
@@ -27203,6 +27204,16 @@ li{
       overflow: scroll;
       justify-content: flex-start;
   }
+  &::after{
+    position: absolute;
+    top: 3px;
+    right: 0;
+    width: 25%;
+    height: 44px;
+    content: ' ';
+    z-index: 1;
+    background-image: linear-gradient(to right,rgba(250,0,0,0),#ffffff);
+}
 }
 .tabs-search .tabs-list li{
   float:left;
