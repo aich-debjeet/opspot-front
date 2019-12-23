@@ -433,16 +433,6 @@ li.active a{
     height:auto;
     margin:0 auto;
     position: relative;
-    &::after{
-        position: absolute;
-        top: 3px;
-        right: 0;
-        width: 25%;
-        height: 44px;
-        content: ' ';
-        z-index: 1;
-        background-image: linear-gradient(to right,rgba(250,0,0,0),#ffffff);
-    }
 }
 
 /* tab list item */
@@ -459,6 +449,16 @@ li.active a{
         padding-left: 2px;
         overflow: scroll;
         justify-content: flex-start;
+    }
+    &::after{
+        position: absolute;
+        top: 3px;
+        right: 0;
+        width: 25%;
+        height: 44px;
+        content: ' ';
+        z-index: 1;
+        background-image: linear-gradient(to right,rgba(250,0,0,0),#ffffff);
     }
 }
 .tabs-search .tabs-list li{
