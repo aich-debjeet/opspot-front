@@ -45,7 +45,7 @@
           <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="cover">
         </div>
         <!--frofile ends-->
-        <div class="o-community-card-header">
+        <div class="o-community-card-header" id="tile-entity-name">
           <div class="f500 text-lg">{{entity.name}}</div>
         </div>
         <div class="o-community-card-skills" *ngIf="entity?.tags.length > 0; else emptyTag">
@@ -61,15 +61,15 @@
           <opspot-groups-join-button *ngIf="(!entity['is:member'] && entity.membership === 2) && !entity['is:awaiting']"
             [group]="entity">
           </opspot-groups-join-button>
-          <button type="button" *ngIf="(!entity['is:member'] && entity.membership !== 2) && !entity['is:awaiting']"
+          <button type="button" id="tile-join-button" *ngIf="(!entity['is:member'] && entity.membership !== 2) && !entity['is:awaiting']"
             class="btn btn-primary btn-sm" (click)='trigger(entity)'>Join</button>
           <!-- <ng-template> -->
-          <button *ngIf="entity['is:member']" class="btn btn-primary btn-sm" i18n="@@GROUPS__TILE__OPEN_ACTION"
+          <button *ngIf="entity['is:member']" id="tile-open-button" class="btn btn-primary btn-sm" i18n="@@GROUPS__TILE__OPEN_ACTION"
             (click)='trigger(entity)'>
             Open
           </button>
           <!-- </ng-template> -->
-          <button class="btn btn-primary btn-sm" *ngIf="entity['is:awaiting']" (click)="cancleRequest()"
+          <button class="btn btn-primary btn-sm" id="tile-cancel-button" *ngIf="entity['is:awaiting']" (click)="cancleRequest()"
             i18n="@@GROUPS__TILE__OPEN_ACTION">
             Cancle
           </button>

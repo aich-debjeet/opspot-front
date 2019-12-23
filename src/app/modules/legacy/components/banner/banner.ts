@@ -36,7 +36,7 @@ import { Component, EventEmitter } from '@angular/core';
       <div class="save-bar" [hidden]="!file">
           <div class="mdl-layout-spacer"></div>
           <span class="opspot-button-edit cancel-button" (click)="cancel()">
-          <button i18n="@@M__ACTION__CANCEL">Cancel</button>
+          <button i18n="@@M__ACTION__CANCEL" id="banner-cancel-button">Cancel</button>
         </span>
       </div>
       <input type="file" id="file" (change)="add($event)" [hidden]="file" />

@@ -64,25 +64,25 @@
   </div>
 </div> -->
 
-<ul *ngIf="filteredConversations?.length > 0" class="o-net-list">
+<ul *ngIf="filteredConversations?.length > 0" class="o-net-list" id="user-list-message">
   <ng-container *ngFor="let conversation of filteredConversations;">
     <li
       class="o-net-list__item"
       [class.o-net-list__item--unread]="conversation.unread == 0"
       [class.o-net-list__item--active]="conversation.isActive == true"
     >
-      <a (click)="openConversation(conversation)" class="o-net-user-list">
+      <a (click)="openConversation(conversation)" class="o-net-user-list" id="user-list-selection">
         <div class="o-net-user-list__avatar o-avatar-md">
           <img [src]="opspot.cdn_url + 'icon/' + conversation.participants[0].guid" alt="">
         </div>
         <div class="o-net-user-list__info">
-          <div class="text-md f500">{{conversation.name}}</div>
+          <div class="text-md f500" >{{conversation.name}}</div>
           <div class="o-net-msg-info">
             <!-- NO DATA FROM BACKEND -->
             <!-- <div class="o-net-msg-info__short text-sm grey">
                 So Jenny, What do you do What do you do
             </div> -->
-            <div class="o-net-msg-info__tym text-sm grey">{{conversation.username}}</div>
+            <div class="o-net-msg-info__tym text-sm grey" id="user-list-conversation-name">{{conversation.username}}</div>
           </div>
         </div>
       </a>

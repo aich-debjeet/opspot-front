@@ -19,7 +19,7 @@
     <div class="o-noti-body o-noti-body--event">
       <!-- subscribed -->
       <ng-template ngSwitchCase="friends">
-        <a  [routerLink]="['/', notification.fromObj.username || '']">
+        <a  [routerLink]="['/', notification.fromObj.username || '']" id="notification-subscribed">
           <p class="o-noti-info__det text-sm grey" *ngIf="notification.fromObj.subscribed" i18n="@@NOTIFICATIONS__NOTIFICATION__FRIENDS_MATCH">{{notification.fromObj.name}} Started Following you</p>
           <p class="o-noti-info__det text-sm grey" id="notification-subscribed" *ngIf="!notification.fromObj.subscribed" i18n="@@NOTIFICATIONS__NOTIFICATION__FRIENDS">{{notification.fromObj.name}} Started Following you</p>
         </a>
@@ -53,7 +53,7 @@
       <!-- Add -->
       <ng-template ngSwitchCase="group_queue_add">
         <a [routerLink]="['/newsfeed', notification.entityObj.guid ]">
-          <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_QUEUE_ADD">
+          <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_QUEUE_ADD" id="notification-added-group">
             Your post for <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span> is awaiting approval from group administrators.
           </p>
         </a>
@@ -372,7 +372,7 @@
             <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="notification.entityObj && !notification.entityObj.title && notification.entityObj.name">{{notification.entityObj.name}}</span>
             <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="notification.entityObj && !notification.entityObj.title && !notification.entityObj.name && notification.entityObj.type !== 'user'" i18n="@@NOTIFICATIONS__NOTIFICATION__YOUR_POST">your post</span>
             <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="notification.entityObj && !notification.entityObj.title && !notification.entityObj.name && notification.entityObj.type === 'user'" i18n="@@NOTIFICATIONS__NOTIFICATION__YOUR_CHANNEL">your channel</span>
-            <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__BOOST_REJECTED__REASON"> was rejected for <ng-container *ngIf="notification.params.reason && notification.params.reason !== -1"><i>{{ findReason(notification.params.reason).label }}</i>.</ng-container> Your tokens have been credited back to your wallet.</ng-container>
+            <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__BOOST_REJECTED__REASON"> was rejected for <ng-container *ngIf="notification.params.reason && notification.params.reason !== -1"><i>{{ findReason(notification.params.reason).label }}</i>.</ng-container> Your coins have been credited back to your wallet.</ng-container>
           </p>
         </a>
       </ng-template>
@@ -393,7 +393,7 @@
       <!-- Boost accepted -->
       <ng-template ngSwitchCase="boost_accepted">
         <a [routerLink]="notification.entityObj.type == 'activity' ? ['/newsfeed', notification.entityObj.guid] : ['/boost/console/content']">
-          <p *ngIf="notification.params.impressions" id="notification-boost-accepted"><ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__X_POINTS_FOR">{{notification.params.bid | token:18}} tokens <span *ngIf="notification.entityObj">for </span></ng-container>
+          <p *ngIf="notification.params.impressions" id="notification-boost-accepted"><ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__X_POINTS_FOR">{{notification.params.bid | token:18}} coins <span *ngIf="notification.entityObj">for </span></ng-container>
             <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="notification.entityObj && notification.entityObj.title">{{notification.entityObj.title | excerpt}}</span>
             <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="notification.entityObj && !notification.entityObj.title && notification.entityObj.name">{{notification.entityObj.name}}</span>
             <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="notification.entityObj && !notification.entityObj.title && !notification.entityObj.name && notification.entityObj.type !== 'user'" i18n="@@NOTIFICATIONS__NOTIFICATION__YOUR_POST">your post</span>
@@ -431,7 +431,7 @@
               {{notification.params.bid | token:18}}
               <span [hidden]="notification.params.type != 'pro'" i18n="@@M__COMMON__USD">USD</span>
               <span [hidden]="notification.params.type != 'points'" i18n="@@M__COMMON__POINTS_SUFFIX">points</span>
-              <span [hidden]="notification.params.currency != 'tokens'" i18n="@@M__COMMON__POINTS_SUFFIX">tokens</span>
+              <span [hidden]="notification.params.currency != 'tokens'" i18n="@@M__COMMON__POINTS_SUFFIX">coins</span>
             </b>
             <span *ngIf="notification.entityObj" i18n="@@NOTIFICATIONS__NOTIFICATION__FOR_WORD"> for </span>
             <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="notification.entityObj && notification.entityObj.title">{{notification.entityObj.title | excerpt}}</span>
@@ -451,7 +451,7 @@
               {{notification.params.bid | token:18}}
               <span [hidden]="notification.params.type != 'pro'" i18n="@@M__COMMON__USD">USD</span>
               <span [hidden]="notification.params.type != 'points'" i18n="@@M__COMMON__POINTS_SUFFIX">points</span>
-              <span [hidden]="notification.params.currency != 'tokens'" i18n="@@M__COMMON__POINTS_SUFFIX">tokens</span>
+              <span [hidden]="notification.params.currency != 'tokens'" i18n="@@M__COMMON__POINTS_SUFFIX">coins</span>
             </b>
             <span *ngIf="notification.entityObj">for </span>
             <span class="pseudo-link mdl-color-text--blue-grey-400"  *ngIf="notification.entityObj && notification.entityObj.title">{{notification.entity.title | excerpt}}</span>
@@ -470,7 +470,7 @@
               {{notification.params.bid | token:18}}
               <span [hidden]="notification.params.type != 'pro'" i18n="@@M__COMMON__USD">USD</span>
               <span [hidden]="notification.params.type != 'points'" i18n="@@M__COMMON__POINTS_SUFFIX">points</span>
-              <span [hidden]="notification.params.currency != 'tokens'" i18n="@@M__COMMON__POINTS_SUFFIX">tokens</span>
+              <span [hidden]="notification.params.currency != 'tokens'" i18n="@@M__COMMON__POINTS_SUFFIX">coins</span>
             </b>
             <span *ngIf="notification.entityObj" i18n="X points _for_ entity@@NOTIFICATIONS__NOTIFICATION__FOR_WORD">for </span>
             <span class="pseudo-link mdl-color-text--blue-grey-400"  *ngIf="notification.entityObj && notification.entityObj.title">{{notification.entity.title | excerpt}}</span>
@@ -609,19 +609,19 @@
       <ng-template ngSwitchCase="wire_happened">
         <a *ngIf="notification.params.amount && notification.from && notification.to">
           <p *ngIf="!notification.params.subscribed && notification.params.from_guid == session.getLoggedInUser().guid" i18n="@@NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__TO_ONETIME">
-            You have successfully wired {{notification.params.amount}} to <a [routerLink]="['/', notification.params.to_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.to_username}}</a>
+            You have successfully contributed {{notification.params.amount}} to <a [routerLink]="['/', notification.params.to_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.to_username}}</a>
           </p>
     
           <p *ngIf="!notification.params.subscribed && notification.params.from_guid != session.getLoggedInUser().guid" i18n="@@NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__FROM_ONETIME">
-            You have received a wire of {{notification.params.amount}} from <a [routerLink]="['/', notification.params.from_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.from_username}}</a>
+            You have received a contribute of {{notification.params.amount}} from <a [routerLink]="['/', notification.params.from_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.from_username}}</a>
           </p>
     
           <p *ngIf="notification.params.subscribed && notification.params.from_guid == session.getLoggedInUser().guid" i18n="@@NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__TO_SUBSCRIPTION">
-            You have subscribed to wire {{notification.params.amount}}/month to <a [routerLink]="['/', notification.params.to_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.to_username}}</a>
+            You have subscribed to contribute {{notification.params.amount}}/month to <a [routerLink]="['/', notification.params.to_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.to_username}}</a>
           </p>
     
           <p *ngIf="notification.params.subscribed && notification.params.from_guid != session.getLoggedInUser().guid" i18n="@@NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__FROM_SUBSCRIPTION">
-            You have received a wire subscription of {{notification.params.amount}}/month from <a [routerLink]="['/', notification.params.from_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.from_username}}</a>
+            You have received a contribute subscription of {{notification.params.amount}}/month from <a [routerLink]="['/', notification.params.from_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.from_username}}</a>
           </p>
         </a>
       </ng-template>
@@ -669,7 +669,7 @@
           routerLink="/wallet/tokens/contributions"
         >
           <p i18n="@@NOTIFICATIONS__NOTIFICATION__REWARDS__YOU_HAVE_RECEIVED_X_TOKENS_TODAY">
-            You earned {{notification.params.amount}} tokens today.
+            You earned {{notification.params.amount}} coins today.
           </p>
         </a>
       </ng-template>
@@ -680,7 +680,7 @@
           routerLink="/wallet/tokens/contributions"
         >
           <p i18n="@@NOTIFICATIONS__NOTIFICATION__REWARDS__YOU_HAVE_LEFT">
-            You have {{notification.params.left}} left to earn tokens today!
+            You have {{notification.params.left}} left to earn coins today!
           </p>
         </a>
       </ng-template>

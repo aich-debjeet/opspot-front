@@ -24,7 +24,7 @@
         <div class="o-create-organisation-header">
             <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage" [croperType]="'circle'" (imgResult)="crop($event)">
             </app-image-croper>
-            <h4>{{editOrganization?"Edit":"Create"}} a Organisation</h4>
+            <h4 id="create-organization">{{editOrganization?"Edit":"Create"}} a Organisation</h4>
             <!-- <div class="text-md grey">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
                 ligula eget dolor. Aenean massa. Cum sociis natoque penatibus.
@@ -33,13 +33,13 @@
         <div class="o-create-organisation-content__form">
             <div class="form-group">
                 <label>Organisation Name</label>
-                <input [(ngModel)]="organization.name" type="text" class="form-control form-control-lg">
+                <input [(ngModel)]="organization.name" id="create-organization-name" type="text" class="form-control form-control-lg">
             </div>
             <div class="form-group select-organisation">
                 <label>Organisation Type</label>
-                <select class="form-control form-control-lg" [(ngModel)]="organization.category">
-                        <option value="not-selected">Select Type</option>
-                        <option *ngFor = "let type of organizationTypeList" [value]="type.value">{{ type.label}}</option>       
+                <select class="form-control form-control-lg" id="create-organization-type" [(ngModel)]="organization.category">
+                        <option value="not-selected" id="create-organization-select-type">Select Type</option>
+                        <option *ngFor = "let type of organizationTypeList" id="create-organization-type-value" [value]="type.value">{{ type.label}}</option>       
                 </select>
             </div>
             <div class="form-group">
@@ -49,14 +49,14 @@
             </div>
             <div class="form-group">
                 <label>Location</label>
-                <input [(ngModel)]="organization.location" type="text" class="form-control form-control-lg">
+                <input [(ngModel)]="organization.location" id="create-organization-loaction" type="text" class="form-control form-control-lg">
             </div>
             <div class="form-group">
                 <label>Profile Picture</label>
                 <div class="o-community-profile-picture">
                     <div class="fileUpload" *ngIf="!editOrganization">
                         <span *ngIf="!croppieImage&&!editOrganization" class="icon-plus"></span>
-                        <input type="file" #editImgcomp onclick="this.value = null" (change)="add($event)"
+                        <input type="file" id="create-organization-file" #editImgcomp onclick="this.value = null" (change)="add($event)"
                             class="upload" />
                         <div *ngIf="croppieImage&&!editOrganization" class="fileUpload-preview">
                             <a class="create-community-img" (click)="openCropper()">
@@ -76,8 +76,8 @@
                 </div>
             </div>
             <div class="o-create-organisation-action">
-                <button type="button" class="btn btn-primary btn-lg mr-18" (click)="save($event)" [disabled]="!organization.name">{{editOrganization?"Update":"Create"}}</button>
-                <button type="button" class="btn btn-outline-primary btn-lg" (click)="organizationReset()">Cancel</button>
+                <button type="button" id="create-organization-create-button" class="btn btn-primary btn-lg mr-18" (click)="save($event)" [disabled]="!organization.name">{{editOrganization?"Update":"Create"}}</button>
+                <button type="button" id="create-organization-cancel-button" class="btn btn-outline-primary btn-lg" (click)="organizationReset()">Cancel</button>
             </div>
             <!--Button action ends-->
         </div>

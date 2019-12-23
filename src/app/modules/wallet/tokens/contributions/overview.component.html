@@ -52,19 +52,19 @@
 
 <div class="o-overview-score-reward">
   <div class="o-score-reward">
-      <div class="text-h4 primary f500">
+      <div class="text-h4 primary f500" id="overview-score">
         <ng-container *ngIf="overview.yourContribution !== null">
           {{ overview.yourContribution | number }}
         </ng-container>
       </div>
-      <div class="text-md">Your Score</div>
+      <div class="text-md" id="overview-text">Your Score</div>
   </div>
   <div class="o-score-reward">
-      <div class="text-h4 primary f500">
+      <div class="text-h4 primary f500" id="overview-estimated-rewards">
         <ng-container *ngIf="overview.currentReward !== null">
           {{ overview.currentReward | token:18 | number }}
         </ng-container>
       </div>
-      <div class="text-md">Estimated Rewards</div>
+      <div class="text-md" id="overview-estimated-rewards-text">Estimated Rewards</div>
   </div>
 </div>

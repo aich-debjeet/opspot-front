@@ -8,15 +8,15 @@
     <m-dropdown class="m-token--ledger-filters--addresses">
       <label class="m-token--ledger-filters--label">
         <span i18n="@@WALLET__TOKENS__TRANSACTIONS__ADDRESSES_DROPDOWN">Addresses</span>
-        <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-inactive">keyboard_arrow_down</i>
-        <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-active">keyboard_arrow_up</i>
+        <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-inactive" id="transaction-keyboard-arrow-down">keyboard_arrow_down</i>
+        <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-active" id="transaction-keyboard-arrow-up">keyboard_arrow_up</i>
       </label>
 
       <ul class="m-dropdown--list">
         <li class="m-dropdown--list--item" (click)="toggleAddress(null)">
           <span style="text-transform: capitalize" i18n="@@WALLET__TOKENS__TRANSACTIONS__ALL_ADDRESSES_OPTION">All addresses</span>
           <div class="m-layout--spacer"></div>
-          <i class="material-icons m-token--ledger-filters--check selected" *ngIf="!selectedAddress">check</i>
+          <i class="material-icons m-token--ledger-filters--check selected" *ngIf="!selectedAddress" id="transaction-reciever-check">check</i>
         </li>
         <li class="m-dropdown--list--item" *ngFor="let address of addresses" (click)="toggleAddress(address)">
           
@@ -31,7 +31,7 @@
 
           <!-- <div class="m-layout--spacer"></div> -->
 
-          <i class="material-icons m-token--ledger-filters--check" [class.selected]="address.selected">check</i>
+          <i class="material-icons m-token--ledger-filters--check" [class.selected]="address.selected" id="transaction-conribute-check" >check</i>
         </li>
       </ul>
     </m-dropdown>
@@ -39,8 +39,8 @@
     <m-dropdown class="m-token--ledger-filters--addresses">
       <label class="m-token--ledger-filters--label">
         <span i18n="@@WALLET__TOKENS__TRANSACTIONS__CONTRACTS_DROPDOWN">Contracts</span>
-        <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-inactive">keyboard_arrow_down</i>
-        <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-active">keyboard_arrow_up</i>
+        <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-inactive" id="transaction-contracts-arrow-down">keyboard_arrow_down</i>
+        <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-active" id="transaction-contracts-arrow-up">keyboard_arrow_up</i>
       </label>
       <ul class="m-dropdown--list">
         <li class="m-dropdown--list--item" (click)="toggleContract(null)">
@@ -121,10 +121,10 @@
         <span class="text-md f500">Latest Transactions</span>
         <a class="text-sm f500 primary">View All</a>
     </div><!--title end -->
-    <div class="o-trans-contributed" *ngFor="let transaction of transactions">
+    <div class="o-trans-contributed" id="transactions" *ngFor="let transaction of transactions">
         <div class="o-trans-contributed__price">
             <ng-container *ngIf="transaction.amount >= 0; else negativeRewardAmount">
-            <div class="caption-bold primary f700">
+            <div class="caption-bold primary f700" id="transactions-rewards-coins">
                 + {{ +transaction.amount | token:18 | number }}
             </div>
             </ng-container>
@@ -133,7 +133,7 @@
                   - {{ -transaction.amount | token:18 | number }}
                 </div>
               </ng-template>
-            <div class="text-sm">
+            <div class="text-sm" id="transactions-rewards-type">
                 {{ getNormalizedContractName(transaction.contract)  | uppercase }}
             </div>
         </div><!-- contributed price end-->
@@ -145,7 +145,7 @@
             <a href="#" class="text-sm primary"></a>
         </div><!-- contributed price info end-->
         <div class="o-trans-contributed__date-tym">
-            <div class="text-sm"><span>{{ transaction.timestamp * 1000 | utcDate | date: 'medium' }}</span></div>
+            <div class="text-sm" id="transactions-rewards-time"><span>{{ transaction.timestamp * 1000 | utcDate | date: 'medium' }}</span></div>
         </div>
     </div><!-- trans contributed row end-->
   </div>

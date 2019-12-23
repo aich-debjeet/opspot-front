@@ -28,27 +28,27 @@
     <div class="o-explore-card-action">
       <div class="o-actions">
           <opspot-button-thumbs-up [object]="entity"></opspot-button-thumbs-up>
-        <a class="o-actions__link">
+        <a class="o-actions__link" id="post-card-comment">
           <i class="icon-message-square f-15"></i>
-          <span class="o-action-count text-sm grey">
-            <span>{{commentsCount}}</span>
+          <span class="o-action-count text-sm grey" id="post-card-comment-count">
+            <span >{{commentsCount}}</span>
           </span>
         </a>
-        <a class="o-actions__link" alt="share">
+        <a class="o-actions__link" alt="share" id="post-card-share">
           <i class="icon-share-2 f-15"></i>
-          <span class="o-action-count text-sm grey">
+          <span class="o-action-count text-sm grey" id="post-card-share-count">
               <span>{{entity?.reminds}}</span> 
           </span>
         </a>
         <!-- <opspot-button-comment [object]="entity"></opspot-button-comment> -->
-        <a class="o-actions__link">
+        <a class="o-actions__link" id="post-card-impressions">
           <i class="icon-eye f-15"></i>
-          <span class="o-action-count text-sm grey">
+          <span class="o-action-count text-sm grey" id="post-card-impression-count">
             <span>{{ entity.impressions | number }}</span>
           </span>
         </a>
         <!-- <opspot-button-remind [object]="entity"></opspot-button-remind> -->
-        <a class="o-actions__link o-actions__link--coin">
+        <a class="o-actions__link o-actions__link--coin" id="post-card-contribute-icon">
           <div class="tooltip_coin"><i class="icon-coins f-18"></i>
             <span class="tooltip_coin__text">
               <div class="float-left"><i class="icon-coins f-18"></i></div>

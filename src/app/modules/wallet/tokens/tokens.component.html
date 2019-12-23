@@ -80,7 +80,7 @@
 <div class="container" style="margin-top:6em;">
   <div class="o-wallet-topbar">
     <div class="o-wallet-topbar-left">
-        <h3 class="f700">Wallet
+        <h3 class="f700" id="token-text">Wallet
             <div class="o-payout-tym hidden-above-tablet">
                 <span class="caption-bold f700">{{ overview.nextPayout | timediff:true }} <i class="icon-info"></i></span>
             </div>
@@ -99,18 +99,18 @@
             <div id="token-title" class="text-md primary">Coins</div>
             <div id="token-count" class="text-h3 f700 primary"><m-wallet--balance-tokens></m-wallet--balance-tokens></div>
         </div>
-        <a (click)="buyTokens()" class="btn btn-primary btn-sm o-btn--wallet-buytoken">Buy Coins</a>
+        <a (click)="buyTokens()" id="token-buy-coins" class="btn btn-primary btn-sm o-btn--wallet-buytoken">Buy Coins</a>
     </div><!-- wallet buytoken part end -->
 </div>
 <div class="o-wallet-block">
   <div class="o-wallet-block__tab">
     <div class="tabs-wallet">
         <ul class="tabs-list wallet-tabs">
-            <li routerLinkActive="active" routerLink="/wallet/tokens/overview"><a >Overview</a></li>
+            <li routerLinkActive="active" routerLink="/wallet/tokens/overview"><a id="token-overview">Overview</a></li>
             <li  routerLink="/wallet/tokens/transactions"
-            routerLinkActive="active"><a >Transaction</a></li>
-            <li  routerLinkActive="active" routerLink="/wallet/tokens/contributions" ><a >Contribution</a></li>
-            <!-- <li  routerLinkActive="active" routerLink="/wallet/tokens/withdraw" ><a >Withdraw</a></li> -->
+            routerLinkActive="active"><a id="token-transaction">Transaction</a></li>
+            <li  routerLinkActive="active" routerLink="/wallet/tokens/contributions" ><a id="token-contribution">Contribution</a></li>
+            <!-- <li  routerLinkActive="active" routerLink="/wallet/tokens/withdraw" ><a id="token-withdraw">Withdraw</a></li> -->
         </ul>
     </div><!--tab end-->
 </div>

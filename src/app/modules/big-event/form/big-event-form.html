@@ -1,6 +1,6 @@
 <div class="o-create-big-event">
     <div class="o-create-big-event-content">
-        <div class="o-create-big-event-header">
+        <div class="o-create-big-event-header" id="big-event-header">
             <h4 class="f500">{{lable}} an Event</h4>
             <!-- <div class="text-md grey">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
@@ -11,7 +11,7 @@
             <div class="o-create-big-event-content__form">
                 <div class="form-group">
                     <label>Event Title</label>
-                    <input type="text" class="form-control form-control-lg" formControlName="eventTitle">
+                    <input type="text" id="big-event-title" class="form-control form-control-lg" formControlName="eventTitle">
                     <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventTitle').errors?.required">
                         This is required
                     </div>
@@ -19,7 +19,7 @@
                 <!--Event Title Name ends-->
                 <div class="form-group">
                     <label>Event Description <span class="text-sm grey description-width">21/300</span></label>
-                    <textarea class="form-control" rows="5" formControlName="eventDesc"></textarea>
+                    <textarea class="form-control" id="big-event-description" rows="5" formControlName="eventDesc"></textarea>
                     <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventDesc').errors?.required">
                         This is required
                     </div>
@@ -27,9 +27,9 @@
                 <div class="o-create-big-event-row">
                     <div class="form-group select-big-event mr13">
                         <label>Event Type</label>
-                        <select class="form-control form-control-lg" formControlName="eventType">
+                        <select class="form-control form-control-lg" id="big-event-event-type" formControlName="eventType">
                             <option value="" disabled selected>Select Type</option>
-                            <option *ngFor="let type of eventTypeList" value="{{ type.value }}">{{ type.label}}</option>
+                            <option *ngFor="let type of eventTypeList" id="big-event-type" value="{{ type.value }}">{{ type.label}}</option>
                         </select>
                         <div class="error text-sm"
                             *ngIf="eventSubmitted && eventForm.get('eventType').errors?.required">
@@ -38,9 +38,9 @@
                     </div>
                     <div class="form-group select-big-event">
                         <label>Event Category</label>
-                        <select class="form-control form-control-lg" formControlName="eventCategory">
+                        <select class="form-control form-control-lg" id="big-event-event-category" formControlName="eventCategory">
                             <option value="" disabled selected>Select Category</option>
-                            <option *ngFor="let type of eventCategoryList" value="{{ type.value }}">{{ type.label}}
+                            <option *ngFor="let type of eventCategoryList" id="big-event-event-category-type" value="{{ type.value }}">{{ type.label}}
                             </option>
                         </select>
                         <div class="error text-sm"
@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     <label>Event Location</label>
-                    <input type="text" class="form-control form-control-lg" formControlName="eventLocation">
+                    <input type="text" id="big-event-event-location" class="form-control form-control-lg" formControlName="eventLocation">
                     <div class="error text-sm"
                         *ngIf="eventSubmitted && eventForm.get('eventLocation').errors?.required">
                         This is required
@@ -61,20 +61,20 @@
                 <div class="o-create-big-event-row">
                     <div class="form-group w100 mr13">
                         <label>Start Date</label>
-                        <input type="text" class="form-control form-control-lg" placeholder="Select Date"
+                        <input type="text" id="big-event-event-start-date" class="form-control form-control-lg" placeholder="Select Date"
                             [textMask]="{mask: dateMask}" formControlName="eventStartDate">
                         <div class="error text-sm"
                             *ngIf="eventSubmitted && eventForm.get('eventStartDate').errors?.required">
                             This is required
                         </div>
-                        <div class="error text-sm" *ngIf="eventForm.get('eventStartDate').errors?.oldate">
+                        <div class="error text-sm" *ngIf="eventForm.get('eventStartDate').errors?.invalidDate || eventForm.get('eventStartDate').errors?.oldate">
                             Please choose a valid date.
                         </div>
                     </div>
                     <!--Organisation Type ends-->
                     <div class="form-group w100">
                         <label>Start Time</label>
-                        <input type="text" class="form-control form-control-lg" placeholder="Start Time"
+                        <input type="text" id="big-event-event-start-time" class="form-control form-control-lg" placeholder="Start Time"
                             [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)"
                             formControlName="eventStartTime">
                         <div class="error text-sm"
@@ -88,20 +88,21 @@
                 <div class="o-create-big-event-row">
                     <div class="form-group w100 mr13">
                         <label>End Date</label>
-                        <input type="text" class="form-control form-control-lg" placeholder="Select Date"
+                        <input type="text" id="big-event-event-end-date" class="form-control form-control-lg" placeholder="Select Date"
                             [textMask]="{mask: dateMask}" formControlName="eventEndDate">
                         <div class="error text-sm"
                             *ngIf="eventSubmitted && eventForm.get('eventEndDate').errors?.required">
                             This is required
                         </div>
-                        <div class="error text-sm" *ngIf="eventForm.get('eventEndDate').errors?.oldate">
+                        <div class="error text-sm" *ngIf="eventForm.get('eventEndDate').errors?.invalidDate ||
+                        eventForm.get('eventEndDate').errors?.oldate">
                             Please choose a valid date.
                         </div>
                     </div>
                     <!--Organisation Type ends-->
                     <div class="form-group w100">
                         <label>End Time</label>
-                        <input type="text" class="form-control form-control-lg" placeholder="End Time"
+                        <input type="text" id="big-event-event-end-time" class="form-control form-control-lg" placeholder="End Time"
                             [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventEndTime">
                         <div class="error text-sm"
                             *ngIf="eventSubmitted && eventForm.get('eventEndTime').errors?.required">
@@ -122,7 +123,7 @@
                         <!--file upload ends-->
                         <div class="fileUpload-preview" *ngIf="coverImage">
                             <a class="o-big-event-image">
-                                <a class="fileUpload-close-temp" (click)="removeAttachment(file,imageGuid)">
+                                <a class="fileUpload-close-temp" (click)="removeAttachment(file,imageGuid)" id="big-event-event-remove-image">
                                     <i class="icon-x"></i>
                                 </a>
                                 <img [src]="coverImage" alt="">
@@ -137,8 +138,8 @@
                 </div>
                 <!--Profile Picture ends-->
                 <div class="o-create-big-event-action">
-                    <button type="button" class="btn btn-primary mr-18" (click)="submitEvent()">{{lable}}</button>
-                    <button type="button" class="btn btn-outline-primary btn-lg" (click)="backClicked()">Cancel</button>
+                    <button type="button" id="big-event-event-submit" class="btn btn-primary mr-18" (click)="submitEvent()">{{lable}}</button>
+                    <button type="button" id="big-event-event-cancel" class="btn btn-outline-primary btn-lg" (click)="backClicked()">Cancel</button>
                 </div>
                 <!--Button action ends-->
             </div>

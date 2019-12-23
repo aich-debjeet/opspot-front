@@ -1,19 +1,19 @@
 <div class="tab" style="display: block;">
-    <h5 class="o-prof-edit-title">About</h5>
+    <h5 class="o-prof-edit-title" id="about-component-about-title">About</h5>
     <form name="form" #f="ngForm">
         <div class="o-prof-edit-about">
             <div class="form-group w-xl">
                 <label class="w-xl">Description</label>
-                <textarea name="description" [(ngModel)]=model.description class="o-prof-edit-about-descr" placeholder="Description goes here"> </textarea>
+                <textarea name="description" id="about-component-description" [(ngModel)]=model.description class="o-prof-edit-about-descr" placeholder="Description goes here"> </textarea>
             </div>
             <div class="form-group w-sm">
                 <label>Gender</label>
-                <select class="form-control" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
-                    <option selected="selected" disabled>Select Type</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="others">Others</option>
-                    <option value="nottosay">Not prefer to say</option>
+                <select class="form-control" id="about-component-gender" name="gender" [(ngModel)]="model.gender" #gender="ngModel" required>
+                    <option selected="selected" disabled id="about-component-gender-type">Select Type</option>
+                    <option value="male" id="about-component-gender-male">Male</option>
+                    <option value="female" id="about-component-gender-female">Female</option>
+                    <option value="others" id="about-component-gender-others">Others</option>
+                    <option value="nottosay" id="about-component-gender-not-prefer">Not prefer to say</option>
                 </select>
             </div>
             <!-- gender end -->
@@ -48,11 +48,11 @@
 
                 <div class="form-group w-sm">
                     <label>Height</label>
-                    <input maxlength="5" [(ngModel)]="model.height" name="height" class="form-control form-control-lg" type="text">
+                    <input maxlength="5" id="about-component-height" [(ngModel)]="model.height" name="height" class="form-control form-control-lg" type="text">
                 </div>
                 <div class="form-group w-sm">
                     <label>Weight</label>
-                    <input maxlength="5" [(ngModel)]="model.weight" name="weight" class="form-control form-control-lg" type="text">
+                    <input maxlength="5" id="about-component-weight" [(ngModel)]="model.weight" name="weight" class="form-control form-control-lg" type="text">
                 </div>
                 <!-- <div class="pos">
                     <a class="o-prof-edit-privacy Eternity text-md primary hidden-mob" (click)="toggleHeight=!toggleHeight">
@@ -80,15 +80,15 @@
             </div> -->
 
             <!-- height and weight mobile end -->
-            <p *ngIf="aboutError.dob" class="error text-sm">The age must be atleat 10 or above</p>
-            <p *ngIf="aboutError.dobInvalid" class="error text-sm">Please select a Valid Date</p>
-            <p *ngIf="!gender.valid&&submitted" class="error text-sm">Please select a gender</p>
-            <p *ngIf="!languages.valid&&submitted" class="error text-sm">Please add atleast one language </p>
-            <p *ngIf="invalidForm" class="error text-sm">Please fill all the form fields </p>
+            <p *ngIf="aboutError.dob" class="error text-sm" id="about-component-age-error">The age must be atleat 10 or above</p>
+            <p *ngIf="aboutError.dobInvalid" class="error text-sm" id="about-component-date-error">Please select a Valid Date</p>
+            <p *ngIf="!gender.valid&&submitted" class="error text-sm" id="about-component-gender-error">Please select a gender</p>
+            <p *ngIf="!languages.valid&&submitted" class="error text-sm" id="about-component-langauge-error">Please add atleast one language </p>
+            <p *ngIf="invalidForm" class="error text-sm" id="about-component-all-from-error">Please fill all the form fields </p>
 
             <div class="o-prof-edit-actions">
-                <button type="button" class="btn btn-primary btn-lg" (click)="onSubmit(f)">Save Changes</button>
-                <button type="button" class="btn btn-outline-primary btn-lg btn--cancel" [routerLink]="['/', activeUser?.username]">Cancel</button>
+                <button type="button" id="about-component-save-button" class="btn btn-primary btn-lg" (click)="onSubmit(f)">Save Changes</button>
+                <button type="button" id="about-component-cancel-button" class="btn btn-outline-primary btn-lg btn--cancel" [routerLink]="['/', activeUser?.username]">Cancel</button>
             </div>
             <!-- prof edit actions end -->
 

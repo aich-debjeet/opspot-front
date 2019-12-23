@@ -10,7 +10,7 @@ import { Session } from '../../../services/session';
 @Component({
   selector: 'opspot-organization-settings-button',
   template: `
-    <button class="icon-more-vertical f-15 focusNone" style="padding: 0;background: #fff;
+    <button class="icon-more-vertical f-15 focusNone" id="organization-setting-button" style="padding: 0;background: #fff;
     border: 0 !important;" (click)="toggleMenu($event)">
     </button>
 
@@ -21,36 +21,36 @@ import { Session } from '../../../services/session';
           <ng-container *ngIf="editing">Save</ng-container>
       </li>
 
-      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.videoChatDisabled" (click)="toggleVideoChat(true)">Enable Gathering</li>
-      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.videoChatDisabled" (click)="toggleVideoChat(false)">Disable Gathering</li> -->
+      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.videoChatDisabled" id="organization-setting-enable-gathering" (click)="toggleVideoChat(true)">Enable Gathering</li>
+      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.videoChatDisabled" id="organization-setting-diable-gathering" (click)="toggleVideoChat(false)">Disable Gathering</li> -->
 
-      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.moderated" (click)="toggleModeration(false)">Disable moderation</li>
-      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.moderated" (click)="toggleModeration(true)">Enable moderation</li>-->
+      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.moderated" id="organization-setting-disable-moderation" (click)="toggleModeration(false)">Disable moderation</li>
+      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.moderated" id="organization-setting-enable-moderation" (click)="toggleModeration(true)">Enable moderation</li>-->
 
-      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.membership" (click)="togglePublic(true)">Make public</li>
-      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.membership" (click)="togglePublic(false)">Make closed</li>-->
+      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.membership" id="organization-setting-make-public" (click)="togglePublic(true)">Make public</li>
+      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.membership" id="organization-setting-make-closed" (click)="togglePublic(false)">Make closed</li>-->
 
       <!-- Member functions -->
-      <li class="mdl-menu__item" [hidden]="organization['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS">Disable Notifications</li>
-      <li class="mdl-menu__item" [hidden]="!organization['is:muted']" (click)="unmute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__ENABLE_NOTIFICATIONS">Enable Notifications</li>
+      <li class="mdl-menu__item" [hidden]="organization['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS" id="organization-setting-disable-notification">Disable Notifications</li>
+      <li class="mdl-menu__item" [hidden]="!organization['is:muted']" (click)="unmute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__ENABLE_NOTIFICATIONS" id="organization-setting-enable-notification">Enable Notifications</li>
 
       <!-- admin functions -->
-      <li class="mdl-menu__item" *ngIf="session.isAdmin() && !organization.mature" (click)="setExplicit(true)" i18n="@@M__ACTION__SET_EXPLICIT">Set Explicit</li>
-      <li class="mdl-menu__item" *ngIf="session.isAdmin() && organization.mature" (click)="setExplicit(false)" i18n="@@M__ACTION__REMOVE_EXPLICIT">Remove Explicit</li>
-      <li class="mdl-menu__item" *ngIf="!organization['is:owner'] && !organization['is:creator']" (click)="report(); showMenu = false" i18n="@@M__ACTION__REPORT">Report</li>
-      <li class="mdl-menu__item" *ngIf="organization['is:creator']" [hidden]="organization.deleted" (click)="deletePrompt()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP">Delete Organization</li>
+      <li class="mdl-menu__item" *ngIf="session.isAdmin() && !organization.mature" (click)="setExplicit(true)" i18n="@@M__ACTION__SET_EXPLICIT" id="organization-setting-set-explicit">Set Explicit</li>
+      <li class="mdl-menu__item" *ngIf="session.isAdmin() && organization.mature" (click)="setExplicit(false)" i18n="@@M__ACTION__REMOVE_EXPLICIT" id="organization-setting-remove-explicit">Remove Explicit</li>
+      <li class="mdl-menu__item" *ngIf="!organization['is:owner'] && !organization['is:creator']" (click)="report(); showMenu = false" i18n="@@M__ACTION__REPORT" id="organization-setting-report">Report</li>
+      <li class="mdl-menu__item" *ngIf="organization['is:creator']" [hidden]="organization.deleted" (click)="deletePrompt()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP" id="organization-setting-delete-organizatopn">Delete Organization</li>
     </ul>
     <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
 
     <m-modal [open]="organization['is:owner'] && isGoingToBeDeleted">
-      <div class="mdl-card__supporting-text">
+      <div class="mdl-card__supporting-text" id="organization-setting-confirmation-window">
         <p i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP_CONFIRM">Are you sure you want to delete {{ organization.name }}? This action cannot be undone.</p>
       </div>
       <div class="mdl-card__actions">
-        <button (click)="delete()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        <button (click)="delete()" id="organization-setting-delete-action" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
           <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
         </button>
-        <button (click)="cancelDelete()" class="mdl-button mdl-js-button mdl-button--colored">
+        <button (click)="cancelDelete()" id="organization-setting-cancel-action" class="mdl-button mdl-js-button mdl-button--colored">
           <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
         </button>
       </div>
@@ -63,7 +63,7 @@ import { Session } from '../../../services/session';
           <option *ngFor="let category of categories" [value]="category.id">{{category.label}}</option>
         </select>
 
-        <button class="mdl-button mdl-button--colored" (click)="feature()" i18n="@@M__ACTION__FEATURE">Feature</button>
+        <button class="mdl-button mdl-button--colored" id="organization-setting-feature-button" (click)="feature()" i18n="@@M__ACTION__FEATURE">Feature</button>
       </div>
     </m-modal>
    <style>

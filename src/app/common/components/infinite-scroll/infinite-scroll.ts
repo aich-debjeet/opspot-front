@@ -11,6 +11,7 @@ import { ScrollService } from '../../../services/ux/scroll';
     <div class="mdl-spinner mdl-js-spinner is-active" [mdl] [hidden]="!inProgress"></div>
   
     <div class="m-infinite-scroll-manual "
+      id="infinite-scroll-nothing-more-to-load"
       [hidden]="moreData"
       *ngIf="!hideManual">
       <ng-container i18n="@@COMMON__INFINITE_SCROLL__NOTHING_MORE">Nothing more to load</ng-container>

@@ -29,10 +29,10 @@
       [hidden]="hasInlineContentLoaded()"
     ></div>
 
-    <div *ngIf="!embeddedInline && inlineEmbed" class="m-rich-embed-action-overlay">
-      <i *ngIf="inlineEmbed.playable" class="material-icons">play_arrow</i>
-      <i *ngIf="inlineEmbed.viewable" class="material-icons">remove_red_eye</i>
-      <i *ngIf="inlineEmbed.downloadable" class="material-icons">file_download</i>
+    <div *ngIf="!embeddedInline && inlineEmbed" id="rich-embed-video" class="m-rich-embed-action-overlay">
+      <i *ngIf="inlineEmbed.playable" id="rich-embed-video-play" class="material-icons">play_arrow</i>
+      <i *ngIf="inlineEmbed.viewable" id="rich-embed-video-remove-red-eye" class="material-icons">remove_red_eye</i>
+      <i *ngIf="inlineEmbed.downloadable" id="rich-embed-video-download" class="material-icons">file_download</i>
     </div>
 
     <div *ngIf="hasInlineContentLoaded()" [class]="inlineEmbed.className">

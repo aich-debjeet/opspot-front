@@ -433,7 +433,7 @@
                        <h5 class="f700">{{group.name}}</h5>
                    </div><!-- community name end -->
                    
-                   <div class="o-community-skills" *ngIf="!editing && group.tags" >
+                   <div class="o-community-skills" *ngIf="!editing && group.tags" id="profile-community-hashtags">
                        <a *ngFor="let tag of group.tags" href="" class="o-community-skills__tag">#{{tag}}></a>
                    </div><!-- community skill end -->
                    <opspot-groups-join-button 
@@ -444,8 +444,8 @@
                    >
    
                   </opspot-groups-join-button>
-                   <div class="o-community-members-top o-community-members-top--mob hidden-above-tablet">
-                       <a class="o-community-members-top__count-mob" *ngFor="let member of membersMobile">
+                   <div class="o-community-members-top o-community-members-top--mob hidden-above-tablet" >
+                       <a class="o-community-members-top__count-mob" *ngFor="let member of membersMobile" >
                            <span class="o-community-members-list-mob-single"><img [src]="memberSrc+member.guid" alt=""></span>
                        </a>
                        <a (click)="openInvite()" class="o-community-add-members-mob"><i class="icon-plus"></i></a>

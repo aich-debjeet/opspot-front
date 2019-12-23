@@ -14,6 +14,7 @@
                     [ngModel]="meta.message"
                     (keyup)="getPostPreview(message)"
                     (ngModelChange)="onMessageChange($event)"
+                    [autoGrow]
                 ></textarea>
             </div>
         </div>
