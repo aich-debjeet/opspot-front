@@ -4,13 +4,13 @@
 
 <div class="feed-paywall bg" [style.backgroundImage]="getBackground()">
   
-  <h4 class="white" id="paywall">{{ entity.wire_threshold.min | number }} tokens </h4>
+  <h4 class="white" id="paywall">{{ entity.wire_threshold.min | number }} coins </h4>
 
   <div class="text-md grey">
     This post can only be seen by supporters
-    who wire 
+    who contribute 
     <ng-container *ngIf="entity?.wire_threshold?.type == 'tokens'" i18n="@@WIRE__LOCK_SCREEN__OVER_TOKENS_PER_MONTH">
-      over {{ entity.wire_threshold.min | number }} Tokens 
+      over {{ entity.wire_threshold.min | number }} Coins 
     </ng-container>
     <ng-container *ngIf="entity?.ownerObj?.username" i18n="@@WIRE__LOCK_SCREEN__TO_USERNAME_PART">
       to @{{ entity.ownerObj.username }}

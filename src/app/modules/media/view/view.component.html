@@ -252,7 +252,7 @@ opspot-button-remind{
           <div class="o-posts-inner-page-myjourney-padding">
             <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">
               <div *ngFor="let media of entity?.custom_data; let i = index;">
-                <a class="feed-media__link">
+                <a class="feed-media__link" id="view-media-link">
                   <img *ngIf="media.entity_type !== 'video'" [src]="media.src" alt="" class="feed-media__img"
                     (click)="showImage(i)">
                   <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">

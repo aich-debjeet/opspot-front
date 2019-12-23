@@ -3,17 +3,17 @@
         <div id="support" class="tab active">
             <div class="o-settings-support">
                 <div class="o-settings-thread-dropdown o-settings-thread-dropdown--select">
-                    <select class="form-control o-settings-thread-dropdown__select" (change)="onChange($event.target.value)">
-                        <option value="review" selected="selected">Review Pending</option>
-                        <option value="pending">Appealed</option>
-                        <option value="rejected">Rejected</option>
-                        <option value="approved">Approved</option>
+                    <select class="form-control o-settings-thread-dropdown__select" id="support" (change)="onChange($event.target.value)">
+                        <option value="review" selected="selected" id="support-review-pending">Review Pending</option>
+                        <option value="pending" id="support-appealed">Appealed</option>
+                        <option value="rejected" id="support-rejected">Rejected</option>
+                        <option value="approved" id="support-approved">Approved</option>
                     </select>
                 </div>
                 <div *ngFor="let appeal of appeals; let i = index"
                     class="mdl-card mdl-shadow--2dp m-report-console--item">
 
-                    <div class="m-report-console--header mdl-color--blue mdl-color-text--white">
+                    <div class="m-report-console--header mdl-color--blue mdl-color-text--white" id="support-reasons">
                         <b>{{ appeal.time_created * 1000 | date: 'short' }}</b>
                         <p [ngSwitch]="appeal.reason">
                             <span *ngSwitchCase="1" i18n="@@REPORT__CONSOLE__REASON_ILLEGAL_LABEL">The following post
@@ -49,10 +49,12 @@
                     <div class="m-report-console--appeal">
                         <div class="m-report-console--appeal--composer" *ngIf="filter == 'review'">
                             <textarea #appealContent
+                                id="support-textarea"
                                 placeholder="Please type in this box if you wish to appeal this decision, explaining your reasons"
                                 i18n="@@REPORT__CONSOLE__APPEAL_COMPOSER_PLACEHOLDER"></textarea>
 
                             <button class="m-report-console--appeal--button" [disabled]="appeal.inProgress"
+                                id="support-appeal-button"
                                 (click)="sendAppeal(appeal, appealContent.value, i)"
                                 i18n="@@REPORT__CONSOLE__APPEAL_ACTION">
                                 Appeal

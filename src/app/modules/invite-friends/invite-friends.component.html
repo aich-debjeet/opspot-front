@@ -3,7 +3,7 @@
     <div class="o-invite-block">
       <div class="o-invite-block-hero">
         <div class="o-invite-block-hero__title">
-          <h2 class="f700">Invite Friends</h2>
+          <h2 class="f700" id="invite-friends-page">Invite Friends</h2>
           <div class="caption-regular o-invit-block-hero-text">
             Enjoying One Page Spotlight, invite your friends on the platform.
           </div>
@@ -18,9 +18,9 @@
       </div><!-- invite short det end -->
       <div class="o-invite-email">
         <div class="caption-bold f500">Invite your friends by email</div>
-        <textarea name="" id="" cols="" rows="" class="o-invite-email-textarea text-md"
+        <textarea name="" id="invite-friends-email-adderss" cols="" rows="" class="o-invite-email-textarea text-md"
           placeholder="Add email address using commas"></textarea>
-        <a class="o-send-invite">Send Invite</a>
+        <a class="o-send-invite" id="invite-friends-send-invite">Send Invite</a>
       </div><!-- invite by email end -->
       <div class="o-invite-other-way">
         <div class="caption-bold f500">More ways to invite your friends</div>
@@ -29,19 +29,19 @@
                     (click)="applyFocus(registerUrlEl, 'registerUrl')"> -->
           <input class="text-md grey input" readonly tabindex="-1" value="{{ registerUrl }}" #registerUrlEl />
           <!-- </div> -->
-          <button class="o-invite-copy-link-btn text-sm f500 white"
+          <button class="o-invite-copy-link-btn text-sm f500 white" id="invite-friends-copy-link"
             (click)="copyToClipboard(registerUrlEl, 'registerUrl')">Copy Link</button>
         </div><!-- invite link copy end -->
         <div class="o-invite-link-copy-other-social">
-          <a (click)="openEmail()" class="o-invite-social-btn">
+          <a (click)="openEmail()" class="o-invite-social-btn" id="invite-friends-on-gmail">
             <div class="o-invite-social-icon"><img src="assets/svg/gmail_Icon.svg" alt=""></div>
             <div class="text-sm f500 hidden-under-tablet">Invite Gmail Contacts</div>
           </a>
-          <a (click)="openFacebook()" class="o-invite-social-btn">
+          <a (click)="openFacebook()" class="o-invite-social-btn" id="invite-friends-on-facebook">
             <div class="o-invite-social-icon"><img src="assets/svg/fb.svg" alt=""></div>
             <div class="text-sm f500 hidden-under-tablet">Share in Facebook</div>
           </a>
-          <a (click)="openTwitter()" class="o-invite-social-btn">
+          <a (click)="openTwitter()" class="o-invite-social-btn" id="invite-friends-on-twitter">
             <div class="o-invite-social-icon"><img src="assets/svg/twitter_bird.svg" alt=""></div>
             <div class="text-sm f500 hidden-under-tablet">Tweet in Twitter</div>
           </a>

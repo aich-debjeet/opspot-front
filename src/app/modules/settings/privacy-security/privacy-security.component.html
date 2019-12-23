@@ -2,7 +2,7 @@
   <div class="tabs-settings">
     <div id="privacy_security" class="tab">
       <div class="o-settings-fields o-settings-fields-privacy">
-          <h5 class="f500">Password</h5>
+          <h5 class="f500" id="privacy-security-password-title">Password</h5>
           <div class="text-md grey">
               Choose a unique password to protect your password
           </div>
@@ -10,12 +10,12 @@
               <label>Password</label>
               <input type="password" class="form-control form-control-lg" value="abcdefghi">
           </div> -->
-          <a class="text-md primary" (click)="changePassword()" [hidden]="displayPassword">Change Password</a>
+          <a class="text-md primary" id="privacy-security-chage-password" (click)="changePassword()" [hidden]="displayPassword">Change Password</a>
           <div class="o-settings-add-email" id="password" [hidden]="!displayPassword">
             <form [formGroup]="form">
               <div class="form-group o-settings-width">
                 <label>Current Password</label>
-                <input type="password" formControlName="currentPassword" class="form-control form-control-lg">
+                <input type="password" id="privacy-security-current-password" formControlName="currentPassword" class="form-control form-control-lg">
                 <div *ngIf="!form.controls['currentPassword'].valid && form.controls['currentPassword'].touched" class="error text-sm">
                     <div *ngIf="form.controls['currentPassword'].errors.required">Current Password is required</div>
                 </div>
@@ -23,22 +23,22 @@
               </div>
               <div class="form-group o-settings-width">
                  <label>New Password</label>
-                 <input type="password" formControlName="newPassword" class="form-control form-control-lg">
+                 <input type="password" id="privacy-security-new-password" formControlName="newPassword" class="form-control form-control-lg">
                  <div *ngIf="!form.controls['newPassword'].valid && form.controls['newPassword'].touched" class="error text-sm">
                     <div *ngIf="form.controls['newPassword'].errors.required">Confirm Password is required</div>
                 </div>
               </div>
               <div class="form-group o-settings-width padng-btm1">
                   <label>Confirm Password</label>
-                  <input type="password" formControlName="confirmpassword" class="form-control form-control-lg">
+                  <input type="password" id="privacy-security-confirm-password" formControlName="confirmpassword" class="form-control form-control-lg">
                   <div *ngIf="form.controls['confirmpassword'].touched && !form.controls['confirmpassword'].valid"
                 class="error text-sm">
                   <div *ngIf="form.controls['confirmpassword'].errors.required">Confirm Password is required</div>
                   <div *ngIf="form.controls['confirmpassword'].errors.mustMatch">Passwords must match</div>
               </div>
               </div>
-              <button type="button" class="btn btn-primary btn-lg pading-right" (click)="save()">Update</button>
-              <button type="button" class="btn btn-outline-primary btn-lg" (click)="changePassword()">Cancel</button>
+              <button type="button" id="privacy-security-update-password" class="btn btn-primary btn-lg pading-right" (click)="save()">Update</button>
+              <button type="button" id="privacy-security-cancel-button" class="btn btn-outline-primary btn-lg" (click)="changePassword()">Cancel</button>
             </form>
           </div><!--change password section-->
           <div class="o-settings-line"></div>
@@ -47,7 +47,7 @@
           <h5 class="f500">Login History</h5>
           <div class="text-md grey">
             Active sessions : <span>{{openSessions}}</span><br><br>
-            <button type="button" class="btn btn-primary" (click)="closeAllSessions()">CLOSE ALL SESSIONS</button>
+            <button type="button" id="privacy-security-close-sessions" class="btn btn-primary" (click)="closeAllSessions()">CLOSE ALL SESSIONS</button>
           </div>
           <!-- <div class="o-settings-login-history marg-tp1">
               <div class="o-settings-login-history__details">

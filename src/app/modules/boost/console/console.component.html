@@ -77,9 +77,9 @@
       <div class="o-boost-console-block__tab">
         <div class="tabs-boost-console">
           <ul class="tabs-list boost-console-tabs">
-            <li [ngClass]="{'active': postType == 'boosted'}"><a (click)="loadData('boosted')">Boosted Posts</a></li>
-            <li [ngClass]="{'active': postType == 'completed'}"><a (click)="loadData('completed')">Completed Targets</a></li>
-            <li [ngClass]="{'active': postType == 'rejected'}"><a (click)="loadData('rejected')">Rejected Posts</a></li>
+            <li [ngClass]="{'active': postType == 'boosted'}"><a (click)="loadData('boosted')" id="console-boosted-posts">Boosted Posts</a></li>
+            <li [ngClass]="{'active': postType == 'completed'}"><a (click)="loadData('completed')" id="console-completed-targets">Completed Targets</a></li>
+            <li [ngClass]="{'active': postType == 'rejected'}"><a (click)="loadData('rejected')" id="console-rejected-posts">Rejected Posts</a></li>
           </ul>
         </div>
         <!--tab end-->
@@ -107,7 +107,7 @@
           <div class="text-lg f500">
             My Posts
           </div>
-          <a class="text-sm primary" [routerLink]="['/', session.getLoggedInUser().username]">
+          <a class="text-sm primary" id="console-see-all" [routerLink]="['/', session.getLoggedInUser().username]">
             See All
           </a>
         </div>
