@@ -38,17 +38,21 @@
                                 <input type="radio" [checked]="this._filter == 'event'" value="event" name="event">
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="c-checkbox" (click)="changeFilter('album')">Album
+                            <!-- <label class="c-checkbox" (click)="changeFilter('album')">Album
                                 <input type="radio" [checked]="this._filter == 'album'" value="album" name="album">
                                 <span class="checkmark"></span>
-                            </label>
+                            </label> -->
                             <label class="c-checkbox" (click)="changeFilter('item')">BlueStore
                                 <input type="radio" [checked]="this._filter == 'item'" value="blueStore"
                                     name="blueStore">
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="c-checkbox" (click)="changeFilter('posts')">Posts
-                                <input type="radio" [checked]="this._filter == 'posts'" value="posts" name="posts">
+                            <label class="c-checkbox" (click)="changeFilter('post')">Posts
+                                <input type="radio" [checked]="this._filter == 'post'" value="post" name="post">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="c-checkbox" (click)="changeFilter('profile')">Profile
+                                <input type="radio" [checked]="this._filter == 'profile'" value="profile" name="profile">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -114,8 +118,12 @@
                                                 name="blueStore">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label class="c-checkbox" (click)="changeFilter('posts')">Posts
-                                            <input type="radio" [checked]="this._filter == 'posts'" value="posts" name="posts">
+                                        <label class="c-checkbox" (click)="changeFilter('post')">Posts
+                                            <input type="radio" [checked]="this._filter == 'post'" value="post" name="post">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('profile')">Profile
+                                            <input type="radio" [checked]="this._filter == 'profile'" value="profile" name="profile">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
