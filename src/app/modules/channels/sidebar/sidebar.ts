@@ -29,6 +29,7 @@ export class ChannelSidebar {
   profEdit = true;
   sidebarMsg = true;
   @Output() changeEditing = new EventEmitter<boolean>();
+  _deleteBookmark: EventEmitter<any> = new EventEmitter();
 
   //@todo make a re-usable city selection module to avoid duplication here
   cities: Array<any> = [];
@@ -37,6 +38,8 @@ export class ChannelSidebar {
     if (!value)
       return;
     this.user = value;
+    this.user.bookmark = false;
+    console.log('user details', this.user)
     this.user['contributeType'] = 'contribute';
   }
 
@@ -152,6 +155,22 @@ export class ChannelSidebar {
 
   setSocialProfile(value: any) {
     this.user.social_profiles = value;
+  }
+  async togglePin(user:any){
+    console.log(user);
+    this.user.bookmark = !this.user.bookmark;
+    const url: string = `api/v3/bookmark/${this.user.guid}/profile`;
+    console.log(url)
+    try {
+      if (this.user.bookmark) {
+        await this.client.post(url);
+      } else {
+        await this.client.delete(url);
+        this._deleteBookmark.next(this.user);
+      }
+    } catch (e) {
+      this.user.bookmark = !this.user.bookmark;
+    }
   }
 
 }

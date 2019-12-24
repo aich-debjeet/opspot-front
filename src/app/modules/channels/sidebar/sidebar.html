@@ -1,5 +1,13 @@
 
 <div class="o-card o-prof-info o-prof-info--radius o-prof-info--shadow">
+  <button class="mdl-button m-pin-button mdl-button--icon o-prof-info__bookmark" id="profile-bookmark" (click)="togglePin(user)">
+      <m-tooltip icon="turned_in" *ngIf="user.bookmark">
+        This profile is Bookmarked
+      </m-tooltip>
+      <m-tooltip *ngIf="!user.bookmark" icon="turned_in_not">
+        Click to bookmark this post to the top of your channel feed
+      </m-tooltip>
+    </button>
   <opspot-avatar
     class="opAvatar"
     [object]="user"
