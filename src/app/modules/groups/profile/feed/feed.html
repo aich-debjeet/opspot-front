@@ -42,9 +42,9 @@
       <!-- Review -->
       <div bottom-content *ngIf="filter == 'review'" style="display: flex;flex-flow:row-reverse; padding: 15px;"
         class="o-actions-moderate-community">
-        <button class="btn btn-primary btn-sm float-right btn--commu" (click)="approve(a, i)"
+        <button class="btn btn-primary btn-sm float-right btn--commu" id="feed-accept-button" (click)="approve(a, i)"
           i18n="@@M__ACTION__APPROVE">Accept</button>
-        <button class="btn btn-outline-primary btn-sm float-rights" (click)="reject(a, i)" i18n="@@M__ACTION__REJECT"
+        <button class="btn btn-outline-primary btn-sm float-rights" id="feed-reject-button" (click)="reject(a, i)" i18n="@@M__ACTION__REJECT"
           style="margin-right: 10px;">Reject</button>
       </div>
     </opspot-activity>
@@ -59,18 +59,18 @@
 
   <m-modal [open]="kickPrompt" *ngIf="kickUser">
     <div class="mdl-card__supporting-text">
-      <p i18n="@@GROUPS__REMOVE_X_FROM_Y_CONFIRM">Are you sure you want to remove {{ kickUser.username }} from
+      <p i18n="@@GROUPS__REMOVE_X_FROM_Y_CONFIRM" id="feed-confirmation-message">Are you sure you want to remove {{ kickUser.username }} from
         {{ group.name }}?</p>
-      <p><input type="checkbox" #ban>
+      <p><input type="checkbox" id="feed-checkbox" #ban>
         <ng-container i18n="@@M__COMMON__BAN_PERMANENTLY">Ban permanently</ng-container>
       </p>
     </div>
     <div class="opspot-modal-dialog-actions">
       <button (click)="kick(ban.checked)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-        <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
+        <ng-container i18n="@@M__ACTION__CONFIRM" id="feed-group-exit-confirm">Confirm</ng-container>
       </button>
       <button (click)="cancelRemove()" class="mdl-button mdl-js-button mdl-button--colored">
-        <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
+        <ng-container i18n="@@M__ACTION__CANCEL" id="feed-group-exit-cancel">Cancel</ng-container>
       </button>
     </div>
   </m-modal>
