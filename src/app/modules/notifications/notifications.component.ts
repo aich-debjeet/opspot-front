@@ -132,10 +132,16 @@ export class NotificationsComponent {
     }
   }
 
-  changeFilter(filter) {
+  changeFilter(filter: string) {
+    console.log('filter',filter)
+    if(filter.length === 0){
+      this._filter = '';
+      this.notifications = [];
+    } else {
       this._filter = filter;
       this.notifications = [];
       this.load(true);
+    }
   }
   markAllRead(){
     let list = {
