@@ -135,6 +135,7 @@ export class NotificationsComponent {
   changeFilter(filter: string) {
     console.log('filter',filter)
     if(filter.length === 0){
+      //clear all filter
       this._filter = '';
       this.notifications = [];
     } else {

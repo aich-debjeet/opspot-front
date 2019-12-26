@@ -2810,7 +2810,11 @@ m-date-selector .m-date-selector--input {
     margin-right: 8px; }
 
 .m-dropdown--list-container {
-  position: relative; }
+  position: relative;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+		right: -90px;
+	}
+ }
 
 .m-dropdown--label-container {
   cursor: pointer; }
