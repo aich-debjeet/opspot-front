@@ -145,7 +145,7 @@
                     <li routerLinkActive="active" routerLink="feed" [routerLinkActiveOptions]="{exact:true}"> 
                         <a id="profile2-group-feed-tab"> Feed</a>
                     </li>
-                    <li *ngIf="filter == 'activity' && (group['is:owner']||group['is:moderator']) && group['adminqueue:count']" routerLinkActive="active" routerLink="feed/review"> 
+                    <li *ngIf="filter == 'activity' && (group['is:owner']||group['is:moderator'])&& group['adminqueue:count']" routerLinkActive="active" routerLink="feed/review"> 
                        <a id="profile2-group-review-queue"> Review queue<div class="review-count text-md white">{{ group['adminqueue:count'] }}</div></a>
                     </li>  
                     <li routerLinkActive="active" routerLink="requests" *ngIf="group && group['is:owner'] && group['membership'] !== 2">
