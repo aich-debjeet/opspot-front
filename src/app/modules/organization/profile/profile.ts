@@ -425,7 +425,7 @@ export class OrganizationProfile {
   if(window.innerWidth>785){
     this.inviteToggle=!this.inviteToggle;
      }else{
-       this.router.navigate([`/organizations/${this.guid}/invite`])
+       this.router.navigate([`/organization/${this.guid}/invite`])
      } 
   }
    
@@ -433,7 +433,7 @@ export class OrganizationProfile {
     if(window.innerWidth>785){
    this.memberToggle=!this.memberToggle;
     }else{
-      this.router.navigate([`/organizations/${this.guid}/members`])
+      this.router.navigate([`/organization/${this.guid}/members`])
     } 
   }
  
