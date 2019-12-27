@@ -80,6 +80,8 @@ export class OrganizationProfile {
     public videochat: VideoChatService,
     private cd: ChangeDetectorRef,
     private updateMarkers: UpdateMarkersService,
+    private _location: Location
+
     // private _location: Location
   ) { }
 
@@ -448,9 +450,14 @@ export class OrganizationProfile {
   
     groupCount(e){
       this.totalMembers=e
-     //  console.log("total: ", this.totalMembers);
+      //  console.log("total: ", this.totalMembers);
       
      }
+
+     goBack(){
+      this._location.back()
+     }
+   
     
   // showGathering1(){
   //  this.showGathering = true;

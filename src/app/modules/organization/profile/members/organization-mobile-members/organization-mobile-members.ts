@@ -3,6 +3,7 @@ import { Session } from '../../../../../services/session';
 import { GroupsService } from '../../../../groups/groups-service';
 import { OpspotHttpClient } from '../../../../../common/api/client.service';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -11,20 +12,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OrganizationMobileMembers implements OnInit {
 
-  constructor(public session: Session, public client: OpspotHttpClient, 
+  constructor(
+    public session: Session,
+    public client: OpspotHttpClient,
     public service: GroupsService,
-    private route:ActivatedRoute) {
-      this.route.params.subscribe(params=>{
-        if(params['guid']){
-          this.loadGroup(params['guid'])
-        }
+    private route: ActivatedRoute,
+    private _location: Location) {
+    this.route.params.subscribe(params => {
+      if (params['guid']) {
+        this.loadGroup(params['guid'])
+      }
     })
-     }
+  }
 
-  
+
   opspot = window.Opspot;
   @ViewChild('el') el;
-  
+
   invitees: any = [];
   organization: any;
   $group;
@@ -41,12 +45,8 @@ export class OrganizationMobileMembers implements OnInit {
 
 
   ngOnInit() {
-   
-
     // console.log(this.members)
   }
-
-
 
   ngOnDestroy() {
     if (this.searchDelayTimer) {
@@ -54,7 +54,6 @@ export class OrganizationMobileMembers implements OnInit {
     }
     this.$group.unsubscribe();
   }
-
 
   load(refresh: boolean = false, query = null) {
     if (this.httpSubscription)
@@ -80,7 +79,7 @@ export class OrganizationMobileMembers implements OnInit {
 
     if (this.q) {
       endpoint = `${endpoint}/search`;
-      params.q = this.q; 
+      params.q = this.q;
     }
 
     this.inProgress = true;
@@ -106,9 +105,9 @@ export class OrganizationMobileMembers implements OnInit {
 
         this.inProgress = false;
 
-        }, (err) => {
-            this.inProgress = false;
-        });
+      }, (err) => {
+        this.inProgress = false;
+      });
   }
 
   invite(user: any) {
@@ -129,18 +128,22 @@ export class OrganizationMobileMembers implements OnInit {
     }, 300);
   }
 
-  async loadGroup(guid){
-    try{
-      let organization= await this.service.load(guid)
-       this.organization=organization  
-       this.$group = this.service.$group.subscribe((organization) => {
+  async loadGroup(guid) {
+    try {
+      let organization = await this.service.load(guid)
+      this.organization = organization
+      this.$group = this.service.$group.subscribe((organization) => {
         this.organization = organization;
         this.load(true);
         this.el.nativeElement.scrollIntoView();
-      });       
+      });
     }
-    catch(e){
+    catch (e) {
       console.log(e)
     }
+  }
+
+  goBack() {
+    this._location.back()
   }
 }

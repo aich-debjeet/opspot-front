@@ -3,6 +3,7 @@ import { Session } from '../../../../../services/session';
 import { GroupsService } from '../../../groups-service';
 import { OpspotHttpClient } from '../../../../../common/api/client.service';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -12,20 +13,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MobileMembersComponent implements OnInit {
 
-  constructor(public session: Session, public client: OpspotHttpClient, 
+  constructor(
+    public session: Session,
+    public client: OpspotHttpClient,
     public service: GroupsService,
-    private route:ActivatedRoute) {
-      this.route.params.subscribe(params=>{
-        if(params['guid']){
-          this.loadGroup(params['guid'])
-        }
+    private route: ActivatedRoute,
+    private _location: Location) {
+    this.route.params.subscribe(params => {
+      if (params['guid']) {
+        this.loadGroup(params['guid'])
+      }
     })
-     }
+  }
 
-  
+
   opspot = window.Opspot;
   @ViewChild('el') el;
-  
+
   invitees: any = [];
   group: any;
   $group;
@@ -42,9 +46,7 @@ export class MobileMembersComponent implements OnInit {
 
 
   ngOnInit() {
-   
-
-    console.log(this.members)
+    // console.log(this.members)
   }
 
 
@@ -81,7 +83,7 @@ export class MobileMembersComponent implements OnInit {
 
     if (this.q) {
       endpoint = `${endpoint}/search`;
-      params.q = this.q; 
+      params.q = this.q;
     }
 
     this.inProgress = true;
@@ -107,9 +109,9 @@ export class MobileMembersComponent implements OnInit {
 
         this.inProgress = false;
 
-        }, (err) => {
-            this.inProgress = false;
-        });
+      }, (err) => {
+        this.inProgress = false;
+      });
   }
 
   invite(user: any) {
@@ -130,18 +132,22 @@ export class MobileMembersComponent implements OnInit {
     }, 300);
   }
 
-  async loadGroup(guid){
-    try{
-      let group= await this.service.load(guid)
-       this.group=group  
-       this.$group = this.service.$group.subscribe((group) => {
+  async loadGroup(guid) {
+    try {
+      let group = await this.service.load(guid)
+      this.group = group
+      this.$group = this.service.$group.subscribe((group) => {
         this.group = group;
         this.load(true);
         this.el.nativeElement.scrollIntoView();
-      });       
+      });
     }
-    catch(e){
+    catch (e) {
       console.log(e)
     }
+  }
+
+  goBack() {
+    this._location.back()
   }
 }
