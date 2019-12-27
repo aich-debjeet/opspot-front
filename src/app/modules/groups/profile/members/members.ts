@@ -105,10 +105,13 @@ export class GroupsProfileMembers {
       this.httpSubscription = this.client.get(endpoint, params)
         .subscribe((response: any) => {
           // console.log("response: ", response.members.length);
-          if (response.members) {
-            // console.log("response: ", response.members);
-            // @gayatri total count should come from backend since it is not coming it handle on frontend which needs to be checked
-            this.totalGroup.emit(response.members.length)
+          // if (response.members) {
+          //   // console.log("response: ", response.members);
+          //   // @gayatri total count should come from backend since it is not coming it handle on frontend which needs to be checked
+          //   this.totalGroup.emit(response.members.length)
+          // }
+          if(response.total){
+            this.totalGroup.emit(response.total);
           }
           if (!response.members) {
             this.moreData = false;
