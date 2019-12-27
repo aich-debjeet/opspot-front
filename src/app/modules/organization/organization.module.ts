@@ -31,7 +31,7 @@ import { HashtagsModule } from '../hashtags/hashtags.module';
 import { OrganizationProfile } from './profile/profile';
 import { CanDeactivateGroupService } from '../groups/profile/can-deactivate/can-deactivate-group.service';
 import { OrganizationSettingButton } from './profile/organization-setting-button';
-import { OrganizationMobileInvite } from './profile/members/organization-mobile-invite/organizationmobileinvite.component';
+import { OrganizationMobileInvite } from './profile/members/organizationmobileinvite/organizationmobileinvite.component';
 // import { GroupsModule } from '../groups/groups.module';
 // import { GroupMemberPreviews } from './profile/member-previews/member-previews.component';
 // import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
