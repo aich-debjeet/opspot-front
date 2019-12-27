@@ -223,9 +223,9 @@ import {Location} from '@angular/common';
 @Component({
   moduleId: module.id,
   selector: 'opspot-groups-create',
-  host: {
-    '(keydown)': 'keyDown($event)'
-  },
+  // host: {
+  //   '(keydown)': 'keyDown($event)'
+  // },
   templateUrl: 'create.html',
 })
 
