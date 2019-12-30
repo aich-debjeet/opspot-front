@@ -8,6 +8,8 @@ import { Client } from '../../../services/api/client';
 
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { CURRENCY } from '../../../services/list-options';
+
 
 @Component({
   selector: 'app-blue-store-form',
@@ -53,9 +55,10 @@ export class BlueStoreFormComponent implements OnInit {
   canPost: boolean = true;
   inProgress = false;
   errorMessage = '';
+  currencyList = CURRENCY;
 
 
-
+ 
 
   constructor(
     public session: Session,
@@ -105,6 +108,7 @@ export class BlueStoreFormComponent implements OnInit {
         blueStoreTitle: [data['title'] ? data['title'] : '', [Validators.required]],
         blueStoreDescription: [this.description ? this.description : '', [Validators.required]],
         blueStoreUnits: [data['item_count'] ? data['item_count'] : '', [Validators.required,Validators.min(1)]],
+        blueStoreCurrency: [data['currency'] ? data['currency'] : '', [Validators.required]],
         blueStorePrice: [data['price'] ? data['price'] : '', [Validators.required,Validators.min(1)]]
       });
     } else {
@@ -112,7 +116,8 @@ export class BlueStoreFormComponent implements OnInit {
         blueStoreTitle: ['', [Validators.required]],
         blueStoreDescription: ['', [Validators.required]],
         blueStoreUnits: ['', [Validators.required,Validators.min(1)]],
-        blueStorePrice: ['', [Validators.required, Validators.min(1)]]
+        blueStoreCurrency: ['', [Validators.required]],
+        blueStorePrice: ['', [Validators.required, Validators.min(1)]] 
       });
     }
   }
@@ -269,6 +274,7 @@ export class BlueStoreFormComponent implements OnInit {
     this.reqBody.description = this.blueStoreForm.value.blueStoreDescription;
     this.reqBody.price = this.blueStoreForm.value.blueStorePrice;
     this.reqBody.item_count = this.blueStoreForm.value.blueStoreUnits;
+    this.reqBody.currency = this.blueStoreForm.value.blueStoreCurrency
     // this.reqBody.currency = 'INR';
     // this.reqBody.access_id = 2,
     // this.reqBody.published = 1;

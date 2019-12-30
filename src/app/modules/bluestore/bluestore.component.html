@@ -110,7 +110,7 @@
 									<span [innerHtml]="marketplace.blurb | safe"></span>
 								</div>
 								<div class="text-rate" id="bluestore-price">
-									₹ {{ marketplace?.price  }} /- <span class="text-md f500">(per piece)</span>
+									{{ marketplace?.currency  }} {{ marketplace?.price  }} /- <span class="text-md f500">(per piece)</span>
 								</div>
 							</div>
 							<div class="feed-card-event-block__right ">
