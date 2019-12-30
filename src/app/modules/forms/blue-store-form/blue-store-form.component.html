@@ -60,10 +60,15 @@
                     <label>Price <span class="icon-info"></span></label>
                     <div class="o-create-blue-store-unit-price__inner">
                         <div class="o-opportunity-country-code">
-                            <span class="o-opportunity-country-code__flag"><img src="assets/svg/in.png" alt=""></span>
-                            <span class="o-opportunity-country-code__text text-md">IND</span>
-                            <a href="javascript:void(0)" class="o-opportunity-country-code__dropdown">
-                                <img src="assets/svg/arrow-down.svg" alt=""></a>
+                            <!-- <span class="o-opportunity-country-code__flag"><img src="assets/svg/in.png" alt=""></span> 
+                            <span class="o-opportunity-country-code__text text-md">IND</span> -->
+                            <select class="form-control form-control-lg"  formControlName="blueStoreCurrency">
+                                <option value="" disabled selected>Select Category</option>
+                                <option *ngFor="let type of currencyList"  value="{{ type.value }}">{{ type.value}}
+                                </option>
+                            </select>
+                            <!-- <a href="javascript:void(0)" class="o-opportunity-country-code__dropdown">
+                                <img src="assets/svg/arrow-down.svg" alt=""></a> -->
                         </div>
                         <input type="number" id="bluestore-price" class="form-control form-control-lg  ml-8" placeholder="Enter Price"
                             formControlName="blueStorePrice">
