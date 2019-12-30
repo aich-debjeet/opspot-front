@@ -194,6 +194,10 @@
     &--padding{
         padding-left: 81px;
         padding-top: 5px;
+
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            padding-left: 230px;
+        }
     }
 }
 // img response

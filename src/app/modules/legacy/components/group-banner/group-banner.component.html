@@ -19,7 +19,7 @@
     <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage"
       (imgResult)="newImageResultFromCroppie($event)">
     </app-image-croper>
-    <a class="o-cover-community-discussion">
+    <a class="o-cover-community-discussion" *ngIf="object.entity_type === 'community'" (click)="openConversation()">
       <i class="icon-message-square"></i>
       <i class="icon-chevron-right"></i>
     </a>

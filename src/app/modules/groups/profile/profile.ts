@@ -430,7 +430,7 @@ export class GroupsProfile {
        this.router.navigate([`/groups/${this.guid}/invite`])
      } 
   }
-   
+
   showMembers(){
     if(window.innerWidth>785){
    this.memberToggle=!this.memberToggle;
