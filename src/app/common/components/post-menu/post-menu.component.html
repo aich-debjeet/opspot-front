@@ -69,7 +69,7 @@
   <!-- NOTIFICATIONS -->
   <ng-container *ngIf="options.indexOf('follow') !== -1">
     <li class="mdl-menu__item" *ngIf="!asyncFollow" disabled i18n="@@COMMON__POST_MENU__FOLLOW_NOTIFICATIONS" id="post-menu-follow-post-1">Follow post</li>
-    <li class="mdl-menu__item" *ngIf="asyncFollow && entity['is:following']" (click)="unfollow()" i18n="@@COMMON__POST_MENU__UNFOLLOW_NOTIFICATIONS" id="post-menu-unfollow-post">Un-follow post</li>
+    <li class="mdl-menu__item" *ngIf="asyncFollow && entity['is:following']" (click)="unfollow()" i18n="@@COMMON__POST_MENU__UNFOLLOW_NOTIFICATIONS" id="post-menu-unfollow-post">Unfollow post</li>
     <li class="mdl-menu__item" *ngIf="asyncFollow && !entity['is:following']" (click)="follow()" i18n="@@COMMON__POST_MENU__FOLLOW_NOTIFICATIONS" id="post-menu-follow-post">Follow post</li>
   </ng-container>
   <!-- BLOCK -->
@@ -80,8 +80,8 @@
   </ng-container>
   <!-- ADMIN EDIT FLAGS -->
   <ng-container *ngIf="options.indexOf('set-explicit') !== -1 && (entity.owner_guid == session.getLoggedInUser().guid || session.isAdmin())">
-    <li class="mdl-menu__item" [hidden]="entity.mature" (click)="setExplicit(true)" i18n="@@COMMON__POST_MENU__SET_AS_EXPLICIT" id="post-menu-set-explicit">Set as Explicit</li>
-    <li class="mdl-menu__item" [hidden]="!entity.mature" (click)="setExplicit(false)" i18n="@@COMMON__POST_MENU__REMOVE_EXPLICIT" id="post-menu-remove-explicit">Remove Explicit</li>
+    <li class="mdl-menu__item" [hidden]="entity.mature" (click)="setExplicit(true)" i18n="@@COMMON__POST_MENU__SET_AS_EXPLICIT" id="post-menu-set-explicit">Set as restricted</li>
+    <li class="mdl-menu__item" [hidden]="!entity.mature" (click)="setExplicit(false)" i18n="@@COMMON__POST_MENU__REMOVE_EXPLICIT" id="post-menu-remove-explicit">Remove restricted</li>
   </ng-container>
   <ng-container *ngIf="options.indexOf('rating') !== -1 && session.isAdmin()">
     <li class="mdl-menu__item" [hidden]="entity.rating === 1" (click)="setRating(1)" i18n="@@COMMON__POST_MENU__MARK_AS_SAFE" id="post-menu-safe">Mark as Safe</li>

@@ -143,6 +143,7 @@ import { MobileMembersComponent } from './profile/members/mobile-members/mobile-
 import { MobileInviteComponent } from './profile/members/mobile-invite/mobile-invite.component';
 import { VideoChatComponent } from '../videochat/videochat.component';
 import { GroupJoinRequestComponent } from './group-join-request/group-join-request.component';
+import { GroupsProfileConversationMobile } from './profile/mobile-conversation/mobile-conversation';
 
 const routes: Routes = [
   { path: 'groups/profile/:guid', component: GroupsProfile, canDeactivate: [CanDeactivateGroupService], children: [
@@ -153,20 +154,16 @@ const routes: Routes = [
       { path: 'members', component: GroupsProfileMembers },
       { path: 'requests',  component: GroupsProfileRequests },
       // { path: 'gathering',  component: VideoChatComponent}
-
     ],
   },
   { path: 'groups/create', component: GroupsCreator },
+  { path: 'groups/:guid/conversation' ,component:GroupsProfileConversationMobile},
   { path: 'groups/edit/:guid', component: GroupsCreator,canDeactivate: [CanDeactivateGroupService] },
   { path: 'groups/:filter', component: GroupsListComponent },
   { path: 'groups', redirectTo: '/groups/members', pathMatch: 'full' },
   { path: 'groups/:guid/members' ,component:MobileMembersComponent},
   { path: 'groups/:guid/invite' ,component:MobileInviteComponent},
-  { path: 'groups/gathering',  component: VideoChatComponent}
-
-
-
-
+  { path: 'groups/gathering',  component: VideoChatComponent},
 ];
 
 @NgModule({
@@ -206,6 +203,7 @@ const routes: Routes = [
     MobileMembersComponent,
     MobileInviteComponent,
     GroupJoinRequestComponent,
+    GroupsProfileConversationMobile
   ],
   exports: [
     GroupsListComponent,

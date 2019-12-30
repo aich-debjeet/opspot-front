@@ -93,15 +93,19 @@ export class SocketsService {
       });
     });
 
-    this.socket.on('joined', (room: string, rooms: string[]) => {
+    this.socket.on('joined', (data: any) => {
       this.nz.run(() => {
+        const room = data[0];
+        const rooms = data[1];
         console.log(`[ws]::joined`, room, rooms);
         this.rooms = rooms;
       });
     });
 
-    this.socket.on('left', (room: string, rooms: string[]) => {
+    this.socket.on('left', (data: any) => {
       this.nz.run(() => {
+        const room = data[0];
+        const rooms = data[1];
         console.log(`[ws]::left`, room, rooms);
         this.rooms = rooms;
       });

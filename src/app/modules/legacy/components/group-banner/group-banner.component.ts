@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-group-banner',
@@ -7,9 +8,11 @@ import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular
   outputs: ['added'],
   styleUrls: ['./group-banner.component.scss']
 })
-export class GroupBannerComponent  {
+export class GroupBannerComponent {
 
-  constructor() { }
+  constructor(
+    public router: Router,
+  ) { }
 
   opspot: Opspot = window.Opspot;
   object;
@@ -17,12 +20,12 @@ export class GroupBannerComponent  {
   index: number = 0;
   top: number = 0;
   file: any;
-  open:boolean=false;
+  open: boolean = false;
   croppieImage;
   added: EventEmitter<any> = new EventEmitter();
 
 
-  @ViewChild('fileInput')fileInput:ElementRef
+  @ViewChild('fileInput') fileInput: ElementRef
 
 
   set _object(value: any) {
@@ -30,12 +33,12 @@ export class GroupBannerComponent  {
       return;
     this.object = value;
 
-    
-    if(!this.object.banner)  {
-      this.src='assets/demo/m2.jpg'
-    }else{
-     this.src = this.opspot.cdn_url+ 'fs/v1/banners/' + this.object.guid + '/' + this.top + '/' + this.object.banner;
-    }  
+
+    if (!this.object.banner) {
+      this.src = 'assets/demo/m2.jpg'
+    } else {
+      this.src = this.opspot.cdn_url + 'fs/v1/banners/' + this.object.guid + '/' + this.top + '/' + this.object.banner;
+    }
   }
   set _top(value: number) {
     if (!value)
@@ -50,11 +53,11 @@ export class GroupBannerComponent  {
 
 
   add(e) {
-    this.open=false;
+    this.open = false;
     var element: any = e.target ? e.target : e.srcElement;
     this.file = element ? element.files[0] : null;
-    
-     this.open=true;
+
+    this.open = true;
     /**
      * Set a live preview
      */
@@ -70,14 +73,14 @@ export class GroupBannerComponent  {
   onClick(e) {
     this.fileInput.nativeElement.click()
   }
-  newImageResultFromCroppie(e){
+  newImageResultFromCroppie(e) {
     console.log(e)
     this.added.next({
       index: this.index,
       file: e,
       top: this.top
     });
-    this.file = null; 
+    this.file = null;
   }
 
   // fix: AOT
@@ -85,5 +88,10 @@ export class GroupBannerComponent  {
   close() {
 
   }
+
+  openConversation() {
+    this.router.navigate([`groups/${this.object.guid}/conversation`])
+  }
+
 
 }
