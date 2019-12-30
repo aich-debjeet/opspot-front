@@ -106,7 +106,10 @@ export class WalletService {
 
   // real-time
   listen() {
-    this.pointsTxSubscription = this.sockets.subscribe('pointsTx', (points, entity_guid, description) => {
+    this.pointsTxSubscription = this.sockets.subscribe('pointsTx', (data) => {
+      const points = data[0];
+      const entity_guid = data[1];
+      const description = data[2];
       if (this.apiInProgress) {
         return;
       }
