@@ -38,7 +38,7 @@ export class ChannelSidebar {
     if (!value)
       return;
     this.user = value;
-    this.user.bookmark = false;
+    // this.user.bookmark = false;
     console.log('user details', this.user)
     this.user['contributeType'] = 'contribute';
   }
