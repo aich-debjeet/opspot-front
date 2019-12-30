@@ -31,11 +31,12 @@ import { HashtagsModule } from '../hashtags/hashtags.module';
 import { OrganizationProfile } from './profile/profile';
 import { CanDeactivateGroupService } from '../groups/profile/can-deactivate/can-deactivate-group.service';
 import { OrganizationSettingButton } from './profile/organization-setting-button';
+import { OrganizationMobileInvite } from './profile/members/organizationmobileinvite/organizationmobileinvite.component';
 // import { GroupsModule } from '../groups/groups.module';
 // import { GroupMemberPreviews } from './profile/member-previews/member-previews.component';
 // import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 // import { CanDeactivateGroupService } from "./profile/can-deactivate/can-deactivate-group.service";
-// import { MobileMembersComponent } from './profile/members/mobile-members/mobile-members.component';
+import { OrganizationMobileMembers } from './profile/members/organization-mobile-members/organization-mobile-members';
 // import { MobileInviteComponent } from './profile/members/mobile-invite/mobile-invite.component';
 // import { VideoChatComponent } from '../videochat/videochat.component';
 
@@ -56,8 +57,8 @@ const routes: Routes = [
   { path: 'organization/edit/:guid', component: OrganizationCreator, canDeactivate: [CanDeactivateGroupService] },
   //   { path: 'groups/:filter', component: GroupsListComponent },
   //   { path: 'groups', redirectTo: '/groups/top', pathMatch: 'full' },
-  //   { path: 'groups/:guid/members' ,component:MobileMembersComponent},
-  //   { path: 'groups/:guid/invite' ,component:MobileInviteComponent},
+    { path: 'organization/:guid/members' ,component:OrganizationMobileMembers},
+    { path: 'organization/:guid/invite' ,component:OrganizationMobileInvite},
   //   { path: 'groups/gathering',  component: VideoChatComponent}
 ];
 
@@ -88,13 +89,13 @@ const routes: Routes = [
     OrganizationCardUserActionsButton,
     OrganizationProfileMembers,
     OrganizationProfileFeed,    // GroupsProfileRequests,
-    OrganizationSettingButton    // GroupsProfileConversation,
+    OrganizationSettingButton, OrganizationMobileInvite  ,  // GroupsProfileConversation,
     // GroupsProfileFilterSelector,
     // GroupsMembersModuleComponent,
     // GroupsTileComponent,
     // GroupMemberPreviews,
     // GroupsSidebarMarkersComponent,
-    // MobileMembersComponent,
+    OrganizationMobileMembers,
     // MobileInviteComponent,
   ],
   exports: [

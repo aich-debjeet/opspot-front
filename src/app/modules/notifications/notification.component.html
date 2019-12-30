@@ -159,17 +159,17 @@
         <div *ngIf="notification.entityObj">
           <a [routerLink]="['/newsfeed', notification.entityObj.guid]" *ngIf="notification.entityObj.type == 'object'">
             <p id="notification-liked">
-              <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__LIKE__VOTED_UP_OBJECT">{{notification.fromObj.name}} voted up </ng-container>
+              <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__LIKE__VOTED_UP_OBJECT">{{notification.fromObj.name}} liked </ng-container>
               <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="notification.entityObj.title">{{notification.entityObj.title | excerpt}}</span>
               <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="!notification.entityObj.title" i18n="object belonging to current user@@NOTIFICATIONS__NOTIFICATION__OWN_OBJECT">your {{notification.entityObj.subtype}}</span>
             </p>
           </a>
           <a [routerLink]="['/newsfeed', notification.entityObj.guid]" *ngIf="notification.entityObj.type == 'activity'">
             <p *ngIf="notification.entityObj.title">
-              <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__LIKE__VOTED_UP_ACTIVITY">{{notification.fromObj.name}} voted up <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.entityObj.title | excerpt}}</span></ng-container>
+              <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__LIKE__VOTED_UP_ACTIVITY">{{notification.fromObj.name}} liked <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.entityObj.title | excerpt}}</span></ng-container>
             </p>
             <p *ngIf="!notification.entityObj.title">
-              <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__LIKE__VOTED_UP_OWN_ACTIVITY">{{notification.fromObj.name}} voted up <span class="pseudo-link mdl-color-text--blue-grey-400">your activity</span></ng-container>
+              <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__LIKE__VOTED_UP_OWN_ACTIVITY">{{notification.fromObj.name}} liked <span class="pseudo-link mdl-color-text--blue-grey-400">your post</span></ng-container>
             </p>
           </a>
     
@@ -177,7 +177,7 @@
             <a [routerLink]="['/newsfeed', notification.entityObj.entity_guid]" *ngIf="notification.params?.parent?.type != 'group'">
               <p>
                 <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__LIKE__VOTED_UP_COMMENT">
-                  {{notification.fromObj.name}} voted up
+                  {{notification.fromObj.name}} liked
                   <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="notification.entityObj.partition_path == '0:0:0'"> your comment </span>
                   <span class="pseudo-link mdl-color-text--blue-grey-400" *ngIf="notification.entityObj.partition_path != '0:0:0'"> your reply </span>
                 </ng-container>
@@ -186,7 +186,7 @@
     
             <a [routerLink]="['/groups/profile', notification.entityObj.entity_guid, 'conversation']" *ngIf="notification.params?.parent?.type == 'group'">
               <p i18n="@@NOTIFICATIONS__NOTIFICATION__LIKE__VOTED_UP_CONVERSATION">
-                <span class="pseudo-link mdl-color-text--blue-grey-400" >{{notification.fromObj.name}}</span> voted up your message in
+                <span class="pseudo-link mdl-color-text--blue-grey-400" >{{notification.fromObj.name}}</span> liked your message in
                 <span class="pseudo-link mdl-color-text--blue-grey-400">{{ notification.params.parent.name }}</span>'s conversation
               </p>
             </a>
@@ -215,7 +215,7 @@
               <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__DOWNVOTE__VOTED_DOWN_ACTIVITY">{{notification.fromObj.name}} down voted <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.entityObj.title | excerpt}}</span></ng-container>
             </p>
             <p *ngIf="!notification.entityObj.title">
-              <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__DOWNVOTE__VOTED_DOWN_OWN_ACTIVITY">{{notification.fromObj.name}} down voted <span class="pseudo-link mdl-color-text--blue-grey-400">your activity</span></ng-container>
+              <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__DOWNVOTE__VOTED_DOWN_OWN_ACTIVITY">{{notification.fromObj.name}} down voted <span class="pseudo-link mdl-color-text--blue-grey-400">your post</span></ng-container>
             </p>
           </a>
     
@@ -250,17 +250,17 @@
       <ng-template ngSwitchCase="remind">
         <div *ngIf="notification.entityObj">
           <a [routerLink]="['/newsfeed', notification.entityObj.guid]" *ngIf="notification.entityObj.type == 'object'">
-              <p id="notification-reposted"><ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__REMIND__REMINDED">{{notification.fromObj.name}} reminded</ng-container>
+              <p id="notification-reposted"><ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__REMIND__REMINDED">{{notification.fromObj.name}} reposted</ng-container>
                   <span class="pseudo-link mdl-color-text--blue-grey-400"  *ngIf="notification.entityObj.title">{{notification.entityObj.title | excerpt}}</span>
                   <span class="pseudo-link mdl-color-text--blue-grey-400"  *ngIf="!notification.entityObj.title" i18n="object belonging to current user@@NOTIFICATIONS__NOTIFICATION__OWN_OBJECT">your {{notification.entityObj.subtype}}</span>
              </p>
           </a>
           <a [routerLink]="['/newsfeed', notification.entityObj.guid]" *ngIf="notification.entityObj.type == 'activity'">
               <p *ngIf="notification.entityObj.title">
-                <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__REMIND__REMINDED_ACTIVITY">{{notification.fromObj.name}} reminded <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.entityObj.title | excerpt}}</span></ng-container>
+                <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__REMIND__REMINDED_ACTIVITY">{{notification.fromObj.name}} reposted <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.entityObj.title | excerpt}}</span></ng-container>
               </p>
               <p *ngIf="!notification.entityObj.title">
-                <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__REMIND__REMINDED_OWN_ACTIVITY">{{notification.fromObj.name}} reminded <span class="pseudo-link mdl-color-text--blue-grey-400">your activity</span></ng-container>
+                <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__REMIND__REMINDED_OWN_ACTIVITY">{{notification.fromObj.name}} reposted <span class="pseudo-link mdl-color-text--blue-grey-400">your activity</span></ng-container>
               </p>
           </a>
         </div>
@@ -574,7 +574,7 @@
       <!-- Welcome messages -->
       <ng-template ngSwitchCase="welcome_boost">
           <a [routerLink]="['/', session.getLoggedInUser().username]">
-              <p i18n="@@NOTIFICATIONS__NOTIFICATION__WELCOME_BOOST">You can gain more reach by boosting your content. Hit the blue boost icon on your posts.</p>
+              <p i18n="@@NOTIFICATIONS__NOTIFICATION__WELCOME_BOOST">You can gain more reach by boosting your content. Hit the blue boost icon on your post.</p>
           </a>
       </ng-template>
       <ng-template ngSwitchCase="welcome_chat">

@@ -127,6 +127,22 @@
             [(ngModel)]="query" (keydown.esc)="onBlur()" (keyup)="search()">
           <span class="c-svg_eye"><i class="icon-search"></i></span>
         </div>
+        <div class="m-helpdesk__dashboardButtons" *ngIf="session.isAdmin()">
+          <button
+            class="m-btn m-btn--slim"
+            i18n="@@HELPDESK__DASHBOARD__NEW_CATEGORY"
+            (click)="newCategory()"
+          >
+            New Category
+          </button>
+          <button
+            class="m-btn m-btn--slim"
+            i18n="@@HELPDESK__DASHBOARD__NEW_CATEGORY"
+            (click)="newQuestion()"
+          >
+            New Question
+          </button>
+        </div>
         <div class="text-md ">Questions you may have: <span class="f500">Settings, Edit Profile, Create Community</span>
         </div>
         <div *ngIf="results.length > 0" class="help-desk-drop">

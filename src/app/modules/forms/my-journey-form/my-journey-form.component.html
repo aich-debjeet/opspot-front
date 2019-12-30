@@ -23,7 +23,7 @@
             <div class="o-create-myjourney-fileupload" *ngIf="attachment.meta.attachment_guid.length == 0">
                 <div class="fileUpload">
                     <span class="icon-paperclip-2"></span>
-                    <input accept="video/mp4,video/x-m4v,video/avi,video/mov" id="file" #file class="upload" type="file"
+                    <input accept=".mp4,.3gp,.wmv.mkv,.flv" id="file" #file class="upload" type="file"
                         name="attachment" (change)="uploadAttachment(file, $event)" />
                 </div>
                 <div class="text-md grey">
