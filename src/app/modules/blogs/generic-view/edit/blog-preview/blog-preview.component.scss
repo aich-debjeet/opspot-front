@@ -14,7 +14,7 @@
     position: relative;
     @include mq($from:$mobile_sm, $until:$mobile_lg){
         padding: 40px 15px;
-        height: calc(100vh - 30px);
+        min-height: calc(100vh - 30px);
     }
     .close{
         position: absolute;
@@ -82,6 +82,9 @@
 //body style
 .o-blog-preview-popup-body{
     display:flex;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+		flex-direction: column;
+	}
 }
 
 //left style
@@ -90,6 +93,10 @@
     border-radius: 4px;
     margin-right:104px;
     width:50%;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        width: 100%;
+        margin-right: 0px;
+	}
     &__header{
         display: flex;
         justify-content: space-between;
@@ -196,9 +203,10 @@
     margin-top:54px;
     float: right;
     @include mq($from:$mobile_sm, $until:$desktop_sm){
-        float:inherit;
+        float: inherit;
         position: absolute;
-        bottom: 40px;
+        bottom: -36px;
+        margin-bottom: 20px;
     }
     .mrgr15{
         margin-right:15px;
