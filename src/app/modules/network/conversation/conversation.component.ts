@@ -13,7 +13,7 @@ import { Session } from '../../../services/session';
 // import { Storage } from '../../../services/storage';
 import { SocketsService } from '../../../services/sockets';
 
-// import { MessengerEncryptionService } from '../encryption/encryption.service';
+import { MessengerEncryptionService } from '../../messenger/encryption/encryption.service';
 
 // import { MessengerConversationDockpanesService } from '../dockpanes/dockpanes.service';
 // import { MessengerSounds } from '../sounds/service';
@@ -82,23 +82,23 @@ export class NetworkConversation {
     public session: Session,
     public client: Client,
     public sockets: SocketsService,
-    public cd: ChangeDetectorRef
-  ) // private renderer: Renderer,
-  // public encryption: MessengerEncryptionService,
+    public cd: ChangeDetectorRef,
+    public encryption: MessengerEncryptionService,
+  // private renderer: Renderer,
   // public dockpanes: MessengerConversationDockpanesService,
-  {
+  ) {
     this.buildTabId();
   }
 
   ngOnInit() {
-    // if (this.conversation.messages) {
-    //   this.messages = this.conversation.messages;
-    // } else if (this.encryption.isOn() && this.conversation.open) {
-    //   this.initialLoad();
-    // } else if (!this.encryption.isOn()) {
-    //   this.showMessages = false;
-    // }
-    // this.listen();
+    if (this.conversation.messages) {
+      this.messages = this.conversation.messages;
+    } else if (this.encryption.isOn() && this.conversation.open) {
+      this.initialLoad();
+    } else if (!this.encryption.isOn()) {
+      this.showMessages = false;
+    }
+    this.listen();
   }
 
   ngOnDestroy() {
@@ -168,91 +168,91 @@ export class NetworkConversation {
       });
   }
 
-  // listen() {
-  //   if (this.conversation.socketRoomName) {
-  //     this.sockets.join(this.conversation.socketRoomName);
+  listen() {
+    if (this.conversation.socketRoomName) {
+      this.sockets.join(this.conversation.socketRoomName);
 
-  //     this.socketSubscriptions.pushConversationMessage = this.sockets.subscribe(
-  //       'pushConversationMessage',
-  //       (guid, message) => {
-  //         if (guid !== this.conversation.guid) return;
+      this.socketSubscriptions.pushConversationMessage = this.sockets.subscribe('pushConversationMessage', (data) => {
+          const guid = data[0];
+          const message = data[1];
+          if (guid !== this.conversation.guid) return;
 
-  //         let fromSelf = false;
+          let fromSelf = false;
 
-  //         if (this.session.getLoggedInUser().guid === message.ownerObj.guid) {
-  //           if (this.tabId === message.tabId) {
-  //             return;
-  //           }
+          if (this.session.getLoggedInUser().guid === message.ownerObj.guid) {
+            if (this.tabId === message.tabId) {
+              return;
+            }
 
-  //           fromSelf = true;
-  //         }
+            fromSelf = true;
+          }
 
-  //         this.load({ finish: message.guid });
+          this.load({ finish: message.guid });
 
-  //         if (!fromSelf) {
-  //           this.invalid = false;
+          if (!fromSelf) {
+            this.invalid = false;
 
-  //           if (!this.focused && document.title.indexOf('\u2022') === -1)
-  //             document.title = '\u2022 ' + document.title;
+            if (!this.focused && document.title.indexOf('\u2022') === -1)
+              document.title = '\u2022 ' + document.title;
 
-  //           // this.sounds.play('new');
-  //         }
-  //       }
-  //     );
+            // this.sounds.play('new');
+          }
+        }
+      );
 
-  //     this.socketSubscriptions.clearConversation = this.sockets.subscribe(
-  //       'clearConversation',
-  //       (guid, actor) => {
-  //         if (guid !== this.conversation.guid) return;
+      this.socketSubscriptions.clearConversation = this.sockets.subscribe('clearConversation', (data) => {
+          const guid = data[0];
+          const actor = data[1];
+          if (guid !== this.conversation.guid) return;
 
-  //         this.messages = [];
-  //         this.chatNotice = `${actor.name} cleared chat history`;
-  //         this.invalid = false;
-  //       }
-  //     );
+          this.messages = [];
+          this.chatNotice = `${actor.name} cleared chat history`;
+          this.invalid = false;
+        }
+      );
 
-  //     this.socketSubscriptions.block = this.sockets.subscribe('block', guid => {
-  //       if (!this.hasParticipant(guid)) return;
+      this.socketSubscriptions.block = this.sockets.subscribe('block', guid => {
+        if (!this.hasParticipant(guid)) return;
 
-  //       this.blocked = true;
-  //     });
+        this.blocked = true;
+      });
 
-  //     this.socketSubscriptions.unblock = this.sockets.subscribe(
-  //       'unblock',
-  //       guid => {
-  //         if (!this.hasParticipant(guid)) return;
+      this.socketSubscriptions.unblock = this.sockets.subscribe(
+        'unblock',
+        guid => {
+          if (!this.hasParticipant(guid)) return;
 
-  //         this.blocked = false;
-  //       }
-  //     );
+          this.blocked = false;
+        }
+      );
 
-  //     this.socketSubscriptions.connect = this.sockets.subscribe(
-  //       'connect',
-  //       () => {
-  //         this.live = true;
-  //       }
-  //     );
+      this.socketSubscriptions.connect = this.sockets.subscribe(
+        'connect',
+        () => {
+          this.live = true;
+        }
+      );
 
-  //     this.socketSubscriptions.disconnect = this.sockets.subscribe(
-  //       'disconnect',
-  //       () => {
-  //         this.live = false;
-  //       }
-  //     );
-  //   }
-  // }
+      this.socketSubscriptions.disconnect = this.sockets.subscribe(
+        'disconnect',
+        () => {
+          this.live = false;
+        }
+      );
+    }
+  }
 
-  // unListen() {
-  //   if (this.conversation.socketRoomName) {
-  //     this.sockets.leave(this.conversation.socketRoomName);
-  //   }
+  unListen() {
+    if (this.conversation.socketRoomName) {
+      this.sockets.leave(this.conversation.socketRoomName);
+    }
 
-  //   for (let sub in this.socketSubscriptions) {
-  //     if (this.socketSubscriptions[sub]) {
-  //       this.socketSubscriptions[sub].unsubscribe();
-  //     }
-  //   }
-  // }
+    for (let sub in this.socketSubscriptions) {
+      if (this.socketSubscriptions[sub]) {
+        this.socketSubscriptions[sub].unsubscribe();
+      }
+    }
+  }
 
   send(e?) {
     if (e) {
