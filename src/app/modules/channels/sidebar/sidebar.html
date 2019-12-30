@@ -8,12 +8,12 @@
     (added)="upload_avatar($event)"
   ></opspot-avatar>
   <div class="o-prof-name">
-    <div class="caption-bold f700">{{user.name}}</div>
+    <div class="caption-bold f700" id="sidebar-avatar-name">{{user.name}}</div>
     <opspot-button-user-dropdown
       [(user)]="user"
       *ngIf="session.getLoggedInUser().guid != user.guid"
     ></opspot-button-user-dropdown>
-    <span class="text-md grey">@{{user.username}}</span>
+    <span class="text-md grey" id="sidebar-avatar-user-name">@{{user.username}}</span>
   </div>
   <!-- <div class="m-channel--username">
     <h2><span>@</span>{{user.username}}</h2>
@@ -21,19 +21,19 @@
   <div *ngIf="!isOwner()" class="o-prof-others-action o-prof-others-action--margin">
     <opspot-button-subscribe [sideBar]="sidebarMsg" [user]="user"  *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != user.guid && !user.blocked "></opspot-button-subscribe>
     <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button> -->
-    <button type="button" class="btn btn-outline-primary btn-sm btn--prof">Network</button>
+    <button type="button" class="btn btn-outline-primary btn-sm btn--prof" id="sidebar-network">Network</button>
  </div>
-  <div class="o-prof-activity">
-    <a [routerLink]="['/', user.username, 'subscribers']" ><div class="caption-bold f700">{{user.subscribers_count}}</div><div class="text-sm grey">Followers</div></a>
-    <a [routerLink]="['/', user.username, 'subscriptions']"><div class="caption-bold f700">{{user.subscriptions_count}}</div><div class="text-sm grey">Following</div></a>
-    <a ><div class="caption-bold f700">{{user.post_count?user.post_count:0}}</div><div class="text-sm grey">Posts</div></a>
+  <div class="o-prof-activity" id="sidebar-profile-activity">
+    <a [routerLink]="['/', user.username, 'subscribers']" id="sidebar-user-subscribers"><div class="caption-bold f700" id="sidebar-user-subscribers-count">{{user.subscribers_count}}</div><div class="text-sm grey">Followers</div></a>
+    <a [routerLink]="['/', user.username, 'subscriptions']" id="sidebar-user-subscriptions"><div class="caption-bold f700" id="sidebar-user-subscriptions-count">{{user.subscriptions_count}}</div><div class="text-sm grey">Following</div></a>
+    <a ><div class="caption-bold f700" id="sidebar-user-posts-count">{{user.post_count?user.post_count:0}}</div><div class="text-sm grey" id="sidebar-user-posts">Posts</div></a>
     <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
   </div>
-  <div [hidden]="editing || !user.tags" class="o-prof-skills" *ngIf="user.tags && !editing" >
+  <div [hidden]="editing || !user.tags" class="o-prof-skills" *ngIf="user.tags && !editing" id="sidebar-hashtags">
     <a href="" *ngFor="let tag of user.tags" class="o-prof-skills__tag">{{tag}}</a>
   </div>
   <div class="o-prof-portfolio">
-    <a [routerLink]="['/', 'portfolio', user.username]" class="btn btn-outline-primary btn-sm">Portfolio</a>
+    <a [routerLink]="['/', 'portfolio', user.username]" class="btn btn-outline-primary btn-sm" id="sidebar-portfolio">Portfolio</a>
   </div>
 
   <!-- <div class="mdl-card__supporting-text" id="bio" [hidden]="editing" style="white-space:pre-line; text-align:center;" [innerHtml]="user.briefdescription | tags"></div> -->
@@ -166,64 +166,64 @@
 <!-- adding a new bio -->
 
 <div class="o-card o-bio">
-  <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/about']"><i class="icon-edit-profile f-15"></i></a>
-  <span class="o-bio__title caption-medium">About {{user.name}}</span>
+  <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/about']" id="sidebar-icon-edit-profile"><i class="icon-edit-profile f-15"></i></a>
+  <span class="o-bio__title caption-medium" id="sidebar-about-user">About {{user.name}}</span>
   <span *ngIf="isOwner() && !user?.about?.description" class="text-md">
-    <a [routerLink]="['/profile/about']" class="primary">Tell something about yourself</a>
+    <a [routerLink]="['/profile/about']" class="primary" id="sidebar-about-self">Tell something about yourself</a>
   </span>
-  <span  class="text-md">{{user?.about?.description}}</span>
+  <span  class="text-md" id="sidebar-user-description">{{user?.about?.description}}</span>
   <ul class="o-bio__info">
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
         <span class="text-md float-left" *ngIf="isOwner() && !user.location" [routerLink]="['/profile/contact']">
-          <a class="primary">Add Location</a>
+          <a class="primary" id="sidebar-add-location">Add Location</a>
         </span>
-        <span class="text-md float-left">{{user.location | titlecase}}</span>
+        <span class="text-md float-left" id="sidebar-location">{{user.location | titlecase}}</span>
       </li>
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-mail"></i></span>
         <span class="text-md float-left" *ngIf="isOwner() && !user.email" [routerLink]="['/profile/contact']">
-          <a class="primary">Add Email</a>
+          <a class="primary" id="sidebar-add-email">Add Email</a>
         </span>
-        <span class="text-md float-left">{{user.email}}</span>
+        <span class="text-md float-left" id="sidebar-email">{{user.email}}</span>
       </li>
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-phone"></i></span>
         <span class="text-md float-left" *ngIf="isOwner() && !user.phone" [routerLink]="['/profile/contact']">
-          <a class="primary">Add Number</a>
+          <a class="primary" id="sidebar-add-email">Add Number</a>
         </span>
-        <span class="text-md float-left">{{user.phone}}</span>
+        <span class="text-md float-left" id="sidebar-phone-number">{{user.phone}}</span>
       </li>
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-globe"></i></span>
         <span class="text-md float-left" *ngIf="isOwner() && !user.website" [routerLink]="['/profile/contact']">
-          <a class="primary">Add Website</a>
+          <a class="primary" id="sidebar-add-website">Add Website</a>
         </span>
-        <span class="text-md float-left">{{user.website}}</span>
+        <span class="text-md float-left" id="sidebar-website">{{user.website}}</span>
       </li>
       <li class="o-bio-info__item m-t-9">
-        <div class="o-bio-info-left">
+        <div class="o-bio-info-left" id="sidebar-height">
           <div class="text-sm grey o-gender-title">Height</div>
           <div class="text-md o-gender-value" *ngIf="isOwner() && !user.height">
-            <a class="primary" [routerLink]="['/profile/about']">Select</a>
+            <a class="primary" [routerLink]="['/profile/about']" id="sidebar-add-height">Select</a>
           </div>
-          <span class="text-md float-left">{{user.height}}</span>
+          <span class="text-md float-left" id="sidebar-user-height">{{user.height}}</span>
         </div>
-        <div class="o-bio-info-right">
+        <div class="o-bio-info-right" id="sidebar-weight">
           <div class="text-sm grey o-dob-title">Weight</div>
           <div class="text-md o-dob-value" *ngIf="isOwner() && !user.weight">
-            <a class="primary" [routerLink]="['/profile/about']">Select</a>
+            <a class="primary" [routerLink]="['/profile/about']" id="sidebar-add-weight">Select</a>
           </div>
-          <span class="text-md float-left">{{user.weight}}</span>
+          <span class="text-md float-left" id="sidebar-user-weight">{{user.weight}}</span>
         </div>
       </li>
       <li class="o-bio-info__item m-t-9">
         <div class="o-bio-language">
-          <div class="text-sm grey w100">Languages Known</div>
+          <div class="text-sm grey w100" id="sidebar-languages">Languages Known</div>
           <div class="text-md w100" *ngIf="isOwner() && !user?.about?.languages">
-            <a [routerLink]="['/profile/about']" class="primary">Add Language</a>
+            <a [routerLink]="['/profile/about']" class="primary" id="sidebar-add-languages">Add Language</a>
           </div>
-          <span class="text-md float-left">{{user?.about?.languages?.join(', ') | truncate:[100, '...']}}</span>
+          <span class="text-md float-left" id="sidebar-languages-known">{{user?.about?.languages?.join(', ') | truncate:[100, '...']}}</span>
         </div>
       </li>
   </ul>
@@ -231,39 +231,39 @@
 
 <div class="o-card o-card--padding" >
   <div *ngIf="user?.work_experience?.length > 0" class="o-work">
-      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/work']"><i class="icon-edit-profile f-15"></i></a>
+      <a *ngIf="isOwner()" class="o-edit" id="sidebar-edit-work" [routerLink]="['/profile/work']"><i class="icon-edit-profile f-15"></i></a>
       <div class="o-work__title caption-medium">Work</div>
       <div *ngFor="let work of user?.work_experience" class="o-work-info">
         <div class="o-work-info__logo">
           <img src="assets/Work.jpg" alt="">
         </div>
-        <div class="o-work-info__det">
+        <div class="o-work-info__det" id="sidebar-work-widget">
           <a class="text-md f500">{{ work?.designation }}</a>
           <div class="text-sm grey-dark">{{ work?.company_name }} - {{ work?.location }}</div>
         </div>
       </div>
   </div><!-- work detail end-->
   <div *ngIf="user?.education?.length > 0" class="o-education">
-      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/education']"><i class="icon-edit-profile f-15"></i></a>
+      <a *ngIf="isOwner()" id="sidebar-edit-education" class="o-edit" [routerLink]="['/profile/education']"><i class="icon-edit-profile f-15"></i></a>
       <div class="o-education__title caption-medium">Education</div>
       <div *ngFor="let education of user?.education" class="o-education-info">
           <div class="o-education-info__logo">
             <img src="assets/Education.jpg" alt="">
           </div>
-          <div class="o-education-info__det">
+          <div class="o-education-info__det" id="sidebar-education-widget">
             <a class="text-md f500">{{ education?.field_of_study }}</a>
             <div class="text-sm grey-dark">{{ education?.university }} - {{ education?.location }}</div>
           </div>
       </div>
   </div><!-- education detail end-->
   <div *ngIf="user?.awards?.length > 0" class="o-award">
-      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/education']"><i class="icon-edit-profile f-15"></i></a>
+      <a *ngIf="isOwner()" id="sidebar-edit-award" class="o-edit" [routerLink]="['/profile/education']"><i class="icon-edit-profile f-15"></i></a>
       <div class="o-award__title caption-medium">Awards</div>
       <div *ngFor="let award of user?.awards" class="o-award-info">
           <div class="o-award-info__logo">
             <img src="assets/Awards.jpg" alt="">
           </div>
-          <div class="o-award-info__det">
+          <div class="o-award-info__det" id="sidebar-award-widget">
             <a class="text-md f500">{{ award?.title }}</a>
             <div class="text-sm grey-dark">{{ award?.issuer }} - {{ award?.location }}</div>
           </div>

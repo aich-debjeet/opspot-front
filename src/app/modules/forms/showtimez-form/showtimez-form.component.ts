@@ -123,7 +123,7 @@ export class ShowtimezFormComponent implements OnInit {
         eventTitle: [data['title'] ? data['title'] : '', [Validators.required]],
         eventDescription: [this.description ? this.description : '', [Validators.required]],
         eventsLocation: [data['location'] ? data['location'] : '', [Validators.required]],
-        eventdate: [date, [Validators.required, FormValidator.datevalidation]],
+        eventdate: [date, [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
         eventTime: [time, [Validators.required]],
         eventImage: ['']
       })
@@ -132,7 +132,7 @@ export class ShowtimezFormComponent implements OnInit {
         eventTitle: ['', [Validators.required]],
         eventDescription: ['', [Validators.required]],
         eventsLocation: ['', [Validators.required]],
-        eventdate: ['', [Validators.required]],
+        eventdate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
         eventTime: ['', [Validators.required]],
         eventImage: ['']
       })

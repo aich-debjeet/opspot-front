@@ -30,7 +30,7 @@
     
     <div class="container hidden-above-tablet">
         <div class="without-nav-header">
-            <a routerLink=".."><i class="icon-arrow-left"></i> </a>
+            <a (click)="goBack()"><i class="icon-arrow-left"></i> </a>
             <div class="without-nav-header__title caption-bold f500">Organization</div>
         </div>
     </div>
@@ -68,7 +68,7 @@
                             <!-- <a class="o-community-img-edit"><i class="icon-edit-profile"></i></a> -->
                         </div>
                         <div class="o-community-name">
-                            <h5 class="f700">{{organization?.name}}</h5>
+                            <h5 class="f700" id="profile-organization-name">{{organization?.name}}</h5>
                         </div>
                         <div class="o-community-skills" *ngIf="!editing && organization?.tags">
                             <a *ngFor="let tag of organization?.tags" href="" class="o-community-skills__tag">#{{tag}}</a>
@@ -86,8 +86,8 @@
                         </div>
                         <!-- <m-videochat></m-videochat> -->
                         <div class="o-community-members-top ">
-                            <a (click)="showMembers()" class="o-community-members-top__count">
-                                <div class="caption-bold">{{totalMembers|abbr}}</div>
+                            <a (click)="showMembers()" class="o-community-members-top__count" id="profile-organization-members">
+                                <div class="caption-bold" id="profile-organization-members-count">{{totalMembers|abbr}}</div>
                                 <div class="text-sm grey">Members</div>
                             </a>
                         </div>
@@ -101,11 +101,11 @@
                     </div>
                     <div class="o-cards o-community-members hidden-under-tablet">
                         <div class="o-community-members__header">
-                            <div class="text-lg f500">
+                            <div class="text-lg f500" id="profile-organization-invite-members">
                                 Organization Members
                             </div>
                             <span (click)="openInvite()" style="font-size: 24px !important;"
-                                class="icon-plus-circle primary">
+                                class="icon-plus-circle primary" id="profile-organization-invite-icon">
                             </span>
                         </div>
                         <opspot-organization-profile-members [organization]="organization" (totalOrganization)="groupCount($event)" [frmGroup]="true">

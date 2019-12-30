@@ -4,16 +4,16 @@
 			<div class="o-posts-inner-page__left">
 				<div class="o-card feed o-post-inner-minheight">
 					<div class="feed-head">
-						<a *ngIf="marketplace?.ownerObj && marketplace?.ownerObj?.username"
+						<a *ngIf="marketplace?.ownerObj && marketplace?.ownerObj?.username" id="bluestore-profile-imgage"
 							[routerLink]="['/', marketplace?.ownerObj?.username]" class="o-avatar">
 							<img [src]="opspot.cdn_url + 'icon/' + marketplace?.ownerObj?.guid + '/medium/' + getOwnerIconTime()"
 								alt="">
 						</a>
 						<div class="o-avatar__info">
 							<div class="o-avatar-det-block">
-								<span class="text-lg grey o-posts-det">
+								<span class="text-lg grey o-posts-det" id="bluestore-details">
 									<a class="o-avatar__name" [routerLink]="['/', marketplace?.ownerObj?.username]">{{marketplace?.ownerObj?.name}}</a>
-									created a <a class="grey-dark f500">#Marketplace</a>
+									created a <a class="grey-dark f500" id="#bluestore-post">#Marketplace</a>
 								</span>
 							</div>
 							<div class="grey m-l-8 o-posts-tym" *ngIf="marketplace?.time_created">
@@ -25,8 +25,8 @@
 						</div>
 						<div class="o-feed-head-action o-post-inner-profile-button">
 							<button type="button" class="btn btn-primary btn-sm" *ngIf="session.getLoggedInUser().guid == marketplace?.owner_guid" 
-								  (click)="showBoost()">Boost</button>
-							<a class="head-action__link" (click)="togglePin()">
+								  (click)="showBoost()" id="bluestore-boost">Boost</button>
+							<a class="head-action__link" (click)="togglePin()" id="bluestore-bookmark-post">
 								<m-tooltip icon="turned_in" *ngIf="marketplace?.bookmark">
 									This post is Bookmarked
 								</m-tooltip>
@@ -86,14 +86,14 @@
 									</a>
 								</div>
 							</ngx-slick-carousel>
-							<button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
-							<button class="btn-next" (click)="slickModal.slickNext()">next</button>
+							<button class="btn-prev" (click)="slickModal.slickPrev()" id="bluestore-prev">prev</button>
+							<button class="btn-next" (click)="slickModal.slickNext()" id="bluestore-next">next</button>
 						</div>
 					</div>
 					<div class="o-posts-inner-marketplace-reachout">
 						<div class="feed-card-event-block">
-							<div class="feed-card-event-block__left">
-								<h5 class="f500 mb-3" *ngIf="marketplace?.title">
+							<div class="feed-card-event-block__left" id="bluestores-details">
+								<h5 class="f500 mb-3" *ngIf="marketplace?.title" id="bluestore-title">
 									{{ marketplace?.title}}
 								</h5>
 								<div class="text-md white-space word-break" *ngIf="marketplace?.blurb">
@@ -109,7 +109,7 @@
 									</m-translate>
 									<span [innerHtml]="marketplace.blurb | safe"></span>
 								</div>
-								<div class="text-rate">
+								<div class="text-rate" id="bluestore-price">
 									₹ {{ marketplace?.price  }} /- <span class="text-md f500">(per piece)</span>
 								</div>
 							</div>
@@ -133,11 +133,11 @@
 								<div class="members-circle members-circle3"><img src="assets/demo/avatar.png" alt="">
 								</div>
 							</div> -->
-							<div class="text-sm grey">{{count}} liked this post</div>
-							<div class="text-sm grey m-16">{{marketplace?.reminds}} shared this post</div>
-							<div class="text-sm grey m-16" *ngIf="marketplace?.wire_totals">
+							<div class="text-sm grey" id="bluestore-liked">{{count}} liked this post</div>
+							<div class="text-sm grey m-16" id="bluestore-shared">{{marketplace?.reminds}} shared this post</div>
+							<div class="text-sm grey m-16" *ngIf="marketplace?.wire_totals" id="bluestore-contributed">
 								{{marketplace?.wire_totals.tokens | token:18 | abbr}} contributed this post</div>
-							<div class="text-sm grey m-16">{{marketplace?.impressions}} viewed this post</div>
+							<div class="text-sm grey m-16" id="bluestore-viewed">{{marketplace?.impressions}} viewed this post</div>
 						</div>
 						<div class="o-posts-inner-page-action__icons">
 							<a class="icon-posts-box">

@@ -17,6 +17,7 @@ declare var tinymce;
     <div
       #editor
       class="m-editor"
+      id="textarea-comment"
       [ngClass]="{ 'm-editor-disabled': disabled }"
       [attr.contenteditable]="!disabled ? 'true' : null"
       (keyup)="change()"

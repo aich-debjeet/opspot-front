@@ -7,7 +7,7 @@ import { Client } from '../../../services/api';
   inputs: ['_banners: banners', '_editMode: editMode', 'hideArrows'],
   outputs: ['done_event: done', 'delete_event: delete'],
   template: `
-    <i class="arrow-icons icon-arrow-left-circle left" *ngIf="!hideArrows" (click)="prev()" [hidden]="banners.length <= 1"></i>
+    <i class="arrow-icons icon-arrow-left-circle left" *ngIf="!hideArrows" id="carousel-left-banner-image" (click)="prev()" [hidden]="banners.length <= 1"></i>
     <div *ngFor="let banner of banners; let i = index">
       <opspot-banner
         [src]="banner.src"
@@ -20,11 +20,11 @@ import { Client } from '../../../services/api';
         (removed)="delete(i)"
         ></opspot-banner>
 
-        <a (click)="delete(i)" [hidden]="i != index || !editing" class="o-cover-edit trash-icon">
+        <a (click)="delete(i)" [hidden]="i != index || !editing" class="o-cover-edit trash-icon" id="carousel-delete-banner-image">
           <i class="icon-trash-2"></i>
         </a>
       </div>
-    <i class="arrow-icons icon-arrow-right-circle right" *ngIf="!hideArrows" (click)="next()" [hidden]="banners.length <= 1"></i>
+    <i class="arrow-icons icon-arrow-right-circle right" *ngIf="!hideArrows" id="carousel-right-banner-image" (click)="next()" [hidden]="banners.length <= 1"></i>
   `,
   styles: [`
     .trash-icon {

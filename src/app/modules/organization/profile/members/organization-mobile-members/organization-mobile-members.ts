@@ -1,17 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Session } from '../../../../../services/session';
-import { GroupsService } from '../../../groups-service';
+import { GroupsService } from '../../../../groups/groups-service';
 import { OpspotHttpClient } from '../../../../../common/api/client.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 
 @Component({
-  selector: 'app-mobile-members',
-  templateUrl: './mobile-members.component.html',
-  styleUrls: ['./mobile-members.component.scss']
+  selector: 'app-organization-mobile-members',
+  templateUrl: './organization-mobile-members.html',
 })
-export class MobileMembersComponent implements OnInit {
+export class OrganizationMobileMembers implements OnInit {
 
   constructor(
     public session: Session,
@@ -31,7 +30,7 @@ export class MobileMembersComponent implements OnInit {
   @ViewChild('el') el;
 
   invitees: any = [];
-  group: any;
+  organization: any;
   $group;
   members: Array<any> = [];
   offset: string = '';
@@ -49,15 +48,12 @@ export class MobileMembersComponent implements OnInit {
     // console.log(this.members)
   }
 
-
-
   ngOnDestroy() {
     if (this.searchDelayTimer) {
       clearTimeout(this.searchDelayTimer);
     }
     this.$group.unsubscribe();
   }
-
 
   load(refresh: boolean = false, query = null) {
     if (this.httpSubscription)
@@ -72,13 +68,13 @@ export class MobileMembersComponent implements OnInit {
     // TODO: [emi] Send this via API
     this.canInvite = false;
 
-    if (this.group['is:owner']) {
+    if (this.organization['is:owner']) {
       this.canInvite = true;
-    } else if (this.group.membership === 2 && this.group['is:member']) {
+    } else if (this.organization.membership === 2 && this.organization['is:member']) {
       this.canInvite = true;
     }
 
-    let endpoint = `api/v1/groups/membership/${this.group.guid}`,
+    let endpoint = `api/v1/groups/membership/${this.organization.guid}`,
       params: { limit, offset, q?: string } = { limit: 12, offset: this.offset };
 
     if (this.q) {
@@ -134,10 +130,10 @@ export class MobileMembersComponent implements OnInit {
 
   async loadGroup(guid) {
     try {
-      let group = await this.service.load(guid)
-      this.group = group
-      this.$group = this.service.$group.subscribe((group) => {
-        this.group = group;
+      let organization = await this.service.load(guid)
+      this.organization = organization
+      this.$group = this.service.$group.subscribe((organization) => {
+        this.organization = organization;
         this.load(true);
         this.el.nativeElement.scrollIntoView();
       });

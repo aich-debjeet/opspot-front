@@ -7,11 +7,11 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
 @Component({
   selector: 'opspot-button-subscribe',
   template: `
-    <button class="btn btn-outline-primary" [ngClass]="{'btn-sm btn--prof':sideBar,' btn-xs':!sideBar}"
+    <button id="follow" class="btn btn-outline-primary" [ngClass]="{'btn-sm btn--prof':sideBar,' btn-xs':!sideBar}"
     *ngIf="!_user.subscribed" (click)="subscribe($event)">
       Follow
     </button>
-    <button class="btn btn-outline-primary" [ngClass]="{'btn-sm btn--prof':sideBar,'btn-xs':!sideBar}"  *ngIf="_user.subscribed" (click)="unSubscribe($event)">
+    <button id="unfollow" class="btn btn-outline-primary" [ngClass]="{'btn-sm btn--prof':sideBar,'btn-xs':!sideBar}"  *ngIf="_user.subscribed" (click)="unSubscribe($event)">
       <span>
         <ng-container i18n="@@OPSPOT__BUTTONS__UNSUBSCRIBE__SUBSCRIBED_LABEL">Unfollow</ng-container>
       </span>

@@ -3,29 +3,29 @@
   [class.m-owner-block--remind]="activity.remind_object" *ngIf="activity.ownerObj && activity.ownerObj.username">
   <i class="material-icons selected" *ngIf="activity.remind_object">repeat</i>
   <div class="o-avatar" [hovercard]="activity.ownerObj.guid">
-    <a [routerLink]="['/', activity.ownerObj.username]">
+    <a [routerLink]="['/', activity.ownerObj.username]" id="activity-user-image">
       <img [src]="opspot.cdn_url + 'icon/' + activity.ownerObj.guid + '/medium/' + getOwnerIconTime()"
         class="mdl-shadow--2dp" />
     </a>
   </div>
   <div class="body">
-    <a class="o-avatar__name" [routerLink]="['/', activity.ownerObj.username]">
-      <strong title={{activity.ownerObj.name}}>{{activity.ownerObj.name}}</strong>
+    <a class="o-avatar__name" id="activity-username" [routerLink]="['/', activity.ownerObj.username]">
+      <strong title={{activity.ownerObj.name}} id="activity-owner-obj-name">{{activity.ownerObj.name}}</strong>
       <m-channel--badges class="m-channel--badges-activity" [user]="activity.ownerObj" badges="[ 'verified' ]">
       </m-channel--badges>
     </a>
     <a *ngIf="activity.containerObj && activity.containerObj.type == 'group'"
       [routerLink]="['/groups/profile', activity.containerObj.guid]" class="mdl-color-text--blue-grey-300">
-      <strong>({{activity.containerObj.name}})</strong>
+      <strong id="activity-owner-container-name">({{activity.containerObj.name}})</strong>
     </a>
     <div class="grey m-l-8 o-posts-tym"
       *ngIf="activity.guid && !activity.remind_object">
-      <span>{{activity.time_created * 1000 | date:'medium'}}</span>
+      <span id="activity-time">{{activity.time_created * 1000 | date:'medium'}}</span>
       <!-- <span class="o-posts-public-private"><i class="icon-public"></i></span> -->
-      <span *ngIf="activity.edited" class="m-edited-text" i18n="@@M__COMMON__EDITED">edited</span>
+      <span *ngIf="activity.edited" id="activity-edited" class="m-edited-text" i18n="@@M__COMMON__EDITED">edited</span>
       <div class="mdl-card__supporting-text is-boosted" *ngIf="boosted">
         <i class="material-icons">trending_up</i>
-        <a i18n="@@OPSPOT__CARDS__ACTIVITY__BOOSTED_LABEL">Boosted</a>
+        <a i18n="@@OPSPOT__CARDS__ACTIVITY__BOOSTED_LABEL" id="activity-boosted2">Boosted</a>
       </div>
     </div>
     <div class="grey m-l-8 o-posts-tym"
@@ -35,7 +35,7 @@
       <span *ngIf="activity.edited" class="m-edited-text" i18n="@@M__COMMON__EDITED">edited</span>
       <div class="mdl-card__supporting-text is-boosted" *ngIf="boosted">
         <i class="material-icons">trending_up</i>
-        <a i18n="@@OPSPOT__CARDS__ACTIVITY__BOOSTED_LABEL">Boosted</a>
+        <a i18n="@@OPSPOT__CARDS__ACTIVITY__BOOSTED_LABEL" id="activity-boosted">Boosted</a>
       </div>
     </div>
   </div>
@@ -56,7 +56,7 @@
       <!-- <i class="material-icons m-material-icons-inline">explicit</i> -->
     </a>
 
-    <span class="m-mature-message-content"
+    <span class="m-mature-message-content" id="activity-text"
       [innerHtml]="activity.message | tags"
       [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"
       (click)="activity.mature && !activity.mature_visibility ? activity.mature_visibility = !activity.mature_visibility : null"
@@ -76,13 +76,13 @@
   <div class="opspot-editable-container"
     *ngIf="editing && (!activity.custom_type || (activity.custom_type && !activity.title))">
     <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
-    <textarea class="mdl-card__supporting-text message" name="message" [ngModel]="activity.message" #messageEdit
+    <textarea id="activity-edit" class="mdl-card__supporting-text message" name="message" [ngModel]="activity.message" #messageEdit
       [autoGrow]></textarea>
     <!-- <m-wire-threshold-input [(threshold)]="activity.wire_threshold" [(enabled)]="activity.paywall">
     </m-wire-threshold-input> -->
-    <button class="btn btn-outline-primary btn-lg"
+    <button id="activity-cancel" class="btn btn-outline-primary btn-lg"
       (click)="messageEdit.value = activity.message; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
-    <button class="btn btn-primary btn-lg"
+    <button id="activity-save" class="btn btn-primary btn-lg"
       (click)="activity.message = messageEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
   </div>
 
@@ -93,7 +93,7 @@
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
-        <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
+        <span i18n="@@M__COMMON__CONFIRM_18" id="activity-mature-content" >Warning! Mature content (18+)</span>
       </span>
     </div>
     <opspot-rich-embed [src]="activity" [maxheight]="480"></opspot-rich-embed>
@@ -105,7 +105,7 @@
       class="feed-media" *ngIf="activity?.custom_data" [routerLink]="['/media', activity.guid]"
       [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
     >
-      <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+      <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link" id="activity-posts">
         <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
         <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
           (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
@@ -114,8 +114,8 @@
         <div *ngIf="i >= 2 && activity?.custom_data.length > 4" class="feed-media-overlay">
           <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
         </div>
-        <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
-          <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+        <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" id="activity-video-post">
+          <div class="feed-media-video__icon" ><img src="assets/svg/playfill.svg" alt=""></div>
         </div>
       </a>
     </div>
@@ -123,18 +123,18 @@
 
   <!-- opportunity -->
   <div *ngIf="activity.entity_type === 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event' && activity.entity_type !== 'album'">
-    <div class="feed-card-opportunity-block">
+    <div class="feed-card-opportunity-block" id="activity-opportunity-postcard">
       <div class="feed-card-opportunity-block__top">
         <div class="opportunity-image" [routerLink]="['/opportunity/view',activity.guid]">
           <img *ngIf="activity?.custom_data.length > 0" [src]="activity?.custom_data[0]?activity?.custom_data[0].src:''"
-            (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'">
+            (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'" id="oppImg">
             <img *ngIf="activity?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/ops_icon.png'">
           </div>
-        <div class="opportunity-details">
-          <div class="text-lg f500 mb-3" [routerLink]="['/opportunity/view',activity.guid]">
+        <div class="opportunity-details" id="activity-opportunity-details">
+          <div class="text-lg f500 mb-3" id="activity-opportunity-title" [routerLink]="['/opportunity/view',activity.guid]">
             {{activity?.title}}
           </div>
-          <div class="text-md grey">
+          <div class="text-md grey" id="activity-opportunity-location">
             {{activity?.location}}
           </div>
           <m-messenger--channel-button
@@ -144,7 +144,7 @@
             [label]="'Reach Out'"
           ></m-messenger--channel-button>
         </div>
-        <div class="opportunity-button">
+        <div class="opportunity-button" id="activity-opportunity-category">
           {{activity?.category}}
         </div>
       </div>
@@ -158,7 +158,7 @@
 
   <!--BlueStore-->
   <div *ngIf="activity.entity_type === 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'">
-    <div [routerLink]="['/item/view', activity.guid]" class="feed-media" *ngIf="activity?.custom_data">
+    <div [routerLink]="['/item/view', activity.guid]" class="feed-media" *ngIf="activity?.custom_data" id="activity-bluestore-postcard">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
         <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
         <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
@@ -174,14 +174,14 @@
       </a>
     </div>
     <div class="feed-card-event-block">
-      <div class="feed-card-event-block__left">
-        <div class="text-lg f500 mb-3">
+      <div class="feed-card-event-block__left" id="activity-bluestore-details">
+        <div class="text-lg f500 mb-3" id="activity-bluestore-title">
           {{activity?.title}}
         </div>
-        <div class="text-md grey">
+        <div class="text-md grey" id="activity-bluestore-description">
           {{activity?.blurb | truncate:[100, '...']}}
         </div>
-        <div class="text-rate">
+        <div class="text-rate" id="activity-bluestore-price">
           ₹ {{activity?.price}} <span class="text-md grey">per piece</span>
         </div>
       </div>
@@ -200,25 +200,25 @@
   <div *ngIf="activity.entity_type === 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
     <div [routerLink]="[routerLink1, activity.guid]" class="feed-media">
-      <div class="feed-media-event-image">
+      <div class="feed-media-event-image" id="activity-showtimes-postcard">
         
           <img [src]="activity?.custom_data[0] ? activity?.custom_data[0].src:''"
           (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
           *ngIf="activity?.custom_data.length > 0">
           <img *ngIf="activity?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
 
-        <div class="event-date">
-          <div class="text-red">{{activity?.start_time_date | date:'dd'}} </div>
-          <div class="text-md">{{activity?.start_time_date| date:'MMM'}} </div>
+        <div class="event-date" id="activity-event-time">
+          <div class="text-red" id="activity-evnt-date">{{activity?.start_time_date | date:'dd'}} </div>
+          <div class="text-md" id="activity-evnt-month">{{activity?.start_time_date| date:'MMM'}} </div>
         </div>
       </div>
     </div>
     <div class="feed-card-event-block">
-      <div [routerLink]="[routerLink1, activity.guid]" class="feed-card-event-block__left">
-        <div class="text-lg f500 mb-3">
+      <div [routerLink]="[routerLink1, activity.guid]" class="feed-card-event-block__left" id="activity-event-details">
+        <div class="text-lg f500 mb-3" id="evntTitle">
           {{activity?.title}}
         </div>
-        <div class="text-md grey">
+        <div class="text-md grey" id="activity-event-description">
           {{activity?.blurb | truncate:[100, '...']}}
         </div>
       </div>
@@ -264,7 +264,7 @@
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
-        <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
+        <span i18n="@@M__COMMON__CONFIRM_18" >Warning! Mature content (18+)</span>
       </span>
     </div>
 
@@ -300,7 +300,7 @@
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
-        <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
+        <span i18n="@@M__COMMON__CONFIRM_18" >Warning! Mature content (18+)</span>
       </span>
     </div>
     <a [routerLink]="['/media', activity.guid]">
@@ -327,8 +327,8 @@
 
 <!-- mature toggle button -->
 <div *ngIf="activity.mature" class="o-feed-nsfw-cover-btn ">
-  <a *ngIf="activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md">Cover</a>
-  <a *ngIf="!activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md">Uncover</a>
+  <a *ngIf="activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-cover">Cover</a>
+  <a *ngIf="!activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-uncover">Uncover</a>
 </div>
 <!-- mature toggle button -->
 
@@ -343,16 +343,16 @@
   <opspot-button-comment [object]="activity" (click)="openComments()"></opspot-button-comment>
 
   <!-- wire button-->
-  <a class="o-actions__link">
+  <a class="o-actions__link" id="activity-view">
     <i class="icon-eye f-15"></i>
     <span class="o-action-count text-sm grey">
-      <span>{{ activity.impressions | number }}</span>
+      <span id="activity-viewcount">{{ activity.impressions | number }}</span>
     </span>
   </a>
-  <a class="o-actions__link" *ngIf="session.getLoggedInUser().guid == activity.owner_guid">
+  <a class="o-actions__link" *ngIf="session.getLoggedInUser().guid == activity.owner_guid" id="activity-contribute-icon">
     <i class="icon-coins f-15"></i>
     <span class="o-action-count text-sm grey">
-      <span *ngIf="activity.wire_totals">{{ activity.wire_totals.tokens | token:18 | abbr }}</span>
+      <span *ngIf="activity.wire_totals" id="activity-coin-count">{{ activity.wire_totals.tokens | token:18 | abbr }}</span>
     </span>
   </a>
 
@@ -410,7 +410,7 @@
 
 <!-- TODO @gayatri need to check this part bacuse of shshis impl-->
 <div class="mdl-card__menu mdl-color-text--blue-grey-300" #toggle *ngIf="!hideTabs">
-  <button class="mdl-button m-pin-button mdl-button--icon" (click)="togglePin()">
+  <button class="mdl-button m-pin-button mdl-button--icon" id="activity-bookmark" (click)="togglePin()">
     <m-tooltip icon="turned_in" *ngIf="activity.bookmark">
       This post is Bookmarked
     </m-tooltip>

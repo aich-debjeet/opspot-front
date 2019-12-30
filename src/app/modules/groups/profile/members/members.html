@@ -23,7 +23,7 @@ input:focus{
   </div> -->
   
   <div class="o-community-member-popup-body__title" style="margin-bottom: 8px;">
-      <div class="text-h3">
+      <div class="text-h3" id="members-community-members">
           Community Members
       </div>
   </div>
@@ -31,6 +31,7 @@ input:focus{
     <input
       type="text"
       name="q"
+      id="members-search"
       [(ngModel)]="q"
       (keyup)="search(q)"
       placeholder="Search Members"

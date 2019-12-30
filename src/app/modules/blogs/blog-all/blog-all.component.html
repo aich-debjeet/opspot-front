@@ -2,10 +2,10 @@
   <div class="blogs-action-filter">
     <form>
       <div class="form-group">
-        <select class="form-control form-control-sm" (change)="onChange($event.target.value)">
-          <option value="MyBlogs" selected>My Blogs</option>
-          <option value="Drafts">Drafts</option>
-          <option value="Published">Published Blogs</option>
+        <select class="form-control form-control-sm" id="blog-all-selector" (change)="onChange($event.target.value)">
+          <option value="MyBlogs" selected id="blog-all-my-blogs">My Blogs</option>
+          <option value="Drafts" id="blog-all-drafts">Drafts</option>
+          <option value="Published" id="blog-all-published-blog">Published Blogs</option>
         </select>
       </div>
     </form>

@@ -128,8 +128,8 @@ export class BigEventForm implements OnInit {
         eventType: ['', [Validators.required]],
         eventCategory: ['', [Validators.required]],
         eventLocation: ['', [Validators.required]],
-        eventStartDate: ['', [Validators.required, FormValidator.datevalidation]],
-        eventEndDate: ['', [Validators.required, FormValidator.datevalidation]],
+        eventStartDate: ['', [Validators.required,FormValidator.validateDate, FormValidator.datevalidation]],
+        eventEndDate: ['', [Validators.required, FormValidator.validateDate,FormValidator.datevalidation]],
         eventStartTime: ['', [Validators.required]],
         eventEndTime: ['', [Validators.required]],
         eventCoverImage: ['', []]
@@ -155,6 +155,7 @@ export class BigEventForm implements OnInit {
           obj['src'] = this.attachment.getPreview();
           // this.reqBody.attachment_guid = obj['guid'];
           this.coverImage = obj['src'];
+          this.imageGuid = obj['guid'];
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }

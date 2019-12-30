@@ -63,7 +63,7 @@ import { ProfileReportComponent } from '../../../report/profile-report/profile-r
         (click)="setExplicit(true); showMenu = false"
         i18n="@@M__ACTION__MARK_EXPLICIT"
       >
-        Set as explicit
+        Set as restricted
       </li>
       <li class="mdl-menu__item"
         *ngIf="session.isAdmin()"
@@ -71,7 +71,7 @@ import { ProfileReportComponent } from '../../../report/profile-report/profile-r
         (click)="setExplicit(false); showMenu = false"
         i18n="@@M__ACTION__REMOVE_EXPLICIT"
       >
-        Remove Explicit
+        Remove restricted
       </li>
       <li class="mdl-menu__item"
         *ngIf="session.isAdmin()"

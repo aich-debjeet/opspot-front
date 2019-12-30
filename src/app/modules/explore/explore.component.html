@@ -1,8 +1,8 @@
-<div class="o-explore-tag-sec">
+<div class="o-explore-tag-sec" id="explore-view">
     <ngx-slick-carousel class="carousel o-explore-tag tag-slik" #slickModal="slick-carousel" [config]="slideConfig"
         (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
         (beforeChange)="beforeChange($event)">
-        <div ngxSlickItem *ngFor="let tags of hashtags; let i = index;" class="slide o-tag">
+        <div ngxSlickItem *ngFor="let tags of hashtags; let i = index;" id="explore-skill-type" class="slide o-tag">
             <a (click)="switchCategoryType(tags.value)" class="">{{tags.value}}</a>
         </div>
     </ngx-slick-carousel>
@@ -15,22 +15,22 @@
         <div class="o-explore-action">
             <div class="o-explore-action__filter">
                 <form>
-                    <div class="form-group">
-                        <select class="form-control" (change)="onChange($event.target.value)">
+                    <div class="form-group" >
+                        <select class="form-control" id="explore-media-type" (change)="onChange($event.target.value)">
                             <option value="activities" selected>All</option>
-                            <option value="images">Image</option>
-                            <option value="audios">Audio</option>
-                            <option value="videos">Video</option>
-                            <option value="blogs">Blogs</option>
+                            <option value="images" id="explore-image">Image</option>
+                            <option value="audios" id="explore-audio">Audio</option>
+                            <option value="videos" id="explore-video">Video</option>
+                            <option value="blogs" id="explore-blog">Blogs</option>
                         </select>
                     </div>
                 </form>
             </div>
             <div class="o-explore-action__search">
                 <div class="form-group c-form_righticon-lg">
-                    <input type="text" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q"
+                    <input type="text" id="explore-search" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q"
                         name="q" autocomplete="off" #searchInput>
-                    <span class="c-svg_eye"><i class="icon-search"></i></span>
+                    <span class="c-svg_eye"><i class="icon-search" id="explore-search-icon"></i></span>
                 </div>
             </div>
         </div>

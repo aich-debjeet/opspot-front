@@ -110,6 +110,9 @@ export class GroupsProfileMembers {
             // @gayatri total count should come from backend since it is not coming it handle on frontend which needs to be checked
             this.totalGroup.emit(response.members.length)
           }
+          // if(response.total){
+          //   this.totalGroup.emit(response.total);
+          // }
           if (!response.members) {
             this.moreData = false;
             this.inProgress = false;

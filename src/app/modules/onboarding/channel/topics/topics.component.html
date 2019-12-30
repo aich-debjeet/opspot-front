@@ -2,7 +2,7 @@
 <!-- close end -->
     <div class="o-reg-skill-body">
         <div class="o-reg-skill-body__title">
-            <div class="text-h3 f500">
+            <div class="text-h3 f500" id="topics-skills-text">
                 Select Skills of your interest.
             </div>
             <div class="text-md o-reg-skill-body__padng">
@@ -14,22 +14,22 @@
         </div><!--list ends-->
         <div>
             <div class="o-reg-skill-btn-add-skill o-reg-skill-btn-add-skill--no-need">
-                <input type="text"
+                <input type="text" id="topics-add-skills"
                 name="hashtag"
                 [(ngModel)]="input"
                 (keyup)="keyUp($event)"
                 #hashtagInput placeholder="Add Skills">   
                 <a class="text-lg primary">
-                    <i class="icon-check" (click)="addNew()"></i>
-                    <i class="icon-x" (click)="input = ''; addingHashtag = false; hashtagInput.focus()"></i>
+                    <i class="icon-check" id="topics-add" (click)="addNew()"></i>
+                    <i class="icon-x" id="topics-cancel" (click)="input = ''; addingHashtag = false; hashtagInput.focus()"></i>
                 </a>
             </div>
         </div><!--add skill ends-->
         <div class="o-reg-skill-continue">
-          <button class="o-reg-skill-continue__btn" (click)="close()">Continue</button>
+          <button class="o-reg-skill-continue__btn" (click)="close()" id="topics-continue">Continue</button>
         </div>
         <div class="o-reg-skill-skip">
-          <a class="text-md grey" (click)="close()">Skip</a>
+          <a class="text-md grey" (click)="close()" id="topics-skip">Skip</a>
         </div>
     </div><!--body ends-->
 </div>

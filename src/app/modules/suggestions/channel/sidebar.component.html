@@ -1,5 +1,5 @@
-<div class="o-card o-card--popular-channel" >
-  <div class="text-md f500">Suggestions for you</div>
+<div class="o-card o-card--popular-channel" id="sidebar-suggestion" >
+  <div class="text-md f500" id="sidebar-title">Suggestions for you</div>
   <span *ngIf="!inProgress && !suggestions.length" class="m-suggestionsSidebar__empty p-l-r-0">
     You have no suggestions at this time
   </span>
@@ -13,12 +13,12 @@
         </div>
         <div class="o-pop-channel-name">
           <div [title]="suggestion?.entity?.briefdescription">
-            <div class="text-md f500 ">{{ suggestion?.entity?.username }}</div>
+            <div class="text-md f500 " id="sidebar-username">{{ suggestion?.entity?.username }}</div>
             <div class="text-sm" >{{ suggestion?.entity?.briefdescription }}</div>
           </div>
         </div>   
           <!-- <div class="m-layout__spacer"></div> -->
-          <i class="material-icons o-fontRemove" (click)="pass(suggestion, $event)">close</i>
+          <i class="material-icons o-fontRemove" id="sidebar-close" (click)="pass(suggestion, $event)">close</i>
           <opspot-button-subscribe
             [user]="suggestion?.entity"
             (subscribed)="remove(suggestion)"

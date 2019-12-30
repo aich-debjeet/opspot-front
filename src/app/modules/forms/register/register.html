@@ -3,17 +3,17 @@
     <div class="container">
       <div class="o-signup-container">
         <div class="o-signup o-signup--form">
-          <h2>Welcome, Create an account</h2>
+          <h2 id="registration">Welcome, Create an account</h2>
           <form (ngSubmit)="register()" [formGroup]="form">
             <div class="form-group">
-              <input type="text" formControlName='fullname' class="form-control form-control-lg"
+              <input type="text" id="registration-fullname" formControlName='fullname' class="form-control form-control-lg"
                 placeholder="Full Name">
               <div *ngIf="form.controls['fullname'].touched && !form.controls['fullname'].valid" class="error text-sm">
                 <div *ngIf="form.controls['fullname'].errors.required">Full Name is required</div>
               </div>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control form-control-lg" formControlName="username" placeholder="Username"
+              <input type="text" id="registration-username" class="form-control form-control-lg" formControlName="username" placeholder="Username"
                 i18n-placeholder="@@M__COMMON__USERNAME" readonly onfocus="this.removeAttribute('readonly');">
               <!-- <a href="#" class="text-md primary">gowtham_aeione,</a>
               <a href="#" class="text-md primary">gowtham_aeione49</a> -->
@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="form-group">
-              <input type="text" formControlName='email' class="form-control form-control-lg"
+              <input type="text" id="registration-email" formControlName='email' class="form-control form-control-lg"
                 placeholder="Email Address">
               <div *ngIf="form.controls['email'].touched && !form.controls['email'].valid" class="error text-sm">
                 <div *ngIf="form.controls['email'].errors.required">Email is required</div>
@@ -42,7 +42,7 @@
             </div>
 
             <div [hidden]="noViewOtp" class="o-otp">
-              <div class="o-otp__title text-md">Enter OTP <a class="primary">Resend OTP</a></div>
+              <div class="o-otp__title text-md">Enter OTP <a class="primary" id="registration-resend">Resend OTP</a></div>
               <!-- <div class="otp">
                   <fieldset formGroupName="otp">
                     <input formControlName="otp1" (keyup)="keytab($event)" maxlength="1"/>
@@ -54,7 +54,7 @@
                   </fieldset>
                 </div> -->
               <div class="otp">
-                <fieldset formGroupName="otp">
+                <fieldset formGroupName="otp" id="registration-otp">
                   <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
                     formControlName="otp1">
                   <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
@@ -90,20 +90,20 @@
               </div>
               <div class="o-dob__select w100" formGroupName='dobGroup'>
                 <div class="form-group">
-                  <select class="form-control" formControlName="date">
-                    <option value="" selected disabled hidden>Date</option>
+                  <select class="form-control" formControlName="date" id="registration-date-dropdown" >
+                    <option id="registration-date" value="" selected disabled hidden >Date</option>
                     <option *ngFor="let date of dateOfBirth.date">{{date}}</option>
                   </select>
                 </div>
                 <div class="form-group m-l-13">
-                  <select class="form-control" formControlName="month">
-                    <option value="" selected disabled hidden>Month</option>
+                  <select class="form-control" formControlName="month" id="registration-month-dropdown">
+                    <option id="registration-month" value="" selected disabled hidden>Month</option>
                     <option *ngFor="let month of dateOfBirth.month" placeholder="month"> {{month}}</option>
                   </select>
                 </div>
                 <div class="form-group m-l-13">
-                  <select class="form-control" formControlName="year">
-                    <option value="" selected disabled hidden>Year</option>
+                  <select class="form-control" formControlName="year" id="registration-year-dropdown">
+                    <option id="registration-year" value="" selected disabled hidden>Year</option>
                     <option *ngFor="let year of dateOfBirth.year">{{year}}</option>
                   </select>
                 </div>
@@ -116,14 +116,14 @@
             </div>
 
             <div class="form-group">
-              <input type="password" formControlName="password" class="form-control form-control-lg"
+              <input type="password" id="registration-password" formControlName="password" class="form-control form-control-lg"
                 placeholder="Create Password">
               <div *ngIf="!form.controls['password'].valid && form.controls['password'].touched" class="error text-sm">
                 <div> {{ getErrorPassword()}}</div>
               </div>
             </div>
             <div class="form-group">
-              <input type="password" formControlName="password2" class="form-control form-control-lg"
+              <input type="password" id="registration-confirm-password" formControlName="password2" class="form-control form-control-lg"
                 placeholder="Confirm Password">
               <div *ngIf="form.controls['password2'].touched && !form.controls['password2'].valid"
                 class="error text-sm">
@@ -135,7 +135,7 @@
             <div class="o-terms-condition">
               <label class="c-checkbox">I agree to the <a href="javascript:void(0)" class="primary">Terms</a>, <a href="javascript:void(0)" class="primary">Privacy</a> and <a href="javascript:void(0)"
                   class="primary">Cookie Policy</a>
-                <input type="checkbox" formControlName="tos">
+                <input type="checkbox" id="registration-checkbox" formControlName="tos">
                 <span class="checkmark"></span>
               </label>
             </div>
@@ -144,7 +144,7 @@
               style="min-height:0; margin-bottom:10px;" [hidden]="!errorMessage">
               <p class="text-white">{{errorMessage}}</p>
             </div>
-            <button type="submit" class="btn btn-primary btn-block"
+            <button type="submit" id="registration-submit" class="btn btn-primary btn-block"
               [disabled]="!this.form.valid || inProgress || !this.verifiedOtp || this.invalidNumberLength">Get Started</button>
           </form>
         </div>

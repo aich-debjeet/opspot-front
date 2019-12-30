@@ -126,17 +126,17 @@
 
 <div class="o-net-msgs">
     <div class="o-net-msgs__head">
-        <div class="o-net-msgs-user-info">
+        <div class="o-net-msgs-user-info" id="conversation-name">
             <div class="o-avatar-md"><img [src]="opspot.cdn_url + 'icon/' + conversation.participants[0].guid" alt=""></div>
             <div class="caption-bold m-l-9">{{ conversation.name }}</div>
         </div>
         <div class="o-option-drop">
             <div onclick="myFunction()" class="o-option-drop__btn head-action__link">
-                <i class="icon-more-horizontal"></i>
+                <i class="icon-more-horizontal" id="conversation-menu"></i>
             </div>
             <div id="o-option-dropdown" class="o-option-drop__block">
-                <a href="javascript:void(0)">Open Original Post</a>
-                <a href="javascript:void(0)">Remove Bookmark</a>
+                <a href="javascript:void(0)" id="open-original-post">Open Original Post</a>
+                <a href="javascript:void(0)" id="remove-bookmark">Remove Bookmark</a>
             </div>
         </div><!--action drop-->
     </div><!-- network msgs head end -->
@@ -156,12 +156,14 @@
                 >
                     <p
                       class="text-md" 
+                      id="conversation-message"
                       [class.white]="message.owner.guid == session.getLoggedInUser().guid"
                       [class.grey-dark]="message.owner.guid != session.getLoggedInUser().guid"
                       [innerHtml]="message.message"
                     ></p>
                     <div
                       class="text-sm o-net-msg-tym"
+                      id="conversation-time"
                       [class.white]="message.owner.guid == session.getLoggedInUser().guid"
                       [class.grey]="message.owner.guid != session.getLoggedInUser().guid"
                     >{{ message.time_created * 1000 | date: 'medium' }}</div>
@@ -173,6 +175,7 @@
         <div class="o-net-msgs-type">
             <textarea placeholder="Send a message..."
               i18n-placeholder="@@MESSENGER__CONVERSATION__SEND_A_MESSAGE"
+              id="conversation-textarea"
               name="message"
               (keydown.enter)="send($event);"
               [(ngModel)]="message"
@@ -193,7 +196,7 @@
                 </a>
             </div> -->
         </div>
-        <div class="o-net-msgs-send" (click)="send()"><i class="icon-send"></i></div>
+        <div class="o-net-msgs-send" id="conversation-send" (click)="send()"><i class="icon-send"></i></div>
     </div><!-- network msgs footer end -->
 </div>
 

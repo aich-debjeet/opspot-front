@@ -1,21 +1,21 @@
-<a class="o-actions__link" *ngIf = "!large" (click)="shareMenuHandler()">
+<a class="o-actions__link" *ngIf = "!large" (click)="shareMenuHandler()" id="share-menu">
   <i class="icon-share-2"></i>
-  <span class="opspot-counter text-sm grey" *ngIf="entity?.reminds > 0">{{entity.reminds | number}}</span>
+  <span class="opspot-counter text-sm grey" id="share-menu-count" *ngIf="entity?.reminds > 0">{{entity.reminds | number}}</span>
 </a>
-<div class="" *ngIf = "large" (click)="shareMenuHandler()">
+<div class="" *ngIf = "large" (click)="shareMenuHandler()" id="share-menu-share">
     <span class="icon-share-2"></span><span class="text-md f500">Share</span>
 </div>
 
 <div class="o-share" [hidden]="!opened">
-    <button type="button" class="btn btn-outline-primary btn-sm btn-block" (click)="selectOption('repost')">Repost this to your timeline</button>
+    <button type="button" id="share-menu-repost" class="btn btn-outline-primary btn-sm btn-block" (click)="selectOption('repost')">Repost this to your timeline</button>
     <!-- <opspot-button-remind [entityType]="entity.entity_type" [object]="entity" #remindButton></opspot-button-remind> -->
     <div class="o-share__title text-sm">Share this post</div>
     <div class="o-share__social-media">
-        <a (click)="openFacebook()" class="o-share-social-media-item"><img src="assets/share/fb.svg" alt=""></a>
+        <a (click)="openFacebook()" class="o-share-social-media-item" id="share-menu-facebook"><img src="assets/share/fb.svg" alt=""></a>
         <!-- <a href="#" class="o-share-social-media-item"><img src="assets/share/insta.svg" alt=""></a> -->
-        <a class="o-share-social-media-item"  (click)="openTwitter()"><img src="assets/share/twitter.svg" alt=""></a>
+        <a class="o-share-social-media-item"  (click)="openTwitter()" id="share-menu-twitter"><img src="assets/share/twitter.svg" alt=""></a>
         <!-- <a href="#" class="o-share-social-media-item"><img src="assets/share/in.svg" alt=""></a> -->
-        <a (click)="openWhatsapp()" class="o-share-social-media-item"><img src="assets/share/whats.svg" alt=""></a>
+        <a (click)="openWhatsapp()" class="o-share-social-media-item" id="share-menu-whatsapp"><img src="assets/share/whats.svg" alt=""></a>
     </div><!-- social media end -->
     <!-- <div class="o-share__title text-sm">Or send to</div>
     <div class="o-share__search">

@@ -6,17 +6,17 @@ import { GroupsService } from '../../../modules/groups/groups-service';
   selector: 'opspot-organization-card-user-actions-button',
   inputs: ['organization', 'user'],
   template: `
-  <button class="icon-more-vertical btnDefault" *ngIf="organization['is:owner'] || (organization['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
+  <button class="icon-more-vertical btnDefault" id="card-user-action-button" *ngIf="organization['is:owner'] || (organization['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
 
   </button>
 
   <ul class="opspot-dropdown-menu" [hidden]="!showMenu">
-    <li class="mdl-menu__item"
+    <li class="mdl-menu__item" id="card-user-action-remove-from-organization"
       *ngIf="(organization['is:owner'] || organization['is:moderator']) && !(user['is:owner']||user['is:moderator']) && user['is:member']"
       (click)="removePrompt()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_FROM_GROUP">
       Remove from Group
     </li>
-    <li class="mdl-menu__item"
+    <li class="mdl-menu__item" id="card-user-action-reinvite-to-organization"
       *ngIf="(organization['is:owner'] || organization['is:moderator']) && !user['is:member'] && !wasReInvited"
       (click)="reInvite()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REINVITE">
       Re-invite to Group
@@ -24,22 +24,22 @@ import { GroupsService } from '../../../modules/groups/groups-service';
     <li class="mdl-menu__item" *ngIf="(organization['is:owner'] || organization['is:moderator']) && wasReInvited">
       <span class="opspot-menu-info-item" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__INVITED">Invited</span>
     </li>
-    <li class="mdl-menu__item"
+    <li class="mdl-menu__item" id="card-user-action-organization-make-admin"
       *ngIf="organization['is:owner'] && !(user['is:owner']||user['is:moderator']) && user['is:member']"
       (click)="grantOwnership()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__MAKE_ADMIN">
       Make Admin
     </li>
-    <li class="mdl-menu__item"
+    <li class="mdl-menu__item" id="card-user-action-organization-remove-as-admin"
       *ngIf="organization['is:owner'] && user['is:owner'] && user['is:member']"
       (click)="revokeOwnership()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_AS_ADMIN">
       Remove as Admin
     </li>
-    <li class="mdl-menu__item"
+    <li class="mdl-menu__item" id="card-user-action-organization-make-moderator"
       *ngIf="organization['is:owner'] && !(user['is:owner']||user['is:moderator']) && user['is:member']"
       (click)="grantModerator()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__MAKE_MODERATOR">
       Make Moderator
     </li>
-    <li class="mdl-menu__item"
+    <li class="mdl-menu__item" id="card-user-action-organization-remove-as-moderator"
       *ngIf="organization['is:owner'] && user['is:moderator'] && user['is:member']"
       (click)="revokeModerator()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_AS_MODERATOR">
       Remove as Moderator
@@ -53,10 +53,10 @@ import { GroupsService } from '../../../modules/groups/groups-service';
         <p><input type="checkbox" #ban> <ng-container i18n="@@M__COMMON__BAN_PERMANENTLY">Ban permanently</ng-container></p>
       </div>
       <div class="opspot-modal-dialog-actions">
-        <button (click)="kick(ban.checked)" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        <button (click)="kick(ban.checked)" id="card-user-action-organization-confirm-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
           <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
         </button>
-        <button (click)="cancelRemove()" class="mdl-button mdl-js-button mdl-button--colored">
+        <button (click)="cancelRemove()" id="card-user-action-organization-cancel-button" class="mdl-button mdl-js-button mdl-button--colored">
           <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
         </button>
       </div>

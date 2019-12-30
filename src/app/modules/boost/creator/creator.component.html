@@ -4,7 +4,7 @@
     <h2 i18n="@@M__FEATURE__BOOST">Boost</h2>
   </div> -->
     <div class="o-boost-head o-boost-head--border">
-        <div class="o-boost__title text-h4 f500">Boost Post</div>
+        <div class="o-boost__title text-h4 f500" id="creator-boost-post">Boost Post</div>
     </div>
 
   <!-- <span *ngIf="step === 0"> -->
@@ -53,10 +53,10 @@
       </div>
 
       <div class="o-boost-token">
-          <div class="text-md">Coins available: <span class="f500">
+          <div class="text-md">Coins available: <span class="f500" id="creator-boost-coins-available">
           {{ balances.offchain | token:18 | number }}
           </span></div>
-          <button type="button" (click)="buyTokens()" class="btn btn-outline-primary btn-sm">Buy Coins</button>
+          <button type="button" id="creator-boost-buy-coins" (click)="buyTokens()" class="btn btn-outline-primary btn-sm">Buy Coins</button>
       </div>
  
   <div class="o-boost-action">
@@ -72,6 +72,7 @@
           </p>
 
           <input type="text"
+            id="creator-boost-impressions"
             class="o-boost-action-input"
             [ngModel]="boost.amount | number"
             (ngModelChange)="setBoostAmount($event)"
@@ -219,7 +220,7 @@
         *ngIf="boost.currency === 'usd' || boost.currency === 'creditcard'"
       >Back</button>
 
-      <button class="btn btn-primary btn-block"
+      <button id="creator-boost-submit" class="btn btn-primary btn-block"
         [disabled]="!canSubmit() || inProgress || success || criticalError"
         (click)="submit()"
         i18n="verb|@@M__ACTION__BOOST"

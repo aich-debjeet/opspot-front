@@ -1,11 +1,11 @@
 <div class="container">
     <div class="o-prof-edit">
         <div class="o-prof-edit-head">
-            <div class="o-prof-edit-head__title">
+            <div class="o-prof-edit-head__title" id="profile-edit-profile-edit-title">
                 <h4>Edit Profile</h4>
             </div>
             <div class="o-prof-edit-head__progress-bar">
-                <div class="text-md">Profile Completion</div>
+                <div class="text-md" id="profile-completion">Profile Completion</div>
                 <div class="c-cmplt-prof">
                     <div class="col-12 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0">
                         <div class="c-cmplt-prof__progress-bar">
@@ -17,7 +17,7 @@
                                     <span class="progress-bar"></span>
                                 </span>
                                 <div class="progress-value">
-                                    <div class="text-sm primary">
+                                    <div class="text-sm primary" id="profile-completion-range">
                                         50%
                                     </div>
                                 </div>
@@ -33,22 +33,22 @@
                 <swiper [config]="config">
                     <ul class="swiper-wrapper ">
                         <li class="swiper-slide">
-                            <a routerLinkActive='swipActive' routerLink='/profile/general'>General Info</a>
+                            <a routerLinkActive='swipActive' routerLink='/profile/general' id="profile-edit-general-info">General Info</a>
                         </li>
                         <li class="swiper-slide">
-                            <a routerLinkActive='swipActive' routerLink='/profile/about'>About</a>
+                            <a routerLinkActive='swipActive' routerLink='/profile/about' id="profile-edit-about">About</a>
                         </li>
                         <li class="swiper-slide">
-                            <a routerLinkActive='swipActive' routerLink='/profile/contact'>Contact</a>
+                            <a routerLinkActive='swipActive' routerLink='/profile/contact' id="profile-edit-contact">Contact</a>
                         </li>
                         <li class="swiper-slide">
-                            <a routerLinkActive='swipActive' routerLink='/profile/work'>Work</a>
+                            <a routerLinkActive='swipActive' routerLink='/profile/work' id="profile-edit-work">Work</a>
                         </li>
                         <li class="swiper-slide">
-                            <a routerLinkActive='swipActive' routerLink='/profile/education'>Education</a>
+                            <a routerLinkActive='swipActive' routerLink='/profile/education' id="profile-edit-education">Education</a>
                         </li>
                         <li class="swiper-slide">
-                            <a routerLinkActive='swipActive' routerLink='/profile/awards'>Awards </a>
+                            <a routerLinkActive='swipActive' routerLink='/profile/awards' id="profile-edit-awards">Awards </a>
                         </li>
                     </ul>
                 </swiper>

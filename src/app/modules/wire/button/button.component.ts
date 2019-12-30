@@ -9,12 +9,12 @@ import { Session } from '../../../services/session';
   selector: 'm-wire-button',
   template: `
   <div class="" *ngIf="large" (click)="wire()">
-  <span class="icon-coins"></span><span class="text-md f500">Contribute</span>
+  <span class="icon-coins" ></span><span class="text-md f500" id="contribute-button">Contribute</span>
   </div> 
    <a *ngIf = "!large" class="o-actions__link o-actions__link--coin" (click)="wire()">
-      <i class="icon-coins f-15"></i>
+      <i class="icon-coins f-15" id="contribute-icon"></i>
       <span class='o-action-count text-sm grey'>
-      <span>{{(object.wire_totals?object.wire_totals.tokens:0)|token:18 | number}}</span>
+      <span id="contribute-coins">{{(object.wire_totals?object.wire_totals.tokens:0)|token:18 | number}}</span>
      </span>
     </a>
   `

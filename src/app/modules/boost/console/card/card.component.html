@@ -3,22 +3,22 @@
         <a class="o-avatar"><img [src]="opspot.cdn_url + 'icon/' + boost.owner.guid + '/medium/' + getOwnerIconTime()" alt=""></a>
         <div class="o-avatar__info">
             <div class="o-avatar-det-block">
-                <span class="text-md grey o-posts-det"><a class="o-avatar__name">{{boost.owner.name}}</a></span>
+                <span class="text-md grey o-posts-det"><a class="o-avatar__name" id="card-boost-owner-name">{{boost.owner.name}}</a></span>
             </div>
             <div class="grey m-l-8 o-posts-tym">
-                <span>{{boost.time_created * 1000 | date:'medium'}}</span> 
+                <span id="card-boost-time-created">{{boost.time_created * 1000 | date:'medium'}}</span> 
                 <!-- <span class="o-posts-public-private"><i class="icon-public"></i></span> -->
             </div>
         </div><!--avatar info end-->
         <div class="o-posts-discription" *ngIf="boost?.entity?.entity_type === 'post' || boost?.entity?.entity_type === 'album'
         || boost?.entity?.entity_type === 'image'">
-                <p class="text-md grey-darker" [innerHtml]="boost.entity.message | tags"> 
+                <p class="text-md grey-darker" [innerHtml]="boost.entity.message | tags" id="card-boost-entity-message"> 
                 </p>
         </div>
     </div><!-- feed head end -->
     <div class="feed-media" *ngIf="boost?.entity?.entity_type !== 'event' && boost?.entity?.entity_type !== 'item' && boost?.entity?.entity_type !== 'opportunity' &&
      (boost?.entity?.entity_type === 'image' || boost?.entity?.entity_type === 'album' || boost?.entity?.entity_type === 'video')" [routerLink]="['/media', boost?.entity?.guid]">
-        <a *ngFor="let media of boost.entity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+        <a *ngFor="let media of boost.entity.custom_data | slice:0:3; let i = index;" id="card-boost-entity-media" class="feed-media__link">
             <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
             <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
               (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
@@ -124,7 +124,7 @@
             </div>
             </div>
             <div class="feed-card-event-block__right">
-            <button type="button" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != boost?.entity?.owner_guid">Reach Out</button>
+            <button type="button" id="reachout" class="btn btn-primary btn-lg" *ngIf="session.getLoggedInUser().guid != boost?.entity?.owner_guid">Reach Out</button>
             </div>
         </div>
     </div>
@@ -132,11 +132,11 @@
         
     <div class="o-boost-console-boosted-details">
         <div class="o-boost-console-boosted-details__left">
-            <div class="mr-30">
+            <div class="mr-30" id="card-views-for">
                 <div class="text-sm grey">
                     Views so far 
                 </div>
-                <div class="text-sm f500">
+                <div class="text-sm f500" id="card-boost-entity-impressions">
                     {{boost.entity.impressions}} out of {{boost.impressions}} 
                 </div>
             </div>
@@ -144,11 +144,11 @@
                 <div class="text-sm grey">
                     Target
                 </div>
-                <div class="text-sm f500">
+                <div class="text-sm f500" id="card-boost-entity-target">
                     {{boost.impressions}}
                 </div>
             </div>
-            <div *ngIf="boost.state == 'rejected'">
+            <div *ngIf="boost.state == 'rejected'" id="card-boosted-status">
                 <div class="text-sm grey">
                     Boosted Status
                 </div>
@@ -156,7 +156,7 @@
                     Rejected<span class="icon-info"></span> 
                 </div> -->
                 <div>
-                    <span class="text-sm f500">{{boost.state}}
+                    <span class="text-sm f500" id="card-boosted-entity-status">{{boost.state}}
 
                     </span>
                     <!-- <span class="tooltiptext">

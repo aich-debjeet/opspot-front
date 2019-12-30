@@ -3,42 +3,42 @@
     <div class="o-book-left-block hidden-mob">
       <div class="o-card o-book-filter">
           <div class="o-book-filter__title">
-              <div class="caption-medium">Filter</div>
-              <div class="text-sm primary">Clear All</div>
+              <div class="caption-medium" id="bookmark-view-bookmark-filter">Filter</div>
+              <div class="text-sm primary" id="bookmark-view-bookmark-clear-all">Clear All</div>
           </div>
           <div class="o-book-filter__block">
               <form>
                   <div class="c-checkbox__md">
                       <label class="c-checkbox">All
-                          <input type="checkbox" checked="checked">
+                          <input type="checkbox" checked="checked" id="bookmark-view-bookmark-all">
                           <span class="checkmark"></span>
                       </label>
                       <label class="c-checkbox">Images
-                          <input type="checkbox">
+                          <input type="checkbox" id="bookmark-view-bookmark-images">
                           <span class="checkmark"></span>
                       </label>
                       <label class="c-checkbox">Video
-                          <input type="checkbox">
+                          <input type="checkbox" id="bookmark-view-bookmark-video">
                           <span class="checkmark"></span>
                       </label>
                       <label class="c-checkbox">Audio
-                          <input type="checkbox">
+                          <input type="checkbox" id="bookmark-view-bookmark-audio">
                           <span class="checkmark"></span>
                       </label>
                       <label class="c-checkbox">Blogs
-                          <input type="checkbox">
+                          <input type="checkbox" id="bookmark-view-bookmark-blog">
                           <span class="checkmark"></span>
                       </label>
                       <label class="c-checkbox">Opportunities
-                          <input type="checkbox">
+                          <input type="checkbox" id="bookmark-view-bookmark-opportunity">
                           <span class="checkmark"></span>
                       </label>
                       <label class="c-checkbox">Events
-                          <input type="checkbox">
+                          <input type="checkbox" id="bookmark-view-bookmark-events">
                           <span class="checkmark"></span>
                       </label>
                       <label class="c-checkbox">Profile
-                          <input type="checkbox">
+                          <input type="checkbox" id="bookmark-view-bookmark-profile">
                           <span class="checkmark"></span>
                       </label>
                   </div>
@@ -50,11 +50,11 @@
   <div class="o-book-right-block">
     <div class="o-card o-book-title">
       <div class="o-book-title__text">
-          <div class="caption-medium float-left">Bookmark</div>
-          <span class="o-bookmark-count text-md grey-dark float-left" title="Unread Notification">{{activity.length}}</span>
+          <div class="caption-medium float-left" id="bookmark-view-bookmark">Bookmark</div>
+          <span class="o-bookmark-count text-md grey-dark float-left" title="Unread Notification" id="bookmark-view-bookmark-activity-count">{{activity.length}}</span>
       </div>
       <div class="o-book-title__action">
-          <a  class="o-book-settings" title="Settings"><i class="icon-settings"></i></a>
+          <a  class="o-book-settings" title="Settings" id="bookmark-view-bookmark-setting"><i class="icon-settings"></i></a>
       </div>
   </div>
   <opspot-activity

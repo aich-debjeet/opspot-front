@@ -46,12 +46,12 @@
 <!-- <app-image-croper></app-image-croper> -->
 <div class="o-card o-drop-title" *ngIf="loadOnDemand">
   <div class="o-drop-title__text">
-    <div class="caption-medium float-left">Notifications</div>
-    <span class="o-drop-title-count text-md white float-left" title="Unread Notification">
+    <div class="caption-medium float-left" id="notifications">Notifications</div>
+    <span class="o-drop-title-count text-md white float-left" title="Unread Notification" id="notification-count">
       {{opspot.notifications_count}}</span>
   </div>
   <div class="o-drop-title__action">
-    <a (click)="markAllRead()" class="text-sm primary" title="Mark all as read">Mark all as read</a>
+    <a (click)="markAllRead()" class="text-sm primary" title="Mark all as read" id="notifications-mark-as-read">Mark all as read</a>
     <!-- <a href="#" class="o-drop-title-icons" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
   </div>
 </div>
@@ -62,7 +62,7 @@
       <div class="o-card o-noti-filter">
         <div class="o-noti-filter__title">
           <div class="caption-medium">Filter</div>
-          <div class="text-sm primary">Clear All</div>
+          <div class="text-sm primary" (click)="changeFilter('')">Clear All</div>
         </div>
         <div class="o-noti-filter__block">
           <form>
