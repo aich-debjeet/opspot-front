@@ -156,7 +156,9 @@ export class MessengerConversation {
 
       this.sockets.join(this.conversation.socketRoomName);
 
-      this.socketSubscriptions.pushConversationMessage = this.sockets.subscribe('pushConversationMessage', (guid, message) => {
+      this.socketSubscriptions.pushConversationMessage = this.sockets.subscribe('pushConversationMessage', (data) => {
+        const guid = data[0];
+        const message = data[1];
         if (guid !== this.conversation.guid)
           return;
 
@@ -182,7 +184,9 @@ export class MessengerConversation {
         }
       });
 
-      this.socketSubscriptions.clearConversation = this.sockets.subscribe('clearConversation', (guid, actor) => {
+      this.socketSubscriptions.clearConversation = this.sockets.subscribe('clearConversation', (data) => {
+        const guid = data[0];
+        const actor = data[1];
         if (guid !== this.conversation.guid)
           return;
 
