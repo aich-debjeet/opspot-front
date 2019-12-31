@@ -262,7 +262,8 @@ opspot-button-remind{
                 </a>
               </div>
             </div>
-            <div class="" *ngIf="entity?.custom_data?.length > 5">
+            <div class="pos-rel" *ngIf="entity?.custom_data?.length > 5">
+              <i class="arrow-icons icon-arrow-left-circle left" (click)="slickModal.slickPrev()"></i>
               <ngx-slick-carousel class="carousel feed-media post-view-style" #slickModal="slick-carousel"
                 [config]="slideConfig" (init)="slickInit($event)" (breakpoint)="breakpoint($event)"
                 (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
@@ -281,8 +282,7 @@ opspot-button-remind{
                   </a>
                 </div>
               </ngx-slick-carousel>
-              <button class="btn-prev" (click)="slickModal.slickPrev()" id="view-profile-prev">prev</button>
-              <button class="btn-next" (click)="slickModal.slickNext()" id="view-profile-next">next</button>
+							<i class="arrow-icons icon-arrow-right-circle right" (click)="slickModal.slickNext()"></i>              
             </div>
             <m-translate 
               [open]="translateToggle"
