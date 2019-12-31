@@ -13,6 +13,7 @@ export class BookmarkViewComponent implements OnInit {
   inProgress: boolean = false;
   moreData: boolean = true;
   openFilter: boolean = false;
+  displayBookmark= true;
 
   constructor(
     private client: Client

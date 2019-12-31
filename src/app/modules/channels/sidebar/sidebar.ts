@@ -10,7 +10,8 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 @Component({
   moduleId: module.id,
   selector: 'm-channel--sidebar',
-  inputs: ['_user: user', 'editing'],
+  inputs: ['_user: user', 'editing', 'displayBookmark'],
+  outputs: [ '_deleteBookmark: deleteBookmark'],
   templateUrl: 'sidebar.html'
 })
 
@@ -20,6 +21,7 @@ export class ChannelSidebar {
   filter: any = 'feed';
   isLocked: boolean = false;
   editing: boolean = false;
+  displayBookmark: boolean = false;
   user: OpspotUser;
   searching;
   errorMessage: string = '';
@@ -38,7 +40,6 @@ export class ChannelSidebar {
     if (!value)
       return;
     this.user = value;
-    // this.user.bookmark = false;
     console.log('user details', this.user)
     this.user['contributeType'] = 'contribute';
   }
@@ -156,7 +157,7 @@ export class ChannelSidebar {
   setSocialProfile(value: any) {
     this.user.social_profiles = value;
   }
-  async togglePin(user:any){
+  async togglePin(user: any) {
     console.log(user);
     this.user.bookmark = !this.user.bookmark;
     const url: string = `api/v3/bookmark/${this.user.guid}/profile`;

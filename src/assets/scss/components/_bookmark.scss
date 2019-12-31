@@ -144,7 +144,7 @@
 .o-book-block{
     width: 100%;
     padding: 22px 20px;
-    display: flex;
+    // display: flex;
     justify-content: flex-start;
     flex-direction: row;
     @include mq($from: $mobile_sm, $until: $tablet) {
@@ -164,7 +164,7 @@
             @include mq($from: $mobile_sm, $until: $tablet) {
                 width: 100%!important;
                 position: relative;
-                min-height: 200px;
+                // min-height: 200px;
             }
         }
     }
