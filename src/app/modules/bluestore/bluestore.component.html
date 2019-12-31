@@ -67,7 +67,8 @@
 								</div>
 							</a>
 						</div>
-						<div class="" *ngIf="marketplace?.custom_data.length > 5">
+						<div class="pos-rel" *ngIf="marketplace?.custom_data.length > 5">
+							<i class="arrow-icons icon-arrow-left-circle left" (click)="slickModal.slickPrev()"></i>
 							<ngx-slick-carousel class="carousel feed-media post-view-style" #slickModal="slick-carousel"
 								[config]="slideConfig" (init)="slickInit($event)" (breakpoint)="breakpoint($event)"
 								(afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
@@ -80,14 +81,14 @@
 											class="feed-media__img">
 										<div class="feed-media-overlay" *ngIf="media.entity_type === 'video'"
 											(click)="showImage(i,media)">
-											<div class="feed-media-video__icon"><img src="assets/svg/playfill.svg"
-													alt=""></div>
+											<div class="feed-media-video__icon">
+												<img src="assets/svg/playfill.svg" alt="">
+											</div>
 										</div>
 									</a>
 								</div>
 							</ngx-slick-carousel>
-							<button class="btn-prev" (click)="slickModal.slickPrev()" id="bluestore-prev">prev</button>
-							<button class="btn-next" (click)="slickModal.slickNext()" id="bluestore-next">next</button>
+							<i class="arrow-icons icon-arrow-right-circle right" (click)="slickModal.slickNext()"></i>
 						</div>
 					</div>
 					<div class="o-posts-inner-marketplace-reachout">
