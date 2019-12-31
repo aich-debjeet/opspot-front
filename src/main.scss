@@ -25473,26 +25473,31 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .o-opportunity-country-code{
   width: 174px;
   height: 40px;
-  padding: 12px;
   border: 1px solid #90A4AE;
   border-radius: 4px;
+  select{
+    width: 100%;
+    height: 38px !important;
+    padding: 5px;
+    border: 0px;
+  }
   &__flag{
-  width: 25px;
-  height: 18px;
-  overflow: hidden;
-  border-radius: 50%;
-  float: left;
+    width: 25px;
+    height: 18px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
   }
   &__text{
-  text-transform: uppercase;
-  float: left;
-  margin-left: 4px;
+    text-transform: uppercase;
+    float: left;
+    margin-left: 4px;
   }
   &__dropdown{
-  width: 16px;
-  height: 16px;
-  border-radius: 2px;
-  margin-left: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    margin-left: 6px;
   }
 
 }
