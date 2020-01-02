@@ -1,5 +1,5 @@
 import { Component, EventEmitter, ViewChild, Input, Output, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
@@ -27,7 +27,7 @@ export class RegisterForm {
   takenUsername: boolean = false;
   usernameValidationTimeout: any;
   number;
-  noViewOtp=true;
+  noViewOtp = true;
   verifiedOtp = false;
   showFbForm: boolean = false;
   invalidNumberLength: boolean = false;
@@ -73,6 +73,7 @@ export class RegisterForm {
 
     //for dob 
   }
+
   //mobile number entered
   onMobileNumbr() {
     let numbers;
@@ -82,13 +83,14 @@ export class RegisterForm {
       this.getOtp(numbers)
     });
   }
+
   onOtp() {
     this.form.controls['otp'].valueChanges.subscribe(val => {
       let a = Object.values(val);
       let values = '';
       a.forEach(a => { values += a });
       if (values.length === 6) {
-       const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
+        const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
         const data = {
           'number': phoneNumber,
           'code': values,
@@ -97,7 +99,7 @@ export class RegisterForm {
         this.service.verifyMobile(data)
           .then((data: any) => {
             this.verifiedOtp = true;
-            if(this.errorMessage === 'Confirmation failed'){
+            if (this.errorMessage === 'Confirmation failed') {
               this.errorMessage = ''
             }
             // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
@@ -112,18 +114,19 @@ export class RegisterForm {
 
     })
   }
+
   //for getting otp
-   getOtp(numbr) {
+  getOtp(numbr) {
     this.service.getOtp(numbr).then((res: any) => {
       this.noViewOtp = false;
       this.invalidNumberLength = false;
       localStorage.setItem('phoneNumberSecret', res.secret);
     })
-    .catch((e)=>{
-      if(e.status === 'error') {
-        this.invalidNumberLength = true;
-      }
-    });
+      .catch((e) => {
+        if (e.status === 'error') {
+          this.invalidNumberLength = true;
+        }
+      });
   }
 
   ngOnInit() {
@@ -138,12 +141,12 @@ export class RegisterForm {
   register() {
     // console.log(this.form.value);
     if (this.errorMessage.length > 0)
-    this.errorMessage = '';
-    if(!this.enterOtpError)
-    this.enterOtpError = true;
-    
-    if((!this.form.value.tos) || (this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == '')){
-      if(this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == ''){
+      this.errorMessage = '';
+    if (!this.enterOtpError)
+      this.enterOtpError = true;
+
+    if ((!this.form.value.tos) || (this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == '')) {
+      if (this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == '') {
         this.enterOtpError = false;
       }
       if (!this.form.value.tos) {
@@ -242,7 +245,6 @@ export class RegisterForm {
   //   this.usernameValidationTimeout = setTimeout(this.validateUsername.bind(this), 500);
   // }
 
-  
   // function to give birth date selection
 
   dob() {
@@ -311,11 +313,12 @@ export class RegisterForm {
       }
     }
   }
-  removeSpace(numb){
+
+  removeSpace(numb) {
     return numb.replace(/\s/g, '')
   }
 
-  removeOperators(numb){
+  removeOperators(numb) {
     return numb.replace(/\s/g, '').replace('+', '').replace('-', '');
   }
 
