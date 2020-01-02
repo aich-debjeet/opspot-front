@@ -18997,7 +18997,11 @@ m-videochat {
   display: block;
   position: relative; }
   m-videochat, m-videochat iframe {
-    max-height: calc(100vh - 90px); }
+    min-height: calc(100vh - 90px); 
+    @include mq($from: $mobile_sm, $until: $tablet) {
+      min-height: calc(100vh - 90px);
+    }
+  }
 
 m-wallet--balance-money, m-wallet--balance-reward, m-wallet--balance-tokens {
   display: block; }
