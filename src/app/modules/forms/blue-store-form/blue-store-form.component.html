@@ -63,7 +63,7 @@
                             <!-- <span class="o-opportunity-country-code__flag"><img src="assets/svg/in.png" alt=""></span> 
                             <span class="o-opportunity-country-code__text text-md">IND</span> -->
                             <select class="form-control form-control-lg"  formControlName="blueStoreCurrency">
-                                <option value="" disabled selected>Select Category</option>
+                                <option value="INR" selected>INR</option>
                                 <option *ngFor="let type of currencyList"  value="{{ type.value }}">{{ type.value}}
                                 </option>
                             </select>

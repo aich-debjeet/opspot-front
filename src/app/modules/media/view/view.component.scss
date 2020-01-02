@@ -3,6 +3,22 @@
 
 // posts inner page style
 
+i.arrow-icons.icon-arrow-right-circle.right {
+	right: -25px;
+}
+i.arrow-icons.icon-arrow-left-circle.left {
+	left: -25px;
+}
+i.arrow-icons {
+    position: absolute;
+    z-index: 1;
+	top: 37px;
+	cursor: pointer;
+}
+.pos-rel {
+	position: relative;
+}
+
 .o-post-inner-sec{
     background-color: #FAFAFA;
   }

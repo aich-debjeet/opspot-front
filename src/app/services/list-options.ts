@@ -124,7 +124,6 @@ export const CURRENCY : Array<any> = [
 	{ value:'HKD', label:  'Hong Kong Dollars'  },
 	{ value:'HUF', label:  'Hungary Forint'  },
 	{ value:'ISK', label:  'Iceland Krona'  },
-	{ value:'INR', label:  'India Rupees'  },
 	{ value:'IDR', label:  'Indonesia Rupiah'  },
 	{ value:'IEP', label:  'Ireland Punt'  },
 	{ value:'ILS', label:  'Israel New Shekels'  },
