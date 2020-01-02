@@ -83,13 +83,14 @@ export class PortfolioComponent implements OnInit, OnDestroy {
       return;
     }
     if (refresh) {
-      this.offset = '';
+      // this.offset='';
+      this.requestParams.offset = '';
     }
     this.inProgress = true;
     this.client.get('api/v2/search', this.requestParams)
       .then((data: any) => {
         const respData: any = data;
-        if (respData.entities.length == 0) {
+        if (!respData.entities || respData.entities.length == 0) {
           this.moreData = false;
           this.inProgress = false;
           return false;
@@ -101,13 +102,14 @@ export class PortfolioComponent implements OnInit, OnDestroy {
         }
         this.moreData = true;
         // console.log("data: ", data['load-next']);
-        
+
         this.requestParams.offset = data['load-next'];
         // console.log("this offset: ", this.offset);
-        
+
         this.inProgress = false;
       })
       .catch((e) => {
+        this.moreData = false;
         this.inProgress = false;
       });
   }
@@ -125,5 +127,25 @@ export class PortfolioComponent implements OnInit, OnDestroy {
       }
     }
   }
-
+  onChange(e: any) {
+    console.log(e)
+    console.log(this.requestParams)
+    // let requestParams = {
+    //   taxonomies: e,
+    //   limit: 12,
+    //   offset: '',
+    //   rating: 2,
+    //   q: ''
+    // };
+    this.requestParams.taxonomies =e;
+    // this.requestParams = requestParams;
+    // console.log(requestParams)
+    console.log(this.requestParams)
+    this.reset();
+    this.searchMore(true);
+  }
+  reset() {
+    console.log(this.filteredArray);
+    this.filteredArray = [];
+  }
 }
