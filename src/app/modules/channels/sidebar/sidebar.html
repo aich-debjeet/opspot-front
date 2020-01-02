@@ -1,7 +1,7 @@
 <div *ngIf="!displayBookmark">
   <div class="o-card o-prof-info o-prof-info--radius o-prof-info--shadow">
-    <button class="mdl-button m-pin-button mdl-button--icon o-prof-info__bookmark mdl-color-text--blue-grey-300" id="profile-bookmark"
-      (click)="togglePin(user)">
+    <button class="mdl-button m-pin-button mdl-button--icon o-prof-info__bookmark mdl-color-text--blue-grey-300"
+      id="profile-bookmark" (click)="togglePin(user)">
       <m-tooltip icon="turned_in" *ngIf="user.bookmark">
         This profile is Bookmarked
       </m-tooltip>
@@ -291,9 +291,9 @@
   <div class="opspot-spacer-2x"></div>
 </div>
 
-<div class="o-card o-prof-info o-prof-info--radius o-prof-info--shadow" *ngIf="displayBookmark">
-  <button class="mdl-button m-pin-button mdl-button--icon o-prof-info__bookmark mdl-color-text--blue-grey-300" id="profile-bookmark"
-    (click)="togglePin(user)">
+<!-- <div class="o-card o-prof-info o-prof-info--radius o-prof-info--shadow" *ngIf="displayBookmark">
+  <button class="mdl-button m-pin-button mdl-button--icon o-prof-info__bookmark mdl-color-text--blue-grey-300"
+    id="profile-bookmark" (click)="togglePin(user)">
     <m-tooltip icon="turned_in" *ngIf="user.bookmark">
       This profile is Bookmarked
     </m-tooltip>
@@ -305,85 +305,15 @@
     (added)="upload_avatar($event)"></opspot-avatar>
   <div class="o-prof-name">
     <div class="caption-bold f700" id="sidebar-avatar-name">{{user.name}}</div>
-    <!-- <opspot-button-user-dropdown [(user)]="user" *ngIf="session.getLoggedInUser().guid != user.guid">
-    </opspot-button-user-dropdown> -->
     <span class="text-md grey" id="sidebar-avatar-user-name">@{{user.username}}</span>
   </div>
-  <!-- <div class="m-channel--username">
-      <h2><span>@</span>{{user.username}}</h2>
-    </div> -->
   <div *ngIf="!isOwner()" class="o-prof-others-action o-prof-others-action--margin">
     <div class="o-prof-portfolio">
       <a [routerLink]="['/', 'portfolio', user.username]" class="btn btn-outline-primary btn-sm"
         id="sidebar-portfolio">Portfolio</a>
     </div>
-    <!-- <div class="o-card o-bio">
-      <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/about']" id="sidebar-icon-edit-profile"><i
-          class="icon-edit-profile f-15"></i></a>
-      <span class="o-bio__title caption-medium" id="sidebar-about-user">About {{user.name}}</span>
-      <span *ngIf="isOwner() && !user?.about?.description" class="text-md">
-        <a [routerLink]="['/profile/about']" class="primary" id="sidebar-about-self">Tell something about yourself</a>
-      </span>
-      <span class="text-md" id="sidebar-user-description">{{user?.about?.description}}</span>
-      <ul class="o-bio__info">
-        <li class="o-bio-info__item">
-          <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
-          <span class="text-md float-left" *ngIf="isOwner() && !user.location" [routerLink]="['/profile/contact']">
-            <a class="primary" id="sidebar-add-location">Add Location</a>
-          </span>
-          <span class="text-md float-left" id="sidebar-location">{{user.location | titlecase}}</span>
-        </li>
-        <li class="o-bio-info__item">
-          <span class="o-bio-info_ico"><i class="icon-mail"></i></span>
-          <span class="text-md float-left" *ngIf="isOwner() && !user.email" [routerLink]="['/profile/contact']">
-            <a class="primary" id="sidebar-add-email">Add Email</a>
-          </span>
-          <span class="text-md float-left" id="sidebar-email">{{user.email}}</span>
-        </li>
-        <li class="o-bio-info__item">
-          <span class="o-bio-info_ico"><i class="icon-phone"></i></span>
-          <span class="text-md float-left" *ngIf="isOwner() && !user.phone" [routerLink]="['/profile/contact']">
-            <a class="primary" id="sidebar-add-email">Add Number</a>
-          </span>
-          <span class="text-md float-left" id="sidebar-phone-number">{{user.phone}}</span>
-        </li>
-        <li class="o-bio-info__item">
-          <span class="o-bio-info_ico"><i class="icon-globe"></i></span>
-          <span class="text-md float-left" *ngIf="isOwner() && !user.website" [routerLink]="['/profile/contact']">
-            <a class="primary" id="sidebar-add-website">Add Website</a>
-          </span>
-          <span class="text-md float-left" id="sidebar-website">{{user.website}}</span>
-        </li>
-        <li class="o-bio-info__item m-t-9">
-          <div class="o-bio-info-left" id="sidebar-height">
-            <div class="text-sm grey o-gender-title">Height</div>
-            <div class="text-md o-gender-value" *ngIf="isOwner() && !user.height">
-              <a class="primary" [routerLink]="['/profile/about']" id="sidebar-add-height">Select</a>
-            </div>
-            <span class="text-md float-left" id="sidebar-user-height">{{user.height}}</span>
-          </div>
-          <div class="o-bio-info-right" id="sidebar-weight">
-            <div class="text-sm grey o-dob-title">Weight</div>
-            <div class="text-md o-dob-value" *ngIf="isOwner() && !user.weight">
-              <a class="primary" [routerLink]="['/profile/about']" id="sidebar-add-weight">Select</a>
-            </div>
-            <span class="text-md float-left" id="sidebar-user-weight">{{user.weight}}</span>
-          </div>
-        </li>
-        <li class="o-bio-info__item m-t-9">
-          <div class="o-bio-language">
-            <div class="text-sm grey w100" id="sidebar-languages">Languages Known</div>
-            <div class="text-md w100" *ngIf="isOwner() && !user?.about?.languages">
-              <a [routerLink]="['/profile/about']" class="primary" id="sidebar-add-languages">Add Language</a>
-            </div>
-            <span class="text-md float-left"
-              id="sidebar-languages-known">{{user?.about?.languages?.join(', ') | truncate:[100, '...']}}</span>
-          </div>
-        </li>
-      </ul>
-    </div> -->
   </div>
-</div>
+</div> -->
 
 <!-- images  -->
 <!-- <m-channel--modules [owner]="user" type="image" [linksTo]="['/media/images', user.username]">
@@ -414,3 +344,28 @@
 </m-channel--modules>
 
 <div class="opspot-spacer-2x"></div> -->
+
+<div class="o-card o-book-block" *ngIf="displayBookmark">
+  <div class="o-book-block__left o-book-block__left--profile ">
+    <div class="o-book-prof-top-bar-mob"></div>
+    <div class="o-book-prof">
+      <div class="o-book-top-action">
+        <div class="o-bookmark-tag text-sm mdl-color-text--blue-grey-300" (click)="togglePin(user)">
+          <m-tooltip icon="turned_in" *ngIf="user.bookmark">
+            This profile is Bookmarked
+          </m-tooltip>
+          <m-tooltip *ngIf="!user.bookmark" icon="turned_in_not">
+            Click to bookmark this post to the top of your channel feed
+          </m-tooltip>
+        </div>
+      </div>
+      <div class="o-book-prof__avatar"><img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt=""></div>
+      <div class="o-book-prof__info">
+        <div id="name" class="caption-bold">{{user.name}}</div>
+        <div class="text-sm grey">@{{user.username}}</div>
+        <button type="button" [routerLink]="['/', 'portfolio', user.username]"
+          class="btn btn-primary btn-xs btn--book">Portfolio</button>
+      </div>
+    </div>
+  </div>
+</div>

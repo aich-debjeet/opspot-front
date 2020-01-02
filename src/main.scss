@@ -27651,3 +27651,90 @@ li{
 .word-break{
   word-break: break-all
 }
+.o-book-block{
+    width: 100%;
+    padding: 22px 20px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    background-color: white;
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: column;
+        padding: 0px;
+        background: #fff;
+        margin-bottom: 9px;
+        border-bottom: 1px solid $grey-light;
+	}
+    &__left{
+        width: 193px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+        }
+        &--profile{
+            width:41%!important;
+            @include mq($from: $mobile_sm, $until: $tablet) {
+                width: 100%!important;
+                position: relative;
+                min-height: 200px;
+            }
+        }
+    }
+    &__right{
+        width: calc(100% - 193px);
+        padding-left: 31px;
+        position: relative;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+            padding: 13px 15px 18px 15px;
+        }
+    }
+}
+.o-book-prof{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items:center;
+  flex-direction: row;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+      flex-direction: column;
+      position: absolute;
+      top: 17px;
+      z-index: 2;
+}
+  &__avatar{
+      width: 111px;
+      height: 111px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid #ECEFF1;
+      @include mq($from: $mobile_sm, $until: $tablet) {
+          
+      }
+      img{
+          width: 100%;
+      }
+  }
+  &__info{
+      display: flex;
+      justify-content: flex-start;
+      align-items: left;
+      width: calc(100% - 135px);
+      flex-direction: column;
+      margin-left: 15px;
+      .btn--book{
+          margin-top: 12px;
+      }
+  }
+}
+.o-book-top-action{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  &--mob{
+      top: 38px;
+  }
+}

@@ -18,6 +18,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 export class ChannelSidebar {
 
   opspot = window.Opspot;
+  avatarSize: string = 'medium';
   filter: any = 'feed';
   isLocked: boolean = false;
   editing: boolean = false;
