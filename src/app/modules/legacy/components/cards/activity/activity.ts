@@ -431,7 +431,7 @@ export class Activity {
     this.activity.attachment_guid = data.attachment_guid;
     this.activity.price = data.price;
     this.activity.item_count = data.item_count;
-    this.activity.currency = 'INR';
+    this.activity.currency = data.currency;
     this.activity.published = 1;
     // trigger component observe new changes
     this.detectChanges();

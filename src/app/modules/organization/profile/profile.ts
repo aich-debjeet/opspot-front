@@ -327,7 +327,10 @@ export class OrganizationProfile {
   }
 
   listenForNewMessages() {
-    this.socketSubscription = this.sockets.subscribe('comment', (parent_guid, owner_guid, guid) => {
+    this.socketSubscription = this.sockets.subscribe('comment', (data) => {
+      const parent_guid = data[0];
+      const owner_guid = data[1];
+      const guid = data[2];
       if (!this.organization || parent_guid !== this.organization.guid) {
         return;
       }
