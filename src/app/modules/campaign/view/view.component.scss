@@ -1,0 +1,371 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+//container style
+.container-enrolment{
+    max-width: 1069px;
+    margin:auto auto;
+    width: 100%;
+}
+//header style
+.without-nav-header__title{
+    @include mq($until:$tablet){
+        text-align: left;
+        margin-left: 21px;
+    }
+}
+
+//enrolment main style
+.o-enrolment-sec{
+    width: 100%;
+    // min-height: 200vh;
+    background-color: #FAFAFA;
+    float: left;
+}
+.o-enrolment{
+    border: 1px solid #ECEFF1;	
+    border-radius: 4px;	
+    background-color: $white;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    // min-height: 200vh;
+}
+//enrolment body style
+.o-enrolment-body{
+    padding:24px 30px 34px;
+    @include mq($until:$tablet){
+        padding:12px 15px;
+    }
+}
+.o-enrolment-baner{
+    img{
+        width:100%;
+        height:316px;
+        object-fit: cover;
+        @include mq($until:$tablet){
+            height:144px;
+        }
+    }
+}
+//title style
+.o-enrolment-title{
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 29px;
+    &__icon{
+        font-size:17px!important;
+        color:$primary!important;
+        margin-right:14px!important;
+        @include mq($until:$tablet){
+            font-size:20px!important;
+        }
+    }
+    &__button{
+        padding: 8px 19px;
+        display: flex;
+        align-items: center;
+        &:hover span{
+            color:$white!important;
+        }
+        &:focus span{
+            color:$white!important;
+        }
+        @include mq($until:$tablet){
+            padding: 6px 8px;
+            border: none;
+            width: 36px;
+            overflow: hidden;
+        }
+    }
+}
+//margin style
+.o-enrolment-marginb51{
+    margin-bottom: 51px;
+}
+.o-enrolment-marginb25{
+    margin-bottom:25px;
+}
+.o-enrolment-marginr15{
+    margin-right:15px;
+}
+.o-enrolment-marginb15{
+    margin-bottom:15px;
+}
+.o-enrolment-marginb10{
+    margin-bottom:10px;
+}
+.o-enrolment-lh30{
+    line-height: 30px;
+}
+.o-enrolment-marginl13{
+    margin-left:13px;
+    @include mq($until:$tablet){
+        margin-left:0px;
+    }
+}
+.o-enrolment-margin18{
+    margin:18px 0px;
+}
+.o-enrolment-f17{
+    font-size:17px!important;
+    @include mq($until:$tablet){
+        font-size:15px!important;
+    }
+}
+.o-enrolment-respaddng{
+    @include mq($until:$tablet){
+        padding:0px 15px;
+    }
+}
+//common block style
+.o-enrolment-block{
+    display: flex;
+    justify-content: space-between;
+    @include mq($until:$tablet){
+        flex-direction: column;
+    }
+    &__left{
+       width:100%;
+       max-width: 200px;
+       margin-right:115px;
+       h4{
+        @include mq($until:$tablet){
+            font-weight: 500;
+            font-size: 18px;
+            margin-bottom: 21px;
+        }  
+       }
+    }
+    &__right{
+        width:100%;
+    }
+}
+.o-enrolment-block--gap{
+    margin-top:46px;
+    margin-bottom: 46px;
+    @include mq($until:$tablet){
+        margin-top:25px;
+        margin-bottom: 25px;
+    }  
+}
+.o-enrolment-block-gallery{
+    @include mq($until:$tablet){
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        overflow-x: scroll;
+    }
+}
+
+//info style
+.o-enrolment-info{
+    display:flex;
+    justify-content:space-between;
+    padding-right:66px;
+    @include mq($until:$tablet){
+        padding-right:0px;
+        flex-wrap: wrap;
+    }
+    &__item{
+        display:flex;
+        flex-direction: column;
+        @include mq($until:$tablet){
+            margin-top: 21px;
+            width: 50%;
+        }
+    }
+}
+.o-enrolment-btninfo{
+    font-size:14px!important;
+    margin-left:10px;
+}
+//gallery style
+.o-enrolment-gallery{
+    display: flex;
+    justify-content:space-between;
+    // @include mq($until:$tablet){
+    //     flex-direction: column;
+    // }
+    &__item{
+        img{
+            height: 168px;
+            max-width:168px;	
+            width: 100%;	
+            border-radius: 4px;
+            object-fit:cover;
+        }
+    }
+}
+
+//organisation style
+.o-enrolment-organiser{
+    &__avatar{
+        img{
+            width:100px;
+            height:100px;
+            border-radius: 50%;
+        }   
+    }
+    &__title{
+        margin:20px 0px 14px;
+        h4{
+            @include mq($until:$tablet){
+                font-weight: 500;
+                font-size: 15px;
+            }
+        } 
+    }
+    &__button{
+        padding: 8px 35px;
+        margin-top:20px;
+    }
+}
+
+//form ends
+.o-entrolment-form{
+    &__item{
+        display: flex;
+        width:100%;
+        justify-content: space-between;
+        @include mq($until:$tablet){
+            flex-direction: column;
+        }
+        div{
+            flex:1;
+            width:100%;
+        }
+    }
+    &__button{
+        float: right;
+        padding: 12px 59px;
+        @include mq($until:$tablet){
+            width:100%;
+        }
+    }
+    textarea{
+        resize:none;
+    }
+}
+.o-enrolment-gender{
+    padding: 10px 15px;
+    border: 1px solid #90A4AE;
+    border-radius: 4px;
+    .radiobutton input[type="radio"] + label:before{
+        width: 17px;
+        height: 17px; 
+    }
+    .radiobutton input[type="radio"] + label:after{
+        width: 17px;
+        height: 17px; 
+    }
+    label{
+        margin-bottom: 0px;
+    }
+}
+
+//gallery popup
+.fs-gal-view {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    text-align: center;
+    background-size: contain;
+    background-position: center center;
+    background-color: rgba(0, 0, 0, 0.9);
+    background-repeat: no-repeat;
+    overflow: hidden;
+    z-index: 999999;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}
+
+.fs-gal-prev, .fs-gal-next, .fs-gal-close {
+    position: absolute;
+    top: calc(50vh - 20px);
+    height: 40px;
+    width: 40px;
+    z-index: 999999;
+    -webkit-filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 1));      
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 1)); 
+    transition: all 0.3s;
+    @include mq($until:$tablet){
+        width:30px;
+        height:30px;
+    }
+}
+.fs-gal-prev:hover, .fs-gal-next:hover, .fs-gal-close:hover {
+    -webkit-filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.9));      
+    filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.9)); 
+    cursor: pointer;
+}
+.fs-gal-prev {
+    left: 14px;
+}
+.fs-gal-next {
+    right: 14px;
+}
+.fs-gal-close {
+    top: 30px;
+    right: 40px;
+    height: 30px;
+    width: 30px;
+    @include mq($until:$tablet){
+        width:17px;
+    }
+}
+.fs-gal-main {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.fs-gal:hover, .fs-gal-nav:hover, .fs-gal-close:hover {
+    cursor: pointer;
+}
+.fs-gal {
+    height: 163px;
+    width: 163px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 7px;
+    margin-bottom: 7px;
+}
+
+//enrolment confirmed
+.o-enrolment-confirmed{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 21px;
+    padding-bottom: 46px;
+    @include mq($until:$tablet){
+        padding-top: 0px;
+        padding-bottom: 15px;
+    }
+    &__avatar{
+        margin-bottom: 35px;
+    }
+}
+.o-enrolment-line{
+    border-top: 1px solid #ECEFF1;
+}
+//table style
+.o-enrolment-table{
+    width:60%;
+    @include mq($until:$tablet){
+        width:100%;
+    }
+    td{
+        padding-bottom: 10px;
+    }
+}
+.o-entrolment-button-left{
+    float:left!important;
+    margin-top:40px;
+}
