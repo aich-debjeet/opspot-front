@@ -128,11 +128,11 @@
         <target>ENVIAR</target>
       </trans-unit>
       <trans-unit id="WIRE__CREATOR__WIRED_NOTICE">
-        <source>Wired!</source>
+        <source>Contributed!</source>
         <target>¡Transferido!</target>
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__WIRE_ME_ACTION">
-        <source>Wire me</source>
+        <source>Contribute me</source>
         <target>Transfiéreme</target>
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__REWARDS_TITLE">
@@ -976,7 +976,7 @@
         <target>Salida</target>
       </trans-unit>
       <trans-unit id="WIRE__CONSOLE__WIRE_DESC">
-        <source>Wire allows you to receive money for rewards and exclusive content. You can configure your rewards on your channel page.</source>
+        <source>Contribute allows you to receive money for rewards and exclusive content. You can configure your rewards on your channel page.</source>
         <target>Transferir te permite recibir dinero por recompensas y contenido exclusivo. Puedes configurar las recompensas en la página de tu canal.</target>
       </trans-unit>
       <trans-unit id="MONETIZATION__ONBOARDING__DOB_LABEL">
@@ -1216,11 +1216,11 @@
         <target>Agregar recompensa</target>
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__OVERVIEW__WIRES_CARD_TOOLTIP">
-        <source>How many wires <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />@<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /><x id="INTERPOLATION" /> has received in the last 30 days</source>
+        <source>How many contributes <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />@<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /><x id="INTERPOLATION" /> has received in the last 30 days</source>
         <target>Cuántas transferencias recibió <x id="START_TAG_SPAN" ctype="x-span" />@<x id="CLOSE_TAG_SPAN" ctype="x-span" /><x id="INTERPOLATION" /> en los últimos 30 días</target>
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__OVERVIEW__POINTS_CARD_TOOLTIP">
-        <source>This is <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />@<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /><x id="INTERPOLATION" />'s total volume (gross) of all Token wires received in the last 30 days</source>
+        <source>This is <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />@<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /><x id="INTERPOLATION" />'s total volume (gross) of all Coin contributions received in the last 30 days</source>
         <target>Esto es el volumen total (bruto) de todas las transferencias de puntos que recibió <x id="START_TAG_SPAN" ctype="x-span" />@<x id="CLOSE_TAG_SPAN" ctype="x-span" /><x id="INTERPOLATION" /> en los últimos 30 días</target>
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__OVERVIEW__BREAKDOWN_LINK">
@@ -1228,7 +1228,7 @@
         <target>Ver detalle</target>
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__OVERVIEW__BREAKDOWN_LINK_TOOLTIP">
-        <source>See a breakdown of all your Wires in your wallet</source>
+        <source>See a breakdown of all your Contributes in your wallet</source>
         <target>Ver los detalles de todas tus transferencias en tu billetera</target>
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__OVERVIEW__YOU_SENT_CARD_LABEL">
@@ -1236,7 +1236,7 @@
         <target>Enviaste</target>
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__OVERVIEW__YOU_SENT_CARD_TOOLTIP">
-        <source>This is the amount you have wired to <x id="INTERPOLATION" /> in the last 30 days</source>
+        <source>This is the amount you have contributed to <x id="INTERPOLATION" /> in the last 30 days</source>
         <target>Este es el monto que has transferido a <x id="INTERPOLATION" /> en los últimos 30 días</target>
       </trans-unit>
       <trans-unit id="WIRE__CREATOR__REWARDS__TITLE">
@@ -1268,7 +1268,7 @@
         <target><x id="START_ITALIC_TEXT" ctype="x-i" />$<x id="CLOSE_ITALIC_TEXT" ctype="x-i" /><x id="INTERPOLATION" /></target>
       </trans-unit>
       <trans-unit id="WIRE__CONSOLE__LEDGER__NO_WIRES_NOTICE">
-        <source>No Wires to show.</source>
+        <source>No Contributes to show.</source>
         <target>No hay transferencias que mostrar.</target>
       </trans-unit>
       <trans-unit id="WIRE__CONSOLE__SUPPORTER__THIS_MONTH">
@@ -1300,7 +1300,7 @@
         <target>Guardando…</target>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__ONLY_SUPPORTERS_TITLE_PART">
-        <source>Only supporters who wire you over</source>
+        <source>Only supporters who contribute you over</source>
         <target>Solo los partidarios que te transfieren más de</target>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__USD_PER_MONTH">
@@ -1320,7 +1320,7 @@
         <target>Bloqueado</target>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__WIRE_ME_OVER_PART">
-        <source>Wire me over</source>
+        <source>Contribute me over</source>
         <target>Transfiéreme más de</target>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__TO_SEE_TITLE_PART">
@@ -1332,7 +1332,7 @@
         <target>Desbloquear</target>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__CAN_ONLY_BE_SEEN_TITLE_PART">
-        <source>This post can only be seen by supporters who wire</source>
+        <source>This post can only be seen by supporters who contribute</source>
         <target>Esta publicación solo podrá ser vista por partidarios que transfieren</target>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__OVER_USD_PER_MONTH">
@@ -1348,7 +1348,7 @@
         <target>a @<x id="INTERPOLATION" /></target>
       </trans-unit>
       <trans-unit id="WIRE__CONSOLE__OVERVIEW__MONEY_WIRES_TOOLTIP">
-        <source>The total wires you have received</source>
+        <source>The total contributes you have received</source>
         <target>Cuántas transferencias de dinero has recibido en los últimos 30 días</target>
       </trans-unit>
       <trans-unit id="WIRE__CONSOLE__OVERVIEW__MONEY_EARNINGS_TOOLTIP">
@@ -2003,7 +2003,7 @@
         <target>Tu promoción <x id="START_TAG_SPAN" ctype="x-span" />para<x id="CLOSE_TAG_SPAN" ctype="x-span" /></target>
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__BOOST_REJECTED__REASON">
-        <source>was rejected for <x id="START_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;" /><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;" /><x id="INTERPOLATION" /><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;" />.<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;" /> Your tokens have been credited back to your wallet.</source>
+        <source>was rejected for <x id="START_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;" /><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;" /><x id="INTERPOLATION" /><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;" />.<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;" /> Your coins have been credited back to your wallet.</source>
         <target>fue rechazado: <x id="START_TAG_NG-CONTAINER" ctype="x-ng-container" /><x id="START_ITALIC_TEXT" ctype="x-i" /><x id="INTERPOLATION" /><x id="CLOSE_ITALIC_TEXT" ctype="x-i" />.<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" /> Tus puntos han sido devueltos a tu billetera.</target>
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__BOOST_REVOKED__BOOST_FOR">
@@ -2099,19 +2099,19 @@
         <target>¡<x id="START_TAG_SPAN" ctype="x-span" /><x id="INTERPOLATION" /><x id="CLOSE_TAG_SPAN" ctype="x-span" /> quiere chatear contigo!</target>
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__TO_ONETIME">
-        <source>You have successfully wired <x id="INTERPOLATION" /> to <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" /></source>
+        <source>You have successfully contributed <x id="INTERPOLATION" /> to <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" /></source>
         <target>Has exitosamente transferido <x id="INTERPOLATION" /> a <x id="START_LINK" ctype="x-a" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" /></target>
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__FROM_ONETIME">
-        <source>You have received a wire of <x id="INTERPOLATION" /> from <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" /></source>
+        <source>You have received a contribute of <x id="INTERPOLATION" /> from <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" /></source>
         <target>Has recibido una transferencia de <x id="INTERPOLATION" /> de <x id="START_LINK" ctype="x-a" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" /></target>
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__TO_SUBSCRIPTION">
-        <source>You have subscribed to wire <x id="INTERPOLATION" />/month to <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" /></source>
+        <source>You have subscribed to contribute <x id="INTERPOLATION" />/month to <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" /></source>
         <target>Te suscribiste a transferir <x id="INTERPOLATION" />/mes a <x id="START_LINK" ctype="x-a" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" /></target>
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__FROM_SUBSCRIPTION">
-        <source>You have received a wire subscription of <x id="INTERPOLATION" />/month from <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" /></source>
+        <source>You have received a contribute subscription of <x id="INTERPOLATION" />/month from <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" /></source>
         <target>Has recibido una suscripción de transferencia de <x id="INTERPOLATION" />/mes de <x id="START_LINK" ctype="x-a" />@<x id="INTERPOLATION_1" /><x id="CLOSE_LINK" ctype="x-a" /></target>
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__REPORT_ACTIONED__ACTIVITY_BEEN">
@@ -2346,7 +2346,7 @@
         <target>Promoción</target>
       </trans-unit>
       <trans-unit id="M__FEATURE__WIRE">
-        <source>Wire</source>
+        <source>Contribute</source>
         <target>Transferir</target>
       </trans-unit>
       <trans-unit id="M__COMMON__COPYRIGHT_2017">
@@ -2422,7 +2422,7 @@
         <target>USD</target>
       </trans-unit>
       <trans-unit id="M__COMMON__SELECT_MONEY">
-        <source>Don't have Tokens? No problem.</source>
+        <source>Don't have Coins? No problem.</source>
         <target>Seleccionar dinero</target>
       </trans-unit>
       <trans-unit id="M__COMMON__PAYMENT_ATTACHED">
@@ -2584,7 +2584,7 @@
         <target>E-mail</target>
       </trans-unit>
       <trans-unit id="M__COMMON__EARNINGS">
-        <source>Tokens</source>
+        <source>Coins</source>
         <target>Ingresos</target>
       </trans-unit>
       <trans-unit id="M__COMMON__ENTER_2FA_CODE">
@@ -2694,7 +2694,7 @@
         <target>puntos</target>
       </trans-unit>
       <trans-unit id="M__FEATURE__WIRE_PLURAL">
-        <source>Wires</source>
+        <source>Contributes</source>
         <target>Transferencias</target>
       </trans-unit>
       <trans-unit id="M__COMMON__SYMBOL_AND_USD">
@@ -2829,12 +2829,12 @@
         <target>Your <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;" />video<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;" /> is ready to be viewed!</target>
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__REWARDS__YOU_HAVE_RECEIVED_X_TOKENS_TODAY">
-        <source>You earned <x id="INTERPOLATION" /> tokens today.</source>
-        <target>You earned <x id="INTERPOLATION" /> tokens today.</target>
+        <source>You earned <x id="INTERPOLATION" /> coins today.</source>
+        <target>You earned <x id="INTERPOLATION" /> coins today.</target>
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__REWARDS__YOU_HAVE_LEFT">
-        <source>You have <x id="INTERPOLATION" /> left to earn tokens today!</source>
-        <target>You have <x id="INTERPOLATION" /> left to earn tokens today!</target>
+        <source>You have <x id="INTERPOLATION" /> left to earn coins today!</source>
+        <target>You have <x id="INTERPOLATION" /> left to earn coins today!</target>
       </trans-unit>
       <trans-unit id="OPSPOT__TOPBAR__VIEW_CHANNEL">
         <source>View Channel</source>
@@ -2861,16 +2861,16 @@
         <target>Offers</target>
       </trans-unit>
       <trans-unit id="BOOST__CREATOR__OFFERS_SELECTOR_DESC">
-        <source>Your content will be shared to a specific channel in exchange for USD or tokens.</source>
-        <target>Your content will be shared to a specific channel in exchange for USD or tokens.</target>
+        <source>Your content will be shared to a specific channel in exchange for USD or coins.</source>
+        <target>Your content will be shared to a specific channel in exchange for USD or coins.</target>
       </trans-unit>
       <trans-unit id="BOOST__CREATOR__PAYMENT_METHOD_CRYPTO_TITLE">
         <source>Payment Method</source>
         <target>Payment Method</target>
       </trans-unit>
       <trans-unit id="BOOST__CREATOR__TOKENS_PRIORITY_FEE">
-        <source>+ <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;" /><x id="INTERPOLATION" /> tokens<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;" /></source>
-        <target>+ <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;" /><x id="INTERPOLATION" /> tokens<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;" /></target>
+        <source>+ <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;" /><x id="INTERPOLATION" /> coins<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;" /></source>
+        <target>+ <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;" /><x id="INTERPOLATION" /> coins<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;" /></target>
       </trans-unit>
       <trans-unit id="M__ACTION__BOOST_NEXT">
         <source>Next</source>
@@ -2883,17 +2883,17 @@
         <note>verb</note>
       </trans-unit>
       <trans-unit id="WIRE__CREATOR__WIRE_NOTICE_TOKENS">
-        <source>Support <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />@<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /><x id="INTERPOLATION" /> by sending them tokens. Once you send them the amount listed in the tiers, you can receive rewards if they are offered. Otherwise, it's a donation.</source>
-        <target>Support <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />@<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /><x id="INTERPOLATION" /> by sending them tokens. Once you send them the amount listed in the tiers, you can receive rewards if they are offered. Otherwise, it's a donation.</target>
+        <source>Support <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />@<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /><x id="INTERPOLATION" /> by sending them coins. Once you send them the amount listed in the tiers, you can receive rewards if they are offered. Otherwise, it's a donation.</source>
+        <target>Support <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" />@<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /><x id="INTERPOLATION" /> by sending them coins. Once you send them the amount listed in the tiers, you can receive rewards if they are offered. Otherwise, it's a donation.</target>
       </trans-unit>
       <trans-unit id="WIRE__CREATOR__AMOUNT_TITLE_HOW_MANY_TOKENS">
-        <source>How many tokens do you want to send?</source>
-        <target>How many tokens do you want to send?</target>
+        <source>How many coins do you want to send?</source>
+        <target>How many coins do you want to send?</target>
       </trans-unit>
       <trans-unit id="M__COMMON__TOKENS_INPUT">
-        <source>Tokens</source>
-        <target>Tokens</target>
-        <note>tokens input</note>
+        <source>Coins</source>
+        <target>Coins</target>
+        <note>coins input</note>
       </trans-unit>
       <trans-unit id="b1ca9ab71d6492ee128ec3771cda9d079e8c2383">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;" /><x id="INTERPOLATION" /><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /> <x id="START_TAG_SPAN_1" ctype="x-span" equiv-text="&lt;span&gt;" />…<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /></source>
@@ -2916,20 +2916,20 @@
         <target>OffChain</target>
       </trans-unit>
       <trans-unit id="M__WIRE_CREATOR__DONT_HAVE_TOKENS">
-        <source>Don't have Tokens? No problem.</source>
-        <target>Don't have Tokens? No problem.</target>
+        <source>Don't have Coins? No problem.</source>
+        <target>Don't have Coins? No problem.</target>
       </trans-unit>
       <trans-unit id="WALLET__TOKENS_NAV">
-        <source>Tokens</source>
-        <target>Tokens</target>
+        <source>Coins</source>
+        <target>Coins</target>
       </trans-unit>
       <trans-unit id="OPSPOT__WALLET__TOPBAR__TOKENS_TOOLTIP">
         <source>See your contributions score and rewards, withdraw them and configure your ethereum wallet</source>
         <target>See your contributions score and rewards, withdraw them and configure your ethereum wallet</target>
       </trans-unit>
       <trans-unit id="OPSPOT__WALLET__TOPBAR__WIRE_TOOLTIP">
-        <source>Your sent and received wires ledger</source>
-        <target>Your sent and received wires ledger</target>
+        <source>Your sent and received contributes ledger</source>
+        <target>Your sent and received contributes ledger</target>
       </trans-unit>
       <trans-unit id="M__FEATURE__OPSPOT_PLUS ">
         <source>Opspot Plus</source>
@@ -2944,12 +2944,12 @@
         <target>Wallet</target>
       </trans-unit>
       <trans-unit id="831c70609f5320ba73bb112526ec9cb86c71367c">
-        <source>Tokens</source>
-        <target>Tokens</target>
+        <source>Coins</source>
+        <target>Coins</target>
       </trans-unit>
       <trans-unit id="3ad5221f4d6c53c3cb08f9067ac7a7ae44edf016">
-        <source>Your Tokens balance</source>
-        <target>Your Tokens balance</target>
+        <source>Your Coins balance</source>
+        <target>Your Coins balance</target>
       </trans-unit>
       <trans-unit id="WALLET__FLYOUT__GO_TO_WALLET">
         <source>Go to Wallet</source>
@@ -3001,36 +3001,36 @@
         <target><x id="INTERPOLATION" /> points</target>
       </trans-unit>
       <trans-unit id="BOOST__CONSOLE__CARD__TOKENS_VALUE">
-        <source><x id="INTERPOLATION" /> tokens</source>
-        <target><x id="INTERPOLATION" /> tokens</target>
+        <source><x id="INTERPOLATION" /> coins</source>
+        <target><x id="INTERPOLATION" /> coins</target>
       </trans-unit>
       <trans-unit id="BOOST__CONSOLE__BOOSTER__POST_SOMETHING">
         <source>You have no content yet. Why don't you post something?</source>
         <target>You have no content yet. Why don't you post something?</target>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__TOKENS_PER_MONTH">
-        <source><x id="INTERPOLATION" /> Tokens/month</source>
-        <target><x id="INTERPOLATION" /> Tokens/month</target>
+        <source><x id="INTERPOLATION" /> Coins/month</source>
+        <target><x id="INTERPOLATION" /> Coins/month</target>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__OVER_TOKENS_PER_MONTH">
-        <source>over <x id="INTERPOLATION" /> Tokens/month</source>
-        <target>over <x id="INTERPOLATION" /> Tokens/month</target>
+        <source>over <x id="INTERPOLATION" /> Coins/month</source>
+        <target>over <x id="INTERPOLATION" /> Coins/month</target>
       </trans-unit>
       <trans-unit id="M__FEATURE__TOKENS">
-        <source>Tokens</source>
-        <target>Tokens</target>
+        <source>Coins</source>
+        <target>Coins</target>
       </trans-unit>
       <trans-unit id="M__COMMON__TOKEN">
-        <source>Token</source>
-        <target>Token</target>
+        <source>Coin</source>
+        <target>Coin</target>
       </trans-unit>
       <trans-unit id="WIRE__CONSOLE__LEDGER__AMOUNT_TOKEN_CELL_VALUE">
         <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;" />M<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;" /><x id="INTERPOLATION" /></source>
         <target><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;" />M<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;" /><x id="INTERPOLATION" /></target>
       </trans-unit>
       <trans-unit id="WIRE__CONSOLE__OVERVIEW__TOKENS_EARNINGS_TOOLTIP">
-        <source>The total in Tokens you have earned</source>
-        <target>The total in Tokens you have earned</target>
+        <source>The total in Coins you have earned</source>
+        <target>The total in Coins you have earned</target>
       </trans-unit>
       <trans-unit id="OPSPOT__BUTTONS__UNSUBSCRIBE__SUBSCRIBED_LABEL">
         <source>Unsubscribe</source>
@@ -3085,8 +3085,8 @@
         <target>Sorry, we couldn't verify your two factor code. Please try logging again.</target>
       </trans-unit>
       <trans-unit id="OPSPOT__LOGIN__EXCEPTION__INVALID_TOKEN">
-        <source>Invalid token</source>
-        <target>Invalid token</target>
+        <source>Invalid coin</source>
+        <target>Invalid coin</target>
       </trans-unit>
       <trans-unit id="OPSPOT__LOGIN__EXCEPTION__UNKNOWN_ERROR">
         <source>Unknown error</source>
@@ -3229,8 +3229,8 @@
         <target>There are no local wallets available, the wallet manager is locked, or you're connected to a different network.</target>
       </trans-unit>
       <trans-unit id="BLOCKCHAIN__WALLET_ADDRESS_NOTICE">
-        <source>Hey, do you want to setup your Tokens wallet?</source>
-        <target>Hey, do you want to setup your Tokens wallet?</target>
+        <source>Hey, do you want to setup your Coins wallet?</source>
+        <target>Hey, do you want to setup your Coins wallet?</target>
       </trans-unit>
       <trans-unit id="af9d0d81e627049804748055715389cab9d39238">
         <source>Bought</source>
@@ -3245,16 +3245,16 @@
         <target>Page Views</target>
       </trans-unit>
       <trans-unit id="OPSPOT__ADMIN__BOOSTS__BOOST_BID_TOKENS_LABEL">
-        <source>Bid: <x id="INTERPOLATION" /> Tokens</source>
-        <target>Bid: <x id="INTERPOLATION" /> Tokens</target>
+        <source>Bid: <x id="INTERPOLATION" /> Coins</source>
+        <target>Bid: <x id="INTERPOLATION" /> Coins</target>
       </trans-unit>
       <trans-unit id="OPSPOT__ADMIN__BOOSTS__NOT_REVIEW_STATE">
         <source>This boost is in <x id="INTERPOLATION" /> state.</source>
         <target>This boost is in <x id="INTERPOLATION" /> state.</target>
       </trans-unit>
       <trans-unit id="BLOCKCHAIN__OPTIONS__WALLET_TITLE">
-        <source>Token Configuration</source>
-        <target>Token Configuration</target>
+        <source>Coin Configuration</source>
+        <target>Coin Configuration</target>
       </trans-unit>
       <trans-unit id="BLOCKCHAIN__OPTIONS__WALLET_DESC">
         <source>Enter your Ethereum wallet address below. If you installed and unlocked MetaMask, or have a web3-enabled browser your local wallets will be listed below. You can click on them to auto-fill the address field.</source>
@@ -3345,8 +3345,8 @@
         <target>I have unread notifications</target>
       </trans-unit>
       <trans-unit id="OPSPOT__SETTINGS__WIRE_RECEIVED_LABEL">
-        <source>I receive a wire</source>
-        <target>I receive a wire</target>
+        <source>I receive a contribute</source>
+        <target>I receive a contribute</target>
       </trans-unit>
       <trans-unit id="OPSPOT__SETTINGS__BOOST_COMPLETED_LABEL">
         <source>My boost has been completed</source>

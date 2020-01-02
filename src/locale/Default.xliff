@@ -612,7 +612,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__BOOST_REJECTED__REASON" datatype="html">
-        <source>was rejected for {{id="START_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;"}}{{id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"}}%1$s{{id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"}}.{{id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;"}} Your tokens have been credited back to your wallet.</source>
+        <source>was rejected for {{id="START_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;"}}{{id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"}}%1$s{{id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"}}.{{id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;"}} Your coins have been credited back to your wallet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/notifications/notification.component.ts</context>
           <context context-type="linenumber">322</context>
@@ -857,7 +857,7 @@
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__TO_ONETIME" datatype="html">
         <source>
-        You have successfully wired %1$s to {{id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"}}@%2$s{{id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"}}
+        You have successfully contributed %1$s to {{id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"}}@%2$s{{id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"}}
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/notifications/notification.component.ts</context>
@@ -866,7 +866,7 @@
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__FROM_ONETIME" datatype="html">
         <source>
-        You have received a wire of %1$s from {{id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"}}@%2$s{{id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"}}
+        You have received a contribute of %1$s from {{id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"}}@%2$s{{id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"}}
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/notifications/notification.component.ts</context>
@@ -875,7 +875,7 @@
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__TO_SUBSCRIPTION" datatype="html">
         <source>
-        You have subscribed to wire %1$s/month to {{id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"}}@%2$s{{id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"}}
+        You have subscribed to contribute %1$s/month to {{id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"}}@%2$s{{id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"}}
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/notifications/notification.component.ts</context>
@@ -884,7 +884,7 @@
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__FROM_SUBSCRIPTION" datatype="html">
         <source>
-        You have received a wire subscription of %1$s/month from {{id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"}}@%2$s{{id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"}}
+        You have received a contribute subscription of %1$s/month from {{id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"}}@%2$s{{id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"}}
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/notifications/notification.component.ts</context>
@@ -916,7 +916,7 @@
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__REWARDS__YOU_HAVE_RECEIVED_X_TOKENS_TODAY" datatype="html">
         <source>
-        You earned %1$s tokens today.
+        You earned %1$s coins today.
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/notifications/notification.component.ts</context>
@@ -925,7 +925,7 @@
       </trans-unit>
       <trans-unit id="NOTIFICATIONS__NOTIFICATION__REWARDS__YOU_HAVE_LEFT" datatype="html">
         <source>
-        You have %1$s left to earn tokens today!
+        You have %1$s left to earn coins today!
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/notifications/notification.component.ts</context>
@@ -1353,7 +1353,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="BOOST__CREATOR__OFFERS_SELECTOR_DESC" datatype="html">
-        <source>Your content will be shared to a specific channel in exchange for USD or tokens.</source>
+        <source>Your content will be shared to a specific channel in exchange for USD or coins.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/boost/creator/creator.component.ts</context>
           <context context-type="linenumber">29</context>
@@ -1455,7 +1455,7 @@
       </trans-unit>
       <trans-unit id="BOOST__CREATOR__TOKENS_PRIORITY_FEE" datatype="html">
         <source>
-            + {{id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"}}%1$s tokens{{id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"}}
+            + {{id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"}}%1$s coins{{id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"}}
           </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/boost/creator/creator.component.ts</context>
@@ -1515,7 +1515,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="M__FEATURE__WIRE" datatype="html">
-        <source>Wire</source>
+        <source>Contribute</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/creator/creator.component.ts</context>
           <context context-type="linenumber">5</context>
@@ -1535,7 +1535,7 @@
       </trans-unit>
       <trans-unit id="WIRE__CREATOR__WIRE_NOTICE_TOKENS" datatype="html">
         <source>
-        Support {{id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"}}@{{id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"}}%1$s by sending them tokens. Once you send them the amount listed in the tiers, you can receive rewards if they are offered. Otherwise, it&apos;s a donation.
+        Support {{id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"}}@{{id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"}}%1$s by sending them coins. Once you send them the amount listed in the tiers, you can receive rewards if they are offered. Otherwise, it&apos;s a donation.
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/creator/creator.component.ts</context>
@@ -1544,7 +1544,7 @@
       </trans-unit>
       <trans-unit id="WIRE__CREATOR__AMOUNT_TITLE_HOW_MANY_TOKENS" datatype="html">
         <source>
-          How many tokens do you want to send?
+          How many coins do you want to send?
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/creator/creator.component.ts</context>
@@ -1552,12 +1552,12 @@
         </context-group>
       </trans-unit>
       <trans-unit id="M__COMMON__TOKENS_INPUT" datatype="html">
-        <source>Tokens</source>
+        <source>Coins</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/creator/creator.component.ts</context>
           <context context-type="linenumber">55</context>
         </context-group>
-        <note priority="1" from="meaning">tokens input</note>
+        <note priority="1" from="meaning">coins input</note>
       </trans-unit>
       <trans-unit id="b1ca9ab71d6492ee128ec3771cda9d079e8c2383" datatype="html">
         <source>
@@ -1619,7 +1619,7 @@
       </trans-unit>
       <trans-unit id="M__WIRE_CREATOR__DONT_HAVE_TOKENS" datatype="html">
         <source>
-              Don&apos;t have Tokens? No problem.
+              Don&apos;t have Coins? No problem.
             </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/creator/creator.component.ts</context>
@@ -1645,7 +1645,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="WIRE__CREATOR__WIRED_NOTICE" datatype="html">
-        <source>Wired!</source>
+        <source>contributed!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/creator/creator.component.ts</context>
           <context context-type="linenumber">226</context>
@@ -2101,7 +2101,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="WALLET__TOKENS_NAV" datatype="html">
-        <source>Tokens</source>
+        <source>Coins</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wallet/wallet.component.ts</context>
           <context context-type="linenumber">9</context>
@@ -2118,7 +2118,7 @@
       </trans-unit>
       <trans-unit id="OPSPOT__WALLET__TOPBAR__WIRE_TOOLTIP" datatype="html">
         <source>
-          Your sent and received wires ledger
+          Your sent and received contributes ledger
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wallet/wallet.component.ts</context>
@@ -2260,7 +2260,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="WIRE__CONSOLE__WIRE_DESC" datatype="html">
-        <source>Wire allows you to receive money for rewards and exclusive content. You can
+        <source>Contribute allows you to receive money for rewards and exclusive content. You can
           configure your rewards on your channel page.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/console/console.component.ts</context>
@@ -2277,7 +2277,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="831c70609f5320ba73bb112526ec9cb86c71367c" datatype="html">
-        <source>Tokens</source>
+        <source>Coins</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wallet/flyout/flyout.component.ts</context>
           <context context-type="linenumber">31</context>
@@ -2285,7 +2285,7 @@
       </trans-unit>
       <trans-unit id="3ad5221f4d6c53c3cb08f9067ac7a7ae44edf016" datatype="html">
         <source>
-          Your Tokens balance
+          Your Coins balance
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wallet/flyout/flyout.component.ts</context>
@@ -2891,7 +2891,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="BOOST__CONSOLE__CARD__TOKENS_VALUE" datatype="html">
-        <source>%1$s tokens</source>
+        <source>%1$s coins</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/boost/console/card/card.component.ts</context>
           <context context-type="linenumber">52</context>
@@ -3025,7 +3025,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__ONLY_SUPPORTERS_TITLE_PART" datatype="html">
-        <source>Only supporters who wire you over</source>
+        <source>Only supporters who contribute you over</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/lock-screen/wire-lock-screen.component.ts</context>
           <context context-type="linenumber">4</context>
@@ -3067,7 +3067,7 @@
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__TOKENS_PER_MONTH" datatype="html">
         <source>
-        %1$s Tokens/month
+        %1$s Coins/month
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/lock-screen/wire-lock-screen.component.ts</context>
@@ -3097,7 +3097,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__WIRE_ME_OVER_PART" datatype="html">
-        <source>Wire me over</source>
+        <source>Contribute me over</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/lock-screen/wire-lock-screen.component.ts</context>
           <context context-type="linenumber">41</context>
@@ -3118,7 +3118,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__CAN_ONLY_BE_SEEN_TITLE_PART" datatype="html">
-        <source>This post can only be seen by supporters who wire</source>
+        <source>This post can only be seen by supporters who contribute</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/lock-screen/wire-lock-screen.component.ts</context>
           <context context-type="linenumber">94</context>
@@ -3144,7 +3144,7 @@
       </trans-unit>
       <trans-unit id="WIRE__LOCK_SCREEN__OVER_TOKENS_PER_MONTH" datatype="html">
         <source>
-      over %1$s Tokens/month
+      over %1$s Coins/month
     </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/lock-screen/wire-lock-screen.component.ts</context>
@@ -3161,7 +3161,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__WIRE_ME_ACTION" datatype="html">
-        <source>Wire me</source>
+        <source>Contribute me</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/channel/channel.component.ts</context>
           <context context-type="linenumber">10</context>
@@ -3184,7 +3184,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="M__FEATURE__WIRE_PLURAL" datatype="html">
-        <source>Wires</source>
+        <source>Contributes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/channel/overview/overview.component.ts</context>
           <context context-type="linenumber">6</context>
@@ -3196,7 +3196,7 @@
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__OVERVIEW__WIRES_CARD_TOOLTIP" datatype="html">
         <source>
-      How many wires {{id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"}}@{{id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"}}%1$s has received in the last 30 days
+      How many contributes {{id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"}}@{{id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"}}%1$s has received in the last 30 days
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/channel/overview/overview.component.ts</context>
@@ -3204,7 +3204,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="M__FEATURE__TOKENS" datatype="html">
-        <source>Tokens</source>
+        <source>Coins</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/channel/overview/overview.component.ts</context>
           <context context-type="linenumber">16</context>
@@ -3212,7 +3212,7 @@
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__OVERVIEW__POINTS_CARD_TOOLTIP" datatype="html">
         <source>
-        This is {{id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"}}@{{id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"}}%1$s&apos;s total volume (gross) of all Token wires received in the last 30 days
+        This is {{id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"}}@{{id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"}}%1$s&apos;s total volume (gross) of all Coin contributes received in the last 30 days
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/channel/overview/overview.component.ts</context>
@@ -3228,7 +3228,7 @@
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__OVERVIEW__BREAKDOWN_LINK_TOOLTIP" datatype="html">
         <source>
-        See a breakdown of all your Wires in your wallet 
+        See a breakdown of all your Contributes in your wallet 
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/channel/overview/overview.component.ts</context>
@@ -3244,7 +3244,7 @@
       </trans-unit>
       <trans-unit id="WIRE__CHANNEL__OVERVIEW__YOU_SENT_CARD_TOOLTIP" datatype="html">
         <source>
-        This is the amount you have wired to %1$s in the last 30 days
+        This is the amount you have contributed to %1$s in the last 30 days
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/channel/overview/overview.component.ts</context>
@@ -3277,7 +3277,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="M__COMMON__TOKEN" datatype="html">
-        <source>Token</source>
+        <source>Coin</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/console/ledger.component.ts</context>
           <context context-type="linenumber">13</context>
@@ -3310,7 +3310,7 @@
       </trans-unit>
       <trans-unit id="WIRE__CONSOLE__LEDGER__NO_WIRES_NOTICE" datatype="html">
         <source>
-              No Wires to show.
+              No Contributes to show.
             </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/console/ledger.component.ts</context>
@@ -3423,7 +3423,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="M__COMMON__EARNINGS" datatype="html">
-        <source>Tokens</source>
+        <source>Coins</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/console/overview/overview.component.ts</context>
           <context context-type="linenumber">18</context>
@@ -3439,7 +3439,7 @@
       </trans-unit>
       <trans-unit id="WIRE__CONSOLE__OVERVIEW__TOKENS_EARNINGS_TOOLTIP" datatype="html">
         <source>
-          The total in Tokens you have earned
+          The total in Coins you have earned
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/wire/console/overview/overview.component.ts</context>
@@ -4275,7 +4275,7 @@
       </trans-unit>
       <trans-unit id="OPSPOT__LOGIN__EXCEPTION__INVALID_TOKEN" datatype="html">
         <source>
-      Invalid token
+      Invalid coin
     </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/forms/login/login.ts</context>
@@ -6219,7 +6219,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="BLOCKCHAIN__WALLET_ADDRESS_NOTICE" datatype="html">
-        <source>Hey, do you want to setup your Tokens wallet?</source>
+        <source>Hey, do you want to setup your Coins wallet?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/blockchain/wallet-address-notice/wallet-address-notice.component.ts</context>
           <context context-type="linenumber">5</context>
@@ -6625,7 +6625,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="OPSPOT__ADMIN__BOOSTS__BOOST_BID_TOKENS_LABEL" datatype="html">
-        <source>Bid: %1$s Tokens</source>
+        <source>Bid: %1$s Coins</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/controllers/admin/boosts/boosts.ts</context>
           <context context-type="linenumber">76</context>
@@ -7019,7 +7019,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="BLOCKCHAIN__OPTIONS__WALLET_TITLE" datatype="html">
-        <source>Token Configuration</source>
+        <source>Coin Configuration</source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/blockchain/console/console.component.ts</context>
           <context context-type="linenumber">4</context>
@@ -7172,7 +7172,7 @@
       </trans-unit>
       <trans-unit id="M__COMMON__SELECT_MONEY" datatype="html">
         <source>
-      Don&apos;t have Tokens? No problem.
+      Don&apos;t have Coins? No problem.
     </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/boost/creator/payment-methods/payment-methods.component.ts</context>
@@ -7565,7 +7565,7 @@
       </trans-unit>
       <trans-unit id="OPSPOT__SETTINGS__WIRE_RECEIVED_LABEL" datatype="html">
         <source>
-          I receive a wire
+          I receive a contribute
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/settings/emails/emails.component.ts</context>

@@ -129,6 +129,7 @@
         </div>
         <div class="m-helpdesk__dashboardButtons" *ngIf="session.isAdmin()">
           <button
+            id="dashboard-new-category"
             class="m-btn m-btn--slim"
             i18n="@@HELPDESK__DASHBOARD__NEW_CATEGORY"
             (click)="newCategory()"
@@ -136,6 +137,7 @@
             New Category
           </button>
           <button
+            id="dashboard-new-question"
             class="m-btn m-btn--slim"
             i18n="@@HELPDESK__DASHBOARD__NEW_CATEGORY"
             (click)="newQuestion()"
