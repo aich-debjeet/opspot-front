@@ -41,6 +41,7 @@ export class ChannelComponent {
   changed: boolean = false;
   showOnboarding: boolean = false;
   paramsSubscription: Subscription;
+  displayBookmark= false;
 
   @ViewChild('feed') private feed: ChannelFeedComponent;
 

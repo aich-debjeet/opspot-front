@@ -80,6 +80,8 @@ export class OrganizationProfile {
     public videochat: VideoChatService,
     private cd: ChangeDetectorRef,
     private updateMarkers: UpdateMarkersService,
+    private _location: Location
+
     // private _location: Location
   ) { }
 
@@ -325,7 +327,10 @@ export class OrganizationProfile {
   }
 
   listenForNewMessages() {
-    this.socketSubscription = this.sockets.subscribe('comment', (parent_guid, owner_guid, guid) => {
+    this.socketSubscription = this.sockets.subscribe('comment', (data) => {
+      const parent_guid = data[0];
+      const owner_guid = data[1];
+      const guid = data[2];
       if (!this.organization || parent_guid !== this.organization.guid) {
         return;
       }
@@ -425,7 +430,7 @@ export class OrganizationProfile {
   if(window.innerWidth>785){
     this.inviteToggle=!this.inviteToggle;
      }else{
-       this.router.navigate([`/organizations/${this.guid}/invite`])
+       this.router.navigate([`/organization/${this.guid}/invite`])
      } 
   }
    
@@ -433,7 +438,7 @@ export class OrganizationProfile {
     if(window.innerWidth>785){
    this.memberToggle=!this.memberToggle;
     }else{
-      this.router.navigate([`/organizations/${this.guid}/members`])
+      this.router.navigate([`/organization/${this.guid}/members`])
     } 
   }
  
@@ -448,9 +453,14 @@ export class OrganizationProfile {
   
     groupCount(e){
       this.totalMembers=e
-     //  console.log("total: ", this.totalMembers);
+      //  console.log("total: ", this.totalMembers);
       
      }
+
+     goBack(){
+      this._location.back()
+     }
+   
     
   // showGathering1(){
   //  this.showGathering = true;

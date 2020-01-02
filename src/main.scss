@@ -2810,7 +2810,11 @@ m-date-selector .m-date-selector--input {
     margin-right: 8px; }
 
 .m-dropdown--list-container {
-  position: relative; }
+  position: relative;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+		right: -90px;
+	}
+ }
 
 .m-dropdown--label-container {
   cursor: pointer; }
@@ -18993,7 +18997,11 @@ m-videochat {
   display: block;
   position: relative; }
   m-videochat, m-videochat iframe {
-    max-height: calc(100vh - 90px); }
+    min-height: calc(100vh - 90px); 
+    @include mq($from: $mobile_sm, $until: $tablet) {
+      min-height: calc(100vh - 90px);
+    }
+  }
 
 m-wallet--balance-money, m-wallet--balance-reward, m-wallet--balance-tokens {
   display: block; }
@@ -25469,26 +25477,31 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .o-opportunity-country-code{
   width: 174px;
   height: 40px;
-  padding: 12px;
   border: 1px solid #90A4AE;
   border-radius: 4px;
+  select{
+    width: 100%;
+    height: 38px !important;
+    padding: 5px;
+    border: 0px;
+  }
   &__flag{
-  width: 25px;
-  height: 18px;
-  overflow: hidden;
-  border-radius: 50%;
-  float: left;
+    width: 25px;
+    height: 18px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
   }
   &__text{
-  text-transform: uppercase;
-  float: left;
-  margin-left: 4px;
+    text-transform: uppercase;
+    float: left;
+    margin-left: 4px;
   }
   &__dropdown{
-  width: 16px;
-  height: 16px;
-  border-radius: 2px;
-  margin-left: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    margin-left: 6px;
   }
 
 }
@@ -27646,4 +27659,91 @@ li{
 
 .word-break{
   word-break: break-all
+}
+.o-book-block{
+    width: 100%;
+    padding: 22px 20px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    background-color: white;
+    position: relative;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: column;
+        padding: 0px;
+        background: #fff;
+        margin-bottom: 9px;
+        border-bottom: 1px solid $grey-light;
+	}
+    &__left{
+        width: 193px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+        }
+        &--profile{
+            width:41%!important;
+            @include mq($from: $mobile_sm, $until: $tablet) {
+                width: 100%!important;
+                position: relative;
+                min-height: 200px;
+            }
+        }
+    }
+    &__right{
+        width: calc(100% - 193px);
+        padding-left: 31px;
+        position: relative;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 100%;
+            padding: 13px 15px 18px 15px;
+        }
+    }
+}
+.o-book-prof{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items:center;
+  flex-direction: row;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+      flex-direction: column;
+      position: absolute;
+      top: 17px;
+      z-index: 2;
+}
+  &__avatar{
+      width: 111px;
+      height: 111px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid #ECEFF1;
+      @include mq($from: $mobile_sm, $until: $tablet) {
+          
+      }
+      img{
+          width: 100%;
+      }
+  }
+  &__info{
+      display: flex;
+      justify-content: flex-start;
+      align-items: left;
+      width: calc(100% - 135px);
+      flex-direction: column;
+      margin-left: 15px;
+      .btn--book{
+          margin-top: 12px;
+      }
+  }
+}
+.o-book-top-action{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  &--mob{
+      top: 38px;
+  }
 }

@@ -1,0 +1,21 @@
+<div class="container hidden-above-tablet">
+    <div class="without-nav-header o-reg-skill-mob-header">
+        <a (click)="goBack()"><i class="icon-arrow-left"></i> </a>
+        <div class="without-nav-header__title caption-bold f500">Discussions</div>
+    </div>
+</div><!-- without nav header end -->
+<div class="container">
+        <div class="o-discussions">
+            <div class="o-discussions-body">
+                <app-comment-list *ngIf="group?.guid"
+                [limit]="24"
+                [object]="group"
+                [focusOnInit]="true"
+                [conversation]="true"
+                [scrollable]="true"
+                [canEdit]="group['is:moderator'] || group['is:creator']"
+                [readonly]="!group['is:member']"
+              ></app-comment-list>               
+            </div>
+        </div>
+</div>

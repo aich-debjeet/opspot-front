@@ -1,0 +1,73 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+.o-book-filter-mob{
+    margin-left: 17px;
+    position: relative;
+    @include mq($from: $desktop_sm, $until: $wide_lg ) {
+		display: none!important;
+	}
+    i{
+        font-size: 16px;
+        color: $grey;
+    }
+}
+.book-filter-mob-block{
+    width: 200px;
+    position: absolute;
+    top: 31px;
+    right: -20px;
+    background: #fff;
+    height: 279px;
+    z-index: 9;
+    box-shadow: 0 6px 10px 0 rgba(144, 164, 174, 0.16), 0 1px 12px 0 rgba(144, 164, 174, 0.18), 0 3px 5px 0 rgba(144, 164, 174, 0.2);
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+.o-book-prof-top-bar-mob{
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        width: 100%;
+        height: 61px;
+        background-color: $grey-light;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+	}
+}
+.o-book-prof-media{
+    width: 100%;
+    margin-top: 35px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    &__box{
+        height: 78px;	
+        width: 78px;	
+        border: 1px solid #ECEFF1;	
+        border-radius: 2px;
+        overflow: hidden;
+        margin: 0px 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        img{
+            width: 100%;
+        }
+        .o-book-prof-media-overlay{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 3;
+            width: 100%;
+            height: 78px;
+            background-color: rgba(0,0,0,0.79);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

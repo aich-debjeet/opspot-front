@@ -23,7 +23,7 @@ import { Router } from '@angular/router';
 
   },
   inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle'],
-  outputs: ['_delete: delete', 'commentsOpened', 'onViewed'],
+  outputs: ['_delete: delete', 'commentsOpened', 'onViewed', '_deleteBookmark: deleteBookmark'],
   templateUrl: 'activity.html',
   styleUrls: ['./activity.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -69,6 +69,7 @@ export class Activity {
   @Input() hideTabs: boolean;
 
   _delete: EventEmitter<any> = new EventEmitter();
+  _deleteBookmark: EventEmitter<any> = new EventEmitter();
   commentsOpened: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
   scroll_listener;
@@ -257,14 +258,28 @@ export class Activity {
     this.commentsOpened.emit(this.commentsToggle);
   }
 
-  async togglePin() {
+  async togglePin(activity: any) {
+    console.log('this.activity',activity);
+    // let url: string;
+    // if(activity.entity_type === 'album'){
+    //   if(activity.entity_type === 'album' && activity.custom_data.length > 0){
+    //     this.activity.bookmark = !this.activity.bookmark;
+    //     url = `api/v3/bookmark/${this.activity.guid}/${activity.custom_data[0].entity_type}`;
+    //   }
+
+    // } else {
+    //   this.activity.bookmark = !this.activity.bookmark;
+    //   url = `api/v3/bookmark/${this.activity.guid}/${activity.entity_type}`;
+    // }
     this.activity.bookmark = !this.activity.bookmark;
-    const url: string = `api/v3/bookmark/${this.activity.guid}/image`;
+    const url: string = `api/v3/bookmark/${this.activity.guid}/${activity.entity_type}`;
+    console.log(url)
     try {
       if (this.activity.bookmark) {
         await this.client.post(url);
       } else {
         await this.client.delete(url);
+        this._deleteBookmark.next(this.activity);
       }
     } catch (e) {
       this.activity.bookmark = !this.activity.bookmark;
@@ -416,7 +431,7 @@ export class Activity {
     this.activity.attachment_guid = data.attachment_guid;
     this.activity.price = data.price;
     this.activity.item_count = data.item_count;
-    this.activity.currency = 'INR';
+    this.activity.currency = data.currency;
     this.activity.published = 1;
     // trigger component observe new changes
     this.detectChanges();

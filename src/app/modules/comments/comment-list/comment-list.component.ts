@@ -280,7 +280,10 @@ export class CommentListComponent implements OnInit {
   }
 
   listen() {
-    this.socketSubscriptions.comment = this.sockets.subscribe('comment', (entity_guid, owner_guid, guid) => {
+    this.socketSubscriptions.comment = this.sockets.subscribe('comment', (data) => {
+      const entity_guid = data[0];
+      const owner_guid = data[1];
+      const guid = data[2];
       if (entity_guid !== this.guid) {
         return;
       }
@@ -324,7 +327,10 @@ export class CommentListComponent implements OnInit {
       }
     });
 
-    this.sockets.subscribe('vote', (guid, owner_guid, direction) => {
+    this.sockets.subscribe('vote', (data) => {
+      const guid = data[0];
+      const owner_guid = data[1];
+      const direction = data[2];
       if (this.session.isLoggedIn() && owner_guid === this.session.getLoggedInUser().guid) {
         return;
       }
@@ -339,7 +345,10 @@ export class CommentListComponent implements OnInit {
        this.detectChanges();
      });
 
-     this.sockets.subscribe('vote:cancel', (guid, owner_guid, direction) => {
+     this.sockets.subscribe('vote:cancel', (data) => {
+       const guid = data[0];
+       const owner_guid = data[1];
+       const direction = data[2];
        if (this.session.isLoggedIn() && owner_guid === this.session.getLoggedInUser().guid) {
          return;
        }
