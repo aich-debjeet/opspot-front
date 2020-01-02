@@ -68,23 +68,23 @@
           <form>
             <div class="c-checkbox__md">
               <label (click)="changeFilter('all')" class="c-checkbox">All
-                <input type="radio" [checked]="this._filter == 'all'" value="all" name="all">
+                <input type="radio" id="notification-all" [checked]="this._filter == 'all'" value="all" name="all">
                 <span class="checkmark"></span>
               </label>
               <label (click)="changeFilter('tagged')" class="c-checkbox">Tagged
-                <input type="radio" value="tagged" [checked]="this._filter == 'tagged'" name="tagged">
+                <input type="radio" id="notification-tagged" value="tagged" [checked]="this._filter == 'tagged'" name="tagged">
                 <span class="checkmark"></span>
               </label>
               <label (click)="changeFilter('likes')" class="c-checkbox">Likes
-                <input type="radio" value="likes" [checked]="this._filter == 'likes'" name="likes">
+                <input type="radio" id="notification-likes" value="likes" [checked]="this._filter == 'likes'" name="likes">
                 <span class="checkmark"></span>
               </label>
               <label (click)="changeFilter('comments')" class="c-checkbox">Comments
-                <input type="radio" value="comments" [checked]="this._filter == 'comments'" name="comments">
+                <input type="radio" id="comments" value="comments" [checked]="this._filter == 'comments'" name="comments">
                 <span class="checkmark"></span>
               </label>
               <label (click)="changeFilter('boost')" class="c-checkbox">Boost
-                <input type="radio" value="boost" [checked]="this._filter == 'boost'" name="boost">
+                <input type="radio" id="notification-boost" value="boost" [checked]="this._filter == 'boost'" name="boost">
                 <span class="checkmark"></span>
               </label>
               <!-- <label class="c-checkbox">Channels
@@ -119,11 +119,11 @@
       <div class="o-card o-noti-title">
         <div class="o-noti-title__text">
           <div class="caption-medium float-left">Notifications</div>
-          <span class="o-notification-count text-md white float-left" title="Unread Notification">
+          <span class="o-notification-count text-md white float-left" title="Unread Notification" id="notification-count-page">
             {{opspot.notifications_count}}</span>
         </div>
         <div class="o-noti-title__action">
-          <a (click)="markAllRead()" class="text-sm primary" title="Mark all as read">Mark all as Read</a>
+          <a (click)="markAllRead()" id="notification-mark-all-as-read-page" class="text-sm primary" title="Mark all as read">Mark all as Read</a>
           <!-- <a href="#" class="o-noti-settings" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
         </div>
       </div>
