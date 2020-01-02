@@ -52,6 +52,7 @@ export interface OpspotUser {
   guid: string;
   name: string;
   username: string;
+  bookmark?: boolean;
   chat?: boolean;
   icontime: number;
   blocked?: boolean;
