@@ -408,9 +408,15 @@
       <img src="assets/svg/m_nav_ico/home_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
     </a>
     <!-- wallet/tokens/contributions -->
-    <a [routerLink]="['wallet/tokens/contributions']" class="mobile-nav-icon__item">
+    <!-- <a [routerLink]="['wallet/tokens/contributions']" class="mobile-nav-icon__item">
       <i style="color: #999999;" class="material-icons">account_balance</i>
-      <!-- <div class="o-noti-count"></div> -->
+      <div class="o-noti-count"></div>
+    </a> -->
+    <a routerLink="/network" class="mobile-nav-icon__item">
+      <img src="assets/svg/m_nav_ico/message_main.svg" alt="home" class="mobile-nav-icon--lg">
+      <img src="assets/svg/m_nav_ico/message_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
+      <!-- <div class="o-noti-count">12</div> -->
+
     </a>
     <a [routerLink]="['/notifications']" class="mobile-nav-icon__item">
       <img src="assets/svg/m_nav_ico/notification_main.svg" alt="home" class="mobile-nav-icon--lg">
