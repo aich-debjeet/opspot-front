@@ -54,13 +54,13 @@
     height: 55px;
     @include mq($until:$tablet){
         margin: 0px 0px;  
-        padding: 0px 0px;
+        padding: 0px 5px;
     }
         .visible-mob{
             display: none;
             @include mq($until:$tablet){
                 display:block;
-                width: 85%;
+                width: 35%;
             }
         }
         .form-control{
@@ -105,7 +105,7 @@
             @include mq($until:$tablet){
                 width: initial;
                 position: absolute;
-                right: 0;
+                right: 5px;
             }
             .form-group{
                 input{
@@ -138,6 +138,13 @@
             }
 
         }
+}
+@include mq($until:$tablet){
+    h2.mb26{
+        font-size: 20px;
+        font-weight: 300;
+        padding: 0px 15px 18px 15px;
+    }
 }
 
 // // media css
