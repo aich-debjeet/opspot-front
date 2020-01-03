@@ -289,6 +289,32 @@
           </a>
         </li>
         <li class="app-nav-link_-item">
+          <a [routerLink]="['wallet/tokens/contributions']" (click)='closeNav()'>
+            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/wallet.svg" alt=""></div>
+            <div class="app-nav-link__text">Wallet</div>
+          </a>
+        </li>
+        <li class="app-nav-link_-item">
+          <a [routerLink]="['/notifications']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><i class="icon-bell"></i></div>
+              <div class="app-nav-link__text">Notification </div>
+              <!-- <span class="header-noti-count header-noti-count--mob">12</span> -->
+          </a>
+        </li>
+        <!-- <li class="app-nav-link_-item">
+          <a href="#">
+              <div class="app-nav-link__ico"><i class="icon-mail"></i></div>
+              <div class="app-nav-link__text">Network </div>
+              <span class="header-noti-count header-noti-count--mob">12</span>
+          </a>
+        </li> -->
+        <li class="app-nav-link_-item">
+          <a [routerLink]="['/', 'portfolio', user.username]" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/portfolio.svg" alt=""></div>
+              <div class="app-nav-link__text">Portfolio </div>
+          </a>
+        </li>
+        <li class="app-nav-link_-item">
           <a [routerLink]="['/bookmark']" (click)='closeNav()'>
             <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_bookmark.svg" alt=""></div>
             <div class="app-nav-link__text">Bookmarks</div>
@@ -328,6 +354,12 @@
           <a [routerLink]="['blog/edit/new']" (click)='closeNav()'>
             <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_jobs.svg" alt=""></div>
             <div class="app-nav-link__text">Blog</div>
+          </a>
+        </li>
+        <li class="app-nav-link_-item">
+          <a [routerLink]="['/about']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><i class="icon-alert-circle"></i></div>
+              <div class="app-nav-link__text">About One Page Spotlight</div>
           </a>
         </li>
         <li class="app-nav-link_-item">
@@ -376,9 +408,15 @@
       <img src="assets/svg/m_nav_ico/home_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
     </a>
     <!-- wallet/tokens/contributions -->
-    <a [routerLink]="['wallet/tokens/contributions']" class="mobile-nav-icon__item">
+    <!-- <a [routerLink]="['wallet/tokens/contributions']" class="mobile-nav-icon__item">
       <i style="color: #999999;" class="material-icons">account_balance</i>
-      <!-- <div class="o-noti-count"></div> -->
+      <div class="o-noti-count"></div>
+    </a> -->
+    <a routerLink="/network" class="mobile-nav-icon__item">
+      <img src="assets/svg/m_nav_ico/message_main.svg" alt="home" class="mobile-nav-icon--lg">
+      <img src="assets/svg/m_nav_ico/message_main_active.svg" alt="home" class="mobile-nav-icon--lg img_hover">
+      <!-- <div class="o-noti-count">12</div> -->
+
     </a>
     <a [routerLink]="['/notifications']" class="mobile-nav-icon__item">
       <img src="assets/svg/m_nav_ico/notification_main.svg" alt="home" class="mobile-nav-icon--lg">

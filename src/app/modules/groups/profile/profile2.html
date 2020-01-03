@@ -89,7 +89,7 @@
                     <div class="o-community-gathering-block">
                         <a (click)="videochat.activate(group); showGathering1()" *ngIf="!group?.videoChatDisabled"
                             class="o-community-gathering" id="profile2-group-gathering"><i class="icon-video"></i> <span
-                                class="text-sm f500 primary">Gathering</span></a>
+                                class="text-sm f500 primary">Group Video Chat</span></a>
                         <!-- class="text-sm f500 primary" routerLink = 'groups/gathering'>Gathering</span></a> -->
                     </div><!-- gathering block end -->
                     <div class="o-community-members-top " id="profile2-group-members"> 
@@ -123,7 +123,7 @@
                         <div class="text-lg f500" id="profile2-community-members">
                             Community Members
                         </div>
-                        <span (click)="openInvite()" style="font-size: 24px !important;"
+                        <span (click)="openInvite()" style="font-size: 24px !important; cursor: pointer;"
                             class="icon-plus-circle primary" id="profile2-icon-plus-circle">
                         </span>
                     </div>
