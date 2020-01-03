@@ -46,12 +46,12 @@
 .o-reg-skill-btn-add-skill{
     border: 1px solid #0288D1;
     border-radius: 16px;
-    padding: 6px 0px;
+    padding: 6px 11px;
     line-height: 22px;
     margin: 8px 6px;
     background: transparent;
     color: $primary;
-    width: 146px;
+    min-width: 188px;
     display: flex;
     justify-content: space-around;
     &:focus{
@@ -91,7 +91,7 @@
     flex-wrap: wrap;
     overflow-x: hidden;
     overflow-y: scroll;
-    max-height: 375px;
+    max-height: 225px;
     .active{
         background-color: #0288D1;
         color:#fff;
@@ -176,6 +176,6 @@
         background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 69.88%);
         position: absolute;
         width:100%;
-        bottom:-25px;
+        bottom:30px;
     }
 }

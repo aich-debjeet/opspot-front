@@ -44,6 +44,15 @@ export class TopbarHashtagsService {
   }
 
   cleanupHashtag(hashtag: string) {
+    let words = hashtag.split(' ');
+    for (var i = 0; i < words.length; i++) {
+      let word = words[i];
+      if (word !== null) {
+        words[i] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      }
+    }
+    hashtag = words.join('');
+    
     const regex = /\w*/gm;
     let m;
     let result = '';
@@ -61,4 +70,5 @@ export class TopbarHashtagsService {
     }
     return result;
   }
+
 }
