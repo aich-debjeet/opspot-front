@@ -11,5 +11,6 @@ import { AddressExcerptPipe } from './address-excerpt';
 import { TimediffPipe } from './timediff.pipe';
 import { FriendlyDateDiffPipe } from './friendlydatediff';
 import { TruncatePipe } from './truncate.pipe';
+import { CapitalizeFirstPipePipe} from './capitalize-first-pipe.pipe';
 
-export const OPSPOT_PIPES = [ AbbrPipe, DomainPipe, TagsPipe, SanitizePipe, SafePipe, ListablePipe, ExcerptPipe, TokenPipe, UtcDatePipe, AddressExcerptPipe, TimediffPipe, FriendlyDateDiffPipe, TruncatePipe ];
+export const OPSPOT_PIPES = [ AbbrPipe, DomainPipe, TagsPipe, SanitizePipe, SafePipe, ListablePipe, ExcerptPipe, TokenPipe, UtcDatePipe, AddressExcerptPipe, TimediffPipe, FriendlyDateDiffPipe, TruncatePipe, CapitalizeFirstPipePipe ];

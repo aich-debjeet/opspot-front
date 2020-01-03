@@ -94,6 +94,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ActivityWidgetComponent } from './components/activity-widget/activity-widget.component';
 import { MyjourneyListCardComponent } from './components/myjourney-list-card/myjourney-list-card';
 import { BoostPostCard } from '../modules/legacy/components/cards/boost-post-card/boost-post-card';
+import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
 
 @NgModule({
   imports: [
@@ -188,7 +189,8 @@ import { BoostPostCard } from '../modules/legacy/components/cards/boost-post-car
     ShowtimeListCardComponent,
     MyjourneyWidgetComponent,
     ActivityWidgetComponent,
-    MyjourneyListCardComponent
+    MyjourneyListCardComponent,
+    CapitalizeFirstPipePipe
   ],
   exports: [
     OPSPOT_PIPES,
