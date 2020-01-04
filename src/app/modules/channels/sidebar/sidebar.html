@@ -1,63 +1,83 @@
-
-<div class="o-card o-prof-info o-prof-info--radius o-prof-info--shadow">
-  <opspot-avatar
-    class="opAvatar"
-    [object]="user"
-    [profileEdit]='profEdit'
-    [editMode]="editing"
-    (added)="upload_avatar($event)"
-  ></opspot-avatar>
-  <div class="o-prof-name">
-    <div class="caption-bold f700" id="sidebar-avatar-name">{{user.name}}</div>
-    <opspot-button-user-dropdown
-      [(user)]="user"
-      *ngIf="session.getLoggedInUser().guid != user.guid"
-    ></opspot-button-user-dropdown>
-    <span class="text-md grey" id="sidebar-avatar-user-name">@{{user.username}}</span>
-  </div>
-  <!-- <div class="m-channel--username">
+<div *ngIf="!displayBookmark">
+  <div class="o-card o-prof-info o-prof-info--radius o-prof-info--shadow">
+    <button class="mdl-button m-pin-button mdl-button--icon o-prof-info__bookmark mdl-color-text--blue-grey-300"
+      id="profile-bookmark" (click)="togglePin(user)">
+      <m-tooltip icon="turned_in" *ngIf="user.bookmark">
+        This profile is Bookmarked
+      </m-tooltip>
+      <m-tooltip *ngIf="!user.bookmark" icon="turned_in_not">
+        Click to bookmark this post to the top of your channel feed
+      </m-tooltip>
+    </button>
+    <opspot-avatar class="opAvatar" [object]="user" [profileEdit]='profEdit' [editMode]="editing"
+      (added)="upload_avatar($event)"></opspot-avatar>
+    <div class="o-prof-name">
+      <div class="caption-bold f700" id="sidebar-avatar-name">{{user.name}}</div>
+      <opspot-button-user-dropdown [(user)]="user" *ngIf="session.getLoggedInUser().guid != user.guid">
+      </opspot-button-user-dropdown>
+      <span class="text-md grey" id="sidebar-avatar-user-name">@{{user.username}}</span>
+    </div>
+    <!-- <div class="m-channel--username">
     <h2><span>@</span>{{user.username}}</h2>
   </div> -->
-  <div *ngIf="!isOwner()" class="o-prof-others-action o-prof-others-action--margin">
-    <opspot-button-subscribe [sideBar]="sidebarMsg" [user]="user"  *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != user.guid && !user.blocked "></opspot-button-subscribe>
-    <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button> -->
-    <button type="button" class="btn btn-outline-primary btn-sm btn--prof" id="sidebar-network">Network</button>
- </div>
-  <div class="o-prof-activity" id="sidebar-profile-activity">
-    <a [routerLink]="['/', user.username, 'subscribers']" id="sidebar-user-subscribers"><div class="caption-bold f700" id="sidebar-user-subscribers-count">{{user.subscribers_count}}</div><div class="text-sm grey">Followers</div></a>
-    <a [routerLink]="['/', user.username, 'subscriptions']" id="sidebar-user-subscriptions"><div class="caption-bold f700" id="sidebar-user-subscriptions-count">{{user.subscriptions_count}}</div><div class="text-sm grey">Following</div></a>
-    <a ><div class="caption-bold f700" id="sidebar-user-posts-count">{{user.post_count?user.post_count:0}}</div><div class="text-sm grey" id="sidebar-user-posts">Posts</div></a>
-    <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
-  </div>
-  <div [hidden]="editing || !user.tags" class="o-prof-skills" *ngIf="user.tags && !editing" id="sidebar-hashtags">
-    <a href="" *ngFor="let tag of user.tags" class="o-prof-skills__tag">{{tag}}</a>
-  </div>
-  <div class="o-prof-portfolio">
-    <a [routerLink]="['/', 'portfolio', user.username]" class="btn btn-outline-primary btn-sm" id="sidebar-portfolio">Portfolio</a>
-  </div>
+    <div *ngIf="!isOwner()" class="o-prof-others-action o-prof-others-action--margin">
+      <opspot-button-subscribe [sideBar]="sidebarMsg" [user]="user"
+        *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != user.guid && !user.blocked ">
+      </opspot-button-subscribe>
+      <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button> -->
+      <!-- <button type="button" class="btn btn-outline-primary btn-sm btn--prof" id="sidebar-network">Network</button> -->
+      <m-messenger--channel-button
+        *ngIf="user.subscribed && session.getLoggedInUser().guid != user.guid"
+        [user]="user"
+        [label]="'Network'"
+        [theme]="'secondary'"
+      ></m-messenger--channel-button>
+    </div>
+    <div class="o-prof-activity" id="sidebar-profile-activity">
+      <a [routerLink]="['/', user.username, 'subscribers']" id="sidebar-user-subscribers">
+        <div class="caption-bold f700" id="sidebar-user-subscribers-count">{{user.subscribers_count}}</div>
+        <div class="text-sm grey">Followers</div>
+      </a>
+      <a [routerLink]="['/', user.username, 'subscriptions']" id="sidebar-user-subscriptions">
+        <div class="caption-bold f700" id="sidebar-user-subscriptions-count">{{user.subscriptions_count}}</div>
+        <div class="text-sm grey">Following</div>
+      </a>
+      <a>
+        <div class="caption-bold f700" id="sidebar-user-posts-count">{{user.post_count?user.post_count:0}}</div>
+        <div class="text-sm grey" id="sidebar-user-posts">Posts</div>
+      </a>
+      <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
+    </div>
+    <div [hidden]="editing || !user.tags" class="o-prof-skills" *ngIf="user.tags && !editing" id="sidebar-hashtags">
+      <a href="" *ngFor="let tag of user.tags" class="o-prof-skills__tag">{{tag}}</a>
+    </div>
+    <div class="o-prof-portfolio">
+      <a [routerLink]="['/', 'portfolio', user.username]" class="btn btn-outline-primary btn-sm"
+        id="sidebar-portfolio">Portfolio</a>
+    </div>
 
-  <!-- <div class="mdl-card__supporting-text" id="bio" [hidden]="editing" style="white-space:pre-line; text-align:center;" [innerHtml]="user.briefdescription | tags"></div> -->
+    <!-- <div class="mdl-card__supporting-text" id="bio" [hidden]="editing" style="white-space:pre-line; text-align:center;" [innerHtml]="user.briefdescription | tags"></div> -->
 
-  <!-- <div class="opspot-editable-container mdl-card__supporting-text" *ngIf="editing && isOwner()"> -->
+    <!-- <div class="opspot-editable-container mdl-card__supporting-text" *ngIf="editing && isOwner()"> -->
     <!-- OWNER EDIT FORM -->
-      <!-- <textarea
+    <!-- <textarea
         [autoGrow]
         class="mdl-textfield__input"
         type="text"
         name="briefdescription"
         [(ngModel)]="user.briefdescription"
       ></textarea> -->
-  <!-- </div> -->
+    <!-- </div> -->
 
-  <div class="m-channel-bio-fields" [ngClass]="{'m-channel-bio-fields-flex': !editing}">
+    <div class="m-channel-bio-fields" [ngClass]="{'m-channel-bio-fields-flex': !editing}">
 
-    <!-- City / Location -->
-    <!-- <div class="m-channel-bio-field m-channel--city mdl-color-text--blue-grey-600" [hidden]="editing || !user.city">
+      <!-- City / Location -->
+      <!-- <div class="m-channel-bio-field m-channel--city mdl-color-text--blue-grey-600" [hidden]="editing || !user.city">
       <i class="material-icons mdl-color-text--blue-grey-300">location_on</i>
       <span>{{user.city}}</span>
     </div> -->
 
-    <!-- <div class="m-channel-bio-editor m-channel-city-editor" *ngIf="editing && isOwner()">
+      <!-- <div class="m-channel-bio-editor m-channel-city-editor" *ngIf="editing && isOwner()">
       <div class="m-channel-bio-input m-channel-city-input">
         <i class="material-icons mdl-color-text--blue-grey-300">location_on</i>
         <input (keyup)="findCity(user.city)" name="city" [(ngModel)]="user.city" class="" placeholder="Enter your city..." i18n-placeholder="@@M__COMMON__ENTER_CITY" />
@@ -67,46 +87,42 @@
         <li (click)="setCity(c)" *ngFor="let c of cities" [hidden]="!(c.address.town || c.address.city)">{{c.address.town}}{{c.address.city}}, {{c.address.state}}</li>
       </div>
     </div> -->
-    <!-- END City / Location -->
+      <!-- END City / Location -->
 
 
-    <!-- <div class="m-channel-bio-field mdl-color-text--blue-grey-300" *ngIf="user.tags && !editing">
+      <!-- <div class="m-channel-bio-field mdl-color-text--blue-grey-300" *ngIf="user.tags && !editing">
       <div [hidden]="editing || !user.tags">
         <i class="material-icons mdl-color-text--blue-grey-300">local_offer</i>
         <span *ngFor="let tag of user.tags">#{{tag}}</span>
       </div>
     </div> -->
 
-    <div class="m-channel-bio-editor m-channel-city-editor" *ngIf="editing && isOwner()">
-      <div class="m-channel-bio-input">
-        <i class="material-icons mdl-color-text--blue-grey-300">local_offer</i>
-        <m-hashtags-selector #hashtagsSelector
-          [alignLeft]="true"
-          [tags]="user.tags"
-          (tagsChange)="onTagsChange($event)"
-          (tagsAdded)="onTagsAdded($event)"
-          (tagsRemoved)="onTagsRemoved($event)">
-        </m-hashtags-selector>
-      </div>
-      <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp" style="min-height:0;"
-        *ngIf="errorMessage">
-        <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-          {{errorMessage}}
+      <div class="m-channel-bio-editor m-channel-city-editor" *ngIf="editing && isOwner()">
+        <div class="m-channel-bio-input">
+          <i class="material-icons mdl-color-text--blue-grey-300">local_offer</i>
+          <m-hashtags-selector #hashtagsSelector [alignLeft]="true" [tags]="user.tags"
+            (tagsChange)="onTagsChange($event)" (tagsAdded)="onTagsAdded($event)" (tagsRemoved)="onTagsRemoved($event)">
+          </m-hashtags-selector>
+        </div>
+        <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp" style="min-height:0;"
+          *ngIf="errorMessage">
+          <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+            {{errorMessage}}
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- <m-channel--social-profiles
+      <!-- <m-channel--social-profiles
       [user]="user"
       [editing]="editing && isOwner()"
       (changed)="setSocialProfile($event)"
     ></m-channel--social-profiles> -->
 
-  </div>
+    </div>
 
-<!-- added new bio part -->
+    <!-- added new bio part -->
 
-  <!-- <div class="m-channel--stats  mdl-tabs__tab-bar">
+    <!-- <div class="m-channel--stats  mdl-tabs__tab-bar">
     <a [routerLink]="['/', user.username, 'feed']" class="mdl-tabs__tab mdl-color-text--blue-grey-500" *ngIf="user.activity_count">
       <span i18n="Count of activities@@M__COMMON__FEED_COUNT">Feed</span>
       <b>{{user.activity_count | number}}</b>
@@ -127,9 +143,9 @@
       <span i18n="@@M__COMMON__VIEWS">Views</span>
       <b>{{user.impressions | number}}</b>
     </a> -->
-  <!-- </div> -->
+    <!-- </div> -->
 
-  <!-- <div class="m-channel__onboardingProgress"
+    <!-- <div class="m-channel__onboardingProgress"
        *ngIf="shouldShowOnboardingProgress()"
   >
 
@@ -144,7 +160,7 @@
     </div>
   </div> -->
 
-  <!-- <div class="m-channel--action-buttons" >
+    <!-- <div class="m-channel--action-buttons" >
     <opspot-button-subscribe [user]="user"  *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != user.guid && !user.blocked && !user.subscribed"></opspot-button-subscribe>
     <m-messenger--channel-button [user]="user" *ngIf="user.subscribed && session.getLoggedInUser().guid != user.guid"></m-messenger--channel-button>
     <opspot-button-user-dropdown [(user)]="user" *ngIf="session.getLoggedInUser().guid != user.guid"></opspot-button-user-dropdown>
@@ -160,19 +176,20 @@
     <opspot-button-boost [object]="user" *ngIf="session.getLoggedInUser().guid == user.guid"></opspot-button-boost>
     <m-channel--badges [user]="user"></m-channel--badges>
   </div> -->
-</div>
+  </div>
 
-<!-- <div class="opspot-spacer-2x"></div> -->
-<!-- adding a new bio -->
+  <!-- <div class="opspot-spacer-2x"></div> -->
+  <!-- adding a new bio -->
 
-<div class="o-card o-bio">
-  <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/about']" id="sidebar-icon-edit-profile"><i class="icon-edit-profile f-15"></i></a>
-  <span class="o-bio__title caption-medium" id="sidebar-about-user">About {{user.name}}</span>
-  <span *ngIf="isOwner() && !user?.about?.description" class="text-md">
-    <a [routerLink]="['/profile/about']" class="primary" id="sidebar-about-self">Tell something about yourself</a>
-  </span>
-  <span  class="text-md" id="sidebar-user-description">{{user?.about?.description}}</span>
-  <ul class="o-bio__info">
+  <div class="o-card o-bio">
+    <a *ngIf="isOwner()" class="o-edit" [routerLink]="['/profile/about']" id="sidebar-icon-edit-profile"><i
+        class="icon-edit-profile f-15"></i></a>
+    <span class="o-bio__title caption-medium" id="sidebar-about-user">About {{user.name}}</span>
+    <span *ngIf="isOwner() && !user?.about?.description" class="text-md">
+      <a [routerLink]="['/profile/about']" class="primary" id="sidebar-about-self">Tell something about yourself</a>
+    </span>
+    <span class="text-md" id="sidebar-user-description">{{user?.about?.description}}</span>
+    <ul class="o-bio__info">
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
         <span class="text-md float-left" *ngIf="isOwner() && !user.location" [routerLink]="['/profile/contact']">
@@ -223,15 +240,17 @@
           <div class="text-md w100" *ngIf="isOwner() && !user?.about?.languages">
             <a [routerLink]="['/profile/about']" class="primary" id="sidebar-add-languages">Add Language</a>
           </div>
-          <span class="text-md float-left" id="sidebar-languages-known">{{user?.about?.languages?.join(', ') | truncate:[100, '...']}}</span>
+          <span class="text-md float-left"
+            id="sidebar-languages-known">{{user?.about?.languages?.join(', ') | truncate:[100, '...']}}</span>
         </div>
       </li>
-  </ul>
-</div>
+    </ul>
+  </div>
 
-<div class="o-card o-card--padding" >
-  <div *ngIf="user?.work_experience?.length > 0" class="o-work">
-      <a *ngIf="isOwner()" class="o-edit" id="sidebar-edit-work" [routerLink]="['/profile/work']"><i class="icon-edit-profile f-15"></i></a>
+  <div class="o-card o-card--padding">
+    <div *ngIf="user?.work_experience?.length > 0" class="o-work">
+      <a *ngIf="isOwner()" class="o-edit" id="sidebar-edit-work" [routerLink]="['/profile/work']"><i
+          class="icon-edit-profile f-15"></i></a>
       <div class="o-work__title caption-medium">Work</div>
       <div *ngFor="let work of user?.work_experience" class="o-work-info">
         <div class="o-work-info__logo">
@@ -242,42 +261,65 @@
           <div class="text-sm grey-dark">{{ work?.company_name }} - {{ work?.location }}</div>
         </div>
       </div>
-  </div><!-- work detail end-->
-  <div *ngIf="user?.education?.length > 0" class="o-education">
-      <a *ngIf="isOwner()" id="sidebar-edit-education" class="o-edit" [routerLink]="['/profile/education']"><i class="icon-edit-profile f-15"></i></a>
+    </div><!-- work detail end-->
+    <div *ngIf="user?.education?.length > 0" class="o-education">
+      <a *ngIf="isOwner()" id="sidebar-edit-education" class="o-edit" [routerLink]="['/profile/education']"><i
+          class="icon-edit-profile f-15"></i></a>
       <div class="o-education__title caption-medium">Education</div>
       <div *ngFor="let education of user?.education" class="o-education-info">
-          <div class="o-education-info__logo">
-            <img src="assets/Education.jpg" alt="">
-          </div>
-          <div class="o-education-info__det" id="sidebar-education-widget">
-            <a class="text-md f500">{{ education?.field_of_study }}</a>
-            <div class="text-sm grey-dark">{{ education?.university }} - {{ education?.location }}</div>
-          </div>
+        <div class="o-education-info__logo">
+          <img src="assets/Education.jpg" alt="">
+        </div>
+        <div class="o-education-info__det" id="sidebar-education-widget">
+          <a class="text-md f500">{{ education?.field_of_study }}</a>
+          <div class="text-sm grey-dark">{{ education?.university }} - {{ education?.location }}</div>
+        </div>
       </div>
-  </div><!-- education detail end-->
-  <div *ngIf="user?.awards?.length > 0" class="o-award">
-      <a *ngIf="isOwner()" id="sidebar-edit-award" class="o-edit" [routerLink]="['/profile/education']"><i class="icon-edit-profile f-15"></i></a>
+    </div><!-- education detail end-->
+    <div *ngIf="user?.awards?.length > 0" class="o-award">
+      <a *ngIf="isOwner()" id="sidebar-edit-award" class="o-edit" [routerLink]="['/profile/education']"><i
+          class="icon-edit-profile f-15"></i></a>
       <div class="o-award__title caption-medium">Awards</div>
       <div *ngFor="let award of user?.awards" class="o-award-info">
-          <div class="o-award-info__logo">
-            <img src="assets/Awards.jpg" alt="">
-          </div>
-          <div class="o-award-info__det" id="sidebar-award-widget">
-            <a class="text-md f500">{{ award?.title }}</a>
-            <div class="text-sm grey-dark">{{ award?.issuer }} - {{ award?.location }}</div>
-          </div>
+        <div class="o-award-info__logo">
+          <img src="assets/Awards.jpg" alt="">
+        </div>
+        <div class="o-award-info__det" id="sidebar-award-widget">
+          <a class="text-md f500">{{ award?.title }}</a>
+          <div class="text-sm grey-dark">{{ award?.issuer }} - {{ award?.location }}</div>
+        </div>
       </div>
-  </div><!-- Award detail end-->
+    </div><!-- Award detail end-->
+  </div>
+
+  <m-wire-channel #wire [(rewards)]="user.wire_rewards" [channel]="user" [editing]="editing"></m-wire-channel>
+
+  <div class="opspot-spacer-2x"></div>
 </div>
 
-<m-wire-channel #wire
-  [(rewards)]="user.wire_rewards"
-  [channel]="user"
-  [editing]="editing"
-></m-wire-channel>
-
-<div class="opspot-spacer-2x"></div>
+<!-- <div class="o-card o-prof-info o-prof-info--radius o-prof-info--shadow" *ngIf="displayBookmark">
+  <button class="mdl-button m-pin-button mdl-button--icon o-prof-info__bookmark mdl-color-text--blue-grey-300"
+    id="profile-bookmark" (click)="togglePin(user)">
+    <m-tooltip icon="turned_in" *ngIf="user.bookmark">
+      This profile is Bookmarked
+    </m-tooltip>
+    <m-tooltip *ngIf="!user.bookmark" icon="turned_in_not">
+      Click to bookmark this post to the top of your channel feed
+    </m-tooltip>
+  </button>
+  <opspot-avatar class="opAvatar" [object]="user" [profileEdit]='profEdit' [editMode]="editing"
+    (added)="upload_avatar($event)"></opspot-avatar>
+  <div class="o-prof-name">
+    <div class="caption-bold f700" id="sidebar-avatar-name">{{user.name}}</div>
+    <span class="text-md grey" id="sidebar-avatar-user-name">@{{user.username}}</span>
+  </div>
+  <div *ngIf="!isOwner()" class="o-prof-others-action o-prof-others-action--margin">
+    <div class="o-prof-portfolio">
+      <a [routerLink]="['/', 'portfolio', user.username]" class="btn btn-outline-primary btn-sm"
+        id="sidebar-portfolio">Portfolio</a>
+    </div>
+  </div>
+</div> -->
 
 <!-- images  -->
 <!-- <m-channel--modules [owner]="user" type="image" [linksTo]="['/media/images', user.username]">
@@ -308,3 +350,30 @@
 </m-channel--modules>
 
 <div class="opspot-spacer-2x"></div> -->
+
+<div class="o-card o-book-block" *ngIf="displayBookmark">
+  <div class="o-book-block__left o-book-block__left--profile ">
+    <div class="o-book-prof-top-bar-mob"></div>
+    <div class="o-book-prof">
+      <div class="o-book-top-action">
+        <div class="o-bookmark-tag text-sm mdl-color-text--blue-grey-300" (click)="togglePin(user)">
+          <m-tooltip icon="turned_in" *ngIf="user.bookmark">
+            This profile is Bookmarked
+          </m-tooltip>
+          <m-tooltip *ngIf="!user.bookmark" icon="turned_in_not">
+            Click to bookmark this post to the top of your channel feed
+          </m-tooltip>
+        </div>
+      </div>
+      <div [routerLink]="['/', user.username]" class="o-book-prof__avatar">
+        <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt="">
+      </div>
+      <div class="o-book-prof__info">
+        <div [routerLink]="['/', user.username]" id="name" class="caption-bold">{{user.name}}</div>
+        <div [routerLink]="['/', user.username]" class="text-sm grey">@{{user.username}}</div>
+        <button type="button" [routerLink]="['/', 'portfolio', user.username]"
+          class="btn btn-primary btn-xs btn--book">Portfolio</button>
+      </div>
+    </div>
+  </div>
+</div>

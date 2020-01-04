@@ -54,6 +54,7 @@
     "mixins": "0.0.1",
     "moment": "^2.24.0",
     "mq-scss": "^2.1.5",
+    "ng-otp-input": "^1.7.0",
     "ngx-bootstrap": "^4.3.0",
     "ngx-chips": "^2.0.2",
     "ngx-croppie": "^3.0.0",

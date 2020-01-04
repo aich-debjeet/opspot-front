@@ -182,7 +182,7 @@
           {{activity?.blurb | truncate:[100, '...']}}
         </div>
         <div class="text-rate" id="activity-bluestore-price">
-          ₹ {{activity?.price}} <span class="text-md grey">per piece</span>
+          {{activity?.currency}} {{activity?.price}} <span class="text-md grey">per piece</span>
         </div>
       </div>
       <div class="feed-card-event-block__right ">
@@ -410,7 +410,7 @@
 
 <!-- TODO @gayatri need to check this part bacuse of shshis impl-->
 <div class="mdl-card__menu mdl-color-text--blue-grey-300" #toggle *ngIf="!hideTabs">
-  <button class="mdl-button m-pin-button mdl-button--icon" id="activity-bookmark" (click)="togglePin()">
+  <button class="mdl-button m-pin-button mdl-button--icon" id="activity-bookmark" (click)="togglePin(activity)">
     <m-tooltip icon="turned_in" *ngIf="activity.bookmark">
       This post is Bookmarked
     </m-tooltip>

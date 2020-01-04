@@ -1,68 +1,163 @@
 <div class="container" style="margin-top: 80px;">
-  <div class="o-book-blocks">
-    <div class="o-book-left-block hidden-mob">
-      <div class="o-card o-book-filter">
-          <div class="o-book-filter__title">
-              <div class="caption-medium" id="bookmark-view-bookmark-filter">Filter</div>
-              <div class="text-sm primary" id="bookmark-view-bookmark-clear-all">Clear All</div>
-          </div>
-          <div class="o-book-filter__block">
-              <form>
-                  <div class="c-checkbox__md">
-                      <label class="c-checkbox">All
-                          <input type="checkbox" checked="checked" id="bookmark-view-bookmark-all">
-                          <span class="checkmark"></span>
-                      </label>
-                      <label class="c-checkbox">Images
-                          <input type="checkbox" id="bookmark-view-bookmark-images">
-                          <span class="checkmark"></span>
-                      </label>
-                      <label class="c-checkbox">Video
-                          <input type="checkbox" id="bookmark-view-bookmark-video">
-                          <span class="checkmark"></span>
-                      </label>
-                      <label class="c-checkbox">Audio
-                          <input type="checkbox" id="bookmark-view-bookmark-audio">
-                          <span class="checkmark"></span>
-                      </label>
-                      <label class="c-checkbox">Blogs
-                          <input type="checkbox" id="bookmark-view-bookmark-blog">
-                          <span class="checkmark"></span>
-                      </label>
-                      <label class="c-checkbox">Opportunities
-                          <input type="checkbox" id="bookmark-view-bookmark-opportunity">
-                          <span class="checkmark"></span>
-                      </label>
-                      <label class="c-checkbox">Events
-                          <input type="checkbox" id="bookmark-view-bookmark-events">
-                          <span class="checkmark"></span>
-                      </label>
-                      <label class="c-checkbox">Profile
-                          <input type="checkbox" id="bookmark-view-bookmark-profile">
-                          <span class="checkmark"></span>
-                      </label>
-                  </div>
-              </form>
-          </div>
-      </div><!--filter block end-->
-  </div>
+    <div class="o-book-blocks">
+        <div class="o-book-left-block hidden-mob">
+            <div class="o-card o-book-filter">
+                <div class="o-book-filter__title">
+                    <div class="caption-medium">Filter</div>
+                    <div class="text-sm primary">Clear All</div>
+                </div>
+                <div class="o-book-filter__block">
+                    <form>
+                        <div class="c-checkbox__md">
+                            <label class="c-checkbox" (click)="changeFilter('all')">All
+                                <input type="radio" [checked]="this._filter == 'all'" value="all" name="all">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="c-checkbox" (click)="changeFilter('image')">Images
+                                <input type="radio" [checked]="this._filter == 'image'" value="image" name="image">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="c-checkbox" (click)="changeFilter('video')">Video
+                                <input type="radio" [checked]="this._filter == 'video'" value="video" name="video">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="c-checkbox" (click)="changeFilter('audio')">Audio
+                                <input type="radio" [checked]="this._filter == 'audio'" value="audio" name="audio">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="c-checkbox" (click)="changeFilter('blog')">Blogs
+                                <input type="radio" [checked]="this._filter == 'blog'" value="blog" name="blog">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="c-checkbox" (click)="changeFilter('Opportunity')">Opportunities
+                                <input type="radio" [checked]="this._filter == 'Opportunity'" value="Opportunity"
+                                    name="Opportunity">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="c-checkbox" (click)="changeFilter('event')">Events
+                                <input type="radio" [checked]="this._filter == 'event'" value="event" name="event">
+                                <span class="checkmark"></span>
+                            </label>
+                            <!-- <label class="c-checkbox" (click)="changeFilter('album')">Album
+                                <input type="radio" [checked]="this._filter == 'album'" value="album" name="album">
+                                <span class="checkmark"></span>
+                            </label> -->
+                            <label class="c-checkbox" (click)="changeFilter('item')">BlueStore
+                                <input type="radio" [checked]="this._filter == 'item'" value="blueStore"
+                                    name="blueStore">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="c-checkbox" (click)="changeFilter('post')">Posts
+                                <input type="radio" [checked]="this._filter == 'post'" value="post" name="post">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="c-checkbox" (click)="changeFilter('profile')">Profile
+                                <input type="radio" [checked]="this._filter == 'profile'" value="profile"
+                                    name="profile">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--filter block end-->
+        </div>
 
-  <div class="o-book-right-block">
-    <div class="o-card o-book-title">
-      <div class="o-book-title__text">
-          <div class="caption-medium float-left" id="bookmark-view-bookmark">Bookmark</div>
-          <span class="o-bookmark-count text-md grey-dark float-left" title="Unread Notification" id="bookmark-view-bookmark-activity-count">{{activity.length}}</span>
-      </div>
-      <div class="o-book-title__action">
-          <a  class="o-book-settings" title="Settings" id="bookmark-view-bookmark-setting"><i class="icon-settings"></i></a>
-      </div>
-  </div>
-  <opspot-activity
-  *ngFor="let activi of activity; let i = index"
-  [object]="activi"
-  [class]="'mdl-card m-border item m-boost-rotator-item m-boost-rotator-item-' + i"
-  visible="true"
-  ></opspot-activity>
-  </div>
-  </div>
+        <div class="o-book-right-block">
+            <div class="o-card o-book-title">
+                <div class="o-book-title__text">
+                    <div class="caption-medium float-left">Bookmark</div>
+                    <span class="o-bookmark-count text-md grey-dark float-left"
+                        title="Unread Notification">{{activity.length}}</span>
+                </div>
+                <div class="o-book-title__action">
+                    <a (click)="openFilter = !openFilter" id="filter-book" name="filter" class="o-book-filter-mob"
+                        title="Settings"><i class="icon-filter"></i></a>
+                    <div id="filter-drop" class="book-filter-mob-block" *ngIf="openFilter">
+                        <div class="o-card o-book-filter">
+                            <div class="o-book-filter__title">
+                                <div class="caption-medium">Filter</div>
+                                <div class="text-sm primary">Clear All</div>
+                            </div>
+                            <div class="o-book-filter__block">
+                                <form>
+                                    <div class="c-checkbox__md">
+                                        <label class="c-checkbox" (click)="changeFilter('all')">All
+                                            <input type="radio" [checked]="this._filter == 'all'" value="all"
+                                                name="all">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('image')">Images
+                                            <input type="radio" [checked]="this._filter == 'image'" value="image"
+                                                name="image">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('video')">Video
+                                            <input type="radio" [checked]="this._filter == 'video'" value="video"
+                                                name="video">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('audio')">Audio
+                                            <input type="radio" [checked]="this._filter == 'audio'" value="audio"
+                                                name="audio">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('blog')">Blogs
+                                            <input type="radio" [checked]="this._filter == 'blog'" value="blog"
+                                                name="blog">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('Opportunity')">Opportunities
+                                            <input type="radio" [checked]="this._filter == 'Opportunity'"
+                                                value="Opportunity" name="Opportunity">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('event')">Events
+                                            <input type="radio" [checked]="this._filter == 'event'" value="event"
+                                                name="event">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('album')">Album
+                                            <input type="radio" [checked]="this._filter == 'album'" value="album"
+                                                name="album">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('item')">BlueStore
+                                            <input type="radio" [checked]="this._filter == 'item'" value="blueStore"
+                                                name="blueStore">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('post')">Posts
+                                            <input type="radio" [checked]="this._filter == 'post'" value="post"
+                                                name="post">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="c-checkbox" (click)="changeFilter('profile')">Profile
+                                            <input type="radio" [checked]="this._filter == 'profile'" value="profile"
+                                                name="profile">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!--filter block end-->
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngFor="let activi of activity; let i = index">
+                <opspot-activity [object]="activi" *ngIf="activi.type !== 'user'"
+                    [class]="'mdl-card m-border item m-boost-rotator-item m-boost-rotator-item-' + i" visible="true"
+                    (deleteBookmark)="delete($event)">
+                </opspot-activity>
+                <div *ngIf="activi.type == 'user'">
+                    <m-channel--sidebar [user]="activi" [editing]="editing" [displayBookmark]="displayBookmark"
+                        (deleteBookmark)="delete($event)">
+                    </m-channel--sidebar>
+                </div>
+            </ng-container>
+            <infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress">
+            </infinite-scroll>
+        </div>
+    </div>
 </div>

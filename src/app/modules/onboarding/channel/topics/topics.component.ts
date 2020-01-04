@@ -69,8 +69,8 @@ export class TopicsOnboardingComponent implements OnInit {
 
   keyUp(e) {
     switch (e.keyCode) {
-      case 32: //space
-      case 9: //tab
+      // case 32: //space
+      // case 9: //tab
       case 13: //enter
       case 188: //comma
         this.addNew();

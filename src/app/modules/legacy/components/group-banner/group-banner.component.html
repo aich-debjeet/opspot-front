@@ -13,13 +13,13 @@
 <div [style.backgroundImage]="src ? 'url(' + src + ')' : null" class="o-cover o-cover--community hidden-above-tablet"
   style="background-size: cover; background-position: left;">
   <div class="o-cover__actions">
-    <a *ngIf=" object && object['is:owner']" class="o-cover-edit o-cover-edit--community" (click)="onClick($event)"><i
+    <a *ngIf="object && object['is:owner']" class="o-cover-edit o-cover-edit--community" (click)="onClick($event)"><i
         class="icon-edit-profile"></i></a>
     <input style="display:none" type="file" id="file" (change)="add($event)" [hidden]="file" #fileInput />
     <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage"
       (imgResult)="newImageResultFromCroppie($event)">
     </app-image-croper>
-    <a class="o-cover-community-discussion" *ngIf="object.entity_type === 'community'" (click)="openConversation()">
+    <a class="o-cover-community-discussion" *ngIf="object && object.entity_type === 'community'" (click)="openConversation()">
       <i class="icon-message-square"></i>
       <i class="icon-chevron-right"></i>
     </a>

@@ -6,15 +6,15 @@
           <h2 id="registration">Welcome, Create an account</h2>
           <form (ngSubmit)="register()" [formGroup]="form">
             <div class="form-group">
-              <input type="text" id="registration-fullname" formControlName='fullname' class="form-control form-control-lg"
-                placeholder="Full Name">
+              <input type="text" id="registration-fullname" formControlName='fullname'
+                class="form-control form-control-lg" placeholder="Full Name">
               <div *ngIf="form.controls['fullname'].touched && !form.controls['fullname'].valid" class="error text-sm">
                 <div *ngIf="form.controls['fullname'].errors.required">Full Name is required</div>
               </div>
             </div>
             <div class="form-group">
-              <input type="text" id="registration-username" class="form-control form-control-lg" formControlName="username" placeholder="Username"
-                i18n-placeholder="@@M__COMMON__USERNAME" readonly onfocus="this.removeAttribute('readonly');">
+              <input type="text" id="registration-username" class="form-control form-control-lg"
+                formControlName="username" placeholder="Username" i18n-placeholder="@@M__COMMON__USERNAME">
               <!-- <a href="#" class="text-md primary">gowtham_aeione,</a>
               <a href="#" class="text-md primary">gowtham_aeione49</a> -->
               <div *ngIf="form.controls['username'].touched && !form.controls['username'].valid" class="error text-sm">
@@ -42,19 +42,10 @@
             </div>
 
             <div [hidden]="noViewOtp" class="o-otp">
-              <div class="o-otp__title text-md">Enter OTP <a class="primary" id="registration-resend">Resend OTP</a></div>
-              <!-- <div class="otp">
-                  <fieldset formGroupName="otp">
-                    <input formControlName="otp1" (keyup)="keytab($event)" maxlength="1"/>
-                    <input formControlName="otp2" (keyup)="keytab($event)" maxlength="1"/>
-                    <input formControlName="otp3" (keyup)="keytab($event)" maxlength="1"/>
-                    <input formControlName="otp4" (keyup)="keytab($event)" maxlength="1"/>
-                    <input formControlName="otp5" (keyup)="keytab($event)" maxlength="1"/>
-                    <input formControlName="otp6" (keyup)="keytab($event)" maxlength="1"/>
-                  </fieldset>
-                </div> -->
+              <div class="o-otp__title text-md">Enter OTP <a class="primary" id="registration-resend">Resend OTP</a>
+              </div>
               <div class="otp">
-                <fieldset formGroupName="otp" id="registration-otp">
+                <!-- <fieldset formGroupName="otp" id="registration-otp">
                   <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
                     formControlName="otp1">
                   <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
@@ -67,31 +58,23 @@
                     formControlName="otp5">
                   <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
                     formControlName="otp6">
-                </fieldset>
+                </fieldset> -->
+                <ng-otp-input
+                  (onInputChange)="onOtpChange($event)"
+                  [config]="otpConfig"
+                ></ng-otp-input>
                 <div [hidden]="enterOtpError" class="line-err">
                   Please enter the Otp
                 </div>
               </div>
-
-
             </div>
 
             <div class="o-dob">
-              <div class="o-dob__title text-md">Date of Birth
-                <!-- <div class="tooltip float-right"><span class="o-dob-info"> <img src="../../../../assets/svg/info.svg" alt=""></span>
-                    <span class="tooltiptext">
-                      Lorem ipsum dolor sit
-                      amet, consectetuer adipi
-                      scing elit. Aenean comm
-                      ligula eget dolor. Aenean
-                      massa
-                    </span>
-                  </div> -->
-              </div>
+              <div class="o-dob__title text-md">Date of Birth</div>
               <div class="o-dob__select w100" formGroupName='dobGroup'>
                 <div class="form-group">
-                  <select class="form-control" formControlName="date" id="registration-date-dropdown" >
-                    <option id="registration-date" value="" selected disabled hidden >Date</option>
+                  <select class="form-control" formControlName="date" id="registration-date-dropdown">
+                    <option id="registration-date" value="" selected disabled hidden>Date</option>
                     <option *ngFor="let date of dateOfBirth.date">{{date}}</option>
                   </select>
                 </div>
@@ -116,15 +99,15 @@
             </div>
 
             <div class="form-group">
-              <input type="password" id="registration-password" formControlName="password" class="form-control form-control-lg"
-                placeholder="Create Password">
+              <input type="password" id="registration-password" formControlName="password"
+                class="form-control form-control-lg" placeholder="Create Password">
               <div *ngIf="!form.controls['password'].valid && form.controls['password'].touched" class="error text-sm">
                 <div> {{ getErrorPassword()}}</div>
               </div>
             </div>
             <div class="form-group">
-              <input type="password" id="registration-confirm-password" formControlName="password2" class="form-control form-control-lg"
-                placeholder="Confirm Password">
+              <input type="password" id="registration-confirm-password" formControlName="password2"
+                class="form-control form-control-lg" placeholder="Confirm Password">
               <div *ngIf="form.controls['password2'].touched && !form.controls['password2'].valid"
                 class="error text-sm">
                 <div *ngIf="form.controls['password2'].errors.required">Confirm Password is required</div>
@@ -133,9 +116,10 @@
             </div>
 
             <div class="o-terms-condition">
-              <label class="c-checkbox">I agree to the <a href="javascript:void(0)" class="primary">Terms</a>, <a href="javascript:void(0)" class="primary">Privacy</a> and <a href="javascript:void(0)"
+              <label class="c-checkbox">I agree to the <a href="javascript:void(0)" class="primary">Terms</a>, <a
+                  href="javascript:void(0)" class="primary">Privacy</a> and <a href="javascript:void(0)"
                   class="primary">Cookie Policy</a>
-                <input type="checkbox" id="registration-checkbox" formControlName="tos">
+                <input type="checkbox" id="registration-checkbox" formControlName="agreeTerms">
                 <span class="checkmark"></span>
               </label>
             </div>
@@ -145,7 +129,8 @@
               <p class="text-white">{{errorMessage}}</p>
             </div>
             <button type="submit" id="registration-submit" class="btn btn-primary btn-block"
-              [disabled]="!this.form.valid || inProgress || !this.verifiedOtp || this.invalidNumberLength">Get Started</button>
+              [disabled]="!this.form.valid || inProgress || !this.verifiedOtp || this.invalidNumberLength">Get
+              Started</button>
           </form>
         </div>
         <div class="o-signup o-signup--img">
@@ -159,104 +144,3 @@
     </div>
   </section>
 </div>
-
-
-<!-- <div class="mdl-card mdl-color--red-500 mdl-color-text--blue-grey-50  mdl-shadow--2dp opspot-login-box m-error-box" style="min-height:0;" [hidden]="!errorMessage">
-  <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
-    {{errorMessage}}
-  </div>
-</div> -->
-
-<!-- START: Register -->
-<!-- <form (submit)="$event.preventDefault()" [formGroup]="form" class="mdl-card mdl-color-text--blue-grey-400 m-form m-login-box" [hidden]="hideLogin" *ngIf="!showFbForm">
-
-  <div class="mdl-card__supporting-text mdl-grid">
-
-    <div class="mdl-cell mdl-cell--12-col">
-      <input
-        type="text"
-        id="username"
-        formControlName="username"
-        placeholder="Username"
-        i18n-placeholder="@@M__COMMON__USERNAME"
-        (keyup)="validationTimeoutHandler()"
-        readonly onfocus="this.removeAttribute('readonly');"
-        />
-    </div>
-
-    <div class="mdl-cell mdl-cell--12-col">
-      <input
-        type="email"
-        id="email"
-        formControlName="email"
-        placeholder="Email"
-        i18n-placeholder="email placeholder|@@FORMS__REGISTER__EMAIL_PLACEHOLDER"
-      />
-    </div>
-    <div class="mdl-cell mdl-cell--12-col" style="position: relative">
-      <input
-        type="password"
-        id="password"
-        formControlName="password"
-        placeholder="Password"
-        i18n-placeholder="@@M__COMMON__PASSWORD"
-        readonly
-        onfocus="this.removeAttribute('readonly');"
-        />
-      <m-tooltip class="tooltip-wrapper" icon="help" i18n="@@OPSPOT__PASSWORD_TOOLTIP" anchor="right">
-        Password must have more than 8 characters. Including uppercase, numbers, special characters (ie. !,#,@), and cannot have spaces.
-      </m-tooltip>
-    </div>
-    <div class="mdl-cell mdl-cell--12-col password-help" [hidden]="errorMessage || !form.value.password">
-      <span i18n="@@OPSPOT__PASSWORD_TOOLTIP">Password must have more than 8 characters. Including uppercase, numbers, special characters (ie. !,#,@), and cannot have spaces</span>
-    </div>
-    <div class="mdl-cell mdl-cell--12-col" [hidden]="!form.value.password">
-      <input
-        type="password"
-        id="password2"
-        formControlName="password2"
-        placeholder="Confirm your password"
-        i18n-placeholder="@@FORMS__REGISTER__CONFIRM_PASSWORD_PLACEHOLDER"
-        (keydown.enter)="register($event)"
-        readonly
-        onfocus="this.removeAttribute('readonly');"
-        />
-    </div>
-
-    <div class="mdl-cell mdl-cell--12-col" [hidden]="!form.value.password2" *ngIf="form.value.password">
-      <re-captcha *ngIf="opspot.recaptchaKey" (captchaResponse)="setCaptcha($event)" [site_key]="opspot.recaptchaKey" #reCaptcha></re-captcha>
-    </div>
-  </div>
-
-  <div class="mdl-card__actions">
-    <div>
-      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" [mdlSwitch] [toggled]="form.value.exclusive_promotions">
-        <input
-          type="checkbox" class="mdl-checkbox__input"
-          formControlName="exclusive_promotions"
-        />
-
-        <span class="m-register-tac" i18n="@@FORMS__REGISTER__EXCLUSIVE_PROMOTIONS_ACCEPTANCE_LABEL"> Receive exclusive promotions from Opspot (recommended)
-        </span>
-      </label>
-
-      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" [mdlSwitch] [toggled]="form.value.tos">
-        <input
-          type="checkbox" class="mdl-checkbox__input"
-          formControlName="tos"
-        />
-
-        <span class="m-register-tac" i18n="@@FORMS__REGISTER__TOS_ACCEPTANCE_LABEL"> I accept the
-          <a routerLink="/p/terms" target="_blank"> Terms & Conditions </a>
-        </span>
-      </label>
-    </div>
-
-
-    <button class="m-btn m-btn--action" (click)="register($event)" [disabled]="!this.form.valid || inProgress">
-      <ng-container i18n="@@FORMS__REGISTER__SIGNUP_ACTION">Signup</ng-container>
-    </button>
-  </div>
-
-</form> -->
-<!-- END: Register -->

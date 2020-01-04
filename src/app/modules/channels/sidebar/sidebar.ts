@@ -10,16 +10,19 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 @Component({
   moduleId: module.id,
   selector: 'm-channel--sidebar',
-  inputs: ['_user: user', 'editing'],
+  inputs: ['_user: user', 'editing', 'displayBookmark'],
+  outputs: [ '_deleteBookmark: deleteBookmark'],
   templateUrl: 'sidebar.html'
 })
 
 export class ChannelSidebar {
 
   opspot = window.Opspot;
+  avatarSize: string = 'medium';
   filter: any = 'feed';
   isLocked: boolean = false;
   editing: boolean = false;
+  displayBookmark: boolean = false;
   user: OpspotUser;
   searching;
   errorMessage: string = '';
@@ -29,6 +32,7 @@ export class ChannelSidebar {
   profEdit = true;
   sidebarMsg = true;
   @Output() changeEditing = new EventEmitter<boolean>();
+  _deleteBookmark: EventEmitter<any> = new EventEmitter();
 
   //@todo make a re-usable city selection module to avoid duplication here
   cities: Array<any> = [];
@@ -37,6 +41,7 @@ export class ChannelSidebar {
     if (!value)
       return;
     this.user = value;
+    console.log('user details', this.user)
     this.user['contributeType'] = 'contribute';
   }
 
@@ -152,6 +157,22 @@ export class ChannelSidebar {
 
   setSocialProfile(value: any) {
     this.user.social_profiles = value;
+  }
+  async togglePin(user: any) {
+    console.log(user);
+    this.user.bookmark = !this.user.bookmark;
+    const url: string = `api/v3/bookmark/${this.user.guid}/profile`;
+    console.log(url)
+    try {
+      if (this.user.bookmark) {
+        await this.client.post(url);
+      } else {
+        await this.client.delete(url);
+        this._deleteBookmark.next(this.user);
+      }
+    } catch (e) {
+      this.user.bookmark = !this.user.bookmark;
+    }
   }
 
 }
