@@ -44,11 +44,7 @@ export class RegisterForm {
 
   otpConfig = {
     allowNumbersOnly: true,
-    length: 6,
-    inputStyles: {
-      'width': '60px',
-      'height': '40px'
-    }
+    length: 6
   };
   otp: string;
 
