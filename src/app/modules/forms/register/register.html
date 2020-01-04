@@ -14,8 +14,7 @@
             </div>
             <div class="form-group">
               <input type="text" id="registration-username" class="form-control form-control-lg"
-                formControlName="username" placeholder="Username" i18n-placeholder="@@M__COMMON__USERNAME" readonly
-                onfocus="this.removeAttribute('readonly');">
+                formControlName="username" placeholder="Username" i18n-placeholder="@@M__COMMON__USERNAME">
               <!-- <a href="#" class="text-md primary">gowtham_aeione,</a>
               <a href="#" class="text-md primary">gowtham_aeione49</a> -->
               <div *ngIf="form.controls['username'].touched && !form.controls['username'].valid" class="error text-sm">
@@ -45,31 +44,11 @@
             <div [hidden]="noViewOtp" class="o-otp">
               <div class="o-otp__title text-md">Enter OTP <a class="primary" id="registration-resend">Resend OTP</a>
               </div>
-              <!-- <div class="otp">
-                  <fieldset formGroupName="otp">
-                    <input formControlName="otp1" (keyup)="keytab($event)" maxlength="1"/>
-                    <input formControlName="otp2" (keyup)="keytab($event)" maxlength="1"/>
-                    <input formControlName="otp3" (keyup)="keytab($event)" maxlength="1"/>
-                    <input formControlName="otp4" (keyup)="keytab($event)" maxlength="1"/>
-                    <input formControlName="otp5" (keyup)="keytab($event)" maxlength="1"/>
-                    <input formControlName="otp6" (keyup)="keytab($event)" maxlength="1"/>
-                  </fieldset>
-                </div> -->
               <div class="otp">
-                <fieldset formGroupName="otp" id="registration-otp">
-                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
-                    formControlName="otp1">
-                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
-                    formControlName="otp2">
-                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
-                    formControlName="otp3">
-                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
-                    formControlName="otp4">
-                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
-                    formControlName="otp5">
-                  <input type="text" maxlength="1" (keyup)="prevOtpNum($event)" (keypress)="nextOtpNum($event)"
-                    formControlName="otp6">
-                </fieldset>
+                <ng-otp-input
+                  (onInputChange)="onOtpChange($event)"
+                  [config]="otpConfig"
+                ></ng-otp-input>
                 <div [hidden]="enterOtpError" class="line-err">
                   Please enter the Otp
                 </div>
@@ -77,17 +56,7 @@
             </div>
 
             <div class="o-dob">
-              <div class="o-dob__title text-md">Date of Birth
-                <!-- <div class="tooltip float-right"><span class="o-dob-info"> <img src="../../../../assets/svg/info.svg" alt=""></span>
-                    <span class="tooltiptext">
-                      Lorem ipsum dolor sit
-                      amet, consectetuer adipi
-                      scing elit. Aenean comm
-                      ligula eget dolor. Aenean
-                      massa
-                    </span>
-                  </div> -->
-              </div>
+              <div class="o-dob__title text-md">Date of Birth</div>
               <div class="o-dob__select w100" formGroupName='dobGroup'>
                 <div class="form-group">
                   <select class="form-control" formControlName="date" id="registration-date-dropdown">
@@ -136,7 +105,7 @@
               <label class="c-checkbox">I agree to the <a href="javascript:void(0)" class="primary">Terms</a>, <a
                   href="javascript:void(0)" class="primary">Privacy</a> and <a href="javascript:void(0)"
                   class="primary">Cookie Policy</a>
-                <input type="checkbox" id="registration-checkbox" formControlName="tos">
+                <input type="checkbox" id="registration-checkbox" formControlName="agreeTerms">
                 <span class="checkmark"></span>
               </label>
             </div>

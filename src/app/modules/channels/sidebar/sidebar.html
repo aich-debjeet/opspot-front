@@ -25,7 +25,13 @@
         *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != user.guid && !user.blocked ">
       </opspot-button-subscribe>
       <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button> -->
-      <button type="button" class="btn btn-outline-primary btn-sm btn--prof" id="sidebar-network">Network</button>
+      <!-- <button type="button" class="btn btn-outline-primary btn-sm btn--prof" id="sidebar-network">Network</button> -->
+      <m-messenger--channel-button
+        *ngIf="user.subscribed && session.getLoggedInUser().guid != user.guid"
+        [user]="user"
+        [label]="'Network'"
+        [theme]="'secondary'"
+      ></m-messenger--channel-button>
     </div>
     <div class="o-prof-activity" id="sidebar-profile-activity">
       <a [routerLink]="['/', user.username, 'subscribers']" id="sidebar-user-subscribers">
@@ -359,10 +365,12 @@
           </m-tooltip>
         </div>
       </div>
-      <div class="o-book-prof__avatar"><img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt=""></div>
+      <div [routerLink]="['/', user.username]" class="o-book-prof__avatar">
+        <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt="">
+      </div>
       <div class="o-book-prof__info">
-        <div id="name" class="caption-bold">{{user.name}}</div>
-        <div class="text-sm grey">@{{user.username}}</div>
+        <div [routerLink]="['/', user.username]" id="name" class="caption-bold">{{user.name}}</div>
+        <div [routerLink]="['/', user.username]" class="text-sm grey">@{{user.username}}</div>
         <button type="button" [routerLink]="['/', 'portfolio', user.username]"
           class="btn btn-primary btn-xs btn--book">Portfolio</button>
       </div>

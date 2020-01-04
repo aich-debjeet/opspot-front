@@ -42,6 +42,12 @@ export class RegisterForm {
   @ViewChild('reCaptcha') reCaptcha: ReCaptchaComponent;
   dateOfBirth;
 
+  otpConfig = {
+    allowNumbersOnly: true,
+    length: 6
+  };
+  otp: string;
+
   constructor(
     public session: Session,
     public client: Client,
@@ -58,10 +64,7 @@ export class RegisterForm {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, this.checkPassword]],
       password2: ['', Validators.required],
-      otp: fb.group({
-        otp1: '', otp2: '', otp3: '', otp4: '', otp5: '', otp6: ''
-      }, { updateOn: 'change' }),
-      tos: [false],
+      agreeTerms: [false],
       mobileNumber: ['', { validators: Validators.required, updateOn: 'blur' }],
       exclusive_promotions: [false],
       captcha: [''],
@@ -75,53 +78,48 @@ export class RegisterForm {
   }
 
   //mobile number entered
-  onMobileNumbr() {
+  onMobileNumber() {
     let numbers;
     this.form.controls['mobileNumber'].valueChanges.subscribe(val => {
       numbers = this.removeSpace(val.internationalNumber);
       numbers = this.removeOperators(numbers);
-      this.getOtp(numbers)
+      this.getOtp(numbers);
     });
   }
 
   onOtp() {
-    this.form.controls['otp'].valueChanges.subscribe(val => {
-      let a = Object.values(val);
-      let values = '';
-      a.forEach(a => { values += a });
-      if (values.length === 6) {
-        const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
-        const data = {
-          'number': phoneNumber,
-          'code': values,
-          'secret': localStorage.getItem('phoneNumberSecret')
-        }
-        this.service.verifyMobile(data)
-          .then((data: any) => {
-            this.verifiedOtp = true;
-            if (this.errorMessage === 'Confirmation failed') {
-              this.errorMessage = ''
-            }
-            // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
-          })
-          .catch((e) => {
-            if (e.status === 'error') {
-              this.verifiedOtp = false;
-              this.errorMessage = e.message;
-            }
-          });
+    if (this.otp && this.otp.toString().length === 6) {
+      const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
+      const data = {
+        'number': phoneNumber,
+        'code': this.otp,
+        'secret': localStorage.getItem('phoneNumberSecret')
       }
-
-    })
+      this.service.verifyMobile(data)
+        .then((data: any) => {
+          this.verifiedOtp = true;
+          if (this.errorMessage === 'Confirmation failed') {
+            this.errorMessage = ''
+          }
+          // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
+        })
+        .catch((e) => {
+          if (e.status === 'error') {
+            this.verifiedOtp = false;
+            this.errorMessage = e.message;
+          }
+        });
+    }
   }
 
   //for getting otp
-  getOtp(numbr) {
-    this.service.getOtp(numbr).then((res: any) => {
-      this.noViewOtp = false;
-      this.invalidNumberLength = false;
-      localStorage.setItem('phoneNumberSecret', res.secret);
-    })
+  getOtp(num) {
+    this.service.getOtp(num)
+      .then((res: any) => {
+        this.noViewOtp = false;
+        this.invalidNumberLength = false;
+        localStorage.setItem('phoneNumberSecret', res.secret);
+      })
       .catch((e) => {
         if (e.status === 'error') {
           this.invalidNumberLength = true;
@@ -134,8 +132,8 @@ export class RegisterForm {
     if (this.reCaptcha) {
       this.reCaptcha.reset();
     }
-    this.onMobileNumbr()
-    this.onOtp()
+    this.onMobileNumber();
+    this.onOtp();
   }
 
   register() {
@@ -145,24 +143,26 @@ export class RegisterForm {
     if (!this.enterOtpError)
       this.enterOtpError = true;
 
-    if ((!this.form.value.tos) || (this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == '')) {
-      if (this.form.value.otp.otp1 == '' || this.form.value.otp.otp2 == '' || this.form.value.otp.otp3 == '' || this.form.value.otp.otp4 == '' || this.form.value.otp.otp5 == '' || this.form.value.otp.otp6 == '') {
-        this.enterOtpError = false;
-      }
-      if (!this.form.value.tos) {
+    if (!this.form.value.agreeTerms) {
+      if (!this.form.value.agreeTerms) {
         this.errorMessage = 'To create an account you need to accept terms and conditions.';
       }
       return;
     }
+    if (this.otp.toString().length != this.otpConfig.length) {
+      this.enterOtpError = false;
+      return;
+    }
+
     if (this.form.valid) {
-      const otpCode = `${this.form.value.otp.otp1}${this.form.value.otp.otp2}${this.form.value.otp.otp3}${this.form.value.otp.otp4}${this.form.value.otp.otp5}${this.form.value.otp.otp6}`;
+      // const otpCode = `${this.form.value.otp.otp1}${this.form.value.otp.otp2}${this.form.value.otp.otp3}${this.form.value.otp.otp4}${this.form.value.otp.otp5}${this.form.value.otp.otp6}`;
       const phoneNumber = this.removeOperators(this.form.value.mobileNumber.internationalNumber);
 
       const form = {
         'name': this.form.value.fullname,
         'username': this.form.value.username,
         'number': phoneNumber,
-        'code': otpCode,
+        'code': this.otp,
         'secret': localStorage.getItem('phoneNumberSecret'),
         'email': this.form.value.email,
         'date_of_birth': {
@@ -320,6 +320,13 @@ export class RegisterForm {
 
   removeOperators(numb) {
     return numb.replace(/\s/g, '').replace('+', '').replace('-', '');
+  }
+
+  onOtpChange(otp) {
+    this.otp = otp;
+    if (this.otp.toString().length === 6) {
+      this.onOtp();
+    }
   }
 
 }
