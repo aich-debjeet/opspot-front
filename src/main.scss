@@ -27769,6 +27769,11 @@ ng-otp-input {
     border-radius: 4px !important;
     margin-bottom: 24px;
     margin-top: 6px;
+		@include mq($from: $mobile_sm, $until: $mobile_lg) {
+      height: 40px !important;
+			width: 36px !important;
+			margin-right: 14px !important;
+		}
   }
   input:nth-child(6) {
     margin-right: 0 !important;
