@@ -24,6 +24,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { PostFormComponent } from './post-form/post-form.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 // import { AuthModule } from '../auth/auth.module';
+import { NgOtpInputModule } from  'ng-otp-input';
 
 @NgModule({
   imports: [
@@ -37,7 +38,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
     NgxIntlTelInputModule,
     TextMaskModule,
     BsDatepickerModule.forRoot(),
-
+    NgOtpInputModule
   ],
   declarations: [
     LoginForm,
