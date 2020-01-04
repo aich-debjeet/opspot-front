@@ -100,8 +100,6 @@ export class RegisterForm {
           this.verifiedOtp = true;
           if (this.errorMessage === 'Confirmation failed') {
             this.errorMessage = ''
-          } else {
-            localStorage.removeItem('phoneNumberSecret');
           }
           // TODO: [emi/sprint/bison] Find a way to reset controls. Old implementation throws Exception;
         })
@@ -151,7 +149,7 @@ export class RegisterForm {
       }
       return;
     }
-    if (this.otp.toString().length != this.otpConfig.length.toString().length) {
+    if (this.otp.toString().length != this.otpConfig.length) {
       this.enterOtpError = false;
       return;
     }
