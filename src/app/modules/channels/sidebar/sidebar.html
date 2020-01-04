@@ -359,10 +359,12 @@
           </m-tooltip>
         </div>
       </div>
-      <div class="o-book-prof__avatar"><img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt=""></div>
+      <div [routerLink]="['/', user.username]" class="o-book-prof__avatar">
+        <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt="">
+      </div>
       <div class="o-book-prof__info">
-        <div id="name" class="caption-bold">{{user.name}}</div>
-        <div class="text-sm grey">@{{user.username}}</div>
+        <div [routerLink]="['/', user.username]" id="name" class="caption-bold">{{user.name}}</div>
+        <div [routerLink]="['/', user.username]" class="text-sm grey">@{{user.username}}</div>
         <button type="button" [routerLink]="['/', 'portfolio', user.username]"
           class="btn btn-primary btn-xs btn--book">Portfolio</button>
       </div>
