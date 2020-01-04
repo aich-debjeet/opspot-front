@@ -27,7 +27,7 @@ export class RegisterForm {
   takenUsername: boolean = false;
   usernameValidationTimeout: any;
   number;
-  noViewOtp = false;
+  noViewOtp = true;
   verifiedOtp = false;
   showFbForm: boolean = false;
   invalidNumberLength: boolean = false;
