@@ -9,7 +9,7 @@ import { MessengerConversationDockpanesService } from '../dockpanes/dockpanes.se
 @Component({
   selector: 'm-messenger--channel-button',
   templateUrl: 'channel-button.component.html',
-  inputs: ['user', 'message', 'label']
+  inputs: ['user', 'message', 'label', 'theme']
 })
 
 export class MessengerChannelButton {
