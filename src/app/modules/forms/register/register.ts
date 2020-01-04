@@ -151,7 +151,7 @@ export class RegisterForm {
       }
       return;
     }
-    if (this.otp.toString().length != this.otpConfig.length.toString().length) {
+    if (this.otp.toString().length != this.otpConfig.length) {
       this.enterOtpError = false;
       return;
     }
