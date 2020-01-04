@@ -17,6 +17,7 @@ export class MessengerChannelButton {
   opspot: Opspot = window.Opspot;
   message: any;
   label: any;
+  theme: any;
   user: any;
 
   constructor(
