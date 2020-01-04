@@ -41,6 +41,7 @@ export class ForgotPasswordComponent {
   submitted2 = false;
   otp;
   resending = false;
+  invalidOtp = true;
 
   // step3
   updatePasswordForm: FormGroup;
@@ -49,6 +50,11 @@ export class ForgotPasswordComponent {
 
   paramsSubscription: Subscription;
   mobilenumber;
+  
+  otpConfig = {
+    allowNumbersOnly: true,
+    length: 6
+  };
 
   constructor(
     public client: Client,
@@ -98,14 +104,14 @@ export class ForgotPasswordComponent {
         mobileInput: ['', [Validators.required]]
       });
     } else if (val === 'otp') {
-      this.otpForm = this.formBuilder.group({
-        otpNum1: [''],
-        otpNum2: [''],
-        otpNum3: [''],
-        otpNum4: [''],
-        otpNum5: [''],
-        otpNum6: ['']
-      }, { validators: FormValidator.otpValidation });
+      // this.otpForm = this.formBuilder.group({
+      //   otpNum1: [''],
+      //   otpNum2: [''],
+      //   otpNum3: [''],
+      //   otpNum4: [''],
+      //   otpNum5: [''],
+      //   otpNum6: ['']
+      // }, { validators: FormValidator.otpValidation });
     } else if (val === 'password') {
       this.updatePasswordForm = this.formBuilder.group({
         newPassword: ['', [Validators.required, FormValidator.checkPassword]],
@@ -231,11 +237,10 @@ export class ForgotPasswordComponent {
 
   // otpForm otp validation
   validateOtp() {
-    this.otp = this.otpForm.value.otpNum1 + this.otpForm.value.otpNum2 +
-      this.otpForm.value.otpNum3 + this.otpForm.value.otpNum4 + this.otpForm.value.otpNum5 + this.otpForm.value.otpNum6;
+    // this.otp = this.otpForm.value.otpNum1 + this.otpForm.value.otpNum2 + this.otpForm.value.otpNum3 + this.otpForm.value.otpNum4 + this.otpForm.value.otpNum5 + this.otpForm.value.otpNum6;
     this.submitted2 = true;
     this.error = '';
-    if (this.otpForm.valid) {
+    if (this.otp.length === this.otpConfig.length) {
       this.inProgress = true;
       const data = ({
         key: "phone_number",
@@ -341,5 +346,14 @@ export class ForgotPasswordComponent {
 
   goHome(){
     this.router.navigateByUrl('/login');
+  }
+
+  onOtpChange(otp) {
+    this.otp = otp;
+    if (this.otp.toString().length === 6) {
+      this.invalidOtp = false;
+    } else {
+      this.invalidOtp = true;
+    }
   }
 }
