@@ -57,7 +57,7 @@
         padding: 0px 5px;
     }
         .visible-mob{
-            display: none;
+            // display: none;
             @include mq($until:$tablet){
                 display:block;
                 width: 35%;
