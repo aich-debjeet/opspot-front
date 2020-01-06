@@ -1,0 +1,83 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+.o-entrolment-form{
+    &__item{
+        display: flex;
+        width:100%;
+        justify-content: space-between;
+        @include mq($until:$tablet){
+            flex-direction: column;
+        }
+        div{
+            flex:1;
+            width:100%;
+        }
+    }
+    &__button{
+        float: right;
+        padding: 12px 59px;
+        @include mq($until:$tablet){
+            width:100%;
+        }
+    }
+    textarea{
+        resize:none;
+    }
+}
+.o-enrolment-gender{
+    padding: 10px 15px;
+    border: 1px solid #90A4AE;
+    border-radius: 4px;
+    .radiobutton input[type="radio"] + label:before{
+        width: 17px;
+        height: 17px; 
+    }
+    .radiobutton input[type="radio"] + label:after{
+        width: 17px;
+        height: 17px; 
+    }
+    label{
+        margin-bottom: 0px;
+    }
+}
+
+//margin style
+.o-enrolment-marginb51{
+    margin-bottom: 51px;
+}
+.o-enrolment-marginb25{
+    margin-bottom:25px;
+}
+.o-enrolment-marginr15{
+    margin-right:15px;
+}
+.o-enrolment-marginb15{
+    margin-bottom:15px;
+}
+.o-enrolment-marginb10{
+    margin-bottom:10px;
+}
+.o-enrolment-lh30{
+    line-height: 30px;
+}
+.o-enrolment-marginl13{
+    margin-left:13px;
+    @include mq($until:$tablet){
+        margin-left:0px;
+    }
+}
+.o-enrolment-margin18{
+    margin:18px 0px;
+}
+.o-enrolment-f17{
+    font-size:17px!important;
+    @include mq($until:$tablet){
+        font-size:15px!important;
+    }
+}
+.o-enrolment-respaddng{
+    @include mq($until:$tablet){
+        padding:0px 15px;
+    }
+}

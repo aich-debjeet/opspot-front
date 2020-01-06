@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 import { Route, RouterModule } from '@angular/router';
 
 import { CampaignComponent } from './campaign.component';
-import { CampaignViewComponent } from './view/view.component';
+import { EnrolmentViewComponent } from './view/view.component';
+import { EnrolmentFormComponent } from './form/form.component';
 
 const routes: Route[] = [
+  // to be redirected to the active campaign
   { path: '', redirectTo: 'enrolment', pathMatch: 'full' },
-  { path: 'enrolment', component: CampaignViewComponent },
+  { path: 'enrolment', component: EnrolmentViewComponent },
 ];
 
 @NgModule({
   declarations: [
     CampaignComponent,
-    CampaignViewComponent
+    EnrolmentViewComponent,
+    EnrolmentFormComponent
   ],
   imports: [
     CommonModule,

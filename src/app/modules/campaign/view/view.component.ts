@@ -1,15 +1,43 @@
 import { Component, OnInit } from '@angular/core';
+import { Client } from '../../../services/api/client';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-campaign-view',
+  selector: 'app-enrolment-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.scss']
 })
-export class CampaignViewComponent implements OnInit {
+export class EnrolmentViewComponent implements OnInit {
 
-  constructor() { }
+  inProgress: boolean = false;
+  enrolmentDetails: any;
+
+  constructor(
+    public client: Client,
+    public router: Router
+  ) { }
 
   ngOnInit() {
+    this.load();
+  }
+
+  load() {
+    if (this.inProgress)
+      return false;
+
+    this.inProgress = true;
+
+    this.client.get('api/v3/campaign/enrolment')
+      .then((data: any) => {
+        this.enrolmentDetails = data;
+      })
+      .catch((e) => {
+        this.inProgress = false;
+      });
+  }
+
+  enrolled() {
+    this.router.navigate(['/campaign/invoice']);
   }
 
 }

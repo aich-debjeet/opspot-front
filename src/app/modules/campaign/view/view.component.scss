@@ -222,48 +222,6 @@
     }
 }
 
-//form ends
-.o-entrolment-form{
-    &__item{
-        display: flex;
-        width:100%;
-        justify-content: space-between;
-        @include mq($until:$tablet){
-            flex-direction: column;
-        }
-        div{
-            flex:1;
-            width:100%;
-        }
-    }
-    &__button{
-        float: right;
-        padding: 12px 59px;
-        @include mq($until:$tablet){
-            width:100%;
-        }
-    }
-    textarea{
-        resize:none;
-    }
-}
-.o-enrolment-gender{
-    padding: 10px 15px;
-    border: 1px solid #90A4AE;
-    border-radius: 4px;
-    .radiobutton input[type="radio"] + label:before{
-        width: 17px;
-        height: 17px; 
-    }
-    .radiobutton input[type="radio"] + label:after{
-        width: 17px;
-        height: 17px; 
-    }
-    label{
-        margin-bottom: 0px;
-    }
-}
-
 //gallery popup
 .fs-gal-view {
     display: none;
