@@ -27759,6 +27759,7 @@ ng-otp-input {
   justify-content: center;
   input {
     font-size: inherit !important;
+    height: 40px !important;
     width: 51px !important;
     margin-right: 20px !important;
     border: 1px solid #90a4ae !important;
@@ -27777,5 +27778,14 @@ ng-otp-input {
   }
   input:nth-child(6) {
     margin-right: 0 !important;
+  }
+}
+
+.o-forgot-password-block {
+  ng-otp-input {
+    input {
+      width: 50px !important;
+      margin-right: 7px !important;
+    }
   }
 }
