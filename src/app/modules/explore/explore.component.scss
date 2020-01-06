@@ -87,7 +87,7 @@
         &__filter{
             width: 141px;
             @include mq($until:$tablet){
-                width: 90%;
+                width: 36%;
                 margin: 0 10px 0 0;
             }
         
@@ -97,7 +97,7 @@
             @include mq($until:$tablet){
                 width: initial;
                 position: absolute;
-                right: 0;
+                right: 10px;
         }
             .form-group{
                 
