@@ -4,7 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-enrolment-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./../enrolment.component.scss']
 })
 export class EnrolmentFormComponent implements OnInit {
 
@@ -29,6 +29,10 @@ export class EnrolmentFormComponent implements OnInit {
       porfolioLink: ['', [Validators.required]],
       comments: ['', [Validators.required]],
     });
+  }
+
+  submitForm() {
+    this.done.emit();
   }
 
 }

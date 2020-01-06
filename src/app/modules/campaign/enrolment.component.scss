@@ -249,6 +249,48 @@
     }
 }
 
+//form ends
+.o-entrolment-form{
+    &__item{
+        display: flex;
+        width:100%;
+        justify-content: space-between;
+        @include mq($until:$tablet){
+            flex-direction: column;
+        }
+        div{
+            flex:1;
+            width:100%;
+        }
+    }
+    &__button{
+        float: right;
+        padding: 12px 59px;
+        @include mq($until:$tablet){
+            width:100%;
+        }
+    }
+    textarea{
+        resize:none;
+    }
+}
+.o-enrolment-gender{
+    padding: 10px 15px;
+    border: 1px solid #90A4AE;
+    border-radius: 4px;
+    .radiobutton input[type="radio"] + label:before{
+        width: 17px;
+        height: 17px; 
+    }
+    .radiobutton input[type="radio"] + label:after{
+        width: 17px;
+        height: 17px; 
+    }
+    label{
+        margin-bottom: 0px;
+    }
+}
+
 //gallery popup
 .fs-gal-view {
     display: none;
@@ -354,13 +396,33 @@
     float:left!important;
     margin-top:40px;
 }
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #ffffff;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    width: 100%;
+//file upload
+.o-enrolment-fileupload{
+    width:100%;
+    position: relative;
+    height: 112px;
+    border: 1px dashed #90A4AE;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #FAFAFA;
+    input.upload{
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        // font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        height: 112px;
+        width: 100%;
+    }
+}
+.o-enrolment-upload{
+    font-size:17px!important;
+    margin-bottom: 12px;
 }

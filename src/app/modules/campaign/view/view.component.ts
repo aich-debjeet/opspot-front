@@ -6,7 +6,7 @@ import { OpspotTitle } from '../../../services/ux/title';
 @Component({
   selector: 'app-enrolment-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.scss']
+  styleUrls: ['./../enrolment.component.scss']
 })
 export class EnrolmentViewComponent implements OnInit {
 
