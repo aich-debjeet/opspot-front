@@ -81,3 +81,34 @@
         padding:0px 15px;
     }
 }
+
+//file upload
+.o-enrolment-fileupload{
+    width:100%;
+    position: relative;
+    height: 112px;
+    border: 1px dashed #90A4AE;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #FAFAFA;
+    input.upload{
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        // font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        height: 112px;
+        width: 100%;
+    }
+}
+.o-enrolment-upload{
+    font-size:17px!important;
+    margin-bottom: 12px;
+}

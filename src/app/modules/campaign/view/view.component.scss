@@ -53,6 +53,7 @@
     display: flex;
     justify-content:space-between;
     margin-bottom: 29px;
+    position: relative;
     &__icon{
         font-size:17px!important;
         color:$primary!important;
@@ -78,6 +79,32 @@
             overflow: hidden;
         }
     }
+    .dropdown-content {
+       overflow: initial;
+        min-width: initial;
+        z-index:1;
+        a{
+            padding:0;
+        }
+        .o-drop__arrow{
+            @include mq($until:$tablet){
+                right: 15px;
+            } 
+        }
+    }
+    .show {
+        display: block!important;
+        width: 24%;
+        right: -16px;
+        top: 60px;
+        @include mq($until:$tablet){
+            width:60%;
+            right: -12px;
+        }
+    }
+}
+.o-enrolment-social-margin10{
+    margin-bottom: 10px;
 }
 //margin style
 .o-enrolment-marginb51{
