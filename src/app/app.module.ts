@@ -57,7 +57,6 @@ import { BlockchainModule } from './modules/blockchain/blockchain.module';
 import { BlockchainMarketingModule } from './modules/blockchain/marketing/marketing.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { NodesMarketingModule } from './modules/nodes/nodes.module';
-import { JobsMarketingModule } from './modules/jobs/jobs.module';
 import { HelpdeskModule } from './modules/helpdesk/helpdesk.module';
 import { MobileModule } from './modules/mobile/mobile.module';
 import { CanaryModule } from './modules/canary/canary.module';
@@ -124,7 +123,6 @@ import { BigEventModule } from './modules/big-event/big-event.module';
     BlockchainMarketingModule,
     NodesMarketingModule,
     CommentsModule,
-    JobsMarketingModule,
     HelpdeskModule,
     MobileModule,
     CanaryModule,
