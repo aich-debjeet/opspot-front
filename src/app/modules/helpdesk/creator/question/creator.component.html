@@ -33,8 +33,8 @@
             <m-dropdown #dropdown>
               <label i18n="@@HELPDESK__EDIT__CATEGORIES__TITLE">
                 Select a Category
-                <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-inactive">keyboard_arrow_down</i>
-                <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-active">keyboard_arrow_up</i>
+                <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-inactive" id="creator-category-arrow-down">keyboard_arrow_down</i>
+                <i class="material-icons m-dropdown--label-icon m-dropdown--label-icon-active" id="cretor-question-arrow-up">keyboard_arrow_up</i>
               </label>
 
               <ul class="m-dropdown--list">
@@ -59,13 +59,13 @@
           <strong>Position</strong>
         </div>
         <div class="m-layout__cell">
-          <input class="m-input" placeholder="10" [(ngModel)]="question.position" name="position"/>
+          <input class="m-input" id="creator-position" placeholder="10" [(ngModel)]="question.position" name="position"/>
         </div>
       </div>
     </div>
 
     <div class="m-layout__cell">
-      <button type="submit" class="m-button m-button--text m-button--draft" i18n="@@HELPDESK__EDIT__SAVE_ACTION">
+      <button type="submit" id="creator-save-question-button" class="m-button m-button--text m-button--draft" i18n="@@HELPDESK__EDIT__SAVE_ACTION">
         Save
       </button>
       <div class="m-helpdesk--question-creator--error">{{error}}</div>

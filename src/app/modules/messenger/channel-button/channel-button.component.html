@@ -5,4 +5,16 @@
 </button>
 -->
 
-<button id="reach-out-button" (click)="chat()" class="btn btn-primary btn-lg" type="button">{{ label ? label : 'Message' }}</button>
+<button
+  id="reach-out-button"
+  (click)="chat()"
+  class="btn btn-primary btn-lg"
+  [class.secondary-btn]="theme == 'secondary'"
+  type="button"
+>{{ label ? label : 'Message' }}</button>
+
+<style>
+.secondary-btn {
+  padding: 5px 20px;
+}
+</style>
