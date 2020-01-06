@@ -24,7 +24,6 @@ import { MonetizationModule } from './modules/monetization/monetization.module';
 import { WalletModule } from './modules/wallet/wallet.module';
 // import { CheckoutModule } from './modules/checkout/checkout.module';
 import { PlusModule } from './modules/plus/plus.module';
-import { I18nModule } from './modules/i18n/i18n.module';
 
 import { AdsModule } from './modules/ads/ads.module';
 import { BoostModule } from './modules/boost/boost.module';
@@ -101,7 +100,6 @@ import { BigEventModule } from './modules/big-event/big-event.module';
     BoostModule,
     WireModule,
     ReportModule,
-    I18nModule,
     BanModule,
     ThirdPartyNetworksModule,
     LegacyModule,
