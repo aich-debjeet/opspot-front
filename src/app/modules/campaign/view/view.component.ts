@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../services/api/client';
 import { Router } from '@angular/router';
+import { OpspotTitle } from '../../../services/ux/title';
 
 @Component({
   selector: 'app-enrolment-view',
@@ -14,11 +15,13 @@ export class EnrolmentViewComponent implements OnInit {
 
   constructor(
     public client: Client,
-    public router: Router
+    public router: Router,
+    public title: OpspotTitle
   ) { }
 
   ngOnInit() {
     this.load();
+    this.title.setTitle('Enrolment');
   }
 
   load() {
