@@ -29,7 +29,7 @@
     <app-appuser [object]="member">
         <opspot-groups-card-user-actions-button
         style="position: relative;"
-        *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid"
+        *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid && !member['is:owner']"
         [group]="group"
         [user]="member"
         ></opspot-groups-card-user-actions-button>
