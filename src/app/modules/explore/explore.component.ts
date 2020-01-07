@@ -227,12 +227,12 @@ export class ExploreComponent implements OnInit {
           return false;
         }
         if (this.filteredArray && !refresh) {
-          console.log('added data');
+          // console.log('added data');
           this.filteredArray = this.exploreArray = this.exploreArray.concat(
             respData.entities
           );
         } else {
-          console.log('added new data');
+          // console.log('added new data');
           this.filteredArray = this.exploreArray = respData.entities;
         }
         this.moreData = true;
@@ -244,22 +244,22 @@ export class ExploreComponent implements OnInit {
       });
   }
   reset() {
-    console.log(this.exploreArray);
+    // console.log(this.exploreArray);
     this.filteredArray = this.exploreArray = [];
   }
 
   slickInit(e) {
-    console.log('slick initialized in activity');
+    // console.log('slick initialized in activity');
   }
   breakpoint(e) {
-    console.log('breakpoint');
+    // console.log('breakpoint');
   }
 
   afterChange(e) {
-    console.log('afterChange');
+    // console.log('afterChange');
   }
 
   beforeChange(e) {
-    console.log('beforeChange');
+    // console.log('beforeChange');
   }
 }
