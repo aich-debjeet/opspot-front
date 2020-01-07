@@ -131,7 +131,7 @@
             <img *ngIf="activity?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/ops_icon.png'">
           </div>
         <div class="opportunity-details" id="activity-opportunity-details">
-          <div class="text-lg f500 mb-3" id="activity-opportunity-title" style="word-break: break-all" [routerLink]="['/opportunity/view',activity.guid]">
+          <div class="text-lg f500 mb-3 word-br" id="activity-opportunity-title" [routerLink]="['/opportunity/view',activity.guid]">
             {{activity?.title}}
           </div>
           <div class="text-md grey" id="activity-opportunity-location">
@@ -175,7 +175,7 @@
     </div>
     <div class="feed-card-event-block">
       <div class="feed-card-event-block__left" id="activity-bluestore-details">
-        <div class="text-lg f500 mb-3" id="activity-bluestore-title" style="word-break: break-all">
+        <div class="text-lg f500 mb-3 word-br" id="activity-bluestore-title">
           {{activity?.title}}
         </div>
         <div class="text-md grey" id="activity-bluestore-description">
@@ -215,7 +215,7 @@
     </div>
     <div class="feed-card-event-block">
       <div [routerLink]="[routerLink1, activity.guid]" class="feed-card-event-block__left" id="activity-event-details">
-        <div class="text-lg f500 mb-3" id="evntTitle" style="word-break: break-all">
+        <div class="text-lg f500 mb-3 word-br" id="evntTitle">
           {{activity?.title}}
         </div>
         <div class="text-md grey" id="activity-event-description">

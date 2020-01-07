@@ -49,7 +49,7 @@
                   <img *ngIf="opportunity?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/ops_icon.png'">
                 </div>
                 <div class="opportunity-details" id="opportunity-details">
-                  <h5 class="f500 mb-3" *ngIf="opportunity?.title" id="opportunity-title">{{ opportunity?.title}}</h5>
+                  <h5 class="f500 mb-3 word-br" *ngIf="opportunity?.title" id="opportunity-title">{{ opportunity?.title}}</h5>
                   <div class="text-md grey" *ngIf="opportunity?.location" id="opportunity-location">
                     {{ opportunity?.location }}
                   </div>
