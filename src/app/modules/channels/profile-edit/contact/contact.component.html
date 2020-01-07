@@ -3,7 +3,7 @@
     <form #f="ngForm">
         <div class="o-prof-edit-contact">
             <div class="o-prof-edit-item__title">
-                Location <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop">Everyone </div>
+                Location <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop" (click)="toggleLocation=!toggleLocation">{{privacy.location}} </div>
                 <!--privacy end-->
             </div>
             <div class="o-prof-edit-single-item">
@@ -16,7 +16,7 @@
                         (click)="toggleLocation=!toggleLocation">
                         {{privacy.location}}
                     </div>
-                    <app-user-privacy (privacyChange)="changePrivacy($event,'location')" [toggleClass]="toggleLocation"
+                    <app-user-privacy (privacyChange)="changePrivacy($event,'location')" [inPrivacy]="privacy.location" [toggleClass]="toggleLocation"
                         class="privacy"></app-user-privacy>
                 </div>
                 <!--privacy end-->
@@ -24,7 +24,7 @@
             <!--location end-->
 
             <div class="o-prof-edit-item__title">
-                Email <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop" id="contact-privacy-email-everyone">Everyone </div>
+                Email <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop" id="contact-privacy-email-everyone" (click)="toggleEmail=!toggleEmail">{{privacy.email}} </div>
                 <!--privacy end-->
             </div>
             <div class="o-prof-edit-single-item">
@@ -36,7 +36,7 @@
                     <div class="o-prof-edit-privacy  text-md primary hidden-mob" (click)="toggleEmail=!toggleEmail" id="contact-email-privacy">
                         {{privacy.email}}
                     </div>
-                    <app-user-privacy (privacyChange)="changePrivacy($event,'email')" [toggleClass]="toggleEmail"
+                    <app-user-privacy (privacyChange)="changePrivacy($event,'email')" [inPrivacy]="privacy.email" [toggleClass]="toggleEmail"
                         class="privacy"></app-user-privacy>
                 </div>
 
@@ -44,7 +44,7 @@
             </div><!-- email end -->
 
             <div class="o-prof-edit-item__title">
-                Phone Number <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop" id="contact-privacy-phone-everyone">Everyone </div>
+                Phone Number <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop" id="contact-privacy-phone-everyone" (click)="togglePhone=!togglePhone">{{privacy.phone}}</div>
                 <!--privacy end-->
             </div>
             <div class="o-prof-edit-single-item">
@@ -60,7 +60,7 @@
                     <div class="o-prof-edit-privacy  text-md primary hidden-mob" id="contact-phone-privacy" (click)="togglePhone=!togglePhone">
                         {{privacy.phone}}
                     </div>
-                    <app-user-privacy (privacyChange)="changePrivacy($event,'phone')" [toggleClass]="togglePhone"
+                    <app-user-privacy (privacyChange)="changePrivacy($event,'phone')" [inPrivacy]="privacy.phone" [toggleClass]="togglePhone"
                         class="privacy"></app-user-privacy>
                 </div>
 
@@ -68,7 +68,7 @@
             <!--phone number end-->
 
             <div class="o-prof-edit-item__title">
-                Website <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop">Everyone </div>
+                Website <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop" (click)="toggleWebsite=!toggleWebsite">{{privacy.website}} </div>
                 <!--privacy end-->
             </div>
             <div class="o-prof-edit-single-item">
@@ -79,7 +79,7 @@
                     <div class="o-prof-edit-privacy text-md primary hidden-mob" (click)="toggleWebsite=!toggleWebsite">
                         {{privacy.website}}
                     </div>
-                    <app-user-privacy (privacyChange)="changePrivacy($event,'website')" [toggleClass]="toggleWebsite"
+                    <app-user-privacy (privacyChange)="changePrivacy($event,'website')" [inPrivacy]="privacy.website" [toggleClass]="toggleWebsite"
                         class="privacy"></app-user-privacy>
                 </div>
             </div>
