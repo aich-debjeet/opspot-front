@@ -103,17 +103,11 @@
                 
                 input{
                     @include mq($until:$tablet){
-                        width: 40px;
+                        width: 170px;
                         box-sizing: border-box;
                         border-radius: 4px;
                         background-color: white;
-                        -webkit-transition: width 0.4s ease-in-out;
-                        transition: width 0.4s ease-in-out;
-                        &:focus {
-                            max-width: 170px;
-                            width: auto;
                         
-                        }
                     }
                 }
                 i{
