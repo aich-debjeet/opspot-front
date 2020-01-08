@@ -91,6 +91,7 @@ export class WorkComponent implements OnInit {
     this.model.strtYear = data.start_date.split('-')[1];
     this.model.strtMonth = data.start_date.split('-')[0];
     if (data.end_date) {
+      this.toggleEnd = false;
       this.model.endYear = data.end_date.split('-')[1];
       this.model.endMonth = data.end_date.split('-')[0];
     } else {
