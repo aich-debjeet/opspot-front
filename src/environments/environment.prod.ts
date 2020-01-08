@@ -1,3 +1,8 @@
 export const environment = {
-  production: true
+  production: true,
+  campaigns: {
+    enrolment: {
+      guid: 1061616502135853076
+    }
+  }
 };
