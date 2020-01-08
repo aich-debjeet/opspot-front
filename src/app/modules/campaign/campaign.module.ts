@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Route, RouterModule } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { CampaignComponent } from './campaign.component';
 import { EnrolmentViewComponent } from './view/view.component';
@@ -19,10 +20,12 @@ const routes: Route[] = [
     CampaignComponent,
     EnrolmentViewComponent,
     EnrolmentFormComponent,
-    EnrolmentInvoiceComponent
+    EnrolmentInvoiceComponent,
   ],
   imports: [
+    FormsModule,
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })

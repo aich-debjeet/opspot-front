@@ -38,6 +38,7 @@
 //enrolment body style
 .o-enrolment-body{
     padding:24px 30px 34px;
+    padding-bottom: 100px;
     @include mq($until:$tablet){
         padding:12px 15px;
     }
