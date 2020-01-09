@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
       </div>
 
       <h2>
-        Opspot Android App
+      One Page Spotlight Android App
       </h2>
 
       <i class="material-icons">android</i>

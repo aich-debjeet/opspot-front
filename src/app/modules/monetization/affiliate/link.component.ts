@@ -26,7 +26,7 @@ export class AffiliateLinkComponent {
   }
 
   openEmail() {
-    window.location.href = 'mailto:?subject=Join%20me%20on%20opspot&body=Join me on Opspot ' + this.encodedLink;
+    window.location.href = 'mailto:?subject=Join%20me%20on%20onepagespotlight&body=Join me on One Page Spotlight ' + this.encodedLink;
   }
 
   detectChanges() {

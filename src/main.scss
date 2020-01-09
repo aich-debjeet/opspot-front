@@ -27222,7 +27222,7 @@ li{
     position: absolute;
     top: 3px;
     right: 0;
-    width: 25%;
+    width: 10%;
     height: 44px;
     content: ' ';
     z-index: 1;
@@ -27788,4 +27788,9 @@ ng-otp-input {
       margin-right: 7px !important;
     }
   }
+}
+
+
+.word-br{
+  word-break: break-all;
 }

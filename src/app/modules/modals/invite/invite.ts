@@ -19,7 +19,7 @@ import { OpspotUser } from '../../../interfaces/entities';
       </div>
 
       <div class="mdl-card__supporting-text">
-        <ng-container i18n="@@MODALS__INVITE__DESCRIPTION">Add this code to the end of any Opspot link you share and earn tokens for signups within 24 hours:</ng-container>
+        <ng-container i18n="@@MODALS__INVITE__DESCRIPTION">Add this code to the end of any One Page Spotlight link you share and earn tokens for signups within 24 hours:</ng-container>
       </div>
 
       <div class="mdl-card__supporting-text">
@@ -32,7 +32,7 @@ import { OpspotUser } from '../../../interfaces/entities';
           <ng-container i18n="@@M__NAMES__FACEBOOK">Facebook</ng-container>
         </button>
         <button class="mdl-button mdl-button--raised mdl-color-text--white m-social-share-twitter"
-          (click)="openWindow('https://twitter.com/intent/tweet?text=Join%20me%20on%20Opspot&tw_p=tweetbutton&url=' + encodedUrl)">
+          (click)="openWindow('https://twitter.com/intent/tweet?text=Join%20me%20on%20onepagespotlight.com&tw_p=tweetbutton&url=' + encodedUrl)">
           <ng-container i18n="@@M__NAMES__TWITTER">Twitter</ng-container>
         </button>
         <button class="mdl-button mdl-button--raised mdl-color-text--white m-social-share-email" (click)="openEmail()">
@@ -77,7 +77,7 @@ export class InviteModal {
   }
 
   openEmail() {
-    window.location.href = 'mailto:?subject=Join%20me%20on%20opspot&body=Join me on Opspot ' + this.encodedUrl;
+    window.location.href = 'mailto:?subject=Join%20me%20on%onepagespotlight&body=Join me on One Page Spotlight ' + this.encodedUrl;
   }
 
 }

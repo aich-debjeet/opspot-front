@@ -64,7 +64,7 @@
 }
 .o-explore-action{
     padding: 0px 6px;
-    margin: 0px 6px;
+    // margin: 0px 6px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -87,7 +87,7 @@
         &__filter{
             width: 141px;
             @include mq($until:$tablet){
-                width: 90%;
+                width: 36%;
                 margin: 0 10px 0 0;
             }
         
@@ -97,23 +97,17 @@
             @include mq($until:$tablet){
                 width: initial;
                 position: absolute;
-                right: 0;
+                right: 10px;
         }
             .form-group{
                 
                 input{
                     @include mq($until:$tablet){
-                        width: 40px;
+                        width: 170px;
                         box-sizing: border-box;
                         border-radius: 4px;
                         background-color: white;
-                        -webkit-transition: width 0.4s ease-in-out;
-                        transition: width 0.4s ease-in-out;
-                        &:focus {
-                            max-width: 768px;
-                            width: auto;
                         
-                        }
                     }
                 }
                 i{

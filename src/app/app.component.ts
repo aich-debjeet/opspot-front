@@ -45,7 +45,7 @@ export class Opspot {
     public onboardingService: ChannelOnboardingService,
     public router: Router,
   ) {
-    this.name = 'Opspot';
+    this.name = 'One Page Spotlight';
   }
 
   async ngOnInit() {

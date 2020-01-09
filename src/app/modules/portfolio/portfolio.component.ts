@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from '../../services/api';
 import { SpecialHashtg } from '../../helpers/special-hashtag';
+import { OpspotTitle } from '../../services/ux/title';
 
 @Component({
   selector: 'app-portfolio',
@@ -37,8 +38,11 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private client: Client
-  ) { }
+    private client: Client,
+    public title: OpspotTitle,
+  ) { 
+    this.title.setTitle('Portfolio');
+  }
 
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe((params) => {

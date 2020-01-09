@@ -65,6 +65,10 @@ export const OpspotAppRoutes: Routes = [
     loadChildren: './modules/invite-friends/invite-friends.module#InviteFriendsModule'
   },
   {
+    path: 'campaign',
+    loadChildren: './modules/campaign/campaign.module#CampaignModule'
+  },
+  {
     path: 'network',
     component: NetworkComponent,
     canDeactivate: [CanDeactivateGuardService]

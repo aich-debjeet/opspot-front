@@ -75,7 +75,7 @@ export class SignupOnScrollModal {
           }
         }
       } catch (e) {
-        console.error('Opspot: router hook(SignupOnScrollModal)', e);
+        console.error('One Page Spotlight: router hook(SignupOnScrollModal)', e);
       }
     });
   }
