@@ -6,7 +6,7 @@
 
 <div class="m-root-other" *ngIf="!isMerchant && !remote && !inProgress && loaded && canBecomeMerchant">
   <p>
-    <ng-container i18n="@@MONETIZATION__AD_SHARING__NO_MERCHANT_TITLE">You need to be a Opspot Merchant in order to apply for Ad Sharing program.</ng-container>
+    <ng-container i18n="@@MONETIZATION__AD_SHARING__NO_MERCHANT_TITLE">You need to be a One Page Spotlight Merchant in order to apply for Ad Sharing program.</ng-container>
   </p>
 
   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
@@ -28,7 +28,7 @@
         <textarea
           name="message"
           [(ngModel)]="applyForm.message"
-          placeholder="Why do you want to participate in the Opspot Ad Sharing program? Please, list your other social media accounts and quantity of followers."
+          placeholder="Why do you want to participate in the One Page Spotlight Ad Sharing program? Please, list your other social media accounts and quantity of followers."
           i18n-placeholder="@@MONETIZATION__AD_SHARING__APPLICATION_MESSAGE"
         ></textarea>
       </div>
@@ -46,7 +46,7 @@
 
 <div class="m-root-other" *ngIf="!remote && !inProgress && loaded && !enabled && applied">
   <h2 class="m-revenue--console-product-header" i18n="@@MONETIZATION__AD_SHARING__APPLICATION_TITLE">Ad-Revenue Sharing</h2>
-  <p><ng-container i18n="@@MONETIZATION__AD_SHARING__APPLICATION_UNDER_REVIEW_LABEL">You have applied for the Opspot Ad Sharing program. Your application is currently under review. This may take up to 7 days.</ng-container></p>
+  <p><ng-container i18n="@@MONETIZATION__AD_SHARING__APPLICATION_UNDER_REVIEW_LABEL">You have applied for the One Page Spotlight Ad Sharing program. Your application is currently under review. This may take up to 7 days.</ng-container></p>
 </div>
 
 <div *ngIf="!remote && !inProgress && isMerchant && loaded && enabled">

@@ -37,7 +37,7 @@ export class BlockchainMarketingComponent implements OnInit, OnDestroy {
   ngOnInit() {
     //this.poll();
 
-    this.title.setTitle('The Opspot Token');
+    this.title.setTitle('The One Page Spotlight Token');
     this.updatePledgeConfirmation();
   }
 

@@ -59,7 +59,7 @@ export class WithdrawContractService {
         amount
       ],
       gas.clone(),
-      `Request a withdrawal of ${tokens} Opspot Tokens. ${gasEther} ETH will be transferred to cover the gas fee. If you send a low amount of gas fee, your withdrawal may fail. ${message}`.trim()
+      `Request a withdrawal of ${tokens} One Page Spotlight Tokens. ${gasEther} ETH will be transferred to cover the gas fee. If you send a low amount of gas fee, your withdrawal may fail. ${message}`.trim()
     );
 
     return {

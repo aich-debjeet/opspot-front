@@ -65,7 +65,7 @@ export class VideoChatComponent implements OnInit {
         SHOW_JITSI_WATERMARK: false,
         JITSI_WATERMARK_LINK: '',
         SHOW_WATERMARK_FOR_GUESTS: false,
-        APP_NAME: 'Opspot',
+        APP_NAME: 'One Page Spotlight',
 
         TOOLBAR_BUTTONS: [
 
