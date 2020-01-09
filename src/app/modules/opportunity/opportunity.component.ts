@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { TranslationService } from '../../services/translation';
 import { ScrollService } from '../../services/ux/scroll';
 import { BoostCreatorComponent } from '../boost/creator/creator.component';
+import { OpspotTitle } from '../../services/ux/title';
 
 
 
@@ -31,10 +32,12 @@ export class OpportunityComponent implements OnInit {
     public overlayModal: OverlayModalService,
     private router: Router,
     public translationService: TranslationService,
-    public scroll: ScrollService
+    public scroll: ScrollService,
+    public title: OpspotTitle,
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Opportunities');
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
         this.guid = params.get('guid');
