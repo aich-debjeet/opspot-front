@@ -21,7 +21,7 @@ import { EmbedService } from '../../../services/embed';
           <ng-container i18n="@@MODALS__SHARE__ON_FACEBOOK">Share on Facebook</ng-container>
         </button>
         <button class="mdl-button mdl-button--raised mdl-color-text--white m-social-share-twitter"
-          (click)="openWindow('https://twitter.com/intent/tweet?text=Shared%20via%20Opspot.com&tw_p=tweetbutton&url=' + encodedUrl)">
+          (click)="openWindow('https://twitter.com/intent/tweet?text=Shared%20via%20onepagespotlight.com&tw_p=tweetbutton&url=' + encodedUrl)">
           <ng-container i18n="@@MODALS__SHARE__ON_TWITTER">Share on Twitter</ng-container>
         </button>
       </div>

@@ -42,7 +42,7 @@ export class WireService {
             await this.tokenContract.increaseApproval(
               (await this.wireContract.wire()).address,
               wire.amount * 11,
-              `We need you to pre-approve Opspot Wire wallet for the recurring wire transactions.`
+              `We need you to pre-approve One Page Spotlight Wire wallet for the recurring wire transactions.`
             );
           }
 
