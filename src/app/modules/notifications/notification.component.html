@@ -613,7 +613,7 @@
           </p>
     
           <p *ngIf="!notification.params.subscribed && notification.params.from_guid != session.getLoggedInUser().guid" i18n="@@NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__FROM_ONETIME">
-            You have received a contribute of {{notification.params.amount}} from <a [routerLink]="['/', notification.params.from_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.from_username}}</a>
+            You have received a contribution of {{notification.params.amount}} from <a [routerLink]="['/', notification.params.from_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.from_username}}</a>
           </p>
     
           <p *ngIf="notification.params.subscribed && notification.params.from_guid == session.getLoggedInUser().guid" i18n="@@NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__TO_SUBSCRIPTION">
