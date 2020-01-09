@@ -4,7 +4,7 @@ export class OpspotTitle {
 
   private counter: number;
   private sep = ' | ';
-  private default_title = 'Opspot';
+  private default_title = 'One Page Spotlight';
   private text: string = '';
 
   static _(title: Title) {

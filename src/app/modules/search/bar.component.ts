@@ -49,7 +49,7 @@ export class SearchBarComponent {
           this.handleUrl(navigationEvent.urlAfterRedirects);
         }
       } catch (e) {
-        console.error('Opspot: router hook(SearchBar)', e);
+        console.error('One Page Spotlight: router hook(SearchBar)', e);
       }
     });
   }

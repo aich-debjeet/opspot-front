@@ -89,7 +89,7 @@ export class SignupModalService {
           }
         }
       } catch (e) {
-        console.error('Opspot: router hook(SignupModalService)', e);
+        console.error('One Page Spotlight: router hook(SignupModalService)', e);
       }
     });
   }
