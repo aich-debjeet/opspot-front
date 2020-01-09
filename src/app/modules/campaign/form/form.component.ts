@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Client } from '../../../services/api';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -16,12 +15,10 @@ export class EnrolmentFormComponent implements OnInit {
   form: FormGroup;
   errorMessage = '';
   attachment_guid = '';
-  inProgress: boolean = false;
   campaignGuid = environment.campaigns.enrolment.guid;
 
   constructor(
-    private fb: FormBuilder,
-    private client: Client
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -36,9 +33,10 @@ export class EnrolmentFormComponent implements OnInit {
       location: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       porfolioLink: ['', [Validators.required]],
-      comments: ['', [Validators.required]],
+      comments: [''],
       agreeTerms: [false],
-      resume: [this.fileName, Validators.required]
+      resume: [this.fileName]
+      // resume: [this.fileName, [Validators.required]]
     });
   }
 
@@ -51,7 +49,7 @@ export class EnrolmentFormComponent implements OnInit {
     this.form.controls['resume'].setValue(file ? file.name : '');
   }
 
-  enrol() {
+  submit() {
 
     if (!this.form.value.agreeTerms) {
       if (!this.form.value.agreeTerms) {
@@ -61,6 +59,7 @@ export class EnrolmentFormComponent implements OnInit {
     }
 
     if (this.form.valid) {
+      this.errorMessage = '';
       const formData = {
         'fullname': this.form.value.fullName,
         'email': this.form.value.email,
@@ -71,24 +70,7 @@ export class EnrolmentFormComponent implements OnInit {
         'comment': this.form.value.comments,
         'attachment_guid': this.attachment_guid
       }
-
-      this.inProgress = true;
-      this.client.post(`api/v3/campaign/enrolment/${this.campaignGuid}`, formData)
-        .then((data: any) => {
-          this.inProgress = false;
-          this.done.next(data);
-        })
-        .catch((e) => {
-          // console.log(e);
-          this.inProgress = false;
-          if (e.status === 'error') {
-            //two factor?
-            this.errorMessage = e.message;
-          } else {
-            this.errorMessage = "Sorry, there was an error. Please try again.";
-          }
-          return;
-        });
+      this.done.emit(formData);
     }
 
   }

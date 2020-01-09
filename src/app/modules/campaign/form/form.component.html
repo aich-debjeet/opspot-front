@@ -1,9 +1,13 @@
-<form (ngSubmit)="enrol()" [formGroup]="form">
+<form (ngSubmit)="submit()" [formGroup]="form">
   <div class="o-entrolment-form__item">
     <div class="form-group">
       <label>Full Name</label>
       <input type="text" formControlName="fullName" id="name" class="form-control form-control-lg">
+      <div *ngIf="form.controls['fullName'].touched && !form.controls['fullName'].valid" class="error text-sm">
+        <div *ngIf="form.controls['fullName'].errors.required">Full Name is required</div>
+      </div>
     </div>
+    
     <div class="form-group o-enrolment-marginl13">
       <label>Email</label>
       <input type="text" formControlName="email" id="email" class="form-control form-control-lg">
@@ -69,9 +73,9 @@
     </label>
   </div>
   <button 
-    type="button"
+    type="submit"
     class="btn btn-primary o-entrolment-form__button"
     id="en_payment"
-    [disabled]="!this.form.valid || inProgress"
+    [disabled]="!this.form.valid"
   >Proceed to Payment</button>
 </form>
