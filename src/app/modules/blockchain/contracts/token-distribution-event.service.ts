@@ -33,7 +33,7 @@ export class TokenDistributionEventService {
       value: this.web3Wallet.EthJS.toWei(ethAmount, 'ether'),
       gasPrice: this.web3Wallet.EthJS.toWei(gasPriceGwei, 'Gwei'),
       data: '0x'
-    }, `purchase of ${ethAmount} ETH worth Opspot Tokens. ${message}`.trim());
+    }, `purchase of ${ethAmount} ETH worth One Page Spotlight Tokens. ${message}`.trim());
   }
 
   // Service provider

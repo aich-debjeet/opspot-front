@@ -16,7 +16,7 @@ export class BlockchainMarketingBlogsComponent {
   blogs = [
     { 
       guid: "871791809876131840",
-      title: "How to buy OPSPOT tokens",
+      title: "How to buy One Page Spotlight tokens",
       ownerObj: {
         name: "Opspot",
         username: "opspot",

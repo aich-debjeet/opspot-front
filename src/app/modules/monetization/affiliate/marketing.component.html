@@ -2,7 +2,7 @@
 
   <div class="m-affiliate--marketing-header">
     <h1 i18n="@@MONETIZATION__AFFILIATE__MKT__AFFILIATE_PROGRAM_TITLE">Affiliate Program</h1>
-    <h3 i18n="@@MONETIZATION__AFFILIATE__MKT__EARN_25_REVENUE">Earn 25% of the revenue Opspot generates from your referrals</h3>
+    <h3 i18n="@@MONETIZATION__AFFILIATE__MKT__EARN_25_REVENUE">Earn 25% of the revenue One Page Spotlight generates from your referrals</h3>
 
     <div class="m-affiliate--marketing-link" *ngIf="isAffiliate()">
       <input [value]="link" #el (click)="el.select()" />
@@ -17,7 +17,7 @@
   </div>
 
   <div class="m-affiliate--marketing-onboarding mdl-shadow--4dp" *ngIf="showOnboarding">
-    <p i18n="@@MONETIZATION__AFFILIATE__MKT__ONBOARDING_LEGEND">In order to become a Opspot Affiliate, you must first monetize your channel. Fill out the form below to get started.</p>
+    <p i18n="@@MONETIZATION__AFFILIATE__MKT__ONBOARDING_LEGEND">In order to become a One Page Spotlight Affiliate, you must first monetize your channel. Fill out the form below to get started.</p>
     <m-monetization--onboarding (completed)="onboardCompleted($event)"></m-monetization--onboarding>
   </div>
 
@@ -37,7 +37,7 @@
     <div class="mdl-cell mdl-cell--4-col">
       <i class="material-icons mdl-color-text--blue-grey-700">attach_money</i>
       <h2 i18n="@@MONETIZATION__AFFILIATE__MKT__EARN_TITLE">Earn</h2>
-      <span i18n="@@MONETIZATION__AFFILIATE__MKT__EARN_DESC">Earn 25% of the revenue Opspot generates from the users who sign up through your referral link</span>
+      <span i18n="@@MONETIZATION__AFFILIATE__MKT__EARN_DESC">Earn 25% of the revenue One Page Spotlight generates from the users who sign up through your referral link</span>
     </div>
 
   </div>
