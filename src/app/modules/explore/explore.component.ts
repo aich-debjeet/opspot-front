@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
+import { OpspotTitle } from '../../services/ux/title';
 
 @Component({
   selector: 'app-explore',
@@ -67,7 +68,8 @@ export class ExploreComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public client: Client,
-    public session: Session
+    public session: Session,
+    public title: OpspotTitle,
   ) {
     this.paramsSubscription = this.route.queryParams.subscribe(params => {
       if (typeof params['q'] !== 'undefined') {
@@ -99,6 +101,7 @@ export class ExploreComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.title.setTitle('Explore');
     await this.load();
   }
 

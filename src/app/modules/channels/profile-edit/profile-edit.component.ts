@@ -5,6 +5,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { SwiperOptions } from 'swiper';
+import { OpspotTitle } from '../../../services/ux/title';
 // import { Router } from '@angular/router';
 
 @Component({
@@ -15,6 +16,7 @@ import { SwiperOptions } from 'swiper';
 export class ProfileEditComponent implements OnInit {
   config;
   constructor(
+    public title: OpspotTitle,
     // private cd: ChangeDetectorRef,
     // private router: Router
   ) {
@@ -35,5 +37,7 @@ export class ProfileEditComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.title.setTitle('Profile-Edit');
+  }
 }

@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { TranslationService } from '../../services/translation';
 import { ScrollService } from '../../services/ux/scroll';
 import { BoostCreatorComponent } from '../boost/creator/creator.component';
+import { OpspotTitle } from '../../services/ux/title';
 
 
 @Component({
@@ -29,10 +30,12 @@ export class ShowtimezComponent implements OnInit {
     public overlayModal: OverlayModalService,
     public translationService: TranslationService,
     private router: Router,
-    public scroll: ScrollService
+    public scroll: ScrollService,
+    public title: OpspotTitle,
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Showtimez');
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
         this.guid = params.get('guid');
