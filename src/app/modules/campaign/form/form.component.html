@@ -53,9 +53,10 @@
   <div class="form-group">
     <div class="o-enrolment-fileupload">
       <div class="icon-upload o-enrolment-upload"></div>
-      <div class="grey text-md">Attach your CV here (PDF, JPEG, DOCX)</div>
+      <div class="grey text-md">Attach your CV here (PDF, DOC, DOCX)</div>
       <input type="file" name="fileToUpload" class="upload"
-        (change)="onFileChange($event)"
+        accept="application/msword, application/pdf"
+        (change)="uploadAttachment($event)"
         formControlName="resume"
       >
     </div>

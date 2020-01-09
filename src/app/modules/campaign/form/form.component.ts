@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+
 import { environment } from '../../../../environments/environment';
+import { AttachmentService } from '../../../services/attachment';
 
 @Component({
   selector: 'app-enrolment-form',
@@ -18,7 +20,8 @@ export class EnrolmentFormComponent implements OnInit {
   campaignGuid = environment.campaigns.enrolment.guid;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private attachment: AttachmentService
   ) { }
 
   ngOnInit() {
@@ -44,9 +47,18 @@ export class EnrolmentFormComponent implements OnInit {
     this.done.emit();
   }
 
-  onFileChange($event) {
-    let file = $event.target.files[0];
-    this.form.controls['resume'].setValue(file ? file.name : '');
+  uploadAttachment(file: HTMLInputElement, event) {
+    if (file.value) {
+      this.attachment.upload(file)
+        .then((response) => {
+          console.log('Attachment response: ', response);
+          file.value = null;
+        })
+        .catch(e => {
+          file.value = null;
+          this.attachment.reset();
+        });
+    }
   }
 
   submit() {
