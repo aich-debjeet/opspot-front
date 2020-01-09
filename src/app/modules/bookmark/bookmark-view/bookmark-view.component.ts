@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../services/api/client';
+import { OpspotTitle } from '../../../services/ux/title';
 
 @Component({
   selector: 'app-bookmark-view',
@@ -16,14 +17,16 @@ export class BookmarkViewComponent implements OnInit {
   displayBookmark= true;
 
   constructor(
-    private client: Client
+    private client: Client,
+    public title: OpspotTitle,
   ) { }
 
   activity: any = [];
 
   ngOnInit() {
+    this.title.setTitle('Bookmarks');
     this.load(true)
-    console.log(this.activity)
+    // console.log(this.activity)
   }
   changeFilter(filter: string) {
     this._filter = filter;

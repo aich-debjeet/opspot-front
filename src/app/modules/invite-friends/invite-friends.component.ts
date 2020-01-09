@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Session } from '../../services/session';
+import { OpspotTitle } from '../../services/ux/title';
 
 @Component({
   selector: 'app-invite-friends',
@@ -24,10 +25,12 @@ export class InviteFriendsComponent implements OnInit, OnDestroy {
   referrerParamFocused: boolean = false;
 
   constructor(
-    public session: Session
+    public session: Session,
+    public title: OpspotTitle,
     ) {}
 
   ngOnInit() {
+    this.title.setTitle('Invite-Friends');
     // Create custom referral links for current user
     this.referrerParam = '?referrer=' + this.session.getLoggedInUser().username;
     this.registerUrl = this.opspot.site_url + 'register' + this.referrerParam;
