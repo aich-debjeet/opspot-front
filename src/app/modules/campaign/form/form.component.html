@@ -1,23 +1,27 @@
-<form>
+<form (ngSubmit)="submit()" [formGroup]="form">
   <div class="o-entrolment-form__item">
     <div class="form-group">
       <label>Full Name</label>
-      <input type="text" name="Full Name" id="full name" class="form-control form-control-lg">
+      <input type="text" formControlName="fullName" id="name" class="form-control form-control-lg">
+      <div *ngIf="form.controls['fullName'].touched && !form.controls['fullName'].valid" class="error text-sm">
+        <div *ngIf="form.controls['fullName'].errors.required">Full Name is required</div>
+      </div>
     </div>
+    
     <div class="form-group o-enrolment-marginl13">
       <label>Email</label>
-      <input type="text" name="Email" id="email" class="form-control form-control-lg">
+      <input type="text" formControlName="email" id="email" class="form-control form-control-lg">
     </div>
   </div>
   <!--item ends-->
   <div class="o-entrolment-form__item">
     <div class="form-group">
       <label>Phone Number</label>
-      <input type="text" name="phone number" id="phone number" class="form-control form-control-lg">
+      <input type="text" formControlName="mobile" id="mobile" class="form-control form-control-lg">
     </div>
     <div class="form-group o-enrolment-marginl13">
       <label>Location</label>
-      <input type="text" name="location" id="location" class="form-control form-control-lg">
+      <input type="text" formControlName="location" id="location" class="form-control form-control-lg">
     </div>
   </div>
   <!--item ends-->
@@ -25,32 +29,36 @@
   <div class="o-entrolment-form__item">
     <div class="form-group o-enrolment-gender">
       <div class="radiobutton">
-        <input type="radio" name="radios" id="radio_1">
+        <input type="radio" formControlName="gender" name="gender" id="radio_1" value="Male">
         <label for="radio_1">Male</label>
       </div>
     </div>
     <div class="form-group o-enrolment-marginl13 o-enrolment-gender">
       <div class="radiobutton">
-        <input type="radio" name="radios" id="radio_2">
+        <input type="radio" formControlName="gender" name="gender" id="radio_2" value="Female">
         <label for="radio_2">Female</label>
       </div>
     </div>
     <div class="form-group o-enrolment-marginl13 o-enrolment-gender">
       <div class="radiobutton">
-        <input type="radio" name="radios" id="radio_3">
+        <input type="radio" formControlName="gender" name="gender" id="radio_3" value="Others">
         <label for="radio_3">Others</label>
       </div>
     </div>
   </div>
   <div class="form-group">
     <label>Share your One Page Spotlight Link <a class="icon-info o-enrolment-btninfo"></a></label>
-    <input type="text" name="link" id="Link" class="form-control form-control-lg">
+    <input type="text" formControlName="porfolioLink" name="porfolio" id="portfolio" class="form-control form-control-lg">
   </div>
   <div class="form-group">
     <div class="o-enrolment-fileupload">
       <div class="icon-upload o-enrolment-upload"></div>
-      <div class="grey text-md">Attach your CV here (PDF, JPEG, DOCX)</div>
-      <input type="file" name="fileToUpload" class="upload">
+      <div class="grey text-md">Attach your CV here (PDF, DOC, DOCX)</div>
+      <input type="file" name="fileToUpload" class="upload"
+        accept="application/msword, application/pdf"
+        (change)="uploadAttachment($event)"
+        formControlName="resume"
+      >
     </div>
   </div>
   <div class="form-group">
@@ -58,11 +66,17 @@
     <textarea class="form-control" rows="7" value="Textarea" id="comments"></textarea>
   </div>
   <div class="form-group">
-    <label class="c-checkbox">By clicking proceed to payment, I agree with the <a href="#" class="primary">terms and
-        conditions</a>
-      <input type="checkbox">
+    <label class="c-checkbox">
+      By clicking proceed to payment, I agree with the 
+      <a href="#" class="primary">Terms and Conditions</a>
+      <input type="checkbox" formControlName="agreeTerms">
       <span class="checkmark"></span>
     </label>
   </div>
-  <button type="button" class="btn btn-primary o-entrolment-form__button" id="en_payment" (click)="submitForm()">Proceed to Payment</button>
+  <button 
+    type="submit"
+    class="btn btn-primary o-entrolment-form__button"
+    id="en_payment"
+    [disabled]="!this.form.valid"
+  >Proceed to Payment</button>
 </form>
