@@ -14,7 +14,7 @@ export class BookmarkViewComponent implements OnInit {
   inProgress: boolean = false;
   moreData: boolean = true;
   openFilter: boolean = false;
-  displayBookmark= true;
+  displayBookmark = true;
 
   constructor(
     private client: Client,
@@ -29,9 +29,16 @@ export class BookmarkViewComponent implements OnInit {
     // console.log(this.activity)
   }
   changeFilter(filter: string) {
-    this._filter = filter;
-    this.activity = [];
-    this.load(true);
+    console.log('filter', filter)
+    if (filter.length === 0) {
+      //clear all filter
+      this._filter = '';
+      this.activity = [];
+    } else {
+      this._filter = filter;
+      this.activity = [];
+      this.load(true);
+    }
   }
 
   async load(refresh: boolean = false) {
