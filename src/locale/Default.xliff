@@ -7808,7 +7808,7 @@
       </trans-unit>
       <trans-unit id="OPSPOT__NEWSFEED__SINGLE__APPEAL_FLAG_NOTE" datatype="html">
         <source>
-        If you wish to appeal, please contact us at info@ops.doesntexist.com.
+        If you wish to appeal, please contact us at contact@onepagespotlight.com.
       </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/modules/newsfeed/single/single.component.ts</context>

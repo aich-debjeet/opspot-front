@@ -1,6 +1,10 @@
 @import "src/assets/helpers/variables";
 @import "node_modules/sass-mq/_mq";
 
+.hide {
+    display: none;
+}
+
 //container style
 .container-enrolment{
     max-width: 1069px;
@@ -20,7 +24,7 @@
     width: 100%;
     // min-height: 200vh;
     background-color: #FAFAFA;
-    float: left;
+    // float: left;
 }
 .o-enrolment{
     border: 1px solid #ECEFF1;	
@@ -34,6 +38,7 @@
 //enrolment body style
 .o-enrolment-body{
     padding:24px 30px 34px;
+    padding-bottom: 100px;
     @include mq($until:$tablet){
         padding:12px 15px;
     }
