@@ -27,11 +27,6 @@ export class EnrolmentViewComponent implements OnInit {
 
   ngOnInit() {
     const location = window.location.href;
-    // if(location.split("?").length == 2){
-    //   this.confirming = false;
-    //   this.confirmed = true;
-    //   this.showPledgeModal =true;
-    // }
     const a = document.createElement('script');
     a.src = 'https://js.instamojo.com/v1/checkout.js';
     this.elementRef.nativeElement.appendChild(a);
