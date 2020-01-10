@@ -8,11 +8,11 @@ export const environment = {
   campaigns: {
     enrolment: {
       fee: {
-        purpose: '',
+        purpose: 'enrollment_payment',
         amount: 2000,
         currency: 'INR'
       },
-      guid: 1061616502135853076
+      guid: '1062253905322184709'
     }
   }
 };
