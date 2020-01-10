@@ -204,6 +204,7 @@ export class SpotcoinsComponent implements OnInit {
     //formData.append('redirect_url','https://336a201c.ngrok.io/Instamojo-php-curl/success');
     formData.append('email', window.Opspot.user.email);
     formData.append('phone', window.Opspot.user.phone);
+    formData.append('redirect_url', window.Opspot.site_url + 'wallet/tokens/overview');
 
 
     this.http.post<any>('api/v3/payment/instamojo', formData).subscribe(
