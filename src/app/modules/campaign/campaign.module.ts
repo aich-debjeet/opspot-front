@@ -13,6 +13,7 @@ const routes: Route[] = [
   { path: '', redirectTo: 'enrolment', pathMatch: 'full' },
   { path: 'enrolment', component: EnrolmentViewComponent },
   { path: 'invoice', component: EnrolmentInvoiceComponent },
+  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
 ];
 
 @NgModule({
