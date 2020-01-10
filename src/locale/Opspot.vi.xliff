@@ -53,9 +53,9 @@
         <target>Hành động này được đánh dấu là tin rác.</target>
       </trans-unit>
       <trans-unit id="OPSPOT__NEWSFEED__SINGLE__APPEAL_FLAG_NOTE">
-        <source>If you wish to appeal, please contact us at info@ops.doesntexist.com.</source>
-        <target>Nếu bạn cần khiếu nại, xin vui lòng liên lạc với chúng tôi tại info@ops.doesntexist.com.</target>
-        <note>Nếu bạn muốn kháng nghị, vui lòng liên hệ với chúng tôi ở info@ops.doesntexist.com</note>
+        <source>If you wish to appeal, please contact us at contact@onepagespotlight.com.</source>
+        <target>Nếu bạn cần khiếu nại, xin vui lòng liên lạc với chúng tôi tại contact@onepagespotlight.com.</target>
+        <note>Nếu bạn muốn kháng nghị, vui lòng liên hệ với chúng tôi ở contact@onepagespotlight.com</note>
       </trans-unit>
       <trans-unit id="OPSPOT__NEWSFEED__UPGRADE_TO_PLUS_ACTION">
         <source>Upgrade to Plus</source>

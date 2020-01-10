@@ -138,7 +138,7 @@ describe('NewsfeedSingleComponent', () => {
     const spamNotice =fixture.debugElement.query(By.css('.m--spam-notice'));
     expect(spamNotice).not.toBeNull();
     expect(spamNotice.nativeElement.textContent).toContain('This activity is flagged as spam.');
-    expect(spamNotice.nativeElement.textContent).toContain('If you wish to appeal, please contact us at info@ops.doesntexist.com.');
+    expect(spamNotice.nativeElement.textContent).toContain('If you wish to appeal, please contact us at contact@onepagespotlight.com.');
   });
 
   it('it should not show the appeal text if the user is an admin', () => {
@@ -150,7 +150,7 @@ describe('NewsfeedSingleComponent', () => {
     const spamNotice =fixture.debugElement.query(By.css('.m--spam-notice'));
     expect(spamNotice).not.toBeNull();
     expect(spamNotice.nativeElement.textContent).toContain('This activity is flagged as spam.');
-    expect(spamNotice.nativeElement.textContent).not.toContain('If you wish to appeal, please contact us at info@ops.doesntexist.com.');
+    expect(spamNotice.nativeElement.textContent).not.toContain('If you wish to appeal, please contact us at .');
   });
 
 });

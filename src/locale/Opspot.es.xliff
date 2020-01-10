@@ -51,8 +51,8 @@
         <target>Esta actividad está marcada como spam.</target>
       </trans-unit>
       <trans-unit id="OPSPOT__NEWSFEED__SINGLE__APPEAL_FLAG_NOTE">
-        <source>If you wish to appeal, please contact us at info@ops.doesntexist.com.</source>
-        <target>Si quieres apelar, por favor contáctanos a info@ops.doesntexist.com.</target>
+        <source>If you wish to appeal, please contact us at contact@onepagespotlight.com.</source>
+        <target>Si quieres apelar, por favor contáctanos a contact@onepagespotlight.com.</target>
       </trans-unit>
       <trans-unit id="OPSPOT__NEWSFEED__UPGRADE_TO_PLUS_ACTION">
         <source>Upgrade to Plus</source>

@@ -26,6 +26,15 @@ export class EnrolmentViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const location = window.location.href;
+    // if(location.split("?").length == 2){
+    //   this.confirming = false;
+    //   this.confirmed = true;
+    //   this.showPledgeModal =true;
+    // }
+    const a = document.createElement('script');
+    a.src = 'https://js.instamojo.com/v1/checkout.js';
+    this.elementRef.nativeElement.appendChild(a);
     this.load();
     this.title.setTitle('Enrolment');
   }
@@ -61,6 +70,7 @@ export class EnrolmentViewComponent implements OnInit {
     formData.append('buyer_name', this.formData.fullname);
     formData.append('email', this.formData.email);
     formData.append('phone', this.formData.phone_no);
+    formData.append('redirect_url', window.Opspot.site_url + 'campaign/invoice');
 
     this.http.post<any>('api/v3/payment/instamojo', formData).subscribe(
       (res) => {
