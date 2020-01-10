@@ -20,6 +20,23 @@ export class FormValidator {
         }
     }
 
+    static validateMobileNumber(input: AbstractControl) {
+        if (input.value === '') {
+            return;
+        }
+        const inputVal = input.value;
+        if (inputVal) {
+            // tslint:disable-next-line: max-line-length
+            const mobileRegex = /[0-9]{0-10}/;
+            if (!(mobileRegex.test(inputVal))) {  
+                return { invalidMobile: true };
+            }
+            return null;
+        }
+    }
+
+
+
 
     static mobileValidation(input: AbstractControl) {
         if (input.value === '') {
