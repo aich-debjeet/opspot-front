@@ -2,6 +2,9 @@
 
 
 opspot-card-user{
+  .cursor-pointer {
+    cursor: pointer;
+  }
   min-height: 142px !important;
   .opspot-tabs a {
     overflow: visible;
