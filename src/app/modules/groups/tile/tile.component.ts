@@ -56,7 +56,7 @@ export class GroupsTileComponent {
     }
   }
 
-  cancleRequest() {
+  cancelRequest() {
     this.entity['is:awaiting'] = false;
 
     this.service.cancelRequest(this.entity)
