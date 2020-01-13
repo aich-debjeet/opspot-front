@@ -15,15 +15,14 @@ export class SuggestionsSlider {
 
   ngOnInit() {
     this.load();
-    // console.log(this.suggestions);
   }
 
   async load() {
     this.inProgress = true;
-    let limit: number = 4;
+    let limit: number = 2;
 
     if (this.suggestions.length) {
-      limit = 1
+      limit = 1;
     }
 
     // Subscribe can not rely on next batch, so load further batch
