@@ -71,7 +71,7 @@
                 <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" />
             </div>
         </a>
-        <div [routerLink]="['/', user.username]" class="o-prof-name" id="user-profile-details">
+        <div class="o-prof-name" id="user-profile-details" [routerLink]="['/', user.username]">
             <div class="caption-bold f700" id="user-profile-name">{{user.name}}</div>
             <span class="text-md grey cursor-pointer" id="user-profile-account">@{{user.username}}</span>
         </div>
