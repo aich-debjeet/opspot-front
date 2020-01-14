@@ -49,6 +49,11 @@
             </div>
         </div>
     </div>
+    <div *ngIf="inProgress" class="mdl-progress mdl-progress__indeterminate initial-loading is-upgraded">
+        <div class="progressbar bar bar1" style="width: 0%;"></div>
+        <div class="bufferbar bar bar2" style="width: 100%;"></div>
+        <div class="auxbar bar bar3" style="width: 0%;"></div>
+    </div>
     <div class="o-create-post-footer">
         <div class="o-create-post-left">
             <div class="o-create-post-toggle">

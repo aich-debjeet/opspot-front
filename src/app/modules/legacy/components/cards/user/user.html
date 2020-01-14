@@ -71,9 +71,9 @@
                 <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" />
             </div>
         </a>
-        <div class="o-prof-name" id="user-profile-details">
+        <div [routerLink]="['/', user.username]" class="o-prof-name" id="user-profile-details">
             <div class="caption-bold f700" id="user-profile-name">{{user.name}}</div>
-            <span class="text-md grey" id="user-profile-account">@{{user.username}}</span>
+            <span class="text-md grey cursor-pointer" id="user-profile-account">@{{user.username}}</span>
         </div>
         <div class="o-prof-activity" id="user-profile-activity">
             <a [routerLink]="['/', user.username, 'subscribers']" id="user-profile-follower-details">
@@ -88,9 +88,7 @@
                 <div class="caption-bold f700" id="user-profile-view-count">{{user.impressions?user.impressions:'0' | abbr:0}}</div>
                 <div class="text-sm grey">Views</div>
             </a>
-            <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
         </div>
-        <!-- <opspot-button-boost [object]="user" *ngIf="user.guid == session.getLoggedInUser().guid"></opspot-button-boost> -->
     </div>
 </ng-template>
 

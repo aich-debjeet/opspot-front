@@ -127,7 +127,7 @@ export class ContextService {
   }
 
   resolveStaticLabel(product: string): Promise<string> {
-    return Promise.resolve(this.getProductLabel(product) || 'Opspot');
+    return Promise.resolve(this.getProductLabel(product) || ' One Page Spotlight ');
   }
 
   protected _storeLabel(guid: string, label: string) {

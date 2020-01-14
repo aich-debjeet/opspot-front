@@ -5,7 +5,7 @@ import { Client } from "../../../../services/api/client";
   selector: 'm-onboarding--welcome',
   template: `
     <div class="m-channelOnboarding__slide">
-      <h2>Welcome to Opspot!</h2>
+      <h2>Welcome to One Page Spotlight!</h2>
       <div class="m-channelOnboardingSlide__column">
         <p class="m-channelOnboardingSlide__subtext">
           Before you get started, there are a few things we need to know to provide

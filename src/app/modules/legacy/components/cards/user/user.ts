@@ -18,37 +18,27 @@ export class UserCard implements OnInit {
   cardType: string = 'default';
   bannerSrc: string;
   offset: string = '';
-  subscriptionCount;
-  subscriberCount;
-   
-  constructor(public session: Session, public client: Client) {
-  }
-  
+  subscriptionCount = 0;
+  subscriberCount = 0;
+
+  constructor(
+    public session: Session,
+    public client: Client
+  ) { }
+
   set object(value: any) {
     this.user = value;
     this.bannerSrc = `${this.opspot.cdn_url}fs/v1/banners/${this.user.guid}/fat/${this.user.icontime}`;
-    if(this.user){
-      this.subscriptionCount= this.user.subscriptions_count;
-      this.subscriberCount = this.user.subscribers_count;
-    }
   }
-ngOnInit(){
-  
-  /* 
-    @sashi/anup: quick fix TODO:
-    Count could be found from user object. There is no necessity to call an api for that which fetches complete data on pagination.
-  */
-  // this.client.get('api/v1/subscribe/subscriptions/' + this.user.guid, { offset: this.offset })
-  // .then(res=>{
-  //  this.subscriptionCount=Math.abs(res['users'].length-1)
-  // })
-  // .catch(err=>console.log(err))
-  
-  // this.client.get('api/v1/subscribe/subscribers/' + this.user.guid, { offset: this.offset })
-  // .then(res=>{
-  //  this.subscriberCount=Math.abs(res['users'].length)
-  // })
-  // .catch(err=>console.log(err))
 
-}
+  ngOnInit() {
+    this.client.get(`api/v1/channel/${this.opspot.user.username}`)
+      .then(res => {
+        this.subscriptionCount = res['channel']['subscriptions_count'];
+        this.subscriberCount = res['channel']['subscribers_count'];
+      })
+      .catch((err) => {
+        // console.log(err);
+      });
+  }
 }

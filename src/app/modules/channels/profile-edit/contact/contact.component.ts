@@ -13,7 +13,7 @@ export class ContactComponent implements OnInit {
   constructor(
     private client: Client,
     private router: Router
-  ) {}
+  ) { }
 
   privacy = {
     location: 'Visible to Everyone',
@@ -60,18 +60,17 @@ export class ContactComponent implements OnInit {
   async load() {
     let res = {};
     res = await this.client.get('api/v1/channel/me');
-    console.log(res);
     res = res['channel'];
     this.model.phoneNumber = res['phone'];
     this.model.email = res['email'];
     this.model.location = res['location'];
     this.model.website = res['website'];
-    if (res) {
-      this.privacy.email = res['email_visibility'];
-      this.privacy.location = res['location_visibility'];
-      this.privacy.website = res['website_visibility'];
-      this.privacy.phone = res['phone_number_visibility'];
-    }
+
+    this.privacy.email = res['email_visibility'] ? res['email_visibility'] : this.privacy.email;
+    this.privacy.location = res['location_visibility'] ? res['location_visibility'] : this.privacy.location;
+    this.privacy.website = res['website_visibility'] ? res['website_visibility'] : this.privacy.website;
+    this.privacy.phone = res['phone_number_visibility'] ? res['phone_number_visibility'] : this.privacy.phone;
+
   }
 
   onSubmit() {

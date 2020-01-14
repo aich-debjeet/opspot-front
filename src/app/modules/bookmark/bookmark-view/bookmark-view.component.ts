@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../services/api/client';
+import { OpspotTitle } from '../../../services/ux/title';
 
 @Component({
   selector: 'app-bookmark-view',
@@ -13,22 +14,31 @@ export class BookmarkViewComponent implements OnInit {
   inProgress: boolean = false;
   moreData: boolean = true;
   openFilter: boolean = false;
-  displayBookmark= true;
+  displayBookmark = true;
 
   constructor(
-    private client: Client
+    private client: Client,
+    public title: OpspotTitle,
   ) { }
 
   activity: any = [];
 
   ngOnInit() {
+    this.title.setTitle('Bookmarks');
     this.load(true)
-    console.log(this.activity)
+    // console.log(this.activity)
   }
   changeFilter(filter: string) {
-    this._filter = filter;
-    this.activity = [];
-    this.load(true);
+    console.log('filter', filter)
+    if (filter.length === 0) {
+      //clear all filter
+      this._filter = '';
+      this.activity = [];
+    } else {
+      this._filter = filter;
+      this.activity = [];
+      this.load(true);
+    }
   }
 
   async load(refresh: boolean = false) {

@@ -4,5 +4,15 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  campaigns: {
+    enrolment: {
+      fee: {
+        purpose: '',
+        amount: 2000,
+        currency: 'INR'
+      },
+      guid: 1061616502135853076
+    }
+  }
 };

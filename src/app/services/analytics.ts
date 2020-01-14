@@ -18,7 +18,7 @@ export class AnalyticsService {
         try {
           this.onRouteChanged(navigationState.urlAfterRedirects);
         } catch (e) {
-          console.error('Opspot: router hook(AnalyticsService)', e);
+          console.error('One Page Spotlightt: router hook(AnalyticsService)', e);
         }
       }
     });

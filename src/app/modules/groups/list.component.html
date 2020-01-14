@@ -9,8 +9,8 @@
         <div class="o-cmnity-landing-block__tab">
           <div class="tabs-cmnity-landing">
             <ul class="tabs-list cmnity-landing-tabs">
-              <li><a (click)="showMyCommunities1('show')">Discover</a></li>
-              <li><a (click)="showMyCommunities1('hide')">My Communities</a></li>
+              <li [class.active]="showMyCommunities == false"><a (click)="communityTabsToggle()">Discover</a></li>
+              <li [class.active]="showMyCommunities == true"><a (click)="communityTabsToggle()">My Communities</a></li>
             </ul>
           </div>
         </div>
