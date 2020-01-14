@@ -8,7 +8,7 @@ export const environment = {
   campaigns: {
     enrolment: {
       fee: {
-        purpose: 'enrollment_payment',
+        purpose: 'enrolment_payment',
         amount: 2000,
         currency: 'INR'
       },

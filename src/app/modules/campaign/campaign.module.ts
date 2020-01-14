@@ -12,7 +12,7 @@ const routes: Route[] = [
   // to be redirected to the active campaign
   { path: '', redirectTo: 'enrolment', pathMatch: 'full' },
   { path: 'enrolment', component: EnrolmentViewComponent },
-  { path: 'invoice', component: EnrolmentInvoiceComponent },
+  { path: 'invoice/:campaignGuid/:enrollGuid', component: EnrolmentInvoiceComponent },
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
 ];
 

@@ -107,7 +107,10 @@ export class EnrolmentFormComponent implements OnInit {
 
       this.client.post(endpoint, formData)
         .then((resp: any) => {
-          console.log("Response: ", resp);
+          if(resp.status == 'success'){
+            console.log("Response: ", resp);
+            this.done.emit({form:formData, enrollGuid:resp.guid, campaignGuid:this.campaignGuid });
+          }
 
         })
         .catch((e) => {
@@ -115,7 +118,7 @@ export class EnrolmentFormComponent implements OnInit {
           // alert(e.message);
         });
     }
-    this.done.emit(formData);
+    // this.done.emit(formData);
 
   }
 
