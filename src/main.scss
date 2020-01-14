@@ -13486,7 +13486,14 @@ m-homepage .m-homepage-press {
     /* display: flex; */
     text-align: center;
     padding-top: 150px;
-    cursor: pointer; }
+    cursor: pointer; 
+    @include mq($from: $mobile_sm, $until: $tablet  ) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 0px;
+    }
+  }
     .opspot-banner.opspot-banner-editing .overlay i {
       font-size: 62px;
       width: 100%; }
