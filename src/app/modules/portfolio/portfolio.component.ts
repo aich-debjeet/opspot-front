@@ -19,16 +19,21 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   /**temp variables */
   offset: string = '';
   q: string = '';
-  type: string = '';
+  type: string = 'activities';
   filteredArray: Array<Object>;
   entities: Array<Object>;
   requestParams = {
     // TODO @abhijeet check for all valid request params
-    taxonomies: 'activity',
-    limit: 12,
-    offset: '',
-    rating: 2,
-    q: ''
+    hashtags: '',
+    period: '12h',
+    all: '',
+    query: this.q,
+    nsfw: '',
+    sync: '1',
+    as_activities: '1',
+    from_timestamp: '',
+    limit: 24,
+    offset: this.offset
   };
   channel: any;
   username: string;
@@ -47,7 +52,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe((params) => {
       this.username = params['username'];
-      this.requestParams.q = SpecialHashtg.concat('portfolio', params['username'])
+      this.requestParams.hashtags = SpecialHashtg.concat('portfolio', params['username'])
       this.loadProfileInfo();
     });
   }
@@ -91,7 +96,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
       this.requestParams.offset = '';
     }
     this.inProgress = true;
-    this.client.get('api/v2/search', this.requestParams)
+    this.client.get(`api/v2/feeds/global/top/${this.type}`, this.requestParams)
       .then((data: any) => {
         const respData: any = data;
         if (!respData.entities || respData.entities.length == 0) {
@@ -133,17 +138,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   }
   onChange(e: any) {
     console.log(e)
-    console.log(this.requestParams)
-    // let requestParams = {
-    //   taxonomies: e,
-    //   limit: 12,
-    //   offset: '',
-    //   rating: 2,
-    //   q: ''
-    // };
-    this.requestParams.taxonomies =e;
-    // this.requestParams = requestParams;
-    // console.log(requestParams)
+    this.type= e;
     console.log(this.requestParams)
     this.reset();
     this.searchMore(true);
