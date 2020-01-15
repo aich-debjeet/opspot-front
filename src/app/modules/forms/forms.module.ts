@@ -25,6 +25,7 @@ import { PostFormComponent } from './post-form/post-form.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 // import { AuthModule } from '../auth/auth.module';
 import { NgOtpInputModule } from  'ng-otp-input';
+import { PaywallMessageComponent } from './post-form/paywall-message.component';
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import { NgOtpInputModule } from  'ng-otp-input';
     BlueStoreFormComponent,
     PortfolioFormComponent,
     MyJourneyFormComponent,
-    PostFormComponent
+    PostFormComponent,
+    PaywallMessageComponent
   ],
   exports: [
     LoginForm,
@@ -74,7 +76,8 @@ import { NgOtpInputModule } from  'ng-otp-input';
     OpportunityFormComponent,
     BlueStoreFormComponent,
     ShowtimezFormComponent,
-    PostFormComponent
+    PostFormComponent,
+    PaywallMessageComponent
   ]
 })
 export class OpspotFormsModule {

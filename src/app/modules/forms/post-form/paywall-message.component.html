@@ -1,0 +1,32 @@
+<div class="paywall-wrapper">
+    <p class="paywall-coins-text">Coins required to unlock this post</p>
+    <div class="paywall-coins">
+        <input type="text" name="coins" [(ngModel)]="coins" placeholder="0 Pay Per Post" id="post-set-coins">
+    </div>
+    <p class="paywall-coins-text m-t-20">Paywall message</p>
+    <div class="paywall-coins">
+        <textarea name="message" id="post-set-coins" maxlength="120" [(ngModel)]="message"></textarea>
+    </div>
+    <div class="m-t-20">
+        <button type="button" class="btn btn-primary btn-sm" (click)="add()" id="post-coins-add" [disabled]="!coins">Add</button>
+    </div>
+</div>
+
+<style>
+.paywall-wrapper {
+    margin: 35px;
+}
+.paywall-wrapper p {
+    font-size: 15px;
+    font-weight: bold;
+}
+.paywall-wrapper textarea {
+    width: 100%;
+    outline: none;
+    resize: none;
+    height: 150px;
+}
+.m-t-20 {
+    margin-top: 20px;
+}
+</style>

@@ -2,7 +2,6 @@
   <div class="o-community-landing-block">
     <div class="o-community-landing-block__mob-header">
       <h4 class="f500">Communities</h4>
-
       <a routerLink="/groups/create" *ngIf="session.isLoggedIn()" class="text-lg primary f500">Create</a>
     </div>
     <div class="o-community-landing-block__mob-tab">
@@ -10,8 +9,8 @@
         <div class="o-cmnity-landing-block__tab">
           <div class="tabs-cmnity-landing">
             <ul class="tabs-list cmnity-landing-tabs">
-              <li class="active"><a (click)="showMyCommunities1('show')">Discover</a></li>
-              <li class=""><a (click)="showMyCommunities1('hide')">My Communities</a></li>
+              <li [class.active]="showMyCommunities == false"><a (click)="communityTabsToggle()">Discover</a></li>
+              <li [class.active]="showMyCommunities == true"><a (click)="communityTabsToggle()">My Communities</a></li>
             </ul>
           </div>
         </div>
@@ -23,7 +22,6 @@
       <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn()"
         routerLink="/groups/create">Create Community</button>
       <div class="text-lg f500 mb-17" id="list-communities-manage">Communities you manage</div>
-
       <div *ngFor="let entity of entities">
         <div class="o-community-landing-block-manage" *ngIf="entity['is:creator'] && entity['entity_type']=='community'" 
           id="list-community-manage-list"
@@ -36,11 +34,8 @@
           </div>
         </div>
       </div>
-
-      <!--communities-manage ends-->
       <div class="o-community-landing-block-your">
         <div class="text-lg f500 mb-17" id="list-community-header">Communities you’re in</div>
-        <!--communities-manage ends-->
         <div *ngFor="let entity of entities">
           <div class="o-community-landing-block-manage"
             id="list-community-joined"
@@ -55,29 +50,27 @@
           </div>
         </div>
       </div>
-      <!--your block ends-->
     </div>
+
     <div class="o-community-landing-block__main" *ngIf="!showMyCommunities">
       <div class="o-cmnity-landing-tab-content">
         <div class="tabs-cmnity-landing">
           <div id="discover" class="tab active">
             <div class="o-community-landing-block-design">
-              <!-- <div class="o-community-landing-block-design__item"> -->
               <m-groups--tile *ngFor="let entity of entities" [entity]="entity"></m-groups--tile>
             </div>
-            <!--</div> -->
           </div>
         </div>
       </div>
     </div>
-    <div class="o-community-landing-block-design hidden-above-tablet" style="flex-direction: column;"
-      *ngIf="showMyCommunities">
-      <div id="discover" *ngFor="let entity of entities">
+    <div class="o-community-landing-block-design" *ngIf="showMyCommunities">
+      <div id="communities" class="tab" *ngFor="let entity of entities">
         <m-groups--tile *ngIf="entity['is:member'] && entity['is:creator'] && entity['entity_type']=='community'"
           [entity]="entity"></m-groups--tile>
       </div>
     </div>
   </div>
+</div>
 
   <!-- <div *ngIf="dev">
 

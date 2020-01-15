@@ -458,6 +458,16 @@ export class AttachmentService {
           resolve();
         };
         reader.readAsDataURL(file);
+      } else if (file.type && file.type.indexOf('application/pdf') === 0) {
+        this.attachment.mime = 'pdf';
+
+        let reader = new FileReader();
+
+        reader.onloadend = () => {
+          this.attachment.preview = reader.result;
+          resolve();
+        };
+        reader.readAsDataURL(file);
       } else {
         this.attachment.mime = 'unknown';
       }

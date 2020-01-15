@@ -15,6 +15,7 @@
                     (keyup)="getPostPreview(message)"
                     (ngModelChange)="onMessageChange($event)"
                     [autoGrow]
+                    autofocus
                 ></textarea>
             </div>
         </div>
@@ -49,6 +50,11 @@
             </div>
         </div>
     </div>
+    <div *ngIf="inProgress" class="mdl-progress mdl-progress__indeterminate initial-loading is-upgraded">
+        <div class="progressbar bar bar1" style="width: 0%;"></div>
+        <div class="bufferbar bar bar2" style="width: 100%;"></div>
+        <div class="auxbar bar bar3" style="width: 0%;"></div>
+    </div>
     <div class="o-create-post-footer">
         <div class="o-create-post-left">
             <div class="o-create-post-toggle">
@@ -70,19 +76,24 @@
                 <div class="float-left" *ngIf="defaultCoins.length > 0">
                     <span class="text-md f500">{{defaultCoins}} Pay Per Post</span>
                 </div>
-                <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span
-                        class="icon-chevron-down" id="post-form-set-paywall-icon"></span></a>
-                <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
+                <a (click)="displayPaywall()" class="o-create-post-right__dropdown">
+                    <span class="icon-chevron-down" id="post-form-set-paywall-icon"></span>
+                </a>
+                <!-- <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
                     <div class="o-create-post-dropdown-footer__paywall">
-                        <div class="text-sm grey" id="post-form-paywall-text">Coins required to unlock this post</div>
+                        <div class="text-sm grey" id="post-form-paywall-tokens">Coins required to unlock this post</div>
                         <div class="paywall-coins">
-                            <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins"
-                                placeholder="0 Pay Per Post" id="poast-set-coins">
-                            <button type="button" class="btn btn-primary btn-sm disabled"
-                                (click)="displayPaywall()" id="poast-coins-add">Add</button>
+                            <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins" placeholder="0 Pay Per Post" id="post-set-coins">
+                        </div>
+                        <div class="text-sm grey m-t-10" id="post-form-paywall-message">Paywall message</div>
+                        <div class="paywall-coins">
+                            <textarea name="paywallMessage" id="post-set-coins" maxlength="120" [(ngModel)]="paywallMessage"></textarea>
+                        </div>
+                        <div class="m-t-10">
+                            <button type="button" class="btn btn-primary btn-sm disabled" (click)="displayPaywall()" id="post-coins-add">Add</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <button type="submit" class="btn btn-primary btn-sm" id="post-form-submit">Post</button>
