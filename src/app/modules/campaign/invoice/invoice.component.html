@@ -10,7 +10,7 @@
           <div class="o-enrolment-body">
             <div class="o-enrolment-title" id="en_header">
               <h4 class="f500"></h4>
-              <button type="button" class="btn btn-outline-primary o-enrolment-title__button" id="en_share"><span class="icon-printer o-enrolment-title__icon"></span>PRINT</button>
+              <button type="button" (click)="print()" class="btn btn-outline-primary o-enrolment-title__button" id="en_share"><span class="icon-printer o-enrolment-title__icon"></span>PRINT</button>
             </div><!--title ends-->
             <div class="o-enrolment-confirmed">
                 <div class="o-enrolment-confirmed__avatar">
@@ -25,10 +25,9 @@
                     <h4>Enroled to</h4>
                 </div><!--left ends-->
                 <div class="o-enrolment-block__right">
-                    <h4 class="f500">Dance for the fitness</h4>
-                    <div class="o-enrolment-margin18 o-enrolment-f17">06:30 PM | 26 December 2019</div>
-                    <div class="grey o-enrolment-f17 o-enrolment-lh30">46/1, Cobalt Building, Church St, Haridevpur, Shanthala Nagar, Ashok Nagar,
-                    Bengaluru, Karnataka 560001</div>
+                    <h4 class="f500">{{enrolledData?.campaign?.title}}</h4>
+                    <div class="o-enrolment-margin18 o-enrolment-f17">{{enrolledData?.time_created * 1000 | date:'medium'}}</div>
+                    <div class="grey o-enrolment-f17 o-enrolment-lh30">{{enrolledData?.location}}</div>
                 </div><!--right ends-->
             </div><!--block ends-->
             <div class="o-enrolment-line"></div>
@@ -85,7 +84,7 @@
                 <div class="o-enrolment-block__right o-enrolment-f17">
                     <div class="o-enrolment-marginb10">Email: support@onepagespotlight.com</div>
                     <div>Phone Number: 080 81873 82321</div>
-                    <button type="button" class="btn btn-primary o-entrolment-form__button o-entrolment-button-left" id="en_payment">Proceed to Home</button>
+                    <button type="button" class="btn btn-primary o-entrolment-form__button o-entrolment-button-left" routerLink="/newsfeed/subscribed" id="en_payment">Proceed to Home</button>
                 </div><!--right ends-->
             </div><!--block ends-->
           </div><!-- enrolment body ends-->
