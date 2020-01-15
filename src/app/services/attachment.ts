@@ -113,7 +113,6 @@ export class AttachmentService {
   }
 
   upload(fileInput: HTMLInputElement, guidArray?) {
-
     if(guidArray && guidArray.length > 0){
       this.meta.attachment_guid = guidArray
     }
@@ -433,6 +432,8 @@ export class AttachmentService {
   }
 
   private checkFileType(file): Promise<any> {
+    console.log("file: ", file);
+    
     return new Promise((resolve, reject) => {
       if (file.type && file.type.indexOf('video/') === 0) {
         this.attachment.mime = 'video';
@@ -448,6 +449,22 @@ export class AttachmentService {
           //reject(error);
         });
 
+      } else if (file.type && file.type.indexOf('audio/') === 0) {
+        console.log("In th audio");
+        
+        this.attachment.mime = 'audio';
+
+        
+        this.checkVideoDuration(file).then(duration => {
+          if (duration > window.Opspot.max_video_length) {
+            return reject({ message: 'Error: Video duration exceeds ' + window.Opspot.max_video_length / 60 + ' minutes' });
+          }
+
+          resolve();
+        }).catch(error => {
+          resolve(); //resolve regardless and forward to backend job
+          //reject(error);
+        });
       } else if (file.type && file.type.indexOf('image/') === 0) {
         this.attachment.mime = 'image';
 

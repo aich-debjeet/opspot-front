@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '../../common/common.module';
 import { TranslateModule } from '../translate/translate.module';
 import { VideoModule } from '../media/components/video/video.module';
+import { AudioModule } from '../media/components/audio/audio.module';
 import { ModalsModule } from '../modals/modals.module';
 import { PaymentsModule } from '../payments/payments.module';
 import { BoostModule } from '../boost/boost.module';
@@ -56,6 +57,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
     ReactiveFormsModule,
     TranslateModule,
     VideoModule,
+    AudioModule,
     PaymentsModule,
     ModalsModule,
     BoostModule,
