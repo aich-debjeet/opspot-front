@@ -79,7 +79,7 @@
                 <a (click)="displayPaywall()" class="o-create-post-right__dropdown">
                     <span class="icon-chevron-down" id="post-form-set-paywall-icon"></span>
                 </a>
-                <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
+                <!-- <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
                     <div class="o-create-post-dropdown-footer__paywall">
                         <div class="text-sm grey" id="post-form-paywall-tokens">Coins required to unlock this post</div>
                         <div class="paywall-coins">
@@ -93,28 +93,10 @@
                             <button type="button" class="btn btn-primary btn-sm disabled" (click)="displayPaywall()" id="post-coins-add">Add</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <button type="submit" class="btn btn-primary btn-sm" id="post-form-submit">Post</button>
         </div>
     </div>
 </form>
-
-<style>
-.o-create-post-dropdown-footer {
-  right: 45px;
-  top: 50px;
-}
-.o-create-post-dropdown-footer input, .o-create-post-dropdown-footer textarea {
-    width: 100%;
-}
-.o-create-post-dropdown-footer textarea {
-    height: 100px;
-    resize: none;
-    outline: none;
-}
-.m-t-10 {
-    margin-top: 10px;
-}
-</style>

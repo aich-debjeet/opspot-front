@@ -22,7 +22,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 @Component({
   selector: 'app-post-form',
   templateUrl: './post-form.component.html',
-  styleUrls: ['./post-form.component.scss']
+  // styleUrls: ['./post-form.component.scss']
 })
 export class PostFormComponent {
 
@@ -61,7 +61,7 @@ export class PostFormComponent {
   submitted = false;
   cards = [];
   isNSFW = false;
-  displayPaywal = false;
+  // displayPaywal = false;
   defaultCoins = '';
   entity: any;
   paywallMessage: string;
@@ -316,11 +316,19 @@ export class PostFormComponent {
   }
 
   displayPaywall() {
-    if (this.displayPaywal) {
-      this.displayPaywal = false;
-    } else {
-      this.displayPaywal = true;
-    }
+    // if (this.displayPaywal) {
+    //   this.displayPaywal = false;
+    // } else {
+    //   this.displayPaywal = true;
+    // }
+    this.overlayModal.create(PaywallMessageComponent, {}, {
+      class: 'm-overlay-modal--paywall-selector m-overlay-modal--small',
+      onSelected: (data) => {
+        this.paywallMessage = data.message;
+        this.defaultCoins = data.coins;
+        this.overlayModal.dismiss();
+      },
+    }).present();
   }
 
   // emitEvent(data){
