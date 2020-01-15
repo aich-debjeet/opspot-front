@@ -80,7 +80,7 @@
       <!-- / Group Queue -->
 
       <!--community join notification(pending)-->
-      <!-- <ng-template ngSwitchCase="group_join_request">
+      <ng-template ngSwitchCase="group_join_request">
         <a [routerLink]="['/groups/profile', notification.params.group.guid]">
             <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">{{notification.params.from_username}} wants to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
         </a>
@@ -88,15 +88,15 @@
 
       <ng-template ngSwitchCase="group_join_accept">
         <a [routerLink]="['/groups/profile', notification.params.group.guid]">
-            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">{{notification.params.user}} invited you to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
+            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">{{notification.params.from_username}} has accepted your request to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
         </a>
       </ng-template>
 
       <ng-template ngSwitchCase="group_join_reject">
         <a [routerLink]="['/groups/profile', notification.params.group.guid]">
-            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">{{notification.params.user}} invited you to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
+            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">Your request to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}} has been rejected</span></p>
         </a>
-      </ng-template> -->
+      </ng-template>
     
       <!-- comment -->
       <ng-template ngSwitchCase="comment">
