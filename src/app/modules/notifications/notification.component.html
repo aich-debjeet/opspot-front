@@ -78,6 +78,25 @@
       </ng-template>
     
       <!-- / Group Queue -->
+
+      <!--community join notification(pending)-->
+      <!-- <ng-template ngSwitchCase="group_join_request">
+        <a [routerLink]="['/groups/profile', notification.params.group.guid]">
+            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">{{notification.params.from_username}} wants to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
+        </a>
+      </ng-template>
+
+      <ng-template ngSwitchCase="group_join_accept">
+        <a [routerLink]="['/groups/profile', notification.params.group.guid]">
+            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">{{notification.params.user}} invited you to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
+        </a>
+      </ng-template>
+
+      <ng-template ngSwitchCase="group_join_reject">
+        <a [routerLink]="['/groups/profile', notification.params.group.guid]">
+            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">{{notification.params.user}} invited you to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
+        </a>
+      </ng-template> -->
     
       <!-- comment -->
       <ng-template ngSwitchCase="comment">
@@ -560,7 +579,7 @@
       <!-- Welcome points -->
       <ng-template ngSwitchCase="welcome_points">
           <a [routerLink]="['/wallet']">
-              <p i18n="@@NOTIFICATIONS__NOTIFICATION__WELCOME_POINTS" id="notification-welcome-message">Welcome to Opspot. We have given you  <span class="pseudo-link mdl-color-text--blue-grey-400">1000 points</span> to get you started.</p>
+              <p i18n="@@NOTIFICATIONS__NOTIFICATION__WELCOME_POINTS" id="notification-welcome-message">Welcome to One Page Spotlight. We have given you  <span class="pseudo-link mdl-color-text--blue-grey-400">1000 points</span> to get you started.</p>
           </a>
       </ng-template>
     
@@ -613,7 +632,7 @@
           </p>
     
           <p *ngIf="!notification.params.subscribed && notification.params.from_guid != session.getLoggedInUser().guid" i18n="@@NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__FROM_ONETIME">
-            You have received a contribute of {{notification.params.amount}} from <a [routerLink]="['/', notification.params.from_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.from_username}}</a>
+            You have received a contribution of {{notification.params.amount}} from <a [routerLink]="['/', notification.params.from_username]" class="pseudo-link mdl-color-text--blue-grey-400">@{{notification.params.from_username}}</a>
           </p>
     
           <p *ngIf="notification.params.subscribed && notification.params.from_guid == session.getLoggedInUser().guid" i18n="@@NOTIFICATIONS__NOTIFICATION__WIRE_HAPPENED__TO_SUBSCRIPTION">

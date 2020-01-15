@@ -3,6 +3,6 @@ export class UniqueId {
 
   static generate(prefix: string = 'id') {
     UniqueId.counter++;
-    return `opspot-${prefix}--${UniqueId.counter}`;
+    return `one-page-spotlight-${prefix}--${UniqueId.counter}`;
   }
 }

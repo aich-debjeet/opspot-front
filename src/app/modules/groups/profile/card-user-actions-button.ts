@@ -6,13 +6,13 @@ import { GroupsService } from '../groups-service';
   selector: 'opspot-groups-card-user-actions-button',
   inputs: ['group', 'user'],
   template: `
-  <button class="icon-more-vertical btnDefault" id="card-user-action-menu" *ngIf="group['is:owner'] || (group['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
+  <button class="icon-more-vertical btnDefault" id="card-user-action-menu" *ngIf="(group['is:owner'] || group['is:admin']) || (group['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
 
   </button>
 
   <ul class="opspot-dropdown-menu" [hidden]="!showMenu">
     <li class="mdl-menu__item" id="card-user-action-remove-from-group"
-      *ngIf="(group['is:owner'] || group['is:moderator']) && !(user['is:owner']||user['is:moderator']) && user['is:member']"
+      *ngIf="(group['is:owner'] || group['is:moderator'] || group['is:admin']) && !(user['is:owner']||user['is:moderator']) && user['is:member']"
       (click)="removePrompt()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_FROM_GROUP">
       Remove from Group
     </li>
@@ -25,22 +25,22 @@ import { GroupsService } from '../groups-service';
       <span class="opspot-menu-info-item" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__INVITED">Invited</span>
     </li>
     <li class="mdl-menu__item" id="card-user-action-make-admin"
-      *ngIf="group['is:owner'] && !(user['is:owner']||user['is:moderator']) && user['is:member']"
+      *ngIf="(group['is:owner'] || group['is:admin']) && !(user['is:owner']||user['is:moderator'] || user['is:admin']) && user['is:member']"
       (click)="grantOwnership()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__MAKE_ADMIN">
       Make Admin
     </li>
     <li class="mdl-menu__item" id="card-user-action-remove-as-admin"
-      *ngIf="group['is:owner'] && user['is:owner'] && user['is:member']"
+      *ngIf="(group['is:owner'] || group['is:admin']) && (user['is:owner'] ||user['is:admin'])&& user['is:member']"
       (click)="revokeOwnership()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_AS_ADMIN">
       Remove as Admin
     </li>
     <li class="mdl-menu__item" id="card-user-action-make-as-moderator"
-      *ngIf="group['is:owner'] && !(user['is:owner']||user['is:moderator']) && user['is:member']"
+      *ngIf="(group['is:owner'] || group['is:admin']) && !(user['is:owner']||user['is:moderator']) && user['is:member']"
       (click)="grantModerator()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__MAKE_MODERATOR">
       Make Moderator
     </li>
     <li class="mdl-menu__item" id="card-user-action-remove-as-moderator"
-      *ngIf="group['is:owner'] && user['is:moderator'] && user['is:member']"
+      *ngIf="(group['is:owner'] || group['is:admin']) && user['is:moderator'] && user['is:member']"
       (click)="revokeModerator()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_AS_MODERATOR">
       Remove as Moderator
     </li>
@@ -89,6 +89,8 @@ export class GroupsCardUserActionsButton {
   toggleMenu(e) {
     e.stopPropagation();
     if (this.showMenu) {
+      // alert();
+
       this.showMenu = false;
 
       return;
@@ -143,22 +145,26 @@ export class GroupsCardUserActionsButton {
   }
 
   grantOwnership() {
-    this.user['is:owner'] = true;
+    // this.user['is:owner'] = true;
+    this.user['is:admin'] = true;
 
     this.service.grantOwnership({ guid: this.group.guid }, this.user.guid)
-      .then((isOwner: boolean) => {
-        this.user['is:owner'] = isOwner;
+      .then((data: boolean) => {
+        // this.user['is:owner'] = data;
+        this.user['is:admin'] = data;
       });
 
     this.showMenu = false;
   }
 
   revokeOwnership() {
-    this.user['is:owner'] = false;
+    // this.user['is:owner'] = false;
+    this.user['is:admin'] = false;
 
     this.service.revokeOwnership({ guid: this.group.guid }, this.user.guid)
-      .then((isOwner: boolean) => {
-        this.user['is:owner'] = isOwner;
+      .then((data: boolean) => {
+        // this.user['is:owner'] = data;
+        this.user['is:admin'] = data;
       });
 
     this.showMenu = false;

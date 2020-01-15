@@ -162,7 +162,7 @@ export class AdminReports {
   }
 
   async delete(report: any, index: number) {
-    if (!confirm('This will delete this from Opspot. Are you sure?')) {
+    if (!confirm('This will delete this from One Page Spotlight. Are you sure?')) {
       return;
     }
 

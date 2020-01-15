@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OpspotTitle } from '../../../services/ux/title';
 
 
 @Component({
@@ -8,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BigEventCreate implements OnInit {
 
-  constructor() { }
+  constructor(
+    public title: OpspotTitle,
+  ) { }
 
   ngOnInit() {
-
+    this.title.setTitle('Create Events');
   }
 
 

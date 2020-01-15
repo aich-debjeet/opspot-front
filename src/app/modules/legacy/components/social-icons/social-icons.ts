@@ -12,9 +12,9 @@ import { EmbedService } from '../../../../services/embed';
 export class SocialIcons {
 
   url: string = '';
-  title: string = 'Shared via Opspot.com';
+  title: string = 'Shared via onepagespotlight.com';
   encodedUrl: string = '';
-  encodedTitle: string = 'Shared%20via%20Opspot.com';
+  encodedTitle: string = 'Shared%20via%20onepagespotlight.com';
 
   embedCode: string = '';
   embedModalOpen: boolean = false;

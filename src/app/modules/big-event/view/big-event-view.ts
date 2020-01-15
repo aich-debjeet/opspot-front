@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { TranslationService } from '../../../services/translation';
 import { BoostCreatorComponent } from '../../boost/creator/creator.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { OpspotTitle } from '../../../services/ux/title';
 
 
 
@@ -51,11 +52,13 @@ export class BigEventView implements OnInit {
     public router: Router,
     public route: ActivatedRoute,
     public translationService: TranslationService,
-    public overlayModal: OverlayModalService
+    public overlayModal: OverlayModalService,
+    public title: OpspotTitle,
   ) { }
 
 
   ngOnInit() {
+    this.title.setTitle('View Event');
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
         this.entity_guid = params.get('guid');

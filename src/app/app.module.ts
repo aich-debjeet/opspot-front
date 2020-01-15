@@ -24,7 +24,6 @@ import { MonetizationModule } from './modules/monetization/monetization.module';
 import { WalletModule } from './modules/wallet/wallet.module';
 // import { CheckoutModule } from './modules/checkout/checkout.module';
 import { PlusModule } from './modules/plus/plus.module';
-import { I18nModule } from './modules/i18n/i18n.module';
 
 import { AdsModule } from './modules/ads/ads.module';
 import { BoostModule } from './modules/boost/boost.module';
@@ -56,10 +55,8 @@ import { MediaModule } from './modules/media/media.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { BlockchainModule } from './modules/blockchain/blockchain.module';
 import { BlockchainMarketingModule } from './modules/blockchain/marketing/marketing.module';
-import { BrandingModule } from './modules/branding/branding.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { NodesMarketingModule } from './modules/nodes/nodes.module';
-import { JobsMarketingModule } from './modules/jobs/jobs.module';
 import { HelpdeskModule } from './modules/helpdesk/helpdesk.module';
 import { MobileModule } from './modules/mobile/mobile.module';
 import { CanaryModule } from './modules/canary/canary.module';
@@ -102,7 +99,6 @@ import { BigEventModule } from './modules/big-event/big-event.module';
     BoostModule,
     WireModule,
     ReportModule,
-    I18nModule,
     BanModule,
     ThirdPartyNetworksModule,
     LegacyModule,
@@ -126,9 +122,7 @@ import { BigEventModule } from './modules/big-event/big-event.module';
     BlockchainModule,
     BlockchainMarketingModule,
     NodesMarketingModule,
-    BrandingModule,
     CommentsModule,
-    JobsMarketingModule,
     HelpdeskModule,
     MobileModule,
     CanaryModule,

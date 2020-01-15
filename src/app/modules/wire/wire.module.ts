@@ -27,7 +27,7 @@ import { WireConsoleRewardsInputsComponent } from './console/rewards-table/input
 import { WireConsoleRewardsComponent } from './console/rewards-table/rewards.component';
 
 const wireRoutes : Routes = [
-  { path: 'wire', component: WireMarketingComponent }
+  // { path: 'wire', component: WireMarketingComponent }
 ];
 
 @NgModule({

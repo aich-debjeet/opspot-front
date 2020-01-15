@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
+import { OpspotTitle } from '../../services/ux/title';
 
 @Component({
   selector: 'app-explore',
@@ -67,7 +68,8 @@ export class ExploreComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public client: Client,
-    public session: Session
+    public session: Session,
+    public title: OpspotTitle,
   ) {
     this.paramsSubscription = this.route.queryParams.subscribe(params => {
       if (typeof params['q'] !== 'undefined') {
@@ -99,6 +101,7 @@ export class ExploreComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.title.setTitle('Explore');
     await this.load();
   }
 
@@ -227,12 +230,12 @@ export class ExploreComponent implements OnInit {
           return false;
         }
         if (this.filteredArray && !refresh) {
-          console.log('added data');
+          // console.log('added data');
           this.filteredArray = this.exploreArray = this.exploreArray.concat(
             respData.entities
           );
         } else {
-          console.log('added new data');
+          // console.log('added new data');
           this.filteredArray = this.exploreArray = respData.entities;
         }
         this.moreData = true;
@@ -244,22 +247,22 @@ export class ExploreComponent implements OnInit {
       });
   }
   reset() {
-    console.log(this.exploreArray);
+    // console.log(this.exploreArray);
     this.filteredArray = this.exploreArray = [];
   }
 
   slickInit(e) {
-    console.log('slick initialized in activity');
+    // console.log('slick initialized in activity');
   }
   breakpoint(e) {
-    console.log('breakpoint');
+    // console.log('breakpoint');
   }
 
   afterChange(e) {
-    console.log('afterChange');
+    // console.log('afterChange');
   }
 
   beforeChange(e) {
-    console.log('beforeChange');
+    // console.log('beforeChange');
   }
 }

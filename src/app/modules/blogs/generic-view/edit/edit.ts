@@ -86,7 +86,7 @@ export class BlogEdit {
       return;
     }
 
-    this.title.setTitle('New Blog');
+    this.title.setTitle('Blog');
 
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {

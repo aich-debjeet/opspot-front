@@ -59,8 +59,8 @@ export class AboutComponent implements OnInit {
     this.model.dob_visibility = 'everyone';
     this.privacy.dob = 'everyone';
     this.privacy.height = 'everyone';
-    this.model.height = response.about.height;
-    this.model.weight = response.about.weight;
+    this.model.height = response.height;
+    this.model.weight = response.weight;
     const languages = [];
     if (response.about.languages && response.about.languages.length > 0) {
       response.about.languages.map(el => {

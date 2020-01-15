@@ -1,3 +1,6 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
 .form-controls{
     display: block;
     width: 100%;
@@ -22,5 +25,16 @@
     top: -54px;
     left: 95px;
     z-index: 2;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        position: absolute;
+        top: -23px;
+        left: -173px;
+        z-index: 2;
+    }
 }
 
+.o-phone{
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        width: 100%;
+    }
+}

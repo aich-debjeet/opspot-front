@@ -102,6 +102,7 @@ export class AwardsComponent implements OnInit {
   }
 
   addWorkMove() {
+    this.model = {}; //render empty form after update/create
     this.submitted = false;
   }
 }

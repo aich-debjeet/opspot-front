@@ -97,7 +97,7 @@ import { ProfileReportComponent } from '../../../report/profile-report/profile-r
     >
       <p confirm-message i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__BAN_USER_CONFIRM_MESSAGE">
           Are you sure you want to ban this user?<br><br>
-          This will close all open sessions and lock him/her out from Opspot.
+          This will close all open sessions and lock him/her out from One Page Spotlight.
       </p>
       <p confirm-success-message i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__BAN_USER_SUCCESS_MESSAGE">
           User has been banned.
@@ -114,7 +114,7 @@ import { ProfileReportComponent } from '../../../report/profile-report/profile-r
       <p confirm-message i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__BAN_MONETIZATION_CONFIRM_MESSAGE">
           Are you sure you want to ban this user from monetization?<br><br>
           This will close all open sessions and decline pending payments.<br>
-          There's no UNDO. This will NOT ban the user from Opspot.
+          There's no UNDO. This will NOT ban the user from One Page Spotlight.
       </p>
       <p confirm-success-message i18n="@@OPSPOT__BUTTONS__USER_DROPDOWN__BAN_MONETIZATION_SUCCESS_MESSAGE">
           User has been banned from monetization.

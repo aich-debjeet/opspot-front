@@ -82,11 +82,10 @@ export class GroupsListComponent {
   }
 
 
-  showMyCommunities1(val) {
-    if (val === 'show') {
-    this.showMyCommunities = false;
-    }
-    else if (val === 'hide') {
+  communityTabsToggle() {
+    if (this.showMyCommunities) {
+      this.showMyCommunities = false;
+    } else {
       this.showMyCommunities = true;
     }
   }
