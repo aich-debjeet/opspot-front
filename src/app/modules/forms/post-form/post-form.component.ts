@@ -15,7 +15,8 @@ import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.comp
 import { Tag } from '../../hashtags/types/tag';
 // import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
-// import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { PaywallMessageComponent } from './paywall-message.component';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 // import { LoginComponent } from '../../auth/login.component';
 
 @Component({
@@ -63,6 +64,7 @@ export class PostFormComponent {
   displayPaywal = false;
   defaultCoins = '';
   entity: any;
+  paywallMessage: string;
 
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
@@ -81,7 +83,7 @@ export class PostFormComponent {
     public upload: Upload,
     public attachment: AttachmentService,
     // private formBuilder: FormBuilder,
-    // private overlayModal: OverlayModalService
+    private overlayModal: OverlayModalService
   ) {
     this.opspot = window.Opspot;
     this.cards = [];
@@ -169,6 +171,24 @@ export class PostFormComponent {
         type: 'tokens'
       };
     }
+
+    // check message if paywall is there
+    if (this.meta.wire_threshold) {
+      console.log('PAYWALL');
+      if (!this.paywallMessage) {
+        // trigger modal to accept paywall message
+        alert('Please add paywall message');
+
+        this.overlayModal.create(PaywallMessageComponent, { message: '' }, {
+          class: '',
+        }
+        ).present();
+        return;
+      }
+    } else {
+      console.log('NO PAYWALL');
+    }
+
     // if (this.hashtagsSelector.tags.length > 5) {
     //   this.showTagsError();
     //   return;
@@ -178,26 +198,19 @@ export class PostFormComponent {
     // console.log("this.attachment.exportMeta(): ", this.attachment.exportMeta());
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-    // console.log("data: ", data);
-    // console.log("data: ", data);
 
+    console.log('this.meta', this.meta);
+    console.log('data', data);
 
     data.tags = this.tags;
     data.mature = this.isNSFW;
-    // console.log(data);
-    // console.log(this.meta);
-    // console.log(this.attachment.exportMeta());
 
     this.inProgress = true;
     this.client
       .post('api/v1/newsfeed', data)
       .then((data: any) => {
         // data.activity.boostToggle = true; //@gayatri hava to check this
-
-        // console.log(data);
         this.load.emit(data);
-
-        // this.load.next(data.activity);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
         this.inProgress = false;
