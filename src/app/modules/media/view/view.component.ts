@@ -100,9 +100,9 @@ export class MediaViewComponent {
     this.queryParamsSubscription$.unsubscribe();
   }
 
-  slideConfig = { 
-    slidesToShow: 6, 
-    slidesToScroll: 1, 
+  slideConfig = {
+    slidesToShow: 6,
+    slidesToScroll: 1,
     arrows: true,
     responsive: [
       {
@@ -128,7 +128,7 @@ export class MediaViewComponent {
           slidesToScroll: 1
         }
       }]
-     };
+  };
 
   slickInit(e) {
     // console.log('slick initialized in activity');
@@ -161,9 +161,9 @@ export class MediaViewComponent {
         if (response.activity) {
           this.entity = response.activity;
 
-          this.entity.url  = window.Opspot.site_url + 'media/' + this.entity.guid;
+          this.entity.url = window.Opspot.site_url + 'media/' + this.entity.guid;
 
-          if (this.entity['custom_data'][0]['entity_type'] === 'video') {
+          if (this.entity['custom_data'][0]['entity_type'] === 'video' || this.entity['custom_data'][0]['entity_type'] === 'audio') {
             this.showImage(0, this.entity['custom_data'][0]);
           } else {
             this.showImage(0);
@@ -318,19 +318,27 @@ export class MediaViewComponent {
 
   getThumbnail() {
     const url = this.entity.paywalled || (this.entity.wire_threshold && this.entity.wire_threshold !== '0') ? this.opspot.site_url : this.opspot.cdn_url;
-
     return url + `fs/v1/thumbnail/${this.entity.guid}/xlarge`;
   }
 
   showVideo = false;
+  showAudio = false;
   videoData: any;
 
   showImage(i, data?) {
-    if (data) {
+    console.log("Data: ", data);
+
+    if (data && data.entity_type === 'video') {
       this.showVideo = true;
+      this.showAudio = false;
+      this.videoData = data;
+    } else if (data && data.entity_type === 'audio') {
+      this.showVideo = false;
+      this.showAudio = true;
       this.videoData = data;
     } else {
       this.showVideo = false;
+      this.showAudio = false;
       this.largeImage = this.entity.custom_data[i].src;
     }
   }
