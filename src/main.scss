@@ -1290,8 +1290,8 @@ label {
 
 .form-control:disabled,
 .form-control[readonly] {
-    background-color: #e9ecef;
-    opacity: 1;
+  background-color: #fff;
+    
 }
 
 select.form-control:not([size]):not([multiple]) {
@@ -24809,7 +24809,7 @@ app-image-croper .m-modal-container {
       &__status{
           padding: 8px 10px;
           height: 34px;	
-          // width: 103px;	
+          width: 130px;	
           border: 1px solid rgba(144,164,174,0.2);	
           border-radius: 4px;	
           background-color:$white;	

@@ -71,3 +71,10 @@
         }
     }
 }
+.o-book-filter{
+    &__title{
+        .cursor{
+            cursor: pointer;
+        }
+    }
+}
