@@ -1,0 +1,128 @@
+m-modal-confirm {
+
+  m-modal {
+    .m-modal-container {
+      min-width: 340px;
+      min-height: 0;
+
+      .mdl-card {
+        min-height: 0;
+      }
+    }
+  }
+
+  .m-modal-confirm-title {
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    font-size: 21px;
+  }
+
+  .m-modal-confirm-body {
+    padding: ($opspot-padding * 2) (24px + ($opspot-padding * 4)) ($opspot-padding * 2) ($opspot-padding * 2);
+  }
+
+  .o-delete{
+    width: 470px;
+    padding: 38px 15px 35px;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include mq($from: $mobile_sm, $until: $mobile_lg) {
+      width: 100%;
+      padding: 25px 15px;
+      margin: 0px 15px;
+	  }
+    &__content{
+      margin: 39px 0px 48px;
+      text-align: center;
+    }
+    &__action{
+      display: flex;
+      flex-direction: row-reverse;
+      .btn{
+        width: 128px;
+        margin: 0px 8px;
+        @include mq($from: $mobile_sm, $until: $mobile_lg) {
+          width: 100px;
+          height: 40px;
+          padding: 6px;
+        }
+      }
+    }
+    &__close{
+      position: absolute;
+      top:25px;
+      right: 18px;
+      i{
+        font-size: 18px;
+      }
+    }
+  }
+
+  .m-modal-confirm-buttons {
+    margin-top: $opspot-padding * 2;
+
+    >button+button {
+      margin-left: $opspot-padding;
+    }
+  }
+
+}
+
+// delete confirm pop up style
+
+.o-delete {
+  width: 470px;
+  padding: 38px 15px 35px;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include mq($from: $mobile_sm, $until: $mobile_lg) {
+    width: 100%;
+    padding: 25px 15px;
+    margin: 0px 15px;
+  }
+
+  &__content {
+    margin: 39px 0px 48px;
+    text-align: center;
+  }
+
+  &__action {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .btn {
+      width: 128px;
+      margin: 0px 8px;
+
+      @include mq($from: $mobile_sm, $until: $mobile_lg) {
+        width: 100px;
+        height: 40px;
+        padding: 6px;
+      }
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 25px;
+    right: 18px;
+
+    i {
+      font-size: 18px;
+    }
+  }
+}
