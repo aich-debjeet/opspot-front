@@ -26,6 +26,9 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 })
 export class PostFormComponent {
 
+  opspot = window.Opspot;
+
+
   reqBody = {
     message: '',
     tags: [],
@@ -49,7 +52,6 @@ export class PostFormComponent {
     wire_threshold: null
   };
   tags = [];
-  opspot;
   inProgress = false;
 
   canPost = true;
@@ -217,8 +219,11 @@ export class PostFormComponent {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
+          if(obj['src'] == null){
+          obj['src'] = 'assets/videos/video_thumbnail.png'
+          }
           // console.log(guid);
-          // console.log(obj);
+          // console.log(obj['src']);
           this.cards.push(obj);
           // console.log(this.cards);
           this.inProgress = false;
