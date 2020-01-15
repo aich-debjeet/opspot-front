@@ -15,6 +15,7 @@
                     (keyup)="getPostPreview(message)"
                     (ngModelChange)="onMessageChange($event)"
                     [autoGrow]
+                    autofocus
                 ></textarea>
             </div>
         </div>
@@ -75,16 +76,21 @@
                 <div class="float-left" *ngIf="defaultCoins.length > 0">
                     <span class="text-md f500">{{defaultCoins}} Pay Per Post</span>
                 </div>
-                <a (click)="displayPaywall()" class="o-create-post-right__dropdown"><span
-                        class="icon-chevron-down" id="post-form-set-paywall-icon"></span></a>
+                <a (click)="displayPaywall()" class="o-create-post-right__dropdown">
+                    <span class="icon-chevron-down" id="post-form-set-paywall-icon"></span>
+                </a>
                 <div class="o-create-post-dropdown-footer" [hidden]="!displayPaywal">
                     <div class="o-create-post-dropdown-footer__paywall">
-                        <div class="text-sm grey" id="post-form-paywall-text">Coins required to unlock this post</div>
+                        <div class="text-sm grey" id="post-form-paywall-tokens">Coins required to unlock this post</div>
                         <div class="paywall-coins">
-                            <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins"
-                                placeholder="0 Pay Per Post" id="poast-set-coins">
-                            <button type="button" class="btn btn-primary btn-sm disabled"
-                                (click)="displayPaywall()" id="poast-coins-add">Add</button>
+                            <input type="text" name="coinsDefault" [(ngModel)]="defaultCoins" placeholder="0 Pay Per Post" id="post-set-coins">
+                        </div>
+                        <div class="text-sm grey m-t-10" id="post-form-paywall-message">Paywall message</div>
+                        <div class="paywall-coins">
+                            <textarea name="paywallMessage" id="post-set-coins" maxlength="120" [(ngModel)]="paywallMessage"></textarea>
+                        </div>
+                        <div class="m-t-10">
+                            <button type="button" class="btn btn-primary btn-sm disabled" (click)="displayPaywall()" id="post-coins-add">Add</button>
                         </div>
                     </div>
                 </div>
@@ -94,3 +100,21 @@
         </div>
     </div>
 </form>
+
+<style>
+.o-create-post-dropdown-footer {
+  right: 45px;
+  top: 50px;
+}
+.o-create-post-dropdown-footer input, .o-create-post-dropdown-footer textarea {
+    width: 100%;
+}
+.o-create-post-dropdown-footer textarea {
+    height: 100px;
+    resize: none;
+    outline: none;
+}
+.m-t-10 {
+    margin-top: 10px;
+}
+</style>

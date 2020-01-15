@@ -168,25 +168,9 @@ export class PostFormComponent {
       }
       this.meta.wire_threshold = {
         min: this.defaultCoins,
-        type: 'tokens'
+        type: 'tokens',
+        message: this.paywallMessage
       };
-    }
-
-    // check message if paywall is there
-    if (this.meta.wire_threshold) {
-      console.log('PAYWALL');
-      if (!this.paywallMessage) {
-        // trigger modal to accept paywall message
-        alert('Please add paywall message');
-
-        this.overlayModal.create(PaywallMessageComponent, { message: '' }, {
-          class: '',
-        }
-        ).present();
-        return;
-      }
-    } else {
-      console.log('NO PAYWALL');
     }
 
     // if (this.hashtagsSelector.tags.length > 5) {
@@ -198,9 +182,6 @@ export class PostFormComponent {
     // console.log("this.attachment.exportMeta(): ", this.attachment.exportMeta());
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-
-    console.log('this.meta', this.meta);
-    console.log('data', data);
 
     data.tags = this.tags;
     data.mature = this.isNSFW;
