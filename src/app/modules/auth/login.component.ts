@@ -58,7 +58,7 @@ export class LoginComponent {
       this.loginReferrer.register('/newsfeed');
       // this.loginReferrer.navigate();
     }
-    if (window.screen.width > 600) {
+    if (window.screen.width > 800) {
       this.loginView = true;
     }
 
