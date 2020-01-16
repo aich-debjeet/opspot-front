@@ -17,7 +17,8 @@ import { NewsfeedService } from './services/newsfeed.service';
 
 @Component({
   selector: 'm-newsfeed',
-  templateUrl: 'newsfeed.component.html'
+  templateUrl: 'newsfeed.component.html',
+  styleUrls: ['./newsfeed.component.scss']
 })
 
 export class NewsfeedComponent {

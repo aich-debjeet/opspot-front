@@ -326,7 +326,11 @@ export class PostFormComponent {
     // } else {
     //   this.displayPaywal = true;
     // }
-    this.overlayModal.create(PaywallMessageComponent, {}, {
+    this.overlayModal.create(PaywallMessageComponent,
+      {
+        coins: this.defaultCoins,
+        message: this.paywallMessage
+      }, {
       class: 'm-overlay-modal--paywall-selector m-overlay-modal--small',
       onSelected: (data) => {
         this.paywallMessage = data.message;

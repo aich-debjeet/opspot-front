@@ -13,11 +13,11 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
   template: `
     <!-- TODO @gayatri: check if can reuse the markup -->
     <a *ngIf="!large" class="o-actions__link" (click)="thumb()" id="like" >
-      <i class='spot-ico' [ngClass]="{'icon-heart-filled': has(),'icon-heart':!has() }"></i>
+      <i class='spot-ico' [ngClass]="{'icon-heart_active': has(),'icon-heart':!has() }"></i>
       <span class="o-action-count text-sm grey" id="like-count" *ngIf="object['thumbs:up:count'] > -1"><span>{{object['thumbs:up:count'] | number}}</span></span>
     </a>
     <div *ngIf="large" class="spot-ico-block" (click)="thumb()">
-    <i class='spot-ico' [ngClass]="{'icon-heart-filled': has(),'icon-heart':!has() }" id="like">
+    <i class='spot-ico' [ngClass]="{'icon-heart_active': has(),'icon-heart':!has() }" id="like">
     </i>
     <span class="text-md f500">Like</span> 
     </div>
