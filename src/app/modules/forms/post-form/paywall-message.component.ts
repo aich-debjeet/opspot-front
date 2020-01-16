@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-paywall-message',
@@ -13,6 +13,11 @@ export class PaywallMessageComponent implements OnInit {
   _opts: any;
   set opts(opts: any) {
     this._opts = opts;
+  }
+
+  @Input('object') set data(object) {
+    this.coins = object ? object.coins : null;
+    this.message = object ? object.message : null;
   }
 
   constructor() { }
