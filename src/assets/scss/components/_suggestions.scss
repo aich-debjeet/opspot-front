@@ -40,6 +40,12 @@
     }
     &__name{
         margin-top: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            width: 106px;
+        }
     }
     &__info{
         text-align: center;
