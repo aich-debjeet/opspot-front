@@ -326,7 +326,7 @@ export class MediaViewComponent {
   videoData: any;
 
   showImage(i, data?) {
-    console.log("Data: ", data);
+    // console.log("Data: ", data);
 
     if (data && data.entity_type === 'video') {
       this.showVideo = true;
