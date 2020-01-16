@@ -242,20 +242,23 @@ opspot-button-remind{
             </div>
           </div>
           <div class="o-post-inner-page-myjourney-image">
-            <img [src]="largeImage" alt="" *ngIf="!showVideo">
-            <m-video *ngIf="showVideo" style="background:#000;" [muted]="false" [poster]="videoData.thumbnail_src"
+            <img [src]="largeImage" alt="" *ngIf="!showVideo && !showAudio">
+            <m-video *ngIf="showVideo && !showAudio" style="background:#000;" [muted]="false" [poster]="videoData.thumbnail_src"
               [src]="[{ 'res': '360', 'uri': 'api/v1/media/' + videoData.guid + '/play', 'type': 'video/mp4' }]"
               [guid]="videoData.guid" [torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
               <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
             </m-video>
+            <!-- <m-audio *ngIf="showAudio && !showVideo" [src]="'api/v1/media/' + videoData.guid + '/play'"></m-audio> -->
+            <m-audio *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio>
           </div>
           <div class="o-posts-inner-page-myjourney-padding">
             <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">
               <div *ngFor="let media of entity?.custom_data; let i = index;">
                 <a class="feed-media__link" id="view-media-link">
-                  <img *ngIf="media.entity_type !== 'video'" [src]="media.src" alt="" class="feed-media__img"
+                  <img *ngIf="media.entity_type !== 'video' && media.entity_type !== 'audio'" [src]="media.src" alt="" class="feed-media__img"
                     (click)="showImage(i)">
                   <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+                  <img *ngIf="media.entity_type === 'audio'" src="assets/videos/video_thumbnail.png" alt="" class="feed-media__img" (click)="showImage(i,media)">
                   <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
                     <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
                   </div>
@@ -272,10 +275,10 @@ opspot-button-remind{
                     <!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + media.src + ')'"></div> -->
                     <!-- <img [src]="media.src" alt="" class="feed-media__img"
                       (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
-                    <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'"
+                    <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'  && media.entity_type !== 'audio'""
                       (click)="showImage(i)">
-                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt=""
-                      class="feed-media__img">
+                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+                    <img *ngIf="media.entity_type === 'audio'" src="assets/videos/video_thumbnail.png" alt="" class="feed-media__img" (click)="showImage(i,media)">
                     <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
                       <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
                     </div>
