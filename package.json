@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
     "prebuild": "gulp build.sass",
-    "build": "ng build --prod --output-path dist/en --deploy-url=/en/",
+    "build": "node --max-old-space-size=6096 ./node_modules/@angular/cli/bin/ng build --prod --output-path dist/en --deploy-url=/en/",
     "prebuild-dev": "gulp build.sass --deploy-url=https://ops.doesntexist.com/en",
     "build-dev": "ng build --output-path dist/en --deploy-url=/en/ --watch=false",
     "test": "ng test",
