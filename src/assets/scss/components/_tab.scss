@@ -2,6 +2,9 @@
     width:100%;
     height:auto;
     margin:0 auto;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        padding: 0px!important;
+    }
 }
 
 /* tab list item */
@@ -12,8 +15,11 @@
     border-bottom: 1px solid #dde4e8;
     display: flex;
     margin-bottom: 9px;
+    flex-direction: row;
+    align-items: center;
     @include mq($from: $mobile_sm, $until: $tablet) {
-        justify-content: center;
+        overflow-x: scroll;
+        justify-content: space-between;
     }
 }
 .tabs .tabs-list li{
@@ -22,6 +28,9 @@
     margin: 15px 12px 0px;
     text-align: center;
     background-color:transparent;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        width: unset!important;
+    }
 }
 .tabs .tabs-list li:hover{
     cursor:pointer;

@@ -60,6 +60,9 @@
 //input width
 .o-settings-width{
   width: 314px;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+    width: 100%;
+  }
       input{
       background-color: $grey-light;
       }   
