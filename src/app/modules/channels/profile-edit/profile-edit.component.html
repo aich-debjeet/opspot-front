@@ -9,7 +9,7 @@
                 <div class="c-cmplt-prof">
                     <div class="col-12 col-sm-2 col-md-2 col-lg-1 col-xl-1 p-0">
                         <div class="c-cmplt-prof__progress-bar">
-                            <div class="progress progress--settings" data-percentage="50">
+                            <div class="progress progress--settings" data-percentage="completedPercentage">
                                 <span class="progress-left">
                                     <span class="progress-bar"></span>
                                 </span>
@@ -18,7 +18,7 @@
                                 </span>
                                 <div class="progress-value">
                                     <div class="text-sm primary" id="profile-completion-range">
-                                        50%
+                                        {{completedPercentage}}
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                         </li>
                     </ul>
                 </swiper>
-                <router-outlet></router-outlet>
+                <router-outlet (activate)="onActivate($event)" (deactivate)='onDeactivate($event)'></router-outlet>
             </div>
         </div>
     </div>
