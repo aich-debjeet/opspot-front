@@ -680,6 +680,10 @@ select.form-control-lg:not([size]):not([multiple]),
         right: 14px;
         width: 16px;
         height: 16px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            font-size: 16px;
+            right: 22px;
+        }
         img {
             width: 16px;
             padding-top: 2px;

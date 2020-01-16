@@ -1,7 +1,8 @@
 import { Component, EventEmitter } from '@angular/core';
 
 import { Client } from '../../../../../services/api';
-import { GroupsService } from '../../../../../modules/groups/groups-service';
+
+import { OrganizationService } from '../../../organization-service';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class OrganizationProfileMembersInvite {
 
   timeout;
  
-  constructor(public client: Client, public service: GroupsService) {
+  constructor(public client: Client, public service: OrganizationService) {
    if(window.innerWidth<775){this.mobileView=true;}
   }
 
