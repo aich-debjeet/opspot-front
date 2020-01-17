@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { Subscription } from 'rxjs';
 
@@ -58,6 +59,7 @@ export class SettingsGeneralComponent {
     public route: ActivatedRoute,
     public router: Router,
     public thirdpartynetworks: ThirdPartyNetworksService,
+    private toastr: ToastrService
   ) {
     this.opspot = window.Opspot;
     this.getCategories();
@@ -176,6 +178,9 @@ export class SettingsGeneralComponent {
         portfolio: this.portfolio ? 1 : 0
       })
       .then((response: any) => {
+        this.toastr.success('You have successfully updated your preferences.', '', {
+          timeOut: 3000
+        });
         this.changed = false;
         this.saved = true;
         this.error = '';
@@ -266,6 +271,9 @@ export class SettingsGeneralComponent {
     }
     this.client.post('api/v2/settings/delete', { password })
       .then((response: any) => {
+        this.toastr.success('You have successfully deleted your account.', '', {
+          timeOut: 3000
+        });
         this.router.navigate(['/logout']);
       })
       .catch((e: any) => {
@@ -275,6 +283,9 @@ export class SettingsGeneralComponent {
   deactivate(){
     this.client.delete('api/v1/channel')
       .then((response: any) => {
+        this.toastr.success('You have successfully deactivated your account.', '', {
+          timeOut: 3000
+        });
         this.router.navigate(['/logout']);
       })
       .catch((e: any) => {
