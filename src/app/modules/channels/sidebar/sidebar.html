@@ -277,7 +277,7 @@
       </div>
     </div><!-- education detail end-->
     <div *ngIf="user?.awards?.length > 0" class="o-award">
-      <a *ngIf="isOwner()" id="sidebar-edit-award" class="o-edit" [routerLink]="['/profile/education']"><i
+      <a *ngIf="isOwner()" id="sidebar-edit-award" class="o-edit" [routerLink]="['/profile/awards']"><i
           class="icon-edit-profile f-15"></i></a>
       <div class="o-award__title caption-medium">Awards</div>
       <div *ngFor="let award of user?.awards" class="o-award-info">

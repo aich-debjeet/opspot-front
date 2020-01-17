@@ -16,6 +16,7 @@ export class EnrolmentViewComponent implements OnInit {
   inProgress: boolean = false;
   enrolmentDetails: any;
   formData: any;
+  enrollmentDetails:any;
 
   constructor(
     public client: Client,
@@ -26,6 +27,10 @@ export class EnrolmentViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const location = window.location.href;
+    const a = document.createElement('script');
+    a.src = 'https://js.instamojo.com/v1/checkout.js';
+    this.elementRef.nativeElement.appendChild(a);
     this.load();
     this.title.setTitle('Enrolment');
   }
@@ -38,6 +43,7 @@ export class EnrolmentViewComponent implements OnInit {
 
     this.client.get('api/v3/campaign/enrolment')
       .then((data: any) => {
+        console.log('campaign dta',data)
         this.enrolmentDetails = data;
       })
       .catch((e) => {
@@ -45,8 +51,10 @@ export class EnrolmentViewComponent implements OnInit {
       });
   }
 
-  proceedPayment(formData: any) {
-    this.formData = formData;
+  proceedPayment(enrollDetails: any) {
+    this.enrollmentDetails = enrollDetails;
+    this.formData = this.enrollmentDetails.form;
+    console.log('form data =', this.enrollmentDetails);
     this.payment();
   }
 
@@ -61,6 +69,8 @@ export class EnrolmentViewComponent implements OnInit {
     formData.append('buyer_name', this.formData.fullname);
     formData.append('email', this.formData.email);
     formData.append('phone', this.formData.phone_no);
+    formData.append('redirect_url', window.Opspot.site_url + 'campaign/invoice/'+ this.enrollmentDetails.campaignGuid + '/' + this.enrollmentDetails.enrollGuid);
+    formData.append('enrolment_id', this.enrollmentDetails.enrollGuid);
 
     this.http.post<any>('api/v3/payment/instamojo', formData).subscribe(
       (res) => {

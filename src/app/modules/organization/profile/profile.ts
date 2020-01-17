@@ -3,7 +3,7 @@ import { ActivatedRoute, ChildActivationEnd, NavigationEnd, Router } from '@angu
 
 import { Subscription } from 'rxjs';
 
-import { GroupsService } from '../../../modules/groups/groups-service';
+import { OrganizationService } from '../organization-service';
 
 import { RecentService } from '../../../services/ux/recent';
 import { OpspotTitle } from '../../../services/ux/title';
@@ -69,7 +69,7 @@ export class OrganizationProfile {
 
   constructor(
     public session: Session,
-    public service: GroupsService,
+    public service: OrganizationService,
     public route: ActivatedRoute,
     private router: Router,
     public title: OpspotTitle,

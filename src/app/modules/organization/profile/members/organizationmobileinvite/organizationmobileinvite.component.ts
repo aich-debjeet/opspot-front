@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { GroupsService } from '../../../../../modules/groups/groups-service';
+import { OrganizationService } from '../../../organization-service';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class OrganizationMobileInvite implements OnInit {
 
   constructor(private _location:Location
     ,public route:ActivatedRoute,
-     private service:GroupsService) { 
+     private service:OrganizationService) { 
    this.route.params.subscribe(params=>{
      if(params['guid']){
       this.load(params['guid'])

@@ -24844,7 +24844,7 @@ app-image-croper .m-modal-container {
       &__status{
           padding: 8px 10px;
           height: 34px;	
-          width: 130px;	
+          min-width: 130px;	
           border: 1px solid rgba(144,164,174,0.2);	
           border-radius: 4px;	
           background-color:$white;	
@@ -24883,7 +24883,7 @@ app-image-croper .m-modal-container {
   // border: 1px solid #ECEFF1;	
   border-radius: 4px;	
   background-color:$white;	
-  z-index:99999999;
+  z-index: 99;
   box-shadow: 0 6px 10px 0 rgba(144,164,174,0.16), 0 1px 12px 0 rgba(144,164,174,0.18), 0 3px 5px 0 rgba(144,164,174,0.2);
   @include mq($from: $mobile_sm, $until:$tablet ){
     left: 0px;

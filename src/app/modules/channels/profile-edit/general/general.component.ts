@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,EventEmitter, Output } from '@angular/core';
 import { TopbarHashtagsService } from '../../../hashtags/service/topbar.service';
 import { Client } from '../../../../services/api/client';
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ export class GeneralComponent implements OnInit {
     fullName: '',
     skills: []
   };
+  @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private service: TopbarHashtagsService,
@@ -34,8 +35,13 @@ export class GeneralComponent implements OnInit {
         skills: skills ? skills : []
       }
     };
-    this.client.post('api/v1/entities/general_info', info).then(res => {
-      this.router.navigate(['/profile/about']);
+    this.client.post('api/v1/entities/general_info', info).then((res:any) => {
+      // this.router.navigate(['/profile/about']);
+      if (res.status === 'success' && res.entities == true) {
+        this.client.get('api/v2/onboarding/progress').then((response: any) => {
+          this.updatePercentage.emit(response.rating);
+        });
+      }
     });
   }
 

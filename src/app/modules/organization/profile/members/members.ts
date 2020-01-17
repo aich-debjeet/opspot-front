@@ -1,6 +1,6 @@
 import { Component, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 
-import { GroupsService } from '../../../../modules/groups/groups-service';
+import { OrganizationService } from '../../organization-service';
 import { OpspotHttpClient } from '../../../../common/api/client.service';
 import { map } from 'rxjs/operators';
 import { Session } from '../../../../services/session';
@@ -37,7 +37,7 @@ opspot = window.Opspot;
 
   httpSubscription;
 
-  constructor(public session: Session, public client: OpspotHttpClient, public service: GroupsService) {
+  constructor(public session: Session, public client: OpspotHttpClient, public service: OrganizationService) {
 
   }
 

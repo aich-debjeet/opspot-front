@@ -191,7 +191,7 @@ export class GroupsService {
   // Management
 
   grantOwnership(group: any, user: string) {
-    return this.clientService.put(`${this.base}management/${group.guid}/${user}`)
+    return this.clientService.put(`${this.base}management/${group.guid}/${user}/admin`)
       .then((response: any) => {
         return !!response.done;
       })
@@ -201,7 +201,7 @@ export class GroupsService {
   }
 
   revokeOwnership(group: any, user: string) {
-    return this.clientService.delete(`${this.base}management/${group.guid}/${user}`)
+    return this.clientService.delete(`${this.base}management/${group.guid}/${user}/admin`)
       .then((response: any) => {
         return !response.done;
       })

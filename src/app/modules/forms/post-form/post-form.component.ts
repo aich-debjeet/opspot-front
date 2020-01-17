@@ -15,15 +15,19 @@ import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.comp
 import { Tag } from '../../hashtags/types/tag';
 // import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
-// import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { PaywallMessageComponent } from './paywall-message.component';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 // import { LoginComponent } from '../../auth/login.component';
 
 @Component({
   selector: 'app-post-form',
   templateUrl: './post-form.component.html',
-  styleUrls: ['./post-form.component.scss']
+  // styleUrls: ['./post-form.component.scss']
 })
 export class PostFormComponent {
+
+  opspot = window.Opspot;
+
 
   reqBody = {
     message: '',
@@ -48,7 +52,6 @@ export class PostFormComponent {
     wire_threshold: null
   };
   tags = [];
-  opspot;
   inProgress = false;
 
   canPost = true;
@@ -60,9 +63,10 @@ export class PostFormComponent {
   submitted = false;
   cards = [];
   isNSFW = false;
-  displayPaywal = false;
+  // displayPaywal = false;
   defaultCoins = '';
   entity: any;
+  paywallMessage: string;
 
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
@@ -81,7 +85,7 @@ export class PostFormComponent {
     public upload: Upload,
     public attachment: AttachmentService,
     // private formBuilder: FormBuilder,
-    // private overlayModal: OverlayModalService
+    private overlayModal: OverlayModalService
   ) {
     this.opspot = window.Opspot;
     this.cards = [];
@@ -166,9 +170,11 @@ export class PostFormComponent {
       }
       this.meta.wire_threshold = {
         min: this.defaultCoins,
-        type: 'tokens'
+        type: 'tokens',
+        message: this.paywallMessage
       };
     }
+
     // if (this.hashtagsSelector.tags.length > 5) {
     //   this.showTagsError();
     //   return;
@@ -178,26 +184,16 @@ export class PostFormComponent {
     // console.log("this.attachment.exportMeta(): ", this.attachment.exportMeta());
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-    // console.log("data: ", data);
-    // console.log("data: ", data);
-
 
     data.tags = this.tags;
     data.mature = this.isNSFW;
-    // console.log(data);
-    // console.log(this.meta);
-    // console.log(this.attachment.exportMeta());
 
     this.inProgress = true;
     this.client
       .post('api/v1/newsfeed', data)
       .then((data: any) => {
         // data.activity.boostToggle = true; //@gayatri hava to check this
-
-        // console.log(data);
         this.load.emit(data);
-
-        // this.load.next(data.activity);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
         this.inProgress = false;
@@ -223,8 +219,11 @@ export class PostFormComponent {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
+          if(obj['src'] == null){
+          obj['src'] = 'assets/videos/video_thumbnail.png'
+          }
           // console.log(guid);
-          // console.log(obj);
+          // console.log(obj['src']);
           this.cards.push(obj);
           // console.log(this.cards);
           this.inProgress = false;
@@ -322,11 +321,23 @@ export class PostFormComponent {
   }
 
   displayPaywall() {
-    if (this.displayPaywal) {
-      this.displayPaywal = false;
-    } else {
-      this.displayPaywal = true;
-    }
+    // if (this.displayPaywal) {
+    //   this.displayPaywal = false;
+    // } else {
+    //   this.displayPaywal = true;
+    // }
+    this.overlayModal.create(PaywallMessageComponent,
+      {
+        coins: this.defaultCoins,
+        message: this.paywallMessage
+      }, {
+      class: 'm-overlay-modal--paywall-selector m-overlay-modal--small',
+      onSelected: (data) => {
+        this.paywallMessage = data.message;
+        this.defaultCoins = data.coins;
+        this.overlayModal.dismiss();
+      },
+    }).present();
   }
 
   // emitEvent(data){

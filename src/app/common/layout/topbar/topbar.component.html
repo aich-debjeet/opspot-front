@@ -125,7 +125,7 @@
                 <li class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="entity">
                   <a id="topbar-dropdown-organizationname">
                     <!-- <i class="material-icons">trending_up</i> -->
-                    <span [routerLink]="['/organization/profile/'+ entity.guid + '/feed']">{{entity.name}}</span>
+                    <span [routerLink]="['/organization/profile', entity.guid,  'feed']">{{entity.name}}</span>
                   </a>
                 </li>
               <!-- </div> -->
@@ -339,7 +339,7 @@
           </a>
         </li>
         <li class="app-nav-link_-item" *ngIf="entity">
-          <a [routerLink]="['/organization/profile/'+ entity.guid + '/feed']" (click)='closeNav()'>
+          <a [routerLink]="['/organization/profile', entity.guid,  'feed']" (click)='closeNav()'>
             <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
             <div class="app-nav-link__text">{{entity.name}}</div>
           </a>

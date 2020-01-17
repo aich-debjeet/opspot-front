@@ -69,7 +69,7 @@ export class GroupsProfileFeed {
 
   setUpPoll() {
     this.pollingTimer = setInterval(() => {
-      this.client.get('api/v1/newsfeed/container/' + this.guid, { offset: this.pollingOffset, count: true }, { cache: true })
+      this.client.get('api/v1/newsfeed/container/' + this.guid, { offset: this.pollingOffset, count: true })
         .then((response: any) => {
           if (typeof response.count === 'undefined') {
             return;
@@ -247,6 +247,9 @@ export class GroupsProfileFeed {
       this.pollingNewPosts = 0;
       this.activity = [];
     }
+
+    // console.log("filter: ", this.filter);
+    
 
     switch(this.filter) {
       case 'activity':
