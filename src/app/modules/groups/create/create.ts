@@ -266,7 +266,7 @@ export class GroupsCreator {
     public route:ActivatedRoute,
     private _location: Location
     ) {
-    this.title.setTitle('Create Group');
+    this.title.setTitle('Create Community');
   }
 
   addBanner(banner: any) {

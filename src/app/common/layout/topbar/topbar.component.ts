@@ -10,6 +10,8 @@ import { Session } from '../../../services/session';
 import { DynamicHostDirective } from '../../directives/dynamic-host.directive';
 import { NotificationsToasterComponent } from '../../../modules/notifications/toaster.component';
 import { Client } from '../../../services/api';
+import { Subscription } from 'rxjs';
+import { CommonEventsService } from '../../../services/common-events.service';
 
 @Component({
   moduleId: module.id,
@@ -25,13 +27,15 @@ export class TopbarComponent implements OnInit {
   user: any = {};
   componentRef;
   componentInstance: NotificationsToasterComponent;
+  commService$: Subscription;
 
   constructor(
     public session: Session,
     public storage: Storage,
     public sidebar: Sidebar,
     private _componentFactoryResolver: ComponentFactoryResolver,
-    private client: Client
+    private client: Client,
+    public commService: CommonEventsService
   ) { }
 
   ngAfterViewInit() {
@@ -40,6 +44,22 @@ export class TopbarComponent implements OnInit {
   ngOnInit() {
     this.user = this.opspot.user;
     this.getUsersOrganization();
+
+
+    this.commService$ = this.commService.listen().subscribe((e: any) => {
+      if (e.component && e.action) {
+        if (e.component === 'TopbarComponent') {
+          if (e.action === 'orgCreated') {
+            
+            this.getUsersOrganization();
+          }
+        }
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.commService$.unsubscribe();
   }
 
   /**
@@ -106,7 +126,7 @@ export class TopbarComponent implements OnInit {
         this.entities.push(response[key][0]);
         if(this.entities.length){
           this.entity = this.entities[0];
-          // console.log("this:  ",  this.entity);
+          // console.log("this:  ", response);
           
         }
         // for (var i = 0; i <= this.entities.length; i++) {

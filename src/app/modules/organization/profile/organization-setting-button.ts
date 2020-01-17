@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { GroupsService } from '../../../modules/groups/groups-service';
+import { OrganizationService } from '../organization-service';
 import { ReportCreatorComponent } from '../../report/creator/creator.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { Client } from '../../../services/api/client';
@@ -111,7 +111,7 @@ export class OrganizationSettingButton {
 
   featureModalOpen: boolean = false;
 
-  constructor(public service: GroupsService, public client: Client, public session: Session, public overlayService: OverlayModalService, public router: Router) {
+  constructor(public service: OrganizationService, public client: Client, public session: Session, public overlayService: OverlayModalService, public router: Router) {
   }
 
   ngOnInit() {

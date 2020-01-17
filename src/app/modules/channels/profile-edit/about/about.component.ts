@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Client } from '../../../../services/api/client';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-about',
@@ -10,8 +11,9 @@ import { Router } from '@angular/router';
 export class AboutComponent implements OnInit {
   month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
   activeUser = window.Opspot.user;
+  @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
-  constructor(private client: Client, public router: Router) {
+  constructor(private client: Client, public router: Router,private toastr: ToastrService) {
     this.data = ['Kannada', 'English', 'Hindi', 'Tamil'];
     this.load();
   }
@@ -28,7 +30,7 @@ export class AboutComponent implements OnInit {
   toggleDob;
   aboutError = { dob: false, dobInvalid: false, gender: false };
   submitted = false;
-  invalidForm:boolean = false;
+  invalidForm: boolean = false;
 
   ngOnInit() {
     //set privacy
@@ -105,13 +107,25 @@ export class AboutComponent implements OnInit {
         }
       };
 
-      this.client.post('api/v1/entities/about', about).then(res => {
-        this.router.navigate(['/profile/contact']);
-      }).catch((e)=> {
-        if(e.status === 'error'){
+      this.client.post('api/v1/entities/about', about).then((res: any) => {
+        if (res.status === 'success' && res.entities == true) {
+          this.client.get('api/v2/onboarding/progress').then((response: any) => {
+            this.showSuccess();
+            this.updatePercentage.emit(response.rating)
+          });
+        }
+        // this.router.navigate(['/profile/contact']);
+      }).catch((e) => {
+        if (e.status === 'error') {
           this.invalidForm = true;
         } else this.invalidForm = false;
       });
     }
+  }
+
+  showSuccess() {
+    this.toastr.success('You have successfully updated your profile', '', {
+      timeOut: 3000
+    });
   }
 }

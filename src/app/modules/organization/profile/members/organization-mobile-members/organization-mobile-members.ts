@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Session } from '../../../../../services/session';
-import { GroupsService } from '../../../../groups/groups-service';
+import { OrganizationService } from '../../../organization-service';
 import { OpspotHttpClient } from '../../../../../common/api/client.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -15,7 +15,7 @@ export class OrganizationMobileMembers implements OnInit {
   constructor(
     public session: Session,
     public client: OpspotHttpClient,
-    public service: GroupsService,
+    public service: OrganizationService,
     private route: ActivatedRoute,
     private _location: Location) {
     this.route.params.subscribe(params => {

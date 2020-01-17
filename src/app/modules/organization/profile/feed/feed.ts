@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { GroupsService } from '../../../../modules/groups/groups-service';
-
 import { Client } from '../../../../services/api';
 import { Session } from '../../../../services/session';
 import { PosterComponent } from '../../../newsfeed/poster/poster.component';
 import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
+
+import { OrganizationService } from '../../organization-service';
 
 interface OpspotOrganizationResponse {
     organization: OpspotOrganization;
@@ -50,7 +50,7 @@ interface OpspotOrganizationResponse {
   
     @ViewChild('poster') private poster: PosterComponent;
   
-    constructor(public session: Session, public client: Client, public service: GroupsService, private route: ActivatedRoute) { }
+    constructor(public session: Session, public client: Client, public service: OrganizationService, private route: ActivatedRoute) { }
   
     ngOnInit() {
       this.$organization = this.service.$group.subscribe((org) => {

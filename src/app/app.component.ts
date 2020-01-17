@@ -52,6 +52,8 @@ export class Opspot {
     this.notificationService.getNotifications();
 
     this.session.isLoggedIn(async(is) => {
+      // console.log('isLoggedIn: ', is);
+      // is: logged in boolean
       if (is) {
         this.showOnboarding = await this.onboardingService.showModal();
         if (this.opspot.user.language !== this.opspot.language) {

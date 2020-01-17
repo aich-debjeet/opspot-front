@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Client } from '../../../../services/api/client';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 // import { load } from '@angular/core/src/render3';
 
 @Component({
@@ -10,9 +12,12 @@ import { Router } from '@angular/router';
 })
 export class ContactComponent implements OnInit {
   activeUser = window.Opspot.user;
+  @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
+
   constructor(
     private client: Client,
-    private router: Router
+    private router: Router, 
+    private toastr: ToastrService
   ) { }
 
   privacy = {
@@ -86,8 +91,19 @@ export class ContactComponent implements OnInit {
         website_visibility: this.privacy.website
       }
     };
-    this.client.post('api/v1/entities/contact_details', contact).then(res => {
-      this.router.navigate(['/profile/work']);
+    this.client.post('api/v1/entities/contact_details', contact).then((res:any) => {
+      if (res.status === 'success' && res.entities == true) {
+        this.client.get('api/v2/onboarding/progress').then((response: any) => {
+          this.showSuccess();
+          this.updatePercentage.emit(response.rating);
+        });
+      }
+      // this.router.navigate(['/profile/work']);
+    });
+  }
+  showSuccess() {
+    this.toastr.success('You have successfully updated your profile', '', {
+      timeOut: 3000
     });
   }
 }

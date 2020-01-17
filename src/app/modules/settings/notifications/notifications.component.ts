@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { Client } from '../../../services/api/client';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-notifications',
@@ -39,7 +40,7 @@ export class NotificationsComponent implements OnInit {
 
   paramsSubscription: Subscription;
 
-  constructor(public client: Client, public overlayModal: OverlayModalService) {
+  constructor(public client: Client, private toastr: ToastrService, public overlayModal: OverlayModalService) {
   }
 
   ngOnInit() {
@@ -85,6 +86,9 @@ export class NotificationsComponent implements OnInit {
       'notifications': this.notifications
     })
       .then((response: any) => {
+        this.toastr.success('You have successfully updated your preferences.', '', {
+          timeOut: 3000
+        });
         this.changed = false;
         this.saved = true;
         this.error = '';

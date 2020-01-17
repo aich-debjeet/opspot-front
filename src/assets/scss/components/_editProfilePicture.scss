@@ -18,7 +18,7 @@
         width: 100% !important ;
     }
     input[type="range"]{
-        width:280px!important
+        width:78%!important
     }
 
 }
@@ -118,3 +118,11 @@ input[type="range"]:focus{
 }
 
 
+
+
+// modal style
+
+m-modal .m-modal-container{
+    height: unset!important;
+    min-height: unset!important;
+}

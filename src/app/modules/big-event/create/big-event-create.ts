@@ -14,11 +14,7 @@ export class BigEventCreate implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.title.setTitle('Create Events');
+    this.title.setTitle('Create Event');
   }
-
-
-
-
 
 }

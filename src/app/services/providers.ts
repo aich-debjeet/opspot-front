@@ -26,6 +26,7 @@ import { OverlayModalService } from './ux/overlay-modal';
 import { LoginReferrerService } from './login-referrer.service';
 import { ScrollToTopService } from './scroll-to-top.service';
 import { GroupsService } from '../modules/groups/groups-service';
+import { OrganizationService } from '../modules/organization/organization-service';
 
 import { GoogleChartsLoader } from './third-party/google-charts-loader';
 import { RecentService } from './ux/recent';
@@ -36,6 +37,7 @@ import { WebtorrentService } from '../modules/webtorrent/webtorrent.service';
 import { TimeDiffService } from './timediff.service';
 import { UpdateMarkersService } from '../common/services/update-markers.service';
 import { HttpClient } from "@angular/common/http";
+import { CommonEventsService } from './common-events.service';
 
 export const OPSPOT_PROVIDERS : any[] = [
    {
@@ -159,6 +161,11 @@ export const OPSPOT_PROVIDERS : any[] = [
     deps: [ Client, Upload, UpdateMarkersService ]
   },
   {
+    provide: OrganizationService,
+    useFactory: OrganizationService._,
+    deps: [ Client, Upload, UpdateMarkersService ]
+  },
+  {
     provide: RecentService,
     useFactory: RecentService._,
     deps: [ Storage ]
@@ -186,5 +193,9 @@ export const OPSPOT_PROVIDERS : any[] = [
   { 
     provide: TimeDiffService,
     useFactory: TimeDiffService._
+  },
+  {
+    provide: CommonEventsService,
+    useFactory: CommonEventsService._
   }
 ];

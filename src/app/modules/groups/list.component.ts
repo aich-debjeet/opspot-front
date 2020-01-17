@@ -45,7 +45,7 @@ export class GroupsListComponent {
   }
 
   ngOnInit() {
-    this.title.setTitle('Groups');
+    this.title.setTitle('Communities');
     this.context.set('group');
     this.opspot = window.Opspot;
     this.detectWidth();
