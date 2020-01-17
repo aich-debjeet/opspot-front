@@ -45,9 +45,15 @@ export class TopbarComponent implements OnInit {
     this.user = this.opspot.user;
     this.getUsersOrganization();
 
+
     this.commService$ = this.commService.listen().subscribe((e: any) => {
       if (e.component && e.action) {
-        console.log('RECIEVED', e);
+        if (e.component === 'TopbarComponent') {
+          if (e.action === 'orgCreated') {
+            
+            this.getUsersOrganization();
+          }
+        }
       }
     });
   }
@@ -120,7 +126,7 @@ export class TopbarComponent implements OnInit {
         this.entities.push(response[key][0]);
         if(this.entities.length){
           this.entity = this.entities[0];
-          // console.log("this:  ",  this.entity);
+          // console.log("this:  ", response);
           
         }
         // for (var i = 0; i <= this.entities.length; i++) {

@@ -132,6 +132,7 @@ export class OrganizationCreator {
           })
           .then(() => {
             this.router.navigate(['organization/profile', guid]);
+            this.navEvent()
           });
 
       })

@@ -15,7 +15,7 @@ export class CommonEventsService {
     }
 
     trigger(data: any) {
-        console.log('COMM EVENTS SERVICE', data);
+        // console.log('COMM EVENTS SERVICE', data);
         this.listners.next(data);
     }
 
