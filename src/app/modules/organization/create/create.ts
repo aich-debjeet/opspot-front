@@ -9,6 +9,7 @@ import FileHandler from '../../../utils/file-handle';
 import {Location} from '@angular/common';
 import { ORGANIZATION_TYPE} from '../../../services/list-options';
 import { OrganizationService } from '../organization-service';
+import { CommonEventsService } from '../../../services/common-events.service';
 
 
 @Component({
@@ -60,7 +61,8 @@ export class OrganizationCreator {
     public router: Router, 
     public title: OpspotTitle ,
     public route:ActivatedRoute,
-    private _location: Location
+    private _location: Location,
+    public commService: CommonEventsService
     ) {
     this.title.setTitle('Create Organization');
   }
@@ -215,6 +217,13 @@ export class OrganizationCreator {
  
  organizationReset() {
   this._location.back();
+ }
+
+ navEvent() {
+  this.commService.trigger({
+    component: 'TopbarComponent',
+    action: 'orgCreated'
+  });
  }
 
 }
