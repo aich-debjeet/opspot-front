@@ -2,6 +2,7 @@ import { Component, OnInit,EventEmitter, Output } from '@angular/core';
 import { TopbarHashtagsService } from '../../../hashtags/service/topbar.service';
 import { Client } from '../../../../services/api/client';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-general',
@@ -22,7 +23,8 @@ export class GeneralComponent implements OnInit {
   constructor(
     private service: TopbarHashtagsService,
     private client: Client,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.load();
   }
@@ -39,6 +41,7 @@ export class GeneralComponent implements OnInit {
       // this.router.navigate(['/profile/about']);
       if (res.status === 'success' && res.entities == true) {
         this.client.get('api/v2/onboarding/progress').then((response: any) => {
+          this.showSuccess();
           this.updatePercentage.emit(response.rating);
         });
       }
@@ -77,5 +80,11 @@ export class GeneralComponent implements OnInit {
 
   ngOnInit() {
     this.getInfo();
+  }
+
+  showSuccess() {
+    this.toastr.success('You have successfully updated your profile.', '', {
+      timeOut: 3000
+    });
   }
 }

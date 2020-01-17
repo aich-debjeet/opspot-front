@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CaptchaModule } from './modules/captcha/captcha.module';
 import { TextMaskModule } from 'angular2-text-mask';
+import { ToastrModule } from 'ngx-toastr';
 
 import { Opspot } from './app.component';
 
@@ -89,6 +90,10 @@ import { BigEventModule } from './modules/big-event/big-event.module';
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(OpspotAppRoutes),
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+      positionClass: 'toast-top-right'
+    }),
     CaptchaModule,
     CommonModule,
     WalletModule,
@@ -149,4 +154,4 @@ import { BigEventModule } from './modules/big-event/big-event.module';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class OpspotModule {}
+export class OpspotModule { }

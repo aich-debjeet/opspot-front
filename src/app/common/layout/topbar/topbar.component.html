@@ -95,7 +95,7 @@
                   <span>View Channel</span>
                 </a>
               </li> -->
-              <li class="m-dropdownList__item" (click)="profileMenu.value = false">
+              <li [routerLink]="['/', session.getLoggedInUser().username]" class="m-dropdownList__item" (click)="profileMenu.value = false">
                 <div class="o-prof-avatar-name" id="topbar-dropdown-profile-details">
                   <div class="o-avatar">
                     <img
@@ -104,45 +104,45 @@
                   </div>
                   <div class="o-prof-avatar-name__block">
                     <div class="text-lg f500">{{ session.getLoggedInUser().name | truncate:[15, '...'] }}</div>
-                    <a [routerLink]="['/', session.getLoggedInUser().username]" class="text-sm primary" id="topbar-dropdown-view-Profile">View Profile</a>
+                    <a class="text-sm primary" id="topbar-dropdown-view-Profile">View Profile</a>
                   </div>
                 </div>
               </li>
-              <li class="m-dropdownList__item" *ngIf="session.isAdmin()"
+              <li [routerLink]="['/admin/analytics']" class="m-dropdownList__item" *ngIf="session.isAdmin()"
                 (click)="profileMenu.value = false">
-                <a [routerLink]="['/admin/analytics']" i18n="@@OPSPOT__TOPBAR__ADMIN" id="topbar-dropdown-admin">
+                <a i18n="@@OPSPOT__TOPBAR__ADMIN" id="topbar-dropdown-admin">
                   <i class="material-icons">build</i>
                   <span>Admin</span>
                 </a>
               </li>
-              <li class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="!entity">
-                <a [routerLink]="['/organization/create']" id="topbar-dropdown-create-organization">
+              <li [routerLink]="['/organization/create']" class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="!entity">
+                <a id="topbar-dropdown-create-organization">
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>Create Organisation</span>
                 </a>
               </li>
               <!-- <div *ngFor="let entity of entities"> -->
-                <li class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="entity">
+                <li [routerLink]="['/organization/profile', entity.guid,  'feed']" class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="entity">
                   <a id="topbar-dropdown-organizationname">
                     <!-- <i class="material-icons">trending_up</i> -->
-                    <span [routerLink]="['/organization/profile', entity.guid,  'feed']">{{entity.name}}</span>
+                    <span>{{entity.name}}</span>
                   </a>
                 </li>
               <!-- </div> -->
-              <li class="m-dropdownList__item" (click)="profileMenu.value = false">
-                <a [routerLink]="['/boost/console']" id="topbar-dropdown-boostConsole">
+              <li [routerLink]="['/boost/console']" class="m-dropdownList__item" (click)="profileMenu.value = false">
+                <a id="topbar-dropdown-boostConsole">
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>Boost Console</span>
                 </a>
               </li>
-              <li class="m-dropdownList__item" (click)="profileMenu.value = false">
-                <a [routerLink]="['/invite']" id="topbar-dropdown-invitefriends">
+              <li [routerLink]="['/invite']" class="m-dropdownList__item" (click)="profileMenu.value = false">
+                <a id="topbar-dropdown-invitefriends">
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>Invite Friends</span>
                 </a>
               </li>
-              <li class="m-dropdownList__item" (click)="profileMenu.value = false">
-                <a [routerLink]="['/settings/general']" id="topbar-dropdown-settings" i18n="@@OPSPOT__TOPBAR__SETTINGS">
+              <li [routerLink]="['/settings/general']" class="m-dropdownList__item" (click)="profileMenu.value = false">
+                <a id="topbar-dropdown-settings" i18n="@@OPSPOT__TOPBAR__SETTINGS">
                   <!-- <i class="material-icons">settings</i> -->
                   <span>Settings</span>
                 </a>
@@ -152,14 +152,14 @@
                   <span>Help Desk</span>
                 </a>
               </li> -->
-              <li class="m-dropdownList__item" (click)="profileMenu.value = false">
-                <a [routerLink]="['/about']" id="topbar-dropdown-aboutpage">
+              <li [routerLink]="['/about']" class="m-dropdownList__item" (click)="profileMenu.value = false">
+                <a id="topbar-dropdown-aboutpage">
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>About One Page Spotlight</span>
                 </a>
               </li>
-              <li class="m-dropdownList__item" (click)="profileMenu.value = false">
-                <a [routerLink]="['/logout']" i18n="@@OPSPOT__TOPBAR__LOGOUT" id="topbar-dropdown-signout">
+              <li [routerLink]="['/logout']" class="m-dropdownList__item" (click)="profileMenu.value = false">
+                <a i18n="@@OPSPOT__TOPBAR__LOGOUT" id="topbar-dropdown-signout">
                   <!-- <i class="material-icons">exit_to_app</i> -->
                   <span>Sign Out</span>
                 </a>
