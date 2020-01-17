@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Client } from '../../../../services/api/client';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-about',
@@ -12,7 +13,7 @@ export class AboutComponent implements OnInit {
   activeUser = window.Opspot.user;
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
-  constructor(private client: Client, public router: Router) {
+  constructor(private client: Client, public router: Router,private toastr: ToastrService) {
     this.data = ['Kannada', 'English', 'Hindi', 'Tamil'];
     this.load();
   }
@@ -109,6 +110,7 @@ export class AboutComponent implements OnInit {
       this.client.post('api/v1/entities/about', about).then((res: any) => {
         if (res.status === 'success' && res.entities == true) {
           this.client.get('api/v2/onboarding/progress').then((response: any) => {
+            this.showSuccess();
             this.updatePercentage.emit(response.rating)
           });
         }
@@ -119,5 +121,11 @@ export class AboutComponent implements OnInit {
         } else this.invalidForm = false;
       });
     }
+  }
+
+  showSuccess() {
+    this.toastr.success('You have successfully updated your profile', '', {
+      timeOut: 3000
+    });
   }
 }
