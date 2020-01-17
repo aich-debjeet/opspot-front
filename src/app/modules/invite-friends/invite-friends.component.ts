@@ -30,7 +30,7 @@ export class InviteFriendsComponent implements OnInit, OnDestroy {
     ) {}
 
   ngOnInit() {
-    this.title.setTitle('Invite-Friends');
+    this.title.setTitle('Invite Friends');
     // Create custom referral links for current user
     this.referrerParam = '?referrer=' + this.session.getLoggedInUser().username;
     this.registerUrl = this.opspot.site_url + 'register' + this.referrerParam;
