@@ -27,6 +27,7 @@
               "node_modules/material-design-icons/iconfont/material-icons.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/main.scss",
+              "./node_modules/ngx-toastr/toastr.css",
               "node_modules/croppie/croppie.css",
               "node_modules/swiper/dist/css/swiper.css",
               "node_modules/slick-carousel/slick/slick.scss",

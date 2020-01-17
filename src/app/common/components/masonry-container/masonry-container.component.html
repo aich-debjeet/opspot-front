@@ -11,8 +11,8 @@
 </div> -->
 
 <ngx-masonry [options]="masonryOptions" [useImagesLoaded]="true">
-  <div ngxMasonryItem class="o-explore-media-part__coloumn" *ngFor="let explore of entities">
-      <opspot-post-card [entity]="explore"></opspot-post-card>
+  <div ngxMasonryItem class="o-explore-media-part__coloumn" *ngFor="let entity of entities">
+      <opspot-post-card [entity]="entity"></opspot-post-card>
   </div>
 </ngx-masonry>
 
