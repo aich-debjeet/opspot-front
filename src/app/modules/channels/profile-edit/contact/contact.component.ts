@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Client } from '../../../../services/api/client';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 // import { load } from '@angular/core/src/render3';
 
@@ -15,7 +16,8 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private client: Client,
-    private router: Router
+    private router: Router, 
+    private toastr: ToastrService
   ) { }
 
   privacy = {
@@ -92,10 +94,16 @@ export class ContactComponent implements OnInit {
     this.client.post('api/v1/entities/contact_details', contact).then((res:any) => {
       if (res.status === 'success' && res.entities == true) {
         this.client.get('api/v2/onboarding/progress').then((response: any) => {
+          this.showSuccess();
           this.updatePercentage.emit(response.rating);
         });
       }
       // this.router.navigate(['/profile/work']);
+    });
+  }
+  showSuccess() {
+    this.toastr.success('You have successfully updated your profile', '', {
+      timeOut: 3000
     });
   }
 }

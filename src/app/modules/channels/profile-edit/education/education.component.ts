@@ -1,6 +1,7 @@
-import { Component, OnInit ,EventEmitter, Output} from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Client } from '../../../../services/api/client';
 import dob from '../../../../utils/dateHandler';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-education',
@@ -21,7 +22,7 @@ export class EducationComponent implements OnInit {
   activeUser = window.Opspot.user;
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
-  constructor(private client: Client) {}
+  constructor(private client: Client, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.dateOfBirth = dob();
@@ -76,6 +77,7 @@ export class EducationComponent implements OnInit {
           this.addWork = false;
           if (res.status === 'success' && res.entities == true) {
             this.client.get('api/v2/onboarding/progress').then((response: any) => {
+              this.showSuccess();
               this.updatePercentage.emit(response.rating);
             });
           }
@@ -120,5 +122,10 @@ export class EducationComponent implements OnInit {
     this.model = {}; //render empty form after update/create
     this.submitted = false;
     this.toggleEnd = false; //render form with default value for currently studying field
+  }
+  showSuccess() {
+    this.toastr.success('You have successfully updated your profile', '', {
+      timeOut: 3000
+    });
   }
 }
