@@ -1,4 +1,4 @@
-<m-topbar *ngIf="opspot.LoggedIn" class="m-noshadow mdl-color--white mdl-color-text--grey-600">
+<m-topbar *ngIf="session.isLoggedIn()" class="m-noshadow mdl-color--white mdl-color-text--grey-600">
   <ng-container search>
     <m-search--bar></m-search--bar>
   </ng-container>

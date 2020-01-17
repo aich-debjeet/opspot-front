@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { Session } from '../../../services/session';
 import { Client, Upload } from '../../../services/api';
 import { WireRewardsStruc, WireRewardsTiers, WireRewardsType } from '../../wire/interfaces/wire.interfaces';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'm-settings--wire',
@@ -38,7 +39,8 @@ export class SettingsWireComponent implements OnInit {
     public session: Session,
     public client: Client,
     public upload: Upload,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private toastr: ToastrService
   ) {
     this.rewards = this.opspot.user.wire_rewards;
   }
@@ -152,6 +154,9 @@ export class SettingsWireComponent implements OnInit {
       .then(() => {
         return this.client.post('api/v1/merchant/exclusive', this.exclusive)
           .then(() => {
+            this.toastr.success('Preview Image successfully updated.', '', {
+              timeOut: 3000
+            });
             if (!this.opspot.user.merchant) {
               this.opspot.user.merchant = {};
             }

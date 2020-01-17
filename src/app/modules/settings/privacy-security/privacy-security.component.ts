@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { Session } from '../../../services/session';
 import { Client } from '../../../services/api';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-privacy-security',
@@ -20,6 +21,7 @@ export class PrivacySecurityComponent implements OnInit {
     public session: Session,
     public client: Client,
     public router: Router,
+    private toastr: ToastrService
   ) {
     this.form = fb.group({
       currentPassword:['', Validators.required],
@@ -63,6 +65,9 @@ export class PrivacySecurityComponent implements OnInit {
     return (!passwordCheck.test(enteredPassword) && enteredPassword) ? { 'requirements': true } : null;
   }
   closeAllSessions() {
+    this.toastr.success('You have successfully logged out of all devices.', '', {
+      timeOut: 3000
+    });
     this.router.navigate(['/logout/all']);
   }
   save() {
@@ -74,6 +79,9 @@ export class PrivacySecurityComponent implements OnInit {
       })
       .then((response: any) => {
         if(response.status === 'success'){
+          this.toastr.success('You have successfully changed your password.', '', {
+            timeOut: 3000
+          });
           this.form.reset();
         }
       }).catch(e=> {
