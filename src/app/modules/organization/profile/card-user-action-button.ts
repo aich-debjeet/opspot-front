@@ -1,6 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
-
-import { GroupsService } from '../../../modules/groups/groups-service';
+import { OrganizationService } from '../organization-service';
 
 @Component({
   selector: 'opspot-organization-card-user-actions-button',
@@ -83,7 +82,7 @@ export class OrganizationCardUserActionsButton {
 
   showMenu: boolean = false;
 
-  constructor(public service: GroupsService) {
+  constructor(public service: OrganizationService) {
   }
 
   toggleMenu(e) {

@@ -26,6 +26,7 @@ import { OverlayModalService } from './ux/overlay-modal';
 import { LoginReferrerService } from './login-referrer.service';
 import { ScrollToTopService } from './scroll-to-top.service';
 import { GroupsService } from '../modules/groups/groups-service';
+import { OrganizationService } from '../modules/organization/organization-service';
 
 import { GoogleChartsLoader } from './third-party/google-charts-loader';
 import { RecentService } from './ux/recent';
@@ -156,6 +157,11 @@ export const OPSPOT_PROVIDERS : any[] = [
   {
     provide: GroupsService,
     useFactory: GroupsService._,
+    deps: [ Client, Upload, UpdateMarkersService ]
+  },
+  {
+    provide: OrganizationService,
+    useFactory: OrganizationService._,
     deps: [ Client, Upload, UpdateMarkersService ]
   },
   {

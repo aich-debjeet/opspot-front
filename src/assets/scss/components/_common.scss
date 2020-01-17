@@ -43,9 +43,12 @@
     flex: 1;
     order: 2;
     margin: 0px 10px;
-    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+    @include mq($from: $tablet, $until: $desktop_sm) {
         margin:0px 15px;
         // margin-left: 9px;
+    }
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        margin:15px 15px;
     }
 } 
 .o-right-block{

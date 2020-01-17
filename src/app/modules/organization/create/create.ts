@@ -3,12 +3,12 @@
 import { Component, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { GroupsService } from '../../../modules/groups/groups-service';
 import { OpspotTitle } from '../../../services/ux/title';
 import { Session } from '../../../services/session';
 import FileHandler from '../../../utils/file-handle';
 import {Location} from '@angular/common';
 import { ORGANIZATION_TYPE} from '../../../services/list-options';
+import { OrganizationService } from '../organization-service';
 
 
 @Component({
@@ -56,7 +56,7 @@ export class OrganizationCreator {
 
   constructor(
     public session: Session, 
-    public service: GroupsService, 
+    public service: OrganizationService, 
     public router: Router, 
     public title: OpspotTitle ,
     public route:ActivatedRoute,

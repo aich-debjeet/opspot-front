@@ -208,7 +208,7 @@ opspot-button-remind{
             </a>
             <div class="o-avatar__info">
               <div class="o-avatar-det-block">
-                <span class="text-lg grey o-posts-det" id="view-profile-added-media"><a class="o-avatar__name">{{entity?.ownerObj?.name}}</a>added
+                <span class="text-lg grey o-posts-det" id="view-profile-added-media"><a class="o-avatar__name" *ngIf="entity?.ownerObj && entity?.ownerObj?.username" [routerLink]="['/', entity?.ownerObj?.username]">{{entity?.ownerObj?.name}}</a>added
                   media</span>
               </div>
               <div class="grey m-l-8 o-posts-tym">

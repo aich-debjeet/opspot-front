@@ -79,7 +79,7 @@
                     (onTranslateError)="translateToggle = false" 
                     #translate
                 ></m-translate>
-                <div class="o-big-events-inner-details-discrptn">
+                <div class="o-big-events-inner-details-discrptn" *ngIf = "bigEvent?.blurb">
                     <p class="text-md white-space word-break" [innerHtml]="bigEvent?.blurb | tags">
                     </p>
                 </div><!-- discription end -->

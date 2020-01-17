@@ -1906,6 +1906,10 @@ select.form-control-lg:not([size]):not([multiple]),
         right: 14px;
         width: 16px;
         height: 16px;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            font-size: 16px;
+            right: 22px;
+        }
         img {
             width: 16px;
             padding-top: 2px;
@@ -13486,7 +13490,14 @@ m-homepage .m-homepage-press {
     /* display: flex; */
     text-align: center;
     padding-top: 150px;
-    cursor: pointer; }
+    cursor: pointer; 
+    @include mq($from: $mobile_sm, $until: $tablet  ) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 0px;
+    }
+  }
     .opspot-banner.opspot-banner-editing .overlay i {
       font-size: 62px;
       width: 100%; }
@@ -18512,7 +18523,11 @@ m-search--bar {
         border: 0 !important; }
         m-search--bar input:focus {
           border: 1px solid rgba(0, 0, 0, 0.12) !important;
-          width: 75vw; }
+          width: 75vw; 
+          @include mq($from: $mobile_sm, $until: $tablet) {
+              width:100%!important;
+          }
+        }
           m-search--bar input:focus + .mdl-textfield__label {
             width: 75vw; } }
   m-search--bar .m-search-bar--context {
@@ -18569,7 +18584,11 @@ m-search--bar-suggestions {
     position: absolute;
     z-index: 5000;
     box-sizing: border-box;
-    width: 100%; }
+    width: 100%; 
+    @include mq($from: $mobile_sm, $until: $tablet) {
+       width:90%;
+    }
+  }
     m-search--bar-suggestions .m-search-bar-suggestions-list .m-search-bar-suggestions-suggestion {
       cursor: pointer;
       padding: 8px;
@@ -27793,4 +27812,12 @@ ng-otp-input {
 
 .word-br{
   word-break: break-all;
+}
+
+
+// these styles we need to change to another scss
+
+.mdl-card__menu{
+  right:6px!important;
+  top:6px!important;
 }
