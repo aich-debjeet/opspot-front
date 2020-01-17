@@ -47,7 +47,7 @@ export class ProfileEditComponent implements OnInit {
 
   ngOnInit() {
     this.checkProgress();
-    this.title.setTitle('Profile-Edit');
+    this.title.setTitle('Profile');
   }
   async checkProgress() {
     if (!this.session.isLoggedIn()) {

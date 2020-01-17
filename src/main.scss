@@ -24662,6 +24662,9 @@ app-image-croper .m-modal-container {
   position: relative;
   background-color: rgba(235,239,242,0.4);
   display: flex;
+  @include mq($from: $mobile_sm, $until: $desktop_sm) {
+    align-items: center;
+  }
   .icon-box-design{
       margin-left: 9px;
       height: 32px;	
@@ -24669,9 +24672,9 @@ app-image-croper .m-modal-container {
       border: 1px solid rgba(144,164,174,0.2);	
       border-radius: 4px;	
       background-color:$white;	
-      display: inline-block;
-      text-align: center;
-      vertical-align: middle;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
   .close{
   position: absolute;
@@ -24808,23 +24811,36 @@ app-image-croper .m-modal-container {
   justify-content:space-between;
   // border: 1px solid #ECEFF1;
   position: relative;
-  @include mq($from: $mobile_sm, $until:$mobile_lg ){
-      background: transparent;
-      border:0px;
-      padding:0px 12px; 
+  @include mq($from: $mobile_sm, $until:$tablet ){
+    background: transparent;
+    border: 0px;
+    padding: 0px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
   }
   .o-create-post-left{
-  display:flex;
-  align-items: center;
-  // width: 100%;
-  .icon-info{
-  line-height: 20px;
-  font-size: 11px;
-  margin-left:6px;
-  }  
+    display:flex;
+    align-items: center;
+    // width: 100%;
+    .icon-info{
+      line-height: 20px;
+      font-size: 11px;
+      margin-left:6px;
+    }  
   }
   .o-create-post-right{
       display:flex;
+      @include mq($from: $mobile_sm, $until:$tablet ){
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin: 12px 0px;
+        .btn{
+          width:80%;
+        }
+      }
       &__status{
           padding: 8px 10px;
           height: 34px;	
@@ -24834,8 +24850,9 @@ app-image-croper .m-modal-container {
           background-color:$white;	
           // box-shadow: 0 0 3px 0 rgba(204, 204, 204, 0.43); 
           margin-right:14px;
-          @include mq($from: $mobile_sm, $until:$mobile_lg ){
-              margin-right:0px;
+          @include mq($from: $mobile_sm, $until:$tablet ){
+              margin-right:9px;
+              width:100%;
           }
       }
       &__icon {
@@ -24868,6 +24885,10 @@ app-image-croper .m-modal-container {
   background-color:$white;	
   z-index: 99;
   box-shadow: 0 6px 10px 0 rgba(144,164,174,0.16), 0 1px 12px 0 rgba(144,164,174,0.18), 0 3px 5px 0 rgba(144,164,174,0.2);
+  @include mq($from: $mobile_sm, $until:$tablet ){
+    left: 0px;
+    right:unset;
+  }
   .icon-public,.icon-lock{
   color: $black;
   font-size: 12px;
