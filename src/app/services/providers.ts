@@ -37,6 +37,7 @@ import { WebtorrentService } from '../modules/webtorrent/webtorrent.service';
 import { TimeDiffService } from './timediff.service';
 import { UpdateMarkersService } from '../common/services/update-markers.service';
 import { HttpClient } from "@angular/common/http";
+import { CommonEventsService } from './common-events.service';
 
 export const OPSPOT_PROVIDERS : any[] = [
    {
@@ -192,5 +193,9 @@ export const OPSPOT_PROVIDERS : any[] = [
   { 
     provide: TimeDiffService,
     useFactory: TimeDiffService._
+  },
+  {
+    provide: CommonEventsService,
+    useFactory: CommonEventsService._
   }
 ];
