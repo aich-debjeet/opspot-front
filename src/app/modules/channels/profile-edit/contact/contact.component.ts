@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContactComponent implements OnInit {
   activeUser = window.Opspot.user;
+  inProgress:boolean = false;
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -79,6 +80,7 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
+    this.inProgress = true;
     const contact = {
       contact_details: {
         email: this.model.email,
@@ -95,6 +97,7 @@ export class ContactComponent implements OnInit {
       if (res.status === 'success' && res.entities == true) {
         this.client.get('api/v2/onboarding/progress').then((response: any) => {
           this.showSuccess();
+          this.inProgress = false;
           this.updatePercentage.emit(response.rating);
         });
       }

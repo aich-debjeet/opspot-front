@@ -21,7 +21,7 @@
               <div class="w100 text-sm grey">Use a comma to separate skill or choose from the list.</div>
           </div>
           <div class="o-prof-edit-actions">
-              <button type="button" id="general-save-submit" (click)="onSubmit()" class="btn btn-primary btn-lg">Save Changes</button>
+              <button type="button" id="general-save-submit" (click)="onSubmit()" class="btn btn-primary btn-lg" [disabled]="inProgress">Save Changes</button>
               <button type="button" id="general-cancel-button" class="btn btn-outline-primary btn-lg btn--cancel" [routerLink]="['/', activeUser?.username]">Cancel</button>
           </div><!-- prof edit actions end -->
       </form>
