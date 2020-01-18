@@ -154,6 +154,7 @@ export class SettingsWireComponent implements OnInit {
       .then(() => {
         return this.client.post('api/v1/merchant/exclusive', this.exclusive)
           .then(() => {
+            this.inProgress = false;
             this.toastr.success('Preview Image successfully updated.', '', {
               timeOut: 3000
             });

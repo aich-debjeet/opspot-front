@@ -16,6 +16,8 @@ export class PrivacySecurityComponent implements OnInit {
   guid: string = '';
   openSessions: number = 1;
   incorrectPassword: boolean = false;
+  inProgress: boolean = false;
+
   constructor(
     fb: FormBuilder,
     public session: Session,
@@ -72,6 +74,7 @@ export class PrivacySecurityComponent implements OnInit {
   }
   save() {
     if(!this.form.valid) return;
+    this.inProgress = true;
     this.client.post('api/v1/settings/' + this.guid,
       {
         password: this.form.value.currentPassword,
@@ -79,6 +82,7 @@ export class PrivacySecurityComponent implements OnInit {
       })
       .then((response: any) => {
         if(response.status === 'success'){
+          this.inProgress = false;
           this.toastr.success('You have successfully changed your password.', '', {
             timeOut: 3000
           });

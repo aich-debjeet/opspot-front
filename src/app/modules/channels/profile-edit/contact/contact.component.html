@@ -94,7 +94,7 @@
 
             <!--Website end-->
             <div class="o-prof-edit-actions">
-                <button type="button" id="contact-save-button" (click)="onSubmit()" class="btn btn-primary btn-lg">Save
+                <button type="button" id="contact-save-button" (click)="onSubmit()" class="btn btn-primary btn-lg" [disabled]="inProgress">Save
                     Changes</button>
                 <button type="button" id="contact-cancel-button" class="btn btn-outline-primary btn-lg btn--cancel"
                     [routerLink]="['/', activeUser?.username]">Cancel</button>

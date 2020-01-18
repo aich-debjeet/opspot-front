@@ -31,6 +31,7 @@ export class AboutComponent implements OnInit {
   aboutError = { dob: false, dobInvalid: false, gender: false };
   submitted = false;
   invalidForm: boolean = false;
+  inProgress: boolean= false;
 
   ngOnInit() {
     //set privacy
@@ -94,6 +95,7 @@ export class AboutComponent implements OnInit {
     }
 
     if (e.valid) {
+      this.inProgress = true;
       let about = {
         about: {
           description: this.model.description,
@@ -111,6 +113,7 @@ export class AboutComponent implements OnInit {
         if (res.status === 'success' && res.entities == true) {
           this.client.get('api/v2/onboarding/progress').then((response: any) => {
             this.showSuccess();
+            this.inProgress = false;
             this.updatePercentage.emit(response.rating)
           });
         }
