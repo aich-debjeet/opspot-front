@@ -6,6 +6,7 @@ import { ReportCreatorComponent } from '../../report/creator/creator.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { Client } from '../../../services/api/client';
 import { Session } from '../../../services/session';
+import { CommonEventsService } from '../../../services/common-events.service';
 
 @Component({
   selector: 'opspot-organization-settings-button',
@@ -125,8 +126,14 @@ export class OrganizationSettingButton {
 
   featureModalOpen: boolean = false;
 
-  constructor(public service: OrganizationService, public client: Client, public session: Session, public overlayService: OverlayModalService, public router: Router) {
-  }
+  constructor(
+    public service: OrganizationService, 
+    public client: Client, 
+    public session: Session, 
+    public overlayService: OverlayModalService, 
+    public router: Router,
+    public commService: CommonEventsService
+  ) { }
 
   ngOnInit() {
     this.initCategories();
@@ -233,8 +240,11 @@ export class OrganizationSettingButton {
     this.service.deleteGroup(this.organization)
       .then((deleted) => {
         this.organization.deleted = deleted;
-
         if (deleted) {
+          // setTimeout(() => {
+          //   this.navUpdateOrg();    
+          // }, 2000);
+          this.navUpdateOrg();    
           this.router.navigate(['/newsfeed/subscribed']);
         }
       });
@@ -275,5 +285,12 @@ export class OrganizationSettingButton {
     this.client.post(`api/v1/groups/group/${this.organization.guid}`, { membership: this.organization.membership })
     this.groupChange.next(this.organization);
   }
+
+  navUpdateOrg() {
+    this.commService.trigger({
+      component: 'TopbarComponent',
+      action: 'orgDeleted'
+    });
+   }
 
 }
