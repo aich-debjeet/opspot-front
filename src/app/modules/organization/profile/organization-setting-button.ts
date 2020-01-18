@@ -43,16 +43,18 @@ import { Session } from '../../../services/session';
     <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
 
     <m-modal [open]="organization['is:owner'] && isGoingToBeDeleted">
-      <div class="mdl-card__supporting-text" id="organization-setting-confirmation-window">
-        <p i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP_CONFIRM">Are you sure you want to delete {{ organization.name }}? This action cannot be undone.</p>
-      </div>
-      <div class="mdl-card__actions">
-        <button (click)="delete()" id="organization-setting-delete-action" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-          <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
-        </button>
-        <button (click)="cancelDelete()" id="organization-setting-cancel-action" class="mdl-button mdl-js-button mdl-button--colored">
-          <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
-        </button>
+      <div class="delete-confirmation-wrapper">
+        <div class="mdl-card__supporting-text" id="organization-setting-confirmation-window">
+          <p class="m-modal-confirm-body text-lg">Are you sure you want to delete {{ organization.name }}? This action cannot be undone.</p>
+        </div>
+        <div class="mdl-card__actions">
+          <button (click)="delete()" id="organization-setting-delete-action" class="btn btn-primary">
+            <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
+          </button>
+          <button (click)="cancelDelete()" id="organization-setting-cancel-action" class="btn btn-outline-primary">
+            <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
+          </button>
+        </div>
       </div>
     </m-modal>
 
@@ -69,6 +71,18 @@ import { Session } from '../../../services/session';
    <style>
     .focusNone{
       outline:none;
+    }
+    .delete-confirmation-wrapper {
+      padding: 16px 56px 16px 16px;
+    }
+    .text-lg {
+      color: #263238;
+      font-size: 15px;
+      line-height: 24px;
+      font-weight: 400;
+    }
+    .btn-outline-primary{
+      margin-left: 8px;
     }
    </style>
   
