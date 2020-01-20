@@ -27,9 +27,9 @@ export class ChannelComponent {
   filter: any = 'feed';
   isLocked: boolean = false;
 
-  successRes = false;
-  errorRes = '';
-  userVerifcation = false;
+  emailVerificationSuccess = false;
+  emailVerificationFail = '';
+  emailVerificationModal = false;
   username: string;
   user: OpspotUser;
   offset: string = '';
@@ -100,13 +100,12 @@ export class ChannelComponent {
 
   emailVerify(data) {
     this.client.post('api/v3/verification/email/confirm', data).then(res => {
+      this.emailVerificationModal = true;
       if (res['status'] === 'error') {
-        this.errorRes = res['message'];
-        this.userVerifcation = true;
+        this.emailVerificationFail = res['message'];
       } else {
         res['status'] === 'success';
-        this.successRes = true;
-        this.userVerifcation = true;
+        this.emailVerificationSuccess = true;
       }
     });
   }

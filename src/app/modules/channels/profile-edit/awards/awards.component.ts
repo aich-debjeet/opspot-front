@@ -18,6 +18,7 @@ export class AwardsComponent implements OnInit {
   addWork;
   errWork = false;
   errEndDate = true;
+  inProgress: boolean = false;
 
   work: any = { awards: [] };
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
@@ -51,6 +52,7 @@ export class AwardsComponent implements OnInit {
     // }
 
     if (e.valid) {
+      this.inProgress = true;
       let work = {
         title: this.model.title,
         location: this.model.location,
@@ -72,6 +74,7 @@ export class AwardsComponent implements OnInit {
           if (res.status === 'success' && res.entities == true) {
             this.client.get('api/v2/onboarding/progress').then((response: any) => {
               this.showSuccess();
+              this.inProgress = false;
               this.updatePercentage.emit(response.rating);
             });
           }

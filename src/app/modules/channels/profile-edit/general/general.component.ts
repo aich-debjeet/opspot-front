@@ -18,6 +18,8 @@ export class GeneralComponent implements OnInit {
     fullName: '',
     skills: []
   };
+  inProgress:boolean = false;
+  
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -30,6 +32,7 @@ export class GeneralComponent implements OnInit {
   }
 
   onSubmit() {
+    this.inProgress = true;
     const skills = this.model.skills.map(el => el.value);
     const info = {
       general_info: {
@@ -42,6 +45,7 @@ export class GeneralComponent implements OnInit {
       if (res.status === 'success' && res.entities == true) {
         this.client.get('api/v2/onboarding/progress').then((response: any) => {
           this.showSuccess();
+          this.inProgress = false;
           this.updatePercentage.emit(response.rating);
         });
       }

@@ -132,7 +132,7 @@ export class OrganizationCreator {
           })
           .then(() => {
             this.router.navigate(['organization/profile', guid]);
-            this.navEvent()
+            this.navUpdateOrg();
           });
 
       })
@@ -220,7 +220,8 @@ export class OrganizationCreator {
   this._location.back();
  }
 
- navEvent() {
+ navUpdateOrg() {
+  console.log('trigger');
   this.commService.trigger({
     component: 'TopbarComponent',
     action: 'orgCreated'

@@ -106,6 +106,8 @@ export class ChannelSidebar {
         self.user.icontime = Date.now();
         if (window.Opspot.user)
           window.Opspot.user.icontime = Date.now();
+        // temp fix for profile image update (need to implement url route reload)
+        window.location.reload();
       });
   }
 

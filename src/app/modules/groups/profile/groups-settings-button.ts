@@ -43,17 +43,19 @@ import { Session } from '../../../services/session';
     <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
 
     <m-modal [open]="group['is:owner'] && isGoingToBeDeleted">
+    <div class="delete-confirmation-wrapper">
       <div class="mdl-card__supporting-text">
-        <p i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP_CONFIRM">Are you sure you want to delete {{ group.name }}? This action cannot be undone.</p>
+        <p i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP_CONFIRM" class="m-modal-confirm-body text-lg">Are you sure you want to delete {{ group.name }}? This action cannot be undone.</p>
       </div>
       <div class="mdl-card__actions">
-        <button (click)="delete()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="group-confirm-button">
+        <button (click)="delete()" class="btn btn-primary" id="group-confirm-button">
           <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
         </button>
-        <button (click)="cancelDelete()" class="mdl-button mdl-js-button mdl-button--colored" id="group-cancel-button">
+        <button (click)="cancelDelete()"  class="btn btn-outline-primary" id="group-cancel-button">
           <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
         </button>
       </div>
+    </div>
     </m-modal>
 
     <m-modal [open]="featureModalOpen" (closed)="onFeatureModalClose($event)">
@@ -69,6 +71,18 @@ import { Session } from '../../../services/session';
    <style>
     .focusNone{
       outline:none;
+    }
+    .delete-confirmation-wrapper {
+      padding: 16px 56px 16px 16px;
+    }
+    .text-lg {
+      color: #263238;
+      font-size: 15px;
+      line-height: 24px;
+      font-weight: 400;
+    }
+    .btn-outline-primary{
+      margin-left: 8px;
     }
    </style>
   

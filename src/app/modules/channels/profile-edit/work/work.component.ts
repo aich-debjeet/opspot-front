@@ -19,6 +19,7 @@ export class WorkComponent implements OnInit {
 
   work: any = { work_experience: [] };
   activeUser = window.Opspot.user;
+  inProgress: boolean = false;
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
   constructor(public client: Client, private toastr: ToastrService) {}
@@ -54,6 +55,7 @@ export class WorkComponent implements OnInit {
     }
 
     if (e.valid && !this.errWork && !this.errEndDate) {
+      this.inProgress = true;
       let work = {
         designation: this.model.designation,
         location: this.model.location,
@@ -77,6 +79,7 @@ export class WorkComponent implements OnInit {
           if (res.status === 'success' && res.entities == true) {
             this.client.get('api/v2/onboarding/progress').then((response: any) => {
               this.showSuccess();
+              this.inProgress = false;
               this.updatePercentage.emit(response.rating);
             });
           }
