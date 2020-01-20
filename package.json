@@ -69,7 +69,6 @@
     "sassdoc": "^2.7.0",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^2.2.0",
-    "sweetalert2": "^8.12.1",
     "swiper": "^4.5.0",
     "tslib": "~1.9.3",
     "webtorrent": "^0.103.0",
