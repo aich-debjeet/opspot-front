@@ -85,6 +85,11 @@
                 <div class="text-sm grey">The dimensions for cover image are 797px x 275px </div>
             </div>
         </div>
+        <div *ngIf="inProgress" class="mdl-progress mdl-progress__indeterminate initial-loading is-upgraded">
+            <div class="progressbar bar bar1" style="width: 0%;"></div>
+            <div class="bufferbar bar bar2" style="width: 100%;"></div>
+            <div class="auxbar bar bar3" style="width: 0%;"></div>
+        </div>
         <!--body ends-->
         <div class="o-create-show-timez-footer">
             <button type="button" id="showtimez-submit" class="btn btn-primary btn-sm" [disabled]="!showTimezForm.valid"
