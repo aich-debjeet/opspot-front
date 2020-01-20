@@ -99,7 +99,7 @@
 
         </div>
         <button type="button" id="wire-save-backgroung-image" class="btn btn-primary btn-lg pading-right" style="margin-right: 9px"
-          [hidden]="exclusive.saved && rewardsSaved" (click)="save()">Save</button>
+          [hidden]="exclusive.saved && rewardsSaved" (click)="save()" [disabled]="inProgress">Save</button>
         <button type="button" id="wire-cancel-button" class="btn btn-outline-primary btn-lg" (click)="removeFile()">Cancel</button>
       </div>
     </div>

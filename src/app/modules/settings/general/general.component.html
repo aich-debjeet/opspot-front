@@ -251,7 +251,7 @@
               <span class="text-md grey">Private</span>
           </div>
           <div class="o-settings-pdngtpbtm-button--general">
-            <button type="button" id="general-save-button" class="btn btn-primary btn-lg pading-right" (click)="save()">Save</button>
+            <button type="button" id="general-save-button" class="btn btn-primary btn-lg pading-right" (click)="save()" [disabled]="inProgress">Save</button>
         </div>
           <div class="o-settings-line"></div>
       </div><!--Portfolio toggle settings fields-->

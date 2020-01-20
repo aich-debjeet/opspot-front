@@ -37,7 +37,7 @@
                   <div *ngIf="form.controls['confirmpassword'].errors.mustMatch">Passwords must match</div>
               </div>
               </div>
-              <button type="button" id="privacy-security-update-password" class="btn btn-primary btn-lg pading-right" (click)="save()">Update</button>
+              <button type="button" id="privacy-security-update-password" class="btn btn-primary btn-lg pading-right" (click)="save()" [disabled]="inProgress">Update</button>
               <button type="button" id="privacy-security-cancel-button" class="btn btn-outline-primary btn-lg" (click)="changePassword()">Cancel</button>
             </form>
           </div><!--change password section-->
