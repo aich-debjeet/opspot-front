@@ -249,7 +249,7 @@ opspot-button-remind{
               <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
             </m-video>
             <!-- <m-audio *ngIf="showAudio && !showVideo" [src]="'api/v1/media/' + videoData.guid + '/play'"></m-audio> -->
-            <m-audio *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio>
+            <m-audio style="width: 100%" *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio>
           </div>
           <div class="o-posts-inner-page-myjourney-padding">
             <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">

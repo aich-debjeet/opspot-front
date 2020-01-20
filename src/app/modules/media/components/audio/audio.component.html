@@ -1,1 +1,13 @@
-<audio controls src="{{src}}" type="audio/mpeg" style="width: 100%"></audio>
+<div class="wrapper">
+  <audio controls src="{{src}}" type="audio/mpeg"></audio>
+</div>
+
+<style>
+.wrapper {
+    width: 100%;
+}
+.wrapper audio {
+    width: calc(100% - 40px);
+    margin: 20px;
+}
+</style>
