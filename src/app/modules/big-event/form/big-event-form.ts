@@ -69,7 +69,7 @@ export class BigEventForm implements OnInit {
   @Input('object') set data(object) {
     this.bigEvent = object;
     if (this.bigEvent) {
-      this.lable = "Edit"
+      this.lable = "Update"
       this.bigEventGuid = this.bigEvent['entity_guid'];
       if (this.bigEvent['start_time_date']) {
         var date = new Date(parseInt(this.bigEvent['start_time_date']));
