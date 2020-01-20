@@ -275,7 +275,7 @@ opspot-button-remind{
                     <!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + media.src + ')'"></div> -->
                     <!-- <img [src]="media.src" alt="" class="feed-media__img"
                       (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
-                    <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'  && media.entity_type !== 'audio'""
+                    <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'  && media.entity_type !== 'audio'"
                       (click)="showImage(i)">
                     <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
                     <img *ngIf="media.entity_type === 'audio'" src="assets/videos/video_thumbnail.png" alt="" class="feed-media__img" (click)="showImage(i,media)">
@@ -296,7 +296,7 @@ opspot-button-remind{
               (onTranslateError)="translateToggle = false" 
               #translate>
             </m-translate>
-            <div class="text-md">{{ entity?.message}}</div>
+            <div class="text-md white-space word-break">{{ entity?.message}}</div>
             <div class="opspot-editable-container"
                 *ngIf="editing">
                 <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->

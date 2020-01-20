@@ -6,6 +6,7 @@ import { ReportCreatorComponent } from '../../report/creator/creator.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { Client } from '../../../services/api/client';
 import { Session } from '../../../services/session';
+import { CommonEventsService } from '../../../services/common-events.service';
 
 @Component({
   selector: 'opspot-organization-settings-button',
@@ -43,16 +44,18 @@ import { Session } from '../../../services/session';
     <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
 
     <m-modal [open]="organization['is:owner'] && isGoingToBeDeleted">
-      <div class="mdl-card__supporting-text" id="organization-setting-confirmation-window">
-        <p i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP_CONFIRM">Are you sure you want to delete {{ organization.name }}? This action cannot be undone.</p>
-      </div>
-      <div class="mdl-card__actions">
-        <button (click)="delete()" id="organization-setting-delete-action" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-          <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
-        </button>
-        <button (click)="cancelDelete()" id="organization-setting-cancel-action" class="mdl-button mdl-js-button mdl-button--colored">
-          <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
-        </button>
+      <div class="delete-confirmation-wrapper">
+        <div class="mdl-card__supporting-text" id="organization-setting-confirmation-window">
+          <p class="m-modal-confirm-body text-lg">Are you sure you want to delete {{ organization.name }}? This action cannot be undone.</p>
+        </div>
+        <div class="mdl-card__actions">
+          <button (click)="delete()" id="organization-setting-delete-action" class="btn btn-primary">
+            <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
+          </button>
+          <button (click)="cancelDelete()" id="organization-setting-cancel-action" class="btn btn-outline-primary">
+            <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
+          </button>
+        </div>
       </div>
     </m-modal>
 
@@ -69,6 +72,18 @@ import { Session } from '../../../services/session';
    <style>
     .focusNone{
       outline:none;
+    }
+    .delete-confirmation-wrapper {
+      padding: 16px 56px 16px 16px;
+    }
+    .text-lg {
+      color: #263238;
+      font-size: 15px;
+      line-height: 24px;
+      font-weight: 400;
+    }
+    .btn-outline-primary{
+      margin-left: 8px;
     }
    </style>
   
@@ -111,8 +126,14 @@ export class OrganizationSettingButton {
 
   featureModalOpen: boolean = false;
 
-  constructor(public service: OrganizationService, public client: Client, public session: Session, public overlayService: OverlayModalService, public router: Router) {
-  }
+  constructor(
+    public service: OrganizationService, 
+    public client: Client, 
+    public session: Session, 
+    public overlayService: OverlayModalService, 
+    public router: Router,
+    public commService: CommonEventsService
+  ) { }
 
   ngOnInit() {
     this.initCategories();
@@ -219,8 +240,11 @@ export class OrganizationSettingButton {
     this.service.deleteGroup(this.organization)
       .then((deleted) => {
         this.organization.deleted = deleted;
-
         if (deleted) {
+          // setTimeout(() => {
+          //   this.navUpdateOrg();    
+          // }, 2000);
+          this.navUpdateOrg();    
           this.router.navigate(['/newsfeed/subscribed']);
         }
       });
@@ -261,5 +285,12 @@ export class OrganizationSettingButton {
     this.client.post(`api/v1/groups/group/${this.organization.guid}`, { membership: this.organization.membership })
     this.groupChange.next(this.organization);
   }
+
+  navUpdateOrg() {
+    this.commService.trigger({
+      component: 'TopbarComponent',
+      action: 'orgDeleted'
+    });
+   }
 
 }
