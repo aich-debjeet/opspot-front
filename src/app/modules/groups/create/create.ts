@@ -411,11 +411,12 @@ export class GroupsCreator {
    try{
      let group= await this.service.load(guid)
      if(group['is:owner']){
-      this.group=group         
+      this.group=group   
+      // console.log("group: ", this.group);    
        group.tags.map(el=>{ 
        this.group.tags.push({display:el,value:el})})
        this.group.tags=this.group.tags.filter(el=>el.display)
-       this.cropedImg=`${this.opspot.cdn_url}fs/v1/avatars/${guid}`;
+       this.cropedImg=`${this.opspot.cdn_url}fs/v1/avatars/${guid}/medium/${this.group.icon_time}`;
       }
       // console.log(group)
    }
