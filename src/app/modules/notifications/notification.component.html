@@ -92,6 +92,12 @@
         </a>
       </ng-template>
 
+      <ng-template ngSwitchCase="create_admin_group">
+        <a [routerLink]="['/groups/profile', notification.entity.guid]">
+            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited" *ngIf="notification.entity['is:admin']">You have been made admin to the group <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.entity.name}}</span></p>
+        </a>
+      </ng-template>
+
       <ng-template ngSwitchCase="group_join_reject">
         <a [routerLink]="['/groups/profile', notification.params.group.guid]">
             <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">Your request to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}} has been rejected</span></p>
