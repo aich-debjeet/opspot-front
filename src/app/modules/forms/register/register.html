@@ -42,7 +42,8 @@
             </div>
 
             <div [hidden]="noViewOtp" class="o-otp">
-              <div class="o-otp__title text-md">Enter OTP <a class="primary" id="registration-resend">Resend OTP</a>
+              <div class="o-otp__title text-md">Enter OTP<a class="primary" id="registration-resend" (click)="resendOtp()" *ngIf="!resending">Resend OTP</a>
+                <a class="primary" id="registration-resend" *ngIf="resending">Resending the OTP</a>
               </div>
               <div class="otp">
                 <ng-otp-input
