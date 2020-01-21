@@ -346,6 +346,12 @@
             </a>
           </li>
           <li class="app-nav-link_-item">
+            <a [routerLink]="['/event/create']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><i class="icon-calendar"></i></div>
+              <div class="app-nav-link__text">Events</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
             <a [routerLink]="['/invite']" (click)='closeNav()'>
               <div class="app-nav-link__ico"><i class="icon-user-plus"></i></div>
               <div class="app-nav-link__text">Invite Friends</div>

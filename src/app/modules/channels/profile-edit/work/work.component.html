@@ -98,8 +98,8 @@
         <p *ngIf="errEndDate&&submitted" class="error text-sm" id="work-end-date-error">Enddate is required</p>
     
         <div class="o-prof-edit-actions" style="padding-left:12px; ">
-            <button type="button" id="work-cancel-button" class="btn btn-outline-primary btn-lg " [routerLink]="['/', activeUser?.username]">Cancel</button>
-            <button type="button" id="work-update-button" class="btn btn-primary btn-lg btn--cancel" (click)="onSubmit(f)" [disabled]="inProgress">Update</button>
+            <button type="button" id="work-update-button" class="btn btn-primary btn-lg" (click)="onSubmit(f)" [disabled]="inProgress">Save Changes</button>
+            <button type="button" id="work-cancel-button" class="btn btn-outline-primary btn-lg btn--cancel " [routerLink]="['/', activeUser?.username]">Cancel</button>
         </div>
     </div>
 </div>
