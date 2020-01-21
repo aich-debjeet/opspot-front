@@ -16,7 +16,7 @@
     </div>
     <div *ngIf="entityType == 'event'" class="widget">
         <div *ngFor="let entity of entities">
-            <app-showtime-list-card [object]="entity"></app-showtime-list-card>
+            <app-showtime-list-card *ngIf="entity.event_type" [object]="entity"></app-showtime-list-card>
         </div>
     </div>
     <div *ngIf="entityType == 'myjourney'" class="widget">
