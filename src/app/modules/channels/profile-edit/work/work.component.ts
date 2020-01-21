@@ -60,6 +60,7 @@ export class WorkComponent implements OnInit {
         designation: this.model.designation,
         location: this.model.location,
         company_name: this.model.company,
+        privacy: this.model.privacy,
         start_date: this.model.strtYear
           ? this.model.strtMonth + '-' + this.model.strtYear
           : '',
@@ -113,6 +114,9 @@ export class WorkComponent implements OnInit {
       this.errEndDate = false;
       this.model.present = true;
     }
+    if(!data.privacy){
+      this.model.privacy = false;
+    } else this.model.privacy = true;
   }
 
   goBack() {
@@ -122,6 +126,7 @@ export class WorkComponent implements OnInit {
 
   addWorkMove() {
     this.model = {}; //render empty form after update/create
+    this.model.privacy = false; // setting default value of privacy
     this.submitted = false;
   }
 
