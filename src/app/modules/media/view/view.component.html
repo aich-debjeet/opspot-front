@@ -208,7 +208,8 @@ opspot-button-remind{
             </a>
             <div class="o-avatar__info">
               <div class="o-avatar-det-block">
-                <span class="text-lg grey o-posts-det" id="view-profile-added-media"><a class="o-avatar__name" *ngIf="entity?.ownerObj && entity?.ownerObj?.username" [routerLink]="['/', entity?.ownerObj?.username]">{{entity?.ownerObj?.name}}</a>added
+                <span class="text-lg grey o-posts-det" id="view-profile-added-media"><a class="o-avatar__name" *ngIf="entity?.ownerObj && entity?.ownerObj?.username" 
+                  [routerLink]="['/', entity?.ownerObj?.username]">{{entity?.ownerObj?.name}}</a>added
                   media</span>
               </div>
               <div class="grey m-l-8 o-posts-tym">
@@ -277,9 +278,9 @@ opspot-button-remind{
                       (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
                     <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'  && media.entity_type !== 'audio'"
                       (click)="showImage(i)">
-                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img" (click)="showImage(i,media)">
                     <img *ngIf="media.entity_type === 'audio'" src="assets/videos/video_thumbnail.png" alt="" class="feed-media__img" (click)="showImage(i,media)">
-                    <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
+                    <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
                       <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
                     </div>
                   </a>
