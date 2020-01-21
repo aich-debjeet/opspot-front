@@ -55,7 +55,7 @@ export class MyJourneyFormComponent implements OnInit {
   removeAttachment(file: HTMLInputElement, imageId: string) {
     console.log('clicked')
     this.inProgress = true;
-    this.attachment.remove(imageId,file).then((guid) => {
+    this.attachment.remove(imageId, file).then((guid) => {
       file.value = '';
       this.inProgress = false;
       this.cards = _remove(this.cards, function (n) {
@@ -73,6 +73,12 @@ export class MyJourneyFormComponent implements OnInit {
           let obj = {};
           obj['guid'] = guid;
           obj['imageLink'] = this.attachment.getPreview();
+          /**
+           * temporary fix for video
+           */
+          if (obj['imageLink'] == null) {
+            obj['imageLink'] = 'assets/videos/video_thumbnail.png'
+          }
           this.cards.push(obj);
           file.value = null;
           this.inProgress = false;

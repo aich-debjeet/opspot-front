@@ -66,6 +66,12 @@ export class PortfolioFormComponent implements OnInit {
           let obj = {};
           obj['guid'] = guid;
           obj['imageLink'] = this.attachment.getPreview();
+          /**
+           * temporary fix for video
+           */
+          if(obj['imageLink'] == null){
+            obj['imageLink'] = 'assets/videos/video_thumbnail.png'
+            }
           this.cards.push(obj);
           this.inProgress = false;
           file.value = null;
