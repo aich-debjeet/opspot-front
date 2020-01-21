@@ -111,6 +111,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0px 18px 18px 0px;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+    width: 90px;
+    height: 90px;
+  }
   .icon-plus{
     height: 41.5px;
     width: 41.5px;
@@ -133,6 +138,10 @@
   filter: alpha(opacity=0);
   height: 118px;	
   width: 118px;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+    width: 90px;
+    height: 90px;
+  }
 }
 /* file uplpoad preview css*/
 .fileUpload-preview{

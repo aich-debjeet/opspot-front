@@ -123,6 +123,9 @@
         }
     }
     &__action{
+        display: flex; 
+        flex-direction: row;    
+        align-items: baseline;
         @include mq($from: $mobile_sm, $until: $tablet) {
             margin-top: 12px;
         }

@@ -6,7 +6,7 @@ import { Client } from '../../services/api/client';
     selector:'app-skills',
     template:`
     <tag-input   [maxItems]=maxItems required
-      style="border:1px solid #959595; padding-bottom: 50px;" [(ngModel)]='inputTagsValue' 
+      style="border:1px solid #959595; padding-bottom: 50px;" [(ngModel)]='inputTagsValue' [addOnBlur]="true"
       (ngModelChange)=inputTagsValueChange.emit(inputTagsValue)  name="skills" theme='minimal'>
          <tag-input-dropdown [showDropdownIfEmpty]="true" [minimumTextLength]=5 [autocompleteItems]="data">
            </tag-input-dropdown>

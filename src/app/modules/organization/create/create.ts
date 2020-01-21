@@ -207,7 +207,7 @@ export class OrganizationCreator {
       organization.tags.map(el=>{ 
        this.organization.tags.push({display:el,value:el})})
        this.organization.tags=this.organization.tags.filter(el=>el.display)
-       this.cropedImg=`${this.opspot.cdn_url}fs/v1/avatars/${guid}`;
+       this.cropedImg=`${this.opspot.cdn_url}fs/v1/avatars/${guid}/medium/${this.organization.icon_time}`;
       }
    }
    catch(e){

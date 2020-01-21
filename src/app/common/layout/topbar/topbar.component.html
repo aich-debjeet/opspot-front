@@ -257,144 +257,152 @@
   <!-- desktop:logged-in:top-navigation -->
 
   <!-- mobile:logged-in:primary-navigation -->
-  <div class="app-nav hidden-above-tablet">
-    <a href="javascript:void(0);" class="app-nav__ico" (click)="hamburgerMenu()" id="app-nav">
-      <img src="assets/svg/m_nav_ico/hamburgermenu.svg" class="app-nav__ico-hamburg" alt="">
-    </a>
-  </div>
-  <div id="app-nav-block" class="hidden-above-tablet">
-    <div class="app-nav-block__close" id="app-nav-close" (click)="closeNav()"><img src="assets/svg/m_nav_ico/close.svg"
-        alt=""></div>
-    <div class="app-nav-head">
-      <a [routerLink]="['/',user.username]" class="o-avatar"><img
-          src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt=""></a>
-      <div class="app-nav-head__info">
-        <a class="grey-dark app-nav-head__name">{{user.name}}</a>
-        <a [routerLink]="['/',user.username]" (click)='closeNav()' class="text-sm primary">View Profile</a>
-      </div>
+  <div *ngIf="session.isLoggedIn()">
+    <div class="app-nav hidden-above-tablet">
+      <a href="javascript:void(0);" class="app-nav__ico" (click)="hamburgerMenu()" id="app-nav">
+        <img src="assets/svg/m_nav_ico/hamburgermenu.svg" class="app-nav__ico-hamburg" alt="">
+      </a>
     </div>
-    <!--app nav head end-->
-    <div class="app-nav-link">
-      <ul class="app-nav-link-block">
-        <li class="app-nav-link_-item">
-          <a routerLink="/newsfeed" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_home.svg" alt=""></div>
-            <div class="app-nav-link__text">Home</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item">
-          <a [routerLink]="['/explore']" [queryParams]="{type:'activities',q:'', ref:''}" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_explore.svg" alt=""></div>
-            <div class="app-nav-link__text">Explore</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item">
-          <a [routerLink]="['wallet/tokens/contributions']" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/wallet.svg" alt=""></div>
-            <div class="app-nav-link__text">Wallet</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item">
-          <a [routerLink]="['/notifications']" (click)='closeNav()'>
-              <div class="app-nav-link__ico"><i class="icon-bell"></i></div>
-              <div class="app-nav-link__text">Notification </div>
-              <!-- <span class="header-noti-count header-noti-count--mob">12</span> -->
-          </a>
-        </li>
-        <!-- <li class="app-nav-link_-item">
-          <a href="#">
-              <div class="app-nav-link__ico"><i class="icon-mail"></i></div>
-              <div class="app-nav-link__text">Network </div>
-              <span class="header-noti-count header-noti-count--mob">12</span>
-          </a>
-        </li> -->
-        <li class="app-nav-link_-item">
-          <a [routerLink]="['/', 'portfolio', user.username]" (click)='closeNav()'>
-              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/portfolio.svg" alt=""></div>
-              <div class="app-nav-link__text">Portfolio </div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item">
-          <a [routerLink]="['/bookmark']" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_bookmark.svg" alt=""></div>
-            <div class="app-nav-link__text">Bookmarks</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item">
-          <a [routerLink]="['/groups/members']" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/community.svg" alt=""></div>
-            <div class="app-nav-link__text">Community</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item">
-          <a [routerLink]="['/boost/console']" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><i class="icon-bar-chart-2"></i></div>
-            <div class="app-nav-link__text">Boost Console</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item" *ngIf="!organization">
-          <a [routerLink]="['/organization/create']" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
-            <div class="app-nav-link__text">Organisation</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item" *ngIf="organization">
-          <a [routerLink]="['/organization/profile', organization.guid,  'feed']" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
-            <div class="app-nav-link__text">{{organization.name}}</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item">
-          <a [routerLink]="['/invite']" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><i class="icon-user-plus"></i></div>
-            <div class="app-nav-link__text">Invite Friends</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item">
-          <a [routerLink]="['blog/edit/new']" (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_jobs.svg" alt=""></div>
-            <div class="app-nav-link__text">Blog</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item">
-          <a [routerLink]="['/about']" (click)='closeNav()'>
-              <div class="app-nav-link__ico"><i class="icon-alert-circle"></i></div>
-              <div class="app-nav-link__text">About One Page Spotlight</div>
-          </a>
-        </li>
-        <li class="app-nav-link_-item">
-          <a routerLink='/settings/general' (click)='closeNav()'>
-            <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_settings.svg" alt=""></div>
-            <div class="app-nav-link__text">Settings</div>
-          </a>
-        </li>
-      </ul>
-      <div class="app-nav-link_-item app-nav-link_-item--logout">
-        <a routerLink="/logout" (click)='closeNav()'>
-          <div class="app-nav-link__ico"><i class="icon-power"></i></div>
-          <div class="app-nav-link__text">logout</div>
-        </a>
+    <div id="app-nav-block" class="hidden-above-tablet">
+      <div class="app-nav-block__close" id="app-nav-close" (click)="closeNav()"><img src="assets/svg/m_nav_ico/close.svg"
+          alt=""></div>
+      <div class="app-nav-head">
+        <a [routerLink]="['/',user.username]" class="o-avatar"><img
+            src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt=""></a>
+        <div class="app-nav-head__info">
+          <a class="grey-dark app-nav-head__name">{{user.name}}</a>
+          <a [routerLink]="['/',user.username]" (click)='closeNav()' class="text-sm primary">View Profile</a>
+        </div>
       </div>
+      <!--app nav head end-->
+      <div class="app-nav-link">
+        <ul class="app-nav-link-block">
+          <li class="app-nav-link_-item">
+            <a routerLink="/newsfeed" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_home.svg" alt=""></div>
+              <div class="app-nav-link__text">Home</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['/explore']" [queryParams]="{type:'activities',q:'', ref:''}" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_explore.svg" alt=""></div>
+              <div class="app-nav-link__text">Explore</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['wallet/tokens/contributions']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/wallet.svg" alt=""></div>
+              <div class="app-nav-link__text">Wallet</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['/notifications']" (click)='closeNav()'>
+                <div class="app-nav-link__ico"><i class="icon-bell"></i></div>
+                <div class="app-nav-link__text">Notification </div>
+                <!-- <span class="header-noti-count header-noti-count--mob">12</span> -->
+            </a>
+          </li>
+          <!-- <li class="app-nav-link_-item">
+            <a href="#">
+                <div class="app-nav-link__ico"><i class="icon-mail"></i></div>
+                <div class="app-nav-link__text">Network </div>
+                <span class="header-noti-count header-noti-count--mob">12</span>
+            </a>
+          </li> -->
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['/', 'portfolio', user.username]" (click)='closeNav()'>
+                <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/portfolio.svg" alt=""></div>
+                <div class="app-nav-link__text">Portfolio </div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['/bookmark']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_bookmark.svg" alt=""></div>
+              <div class="app-nav-link__text">Bookmarks</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['/groups/members']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/community.svg" alt=""></div>
+              <div class="app-nav-link__text">Community</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['/boost/console']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><i class="icon-bar-chart-2"></i></div>
+              <div class="app-nav-link__text">Boost Console</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item" *ngIf="!organization">
+            <a [routerLink]="['/organization/create']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
+              <div class="app-nav-link__text">Organisation</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item" *ngIf="organization">
+            <a [routerLink]="['/organization/profile', organization.guid,  'feed']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
+              <div class="app-nav-link__text">{{organization.name}}</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['/event/create']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><i class="icon-calendar"></i></div>
+              <div class="app-nav-link__text">Events</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['/invite']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><i class="icon-user-plus"></i></div>
+              <div class="app-nav-link__text">Invite Friends</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['blog/edit/new']" (click)='closeNav()'>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_jobs.svg" alt=""></div>
+              <div class="app-nav-link__text">Blog</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['/about']" (click)='closeNav()'>
+                <div class="app-nav-link__ico"><i class="icon-alert-circle"></i></div>
+                <div class="app-nav-link__text">About One Page Spotlight</div>
+            </a>
+          </li>
+          <li class="app-nav-link_-item">
+            <a routerLink='/settings/general' (click)='closeNav()'>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/m_settings.svg" alt=""></div>
+              <div class="app-nav-link__text">Settings</div>
+            </a>
+          </li>
+        </ul>
+        <div class="app-nav-link_-item app-nav-link_-item--logout">
+          <a routerLink="/logout" (click)='closeNav()'>
+            <div class="app-nav-link__ico"><i class="icon-power"></i></div>
+            <div class="app-nav-link__text">logout</div>
+          </a>
+        </div>
+      </div>
+      <footer>
+        <ul class="o-footer-link">
+          <li class="o-footer-link__item">
+            <a [routerLink]="['/about']" class="text-md">About Us</a>
+          </li>
+          <li class="o-footer-link__item">
+            <a [routerLink]="['/help']" class="text-md">Help</a>
+          </li>
+          <li class="o-footer-link__item">
+            <a href="javascript:void(0)" class="text-md">Careers</a>
+          </li>
+          <li class="o-footer-link__item">
+            <a href="javascript:void(0)" class="text-md">Privacy</a>
+          </li>
+          <li class="o-footer-link__item">
+            <a href="javascript:void(0)" class="text-md">Terms</a>
+          </li>
+        </ul>
+      </footer>
     </div>
-    <footer>
-      <ul class="o-footer-link">
-        <li class="o-footer-link__item">
-          <a [routerLink]="['/about']" class="text-md">About Us</a>
-        </li>
-        <li class="o-footer-link__item">
-          <a [routerLink]="['/help']" class="text-md">Help</a>
-        </li>
-        <li class="o-footer-link__item">
-          <a href="javascript:void(0)" class="text-md">Careers</a>
-        </li>
-        <li class="o-footer-link__item">
-          <a href="javascript:void(0)" class="text-md">Privacy</a>
-        </li>
-        <li class="o-footer-link__item">
-          <a href="javascript:void(0)" class="text-md">Terms</a>
-        </li>
-      </ul>
-    </footer>
   </div>
   <!-- mobile:logged-in:primary-navigation -->
 

@@ -36,6 +36,7 @@ export class RegisterForm {
   form: FormGroup;
   fbForm: FormGroup;
   opspot = window.Opspot;
+  resending = false;
 
   @Output() done: EventEmitter<any> = new EventEmitter();
 
@@ -327,6 +328,32 @@ export class RegisterForm {
     if (this.otp.toString().length === 6) {
       this.onOtp();
     }
+  }
+
+  // resend otp for mobile
+  resendOtp() {
+    this.resending = true;
+    const data = ({
+      retry: true,
+      key: "phone_number",
+      value: this.removeOperators(this.form.value.mobileNumber.internationalNumber)
+    });
+    this.service.resendOtp(data).then((data: any) => {
+      localStorage.setItem('phoneNumberSecret', data.secret);
+      // this.inProgress = false;
+    })
+      .catch((e) => {
+        // this.inProgress = false;
+        if (e.status === 'failed') {
+          this.errorMessage = 'There was a problem trying to reset your password. Please try again.';
+        }
+        if (e.status === 'error') {
+          this.invalidNumberLength = true;
+        }
+      });;
+    setTimeout(() => {
+      this.resending = false;
+    }, 1500);
   }
 
 }

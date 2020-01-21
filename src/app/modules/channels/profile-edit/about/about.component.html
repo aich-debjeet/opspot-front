@@ -38,8 +38,8 @@
                 <label>Languages Known</label>
                 <!-- <input type="text" class="form-control form-control-lg" placeholder=""> -->
                 <tag-input [maxItems]=5 required style="border:1px solid #959595; border-radius:4px " [(ngModel)]='model.languages' #languages="ngModel" required name="languages" theme='minimal'>
-                    <tag-input-dropdown [minimumTextLength]=5 [autocompleteItems]="data">
-                    </tag-input-dropdown>
+                    <!-- <tag-input-dropdown [minimumTextLength]=5 [autocompleteItems]="data">
+                    </tag-input-dropdown> -->
                 </tag-input>
             </div>
             <!--languages known end-->
@@ -83,8 +83,8 @@
             <p *ngIf="aboutError.dob" class="error text-sm" id="about-component-age-error">The age must be atleat 10 or above</p>
             <p *ngIf="aboutError.dobInvalid" class="error text-sm" id="about-component-date-error">Please select a Valid Date</p>
             <!-- <p *ngIf="!gender.valid&&submitted" class="error text-sm" id="about-component-gender-error">Please select a gender</p> -->
-            <p *ngIf="!languages.valid&&submitted" class="error text-sm" id="about-component-langauge-error">Please add atleast one language </p>
-            <p *ngIf="invalidForm" class="error text-sm" id="about-component-all-from-error">Please fill all the form fields </p>
+            <!-- <p *ngIf="!languages.valid&&submitted" class="error text-sm" id="about-component-langauge-error">Please add atleast one language </p> -->
+            <!-- <p *ngIf="invalidForm" class="error text-sm" id="about-component-all-from-error">Please fill all the form fields </p> -->
 
             <div class="o-prof-edit-actions">
                 <button type="button" id="about-component-save-button" class="btn btn-primary btn-lg" (click)="onSubmit(f)" [disabled]="inProgress">Save Changes</button>

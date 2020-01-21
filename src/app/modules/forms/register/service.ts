@@ -28,4 +28,8 @@ export class Service {
   verifyMobile(data){
     return this.client.post('api/v3/verification/mobile/confirm', data)
   }
+  // resend otp for the mobile
+  resendOtp(data) {
+    return this.client.post('api/v1/forgotpassword/request', data)
+   }
 }

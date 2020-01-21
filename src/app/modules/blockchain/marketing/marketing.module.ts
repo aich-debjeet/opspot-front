@@ -19,13 +19,17 @@ import { SpotcoinsComponent } from './spotcoins/spotcoins.component';
 
 const routes: Routes = [
   {
-    path: 'tokens',
-    redirectTo: '/token',
+    path: 'token',
+    redirectTo: '/newsfeed',
   },
   {
-    path: 'token',
-    component: BlockchainMarketingComponent,
-  }
+    path: 'tokens',
+    redirectTo: '/newsfeed',
+  },
+  // {
+  //   path: 'token',
+  //   component: BlockchainMarketingComponent,
+  // }
 ];
 
 @NgModule({
