@@ -232,7 +232,8 @@
                     <div id="all" class="tab active">
                         <div class="o-blocks">
                             <div  class="o-left-block hidden-under-tablet">
-                              <opspot-search-filter></opspot-search-filter>
+                              <!-- <opspot-search-filter></opspot-search-filter> -->
+                              <opspot-widget [entityType]="'event'"></opspot-widget>
                             </div><!--left-block ends-->
                             <div class="o-center-block">
                                 <ng-container *ngIf="searchType == 'hybrid'; else simpleList">
@@ -254,7 +255,6 @@
             </div>
             <div class="o-search-rightbar hidden-mob">
               <opspot-widget [entityType]="'opportunity'"></opspot-widget>
-              <opspot-widget [entityType]="'event'"></opspot-widget>
             </div>
         </div>
     </div>
