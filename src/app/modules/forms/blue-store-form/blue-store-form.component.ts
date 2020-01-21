@@ -116,7 +116,7 @@ export class BlueStoreFormComponent implements OnInit {
         blueStoreTitle: ['', [Validators.required]],
         blueStoreDescription: ['', [Validators.required]],
         blueStoreUnits: ['', [Validators.required,Validators.min(1)]],
-        blueStoreCurrency: ['', [Validators.required]],
+        blueStoreCurrency: ['INR', [Validators.required]],
         blueStorePrice: ['', [Validators.required, Validators.min(1)]] 
       });
     }
