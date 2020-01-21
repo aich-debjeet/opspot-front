@@ -1,4 +1,6 @@
 import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from "@angular/router";
+import { filter } from 'rxjs/operators';
 
 import { NotificationService } from './modules/notifications/notification.service';
 import { AnalyticsService } from './services/analytics';
@@ -11,14 +13,13 @@ import { BlockchainService } from './modules/blockchain/blockchain.service';
 import { Web3WalletService } from './modules/blockchain/web3-wallet.service';
 import { Client } from './services/api/client';
 import { WebtorrentService } from './modules/webtorrent/webtorrent.service';
-import { ActivatedRoute, Router } from "@angular/router";
 import { ChannelOnboardingService } from "./modules/onboarding/channel/onboarding.service";
 
 @Component({
   moduleId: module.id,
   selector: 'm-app',
   templateUrl: 'app.component.html',
-  styleUrls:['app.component.scss']
+  styleUrls: ['app.component.scss']
 })
 export class Opspot {
   name: string;
@@ -28,7 +29,10 @@ export class Opspot {
 
   showTOSModal: boolean = false;
 
+  showTopbar = true;
+
   paramsSubscription;
+  routerSubscription;
 
   constructor(
     public session: Session,
@@ -51,8 +55,17 @@ export class Opspot {
   async ngOnInit() {
     this.notificationService.getNotifications();
 
-    this.session.isLoggedIn(async(is) => {
-      // console.log('isLoggedIn: ', is);
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        if (event.url === '/login') {
+          this.showTopbar = false;
+        } else {
+          this.showTopbar = true;
+        }
+      });
+
+    this.session.isLoggedIn(async (is) => {
       // is: logged in boolean
       if (is) {
         this.showOnboarding = await this.onboardingService.showModal();
@@ -95,5 +108,6 @@ export class Opspot {
     this.loginReferrer.unlisten();
     this.scrollToTop.unlisten();
     this.paramsSubscription.unsubscribe();
+    this.routerSubscription.unsubscribe();
   }
 }

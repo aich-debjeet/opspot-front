@@ -43,18 +43,20 @@ export class TopbarComponent implements OnInit {
   ngAfterViewInit() {
     // this.loadComponent();
   }
-  ngOnInit() {
-    this.user = this.opspot.user;
-    this.getUsersOrganization();
 
+  ngOnInit() {
+    this.getUsersOrganization();
+    this.loadLoggedInUser();
+
+    this.session.isLoggedIn(async(is) => {
+      this.loadLoggedInUser();
+    });
 
     this.commService$ = this.commService.listen().subscribe((e: any) => {
-      console.log('listen', e);
       if (e.component && e.action) {
         if (e.component === 'TopbarComponent') {
           if (e.action === 'orgCreated' || e.action === 'orgDeleted') {
-            // setTimeout(() => this.loadComponent(), 0);
-          this.getUsersOrganization();
+            this.getUsersOrganization();
           }
         }
       }
@@ -63,6 +65,10 @@ export class TopbarComponent implements OnInit {
 
   ngOnDestroy() {
     this.commService$.unsubscribe();
+  }
+
+  loadLoggedInUser() {
+    this.user = this.opspot.user;
   }
 
   /**
