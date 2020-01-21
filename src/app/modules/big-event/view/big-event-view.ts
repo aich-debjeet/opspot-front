@@ -8,6 +8,7 @@ import { TranslationService } from '../../../services/translation';
 import { BoostCreatorComponent } from '../../boost/creator/creator.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { OpspotTitle } from '../../../services/ux/title';
+import { ScrollService } from '../../../services/ux/scroll';
 
 
 
@@ -35,6 +36,7 @@ export class BigEventView implements OnInit {
   showBoostOptions: boolean = false;
   reachoutMessage = 'I am interested in: ';
   user: any;
+  isLocked = false;
 
   menuOptions: Array<string> = ['translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
@@ -54,6 +56,7 @@ export class BigEventView implements OnInit {
     public translationService: TranslationService,
     public overlayModal: OverlayModalService,
     public title: OpspotTitle,
+    public scroll: ScrollService
   ) { }
 
 
@@ -65,6 +68,7 @@ export class BigEventView implements OnInit {
         this.load();
       }
     });
+    this.onScroll();
   }
 
 
@@ -205,6 +209,13 @@ export class BigEventView implements OnInit {
         args: [$event]
       });
     }
+  }
+
+  onScroll() {
+    var listen = this.scroll.listen(view => {
+      if (view.top > 250) this.isLocked = true;
+      if (view.top < 250) this.isLocked = false;
+    });
   }
 
   ngOnDestroy() {
