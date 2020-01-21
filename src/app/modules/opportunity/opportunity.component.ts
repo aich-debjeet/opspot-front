@@ -37,7 +37,7 @@ export class OpportunityComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.title.setTitle('Opportunities');
+    this.title.setTitle('Opportunity');
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
         this.guid = params.get('guid');

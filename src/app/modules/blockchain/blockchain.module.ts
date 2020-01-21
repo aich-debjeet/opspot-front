@@ -22,8 +22,8 @@ import { TokenDistributionEventService } from './contracts/token-distribution-ev
 import { LocalWalletService } from './local-wallet.service';
 import { OffchainPaymentService } from './offchain-payment.service';
 import { Client } from '../../services/api/client';
-import { MarketingModule } from '../marketing/marketing.module';
-import { BlockchainMarketingModule } from './marketing/marketing.module';
+// import { MarketingModule } from '../marketing/marketing.module';
+// import { BlockchainMarketingModule } from './marketing/marketing.module';
 
 const cryptoRoutes: Routes = [
   {

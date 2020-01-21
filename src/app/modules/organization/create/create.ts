@@ -132,7 +132,7 @@ export class OrganizationCreator {
           })
           .then(() => {
             this.router.navigate(['organization/profile', guid]);
-            this.navEvent()
+            this.navUpdateOrg();
           });
 
       })
@@ -207,7 +207,7 @@ export class OrganizationCreator {
       organization.tags.map(el=>{ 
        this.organization.tags.push({display:el,value:el})})
        this.organization.tags=this.organization.tags.filter(el=>el.display)
-       this.cropedImg=`${this.opspot.cdn_url}fs/v1/avatars/${guid}`;
+       this.cropedImg=`${this.opspot.cdn_url}fs/v1/avatars/${guid}/medium/${this.organization.icon_time}`;
       }
    }
    catch(e){
@@ -220,7 +220,8 @@ export class OrganizationCreator {
   this._location.back();
  }
 
- navEvent() {
+ navUpdateOrg() {
+  console.log('trigger');
   this.commService.trigger({
     component: 'TopbarComponent',
     action: 'orgCreated'

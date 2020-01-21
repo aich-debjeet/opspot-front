@@ -899,6 +899,8 @@
       }
       .opportunity-details{
           margin-left: 17px;
+          max-width: 300px;
+          overflow: hidden;
           @include mq($from: $mobile_sm, $until: $desktop_sm) {
               text-align: center;
               margin-top: 30px;

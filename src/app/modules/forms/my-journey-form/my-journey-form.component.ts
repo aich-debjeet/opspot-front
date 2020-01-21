@@ -28,6 +28,7 @@ export class MyJourneyFormComponent implements OnInit {
   };
   tags = [];
   isNSFW: boolean = false;
+  inProgress = false;
 
   constructor(
     public session: Session,
@@ -52,8 +53,11 @@ export class MyJourneyFormComponent implements OnInit {
   }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    this.attachment.remove(imageId,file).then((guid) => {
+    console.log('clicked')
+    this.inProgress = true;
+    this.attachment.remove(imageId, file).then((guid) => {
       file.value = '';
+      this.inProgress = false;
       this.cards = _remove(this.cards, function (n) {
         return n.guid !== guid;
       });
@@ -63,13 +67,21 @@ export class MyJourneyFormComponent implements OnInit {
 
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
+      this.inProgress = true;
       this.attachment.upload(file)
         .then(guid => {
           let obj = {};
           obj['guid'] = guid;
           obj['imageLink'] = this.attachment.getPreview();
+          /**
+           * temporary fix for video
+           */
+          if (obj['imageLink'] == null) {
+            obj['imageLink'] = 'assets/videos/video_thumbnail.png'
+          }
           this.cards.push(obj);
           file.value = null;
+          this.inProgress = false;
           // this.attachment.reset();
         })
         .catch(e => {
@@ -97,6 +109,7 @@ export class MyJourneyFormComponent implements OnInit {
     this.tags.push(SpecialHashtg.concat('myjourney', this.session.getLoggedInUser().username));
     data.tags = this.tags;
     data.isNSFW = this.isNSFW;
+    this.inProgress = true;
     this.client.post('api/v1/newsfeed', data)
       .then((data: any) => {
         data.activity.boostToggle = true;
@@ -104,9 +117,11 @@ export class MyJourneyFormComponent implements OnInit {
         this.load.emit(data);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
+        this.inProgress = false;
         this.cards = [];
       })
       .catch((e) => {
+        this.inProgress = false;
         // console.log(e.message);
         // this.attachment.reset();
       });

@@ -208,7 +208,8 @@ opspot-button-remind{
             </a>
             <div class="o-avatar__info">
               <div class="o-avatar-det-block">
-                <span class="text-lg grey o-posts-det" id="view-profile-added-media"><a class="o-avatar__name" *ngIf="entity?.ownerObj && entity?.ownerObj?.username" [routerLink]="['/', entity?.ownerObj?.username]">{{entity?.ownerObj?.name}}</a>added
+                <span class="text-lg grey o-posts-det" id="view-profile-added-media"><a class="o-avatar__name" *ngIf="entity?.ownerObj && entity?.ownerObj?.username" 
+                  [routerLink]="['/', entity?.ownerObj?.username]">{{entity?.ownerObj?.name}}</a>added
                   media</span>
               </div>
               <div class="grey m-l-8 o-posts-tym">
@@ -249,7 +250,7 @@ opspot-button-remind{
               <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
             </m-video>
             <!-- <m-audio *ngIf="showAudio && !showVideo" [src]="'api/v1/media/' + videoData.guid + '/play'"></m-audio> -->
-            <m-audio *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio>
+            <m-audio style="width: 100%" *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio>
           </div>
           <div class="o-posts-inner-page-myjourney-padding">
             <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">
@@ -275,11 +276,11 @@ opspot-button-remind{
                     <!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + media.src + ')'"></div> -->
                     <!-- <img [src]="media.src" alt="" class="feed-media__img"
                       (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
-                    <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'  && media.entity_type !== 'audio'""
+                    <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'  && media.entity_type !== 'audio'"
                       (click)="showImage(i)">
-                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img" (click)="showImage(i,media)">
                     <img *ngIf="media.entity_type === 'audio'" src="assets/videos/video_thumbnail.png" alt="" class="feed-media__img" (click)="showImage(i,media)">
-                    <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
+                    <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
                       <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
                     </div>
                   </a>
@@ -296,7 +297,7 @@ opspot-button-remind{
               (onTranslateError)="translateToggle = false" 
               #translate>
             </m-translate>
-            <div class="text-md">{{ entity?.message}}</div>
+            <div class="text-md white-space word-break">{{ entity?.message}}</div>
             <div class="opspot-editable-container"
                 *ngIf="editing">
                 <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->

@@ -121,18 +121,27 @@
 
 <m-channel--explicit-overlay [channel]="user"></m-channel--explicit-overlay>
 
-<m-modal open='true' *ngIf="userVerifcation">
-  <h2 class="modalCls">
-    <ng-container *ngIf="successRes">
-      Thanks for verifing email
+<m-modal class="email-verification-modal" open='true' *ngIf="emailVerificationModal">
+  <h3 class="wrapper">
+    <ng-container *ngIf="emailVerificationSuccess">
+      Thank you, for verifing your email id.
     </ng-container>
-    <ng-container>
-      {{errorRes}}
+    <ng-container *ngIf="emailVerificationFail">
+      {{emailVerificationFail}}
     </ng-container>
-  </h2>
+  </h3>
 </m-modal>
 
 <style>
+  /* m-modal.email-verification-modal {
+    min-height: auto;
+  }
+  .m-modal .m-modal-container .mdl-card {
+    min-height: auto;
+  }
+  .m-modal .m-modal-container .mdl-card .wrapper {
+    padding: 30px;
+  } */
   /* .modalCls {
     position: absolute;
     top: 50%;

@@ -91,6 +91,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    @include mq($from:$mobile-sm, $until:$desktop-sm){
+        flex-direction: column;
+    }
     &__item{
         width:257px;
         cursor: pointer;

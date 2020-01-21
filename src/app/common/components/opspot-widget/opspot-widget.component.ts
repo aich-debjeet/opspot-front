@@ -11,6 +11,7 @@ import { SpecialHashtg } from '../../../helpers/special-hashtag';
 export class OpspotWidgetComponent implements OnInit {
 
   @Input() entityType: any;
+  @Input() seeAllLink: any;
   @Input() user: any;
 
   entities: any[];

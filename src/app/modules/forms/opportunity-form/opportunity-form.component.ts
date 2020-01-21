@@ -150,12 +150,14 @@ export class OpportunityFormComponent implements OnInit {
       if (this.oppGuid) {
         endpoint = 'api/v3/opportunity/' + this.oppGuid;
       }
+      this.inProgress = true;
       this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
           this.load.emit(resp);
           this.attachment.reset();
           this.meta = { wire_threshold: null };
           this.submitted = false;
+          this.inProgress = false;
           this.changeToDefault();
           // // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
@@ -167,12 +169,13 @@ export class OpportunityFormComponent implements OnInit {
         .catch((e) => {
           this.submitted = false;
           alert(e.message);
+          this.inProgress = false;
         });
     }
   }
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
-
+      this.inProgress = true;
       this.attachment.upload(file, this.attach_guid)
         .then(guid => {
           let obj = {};
@@ -182,12 +185,14 @@ export class OpportunityFormComponent implements OnInit {
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }
+          this.inProgress = false;
           file.value = null;
         })
         .catch(e => {
           if (e && e.message) {
           }
           file.value = null;
+          this.inProgress = false;
           this.attachment.reset();
         });
     }

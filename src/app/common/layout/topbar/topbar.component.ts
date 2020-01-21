@@ -29,6 +29,8 @@ export class TopbarComponent implements OnInit {
   componentInstance: NotificationsToasterComponent;
   commService$: Subscription;
 
+  organization: any;
+
   constructor(
     public session: Session,
     public storage: Storage,
@@ -41,16 +43,19 @@ export class TopbarComponent implements OnInit {
   ngAfterViewInit() {
     // this.loadComponent();
   }
-  ngOnInit() {
-    this.user = this.opspot.user;
-    this.getUsersOrganization();
 
+  ngOnInit() {
+    this.getUsersOrganization();
+    this.loadLoggedInUser();
+
+    this.session.isLoggedIn(async(is) => {
+      this.loadLoggedInUser();
+    });
 
     this.commService$ = this.commService.listen().subscribe((e: any) => {
       if (e.component && e.action) {
         if (e.component === 'TopbarComponent') {
-          if (e.action === 'orgCreated') {
-            
+          if (e.action === 'orgCreated' || e.action === 'orgDeleted') {
             this.getUsersOrganization();
           }
         }
@@ -60,6 +65,10 @@ export class TopbarComponent implements OnInit {
 
   ngOnDestroy() {
     this.commService$.unsubscribe();
+  }
+
+  loadLoggedInUser() {
+    this.user = this.opspot.user;
   }
 
   /**
@@ -100,62 +109,20 @@ export class TopbarComponent implements OnInit {
     }
   }
 
-  // getUsersOrganization() {
-
-  // }
-
-  offset = '';
-  entities = [];
-  moreData = false;
-  inProgress = false;
-  rating: number = 1;
-  entity: any;
-
-
   getUsersOrganization() {
-    let key = 'organizations';
     let ownerGuid = this.session.getLoggedInUser().guid;
-    let endpoint = `api/v1/groups/owner/` + ownerGuid;
 
-    this.client.get(endpoint, {
+    this.client.get(`api/v1/groups/owner/` + ownerGuid, {
       limit: 12,
-      offset: this.offset,
-      rating: this.rating
+      offset: '',
+      rating: 1
     })
       .then((response) => {
-        this.entities.push(response[key][0]);
-        if(this.entities.length){
-          this.entity = this.entities[0];
-          // console.log("this:  ", response);
-          
+        if(response && response['organizations']) {
+          this.organization = response['organizations'][0];
         }
-        // for (var i = 0; i <= this.entities.length; i++) {
-       
-        // }
-        // console.log("response: ", response);
-
-        // if (!response[key] || response[key].length === 0) {
-        //   this.moreData = false;
-        //   this.inProgress = false;
-        // }
-        // if (refresh) {
-        //   this.entities = response[key];
-        // } else {
-        //   if (this.offset)
-        //     response[key].shift();
-
-        //   this.entities.push(...response[key]);
-        // }
-
-        // this.offset = response['load-next'];
-        // if (!this.offset) {
-        //   this.moreData = false;
-        // }
-        // this.inProgress = false;
       })
-      .catch((e) => {
-        this.inProgress = false;
-      });
+      .catch((e) => { });
 
   }
 }

@@ -70,7 +70,7 @@ export class ForgotPasswordComponent {
 
 
   ngOnInit() {
-    // this.title.setTitle('Forgot Password');
+    this.title.setTitle('Forgot Password');
     this.paramsSubscription = this.route.params.subscribe((params) => {
       if (params['code']) {
         // console.log("params['code']: ", params['code']);
