@@ -135,7 +135,7 @@ export class BlueStoreFormComponent implements OnInit {
 
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
-
+      this.inProgress = true;
       this.attachment.upload(file, this.attach_guid)
         .then(guid => {
           let obj = {};
@@ -146,11 +146,13 @@ export class BlueStoreFormComponent implements OnInit {
           //   this.removeAttachment(file);
           // }
           // file.value = null;
+          this.inProgress = false;
         })
         .catch(e => {
           if (e && e.message) {
           }
           file.value = null;
+          this.inProgress = false;
           this.attachment.reset();
         });
     }
@@ -197,7 +199,7 @@ export class BlueStoreFormComponent implements OnInit {
       })
       .catch(e => {
         // console.error(e);
-        // this.inProgress = false;
+        this.inProgress = false;
         // this.canPost = true;
       });
   }
@@ -286,6 +288,7 @@ export class BlueStoreFormComponent implements OnInit {
       if (this.bluestoreGuid) {
         endpoint = 'api/v3/marketplace/' + this.bluestoreGuid;
       }
+      this.inProgress = true;
       this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
           // data.activity.boostToggle = true;
@@ -293,6 +296,7 @@ export class BlueStoreFormComponent implements OnInit {
           this.attachment.reset();
           // this.meta = { wire_threshold: null };
           this.blueStoreSubmitted = false;
+          this.inProgress = false;
           this.changeToDefault();
           // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
@@ -304,6 +308,7 @@ export class BlueStoreFormComponent implements OnInit {
         .catch((e) => {
           this.blueStoreSubmitted = false;
           alert(e.message);
+          this.inProgress = false;
         });
     }
   }

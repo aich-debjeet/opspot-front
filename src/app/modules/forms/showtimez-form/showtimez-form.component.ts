@@ -141,7 +141,7 @@ export class ShowtimezFormComponent implements OnInit {
 
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
-
+      this.inProgress = true;
       this.attachment.upload(file, this.attach_guid)
         .then(guid => {
           let obj = {};
@@ -151,12 +151,14 @@ export class ShowtimezFormComponent implements OnInit {
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }
+          this.inProgress = false;
           file.value = null;
         })
         .catch(e => {
           if (e && e.message) {
           }
           file.value = null;
+          this.inProgress = false;
           this.attachment.reset();
         });
     }
@@ -213,7 +215,7 @@ export class ShowtimezFormComponent implements OnInit {
       })
       .catch(e => {
         // console.error(e);
-        // this.inProgress = false;
+        this.inProgress = false;
         // this.canPost = true;
       });
   }
@@ -279,6 +281,7 @@ export class ShowtimezFormComponent implements OnInit {
       if (this.eventGuid) {
         endpoint = 'api/v3/event/' + this.eventGuid;
       }
+      this.inProgress = true;
       this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
           // reqBody.activity.boostToggle = true;
@@ -292,10 +295,12 @@ export class ShowtimezFormComponent implements OnInit {
             this.closeModal();
           }
           this.eventSubmitted = false;
+          this.inProgress = false;
           this.changeToDefault();
         })
         .catch((e) => {
           this.eventSubmitted = false;
+          this.inProgress = false;
           alert(e.message);
 
         });

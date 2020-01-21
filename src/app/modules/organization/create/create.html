@@ -56,7 +56,8 @@
                 <div class="o-community-profile-picture">
                     <div class="fileUpload" *ngIf="!editOrganization">
                         <span *ngIf="!croppieImage&&!editOrganization" class="icon-plus"></span>
-                        <input type="file" id="create-organization-file" #editImgcomp onclick="this.value = null" (change)="add($event)"
+                        <input type="file" id="create-organization-file" #editImgcomp  onclick="this.value = null"  accept="image/*"
+                        (change)="add($event)"
                             class="upload" />
                         <div *ngIf="croppieImage&&!editOrganization" class="fileUpload-preview">
                             <a class="create-community-img" (click)="openCropper()">
