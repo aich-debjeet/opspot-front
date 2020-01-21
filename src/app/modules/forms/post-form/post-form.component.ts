@@ -47,10 +47,7 @@ export class PostFormComponent {
   display = '';
   startDate: string;
   content = '';
-  meta: any = {
-    message: '',
-    wire_threshold: null
-  };
+  meta: any;
   tags = [];
   inProgress = false;
 
@@ -89,6 +86,7 @@ export class PostFormComponent {
   ) {
     this.opspot = window.Opspot;
     this.cards = [];
+    this.resetMeta();
   }
 
   set _container_guid(guid: any) {
@@ -195,7 +193,7 @@ export class PostFormComponent {
         // data.activity.boostToggle = true; //@gayatri hava to check this
         this.load.emit(data);
         this.attachment.reset();
-        this.meta = { wire_threshold: null };
+        this.resetMeta();
         this.inProgress = false;
         this.cards = [];
       })
@@ -344,4 +342,8 @@ export class PostFormComponent {
   //   console.log(data)
   //   this.load.next(data.activity);
   // }
+
+  resetMeta() {
+    this.meta = { message: '', wire_threshold: null };
+  }
 }
