@@ -230,9 +230,9 @@ m-modal .m-modal-container .mdl-card {
   top: -1px;
   right: -108px;
   @include mq($from: $mobile_sm, $until: $tablet) {
-  right: -150px;
-      top: -20px;
-}
+    right: -150px;
+    top: -20px;
+  }
 }
 
 .o-community-option-drop__block {
