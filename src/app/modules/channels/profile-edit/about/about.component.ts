@@ -94,7 +94,7 @@ export class AboutComponent implements OnInit {
       language = this.model.languages.map(el => el.value);
     }
 
-    if (e.valid) {
+    // if (e.valid) {
       this.inProgress = true;
       let about = {
         about: {
@@ -123,7 +123,7 @@ export class AboutComponent implements OnInit {
           this.invalidForm = true;
         } else this.invalidForm = false;
       });
-    }
+    // }
   }
 
   showSuccess() {
