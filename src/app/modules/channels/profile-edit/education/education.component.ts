@@ -56,7 +56,7 @@ export class EducationComponent implements OnInit {
       this.errEndDate = false;
     }
 
-    if (e.valid && !this.errWork && !this.errEndDate) {
+    if (!this.errWork) {
       this.inProgress = true;
       let work = {
         field_of_study: this.model.field,

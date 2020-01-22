@@ -51,7 +51,7 @@ export class AwardsComponent implements OnInit {
     //   this.errEndDate = false;
     // }
 
-    if (e.valid) {
+    // if (e.valid) {
       this.inProgress = true;
       let work = {
         title: this.model.title,
@@ -80,7 +80,7 @@ export class AwardsComponent implements OnInit {
             });
           }
         });
-    }
+    // }
   }
 
   async load() {
