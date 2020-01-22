@@ -17,6 +17,7 @@ export class EducationComponent implements OnInit {
   addWork;
   errWork = false;
   errEndDate = true;
+  errEdu = false;
 
   work: any = { education: [] };
   activeUser = window.Opspot.user;
@@ -38,6 +39,10 @@ export class EducationComponent implements OnInit {
 
   onSubmit(e) {
     this.submitted = true;
+    if(!e.valid){
+      this.errEdu = true;
+      return;
+    }
     if (this.model.endYear - this.model.strtYear < 0) {
       this.errWork = true;
     } else {
@@ -58,6 +63,7 @@ export class EducationComponent implements OnInit {
 
     if (!this.errWork) {
       this.inProgress = true;
+      this.errEdu = false;
       let work = {
         field_of_study: this.model.field,
         location: this.model.location,
