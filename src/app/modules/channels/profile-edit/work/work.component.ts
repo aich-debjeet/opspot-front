@@ -54,7 +54,7 @@ export class WorkComponent implements OnInit {
       this.errEndDate = false;
     }
 
-    if (e.valid && !this.errWork && !this.errEndDate) {
+    if (!this.errWork) {
       this.inProgress = true;
       let work = {
         designation: this.model.designation,

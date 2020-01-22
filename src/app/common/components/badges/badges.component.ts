@@ -30,7 +30,8 @@ export class ChannelBadgesComponent {
   verify(e) {
     if (!this.session.isAdmin()) {
       e.preventDefault();
-      return this.router.navigate(['/plus']);
+      return 
+      // this.router.navigate(['/plus']);
     }
     if (this.user.verified)
       return this.unVerify();
