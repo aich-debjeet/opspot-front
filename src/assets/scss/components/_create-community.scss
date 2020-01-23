@@ -145,6 +145,8 @@
 }
 /* file uplpoad preview css*/
 .fileUpload-preview{
+  border-radius: 50%;
+  overflow: hidden;
   @extend .fileUpload;
   :before{
     right: -10px;

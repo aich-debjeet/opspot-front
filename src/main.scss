@@ -25963,7 +25963,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .o-create-myjourney-body{
   width: 100%;
   padding: 15px 24px 15px;
-  height: 186px;
+  min-height: 186px;
   textarea{
       resize:none;
   }
@@ -26043,6 +26043,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .o-create-myjourney-filled-fileupload{
   display: flex;
   width: 100%;
+  flex-wrap: wrap;
   .mr-9{
       margin-right: 9px
   }
@@ -26052,6 +26053,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
       border: 1px solid #F5F7F8;	
       border-radius: 4px;
       position: relative;
+      margin-bottom: 9px;
       .icon-plus{
           border:0;
       }
@@ -26914,7 +26916,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 // }
 
 .icon-send {
-  font-size: 25px !important;
+  font-size: 18px !important;
 }
 
 .m-l-0 {

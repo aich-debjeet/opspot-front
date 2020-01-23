@@ -39,3 +39,16 @@ swiper{
     border-radius: .25rem;
     width: 40px;
 }
+
+.o-prof-edit-list{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    &__item{
+        padding: 20px 16px;
+        a{
+            width: max-content;
+        }
+    }
+}
