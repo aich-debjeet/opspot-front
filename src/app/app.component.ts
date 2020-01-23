@@ -29,7 +29,7 @@ export class Opspot {
 
   showTOSModal: boolean = false;
 
-  showTopbar = true;
+  showTopbar = false;
 
   paramsSubscription;
   routerSubscription;
@@ -58,7 +58,7 @@ export class Opspot {
     this.routerSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        if (event.url === '/login') {
+        if (event.url === '/' || event.url === '/login') {
           this.showTopbar = false;
         } else {
           this.showTopbar = true;
