@@ -89,13 +89,14 @@
             </label>
         </div>
     
-        <p *ngIf="!location.valid&&submitted" class="error text-sm" id="work-add-location-error">Please add Location</p>
+        <!-- <p *ngIf="!location.valid&&submitted" class="error text-sm" id="work-add-location-error">Please add Location</p>
         <p *ngIf="!designation.valid&&submitted" class="error text-sm" id="work-add-designation-error">Please add designation</p>
-        <p *ngIf="!company.valid&&submitted" class="error text-sm" id="work-add-company-error">Please add company</p>
-        <p *ngIf="!strtMonth.valid&&submitted" class="error text-sm" id="work-start-month-error">Please enter start Month</p>
-        <p *ngIf="!strtYear.valid&&submitted" class="error text-sm" id="work-start-year-error">Please enter start year</p>
+        <p *ngIf="!company.valid&&submitted" class="error text-sm" id="work-add-company-error">Please add company</p> -->
+        <!-- <p *ngIf="!strtMonth.valid&&submitted" class="error text-sm" id="work-start-month-error">Please enter start Month</p>
+        <p *ngIf="!strtYear.valid&&submitted" class="error text-sm" id="work-start-year-error">Please enter start year</p> -->
         <p *ngIf="errWork&&submitted" class="error text-sm" id="work-valid-date-error">Please add valid dates</p>
-        <p *ngIf="errEndDate&&submitted" class="error text-sm" id="work-end-date-error">Enddate is required</p>
+        <p *ngIf="errEdu&&submitted" class="error text-sm" id="work-valid-date-error">Please fill all the details</p>
+        <!-- <p *ngIf="errEndDate&&submitted" class="error text-sm" id="work-end-date-error">Enddate is required</p> -->
     
         <div class="o-prof-edit-actions" style="padding-left:12px; ">
             <button type="button" id="work-update-button" class="btn btn-primary btn-lg" (click)="onSubmit(f)" [disabled]="inProgress">Save Changes</button>

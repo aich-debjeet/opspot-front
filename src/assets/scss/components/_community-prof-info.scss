@@ -52,7 +52,7 @@
     @include mq($from: $mobile_sm, $until: $tablet) {
         position: absolute;
         display: flex;
-        z-index: 1111111111111111111;
+        // z-index: 1111111111111111111;
         top: 62px;
     }
 }
@@ -221,7 +221,7 @@
     top: -1px;
     right: -108px;
     @include mq($from: $mobile_sm, $until: $tablet) {
-		right: -150px;
+		right: -130px;
         top: -20px;
 	}
 }

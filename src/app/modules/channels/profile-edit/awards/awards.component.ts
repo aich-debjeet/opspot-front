@@ -37,6 +37,10 @@ export class AwardsComponent implements OnInit {
 
   onSubmit(e) {
     this.submitted = true;
+    if(!e.valid){
+      this.errWork = true;
+      return;
+    }
     // if (this.model.endYear - this.model.strtYear < 0) {
     //   this.errWork = true;
     // } else {
@@ -51,8 +55,9 @@ export class AwardsComponent implements OnInit {
     //   this.errEndDate = false;
     // }
 
-    if (e.valid) {
+    // if (e.valid) {
       this.inProgress = true;
+      this.errWork = false;
       let work = {
         title: this.model.title,
         location: this.model.location,
@@ -80,7 +85,7 @@ export class AwardsComponent implements OnInit {
             });
           }
         });
-    }
+    // }
   }
 
   async load() {

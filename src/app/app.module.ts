@@ -55,7 +55,7 @@ import { NewsfeedModule } from './modules/newsfeed/newsfeed.module';
 import { MediaModule } from './modules/media/media.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { BlockchainModule } from './modules/blockchain/blockchain.module';
-// import { BlockchainMarketingModule } from './modules/blockchain/marketing/marketing.module';
+import { BlockchainMarketingModule } from './modules/blockchain/marketing/marketing.module';
 import { CommentsModule } from './modules/comments/comments.module';
 import { NodesMarketingModule } from './modules/nodes/nodes.module';
 import { HelpdeskModule } from './modules/helpdesk/helpdesk.module';
@@ -125,7 +125,7 @@ import { BigEventModule } from './modules/big-event/big-event.module';
     MediaModule,
     AuthModule,
     BlockchainModule,
-    // BlockchainMarketingModule,
+    BlockchainMarketingModule,
     NodesMarketingModule,
     CommentsModule,
     HelpdeskModule,
