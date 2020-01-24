@@ -13,12 +13,13 @@ export class AboutComponent implements OnInit {
   activeUser = window.Opspot.user;
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
-  constructor(private client: Client, public router: Router,private toastr: ToastrService) {
-    this.data = ['Kannada', 'English', 'Hindi', 'Tamil'];
+  constructor(private client: Client, public router: Router, private toastr: ToastrService) {
     this.load();
+    this.data = JSON.parse(localStorage.getItem('opspot:languages'));
   }
   date;
   model: any = {};
+  // languages: any[];
   data;
   bsConfig = {
     containerClass: 'theme-dark-blue',
@@ -31,7 +32,7 @@ export class AboutComponent implements OnInit {
   aboutError = { dob: false, dobInvalid: false, gender: false };
   submitted = false;
   invalidForm: boolean = false;
-  inProgress: boolean= false;
+  inProgress: boolean = false;
 
   ngOnInit() {
     //set privacy
@@ -83,9 +84,11 @@ export class AboutComponent implements OnInit {
       dob = dob['year'] + '-' + dob['month'] + '-' + dob['date'];
     } else {
       this.aboutError.dobInvalid = true;
+      return;
     }
     if (new Date().getFullYear() - new Date(this.model.dob).getFullYear() < 10) {
       this.aboutError.dob = true;
+      return;
     }
 
     let language;
@@ -95,34 +98,34 @@ export class AboutComponent implements OnInit {
     }
 
     // if (e.valid) {
-      this.inProgress = true;
-      let about = {
-        about: {
-          description: this.model.description,
-          dob: dob,
-          gender: this.model.gender,
-          languages: this.model.languages.map(el => el.value),
-          height: this.model.height,
-          weight: this.model.weight,
-          dob_visibility: this.privacy.dob,
-          height_and_weight_visibility: this.privacy.height
-        }
-      };
+    this.inProgress = true;
+    let about = {
+      about: {
+        description: this.model.description,
+        dob: dob,
+        gender: this.model.gender,
+        languages: this.model.languages.map(el => el.value),
+        height: this.model.height,
+        weight: this.model.weight,
+        dob_visibility: this.privacy.dob,
+        height_and_weight_visibility: this.privacy.height
+      }
+    };
 
-      this.client.post('api/v1/entities/about', about).then((res: any) => {
-        if (res.status === 'success' && res.entities == true) {
-          this.client.get('api/v2/onboarding/progress').then((response: any) => {
-            this.showSuccess();
-            this.inProgress = false;
-            this.updatePercentage.emit(response.rating)
-          });
-        }
-        // this.router.navigate(['/profile/contact']);
-      }).catch((e) => {
-        if (e.status === 'error') {
-          this.invalidForm = true;
-        } else this.invalidForm = false;
-      });
+    this.client.post('api/v1/entities/about', about).then((res: any) => {
+      if (res.status === 'success' && res.entities == true) {
+        this.client.get('api/v2/onboarding/progress').then((response: any) => {
+          this.showSuccess();
+          this.inProgress = false;
+          this.updatePercentage.emit(response.rating)
+        });
+      }
+      // this.router.navigate(['/profile/contact']);
+    }).catch((e) => {
+      if (e.status === 'error') {
+        this.invalidForm = true;
+      } else this.invalidForm = false;
+    });
     // }
   }
 
