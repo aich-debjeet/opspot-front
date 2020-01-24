@@ -220,14 +220,14 @@
       </li>
       <li class="o-bio-info__item m-t-9">
         <div class="o-bio-info-left" id="sidebar-height">
-          <div class="text-sm grey o-gender-title">Height</div>
+          <div class="text-sm grey o-gender-title">Height(in cm)</div>
           <div class="text-md o-gender-value" *ngIf="isOwner() && !user.height">
             <a class="primary" [routerLink]="['/profile/about']" id="sidebar-add-height">Select</a>
           </div>
           <span class="text-md float-left" id="sidebar-user-height">{{user.height}}</span>
         </div>
         <div class="o-bio-info-right" id="sidebar-weight">
-          <div class="text-sm grey o-dob-title">Weight</div>
+          <div class="text-sm grey o-dob-title">Weight(in Kg)</div>
           <div class="text-md o-dob-value" *ngIf="isOwner() && !user.weight">
             <a class="primary" [routerLink]="['/profile/about']" id="sidebar-add-weight">Select</a>
           </div>

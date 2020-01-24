@@ -83,9 +83,11 @@ export class AboutComponent implements OnInit {
       dob = dob['year'] + '-' + dob['month'] + '-' + dob['date'];
     } else {
       this.aboutError.dobInvalid = true;
+      return;
     }
     if (new Date().getFullYear() - new Date(this.model.dob).getFullYear() < 10) {
       this.aboutError.dob = true;
+      return;
     }
 
     let language;
