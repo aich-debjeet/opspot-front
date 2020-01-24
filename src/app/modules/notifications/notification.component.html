@@ -660,8 +660,7 @@
               
           <!-- Activity -->
           <a *ngIf="notification.entityObj.type == 'activity'"
-            target="_blank"
-            routerLink="/settings/reported-content">
+            routerLink="/settings/support">
             <p *ngIf="notification.entityObj.owner_guid == session.getLoggedInUser().guid && !notification.entityObj.title">
               <span class="pseudo-link mdl-color-text--blue-grey-400" i18n="@@NOTIFICATIONS__NOTIFICATION__REPORT_ACTIONED__ACTIVITY_BEEN">Your post</span> has been {{notification.params.action}}
             </p>
