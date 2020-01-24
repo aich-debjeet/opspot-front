@@ -1,5 +1,5 @@
 <div class="o-card o-noti-block" [ngClass]="getClasses()">
-    <div class="o-noti-head" id="notification">
+    <div class="o-noti-head" id="notification" *ngIf="notification.notification_view != 'report_actioned'">
         <div class="o-noti-head__avatar">
             <a [routerLink]="['/', notification.fromObj.username || '']" *ngIf="notification.fromObj">
               <img [src]="opspot.cdn_url + 'icon/' + notification.fromObj.guid + '/'" />
