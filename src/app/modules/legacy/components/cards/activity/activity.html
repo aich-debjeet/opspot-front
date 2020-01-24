@@ -120,7 +120,7 @@
       </a>
     </div>
     <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type == 'video'"
-    [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
+    [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }" [routerLink]="['/media', activity.guid]">
       <m-video width="100%" height="300px" style="background:#000;" [muted]="false"
       [poster]="activity.custom_data[0].thumbnail_src"
       [src]="[{ 'res': '360', 'uri': 'api/v1/media/' + activity.custom_data[0].guid + '/play', 'type': 'video/mp4' }]"
@@ -129,13 +129,13 @@
       <video-ads [player]="player" *ngIf="activity.monetized"></video-ads>
       </m-video>
     </div>
-    <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type == 'audio'" 
+    <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type == 'audio'" [routerLink]="['/media', activity.guid]"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
       <!-- <m-audio [src]="'api/v1/media/' + activity.custom_data[0].guid + '/play'"></m-audio> -->
       <m-audio [src]="'https://ops-audio-01.s3.amazonaws.com/' + activity.custom_data[0].guid + '/128.mp3'"></m-audio>
     </div>
     <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type != 'audio' && activity?.custom_data[0].entity_type != 'video'
-      &&  activity?.custom_data[0].entity_type == 'image' " 
+      &&  activity?.custom_data[0].entity_type == 'image' " [routerLink]="['/media', activity.guid]"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
       <img [src]="activity?.custom_data[0]?.src" alt="" class="feed-media__img" (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">    
     </div>
