@@ -19,6 +19,13 @@ export class TranslationService {
     this.load();
   }
 
+  setLanguages(data: any[]) {
+    var langNames = data.map(function(lang) {
+      return lang['name'];
+    });
+    localStorage.setItem('opspot:languages', JSON.stringify(langNames));
+  }
+
   getLanguages(): Promise<any> {
     if (!this.languagesReady) {
       let cached = this.storage.get(`translation:languages:${this.defaultLanguage}`);
@@ -34,6 +41,11 @@ export class TranslationService {
           .then((response: any) => {
             if (!response.languages) {
               throw new Error('No languages array');
+            }
+
+            const savedLanguages = localStorage.getItem('opspot:languages');
+            if (!savedLanguages) {
+              this.setLanguages(response.languages);
             }
 
             this.storage.set(`translation:languages:${this.defaultLanguage}`, JSON.stringify(response.languages));

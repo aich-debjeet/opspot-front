@@ -182,7 +182,7 @@ export class ForgotPasswordComponent {
         .then((data: any) => {
           this.secret = data.secret;
           this.mobilenumber = '******' + _.takeRight(this.mobile, 4).join('');
-          //localStorage.setItem('phoneNumberSecret', data.secret);
+          //localStorage.setItem('phone-verification-secret', data.secret);
           this.inProgress = false;
           this.step = 2;
           this.buildForm('otp');
@@ -284,7 +284,7 @@ export class ForgotPasswordComponent {
       value: this.mobile
     });
     this.forgotpasswordservice.resendOtp(data).then((data: any) => {
-      //localStorage.setItem('phoneNumberSecret', data.secret);
+      //localStorage.setItem('phone-verification-secret', data.secret);
       this.secret = data.secret;
       this.inProgress = false;
     })
