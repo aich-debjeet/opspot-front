@@ -148,6 +148,7 @@ export class BigEventForm implements OnInit {
 
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) {
+      this.inProgress = true;
       this.attachment.upload(file, this.attach_guid)
         .then(guid => {
           let obj = {};
@@ -159,11 +160,13 @@ export class BigEventForm implements OnInit {
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }
+          this.inProgress = false;
           file.value = null;
         })
         .catch(e => {
           if (e && e.message) {
           }
+          this.inProgress = false;
           file.value = null;
           this.attachment.reset();
         });

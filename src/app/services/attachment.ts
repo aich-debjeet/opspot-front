@@ -113,7 +113,7 @@ export class AttachmentService {
   }
 
   upload(fileInput: HTMLInputElement, guidArray?) {
-    if(guidArray && guidArray.length > 0){
+    if (guidArray && guidArray.length > 0) {
       this.meta.attachment_guid = guidArray
     }
     // this.reset();
@@ -142,7 +142,7 @@ export class AttachmentService {
       .then((response: any) => {
         this.meta.attachment_guid.push(response.guid ? response.guid : null);
         // console.log( "vdff: ",this.meta.attachment_guid);
-        
+
 
         if (!this.meta.attachment_guid) {
           throw 'No GUID';
@@ -172,13 +172,13 @@ export class AttachmentService {
     }
   }
 
-/**
- * TODO:
- * -needs to be restructured to make it compatible with every feature. 
- * */
+  /**
+   * TODO:
+   * -needs to be restructured to make it compatible with every feature. 
+   * */
   remove(imageId: string, fileInput?: HTMLInputElement, guidArray?: string[]) {
-    if(guidArray && guidArray.length > 0){
-      this.meta.attachment_guid = guidArray;      
+    if (guidArray && guidArray.length > 0) {
+      this.meta.attachment_guid = guidArray;
     }
     let idx = this.meta.attachment_guid.indexOf(imageId);
     this.attachment.progress = 0;
@@ -236,7 +236,7 @@ export class AttachmentService {
 
   exportMeta() {
     let result = {};
-    if(typeof this.meta.attachment_guid === 'string') {
+    if (typeof this.meta.attachment_guid === 'string') {
       return this.meta.attachment_guid;
     } else if (this.meta.attachment_guid instanceof Array && this.meta.attachment_guid.length > 0) {
       for (var prop in this.meta) {
@@ -433,12 +433,14 @@ export class AttachmentService {
 
   private checkFileType(file): Promise<any> {
     console.log("file: ", file);
-    
+
     return new Promise((resolve, reject) => {
       if (file.type && file.type.indexOf('video/') === 0) {
         this.attachment.mime = 'video';
 
         this.checkVideoDuration(file).then(duration => {
+          console.log("video duration", duration);
+
           if (duration > window.Opspot.max_video_length) {
             return reject({ message: 'Error: Video duration exceeds ' + window.Opspot.max_video_length / 60 + ' minutes' });
           }
@@ -450,21 +452,21 @@ export class AttachmentService {
         });
 
       } else if (file.type && file.type.indexOf('audio/') === 0) {
-        console.log("In th audio");
-        
         this.attachment.mime = 'audio';
+        resolve();
+        // this.checkAudioDuration(file).then(duration => {
+        //   console.log("In th audio", duration);
+        //   console.log("window.Opspot.max_video_length: ", window.Opspot.max_video_length);
 
-        
-        this.checkVideoDuration(file).then(duration => {
-          if (duration > window.Opspot.max_video_length) {
-            return reject({ message: 'Error: Video duration exceeds ' + window.Opspot.max_video_length / 60 + ' minutes' });
-          }
-
-          resolve();
-        }).catch(error => {
-          resolve(); //resolve regardless and forward to backend job
-          //reject(error);
-        });
+        //   if (duration > window.Opspot.max_video_length) {
+        //     console.log("In th audio if");
+        //     return reject({ message: 'Error: Audio duration exceeds ' + window.Opspot.max_video_length / 60 + ' minutes' });
+        //   }
+        //   resolve();
+        // }).catch(error => {
+        //   resolve(); //resolve regardless and forward to backend job
+        //   //reject(error);
+        // });
       } else if (file.type && file.type.indexOf('image/') === 0) {
         this.attachment.mime = 'image';
 
@@ -516,6 +518,37 @@ export class AttachmentService {
       // bypass the 'onloadendmetadata' event, which sometimes does never get called in IE
       timeout = window.setTimeout(() => {
         resolve(0); // 0 so it's less windows.Opspot.max_video_length
+      }, 5000);
+    });
+  }
+
+  private checkAudioDuration(file) {
+    return new Promise((resolve, reject) => {
+      const audioElement = document.createElement('audio');
+      let timeout: number = 0;
+      audioElement.preload = 'metadata';
+      audioElement.onloadedmetadata = function () {
+        if (timeout !== 0)
+          window.clearTimeout(timeout);
+
+        window.URL.revokeObjectURL(audioElement.src);
+        console.log("audioElement.duration: ",audioElement.duration);
+        
+        resolve(audioElement.duration);
+      };
+      audioElement.addEventListener('error', function (error) {
+        if (timeout !== 0)
+          window.clearTimeout(timeout);
+
+        window.URL.revokeObjectURL(this.src);
+        reject({ message: 'Error: audio format not supported' });
+      });
+
+      audioElement.src = URL.createObjectURL(file);
+
+      // bypass the 'onloadendmetadata' event, which sometimes does never get called in IE
+      timeout = window.setTimeout(() => {
+        resolve(0); // 0 so it's less windows.Opspot.max_audio_length
       }, 5000);
     });
   }

@@ -29,7 +29,7 @@ export class Opspot {
 
   showTOSModal: boolean = false;
 
-  showTopbar = true;
+  showTopbar = false;
 
   paramsSubscription;
   routerSubscription;

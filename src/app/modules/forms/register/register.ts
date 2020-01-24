@@ -94,7 +94,7 @@ export class RegisterForm {
       const data = {
         'number': phoneNumber,
         'code': this.otp,
-        'secret': localStorage.getItem('phoneNumberSecret')
+        'secret': localStorage.getItem('phone-verification-secret')
       }
       this.service.verifyMobile(data)
         .then((data: any) => {
@@ -119,7 +119,7 @@ export class RegisterForm {
       .then((res: any) => {
         this.noViewOtp = false;
         this.invalidNumberLength = false;
-        localStorage.setItem('phoneNumberSecret', res.secret);
+        localStorage.setItem('phone-verification-secret', res.secret);
       })
       .catch((e) => {
         if (e.status === 'error') {
@@ -164,7 +164,7 @@ export class RegisterForm {
         'username': this.form.value.username,
         'number': phoneNumber,
         'code': this.otp,
-        'secret': localStorage.getItem('phoneNumberSecret'),
+        'secret': localStorage.getItem('phone-verification-secret'),
         'email': this.form.value.email,
         'date_of_birth': {
           'year': this.form['controls'].dobGroup['controls'].year.value,
@@ -339,7 +339,7 @@ export class RegisterForm {
       value: this.removeOperators(this.form.value.mobileNumber.internationalNumber)
     });
     this.service.resendOtp(data).then((data: any) => {
-      localStorage.setItem('phoneNumberSecret', data.secret);
+      localStorage.setItem('phone-verification-secret', data.secret);
       // this.inProgress = false;
     })
       .catch((e) => {
