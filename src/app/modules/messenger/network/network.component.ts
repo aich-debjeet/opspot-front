@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Session } from './../../services/session';
+import { Session } from './../../../services/session';
 import { Router } from '@angular/router';
-import { OpspotTitle } from '../../services/ux/title';
+import { OpspotTitle } from '../../../services/ux/title';
 
 @Component({
-  selector: 'app-network',
+  selector: 'm-network',
   templateUrl: './network.component.html',
   styleUrls: ['./network.component.scss']
 })
