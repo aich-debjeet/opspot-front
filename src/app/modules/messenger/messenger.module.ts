@@ -29,7 +29,8 @@ import { NetworkUserlist } from './network/userlist/userlist.component';
 import { NetworkConversation } from './network/conversation/conversation.component';
 
 const routes: Routes = [
-  { path: '', component: NetworkComponent }
+  { path: 'network', component: NetworkComponent },
+  { path: 'network/:username', component: NetworkComponent }
 ];
 
 @NgModule({
