@@ -23,6 +23,15 @@ import { MessengerEncryptionService } from './encryption/encryption.service';
 import { Storage } from '../../services/storage';
 import { Session } from '../../services/session';
 
+// network
+import { NetworkComponent } from './network/network.component';
+import { NetworkUserlist } from './network/userlist/userlist.component';
+import { NetworkConversation } from './network/conversation/conversation.component';
+
+const routes: Routes = [
+  { path: '', component: NetworkComponent }
+];
+
 @NgModule({
   imports: [
     NgCommonModule,
@@ -31,7 +40,8 @@ import { Session } from '../../services/session';
     ReactiveFormsModule,
     CommonModule,
     //LegacyModule,
-    //ModalsModule
+    //ModalsModule,
+    RouterModule.forChild(routes)
   ],
   declarations: [
     Messenger,
@@ -43,6 +53,10 @@ import { Session } from '../../services/session';
     MessengerUserlist,
     MessengerSetupChat,
     MessengerOnboardingSetupComponent,
+
+    NetworkComponent,
+    NetworkUserlist,
+    NetworkConversation
   ],
   exports: [
     Messenger,

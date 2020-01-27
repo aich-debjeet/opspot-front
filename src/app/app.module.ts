@@ -43,7 +43,6 @@ import { NotificationModule } from './modules/notifications/notification.module'
 
 import { GroupsModule } from './modules/groups/groups.module';
 import { OrganizationModule } from './modules/organization/organization.module';
-import { NetworkModule } from './modules/network/network.module';
 import { PostMenuModule } from './common/components/post-menu/post-menu.module';
 import { ShareMenuModule } from './common/components/share-menu/share-menu.module';
 import { BanModule } from './modules/ban/ban.module';
@@ -137,7 +136,6 @@ import { BigEventModule } from './modules/big-event/big-event.module';
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
     BsDatepickerModule.forRoot(),
-    NetworkModule,
     OpportunityModule,
     TextMaskModule,
     BluestoreModule,

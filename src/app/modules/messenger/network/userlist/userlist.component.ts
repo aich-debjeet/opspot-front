@@ -1,15 +1,10 @@
 import { Component, Injector, ViewChild, EventEmitter, Output, Input } from '@angular/core';
 
-import { SocketsService } from '../../../services/sockets';
+import { SocketsService } from '../../../../services/sockets';
 
-import { Storage } from '../../../services/storage';
-import { Client } from '../../../services/api';
-import { Session } from '../../../services/session';
-
-// import { MessengerConversationDockpanesService } from '../dockpanes/dockpanes.component';
-// import { MessengerEncryptionService } from '../encryption/encryption.service';
-// import { MessengerSounds } from '../sounds/service';
-// import { MessengerEncryption } from '../encryption/encryption.component';
+import { Storage } from '../../../../services/storage';
+import { Client } from '../../../../services/api';
+import { Session } from '../../../../services/session';
 
 @Component({
   moduleId: module.id,
