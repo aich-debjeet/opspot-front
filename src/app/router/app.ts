@@ -20,7 +20,7 @@ import { AboutComponent } from '../modules/channels/profile-edit/about/about.com
 import { ContactComponent } from '../modules/channels/profile-edit/contact/contact.component';
 import { EducationComponent } from '../modules/channels/profile-edit/education/education.component';
 import { AwardsComponent } from '../modules/channels/profile-edit/awards/awards.component';
-import { NetworkComponent } from '../modules/network/network.component';
+import { NetworkComponent } from '../modules/messenger/network/network.component';
 
 export const OpspotAppRoutes: Routes = [
   { path: 'capture', redirectTo: 'media/images/suggested' },
