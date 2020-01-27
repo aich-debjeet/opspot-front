@@ -48,8 +48,13 @@
       </a>
       <!-- <a href="#"><div class="caption-bold f700">12K</div><div class="text-sm grey">Channels</div></a> -->
     </div>
-    <div [hidden]="editing || !user.tags" class="o-prof-skills" *ngIf="user.tags && !editing" id="sidebar-hashtags">
+    <!-- <div [hidden]="editing || !user.tags" class="o-prof-skills" *ngIf="user.tags && !editing" id="sidebar-hashtags">
       <a href="" *ngFor="let tag of user.tags" class="o-prof-skills__tag">{{tag}}</a>
+    </div> -->
+    <div class="o-prof-skills" id="sidebar-hashtags">
+      <ng-container *ngIf="user.tags">
+        <a *ngFor="let tag of user.tags" class="o-prof-skills__tag">{{tag}}</a>
+      </ng-container>
     </div>
     <div class="o-prof-portfolio">
       <a [routerLink]="['/', 'portfolio', user.username]" class="btn btn-outline-primary btn-sm"
