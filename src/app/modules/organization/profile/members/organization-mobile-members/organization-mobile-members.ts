@@ -74,7 +74,7 @@ export class OrganizationMobileMembers implements OnInit {
       this.canInvite = true;
     }
 
-    let endpoint = `api/v1/groups/membership/${this.organization.guid}`,
+    let endpoint = `api/v3/organizations/membership/${this.organization.guid}`,
       params: { limit, offset, q?: string } = { limit: 12, offset: this.offset };
 
     if (this.q) {

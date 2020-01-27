@@ -59,6 +59,8 @@ interface OpspotOrganizationResponse {
         // if (this.organization) {
         //   this.guid = org.guid;
         // }
+        console.log("Org:", org);
+        
         if (org && org.guid) {
           this.guid = org.guid;
           this.load(true);
@@ -111,7 +113,7 @@ interface OpspotOrganizationResponse {
       let endpoint = `api/v1/newsfeed/container/${this.guid}`;
   
       if (this.filter == 'review') {
-        endpoint = `api/v1/groups/review/${this.guid}`;
+        endpoint = `api/v3/organizations/review/${this.guid}`;
       }
   
       const currentFilter = this.filter;
@@ -298,7 +300,7 @@ interface OpspotOrganizationResponse {
       this.activity.splice(index, 1);
   
       try {
-        await this.client.put(`api/v1/groups/review/${this.organization.guid}/${activity.guid}`);
+        await this.client.put(`api/v3/organizations/review/${this.organization.guid}/${activity.guid}`);
   
         this.organization['adminqueue:count'] = this.organization['adminqueue:count'] - 1;
       } catch (e) {
@@ -314,7 +316,7 @@ interface OpspotOrganizationResponse {
       this.activity.splice(index, 1);
   
       try {
-        await this.client.delete(`api/v1/groups/review/${this.organization.guid}/${activity.guid}`);
+        await this.client.delete(`api/v3/organizations/review/${this.organization.guid}/${activity.guid}`);
   
         this.organization['adminqueue:count'] = this.organization['adminqueue:count'] - 1;
       } catch (e) {
