@@ -7,6 +7,7 @@ import { ReCaptchaComponent } from '../../../modules/captcha/recaptcha/recaptcha
 import { ExperimentsService } from '../../experiments/experiments.service';
 import { Service } from './service';
 import { MessengerEncryptionService } from '../../messenger/encryption/encryption.service';
+import { FormValidator } from '../../../helpers/form.validator'
 
 
 @Component({
@@ -63,7 +64,7 @@ export class RegisterForm {
       fullname: ['', Validators.required],
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, this.checkPassword]],
+      password: ['', [Validators.required, FormValidator.checkPassword]],
       password2: ['', Validators.required],
       agreeTerms: [false],
       mobileNumber: ['', { validators: Validators.required, updateOn: 'blur' }],
@@ -206,7 +207,7 @@ export class RegisterForm {
           }
           if (e.status === 'failed') {
             //incorrect login details
-            this.errorMessage = 'RegisterException::AuthenticationFailed';
+            this.errorMessage = 'Authentication Failed';
             this.session.logout();
           } else if (e.status === 'error') {
             //two factor?
@@ -273,9 +274,8 @@ export class RegisterForm {
   //password error messages
   getErrorPassword() {
     return this.form.get('password').hasError('required') ? 'Field is required (at least eight characters, one uppercase letter and one number)' :
-      this.form.get('password').hasError('requirements') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
+      this.form.get('password').hasError('invalidPassword') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
   }
-
   //for confirm password
   MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
