@@ -83,9 +83,11 @@ export class RegisterForm {
   onMobileNumber() {
     let numbers;
     this.form.controls['mobileNumber'].valueChanges.subscribe(val => {
-      numbers = this.removeSpace(val.internationalNumber);
-      numbers = this.removeOperators(numbers);
-      this.getOtp(numbers);
+      if (val && val.internationalNumber) {
+        numbers = this.removeSpace(val.internationalNumber);
+        numbers = this.removeOperators(numbers);
+        this.getOtp(numbers);
+      }
     });
   }
 
