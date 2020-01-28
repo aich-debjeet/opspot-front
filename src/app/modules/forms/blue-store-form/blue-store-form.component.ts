@@ -9,6 +9,8 @@ import { Client } from '../../../services/api/client';
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { CURRENCY } from '../../../services/list-options';
+import getViewPageLink from '../../../helpers/get-viewage-link';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -56,6 +58,7 @@ export class BlueStoreFormComponent implements OnInit {
   inProgress = false;
   errorMessage = '';
   currencyList = CURRENCY;
+  navigationUrl  = '';  
 
 
  
@@ -66,7 +69,8 @@ export class BlueStoreFormComponent implements OnInit {
     public upload: Upload,
     public attachment: AttachmentService,
     private formBuilder: FormBuilder,
-    private overlayModal: OverlayModalService) {
+    private overlayModal: OverlayModalService,
+    private router: Router) {
   }
 
   @Input('object') set data(object) {
@@ -298,6 +302,10 @@ export class BlueStoreFormComponent implements OnInit {
           this.blueStoreSubmitted = false;
           this.inProgress = false;
           this.changeToDefault();
+          this.navigationUrl = getViewPageLink('item', resp.activity.guid)
+          if (resp.activity && this.bluestoreGuid) {
+            this.router.navigate([this.navigationUrl]);
+          }
           // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
             this._opts.onUpdate(this.reqBody);
