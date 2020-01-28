@@ -205,7 +205,7 @@ export class RegisterForm {
           }
           if (e.status === 'failed') {
             //incorrect login details
-            this.errorMessage = 'RegisterException::AuthenticationFailed';
+            this.errorMessage = 'Authentication Failed';
             this.session.logout();
           } else if (e.status === 'error') {
             //two factor?
