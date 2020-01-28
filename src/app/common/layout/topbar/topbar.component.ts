@@ -112,7 +112,7 @@ export class TopbarComponent implements OnInit {
   getUsersOrganization() {
     let ownerGuid = this.session.getLoggedInUser().guid;
 
-    this.client.get(`api/v1/groups/owner/` + ownerGuid, {
+    this.client.get(`api/v3/organizations/owner/` + ownerGuid, {
       limit: 12,
       offset: '',
       rating: 1
