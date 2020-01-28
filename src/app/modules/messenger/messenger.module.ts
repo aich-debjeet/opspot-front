@@ -30,7 +30,7 @@ import { NetworkConversation } from './network/conversation/conversation.compone
 
 const routes: Routes = [
   { path: 'network', component: NetworkComponent },
-  { path: 'network/:username', component: NetworkComponent }
+  // { path: 'network/:username', component: NetworkComponent }
 ];
 
 @NgModule({
