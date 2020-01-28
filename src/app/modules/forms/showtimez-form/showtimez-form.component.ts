@@ -10,6 +10,8 @@ import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { FormValidator } from '../../../helpers/form.validator';
 import * as moment from 'moment';
+import getViewPageLink from '../../../helpers/get-viewage-link';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -60,6 +62,7 @@ export class ShowtimezFormComponent implements OnInit {
   }
 
   imageUploadError: boolean;
+  navigationUrl = '';
 
   @Input('object') set data(object) {
     this.event = object;
@@ -105,7 +108,8 @@ export class ShowtimezFormComponent implements OnInit {
     public upload: Upload,
     public attachment: AttachmentService,
     private formBuilder: FormBuilder,
-    private overlayModal: OverlayModalService) {
+    private overlayModal: OverlayModalService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -297,6 +301,10 @@ export class ShowtimezFormComponent implements OnInit {
           this.eventSubmitted = false;
           this.inProgress = false;
           this.changeToDefault();
+          this.navigationUrl = getViewPageLink('showtime', resp.activity.guid)
+          if (resp.activity && this.eventGuid) {
+            this.router.navigate([this.navigationUrl]);
+          }
         })
         .catch((e) => {
           this.eventSubmitted = false;

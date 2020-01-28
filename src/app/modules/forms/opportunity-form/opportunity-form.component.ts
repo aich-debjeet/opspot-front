@@ -8,6 +8,8 @@ import { Client } from '../../../services/api/client';
 
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { Router } from '@angular/router';
+import getViewPageLink from '../../../helpers/get-viewage-link';
 
 @Component({
   selector: 'app-opportunity-form',
@@ -44,6 +46,7 @@ export class OpportunityFormComponent implements OnInit {
   errorMessage = '';
   attach_guid = [];
   imageUploadError: boolean;
+  navigationUrl = '';
 
   @Input('object') set data(object) {
     this.opportunity = object;
@@ -79,6 +82,7 @@ export class OpportunityFormComponent implements OnInit {
     public attachment: AttachmentService,
     private formBuilder: FormBuilder,
     private overlayModal: OverlayModalService,
+    private router: Router
 
   ) {
     // this.buildForm();
@@ -159,7 +163,12 @@ export class OpportunityFormComponent implements OnInit {
           this.submitted = false;
           this.inProgress = false;
           this.changeToDefault();
-          // // check if update callback function is avaibale
+
+          this.navigationUrl = getViewPageLink('opportunity', resp.activity.guid)
+          if (resp.activity && this.oppGuid) {
+            this.router.navigate([this.navigationUrl]);
+          }
+          // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
             this._opts.onUpdate(this.reqBody);
             // close modal
@@ -173,6 +182,7 @@ export class OpportunityFormComponent implements OnInit {
         });
     }
   }
+
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
       this.inProgress = true;
@@ -238,7 +248,7 @@ export class OpportunityFormComponent implements OnInit {
     this.inProgress = true;
 
     this.errorMessage = '';
-    this.attachment.remove(imageId,file,this.attach_guid)
+    this.attachment.remove(imageId, file, this.attach_guid)
       .then(guid => {
         this.inProgress = false;
         this.canPost = true;
