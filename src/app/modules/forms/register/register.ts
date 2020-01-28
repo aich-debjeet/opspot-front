@@ -273,10 +273,9 @@ export class RegisterForm {
 
   //password error messages
   getErrorPassword() {
-    return this.form.get('password').hasError('required') ? 'Field is required (at least eight characters)' :
-      this.form.get('password').hasError('invalidPassword') ? 'Password needs to be at least eight characters' : '';
+    return this.form.get('password').hasError('required') ? 'Field is required (at least eight characters, one uppercase letter and one number)' :
+      this.form.get('password').hasError('invalidPassword') ? 'Password needs to be at least eight characters, one uppercase letter and one number' : '';
   }
-
   //for confirm password
   MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
