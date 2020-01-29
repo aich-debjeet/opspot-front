@@ -128,6 +128,10 @@ export class BlueStoreFormComponent implements OnInit {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
+           // temporary fix for video thumbnail 
+          if (obj['src'] == null) {
+            obj['src'] = 'assets/videos/video_thumbnail.png'
+          }
           this.addAttachment(obj);
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
