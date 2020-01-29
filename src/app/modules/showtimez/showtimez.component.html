@@ -107,7 +107,6 @@
                 <!-- <opspot-button-remind *ngIf="showTimez" [object]="showTimez" [large]="'true'"></opspot-button-remind> -->
                 <m-modal-remind-composer *ngIf="remindOpen"
                   [object]="showTimez?.remind_object ? showTimez?.remind_object : showTimez"
-                  [entityType]="showTimez.entity_type"
                   [open]="true"
                   [default]="remindMessage"
                   (closed)="remindOpen = false"

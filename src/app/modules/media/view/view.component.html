@@ -331,7 +331,6 @@ opspot-button-remind{
                 <!-- <opspot-button-remind [object]="entity" [large]="'true'"></opspot-button-remind> -->
                 <m-modal-remind-composer *ngIf="remindOpen"
                   [object]="entity?.remind_object ? entity?.remind_object : entity"
-                  [entityType]="entity.entity_type"
                   [open]="true"
                   [default]="remindMessage"
                   (closed)="remindOpen = false"

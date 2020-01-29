@@ -173,7 +173,6 @@
             <m-modal-remind-composer 
                 *ngIf="remindOpen"
 								[object]="blog?.remind_object ? blog?.remind_object : blog"
-								[entityType]="blog"
 								[open]="true"
 								[default]="remindMessage"
 								(closed)="remindOpen = false"
