@@ -12,7 +12,6 @@ import { NewsfeedService } from '../../../../newsfeed/services/newsfeed.service'
 import { OpportunityFormComponent } from '../../../../../modules/forms/opportunity-form/opportunity-form.component';
 import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-form/blue-store-form.component';
 import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
-import { PostFormComponent } from '../../../../../modules/forms/post-form/post-form.component';
 import { Router } from '@angular/router';
 // import { RemindButton } from '../../buttons/remind';
 
@@ -32,7 +31,6 @@ import { Router } from '@angular/router';
 export class Activity {
 
   opspot = window.Opspot;
-
   activity: any;
   boosted: boolean = false;
   commentsToggle: boolean = false;
@@ -48,20 +46,15 @@ export class Activity {
   @Input()
   set showBoostMenuOptions(value: boolean) {
     this._showBoostMenuOptions = value;
-
     if (!value) {
       this.menuOptions = this.defaultMenuOptions;
     }
-
     this.menuOptions = this.menuOptions.slice();
   }
+
   type: string;
   element: any;
   visible: boolean = false;
-  // showOpportunity = false;
-  // showBlueStore = false;
-  // showTimez = false;
-  // showAlbum = false;
   remindOpen = false;
   remindMessage = '';
 
@@ -85,7 +78,6 @@ export class Activity {
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
 
   @ViewChild('player') player: OpspotVideoComponent;
-  // @ViewChild('remindButton') remindButton: RemindButton;
 
   reachoutMessage = '';
 
@@ -113,8 +105,8 @@ export class Activity {
     // user obj for reach out
     if (value['entity_type'] &&
       (value['entity_type'] == 'opportunity'
-      || value['entity_type'] == 'event'
-      || value['entity_type'] == 'item')
+        || value['entity_type'] == 'event'
+        || value['entity_type'] == 'item')
     ) {
       if (value['entity_type'] == 'opportunity') {
         this.reachoutMessage = 'Is there an opening? ';
@@ -125,7 +117,7 @@ export class Activity {
       }
       this.reachoutMessage += value['perma_url'];
     }
-    
+
 
     this.activity.url = window.Opspot.site_url + 'newsfeed/' + value.guid;
 
@@ -136,23 +128,12 @@ export class Activity {
     ) {
       this.activity.custom_data[0].src = this.activity.custom_data[0].src.replace(this.opspot.site_url, this.opspot.cdn_url);
     }
-
     if (!this.activity.message) {
       this.activity.message = '';
     }
-
     if (!this.activity.title) {
       this.activity.title = '';
     }
-
-    // if (this.activity.entity_type === "opportunity") {
-    //   this.showOpportunity = true;
-    // }
-
-    // if (this.activity.entity_type === "item") {
-    //   this.showBlueStore = true;
-    // }
-
     if (this.activity.entity_type === "event") {
       // this.showTimez = true;
       if (this.activity.end_time_date) {
@@ -161,20 +142,6 @@ export class Activity {
         this.routerLink1 = "/showtime/view"
       }
     }
-
-    // if (this.activity.remind_object && this.activity.remind_object.entity_type === 'event') {
-    //   if (this.activity.remind_object.end_time_date) {
-    //     this.routerLink1 = "/event/view"
-    //   } else {
-    //     this.routerLink1 = "/showtime/view"
-    //   }
-    // }
-
-    // if (this.activity.entity_type === "album") {
-    //   this.showAlbum = true;
-    // }
-
-
 
     this.boosted = this.activity.boosted || this.activity.p2p_boosted;
 
@@ -225,55 +192,14 @@ export class Activity {
       });
   }
 
-  /*async setSpam(value: boolean) {
-    this.activity['spam'] = value;
-
-    try {
-      if (value) {
-        await this.client.put(`api/v1/admin/spam/${this.activity.guid}`);
-      } else {
-        await this.client.delete(`api/v1/admin/spam/${this.activity.guid}`);
-      }
-    } catch (e) {
-      this.activity['spam'] = !value;
-    }
-  }
-
-  async setDeleted(value: boolean) {
-    this.activity['deleted'] = value;
-
-    try {
-      if (value) {
-        await this.client.put(`api/v1/admin/delete/${this.activity.guid}`);
-      } else {
-        await this.client.delete(`api/v1/admin/delete/${this.activity.guid}`);
-      }
-    } catch (e) {
-      this.activity['delete'] = !value;
-    }
-  }*/
-
   openComments() {
     this.commentsToggle = !this.commentsToggle;
     this.commentsOpened.emit(this.commentsToggle);
   }
 
   async togglePin(activity: any) {
-    console.log('this.activity',activity);
-    // let url: string;
-    // if(activity.entity_type === 'album'){
-    //   if(activity.entity_type === 'album' && activity.custom_data.length > 0){
-    //     this.activity.bookmark = !this.activity.bookmark;
-    //     url = `api/v3/bookmark/${this.activity.guid}/${activity.custom_data[0].entity_type}`;
-    //   }
-
-    // } else {
-    //   this.activity.bookmark = !this.activity.bookmark;
-    //   url = `api/v3/bookmark/${this.activity.guid}/${activity.entity_type}`;
-    // }
     this.activity.bookmark = !this.activity.bookmark;
     const url: string = `api/v3/bookmark/${this.activity.guid}/${activity.entity_type}`;
-    console.log(url)
     try {
       if (this.activity.bookmark) {
         await this.client.post(url);
@@ -395,17 +321,6 @@ export class Activity {
       }
 
     }
-    // TODO @gayatri need to check for edit
-    // else if (this.activity.entity_type === 'album' || this.activity.entity_type === 'image') {
-    //   this.overlayModal.create(PostFormComponent, this.activity, {
-    //     class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
-    //     // listen to the update callback
-    //     onUpdate: (payload: any) => {
-    //       // make update to local var
-    //      // this.udpateShowtime(payload);
-    //     }
-    //   }).present()
-    // }
     else {
       this.editing = true;
     }
@@ -416,11 +331,11 @@ export class Activity {
     this.activity.blurb = data.description;
     this.activity.location = data.location;
     this.activity.title = data.title;
-    if (data.attachment_guid.length > 0) {
-      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
-    } else {
-      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/ops_icon.png'
-    }
+    // if (data.attachment_guid.length > 0) {
+    //   this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    // } else {
+    //   this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/ops_icon.png'
+    // }
     // trigger component observe new changes
     this.detectChanges();
   }
@@ -443,11 +358,11 @@ export class Activity {
     this.activity.location = data.location;
     this.activity.title = data.title;
     this.activity.start_time_date = data.start_time_date;
-    if (data.attachment_guid.length > 0) {
-      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
-    } else {
-      this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
-    }
+    // if (data.attachment_guid.length > 0) {
+    //   this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
+    // } else {
+    //   this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
+    // }
     // trigger component observe new changes
     this.detectChanges();
   }
