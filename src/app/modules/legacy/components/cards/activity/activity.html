@@ -171,7 +171,7 @@
           {{activity?.category}}
         </div>
       </div>
-      <div [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }" [routerLink]="['/opportunity/view',activity.guid]" class="feed-card-opportunity-block__bottom hidden-mob">
+      <!-- <div [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }" [routerLink]="['/opportunity/view',activity.guid]" class="feed-card-opportunity-block__bottom hidden-mob"> -->
       <div [routerLink]="['/opportunity/view',activity.guid]" class="feed-card-opportunity-block__bottom hidden-mob">
         <div class="text-md grey">
           {{activity?.blurb | truncate:[100, '...']}}
