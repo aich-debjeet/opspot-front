@@ -7,7 +7,7 @@ import { AttachmentService } from '../../../../../services/attachment';
 @Component({
   moduleId: module.id,
   selector: 'opspot-remind',
-  inputs: ['object', '_events: events', '_entityType: entityType'],
+  inputs: ['object', '_events: events'],
   templateUrl: '../activity/activity.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -15,9 +15,6 @@ import { AttachmentService } from '../../../../../services/attachment';
 export class Remind {
 
   opspot = window.Opspot;
-
-  // todo @gayatri: make it dynamic
-  showBlueStore = false;
 
   activity: any;
   @Input() boosted: boolean = false;
@@ -43,16 +40,6 @@ export class Remind {
     private changeDetectorRef: ChangeDetectorRef
   ) {
     this.hideTabs = true;
-  }
-
-  // todo @gayatri: make it dynamic
-  set _entityType(value: any) {
-    console.log(value);
-    if (value) {
-      if (value === 'showBlueStore') {
-        this.showBlueStore = true;
-      }
-    }
   }
 
   set _events(value: any) {

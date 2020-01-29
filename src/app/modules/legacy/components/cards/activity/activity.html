@@ -341,7 +341,6 @@
   <div *ngIf="activity.remind_object">
     <!-- todo @gayatri: make entityType dynamic -->
     <opspot-remind
-      [entityType]="activity.entity_type"
       [object]="activity.remind_object"
       [events]="childEventsEmitter"
       [boosted]="activity.boosted">
@@ -393,7 +392,6 @@
   <!-- <opspot-button-remind [entityType]="activity.entity_type" [object]="activity" #remindButton></opspot-button-remind> -->
   <m-modal-remind-composer *ngIf="remindOpen"
     [object]="activity.remind_object ? activity.remind_object : activity"
-    [entityType]="activity.entity_type"
     [open]="true"
     [default]="remindMessage"
     (closed)="remindOpen = false"
