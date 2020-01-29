@@ -9358,7 +9358,7 @@ m-channel header {
   m-channel header m-channel--carousel {
     height: 440px; }
     m-channel header m-channel--carousel .opspot-banner .opspot-banner-overlay {
-      display: none; }
+      display: block; }
     @media screen and (max-width: 720px) {
       m-channel header m-channel--carousel {
         height: 240px; } }
@@ -13510,10 +13510,11 @@ m-homepage .m-homepage-press {
       font-size: 0.8em;
       opacity: 0.65; }
   .opspot-banner.opspot-banner-editing .opspot-banner-overlay {
-    height: 60px;
-    bottom: 0;
-    top: initial;
-    background: rgba(0, 0, 0, 0.6); }
+    // height: 60px;
+    // bottom: 0;
+    // top: initial;
+    // background: rgba(0, 0, 0, 0.6);
+  }
   .opspot-banner.opspot-banner-editing .add-button {
     display: none; }
   .opspot-banner.opspot-banner-editing .save-bar {
