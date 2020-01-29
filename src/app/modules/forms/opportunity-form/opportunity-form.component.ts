@@ -1,11 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 import { Session } from '../../../services/session';
 import { AttachmentService } from '../../../services/attachment';
 import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
-
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { Router } from '@angular/router';
@@ -26,7 +24,7 @@ export class OpportunityFormComponent implements OnInit {
   set opts(opts: any) {
     this._opts = opts;
   }
-
+  
   reqBody = {
     title: null,
     description: null,
@@ -36,7 +34,6 @@ export class OpportunityFormComponent implements OnInit {
     location: null,
     attachment_guid: ''
   };
-
 
   opportunity: any;
   oppGuid: string;
@@ -55,9 +52,6 @@ export class OpportunityFormComponent implements OnInit {
       this.label = "Edit";
       this.buildForm(this.opportunity);
       this.cards = this.opportunity['custom_data'];
-      // this.opportunity['custom_data'].forEach(image => {
-      //   this.reqBody.attachment_guid.push(image['guid']);
-      // });
       this.opportunity['custom_data'].forEach(image => {
         this.attach_guid.push(image['guid']);
       });
@@ -84,9 +78,7 @@ export class OpportunityFormComponent implements OnInit {
     private overlayModal: OverlayModalService,
     private router: Router
 
-  ) {
-    // this.buildForm();
-  }
+  ) { }
 
   description = '';
 
@@ -121,20 +113,15 @@ export class OpportunityFormComponent implements OnInit {
   changeToDefault() {
     this.ChangeDefault.emit();
   }
+
   close() {
     this.Close.emit();
   }
+
   postOpportunity(value) {
     this.submitted = true;
     this.imageUploadError = false;
-
-    // console.log("this.attachment.exportMeta: ", this.attachment.exportMeta());
-
-
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-    // console.log("data: ", data);
-    // console.log("datta: ", data);
-    // console.log("attach guid: ", this.attach_guid);
     if (data.attachment_guid.length > 0) {
       this.reqBody.attachment_guid = data.attachment_guid;
     } else if (this.attach_guid.length === 1) {
@@ -215,24 +202,6 @@ export class OpportunityFormComponent implements OnInit {
     }
   }
 
-  // removeAttachment(guid) {
-  //   this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
-  //   this.cards = _remove(this.cards, function (n) {
-  //     return n.guid !== guid;
-  //   });
-  // }
-
-  // removeAttachment(file: HTMLInputElement, imageId: string) {
-  //   this.attachment.remove(file, imageId).then((guid) => {
-  //     file.value = '';
-  //     this.cards = _remove(this.cards, function (n) {
-  //       return n.guid !== guid;
-  //     });
-  //   }).catch(e => {
-  //     console.error(e);
-  //   });
-  // }
-
   removeAttachment(file: HTMLInputElement, imageId: string) {
     if (this.inProgress) {
       this.attachment.abort();
@@ -263,8 +232,26 @@ export class OpportunityFormComponent implements OnInit {
       });
   }
 
-
   closeModal() {
     this.overlayModal.dismiss();
   }
+
+  //just for refrence
+  // removeAttachment(guid) {
+  //   this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
+  //   this.cards = _remove(this.cards, function (n) {
+  //     return n.guid !== guid;
+  //   });
+  // }
+
+  // removeAttachment(file: HTMLInputElement, imageId: string) {
+  //   this.attachment.remove(file, imageId).then((guid) => {
+  //     file.value = '';
+  //     this.cards = _remove(this.cards, function (n) {
+  //       return n.guid !== guid;
+  //     });
+  //   }).catch(e => {
+  //     console.error(e);
+  //   });
+  // }
 }
