@@ -88,7 +88,7 @@
           <div class="m-mature-overlay" (click)="comment.mature_visibility = !comment.mature_visibility">
             <span class="m-mature-overlay-note m-mature-overlay-note-smaller">
               <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
-              <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
+              <span i18n="@@M__COMMON__CONFIRM_18">Warning! Restricted content</span>
             </span>
           </div>
   
@@ -107,7 +107,7 @@
             <div class="m-mature-overlay" (click)="comment.mature_visibility = !comment.mature_visibility">
               <span class="m-mature-overlay-note">
                 <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
-                <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
+                <span i18n="@@M__COMMON__CONFIRM_18">Warning! Restricted content</span>
               </span>
             </div>
   
@@ -135,7 +135,7 @@
           <div class="m-mature-overlay" (click)="comment.mature_visibility = !comment.mature_visibility">
             <span class="m-mature-overlay-note">
               <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i>
-              <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
+              <span i18n="@@M__COMMON__CONFIRM_18">Warning! Restricted content</span>
             </span>
           </div>
           <a target="_blank" [routerLink]="['/media', comment.attachment_guid]" *ngIf="comment.attachment_guid">
