@@ -85,4 +85,11 @@ export class ActivityPreview {
 
   menuOptionSelected(e?) { /* NOOP */ }
 
+  skipRestictedFlag(entity: any) {
+    if (entity && (entity.entity_type === 'event' || entity.entity_type === 'opportunity' || entity.entity_type === 'item')) {
+      return true;
+    }
+    return false;
+  }
+
 }
