@@ -32,13 +32,15 @@ export class UserCard implements OnInit {
   }
 
   ngOnInit() {
-    this.client.get(`api/v1/channel/${this.opspot.user.username}`)
-      .then(res => {
-        this.subscriptionCount = res['channel']['subscriptions_count'];
-        this.subscriberCount = res['channel']['subscribers_count'];
-      })
-      .catch((err) => {
-        // console.log(err);
-      });
+    if (this.user.guid == this.session.getLoggedInUser().guid) {
+      this.client.get(`api/v1/channel/${this.opspot.user.username}`)
+        .then(res => {
+          this.subscriptionCount = res['channel']['subscriptions_count'];
+          this.subscriberCount = res['channel']['subscribers_count'];
+        })
+        .catch((err) => {
+          // console.log(err);
+        });
+    }
   }
 }
