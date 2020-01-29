@@ -79,7 +79,7 @@
     <li class="mdl-menu__item" *ngIf="!asyncBlockInProgress && asyncBlock" (click)="unBlock()" i18n="@@COMMON__POST_MENU__UNBLOCK" id="post-menu-unblock-user">Unblock user</li>
   </ng-container>
   <!-- ADMIN EDIT FLAGS -->
-  <ng-container *ngIf="options.indexOf('set-explicit') !== -1 && (entity.owner_guid == session.getLoggedInUser().guid || session.isAdmin())">
+  <ng-container *ngIf="!skipRestictedFlag(entity) && options.indexOf('set-explicit') !== -1 && (entity.owner_guid == session.getLoggedInUser().guid || session.isAdmin())">
     <li class="mdl-menu__item" [hidden]="entity.mature" (click)="setExplicit(true)" i18n="@@COMMON__POST_MENU__SET_AS_EXPLICIT" id="post-menu-set-explicit">Set as restricted</li>
     <li class="mdl-menu__item" [hidden]="!entity.mature" (click)="setExplicit(false)" i18n="@@COMMON__POST_MENU__REMOVE_EXPLICIT" id="post-menu-remove-explicit">Remove restricted</li>
   </ng-container>
