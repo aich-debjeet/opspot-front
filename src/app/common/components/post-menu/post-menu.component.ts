@@ -6,7 +6,6 @@ import { ReportCreatorComponent } from '../../../modules/report/creator/creator.
 import { OpspotUser } from '../../../interfaces/entities';
 import { SignupModalService } from '../../../modules/modals/signup/service';
 
-
 type Option =
   'edit'
   | 'translate'
@@ -50,18 +49,14 @@ export class PostMenuComponent {
   @Input() user: any;
 
   featuredCategory: string = 'not-selected';
-
   asyncFollow: boolean = false;
   asyncFollowInProgress: boolean = false;
   asyncBlockInProgress: boolean = false;
   asyncBlock: boolean = false;
-
   opened: boolean = false;
-
   shareToggle: boolean = false;
   deleteToggle: boolean = false;
   featureToggle: boolean = false;
-
   categories: Array<any> = [];
 
   constructor(
@@ -89,7 +84,7 @@ export class PostMenuComponent {
     /**
      * Error:Cannot read property 'guid' of undefined
      */
-    if(this.entity){
+    if (this.entity) {
       this.asyncFollowFetch();
       this.asyncBlockFetch();
     }
@@ -127,7 +122,6 @@ export class PostMenuComponent {
           this.detectChanges();
           return;
         }
-
         throw new Error('E_NOT_DONE');
       })
       .catch(e => {
@@ -148,7 +142,6 @@ export class PostMenuComponent {
           this.detectChanges();
           return;
         }
-
         throw new Error('E_NOT_DONE');
       })
       .catch(e => {
@@ -165,7 +158,6 @@ export class PostMenuComponent {
 
     this.asyncBlockInProgress = true;
     this.detectChanges();
-
     //Owner
     this.client.get(`api/v1/block/${this.entity.ownerObj.guid}`)
       .then((response: any) => {
@@ -243,15 +235,15 @@ export class PostMenuComponent {
 
   report() {
     console.warn(this.user, this.entity, this.session.getLoggedInUser().guid, this.entity.ownerObj.guid);
-    this.overlayModal.create(ReportCreatorComponent, this.entity, {     
+    this.overlayModal.create(ReportCreatorComponent, this.entity, {
       class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium',
-  })
+    })
       .present();
     this.selectOption('report');
   }
 
   setExplicit(explicit: boolean) {
-    this.selectOption(explicit ? 'set-explicit': 'remove-explicit');
+    this.selectOption(explicit ? 'set-explicit' : 'remove-explicit');
   }
 
   monetize() {
@@ -286,7 +278,6 @@ export class PostMenuComponent {
         if (response && response.error) {
           throw 'error';
         }
-
         this.user.subscribed = true;
       })
       .catch((e) => {
@@ -308,7 +299,7 @@ export class PostMenuComponent {
 
   selectOption(option: Option) {
     this.optionSelected.emit(option);
-    if(this.entity){
+    if (this.entity) {
       this.entityGuid.emit(this.entity.guid)
     }
     this.opened = false;
@@ -318,7 +309,6 @@ export class PostMenuComponent {
   onModalClose() {
     this.featureToggle = false;
   }
-
 
   detectChanges() {
     this.cd.markForCheck();
