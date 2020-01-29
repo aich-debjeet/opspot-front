@@ -332,4 +332,11 @@ export class PostMenuComponent {
       });
     this.selectOption('rating');
   }
+
+  skipRestictedFlag(entity: any) {
+    if (entity && (entity.entity_type === 'event' || entity.entity_type === 'opportunity' || entity.entity_type === 'item')) {
+      return true;
+    }
+    return false;
+  }
 }

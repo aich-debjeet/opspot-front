@@ -24,7 +24,7 @@
             <div class="o-create-portfolio-fileupload" *ngIf="attachment.meta.attachment_guid.length == 0">
                 <div class="fileUpload">
                     <span class="icon-paperclip-2"></span>
-                    <input type="file" id="file" #file class="upload" name="attachment"
+                    <input type="file" accept="audio/*,video/mp4,video/x-m4v,video/*,image/*" id="file" #file class="upload" name="attachment"
                         (change)="uploadAttachment(file, $event)" />
                 </div>
                 <div class="text-md grey">
@@ -50,7 +50,7 @@
                     </div>
                     <div class="fileUpload">
                         <span class="icon-plus"></span>
-                        <input type="file" id="file" #file class="upload" class="upload" name="attachment"
+                        <input type="file" accept="audio/*,video/mp4,video/x-m4v,video/*,image/*" id="file" #file class="upload" class="upload" name="attachment"
                             (change)="uploadAttachment(file, $event)" />
                     </div>
             </div>
