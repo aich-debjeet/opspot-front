@@ -28,10 +28,10 @@
 								  (click)="showBoost()" id="bluestore-boost">Boost</button>
 							<a class="head-action__link" (click)="togglePin()" id="bluestore-bookmark-post">
 								<m-tooltip icon="turned_in" *ngIf="marketplace?.bookmark">
-									This post is Bookmarked
+									Bookmarked
 								</m-tooltip>
 								<m-tooltip *ngIf="!marketplace?.bookmark" icon="turned_in_not">
-									Bookmark this post
+									Bookmark
 								</m-tooltip>
 							</a>
 							<m-post-menu *ngIf="marketplace" [entity]="marketplace" [canDelete]="canDelete"

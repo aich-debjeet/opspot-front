@@ -437,10 +437,10 @@
 <div class="mdl-card__menu mdl-color-text--blue-grey-300" #toggle *ngIf="!hideTabs">
   <button class="mdl-button m-pin-button mdl-button--icon" id="activity-bookmark" (click)="togglePin(activity)">
     <m-tooltip icon="turned_in" *ngIf="activity.bookmark">
-      This post is Bookmarked
+      Bookmarked
     </m-tooltip>
     <m-tooltip *ngIf="!activity.bookmark" icon="turned_in_not">
-      Bookmark this post
+      Bookmark
     </m-tooltip>
   </button>
   <m-safe-toggle *ngIf="showRatingToggle && session.isAdmin()" [(entity)]="activity"></m-safe-toggle>

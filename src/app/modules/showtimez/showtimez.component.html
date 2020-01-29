@@ -24,10 +24,10 @@
                 (click)="showBoost()" id="showtimez-boost">Boost</button>
               <a class="head-action__link" (click)="togglePin()" id="showtimez-bookmark">
                 <m-tooltip icon="turned_in" *ngIf="showTimez?.bookmark">
-                  This post is Bookmarked
+                  Bookmarked
                 </m-tooltip>
                 <m-tooltip *ngIf="!showTimez?.bookmark" icon="turned_in_not">
-                  Bookmark this post
+                  Bookmark
                 </m-tooltip>
               </a>
               <m-post-menu *ngIf="showTimez" [entity]="showTimez" [canDelete]="canDelete"

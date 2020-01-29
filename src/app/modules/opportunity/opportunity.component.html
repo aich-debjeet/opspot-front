@@ -25,10 +25,10 @@
               (click)="showBoost()" id="opportunity-boost">Boost</button>
               <a class="head-action__link" (click)="togglePin()" id="opportunity-bookmark">
                 <m-tooltip icon="turned_in" *ngIf="opportunity?.bookmark">
-                  This post is Bookmarked
+                  Bookmarked
                 </m-tooltip>
                 <m-tooltip *ngIf="!opportunity?.bookmark" icon="turned_in_not">
-                  Bookmark this post
+                  Bookmark
                 </m-tooltip>
               </a>
               <m-post-menu *ngIf="opportunity" [entity]="opportunity" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
