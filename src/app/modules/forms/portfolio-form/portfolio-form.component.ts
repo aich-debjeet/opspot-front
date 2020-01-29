@@ -27,13 +27,13 @@ export class PortfolioFormComponent implements OnInit {
     wire_threshold: null
   };
   tags = [];
-  isNSFW: boolean =false;
+  isNSFW: boolean = false;
   inProgress = false;
 
   constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
     this.opspot = window.Opspot;
     this.cards = [];
-   }
+  }
 
   ngOnInit() {
   }
@@ -45,7 +45,7 @@ export class PortfolioFormComponent implements OnInit {
     //   return;
     // }
     this.inProgress = true;
-    this.attachment.remove(imageId,file).then((guid) => {
+    this.attachment.remove(imageId, file).then((guid) => {
       this.inProgress = false;
       file.value = '';
       this.cards = _remove(this.cards, function (n) {
@@ -58,7 +58,7 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
-    console.log(file, event, this.attachment)
+    // console.log(file, event, this.attachment)
     if (file.value) { // this prevents IE from executing this code twice
       this.inProgress = true;
       this.attachment.upload(file)
@@ -69,16 +69,16 @@ export class PortfolioFormComponent implements OnInit {
           /**
            * temporary fix for video
            */
-          if(obj['imageLink'] == null){
+          if (obj['imageLink'] == null) {
             obj['imageLink'] = 'assets/videos/video_thumbnail.png'
-            }
+          }
           this.cards.push(obj);
           this.inProgress = false;
           file.value = null;
         })
         .catch(e => {
           console.log(e)
-          if (e && e.message) {   
+          if (e && e.message) {
           }
           this.inProgress = false;
           file.value = null;
@@ -92,35 +92,34 @@ export class PortfolioFormComponent implements OnInit {
       alert('What have You Created today?');
       return;
     }
-    // console.log(" this.attachment.exportMeta(): ", this.attachment.exportMeta());
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-    this.tags.push(SpecialHashtg.concat('portfolio' ,this.session.getLoggedInUser().username))
+    this.tags.push(SpecialHashtg.concat('portfolio', this.session.getLoggedInUser().username))
     data.tags = this.tags;
     data.mature = this.isNSFW;
     this.inProgress = true;
-   
+
     this.client.post('api/v1/newsfeed', data)
       .then((data: any) => {
         data.activity.boostToggle = true;
-        console.log(data)
+        // console.log(data)
         this.load.emit(data);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
         this.inProgress = false;
         this.cards = [];
       })
-      .catch((e) => { 
-        this.inProgress = false;      
+      .catch((e) => {
+        this.inProgress = false;
         alert(e.message);
       });
   }
-  
+
   changeToDefault() {
     this.ChangeDefault.emit();
   }
 
-  close(){
+  close() {
     this.Close.emit();
   }
 
@@ -131,7 +130,7 @@ export class PortfolioFormComponent implements OnInit {
     this.attachment.preview(message.value);
   }
 
-  onMessageChange($event) {  
+  onMessageChange($event) {
     this.meta.message = $event;
     const regex = /(^|\s||)#(\w+)/gim;
     this.tags = [];
@@ -140,7 +139,5 @@ export class PortfolioFormComponent implements OnInit {
     while ((match = regex.exec(this.meta.message)) !== null) {
       this.tags.push(match[2]);
     }
-   
-
   }
 }
