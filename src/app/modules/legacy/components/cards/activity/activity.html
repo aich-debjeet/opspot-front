@@ -179,7 +179,8 @@
 
   <!--BlueStore-->
   <div *ngIf="activity.entity_type === 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'">
-    <div [routerLink]="['/item/view', activity.guid]" class="feed-media" *ngIf="activity?.custom_data" id="activity-bluestore-postcard">
+    <div [routerLink]="['/item/view', activity.guid]" class="feed-media" *ngIf="activity?.custom_data" id="activity-bluestore-postcard"
+         [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
         <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
         <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
@@ -194,7 +195,7 @@
         </div>
       </a>
     </div>
-    <div class="feed-card-event-block">
+    <div class="feed-card-event-block" [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }">
       <div class="feed-card-event-block__left" id="activity-bluestore-details">
         <div class="text-lg f500 mb-3 word-br" id="activity-bluestore-title">
           {{activity?.title}}
