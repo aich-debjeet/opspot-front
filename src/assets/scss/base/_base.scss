@@ -27,6 +27,11 @@
 		display: none!important;
 	}
 }
+.hidden-under-desktop{
+	@include mq($from: $tablet, $until: $desktop) {
+		display: none!important;
+	}
+}
 
 .float-left{
 	float: left;
@@ -45,4 +50,8 @@
 }
 .border-left{
 	border-left: 1px solid $grey-light!important;
+}
+
+.btn-boost-mob-c{
+	margin-bottom: 10px;
 }

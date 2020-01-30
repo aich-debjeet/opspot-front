@@ -94,6 +94,8 @@
               <div class="text-sm grey m-16" id="opportunity-viewed">{{opportunity?.impressions}} viewed this post</div>
             </div>
             <div class="o-posts-inner-page-action__icons">
+              <button type="button" class="btn btn-outline-primary btn-block" *ngIf="session.getLoggedInUser().guid == opportunity?.owner_guid" 
+              (click)="showBoost()" id="opportunity-boost">Boost</button>
               <a class="icon-posts-box">
                 <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="opportunity">
                 </opspot-button-thumbs-up>
