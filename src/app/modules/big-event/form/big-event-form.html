@@ -117,7 +117,7 @@
                     <div class="o-big-event-profile-picture">
                         <div class="fileUpload mr10" *ngIf="coverImage == ''">
                             <span class="icon-plus"></span>
-                            <input type="file" accept="image/*" id="file" #file class="upload" name="attachment"
+                            <input type="file" accept="image/*" id="file" #file class="upload upload--event" name="attachment"
                                 (change)="uploadAttachment(file, $event)" formControlName="eventCoverImage">
                         </div>
                         <!--file upload ends-->
