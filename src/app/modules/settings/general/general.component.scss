@@ -140,15 +140,24 @@
   @include mq($from: $mobile_sm, $until: $tablet) {
   position: absolute;
   right: 0;
-  top: -20px;
+  top: -23px;
+  display: flex;
+  flex-direction: row-reverse;
   }
       [type="checkbox"]:before{
           width:40px;
           background-color: $grey;
           left: 3px;
+          @include mq($from: $mobile_sm, $until: $tablet) {
+            margin-right: 0px;
+            margin-left: 12px;
+         }
       }
       [type="checkbox"]:after{
           left: 3px;
+          @include mq($from: $mobile_sm, $until: $tablet) {
+            left: 14px;
+         }
       }
       [type="checkbox"]:checked:before{
           background-color: $primary;
@@ -302,6 +311,9 @@
 }
 .o-settings-notification-header{
   width: 327px;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+    width: 200px;
+  }
 }
 //wire css
 .o-settings-wire{

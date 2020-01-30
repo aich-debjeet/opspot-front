@@ -357,6 +357,9 @@
 }
 .o-settings-notification-header{
   width: 327px;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+    width: 200px;
+  }
 }
 //wire css
 .o-settings-wire{
@@ -966,6 +969,7 @@ li.active a{
     display: inline-block;
     @include mq($from: $mobile_sm, $until: $tablet) {
         padding: 14px 0px 12px;
+        width: max-content;
     }
 }
 
@@ -1006,6 +1010,6 @@ li.active a{
         width:100%;
     }
     .tabs-settings .tabs-list li{
-        width:80px;
+        width:max-content;
     }
 }
