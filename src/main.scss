@@ -2625,7 +2625,7 @@ opspot-button {
 .m-btn {
   background: transparent !important;
   border: 1px solid #ececec;
-  border-radius: 18px;
+  border-radius: 4px;
   font-size: 12px;
   height: 42px;
   letter-spacing: 1.25px;
@@ -2638,8 +2638,9 @@ opspot-button {
   .m-btn:hover {
     border: 1px solid #ccc; }
 
-.m-btn--slim {
-  height: 32px; }
+// .m-btn--slim {
+//   height: 32px;
+// }
 
 .m-btn--action {
   background: #FFF;
