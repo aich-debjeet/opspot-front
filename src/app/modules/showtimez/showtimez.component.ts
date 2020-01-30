@@ -42,7 +42,6 @@ export class ShowtimezComponent implements OnInit {
         this.load();
       }
     });
-
     this.onScroll();
   }
 
@@ -97,9 +96,7 @@ export class ShowtimezComponent implements OnInit {
           // user obj for reach out
           this.user = data.activity.ownerObj;
           this.reachoutMessage += data.activity['perma_url'];
-
-          this.showTimez.url  = window.Opspot.site_url + 'showtime/view/' + this.showTimez.guid;
-
+          this.showTimez.url = window.Opspot.site_url + 'showtime/view/' + this.showTimez.guid;
           this.count = this.showTimez['thumbs:up:count'];
 
           if (data.activity.owner_obj) {
@@ -130,7 +127,6 @@ export class ShowtimezComponent implements OnInit {
     this.client.delete(`api/v3/event/${this.showTimez.entity_guid}`)
       .then((response: any) => {
         this.router.navigate([`newsfeed/subscribed`]);
-        // this._delete.next(this.showTimez);
       })
       .catch(e => {
         alert((e && e.message) || 'Server error');
@@ -150,7 +146,6 @@ export class ShowtimezComponent implements OnInit {
       this.showTimez.bookmark = !this.showTimez.bookmark;
     }
   }
-
 
   async wireSubmitted(wire?) {
     if (wire && this.showTimez.wire_totals) {
@@ -195,25 +190,10 @@ export class ShowtimezComponent implements OnInit {
     }
   }
 
-
   updateShowTimez(data: any) {
     this.load();
-    // this.showTimez.blurb = data.description;
-    // this.showTimez.location = data.location;
-    // this.showTimez.title = data.title;
-    // this.showTimez.start_time_date = data.start_time_date;
-    // this.showTimez.attachment_guid = data.attachment_guid;
-    // if (data.attachment_guid.length > 0) {
-    //   this.showTimez.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
-    // } else {
-    //   this.showTimez.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
-    // }
-    // trigger component observe new changes
     this.detectChanges();
   }
-
-
-  private viewed: boolean = false;
 
   detectChanges() {
     this.cd.markForCheck();
