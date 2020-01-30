@@ -43,13 +43,7 @@ export class MediaViewComponent {
   count: any;
   largeImage: string;
   editing: boolean = false;
-
-
-  // menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'subscribe', 'remove-explicit', 'rating'];
-
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'rating'];
-
-
   paramsSubscription: Subscription;
   queryParamsSubscription$: Subscription;
   focusedCommentGuid: string = '';
@@ -60,8 +54,9 @@ export class MediaViewComponent {
   translateEvent: EventEmitter<any> = new EventEmitter();
   remindOpen = false;
   remindMessage = '';
-
-
+  showVideo = false;
+  showAudio = false;
+  videoData: any;
 
   constructor(
     public session: Session,
@@ -74,7 +69,6 @@ export class MediaViewComponent {
     private cd: ChangeDetectorRef,
     public overlayModal: OverlayModalService,
     public translationService: TranslationService,
-
   ) { }
 
   ngOnInit() {
@@ -170,21 +164,6 @@ export class MediaViewComponent {
           }
           this.count = this.entity['thumbs:up:count'];
 
-
-
-          // switch (this.entity.subtype) {
-          //   case 'video':
-          //     this.context.set('object:video');
-          //     break;
-
-          //   case 'image':
-          //     this.context.set('object:image');
-          //     break;
-
-          //   default:
-          //     this.context.reset();
-          // }
-
           if (this.entity.title) {
             this.title.setTitle(this.entity.title);
           }
@@ -273,7 +252,6 @@ export class MediaViewComponent {
     this.client.post('api/v1/newsfeed/' + this.entity.guid, this.entity);
   }
 
-
   editOptions() {
     if (this.entity) {
       this.overlayModal.create(PostFormComponent, this.entity, {
@@ -297,7 +275,6 @@ export class MediaViewComponent {
   }
 
   setExplicit(value: boolean) {
-
     this.entity.mature = value;
     this.detectChanges();
 
@@ -321,13 +298,7 @@ export class MediaViewComponent {
     return url + `fs/v1/thumbnail/${this.entity.guid}/xlarge`;
   }
 
-  showVideo = false;
-  showAudio = false;
-  videoData: any;
-
   showImage(i, data?) {
-    // console.log("Data: ", data);
-
     if (data && data.entity_type === 'video') {
       this.showVideo = true;
       this.showAudio = false;
@@ -404,7 +375,5 @@ export class MediaViewComponent {
         this.entity.reminds--;
       });
   }
-
-
 
 }
