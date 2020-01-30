@@ -24,10 +24,10 @@
                 (click)="showBoost()" id="showtimez-boost">Boost</button>
               <a class="head-action__link" (click)="togglePin()" id="showtimez-bookmark">
                 <m-tooltip icon="turned_in" *ngIf="showTimez?.bookmark">
-                  This post is Bookmarked
+                  Bookmarked
                 </m-tooltip>
                 <m-tooltip *ngIf="!showTimez?.bookmark" icon="turned_in_not">
-                  Click to bookmark this post to the top of your channel feed
+                  Bookmark
                 </m-tooltip>
               </a>
               <m-post-menu *ngIf="showTimez" [entity]="showTimez" [canDelete]="canDelete"
@@ -107,7 +107,6 @@
                 <!-- <opspot-button-remind *ngIf="showTimez" [object]="showTimez" [large]="'true'"></opspot-button-remind> -->
                 <m-modal-remind-composer *ngIf="remindOpen"
                   [object]="showTimez?.remind_object ? showTimez?.remind_object : showTimez"
-                  [entityType]="showTimez.entity_type"
                   [open]="true"
                   [default]="remindMessage"
                   (closed)="remindOpen = false"
