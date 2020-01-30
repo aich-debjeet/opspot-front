@@ -93,7 +93,6 @@ export class BigEventForm implements OnInit {
     }
   }
 
-
   constructor(
     private formBuilder: FormBuilder,
     public session: Session,
@@ -192,13 +191,9 @@ export class BigEventForm implements OnInit {
     this.errorMessage = '';
     this.attachment.remove(imageId,file,this.attach_guid)
       .then(guid => {
-        // alert();
         this.inProgress = false;
         this.canPost = true;
         this.coverImage = '';        
-        // console.log("this coverimage: ", this.coverImage);
-        
-
         file.value = '';
         // this.cards = _remove(this.cards, function (n) {
         //   return n.guid !== guid;
@@ -206,7 +201,6 @@ export class BigEventForm implements OnInit {
         // console.log(this.cards);
       })
       .catch(e => {
-        // console.error(e);
         this.inProgress = false;
         this.canPost = true;
       });
@@ -243,18 +237,23 @@ export class BigEventForm implements OnInit {
 
   submitEvent() {
     this.eventSubmitted = true;
-    if (this.reqBody.attachment_guid == '') {
-      this.coverImageUploadError = true;
-    }
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-    // console.log("data: ", data);
-    // console.log("datta: ", data);
-    // console.log("attach guid: ", this.attach_guid);
+   
     if (data.attachment_guid) {
       this.reqBody.attachment_guid = data.attachment_guid;
     } else if (this.attach_guid.length === 1) {
       this.reqBody.attachment_guid = this.attach_guid[0];
+    }
+
+    // if (data.attachment_guid.length > 0) {
+    //   this.reqBody.attachment_guid = data.attachment_guid;
+    // } else if (this.attach_guid.length === 1) {
+    //   this.reqBody.attachment_guid = this.attach_guid[0];
+    // }
+
+    if (this.reqBody.attachment_guid == '') {
+      this.coverImageUploadError = true;
     }
 
 
@@ -270,6 +269,7 @@ export class BigEventForm implements OnInit {
     this.reqBody.end_time_date = endTime.getTime();
 
     if (this.eventForm.valid && this.reqBody.attachment_guid != '' && this.reqBody.start_time_date != '' && this.reqBody.end_time_date != '') {
+            
       let endpoint = 'api/v3/event';
       if (this.bigEventGuid) {
         endpoint = 'api/v3/event/' + this.bigEventGuid;
@@ -281,14 +281,13 @@ export class BigEventForm implements OnInit {
             this.router.navigate(['/event/view/' + resp.activity['guid']]);
           }
           this.eventSubmitted = false;
-
+          this.attachment.reset();
         })
         .catch((e) => {
           this.eventSubmitted = false;
           // alert(e.message);
         });
     }
-
   }
 
   backClicked() {

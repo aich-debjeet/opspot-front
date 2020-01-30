@@ -1,14 +1,14 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 import { Session } from '../../../services/session';
 import { AttachmentService } from '../../../services/attachment';
 import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
-
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { CURRENCY } from '../../../services/list-options';
+import getViewPageLink from '../../../helpers/get-viewage-link';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -56,9 +56,7 @@ export class BlueStoreFormComponent implements OnInit {
   inProgress = false;
   errorMessage = '';
   currencyList = CURRENCY;
-
-
- 
+  navigationUrl = '';
 
   constructor(
     public session: Session,
@@ -66,7 +64,8 @@ export class BlueStoreFormComponent implements OnInit {
     public upload: Upload,
     public attachment: AttachmentService,
     private formBuilder: FormBuilder,
-    private overlayModal: OverlayModalService) {
+    private overlayModal: OverlayModalService,
+    private router: Router) {
   }
 
   @Input('object') set data(object) {
@@ -76,21 +75,10 @@ export class BlueStoreFormComponent implements OnInit {
       this.label = "Edit";
       this.buildForm(this.bluestore);
       this.cards = this.bluestore['custom_data'];
-      // console.log('cards', this.cards);
       if (this.bluestore['custom_data']) {
-        // for(let i = 0; i > this.bluestore['custom_data'].length; i++) {
-        //   this.reqBody.attachment_guid.push(this.bluestore['custom_data'][i]['guid']);
-        // }
-        // this.bluestore['custom_data'].forEach(image => {
-        //   this.reqBody.attachment_guid.push(image['guid']);
-        // });
-
         this.bluestore['custom_data'].forEach(image => {
-          // console.log("image: ", image);
           this.attach_guid.push(image['guid']);
         });
-
-
       }
     } else {
       this.buildForm();
@@ -107,17 +95,17 @@ export class BlueStoreFormComponent implements OnInit {
       this.blueStoreForm = this.formBuilder.group({
         blueStoreTitle: [data['title'] ? data['title'] : '', [Validators.required]],
         blueStoreDescription: [this.description ? this.description : '', [Validators.required]],
-        blueStoreUnits: [data['item_count'] ? data['item_count'] : '', [Validators.required,Validators.min(1)]],
+        blueStoreUnits: [data['item_count'] ? data['item_count'] : '', [Validators.required, Validators.min(1)]],
         blueStoreCurrency: [data['currency'] ? data['currency'] : '', [Validators.required]],
-        blueStorePrice: [data['price'] ? data['price'] : '', [Validators.required,Validators.min(1)]]
+        blueStorePrice: [data['price'] ? data['price'] : '', [Validators.required, Validators.min(1)]]
       });
     } else {
       this.blueStoreForm = this.formBuilder.group({
         blueStoreTitle: ['', [Validators.required]],
         blueStoreDescription: ['', [Validators.required]],
-        blueStoreUnits: ['', [Validators.required,Validators.min(1)]],
+        blueStoreUnits: ['', [Validators.required, Validators.min(1)]],
         blueStoreCurrency: ['INR', [Validators.required]],
-        blueStorePrice: ['', [Validators.required, Validators.min(1)]] 
+        blueStorePrice: ['', [Validators.required, Validators.min(1)]]
       });
     }
   }
@@ -132,7 +120,6 @@ export class BlueStoreFormComponent implements OnInit {
     this.Close.emit();
   }
 
-
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
       this.inProgress = true;
@@ -141,6 +128,10 @@ export class BlueStoreFormComponent implements OnInit {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
+          // temporary fix for video thumbnail 
+          if (obj['src'] == null) {
+            obj['src'] = 'assets/videos/video_thumbnail.png'
+          }
           this.addAttachment(obj);
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
@@ -160,9 +151,6 @@ export class BlueStoreFormComponent implements OnInit {
 
   addAttachment(obj) {
     this.cards.push(obj);
-    // console.log('cards', this.cards);
-    // this.attach_guid.push(obj['guid']);
-    // this.reqBody.attachment_guid.push(obj['guid']);
   }
 
   // TODO @abhijeet: check of deleting media here is required?
@@ -173,7 +161,7 @@ export class BlueStoreFormComponent implements OnInit {
   //   });
   // }
 
-  removeAttachment(file: HTMLInputElement, imageId: string) {
+  removeAttachment(file: HTMLInputElement, imageId: string) {    
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -188,7 +176,7 @@ export class BlueStoreFormComponent implements OnInit {
     this.inProgress = true;
 
     this.errorMessage = '';
-    this.attachment.remove(imageId,file,this.attach_guid)
+    this.attachment.remove(imageId, file, this.attach_guid)
       .then(guid => {
         this.inProgress = false;
         this.canPost = true;
@@ -260,10 +248,10 @@ export class BlueStoreFormComponent implements OnInit {
     //   return;
     // }
     // console.log("this.attachment.exportMeta(: ", this.attachment.exportMeta());
-    
+
     let data = Object.assign(this.meta, this.attachment.exportMeta());
     // console.log("data: ", data);
-    
+
     if (data.attachment_guid.length > 0) {
       this.reqBody.attachment_guid = data.attachment_guid;
 
@@ -277,11 +265,6 @@ export class BlueStoreFormComponent implements OnInit {
     this.reqBody.price = this.blueStoreForm.value.blueStorePrice;
     this.reqBody.item_count = this.blueStoreForm.value.blueStoreUnits;
     this.reqBody.currency = this.blueStoreForm.value.blueStoreCurrency
-    // this.reqBody.currency = 'INR';
-    // this.reqBody.access_id = 2,
-    // this.reqBody.published = 1;
-    // console.log('this.reqBody', this.reqBody);
-    // return;
 
     if (this.blueStoreForm.valid && !this.imageUploadError) {
       let endpoint = 'api/v3/marketplace';
@@ -298,6 +281,10 @@ export class BlueStoreFormComponent implements OnInit {
           this.blueStoreSubmitted = false;
           this.inProgress = false;
           this.changeToDefault();
+          this.navigationUrl = getViewPageLink('item', resp.activity.guid)
+          if (resp.activity && this.bluestoreGuid) {
+            this.router.navigate([this.navigationUrl]);
+          }
           // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
             this._opts.onUpdate(this.reqBody);
@@ -315,5 +302,13 @@ export class BlueStoreFormComponent implements OnInit {
 
   closeModal() {
     this.overlayModal.dismiss();
+  }
+
+  checkForSrc(object) {
+    if (object && object.entity_type === 'video') {
+      return object.thumbnail_src;
+    } else {
+      return object.src;
+    }
   }
 }

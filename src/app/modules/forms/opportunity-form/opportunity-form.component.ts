@@ -1,13 +1,13 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 import { Session } from '../../../services/session';
 import { AttachmentService } from '../../../services/attachment';
 import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
-
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { Router } from '@angular/router';
+import getViewPageLink from '../../../helpers/get-viewage-link';
 
 @Component({
   selector: 'app-opportunity-form',
@@ -24,7 +24,7 @@ export class OpportunityFormComponent implements OnInit {
   set opts(opts: any) {
     this._opts = opts;
   }
-
+  
   reqBody = {
     title: null,
     description: null,
@@ -35,7 +35,6 @@ export class OpportunityFormComponent implements OnInit {
     attachment_guid: ''
   };
 
-
   opportunity: any;
   oppGuid: string;
   label = "Create";
@@ -44,6 +43,7 @@ export class OpportunityFormComponent implements OnInit {
   errorMessage = '';
   attach_guid = [];
   imageUploadError: boolean;
+  navigationUrl = '';
 
   @Input('object') set data(object) {
     this.opportunity = object;
@@ -52,9 +52,6 @@ export class OpportunityFormComponent implements OnInit {
       this.label = "Edit";
       this.buildForm(this.opportunity);
       this.cards = this.opportunity['custom_data'];
-      // this.opportunity['custom_data'].forEach(image => {
-      //   this.reqBody.attachment_guid.push(image['guid']);
-      // });
       this.opportunity['custom_data'].forEach(image => {
         this.attach_guid.push(image['guid']);
       });
@@ -79,10 +76,9 @@ export class OpportunityFormComponent implements OnInit {
     public attachment: AttachmentService,
     private formBuilder: FormBuilder,
     private overlayModal: OverlayModalService,
+    private router: Router
 
-  ) {
-    // this.buildForm();
-  }
+  ) { }
 
   description = '';
 
@@ -117,20 +113,15 @@ export class OpportunityFormComponent implements OnInit {
   changeToDefault() {
     this.ChangeDefault.emit();
   }
+
   close() {
     this.Close.emit();
   }
+
   postOpportunity(value) {
     this.submitted = true;
     this.imageUploadError = false;
-
-    // console.log("this.attachment.exportMeta: ", this.attachment.exportMeta());
-
-
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-    // console.log("data: ", data);
-    // console.log("datta: ", data);
-    // console.log("attach guid: ", this.attach_guid);
     if (data.attachment_guid.length > 0) {
       this.reqBody.attachment_guid = data.attachment_guid;
     } else if (this.attach_guid.length === 1) {
@@ -159,7 +150,12 @@ export class OpportunityFormComponent implements OnInit {
           this.submitted = false;
           this.inProgress = false;
           this.changeToDefault();
-          // // check if update callback function is avaibale
+
+          this.navigationUrl = getViewPageLink('opportunity', resp.activity.guid)
+          if (resp.activity && this.oppGuid) {
+            this.router.navigate([this.navigationUrl]);
+          }
+          // check if update callback function is avaibale
           if (this._opts && this._opts.onUpdate) {
             this._opts.onUpdate(this.reqBody);
             // close modal
@@ -173,6 +169,7 @@ export class OpportunityFormComponent implements OnInit {
         });
     }
   }
+
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
       this.inProgress = true;
@@ -205,6 +202,41 @@ export class OpportunityFormComponent implements OnInit {
     }
   }
 
+  removeAttachment(file: HTMLInputElement, imageId: string) {
+    if (this.inProgress) {
+      this.attachment.abort();
+      this.canPost = true;
+      this.inProgress = false;
+      this.errorMessage = '';
+      return;
+    }
+
+    // if we're not uploading a file right now
+    this.attachment.setPendingDelete(false);
+    this.canPost = false;
+    this.inProgress = true;
+
+    this.errorMessage = '';
+    this.attachment.remove(imageId, file, this.attach_guid)
+      .then(guid => {
+        this.inProgress = false;
+        this.canPost = true;
+        // file.value = '';
+        this.cards = _remove(this.cards, function (n) {
+          return n.guid !== guid;
+        });
+      })
+      .catch(e => {
+        // this.inProgress = false;
+        // this.canPost = true;
+      });
+  }
+
+  closeModal() {
+    this.overlayModal.dismiss();
+  }
+
+  //just for refrence
   // removeAttachment(guid) {
   //   this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
   //   this.cards = _remove(this.cards, function (n) {
@@ -222,39 +254,4 @@ export class OpportunityFormComponent implements OnInit {
   //     console.error(e);
   //   });
   // }
-
-  removeAttachment(file: HTMLInputElement, imageId: string) {
-    if (this.inProgress) {
-      this.attachment.abort();
-      this.canPost = true;
-      this.inProgress = false;
-      this.errorMessage = '';
-      return;
-    }
-
-    // if we're not uploading a file right now
-    this.attachment.setPendingDelete(false);
-    this.canPost = false;
-    this.inProgress = true;
-
-    this.errorMessage = '';
-    this.attachment.remove(imageId,file,this.attach_guid)
-      .then(guid => {
-        this.inProgress = false;
-        this.canPost = true;
-        // file.value = '';
-        this.cards = _remove(this.cards, function (n) {
-          return n.guid !== guid;
-        });
-      })
-      .catch(e => {
-        // this.inProgress = false;
-        // this.canPost = true;
-      });
-  }
-
-
-  closeModal() {
-    this.overlayModal.dismiss();
-  }
 }

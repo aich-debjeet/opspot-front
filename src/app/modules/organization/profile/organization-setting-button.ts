@@ -270,19 +270,19 @@ export class OrganizationSettingButton {
 
   toggleVideoChat(enabled: boolean) {
     this.organization.videoChatDisabled = enabled ? 0 : 1;
-    this.client.post(`api/v1/groups/group/${this.organization.guid}`, { videoChatDisabled: this.organization.videoChatDisabled });
+    this.client.post(`api/v3/organizations/organization/${this.organization.guid}`, { videoChatDisabled: this.organization.videoChatDisabled });
     this.groupChange.next(this.organization);
   }
 
   toggleModeration(enabled: boolean) {
     this.organization.moderated = enabled ? 1 : 0;
-    this.client.post(`api/v1/groups/group/${this.organization.guid}`, { moderated: this.organization.moderated });
+    this.client.post(`api/v3/organizations/organization/${this.organization.guid}`, { moderated: this.organization.moderated });
     this.groupChange.next(this.organization);
   }
 
   togglePublic(enabled: boolean) {
     this.organization.membership = enabled ? 2 : 0;
-    this.client.post(`api/v1/groups/group/${this.organization.guid}`, { membership: this.organization.membership })
+    this.client.post(`api/v3/organizations/organization/${this.organization.guid}`, { membership: this.organization.membership })
     this.groupChange.next(this.organization);
   }
 

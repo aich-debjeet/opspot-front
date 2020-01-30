@@ -138,9 +138,10 @@
             </div>
         </div><!-- contributed price end-->
         <div class="o-trans-contributed__price-info"  *ngIf="isP2p(transaction)">
-            <div class="o-avatar-xs"><img [routerLink]="['/', getSelf(transaction).username]"  [src]="getSelf(transaction).avatar" alt=""></div>
-            <i class="icon-arrow-right"></i>
-            <div class="o-avatar-xs"><img [routerLink]="['/', getOther(transaction).username]" [src]="getOther(transaction).avatar"alt=""></div>
+            <div class="o-avatar-xs"><img [routerLink]="['/', getSelf(transaction).username]"  [src]="opspot.cdn_url + getSelf(transaction).avatar" alt=""></div>
+            <i class="icon-arrow-right" *ngIf="!getOther(transaction).isSender"></i>
+            <i class="icon-arrow-left" *ngIf="getOther(transaction).isSender"></i>
+            <div class="o-avatar-xs"><img [routerLink]="['/', getOther(transaction).username]" [src]="opspot.cdn_url + getOther(transaction).avatar"alt=""></div>
             <div id="username" class="text-sm"></div>
             <a href="#" class="text-sm primary"></a>
         </div><!-- contributed price info end-->

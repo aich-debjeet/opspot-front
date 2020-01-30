@@ -1,7 +1,9 @@
-import { Component, OnInit ,EventEmitter, Output} from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import dob from '../../../../utils/dateHandler';
 import { Client } from '../../../../services/api/client';
 import { ToastrService } from 'ngx-toastr';
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-work',
   templateUrl: './work.component.html',
@@ -23,7 +25,7 @@ export class WorkComponent implements OnInit {
   inProgress: boolean = false;
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
-  constructor(public client: Client, private toastr: ToastrService) {}
+  constructor(public client: Client, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.dateOfBirth = dob();
@@ -37,7 +39,7 @@ export class WorkComponent implements OnInit {
 
   onSubmit(e) {
     this.submitted = true;
-    if(!e.valid){
+    if (!e.valid) {
       this.errEdu = true;
       return;
     }
@@ -120,9 +122,23 @@ export class WorkComponent implements OnInit {
       this.errEndDate = false;
       this.model.present = true;
     }
-    if(!data.privacy){
+    if (!data.privacy) {
       this.model.privacy = false;
     } else this.model.privacy = true;
+  }
+
+  remove(index) {
+    let deletedWork = _.pullAt(this.work.work_experience, [index]);
+    this.client
+      .post('api/v1/entities/work_experience', this.work)
+      .then((res: any) => {
+        if (res.status === 'success' && res.entities == true) {
+          this.client.get('api/v2/onboarding/progress').then((response: any) => {
+            this.showSuccess();
+            this.updatePercentage.emit(response.rating);
+          });
+        }
+      });
   }
 
   goBack() {

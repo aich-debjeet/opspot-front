@@ -93,7 +93,7 @@
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
-        <span i18n="@@M__COMMON__CONFIRM_18" id="activity-mature-content" >Warning! Mature content (18+)</span>
+        <span i18n="@@M__COMMON__CONFIRM_18" id="activity-mature-content" >Warning! Restricted content</span>
       </span>
     </div>
     <opspot-rich-embed [src]="activity" [maxheight]="480"></opspot-rich-embed>
@@ -145,11 +145,13 @@
   <div *ngIf="activity.entity_type === 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event' && activity.entity_type !== 'album'">
     <div class="feed-card-opportunity-block" id="activity-opportunity-postcard">
       <div class="feed-card-opportunity-block__top">
+        <!-- <div class="opportunity-image" [routerLink]="['/opportunity/view',activity.guid]" [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"> -->
         <div class="opportunity-image" [routerLink]="['/opportunity/view',activity.guid]">
           <img *ngIf="activity?.custom_data.length > 0" [src]="activity?.custom_data[0]?activity?.custom_data[0].src:''"
             (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'" id="oppImg">
-            <img *ngIf="activity?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/ops_icon.png'">
-          </div>
+          <img *ngIf="activity?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/ops_icon.png'">
+        </div>
+        <!-- <div [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }" class="opportunity-details" id="activity-opportunity-details"> -->
         <div class="opportunity-details" id="activity-opportunity-details">
           <div class="text-lg f500 mb-3 word-br" id="activity-opportunity-title" [routerLink]="['/opportunity/view',activity.guid]">
             {{activity?.title}}
@@ -164,10 +166,12 @@
             [label]="'Reach Out'"
           ></m-messenger--channel-button>
         </div>
+        <!-- <div [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }" class="opportunity-button" id="activity-opportunity-category"> -->
         <div class="opportunity-button" id="activity-opportunity-category">
           {{activity?.category}}
         </div>
       </div>
+      <!-- <div [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }" [routerLink]="['/opportunity/view',activity.guid]" class="feed-card-opportunity-block__bottom hidden-mob"> -->
       <div [routerLink]="['/opportunity/view',activity.guid]" class="feed-card-opportunity-block__bottom hidden-mob">
         <div class="text-md grey">
           {{activity?.blurb | truncate:[100, '...']}}
@@ -178,6 +182,7 @@
 
   <!--BlueStore-->
   <div *ngIf="activity.entity_type === 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'">
+    <!-- <div [routerLink]="['/item/view', activity.guid]" class="feed-media" *ngIf="activity?.custom_data" id="activity-bluestore-postcard" [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"> -->
     <div [routerLink]="['/item/view', activity.guid]" class="feed-media" *ngIf="activity?.custom_data" id="activity-bluestore-postcard">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
         <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
@@ -193,6 +198,7 @@
         </div>
       </a>
     </div>
+    <!-- <div class="feed-card-event-block" [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"> -->
     <div class="feed-card-event-block">
       <div class="feed-card-event-block__left" id="activity-bluestore-details">
         <div class="text-lg f500 mb-3 word-br" id="activity-bluestore-title">
@@ -219,20 +225,21 @@
   <!--Showtime-->
   <div *ngIf="activity.entity_type === 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
+    <!-- <div [routerLink]="[routerLink1, activity.guid]" class="feed-media" [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"> -->
     <div [routerLink]="[routerLink1, activity.guid]" class="feed-media">
-      <div class="feed-media-event-image" id="activity-showtimes-postcard">
-        
+      <div class="feed-media-event-image" id="activity-showtimes-postcard">   
           <img [src]="activity?.custom_data[0] ? activity?.custom_data[0].src:''"
           (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"
           *ngIf="activity?.custom_data.length > 0">
           <img *ngIf="activity?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
-
+        <!-- <div class="event-date" id="activity-event-time"  [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"> -->
         <div class="event-date" id="activity-event-time">
           <div class="text-red" id="activity-evnt-date">{{activity?.start_time_date | date:'dd'}} </div>
           <div class="text-md" id="activity-evnt-month">{{activity?.start_time_date| date:'MMM'}} </div>
         </div>
       </div>
     </div>
+    <!-- <div class="feed-card-event-block" [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"> -->
     <div class="feed-card-event-block">
       <div [routerLink]="[routerLink1, activity.guid]" class="feed-card-event-block__left" id="activity-event-details">
         <div class="text-lg f500 mb-3 word-br" id="evntTitle">
@@ -284,7 +291,7 @@
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
-        <span i18n="@@M__COMMON__CONFIRM_18" >Warning! Mature content (18+)</span>
+        <span i18n="@@M__COMMON__CONFIRM_18" >Warning! Restricted content</span>
       </span>
     </div>
 
@@ -304,7 +311,7 @@
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
-        <span i18n="@@M__COMMON__CONFIRM_18">Warning! Mature content (18+)</span>
+        <span i18n="@@M__COMMON__CONFIRM_18">Warning! Restricted content</span>
       </span>
     </div>
 
@@ -320,7 +327,7 @@
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->
-        <span i18n="@@M__COMMON__CONFIRM_18" >Warning! Mature content (18+)</span>
+        <span i18n="@@M__COMMON__CONFIRM_18" >Warning! Restricted content</span>
       </span>
     </div>
     <a [routerLink]="['/media', activity.guid]">
@@ -334,7 +341,6 @@
   <div *ngIf="activity.remind_object">
     <!-- todo @gayatri: make entityType dynamic -->
     <opspot-remind
-      [entityType]="activity.entity_type"
       [object]="activity.remind_object"
       [events]="childEventsEmitter"
       [boosted]="activity.boosted">
@@ -346,7 +352,7 @@
 <ng-content select="[bottom-content]"></ng-content>
 
 <!-- mature toggle button -->
-<div *ngIf="activity.mature" class="o-feed-nsfw-cover-btn ">
+<div *ngIf="activity.mature && !(activity.entity_type === 'event' || activity.entity_type === 'opportunity' || activity.entity_type === 'item')" class="o-feed-nsfw-cover-btn ">
   <a *ngIf="activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-cover">Cover</a>
   <a *ngIf="!activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-uncover">Uncover</a>
 </div>
@@ -386,7 +392,6 @@
   <!-- <opspot-button-remind [entityType]="activity.entity_type" [object]="activity" #remindButton></opspot-button-remind> -->
   <m-modal-remind-composer *ngIf="remindOpen"
     [object]="activity.remind_object ? activity.remind_object : activity"
-    [entityType]="activity.entity_type"
     [open]="true"
     [default]="remindMessage"
     (closed)="remindOpen = false"
@@ -432,10 +437,10 @@
 <div class="mdl-card__menu mdl-color-text--blue-grey-300" #toggle *ngIf="!hideTabs">
   <button class="mdl-button m-pin-button mdl-button--icon" id="activity-bookmark" (click)="togglePin(activity)">
     <m-tooltip icon="turned_in" *ngIf="activity.bookmark">
-      This post is Bookmarked
+      Bookmarked
     </m-tooltip>
     <m-tooltip *ngIf="!activity.bookmark" icon="turned_in_not">
-      Click to bookmark this post to the top of your channel feed
+      Bookmark
     </m-tooltip>
   </button>
   <m-safe-toggle *ngIf="showRatingToggle && session.isAdmin()" [(entity)]="activity"></m-safe-toggle>

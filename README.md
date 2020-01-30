@@ -9,7 +9,8 @@ ng serve --proxy-config proxy.conf.json
 2. Deployment: ./opspot_front/dist => /var/www/Opspot/front/dist/en
 3. Update: index.php with new scripts and css bundles
 
-# for stg deployment
-1. Front build: node --max-old-space-size=6096 ./node_modules/@angular/cli/bin/ng build --prod --output-path dist/en --deploy-url=/en/
-2. Deployment: ./opspot_front/dist/en => /home/ubuntu/opspot/front/dist/en and ./opspot_front/dist/en/assets => /home/ubuntu/opspot/front/dist/assets
-3. Update: index.php with new scripts and css bundles
+# for dev deployment
+1. Change config in angular.json: src/index.html => src/index.php
+1. Front build: node --max-old-space-size=6096 ./node_modules/@angular/cli/bin/ng build --prod
+2. Deployment: scp -r -i ~/.ssh/pems/ege-minds001.pem /home/ege/workspace/opspot_front/dist/* ubuntu@13.234.47.103:/home/ubuntu/opspot/front/dist/
+3. Index file update: On server copy index.php from /home/ubuntu/opspot/front/dist/ to /home/ubuntu/opspot/front/dist/en/

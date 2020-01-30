@@ -6,7 +6,7 @@ import { ActivityPreview } from '../../legacy/components/cards/activity/preview'
 // had forwardRef(() => ActivityPreview)
 @Component({
   selector: 'm-modal-remind-composer',
-  inputs: ['_default: default', 'open', '_object: object', '_entityType: entityType'],
+  inputs: ['_default: default', 'open', '_object: object'],
   outputs: ['closed', 'post'],
   template: `
     <m-modal [open]="open" (closed)="close($event)">
@@ -69,7 +69,6 @@ export class RemindComposerModal {
   closed: EventEmitter<any> = new EventEmitter();
   post: EventEmitter<any> = new EventEmitter();
   object: any = {};
-  entityType: any;
 
   message: string = '';
 
@@ -79,10 +78,6 @@ export class RemindComposerModal {
 
   set _object(object: any) {
     this.object = object;
-  }
-
-  set _entityType(value: any) {
-    this.entityType = value;
   }
 
   set _default(message: string) {
@@ -118,10 +113,6 @@ export class RemindComposerModal {
       (<ActivityPreview>componentRef.instance).object = this.object;
     } else if (this.object && this.object.remind_object) {
       (<ActivityPreview>componentRef.instance).object = this.object.remind_object;
-    }
-
-    if (this.entityType) {
-      (<ActivityPreview>componentRef.instance).entityType = this.entityType;
     }
 
     componentRef.changeDetectorRef.detectChanges();

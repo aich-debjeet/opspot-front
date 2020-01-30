@@ -45,7 +45,7 @@
 
   <!-- desktop:top-navigation:app-logo -->
   <div class="logo_main">
-    <a routerLink="/newsfeed" id="topbar-ops-logo">
+    <a routerLink="/" id="topbar-ops-logo">
       <img src="assets/ops_icon.png">
     </a>
   </div>
@@ -118,7 +118,7 @@
               <li [routerLink]="['/organization/create']" class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="!organization">
                 <a id="topbar-dropdown-create-organization">
                   <!-- <i class="material-icons">trending_up</i> -->
-                  <span>Create Organisation</span>
+                  <span>Create Organization</span>
                 </a>
               </li>
               <!-- <div *ngFor="let organization of entities"> -->
@@ -336,7 +336,7 @@
           <li class="app-nav-link_-item" *ngIf="!organization">
             <a [routerLink]="['/organization/create']" (click)='closeNav()'>
               <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
-              <div class="app-nav-link__text">Organisation</div>
+              <div class="app-nav-link__text">Organization</div>
             </a>
           </li>
           <li class="app-nav-link_-item" *ngIf="organization">
