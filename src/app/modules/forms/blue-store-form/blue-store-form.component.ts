@@ -128,7 +128,7 @@ export class BlueStoreFormComponent implements OnInit {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
-           // temporary fix for video thumbnail 
+          // temporary fix for video thumbnail 
           if (obj['src'] == null) {
             obj['src'] = 'assets/videos/video_thumbnail.png'
           }
@@ -161,7 +161,7 @@ export class BlueStoreFormComponent implements OnInit {
   //   });
   // }
 
-  removeAttachment(file: HTMLInputElement, imageId: string) {
+  removeAttachment(file: HTMLInputElement, imageId: string) {    
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -302,5 +302,13 @@ export class BlueStoreFormComponent implements OnInit {
 
   closeModal() {
     this.overlayModal.dismiss();
+  }
+
+  checkForSrc(object) {
+    if (object && object.entity_type === 'video') {
+      return object.thumbnail_src;
+    } else {
+      return object.src;
+    }
   }
 }
