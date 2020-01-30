@@ -27,7 +27,7 @@ export class BlogViewComponent implements OnInit {
   menuOptionSelected(option: string) {
     switch (option) {
       case 'edit':
-        this.router.navigate(['/blog/edit', this.entity.guid]);
+        this.router.navigate(['/blog/edit', this.entity.entity_guid]);
         break;
       case 'delete':
         this.delete();
@@ -36,7 +36,7 @@ export class BlogViewComponent implements OnInit {
   }
 
   delete() {
-    this.client.delete('api/v1/blog/' + this.entity.guid)
+    this.client.delete('api/v1/blog/' + this.entity.entity_guid)
       .then((response: any) => {
         // this.router.navigate(['/blog/owner']);
         this.deletedBlog.emit(this.entity.guid)

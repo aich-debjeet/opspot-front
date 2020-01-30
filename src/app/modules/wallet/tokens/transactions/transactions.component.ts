@@ -42,6 +42,7 @@ export class WalletTokenTransactionsComponent {
 
   remote: boolean = false;
   remoteUser: string = '';
+  opspot = window.Opspot;
 
   constructor(
     protected client: Client,
@@ -262,14 +263,14 @@ export class WalletTokenTransactionsComponent {
         user = isSender ? transaction.sender : transaction.receiver;
 
       return {
-        avatar: `/icon/${user.guid}/medium/${user.icontime}`,
+        avatar: `icon/${user.guid}/medium/${user.icontime}`,
         username: user.username,
       }
     } else {
       const user = this.session.getLoggedInUser();
 
       return {
-        avatar: `/icon/${user.guid}/medium/${user.icontime}`,
+        avatar: `icon/${user.guid}/medium/${user.icontime}`,
         username: user.username,
       }
     }
@@ -281,7 +282,7 @@ export class WalletTokenTransactionsComponent {
       user = isSender ? transaction.sender : transaction.receiver;
 
     return {
-      avatar: `/icon/${user.guid}/medium/${user.icontime}`,
+      avatar: `icon/${user.guid}/medium/${user.icontime}`,
       username: user.username,
       isSender,
     }
