@@ -2,6 +2,7 @@ import { Component, Inject, Input, ChangeDetectorRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { Session } from '../../../services/session';
 import { Client, Upload } from '../../../services/api';
+import { DBPedia } from '../../../services/api/dbpedia';
 import { RecentService } from '../../../services/ux/recent';
 import { ContextService, ContextServiceResponse } from '../../../services/context.service';
 
@@ -19,12 +20,14 @@ export class SearchBarSuggestionsComponent {
   currentContext: ContextServiceResponse;
   @Input() active: boolean;
   @Input() disabled: boolean = false;
+  dbPediaList: any[];
 
   private searchTimeout;
 
   constructor(
     public session: Session,
     public client: Client,
+    public dbPedia: DBPedia,
     public location: Location,
     public recentService: RecentService,
     private context: ContextService,
@@ -59,6 +62,18 @@ export class SearchBarSuggestionsComponent {
       } catch (e) {
         console.error(e);
         this.suggestions = [];
+      }
+
+      try {
+        // TODO: little ugly here
+        const dbPediaResponse = await this.dbPedia.get('PrefixSearch', {
+          MaxHits: 1,
+          QueryString: value
+        });
+        this.dbPediaList = dbPediaResponse['results'];
+
+      } catch(e) {
+        console.error(e);
       }
     }, 300);
   }

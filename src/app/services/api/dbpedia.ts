@@ -1,18 +1,14 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from '@angular/core';
 
-/**
- * API Class
- */
+@Injectable({
+  providedIn: 'root'
+})
 export class DBPedia {
 
-  base: string = 'http://lookup.dbpedia.org/api/search/PrefixSearch';
+  base: string = 'http://lookup.dbpedia.org/api/search/';
 
-  static _(http: HttpClient) {
-    return new DBPedia(http);
-  }
-
-  constructor(public http: HttpClient) {
-  }
+  constructor(public http: HttpClient) { }
 
   /**
    * Return a GET request
@@ -20,37 +16,7 @@ export class DBPedia {
   get(endpoint: string, data: Object = {}, options: Object = {}) {
     endpoint += '?' + this.buildParams(data);
     return new Promise((resolve, reject) => {
-      this.http.get(
-        this.base + endpoint,
-        this.buildOptions(options)
-      )
-        .subscribe(
-          res => {
-            return resolve(res);
-          },
-          err => {
-            if (err.data && !err.data()) {
-              return reject(err || new Error('GET error'));
-            }
-            if (err.status === 401 && err.error.loggedin === false) {
-              window.location.href = '/login';
-              return reject(err);
-            }
-            return reject(err);
-          });
-    });
-  }
-
-  /**
-   * Return a GET request
-   */
-  getRaw(endpoint: string, data: Object = {}, options: Object = {}) {
-    endpoint += '?' + this.buildParams(data);
-    return new Promise((resolve, reject) => {
-      this.http.get(
-        this.base + endpoint,
-        this.buildOptions(options)
-      )
+      this.http.get(this.base + endpoint)
         .subscribe(
           res => {
             return resolve(res);
@@ -65,22 +31,6 @@ export class DBPedia {
     return Object.keys(object).map((k) => {
       return encodeURIComponent(k) + '=' + encodeURIComponent(object[k]);
     }).join('&');
-  }
-
-  /**
-   * Build the options
-   */
-  private buildOptions(options: Object) {
-
-    const headers = new HttpHeaders({
-      'accept': 'application/json',
-      'content-type': 'application/json',
-    });
-
-    return Object.assign(options, {
-      headers: headers,
-      cache: true
-    });
   }
 
 }

@@ -52,4 +52,13 @@
   >
     <b i18n="@@SEARCH__SUGGESTIONS__OPSPOT_CONTEXT_LABEL">Search One Page Spotlight:</b> <span>{{ q }}</span>
   </a>
+
+  <a class="m-search-bar-suggestions-suggestion m-search-bar-suggestions-context" *ngIf="q && dbPediaList?.length > 0"
+    [routerLink]="[ '/search' ]"
+  >
+    <b i18n="@@SEARCH__SUGGESTIONS__OPSPOT_CONTEXT_LABEL">DB Pedia Result:</b>
+    <span>
+      <a [routerLink]="[dbPediaList[0]?.uri]" target="_blank">{{dbPediaList[0].description}}</a>  
+    </span>
+  </a>
 </div>
