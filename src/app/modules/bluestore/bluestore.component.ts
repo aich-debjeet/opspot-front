@@ -19,7 +19,6 @@ import { BoostCreatorComponent } from '../boost/creator/creator.component';
 })
 export class BluestoreComponent implements OnInit {
 
-
   guid: string;
   inProgress: boolean = false;
   marketplace: any;
@@ -27,7 +26,6 @@ export class BluestoreComponent implements OnInit {
   opspot = window.Opspot;
   allOpportunities: any;
   largeImage: string;
-
   isTranslatable: boolean;
   canDelete: boolean = false;
   translateToggle: boolean = false;
@@ -38,21 +36,15 @@ export class BluestoreComponent implements OnInit {
   paramsSubscription: Subscription;
   reachoutMessage = 'Is this available? ';
   user: any;
-
-
-
   showBoostOptions: boolean = false;
   // private _showBoostMenuOptions: boolean = false;
-
   @Input() focusedCommentGuid: string;
-
   remindOpen = false;
   remindMessage = '';
-
-
-
-  // private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
+  showVideo = false;
+  videoData: any;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -90,7 +82,7 @@ export class BluestoreComponent implements OnInit {
           this.user = data.activity.ownerObj;
           this.reachoutMessage += data.activity['perma_url'];
 
-          this.marketplace.url  = window.Opspot.site_url + 'item/view/' + this.marketplace.guid;
+          this.marketplace.url = window.Opspot.site_url + 'item/view/' + this.marketplace.guid;
 
           if (this.marketplace['custom_data'][0]['entity_type'] === 'video') {
             this.showImage(0, this.marketplace['custom_data'][0]);
@@ -161,16 +153,6 @@ export class BluestoreComponent implements OnInit {
 
   udpateMarketPlace(data: any) {
     this.load();
-    // this.marketplace.blurb = data.description;
-    // this.marketplace.title = data.title;
-    // // this.marketplace.attachment_guid = data.attachment_guid;
-    // this.marketplace.price = data.price;
-    // this.marketplace.item_count =  data.item_count;
-    // if (data.attachment_guid.length > 0) {
-    //   this.marketplace.custom_data= this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
-    // } else {
-    //   this.marketplace.custom_data = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
-    // }
     this.detectChanges();
   }
 
@@ -186,32 +168,6 @@ export class BluestoreComponent implements OnInit {
       this.count = this.marketplace['thumbs:up:count']
     }
   }
-
-  // setExplicit(value: boolean) {
-  //   let oldValue = this.activity.mature,
-  //     oldMatureVisibility = this.activity.mature_visibility;
-
-  //   this.activity.mature = value;
-  //   this.activity.mature_visibility = void 0;
-
-  //   if (this.activity.custom_data && this.activity.custom_data[0]) {
-  //     this.activity.custom_data[0].mature = value;
-  //   } else if (this.activity.custom_data) {
-  //     this.activity.custom_data.mature = value;
-  //   }
-
-  //   this.client.post(`api/v1/entities/explicit/${this.activity.guid}`, { value: value ? '1' : '0' })
-  //     .catch(e => {
-  //       this.activity.mature = oldValue;
-  //       this.activity.mature_visibility = oldMatureVisibility;
-
-  //       if (this.activity.custom_data && this.activity.custom_data[0]) {
-  //         this.activity.custom_data[0].mature = oldValue;
-  //       } else if (this.activity.custom_data) {
-  //         this.activity.custom_data.mature = oldValue;
-  //       }
-  //     });
-  // }
 
   async togglePin() {
     this.marketplace.bookmark = !this.marketplace.bookmark;
@@ -240,9 +196,9 @@ export class BluestoreComponent implements OnInit {
       });
   }
 
-  slideConfig = { 
-    slidesToShow: 6, 
-    slidesToScroll: 1, 
+  slideConfig = {
+    slidesToShow: 6,
+    slidesToScroll: 1,
     arrows: true,
     responsive: [
       {
@@ -268,7 +224,7 @@ export class BluestoreComponent implements OnInit {
           slidesToScroll: 1
         }
       }]
-     };
+  };
 
   slickInit(e) {
     // console.log('slick initialized in activity');
@@ -284,10 +240,6 @@ export class BluestoreComponent implements OnInit {
   beforeChange(e) {
     // console.log('beforeChange');
   }
-
-
-  showVideo = false;
-  videoData: any;
 
   showImage(i, data?) {
     if (data) {
@@ -309,7 +261,6 @@ export class BluestoreComponent implements OnInit {
       });
     }
   }
-
 
   async wireSubmitted(wire?) {
     if (wire && this.marketplace.wire_totals) {
@@ -338,7 +289,6 @@ export class BluestoreComponent implements OnInit {
   }
 
   shareOptionSelected(option: string) {
-    // console.log('shareOptionSelected', option);
     if (option === 'repost') {
       this.remindOpen = true;
     };
@@ -361,13 +311,8 @@ export class BluestoreComponent implements OnInit {
       });
   }
 
-
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();
   }
-
-  next() {}
-
-  prev() {}
 
 }

@@ -8,6 +8,7 @@ import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { Router } from '@angular/router';
 import getViewPageLink from '../../../helpers/get-viewage-link';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-opportunity-form',
@@ -24,7 +25,7 @@ export class OpportunityFormComponent implements OnInit {
   set opts(opts: any) {
     this._opts = opts;
   }
-  
+
   reqBody = {
     title: null,
     description: null,
@@ -76,7 +77,8 @@ export class OpportunityFormComponent implements OnInit {
     public attachment: AttachmentService,
     private formBuilder: FormBuilder,
     private overlayModal: OverlayModalService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
 
   ) { }
 
@@ -153,6 +155,7 @@ export class OpportunityFormComponent implements OnInit {
 
           this.navigationUrl = getViewPageLink('opportunity', resp.activity.guid)
           if (resp.activity && this.oppGuid) {
+            this.toastr.success('Updated successfully');
             this.router.navigate([this.navigationUrl]);
           }
           // check if update callback function is avaibale

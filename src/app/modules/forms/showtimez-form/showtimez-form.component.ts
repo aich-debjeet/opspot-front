@@ -10,6 +10,7 @@ import { FormValidator } from '../../../helpers/form.validator';
 import * as moment from 'moment';
 import getViewPageLink from '../../../helpers/get-viewage-link';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -103,7 +104,8 @@ export class ShowtimezFormComponent implements OnInit {
     public attachment: AttachmentService,
     private formBuilder: FormBuilder,
     private overlayModal: OverlayModalService,
-    private router: Router) {
+    private router: Router,
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -271,6 +273,7 @@ export class ShowtimezFormComponent implements OnInit {
           this.changeToDefault();
           this.navigationUrl = getViewPageLink('showtime', resp.activity.guid)
           if (resp.activity && this.eventGuid) {
+            this.toastr.success('Updated successfully');
             this.router.navigate([this.navigationUrl]);
           }
         })
