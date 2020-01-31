@@ -222,6 +222,7 @@
     }
     &__price{
         margin-right: 20px;
+        min-width: 100px;
         @include mq($from: $mobile_sm, $until: $mobile_lg) {
             order: 1;
         }
