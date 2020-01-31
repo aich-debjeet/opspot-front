@@ -149,6 +149,7 @@ export class WorkComponent implements OnInit {
   addWorkMove() {
     this.model = {}; //render empty form after update/create
     this.model.privacy = false; // setting default value of privacy
+    this.toggleEnd = false; //set default value of current working status
     this.submitted = false;
   }
 
