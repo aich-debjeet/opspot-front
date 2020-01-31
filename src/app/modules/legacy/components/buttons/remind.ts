@@ -19,7 +19,6 @@ import { SignupModalService } from '../../../../modules/modals/signup/service';
     </div>
     <m-modal-remind-composer *ngIf="remindOpen"
     [object]="object"
-    [entityType]="entityType"
     [open]="true"
     [default]="message"
     (closed)="remindOpen = false"

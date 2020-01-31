@@ -1,15 +1,16 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 import { Session } from '../../../services/session';
 import { AttachmentService } from '../../../services/attachment';
 import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
-
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { FormValidator } from '../../../helpers/form.validator';
 import * as moment from 'moment';
+import getViewPageLink from '../../../helpers/get-viewage-link';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -60,6 +61,7 @@ export class ShowtimezFormComponent implements OnInit {
   }
 
   imageUploadError: boolean;
+  navigationUrl = '';
 
   @Input('object') set data(object) {
     this.event = object;
@@ -73,15 +75,11 @@ export class ShowtimezFormComponent implements OnInit {
       }
       this.buildForm(this.event, date1, time1);
       if (this.event['custom_data']) {
-        // this.event['custom_data'].forEach(image => {
-        //   this.reqBody.attachment_guid.push(image['guid']);
-        // });
         this.event['custom_data'].forEach(image => {
           this.attach_guid.push(image['guid']);
         });
       }
       this.cards = this.event['custom_data'];
-
     } else {
       this.buildForm();
     }
@@ -105,7 +103,9 @@ export class ShowtimezFormComponent implements OnInit {
     public upload: Upload,
     public attachment: AttachmentService,
     private formBuilder: FormBuilder,
-    private overlayModal: OverlayModalService) {
+    private overlayModal: OverlayModalService,
+    private router: Router,
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -171,23 +171,6 @@ export class ShowtimezFormComponent implements OnInit {
     }
   }
 
-  // removeAttachment(guid) {
-  //   this.reqBody.attachment_guid = this.reqBody.attachment_guid.filter(i => i !== guid);
-  //   this.cards = _remove(this.cards, function (n) {
-  //     return n.guid !== guid;
-  //   });
-  // }
-  // removeAttachment(file: HTMLInputElement, imageId: string) {
-  //   this.attachment.remove(file, imageId).then((guid) => {
-  //     file.value = '';
-  //     this.cards = _remove(this.cards, function (n) {
-  //       return n.guid !== guid;
-  //     });
-  //   }).catch(e => {
-  //     console.error(e);
-  //   });
-  // }
-
   removeAttachment(file: HTMLInputElement, imageId: string) {
     // alert();
     if (this.inProgress) {
@@ -204,7 +187,7 @@ export class ShowtimezFormComponent implements OnInit {
     this.inProgress = true;
 
     this.errorMessage = '';
-    this.attachment.remove(imageId,file,this.attach_guid)
+    this.attachment.remove(imageId, file, this.attach_guid)
       .then(guid => {
         this.inProgress = false;
         this.canPost = true;
@@ -214,7 +197,6 @@ export class ShowtimezFormComponent implements OnInit {
         });
       })
       .catch(e => {
-        // console.error(e);
         this.inProgress = false;
         // this.canPost = true;
       });
@@ -232,7 +214,6 @@ export class ShowtimezFormComponent implements OnInit {
     if (inputTime) {
       var timeString = this.formatTime(inputTime)
       const d = moment(inputDate.split('-').reverse().join('-')).format('MM/DD/YYYY');
-
       var myDate = new Date(d);
       var timeReg = /(\d+)\:(\d+)(\w+)/;
       if (timeString) {
@@ -252,11 +233,8 @@ export class ShowtimezFormComponent implements OnInit {
   eventSubmit() {
     this.imageUploadError = false;
     this.eventSubmitted = true;
-
     var startTime = this.convertDateToMillis(this.showTimezForm.value.eventdate, this.showTimezForm.value.eventTime)
-
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-    // console.log("data: ", data);
 
     if (data.attachment_guid.length > 0) {
       this.reqBody.attachment_guid = data.attachment_guid;
@@ -268,13 +246,10 @@ export class ShowtimezFormComponent implements OnInit {
       this.imageUploadError = true;
     }
 
-
     this.reqBody.title = this.showTimezForm.value.eventTitle;
     this.reqBody.description = this.showTimezForm.value.eventDescription;
     this.reqBody.location = this.showTimezForm.value.eventsLocation;
-
     this.reqBody.start_time_date = startTime.getTime();
-
 
     if (this.showTimezForm.valid && this.reqBody.attachment_guid != '') {
       let endpoint = 'api/v3/event';
@@ -288,7 +263,6 @@ export class ShowtimezFormComponent implements OnInit {
           this.load.emit(resp);
           this.attachment.reset();
           // this.meta = { wire_threshold: null };
-
           if (this._opts && this._opts.onUpdate) {
             this._opts.onUpdate(this.reqBody);
             // close modal
@@ -297,12 +271,16 @@ export class ShowtimezFormComponent implements OnInit {
           this.eventSubmitted = false;
           this.inProgress = false;
           this.changeToDefault();
+          this.navigationUrl = getViewPageLink('showtime', resp.activity.guid)
+          if (resp.activity && this.eventGuid) {
+            this.toastr.success('Updated successfully');
+            this.router.navigate([this.navigationUrl]);
+          }
         })
         .catch((e) => {
           this.eventSubmitted = false;
           this.inProgress = false;
           alert(e.message);
-
         });
     }
   }
@@ -310,6 +288,7 @@ export class ShowtimezFormComponent implements OnInit {
   changeToDefault() {
     this.ChangeDefault.emit();
   }
+
   close() {
     this.Close.emit();
   }

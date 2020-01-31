@@ -40,7 +40,6 @@ export class MyJourneyFormComponent implements OnInit {
     this.cards = [];
   }
 
-
   ngOnInit() {
   }
 
@@ -53,7 +52,6 @@ export class MyJourneyFormComponent implements OnInit {
   }
 
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    console.log('clicked')
     this.inProgress = true;
     this.attachment.remove(imageId, file).then((guid) => {
       file.value = '';
@@ -82,13 +80,10 @@ export class MyJourneyFormComponent implements OnInit {
           this.cards.push(obj);
           file.value = null;
           this.inProgress = false;
-          // this.attachment.reset();
         })
         .catch(e => {
           if (e && e.message) {
-
           }
-
           file.value = null;
           this.attachment.reset();
         });
@@ -101,9 +96,6 @@ export class MyJourneyFormComponent implements OnInit {
       return;
     }
 
-    //console.log(" this.attachment.exportMeta(): ", this.attachment.exportMeta());
-
-
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
     this.tags.push(SpecialHashtg.concat('myjourney', this.session.getLoggedInUser().username));
@@ -113,7 +105,6 @@ export class MyJourneyFormComponent implements OnInit {
     this.client.post('api/v1/newsfeed', data)
       .then((data: any) => {
         data.activity.boostToggle = true;
-        // console.log(data)
         this.load.emit(data);
         this.attachment.reset();
         this.meta = { wire_threshold: null };
@@ -123,7 +114,6 @@ export class MyJourneyFormComponent implements OnInit {
       .catch((e) => {
         this.inProgress = false;
         // console.log(e.message);
-        // this.attachment.reset();
       });
   }
 

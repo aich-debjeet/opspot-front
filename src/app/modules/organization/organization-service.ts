@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export class OrganizationService {
 
-  private base: string = 'api/v1/groups/';
+  private base: string = 'api/v3/organizations/';
 
   private infiniteInProgress: boolean = false;
   private infiniteOffset: any;
@@ -28,11 +28,13 @@ export class OrganizationService {
 
   load(guid: string) {
     // console.log('GS laod', guid);
-    return this.clientService.get(`${this.base}group/${guid}`)
+    return this.clientService.get(`${this.base}organization/${guid}`)
       .then((response: any) => {
-        if (response.group) {
-          this.group.next(response.group);
-          return response.group;
+        console.log("Response: ", response);
+        
+        if (response.organization) {
+          this.group.next(response.organization);
+          return response.organization;
         }
 
         throw 'E_LOADING';
@@ -40,7 +42,7 @@ export class OrganizationService {
   }
 
   save(group: any) {
-    let endpoint = `${this.base}group`;
+    let endpoint = `${this.base}organization`;
 
     if (group.guid) {
       endpoint += `/${group.guid}`;
@@ -53,7 +55,6 @@ export class OrganizationService {
         if (response.guid) {
           return response.guid;
         }
-
         throw 'E_SAVING';
       });
   }
@@ -62,7 +63,7 @@ export class OrganizationService {
     let uploads = [];
 
     if (files.banner) {
-      uploads.push(this.uploadService.post(`${this.base}group/${group.guid}/banner`, [
+      uploads.push(this.uploadService.post(`${this.base}organization/${group.guid}/banner`, [
         files.banner
       ], {
         banner_position: group.banner_position
@@ -70,7 +71,7 @@ export class OrganizationService {
     }
 
     if (files.avatar) {
-      uploads.push(this.uploadService.post(`${this.base}group/${group.guid}/avatar`, [
+      uploads.push(this.uploadService.post(`${this.base}organization/${group.guid}/avatar`, [
         files.avatar
       ]));
     }
@@ -79,7 +80,7 @@ export class OrganizationService {
   }
 
   deleteGroup(group: any) {
-    return this.clientService.delete(`${this.base}group/${group.guid}`)
+    return this.clientService.delete(`${this.base}organization/${group.guid}`)
       .then((response: any) => {
         return !!response.done;
       })

@@ -6,18 +6,14 @@ import {
   Output
 } from '@angular/core';
 import { Session } from '../../../services/session';
-
 import { AttachmentService } from '../../../services/attachment';
-// import { ThirdPartyNetworksSelector } from '../../third-party-networks/selector';
 import { Upload } from '../../../services/api/upload';
 import { Client } from '../../../services/api/client';
 import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.component';
 import { Tag } from '../../hashtags/types/tag';
-// import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { PaywallMessageComponent } from './paywall-message.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
-// import { LoginComponent } from '../../auth/login.component';
 
 @Component({
   selector: 'app-post-form',
@@ -27,7 +23,6 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 export class PostFormComponent {
 
   opspot = window.Opspot;
-
 
   reqBody = {
     message: '',
@@ -50,11 +45,9 @@ export class PostFormComponent {
   meta: any;
   tags = [];
   inProgress = false;
-
   canPost = true;
   validThreshold = true;
   tooManyTags = false;
-
   errorMessage = null;
   staticBoard = false;
   submitted = false;
@@ -156,13 +149,12 @@ export class PostFormComponent {
    * Post to the newsfeed
    */
   post() {
-    // console.log(this.meta, this.attachment.has());
     if (this.meta.message.length <= 0 && this.attachment.has()) {
       alert('What have You Created today?');
       return;
     }
     if (this.defaultCoins.length > 0) {
-      if(!/\d/.test(this.defaultCoins)){
+      if (!/\d/.test(this.defaultCoins)) {
         alert('Invalid Wire threshold');
         return;
       }
@@ -173,13 +165,7 @@ export class PostFormComponent {
       };
     }
 
-    // if (this.hashtagsSelector.tags.length > 5) {
-    //   this.showTagsError();
-    //   return;
-    // }
-
     this.errorMessage = '';
-    // console.log("this.attachment.exportMeta(): ", this.attachment.exportMeta());
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
@@ -204,7 +190,6 @@ export class PostFormComponent {
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
-    // console.log(file, event, this.attachment);
     if (file.value) {
       // this prevents IE from executing this code twice
       this.canPost = false;
@@ -217,19 +202,15 @@ export class PostFormComponent {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
-          if(obj['src'] == null){
-          obj['src'] = 'assets/videos/video_thumbnail.png'
+          if (obj['src'] == null) {
+            obj['src'] = 'assets/videos/video_thumbnail.png'
           }
-          // console.log(guid);
-          // console.log(obj['src']);
           this.cards.push(obj);
-          // console.log(this.cards);
           this.inProgress = false;
           this.canPost = true;
           file.value = null;
         })
         .catch(e => {
-          // console.log(e);
           if (e && e.message) {
             this.errorMessage = e.message;
           }
@@ -245,7 +226,7 @@ export class PostFormComponent {
     this.attachment.reset();
   }
 
-  removeAttachment(imageId: string,file?: HTMLInputElement,) {
+  removeAttachment(imageId: string, file?: HTMLInputElement) {
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -253,19 +234,16 @@ export class PostFormComponent {
       this.errorMessage = '';
       return;
     }
-
     // if we're not uploading a file right now
     this.attachment.setPendingDelete(false);
     this.canPost = false;
     this.inProgress = true;
-
     this.errorMessage = '';
 
-    this.attachment.remove(imageId,file)
+    this.attachment.remove(imageId, file)
       .then(guid => {
         this.inProgress = false;
         this.canPost = true;
-        // file.value = '';
         this.cards = _remove(this.cards, function (n) {
           return n.guid != guid;
         });
@@ -292,23 +270,7 @@ export class PostFormComponent {
       .slice(0, 5);
   }
 
-  // getChoiceLabel(text: string) {
-  //   return `#${text}`;
-  // }
-  // createForms(type: string) {
-  //   this.staticBoard = true;
-  //   this.cards = [];
-  //   this.renderForms(type);
-  // }
-  // renderForms(type: string) {
-  //   console.log(type)
-  //   this.display = type;
-  //   this.attachment.reset();
-  //   // this.buildForm(type);
-  // }
-
   close() {
-    // console.log('close');
     this.display = '';
     this.staticBoard = false;
   }
@@ -319,11 +281,6 @@ export class PostFormComponent {
   }
 
   displayPaywall() {
-    // if (this.displayPaywal) {
-    //   this.displayPaywal = false;
-    // } else {
-    //   this.displayPaywal = true;
-    // }
     this.overlayModal.create(PaywallMessageComponent,
       {
         coins: this.defaultCoins,

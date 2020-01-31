@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Client } from '../../../../services/api/client';
 import dob from '../../../../utils/dateHandler';
 import { ToastrService } from 'ngx-toastr';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-education',
@@ -126,6 +127,19 @@ export class EducationComponent implements OnInit {
     if(!data.privacy){
       this.model.privacy = false;
     } else this.model.privacy = true;
+  }
+  remove(index) {
+    let deletedWork = _.pullAt(this.work.education, [index]);
+    this.client
+      .post('api/v1/entities/education', this.work)
+      .then((res: any) => {
+        if (res.status === 'success' && res.entities == true) {
+          this.client.get('api/v2/onboarding/progress').then((response: any) => {
+            this.showSuccess();
+            this.updatePercentage.emit(response.rating);
+          });
+        }
+      });
   }
 
   goBack() {

@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import dob from '../../../../utils/dateHandler';
 import { Client } from '../../../../services/api/client';
 import { ToastrService } from 'ngx-toastr';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-awards',
@@ -37,7 +38,7 @@ export class AwardsComponent implements OnInit {
 
   onSubmit(e) {
     this.submitted = true;
-    if(!e.valid){
+    if (!e.valid) {
       this.errWork = true;
       return;
     }
@@ -56,35 +57,35 @@ export class AwardsComponent implements OnInit {
     // }
 
     // if (e.valid) {
-      this.inProgress = true;
-      this.errWork = false;
-      let work = {
-        title: this.model.title,
-        location: this.model.location,
-        issuer: this.model.issuer,
-        privacy: this.model.privacy,
-        issue_period: this.model.strtYear
-          ? this.model.strtMonth + '-' + this.model.strtYear
-          : ''
-        // 'end_date':this.model.endYear?this.model.endMonth+'-'+this.model.endYear:''
-      };
-      if (isNaN(this.model.index)) {
-        this.work.awards.push(work);
-      } else {
-        this.work.awards[this.model.index] = work;
-      }
-      this.client
-        .post('api/v1/entities/awards', this.work)
-        .then((res: any) => {
-          this.addWork = false;
-          if (res.status === 'success' && res.entities == true) {
-            this.client.get('api/v2/onboarding/progress').then((response: any) => {
-              this.showSuccess();
-              this.inProgress = false;
-              this.updatePercentage.emit(response.rating);
-            });
-          }
-        });
+    this.inProgress = true;
+    this.errWork = false;
+    let work = {
+      title: this.model.title,
+      location: this.model.location,
+      issuer: this.model.issuer,
+      privacy: this.model.privacy,
+      issue_period: this.model.strtYear
+        ? this.model.strtMonth + '-' + this.model.strtYear
+        : ''
+      // 'end_date':this.model.endYear?this.model.endMonth+'-'+this.model.endYear:''
+    };
+    if (isNaN(this.model.index)) {
+      this.work.awards.push(work);
+    } else {
+      this.work.awards[this.model.index] = work;
+    }
+    this.client
+      .post('api/v1/entities/awards', this.work)
+      .then((res: any) => {
+        this.addWork = false;
+        if (res.status === 'success' && res.entities == true) {
+          this.client.get('api/v2/onboarding/progress').then((response: any) => {
+            this.showSuccess();
+            this.inProgress = false;
+            this.updatePercentage.emit(response.rating);
+          });
+        }
+      });
     // }
   }
 
@@ -113,9 +114,22 @@ export class AwardsComponent implements OnInit {
     //   this.errEndDate=false;
     //   this.model.present=true;
     // }
-    if(!data.privacy){
+    if (!data.privacy) {
       this.model.privacy = false;
     } else this.model.privacy = true;
+  }
+  remove(index) {
+    let deletedAwards = _.pullAt(this.work.awards, [index]);
+    this.client
+      .post('api/v1/entities/awards', this.work)
+      .then((res: any) => {
+        if (res.status === 'success' && res.entities == true) {
+          this.client.get('api/v2/onboarding/progress').then((response: any) => {
+            this.showSuccess();
+            this.updatePercentage.emit(response.rating);
+          });
+        }
+      });
   }
 
   goBack() {

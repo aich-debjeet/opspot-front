@@ -29,6 +29,7 @@ import { Client } from '../../../services/api';
   styles: [`
     .trash-icon {
       right: 80px;
+      bottom:27px;
     }
     .arrow-icons  {
       font-size: 30px !important;
