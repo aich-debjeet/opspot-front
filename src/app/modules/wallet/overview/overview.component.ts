@@ -41,6 +41,7 @@ export class WalletOverviewComponent {
   hasMoney: boolean = false;
 
   overviewColSize: number;
+  rewards = {};
 
   constructor(
     public client: Client,
@@ -71,10 +72,19 @@ export class WalletOverviewComponent {
     });
 
     this.getTotals();
+    this.loadRewards();
   }
 
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();
+  }
+
+  loadRewards(){
+    this.client.get('api/v3/rewards/data').then((result: any) => {
+      if (result.status == 'success') {
+        this.rewards = result.entities;
+      }
+    });
   }
 
   getTotals() {
