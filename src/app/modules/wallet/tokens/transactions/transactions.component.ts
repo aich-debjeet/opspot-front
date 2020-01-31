@@ -291,7 +291,7 @@ export class WalletTokenTransactionsComponent {
   isP2p(transaction) {
     const contractName = this.getNormalizedContractName(transaction.contract);
 
-    if (contractName === 'wire' ||contractName == 'offchain wire' || contractName === 'boost') {
+    if (contractName === 'wire' ||contractName == 'offchain wire' || contractName === 'boost'|| contractName === 'purchase') {
       return !!transaction.sender && !!transaction.receiver;
     }
   }
