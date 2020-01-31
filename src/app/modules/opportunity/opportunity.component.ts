@@ -49,29 +49,19 @@ export class OpportunityComponent implements OnInit {
 
   // activity: any;
   opspot = window.Opspot;
-  // allevents = [];
-
   boosted: boolean = false;
   commentsToggle: boolean = false;
-  // shareToggle: boolean = false;
-  // deleteToggle: boolean = false;
   translateToggle: boolean = false;
   translateEvent: EventEmitter<any> = new EventEmitter();
   showBoostOptions: boolean = false;
   private _showBoostMenuOptions: boolean = false;
   count;
-  // allOpportunities = [];
-
-
   type: string;
   element: any;
   visible: boolean = false;
   showOpportunity = false;
   inProgress: boolean = false;
   opportunity: any;
-
-  // editing: boolean = false;
-
   _delete: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
   scroll_listener;
@@ -93,11 +83,6 @@ export class OpportunityComponent implements OnInit {
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
 
   load() {
-    // if (refresh) {
-    //  // this.entity = {};
-    //   this.detectChanges();
-    // }
-
     if (this.inProgress)
       return false;
 
@@ -109,8 +94,8 @@ export class OpportunityComponent implements OnInit {
           this.opportunity = data.activity;// user obj for reach out
           this.user = data.activity.ownerObj;
           this.reachoutMessage += data.activity['perma_url'];
-          
-          this.opportunity.url  = window.Opspot.site_url + 'opportunity/view/' + this.opportunity.guid;
+
+          this.opportunity.url = window.Opspot.site_url + 'opportunity/view/' + this.opportunity.guid;
 
           this.count = this.opportunity['thumbs:up:count'];
 
@@ -119,7 +104,6 @@ export class OpportunityComponent implements OnInit {
           }
           this.inProgress = false;
         }
-
         this.isTranslatable = (
           this.translationService.isTranslatable(this.opportunity)
         );
@@ -174,7 +158,6 @@ export class OpportunityComponent implements OnInit {
     }
   }
 
-
   async wireSubmitted(wire?) {
     if (wire && this.opportunity.wire_totals) {
       this.opportunity.wire_totals.tokens =
@@ -219,25 +202,10 @@ export class OpportunityComponent implements OnInit {
     }
   }
 
-
   udpateOpportunity(data: any) {
     this.load();
-    // this.opportunity.category = data.category;
-    // this.opportunity.blurb = data.description;
-    // this.opportunity.location = data.location;
-    // this.opportunity.title = data.title;
-    // if (data.attachment_guid.length > 0) {
-    //   // this.opportunity.custom_data[0].src = data.custom_data[0].src;
-    //   this.opportunity.custom_data[0].src = this.opspot.cdn_assets_url + 'fs/v1/thumbnail/' + data.attachment_guid[0]
-    // } else {
-    //   this.opportunity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/ops_icon.png'
-    // }
-    // trigger component observe new changes
     this.detectChanges();
   }
-
-
-  private viewed: boolean = false;
 
   detectChanges() {
     this.cd.markForCheck();
@@ -271,7 +239,6 @@ export class OpportunityComponent implements OnInit {
     boostModal.present();
   }
 
-
   onScroll() {
     var listen = this.scroll.listen(view => {
       if (view.top > 250) this.isLocked = true;
@@ -280,7 +247,6 @@ export class OpportunityComponent implements OnInit {
   }
 
   shareOptionSelected(option: string) {
-    console.log('shareOptionSelected', option);
     if (option === 'repost') {
       this.remindOpen = true;
     };
