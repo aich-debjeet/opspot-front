@@ -66,8 +66,7 @@
         </div>
         <div class="fileUpload">
           <span class="icon-plus f500"></span><span class="text-md grey">Background image</span>
-          <input type="file" id="file" class="upload" #backgroundFile name="preview" (change)="updatePreview(backgroundFile)"
-            accept="image/jpg, image/jpeg, image/png" />
+          <input type="file" accept="image/jpg, image/jpeg, image/png" id="file" class="upload" #backgroundFile name="preview" (change)="updatePreview(backgroundFile)"/>
         </div>
         <h5 class="f500">Preview</h5>
         <div class="o-settings-preview">
