@@ -9,6 +9,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { CURRENCY } from '../../../services/list-options';
 import getViewPageLink from '../../../helpers/get-viewage-link';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -65,7 +66,8 @@ export class BlueStoreFormComponent implements OnInit {
     public attachment: AttachmentService,
     private formBuilder: FormBuilder,
     private overlayModal: OverlayModalService,
-    private router: Router) {
+    private router: Router,
+    private toastr: ToastrService) {
   }
 
   @Input('object') set data(object) {
@@ -128,7 +130,7 @@ export class BlueStoreFormComponent implements OnInit {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
-           // temporary fix for video thumbnail 
+          // temporary fix for video thumbnail 
           if (obj['src'] == null) {
             obj['src'] = 'assets/videos/video_thumbnail.png'
           }
@@ -283,6 +285,7 @@ export class BlueStoreFormComponent implements OnInit {
           this.changeToDefault();
           this.navigationUrl = getViewPageLink('item', resp.activity.guid)
           if (resp.activity && this.bluestoreGuid) {
+            this.toastr.success('Updated successfully');
             this.router.navigate([this.navigationUrl]);
           }
           // check if update callback function is avaibale
@@ -302,5 +305,13 @@ export class BlueStoreFormComponent implements OnInit {
 
   closeModal() {
     this.overlayModal.dismiss();
+  }
+
+  checkForSrc(object) {
+    if (object && object.entity_type === 'video') {
+      return object.thumbnail_src;
+    } else {
+      return object.src;
+    }
   }
 }

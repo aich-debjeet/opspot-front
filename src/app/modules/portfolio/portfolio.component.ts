@@ -45,7 +45,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private client: Client,
     public title: OpspotTitle,
-  ) { 
+  ) {
     this.title.setTitle('Portfolio');
   }
 
@@ -110,10 +110,8 @@ export class PortfolioComponent implements OnInit, OnDestroy {
           this.filteredArray = this.entities = respData.entities;
         }
         this.moreData = true;
-        // console.log("data: ", data['load-next']);
 
         this.requestParams.offset = data['load-next'];
-        // console.log("this offset: ", this.offset);
 
         this.inProgress = false;
       })
@@ -125,26 +123,22 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
   keyup(e) {
     if (e.keyCode === 13) {
-      console.log(this.q);
       if (!this.filteredArray || !this.q) {
         return this.filteredArray = this.entities;
       }
       if (this.entities.find((item: any) => item.message.toString().toLowerCase() === this.q.toLowerCase())) {
-        // console.log('Before filter', this.filteredArray)
         this.filteredArray = this.entities.filter((item: any) => item.message.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1)
-        // console.log('After filter', this.filteredArray)
       }
     }
   }
+
   onChange(e: any) {
-    console.log(e)
-    this.type= e;
-    console.log(this.requestParams)
+    this.type = e;
     this.reset();
     this.searchMore(true);
   }
+
   reset() {
-    console.log(this.filteredArray);
     this.filteredArray = [];
   }
 }

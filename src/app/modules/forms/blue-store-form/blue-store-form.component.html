@@ -16,15 +16,18 @@
                 <div class="o-create-blue-store-cover-image">
                     <div class="fileUpload">
                         <span class="icon-plus"></span>
-                        <input type="file" id="file" #file class="upload" name="attachment"
+                        <input type="file" accept="video/mp4, video/x-m4v, video/*, .jpg, .jpeg, .png" id="file" #file class="upload" name="attachment"
                             (change)="uploadAttachment(file, $event)" />
                     </div>
                     <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
                         <a class="o-create-blue-store-cover-image__avatar">
-                            <a class="fileUpload-close-temp" (click)="removeAttachment(file,image.guid)"><i
+                            <a class="fileUpload-close-temp z-index-2" (click)="removeAttachment(file,image.guid)"><i
                                     class="icon-x" id="bluestore-remove-attachment"></i></a>
-                            <img [src]="image.src" alt="">
+                            <img [src]="checkForSrc(image)" alt="">
                         </a>
+                        <div class="feed-media-overlay z-index-1" *ngIf="image.entity_type === 'video'">
+                            <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+                        </div>
                     </div>
                 </div>
                 <div class="error text-sm" *ngIf="imageUploadError">
@@ -92,3 +95,13 @@
         </div>
     </form>
 </div>
+
+
+<style>
+.z-index-1 {
+    z-index: 1;
+}
+.z-index-2::before {
+    z-index: 2;
+}
+</style>

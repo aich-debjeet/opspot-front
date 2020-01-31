@@ -3,17 +3,28 @@
   [class.m-owner-block--remind]="activity.remind_object" *ngIf="activity.ownerObj && activity.ownerObj.username">
   <i class="material-icons selected" *ngIf="activity.remind_object">repeat</i>
   <div class="o-avatar" [hovercard]="activity.ownerObj.guid">
-    <a [routerLink]="['/', activity.ownerObj.username]" id="activity-user-image">
-      <img [src]="opspot.cdn_url + 'icon/' + activity.ownerObj.guid + '/medium/' + getOwnerIconTime()"
-        class="mdl-shadow--2dp" />
+    <a *ngIf="activity.containerObj && activity.containerObj.type == 'organization'; else usersPicture" [routerLink]="['/organization/profile/', activity.containerObj.guid]" id="activity-user-image">
+      <img [src]="opspot.cdn_url + 'icon/' + activity.containerObj.guid + '/medium/' + getOwnerIconTime()" class="mdl-shadow--2dp" />
     </a>
+    <ng-template #usersPicture>
+      <a [routerLink]="['/', activity.ownerObj.username]" id="activity-user-image">
+        <img [src]="opspot.cdn_url + 'icon/' + activity.ownerObj.guid + '/medium/' + getOwnerIconTime()" class="mdl-shadow--2dp" />
+      </a>
+    </ng-template>
   </div>
   <div class="body">
-    <a class="o-avatar__name" id="activity-username" [routerLink]="['/', activity.ownerObj.username]">
-      <strong title={{activity.ownerObj.name}} id="activity-owner-obj-name">{{activity.ownerObj.name}}</strong>
-      <m-channel--badges class="m-channel--badges-activity" [user]="activity.ownerObj" badges="[ 'verified' ]">
+    <a *ngIf="activity.containerObj && activity.containerObj.type == 'organization'; else usersLabel" class="o-avatar__name" id="activity-username" [routerLink]="['/organization/profile/', activity.containerObj.guid]">
+      <strong title={{activity.containerObj.name}} id="activity-owner-obj-name">{{activity.containerObj.name}}</strong>
+      <m-channel--badges class="m-channel--badges-activity" [user]="activity.containerObj" badges="[ 'verified' ]">
       </m-channel--badges>
     </a>
+    <ng-template #usersLabel>
+      <a class="o-avatar__name" id="activity-username" [routerLink]="['/', activity.ownerObj.username]">
+        <strong title={{activity.ownerObj.name}} id="activity-owner-obj-name">{{activity.ownerObj.name}}</strong>
+        <m-channel--badges class="m-channel--badges-activity" [user]="activity.ownerObj" badges="[ 'verified' ]">
+        </m-channel--badges>
+      </a>
+    </ng-template>
     <a *ngIf="activity.containerObj && activity.containerObj.type == 'group'"
       [routerLink]="['/groups/profile', activity.containerObj.guid]" class="mdl-color-text--blue-grey-300">
       <strong id="activity-owner-container-name">({{activity.containerObj.name}})</strong>
