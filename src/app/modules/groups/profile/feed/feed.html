@@ -20,6 +20,7 @@
     <i class="material-icons">rate_review</i>
     {{ group['adminqueue:count'] }} new {{ group['adminqueue:count'] === 1 ? 'post' : 'posts' }} in review queue
   </a> -->
+  
   <div [class.m-groupProfileFeed__mediaList]="filter !== 'activity'">
     <opspot-activity 
         *ngFor="let activity of pinned" 
