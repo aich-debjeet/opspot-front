@@ -48,19 +48,36 @@ import { GroupsService } from '../groups-service';
   <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
 
   <m-modal [open]="kickPrompt">
+      <div class="delete-confirmation-wrapper">
       <div class="mdl-card__supporting-text">
-        <p i18n="@@GROUPS__REMOVE_X_FROM_Y_CONFIRM">Are you sure you want to remove {{ user.username }} from {{ group.name }}?</p>
+        <p i18n="@@GROUPS__REMOVE_X_FROM_Y_CONFIRM" class="m-modal-confirm-body text-lg">Are you sure you want to remove {{ user.username }} from {{ group.name }}?</p>
         <p><input type="checkbox" #ban> <ng-container i18n="@@M__COMMON__BAN_PERMANENTLY">Ban permanently</ng-container></p>
       </div>
       <div class="opspot-modal-dialog-actions">
-        <button (click)="kick(ban.checked)" id="card-user-action-confirm" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        <button (click)="kick(ban.checked)" id="card-user-action-confirm" class="btn btn-primary">
           <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
         </button>
-        <button (click)="cancelRemove()" id="card-user-action-cancel" class="mdl-button mdl-js-button mdl-button--colored">
+        <button (click)="cancelRemove()" id="card-user-action-cancel" class="btn btn-outline-primary">
           <ng-container i18n="@@M__ACTION__CANCEL">Cancel</ng-container>
         </button>
       </div>
+      </div>
   </m-modal>
+
+  <style>
+  .delete-confirmation-wrapper {
+    padding: 16px 56px 16px 16px;
+  }
+  .text-lg {
+    color: #263238;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  .btn-outline-primary{
+    margin-left: 8px;
+  }
+  </style>
   `
 })
 
