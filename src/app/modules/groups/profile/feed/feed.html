@@ -25,7 +25,7 @@
     <opspot-activity 
         *ngFor="let activity of pinned" 
         [object]="activity"
-        [canDelete]="group['is:owner'] || group['is:moderator']" 
+        [canDelete]="group['is:owner'] || group['is:admin'] || group['is:moderator']" 
         (delete)="delete(a)" 
         [showRatingToggle]="true"
         class="mdl-card item">
@@ -34,7 +34,7 @@
     <opspot-activity 
       *ngFor="let a of activity; let i = index" 
       class="mdl-card item" [object]="a"
-      [canDelete]="group['is:owner'] || group['is:moderator']" 
+      [canDelete]="group['is:owner'] || group['is:admin'] || group['is:moderator']" 
       (delete)="delete(a)" 
       [hideTabs]="filter == 'review'">
       <!-- Menu Actions -->
