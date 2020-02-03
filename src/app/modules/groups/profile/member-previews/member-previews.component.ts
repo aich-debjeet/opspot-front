@@ -13,7 +13,7 @@ export class GroupMemberPreviews {
 
   @Input() group;
   members: Array<any> = [];
-  count: Number = 0;  
+  count: Number = 0;
   inProgress: boolean = false;
   opspot = window.Opspot;
 
@@ -42,7 +42,7 @@ export class GroupMemberPreviews {
       }
       this.inProgress = false;
     } catch {
-        this.inProgress = false;
+      this.inProgress = false;
     }
   }
 
