@@ -82,6 +82,9 @@ export class AboutComponent implements OnInit {
       dob['month'] = this.month[new Date(this.model.dob).getMonth()];
       dob['date'] = new Date(this.model.dob).getDate();
       dob = dob['year'] + '-' + dob['month'] + '-' + dob['date'];
+      if(this.aboutError.dobInvalid){
+        this.aboutError.dobInvalid = false;
+      }
     } else {
       this.aboutError.dobInvalid = true;
       return;
