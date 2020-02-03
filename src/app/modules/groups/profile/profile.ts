@@ -1,15 +1,11 @@
 import { Component, ViewChild, ChangeDetectorRef, HostListener } from '@angular/core';
 import { ActivatedRoute, ChildActivationEnd, NavigationEnd, Router } from '@angular/router';
-
 import { Subscription } from 'rxjs';
-
 import { GroupsService } from '../groups-service';
-
 import { RecentService } from '../../../services/ux/recent';
 import { OpspotTitle } from '../../../services/ux/title';
 import { Session } from '../../../services/session';
 import { SocketsService } from '../../../services/sockets';
-
 import { GroupsProfileFeed } from './feed/feed';
 import { ContextService } from '../../../services/context.service';
 import { Client } from '../../../services/api';
@@ -17,7 +13,6 @@ import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.comp
 import { VideoChatService } from '../../videochat/videochat.service';
 import { UpdateMarkersService } from '../../../common/services/update-markers.service';
 import { filter } from "rxjs/operators";
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'm-groups--profile',
@@ -52,10 +47,10 @@ export class GroupsProfile {
   socketRoomName: string;
   newConversationMessages: boolean = false;
 
-  inviteToggle:boolean=false;
-  memberToggle:boolean=false;
+  inviteToggle: boolean = false;
+  memberToggle: boolean = false;
   membersMobile;
-  memberSrc=`${this.opspot.cdn_url}icon/`
+  memberSrc = `${this.opspot.cdn_url}icon/`
   @ViewChild('feed') private feed: GroupsProfileFeed;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
@@ -83,23 +78,22 @@ export class GroupsProfile {
   ) { }
 
   ngOnInit() {
+    // alert();
     this.context.set('activity');
     this.listenForNewMessages();
     this.detectWidth();
     this.detectConversationsState();
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {
-        // console.log("params: ", params['guid'])
-       this.loadMembers(params['guid'])
+        this.loadMembers(params['guid'])
 
         let changed = params['guid'] !== this.guid;
 
         this.guid = params['guid'];
         this.postMeta.container_guid = this.guid;
-        
+
         if (changed) {
           this.group = void 0;
-
           this.load()
             .then(async () => {
               this.filterToDefaultView();
@@ -114,7 +108,6 @@ export class GroupsProfile {
 
       if (params['filter']) {
         this.filter = params['filter'];
-
         if (this.filter == 'conversation') {
           this.newConversationMessages = false;
         }
@@ -136,7 +129,7 @@ export class GroupsProfile {
       this.reviewCountLoad();
     }, 120 * 1000);
 
-    this.videoChatActiveSubscription = this.videochat.activate$.subscribe(next => window.scrollTo(0, 0));    
+    this.videoChatActiveSubscription = this.videochat.activate$.subscribe(next => window.scrollTo(0, 0));
   }
 
   setFilter(url: string) {
@@ -160,7 +153,7 @@ export class GroupsProfile {
       this.queryParamsSubscripton.unsubscribe();
 
     if (this.videoChatActiveSubscription)
-      this.videoChatActiveSubscription.unsubscribe(); 
+      this.videoChatActiveSubscription.unsubscribe();
 
     if (this.updateMarkersSubscription)
       this.updateMarkersSubscription.unsubscribe();
@@ -179,9 +172,8 @@ export class GroupsProfile {
     this.group = null;
 
     // Load group
-    try { 
+    try {
       this.group = await this.service.load(this.guid);
-
     } catch (e) {
       this.error = e.message;
       return;
@@ -193,8 +185,8 @@ export class GroupsProfile {
     this.updateMarkersSubscription = this.updateMarkers.getByEntityGuid(this.guid).subscribe(marker => {
       if (!marker)
         return;
-        
-      let hasMarker = 
+
+      let hasMarker =
         (marker.read_timestamp < marker.updated_timestamp)
         && (marker.entity_guid == this.group.guid)
         && (marker.marker != 'gathering-heartbeat');
@@ -218,14 +210,11 @@ export class GroupsProfile {
     if (!this.guid || !this.session.isLoggedIn()) {
       return;
     }
-
     let count = 0;
-
     try {
       count = await this.service.getReviewCount(this.guid);
     } catch (e) {
     }
-
     this.group['adminqueue:count'] = count;
   }
 
@@ -242,7 +231,6 @@ export class GroupsProfile {
     if (!this.group || this.route.snapshot.params.filter && this.route.snapshot.params.filter !== 'gathering') {
       return;
     }
-
     if (this.filter === 'gathering') {
       this.videochat.activate(this.group);
     }
@@ -256,9 +244,7 @@ export class GroupsProfile {
 
   save() {
     this.group.videoChatDisabled = parseInt(this.group.videoChatDisabled);
-
     this.service.save(this.group);
-
     this.editing = false;
     this.editDone = true;
     this.detectChanges();
@@ -266,7 +252,6 @@ export class GroupsProfile {
 
   toggleEdit() {
     this.editing = !this.editing;
-
     if (this.editing) {
       this.editDone = false;
     }
@@ -277,7 +262,6 @@ export class GroupsProfile {
       guid: this.group.guid,
       banner_position: file.top
     }, { banner: file.file });
-
     this.group.banner = true;
   }
 
@@ -286,7 +270,7 @@ export class GroupsProfile {
       guid: this.group.guid
     }, { avatar: file });
   }
- 
+
   change_membership(membership: any) {
     if (!membership.error || membership.error === 'already_a_member' || membership.error === 'Error unmuting group') {
       this.load();
@@ -373,7 +357,6 @@ export class GroupsProfile {
   onTagsRemoved(tags) {
     for (let tag of tags) {
       for (let i in this.group.tags) {
-        // console.log(this.group.tags[i]);
         if (this.group.tags[i] == tag.value) {
           this.group.tags.splice(i, 1);
         }
@@ -420,39 +403,35 @@ export class GroupsProfile {
     this.cd.detectChanges();
   }
 
-  groupCount(e){
-   this.totalMembers=e
-  //  console.log("total: ", this.totalMembers);
-   
+  groupCount(e) {
+    this.totalMembers = e
   }
 
-  openInvite(){
-  if(window.innerWidth>785){
-    this.inviteToggle=!this.inviteToggle;
-     }else{
-       this.router.navigate([`/groups/${this.guid}/invite`])
-     } 
-  }
-
-  showMembers(){
-    if(window.innerWidth>785){
-   this.memberToggle=!this.memberToggle;
-    }else{
-      this.router.navigate([`/groups/${this.guid}/members`])
-    } 
-  }
- 
- async loadMembers(guid){
-  //  console.log('profile loadMembers', guid);
-    let endpoint = `api/v1/groups/membership/${guid}`
-    let  params = { limit: 4, offset: this.offset };
-     let members= await this.client.get(endpoint, params)
-    //  console.log(members)
-     this.membersMobile=members['members']
+  openInvite() {
+    if (window.innerWidth > 785) {
+      this.inviteToggle = !this.inviteToggle;
+    } else {
+      this.router.navigate([`/groups/${this.guid}/invite`])
     }
-    
-  showGathering1(){
-   this.showGathering = true;
+  }
+
+  showMembers() {
+    if (window.innerWidth > 785) {
+      this.memberToggle = !this.memberToggle;
+    } else {
+      this.router.navigate([`/groups/${this.guid}/members`])
+    }
+  }
+
+  async loadMembers(guid) {
+    let endpoint = `api/v1/groups/membership/${guid}`
+    let params = { limit: 4, offset: this.offset };
+    let members = await this.client.get(endpoint, params)
+    this.membersMobile = members['members']
+  }
+
+  showGathering1() {
+    this.showGathering = true;
   }
 
   backClicked() {

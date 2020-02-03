@@ -13,22 +13,22 @@ import { Session } from '../../../services/session';
     <button class="icon-more-vertical f-15 focusNone" style="padding: 0;background: #fff; 
     border: 0 !important;" (click)="toggleMenu($event)" id="group-settings-menu">
     </button>
-
     <ul class="opspot-dropdown-menu" [hidden]="!showMenu" >
+
       <!-- owner functions -->
-      <li class="mdl-menu__item" *ngIf="group['is:owner']" (click)="toggleEdit()" id="group-settings-edit">
+      <li class="mdl-menu__item" *ngIf="group['is:owner'] || group['is:admin'] " (click)="toggleEdit()" id="group-settings-edit">
           <ng-container *ngIf="!editing">Edit</ng-container>
           <ng-container *ngIf="editing">Save</ng-container>
       </li>
 
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.videoChatDisabled" (click)="toggleVideoChat(true)" id="group-settings-enable-gathering">Enable Gathering</li>
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.videoChatDisabled" (click)="toggleVideoChat(false)" id="group-settings-disable-gathering">Disable Gathering</li>
+      <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && group.videoChatDisabled" (click)="toggleVideoChat(true)" id="group-settings-enable-gathering">Enable Gathering</li>
+      <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && !group.videoChatDisabled" (click)="toggleVideoChat(false)" id="group-settings-disable-gathering">Disable Gathering</li>
 
-      <!-- <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.moderated" (click)="toggleModeration(false)" id="group-settings-disable-moderation">Disable moderation</li>
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.moderated" (click)="toggleModeration(true)" id="group-settings-enable-moderation">Enable moderation</li> -->
+      <!-- <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && group.moderated" (click)="toggleModeration(false)" id="group-settings-disable-moderation">Disable moderation</li>
+      <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && !group.moderated" (click)="toggleModeration(true)" id="group-settings-enable-moderation">Enable moderation</li> -->
 
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && !group.membership" (click)="togglePublic(true)" id="group-settings-make-public">Make public</li>
-      <li class="mdl-menu__item" *ngIf="group['is:owner'] && group.membership" (click)="togglePublic(false)" id="group-settings-make-closed">Make closed</li>
+      <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && !group.membership" (click)="togglePublic(true)" id="group-settings-make-public">Make public</li>
+      <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && group.membership" (click)="togglePublic(false)" id="group-settings-make-closed">Make closed</li>
 
       <!-- Member functions -->
       <li class="mdl-menu__item" [hidden]="group['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS" id="group-settings-disable-notification">Disable Notifications</li>
@@ -37,12 +37,12 @@ import { Session } from '../../../services/session';
       <!-- admin functions -->
       <li class="mdl-menu__item" *ngIf="session.isAdmin() && !group.mature" (click)="setExplicit(true)" i18n="@@M__ACTION__SET_EXPLICIT" id="group-admin-set-explicit">Set Explicit</li>
       <li class="mdl-menu__item" *ngIf="session.isAdmin() && group.mature" (click)="setExplicit(false)" i18n="@@M__ACTION__REMOVE_EXPLICIT" id="group-admin-remove-explicit">Remove Explicit</li>
-      <li class="mdl-menu__item" *ngIf="!group['is:owner'] && !group['is:creator']" (click)="report(); showMenu = false" i18n="@@M__ACTION__REPORT" id="group-admin-report">Report</li>
+      <li class="mdl-menu__item" *ngIf="!(group['is:owner'] || group['is:admin']) && !group['is:creator']" (click)="report(); showMenu = false" i18n="@@M__ACTION__REPORT" id="group-admin-report">Report</li>
       <li class="mdl-menu__item" *ngIf="group['is:creator']" [hidden]="group.deleted" (click)="deletePrompt()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP" id="group-settings-delete-community">Delete Community</li>
-    </ul>
+    
+      </ul>
     <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
-
-    <m-modal [open]="group['is:owner'] && isGoingToBeDeleted">
+    <m-modal [open]="(group['is:owner'] || group['is:admin']) && isGoingToBeDeleted">
     <div class="delete-confirmation-wrapper">
       <div class="mdl-card__supporting-text">
         <p i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP_CONFIRM" class="m-modal-confirm-body text-lg">Are you sure you want to delete {{ group.name }}? This action cannot be undone.</p>
@@ -57,14 +57,12 @@ import { Session } from '../../../services/session';
       </div>
     </div>
     </m-modal>
-
     <m-modal [open]="featureModalOpen" (closed)="onFeatureModalClose($event)">
       <div class="m-button-feature-modal">
         <select [(ngModel)]="category">
           <option value="not-selected" i18n="@@M__COMMON__SELECT_A_CATEGORY">-- SELECT A CATEGORY --</option>
           <option *ngFor="let category of categories" [value]="category.id">{{category.label}}</option>
         </select>
-
         <button class="mdl-button mdl-button--colored" (click)="feature()" i18n="@@M__ACTION__FEATURE">Feature</button>
       </div>
     </m-modal>
@@ -85,17 +83,8 @@ import { Session } from '../../../services/session';
       margin-left: 8px;
     }
    </style>
-  
-
-
   `
 })
-
-
-//old code
-//<i *ngIf="group['is:muted']" class="opspot-groups-button-badge material-icons">notifications_off</i>
-// 
-
 
 export class GroupsSettingsButton {
 
@@ -107,6 +96,7 @@ export class GroupsSettingsButton {
   @Input('group') set _group(value: any) {
     if (!value) return;
     this.group = value;
+
     this.featured = value.featured_id || value.featured === true;
   }
 
@@ -125,7 +115,12 @@ export class GroupsSettingsButton {
 
   featureModalOpen: boolean = false;
 
-  constructor(public service: GroupsService, public client: Client, public session: Session, public overlayService: OverlayModalService, public router: Router) {
+  constructor(
+    public service: GroupsService, 
+    public client: Client,
+    public session: Session, 
+    public overlayService: OverlayModalService, 
+    public router: Router) {
   }
 
   ngOnInit() {
