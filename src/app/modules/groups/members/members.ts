@@ -12,7 +12,7 @@ import { Client } from '../../../services/api';
 })
 
 export class GroupsMembersModuleComponent {
-members: Array<any> = [];
+  members: Array<any> = [];
   @ViewChild('el') el;
 
   group: any;

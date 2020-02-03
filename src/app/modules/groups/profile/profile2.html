@@ -48,7 +48,7 @@
         <!-- <div> -->
         <div class="o-left-block o-left-block--community" *ngIf="!showGathering">
             <div class="sticky-wrapper">
-                <app-group-banner class="o-cover o-cover--community hidden-above-tablet" [object]="group"
+                <app-group-banner class="o-cover o-cover--community hidden-above-tablet" *ngIf = "group" [object]="group"
                     [editMode]="editing" [top]="group?.banner_position" [done]="editDone" (added)="add_banner($event)">
                 </app-group-banner>
                 <div class="o-card o-community-info o-community-info--radius o-community-info--shadow">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="o-community-img-block">
-                        <opspot-avatar [object]="group" [editMode]="editing" [profileEdit]="true"
+                        <opspot-avatar *ngIf = "group" [object]="group" [editMode]="editing" [profileEdit]="true"
                             (added)="upload_avatar($event)">
                         </opspot-avatar>
                         <!-- <a class="o-community-img-edit"><i class="icon-edit-profile"></i></a> -->
@@ -77,7 +77,6 @@
                         (membership)="change_membership($event)"
                         *ngIf="(group && (!group['is:creator'] || (session.isAdmin()) && !group['is:invited']))">
                     </opspot-groups-join-button>
-                    <!--doubt -->
                     <div class="o-community-members-top o-community-members-top--mob hidden-above-tablet">
                         <a class="o-community-members-top__count-mob" *ngFor="let member of membersMobile">
                             <span class="o-community-members-list-mob-single"><img [src]="memberSrc+member.guid"
@@ -137,7 +136,7 @@
         </div>
         <div class="o-center-block" *ngIf="!showGathering">
             <div class=" hidden-under-tablet" style="width:100%; height: 187px; margin-bottom:9px;">
-                <app-group-banner [object]="group" [editMode]="editing" [top]="group.banner_position" [done]="editDone"
+                <app-group-banner *ngIf = "group" [object]="group" [editMode]="editing" [top]="group.banner_position" [done]="editDone"
                     (added)="add_banner($event)"></app-group-banner>
             </div>
             <div class="tabs-community">
@@ -145,10 +144,10 @@
                     <li routerLinkActive="active" routerLink="feed" [routerLinkActiveOptions]="{exact:true}"> 
                         <a id="profile2-group-feed-tab"> Feed</a>
                     </li>
-                    <li *ngIf="filter == 'activity' && (group['is:owner']||group['is:moderator'])&& group['adminqueue:count']" routerLinkActive="active" routerLink="feed/review"> 
+                    <li *ngIf="filter == 'activity' && group && (group['is:owner'] || group['is:admin'] || group['is:moderator']) && group['adminqueue:count']" routerLinkActive="active" routerLink="feed/review"> 
                        <a id="profile2-group-review-queue"> Review queue<div class="review-count text-md white">{{ group['adminqueue:count'] }}</div></a>
                     </li>  
-                    <li routerLinkActive="active" routerLink="requests" *ngIf="group && group['is:owner'] && group['membership'] !== 2">
+                    <li routerLinkActive="active" routerLink="requests" *ngIf="group && (group['is:owner'] || group['is:admin']) && group['membership'] !== 2">
                         <a id="profile2-group-members-request"> Members Request</a>
                         <!-- <opspot-groups-profile-requests [group]="group"></opspot-groups-profile-requests> -->
                     </li>

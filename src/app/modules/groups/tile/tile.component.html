@@ -1,37 +1,3 @@
-<!-- <div class="m-groups--tile m-border" [class.m-groupTile--hasUpdates]="hasMarker">
-    
-  <div class="m-groups--tile-banner">
-    <div class="m-groups--tile-banner-img"
-        [ngStyle]="{'background-image': 'url(' + opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity.icontime + ')'}"
-      >
-    </div>
-    <div class="opspot-banner-overlay"></div>
-  </div>
-  
-  <a [routerLink]="['/groups/profile', entity.guid]"  class="m-groups--tile-block">
-    <div class="avatar">
-      <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large"/>
-    </div>
-    <div class="body">
-      <h3>{{entity.name}}</h3>
-      <span i18n="@@GROUPS__TILE__MEMBERS_COUNT"><b>{{entity['members:count'] | number}}</b> members</span>
-    </div>
-  </a>
-  
-  <div class="m-groups--tile-buttons">
-    <opspot-groups-join-button *ngIf="!entity['is:member']; else isMember" [group]="entity"></opspot-groups-join-button>
-    
-    <ng-template #isMember>
-      <button class="m-btn m-btn--action" [routerLink]="['/groups/profile', entity.guid]" i18n="@@GROUPS__TILE__OPEN_ACTION">
-        Open
-      </button>
-    </ng-template>
-
-    <m-safe-toggle *ngIf="session.isAdmin()" [(entity)]="entity"></m-safe-toggle>
-  </div>
-  
-</div> -->
-
   <div class="o-community-landing-block-design__item" *ngIf="entity && entity['entity_type']=='community'">
     <div class="o-community-card">
       <div class="o-community-card-section mr-6">
@@ -40,11 +6,9 @@
             [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
           <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
         </div>
-        <!--cover ends-->
         <div class="o-community-card-profile">
           <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="cover">
         </div>
-        <!--frofile ends-->
         <div class="o-community-card-header" id="tile-entity-name">
           <div class="f500 text-lg">{{entity.name}}</div>
         </div>
@@ -56,19 +20,16 @@
             <a class="o-community-card-skills__tag" style="background: transparent">&nbsp;</a>
           </p>
         </ng-template>
-        <!--tag ends-->
         <div class="o-community-card-action">
           <opspot-groups-join-button *ngIf="(!entity['is:member'] && entity.membership === 2) && !entity['is:awaiting']"
             [group]="entity">
           </opspot-groups-join-button>
           <button type="button" id="tile-join-button" *ngIf="(!entity['is:member'] && entity.membership !== 2) && !entity['is:awaiting']"
             class="btn btn-primary btn-sm" (click)='trigger(entity)'>Join</button>
-          <!-- <ng-template> -->
           <button *ngIf="entity['is:member']" id="tile-open-button" class="btn btn-primary btn-sm" i18n="@@GROUPS__TILE__OPEN_ACTION"
             (click)='trigger(entity)'>
             Open
           </button>
-          <!-- </ng-template> -->
           <button class="btn btn-primary btn-sm" id="tile-cancel-button" *ngIf="entity['is:awaiting']" (click)="cancelRequest()"
             i18n="@@GROUPS__TILE__OPEN_ACTION">
             Cancel
@@ -77,4 +38,3 @@
       </div>
     </div>
   </div>
-<!--community card ends-->

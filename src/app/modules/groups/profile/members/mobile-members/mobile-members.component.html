@@ -4,10 +4,7 @@
       <div class="without-nav-header__title caption-bold f500">Community Members</div>
   </div>
 </div>
-
 <div class="o-community-member-popup-body" style="padding-top: 2px;">
-
-
 <div class="form-group form-group--member-search" #el>
   <input
     type="text"
@@ -23,7 +20,6 @@
     />
     <i class="icon-search" style="position: absolute; top: 9px; right: 12px;"></i>
 </div>
-
 <ul class="o-community-members-list scrollbar scrollbar-default" >
     <li class="o-community-members-list__user-list" *ngFor="let member of members">
     <app-appuser [object]="member">
@@ -36,7 +32,6 @@
     </app-appuser>
     </li>   
   </ul>
-  
   <infinite-scroll
       distance="25%"
       (load)="load()"
