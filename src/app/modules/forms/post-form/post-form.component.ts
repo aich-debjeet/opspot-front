@@ -14,6 +14,7 @@ import { Tag } from '../../hashtags/types/tag';
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { PaywallMessageComponent } from './paywall-message.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post-form',
@@ -75,7 +76,8 @@ export class PostFormComponent {
     public upload: Upload,
     public attachment: AttachmentService,
     // private formBuilder: FormBuilder,
-    private overlayModal: OverlayModalService
+    private overlayModal: OverlayModalService,
+    private toastr: ToastrService
   ) {
     this.opspot = window.Opspot;
     this.cards = [];
@@ -213,6 +215,7 @@ export class PostFormComponent {
         .catch(e => {
           if (e && e.message) {
             this.errorMessage = e.message;
+            this.toastr.error(e.message, '', { timeOut: 3000 });
           }
           this.inProgress = false;
           this.canPost = true;

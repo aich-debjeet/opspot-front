@@ -25,5 +25,5 @@
       (click)="selectThumbnail(i)">
   </div>
 </div>
-<input type="file" (change)="addNewThumbnail($event)" hidden #thumbnailInput/>
+<input type="file" accept="image/jpg, image/jpeg, image/png" (change)="addNewThumbnail($event)" hidden #thumbnailInput/>
   

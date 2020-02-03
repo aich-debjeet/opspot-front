@@ -5,7 +5,7 @@
     <i class="icon-edit-profile"></i>
   </a>
 </div>
-<input style="display:none" accept=".jpg, .jpeg, .png" type="file" id="file" (change)="add($event)" [hidden]="file" #fileInput />
+<input type="file" accept="image/jpg, image/jpeg, image/png" style="display:none" id="file" (change)="add($event)" [hidden]="file" #fileInput />
 <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage"
   (imgResult)="newImageResultFromCroppie($event)">
 </app-image-croper>
@@ -15,7 +15,7 @@
   <div class="o-cover__actions">
     <a *ngIf="object && object['is:owner']" class="o-cover-edit o-cover-edit--community" (click)="onClick($event)"><i
         class="icon-edit-profile"></i></a>
-    <input style="display:none"  accept=".jpg, .jpeg, .png" type="file" id="file" (change)="add($event)" [hidden]="file" #fileInput />
+    <input type="file" accept="image/jpg, image/jpeg, image/png" style="display:none" id="file" (change)="add($event)" [hidden]="file" #fileInput />
     <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage"
       (imgResult)="newImageResultFromCroppie($event)">
     </app-image-croper>
