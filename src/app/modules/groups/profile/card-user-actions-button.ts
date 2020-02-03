@@ -17,11 +17,11 @@ import { GroupsService } from '../groups-service';
       Remove from Group
     </li>
     <li class="mdl-menu__item" id="card-user-action-re-invite-to-group"
-      *ngIf="(group['is:owner'] || group['is:moderator']) && !user['is:member'] && !wasReInvited"
+      *ngIf="(group['is:owner'] || group['is:admin'] ||  group['is:moderator']) && !user['is:member'] && !wasReInvited"
       (click)="reInvite()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REINVITE">
       Re-invite to Group
     </li>
-    <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:moderator']) && wasReInvited" id="card-user-action-invited">
+    <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin'] || group['is:moderator']) && wasReInvited" id="card-user-action-invited">
       <span class="opspot-menu-info-item" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__INVITED">Invited</span>
     </li>
     <li class="mdl-menu__item" id="card-user-action-make-admin"
