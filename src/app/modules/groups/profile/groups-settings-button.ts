@@ -96,7 +96,6 @@ export class GroupsSettingsButton {
   @Input('group') set _group(value: any) {
     if (!value) return;
     this.group = value;
-    // console.log("Group: ", this.group);
 
     this.featured = value.featured_id || value.featured === true;
   }
