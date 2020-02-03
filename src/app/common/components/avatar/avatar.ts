@@ -21,7 +21,7 @@ import { CroppieOptions, ResultOptions, CropData } from 'croppie';
   <div *ngIf="proEdit" class="o-prof-img-block">
     <div class="o-avatar-xl o-avatar-xl--prof" [style.background-image]="'url(' + src + ')'" >
       <img *ngIf="!src" src="{{opspot.cdn_assets_url}}assets/avatars/blue/default-large.png" class="mdl-shadow--4dp" />
-      <a *ngIf="opspot.user.guid === object.guid || groupProfile || object['is:owner']" class="o-prof-img-edit" (click)="openFileSelect()" id="avatar-image-edit"><i class="icon-edit-profile"></i></a>
+      <a *ngIf="opspot.user.guid === object.guid || groupProfile || object['is:owner'] || object['is:admin']" class="o-prof-img-edit" (click)="openFileSelect()" id="avatar-image-edit"><i class="icon-edit-profile"></i></a>
     </div>
     <input  style="display:none" id="onfile" type="file"  accept=".jpg, .jpeg, .png" #file (change)="add($event)"/>
     <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage" [croperType]="'circle'" (imgResult)="newImageResultFromCroppie($event)">
