@@ -40,16 +40,11 @@ export class MobileMembersComponent implements OnInit {
   moreData: boolean = true;
   canInvite: boolean = false;
   private searchDelayTimer;
-
   httpSubscription;
-
-
 
   ngOnInit() {
     // console.log(this.members)
   }
-
-
 
   ngOnDestroy() {
     if (this.searchDelayTimer) {
