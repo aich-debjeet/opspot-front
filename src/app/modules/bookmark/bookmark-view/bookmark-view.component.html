@@ -150,11 +150,11 @@
             <ng-container *ngFor="let activi of activity; let i = index">
                 <opspot-activity [object]="activi" *ngIf="activi.type !== 'user'"
                     [class]="'mdl-card m-border item m-boost-rotator-item m-boost-rotator-item-' + i" visible="true"
-                    (deleteBookmark)="delete($event)">
+                    (deleteBookmark)="delete($event)" (delete)="delete($event)">
                 </opspot-activity>
                 <div *ngIf="activi.type == 'user'">
                     <m-channel--sidebar [user]="activi" [editing]="editing" [displayBookmark]="displayBookmark"
-                        (deleteBookmark)="delete($event)">
+                        (deleteBookmark)="delete($event)" (delete)="delete($event)">
                     </m-channel--sidebar>
                 </div>
             </ng-container>
