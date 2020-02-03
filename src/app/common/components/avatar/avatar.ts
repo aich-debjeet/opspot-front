@@ -21,7 +21,7 @@ import { CroppieOptions, ResultOptions, CropData } from 'croppie';
   <div *ngIf="proEdit" class="o-prof-img-block">
     <div class="o-avatar-xl o-avatar-xl--prof" [style.background-image]="'url(' + src + ')'" >
       <img *ngIf="!src" src="{{opspot.cdn_assets_url}}assets/avatars/blue/default-large.png" class="mdl-shadow--4dp" />
-      <a *ngIf="opspot.user.guid===object.guid||groupProfile||object['is:owner']" class="o-prof-img-edit" (click)="openFileSelect()" id="avatar-image-edit"><i class="icon-edit-profile"></i></a>
+      <a *ngIf="opspot.user.guid === object.guid || groupProfile || object['is:owner']" class="o-prof-img-edit" (click)="openFileSelect()" id="avatar-image-edit"><i class="icon-edit-profile"></i></a>
     </div>
     <input  style="display:none" id="onfile" type="file"  accept=".jpg, .jpeg, .png" #file (change)="add($event)"/>
     <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage" [croperType]="'circle'" (imgResult)="newImageResultFromCroppie($event)">
@@ -128,8 +128,6 @@ export class OpspotAvatar {
   }
 
   set _object(value: any) {
-    console.log("Value: ", value);
-    
     if (!value)
       return;
 
@@ -149,8 +147,6 @@ export class OpspotAvatar {
     if (!this.editing && this.file)
       this.done();
   }
-
-
 
   // profile image edit
   set _profileEdit(value: boolean) {
@@ -179,51 +175,14 @@ export class OpspotAvatar {
     reader.readAsDataURL(this.file);
 
     element.value = '';
-
-    // console.log(this.waitForDoneSignal);
-    // if (this.waitForDoneSignal !== true)
-    //   this.done();
   }
 
-  //   dataURItoBlob(dataURI) {
-  //     this.src=dataURI;
-  //     var startIndex = dataURI.indexOf("base64,") + 7;
-  //     var b64 = dataURI.substr(startIndex);
-  //     const byteString = window.atob(b64);
-  //     const arrayBuffer = new ArrayBuffer(byteString.length);
-  //     const int8Array = new Uint8Array(arrayBuffer);
-  //     for (let i = 0; i < byteString.length; i++) {
-  //       int8Array[i] = byteString.charCodeAt(i);
-  //     }
-  //     const blob = new Blob([int8Array], { type: 'image/jpeg/png' });    
-  //     return blob;
-  //  }
-
-  //  base64ToImage(){
-  //   const date = new Date().valueOf();
-  //   let text = '';
-  //   const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  //   for (let i = 0; i < 5; i++) {
-  //     text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
-  //   }
-  //   // Replace extension according to your media type
-  //   const imageName = date + '.' + text + '.jpeg';
-  //   // call method that creates a blob from dataUri
-  //   const imageBlob = this.dataURItoBlob(this.editedImg);
-  //   const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
-  //   return imageFile;
-  //  }
-
   done() {
-    // this.added.next(this.file);
-    // console.log(this.file, this.editedImg)
-    // this.editedImg=this.base64ToImage()
     this.added.next(this.editedImg)
     this.file = null;
     this.open = false;
     window.Opspot
   }
-
 
   enableEdit() {
     this.editing = true;
