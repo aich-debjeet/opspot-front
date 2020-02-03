@@ -72,7 +72,7 @@ export class GroupsProfileMembers {
     // TODO: [emi] Send this via API
     this.canInvite = false;
     if (this.group) {
-      if (this.group['is:owner']) {
+      if (this.group['is:owner'] || this.group['is:admin']) {
         this.canInvite = true;
       } else if (this.group.membership === 2 && this.group['is:member']) {
         this.canInvite = true;
