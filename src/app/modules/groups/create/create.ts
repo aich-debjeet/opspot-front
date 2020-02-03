@@ -140,7 +140,6 @@ export class GroupsCreator {
   onTagsRemoved(tags) {
     for (let tag of tags) {
       for (let i in this.group.tags) {
-        // console.log(this.group.tags[i]);
         if (this.group.tags[i] == tag.value) {
           this.group.tags.splice(i, 1);
         }
