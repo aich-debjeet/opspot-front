@@ -68,6 +68,7 @@ export class WireService {
       let response: any = await this.client.post(`api/v1/wire/${wire.guid}`, {
         payload,
         method: 'tokens',
+        type: wire.type,
         amount: wire.amount,
         recurring: wire.recurring
       });

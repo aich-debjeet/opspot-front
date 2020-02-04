@@ -23,6 +23,7 @@ export interface WireStruc {
   guid: any;
   recurring: boolean;
   payload: any;
+  type: string | '';
 }
 
 @Component({
@@ -42,6 +43,7 @@ export class WireCreatorComponent {
     payloadType: 'onchain',
     guid: null,
     recurring: false,
+    type: '',
 
     // Payment
     payload: null
@@ -91,10 +93,12 @@ export class WireCreatorComponent {
         this.owner = object;
       } else if (object.ownerObj) {
         if(object.ownerObj.contributeType === 'paywall'){
+          this.wire.type = 'pay-per-post';
           this.wire.amount = object ?  object.wire_threshold.min : 1;
         }
         if(object.ownerObj.contributeType === 'contribute'){
           this.wire.amount = 1;
+          this.wire.type = 'contribution';
         }
         this.owner = object.ownerObj;
       }
@@ -480,6 +484,7 @@ export class WireCreatorComponent {
    * Submits the wire
    */
   async submit() {
+    console.log(this.wire);
     if (this.inProgress) {
       return;
     }

@@ -23,6 +23,7 @@ export interface WireStruc {
   recurring: boolean;
   payload: any;
   period: string;
+  type: string;
 }
 
 @Component({
@@ -44,7 +45,8 @@ export class WirePaymentsCreatorComponent {
     guid: null,
     recurring: false,
     payload: null,
-    period: null
+    period: null,
+    type:''
   };
 
   owner: any;
