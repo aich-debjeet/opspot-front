@@ -109,7 +109,7 @@ export class WorkComponent implements OnInit {
     this.model.index = index;
     let data = this.work.work_experience[index];
     this.model.designation = data.designation;
-    this.model.location = data.designation;
+    this.model.location = data.location;
     this.model.company = data.company_name;
     this.model.strtYear = data.start_date.split('-')[1];
     this.model.strtMonth = data.start_date.split('-')[0];
