@@ -1,21 +1,18 @@
 import { Component, Inject, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { GroupsService } from './groups-service';
 import { Session } from '../../services/session';
 import { LoginReferrerService } from '../../services/login-referrer.service';
 
 @Component({
   selector: 'opspot-groups-join-button',
-
   inputs: ['_group: group'],
   outputs: ['membership'],
   template: `
     <button class="btn btn-primary btn-sm" id="group-join"
       *ngIf="!group['is:banned'] && !group['is:awaiting']
         && !group['is:invited'] && !group['is:member']"
-        (click)="join()" i18n="@@GROUPS__JOIN_BUTTON__JOIN_ACTION"
-      >
+        (click)="join()" i18n="@@GROUPS__JOIN_BUTTON__JOIN_ACTION">
       <ng-container *ngIf="!inProgress">Join</ng-container>
       <ng-container *ngIf="inProgress">Joining</ng-container>
     </button>

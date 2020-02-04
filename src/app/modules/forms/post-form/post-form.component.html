@@ -22,8 +22,7 @@
         <div class="o-create-post-fileupload" *ngIf="!attachment.isRich() && cards.length == 0">
             <div class="fileUpload">
                 <span class="icon-paperclip-2"></span>
-                <!-- <input type="file" class="upload"> -->
-                <input type="file" accept="audio/*, video/mp4, video/x-m4v, video/*, .jpg, .jpeg, .png"  id="file" #file class="upload" name="attachment"
+                <input type="file"  id="file" #file class="upload" name="attachment"
                     (change)="uploadAttachment(file, $event)" />
             </div>
             <div class="text-md grey">
@@ -38,7 +37,7 @@
         <div class="o-create-post-filled-fileupload" *ngIf="cards.length > 0">
             <div class="fileUpload">
                 <span class="icon-plus"></span>
-                <input type="file" accept="audio/*,video/mp4,video/x-m4v,video/*,.jpg, .jpeg, .png" id="file" #file class="upload" class="upload" name="attachment"
+                <input type="file" id="file" #file class="upload" class="upload" name="attachment"
                     (change)="uploadAttachment(file, $event)" />
             </div>
             <div class="fileUpload-preview-new mr-9" *ngFor="let image of cards">

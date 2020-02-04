@@ -149,7 +149,7 @@
 								<!-- <opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'">
 								</opspot-button-remind> -->
 								<m-modal-remind-composer *ngIf="remindOpen"
-								[object]="marketplace?.remind_object ? marketplace?.remind_object : marketplace"\
+								[object]="marketplace?.remind_object ? marketplace?.remind_object : marketplace"
 								[open]="true"
 								[default]="remindMessage"
 								(closed)="remindOpen = false"

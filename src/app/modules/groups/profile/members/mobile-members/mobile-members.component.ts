@@ -40,16 +40,11 @@ export class MobileMembersComponent implements OnInit {
   moreData: boolean = true;
   canInvite: boolean = false;
   private searchDelayTimer;
-
   httpSubscription;
-
-
 
   ngOnInit() {
     // console.log(this.members)
   }
-
-
 
   ngOnDestroy() {
     if (this.searchDelayTimer) {
@@ -72,7 +67,7 @@ export class MobileMembersComponent implements OnInit {
     // TODO: [emi] Send this via API
     this.canInvite = false;
 
-    if (this.group['is:owner']) {
+    if (this.group['is:owner'] || this.group['is:admin']) {
       this.canInvite = true;
     } else if (this.group.membership === 2 && this.group['is:member']) {
       this.canInvite = true;

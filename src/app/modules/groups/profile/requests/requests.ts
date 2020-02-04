@@ -10,7 +10,7 @@ import { Session } from '../../../../services/session';
   selector: 'opspot-groups-profile-requests',
   inputs: ['_group : group'],
   templateUrl: 'requests.html',
-  styleUrls: [ 'request.scss']
+  styleUrls: ['request.scss']
 })
 
 export class GroupsProfileRequests {
@@ -25,18 +25,16 @@ export class GroupsProfileRequests {
   moreData: boolean = true;
 
   constructor(public session: Session, public client: Client, public service: GroupsService) {
-    
+
   }
 
   ngOnInit() {
     this.$group = this.service.$group.subscribe((group) => {
       this.group = group;
-      // console.log("this group : ", this.group);
-      
       this.load(true);
     });
   }
- 
+
   load(refresh: boolean = false) {
     if (this.inProgress)
       return;
@@ -50,8 +48,6 @@ export class GroupsProfileRequests {
     this.inProgress = true;
     this.client.get('api/v1/groups/membership/' + this.group.guid + '/requests', { limit: 12, offset: this.offset })
       .then((response: any) => {
-         console.log("response: ", response);
-         
         if (!response.users || response.users.length === 0) {
           this.moreData = false;
           this.inProgress = false;
@@ -73,7 +69,6 @@ export class GroupsProfileRequests {
   accept(user: any, index: number) {
     this.service.acceptRequest(this.group, user.guid)
       .then(() => {
-        // alert();
         this.users.splice(index, 1);
         this.changeCounter('members:count', +1);
         this.changeCounter('requests:count', -1);

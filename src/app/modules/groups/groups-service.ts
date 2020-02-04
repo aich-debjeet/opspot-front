@@ -24,17 +24,13 @@ export class GroupsService {
   ) {
   }
 
-  // Group
-
   load(guid: string) {
-    // console.log('GS laod', guid);
     return this.clientService.get(`${this.base}group/${guid}`)
       .then((response: any) => {
         if (response.group) {
           this.group.next(response.group);
           return response.group;
         }
-
         throw 'E_LOADING';
       });
   }
@@ -45,15 +41,12 @@ export class GroupsService {
     if (group.guid) {
       endpoint += `/${group.guid}`;
     }
-
     this.group.next(group);
-
     return this.clientService.post(endpoint, group)
       .then((response: any) => {
         if (response.guid) {
           return response.guid;
         }
-
         throw 'E_SAVING';
       });
   }
@@ -68,13 +61,11 @@ export class GroupsService {
         banner_position: group.banner_position
       }));
     }
-
     if (files.avatar) {
       uploads.push(this.uploadService.post(`${this.base}group/${group.guid}/avatar`, [
         files.avatar
       ]));
     }
-
     return Promise.all(uploads);
   }
 
@@ -88,8 +79,6 @@ export class GroupsService {
       });
   }
 
-  // Membership
-
   join(group: any, target: string = null) {
     let endpoint = `${this.base}membership/${group.guid}`;
 
@@ -102,7 +91,7 @@ export class GroupsService {
         if (response.done) {
           return true;
         }
-       //  @gayatri need to check backend error quick handle for time sake in front
+        //  @gayatri need to check backend error quick handle for time sake in front
         return true;
         // throw response.error ? response.error : 'Internal error';
       });
@@ -164,8 +153,6 @@ export class GroupsService {
       });
   }
 
-  // Notifications
-
   muteNotifications(group: any) {
     this.updateMarkers.mute(group.guid);
     return this.clientService.post(`${this.base}notifications/${group.guid}/mute`)
@@ -188,8 +175,6 @@ export class GroupsService {
       });
   }
 
-  // Management
-
   grantOwnership(group: any, user: string) {
     return this.clientService.put(`${this.base}management/${group.guid}/${user}/admin`)
       .then((response: any) => {
@@ -209,8 +194,6 @@ export class GroupsService {
         return true;
       });
   }
-
-  // Moderation
 
   grantModerator(group: any, user: string) {
     return this.clientService.put(`${this.base}management/${group.guid}/${user}/moderator`)
@@ -232,15 +215,12 @@ export class GroupsService {
       });
   }
 
-  // Invitations
-
   canInvite(user: string) {
     return this.clientService.post(`${this.base}invitations/check`, { user })
       .then((response: any) => {
         if (response.done) {
           return user;
         }
-
         throw 'E_NOT_DONE';
       });
   }
@@ -251,7 +231,6 @@ export class GroupsService {
         if (response.done) {
           return true;
         }
-
         throw response.error ? response.error : 'Internal error';
       })
       .catch(e => {
@@ -285,7 +264,6 @@ export class GroupsService {
         if (typeof response['adminqueue:count'] !== 'undefined') {
           return parseInt(response['adminqueue:count'], 10);
         }
-
         throw 'E_COUNT';
       });
   }

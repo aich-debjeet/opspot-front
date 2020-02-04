@@ -91,7 +91,7 @@ import { BigEventModule } from './modules/big-event/big-event.module';
     RouterModule.forRoot(OpspotAppRoutes),
     ToastrModule.forRoot({
       preventDuplicates: true,
-      positionClass: 'toast-top-right'
+      positionClass: 'toast-bottom-right'
     }),
     CaptchaModule,
     CommonModule,

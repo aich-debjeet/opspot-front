@@ -43,31 +43,23 @@ export class GroupsProfileMembers {
     this.load(true);
   }
 
-  constructor(public session: Session, public client: OpspotHttpClient, public service: GroupsService) {
+  constructor(
+    public session: Session,
+    public client: OpspotHttpClient,
+    public service: GroupsService) {
 
   }
 
   ngOnInit() {
-    // this.$group = this.service.$group.subscribe((group) => {
-    //   this.group = group;
-    //   // console.log("This group: ", this.group);
-
-    //   // this.load(true);
-    // });
-
-    // this.el.nativeElement.scrollIntoView();
-
   }
 
   ngOnDestroy() {
     if (this.searchDelayTimer) {
       clearTimeout(this.searchDelayTimer);
     }
-    // this.$group.unsubscribe();
   }
 
   load(refresh: boolean = false, query = null) {
-    // console.log('members load()');
     if (this.httpSubscription)
       this.httpSubscription.unsubscribe();
 
@@ -79,22 +71,15 @@ export class GroupsProfileMembers {
 
     // TODO: [emi] Send this via API
     this.canInvite = false;
-
-    // console.log("GROUP: ", this.group);
-
     if (this.group) {
-      if (this.group['is:owner']) {
+      if (this.group['is:owner'] || this.group['is:admin']) {
         this.canInvite = true;
       } else if (this.group.membership === 2 && this.group['is:member']) {
         this.canInvite = true;
       }
 
-
       let endpoint = `api/v1/groups/membership/${this.group.guid}`,
         params: { limit, offset, q?: string } = { limit: 12, offset: this.offset };
-
-
-      // console.log("endpoint: ", endpoint);
 
       if (this.q) {
         endpoint = `${endpoint}/search`;
@@ -104,15 +89,11 @@ export class GroupsProfileMembers {
       this.inProgress = true;
       this.httpSubscription = this.client.get(endpoint, params)
         .subscribe((response: any) => {
-          // console.log("response: ", response.members.length);
           if (response.members) {
             // console.log("response: ", response.members);
             // @gayatri total count should come from backend since it is not coming it handle on frontend which needs to be checked
             this.totalGroup.emit(response.members.length)
           }
-          // if(response.total){
-          //   this.totalGroup.emit(response.total);
-          // }
           if (!response.members) {
             this.moreData = false;
             this.inProgress = false;
@@ -121,8 +102,6 @@ export class GroupsProfileMembers {
 
           if (refresh) {
             this.members = response.members;
-            // console.log("Response members: ", response.members);
-
           } else {
             this.members = this.members.concat(response.members);
           }
