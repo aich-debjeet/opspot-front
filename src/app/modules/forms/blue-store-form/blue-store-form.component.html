@@ -91,7 +91,7 @@
             <div class="auxbar bar bar3" style="width: 0%;"></div>
         </div>
         <div class="o-create-blue-store-footer">
-            <button type="button" id="bluestore-submit" class="btn btn-primary btn-sm" [disabled]="!blueStoreForm.valid" (click)="blueStoreSubmit()">Post</button>
+            <button type="button" id="bluestore-submit" class="btn btn-primary btn-sm" [disabled]="!blueStoreForm.valid || inProgress" (click)="blueStoreSubmit()">Post</button>
         </div>
     </form>
 </div>
