@@ -2,7 +2,7 @@ import { Component, Inject, Input, ChangeDetectorRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { Session } from '../../../services/session';
 import { Client, Upload } from '../../../services/api';
-import { DBPedia } from '../../../services/api/dbpedia';
+import { OPSPedia } from '../../../services/api/opspedia';
 import { RecentService } from '../../../services/ux/recent';
 import { ContextService, ContextServiceResponse } from '../../../services/context.service';
 
@@ -27,7 +27,7 @@ export class SearchBarSuggestionsComponent {
   constructor(
     public session: Session,
     public client: Client,
-    public dbPedia: DBPedia,
+    public opsPedia: OPSPedia,
     public location: Location,
     public recentService: RecentService,
     private context: ContextService,
@@ -66,7 +66,7 @@ export class SearchBarSuggestionsComponent {
 
       try {
         // TODO: little ugly here
-        const pediaResponse = await this.dbPedia.get('PrefixSearch', {
+        const pediaResponse = await this.opsPedia.get('PrefixSearch', {
           MaxHits: 1,
           QueryString: value
         });

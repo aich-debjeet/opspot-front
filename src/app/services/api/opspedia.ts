@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class DBPedia {
+export class OPSPedia {
 
   base: string = 'http://lookup.dbpedia.org/api/search/';
 
