@@ -116,6 +116,7 @@ export class GroupsCreator {
           avatar: this.avatar
         })
           .then(() => {
+            this.inProgress = false;
             this.router.navigate(['/groups/profile', guid]);
           });
       })
