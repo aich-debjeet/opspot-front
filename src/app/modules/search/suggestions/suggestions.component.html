@@ -52,4 +52,11 @@
   >
     <b i18n="@@SEARCH__SUGGESTIONS__OPSPOT_CONTEXT_LABEL">Search One Page Spotlight:</b> <span>{{ q }}</span>
   </a>
+
+  <a class="m-search-bar-suggestions-suggestion m-search-bar-suggestions-context" *ngIf="q && pediaAutocomplete?.length > 0"
+    [href]="pediaAutocomplete[0]?.uri" target="_blank"
+  >
+    <b>OPS Pedia Result:</b>
+    <span>{{pediaAutocomplete[0].description}}</span>
+  </a>
 </div>
