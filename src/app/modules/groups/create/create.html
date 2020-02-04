@@ -99,7 +99,7 @@
         </div>
       </div>
       <div class="o-create-community-action">
-        <button (click)="save($event)" id="create-community-button" type="button" [disabled]="!group.name"
+        <button (click)="save($event)" id="create-community-button" type="button" [disabled]="!group.name || inProgress"
           class="btn btn-primary btn-lg">{{editCommunity?"Update":"Create"}}</button>
         <button type="button" id="create-community-cancel" (click)="groupReset()" class="btn btn-outline-primary btn-lg">Cancel</button>
       </div>

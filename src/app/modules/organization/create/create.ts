@@ -131,6 +131,7 @@ export class OrganizationCreator {
             avatar: this.avatar
           })
           .then(() => {
+            this.inProgress = false;
             this.router.navigate(['organization/profile', guid]);
             this.navUpdateOrg();
           });

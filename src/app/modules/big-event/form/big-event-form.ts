@@ -237,6 +237,7 @@ export class BigEventForm implements OnInit {
 
   submitEvent() {
     this.eventSubmitted = true;
+    this.inProgress = true;
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
    
@@ -281,10 +282,12 @@ export class BigEventForm implements OnInit {
             this.router.navigate(['/event/view/' + resp.activity['guid']]);
           }
           this.eventSubmitted = false;
+          this.inProgress = false;
           this.attachment.reset();
         })
         .catch((e) => {
           this.eventSubmitted = false;
+          this.inProgress = false;
           // alert(e.message);
         });
     }
