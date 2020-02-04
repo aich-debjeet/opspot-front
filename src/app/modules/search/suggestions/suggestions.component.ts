@@ -20,7 +20,7 @@ export class SearchBarSuggestionsComponent {
   currentContext: ContextServiceResponse;
   @Input() active: boolean;
   @Input() disabled: boolean = false;
-  dbPediaList: any[];
+  pediaAutocomplete: any[];
 
   private searchTimeout;
 
@@ -66,11 +66,11 @@ export class SearchBarSuggestionsComponent {
 
       try {
         // TODO: little ugly here
-        const dbPediaResponse = await this.dbPedia.get('PrefixSearch', {
+        const pediaResponse = await this.dbPedia.get('PrefixSearch', {
           MaxHits: 1,
           QueryString: value
         });
-        this.dbPediaList = dbPediaResponse['results'];
+        this.pediaAutocomplete = pediaResponse['results'];
 
       } catch(e) {
         console.error(e);
