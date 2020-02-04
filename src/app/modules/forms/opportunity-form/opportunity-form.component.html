@@ -76,7 +76,7 @@
             <div class="auxbar bar bar3" style="width: 0%;"></div>
         </div>
         <div class="o-create-opportunity-footer">
-            <button type="submit" id="opportunity-submit" class="btn btn-primary btn-sm" [disabled]="!opportunityForm.valid">Post</button>
+            <button type="submit" id="opportunity-submit" class="btn btn-primary btn-sm" [disabled]="!opportunityForm.valid || inProgress">Post</button>
         </div>
     </form>
 </div>
