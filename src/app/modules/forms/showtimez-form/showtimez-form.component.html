@@ -92,7 +92,7 @@
         </div>
         <!--body ends-->
         <div class="o-create-show-timez-footer">
-            <button type="button" id="showtimez-submit" class="btn btn-primary btn-sm" [disabled]="!showTimezForm.valid"
+            <button type="button" id="showtimez-submit" class="btn btn-primary btn-sm" [disabled]="!showTimezForm.valid || inProgress"
                 (click)="eventSubmit()">Post</button>
             <!--for event page-->
         </div>
