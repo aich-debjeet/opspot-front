@@ -12,8 +12,10 @@ export default function getEntityType(entity) {
     }
   } else if (entity.entity_type === 'item') {
     postType = 'bluestore';
+  } else if (entity.entity_type === 'blog') {
+    postType = 'blog';
   } else if (entity.entity_type === 'post' || entity.entity_type === 'album' || entity.entity_type === 'video'
-             || entity.entity_type === 'video') {
+    || entity.entity_type === 'video') {
     postType = 'post';
   } else if (entity.remind_object != false) {
     postType = 'repost';
