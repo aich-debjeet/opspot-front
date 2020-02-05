@@ -142,8 +142,8 @@
     </div>
     <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type == 'audio'" [routerLink]="['/media', activity.guid]"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
-      <!-- <m-audio [src]="'api/v1/media/' + activity.custom_data[0].guid + '/play'"></m-audio> -->
-      <m-audio [src]="'https://ops-audio-01.s3.amazonaws.com/' + activity.custom_data[0].guid + '/128.mp3'"></m-audio>
+      <m-audio [src]="'api/v1/media/' + activity.custom_data[0].guid + '/play'"></m-audio>
+      <!-- <m-audio [src]="'https://ops-audio-01.s3.amazonaws.com/' + activity.custom_data[0].guid + '/128.mp3'"></m-audio> -->
     </div>
     <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type != 'audio' && activity?.custom_data[0].entity_type != 'video'
       &&  activity?.custom_data[0].entity_type == 'image' " [routerLink]="['/media', activity.guid]"
