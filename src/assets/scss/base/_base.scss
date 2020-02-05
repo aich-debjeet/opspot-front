@@ -54,4 +54,11 @@
 
 .btn-boost-mob-c{
 	margin-bottom: 10px;
+	@include mq($from: $tablet, $until: $wide_lg) {
+		display: none!important;
+	}
+}
+
+.w-label100{
+	width: 100px;
 }
