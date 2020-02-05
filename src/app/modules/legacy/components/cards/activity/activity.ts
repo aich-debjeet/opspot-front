@@ -13,7 +13,6 @@ import { OpportunityFormComponent } from '../../../../../modules/forms/opportuni
 import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-form/blue-store-form.component';
 import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
 import { Router } from '@angular/router';
-// import { RemindButton } from '../../buttons/remind';
 
 @Component({
   moduleId: module.id,
@@ -80,6 +79,8 @@ export class Activity {
   @ViewChild('player') player: OpspotVideoComponent;
 
   reachoutMessage = '';
+  postHashtagTitle = '';
+  postType = '';
 
   constructor(
     public session: Session,
@@ -91,10 +92,12 @@ export class Activity {
     public translationService: TranslationService,
     private overlayModal: OverlayModalService,
     private cd: ChangeDetectorRef,
-    private router: Router
-  ) {
+    private router: Router) {
     this.element = _element.nativeElement;
     this.isVisible();
+  }
+
+  ngOnInit() {
   }
 
   set object(value: any) {
@@ -102,6 +105,9 @@ export class Activity {
       return;
     this.activity = value;
 
+    // if (this.activity) {
+    //   this.postType = getEntityType(this.activity);
+    // }
     // user obj for reach out
     if (value['entity_type'] &&
       (value['entity_type'] == 'opportunity'
@@ -110,10 +116,16 @@ export class Activity {
     ) {
       if (value['entity_type'] == 'opportunity') {
         this.reachoutMessage = 'Is there an opening? ';
+        // this.postHashtagTitle = getPostTitle('opportunity');
+        // this.loadComponent('opportunity');
       } else if (value['entity_type'] == 'event') {
         this.reachoutMessage = 'I am interested. ';
+        // this.postHashtagTitle = getPostTitle('event');
+        // this.createComponent('opportunity');
       } else if (value['entity_type'] == 'item') {
         this.reachoutMessage = 'Is this available? ';
+        // this.postHashtagTitle = getPostTitle('item');
+        // this.createComponent('opportunity');
       }
       this.reachoutMessage += value['perma_url'];
     }
@@ -263,7 +275,7 @@ export class Activity {
   }
 
   shareOptionSelected(option: string) {
-    console.log('shareOptionSelected', option);
+    // console.log('shareOptionSelected', option);
     if (option === 'repost') {
       this.remindOpen = true;
     };

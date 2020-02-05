@@ -19,8 +19,9 @@
       </m-channel--badges>
     </a>
     <ng-template #usersLabel>
-      <a class="o-avatar__name" id="activity-username" [routerLink]="['/', activity.ownerObj.username]">
-        <strong title={{activity.ownerObj.name}} id="activity-owner-obj-name">{{activity.ownerObj.name}}</strong>
+      <a id="activity-username" [routerLink]="['/', activity.ownerObj.username]">
+        <!-- <strong title={{activity.ownerObj.name}} id="activity-owner-obj-name">{{activity.ownerObj.name}}</strong> -->
+        <opspot-post-title-card [entity]="activity"></opspot-post-title-card>
         <m-channel--badges class="m-channel--badges-activity" [user]="activity.ownerObj" badges="[ 'verified' ]">
         </m-channel--badges>
       </a>
