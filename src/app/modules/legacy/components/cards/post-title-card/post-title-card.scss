@@ -2,6 +2,8 @@
 .o-posts-det{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    width: 80%;
     .hash-tag{
         margin-left: 6px;
     }
