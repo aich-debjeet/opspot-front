@@ -22,7 +22,7 @@ export class PostCardTitle implements OnInit {
 
   set _entity(value) {
     this.entity = value;
-    // console.log("Entity: ", this.entity);
+    // console.log("Entity: ", value);
 
     if (this.entity) {
       this.postType = getEntityType(this.entity);
@@ -46,13 +46,16 @@ export class PostCardTitle implements OnInit {
     } else if (this.postType === 'portfolio') {
       this.title = 'created a';
       this.hashtag = '#Portfolio';
+    } else if (this.postType === 'blog') {
+      this.title = 'created a';
+      this.hashtag = 'Blog';
     } else if (this.postType === 'repost') {
       // var name = this.entity.ownerObj.name + "'s"
       this.title = 'shared ' + this.entity.remind_object.ownerObj.name + "'s";
       this.hashtag = 'post ' + "(Repost)";
     } else {
       this.title = 'created a';
-      this.hashtag = 'post';
+      this.hashtag = 'Post';
     }
   }
 
