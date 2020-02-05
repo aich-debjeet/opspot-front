@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Session } from '../../../../../services/session';
-import getEntityType from '../../../../../helpers/post-title';
+import getEntityType from '../../../../../helpers/post-type';
 
 @Component({
   selector: 'opspot-post-title-card',
