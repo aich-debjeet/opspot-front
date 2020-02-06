@@ -107,8 +107,10 @@ export class MyJourneyFormComponent implements OnInit {
         data.activity.boostToggle = true;
         this.load.emit(data);
         this.attachment.reset();
-        this.meta = { wire_threshold: null };
+        this.resetMeta();
+        // this.meta = { wire_threshold: null };
         this.inProgress = false;
+        this.changeToDefault();
         this.cards = [];
       })
       .catch((e) => {
@@ -133,5 +135,9 @@ export class MyJourneyFormComponent implements OnInit {
     while ((match = regex.exec(this.meta.message)) !== null) {
       this.tags.push(match[2]);
     }
+  }
+
+  resetMeta() {
+    this.meta = { message: '', wire_threshold: null };
   }
 }

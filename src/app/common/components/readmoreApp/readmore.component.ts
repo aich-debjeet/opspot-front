@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector:'readMore',
     template: `
     <div>
-    <div [class.collapsed]="isCollapsed" >
+    <div [class.collapsed]="isCollapsed" style="word-break: break-all" >
     <ng-content  ></ng-content>
     </div>
         <a  (click)="isCollapsed = !isCollapsed">{{isCollapsed?'See More':'Hide'}}</a>
