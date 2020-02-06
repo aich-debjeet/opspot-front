@@ -141,13 +141,10 @@ export class AttachmentService {
       })
       .then((response: any) => {
         this.meta.attachment_guid.push(response.guid ? response.guid : null);
-        // console.log( "vdff: ",this.meta.attachment_guid);
-
-
+  
         if (!this.meta.attachment_guid) {
           throw 'No GUID';
         }
-
         return Promise.resolve(response.guid ? response.guid : null);
       })
       .catch(e => {
@@ -157,8 +154,6 @@ export class AttachmentService {
 
         return Promise.reject(e);
       });
-
-
   }
 
   abort() {
@@ -199,7 +194,6 @@ export class AttachmentService {
       })
       .catch(e => {
         this.meta.attachment_guid = null;
-
         throw e;
       });
   }
@@ -230,7 +224,6 @@ export class AttachmentService {
   }
 
   getMeta() {
-    // console.log(this.meta)
     return this.meta;
   }
 
@@ -253,19 +246,6 @@ export class AttachmentService {
       }
       return result;
     }
-
-    // let result = {};
-    // console.log(this.meta)
-    // if(this.meta.attachment_guid.length > 0 && this.meta.attachment_guid.length <= 1){
-    //   this.meta.attachment_guid = this.meta.attachment_guid.toString();
-    // }
-    // for (var prop in this.meta) {
-    //   if (this.meta.hasOwnProperty(prop)) {
-    //     result[prop] = this.meta[prop];
-    //   }
-    // }
-    // console.log(result)
-    // return result;
   }
 
   reset() {
@@ -432,19 +412,14 @@ export class AttachmentService {
   }
 
   private checkFileType(file): Promise<any> {
-    console.log("file: ", file);
-
     return new Promise((resolve, reject) => {
       if (file.type && file.type.indexOf('video/') === 0) {
         this.attachment.mime = 'video';
 
         this.checkVideoDuration(file).then(duration => {
-          console.log("video duration", duration);
-
           if (duration > window.Opspot.max_video_length) {
             return reject({ message: 'Error: Video duration exceeds ' + window.Opspot.max_video_length / 60 + ' minutes' });
           }
-
           resolve();
         }).catch(error => {
           resolve(); //resolve regardless and forward to backend job
@@ -489,6 +464,7 @@ export class AttachmentService {
         reader.readAsDataURL(file);
       } else {
         this.attachment.mime = 'unknown';
+        reject({ message: 'Invalid file type' });
       }
     });
   }
@@ -531,9 +507,7 @@ export class AttachmentService {
         if (timeout !== 0)
           window.clearTimeout(timeout);
 
-        window.URL.revokeObjectURL(audioElement.src);
-        console.log("audioElement.duration: ",audioElement.duration);
-        
+        window.URL.revokeObjectURL(audioElement.src);        
         resolve(audioElement.duration);
       };
       audioElement.addEventListener('error', function (error) {

@@ -81,7 +81,7 @@ import { SocketsService } from '../services/sockets';
 import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
-import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
+import { ReadMoreComponent } from './components/read-more/readmore.component';
 import { OpspotWidgetComponent } from './components/opspot-widget/opspot-widget.component';
 import { OpspotWidgetSliderComponent } from './components/opspot-widget-slider/opspot-widget-slider.component';
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
@@ -95,6 +95,7 @@ import { ActivityWidgetComponent } from './components/activity-widget/activity-w
 import { MyjourneyListCardComponent } from './components/myjourney-list-card/myjourney-list-card';
 import { BoostPostCard } from '../modules/legacy/components/cards/boost-post-card/boost-post-card';
 import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
+import { PostCardTitle } from '../modules/legacy/components/cards/post-title-card/post-tile-card';
 
 @NgModule({
   imports: [
@@ -150,6 +151,7 @@ import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
     OpspotButton,
     PostCard,
     BoostPostCard,
+    PostCardTitle,
 
     ChartComponent,
     OverlayModalComponent,
@@ -235,6 +237,7 @@ import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
     OpspotButton,
     PostCard,
     BoostPostCard,
+    PostCardTitle,
 
     ChartComponent,
     OverlayModalComponent,
@@ -296,7 +299,8 @@ import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
     },
   ],
   entryComponents: [
-    NotificationsToasterComponent
+    NotificationsToasterComponent,
+    // PostCardTitle
   ]
 })
 

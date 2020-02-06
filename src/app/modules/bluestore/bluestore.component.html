@@ -141,6 +141,8 @@
 							<div class="text-sm grey m-16" id="bluestore-viewed">{{marketplace?.impressions}} viewed this post</div>
 						</div>
 						<div class="o-posts-inner-page-action__icons">
+							<button type="button" class="btn btn-outline-primary btn-block btn-boost-mob-c" *ngIf="session.getLoggedInUser().guid == marketplace?.owner_guid" 
+							(click)="showBoost()" id="bluestore-boost">Boost</button>
 							<a class="icon-posts-box">
 								<opspot-button-thumbs-up *ngIf="marketplace" (liked)="liked($event)" [large]="'true'"
 									[object]="marketplace"></opspot-button-thumbs-up>
@@ -149,7 +151,7 @@
 								<!-- <opspot-button-remind *ngIf="marketplace" [object]="marketplace" [large]="'true'">
 								</opspot-button-remind> -->
 								<m-modal-remind-composer *ngIf="remindOpen"
-								[object]="marketplace?.remind_object ? marketplace?.remind_object : marketplace"\
+								[object]="marketplace?.remind_object ? marketplace?.remind_object : marketplace"
 								[open]="true"
 								[default]="remindMessage"
 								(closed)="remindOpen = false"

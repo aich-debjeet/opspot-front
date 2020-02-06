@@ -69,13 +69,11 @@
               <span class="icon-ops-attach"></span>
               <span i18n="@@OPSPOT__CAPTURE__ADD_FILE_ACTION">Add file</span>
             </button>
-            <input
-              type="file"
+            <input type="file" accept="image/jpg, image/jpeg, image/png"
               id="file"
               #file
               (change)="add(file); file.value = '';"
               multiple
-              accept="image/*"
               />
           </div>
 

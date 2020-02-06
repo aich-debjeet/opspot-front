@@ -50,7 +50,11 @@ export class GroupsProfileFeed {
 
   @ViewChild('poster') private poster: PosterComponent;
 
-  constructor(public session: Session, public client: Client, public service: GroupsService, private route: ActivatedRoute) { }
+  constructor(
+    public session: Session, 
+    public client: Client, 
+    public service: GroupsService, 
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.$group = this.service.$group.subscribe((group) => {
@@ -108,12 +112,12 @@ export class GroupsProfileFeed {
 
     const currentFilter = this.filter;
 
-    let opts:any = {
+    let opts: any = {
       limit: 12,
       offset: this.offset,
     };
 
-    if (!this.offset && this.group && this.group.pinned_posts && this.group.pinned_posts.length > 0){
+    if (!this.offset && this.group && this.group.pinned_posts && this.group.pinned_posts.length > 0) {
       opts.pinned = this.group.pinned_posts;
     }
 
@@ -141,7 +145,7 @@ export class GroupsProfileFeed {
         this.pinned = response.pinned;
 
         response.activity = response.activity
-          .map(entity => { 
+          .map(entity => {
             if (this.group.pinned_posts && this.group.pinned_posts.indexOf(entity.guid) >= 0) {
               entity.pinned = true;
             }
@@ -151,7 +155,7 @@ export class GroupsProfileFeed {
             return entity;
           })
           .filter(entity => !entity.pinned);
-        
+
         this.activity.push(...(response.activity || []));
 
         if (typeof this.activity[0] !== 'undefined') {
@@ -193,10 +197,10 @@ export class GroupsProfileFeed {
           return false;
         }
 
-        for(let entity of response.entities) {
+        for (let entity of response.entities) {
           let fakeActivity = {
             custom_type: this.filter === 'image' ? 'batch' : 'video',
-            custom_data: this.filter === 'image' ? [{src: entity.thumbnail_src}]: entity,
+            custom_data: this.filter === 'image' ? [{ src: entity.thumbnail_src }] : entity,
             guid: entity.guid,
             entity_guid: entity.guid,
             ownerObj: entity.ownerObj,
@@ -248,10 +252,7 @@ export class GroupsProfileFeed {
       this.activity = [];
     }
 
-    // console.log("filter: ", this.filter);
-    
-
-    switch(this.filter) {
+    switch (this.filter) {
       case 'activity':
       case 'review':
         return this.loadActivities(refresh);

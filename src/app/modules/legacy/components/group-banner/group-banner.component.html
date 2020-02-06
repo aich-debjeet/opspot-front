@@ -1,11 +1,11 @@
 <div style="background-size: cover;
             background-position: left;" [style.backgroundImage]="src ? 'url(' + src + ')' : null"
   class="o-cover o-cover--community hidden-under-tablet">
-  <a *ngIf="object && object['is:owner']" (click)="onClick($event)" class="o-cover-edit o-cover-edit--community">
+  <a *ngIf="object && (object['is:owner'] || object['is:admin'])" (click)="onClick($event)" class="o-cover-edit o-cover-edit--community">
     <i class="icon-edit-profile"></i>
   </a>
 </div>
-<input style="display:none" accept="image/*" type="file" id="file" (change)="add($event)" [hidden]="file" #fileInput />
+<input type="file" accept="image/jpg, image/jpeg, image/png" style="display:none" id="file" (change)="add($event)" [hidden]="file" #fileInput />
 <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage"
   (imgResult)="newImageResultFromCroppie($event)">
 </app-image-croper>
@@ -13,9 +13,9 @@
 <div [style.backgroundImage]="src ? 'url(' + src + ')' : null" class="o-cover o-cover--community hidden-above-tablet"
   style="background-size: cover; background-position: left;">
   <div class="o-cover__actions">
-    <a *ngIf="object && object['is:owner']" class="o-cover-edit o-cover-edit--community" (click)="onClick($event)"><i
+    <a *ngIf="object && (object['is:owner'] || object['is:admin'])" class="o-cover-edit o-cover-edit--community" (click)="onClick($event)"><i
         class="icon-edit-profile"></i></a>
-    <input style="display:none"  accept="image/*" type="file" id="file" (change)="add($event)" [hidden]="file" #fileInput />
+    <input type="file" accept="image/jpg, image/jpeg, image/png" style="display:none" id="file" (change)="add($event)" [hidden]="file" #fileInput />
     <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage"
       (imgResult)="newImageResultFromCroppie($event)">
     </app-image-croper>

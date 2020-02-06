@@ -1,5 +1,10 @@
 // journey scss
 
+@import "src/assets/helpers/variables";
+
+@import "node_modules/sass-mq/_mq";
+
+
 .journey{
     width: 100%;
     background: #fff;

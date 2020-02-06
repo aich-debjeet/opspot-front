@@ -14,7 +14,7 @@
 
     <div class="mdl-cell mdl-cell--12-col m-merchant-plans-exclusive--background">
       <label i18n="@@WIRE__CONSOLE__SETTINGS__BACKGROUND_LABEL">Background</label>
-      <input type="file" #backgroundFile name="preview" (change)="updatePreview(backgroundFile)" accept="image/*" />
+      <input type="file" accept="image/jpg, image/jpeg, image/png" #backgroundFile name="preview" (change)="updatePreview(backgroundFile)" />
     </div>
 
     <div class="mdl-cell mdl-cell--12-col m-merchant-plans-exclusive--preview">

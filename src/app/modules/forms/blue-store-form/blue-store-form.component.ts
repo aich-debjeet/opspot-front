@@ -9,6 +9,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { CURRENCY } from '../../../services/list-options';
 import getViewPageLink from '../../../helpers/get-viewage-link';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -65,7 +66,8 @@ export class BlueStoreFormComponent implements OnInit {
     public attachment: AttachmentService,
     private formBuilder: FormBuilder,
     private overlayModal: OverlayModalService,
-    private router: Router) {
+    private router: Router,
+    private toastr: ToastrService) {
   }
 
   @Input('object') set data(object) {
@@ -161,7 +163,7 @@ export class BlueStoreFormComponent implements OnInit {
   //   });
   // }
 
-  removeAttachment(file: HTMLInputElement, imageId: string) {    
+  removeAttachment(file: HTMLInputElement, imageId: string) {
     if (this.inProgress) {
       this.attachment.abort();
       this.canPost = true;
@@ -283,6 +285,7 @@ export class BlueStoreFormComponent implements OnInit {
           this.changeToDefault();
           this.navigationUrl = getViewPageLink('item', resp.activity.guid)
           if (resp.activity && this.bluestoreGuid) {
+            this.toastr.success('Updated successfully');
             this.router.navigate([this.navigationUrl]);
           }
           // check if update callback function is avaibale

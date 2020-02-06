@@ -1,24 +1,38 @@
-@import 'defaults.scss';
+// @import 'defaults.scss';
 
-.m-channel-bio-field {
-  div > i {
-    vertical-align: middle;
-  }
+@import "src/assets/helpers/variables";
+
+@import "node_modules/sass-mq/_mq";
+
+// .m-channel-bio-field {
+//   div > i {
+//     vertical-align: middle;
+//   }
   
-  div > span {
-    vertical-align: middle;
-    font-size: 11px;
-    padding: 4px 7px;
-    margin: 2px 2px;
-    border: 1px solid rgb(238, 238, 238);
-    border-radius: 3px;
-    display: inline-block;
+//   div > span {
+//     vertical-align: middle;
+//     font-size: 11px;
+//     padding: 4px 7px;
+//     margin: 2px 2px;
+//     border: 1px solid rgb(238, 238, 238);
+//     border-radius: 3px;
+//     display: inline-block;
+//   }
+// }
+
+// @media screen and (max-width: $max-mobile * 1.25) {
+//   m-messenger--channel-button {
+//     display: none; 
+//   }
+// }
+
+
+
+.prof-myjourney-mob{
+  width:calc(100% - 30px);
+  display: none;
+  @include mq($from: $mobile_sm, $until: $desktop) {
+      display: block;
+      margin: 0px 15px;
   }
 }
-
-@media screen and (max-width: $max-mobile * 1.25) {
-  m-messenger--channel-button {
-    display: none; 
-  }
-}
-

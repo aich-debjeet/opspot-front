@@ -16,7 +16,7 @@
                 <div class="o-create-blue-store-cover-image">
                     <div class="fileUpload">
                         <span class="icon-plus"></span>
-                        <input type="file" accept="video/mp4,video/x-m4v,video/*,image/*" id="file" #file class="upload" name="attachment"
+                        <input type="file" accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov" id="file" #file class="upload" name="attachment"
                             (change)="uploadAttachment(file, $event)" />
                     </div>
                     <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
@@ -91,7 +91,7 @@
             <div class="auxbar bar bar3" style="width: 0%;"></div>
         </div>
         <div class="o-create-blue-store-footer">
-            <button type="button" id="bluestore-submit" class="btn btn-primary btn-sm" [disabled]="!blueStoreForm.valid" (click)="blueStoreSubmit()">Post</button>
+            <button type="button" id="bluestore-submit" class="btn btn-primary btn-sm" [disabled]="!blueStoreForm.valid || inProgress" (click)="blueStoreSubmit()">Post</button>
         </div>
     </form>
 </div>

@@ -12,7 +12,8 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
   selector: 'm-channel--sidebar',
   inputs: ['_user: user', 'editing', 'displayBookmark'],
   outputs: [ '_deleteBookmark: deleteBookmark'],
-  templateUrl: 'sidebar.html'
+  templateUrl: 'sidebar.html',
+  styleUrls: ['./sidebar.scss']
 })
 
 export class ChannelSidebar {
