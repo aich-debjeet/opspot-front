@@ -221,22 +221,28 @@
 
 <div class="o-contribute">
   <div class="o-contribute-head o-contribute-head--border">
-    <div id="creator-paywall" class="o-contribute__title text-h4 f500" *ngIf="owner.contributeType === 'paywall'">Pay Per Post</div>
-    <div id="creator-contribute" class="o-contribute__title text-h4 f500" *ngIf="owner.contributeType === 'contribute'">Contribute</div>
+    <div id="creator-paywall" class="o-contribute__title text-h4 f500" *ngIf="owner.contributeType === 'paywall'">Pay
+      Per Post</div>
+    <div id="creator-contribute" class="o-contribute__title text-h4 f500" *ngIf="owner.contributeType === 'contribute'">
+      Contribute</div>
   </div>
   <!--contribute head end-->
   <div class="o-contribute-body o-contribute-body--flex">
     <div class="o-contribute-discrptn text-md text-center" *ngIf="owner.contributeType === 'contribute'">
-      Liked @{{owner.username}}'s work? Support their work by sending coins. <a href="javascript:void(0)" id="creator-contribute-learn-more"
-        class="primary">Learn more</a>
+      Liked @{{owner.username}}'s work? Support their work by sending coins. <a href="javascript:void(0)"
+        id="creator-contribute-learn-more" class="primary">Learn more</a>
     </div>
-    <div class="o-contribute-discrptn text-md text-center" *ngIf="owner.contributeType === 'paywall'" id="creator-paywall-title">
-      Unlock this post by sending coins <a href="javascript:void(0)" id="creator-paywall-learn-more" class="primary">Learn more</a>
+    <div class="o-contribute-discrptn text-md text-center" *ngIf="owner.contributeType === 'paywall'"
+      id="creator-paywall-title">
+      Unlock this post by sending coins <a href="javascript:void(0)" id="creator-paywall-learn-more"
+        class="primary">Learn more</a>
     </div>
     <!--contribute discription end-->
     <div class="o-contribute-token">
-      <div class="text-md">Coins available: <span class="f500" id="creator-contribute-available-coins">{{balances.token | token: 18 | number}}</span></div>
-      <button type="button" id="creator-contribute-buy-coins" class="btn btn-outline-primary btn-sm" (click)="buyTokens()">Buy Coins</button>
+      <div class="text-md">Coins available: <span class="f500"
+          id="creator-contribute-available-coins">{{balances.token | token: 18 | number}}</span></div>
+      <button type="button" id="creator-contribute-buy-coins" class="btn btn-outline-primary btn-sm"
+        (click)="buyTokens()">Buy Coins</button>
     </div>
     <!--contribute token part end-->
     <div class="o-contribute-action">
@@ -244,7 +250,8 @@
         <a [routerLink]="['/', owner.username]" class="o-avatar-lg" id="creator-contribute-avatar">
           <img [src]="opspot.cdn_url + 'icon/' + owner.guid + '/medium/' + owner.icontime" alt="">
         </a>
-        <div class="text-sm" id="creator-contribute-avatar-name">Support @{{owner.username}}'s' work by contributing coins.</div>
+        <div class="text-sm" id="creator-contribute-avatar-name">Support @{{owner.username}}'s' work by contributing
+          coins.</div>
       </div>
       <div class="o-contribute-action__spend">
         <p class="caption-regular" *ngIf="owner.contributeType === 'contribute'">
@@ -253,17 +260,22 @@
         <p class="caption-regular" *ngIf="owner.contributeType === 'paywall'">
           Coins you need to spend for this post.
         </p>
-        <input type="number" id="creator-contribute-set-coins" class="o-boost-action-input" [ngModel]="wire.amount | number"
+        <input type="number" id="creator-contribute-set-coins" class="o-boost-action-input"
+          *ngIf="owner.contributeType === 'contribute'" [ngModel]="wire.amount | number"
           (ngModelChange)="setAmount($event)" (focus)="amountEditorFocus()" (blur)="amountEditorBlur()"
           (keydown.enter)="amountEditorBlur()" (keydown.esc)="amountEditorBlur()" #amountEditor>
+        <input type="number" id="creator-contribute-set-coins" class="o-boost-action-input"
+          *ngIf="owner.contributeType === 'paywall'" [ngModel]="wire.amount | number" #amountEditor readonly>
       </div>
     </div><!-- contribute action end -->
     <div *ngIf="!inProgress && success && owner.contributeType === 'contribute'" class="">
       <i class="icon-check">Contributed!</i>
     </div>
-    <button type="button" id="creator-paywall-submit" class="btn btn-primary btn-block" *ngIf="owner.contributeType === 'paywall'"
-      [disabled]="!canSubmit() || inProgress || success || criticalError" (click)="submit()">Unlock this post</button>
-    <button type="button" id="creator-contribute-submit" class="btn btn-primary btn-block" *ngIf="owner.contributeType === 'contribute'"
-      [disabled]="!canSubmit() || inProgress || success || criticalError" (click)="submit()">Contribute</button>
+    <button type="button" id="creator-paywall-submit" class="btn btn-primary btn-block"
+      *ngIf="owner.contributeType === 'paywall'" [disabled]="!canSubmit() || inProgress || success || criticalError"
+      (click)="submit()">Unlock this post</button>
+    <button type="button" id="creator-contribute-submit" class="btn btn-primary btn-block"
+      *ngIf="owner.contributeType === 'contribute'" [disabled]="!canSubmit() || inProgress || success || criticalError"
+      (click)="submit()">Contribute</button>
   </div>
 </div>
