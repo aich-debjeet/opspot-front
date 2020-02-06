@@ -106,12 +106,12 @@
                     </m-modal>
                     <div class="o-community-discrptn">
                         <div class="text-md">
-                            <a *ngIf="(group?.briefdescription ? group?.briefdescription.length<30:true); else readMo">
+                            <a *ngIf="(group?.briefdescription ? group?.briefdescription.length<30:true); else readMore">
                                 {{group?.briefdescription}} </a>
-                            <ng-template #readMo>
-                                <readMore>
+                            <ng-template #readMore>
+                                <read-more>
                                     {{group?.briefdescription}}
-                                </readMore>
+                                </read-more>
                             </ng-template>
                         </div>
 

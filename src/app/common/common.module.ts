@@ -81,7 +81,7 @@ import { SocketsService } from '../services/sockets';
 import { HttpClient } from "@angular/common/http";
 import { AndroidAppDownloadComponent } from "./components/android-app-download-button/button.component";
 import { ImageCroperComponent } from './components/image-croper/image-croper.component';
-import { ReadMoreComponent } from './components/readmoreApp/readmore.component';
+import { ReadMoreComponent } from './components/read-more/readmore.component';
 import { OpspotWidgetComponent } from './components/opspot-widget/opspot-widget.component';
 import { OpspotWidgetSliderComponent } from './components/opspot-widget-slider/opspot-widget-slider.component';
 import { OpportunityListCardComponent } from './components/opportunity-list-card/opportunity-list-card.component';
