@@ -75,6 +75,7 @@ export class AboutComponent implements OnInit {
   }
 
   onSubmit(e) {
+    console.log(e);
     this.submitted = true;
     let dob = {};
     if (new Date(this.model.dob).getTime()) {
@@ -96,7 +97,7 @@ export class AboutComponent implements OnInit {
 
     let language;
 
-    if (e.languages) {
+    if (e.controls.languages.value) {
       language = this.model.languages.map(el => el.value);
     }
 
@@ -107,7 +108,7 @@ export class AboutComponent implements OnInit {
         description: this.model.description,
         dob: dob,
         gender: this.model.gender,
-        languages: this.model.languages.map(el => el.value),
+        languages: language,
         height: this.model.height,
         weight: this.model.weight,
         dob_visibility: this.privacy.dob,
@@ -127,6 +128,8 @@ export class AboutComponent implements OnInit {
     }).catch((e) => {
       if (e.status === 'error') {
         this.invalidForm = true;
+        this.inProgress = false;
+        this.showFailure();
       } else this.invalidForm = false;
     });
     // }
@@ -134,6 +137,11 @@ export class AboutComponent implements OnInit {
 
   showSuccess() {
     this.toastr.success('You have successfully updated your profile', '', {
+      timeOut: 3000
+    });
+  }
+  showFailure(){
+    this.toastr.error('Profile could not be updated', '', {
       timeOut: 3000
     });
   }
