@@ -75,6 +75,7 @@ export class AboutComponent implements OnInit {
   }
 
   onSubmit(e) {
+    console.log(e);
     this.submitted = true;
     let dob = {};
     if (new Date(this.model.dob).getTime()) {
@@ -96,7 +97,7 @@ export class AboutComponent implements OnInit {
 
     let language;
 
-    if (e.languages) {
+    if (e.controls.languages.value) {
       language = this.model.languages.map(el => el.value);
     }
 
