@@ -299,6 +299,9 @@
 }
 .o-settings-notification-header{
   width: 327px;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+    width: 200px;
+  }
 }
 //wire css
 .o-settings-wire{

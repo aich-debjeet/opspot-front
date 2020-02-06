@@ -95,6 +95,7 @@ import { ActivityWidgetComponent } from './components/activity-widget/activity-w
 import { MyjourneyListCardComponent } from './components/myjourney-list-card/myjourney-list-card';
 import { BoostPostCard } from '../modules/legacy/components/cards/boost-post-card/boost-post-card';
 import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
+import { PostCardTitle } from '../modules/legacy/components/cards/post-title-card/post-tile-card';
 
 @NgModule({
   imports: [
@@ -150,6 +151,7 @@ import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
     OpspotButton,
     PostCard,
     BoostPostCard,
+    PostCardTitle,
 
     ChartComponent,
     OverlayModalComponent,
@@ -235,6 +237,7 @@ import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
     OpspotButton,
     PostCard,
     BoostPostCard,
+    PostCardTitle,
 
     ChartComponent,
     OverlayModalComponent,
@@ -296,7 +299,8 @@ import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
     },
   ],
   entryComponents: [
-    NotificationsToasterComponent
+    NotificationsToasterComponent,
+    // PostCardTitle
   ]
 })
 

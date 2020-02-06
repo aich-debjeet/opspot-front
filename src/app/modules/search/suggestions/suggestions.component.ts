@@ -2,6 +2,7 @@ import { Component, Inject, Input, ChangeDetectorRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { Session } from '../../../services/session';
 import { Client, Upload } from '../../../services/api';
+import { OPSPedia } from '../../../services/api/opspedia';
 import { RecentService } from '../../../services/ux/recent';
 import { ContextService, ContextServiceResponse } from '../../../services/context.service';
 
@@ -19,12 +20,14 @@ export class SearchBarSuggestionsComponent {
   currentContext: ContextServiceResponse;
   @Input() active: boolean;
   @Input() disabled: boolean = false;
+  pediaAutocomplete: any[];
 
   private searchTimeout;
 
   constructor(
     public session: Session,
     public client: Client,
+    public opsPedia: OPSPedia,
     public location: Location,
     public recentService: RecentService,
     private context: ContextService,
@@ -59,6 +62,18 @@ export class SearchBarSuggestionsComponent {
       } catch (e) {
         console.error(e);
         this.suggestions = [];
+      }
+
+      try {
+        // TODO: little ugly here
+        const pediaResponse = await this.opsPedia.get('PrefixSearch', {
+          MaxHits: 1,
+          QueryString: value
+        });
+        this.pediaAutocomplete = pediaResponse['results'];
+
+      } catch(e) {
+        console.error(e);
       }
     }, 300);
   }
