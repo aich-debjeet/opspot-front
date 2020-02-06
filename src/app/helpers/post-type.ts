@@ -1,6 +1,6 @@
 export default function getEntityType(entity) {
 
-  let postType;
+  let postType = 'post';
 
   if (entity.entity_type === 'opportunity') {
     postType = 'opportunity';
@@ -14,23 +14,28 @@ export default function getEntityType(entity) {
     postType = 'bluestore';
   } else if (entity.entity_type === 'blog') {
     postType = 'blog';
-  } else if (entity.entity_type === 'post' || entity.entity_type === 'album' || entity.entity_type === 'video'
-    || entity.entity_type === 'video') {
-    postType = 'post';
-  } else if (entity.remind_object != false) {
-    postType = 'repost';
-  } else {
+  } else if (entity.entity_type === 'post'
+    || entity.entity_type === 'album'
+    || entity.entity_type === 'video'
+    || entity.entity_type === 'video'
+  ) {
     if (entity.tags && entity.tags.length > 0) {
       for (var i = 0; i < entity['tags'].length; i++) {
-        var specialHashtag = 'myjourney' + entity.ownerObj.username;
-        if (specialHashtag == entity['tags'][i]) {
+        var isMyJourney = 'myjourney' + entity.ownerObj.username;
+        var isPortfolio = 'portfolio' + entity.ownerObj.username;
+        if (isMyJourney == entity['tags'][i]) {
           postType = 'myjourney';
+          // console.log('myjourney');
+          break;
+        } else if (isPortfolio == entity['tags'][i]) {
+          postType = 'portfolio';
+          // console.log('portfolio');
           break;
         }
       }
-    } else {
-      postType = 'portfolio';
     }
+  } else if (entity.remind_object != false) {
+    postType = 'repost';
   }
 
   return postType;
