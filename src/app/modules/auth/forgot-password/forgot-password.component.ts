@@ -8,6 +8,7 @@ import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ForgotpasswordService } from './forgotpassword.service';
 import { FormValidator } from '../../../helpers/form.validator'
 import * as _ from 'lodash';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -63,7 +64,8 @@ export class ForgotPasswordComponent {
     public title: OpspotTitle,
     public session: Session,
     public formBuilder: FormBuilder,
-    private forgotpasswordservice: ForgotpasswordService
+    private forgotpasswordservice: ForgotpasswordService,
+    private toastr: ToastrService
   ) {
     this.buildForm('mobile');
   }
@@ -332,7 +334,8 @@ export class ForgotPasswordComponent {
       this.forgotpasswordservice.reset(data)
         .then((response: any) => {
           this.session.login(response.user);
-          this.router.navigate(['/newsfeed']);
+          this.router.navigate(['/login']);
+          this.toastr.success('Password reset successful, please login again to continue.')
         })
         .catch((e) => {
           this.error = e.message;
