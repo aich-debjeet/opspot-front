@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Session } from '../../../../../services/session';
 import getEntityType from '../../../../../helpers/post-type';
+import checkNestedKey from '../../../../../helpers/check-nested-key';
 
 @Component({
   selector: 'opspot-post-title-card',
@@ -49,8 +50,7 @@ export class PostCardTitle implements OnInit {
     } else if (this.postType === 'blog') {
       this.title = 'created a';
       this.hashtag = 'Blog';
-    } else if (this.postType === 'repost') {
-      // var name = this.entity.ownerObj.name + "'s"
+    } else if (this.postType === 'repost' && checkNestedKey(this.entity, ['remind_object', 'ownerObj', 'name'])) {
       this.title = 'shared ' + this.entity.remind_object.ownerObj.name + "'s";
       this.hashtag = 'post ' + "(Repost)";
     } else {
@@ -62,6 +62,5 @@ export class PostCardTitle implements OnInit {
   ngOnInit() {
     // console.log(this.entity)
   }
-
 
 }
