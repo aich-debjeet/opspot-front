@@ -47,8 +47,10 @@
 <div class="container">
   <div class="o-blocks o-blocks--flex" style="max-width:1190px" *ngIf="user && !user?.blocked">
     <section class="o-left-block o-left-block--prof">
+      
       <m-channel--sidebar [user]="user" [editing]="editing" (changeEditing)="toggleEditing($event)" [displayBookmark]="displayBookmark">
       </m-channel--sidebar>
+      
     </section>
 
     <!-- Feed list -->
@@ -67,7 +69,7 @@
       <m-channel--filter [user]="user" [filter]="filter" *ngIf="filter !== 'feed'"></m-channel--filter>
     </section>
 
-    <section class="o-right-block hidden-mob">
+    <section class="o-right-block hidden-under-desktop">
       <div class="sticky-card-wrapper">
         <app-myjourney-widget [user]="user"></app-myjourney-widget>
       </div>

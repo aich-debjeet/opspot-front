@@ -323,6 +323,8 @@ opspot-button-remind{
               <div class="text-sm grey m-16" id="view-profile-impressions">{{entity?.impressions}} viewed this post</div>
             </div>
             <div class="o-posts-inner-page-action__icons">
+                <button type="button" class="btn btn-outline-primary btn-block btn-boost-mob-c" id="view-profile-boost-button"
+                *ngIf="session.getLoggedInUser().guid == entity?.owner_guid" (click)="showBoost()">Boost</button>
               <a class="icon-posts-box">
                 <opspot-button-thumbs-up (liked)="liked($event)" [large]="'true'" [object]="entity">
                 </opspot-button-thumbs-up>

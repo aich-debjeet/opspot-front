@@ -5,7 +5,7 @@
     <label class="radio-label radio-label--flex" *ngFor="let privacy of privacys">
       <input type="radio" id="user-privacy-radio-button" (click)="model.privacy=privacy; changePrivacy()" [checked]="privacy===model.privacy">
       <div class="radio-widget" id="user-privacy-radio"></div>
-      <div class="text-sm grey"> {{privacy}}</div>
+      <div class="text-sm grey w-label100"> {{privacy}}</div>
     </label>
   </div>
 </div>

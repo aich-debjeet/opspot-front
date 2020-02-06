@@ -353,6 +353,9 @@ opspot-card-blog {
   display: flex;
   flex-direction: column;
   align-items: center;
+  img{
+    width: 100%;
+  }
   .m-blog--image-caption {
     display: inline-block;
     text-align: center;

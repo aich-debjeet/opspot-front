@@ -107,6 +107,11 @@
     width: 46px;
     order: 3;
     display: flex;
+    .btn{
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            display: none;
+        }
+    }
 }
 .head-action__link{
     margin-left: 12px;
