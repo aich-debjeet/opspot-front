@@ -107,7 +107,7 @@ export class AboutComponent implements OnInit {
         description: this.model.description,
         dob: dob,
         gender: this.model.gender,
-        languages: this.model.languages.map(el => el.value),
+        languages: language,
         height: this.model.height,
         weight: this.model.weight,
         dob_visibility: this.privacy.dob,
