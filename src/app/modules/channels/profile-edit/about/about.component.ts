@@ -127,6 +127,8 @@ export class AboutComponent implements OnInit {
     }).catch((e) => {
       if (e.status === 'error') {
         this.invalidForm = true;
+        this.inProgress = false;
+        this.showFailure();
       } else this.invalidForm = false;
     });
     // }
@@ -134,6 +136,11 @@ export class AboutComponent implements OnInit {
 
   showSuccess() {
     this.toastr.success('You have successfully updated your profile', '', {
+      timeOut: 3000
+    });
+  }
+  showFailure(){
+    this.toastr.error('Profile could not be updated', '', {
       timeOut: 3000
     });
   }
