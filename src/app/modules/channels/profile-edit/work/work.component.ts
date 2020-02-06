@@ -24,8 +24,8 @@ export class WorkComponent implements OnInit {
   work: any = { work_experience: [] };
   activeUser = window.Opspot.user;
   inProgress: boolean = false;
-  startMonthIndex
-  EndMonthIndex
+  startMonthIndex;
+  endMonthIndex;
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
   constructor(public client: Client, private toastr: ToastrService) { }
@@ -48,9 +48,9 @@ export class WorkComponent implements OnInit {
     }
     if (this.model.strtMonth && this.model.endMonth) {
       this.startMonthIndex = this.monthArray.indexOf(this.model.strtMonth.toLowerCase());
-      this.EndMonthIndex = this.monthArray.indexOf(this.model.endMonth.toLowerCase());
+      this.endMonthIndex = this.monthArray.indexOf(this.model.endMonth.toLowerCase());
     }
-    if ((this.model.endYear - this.model.strtYear < 0) || (this.EndMonthIndex - this.startMonthIndex < 0)) {
+    if ((this.model.endYear - this.model.strtYear < 0) || (this.endMonthIndex - this.startMonthIndex < 0)) {
       this.errWork = true;
     } else {
       this.errWork = false;

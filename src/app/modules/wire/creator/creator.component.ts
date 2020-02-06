@@ -484,7 +484,6 @@ export class WireCreatorComponent {
    * Submits the wire
    */
   async submit() {
-    console.log(this.wire);
     if (this.inProgress) {
       return;
     }
