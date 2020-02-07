@@ -63,4 +63,6 @@ export class PostCardTitle implements OnInit {
     // console.log(this.entity)
   }
 
+  getPostLink() { return ''; }
+
 }
