@@ -271,7 +271,7 @@ export class ShowtimezFormComponent implements OnInit {
           this.eventSubmitted = false;
           this.inProgress = false;
           this.changeToDefault();
-          this.navigationUrl = getViewPageLink('showtime', resp.activity.guid)
+          this.navigationUrl = getViewPageLink('showtimez', resp.activity.guid)
           if (resp.activity && this.eventGuid) {
             this.toastr.success('Updated successfully');
             this.router.navigate([this.navigationUrl]);
