@@ -59,7 +59,7 @@ export class OrganizationProfileFeed {
       // if (this.organization) {
       //   this.guid = org.guid;
       // }
-      console.log("Org:", org);
+      // console.log("Org:", org);
 
       if (org && org.guid) {
         this.guid = org.guid;
