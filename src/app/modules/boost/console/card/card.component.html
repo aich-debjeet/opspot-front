@@ -34,7 +34,7 @@
     </div><!--feed media end-->
 
     <div *ngIf="boost?.entity?.entity_type === 'opportunity'">
-        <div class="feed-card-opportunity-block" [routerLink]="['/opportunity/view',boost?.entity?.guid]">
+        <div class="feed-card-opportunity-block" [routerLink]="['/opportunity',boost?.entity?.guid]">
             <div class="feed-card-opportunity-block__top">
             <div class="opportunity-image">
                 <img *ngIf="boost?.entity?.custom_data.length > 0" [src]="boost?.entity?.custom_data[0]?boost?.entity?.custom_data[0].src:''"
@@ -63,7 +63,7 @@
     </div>
 
     <div *ngIf="boost?.entity?.entity_type === 'item'"
-    [routerLink]="['/item/view', boost?.entity?.guid]">
+    [routerLink]="['/item', boost?.entity?.guid]">
         <div class="feed-media" *ngIf="boost?.entity?.custom_data">
         <a *ngFor="let media of boost?.entity?.custom_data | slice:0:3; let i = index;" class="feed-media__link">
             <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
@@ -98,7 +98,7 @@
     </div>
 
     <div *ngIf="boost?.entity?.entity_type === 'event'"
-    [routerLink]="['/showtime/view', boost?.entity?.guid]">
+    [routerLink]="['/showtimez', boost?.entity?.guid]">
         <!-- <div class="m-mature-overlay" (click)="boost?.entity?.mature_visibility = !boost?.entity?.mature_visibility"></div> -->
         <div class="feed-media">
             <div class="feed-media-event-image">
