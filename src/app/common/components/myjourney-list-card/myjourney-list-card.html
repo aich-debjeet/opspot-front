@@ -1,7 +1,7 @@
 <div>
     <ul class="o-trending-post">
         <li class="o-trending-post__item">
-            <a [routerLink]="['/media/view', myjourney?.guid]">
+            <a [routerLink]="['/media', myjourney?.guid]">
                 <div class="feed-media__link">
                     <img class="feed-media__img" [src]="myjourney?.custom_data[0] ? myjourney?.custom_data[0].thumbnail_src:''"
                         (error)="myjourney.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png'"
