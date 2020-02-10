@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="o-community-img-block">
-                            <opspot-avatar [object]="organization" [editMode]="editing" [profileEdit]="true"
+                            <opspot-avatar *ngIf="organization" [object]="organization" [editMode]="editing" [profileEdit]="true"
                                 (added)="upload_avatar($event)">
                             </opspot-avatar>
                             <!-- <a class="o-community-img-edit"><i class="icon-edit-profile"></i></a> -->
