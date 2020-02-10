@@ -1,7 +1,7 @@
 <!-- Owner block -->
 <div class="mdl-card__supporting-text mdl-color-text--grey-600 m-owner-block"
   [class.m-owner-block--remind]="activity.remind_object" *ngIf="activity.ownerObj && activity.ownerObj.username">
-  <i class="material-icons selected" *ngIf="activity.remind_object">repeat</i>
+  <!-- <i class="material-icons selected" *ngIf="activity.remind_object">repeat</i> -->
   <div class="o-avatar" [hovercard]="activity.ownerObj.guid">
     <a *ngIf="activity.containerObj && activity.containerObj.type == 'organization'; else usersPicture" [routerLink]="['/organization/profile/', activity.containerObj.guid]" id="activity-user-image">
       <img [src]="opspot.cdn_url + 'icon/' + activity.containerObj.guid + '/medium/' + getOwnerIconTime()" class="mdl-shadow--2dp" />
