@@ -50,7 +50,11 @@ export class OrganizationProfileFeed {
 
   @ViewChild('poster') private poster: PosterComponent;
 
-  constructor(public session: Session, public client: Client, public service: OrganizationService, private route: ActivatedRoute) { }
+  constructor(
+    public session: Session, 
+    public client: Client, 
+    public service: OrganizationService, 
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.$organization = this.service.$group.subscribe((org) => {
