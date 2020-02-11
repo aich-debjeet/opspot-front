@@ -89,6 +89,7 @@
 
 .o-blog-inner-page-header-action{
   display:flex;
+  align-items: center;
   @include mq($from:$mobile_sm, $until:$desktop_sm){
       justify-content: flex-end;
   }
