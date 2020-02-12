@@ -149,9 +149,9 @@ export class Activity {
     if (this.activity.entity_type === "event") {
       // this.showTimez = true;
       if (this.activity.end_time_date) {
-        this.routerLink1 = "/event/view"
+        this.routerLink1 = "/event"
       } else {
-        this.routerLink1 = "/showtime/view"
+        this.routerLink1 = "/showtimez"
       }
     }
 

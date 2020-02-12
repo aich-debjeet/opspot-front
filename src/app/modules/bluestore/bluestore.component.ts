@@ -82,7 +82,7 @@ export class BluestoreComponent implements OnInit {
           this.user = data.activity.ownerObj;
           this.reachoutMessage += data.activity['perma_url'];
 
-          this.marketplace.url = window.Opspot.site_url + 'item/view/' + this.marketplace.guid;
+          this.marketplace.url = window.Opspot.site_url + 'item/' + this.marketplace.guid;
 
           if (this.marketplace['custom_data'][0]['entity_type'] === 'video') {
             this.showImage(0, this.marketplace['custom_data'][0]);

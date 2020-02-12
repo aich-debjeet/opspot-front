@@ -276,7 +276,7 @@ export class BigEventForm implements OnInit {
       this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
           if (resp && resp.activity && resp.activity['guid'] != '') {
-            this.router.navigate(['/event/view/' + resp.activity['guid']]);
+            this.router.navigate(['/event/' + resp.activity['guid']]);
           }
           this.eventSubmitted = false;
           this.inProgress = false;

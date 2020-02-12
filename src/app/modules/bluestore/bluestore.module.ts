@@ -18,7 +18,7 @@ import { MessengerModule } from '../messenger/messenger.module';
 // TODO @gayatri: handle all other requests
 const blueStoreRoutes: Routes = [
   {
-    path: 'item/view/:guid',
+    path: 'item/:guid',
     component: BluestoreComponent,
   }
   // {

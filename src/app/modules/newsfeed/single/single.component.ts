@@ -72,7 +72,7 @@ export class NewsfeedSingleComponent {
             this.router.navigate(['/blog/view', this.activity.guid], { replaceUrl: true });
             break;
           case 'opportunity':
-            this.router.navigate(['/opportunity/view', this.activity.guid], { replaceUrl: true });
+            this.router.navigate(['/opportunity', this.activity.guid], { replaceUrl: true });
             break;
         }
 

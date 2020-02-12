@@ -20,11 +20,11 @@ export class PostCard implements OnInit {
     
     if(this.entity){
       if(this.entity.entity_type === 'event'){
-        this.routerlink = '/event/view/' + this.entity.guid;
+        this.routerlink = '/event/' + this.entity.guid;
       }else if(this.entity.entity_type === 'opportunity'){
-        this.routerlink = '/opportunity/view/' + this.entity.guid;
+        this.routerlink = '/opportunity/' + this.entity.guid;
       }else if(this.entity.entity_type === 'item'){
-        this.routerlink = '/item/view/' + this.entity.guid;
+        this.routerlink = '/item/' + this.entity.guid;
       }else{
         this.routerlink = '/media/' + this.entity.guid;
       }

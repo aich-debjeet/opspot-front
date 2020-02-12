@@ -30,7 +30,7 @@ export class OrganizationService {
     // console.log('GS laod', guid);
     return this.clientService.get(`${this.base}organization/${guid}`)
       .then((response: any) => {
-        console.log("Response: ", response);
+        // console.log("Response: ", response);
         
         if (response.organization) {
           this.group.next(response.organization);
