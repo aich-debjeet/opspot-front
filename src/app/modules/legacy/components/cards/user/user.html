@@ -34,10 +34,6 @@
                     <div class="caption-bold f700" id="user-profile-following-count">{{subscriptionCount?subscriptionCount:0}}</div>
                     <div class="text-sm grey">Following</div>
                 </a>
-                <a [routerLink]="['/', user.username, 'feed']" id="user-profile-view-details">
-                    <div class="caption-bold f700" id="user-profile-view-count">{{user.impressions?user.impressions:'0' | abbr:0}}</div>
-                    <div class="text-sm grey">Views</div>
-                </a>
             </div>
             <br>
             <span [hidden]="!user?.about?.description" class="text-md" id="sidebar-user-description">
