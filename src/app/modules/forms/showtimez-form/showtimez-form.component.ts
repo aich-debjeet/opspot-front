@@ -60,7 +60,7 @@ export class ShowtimezFormComponent implements OnInit {
     dateInputFormat: 'DD-MM-YYYY'
   }
 
-  imageUploadError: boolean;
+  // imageUploadError: boolean;
   navigationUrl = '';
 
   @Input('object') set data(object) {
@@ -231,7 +231,7 @@ export class ShowtimezFormComponent implements OnInit {
   }
 
   eventSubmit() {
-    this.imageUploadError = false;
+    // this.imageUploadError = false;
     this.eventSubmitted = true;
     var startTime = this.convertDateToMillis(this.showTimezForm.value.eventdate, this.showTimezForm.value.eventTime)
     let data = Object.assign(this.meta, this.attachment.exportMeta());
@@ -243,7 +243,9 @@ export class ShowtimezFormComponent implements OnInit {
     }
 
     if (this.reqBody.attachment_guid == '') {
-      this.imageUploadError = true;
+      this.toastr.error('Please upload cover image');
+      return;
+      // this.imageUploadError = true;
     }
 
     this.reqBody.title = this.showTimezForm.value.eventTitle;
