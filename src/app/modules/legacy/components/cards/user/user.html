@@ -40,7 +40,10 @@
                 </a>
             </div>
             <br>
-            <span [hidden]="!user?.about?.description" class="text-md" id="sidebar-user-description">{{user.about.description}}</span>
+            <span [hidden]="!user?.about?.description" class="text-md" id="sidebar-user-description">
+                <span class="o-bio__title caption-medium t-a-l" id="sidebar-about-user">About: </span>
+                {{user.about.description}}
+            </span>
             <br>
             <ul class="o-bio__info">
               <li class="o-bio-info__item" [hidden]="user?.location">
@@ -144,6 +147,9 @@
 </div>
 
 <style>
+.t-a-l {
+    text-align: left;
+}
 .follow-btn {
     position: relative;
     margin: auto;
