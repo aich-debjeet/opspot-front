@@ -102,7 +102,7 @@ export class OrganizationCreator {
 
   save(e) {
 
-    if (!this.organization.name) {
+    if (!(this.organization.name && this.organization.location && this.organization.category)) {
       return;
     }
 
