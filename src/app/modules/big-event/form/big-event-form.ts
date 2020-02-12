@@ -26,7 +26,7 @@ export class BigEventForm implements OnInit {
   eventSubmitted: boolean;
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-  coverImageUploadError: boolean = false;
+  // coverImageUploadError: boolean = false;
   lable = 'Create';
 
   coverImage = '';
