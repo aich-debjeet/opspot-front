@@ -18,7 +18,9 @@
                 </div>
                 <!--Event Title Name ends-->
                 <div class="form-group">
-                    <label>Event Description <span class="text-sm grey description-width">21/300</span></label>
+                    <label>Event Description 
+                        <!-- <span class="text-sm grey description-width">21/300</span> -->
+                    </label>
                     <textarea class="form-control" id="big-event-description" rows="5" formControlName="eventDesc"></textarea>
                     <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventDesc').errors?.required">
                         This is required
