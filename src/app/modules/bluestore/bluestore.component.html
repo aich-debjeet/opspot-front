@@ -24,7 +24,7 @@
 							</div>
 						</div>
 						<div class="o-feed-head-action o-post-inner-profile-button">
-							<button type="button" class="btn btn-primary btn-sm" *ngIf="session.getLoggedInUser().guid == marketplace?.owner_guid" 
+							<button type="button" class="btn btn-primary btn-sm btn-boost" *ngIf="session.getLoggedInUser().guid == marketplace?.owner_guid" 
 								  (click)="showBoost()" id="bluestore-boost">Boost</button>
 							<a class="head-action__link" (click)="togglePin()" id="bluestore-bookmark-post">
 								<m-tooltip icon="turned_in" *ngIf="marketplace?.bookmark">

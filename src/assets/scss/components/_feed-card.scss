@@ -107,7 +107,7 @@
     width: 46px;
     order: 3;
     display: flex;
-    .btn{
+    .btn-boost {
         @include mq($from: $mobile_sm, $until: $tablet) {
             display: none;
         }
