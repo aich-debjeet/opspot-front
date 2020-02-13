@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label>Date</label>
                     <input type="text" id="showtimez-date" class="form-control form-control-lg" [textMask]="{mask: dateMask}"
-                        placeholder="Select Date" formControlName="eventdate">
+                        placeholder="Enter Date(DD-MM-YYYY)" formControlName="eventdate">
                     <div class="error text-sm"
                         *ngIf="eventSubmitted && showTimezForm.get('eventdate').errors?.required">
                         This is required</div>
@@ -56,7 +56,7 @@
                 <!--Date Location-->
                 <div class="form-group ml-18">
                     <label>Time</label>
-                    <input type="text" id="showtimez-time" class="form-control form-control-lg" placeholder="Time"
+                    <input type="text" id="showtimez-time" class="form-control form-control-lg" placeholder="Enter Time(HH:MM)"
                         [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventTime">
                     <div class="error text-sm"
                         *ngIf="eventSubmitted && showTimezForm.get('eventTime').errors?.required">
