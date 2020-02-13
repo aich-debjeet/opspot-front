@@ -14692,7 +14692,9 @@ m-video--progress-bar {
   m-video--progress-bar .progress-bar {
     -webkit-flex: 1;
             flex: 1;
-    position: relative; }
+    position: relative;
+    display: block;
+    background-color: transparent; }
     m-video--progress-bar .progress-bar .opspot-bar {
       position: absolute;
       left: 0px;

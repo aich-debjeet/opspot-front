@@ -333,7 +333,7 @@ export class ForgotPasswordComponent {
       }) 
       this.forgotpasswordservice.reset(data)
         .then((response: any) => {
-          this.session.login(response.user);
+          this.session.logout();
           this.router.navigate(['/login']);
           this.toastr.success('Password reset successful, please login again to continue.')
         })

@@ -18,9 +18,15 @@
       </div><!-- invite short det end -->
       <div class="o-invite-email">
         <div class="caption-bold f500">Invite your friends by email</div>
-        <textarea name="" id="invite-friends-email-adderss" cols="" rows="" class="o-invite-email-textarea text-md"
-          placeholder="Add email address using commas"></textarea>
-        <a class="o-send-invite" id="invite-friends-send-invite">Send Invite</a>
+        <!-- <textarea [(ngModel)]='emails' name="" id="invite-friends-email-adderss" cols="" rows="" class="o-invite-email-textarea text-md"
+          placeholder="Add email address"></textarea> -->
+        <tag-input
+          [(ngModel)]='emails'
+          placeholder="Add email address"
+          secondaryPlaceholder="Add email address"
+        ></tag-input>
+        <!-- <a class="o-send-invite" id="invite-friends-send-invite" (click)="sendInvite()">Send Invite</a> -->
+        <button class="o-send-invite" id="invite-friends-send-invite" (click)="sendInvite()" [disabled]="inProgress">Send Invite</button>
       </div><!-- invite by email end -->
       <div class="o-invite-other-way">
         <div class="caption-bold f500">More ways to invite your friends</div>
@@ -211,3 +217,17 @@
   </div>
 </div>
  -->
+
+<style>
+tag-input {
+  border: 1px solid #959595;
+  margin: 50px 0;
+  border-radius: 2px;
+  background: #fff;
+  height: 150px;
+  width: 450px;
+}
+tag-input .ng2-tag-input {
+  border-bottom: none;
+}
+</style>

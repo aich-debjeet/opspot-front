@@ -118,7 +118,11 @@ export class RegisterForm {
 
   //for getting otp
   getOtp(num) {
-    this.service.getOtp(num)
+    const data = {
+      num: num,
+      retry: false,
+    }
+    this.service.getOtp(data)
       .then((res: any) => {
         this.noViewOtp = false;
         this.invalidNumberLength = false;
@@ -335,12 +339,11 @@ export class RegisterForm {
   // resend otp for mobile
   resendOtp() {
     this.resending = true;
-    const data = ({
+    const data = {
       retry: true,
-      key: "phone_number",
-      value: this.removeOperators(this.form.value.mobileNumber.internationalNumber)
-    });
-    this.service.resendOtp(data).then((data: any) => {
+      num: this.removeOperators(this.form.value.mobileNumber.internationalNumber)
+    };
+    this.service.getOtp(data).then((data: any) => {
       localStorage.setItem('phone-verification-secret', data.secret);
       // this.inProgress = false;
     })

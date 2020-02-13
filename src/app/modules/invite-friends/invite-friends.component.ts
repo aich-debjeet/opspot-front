@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Session } from '../../services/session';
 import { OpspotTitle } from '../../services/ux/title';
+import { Client } from '../../services/api';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-invite-friends',
@@ -23,11 +25,15 @@ export class InviteFriendsComponent implements OnInit, OnDestroy {
   referrerParamRecentlyCopied: boolean = false;
   registerUrlFocused: boolean = false;
   referrerParamFocused: boolean = false;
+  emails: any[];
+  inProgress = false;
 
   constructor(
     public session: Session,
     public title: OpspotTitle,
-    ) {}
+    public client: Client,
+    public toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.title.setTitle('Invite Friends');
@@ -76,6 +82,25 @@ export class InviteFriendsComponent implements OnInit, OnDestroy {
       'mailto:?subject=Join%20me%20on%20OPS&body=Join me on OPS%0D%0A' +
         this.encodedRegisterUrl
     );
+  }
+
+  sendInvite() {
+    if (!this.emails) {
+      this.toastr.error('Please enter your friends email ids');
+      return;
+    }
+    const emails = this.emails.map(el => el.value);
+    this.inProgress = true;
+    this.client.post('api/v3/invitations', emails)
+      .then((response: any) => {
+        this.inProgress = false;
+        if (response.status === 'success') {
+          this.toastr.success('Invitations sent');
+          this.emails = [];
+        } else {
+          this.toastr.error('Something went wrong');
+        }
+      });
   }
 
   // openMessenger() {

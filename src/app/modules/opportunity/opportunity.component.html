@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="o-feed-head-action o-post-inner-profile-button">
-              <button type="button" class="btn btn-primary btn-sm" *ngIf="session.getLoggedInUser().guid == opportunity?.owner_guid" 
+              <button type="button" class="btn btn-primary btn-sm btn-boost" *ngIf="session.getLoggedInUser().guid == opportunity?.owner_guid" 
               (click)="showBoost()" id="opportunity-boost">Boost</button>
               <a class="head-action__link" (click)="togglePin()" id="opportunity-bookmark">
                 <m-tooltip icon="turned_in" *ngIf="opportunity?.bookmark">
