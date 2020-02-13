@@ -61,7 +61,8 @@
                   {{showTimez?.title}}
                 </h5>
                 <div class="text-lg grey">{{showTimez?.location}}<br>
-                  {{showTimez?.start_time_date | date:'h:mm | dd MMMM y'}}</div>
+                  {{showTimez?.start_time_date| date: 'E'}},
+                  {{showTimez?.start_time_date | date:'medium'}}</div>
                 <div class="text-md white-space word-break">
                   <!-- <span class="primary">#Event</span> -->
                   <m-translate 
