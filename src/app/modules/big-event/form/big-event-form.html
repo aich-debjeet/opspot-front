@@ -63,7 +63,7 @@
                 <div class="o-create-big-event-row">
                     <div class="form-group w100 mr13">
                         <label>Start Date</label>
-                        <input type="text" id="big-event-event-start-date" class="form-control form-control-lg" placeholder="Select Date"
+                        <input type="text" id="big-event-event-start-date" class="form-control form-control-lg" placeholder="Enter Date(DD-MM-YYYY)"
                             [textMask]="{mask: dateMask}" formControlName="eventStartDate">
                         <div class="error text-sm"
                             *ngIf="eventSubmitted && eventForm.get('eventStartDate').errors?.required">
@@ -76,7 +76,7 @@
                     <!--Organisation Type ends-->
                     <div class="form-group w100">
                         <label>Start Time</label>
-                        <input type="text" id="big-event-event-start-time" class="form-control form-control-lg" placeholder="Start Time"
+                        <input type="text" id="big-event-event-start-time" class="form-control form-control-lg" placeholder="Enter Time(HH:MM)"
                             [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)"
                             formControlName="eventStartTime">
                         <div class="error text-sm"
@@ -90,7 +90,7 @@
                 <div class="o-create-big-event-row">
                     <div class="form-group w100 mr13">
                         <label>End Date</label>
-                        <input type="text" id="big-event-event-end-date" class="form-control form-control-lg" placeholder="Select Date"
+                        <input type="text" id="big-event-event-end-date" class="form-control form-control-lg" placeholder="Enter Date(DD-MM-YYYY)"
                             [textMask]="{mask: dateMask}" formControlName="eventEndDate">
                         <div class="error text-sm"
                             *ngIf="eventSubmitted && eventForm.get('eventEndDate').errors?.required">
@@ -104,7 +104,7 @@
                     <!--Organisation Type ends-->
                     <div class="form-group w100">
                         <label>End Time</label>
-                        <input type="text" id="big-event-event-end-time" class="form-control form-control-lg" placeholder="End Time"
+                        <input type="text" id="big-event-event-end-time" class="form-control form-control-lg" placeholder="Enter Time(HH:MM)"
                             [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventEndTime">
                         <div class="error text-sm"
                             *ngIf="eventSubmitted && eventForm.get('eventEndTime').errors?.required">
