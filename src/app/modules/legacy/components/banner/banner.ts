@@ -24,6 +24,7 @@ import { Component, EventEmitter } from '@angular/core';
               <i class="white icon-plus-circle" (click)="chooseFile()"></i>
               <!--<i class="white icon-minus-circle" (click)="remove()"></i>-->
               <p class="white text-lg">Add Cover Picture</p>
+              <p class="white text-lg">Recommended size 2000px &times; 1125px (Ratio 16:9)</p>
           </div>
       </div>
 

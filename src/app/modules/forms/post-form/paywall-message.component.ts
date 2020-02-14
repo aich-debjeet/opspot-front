@@ -7,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class PaywallMessageComponent implements OnInit {
 
-  coins: string;
+  coins: number;
   message: any;
 
   _opts: any;
@@ -31,6 +31,13 @@ export class PaywallMessageComponent implements OnInit {
         coins: this.coins,
         message: this.message
       });
+    }
+  }
+  limit(e) {
+    let max_chars = 3;
+
+    if (e.target.value.length >= max_chars) {
+      e.preventDefault();
     }
   }
 
