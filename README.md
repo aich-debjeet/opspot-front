@@ -5,9 +5,9 @@ Opspot Front end
 ng serve --proxy-config proxy.conf.json
 
 # for prod deployment
-1. Front build: node --max-old-space-size=6096 ./node_modules/@angular/cli/bin/ng build --prod --output-path dist/ --deploy-url=/
-2. Deployment: ./opspot_front/dist => /var/www/Opspot/front/dist/en
-3. Update: index.php with new scripts and css bundles
+1. Change config in angular.json: src/index.html => src/index.php
+2. Front build: node --max-old-space-size=6096 ./node_modules/@angular/cli/bin/ng build --prod --output-path dist/ --deploy-url=/
+3. Deployment: ./opspot_front/dist => /var/www/Opspot/front/dist/en
 
 # for dev deployment
 1. Change config in angular.json: src/index.html => src/index.php
