@@ -10,11 +10,16 @@
         <img [src]="entity?.thumbnail_src" alt="media">
       </a>
     </div>
-    <div class="o-explore-media-img o-explore-media-img-oberlay" *ngIf="entity?.custom_data && entity?.custom_data.length> 0 && entity?.custom_data[0]?.entity_type === 'video'">
+    <div class="o-explore-media-img o-explore-media-img-oberlay" *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'video'">
       <a>
         <img [src]="entity?.custom_data[0]?.thumbnail_src" alt="media">
       </a>
-    </div><!-- media img end -->
+    </div>
+    <div class="o-explore-media-img" *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'audio'">
+      <a>
+        <img src="assets/videos/video_thumbnail.png" alt="media">
+      </a>
+    </div>
     <a class="o-explore-card-media-info">
       <div class="o-explore-card-media-info__avatar">
         <img src="{{opspot.cdn_url}}icon/{{entity.guid}}/medium/{{entity?.ownerObj?.icontime}}" alt="avatar">
