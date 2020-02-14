@@ -23,7 +23,7 @@
         routerLink="/groups/create">Create Community</button>
       <div class="text-lg f500 mb-17" id="list-communities-manage">Communities you manage</div>
       <div *ngFor="let entity of entities">
-        <div class="o-community-landing-block-manage" *ngIf="entity['is:creator'] && entity['entity_type']=='community'" 
+        <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='community'" 
           id="list-community-manage-list"
           [routerLink]="['/groups/profile', entity.guid]">
           <div class="o-community-landing-block-manage__avatar">

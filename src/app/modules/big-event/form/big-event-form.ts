@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { FormValidator } from '../../../helpers/form.validator';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { ToastrService } from "ngx-toastr";
 
 
 
@@ -25,7 +26,7 @@ export class BigEventForm implements OnInit {
   eventSubmitted: boolean;
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-  coverImageUploadError: boolean = false;
+  // coverImageUploadError: boolean = false;
   lable = 'Create';
 
   coverImage = '';
@@ -100,7 +101,8 @@ export class BigEventForm implements OnInit {
     public upload: Upload,
     public attachment: AttachmentService,
     public router: Router,
-    private _location: Location
+    private _location: Location,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -235,8 +237,11 @@ export class BigEventForm implements OnInit {
   }
 
   submitEvent() {
+
     this.eventSubmitted = true;
-    this.inProgress = true;
+    if (this.eventForm.invalid) {
+      return;
+    }
 
     let data = Object.assign(this.meta, this.attachment.exportMeta());
 
@@ -252,7 +257,8 @@ export class BigEventForm implements OnInit {
     // }
 
     if (this.reqBody.attachment_guid == '') {
-      this.coverImageUploadError = true;
+      this.toastr.error('Please upload cover image');
+      return;
     }
 
     var startTime = this.convertDateToMillis(this.eventForm.value.eventStartDate, this.eventForm.value.eventStartTime)
@@ -272,6 +278,7 @@ export class BigEventForm implements OnInit {
       if (this.bigEventGuid) {
         endpoint = 'api/v3/event/' + this.bigEventGuid;
       }
+      this.inProgress = true;
 
       this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
