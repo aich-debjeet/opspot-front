@@ -109,6 +109,8 @@
 
 //right style
 .o-blog-preview-popup-right{
+    max-width: 450px;
+    width: 100%;
     @include mq($from:$mobile_sm, $until:$mobile_lg){
         width: 100%;
     }
