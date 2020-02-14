@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { HashtagsSelectorComponent } from '../../../../hashtags/selector/selector.component';
+import { TopbarHashtagsService } from '../../../../hashtags/service/topbar.service';
 import { Tag } from '../../../../hashtags/types/tag';
 import { Client, Upload } from '../../../../../services/api';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,30 +17,55 @@ export class BlogPreviewComponent implements OnInit {
   banner: any;
   banner_top: number = 0;
   banner_prompt: boolean = false;
+  skillData: any[] = [];
+  blogSkills: any[];
 
   @Input('object') set data(object) {
     console.log(object);
     this.blog = object ? object.blog : null;
     this.guid = object ? object.guid : null;
+    let skills = object ? object.blog.tags : null;
+    skills = skills.filter(el => !!el);
+    this.skillsAlter(skills);
   }
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
-  constructor(public upload: Upload, public router: Router, public client: Client, private overlayModal: OverlayModalService) {
+  constructor(public upload: Upload, public router: Router, public client: Client, private overlayModal: OverlayModalService,private service: TopbarHashtagsService,) {
     this.banner = void 0;
     this.banner_top = 0;
     this.banner_prompt = false;
   }
 
   ngOnInit() {
+   this.getTopHashtags();
+  }
+
+  async getTopHashtags(){
+    const res = await this.service.load(50);
+    res.map(a => {
+      console.log(a)
+      this.skillData.push(a.value);
+    });
   }
 
   onTagsChange(tags: string[]) {
     this.blog.tags = tags;
   }
 
+  skillsAlter(skills: any[]) {
+    for (let i = skills.length; i--;) {
+      this.blogSkills.push({ display: skills[i], value: skills[i] });
+    }
+  }
   onTagsAdded(tags: Tag[]) {
   }
 
   onTagsRemoved(tags: Tag[]) {
+  }
+  onItemAdded(e){
+    console.log(e);
+    const skills = this.blogSkills.map(e => e.value);
+    this.blog.tags = skills;
+
   }
 
   add_banner(banner: any) {
