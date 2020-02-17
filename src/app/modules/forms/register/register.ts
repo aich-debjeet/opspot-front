@@ -33,6 +33,7 @@ export class RegisterForm {
   showFbForm: boolean = false;
   invalidNumberLength: boolean = false;
   enterOtpError: boolean = true;
+  countryCode = '91';
 
   form: FormGroup;
   fbForm: FormGroup;
@@ -83,10 +84,15 @@ export class RegisterForm {
   onMobileNumber() {
     let numbers;
     this.form.controls['mobileNumber'].valueChanges.subscribe(val => {
-      if (val && val.internationalNumber) {
-        numbers = this.removeSpace(val.internationalNumber);
-        numbers = this.removeOperators(numbers);
-        this.getOtp(numbers);
+      if (val) {
+        if (val.dialCode) {
+          this.countryCode = this.removeOperators(val.dialCode);
+        }
+        if (val.internationalNumber) {
+          numbers = this.removeSpace(val.internationalNumber);
+          numbers = this.removeOperators(numbers);
+          this.getOtp(numbers);
+        }
       }
     });
   }
@@ -117,10 +123,11 @@ export class RegisterForm {
   }
 
   //for getting otp
-  getOtp(num) {
+  getOtp(number) {
     const data = {
-      num: num,
+      number: number,
       retry: false,
+      country_code: this.countryCode
     }
     this.service.getOtp(data)
       .then((res: any) => {
@@ -171,6 +178,7 @@ export class RegisterForm {
         'username': this.form.value.username,
         'number': phoneNumber,
         'code': this.otp,
+        'country_code': this.countryCode,
         'secret': localStorage.getItem('phone-verification-secret'),
         'email': this.form.value.email,
         'date_of_birth': {
@@ -340,8 +348,9 @@ export class RegisterForm {
   resendOtp() {
     this.resending = true;
     const data = {
+      number: this.removeOperators(this.form.value.mobileNumber.internationalNumber),
       retry: true,
-      num: this.removeOperators(this.form.value.mobileNumber.internationalNumber)
+      country_code: this.countryCode
     };
     this.service.getOtp(data).then((data: any) => {
       localStorage.setItem('phone-verification-secret', data.secret);
