@@ -25,6 +25,7 @@ export class ForgotPasswordComponent {
   step = 0;
   username = '';
   code = '';
+  countryCode = '91';
 
   // step0
   emailForm: FormGroup;
@@ -172,13 +173,15 @@ export class ForgotPasswordComponent {
     this.submitted1 = true;
     if (this.mobileForm.valid) {
       this.mobile = this.removeOperators(this.mobileForm.value.mobileInput.internationalNumber);
+      this.countryCode = this.removeOperators(this.mobileForm.value.mobileInput.dialCode);
       //localStorage.setItem("mobileNumber", mobileNumber);
       this.error = '';
       this.inProgress = true;
       const data = ({
         retry: false,
         key: "phone_number",
-        value: this.mobile
+        value: this.mobile,
+        country_code: this.countryCode
       });
       this.forgotpasswordservice.sendOtp(data)
         .then((data: any) => {

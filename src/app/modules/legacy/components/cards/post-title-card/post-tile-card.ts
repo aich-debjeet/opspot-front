@@ -47,7 +47,7 @@ export class PostCardTitle implements OnInit {
       this.hashtag = '#Myjourney';
     } else if (this.postType === 'bluestore') {
       this.title = 'created a';
-      this.hashtag = '#MarketPlace';
+      this.hashtag = '#TheBlueStore';
       this.parentRoute = 'item';
     } else if (this.postType === 'portfolio') {
       this.title = 'created a';
