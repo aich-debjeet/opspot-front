@@ -63,7 +63,7 @@ export class AwardsComponent implements OnInit {
       title: this.model.title,
       location: this.model.location,
       issuer: this.model.issuer,
-      privacy: this.model.privacy,
+      access: this.model.access,
       issue_period: this.model.strtYear
         ? this.model.strtMonth + '-' + this.model.strtYear
         : ''
@@ -119,9 +119,9 @@ export class AwardsComponent implements OnInit {
     //   this.errEndDate=false;
     //   this.model.present=true;
     // }
-    if (!data.privacy) {
-      this.model.privacy = false;
-    } else this.model.privacy = true;
+    if (!data.access) {
+      this.model.access = false;
+    } else this.model.access = true;
   }
   remove(index) {
     let deletedAwards = _.pullAt(this.work.awards, [index]);
@@ -144,7 +144,7 @@ export class AwardsComponent implements OnInit {
 
   addWorkMove() {
     this.model = {}; //render empty form after update/create
-    this.model.privacy = false; // setting default value of privacy
+    this.model.access = false; // setting default value of access
     this.submitted = false;
   }
   showSuccess() {

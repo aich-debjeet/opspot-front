@@ -265,10 +265,10 @@
           class="icon-edit-profile f-15"></i></a>
       <div class="o-work__title caption-medium">Work</div>
       <div *ngFor="let work of user?.work_experience" class="o-work-info">
-        <div class="o-work-info__logo" *ngIf="work?.privacy">
+        <div class="o-work-info__logo" *ngIf="work?.access">
           <img src="assets/Work.jpg" alt="">
         </div>
-        <div class="o-work-info__det" id="sidebar-work-widget" *ngIf="work?.privacy">
+        <div class="o-work-info__det" id="sidebar-work-widget" *ngIf="work?.access">
           <a class="text-md f500">{{ work?.designation }}</a>
           <div class="text-sm grey-dark">{{ work?.company_name }} - {{ work?.location }}</div>
         </div>
@@ -279,10 +279,10 @@
           class="icon-edit-profile f-15"></i></a>
       <div class="o-education__title caption-medium">Education</div>
       <div *ngFor="let education of user?.education" class="o-education-info">
-        <div class="o-education-info__logo" *ngIf="education.privacy">
+        <div class="o-education-info__logo" *ngIf="education.access">
           <img src="assets/Education.jpg" alt="">
         </div>
-        <div class="o-education-info__det" id="sidebar-education-widget" *ngIf="education.privacy">
+        <div class="o-education-info__det" id="sidebar-education-widget" *ngIf="education.access">
           <a class="text-md f500">{{ education?.field_of_study }}</a>
           <div class="text-sm grey-dark">{{ education?.university }} - {{ education?.location }}</div>
         </div>
@@ -293,10 +293,10 @@
           class="icon-edit-profile f-15"></i></a>
       <div class="o-award__title caption-medium">Awards</div>
       <div *ngFor="let award of user?.awards" class="o-award-info">
-        <div class="o-award-info__logo" *ngIf="award.privacy">
+        <div class="o-award-info__logo" *ngIf="award.access">
           <img src="assets/Awards.jpg" alt="">
         </div>
-        <div class="o-award-info__det" id="sidebar-award-widget" *ngIf="award.privacy">
+        <div class="o-award-info__det" id="sidebar-award-widget" *ngIf="award.access">
           <a class="text-md f500">{{ award?.title }}</a>
           <div class="text-sm grey-dark">{{ award?.issuer }} - {{ award?.location }}</div>
         </div>

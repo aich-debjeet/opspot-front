@@ -75,7 +75,7 @@ export class WorkComponent implements OnInit {
         designation: this.model.designation,
         location: this.model.location,
         company_name: this.model.company,
-        privacy: this.model.privacy,
+        access: this.model.access,
         start_date: this.model.strtYear
           ? this.model.strtMonth + '-' + this.model.strtYear
           : '',
@@ -134,9 +134,9 @@ export class WorkComponent implements OnInit {
       this.errEndDate = false;
       this.model.present = true;
     }
-    if (!data.privacy) {
-      this.model.privacy = false;
-    } else this.model.privacy = true;
+    if (!data.access) {
+      this.model.access = false;
+    } else this.model.access = true;
   }
 
   remove(index) {
@@ -160,7 +160,7 @@ export class WorkComponent implements OnInit {
 
   addWorkMove() {
     this.model = {}; //render empty form after update/create
-    this.model.privacy = false; // setting default value of privacy
+    this.model.access = false; // setting default value of access
     this.toggleEnd = false; //set default value of current working status
     this.submitted = false;
   }
