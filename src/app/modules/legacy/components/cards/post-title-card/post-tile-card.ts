@@ -12,10 +12,11 @@ import checkNestedKey from '../../../../../helpers/check-nested-key';
 export class PostCardTitle implements OnInit {
 
   entity: any;
-  opspot = window.Opspot;
   title = '';
   hashtag = '';
   postType = '';
+  parentRoute = 'media';
+  opspot = window.Opspot;
 
   constructor(
     public session: Session,
@@ -32,18 +33,22 @@ export class PostCardTitle implements OnInit {
     if (this.postType === 'opportunity') {
       this.title = 'created an';
       this.hashtag = '#Opportunity';
+      this.parentRoute = 'opportunity';
     } else if (this.postType === 'bigevent') {
       this.title = 'created an';
       this.hashtag = '#Event';
+      this.parentRoute = 'event';
     } else if (this.postType === 'showtimez') {
       this.title = 'created a';
       this.hashtag = '#Showtimez';
+      this.parentRoute = 'showtimez';
     } else if (this.postType === 'myjourney') {
       this.title = 'created a';
       this.hashtag = '#Myjourney';
     } else if (this.postType === 'bluestore') {
       this.title = 'created a';
-      this.hashtag = '#MarketPlace';
+      this.hashtag = '#TheBlueStore';
+      this.parentRoute = 'item';
     } else if (this.postType === 'portfolio') {
       this.title = 'created a';
       this.hashtag = '#Portfolio';
@@ -52,7 +57,7 @@ export class PostCardTitle implements OnInit {
       this.hashtag = 'Blog';
     } else if (this.postType === 'repost' && checkNestedKey(this.entity, ['remind_object', 'ownerObj', 'name'])) {
       this.title = 'shared ' + this.entity.remind_object.ownerObj.name + "'s";
-      this.hashtag = 'post ' + "(Repost)";
+      this.hashtag = 'post ' + '(Repost)';
     } else {
       this.title = 'created a';
       this.hashtag = 'Post';
@@ -62,5 +67,6 @@ export class PostCardTitle implements OnInit {
   ngOnInit() {
     // console.log(this.entity)
   }
+
 
 }

@@ -194,8 +194,11 @@
 <!-- </div> -->
 
 <div class="o-overview-activity">
-  <div id="likes" class="o-activity-info" *ngFor="let reward of rewards | keyvalue">
-    <div class="text-md f500 primary">{{reward.key}}</div>
-    <div class="text-sm grey">{{reward.value}}</div>
+  <p>Points you can earn through your activities.</p>
+  <div class="__activity">
+    <div id="likes" class="o-activity-info" *ngFor="let reward of rewards | keyvalue">
+      <div class="text-sm grey">+{{reward.value}}</div>
+      <div class="text-md f500 primary">{{reward.key}}</div>   
+    </div>
   </div>
 </div>

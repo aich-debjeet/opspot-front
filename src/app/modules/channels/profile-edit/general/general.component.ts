@@ -19,6 +19,7 @@ export class GeneralComponent implements OnInit {
     skills: []
   };
   inProgress:boolean = false;
+  reqName: boolean = false;
   
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
@@ -31,7 +32,12 @@ export class GeneralComponent implements OnInit {
     this.load();
   }
 
-  onSubmit() {
+  onSubmit(e) {
+    if(!e.valid){
+      this.reqName = true;
+      return;
+    }
+    this.reqName = false;
     this.inProgress = true;
     const skills = this.model.skills.map(el => el.value);
     const info = {
@@ -48,6 +54,11 @@ export class GeneralComponent implements OnInit {
           this.inProgress = false;
           this.updatePercentage.emit(response.rating);
         });
+      }
+    }).catch((e) => {
+      if (e.status === 'error') {
+        this.inProgress = false;
+        this.showFailure();
       }
     });
   }
@@ -88,6 +99,11 @@ export class GeneralComponent implements OnInit {
 
   showSuccess() {
     this.toastr.success('You have successfully updated your profile.', '', {
+      timeOut: 3000
+    });
+  }
+  showFailure(){
+    this.toastr.error('Profile could not be updated', '', {
       timeOut: 3000
     });
   }

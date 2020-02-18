@@ -36,14 +36,28 @@
                 <opspot-banner [object]="blog" editMode="true" [done]="banner_prompt" (added)="add_banner($event)">
                 </opspot-banner>
                 <div class="o-blog-preview-popup-right__title">
-                    <div class="text-lg" (click)="detect()">
-                        Add Hashtags
+                    <div class="text-lg">
+                        Add Tags
                     </div>
                 </div>
                 <!--title ends-->
                 <div class="o-blog-preview-tag">
-                    <m-hashtags-selector #hashtagsSelector [tags]="blog.tags.slice(0)" (tagsChange)="onTagsChange($event)"
-                        (tagsAdded)="onTagsAdded($event)" (tagsRemoved)="onTagsRemoved($event)"></m-hashtags-selector>
+                    <!-- <m-hashtags-selector #hashtagsSelector [tags]="blog.tags.slice(0)" (tagsChange)="onTagsChange($event)"
+                        (tagsAdded)="onTagsAdded($event)" (tagsRemoved)="onTagsRemoved($event)"></m-hashtags-selector> -->
+                        <!-- <div class="form-group form-gorup--general--textarea"> -->
+                              <tag-input
+                                  style="border:1px solid #959595; padding-bottom: 50px;"
+                                  [(ngModel)]='blogSkills' name="d" theme='minimal' (onAdd)="onItemAdded($event)">
+                                  <tag-input-dropdown
+                                      [showDropdownIfEmpty]="false"
+                                      [limitItemsTo]=5
+                                      [minimumTextLength]=3
+                                      [zIndex]=999999999999
+                                      [autocompleteItems]="skillData"
+                                  ></tag-input-dropdown>
+                             </tag-input>
+                            <div class="w100 text-sm grey">Use a comma to separate skill or choose from the list.</div>
+                        <!-- </div> -->
 
                     <!-- <div class="text-sm grey">Use a comma to separate hashtags or choose from the list.</div> -->
                     <!--tag style-->
@@ -53,6 +67,20 @@
                         </div>
                         <a class="#"><i class="icon-x tag-close"></i></a>
                     </div> -->
+                    <ng-container *ngIf="error" [ngSwitch]="error">
+                        <h1 class="edit-error"
+                        i18n="@@BLOGS__EDIT__NO_BANNER_ERROR"
+                        *ngSwitchCase="'error:no-banner'"
+                        >
+                        Error: You must upload a banner before publishing a draft.
+                        </h1>
+                        <h1
+                          class="edit-error"
+                          *ngSwitchDefault
+                        >
+                          Error: {{error}}
+                        </h1>
+                      </ng-container>
                 </div>
                 <div class="o-blog-preview-button-set">
                     <button type="button" id="blog-review-cancel" class="btn btn-primary btn-lg mrgr15" (click)="closeModal()">Cancel</button>

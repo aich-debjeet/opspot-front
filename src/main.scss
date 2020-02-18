@@ -3282,7 +3282,7 @@ m-inline-editor .m-blog--image {
       -webkit-flex-grow: 1;
               flex-grow: 1; }
   .medium-editor-insert-plugin .medium-insert-buttons {
-    position: absolute;
+    // position: absolute;
     color: #bbb;
     font-size: 0.9em; }
     .medium-editor-insert-plugin .medium-insert-buttons button {
@@ -14692,7 +14692,9 @@ m-video--progress-bar {
   m-video--progress-bar .progress-bar {
     -webkit-flex: 1;
             flex: 1;
-    position: relative; }
+    position: relative;
+    display: block;
+    background-color: transparent; }
     m-video--progress-bar .progress-bar .opspot-bar {
       position: absolute;
       left: 0px;

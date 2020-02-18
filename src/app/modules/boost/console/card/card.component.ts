@@ -30,9 +30,9 @@ export class BoostConsoleCard {
     // if (this.boost.entity_type === "event") {
     //   // this.showTimez = true;
     //   if (this.boost.entity.end_time_date) {
-    //     this.routerLink1 = "/event/view"
+    //     this.routerLink1 = "/event"
     //   } else {
-    //     this.routerLink1 = "/showtime/view"
+    //     this.routerLink1 = "/showtimez"
     //   }
     // }
     // console.log("this.boost: ", this.boost)

@@ -50,7 +50,11 @@ export class OrganizationProfileFeed {
 
   @ViewChild('poster') private poster: PosterComponent;
 
-  constructor(public session: Session, public client: Client, public service: OrganizationService, private route: ActivatedRoute) { }
+  constructor(
+    public session: Session, 
+    public client: Client, 
+    public service: OrganizationService, 
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.$organization = this.service.$group.subscribe((org) => {
@@ -59,7 +63,7 @@ export class OrganizationProfileFeed {
       // if (this.organization) {
       //   this.guid = org.guid;
       // }
-      console.log("Org:", org);
+      // console.log("Org:", org);
 
       if (org && org.guid) {
         this.guid = org.guid;

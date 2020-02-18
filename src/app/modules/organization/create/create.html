@@ -35,10 +35,10 @@
                 <label>Organization Name</label>
                 <input [(ngModel)]="organization.name" id="create-organization-name" type="text" class="form-control form-control-lg">
             </div>
-            <div class="form-group select-organisation">
+            <div class="form-group">
                 <label>Organization Type</label>
                 <select class="form-control form-control-lg" id="create-organization-type" [(ngModel)]="organization.category">
-                        <option value="not-selected" id="create-organization-select-type">Select Type</option>
+                        <option value="" id="create-organization-select-type" disabled selected>Select Type</option>
                         <option *ngFor = "let type of organizationTypeList" id="create-organization-type-value" [value]="type.value">{{ type.label}}</option>       
                 </select>
             </div>
@@ -75,9 +75,10 @@
                     <!--file upload ends-->
                     <!--file preview ends-->
                 </div>
+                <div class="text-sm grey">The dimensions for profile picture is 797px x 275px </div>
             </div>
             <div class="o-create-organisation-action">
-                <button type="button" id="create-organization-create-button" class="btn btn-primary btn-lg mr-18" (click)="save($event)" [disabled]="inProgress">{{editOrganization?"Update":"Create"}}</button>
+                <button type="button" id="create-organization-create-button" class="btn btn-primary btn-lg mr-18" (click)="save($event)" [disabled]="!(organization.name && organization.location && organization.category) || inProgress">{{editOrganization?"Update":"Create"}}</button>
                 <button type="button" id="create-organization-cancel-button" class="btn btn-outline-primary btn-lg" (click)="organizationReset()">Cancel</button>
                 <!-- <button (click)="navEvent()">Nav Event</button> -->
             </div>

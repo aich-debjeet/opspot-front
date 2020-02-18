@@ -1,6 +1,7 @@
 import { Inject } from '@angular/core';
 import { Client, Upload } from './api';
 import { Session } from './session';
+// import getFileSize from '../helpers/file-size';
 
 export class AttachmentService {
 
@@ -416,15 +417,23 @@ export class AttachmentService {
       if (file.type && file.type.indexOf('video/') === 0) {
         this.attachment.mime = 'video';
 
-        this.checkVideoDuration(file).then(duration => {
-          if (duration > window.Opspot.max_video_length) {
-            return reject({ message: 'Error: Video duration exceeds ' + window.Opspot.max_video_length / 60 + ' minutes' });
-          }
+        const fzMB = file.size / 1024 / 1024;
+        // const displaySize = getFileSize(file.size, true);
+        if (fzMB > 100) { // 100 MB
+          reject({ message: 'Error: Video file size limit 100 MB exceeded' });
+        } else {
           resolve();
-        }).catch(error => {
-          resolve(); //resolve regardless and forward to backend job
-          //reject(error);
-        });
+        }
+
+        // this.checkVideoDuration(file).then(duration => {
+        //   if (duration > window.Opspot.max_video_length) {
+        //     return reject({ message: 'Error: Video duration exceeds ' + window.Opspot.max_video_length / 60 + ' minutes' });
+        //   }
+        //   resolve();
+        // }).catch(error => {
+        //   resolve(); //resolve regardless and forward to backend job
+        //   //reject(error);
+        // });
 
       } else if (file.type && file.type.indexOf('audio/') === 0) {
         this.attachment.mime = 'audio';
@@ -469,7 +478,7 @@ export class AttachmentService {
     });
   }
 
-  private checkVideoDuration(file) {
+  private checkVideoDuration(file: HTMLInputElement) {
     return new Promise((resolve, reject) => {
       const videoElement = document.createElement('video');
       let timeout: number = 0;
@@ -479,6 +488,7 @@ export class AttachmentService {
           window.clearTimeout(timeout);
 
         window.URL.revokeObjectURL(videoElement.src);
+        console.log('file size', file.size);
         resolve(videoElement.duration);
       };
       videoElement.addEventListener('error', function (error) {

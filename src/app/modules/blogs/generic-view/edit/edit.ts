@@ -181,16 +181,15 @@ export class BlogEdit {
 
   validate() {
     this.error = '';
-
-    if (!this.blog.description) {
-      this.error = 'error:no-description';
-      return false;
-    }
+    console.log(this.blog.description)
     if (!this.blog.title) {
       this.error = 'error:no-title';
       return false;
     }
-
+    if (!this.blog.description) {
+      this.error = 'error:no-description';
+      return false;
+    }
     return true;
   }
 

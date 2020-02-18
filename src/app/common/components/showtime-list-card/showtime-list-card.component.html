@@ -1,7 +1,7 @@
 <div>
     <ul class="o-trending-post">
         <li class="o-trending-post__item">
-            <a [routerLink]="['/event/view', event?.guid]">
+            <a [routerLink]="['/event', event?.guid]">
                 <div class="o-trending-post__cover">
                     <img *ngIf="event?.custom_data.length > 0"
                         [src]="event?.custom_data[0] ? event?.custom_data[0].src:''"
