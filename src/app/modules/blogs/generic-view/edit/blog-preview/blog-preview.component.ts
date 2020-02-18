@@ -19,6 +19,7 @@ export class BlogPreviewComponent implements OnInit {
   banner_prompt: boolean = false;
   skillData: any[] = [];
   blogSkills: any[];
+  error: string = '';
 
   @Input('object') set data(object) {
     console.log(object);
@@ -112,7 +113,12 @@ export class BlogPreviewComponent implements OnInit {
         });
     })
       .catch(() => {
-        this.client.post('api/v1/blog/' + this.guid, this.blog)
+        this.error = '';
+        if(blog.published != 0){
+          this.error = 'error:no-banner';
+          return false;
+        } else {
+          this.client.post('api/v1/blog/' + this.guid, this.blog)
           .then((response: any) => {
             if (response.guid) {
               this.overlayModal.dismiss();
@@ -125,6 +131,7 @@ export class BlogPreviewComponent implements OnInit {
             // this.inProgress = false;
             // this.canSave = true;
           });
+        }
       });
   }
 
