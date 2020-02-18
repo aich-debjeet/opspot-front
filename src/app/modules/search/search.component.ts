@@ -261,4 +261,8 @@ export class SearchComponent {
     console.log('see all: ', type);
     // this.router.navigate(['']);
   }
+
+  selectedFilter(type: string) {
+    this.router.navigate(['/search', { q: this.q, type: type, ref: this.ref }]);
+  }
 }
