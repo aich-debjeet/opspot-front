@@ -246,73 +246,78 @@ opspot-button-remind{
               <!-- </div> -->
             </div>
           </div>
-          <div class="o-post-inner-page-myjourney-image">
-            <img [src]="largeImage" alt="" *ngIf="!showVideo && !showAudio">
-            <m-video *ngIf="showVideo && !showAudio" style="background:#000;" [muted]="false" [poster]="videoData.thumbnail_src"
-              [src]="[{ 'res': '360', 'uri': 'api/v1/media/' + videoData.guid + '/play', 'type': 'video/mp4' }]"
-              [guid]="videoData.guid" [torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
-              <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
-            </m-video>
-            <m-audio style="width:100%" *ngIf="showAudio && !showVideo" [src]="'api/v1/media/' + videoData.guid + '/play'"></m-audio>
-            <!-- <m-audio style="width: 100%" *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio> -->
-          </div>
-          <div class="o-posts-inner-page-myjourney-padding">
-            <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">
-              <div *ngFor="let media of entity?.custom_data; let i = index;">
-                <a class="feed-media__link" id="view-media-link">
-                  <img *ngIf="media.entity_type !== 'video' && media.entity_type !== 'audio'" [src]="media.src" alt="" class="feed-media__img"
-                    (click)="showImage(i)">
-                  <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
-                  <img *ngIf="media.entity_type === 'audio'" src="assets/videos/video_thumbnail.png" alt="" class="feed-media__img" (click)="showImage(i,media)">
-                  <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
-                    <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
-                  </div>
-                </a>
-              </div>
+          <div class="media-wrapper" *ngIf="!entity.paywall || editing">
+            <div class="o-post-inner-page-myjourney-image">
+              <img [src]="largeImage" alt="" *ngIf="!showVideo && !showAudio">
+              <m-video *ngIf="showVideo && !showAudio" style="background:#000;" [muted]="false" [poster]="videoData.thumbnail_src"
+                [src]="[{ 'res': '360', 'uri': 'api/v1/media/' + videoData.guid + '/play', 'type': 'video/mp4' }]"
+                [guid]="videoData.guid" [torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
+                <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
+              </m-video>
+              <m-audio style="width:100%" *ngIf="showAudio && !showVideo" [src]="'api/v1/media/' + videoData.guid + '/play'"></m-audio>
+              <!-- <m-audio style="width: 100%" *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio> -->
             </div>
-            <div class="pos-rel" *ngIf="entity?.custom_data?.length > 5">
-              <i class="arrow-icons icon-arrow-left-circle left" (click)="slickModal.slickPrev()"></i>
-              <ngx-slick-carousel class="carousel feed-media post-view-style" #slickModal="slick-carousel"
-                [config]="slideConfig" (init)="slickInit($event)" (breakpoint)="breakpoint($event)"
-                (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
-                <div ngxSlickItem *ngFor="let media of entity?.custom_data; let i = index;" class="slide">
-                  <a class="feed-media__link">
-                    <!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + media.src + ')'"></div> -->
-                    <!-- <img [src]="media.src" alt="" class="feed-media__img"
-                      (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
-                    <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'  && media.entity_type !== 'audio'"
+            <div class="o-posts-inner-page-myjourney-padding">
+              <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">
+                <div *ngFor="let media of entity?.custom_data; let i = index;">
+                  <a class="feed-media__link" id="view-media-link">
+                    <img *ngIf="media.entity_type !== 'video' && media.entity_type !== 'audio'" [src]="media.src" alt="" class="feed-media__img"
                       (click)="showImage(i)">
-                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img" (click)="showImage(i,media)">
+                    <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
                     <img *ngIf="media.entity_type === 'audio'" src="assets/videos/video_thumbnail.png" alt="" class="feed-media__img" (click)="showImage(i,media)">
-                    <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
+                    <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" (click)="showImage(i,media)">
                       <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
                     </div>
                   </a>
                 </div>
-              </ngx-slick-carousel>
-							<i class="arrow-icons icon-arrow-right-circle right" (click)="slickModal.slickNext()"></i>              
-            </div>
-            <m-translate 
-              [open]="translateToggle"
-              [entity]="entity" 
-              [translateEvent]="translateEvent"
-              (onTranslateInit)="propagateTranslation($event)" 
-              (onTranslate)="translateToggle = false"
-              (onTranslateError)="translateToggle = false" 
-              #translate>
-            </m-translate>
-            <div class="text-md white-space word-break">{{ entity?.message}}</div>
-            <div class="opspot-editable-container"
-                *ngIf="editing">
-                <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
-                <textarea class="mdl-card__supporting-text message w100" id="view-profile-message" name="message" [ngModel]="entity.message" #messageEdit
-                  [autoGrow]></textarea>
-                <button class="btn btn-outline-primary btn-lg" id="view-profile-cancel-message"
-                  (click)="messageEdit.value = entity?.message; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
-                <button class="btn btn-primary btn-lg" id="view-profile-save-message"
-                  (click)="entity.message = messageEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
+              </div>
+              <div class="pos-rel" *ngIf="entity?.custom_data?.length > 5">
+                <i class="arrow-icons icon-arrow-left-circle left" (click)="slickModal.slickPrev()"></i>
+                <ngx-slick-carousel class="carousel feed-media post-view-style" #slickModal="slick-carousel"
+                  [config]="slideConfig" (init)="slickInit($event)" (breakpoint)="breakpoint($event)"
+                  (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+                  <div ngxSlickItem *ngFor="let media of entity?.custom_data; let i = index;" class="slide">
+                    <a class="feed-media__link">
+                      <!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + media.src + ')'"></div> -->
+                      <!-- <img [src]="media.src" alt="" class="feed-media__img"
+                        (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
+                      <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'  && media.entity_type !== 'audio'"
+                        (click)="showImage(i)">
+                      <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img" (click)="showImage(i,media)">
+                      <img *ngIf="media.entity_type === 'audio'" src="assets/videos/video_thumbnail.png" alt="" class="feed-media__img" (click)="showImage(i,media)">
+                      <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
+                        <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+                      </div>
+                    </a>
+                  </div>
+                </ngx-slick-carousel>
+                <i class="arrow-icons icon-arrow-right-circle right" (click)="slickModal.slickNext()"></i>              
+              </div>
+              <m-translate 
+                [open]="translateToggle"
+                [entity]="entity" 
+                [translateEvent]="translateEvent"
+                (onTranslateInit)="propagateTranslation($event)" 
+                (onTranslate)="translateToggle = false"
+                (onTranslateError)="translateToggle = false" 
+                #translate>
+              </m-translate>
+              <div class="text-md white-space word-break">{{ entity?.message}}</div>
+              <div class="opspot-editable-container"
+                  *ngIf="editing">
+                  <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
+                  <textarea class="mdl-card__supporting-text message w100" id="view-profile-message" name="message" [ngModel]="entity.message" #messageEdit
+                    [autoGrow]></textarea>
+                  <button class="btn btn-outline-primary btn-lg" id="view-profile-cancel-message"
+                    (click)="messageEdit.value = entity?.message; editing=false;" i18n="@@M__ACTION__CANCEL">Cancel</button>
+                  <button class="btn btn-primary btn-lg" id="view-profile-save-message"
+                    (click)="entity.message = messageEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
+              </div>
             </div>
           </div>
+          <!-- paywall screen -->
+          <m-wire--lock-screen *ngIf="entity.paywall && !editing" [(entity)]="entity"></m-wire--lock-screen>
+          <!-- paywall screen -->
           <div class="o-posts-inner-page-action">
             <div class="o-posts-inner-page-action__details" id="view-profile-activity-details">
               <!-- <div class="o-latest-channel-info-head__members members-list">
