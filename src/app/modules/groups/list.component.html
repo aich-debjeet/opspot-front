@@ -57,7 +57,7 @@
         <div class="tabs-cmnity-landing">
           <div id="discover" class="tab active">
             <div class="o-community-landing-block-design">
-              <m-groups--tile *ngFor="let entity of entities" [entity]="entity"></m-groups--tile>
+              <m-groups--tile *ngFor="let entity of entities" class="o-community-main-card" [entity]="entity"></m-groups--tile>
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
     <div class="o-community-landing-block-design" *ngIf="showMyCommunities">
       <div id="communities" class="tab" *ngFor="let entity of entities">
         <m-groups--tile *ngIf="entity['is:member'] && entity['is:creator'] && entity['entity_type']=='community'"
-          [entity]="entity"></m-groups--tile>
+          [entity]="entity" class="o-community-main-card"></m-groups--tile>
       </div>
     </div>
   </div>
