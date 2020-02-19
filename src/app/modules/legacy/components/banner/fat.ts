@@ -20,7 +20,7 @@ import { Client } from '../../../../services/api';
     <button class="add-button mdl-button mdl-button--raised mdl-button--colored material-icons" (click)="onClick($event)">
       <i class="material-icons">file_upload</i>
     </button>
-    <input type="file" id="file" (change)="add($event)" [hidden]="file" />
+    <input type="file" accept="image/jpg, image/jpeg, image/png" id="file" (change)="add($event)" [hidden]="file" />
   </div>
   `
 })

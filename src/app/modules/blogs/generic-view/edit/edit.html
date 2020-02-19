@@ -156,6 +156,26 @@
 <div id="write" class="tab active">
   <form (submit)="save()" *ngIf="blog.guid" class="blog-create-form">
     <div class="o-blog-preview-btn-block ">
+      <ng-container *ngIf="error" [ngSwitch]="error">
+        <h1 class="edit-error"
+          i18n="@@BLOGS__EDIT__NO_TITLE_ERROR"
+          *ngSwitchCase="'error:no-title'"
+        >
+          Error: You must provide a title
+        </h1>
+        <h1 class="edit-error"
+          i18n="@@BLOGS__EDIT__NO_DESCRIPTION_ERROR"
+          *ngSwitchCase="'error:no-description'"
+        >
+          Error: You must provide a description
+        </h1>
+        <h1
+          class="edit-error"
+          *ngSwitchDefault
+        >
+          Error: {{error}}
+        </h1>
+      </ng-container>
       <button type="submit" id="preview-publish" class="btn btn-primary btn-sm"
         [disabled]="!canSave || pendingUploads.length !== 0 || !validThreshold"
         i18n="@@BLOGS__EDIT__PUBLISH_ACTION">Preview and Publish</button>

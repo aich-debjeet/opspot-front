@@ -1,31 +1,32 @@
-<section class="o-portfolio-content-sec">
-    <div class="container">
-        <h2 class="mb26" id="portfolio-owner-portfolio">{{ channel?.name }}'s Portfolio</h2>
-        <div class="o-portfolio-action">
-            <form class="visible-mob">
-                <div class="form-group">
-                    <select class="form-control" (change)="onChange($event.target.value)">
-                            <option value="activities" selected>All Media</option>
-                            <option value="images" id="portfolio-action-image">Image</option>
-                            <option value="audios" id="portfolio-action-audio">Audio</option>
-                            <option value="videos" id="portfolio-action-audio">Video</option>
-                            <!-- <option value="object:blog" id="portfolio-action-audio">Blogs</option> -->
-                    </select>
-                </div>
-            </form>
-            <div class="o-portfolio-action__search">
-                <div class="form-group c-form_righticon-lg">
-                    <input type="text" id="portfolio-actions-search" class="form-control form-control-lg"
-                        placeholder="Search" [(ngModel)]="q" name="q" autocomplete="off" #searchInput>
-                    <span class="c-svg_eye"><i class="icon-search"></i></span>
+<div class="container" style="margin-top: 80px;">
+    <div class="o-book-blocks">
+        <div class="o-book-left-block">
+            <opspot-card-user *ngIf="channel" [cardType]="'portfolio'" [object]="channel" class="mdl-card"></opspot-card-user>
+        </div>
+        <div class="o-book-right-block">
+            <h2 class="mb26" id="portfolio-owner-portfolio">{{ channel?.name }}'s Portfolio</h2>
+            <div class="o-portfolio-action">
+                <form class="visible-mob">
+                    <div class="form-group">
+                        <select class="form-control" (change)="onChange($event.target.value)">
+                                <option value="activities" selected>All Media</option>
+                                <option value="images" id="portfolio-action-image">Image</option>
+                                <option value="audios" id="portfolio-action-audio">Audio</option>
+                                <option value="videos" id="portfolio-action-audio">Video</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="o-portfolio-action__search">
+                    <div class="form-group c-form_righticon-lg">
+                        <input type="text" id="portfolio-actions-search" class="form-control form-control-lg"
+                            placeholder="Search" [(ngModel)]="q" name="q" autocomplete="off" #searchInput>
+                        <span class="c-svg_eye"><i class="icon-search"></i></span>
+                    </div>
                 </div>
             </div>
+            <opspot-masonry-container [entities]="filteredArray"></opspot-masonry-container>
+            <infinite-scroll distance="25%" (load)="searchMore()" [moreData]="moreData" [inProgress]="inProgress">
+            </infinite-scroll>
         </div>
-        <!--filter and search section-->
-        <opspot-masonry-container [entities]="filteredArray"></opspot-masonry-container>
-
-        <!-- TODO: load more -->
-        <infinite-scroll distance="25%" (load)="searchMore()" [moreData]="moreData" [inProgress]="inProgress">
-        </infinite-scroll>
     </div>
-</section>
+</div>

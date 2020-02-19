@@ -1,0 +1,32 @@
+<!-- <span class="text-lg grey o-posts-det">
+    {{title}} <a class="grey-dark f500">{{hashtag}}</a>
+</span> -->
+<div class="o-avatar-det-block">
+    <span class="text-lg grey o-posts-det">
+        <a
+            *ngIf="entity && entity.ownerObj"
+            [routerLink]="['/', entity?.ownerObj?.username]"
+            class="o-avatar__name"
+        >
+            {{entity?.ownerObj?.name}}
+        </a>
+        {{title}} 
+        <ng-container [ngSwitch]="postType">
+            <ng-template ngSwitchCase="repost">
+               <a class="grey-dark f500 text-md hash-tag">
+                  {{hashtag}}
+                </a>
+            </ng-template>
+            <ng-template ngSwitchCase="blog">
+                <a [href]="entity.perma_url" target="_blank" class="grey-dark f500 text-md hash-tag">
+                    {{hashtag}}
+                </a>
+            </ng-template>
+            <ng-template ngSwitchDefault>
+                <a [routerLink]="['/', parentRoute, this.entity.guid]" class="grey-dark f500 text-md hash-tag">
+                    {{hashtag}}
+                </a>
+            </ng-template>
+        </ng-container>
+    </span>
+</div>

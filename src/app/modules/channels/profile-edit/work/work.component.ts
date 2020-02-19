@@ -20,9 +20,12 @@ export class WorkComponent implements OnInit {
   errEndDate = true;
   errEdu = false;
 
+  monthArray = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
   work: any = { work_experience: [] };
   activeUser = window.Opspot.user;
   inProgress: boolean = false;
+  startMonthIndex;
+  endMonthIndex;
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
   constructor(public client: Client, private toastr: ToastrService) { }
@@ -43,7 +46,11 @@ export class WorkComponent implements OnInit {
       this.errEdu = true;
       return;
     }
-    if (this.model.endYear - this.model.strtYear < 0) {
+    if (this.model.strtMonth && this.model.endMonth) {
+      this.startMonthIndex = this.monthArray.indexOf(this.model.strtMonth.toLowerCase());
+      this.endMonthIndex = this.monthArray.indexOf(this.model.endMonth.toLowerCase());
+    }
+    if ((this.model.endYear - this.model.strtYear < 0) || (this.endMonthIndex - this.startMonthIndex < 0)) {
       this.errWork = true;
     } else {
       this.errWork = false;
@@ -92,6 +99,11 @@ export class WorkComponent implements OnInit {
               this.updatePercentage.emit(response.rating);
             });
           }
+        }).catch((e) => {
+          if (e.status === 'error') {
+            this.inProgress = false;
+            this.showFailure();
+          }
         });
     }
   }
@@ -109,7 +121,7 @@ export class WorkComponent implements OnInit {
     this.model.index = index;
     let data = this.work.work_experience[index];
     this.model.designation = data.designation;
-    this.model.location = data.designation;
+    this.model.location = data.location;
     this.model.company = data.company_name;
     this.model.strtYear = data.start_date.split('-')[1];
     this.model.strtMonth = data.start_date.split('-')[0];
@@ -149,11 +161,17 @@ export class WorkComponent implements OnInit {
   addWorkMove() {
     this.model = {}; //render empty form after update/create
     this.model.privacy = false; // setting default value of privacy
+    this.toggleEnd = false; //set default value of current working status
     this.submitted = false;
   }
 
   showSuccess() {
     this.toastr.success('You have successfully updated your profile.', '', {
+      timeOut: 3000
+    });
+  }
+  showFailure(){
+    this.toastr.error('Profile could not be updated', '', {
       timeOut: 3000
     });
   }

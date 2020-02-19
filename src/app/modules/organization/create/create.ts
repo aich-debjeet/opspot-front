@@ -102,7 +102,7 @@ export class OrganizationCreator {
 
   save(e) {
 
-    if (!this.organization.name) {
+    if (!(this.organization.name && this.organization.location && this.organization.category)) {
       return;
     }
 
@@ -131,6 +131,7 @@ export class OrganizationCreator {
             avatar: this.avatar
           })
           .then(() => {
+            this.inProgress = false;
             this.router.navigate(['organization/profile', guid]);
             this.navUpdateOrg();
           });

@@ -207,18 +207,22 @@ opspot-button-remind{
               <img [src]="opspot.cdn_url + 'icon/' + entity?.ownerObj?.guid + '/' " class="mdl-shadow--2dp" />
             </a>
             <div class="o-avatar__info">
-              <div class="o-avatar-det-block">
-                <span class="text-lg grey o-posts-det" id="view-profile-added-media"><a class="o-avatar__name" *ngIf="entity?.ownerObj && entity?.ownerObj?.username" 
-                  [routerLink]="['/', entity?.ownerObj?.username]">{{entity?.ownerObj?.name}}</a>added
-                  media</span>
-              </div>
+              <!-- <div class="o-avatar-det-block">
+                <span class="text-lg grey o-posts-det" id="view-profile-added-media">
+                  <a class="o-avatar__name" *ngIf="entity?.ownerObj && entity?.ownerObj?.username" [routerLink]="['/', entity?.ownerObj?.username]">
+                    {{entity?.ownerObj?.name}}
+                  </a>
+                  added media
+                </span>
+              </div> -->
+              <opspot-post-title-card [entity]="entity"></opspot-post-title-card>
               <div class="grey m-l-8 o-posts-tym">
                 <span>{{entity?.time_created * 1000 | date:'medium'}}</span>
                 <!-- <span class="o-posts-public-private"><i class="icon-public"></i></span> -->
               </div>
             </div>
             <div class="o-feed-head-action o-post-inner-profile-button">
-              <button type="button" class="btn btn-primary btn-sm" id="view-profile-boost-button"
+              <button type="button" class="btn btn-primary btn-sm btn-boost" id="view-profile-boost-button"
                 *ngIf="session.getLoggedInUser().guid == entity?.owner_guid" (click)="showBoost()">Boost</button>
               <!-- <a href="#" class="head-action__link">
                 <img src="assets/svg/bookmark.svg" alt="" class="head-action__icon hidden-mob">
@@ -249,8 +253,8 @@ opspot-button-remind{
               [guid]="videoData.guid" [torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
               <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
             </m-video>
-            <!-- <m-audio *ngIf="showAudio && !showVideo" [src]="'api/v1/media/' + videoData.guid + '/play'"></m-audio> -->
-            <m-audio style="width: 100%" *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio>
+            <m-audio style="width:100%" *ngIf="showAudio && !showVideo" [src]="'api/v1/media/' + videoData.guid + '/play'"></m-audio>
+            <!-- <m-audio style="width: 100%" *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio> -->
           </div>
           <div class="o-posts-inner-page-myjourney-padding">
             <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">

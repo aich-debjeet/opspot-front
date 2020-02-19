@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-
 import { Client } from '../../../services/api';
 import { UpdateMarkersService } from '../../../common/services/update-markers.service';
 

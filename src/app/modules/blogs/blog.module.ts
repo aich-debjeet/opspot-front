@@ -24,6 +24,7 @@ import { BlogAllComponent } from './blog-all/blog-all.component';
 import { GenericViewComponent } from './generic-view/generic-view.component';
 // import { ModalsModule } from '../modals/modals.module';
 import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
+import { TagInputModule } from 'ngx-chips';
 
 const routes: Routes = [
   { path: 'blog/view/:guid/:title', component: BlogViewInfinite },
@@ -56,7 +57,8 @@ const routes: Routes = [
     PostMenuModule,
     WireModule,
     HashtagsModule,
-    ShareMenuModule
+    ShareMenuModule,
+    TagInputModule,
   ],
   declarations: [
     BlogView,

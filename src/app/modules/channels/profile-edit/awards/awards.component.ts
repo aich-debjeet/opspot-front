@@ -85,6 +85,11 @@ export class AwardsComponent implements OnInit {
             this.updatePercentage.emit(response.rating);
           });
         }
+      }).catch((e) => {
+        if (e.status === 'error') {
+          this.inProgress = false;
+          this.showFailure();
+        }
       });
     // }
   }
@@ -144,6 +149,11 @@ export class AwardsComponent implements OnInit {
   }
   showSuccess() {
     this.toastr.success('You have successfully updated your profile', '', {
+      timeOut: 3000
+    });
+  }
+  showFailure(){
+    this.toastr.error('Profile could not be updated', '', {
       timeOut: 3000
     });
   }

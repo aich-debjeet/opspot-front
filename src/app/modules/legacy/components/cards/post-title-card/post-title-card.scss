@@ -1,0 +1,31 @@
+
+.o-posts-det{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 80%;
+    .hash-tag{
+        margin-left: 6px;
+    }
+}
+
+.text-lg {
+    color: #263238;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.o-avatar__name {
+    color: #263238 !important;
+    font-size: 13px;
+    line-height: 18px;
+    display: inline-block;
+    font-weight: 700;
+    float: left;
+    padding-right: 4px;
+}
+
+.grey {
+    color: #90A4AE !important;
+}

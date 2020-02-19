@@ -24,6 +24,7 @@ import { Component, EventEmitter } from '@angular/core';
               <i class="white icon-plus-circle" (click)="chooseFile()"></i>
               <!--<i class="white icon-minus-circle" (click)="remove()"></i>-->
               <p class="white text-lg">Add Cover Picture</p>
+              <p class="white text-lg">Recommended size 2000px &times; 1125px (Ratio 16:9)</p>
           </div>
       </div>
 
@@ -39,7 +40,7 @@ import { Component, EventEmitter } from '@angular/core';
           <button i18n="@@M__ACTION__CANCEL" id="banner-cancel-button">Cancel</button>
         </span>
       </div>
-      <input type="file" id="file" (change)="add($event)" [hidden]="file" />
+      <input type="file" accept="image/jpg, image/jpeg, image/png" id="file" (change)="add($event)" [hidden]="file" />
   </div>
   <style>
     .overlay i {

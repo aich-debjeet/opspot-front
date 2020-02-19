@@ -3282,7 +3282,7 @@ m-inline-editor .m-blog--image {
       -webkit-flex-grow: 1;
               flex-grow: 1; }
   .medium-editor-insert-plugin .medium-insert-buttons {
-    position: absolute;
+    // position: absolute;
     color: #bbb;
     font-size: 0.9em; }
     .medium-editor-insert-plugin .medium-insert-buttons button {
@@ -7731,7 +7731,9 @@ m-blog-view img.m--img-not-found, opspot-blog-edit img.m--img-not-found {
   background-image: url("https://ops.doesntexist.com/assets/image-not-found.png"); }
 
 m-blog-view img.display {
-  width:100%;
+  // width:100%;
+  width: 300px !important;
+  height: 300px !important;
 }
 
 m-blog-view ul.m-blog--categories-list, opspot-blog-edit ul.m-blog--categories-list {
@@ -7889,8 +7891,9 @@ opspot-card-blog {
   display: flex;
   -webkit-flex-direction: column;
           flex-direction: column;
-  -webkit-align-items: center;
-          align-items: center; }
+  // -webkit-align-items: center;
+  //         align-items: center;
+         }
   .m-blog--image .m-blog--image-caption {
     display: inline-block;
     text-align: center;
@@ -14689,7 +14692,9 @@ m-video--progress-bar {
   m-video--progress-bar .progress-bar {
     -webkit-flex: 1;
             flex: 1;
-    position: relative; }
+    position: relative;
+    display: block;
+    background-color: transparent; }
     m-video--progress-bar .progress-bar .opspot-bar {
       position: absolute;
       left: 0px;
@@ -24661,7 +24666,7 @@ app-image-croper .m-modal-container {
 
 .o-create-post-head{
   width: 100%;
-  padding:13px 27px;
+  padding:18px 27px;
   position: relative;
   background-color: rgba(235,239,242,0.4);
   display: flex;
@@ -24670,7 +24675,7 @@ app-image-croper .m-modal-container {
   }
   .icon-box-design{
       margin-left: 9px;
-      height: 32px;	
+      height: 25px;	
       width: 32px;	
       border: 1px solid rgba(144,164,174,0.2);	
       border-radius: 4px;	

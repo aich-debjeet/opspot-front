@@ -55,10 +55,9 @@ export class BigEventEdit implements OnInit {
           }
           if (this.bigEvent.custom_data) {
             this.coverImage = this.bigEvent.custom_data[0].src;
-
           }
-          this.inProgress = false;
         }
+        this.inProgress = false;
         this.detectChanges();
       })
       .catch((e) => {

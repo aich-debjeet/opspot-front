@@ -1,6 +1,18 @@
 @import "src/assets/helpers/variables";
 @import "node_modules/sass-mq/_mq";
 
+.o-book-blocks{
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: column;
+        position: relative;
+    }
+}
+.o-book-left-block{
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        width: 100%;
+    }
+}
+
 // // for tag
 // .o-portfolio-tag-sec{
 //     width: 100%;

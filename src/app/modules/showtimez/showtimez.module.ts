@@ -15,7 +15,7 @@ import { MessengerModule } from '../messenger/messenger.module';
 // TODO @gayatri: handle all other requests
 const showtimeRoutes: Routes = [
   {
-    path: 'showtime/view/:guid',
+    path: 'showtimez/:guid',
     component: ShowtimezComponent,
   }
   // {

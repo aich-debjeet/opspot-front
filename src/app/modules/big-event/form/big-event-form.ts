@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { FormValidator } from '../../../helpers/form.validator';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { ToastrService } from "ngx-toastr";
 
 
 
@@ -25,7 +26,7 @@ export class BigEventForm implements OnInit {
   eventSubmitted: boolean;
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-  coverImageUploadError: boolean = false;
+  // coverImageUploadError: boolean = false;
   lable = 'Create';
 
   coverImage = '';
@@ -100,7 +101,8 @@ export class BigEventForm implements OnInit {
     public upload: Upload,
     public attachment: AttachmentService,
     public router: Router,
-    private _location: Location
+    private _location: Location,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -127,8 +129,8 @@ export class BigEventForm implements OnInit {
         eventType: ['', [Validators.required]],
         eventCategory: ['', [Validators.required]],
         eventLocation: ['', [Validators.required]],
-        eventStartDate: ['', [Validators.required,FormValidator.validateDate, FormValidator.datevalidation]],
-        eventEndDate: ['', [Validators.required, FormValidator.validateDate,FormValidator.datevalidation]],
+        eventStartDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
+        eventEndDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
         eventStartTime: ['', [Validators.required]],
         eventEndTime: ['', [Validators.required]],
         eventCoverImage: ['', []]
@@ -189,11 +191,11 @@ export class BigEventForm implements OnInit {
     this.inProgress = true;
 
     this.errorMessage = '';
-    this.attachment.remove(imageId,file,this.attach_guid)
+    this.attachment.remove(imageId, file, this.attach_guid)
       .then(guid => {
         this.inProgress = false;
         this.canPost = true;
-        this.coverImage = '';        
+        this.coverImage = '';
         file.value = '';
         // this.cards = _remove(this.cards, function (n) {
         //   return n.guid !== guid;
@@ -205,7 +207,6 @@ export class BigEventForm implements OnInit {
         this.canPost = true;
       });
   }
-
 
   formatTime(inputTime) {
     var timeString = inputTime;
@@ -236,16 +237,19 @@ export class BigEventForm implements OnInit {
   }
 
   submitEvent() {
-    this.eventSubmitted = true;
 
-    let data = Object.assign(this.meta, this.attachment.exportMeta());
-   
-    if (data.attachment_guid) {
-      this.reqBody.attachment_guid = data.attachment_guid;
-    } else if (this.attach_guid.length === 1) {
-      this.reqBody.attachment_guid = this.attach_guid[0];
+    this.eventSubmitted = true;
+    if (this.eventForm.invalid) {
+      return;
     }
 
+    let data = Object.assign(this.meta, this.attachment.exportMeta());
+
+    if (data.attachment_guid.length > 0) {
+      this.reqBody.attachment_guid = data.attachment_guid;
+    } else if (this.attach_guid.length == 1) {
+      this.reqBody.attachment_guid = this.attach_guid[0];
+    }
     // if (data.attachment_guid.length > 0) {
     //   this.reqBody.attachment_guid = data.attachment_guid;
     // } else if (this.attach_guid.length === 1) {
@@ -253,9 +257,9 @@ export class BigEventForm implements OnInit {
     // }
 
     if (this.reqBody.attachment_guid == '') {
-      this.coverImageUploadError = true;
+      this.toastr.error('Please upload cover image');
+      return;
     }
-
 
     var startTime = this.convertDateToMillis(this.eventForm.value.eventStartDate, this.eventForm.value.eventStartTime)
     var endTime = this.convertDateToMillis(this.eventForm.value.eventEndDate, this.eventForm.value.eventEndTime)
@@ -269,22 +273,25 @@ export class BigEventForm implements OnInit {
     this.reqBody.end_time_date = endTime.getTime();
 
     if (this.eventForm.valid && this.reqBody.attachment_guid != '' && this.reqBody.start_time_date != '' && this.reqBody.end_time_date != '') {
-            
+
       let endpoint = 'api/v3/event';
       if (this.bigEventGuid) {
         endpoint = 'api/v3/event/' + this.bigEventGuid;
       }
+      this.inProgress = true;
 
       this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
           if (resp && resp.activity && resp.activity['guid'] != '') {
-            this.router.navigate(['/event/view/' + resp.activity['guid']]);
+            this.router.navigate(['/event/' + resp.activity['guid']]);
           }
           this.eventSubmitted = false;
+          this.inProgress = false;
           this.attachment.reset();
         })
         .catch((e) => {
           this.eventSubmitted = false;
+          this.inProgress = false;
           // alert(e.message);
         });
     }

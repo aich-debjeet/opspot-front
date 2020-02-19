@@ -409,7 +409,7 @@
 </header>
 
 <!-- mobile:logged-in:secondary-navigation -->
-<div class="header_mobile hidden-above-tablet">
+<div *ngIf="session.isLoggedIn()" class="header_mobile hidden-above-tablet">
   <div class="mobile-nav-ico">
     <a routerLink="/newsfeed" class="mobile-nav-icon__item">
       <img src="assets/svg/m_nav_ico/home_main.svg" alt="home" class="mobile-nav-icon--lg">

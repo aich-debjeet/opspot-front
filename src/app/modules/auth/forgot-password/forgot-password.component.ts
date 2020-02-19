@@ -8,6 +8,7 @@ import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ForgotpasswordService } from './forgotpassword.service';
 import { FormValidator } from '../../../helpers/form.validator'
 import * as _ from 'lodash';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class ForgotPasswordComponent {
   step = 0;
   username = '';
   code = '';
+  countryCode = '91';
 
   // step0
   emailForm: FormGroup;
@@ -63,7 +65,8 @@ export class ForgotPasswordComponent {
     public title: OpspotTitle,
     public session: Session,
     public formBuilder: FormBuilder,
-    private forgotpasswordservice: ForgotpasswordService
+    private forgotpasswordservice: ForgotpasswordService,
+    private toastr: ToastrService
   ) {
     this.buildForm('mobile');
   }
@@ -170,13 +173,15 @@ export class ForgotPasswordComponent {
     this.submitted1 = true;
     if (this.mobileForm.valid) {
       this.mobile = this.removeOperators(this.mobileForm.value.mobileInput.internationalNumber);
+      this.countryCode = this.removeOperators(this.mobileForm.value.mobileInput.dialCode);
       //localStorage.setItem("mobileNumber", mobileNumber);
       this.error = '';
       this.inProgress = true;
       const data = ({
         retry: false,
         key: "phone_number",
-        value: this.mobile
+        value: this.mobile,
+        country_code: this.countryCode
       });
       this.forgotpasswordservice.sendOtp(data)
         .then((data: any) => {
@@ -331,8 +336,9 @@ export class ForgotPasswordComponent {
       }) 
       this.forgotpasswordservice.reset(data)
         .then((response: any) => {
-          this.session.login(response.user);
-          this.router.navigate(['/newsfeed']);
+          this.session.logout();
+          this.router.navigate(['/login']);
+          this.toastr.success('Password reset successful, please login again to continue.')
         })
         .catch((e) => {
           this.error = e.message;

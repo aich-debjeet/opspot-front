@@ -13,7 +13,8 @@
                                 <input type="radio" [checked]="this._filter == 'all'" value="all" name="all">
                                 <span class="checkmark"></span>
                             </label>
-                            <label class="c-checkbox" (click)="changeFilter('image')">Images
+                            <!--to avoid individual bookmarks at media level-->
+                            <!-- <label class="c-checkbox" (click)="changeFilter('image')">Images
                                 <input type="radio" [checked]="this._filter == 'image'" value="image" name="image">
                                 <span class="checkmark"></span>
                             </label>
@@ -24,7 +25,7 @@
                             <label class="c-checkbox" (click)="changeFilter('audio')">Audio
                                 <input type="radio" [checked]="this._filter == 'audio'" value="audio" name="audio">
                                 <span class="checkmark"></span>
-                            </label>
+                            </label> -->
                             <label class="c-checkbox" (click)="changeFilter('blog')">Blogs
                                 <input type="radio" [checked]="this._filter == 'blog'" value="blog" name="blog">
                                 <span class="checkmark"></span>
@@ -87,7 +88,8 @@
                                                 name="all">
                                             <span class="checkmark"></span>
                                         </label>
-                                        <label class="c-checkbox" (click)="changeFilter('image')">Images
+                                        <!--to avoid individual bookmarks at media level-->
+                                        <!-- <label class="c-checkbox" (click)="changeFilter('image')">Images
                                             <input type="radio" [checked]="this._filter == 'image'" value="image"
                                                 name="image">
                                             <span class="checkmark"></span>
@@ -101,7 +103,7 @@
                                             <input type="radio" [checked]="this._filter == 'audio'" value="audio"
                                                 name="audio">
                                             <span class="checkmark"></span>
-                                        </label>
+                                        </label> -->
                                         <label class="c-checkbox" (click)="changeFilter('blog')">Blogs
                                             <input type="radio" [checked]="this._filter == 'blog'" value="blog"
                                                 name="blog">
@@ -148,11 +150,11 @@
             <ng-container *ngFor="let activi of activity; let i = index">
                 <opspot-activity [object]="activi" *ngIf="activi.type !== 'user'"
                     [class]="'mdl-card m-border item m-boost-rotator-item m-boost-rotator-item-' + i" visible="true"
-                    (deleteBookmark)="delete($event)">
+                    (deleteBookmark)="delete($event)" (delete)="delete($event)">
                 </opspot-activity>
                 <div *ngIf="activi.type == 'user'">
                     <m-channel--sidebar [user]="activi" [editing]="editing" [displayBookmark]="displayBookmark"
-                        (deleteBookmark)="delete($event)">
+                        (deleteBookmark)="delete($event)" (delete)="delete($event)">
                     </m-channel--sidebar>
                 </div>
             </ng-container>

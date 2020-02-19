@@ -43,7 +43,7 @@ export class OpportunityFormComponent implements OnInit {
   inProgress = false;
   errorMessage = '';
   attach_guid = [];
-  imageUploadError: boolean;
+  // imageUploadError: boolean;
   navigationUrl = '';
 
   @Input('object') set data(object) {
@@ -79,7 +79,6 @@ export class OpportunityFormComponent implements OnInit {
     private overlayModal: OverlayModalService,
     private router: Router,
     private toastr: ToastrService
-
   ) { }
 
   description = '';
@@ -122,7 +121,7 @@ export class OpportunityFormComponent implements OnInit {
 
   postOpportunity(value) {
     this.submitted = true;
-    this.imageUploadError = false;
+    // this.imageUploadError = false;
     let data = Object.assign(this.meta, this.attachment.exportMeta());
     if (data.attachment_guid.length > 0) {
       this.reqBody.attachment_guid = data.attachment_guid;
@@ -130,7 +129,9 @@ export class OpportunityFormComponent implements OnInit {
       this.reqBody.attachment_guid = this.attach_guid[0];
     }
     if (this.reqBody.attachment_guid == '') {
-      this.imageUploadError = true;
+      this.toastr.error('Please upload logo');
+      return;
+      // this.imageUploadError = true;
     }
 
     this.reqBody.title = value.opportunityTitle;

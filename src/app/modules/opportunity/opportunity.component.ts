@@ -95,7 +95,7 @@ export class OpportunityComponent implements OnInit {
           this.user = data.activity.ownerObj;
           this.reachoutMessage += data.activity['perma_url'];
 
-          this.opportunity.url = window.Opspot.site_url + 'opportunity/view/' + this.opportunity.guid;
+          this.opportunity.url = window.Opspot.site_url + 'opportunity/' + this.opportunity.guid;
 
           this.count = this.opportunity['thumbs:up:count'];
 

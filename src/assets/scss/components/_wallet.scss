@@ -156,9 +156,11 @@
     padding: 18px 33px;
     margin: 18px 0px;
     box-shadow: 0 0 2px 0 rgba(144,164,174,0.16), 0 2px 2px 0 rgba(144,164,174,0.16), 0 1px 3px 0 rgba(144,164,174,0.16);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    .__activity {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
     :nth-child(1){
         padding-left: 0px;
         @include mq($from: $mobile_sm, $until: $tablet) {
@@ -222,6 +224,7 @@
     }
     &__price{
         margin-right: 20px;
+        min-width: 100px;
         @include mq($from: $mobile_sm, $until: $mobile_lg) {
             order: 1;
         }

@@ -50,8 +50,6 @@ export class GroupBannerComponent {
     this.src = value;
   }
 
-
-
   add(e) {
     this.open = false;
     var element: any = e.target ? e.target : e.srcElement;

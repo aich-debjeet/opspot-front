@@ -16,7 +16,7 @@ import { MessengerModule } from '../messenger/messenger.module';
 // TODO @gayatri: handle all other requests
 const opportunityRoutes: Routes = [
   {
-    path: 'opportunity/view/:guid',
+    path: 'opportunity/:guid',
     component: OpportunityComponent,
   }
   // {

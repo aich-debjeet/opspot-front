@@ -1,5 +1,5 @@
 export default function getViewPageLink(type, guid) {
-    var navigationUrl = `${type}/view/${guid}`;
+    var navigationUrl = `${type}/${guid}`;
     // switch (type) {
     //     case (type === 'opportunity'): navigationUrl = `${type}/view/${guid}`
     //     console.log("navigationUrl: ", navigationUrl);

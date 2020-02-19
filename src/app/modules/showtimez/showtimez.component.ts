@@ -96,7 +96,7 @@ export class ShowtimezComponent implements OnInit {
           // user obj for reach out
           this.user = data.activity.ownerObj;
           this.reachoutMessage += data.activity['perma_url'];
-          this.showTimez.url = window.Opspot.site_url + 'showtime/view/' + this.showTimez.guid;
+          this.showTimez.url = window.Opspot.site_url + 'showtimez/' + this.showTimez.guid;
           this.count = this.showTimez['thumbs:up:count'];
 
           if (data.activity.owner_obj) {

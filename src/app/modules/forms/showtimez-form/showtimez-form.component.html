@@ -20,7 +20,9 @@
 
             <!--Event Title-->
             <div class="form-group">
-                <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                <label>Description
+                    <!-- <span class="text-sm grey description-width">21/300</span> -->
+                </label>
                 <textarea class="form-control" id="showtimez-description" rows="5" formControlName="eventDescription"></textarea>
                 <div class="error text-sm"
                     *ngIf="eventSubmitted && showTimezForm.get('eventDescription').errors?.required">
@@ -39,7 +41,7 @@
                 <div class="form-group">
                     <label>Date</label>
                     <input type="text" id="showtimez-date" class="form-control form-control-lg" [textMask]="{mask: dateMask}"
-                        placeholder="Select Date" formControlName="eventdate">
+                        placeholder="Enter Date(DD-MM-YYYY)" formControlName="eventdate">
                     <div class="error text-sm"
                         *ngIf="eventSubmitted && showTimezForm.get('eventdate').errors?.required">
                         This is required</div>
@@ -54,7 +56,7 @@
                 <!--Date Location-->
                 <div class="form-group ml-18">
                     <label>Time</label>
-                    <input type="text" id="showtimez-time" class="form-control form-control-lg" placeholder="Time"
+                    <input type="text" id="showtimez-time" class="form-control form-control-lg" placeholder="Enter Time(HH:MM)"
                         [textMask]="{mask: timeMask}" (keyup)="changeRegex($event)" formControlName="eventTime">
                     <div class="error text-sm"
                         *ngIf="eventSubmitted && showTimezForm.get('eventTime').errors?.required">
@@ -66,7 +68,7 @@
                 <div class="o-create-show-timez-cover-image">
                     <div class="fileUpload" *ngIf="this.cards.length == 0">
                         <span class="icon-plus"></span>
-                        <input type="file" id="file" accept=".jpg, .jpeg, .png" #file class="upload upload--showtym" name="attachment"
+                        <input type="file" id="file" accept="image/jpg, image/jpeg, image/png" #file class="upload upload--showtym" name="attachment"
                             (change)="uploadAttachment(file, $event)" formControlName="eventImage">
                     </div>
                     <!--file upload ends-->
@@ -79,9 +81,6 @@
                     </div>
                     <!--file preview ends-->
                 </div>
-                <div class="error text-sm" *ngIf="imageUploadError">
-                    This is required
-                </div>
                 <div class="text-sm grey">The dimensions for cover image are 797px x 275px </div>
             </div>
         </div>
@@ -92,7 +91,7 @@
         </div>
         <!--body ends-->
         <div class="o-create-show-timez-footer">
-            <button type="button" id="showtimez-submit" class="btn btn-primary btn-sm" [disabled]="!showTimezForm.valid"
+            <button type="button" id="showtimez-submit" class="btn btn-primary btn-sm" [disabled]="!showTimezForm.valid || inProgress"
                 (click)="eventSubmit()">Post</button>
             <!--for event page-->
         </div>

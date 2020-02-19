@@ -33,7 +33,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                <label>Description
+                    <!-- <span class="text-sm grey description-width">21/300</span> -->
+                </label>
                 <textarea class="form-control" id="opportunity-description" rows="5" formControlName="opportunityDescription">
                 </textarea>
                 <div class="error text-sm"
@@ -52,7 +54,7 @@
                 <div class="o-create-opportunity-cover-image">
                     <div class="fileUpload" *ngIf="this.cards.length == 0">
                         <span class="icon-plus"></span>
-                        <input type="file" id="file" accept=".jpg, .jpeg, .png" class="upload" formControlName="opportunityImage" #file name="attachment"
+                        <input type="file" accept="image/jpg, image/jpeg, image/png" id="file" class="upload" formControlName="opportunityImage" #file name="attachment"
                             (change)="uploadAttachment(file, $event)">
                     </div>
                     <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
@@ -64,9 +66,9 @@
                         </a>
                     </div>
                 </div>
-                <div class="error text-sm" *ngIf="imageUploadError">
+                <!-- <div class="error text-sm" *ngIf="imageUploadError">
                     This is required
-                </div>
+                </div> -->
                 <div class="text-sm grey">The dimensions for company logo are 140px x 140px </div>
             </div>
         </div>
@@ -76,7 +78,7 @@
             <div class="auxbar bar bar3" style="width: 0%;"></div>
         </div>
         <div class="o-create-opportunity-footer">
-            <button type="submit" id="opportunity-submit" class="btn btn-primary btn-sm" [disabled]="!opportunityForm.valid">Post</button>
+            <button type="submit" id="opportunity-submit" class="btn btn-primary btn-sm" [disabled]="!opportunityForm.valid || inProgress">Post</button>
         </div>
     </form>
 </div>

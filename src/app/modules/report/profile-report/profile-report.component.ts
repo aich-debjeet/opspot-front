@@ -3,6 +3,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { PROFILE_REPORT_REASONS } from '../../../services/list-options';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile-report',
@@ -34,6 +35,7 @@ export class ProfileReportComponent implements AfterViewInit {
     private _changeDetectorRef: ChangeDetectorRef,
     private overlayModal: OverlayModalService,
     private client: Client,
+    private toastr: ToastrService
   ) { }
 
   ngAfterViewInit() {
@@ -103,9 +105,10 @@ export class ProfileReportComponent implements AfterViewInit {
         if (response.done) {
           this.success = true;
           this.overlayModal.dismiss();
+          this.toastr.success('Reported successfully.');
         } else {
           this.overlayModal.dismiss();
-          alert('There was an error sending your report.');
+          this.toastr.error('There was an error sending your report.');
         }
       })
       .catch(e => {
