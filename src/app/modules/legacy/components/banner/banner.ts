@@ -73,7 +73,6 @@ export class OpspotBanner {
   overlay: any; // @todo: ??
 
   set _object(value: any) {
-    console.log(value)
     if (!value)
       return;
     this.object = value;
@@ -81,19 +80,16 @@ export class OpspotBanner {
   }
 
   set _src(value: any) {
-    console.log(value)
     this.src = value;
   }
 
   set _top(value: number) {
-    console.log(value)
     if (!value)
       return;
     this.top = value;
   }
 
   set _editMode(value: boolean) {
-    console.log(value)
     this.editing = value;
   }
 
