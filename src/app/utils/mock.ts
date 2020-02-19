@@ -2,7 +2,7 @@ import { Component, Directive, EventEmitter } from '@angular/core';
 
 export function Mock(opts: any = {}) {
   return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) => {
-      console.log(descriptor);
+      // console.log(descriptor);
       return descriptor;
   };
 }

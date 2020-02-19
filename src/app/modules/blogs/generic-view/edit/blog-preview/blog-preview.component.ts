@@ -51,7 +51,7 @@ export class BlogPreviewComponent implements OnInit {
   }
 
   skillsAlter(skills: any[]) {
-    console.log('skills', skills)
+    // console.log('skills', skills)
     for (let i = skills.length; i--;) {
       this.blogSkills.push({ display: skills[i], value: skills[i] });
     }

@@ -86,7 +86,7 @@ export class SupportComponent implements OnInit {
   }
 
   onChange(filter) {
-    console.log(filter)
+    // console.log(filter)
     this.filter = filter;
     this.load(true);
   }

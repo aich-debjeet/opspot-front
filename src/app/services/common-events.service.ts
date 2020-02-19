@@ -33,7 +33,7 @@ export class CommonEventsService {
  * Event listen,
  * this.commService = this.commService.listen().subscribe((e: any) => {
       if (e.component && e.action) {
-        console.log('triggered', e);
+        // console.log('triggered', e);
       }
     });
 

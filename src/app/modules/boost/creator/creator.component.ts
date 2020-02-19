@@ -663,7 +663,7 @@ export class BoostCreatorComponent implements AfterViewInit,OnInit {
       }
    }
    catch{
-     console.log('balance not loaded')
+    //  console.log('balance not loaded')
    }
   }
  
