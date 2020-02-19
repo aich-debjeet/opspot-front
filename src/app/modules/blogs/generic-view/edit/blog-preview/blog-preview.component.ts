@@ -22,7 +22,6 @@ export class BlogPreviewComponent implements OnInit {
   error: string = '';
 
   @Input('object') set data(object) {
-    console.log(object);
     this.blog = object ? object.blog : null;
     this.guid = object ? object.guid : null;
     let skills = object ? object.blog.tags : null;
@@ -43,7 +42,6 @@ export class BlogPreviewComponent implements OnInit {
   async getTopHashtags(){
     const res = await this.service.load(50);
     res.map(a => {
-      console.log(a)
       this.skillData.push(a.value);
     });
   }
@@ -53,6 +51,7 @@ export class BlogPreviewComponent implements OnInit {
   }
 
   skillsAlter(skills: any[]) {
+    console.log('skills', skills)
     for (let i = skills.length; i--;) {
       this.blogSkills.push({ display: skills[i], value: skills[i] });
     }
@@ -63,21 +62,17 @@ export class BlogPreviewComponent implements OnInit {
   onTagsRemoved(tags: Tag[]) {
   }
   onItemAdded(e){
-    console.log(e);
     const skills = this.blogSkills.map(e => e.value);
     this.blog.tags = skills;
 
   }
 
   add_banner(banner: any) {
-    console.log(banner)
-    var self = this;
     this.banner = banner.file;
     this.blog.header_top = banner.top;
   }
   //this is a nasty hack because people don't want to click save on a banner ;@
   check_for_banner() {
-    console.log('banner', this.banner)
     if (!this.banner)
       this.banner_prompt = true;
 
@@ -85,6 +80,7 @@ export class BlogPreviewComponent implements OnInit {
       if (this.banner)
         return resolve(true);
       setTimeout(() => {
+        this.banner_prompt = false;
         if (this.banner)
           return resolve(true);
         else
@@ -100,6 +96,7 @@ export class BlogPreviewComponent implements OnInit {
     blog.monetized = blog.monetized ? 1 : 0;
 
     this.check_for_banner().then(() => {
+      if(this.error != 'undefined') this.error ='';
       this.upload.post('api/v1/blog/' + this.guid, [this.banner], blog)
         .then((response: any) => {
           this.overlayModal.dismiss();
