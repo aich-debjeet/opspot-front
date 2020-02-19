@@ -91,7 +91,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    @include mq($from:$mobile-sm, $until:$desktop-sm){
+    @include mq($from:$mobile-sm, $until:$mobile-lg){
         flex-direction: column;
     }
     &__item{
@@ -113,6 +113,11 @@
             margin-right: 15px;
             margin-left:15px;
         }
+    }
+}
+.o-community-main-card{
+    @include mq($from:$mobile-lg, $until:$desktop-sm){
+        width: 50%;
     }
 }
 
