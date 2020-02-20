@@ -7899,7 +7899,8 @@ opspot-card-blog {
     text-align: center;
     font-size: 16px;
     color: #666;
-    font-style: italic; }
+    font-style: italic;
+    word-break: break-all; }
 
 opspot-blog-edit opspot-banner .opspot-banner-overlay, opspot-blog-edit opspot-banner .save-bar .save-button {
   display: none !important; }
@@ -13997,7 +13998,8 @@ opspot-activity.mdl-card, opspot-activity, opspot-activity-preview {
       max-height: 48px;
       margin: 8px 0;
       padding: 0;
-      line-height: 1.25; }
+      line-height: 1.25;
+      word-break: break-all; }
     opspot-activity.mdl-card .m-rich-embed .meta p.m-url, opspot-activity .m-rich-embed .meta p.m-url, opspot-activity-preview .m-rich-embed .meta p.m-url {
       white-space: nowrap;
       max-width: 240px; }
