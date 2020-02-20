@@ -97,7 +97,7 @@ export class BlogView {
 
   set _blog(value: OpspotBlogEntity) {
     this.blog = value;
-    console.log("blog: ", this.blog);
+    // console.log("blog: ", this.blog);
     this.blog.url = `${this.opspot.site_url}${this.blog.route}`;
     
     setTimeout(() => {

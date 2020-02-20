@@ -67,7 +67,7 @@ export class LoginComponent {
 
     this.paramsSubscription = this.route.queryParams.subscribe(params => {
       if (params['referrer']) {
-        console.log(params['referrer']);
+        // console.log(params['referrer']);
         this.referrer = params['referrer'];
       }
     });

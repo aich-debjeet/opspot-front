@@ -55,12 +55,12 @@ export class EnrolmentFormComponent implements OnInit {
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
-    console.log("File", file.value);
+    // console.log("File", file.value);
 
     if (file.value) {
     this.attachment.upload(file, this.attach_guid)
       .then((response) => {
-        console.log("Res: ", response);
+        // console.log("Res: ", response);
 
         this.attachment_guid = response;
         file.value = null;
@@ -74,7 +74,7 @@ export class EnrolmentFormComponent implements OnInit {
 
   submit() {
     this.formSubmitted = true;
-    console.log("Attachment: ", this.attachment_guid);
+    // console.log("Attachment: ", this.attachment_guid);
 
     if (this.attachment_guid == '') {
       this.resumeUploadError = true;
@@ -99,7 +99,7 @@ export class EnrolmentFormComponent implements OnInit {
       'comment': this.form.value.comments,
       'attachment_guid': this.attachment_guid
     }
-    console.log(this.campaignGuid);
+    // console.log(this.campaignGuid);
 
 
     if (this.form.valid && formData.attachment_guid != '') {
@@ -108,7 +108,7 @@ export class EnrolmentFormComponent implements OnInit {
       this.client.post(endpoint, formData)
         .then((resp: any) => {
           if(resp.status == 'success'){
-            console.log("Response: ", resp);
+            // console.log("Response: ", resp);
             this.done.emit({form:formData, enrollGuid:resp.guid, campaignGuid:this.campaignGuid });
           }
 

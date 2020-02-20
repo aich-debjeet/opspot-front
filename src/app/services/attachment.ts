@@ -488,7 +488,7 @@ export class AttachmentService {
           window.clearTimeout(timeout);
 
         window.URL.revokeObjectURL(videoElement.src);
-        console.log('file size', file.size);
+        // console.log('file size', file.size);
         resolve(videoElement.duration);
       };
       videoElement.addEventListener('error', function (error) {

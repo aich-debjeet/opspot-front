@@ -34,7 +34,7 @@ export class DynamicFormComponent implements OnInit, AfterViewChecked , OnChange
 
   ngOnChanges(changes: any) {
     const fields: any = changes.fields;
-    console.log(fields);
+    // console.log(fields);
     this.updateFields();
   }
 

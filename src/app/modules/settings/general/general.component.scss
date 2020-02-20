@@ -137,6 +137,7 @@
 // toggle css
 .o-settings-toggle{
   padding-top:22px;
+  display: flex;
   @include mq($from: $mobile_sm, $until: $tablet) {
   position: absolute;
   right: 0;

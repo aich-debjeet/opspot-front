@@ -29,7 +29,7 @@ export class BookmarkViewComponent implements OnInit {
     // console.log(this.activity)
   }
   changeFilter(filter: string) {
-    console.log('filter', filter)
+    // console.log('filter', filter)
     if (filter.length === 0) {
       //clear all filter
       this._filter = '';
@@ -75,7 +75,7 @@ export class BookmarkViewComponent implements OnInit {
     })
   }
   delete(activity) {
-    console.log(activity);
+    // console.log(activity);
     let i: any;
     for (i in this.activity) {
       if (this.activity[i] === activity) {

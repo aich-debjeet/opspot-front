@@ -18,7 +18,7 @@ export class NotificationComponent {
 
   set _notification(value: any) {
     this.notification = value;
-    console.log(this.notification)
+    // console.log(this.notification)
   }
 
   openMessengerWindow(event) {

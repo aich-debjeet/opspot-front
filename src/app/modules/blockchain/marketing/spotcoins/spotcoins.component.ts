@@ -77,7 +77,7 @@ export class SpotcoinsComponent implements OnInit {
   }
 
   set amount(value: number) {
-    console.log(value)
+    // console.log(value)
     this.tokens = value * this.rate;
   }
 

@@ -2,7 +2,7 @@
   We've received your transaction. Please try unlocking this post after it gets processed. We estimate it may take around 5 minutes.
 </div>
 
-<div *ngIf="entity.wire_threshold.message" class="m-wire--lock-screen--button">
+<div *ngIf="entity?.wire_threshold?.message" class="m-wire--lock-screen--button">
   <div class="m-wire--lock-screen-introduction">
     <p class="mdl-color-text--grey-800">
       {{ entity.wire_threshold.message }}
@@ -12,7 +12,7 @@
 
 <div class="feed-paywall bg" [style.backgroundImage]="getBackground()">
   
-  <h4 class="white" id="paywall">{{ entity.wire_threshold.min | number }} coins </h4>
+  <h4 *ngIf="entity?.wire_threshold?.min" class="white" id="paywall">{{ entity.wire_threshold.min | number }} coins </h4>
 
   <div class="text-md grey">
     This post can only be seen by supporters
