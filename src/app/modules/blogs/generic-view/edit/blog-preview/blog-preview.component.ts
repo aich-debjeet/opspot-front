@@ -25,9 +25,7 @@ export class BlogPreviewComponent implements OnInit {
     this.blog = object ? object.blog : null;
     this.guid = object ? object.guid : null;
     let skills = object ? object.blog.tags : null;
-    console.log(skills);
     skills = skills.filter(el => !!el);
-    console.log(skills);
     this.skillsAlter(skills);
   }
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
@@ -53,7 +51,6 @@ export class BlogPreviewComponent implements OnInit {
   }
 
   skillsAlter(skills: any[]) {
-    console.log('skills', skills)
     for (let i = skills.length; i--;) {
       this.blogSkills.push({ display: skills[i], value: skills[i] });
     }
