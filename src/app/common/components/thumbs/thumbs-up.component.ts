@@ -31,6 +31,7 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
       }
       .spot-ico{
         font-size:19px !important;
+        margin-right:16px;
       }
       .spot-ico-block{
         display:flex;

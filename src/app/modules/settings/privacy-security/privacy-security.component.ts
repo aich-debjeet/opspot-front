@@ -36,7 +36,7 @@ export class PrivacySecurityComponent implements OnInit {
   ngOnInit() {
     this.client.get('api/v1/settings/' + this.guid)
       .then((response: any) => {
-        console.log('LOAD', response.channel);
+        // console.log('LOAD', response.channel);
         this.openSessions = response.channel.open_sessions || 1;
       });
   }

@@ -29,7 +29,7 @@ export class EducationComponent implements OnInit {
 
   ngOnInit() {
     this.dateOfBirth = dob();
-    // this.model.privacy = false; // setting default value of privacy
+    // this.model.access = false; // setting default value of access
     this.load();
   }
 
@@ -69,7 +69,7 @@ export class EducationComponent implements OnInit {
         field_of_study: this.model.field,
         location: this.model.location,
         university: this.model.university,
-        privacy: this.model.privacy,
+        access: this.model.access,
         start_date: this.model.strtYear
           ? this.model.strtMonth + '-' + this.model.strtYear
           : '',
@@ -119,7 +119,7 @@ export class EducationComponent implements OnInit {
     this.model.university = data.university;
     this.model.strtYear = data.start_date.split('-')[1];
     this.model.strtMonth = data.start_date.split('-')[0];
-    // this.model.privacy = data.privacy ? data.privacy : false;
+    // this.model.access = data.access ? data.access : false;
     if (data.end_date) {
       this.toggleEnd = false;
       this.model.endYear = data.end_date.split('-')[1];
@@ -129,9 +129,9 @@ export class EducationComponent implements OnInit {
       this.errEndDate = false;
       this.model.present = true;
     }
-    if(!data.privacy){
-      this.model.privacy = false;
-    } else this.model.privacy = true;
+    if(!data.access){
+      this.model.access = false;
+    } else this.model.access = true;
   }
   remove(index) {
     let deletedWork = _.pullAt(this.work.education, [index]);
@@ -154,7 +154,7 @@ export class EducationComponent implements OnInit {
 
   addWorkMove() {
     this.model = {}; //render empty form after update/create
-    this.model.privacy = false; // setting default value of privacy
+    this.model.access = false; // setting default value of access
     this.submitted = false;
     this.toggleEnd = false; //render form with default value for currently studying field
   }

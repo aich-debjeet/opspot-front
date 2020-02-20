@@ -20,7 +20,7 @@ export class SuggestionsSidebar {
 
   ngOnInit() {
     this.load();
-    console.log(this.suggestions)
+    // console.log(this.suggestions)
   }
 
   async load() {

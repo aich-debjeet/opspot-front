@@ -28,7 +28,7 @@ export class PaywallMessageComponent implements OnInit {
   add() {
     if (this._opts && this._opts.onSelected) {
       this._opts.onSelected({
-        coins: this.coins,
+        coins: this.coins.toString(),
         message: this.message
       });
     }

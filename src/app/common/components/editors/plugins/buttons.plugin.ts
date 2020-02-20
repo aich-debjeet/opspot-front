@@ -30,7 +30,7 @@ export class ButtonsPlugin {
   }
 
   public init() {
-    console.log('creating a div');
+    // console.log('creating a div');
     this.$element = document.querySelector('.medium-editor-element');
 
     this.$element.classList.add('medium-editor-insert-plugin');

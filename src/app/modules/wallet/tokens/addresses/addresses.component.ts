@@ -68,7 +68,7 @@ export class WalletTokenAddressesComponent {
       });
       this.detectChanges();
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   }
 

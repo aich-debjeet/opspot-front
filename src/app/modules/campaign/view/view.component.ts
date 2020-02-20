@@ -43,7 +43,7 @@ export class EnrolmentViewComponent implements OnInit {
 
     this.client.get('api/v3/campaign/enrolment')
       .then((data: any) => {
-        console.log('campaign dta',data)
+        // console.log('campaign dta',data)
         this.enrolmentDetails = data;
       })
       .catch((e) => {
@@ -54,7 +54,7 @@ export class EnrolmentViewComponent implements OnInit {
   proceedPayment(enrollDetails: any) {
     this.enrollmentDetails = enrollDetails;
     this.formData = this.enrollmentDetails.form;
-    console.log('form data =', this.enrollmentDetails);
+    // console.log('form data =', this.enrollmentDetails);
     this.payment();
   }
 
@@ -79,7 +79,7 @@ export class EnrolmentViewComponent implements OnInit {
         s.innerHTML = "Instamojo.open('" + res.longurl + "');";
         this.elementRef.nativeElement.appendChild(s);
       }, (err) => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }

@@ -4,6 +4,9 @@ Opspot Front end
 # to run in DEV env
 ng serve --proxy-config proxy.conf.json
 
+# to generate release notes
+git log --pretty=format:'"%an","%ae","%aD","%s",' --shortstat --no-merges | paste - - - > release_notes.csv
+
 # for prod deployment
 1. Change config in angular.json: src/index.html => src/index.php
 2. Front build: node --max-old-space-size=6096 ./node_modules/@angular/cli/bin/ng build --prod --output-path dist/ --deploy-url=/
