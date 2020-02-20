@@ -4,28 +4,28 @@
         <div class="document-block__left ">
           <div class="for-sticky">
             <ul class="document-menu hidden-under-tablet">
-              <li class="document-menu__items document-menu__items--active">
+              <li class="document-menu__items" routerLinkActive="document-menu__items--active">
                 <a [routerLink]="['terms']" class="document-menu__link">Terms of Use</a>
               </li>
-              <li class="document-menu__items">
+              <li class="document-menu__items" routerLinkActive="document-menu__items--active">
                 <a [routerLink]="['privacy-policy']" class="document-menu__link">Privacy Policy</a>
               </li>
-              <li class="document-menu__items">
+              <li class="document-menu__items" routerLinkActive="document-menu__items--active">
                 <a [routerLink]="['cookie-policy']" class="document-menu__link">Cookie Policy</a>
               </li>
-              <li class="document-menu__items">
+              <li class="document-menu__items" routerLinkActive="document-menu__items--active">
                 <a [routerLink]="['community']" class="document-menu__link">Community Guidelines</a>
               </li>
-              <li class="document-menu__items">
+              <li class="document-menu__items" routerLinkActive="document-menu__items--active">
                 <a [routerLink]="['copyright-policy']" class="document-menu__link">Copyright Policy</a>
               </li>
-              <li class="document-menu__items">
+              <li class="document-menu__items" routerLinkActive="document-menu__items--active">
                 <a [routerLink]="['enrollment']" class="document-menu__link">Enrollment Terms and Conditions</a>
               </li>
             </ul>
             <div class="dropdown hidden-above-tablet">
-              <button class="dropbtn">Menu <span class="drop-arrow-ico"><i class="icon-chevron-down"></i></span></button>
-              <div id="myDropdown" class="dropdown-content">
+              <button (click)="opened = !opened" class="dropbtn">Menu <span class="drop-arrow-ico"><i class="icon-chevron-down"></i></span></button>
+              <div id="myDropdown" class="dropdown-content" *ngIf="opened">
                 <a [routerLink]="['terms']">Terms of Use</a>
                 <a [routerLink]="['privacy-policy']">Privacy Policy</a>
                 <a [routerLink]="['cookie-policy']">Cookie Policy</a>

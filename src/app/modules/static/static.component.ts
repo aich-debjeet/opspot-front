@@ -7,7 +7,7 @@ import { OpspotTitle } from '../../services/ux/title';
   styleUrls: ['./static.component.scss']
 })
 export class StaticComponent implements OnInit {
-
+  opened: boolean = false;
   constructor(
     private title: OpspotTitle
   ) { }
