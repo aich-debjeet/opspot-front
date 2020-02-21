@@ -25697,7 +25697,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .o-create-portfolio-body{
   width: 100%;
   padding: 15px 24px 15px;
-  height: 186px;
+  // height: 186px;
   textarea{
       resize:none;
   }
@@ -25722,13 +25722,13 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   display: flex;
   align-items: flex-start;
   &__avatar{
-  order: 1;  
+    order: 1;  
   img{
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
   }
 }
   &__mesaage{
