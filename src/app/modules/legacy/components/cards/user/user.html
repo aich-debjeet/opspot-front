@@ -133,8 +133,8 @@
                     <div class="text-sm grey">Following</div>
                 </a>
                 <a [routerLink]="['/', user.username, 'feed']" id="user-profile-view-details">
-                    <div class="caption-bold f700" id="user-profile-view-count">{{user.impressions?user.impressions:'0' | abbr:0}}</div>
-                    <div class="text-sm grey">Views</div>
+                    <div class="caption-bold f700" id="user-profile-view-count">{{user.post_count?user.post_count:0 | abbr:0}}</div>
+                    <div class="text-sm grey">Posts</div>
                 </a>
             </div>
         </div>
