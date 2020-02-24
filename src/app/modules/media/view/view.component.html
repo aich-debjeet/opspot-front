@@ -286,8 +286,8 @@ opspot-button-remind{
                       <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'  && media.entity_type !== 'audio'"
                         (click)="showImage(i)">
                       <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img" (click)="showImage(i,media)">
-                      <img *ngIf="media.entity_type === 'audio'" src="assets/videos/video_thumbnail.png" alt="" class="feed-media__img" (click)="showImage(i,media)">
-                      <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
+                      <img *ngIf="media.entity_type === 'audio'" src="assets/audiops.jpg" alt="" class="feed-media__img" (click)="showImage(i,media)">
+                      <div class="feed-media-overlay" *ngIf="media.entity_type === 'video' || media.entity_type === 'audio'">
                         <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
                       </div>
                     </a>
