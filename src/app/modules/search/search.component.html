@@ -210,6 +210,12 @@
         <li [class.active]="type == 'user'">
           <a [routerLink]="['/search', { q: q, type: 'user', ref: ref }]">Profile</a>
         </li>
+        <li [class.active]="type == 'group'">
+          <a [routerLink]="['/search', { q: q, type: 'group', ref: ref }]">Community</a>
+        </li>
+        <li [class.active]="type == 'organization'">
+          <a [routerLink]="['/search', { q: q, type: 'organization', ref: ref }]">Organization</a>
+        </li>
         <!-- <li [class.active]="type == 'object:item'">
           <a [routerLink]="['/search', { q: q, type: 'object:item', ref: ref }]">TheBlueStore</a>
         </li>
