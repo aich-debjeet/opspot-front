@@ -35,7 +35,7 @@ import { GroupsService } from '../groups-service';
       Remove as Admin
     </li>
     <li class="mdl-menu__item" id="card-user-action-make-as-moderator"
-      *ngIf="(group['is:owner'] || group['is:admin']) && !(user['is:owner']||user['is:moderator']) && user['is:member']"
+      *ngIf="(group['is:owner'] || group['is:admin']) && !(user['is:owner']|| user['is:moderator'] || user['is:admin']) && user['is:member']"
       (click)="grantModerator()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__MAKE_MODERATOR">
       Make Moderator
     </li>
