@@ -8,6 +8,9 @@ ng serve --proxy-config proxy.conf.json
 # example: git log v1.2.1..v1.2.2
 git log tag1..tag2 --pretty=format:'"%an","%ae","%aD","%s",' --shortstat --no-merges | paste - - - > ~/Desktop/release_notes_tag2.csv
 
+# for weekly updates
+git log --after="2020-02-16T16:00:00-00:00" --before="2020-02-23T16:00:00-00:00" --pretty=format:'"%s"' --shortstat --no-merges | paste - - - > ~/Desktop/weekly_updates.csv
+
 # for prod deployment
 1. Change config in angular.json: src/index.html => src/index.php
 2. Front build: node --max-old-space-size=6096 ./node_modules/@angular/cli/bin/ng build --prod --output-path dist/ --deploy-url=/
