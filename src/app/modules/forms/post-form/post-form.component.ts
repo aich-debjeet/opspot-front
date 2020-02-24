@@ -204,7 +204,6 @@ export class PostFormComponent {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
-          console.log(obj)
           if(obj['src'].includes("data:audio/")){
             obj['src'] = 'assets/videos/video_thumbnail.png'
           }

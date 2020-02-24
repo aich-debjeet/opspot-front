@@ -66,7 +66,6 @@ export class PortfolioFormComponent implements OnInit {
           let obj = {};
           obj['guid'] = guid;
           obj['imageLink'] = this.attachment.getPreview();
-          console.log(obj)
           /**
            * temporary fix for video and audio
            */
@@ -84,7 +83,6 @@ export class PortfolioFormComponent implements OnInit {
           file.value = null;
         })
         .catch(e => {
-          console.log(e)
           if (e && e.message) {
           }
           this.inProgress = false;
