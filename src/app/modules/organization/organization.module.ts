@@ -23,7 +23,7 @@ import { OrganizationProfileFeed } from './profile/feed/feed';
 // import { GroupsProfileConversation } from './profile/conversation/conversation.component';
 // import { GroupsProfileFilterSelector } from './profile/filter-selector/filter-selector.component';
 // import { GroupsMembersModuleComponent } from './members/members';
-// import { GroupsTileComponent } from './tile/tile.component';
+import { OrganizationTileComponent } from './tile/tile.component';
 // import { GroupsSidebarMarkersComponent } from './sidebar-markers/sidebar-markers.component';
 // import { CommentsModule } from '../comments/comments.module';
 import { PosterModule } from '../newsfeed/poster/poster.module';
@@ -92,7 +92,7 @@ const routes: Routes = [
     OrganizationSettingButton, OrganizationMobileInvite  ,  // GroupsProfileConversation,
     // GroupsProfileFilterSelector,
     // GroupsMembersModuleComponent,
-    // GroupsTileComponent,
+    OrganizationTileComponent,
     // GroupMemberPreviews,
     // GroupsSidebarMarkersComponent,
     OrganizationMobileMembers,
@@ -108,10 +108,12 @@ const routes: Routes = [
     OrganizationCardUserActionsButton,
     OrganizationProfileMembers,
     OrganizationProfileFeed,    // GroupsProfileRequests,
-    OrganizationSettingButton    // GroupsProfileConversation,
+    OrganizationSettingButton,    // GroupsProfileConversation,
+    OrganizationTileComponent
     // GroupsProfileFilterSelector,
     // GroupsMembersModuleComponent,
     // GroupsSidebarMarkersComponent,
+    
   ],
   entryComponents: [
     // GroupsCard,
