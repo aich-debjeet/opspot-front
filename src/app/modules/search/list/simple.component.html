@@ -12,11 +12,19 @@
 </div> -->
 
 <div class="o-serach-post">
-  <div *ngIf="type && type === 'organization'; else opspotCard">
-    <m-organization--tile
-      *ngFor="let entity of entities"
-      [entity]="entity"
-    ></m-organization--tile>
+  <div *ngIf="type && (type === 'organization' || type === 'group'); else opspotCard">
+    <div *ngIf="type === 'organization'">
+      <m-organization--tile
+        *ngFor="let entity of entities"
+        [entity]="entity"
+      ></m-organization--tile>
+    </div>
+    <div *ngIf="type === 'group'">
+      <m-groups--tile
+        *ngFor="let entity of entities"
+        [entity]="entity"
+      ></m-groups--tile>
+    </div>
   </div>
   <ng-template #opspotCard>
     <opspot-card *ngFor="let entity of entities"
