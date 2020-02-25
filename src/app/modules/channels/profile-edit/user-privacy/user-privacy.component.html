@@ -3,9 +3,22 @@
   <div class="o-drop__arrow"><img src="assets/droparrow.png" alt="ss"></div>
   <div class="o-prof-edit-privacy-radio">
     <label class="radio-label radio-label--flex" *ngFor="let privacy of privacys">
-      <input type="radio" id="user-privacy-radio-button" (click)="model.privacy=privacy; changePrivacy()" [checked]="privacy===model.privacy">
+      <input type="radio" id="user-privacy-radio-button" (click)="model.privacy=privacy; changePrivacy()" [checked]="privacy == model.privacy">
       <div class="radio-widget" id="user-privacy-radio"></div>
-      <div class="text-sm grey w-label100"> {{privacy}}</div>
+      <div [ngSwitch]="privacy">
+        <div *ngSwitchCase="'Followers'">
+          <div class="text-sm grey w-label100">Visible to people who follows you</div>
+        </div>
+        <div *ngSwitchCase="'Following'">
+          <div class="text-sm grey w-label100">Visible to people you follow</div>
+        </div>
+        <div *ngSwitchCase="'Everyone'">
+          <div class="text-sm grey w-label100">Visible to everyone</div>
+        </div>
+        <div *ngSwitchCase="'Only Me'">
+          <div class="text-sm grey w-label100">Visible to only me</div>
+        </div>
+      </div>
     </label>
   </div>
 </div>

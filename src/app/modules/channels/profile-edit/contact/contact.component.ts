@@ -22,10 +22,10 @@ export class ContactComponent implements OnInit {
   ) { }
 
   privacy = {
-    location: 'Visible to Everyone',
-    email: 'Visible to Everyone',
-    phone: 'Visible to Everyone',
-    website: 'Visible to Everyone'
+    location: 'Everyone',
+    email: 'Everyone',
+    phone: 'Everyone',
+    website: 'Everyone'
   };
   toggleLocation;
   toggleEmail;
@@ -72,10 +72,10 @@ export class ContactComponent implements OnInit {
     this.model.location = res['location'];
     this.model.website = res['website'];
 
-    this.privacy.email = res['email_visibility'] ? res['email_visibility'] : this.privacy.email;
-    this.privacy.location = res['location_visibility'] ? res['location_visibility'] : this.privacy.location;
-    this.privacy.website = res['website_visibility'] ? res['website_visibility'] : this.privacy.website;
-    this.privacy.phone = res['phone_number_visibility'] ? res['phone_number_visibility'] : this.privacy.phone;
+    this.privacy.email = res['email_visibility'] ? res['email_visibility'].charAt(0).toUpperCase() + res['email_visibility'].slice(1) : this.privacy.email;
+    this.privacy.location = res['location_visibility'] ? res['location_visibility'].charAt(0).toUpperCase() + res['location_visibility'].slice(1) : this.privacy.location;
+    this.privacy.website = res['website_visibility'] ? res['website_visibility'].charAt(0).toUpperCase() + res['website_visibility'].slice(1) : this.privacy.website;
+    this.privacy.phone = res['phone_number_visibility'] ? res['phone_number_visibility'].charAt(0).toUpperCase() + res['phone_number_visibility'].slice(1) : this.privacy.phone;
 
   }
 
@@ -87,10 +87,10 @@ export class ContactComponent implements OnInit {
         location: this.model.location ? this.model.location : '',
         phone: this.model.phoneNumber,
         website: this.model.website ? this.model.website : '',
-        location_visibility: this.privacy.location,
-        phone_visibility: this.privacy.phone,
-        email_visibility: this.privacy.email,
-        website_visibility: this.privacy.website
+        location_visibility: this.privacy.location.toLowerCase().split(' ').join(''),
+        phone_visibility: this.privacy.phone.toLowerCase().split(' ').join(''),
+        email_visibility: this.privacy.email.toLowerCase().split(' ').join(''),
+        website_visibility: this.privacy.website.toLowerCase().split(' ').join('')
       }
     };
     this.client.post('api/v1/entities/contact_details', contact).then((res:any) => {

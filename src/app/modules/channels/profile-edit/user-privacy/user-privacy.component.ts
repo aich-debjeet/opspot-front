@@ -9,15 +9,14 @@ export class UserPrivacyComponent implements OnInit {
 
   privacys = [];
   constructor() {
-    this.privacys = ['Visible to Everyone', 'Visible to people who follow you', 'Visible to people you follow', 'OnlyMe'];
+    this.privacys = ['Everyone', 'Followers', 'Following', 'Only Me'];
   }
 
-  model = { privacy: 'Visible to Everyone' };
+  model = { privacy: 'Everyone' };
   ngOnInit() {
     if (this.inPrivacy) {
       this.model.privacy = this.inPrivacy;
     }
-    //  console.log(this.toggleClass)
   }
 
   @Input('inPrivacy') inPrivacy;
