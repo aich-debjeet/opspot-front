@@ -204,13 +204,19 @@
         <li [class.active]="type == ''">
           <a [routerLink]="['/search', { q: q, type: '', ref: ref }]">All</a>
         </li>
-        <li [class.active]="type == 'activity'">
+        <li [class.active]="type == 'activity' || type == 'object:item' || type == 'object:opportunity' || type == 'object:event'">
           <a [routerLink]="['/search', { q: q, type: 'activity', ref: ref }]">Post</a>
         </li>
         <li [class.active]="type == 'user'">
           <a [routerLink]="['/search', { q: q, type: 'user', ref: ref }]">Profile</a>
         </li>
-        <li [class.active]="type == 'object:item'">
+        <li [class.active]="type == 'group'">
+          <a [routerLink]="['/search', { q: q, type: 'group', ref: ref }]">Community</a>
+        </li>
+        <li [class.active]="type == 'organization'">
+          <a [routerLink]="['/search', { q: q, type: 'organization', ref: ref }]">Organization</a>
+        </li>
+        <!-- <li [class.active]="type == 'object:item'">
           <a [routerLink]="['/search', { q: q, type: 'object:item', ref: ref }]">TheBlueStore</a>
         </li>
         <li [class.active]="type == 'object:opportunity'">
@@ -218,7 +224,7 @@
         </li>
         <li [class.active]="type == 'object:event'">
           <a [routerLink]="['/search', { q: q, type: 'object:event', ref: ref }]">Showtimez</a>
-        </li>
+        </li> -->
       </ul>
     </div><!--tab end-->
   </div>
@@ -232,8 +238,8 @@
                     <div id="all" class="tab active">
                         <div class="o-blocks">
                             <div  class="o-left-block hidden-under-tablet">
-                              <!-- <opspot-search-filter></opspot-search-filter> -->
-                              <opspot-widget [entityType]="'event'"></opspot-widget>
+                              <opspot-search-filter *ngIf="type == 'activity' || type == 'object:item' || type == 'object:opportunity' || type == 'object:event'" (selected)="selectedFilter($event)"></opspot-search-filter>
+                              <opspot-widget *ngIf="!(type == 'activity' || type == 'object:item' || type == 'object:opportunity' || type == 'object:event')" [entityType]="'event'"></opspot-widget>
                             </div><!--left-block ends-->
                             <div class="o-center-block">
                                 <ng-container *ngIf="searchType == 'hybrid'; else simpleList">
@@ -246,6 +252,7 @@
                                   <m-search--simple-list
                                     (seeAll)="seeAll($event)"
                                     [entities]="entities"
+                                    [type]="type"
                                   ></m-search--simple-list>
                                 </ng-template>
                             </div><!--center block ends-->
