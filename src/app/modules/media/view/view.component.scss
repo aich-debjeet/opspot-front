@@ -328,3 +328,12 @@ i.arrow-icons {
     left: 30px;
     z-index: 1;
   }
+
+.audio-background-cover{
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(assets/audiops.jpg);
+}
