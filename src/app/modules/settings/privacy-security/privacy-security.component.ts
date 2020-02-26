@@ -4,6 +4,7 @@ import { Session } from '../../../services/session';
 import { Client } from '../../../services/api';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { FormValidator } from '../../../helpers/form.validator'
 
 @Component({
   selector: 'app-privacy-security',
@@ -17,6 +18,7 @@ export class PrivacySecurityComponent implements OnInit {
   openSessions: number = 1;
   incorrectPassword: boolean = false;
   inProgress: boolean = false;
+  formSubmitted: boolean = false;
 
   constructor(
     fb: FormBuilder,
@@ -27,7 +29,7 @@ export class PrivacySecurityComponent implements OnInit {
   ) {
     this.form = fb.group({
       currentPassword:['', Validators.required],
-      newPassword: ['', [Validators.required, this.checkPassword]],
+      newPassword: ['', [Validators.required, FormValidator.checkPassword]],
       confirmpassword: ['', Validators.required]
     },
     {validator: this.MustMatch('newPassword','confirmpassword')})
@@ -42,6 +44,7 @@ export class PrivacySecurityComponent implements OnInit {
   }
   changePassword(){
     this.form.reset();
+    if(this.formSubmitted)this.formSubmitted = false;
 
     if(this.incorrectPassword)
     this.incorrectPassword = false;
@@ -73,7 +76,11 @@ export class PrivacySecurityComponent implements OnInit {
     this.router.navigate(['/logout/all']);
   }
   save() {
-    if(!this.form.valid) return;
+    this.formSubmitted = false;
+    if(!this.form.valid) {
+      this.formSubmitted = true;
+      return;
+    }
     this.inProgress = true;
     this.client.post('api/v1/settings/' + this.guid,
       {
