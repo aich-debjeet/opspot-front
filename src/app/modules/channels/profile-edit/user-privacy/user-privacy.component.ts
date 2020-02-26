@@ -9,7 +9,7 @@ export class UserPrivacyComponent implements OnInit {
 
   privacys = [];
   constructor() {
-    this.privacys = ['Everyone', 'Followers', 'Following', 'Only Me'];
+    this.privacys = ['Everyone', 'Followers', 'Following', 'Onlyme'];
   }
 
   model = { privacy: 'Everyone' };

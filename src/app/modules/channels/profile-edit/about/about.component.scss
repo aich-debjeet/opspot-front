@@ -1,0 +1,19 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+.pos{
+    position: relative;
+} 
+
+.privacy{
+    position: absolute;
+    top: -54px;
+    left: 95px;
+    z-index: 2;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        position: absolute;
+        top: 37px;
+        left: -104px;
+        z-index: 2;
+    }
+}
