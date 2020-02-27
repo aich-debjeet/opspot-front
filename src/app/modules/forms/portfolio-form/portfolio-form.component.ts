@@ -93,7 +93,7 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   post() {
-    if (this.meta.message.length <= 0 && this.attachment.has()) {
+    if (!this.attachment.hasAttachment()) {
       alert('What have You Created today?');
       return;
     }
