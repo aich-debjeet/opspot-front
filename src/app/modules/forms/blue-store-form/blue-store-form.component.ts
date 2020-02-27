@@ -262,13 +262,19 @@ export class BlueStoreFormComponent implements OnInit {
     } else {
       this.reqBody.attachment_guid = this.attach_guid;
     }
+
+    if (this.reqBody.attachment_guid.length === 0) {
+      this.toastr.error('Please upload product images');
+      return;
+      // this.imageUploadError = true;
+    }
     this.reqBody.title = this.blueStoreForm.value.blueStoreTitle;
     this.reqBody.description = this.blueStoreForm.value.blueStoreDescription;
     this.reqBody.price = this.blueStoreForm.value.blueStorePrice;
     this.reqBody.item_count = this.blueStoreForm.value.blueStoreUnits;
     this.reqBody.currency = this.blueStoreForm.value.blueStoreCurrency
 
-    if (this.blueStoreForm.valid && !this.imageUploadError) {
+    if (this.blueStoreForm.valid) {
       let endpoint = 'api/v3/marketplace';
       if (this.bluestoreGuid) {
         endpoint = 'api/v3/marketplace/' + this.bluestoreGuid;

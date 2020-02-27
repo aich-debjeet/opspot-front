@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <opspot-masonry-container [entities]="filteredArray"></opspot-masonry-container>
+            <opspot-masonry-container [entities]="filteredArray" class="portfolio-container"></opspot-masonry-container>
             <infinite-scroll distance="25%" (load)="searchMore()" [moreData]="moreData" [inProgress]="inProgress">
             </infinite-scroll>
         </div>
