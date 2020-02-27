@@ -36,42 +36,40 @@ export class WorkComponent implements OnInit {
   }
 
   toggleEndDate() {
+    this.errEndDate = !this.errEndDate;
     this.toggleEnd = !this.toggleEnd;
   }
 
   onSubmit(e) {
-    console.log(e);
     this.submitted = true;
     if (!e.valid) {
       this.errEdu = true;
       return;
     }
-    this.errEdu = false;
-    if(!this.toggleEnd){
-      if(!this.model.endMonth || !this.model.endYear){
-        this.errWork = true;
-        return;
-      }
-      if (this.model.strtMonth && this.model.endMonth) {
-        this.startMonthIndex = this.monthArray.indexOf(this.model.strtMonth.toLowerCase());
-        this.endMonthIndex = this.monthArray.indexOf(this.model.endMonth.toLowerCase());
-      }
-      if ((this.model.endYear - this.model.strtYear < 0)) {
-        this.errWork = true;
-      } else {
-        if((this.model.endYear === this.model.strtYear) && (this.endMonthIndex - this.startMonthIndex < 0)){
-          this.errWork = true;
-        } else
-        this.errWork = false;
+    if (this.model.strtMonth && this.model.endMonth) {
+      this.startMonthIndex = this.monthArray.indexOf(this.model.strtMonth.toLowerCase());
+      this.endMonthIndex = this.monthArray.indexOf(this.model.endMonth.toLowerCase());
+    }
+    if ((this.model.endYear - this.model.strtYear < 0) || (this.endMonthIndex - this.startMonthIndex < 0)) {
+      this.errWork = true;
+    } else {
+      this.errWork = false;
+    }
+
+    if (!this.toggleEnd) {
+      if (
+        (e.controls.endMonth.value ? true : false) && e.controls.endYear.value
+          ? true
+          : false
+      ) {
+        this.errEndDate = false;
       }
     } else {
-      if(this.errWork) {
-        this.errWork = false;
-      }
+      this.errEndDate = false;
     }
 
     if (!this.errWork) {
-      // this.errEdu = false
+      this.errEdu = false
       this.inProgress = true;
       let work = {
         designation: this.model.designation,
