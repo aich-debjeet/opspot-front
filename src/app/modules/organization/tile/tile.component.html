@@ -10,7 +10,7 @@
           <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="cover">
         </div>
         <div class="o-community-card-header" id="tile-entity-name">
-          <div class="f500 text-lg">{{entity.name}}</div>
+          <div class="f500 text-lg word-br elipse elipse--w-130">{{entity.name}}</div>
         </div>
         <div class="o-community-card-skills" *ngIf="entity?.tags.length > 0; else emptyTag">
           <a *ngFor="let tag of entity?.tags | slice:0:3" class="o-community-card-skills__tag">{{tag}}</a>
