@@ -8,21 +8,25 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class UserPrivacyComponent implements OnInit {
 
   privacys = [];
+  private _inPrivacy: string;
+
   constructor() {
-    this.privacys = ['Visible to Everyone', 'Visible to people who follow you', 'Visible to people you follow', 'OnlyMe'];
+    this.privacys = ['Everyone', 'Followers', 'Following', 'Onlyme'];
   }
 
-  model = { privacy: 'Visible to Everyone' };
+  model = { privacy: 'Following' };
   ngOnInit() {
-    if (this.inPrivacy) {
-      this.model.privacy = this.inPrivacy;
-    }
-    //  console.log(this.toggleClass)
   }
 
-  @Input('inPrivacy') inPrivacy;
   @Input('toggleClass') toggleClass: boolean;
   @Output('privacyChange') privacyChange: EventEmitter<any> = new EventEmitter();
+
+  @Input() set inPrivacy(value: string) {
+    this._inPrivacy = value;
+    if (this._inPrivacy) {
+      this.model.privacy = this._inPrivacy;
+    }
+  }
 
   changePrivacy() {
     this.privacyChange.emit(this.model.privacy);

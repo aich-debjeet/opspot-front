@@ -1,4 +1,4 @@
-  <div class="o-community-landing-block-design__item" *ngIf="entity && entity['entity_type']=='community'">
+  <div class="o-community-landing-block-design__item" *ngIf="entity && entity['entity_type']=='organization'">
     <div class="o-community-card">
       <div class="o-community-card-section mr-6">
         <div class="o-community-card-cover">
@@ -21,7 +21,7 @@
           </p>
         </ng-template>
         <div class="o-community-card-action">
-          <opspot-groups-join-button *ngIf="(!entity['is:member'] && entity.membership === 2) && !entity['is:awaiting']"
+          <!-- <opspot-groups-join-button *ngIf="(!entity['is:member'] && entity.membership === 2) && !entity['is:awaiting']"
             [group]="entity">
           </opspot-groups-join-button>
           <button type="button" id="tile-join-button" *ngIf="(!entity['is:member'] && entity.membership !== 2) && !entity['is:awaiting']"
@@ -29,7 +29,8 @@
           <button *ngIf="entity['is:member']" id="tile-open-button" class="btn btn-primary btn-sm" i18n="@@GROUPS__TILE__OPEN_ACTION"
             (click)='trigger(entity)'>
             Open
-          </button>
+          </button> -->
+          <button type="button" id="tile-join-button" class="btn btn-primary btn-sm" (click)='trigger(entity)'>Open</button>
           <button class="btn btn-primary btn-sm" id="tile-cancel-button" *ngIf="entity['is:awaiting']" (click)="cancelRequest()"
             i18n="@@GROUPS__TILE__OPEN_ACTION">
             Cancel

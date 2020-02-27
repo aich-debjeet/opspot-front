@@ -14,7 +14,7 @@
                 </div>
             </div><!--profile crop head end-->
             <div class="o-profile-crop-body">
-                <ngx-croppie *ngIf="croppieImage" [croppieOptions]="croppieOptions" [imageUrl]="croppieImage" [points]="[20,50,500,500]" (result)="imageResult($event)">
+                <ngx-croppie *ngIf="croppieImage" [croppieOptions]="croppieOptions" [imageUrl]="croppieImage" (result)="imageResult($event)">
                 </ngx-croppie>   
             </div>
             <div class="o-profile-crop-footer">

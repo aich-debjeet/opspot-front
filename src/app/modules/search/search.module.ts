@@ -12,6 +12,8 @@ import { SearchBarComponent } from './bar.component';
 import { SearchComponent } from './search.component';
 import { SearchFilterComponent } from './filter/search-filter.component';
 import { LegacyModule } from '../legacy/legacy.module';
+import { OrganizationModule } from '../organization/organization.module';
+import { GroupsModule } from '../groups/groups.module';
 
 const searchRoutes: Routes = [
   { path: 'search', component: SearchComponent }
@@ -24,7 +26,9 @@ const searchRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(searchRoutes),
     CommonModule,
-    LegacyModule
+    LegacyModule,
+    GroupsModule,
+    OrganizationModule
   ],
   declarations: [
     SearchHybridListComponent,

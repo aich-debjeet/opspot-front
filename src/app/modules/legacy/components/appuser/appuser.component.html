@@ -10,6 +10,7 @@
     <div class="o-community-members-info__option">
       <button *ngIf="user['is:admin']" id="appuser-admin" type="button" class="btn btn-outline-primary btn-xs disabled">admin</button>
       <button *ngIf="user['is:owner']" id="appuser-admin" type="button" class="btn btn-outline-primary btn-xs disabled">owner</button>
+      <button *ngIf="user['is:moderator']" id="appuser-admin" type="button" class="btn btn-outline-primary btn-xs disabled">moderator</button>
       <a>
      <ng-content></ng-content>
       </a>

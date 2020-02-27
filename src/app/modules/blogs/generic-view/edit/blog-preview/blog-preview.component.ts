@@ -20,12 +20,14 @@ export class BlogPreviewComponent implements OnInit {
   skillData: any[] = [];
   blogSkills: any[] = [];
   error: string = '';
+  inProgress: boolean = false;
 
   @Input('object') set data(object) {
     this.blog = object ? object.blog : null;
     this.guid = object ? object.guid : null;
     let skills = object ? object.blog.tags : null;
     skills = skills.filter(el => !!el);
+    console.log(this.blog);
     this.skillsAlter(skills);
   }
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
@@ -96,16 +98,17 @@ export class BlogPreviewComponent implements OnInit {
 
     this.check_for_banner().then(() => {
       if(this.error != 'undefined') this.error ='';
+      this.inProgress = true;
       this.upload.post('api/v1/blog/' + this.guid, [this.banner], blog)
         .then((response: any) => {
           this.overlayModal.dismiss();
           this.router.navigate(response.route ? ['/' + response.route] : ['/blog/view', response.guid]);
           // this.canSave = true;
-          // this.inProgress = false;
+          this.inProgress = false;
         })
         .catch((e) => {
           // this.canSave = true;
-          // this.inProgress = false;
+          this.inProgress = false;
         });
     })
       .catch(() => {
@@ -114,17 +117,18 @@ export class BlogPreviewComponent implements OnInit {
           this.error = 'error:no-banner';
           return false;
         } else {
+          this.inProgress = true;
           this.client.post('api/v1/blog/' + this.guid, this.blog)
           .then((response: any) => {
             if (response.guid) {
               this.overlayModal.dismiss();
               this.router.navigate(response.route ? ['/' + response.route] : ['/blog/view', response.guid]);
             }
-            // this.inProgress = false;
+            this.inProgress = false;
             // this.canSave = true;
           })
           .catch((e) => {
-            // this.inProgress = false;
+            this.inProgress = false;
             // this.canSave = true;
           });
         }

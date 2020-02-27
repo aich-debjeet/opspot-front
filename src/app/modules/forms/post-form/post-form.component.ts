@@ -204,9 +204,15 @@ export class PostFormComponent {
           let obj = {};
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
-          if (obj['src'] == null) {
+          if(obj['src'].includes("data:audio/")){
             obj['src'] = 'assets/videos/video_thumbnail.png'
           }
+          if(obj['src'].includes("data:video/")){
+            obj['src'] = 'assets/videos/video_thumbnail.png'
+          }
+          // if (obj['src'] == null) {
+          //   obj['src'] = 'assets/videos/video_thumbnail.png'
+          // }
           this.cards.push(obj);
           this.inProgress = false;
           this.canPost = true;

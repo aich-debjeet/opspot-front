@@ -1,34 +1,42 @@
 <div class="o-search-filter">
   <div class="text-md f500">Filter By</div>
-  <label class="c-checkbox">Popular
-    <input type="checkbox" checked="checked">
+  <!-- <label class="c-checkbox">Popular
+    <input type="radio" name="filter" (ngModelChange)="onFilterChange($event)" [checked]="selectedFilter">
     <span class="checkmark"></span>
   </label>
   <label class="c-checkbox">Recent
-    <input type="checkbox">
+    <input type="radio" name="filter" (ngModelChange)="onFilterChange($event)" [checked]="selectedFilter">
+    <span class="checkmark"></span>
+  </label> -->
+  <label class="c-checkbox">#Showtimez
+    <input
+      type="radio"
+      name="filter"
+      value="object:event"
+      [(ngModel)]="selectedFilter"
+      (ngModelChange)="onFilterChange($event)"
+      [checked]="selectedFilter === 'object:event'">
     <span class="checkmark"></span>
   </label>
-  <div class="text-md m-10">Location</div>
-  <label class="c-checkbox">All
-    <input type="checkbox" checked="checked">
+  <label class="c-checkbox">#Opportunity
+    <input
+      type="radio"
+      name="filter"
+      value="object:opportunity"
+      [(ngModel)]="selectedFilter"
+      (ngModelChange)="onFilterChange($event)"
+      [checked]="selectedFilter === 'object:opportunity'">
     <span class="checkmark"></span>
   </label>
-  <label class="c-checkbox">#Art
-    <input type="checkbox">
+  <label class="c-checkbox">#TheBlueStore
+    <input
+      type="radio"
+      name="filter"
+      value="object:item"
+      [(ngModel)]="selectedFilter"
+      (ngModelChange)="onFilterChange($event)"
+      [checked]="selectedFilter === 'object:item'">
     <span class="checkmark"></span>
   </label>
-  <label class="c-checkbox">#Music
-    <input type="checkbox">
-    <span class="checkmark"></span>
-  </label>
-  <label class="c-checkbox">#Photography
-    <input type="checkbox">
-    <span class="checkmark"></span>
-  </label>
-  <label class="c-checkbox">#Painting
-    <input type="checkbox">
-    <span class="checkmark"></span>
-  </label>
-  <div class="text-md m-10 primary">Add Hashtag</div>
 </div>
 <!--search filter-->
