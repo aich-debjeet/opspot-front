@@ -204,6 +204,16 @@ export class AttachmentService {
     return !!(this.meta.attachment_guid.length == 0) || this.isRich();
   }
 
+  /**
+   * TODO: @abhijeet required?
+   */
+  hasAttachment() {
+    if (this.meta.attachment_guid.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
   hasFile() {
     return !!this.attachment.preview || this.getMime() === 'video';
   }
