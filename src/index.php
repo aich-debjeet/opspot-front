@@ -17,6 +17,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-16x16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="google-site-verification" content="4e3-srEQdyDsdQQS2UO4dh9TTFgN6FioY-vmKmUxJhs">
+    
     <?php
       foreach($meta as $name => $content){
         $name = strip_tags($name);
