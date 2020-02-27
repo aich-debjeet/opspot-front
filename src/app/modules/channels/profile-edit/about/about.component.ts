@@ -26,7 +26,7 @@ export class AboutComponent implements OnInit {
     adaptivePosition: true,
     dateInputFormat: 'DD-MM-YYYY'
   };
-  privacy = { dob: 'Everyone', height: 'Everyone' };
+  privacy = { dob: 'Following', height: 'Following' };
   toggleHeight;
   toggleDob;
   aboutError = { dob: false, dobInvalid: false, gender: false };
@@ -38,15 +38,16 @@ export class AboutComponent implements OnInit {
     //set privacy
   }
 
-  // changePrivacy(e, arg) {
-  //   if (arg === 'dob') {
-  //     this.privacy.dob = e;
-  //     this.toggleDob = !this.toggleDob;
-  //   } else if (arg === 'height') {
-  //     this.privacy.height = e;
-  //     this.toggleHeight = !this.toggleHeight;
-  //   }
-  // }
+  changePrivacy(e, arg) {
+    if (arg === 'dob') {
+      this.privacy.dob = e;
+      this.toggleDob = !this.toggleDob;
+    }
+    if (arg === 'height') {
+      this.privacy.height = e;
+      this.toggleHeight = !this.toggleHeight;
+    }
+  }
 
   async load() {
     // TODO @shashi: create model for type about
@@ -60,9 +61,9 @@ export class AboutComponent implements OnInit {
     // this.privacy.dob = response.about.dob_visibility;
     // this.privacy.height = response.about.height_and_weight_visibility;
     // this.model.height_and_weight_visibility = response.about.height_and_weight_visibility;
-    this.model.dob_visibility = 'everyone';
-    this.privacy.dob = 'everyone';
-    this.privacy.height = 'everyone';
+  
+    this.privacy.dob = res['date_of_birth_visibility'] ? res['date_of_birth_visibility'].charAt(0).toUpperCase() + res['date_of_birth_visibility'].slice(1) : this.privacy.dob;
+    this.privacy.height = res['height_and_weight_visibility'] ? res['height_and_weight_visibility'].charAt(0).toUpperCase() + res['height_and_weight_visibility'].slice(1) : this.privacy.height;
     this.model.height = response.height;
     this.model.weight = response.weight;
     const languages = [];
@@ -111,8 +112,8 @@ export class AboutComponent implements OnInit {
         languages: language,
         height: this.model.height,
         weight: this.model.weight,
-        dob_visibility: this.privacy.dob,
-        height_and_weight_visibility: this.privacy.height
+        date_of_birth_visibility: this.privacy.dob.toLowerCase().split(' ').join(''),
+        height_and_weight_visibility: this.privacy.height.toLowerCase().split(' ').join('')
       }
     };
 
