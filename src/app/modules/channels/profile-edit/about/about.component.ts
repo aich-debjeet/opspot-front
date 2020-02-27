@@ -26,7 +26,7 @@ export class AboutComponent implements OnInit {
     adaptivePosition: true,
     dateInputFormat: 'DD-MM-YYYY'
   };
-  privacy = { dob: 'Everyone', height: 'Everyone' };
+  privacy = { dob: 'Following', height: 'Following' };
   toggleHeight;
   toggleDob;
   aboutError = { dob: false, dobInvalid: false, gender: false };

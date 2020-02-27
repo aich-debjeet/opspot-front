@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         </div>
-                    <app-user-privacy (privacyChange)="changePrivacy($event,'dob')" class="privacy" [toggleClass]="toggleDob"></app-user-privacy>
+                    <app-user-privacy (privacyChange)="changePrivacy($event,'dob')" class="privacy" [toggleClass]="toggleDob" [inPrivacy]="privacy.dob"></app-user-privacy>
                 </div>
             </div>
 
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <app-user-privacy [toggleClass]="toggleHeight" (privacyChange)="changePrivacy($event,'height')" class="privacy"></app-user-privacy>
+                    <app-user-privacy [toggleClass]="toggleHeight" (privacyChange)="changePrivacy($event,'height')" class="privacy" [inPrivacy]="privacy.height"></app-user-privacy>
                 </div>
                 <!--privacy end-->
             </div>
