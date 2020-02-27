@@ -27857,3 +27857,17 @@ ng-otp-input {
   right:6px!important;
   top:6px!important;
 }
+
+.portfolio-container .o-explore-media-part__coloumn {
+  max-width: 50% !important;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+    max-width:100% !important;
+  }
+}
+
+.explore-container .o-explore-media-part__coloumn {
+  max-width: 25% !important;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+    max-width:100% !important;
+  }
+}
