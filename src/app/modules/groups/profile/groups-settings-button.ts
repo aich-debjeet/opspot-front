@@ -42,7 +42,7 @@ import { Session } from '../../../services/session';
     
       </ul>
     <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
-    <m-modal [open]="(group['is:owner'] || group['is:admin']) && isGoingToBeDeleted">
+    <m-modal [open]="(group['is:owner'] || group['is:admin']) && isGoingToBeDeleted" (closed)="isGoingToBeDeleted = false">
     <div class="delete-confirmation-wrapper">
       <div class="mdl-card__supporting-text">
         <p i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP_CONFIRM" class="m-modal-confirm-body text-lg">Are you sure you want to delete {{ group.name }}? This action cannot be undone.</p>
