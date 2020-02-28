@@ -14,16 +14,17 @@ export class EducationComponent implements OnInit {
   model: any = {};
   submitted = false;
   dateOfBirth;
-
   addWork;
   errWork = false;
   errEndDate = true;
   errEdu = false;
-
+  monthArray = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
   work: any = { education: [] };
   activeUser = window.Opspot.user;
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
   inProgress: boolean = false;
+  startMonthIndex;
+  endMonthIndex;
 
   constructor(private client: Client, private toastr: ToastrService) { }
 
@@ -44,22 +45,28 @@ export class EducationComponent implements OnInit {
       this.errEdu = true;
       return;
     }
-    if (this.model.endYear - this.model.strtYear < 0) {
-      this.errWork = true;
-    } else {
-      this.errWork = false;
-    }
-
-    if (!this.toggleEnd) {
-      if (
-        (e.controls.endMonth.value ? true : false) && e.controls.endYear.value
-          ? true
-          : false
-      ) {
-        this.errEndDate = false;
+    this.errEdu = false;
+    if(!this.toggleEnd){
+      if(!this.model.endMonth || !this.model.endYear){
+        this.errWork = true;
+        return;
+      }
+      if (this.model.strtMonth && this.model.endMonth) {
+        this.startMonthIndex = this.monthArray.indexOf(this.model.strtMonth.toLowerCase());
+        this.endMonthIndex = this.monthArray.indexOf(this.model.endMonth.toLowerCase());
+      }
+      if ((this.model.endYear - this.model.strtYear < 0)) {
+        this.errWork = true;
+      } else {
+        if((this.model.endYear === this.model.strtYear) && (this.endMonthIndex - this.startMonthIndex < 0)){
+          this.errWork = true;
+        } else
+        this.errWork = false;
       }
     } else {
-      this.errEndDate = false;
+      if(this.errWork) {
+        this.errWork = false;
+      }
     }
 
     if (!this.errWork) {

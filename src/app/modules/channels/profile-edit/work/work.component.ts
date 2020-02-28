@@ -40,7 +40,6 @@ export class WorkComponent implements OnInit {
   }
 
   onSubmit(e) {
-    console.log(e);
     this.submitted = true;
     if (!e.valid) {
       this.errEdu = true;
