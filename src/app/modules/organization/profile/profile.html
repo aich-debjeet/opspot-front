@@ -91,11 +91,11 @@
                                 <div class="text-sm grey">Subscribers</div>
                             </a>
                         </div>
-                        <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle">
+                        <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle" (closed)="inviteToggle = false">
                             <opspot-organization-profile-members-invite [organization]="organization">
                             </opspot-organization-profile-members-invite>
                         </m-modal>
-                        <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle">
+                        <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle" (closed)="memberToggle = false">
                             <opspot-organization-profile-members [organization]="organization" (totalOrganization)="groupCount($event)"></opspot-organization-profile-members>
                         </m-modal> 
                     </div>

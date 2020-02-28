@@ -43,7 +43,7 @@ import { CommonEventsService } from '../../../services/common-events.service';
     </ul>
     <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
 
-    <m-modal [open]="organization['is:owner'] && isGoingToBeDeleted">
+    <m-modal [open]="organization['is:owner'] && isGoingToBeDeleted" (closed)="isGoingToBeDeleted = false">
       <div class="delete-confirmation-wrapper">
         <div class="mdl-card__supporting-text" id="organization-setting-confirmation-window">
           <p class="m-modal-confirm-body text-lg">Are you sure you want to delete {{ organization.name }}? This action cannot be undone.</p>
