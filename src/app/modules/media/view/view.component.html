@@ -202,10 +202,16 @@ opspot-button-remind{
       <div class="o-posts-inner-page__left">
         <div class="o-card feed o-post-inner-minheight">
           <div class="feed-head">
-            <a *ngIf="entity?.ownerObj && entity?.ownerObj?.username" id="view-profile-image" [routerLink]="['/', entity?.ownerObj?.username]"
+            <a *ngIf="entity?.containerObj && entity?.containerObj?.type == 'organization'; else usersPicture" id="view-profile-image" [routerLink]="['/', entity?.containerObj?.username]"
               class="o-avatar">
-              <img [src]="opspot.cdn_url + 'icon/' + entity?.ownerObj?.guid + '/' " class="mdl-shadow--2dp" />
+              <img [src]="opspot.cdn_url + 'icon/' + entity?.containerObj?.guid + '/' " class="mdl-shadow--2dp" />
             </a>
+            <ng-template #usersPicture>
+              <a *ngIf="entity?.ownerObj && entity?.ownerObj?.username" id="view-profile-image" [routerLink]="['/', entity?.ownerObj?.username]"
+                class="o-avatar">
+                <img [src]="opspot.cdn_url + 'icon/' + entity?.ownerObj?.guid + '/' " class="mdl-shadow--2dp" />
+              </a>
+            </ng-template>
             <div class="o-avatar__info">
               <!-- <div class="o-avatar-det-block">
                 <span class="text-lg grey o-posts-det" id="view-profile-added-media">
