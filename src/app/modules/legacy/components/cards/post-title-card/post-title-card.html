@@ -25,6 +25,7 @@
                <a class="grey-dark f500 text-md hash-tag">
                   {{hashtag}}
                 </a>
+                <span *ngIf="entity && entity?.deleted" class="delete_post">This post is deleted</span>
             </ng-template>
             <ng-template ngSwitchCase="blog">
                 <a [href]="entity.perma_url" target="_blank" class="grey-dark f500 text-md hash-tag">
