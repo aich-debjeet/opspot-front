@@ -24962,6 +24962,7 @@ app-image-croper .m-modal-container {
       border: 1px solid #F5F7F8;	
       border-radius: 4px;
       position: relative;
+      margin-bottom:8px;
       .icon-plus{
           border:0;
       }
@@ -25700,7 +25701,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .o-create-portfolio-body{
   width: 100%;
   padding: 15px 24px 15px;
-  height: 186px;
+  // height: 186px;
   textarea{
       resize:none;
   }
@@ -25725,13 +25726,13 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   display: flex;
   align-items: flex-start;
   &__avatar{
-  order: 1;  
+    order: 1;  
   img{
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
   }
 }
   &__mesaage{

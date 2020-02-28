@@ -225,12 +225,16 @@ i.arrow-icons {
                 width: 11px; 
             }
             &__img{
-            height: 101px;	
-            width: 101px;	
-            border: 1px solid #E9EDEF;	
-            border-radius: 4px;
-            object-fit: cover;
-            margin-right:19px;
+                height: 101px;	
+                width: 101px;	
+                border: 1px solid #E9EDEF;	
+                border-radius: 4px;
+                object-fit: cover;
+                margin-right:19px;
+                @include mq($from: $mobile_sm, $until: $tablet) {
+                    width: 60px;
+                    height: 60px;
+                }
             }
             &__link{
                 flex: 0; 
