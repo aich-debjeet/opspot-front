@@ -91,7 +91,7 @@ export class LoginComponent {
     if (this.redirectTo)
       this.router.navigate([this.redirectTo]);
     else {
-      this.modal.setDisplay('categories').open();
+      // this.modal.setDisplay('categories').open();
       this.loginReferrer.navigate({
         defaultUrl: '/' + this.session.getLoggedInUser().username
       });
