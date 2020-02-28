@@ -73,10 +73,10 @@
                         <div class="o-community-skills" *ngIf="!editing && organization?.tags">
                             <a *ngFor="let tag of organization?.tags" href="" class="o-community-skills__tag">#{{tag}}</a>
                         </div>
-                        <!-- <opspot-groups-join-button style="margin-bottom: 6px;" [group]="group"
+                        <opspot-organization-join-button style="margin-bottom: 6px;" [group]="organization"
                             (membership)="change_membership($event)"
-                            *ngIf="(!group['is:creator'] || (session.isAdmin()) && !group['is:invited'])">
-                        </opspot-groups-join-button> -->
+                            *ngIf="organization && (!organization['is:creator'] || (session.isAdmin()) && !organization['is:invited'])">
+                        </opspot-organization-join-button>
                         <div class="o-community-members-top o-community-members-top--mob hidden-above-tablet">
                             <a class="o-community-members-top__count-mob" *ngFor="let member of membersMobile">
                                 <span class="o-community-members-list-mob-single"><img [src]="memberSrc+member.guid"

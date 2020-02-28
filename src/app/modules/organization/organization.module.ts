@@ -12,7 +12,7 @@ import { ModalsModule } from '../modals/modals.module';
 import { VideoChatModule } from '../videochat/videochat.module';
 
 import { OrganizationCreator } from './create/create';
-// import { GroupsJoinButton } from './groups-join-button';
+import { OrganizationJoinButton } from './organization-join-button';
 import { OrganizationProfileMembersInvite } from './profile/members/invite/invite';
 // import { GroupsCard } from './card/card';
 import { OrganizationCardUserActionsButton } from './profile/card-user-action-button';
@@ -83,7 +83,7 @@ const routes: Routes = [
     // GroupsListComponent,
     OrganizationProfile,
     OrganizationCreator,
-    // GroupsJoinButton,
+    OrganizationJoinButton,
     OrganizationProfileMembersInvite,
     // GroupsCard,
     OrganizationCardUserActionsButton,
@@ -102,7 +102,7 @@ const routes: Routes = [
     // GroupsListComponent,
     OrganizationProfile,
     OrganizationCreator,
-    // GroupsJoinButton,
+    OrganizationJoinButton,
     OrganizationProfileMembersInvite,
     // GroupsCard,
     OrganizationCardUserActionsButton,
