@@ -3,7 +3,8 @@
         <a class="o-avatar"><img [src]="opspot.cdn_url + 'icon/' + boost.owner.guid + '/medium/' + getOwnerIconTime()" alt=""></a>
         <div class="o-avatar__info">
             <div class="o-avatar-det-block">
-                <span class="text-md grey o-posts-det"><a class="o-avatar__name" id="card-boost-owner-name">{{boost.owner.name}}</a></span>
+                <span class="text-md grey o-posts-det"><a class="o-avatar__name" id="card-boost-owner-name"
+                    [routerLink]="['/', boost?.entity?.ownerObj?.username]">{{boost.owner.name}}</a></span>
             </div>
             <div class="grey m-l-8 o-posts-tym">
                 <span id="card-boost-time-created">{{boost.time_created * 1000 | date:'medium'}}</span> 

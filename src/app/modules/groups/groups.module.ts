@@ -108,6 +108,7 @@ const routes: Routes = [
     GroupsProfileFilterSelector,
     GroupsMembersModuleComponent,
     GroupsSidebarMarkersComponent,
+    GroupsTileComponent
   ],
   entryComponents: [
     GroupsCard,

@@ -17,6 +17,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-16x16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="google-site-verification" content="4e3-srEQdyDsdQQS2UO4dh9TTFgN6FioY-vmKmUxJhs">
+    
     <?php
       foreach($meta as $name => $content){
         $name = strip_tags($name);
@@ -37,17 +39,16 @@
       }
     ?>
 
-
     <!-- inject:css -->
     <!-- endinject -->
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156194289-1"></script>
     <script>
-      var ua = window.navigator.userAgent;
-      if(ua.indexOf("MSIE") > -1 ||
-        (ua.indexOf("Android 4.3") > -1 && !(ua.indexOf('Chrome') > -1)) //android 4.3, but not chrome browser
-        ){
-          window.location.href = window.location.href.replace('<?= Opspot\Core\Config::_()->get('site_url') ?>', 'https://www.ops.doesntexist.com/not-supported');
-      }
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-156194289-1');
     </script>
 
   </head>

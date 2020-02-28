@@ -47,7 +47,7 @@ export class EmbedImage {
   }
 
   private insertHTML(imgSrc: string, $place: HTMLElement = null, timestamp: string = '') {
-    console.log('imgSrc',imgSrc,'$place', $place, timestamp)
+    // console.log('imgSrc',imgSrc,'$place', $place, timestamp)
     let sel = window.getSelection(), range;
     const div = this.getHTML(imgSrc, timestamp);
 
@@ -139,11 +139,11 @@ export class EmbedImage {
   }
 
   public handleClick(event: any) {
-    console.log('event', event)
+    // console.log('event', event)
     const src = this.window.getSelection().toString().trim();
 
     if (this.urlRegex.exec(src)) {
-      console.log(src)
+      // console.log(src)
       this.insertHTML(src);
     }
 
@@ -174,13 +174,13 @@ export class EmbedImage {
     this.base.subscribe('action-images', (data, editable) => {
 
       let $place = this.$element.querySelector('.medium-insert-active');
-      console.log(data.link, $place)
+      // console.log(data.link, $place)
       this.insertHTML(data.link, $place, '');
     });
 
     this.window.addEventListener('attachment-preview-loaded', (event: CustomEvent) => {
       let $place = this.$element.querySelector('.medium-insert-active');
-      console.log('place', $place)
+      // console.log('place', $place)
       this.insertHTML(event.detail.src, $place, event.detail.timestamp);
     });
 

@@ -54,7 +54,7 @@ export class Web3WalletService {
     return new Promise<string | false>((resolve, reject) => {
       this.eth.getBalance(address, (error, result) => {
         if (error) {
-          console.log(error);
+          // console.log(error);
           return reject(false);
         }
         resolve(result.toNumber());

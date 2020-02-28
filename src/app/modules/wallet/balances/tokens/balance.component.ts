@@ -63,7 +63,7 @@ export class WalletBalanceTokensComponent implements OnInit {
       });
       this.detectChanges();
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   }
 

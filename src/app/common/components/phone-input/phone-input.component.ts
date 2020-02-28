@@ -54,7 +54,7 @@ export class PhoneInputComponent implements ControlValueAccessor, OnInit, OnChan
   ngOnChanges(changes: any) {
     this.propagateChange(changes);
 
-    console.log(this.number);
+    // console.log(this.number);
   }
 
   writeValue(value: any) {

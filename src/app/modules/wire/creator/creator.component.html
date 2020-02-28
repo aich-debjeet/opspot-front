@@ -229,13 +229,13 @@
   <!--contribute head end-->
   <div class="o-contribute-body o-contribute-body--flex">
     <div class="o-contribute-discrptn text-md text-center" *ngIf="owner.contributeType === 'contribute'">
-      Liked @{{owner.username}}'s work? Support their work by sending coins. <a href="javascript:void(0)"
-        id="creator-contribute-learn-more" class="primary">Learn more</a>
+      Liked @{{owner.username}}'s work? Support their work by sending coins. <a routerLink="/help"
+      target="_blank" id="creator-contribute-learn-more" class="primary">Learn more</a>
     </div>
     <div class="o-contribute-discrptn text-md text-center" *ngIf="owner.contributeType === 'paywall'"
       id="creator-paywall-title">
-      Unlock this post by sending coins <a href="javascript:void(0)" id="creator-paywall-learn-more"
-        class="primary">Learn more</a>
+      Unlock this post by sending coins <a routerLink="/help" id="creator-paywall-learn-more"
+      target="_blank" class="primary">Learn more</a>
     </div>
     <!--contribute discription end-->
     <div class="o-contribute-token">

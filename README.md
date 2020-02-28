@@ -4,8 +4,12 @@ Opspot Front end
 # to run in DEV env
 ng serve --proxy-config proxy.conf.json
 
-# to generate release notes
-git log --pretty=format:'"%an","%ae","%aD","%s",' --shortstat --no-merges | paste - - - > release_notes.csv
+# to generate release notes (between 2 tags) sand save on Desktop
+# example: git log v1.2.1..v1.2.2
+git log tag1..tag2 --pretty=format:'"%an","%ae","%aD","%s",' --shortstat --no-merges | paste - - - > ~/Desktop/release_notes_tag2.csv
+
+# for weekly updates
+git log --after="2020-02-16T16:00:00-00:00" --before="2020-02-23T16:00:00-00:00" --pretty=format:'"%s"' --shortstat --no-merges | paste - - - > ~/Desktop/weekly_updates.csv
 
 # for prod deployment
 1. Change config in angular.json: src/index.html => src/index.php

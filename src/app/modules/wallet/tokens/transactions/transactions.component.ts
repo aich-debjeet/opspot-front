@@ -126,7 +126,7 @@ export class WalletTokenTransactionsComponent {
         this.inProgress = false;
         this.detectChanges();
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       }
     } else {
       this.selectedAddress = null;

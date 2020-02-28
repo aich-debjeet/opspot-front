@@ -130,6 +130,7 @@ export class GroupsJoinButton {
         this.membership.next({
           member: false
         });
+        this.router.navigate(['/groups/members']);
       })
       .catch(e => {
         this.group['is:member'] = true;

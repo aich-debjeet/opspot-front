@@ -6,7 +6,7 @@
                     <div class="text-lg" id="blog-preview-title">
                         Blog Preview
                     </div>
-                    <button type="submit" id="blog-preview-draft" (click)="blog.published = 0; createEditBlog()" class="btn btn-outline-primary btn-xs drft-btn">Draft</button>
+                    <button type="submit" id="blog-preview-draft" (click)="blog.published = 0; createEditBlog()" class="btn btn-outline-primary btn-xs drft-btn" [disabled]="inProgress">Draft</button>
                 </div>
                 <div class="o-blog-preview-cover">
                     <opspot-banner [object]="blog" [src]="blog.thumbnail_src" [done]="banner_prompt">
@@ -84,7 +84,7 @@
                 </div>
                 <div class="o-blog-preview-button-set">
                     <button type="button" id="blog-review-cancel" class="btn btn-primary btn-lg mrgr15" (click)="closeModal()">Cancel</button>
-                    <button type="submit" id="blog-review-publish" (click)="blog.published = 1;createEditBlog()" class="btn btn-primary btn-lg">Publish Now</button>
+                    <button type="submit" id="blog-review-publish" (click)="blog.published = 1;createEditBlog()" class="btn btn-primary btn-lg" [disabled]="inProgress">Publish Now</button>
                 </div>
             </div>
             <!--right ends-->

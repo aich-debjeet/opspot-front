@@ -88,7 +88,7 @@
 // for action
 
 .o-blog-inner-page-header-action{
-//   display:flex;
+  display:flex;
   align-items: center;
   @include mq($from:$mobile_sm, $until:$desktop_sm){
       justify-content: flex-end;
@@ -140,14 +140,13 @@
 .o-blog-inner-page-tag-list{
   display:flex;
   list-style-type:none;
-  @include mq($from:$mobile_sm, $until:$desktop_sm){
-      flex-wrap: wrap;
-  }
+  flex-wrap: wrap;
   &__item{
       background-color: #ECEFF1;
       border-radius:4px;
       margin-right:12px; 
       padding:5px 8px;
+      margin-top: 8px;
       @include mq($from:$mobile_sm, $until:$desktop_sm){
           margin-bottom: 12px;
       }

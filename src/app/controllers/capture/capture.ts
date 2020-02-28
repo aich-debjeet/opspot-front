@@ -164,7 +164,7 @@ export class Capture {
     promise.then(() => {
       this.client.post('api/v1/media/' + this.uploads[index].guid, this.uploads[index])
         .then((response: any) => {
-          console.log('response from modify', response);
+          // console.log('response from modify', response);
           this.uploads[index].state = 'complete';
         });
     });
@@ -203,7 +203,7 @@ export class Capture {
    */
   dragleave(e) {
     e.preventDefault();
-    console.log(e);
+    // console.log(e);
     if (e.layerX < 0)
       this.dragging = false;
   }

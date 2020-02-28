@@ -16,7 +16,7 @@ export class MasonryContainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.entities)
+    // console.log(this.entities)
   }
 
 }

@@ -42,7 +42,7 @@ export class ChannelSidebar {
     if (!value)
       return;
     this.user = value;
-    console.log('user details', this.user)
+    // console.log('user details', this.user)
     this.user['contributeType'] = 'contribute';
   }
 
@@ -162,10 +162,10 @@ export class ChannelSidebar {
     this.user.social_profiles = value;
   }
   async togglePin(user: any) {
-    console.log(user);
+    // console.log(user);
     this.user.bookmark = !this.user.bookmark;
     const url: string = `api/v3/bookmark/${this.user.guid}/profile`;
-    console.log(url)
+    // console.log(url)
     try {
       if (this.user.bookmark) {
         await this.client.post(url);

@@ -63,7 +63,7 @@ export class PayWall {
     this.showCheckout = false;
     this.inProgress = true;
     this.detectChanges();
-    console.log('nonce: ' + nonce);
+    // console.log('nonce: ' + nonce);
     this.client.post('api/v1/payments/plans/subscribe/' + this.entity.owner_guid + '/exclusive', {
       nonce: nonce
     })

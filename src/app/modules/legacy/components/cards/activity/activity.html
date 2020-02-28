@@ -122,11 +122,12 @@
           (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
         <img [src]="media.thumbnail_src" alt="" class="feed-media__img" *ngIf="media.entity_type === 'video'"
           (error)="media.thumbnail_src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
-        <img src="assets/videos/video_thumbnail.png" alt="" class="feed-media__img" *ngIf="media.entity_type === 'audio'">
+        <img src="assets/audiops.jpg" alt="" class="feed-media__img" *ngIf="media.entity_type === 'audio'"
+        (error)="media.thumbnail_src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
         <div *ngIf="i >= 2 && activity?.custom_data.length >= 4" class="feed-media-overlay">
           <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
         </div>
-        <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'" id="activity-video-post">
+        <div class="feed-media-overlay" *ngIf="media.entity_type === 'video' || media.entity_type === 'audio'" id="activity-video-post">
           <div class="feed-media-video__icon" ><img src="assets/svg/playfill.svg" alt=""></div>
         </div>
       </a>
@@ -141,9 +142,9 @@
       <video-ads [player]="player" *ngIf="activity.monetized"></video-ads>
       </m-video>
     </div>
-    <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type == 'audio'" [routerLink]="['/media', activity.guid]"
+    <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type == 'audio'" [routerLink]="['/media', activity.guid]" class="audio-background-cover"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
-      <m-audio [src]="'api/v1/media/' + activity.custom_data[0].guid + '/play'"></m-audio>
+      <m-audio [src]="'api/v1/media/' + activity.custom_data[0].guid + '/play'" style="width: 100%;"></m-audio>
       <!-- <m-audio [src]="'https://ops-audio-01.s3.amazonaws.com/' + activity.custom_data[0].guid + '/128.mp3'"></m-audio> -->
     </div>
     <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type != 'audio' && activity?.custom_data[0].entity_type != 'video'
@@ -359,16 +360,16 @@
     </opspot-remind>
   </div>
 
+  <!-- mature toggle button -->
+  <div *ngIf="activity.mature && !(activity.entity_type === 'event' || activity.entity_type === 'opportunity' || activity.entity_type === 'item')" class="o-feed-nsfw-cover-btn ">
+    <a *ngIf="activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-cover">Cover</a>
+    <a *ngIf="!activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-uncover">Uncover</a>
+  </div>
+  <!-- mature toggle button -->
+
 </ng-container>
 
 <ng-content select="[bottom-content]"></ng-content>
-
-<!-- mature toggle button -->
-<div *ngIf="activity.mature && !(activity.entity_type === 'event' || activity.entity_type === 'opportunity' || activity.entity_type === 'item')" class="o-feed-nsfw-cover-btn ">
-  <a *ngIf="activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-cover">Cover</a>
-  <a *ngIf="!activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-uncover">Uncover</a>
-</div>
-<!-- mature toggle button -->
 
 <!-- actions bar(like, comments, share, wire, boost)-->
 <div class="o-actions" *ngIf="!hideTabs">

@@ -102,11 +102,10 @@ export class NewsfeedComponent {
   }
 
   ngOnInit() {
-     console.log("from newsfeed")
     if (!this.session.isLoggedIn()) {
       this.router.navigate(['/login']); //force login
     } else {
-      this.load();
+      // this.load();
       //this.setUpPoll();
       this.opspot = window.Opspot;
     }
@@ -143,7 +142,7 @@ export class NewsfeedComponent {
           this.pollingOffset = response['load-previous'];
         })
         .catch(e => {
-          console.error('Newsfeed polling', e);
+          // console.error('Newsfeed polling', e);
         });
     }, 60000);
   }
@@ -245,6 +244,7 @@ export class NewsfeedComponent {
    * Load newsfeed
    */
   loadNewsfeed(refresh: boolean = false) {
+    // console.log('loading newsfeed',refresh);
     var self = this;
     if (this.inProgress) {
       //console.log('already loading more..');

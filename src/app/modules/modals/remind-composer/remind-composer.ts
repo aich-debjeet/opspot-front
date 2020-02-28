@@ -52,7 +52,7 @@ import { ActivityPreview } from '../../legacy/components/cards/activity/preview'
         <ng-template dynamic-host></ng-template>
         </div>
         <div class="o-repost-footer">
-            <button type="button" class="btn btn-primary btn-sm disabled" (click)="close($event)" id="cancel">Cancel</button>
+            <button type="button" class="btn btn-outline-primary" (click)="close($event)" id="cancel">Cancel</button>
             <button type="button" id="repost-share" class="btn btn-primary btn-sm" (click)="send()">Share</button>
         </div>
     </div>

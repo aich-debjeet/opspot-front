@@ -204,6 +204,16 @@ export class AttachmentService {
     return !!(this.meta.attachment_guid.length == 0) || this.isRich();
   }
 
+  /**
+   * TODO: @abhijeet required?
+   */
+  hasAttachment() {
+    if (this.meta.attachment_guid.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
   hasFile() {
     return !!this.attachment.preview || this.getMime() === 'video';
   }
@@ -422,7 +432,15 @@ export class AttachmentService {
         if (fzMB > 100) { // 100 MB
           reject({ message: 'Error: Video file size limit 100 MB exceeded' });
         } else {
-          resolve();
+          // resolve();
+          let reader = new FileReader();
+
+          reader.onloadend = () => {
+            this.attachment.preview = reader.result;
+            resolve();
+          };
+          console.log(this.attachment)
+          reader.readAsDataURL(file);
         }
 
         // this.checkVideoDuration(file).then(duration => {
@@ -436,8 +454,15 @@ export class AttachmentService {
         // });
 
       } else if (file.type && file.type.indexOf('audio/') === 0) {
-        this.attachment.mime = 'audio';
-        resolve();
+          this.attachment.mime = 'audio';
+          let reader = new FileReader();
+
+          reader.onloadend = () => {
+            this.attachment.preview = reader.result;
+            resolve();
+          };
+          console.log(this.attachment)
+          reader.readAsDataURL(file);
         // this.checkAudioDuration(file).then(duration => {
         //   console.log("In th audio", duration);
         //   console.log("window.Opspot.max_video_length: ", window.Opspot.max_video_length);
@@ -460,6 +485,7 @@ export class AttachmentService {
           this.attachment.preview = reader.result;
           resolve();
         };
+        console.log(this.attachment)
         reader.readAsDataURL(file);
       } else if (file.type && file.type.indexOf('application/pdf') === 0) {
         this.attachment.mime = 'pdf';
@@ -488,7 +514,7 @@ export class AttachmentService {
           window.clearTimeout(timeout);
 
         window.URL.revokeObjectURL(videoElement.src);
-        console.log('file size', file.size);
+        // console.log('file size', file.size);
         resolve(videoElement.duration);
       };
       videoElement.addEventListener('error', function (error) {

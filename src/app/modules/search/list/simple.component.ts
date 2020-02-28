@@ -6,6 +6,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: 'simple.component.html'
 })
 export class SearchSimpleListComponent {
+  @Input() type: string;
   @Input() entities: any[] = [];
   @Output() seeAll: EventEmitter<any> = new EventEmitter();
 

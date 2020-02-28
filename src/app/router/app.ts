@@ -68,6 +68,10 @@ export const OpspotAppRoutes: Routes = [
     loadChildren: './modules/campaign/campaign.module#CampaignModule'
   },
   {
+    path: 'static',
+    loadChildren: './modules/static/static.module#StaticModule'
+  },
+  {
     path: ':username/:filter',
     component: ChannelComponent
   },
