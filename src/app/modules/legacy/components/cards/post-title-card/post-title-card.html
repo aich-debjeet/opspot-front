@@ -4,12 +4,21 @@
 <div class="o-avatar-det-block">
     <span class="text-lg grey o-posts-det">
         <a
-            *ngIf="entity && entity.ownerObj"
-            [routerLink]="['/', entity?.ownerObj?.username]"
+            *ngIf="entity?.containerObj && entity?.containerObj?.type == 'organization'; else usersName"
+            [routerLink]="['/', entity?.containerObj?.username]"
             class="o-avatar__name"
         >
-            {{entity?.ownerObj?.name}}
+            {{entity?.containerObj?.name}}
         </a>
+        <ng-template #usersName>
+            <a
+                *ngIf="entity && entity.ownerObj"
+                [routerLink]="['/', entity?.ownerObj?.username]"
+                class="o-avatar__name"
+            >
+                {{entity?.ownerObj?.name}}
+            </a>
+        </ng-template>
         {{title}} 
         <ng-container [ngSwitch]="postType">
             <ng-template ngSwitchCase="repost">
