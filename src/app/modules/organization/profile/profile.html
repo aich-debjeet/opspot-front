@@ -73,10 +73,10 @@
                         <div class="o-community-skills" *ngIf="!editing && organization?.tags">
                             <a *ngFor="let tag of organization?.tags" href="" class="o-community-skills__tag">#{{tag}}</a>
                         </div>
-                        <!-- <opspot-groups-join-button style="margin-bottom: 6px;" [group]="group"
+                        <opspot-organization-join-button style="margin-bottom: 6px;" [group]="organization"
                             (membership)="change_membership($event)"
-                            *ngIf="(!group['is:creator'] || (session.isAdmin()) && !group['is:invited'])">
-                        </opspot-groups-join-button> -->
+                            *ngIf="organization && (!organization['is:creator'] || (session.isAdmin()) && !organization['is:invited'])">
+                        </opspot-organization-join-button>
                         <div class="o-community-members-top o-community-members-top--mob hidden-above-tablet">
                             <a class="o-community-members-top__count-mob" *ngFor="let member of membersMobile">
                                 <span class="o-community-members-list-mob-single"><img [src]="memberSrc+member.guid"
@@ -91,11 +91,11 @@
                                 <div class="text-sm grey">Subscribers</div>
                             </a>
                         </div>
-                        <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle">
+                        <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle" (closed)="inviteToggle = false">
                             <opspot-organization-profile-members-invite [organization]="organization">
                             </opspot-organization-profile-members-invite>
                         </m-modal>
-                        <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle">
+                        <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle" (closed)="memberToggle = false">
                             <opspot-organization-profile-members [organization]="organization" (totalOrganization)="groupCount($event)"></opspot-organization-profile-members>
                         </m-modal> 
                     </div>
@@ -104,7 +104,7 @@
                             <div class="text-lg f500" id="profile-organization-invite-members">
                                 Organization Subscribers
                             </div>
-                            <span (click)="openInvite()" style="font-size: 24px !important; cursor: pointer;"
+                            <span *ngIf="organization && (organization['is:owner'] || organization['is:admin'])" (click)="openInvite()" style="font-size: 24px !important; cursor: pointer;"
                                 class="icon-plus-circle primary" id="profile-organization-invite-icon">
                             </span>
                         </div>

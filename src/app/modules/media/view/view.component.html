@@ -196,16 +196,22 @@ opspot-button-remind{
   </p>
 </m-modal-confirm> -->
 
-<section class="o-post-inner-sec">
+<section class="o-post-inner-sec" [hidden]="inProgress">
   <div class="container">
     <div class="o-posts-inner-page o-post-inner-profile-head">
       <div class="o-posts-inner-page__left">
         <div class="o-card feed o-post-inner-minheight">
           <div class="feed-head">
-            <a *ngIf="entity?.ownerObj && entity?.ownerObj?.username" id="view-profile-image" [routerLink]="['/', entity?.ownerObj?.username]"
+            <a *ngIf="entity?.containerObj && entity?.containerObj?.type == 'organization'; else usersPicture" id="view-profile-image" [routerLink]="['/', entity?.containerObj?.username]"
               class="o-avatar">
-              <img [src]="opspot.cdn_url + 'icon/' + entity?.ownerObj?.guid + '/' " class="mdl-shadow--2dp" />
+              <img [src]="opspot.cdn_url + 'icon/' + entity?.containerObj?.guid + '/' " class="mdl-shadow--2dp" />
             </a>
+            <ng-template #usersPicture>
+              <a *ngIf="entity?.ownerObj && entity?.ownerObj?.username" id="view-profile-image" [routerLink]="['/', entity?.ownerObj?.username]"
+                class="o-avatar">
+                <img [src]="opspot.cdn_url + 'icon/' + entity?.ownerObj?.guid + '/' " class="mdl-shadow--2dp" />
+              </a>
+            </ng-template>
             <div class="o-avatar__info">
               <!-- <div class="o-avatar-det-block">
                 <span class="text-lg grey o-posts-det" id="view-profile-added-media">
@@ -364,7 +370,7 @@ opspot-button-remind{
             </div>
           </div>
           <opspot-comments *ngIf="entity.guid" [object]="entity" [focusedCommentGuid]="focusedCommentGuid"
-          [focusOnInit]="true" [canEdit]="canDelete">
+          [canEdit]="canDelete">
           </opspot-comments>
         </div>
       </div>
@@ -377,3 +383,9 @@ opspot-button-remind{
     </div>
   </div>
 </section>
+
+<div class="m-error-splash" *ngIf="error && !inProgress">
+  <img [src]="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+  <h3 class="mdl-color-text--red-300">{{error}}</h3>
+  <span class="mdl-color-text--blue-grey-300" i18n="@@OPSPOT__MEDIA__ENTITY_NOT_EXISTS">The post may not exist</span>
+</div>

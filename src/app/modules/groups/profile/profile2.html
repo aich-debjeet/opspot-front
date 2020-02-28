@@ -97,11 +97,11 @@
                             <div class="text-sm grey">Members</div>
                         </a>
                     </div>
-                    <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle">
+                    <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle" (closed)="inviteToggle = false">
                         <opspot-groups-profile-members-invite [group]="group">
                         </opspot-groups-profile-members-invite>
                     </m-modal>
-                    <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle">
+                    <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle" (closed)="memberToggle = false">
                         <opspot-groups-profile-members [group]="group"></opspot-groups-profile-members>
                     </m-modal>
                     <div class="o-community-discrptn">

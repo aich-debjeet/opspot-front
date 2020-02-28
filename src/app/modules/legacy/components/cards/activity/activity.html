@@ -360,16 +360,16 @@
     </opspot-remind>
   </div>
 
+  <!-- mature toggle button -->
+  <div *ngIf="activity.mature && !(activity.entity_type === 'event' || activity.entity_type === 'opportunity' || activity.entity_type === 'item')" class="o-feed-nsfw-cover-btn ">
+    <a *ngIf="activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-cover">Cover</a>
+    <a *ngIf="!activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-uncover">Uncover</a>
+  </div>
+  <!-- mature toggle button -->
+
 </ng-container>
 
 <ng-content select="[bottom-content]"></ng-content>
-
-<!-- mature toggle button -->
-<div *ngIf="activity.mature && !(activity.entity_type === 'event' || activity.entity_type === 'opportunity' || activity.entity_type === 'item')" class="o-feed-nsfw-cover-btn ">
-  <a *ngIf="activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-cover">Cover</a>
-  <a *ngIf="!activity.mature_visibility" (click)="activity.mature_visibility = !activity.mature_visibility" class="text-md" id="activity-uncover">Uncover</a>
-</div>
-<!-- mature toggle button -->
 
 <!-- actions bar(like, comments, share, wire, boost)-->
 <div class="o-actions" *ngIf="!hideTabs">
