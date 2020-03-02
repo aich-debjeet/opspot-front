@@ -4,6 +4,7 @@ import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { REASONS } from '../../../services/list-options';
 import { REPORT_REASONS } from '../../../services/list-options'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   moduleId: module.id,
@@ -36,6 +37,7 @@ export class ReportCreatorComponent implements AfterViewInit {
     private _changeDetectorRef: ChangeDetectorRef,
     private overlayModal: OverlayModalService,
     private client: Client,
+    private toastr: ToastrService
   ) { }
 
   ngAfterViewInit() {
@@ -49,7 +51,7 @@ export class ReportCreatorComponent implements AfterViewInit {
     if (!this.subject) {
       return false;
       //throw new Error('You cannot report this.');
-    } else if(this.subject === 7 && this.note === ''){ // others note validation
+    } else if (this.subject === 7 && this.note === '') { // others note validation
       return false;
     }
     return true;
@@ -95,8 +97,6 @@ export class ReportCreatorComponent implements AfterViewInit {
     let guid = this.guid;
     let subject = this.subject;
     let note = this.note;
-
-
     this.inProgress = true;
 
     this.client.post(`api/v1/entities/report/${guid}`, { subject, note })
@@ -105,9 +105,10 @@ export class ReportCreatorComponent implements AfterViewInit {
         if (response.done) {
           this.success = true;
           this.overlayModal.dismiss(); //dismissing model after reporting
+          this.toastr.success('Reported successfully.');
         } else {
           this.overlayModal.dismiss();
-          alert('There was an error sending your report.');
+          this.toastr.error('There was an error sending your report.');
         }
       })
       .catch(e => {
