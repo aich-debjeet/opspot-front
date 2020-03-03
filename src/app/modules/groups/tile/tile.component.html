@@ -7,7 +7,7 @@
           <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
         </div>
         <div class="o-community-card-profile">
-          <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="cover">
+          <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="cover">
         </div>
         <div class="o-community-card-header" id="tile-entity-name">
           <div class="f500 text-lg word-br elipse elipse--w-130">{{entity.name}}</div>

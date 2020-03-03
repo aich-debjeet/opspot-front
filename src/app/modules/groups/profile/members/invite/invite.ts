@@ -2,6 +2,7 @@ import { Component, EventEmitter } from '@angular/core';
 
 import { Client } from '../../../../../services/api';
 import { GroupsService } from '../../../groups-service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -30,9 +31,12 @@ export class GroupsProfileMembersInvite {
   destination: any; // @todo: ??
 
   timeout;
- 
-  constructor(public client: Client, public service: GroupsService) {
-   if(window.innerWidth<775){this.mobileView=true;}
+
+  constructor(
+    public client: Client,
+    public service: GroupsService,
+    private toastr: ToastrService) {
+    if (window.innerWidth < 775) { this.mobileView = true; }
   }
 
   set _group(value: any) {
@@ -40,9 +44,10 @@ export class GroupsProfileMembersInvite {
   }
 
   invite(user) {
-
     if (!user.subscriber) {
-      return alert('You can only invite users who are subscribed to you');
+      this.toastr.error('You can only invite users who are subscribed to you');
+      //  alert('You can only invite users who are subscribed to you');
+      return;
     }
 
     this.invited.next(user);
@@ -89,7 +94,7 @@ export class GroupsProfileMembersInvite {
         .then((success: any) => {
           if (success.entities) {
             this.users = success.entities;
-            
+
           }
         })
         .catch((error) => {
