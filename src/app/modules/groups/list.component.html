@@ -58,6 +58,13 @@
           <div id="discover" class="tab active">
             <div class="o-community-landing-block-design">
               <m-groups--tile *ngFor="let entity of entities" class="o-community-main-card" [entity]="entity"></m-groups--tile>
+              <!-- <infinite-scroll
+              distance="25%"
+              (load)="load()"
+              [moreData]="moreData"
+              [inProgress]="inProgress"
+            >
+            </infinite-scroll> -->
             </div>
           </div>
         </div>
@@ -68,7 +75,21 @@
         <m-groups--tile *ngIf="entity['is:member'] && entity['is:creator'] && entity['entity_type']=='community'"
           [entity]="entity" class="o-community-main-card"></m-groups--tile>
       </div>
+      <!-- <infinite-scroll
+        distance="25%"
+        (load)="load()"
+        [moreData]="moreData"
+        [inProgress]="inProgress"
+      >
+      </infinite-scroll> -->
     </div>
   </div>
+  <infinite-scroll
+   distance="25%"
+   (load)="load()"
+   [moreData]="moreData"
+   [inProgress]="inProgress"
+  >
+  </infinite-scroll>
 </div>
 

@@ -261,14 +261,18 @@ export class GroupsProfile {
     this.service.upload({
       guid: this.group.guid,
       banner_position: file.top
-    }, { banner: file.file });
+    }, { banner: file.file }).then((res: any) => {
+      window.location.reload();
+    });
     this.group.banner = true;
   }
 
   upload_avatar(file: any) {
     this.service.upload({
       guid: this.group.guid
-    }, { avatar: file });
+    }, { avatar: file }).then((res: any) => {
+      window.location.reload();
+    });
   }
 
   change_membership(membership: any) {
