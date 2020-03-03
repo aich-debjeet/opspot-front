@@ -27,9 +27,9 @@
           id="list-community-manage-list"
           [routerLink]="['/groups/profile', entity.guid]">
           <div class="o-community-landing-block-manage__avatar">
-            <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="">
+            <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="">
           </div>
-          <div class="text-md f500">
+          <div class="text-md f500 word-br elipse elipse--w-130">
             {{entity.name}}
           </div>
         </div>
@@ -42,9 +42,9 @@
             *ngIf="entity['is:member'] && entity['entity_type']=='community'"
             [routerLink]="['/groups/profile', entity.guid]">
             <div class="o-community-landing-block-manage__avatar">
-              <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="">
+              <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="">
             </div>
-            <div class="text-md f500">
+            <div class="text-md f500 word-br elipse elipse--w-130">
               {{entity.name}}
             </div>
           </div>
@@ -58,6 +58,13 @@
           <div id="discover" class="tab active">
             <div class="o-community-landing-block-design">
               <m-groups--tile *ngFor="let entity of entities" class="o-community-main-card" [entity]="entity"></m-groups--tile>
+              <!-- <infinite-scroll
+              distance="25%"
+              (load)="load()"
+              [moreData]="moreData"
+              [inProgress]="inProgress"
+            >
+            </infinite-scroll> -->
             </div>
           </div>
         </div>
@@ -68,7 +75,21 @@
         <m-groups--tile *ngIf="entity['is:member'] && entity['is:creator'] && entity['entity_type']=='community'"
           [entity]="entity" class="o-community-main-card"></m-groups--tile>
       </div>
+      <!-- <infinite-scroll
+        distance="25%"
+        (load)="load()"
+        [moreData]="moreData"
+        [inProgress]="inProgress"
+      >
+      </infinite-scroll> -->
     </div>
   </div>
+  <infinite-scroll
+   distance="25%"
+   (load)="load()"
+   [moreData]="moreData"
+   [inProgress]="inProgress"
+  >
+  </infinite-scroll>
 </div>
 

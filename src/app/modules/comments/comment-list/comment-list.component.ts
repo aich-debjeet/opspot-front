@@ -375,8 +375,8 @@ export class CommentListComponent implements OnInit {
 
   async post(e) {
     e.preventDefault();
-
-    if (!this.content && !this.attachment.has()) {
+    this.content = this.content.trim();    
+    if (!this.content && !this.attachment.hasAttachment()) {
       return;
     }
 
