@@ -8,6 +8,8 @@ import { Client } from '../../services/api/client';
 import { Session } from '../../services/session';
 import { NotificationService } from './notification.service';
 import { map as _map} from 'lodash';
+import { OverlayModalService } from '../../services/ux/overlay-modal';
+import { NotiFilterComponent } from './noti-filter/noti-filter.component';
 
 @Component({
   moduleId: module.id,
@@ -29,6 +31,7 @@ export class NotificationsComponent {
   offset: string = '';
   inProgress: boolean = false;
   _filter: string = 'all';
+  toggle: boolean = false;
 
   opspot: any = window.Opspot;
   paramsSubscription: Subscription;
@@ -41,6 +44,7 @@ export class NotificationsComponent {
     public notificationService: NotificationService,
     public route: ActivatedRoute,
     public el: ElementRef,
+    private overlayModal: OverlayModalService,
   ) { }
 
   ngOnInit() {
@@ -132,7 +136,7 @@ export class NotificationsComponent {
     }
   }
 
-  changeFilter(filter: string) {
+  changeFilter(filter) {
     console.log('filter',filter)
     if(filter.length === 0){
       //clear all filter
@@ -166,5 +170,23 @@ export class NotificationsComponent {
     .catch((e) => {
       alert(e);
     });
+  }
+  openFilter(){
+    if(this.toggle){
+      this.toggle = false;
+      return
+    } else {
+      this.toggle = true;
+      const defaultFilter = this._filter;
+      this.overlayModal.create(NotiFilterComponent, defaultFilter , {
+        class: 'm-overlay-modal--hashtag-selector m-overlay-modal--screen-fit',
+        onUpdate: (payload: any) => {
+        console.log(payload)
+        this.overlayModal.setData(payload);
+        this.changeFilter(payload);
+        }
+      }).present();
+      return
+    }
   }
 }
