@@ -3618,8 +3618,10 @@ m-cookies-notice {
     max-width: 990px; }
   .m-overlay-modal.m-overlay-modal--medium-large {
     max-width: 800px; }
-    .m-overlay-modal.m-overlay-modal--medium-extra-large {
-      max-width: 1170px; }
+  .m-overlay-modal.m-overlay-modal--screen-fit{
+      height: 100vh;}
+  .m-overlay-modal.m-overlay-modal--medium-extra-large {
+    max-width: 1170px; }
   .m-overlay-modal.m-overlay-modal--medium {
     max-width: 600px; }
   .m-overlay-modal.m-overlay-modal--medium-report {
@@ -27872,4 +27874,12 @@ ng-otp-input {
   @include mq($from: $mobile_sm, $until: $tablet) {
     max-width:100% !important;
   }
+}
+.msg-thank-you{
+  display: flex;
+  align-items: center;
+  min-height: 200px;
+  width: 90%;
+  margin: 0px auto;
+  justify-content: center;
 }

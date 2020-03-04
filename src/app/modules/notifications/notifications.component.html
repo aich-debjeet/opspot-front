@@ -60,61 +60,7 @@
 <div class="container" *ngIf="!loadOnDemand" style="margin-top: 6em;">
   <div class="o-blocks">
     <div class="o-left-block hidden-mob">
-      <div class="o-card o-noti-filter">
-        <div class="o-noti-filter__title">
-          <div class="caption-medium">Filter</div>
-          <div class="text-sm primary" (click)="changeFilter('')">Clear All</div>
-        </div>
-        <div class="o-noti-filter__block">
-          <form>
-            <div class="c-checkbox__md">
-              <label (click)="changeFilter('all')" class="c-checkbox">All
-                <input type="radio" id="notification-all" [checked]="this._filter == 'all'" value="all" name="all">
-                <span class="checkmark"></span>
-              </label>
-              <label (click)="changeFilter('tagged')" class="c-checkbox">Tagged
-                <input type="radio" id="notification-tagged" value="tagged" [checked]="this._filter == 'tagged'" name="tagged">
-                <span class="checkmark"></span>
-              </label>
-              <label (click)="changeFilter('likes')" class="c-checkbox">Likes
-                <input type="radio" id="notification-likes" value="likes" [checked]="this._filter == 'likes'" name="likes">
-                <span class="checkmark"></span>
-              </label>
-              <label (click)="changeFilter('comments')" class="c-checkbox">Comments
-                <input type="radio" id="comments" value="comments" [checked]="this._filter == 'comments'" name="comments">
-                <span class="checkmark"></span>
-              </label>
-              <label (click)="changeFilter('boost')" class="c-checkbox">Boost
-                <input type="radio" id="notification-boost" value="boost" [checked]="this._filter == 'boost'" name="boost">
-                <span class="checkmark"></span>
-              </label>
-              <!-- <label class="c-checkbox">Channels
-                            <input type="checkbox">
-                            <span class="checkmark"></span>
-                        </label> -->
-              <!-- <label (click)="changeFilter('subscriptions')" class="c-checkbox">Following
-                <input type="radio" value="subscriptions" [checked]="this._filter == 'subscriptions'"
-                  name="subscriptions">
-                <span class="checkmark"></span>
-              </label>
-              <label (click)="changeFilter('subscriptions')" class="c-checkbox">Followers
-                <input type="radio" value="subscriptions" [checked]="this._filter == 'subscriptions'"
-                  name="subscriptions">
-                <span class="checkmark"></span>
-              </label> -->
-              <!-- <label (click)="changeFilter('Network')" class="c-checkbox">Network
-                            <input type="radio" value="Network" [checked]="this._filter == 'Network'" name="Network">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label (click)="changeFilter('Request')" class="c-checkbox">Request
-                            <input type="radio" value="Request" [checked]="this._filter == 'Request'" name="Request">
-                            <span class="checkmark"></span>
-                        </label> -->
-            </div>
-          </form>
-        </div>
-      </div>
-
+      <app-noti-filter (changeFilter)="changeFilter($event)" [defaultFilter]="_filter"></app-noti-filter>
     </div>
     <div class="o-center-block">
       <div class="o-card o-noti-title">
@@ -125,7 +71,9 @@
         </div>
         <div class="o-noti-title__action">
           <a (click)="markAllRead()" id="notification-mark-all-as-read-page" class="text-sm primary" title="Mark all as read">Mark all as Read</a>
-          <!-- <a href="#" class="o-noti-settings" title="Settings"><img src="assets/svg/settings.svg" alt="Settings"></a> -->
+          <a (click)="openFilter()" class="o-noti-filter-mob" title="Settings"><i class="icon-filter"></i>
+            <!-- <app-noti-filter (changeFilter)="changeFilter($event)" [defaultFilter]="_filter" [displayType]="'responsive'" *ngIf= "toggle"></app-noti-filter> -->
+          </a>
         </div>
       </div>
       <opspot-notification *ngFor="let notification of notifications" [notification]="notification">
