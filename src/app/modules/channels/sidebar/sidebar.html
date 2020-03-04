@@ -200,7 +200,7 @@
     <span *ngIf="isOwner() && !user?.about?.description" class="text-md">
       <a [routerLink]="['/profile/about']" class="primary" id="sidebar-about-self">Tell something about yourself</a>
     </span>
-    <span class="text-md" id="sidebar-user-description">{{user?.about?.description}}</span>
+    <span class="text-md word-br" id="sidebar-user-description">{{user?.about?.description}}</span>
     <ul class="o-bio__info">
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
@@ -269,8 +269,8 @@
           <img src="assets/Work.jpg" alt="">
         </div>
         <div class="o-work-info__det" id="sidebar-work-widget">
-          <a class="text-md f500">{{ work?.designation }}</a>
-          <div class="text-sm grey-dark">{{ work?.company_name }} - {{ work?.location }}</div>
+          <a class="text-md f500 word-br">{{ work?.designation }}</a>
+          <div class="text-sm grey-dark word-br">{{ work?.company_name }} - {{ work?.location }}</div>
         </div>
       </div>
     </div><!-- work detail end-->
@@ -283,8 +283,8 @@
           <img src="assets/Education.jpg" alt="">
         </div>
         <div class="o-education-info__det" id="sidebar-education-widget">
-          <a class="text-md f500">{{ education?.field_of_study }}</a>
-          <div class="text-sm grey-dark">{{ education?.university }} - {{ education?.location }}</div>
+          <a class="text-md f500 word-br">{{ education?.field_of_study }}</a>
+          <div class="text-sm grey-dark word-br">{{ education?.university }} - {{ education?.location }}</div>
         </div>
       </div>
     </div><!-- education detail end-->
@@ -297,8 +297,8 @@
           <img src="assets/Awards.jpg" alt="">
         </div>
         <div class="o-award-info__det" id="sidebar-award-widget">
-          <a class="text-md f500">{{ award?.title }}</a>
-          <div class="text-sm grey-dark">{{ award?.issuer }} - {{ award?.location }}</div>
+          <a class="text-md f500 word-br">{{ award?.title }}</a>
+          <div class="text-sm grey-dark word-br">{{ award?.issuer }} - {{ award?.location }}</div>
         </div>
       </div>
     </div><!-- Award detail end-->
