@@ -52,18 +52,13 @@ export class AboutComponent implements OnInit {
   async load() {
     // TODO @shashi: create model for type about
     let res = await this.client.get('api/v1/channel/me');
-    let dob = res['channel'].dob;
     let response: any = res['channel'];
+    let dob = response.dob;
     this.model.dob = new Date(dob);
     this.model.description = response.about.description;
-    this.model.gender = response.about.gender;
-    // this.model.dob_visibility = response.about.dob_visibility;
-    // this.privacy.dob = response.about.dob_visibility;
-    // this.privacy.height = response.about.height_and_weight_visibility;
-    // this.model.height_and_weight_visibility = response.about.height_and_weight_visibility;
-  
-    this.privacy.dob = res['date_of_birth_visibility'] ? res['date_of_birth_visibility'].charAt(0).toUpperCase() + res['date_of_birth_visibility'].slice(1) : this.privacy.dob;
-    this.privacy.height = res['height_and_weight_visibility'] ? res['height_and_weight_visibility'].charAt(0).toUpperCase() + res['height_and_weight_visibility'].slice(1) : this.privacy.height;
+    this.model.gender = response.about.gender;  
+    this.privacy.dob = response['date_of_birth_visibility'] ? `${response['date_of_birth_visibility'].charAt(0).toUpperCase()}${response['date_of_birth_visibility'].slice(1)}` : this.privacy.dob;
+    this.privacy.height = response['height_and_weight_visibility'] ? `${response['height_and_weight_visibility'].charAt(0).toUpperCase()}${response['height_and_weight_visibility'].slice(1)}` : this.privacy.height;
     this.model.height = response.height;
     this.model.weight = response.weight;
     const languages = [];

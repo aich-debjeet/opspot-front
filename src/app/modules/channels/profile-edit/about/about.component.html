@@ -32,7 +32,7 @@
                     <div class="o-prof-edit-privacy hidden-desktop"
                     (click)="toggleDob = !toggleDob">
                         <div [ngSwitch]="privacy.dob">
-                            <div *ngSwitchCase="'Followers'">
+                            <div *ngSwitchCase="'Follower'">
                                 <div class="text-md primary w-label100">Visible to people who follows you</div>
                                 </div>
                                 <div *ngSwitchCase="'Following'">
@@ -48,7 +48,7 @@
                         </div>
                         <div class="o-prof-edit-privacy hidden-mob" (click)="toggleDob = !toggleDob">
                         <div [ngSwitch]="privacy.dob">
-                            <div *ngSwitchCase="'Followers'">
+                            <div *ngSwitchCase="'Follower'">
                                 <div class="text-md primary w-label100">Visible to people who follows you</div>
                                 </div>
                                 <div *ngSwitchCase="'Following'">
@@ -90,7 +90,7 @@
                     <div class="o-prof-edit-privacy"
                         (click)="toggleHeight = !toggleHeight">
                         <div [ngSwitch]="privacy.height">
-                            <div *ngSwitchCase="'Followers'">
+                            <div *ngSwitchCase="'Follower'">
                             <div class="text-md primary w-label100">Visible to people who follows you</div>
                             </div>
                             <div *ngSwitchCase="'Following'">

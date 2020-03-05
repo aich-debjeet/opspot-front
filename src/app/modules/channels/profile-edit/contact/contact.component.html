@@ -6,7 +6,7 @@
                 Location <div class="o-prof-edit-privacy Eternity hidden-desktop"
                     (click)="toggleLocation=!toggleLocation">
                     <div [ngSwitch]="privacy.location">
-                        <div *ngSwitchCase="'Followers'">
+                        <div *ngSwitchCase="'Follower'">
                           <div class="text-md primary w-label100">Visible to people who follows you</div>
                         </div>
                         <div *ngSwitchCase="'Following'">
@@ -31,7 +31,7 @@
                     <div class=" o-prof-edit-privacy Eternity hidden-mob "
                         (click)="toggleLocation=!toggleLocation">
                         <div [ngSwitch]="privacy.location">
-                            <div *ngSwitchCase="'Followers'">
+                            <div *ngSwitchCase="'Follower'">
                               <div class="text-md primary w-label100">Visible to people who follows you</div>
                             </div>
                             <div *ngSwitchCase="'Following'">
@@ -57,7 +57,7 @@
                 <div class="o-prof-edit-privacy Eternity hidden-desktop"
                     id="contact-privacy-email-everyone" (click)="toggleEmail=!toggleEmail">
                     <div [ngSwitch]="privacy.email">
-                        <div *ngSwitchCase="'Followers'">
+                        <div *ngSwitchCase="'Follower'">
                           <div class="text-md primary w-label100">Visible to people who follows you</div>
                         </div>
                         <div *ngSwitchCase="'Following'">
@@ -82,7 +82,7 @@
                     <div class="o-prof-edit-privacy hidden-mob" (click)="toggleEmail=!toggleEmail"
                         id="contact-email-privacy">
                         <div [ngSwitch]="privacy.email">
-                            <div *ngSwitchCase="'Followers'">
+                            <div *ngSwitchCase="'Follower'">
                               <div class="text-md primary w-label100">Visible to people who follows you</div>
                             </div>
                             <div *ngSwitchCase="'Following'">
@@ -107,7 +107,7 @@
                 Phone Number <div class="o-prof-edit-privacy Eternity hidden-desktop"
                     id="contact-privacy-phone-everyone" (click)="togglePhone=!togglePhone">Visible to {{privacy.phone}}
                     <div [ngSwitch]="privacy.phone">
-                        <div *ngSwitchCase="'Followers'">
+                        <div *ngSwitchCase="'Follower'">
                           <div class="text-md primary w-label100">Visible to people who follows you</div>
                         </div>
                         <div *ngSwitchCase="'Following'">
@@ -137,7 +137,7 @@
                     <div class="o-prof-edit-privacy hidden-mob" id="contact-phone-privacy"
                         (click)="togglePhone=!togglePhone">
                         <div [ngSwitch]="privacy.phone">
-                            <div *ngSwitchCase="'Followers'">
+                            <div *ngSwitchCase="'Follower'">
                               <div class="text-md primary w-label100">Visible to people who follows you</div>
                             </div>
                             <div *ngSwitchCase="'Following'">
@@ -162,7 +162,7 @@
                 Website <div class="o-prof-edit-privacy Eternity hidden-desktop"
                     (click)="toggleWebsite=!toggleWebsite">
                     <div [ngSwitch]="privacy.website">
-                        <div *ngSwitchCase="'Followers'">
+                        <div *ngSwitchCase="'Follower'">
                           <div class="text-md primary w-label100">Visible to people who follows you</div>
                         </div>
                         <div *ngSwitchCase="'Following'">
@@ -186,7 +186,7 @@
                 <div class="pos">
                     <div class="o-prof-edit-privacy hidden-mob" (click)="toggleWebsite=!toggleWebsite">
                         <div [ngSwitch]="privacy.website">
-                            <div *ngSwitchCase="'Followers'">
+                            <div *ngSwitchCase="'Follower'">
                               <div class="text-md primary w-label100">Visible to people who follows you</div>
                             </div>
                             <div *ngSwitchCase="'Following'">
