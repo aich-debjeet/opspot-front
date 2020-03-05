@@ -221,7 +221,7 @@
           {{activity?.blurb | truncate:[100, '...']}}
         </div>
         <div class="text-rate" id="activity-bluestore-price">
-          {{activity?.currency}} {{activity?.price}} <span class="text-md grey">per piece</span>
+          {{activity?.currency}} {{activity?.price | number}} /- <span class="text-md 500">(per piece)</span>
         </div>
       </div>
       <div class="feed-card-event-block__right ">
