@@ -42,7 +42,7 @@
         <div class="caption-bold f700" id="sidebar-user-subscriptions-count">{{user.subscriptions_count}}</div>
         <div class="text-sm grey">Following</div>
       </a>
-      <a>
+      <a [routerLink]="['/', user.username]">
         <div class="caption-bold f700" id="sidebar-user-posts-count">{{user.post_count?user.post_count:0}}</div>
         <div class="text-sm grey" id="sidebar-user-posts">Posts</div>
       </a>
