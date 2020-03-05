@@ -334,7 +334,7 @@ export class RegisterForm {
   }
 
   removeOperators(numb) {
-    return numb.replace(/\s/g, '').replace('+', '').replace('-', '');
+    return numb.replace(/\s/g, '').replace('+', '').replace(/-/g, '');
   }
 
   onOtpChange(otp) {
