@@ -74,7 +74,10 @@ export class MyJourneyFormComponent implements OnInit {
           /**
            * temporary fix for video
            */
-          if (obj['imageLink'] == null) {
+          // if (obj['imageLink'] == null) {
+          //   obj['imageLink'] = 'assets/videos/video_thumbnail.png'
+          // }
+          if(obj['imageLink'].includes("data:video/")){
             obj['imageLink'] = 'assets/videos/video_thumbnail.png'
           }
           this.cards.push(obj);
