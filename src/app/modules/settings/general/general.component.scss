@@ -224,7 +224,7 @@
           }
       }
       .form-control{
-          width: 314px;
+          max-width: 314px;
       }
       .form-group {
           margin-bottom: 30px;
@@ -548,4 +548,13 @@ margin-bottom:15px;
 }
 .o-settings-pdngtpbtm-button--general{
     padding-top: 30px;
+}
+
+.del-pas-confirm-action{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.btn--action-set{
+    padding: 9px 18px;
 }

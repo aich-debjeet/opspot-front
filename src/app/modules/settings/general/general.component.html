@@ -256,8 +256,7 @@
           <div class="o-settings-line"></div>
       </div><!--Portfolio toggle settings fields-->
       <div class="o-settings-fields">
-          <h5 class="f500">Delete or Deactivate Account <span class="icon-arrow-right">
-          </span></h5>
+          <h5 class="f500">Delete or Deactivate Account</h5>
           <div class="text-md grey">
               Deactivating or Deleting Your One Page Spotlight Account
           </div>
@@ -272,7 +271,7 @@
                   <input type="radio" name="rd" id="rd2" value="2" (click)="setOption('deactivate')">
                   <div class="radio-widget"></div>
                   <div class="text-lg f500">Deactivate Account</div>
-                  <div class="text-md grey">Deactivating your account can be temporary</div>
+                  <div class="text-md grey">Deactivating your account <br>can be temporary</div>
               </label>
           </div>
           <div id="deactivate" class="o-settings-delete-account" *ngIf="deactivateOptions">
@@ -287,8 +286,10 @@
                   <span class="checkmark"></span>
               </label>
               <textarea class="form-control" id="general-textarea" rows="6" value="Textarea" [hidden]="!openText"></textarea>
-              <button type="button" id="general-confirm-deactivate-button" class="btn btn-primary btn-lg pading-right" (click)="deactivate()">Confirm Deactivate</button>
-              <button type="button" id="general-deactivate-cancel-button" class="btn btn-outline-primary btn-lg" (click)="setOption('deactivate')">Cancel</button>
+              <div class="del-pas-confirm-action">
+                <button type="button" id="general-confirm-deactivate-button" class="btn btn-primary btn-lg pading-right btn--action-set" (click)="deactivate()">Confirm Deactivate</button>
+                <button type="button" id="general-deactivate-cancel-button" class="btn btn-outline-primary btn-lg btn--action-set" (click)="setOption('deactivate')">Cancel</button>
+              </div>
           </div>
           <div id="delete" class="o-settings-deactivate-account" *ngIf="reasonDelete">
               <div class="o-settings-info">
@@ -304,9 +305,11 @@
                   <label>Password</label>
                   <input type="password" id="general-password-delete-account" class="form-control form-control-lg" [(ngModel)]="password">
               </div>
-              <button type="button" id="general-confirm-delete-button" class="btn btn-primary btn-lg pading-right" (click)="delete(password)">Confirm Delete</button>
-              <button type="button" id="general-delete-cancel-button" class="btn btn-outline-primary btn-lg" (click)="setOption('delete')">Cancel</button>
-          </div>
+              <div class="del-pas-confirm-action">
+                <button type="button" id="general-confirm-delete-button" class="btn btn-primary btn-lg pading-right" (click)="delete(password)">Confirm Delete</button>
+                <button type="button" id="general-delete-cancel-button" class="btn btn-outline-primary btn-lg" (click)="setOption('delete')">Cancel</button>
+              </div>
+            </div>
       </div><!--Delete settings fields-->
     </div>
   </div>
