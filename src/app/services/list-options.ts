@@ -229,6 +229,10 @@ export const ORGANIZATION_TYPE: Array<any> = [
    {
       value: 'Corporate / Industrial Company',
       label: 'Corporate / Industrial Company'
+   },
+   {
+      value: 'Others',
+      label: 'Others'
    }
 ]
 
