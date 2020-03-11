@@ -17,6 +17,9 @@
       </opspot-button-user-dropdown>
       <span class="text-md grey" id="sidebar-avatar-user-name">@{{user.username}}</span>
     </div>
+    <div class="o-prof-skills">
+      <a *ngFor="let tag of opspot?.tags" class="o-community-skills__tag">#{{tag}}</a>
+    </div>
     <!-- <div class="m-channel--username">
     <h2><span>@</span>{{user.username}}</h2>
   </div> -->
