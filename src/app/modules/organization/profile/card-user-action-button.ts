@@ -13,12 +13,12 @@ import { OrganizationService } from '../organization-service';
     <li class="mdl-menu__item" id="card-user-action-remove-from-organization"
       *ngIf="(organization['is:owner'] || organization['is:moderator']) && !(user['is:owner']||user['is:moderator']) && user['is:member']"
       (click)="removePrompt()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_FROM_GROUP">
-      Remove from Group
+      Remove from Organization
     </li>
     <li class="mdl-menu__item" id="card-user-action-reinvite-to-organization"
       *ngIf="(organization['is:owner'] || organization['is:moderator']) && !user['is:member'] && !wasReInvited"
       (click)="reInvite()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REINVITE">
-      Re-invite to Group
+      Re-invite to Organization
     </li>
     <li class="mdl-menu__item" *ngIf="(organization['is:owner'] || organization['is:moderator']) && wasReInvited">
       <span class="opspot-menu-info-item" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__INVITED">Invited</span>
