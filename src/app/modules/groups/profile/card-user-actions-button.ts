@@ -5,6 +5,7 @@ import { GroupsService } from '../groups-service';
 @Component({
   selector: 'opspot-groups-card-user-actions-button',
   inputs: ['group', 'user'],
+  outputs: ['_remove: remove'],
   template: `
   <button class="icon-more-vertical btnDefault" id="card-user-action-menu" *ngIf="(group['is:owner'] || group['is:admin']) || (group['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
 
@@ -99,6 +100,8 @@ export class GroupsCardUserActionsButton {
   wasReInvited: boolean = false;
 
   showMenu: boolean = false;
+  _remove: EventEmitter<any> = new EventEmitter();
+
 
   constructor(public service: GroupsService) {
   }
@@ -147,6 +150,7 @@ export class GroupsCardUserActionsButton {
     });
 
     this.showMenu = false;
+    this._remove.next(this.user);
   }
 
   reInvite() {
@@ -185,6 +189,8 @@ export class GroupsCardUserActionsButton {
       });
 
     this.showMenu = false;
+
+
   }
 
   /**
