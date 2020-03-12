@@ -152,7 +152,7 @@ export class PostFormComponent {
    */
   post() {
     if (this.meta.message.length <= 0 && this.attachment.has()) {
-      alert('What have You Created today?');
+      this.toastr.error("Error! You cannot post an empty post.");
       return;
     }
     if (this.defaultCoins.length > 0) {
