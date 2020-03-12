@@ -25703,6 +25703,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .o-create-portfolio-body{
   width: 100%;
   padding: 15px 24px 15px;
+  min-height: 186px;
   // height: 186px;
   textarea{
       resize:none;
@@ -25929,7 +25930,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   // width: 525px;
   border-radius: 4px;
   background-color: $white;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   border: 1px solid #ECEFF1;
 }
 

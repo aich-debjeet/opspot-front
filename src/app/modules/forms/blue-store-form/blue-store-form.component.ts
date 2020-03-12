@@ -131,7 +131,13 @@ export class BlueStoreFormComponent implements OnInit {
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
           // temporary fix for video thumbnail 
-          if (obj['src'] == null) {
+          // if (obj['src'] == null) {
+          //   obj['src'] = 'assets/videos/video_thumbnail.png'
+          // }
+          if(obj['src'].includes("data:audio/")){
+            obj['src'] = 'assets/videos/video_thumbnail.png'
+          }
+          if(obj['src'].includes("data:video/")){
             obj['src'] = 'assets/videos/video_thumbnail.png'
           }
           this.addAttachment(obj);

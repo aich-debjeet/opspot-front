@@ -14,7 +14,7 @@
   
   <h4 *ngIf="entity?.wire_threshold?.min" class="white" id="paywall">{{ entity.wire_threshold.min | number }} coins </h4>
 
-  <div class="text-md grey">
+  <div class="text-md grey" style="width: 90%;">
     This post can only be seen by supporters
     who contribute 
     <ng-container *ngIf="entity?.wire_threshold?.type == 'tokens'" i18n="@@WIRE__LOCK_SCREEN__OVER_TOKENS_PER_MONTH">
