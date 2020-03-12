@@ -66,7 +66,8 @@ export class LoginForm {
     this.errorMessage = '';
     this.invalidUser = false;
     this.inProgress = true;
-    this.client.post('api/v1/authenticate', { username: this._AESEncryptService.encrypt(this.form.value.username.trim()), password: this._AESEncryptService.encrypt(this.form.value.password.trim()) })
+    // this.client.post('api/v1/authenticate', { username: this._AESEncryptService.encrypt(this.form.value.username.trim()), password: this._AESEncryptService.encrypt(this.form.value.password.trim())})
+    this.client.post('api/v1/authenticate', { username: this.form.value.username.trim(), password: this.form.value.password })
       .then((data: any) => {
         // @abhijeet-aeione TODO: added tmp work around to disable encryption
         setTimeout(() => {
