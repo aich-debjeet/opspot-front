@@ -376,4 +376,15 @@ export class MediaViewComponent {
       });
   }
 
+  getOwnerIconTime() {
+    // TODO @gayatri: check for an alternate to prevent heavy work in child comp
+    let session = this.session.getLoggedInUser();
+    if(session && session.guid === this.entity.ownerObj.guid) {
+      return session.icontime;
+    } else {
+      return this.entity.ownerObj.icontime;
+    }
+  }
+
+
 }

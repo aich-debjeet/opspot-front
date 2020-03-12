@@ -23,6 +23,7 @@ export class OpportunityComponent implements OnInit {
   paramsSubscription: Subscription;
   reachoutMessage = 'Is there an opening? ';
   user: any;
+  error: string = '';
 
   constructor(
     private route: ActivatedRoute,

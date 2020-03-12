@@ -37,6 +37,7 @@ export class BigEventView implements OnInit {
   reachoutMessage = 'I am interested in: ';
   user: any;
   isLocked = false;
+  error: string = '';
 
   menuOptions: Array<string> = ['translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
   childEventsEmitter: EventEmitter<any> = new EventEmitter();

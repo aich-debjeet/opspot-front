@@ -44,6 +44,7 @@ export class BluestoreComponent implements OnInit {
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
   showVideo = false;
   videoData: any;
+  error: string = '';
 
 
   constructor(
