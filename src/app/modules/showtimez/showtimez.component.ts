@@ -21,6 +21,7 @@ export class ShowtimezComponent implements OnInit {
   paramsSubscription: Subscription;
   reachoutMessage = 'I am interested in: ';
   user: any;
+  error: string = '';
 
   constructor(
     private route: ActivatedRoute,

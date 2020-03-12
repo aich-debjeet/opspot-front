@@ -28,7 +28,7 @@
                 <div class="form-group w-sm">
                     <input type="text" class="form-control form-control-lg" name="dob" [(ngModel)]="model.dob" [bsValue]="model.dob" bsDatepicker placement="bottom" [bsConfig]="bsConfig">
                 </div>
-                <div class="pos">
+                <!-- <div class="pos">
                     <div class="o-prof-edit-privacy hidden-desktop"
                     (click)="toggleDob = !toggleDob">
                         <div [ngSwitch]="privacy.dob">
@@ -47,23 +47,23 @@
                             </div>
                         </div>
                         <div class="o-prof-edit-privacy hidden-mob" (click)="toggleDob = !toggleDob">
-                        <div [ngSwitch]="privacy.dob">
-                            <div *ngSwitchCase="'Follower'">
-                                <div class="text-md primary w-label100">Visible to people who follows you</div>
+                            <div [ngSwitch]="privacy.dob">
+                                <div *ngSwitchCase="'Follower'">
+                                    <div class="text-md primary w-label100">Visible to people who follows you</div>
+                                    </div>
+                                    <div *ngSwitchCase="'Following'">
+                                    <div class="text-md primary w-label100">Visible to people you follow</div>
+                                    </div>
+                                    <div *ngSwitchCase="'Everyone'">
+                                    <div class="text-md primary w-label100">Visible to everyone</div>
+                                    </div>
+                                    <div *ngSwitchCase="'Onlyme'">
+                                    <div class="text-md primary w-label100">Visible to only me</div>
                                 </div>
-                                <div *ngSwitchCase="'Following'">
-                                <div class="text-md primary w-label100">Visible to people you follow</div>
-                                </div>
-                                <div *ngSwitchCase="'Everyone'">
-                                <div class="text-md primary w-label100">Visible to everyone</div>
-                                </div>
-                                <div *ngSwitchCase="'Onlyme'">
-                                <div class="text-md primary w-label100">Visible to only me</div>
                             </div>
                         </div>
-                        </div>
                     <app-user-privacy (privacyChange)="changePrivacy($event,'dob')" class="privacy" [toggleClass]="toggleDob" [inPrivacy]="privacy.dob"></app-user-privacy>
-                </div>
+                </div> -->
             </div>
 
             <div class="form-group w-xl">
