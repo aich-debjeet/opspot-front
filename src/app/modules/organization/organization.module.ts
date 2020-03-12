@@ -19,6 +19,7 @@ import { CanDeactivateGroupService } from '../groups/profile/can-deactivate/can-
 import { OrganizationSettingButton } from './profile/organization-setting-button';
 import { OrganizationMobileInvite } from './profile/members/organizationmobileinvite/organizationmobileinvite.component';
 import { OrganizationMobileMembers } from './profile/members/organization-mobile-members/organization-mobile-members';
+import { OrganizationListComponent } from './list.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,7 @@ const routes: Routes = [
     OrganizationMobileInvite,  
     OrganizationTileComponent,
     OrganizationMobileMembers,
+    OrganizationListComponent
   ],
   exports: [
     OrganizationProfile,
@@ -69,7 +71,8 @@ const routes: Routes = [
     OrganizationProfileMembers,
     OrganizationProfileFeed,    
     OrganizationSettingButton,   
-    OrganizationTileComponent
+    OrganizationTileComponent,
+    OrganizationListComponent
   ],
   entryComponents: [],
   providers: [
