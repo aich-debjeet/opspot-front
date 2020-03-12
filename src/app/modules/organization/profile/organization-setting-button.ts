@@ -22,15 +22,6 @@ import { CommonEventsService } from '../../../services/common-events.service';
           <ng-container *ngIf="editing">Save</ng-container>
       </li>
 
-      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.videoChatDisabled" id="organization-setting-enable-gathering" (click)="toggleVideoChat(true)">Enable Gathering</li>
-      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.videoChatDisabled" id="organization-setting-diable-gathering" (click)="toggleVideoChat(false)">Disable Gathering</li> -->
-
-      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.moderated" id="organization-setting-disable-moderation" (click)="toggleModeration(false)">Disable moderation</li>
-      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.moderated" id="organization-setting-enable-moderation" (click)="toggleModeration(true)">Enable moderation</li>-->
-
-      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner'] && !organization.membership" id="organization-setting-make-public" (click)="togglePublic(true)">Make public</li>
-      <li class="mdl-menu__item" *ngIf="organization['is:owner'] && organization.membership" id="organization-setting-make-closed" (click)="togglePublic(false)">Make closed</li>-->
-
       <!-- Member functions -->
       <li class="mdl-menu__item" [hidden]="organization['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS" id="organization-setting-disable-notification">Disable Notifications</li>
       <li class="mdl-menu__item" [hidden]="!organization['is:muted']" (click)="unmute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__ENABLE_NOTIFICATIONS" id="organization-setting-enable-notification">Enable Notifications</li>
@@ -65,10 +56,10 @@ import { CommonEventsService } from '../../../services/common-events.service';
           <option value="not-selected" i18n="@@M__COMMON__SELECT_A_CATEGORY">-- SELECT A CATEGORY --</option>
           <option *ngFor="let category of categories" [value]="category.id">{{category.label}}</option>
         </select>
-
         <button class="mdl-button mdl-button--colored" id="organization-setting-feature-button" (click)="feature()" i18n="@@M__ACTION__FEATURE">Feature</button>
       </div>
     </m-modal>
+
    <style>
     .focusNone{
       outline:none;
@@ -91,12 +82,6 @@ import { CommonEventsService } from '../../../services/common-events.service';
 
   `
 })
-
-
-//old code
-//<i *ngIf="organization['is:muted']" class="opspot-organizations-button-badge material-icons">notifications_off</i>
-// 
-
 
 export class OrganizationSettingButton {
 
@@ -157,7 +142,6 @@ export class OrganizationSettingButton {
     } catch (e) {
       this.organization['is:muted'] = false;
     }
-
     this.showMenu = false;
   }
 
@@ -170,7 +154,6 @@ export class OrganizationSettingButton {
     } catch (e) {
       this.organization['is:muted'] = true;
     }
-
     this.showMenu = false;
   }
 
@@ -181,7 +164,6 @@ export class OrganizationSettingButton {
   async feature() {
     this.featured = true;
     this.organization.featured = true;
-
     try {
       await this.client.put(`api/v1/admin/feature/${this.organization.guid}/${this.category}`, {})
       this.featureModalOpen = false;
@@ -193,7 +175,6 @@ export class OrganizationSettingButton {
   async unfeature() {
     this.featured = false;
     this.organization.featured = false;
-
     try {
       await this.client.delete(`api/v1/admin/feature/${this.organization.guid}`);
     } catch (e) {
@@ -230,7 +211,6 @@ export class OrganizationSettingButton {
   }
 
   delete() {
-
     if (!this.isGoingToBeDeleted) {
       return;
     }
@@ -257,7 +237,6 @@ export class OrganizationSettingButton {
     e.stopPropagation();
     if (this.showMenu) {
       this.showMenu = false;
-
       return;
     }
     this.showMenu = true;
