@@ -146,7 +146,7 @@ export class OpportunityComponent implements OnInit {
 
   async togglePin() {
     this.opportunity.bookmark = !this.opportunity.bookmark;
-    const url: string = `api/v3/bookmark/${this.opportunity.entity_guid}/image`;
+    const url: string = `api/v3/bookmark/${this.opportunity.guid}/opportunity`;
     try {
       if (this.opportunity.bookmark) {
         await this.client.post(url);
@@ -249,7 +249,7 @@ export class OpportunityComponent implements OnInit {
   shareOptionSelected(option: string) {
     if (option === 'repost') {
       this.remindOpen = true;
-    };
+    }
   }
 
   remindPost($event) {

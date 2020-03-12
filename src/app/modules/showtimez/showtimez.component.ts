@@ -135,7 +135,7 @@ export class ShowtimezComponent implements OnInit {
 
   async togglePin() {
     this.showTimez.bookmark = !this.showTimez.bookmark;
-    const url: string = `api/v3/bookmark/${this.showTimez.entity_guid}/image`;
+    const url: string = `api/v3/bookmark/${this.showTimez.guid}/event`;
     try {
       if (this.showTimez.bookmark) {
         await this.client.post(url);

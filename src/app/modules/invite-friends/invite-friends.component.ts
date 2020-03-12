@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Session } from '../../services/session';
 import { OpspotTitle } from '../../services/ux/title';
 import { Client } from '../../services/api';
@@ -27,6 +27,8 @@ export class InviteFriendsComponent implements OnInit, OnDestroy {
   referrerParamFocused: boolean = false;
   emails: any[];
   inProgress = false;
+  @Input()maxItems;
+
 
   constructor(
     public session: Session,

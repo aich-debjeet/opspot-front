@@ -17,6 +17,7 @@ import { NotificationsComponent } from './notifications.component';
 
 import { NotificationService } from './notification.service';
 import { NotificationsToasterComponent } from './toaster.component';
+import { NotiFilterComponent } from './noti-filter/noti-filter.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { NotificationsToasterComponent } from './toaster.component';
     NotificationComponent,
     NotificationsTopbarToggleComponent,
     NotificationsToasterComponent,
+    NotiFilterComponent,
   ],
   providers: [
     {
@@ -42,6 +44,7 @@ import { NotificationsToasterComponent } from './toaster.component';
       deps: [ Session, Client, SocketsService, OpspotTitle ]
     }
   ],
+  entryComponents: [ NotiFilterComponent ],
   exports: [
     NotificationsFlyoutComponent,
     NotificationsComponent,

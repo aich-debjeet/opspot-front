@@ -11,7 +11,7 @@ export class UserPrivacyComponent implements OnInit {
   private _inPrivacy: string;
 
   constructor() {
-    this.privacys = ['Everyone', 'Followers', 'Following', 'Onlyme'];
+    this.privacys = ['Everyone', 'Follower', 'Following', 'Onlyme'];
   }
 
   model = { privacy: 'Following' };

@@ -64,19 +64,17 @@ export class ContactComponent implements OnInit {
   }
 
   async load() {
-    let res = {};
-    res = await this.client.get('api/v1/channel/me');
-    res = res['channel'];
-    this.model.phoneNumber = res['phone'];
-    this.model.email = res['email'];
-    this.model.location = res['location'];
-    this.model.website = res['website'];
+    let res = await this.client.get('api/v1/channel/me');
+    let response: any = res['channel'];
+    this.model.phoneNumber = response['phone'];
+    this.model.email = response['email'];
+    this.model.location = response['location'];
+    this.model.website = response['website'];
 
-    this.privacy.email = res['email_visibility'] ? res['email_visibility'].charAt(0).toUpperCase() + res['email_visibility'].slice(1) : this.privacy.email;
-    this.privacy.location = res['location_visibility'] ? res['location_visibility'].charAt(0).toUpperCase() + res['location_visibility'].slice(1) : this.privacy.location;
-    this.privacy.website = res['website_visibility'] ? res['website_visibility'].charAt(0).toUpperCase() + res['website_visibility'].slice(1) : this.privacy.website;
-    this.privacy.phone = res['phone_number_visibility'] ? res['phone_number_visibility'].charAt(0).toUpperCase() + res['phone_number_visibility'].slice(1) : this.privacy.phone;
-
+    this.privacy.email = response['email_visibility'] ? `${response['email_visibility'].charAt(0).toUpperCase()}${response['email_visibility'].slice(1)}` : this.privacy.email;
+    this.privacy.location = response['location_visibility'] ? `${response['location_visibility'].charAt(0).toUpperCase()}${response['location_visibility'].slice(1)}` : this.privacy.location;
+    this.privacy.website = response['website_visibility'] ? `${response['website_visibility'].charAt(0).toUpperCase()}${response['website_visibility'].slice(1)}` : this.privacy.website;
+    this.privacy.phone = response['phone_number_visibility'] ? `${response['phone_number_visibility'].charAt(0).toUpperCase()}${response['phone_number_visibility'].slice(1)}` : this.privacy.phone;
   }
 
   onSubmit() {

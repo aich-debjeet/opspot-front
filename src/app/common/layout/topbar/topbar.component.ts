@@ -23,7 +23,8 @@ export class TopbarComponent implements OnInit {
   @ViewChild(DynamicHostDirective) host: DynamicHostDirective;
 
   opspot: any = window.Opspot;
-  avatarSize = 'small';
+  //change avatar size mediun cause thumbnail is not getting created for small thumbnail.
+  avatarSize = 'medium';
   user: any = {};
   componentRef;
   componentInstance: NotificationsToasterComponent;

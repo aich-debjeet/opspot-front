@@ -3618,8 +3618,10 @@ m-cookies-notice {
     max-width: 990px; }
   .m-overlay-modal.m-overlay-modal--medium-large {
     max-width: 800px; }
-    .m-overlay-modal.m-overlay-modal--medium-extra-large {
-      max-width: 1170px; }
+  .m-overlay-modal.m-overlay-modal--screen-fit{
+      height: 100vh;}
+  .m-overlay-modal.m-overlay-modal--medium-extra-large {
+    max-width: 1170px; }
   .m-overlay-modal.m-overlay-modal--medium {
     max-width: 600px; }
   .m-overlay-modal.m-overlay-modal--medium-report {
@@ -25701,6 +25703,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 .o-create-portfolio-body{
   width: 100%;
   padding: 15px 24px 15px;
+  min-height: 186px;
   // height: 186px;
   textarea{
       resize:none;
@@ -25927,7 +25930,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   // width: 525px;
   border-radius: 4px;
   background-color: $white;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   border: 1px solid #ECEFF1;
 }
 
@@ -27872,4 +27875,12 @@ ng-otp-input {
   @include mq($from: $mobile_sm, $until: $tablet) {
     max-width:100% !important;
   }
+}
+.msg-thank-you{
+  display: flex;
+  align-items: center;
+  min-height: 200px;
+  width: 90%;
+  margin: 0px auto;
+  justify-content: center;
 }

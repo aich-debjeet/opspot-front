@@ -21,9 +21,13 @@
         <!-- <textarea [(ngModel)]='emails' name="" id="invite-friends-email-adderss" cols="" rows="" class="o-invite-email-textarea text-md"
           placeholder="Add email address"></textarea> -->
         <tag-input
+          [maxItems]=maxItems required
           [(ngModel)]='emails'
           placeholder="Add email address"
           secondaryPlaceholder="Add email address"
+          style="border:1px solid #959595; padding-bottom: 50px;height: 100%;"
+          theme='minimal'
+          [addOnBlur]="true"
         ></tag-input>
         <!-- <a class="o-send-invite" id="invite-friends-send-invite" (click)="sendInvite()">Send Invite</a> -->
         <button class="o-send-invite" id="invite-friends-send-invite" (click)="sendInvite()" [disabled]="inProgress">Send Invite</button>

@@ -1,0 +1,32 @@
+<div class="o-card o-noti-filter">
+  <div class="o-noti-filter__title">
+    <div class="caption-medium">Filter</div>
+    <div class="text-sm primary" (click)="changeFilter('')">Clear All</div>
+  </div>
+  <div class="o-noti-filter__block">
+    <form>
+      <div class="c-checkbox__md">
+        <label (click)="changeFilter('all')" class="c-checkbox">All
+          <input type="radio" id="notification-all" [checked]="this._filter == 'all'" value="all" name="all">
+          <span class="checkmark"></span>
+        </label>
+        <label (click)="changeFilter('tagged')" class="c-checkbox">Tagged
+          <input type="radio" id="notification-tagged" value="tagged" [checked]="this._filter == 'tagged'" name="tagged">
+          <span class="checkmark"></span>
+        </label>
+        <label (click)="changeFilter('likes')" class="c-checkbox">Likes
+          <input type="radio" id="notification-likes" value="likes" [checked]="this._filter == 'likes'" name="likes">
+          <span class="checkmark"></span>
+        </label>
+        <label (click)="changeFilter('comments')" class="c-checkbox">Comments
+          <input type="radio" id="comments" value="comments" [checked]="this._filter == 'comments'" name="comments">
+          <span class="checkmark"></span>
+        </label>
+        <label (click)="changeFilter('boost')" class="c-checkbox">Boost
+          <input type="radio" id="notification-boost" value="boost" [checked]="this._filter == 'boost'" name="boost">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </form>
+  </div>
+</div>

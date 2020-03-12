@@ -6,7 +6,7 @@
       <input type="radio" id="user-privacy-radio-button" (click)="model.privacy=privacy; changePrivacy()" [checked]="privacy == model.privacy">
       <div class="radio-widget" id="user-privacy-radio"></div>
       <div [ngSwitch]="privacy">
-        <div *ngSwitchCase="'Followers'">
+        <div *ngSwitchCase="'Follower'">
           <div class="text-sm grey w-label100">Visible to people who follows you</div>
         </div>
         <div *ngSwitchCase="'Following'">

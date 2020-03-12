@@ -152,6 +152,9 @@
 .o-noti-filter{
     padding: 16px;
     background: #fff;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+		border: none!important;
+	}
     &__title{
         width: 100%;
         display: flex;
@@ -179,10 +182,17 @@
             -ms-user-select: none;
             user-select: none;
             line-height: 15px;
+            @include mq($from: $mobile_sm, $until: $tablet) {
+                padding: 18px 0px;
+                border-bottom: 1px solid #ECEFF1;
+            }
         }
         .checkmark{
             right: 0px!important;
             left: unset;
+            @include mq($from: $mobile_sm, $until: $tablet) {
+                top: 17px;
+            }
         }
     }
 }
@@ -540,4 +550,16 @@
   height: 370px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.o-noti-filter-mob{
+    display: none;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        display: block;
+		width: 17px;
+        height: 17px;
+        margin-left: 17px;
+        i{
+            font-size: 17px;
+        }
+    }
 }

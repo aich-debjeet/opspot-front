@@ -171,7 +171,7 @@ export class BluestoreComponent implements OnInit {
 
   async togglePin() {
     this.marketplace.bookmark = !this.marketplace.bookmark;
-    const url: string = `api/v3/bookmark/${this.marketplace.entity_guid}/image`;
+    const url: string = `api/v3/bookmark/${this.marketplace.guid}/item`;
     try {
       if (this.marketplace.bookmark) {
         await this.client.post(url);

@@ -17,6 +17,9 @@
       </opspot-button-user-dropdown>
       <span class="text-md grey" id="sidebar-avatar-user-name">@{{user.username}}</span>
     </div>
+    <div class="o-prof-skills">
+      <a *ngFor="let tag of opspot?.tags" class="o-community-skills__tag">#{{tag}}</a>
+    </div>
     <!-- <div class="m-channel--username">
     <h2><span>@</span>{{user.username}}</h2>
   </div> -->
@@ -42,7 +45,7 @@
         <div class="caption-bold f700" id="sidebar-user-subscriptions-count">{{user.subscriptions_count}}</div>
         <div class="text-sm grey">Following</div>
       </a>
-      <a>
+      <a [routerLink]="['/', user.username]">
         <div class="caption-bold f700" id="sidebar-user-posts-count">{{user.post_count?user.post_count:0}}</div>
         <div class="text-sm grey" id="sidebar-user-posts">Posts</div>
       </a>
@@ -200,7 +203,7 @@
     <span *ngIf="isOwner() && !user?.about?.description" class="text-md">
       <a [routerLink]="['/profile/about']" class="primary" id="sidebar-about-self">Tell something about yourself</a>
     </span>
-    <span class="text-md" id="sidebar-user-description">{{user?.about?.description}}</span>
+    <span class="text-md word-br" id="sidebar-user-description">{{user?.about?.description}}</span>
     <ul class="o-bio__info">
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
@@ -232,14 +235,14 @@
       </li>
       <li class="o-bio-info__item m-t-9">
         <div class="o-bio-info-left" id="sidebar-height">
-          <div class="text-sm grey o-gender-title">Height(in cm)</div>
+          <div class="text-sm grey o-gender-title" [hidden]="!user.height && !isOwner()">Height(in cm)</div>
           <div class="text-md o-gender-value" *ngIf="isOwner() && !user.height">
             <a class="primary" [routerLink]="['/profile/about']" id="sidebar-add-height">Select</a>
           </div>
           <span class="text-md float-left" id="sidebar-user-height">{{user.height}}</span>
         </div>
         <div class="o-bio-info-right" id="sidebar-weight">
-          <div class="text-sm grey o-dob-title">Weight(in Kg)</div>
+          <div class="text-sm grey o-dob-title" [hidden]="!user.weight && !isOwner()">Weight(in Kg)</div>
           <div class="text-md o-dob-value" *ngIf="isOwner() && !user.weight">
             <a class="primary" [routerLink]="['/profile/about']" id="sidebar-add-weight">Select</a>
           </div>
@@ -248,7 +251,7 @@
       </li>
       <li class="o-bio-info__item m-t-9">
         <div class="o-bio-language">
-          <div class="text-sm grey w100" id="sidebar-languages">Languages Known</div>
+          <div class="text-sm grey w100" id="sidebar-languages" [hidden]="!user?.about?.languages && !isOwner()">Languages Known</div>
           <div class="text-md w100" *ngIf="isOwner() && !user?.about?.languages">
             <a [routerLink]="['/profile/about']" class="primary" id="sidebar-add-languages">Add Language</a>
           </div>
@@ -269,8 +272,8 @@
           <img src="assets/Work.jpg" alt="">
         </div>
         <div class="o-work-info__det" id="sidebar-work-widget">
-          <a class="text-md f500">{{ work?.designation }}</a>
-          <div class="text-sm grey-dark">{{ work?.company_name }} - {{ work?.location }}</div>
+          <a class="text-md f500 word-br">{{ work?.designation }}</a>
+          <div class="text-sm grey-dark word-br">{{ work?.company_name }} - {{ work?.location }}</div>
         </div>
       </div>
     </div><!-- work detail end-->
@@ -283,8 +286,8 @@
           <img src="assets/Education.jpg" alt="">
         </div>
         <div class="o-education-info__det" id="sidebar-education-widget">
-          <a class="text-md f500">{{ education?.field_of_study }}</a>
-          <div class="text-sm grey-dark">{{ education?.university }} - {{ education?.location }}</div>
+          <a class="text-md f500 word-br">{{ education?.field_of_study }}</a>
+          <div class="text-sm grey-dark word-br">{{ education?.university }} - {{ education?.location }}</div>
         </div>
       </div>
     </div><!-- education detail end-->
@@ -297,8 +300,8 @@
           <img src="assets/Awards.jpg" alt="">
         </div>
         <div class="o-award-info__det" id="sidebar-award-widget">
-          <a class="text-md f500">{{ award?.title }}</a>
-          <div class="text-sm grey-dark">{{ award?.issuer }} - {{ award?.location }}</div>
+          <a class="text-md f500 word-br">{{ award?.title }}</a>
+          <div class="text-sm grey-dark word-br">{{ award?.issuer }} - {{ award?.location }}</div>
         </div>
       </div>
     </div><!-- Award detail end-->

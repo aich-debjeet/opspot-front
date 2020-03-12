@@ -27,7 +27,6 @@ export class AttachmentService {
   }
 
   load(object: any) {
-    // console.log(object)
     if (!object) {
       return;
     }
@@ -439,7 +438,6 @@ export class AttachmentService {
             this.attachment.preview = reader.result;
             resolve();
           };
-          console.log(this.attachment)
           reader.readAsDataURL(file);
         }
 
@@ -461,7 +459,6 @@ export class AttachmentService {
             this.attachment.preview = reader.result;
             resolve();
           };
-          console.log(this.attachment)
           reader.readAsDataURL(file);
         // this.checkAudioDuration(file).then(duration => {
         //   console.log("In th audio", duration);
@@ -485,7 +482,6 @@ export class AttachmentService {
           this.attachment.preview = reader.result;
           resolve();
         };
-        console.log(this.attachment)
         reader.readAsDataURL(file);
       } else if (file.type && file.type.indexOf('application/pdf') === 0) {
         this.attachment.mime = 'pdf';
@@ -514,7 +510,6 @@ export class AttachmentService {
           window.clearTimeout(timeout);
 
         window.URL.revokeObjectURL(videoElement.src);
-        // console.log('file size', file.size);
         resolve(videoElement.duration);
       };
       videoElement.addEventListener('error', function (error) {

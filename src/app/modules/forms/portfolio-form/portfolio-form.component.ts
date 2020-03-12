@@ -8,6 +8,7 @@ import { Client } from '../../../services/api/client';
 
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { SpecialHashtg } from '../../../helpers/special-hashtag';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-portfolio-form',
@@ -30,7 +31,14 @@ export class PortfolioFormComponent implements OnInit {
   isNSFW: boolean = false;
   inProgress = false;
 
-  constructor(public session: Session, public client: Client, public upload: Upload, public attachment: AttachmentService, private formBuilder: FormBuilder) {
+  constructor(
+    public session: Session,
+    public client: Client,
+    public upload: Upload,
+    public attachment: AttachmentService,
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
+  ) {
     this.opspot = window.Opspot;
     this.cards = [];
   }
@@ -69,10 +77,10 @@ export class PortfolioFormComponent implements OnInit {
           /**
            * temporary fix for video and audio
            */
-          if(obj['imageLink'].includes("data:audio/")){
+          if (obj['imageLink'].includes("data:audio/")) {
             obj['imageLink'] = 'assets/videos/video_thumbnail.png'
           }
-          if(obj['imageLink'].includes("data:video/")){
+          if (obj['imageLink'].includes("data:video/")) {
             obj['imageLink'] = 'assets/videos/video_thumbnail.png'
           }
           // if (obj['imageLink'] == null) {
@@ -94,7 +102,7 @@ export class PortfolioFormComponent implements OnInit {
 
   post() {
     if (!this.attachment.hasAttachment()) {
-      alert('What have You Created today?');
+      this.toastr.error('Error! Please upload a media file.');
       return;
     }
 
