@@ -1,9 +1,9 @@
-<div class="m-token--ledger" *ngIf="!overTrans">
+<!-- <div class="m-token--ledger" *ngIf="!overTrans"> -->
   <!-- <div class="m-token--ledger-remote" *ngIf="remote" i18n="@@WALLET__TOKENS__TRANSACTIONS__REMOTE_LABEL">
     <b>@{{remoteUser}}</b>'s transactions
   </div> -->
 
-  <div  class="m-token--ledger-filters m-border" *ngIf="!preview; else previewHeader">
+  <!-- <div  class="m-token--ledger-filters m-border" *ngIf="!preview; else previewHeader">
     
     <m-dropdown class="m-token--ledger-filters--addresses">
       <label class="m-token--ledger-filters--label">
@@ -28,9 +28,6 @@
               <span>{{ address.label }}</span>
             </ng-template>
           </span>
-
-          <!-- <div class="m-layout--spacer"></div> -->
-
           <i class="material-icons m-token--ledger-filters--check" [class.selected]="address.selected" id="transaction-conribute-check" >check</i>
         </li>
       </ul>
@@ -55,13 +52,11 @@
         </li>
       </ul>
     </m-dropdown>
-
-    <!-- <div class="m-layout--spacer"></div> -->
     <div class="m-token--ledger--date-selectors">
       <m-date-selector label="From:" i18n-label="@@WALLET__TOKENS__TRANSACTIONS__FROM" [date]="startDate" (dateChange)="onStartDateChange($event)" dateFormat="shortDate"></m-date-selector>
       <m-date-selector label="To:" i18n-label="@@WALLET__TOKENS__TRANSACTIONS__TO" [date]="endDate" (dateChange)="onEndDateChange($event)" dateFormat="shortDate"></m-date-selector>
     </div>
-  </div>
+  </div> -->
   <!-- <ng-template #previewHeader>
     <div class="m-token--ledger-filters m-token--ledger-filters--preview m-border" i18n="@@WALLET__TOKENS__TRANSACTIONS__LAST_MONTH_TITLE">
       Last month
@@ -113,7 +108,7 @@
       </div> -->
     <!-- </div> -->
   <!-- </div> -->
-</div>
+<!-- </div> -->
 
 
 <div class="o-trans-history">

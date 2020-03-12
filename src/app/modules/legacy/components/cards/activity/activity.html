@@ -4,7 +4,7 @@
   <!-- <i class="material-icons selected" *ngIf="activity.remind_object">repeat</i> -->
   <div class="o-avatar" [hovercard]="activity.ownerObj.guid">
     <a *ngIf="activity.containerObj && activity.containerObj.type == 'organization'; else usersPicture" [routerLink]="['/organization/profile/', activity.containerObj.guid]" id="activity-user-image">
-      <img [src]="opspot.cdn_url + 'icon/' + activity.containerObj.guid + '/medium/' + getOwnerIconTime()" class="mdl-shadow--2dp" />
+      <img [src]="opspot.cdn_url + 'fs/v1/avatars/' + activity.containerObj.guid + '/medium/' + getOwnerIconTime()" class="mdl-shadow--2dp" />
     </a>
     <ng-template #usersPicture>
       <a [routerLink]="['/', activity.ownerObj.username]" id="activity-user-image">
@@ -137,7 +137,7 @@
       <m-video width="100%" height="300px" style="background:#000;" [muted]="false"
       [poster]="activity.custom_data[0].thumbnail_src"
       [src]="[{ 'res': '360', 'uri': 'api/v1/media/' + activity.custom_data[0].guid + '/play', 'type': 'video/mp4' }]"
-      [guid]="activity.custom_data.guid" [playCount]="activity['play:count']"
+      [guid]="activity.custom_data[0].guid" [playCount]="activity['play:count']"
       [torrent]="[{ res: '360', key: activity.custom_data[0].guid + '/360.mp4' }]" #player>
       <video-ads [player]="player" *ngIf="activity.monetized"></video-ads>
       </m-video>
@@ -210,8 +210,8 @@
           <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
         </div>
       </a>
-    </div>
-    <!-- <div class="feed-card-event-block" [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"> -->
+    </div>iconicon
+    <!-- <div class="feed-card-event-block" [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"> -->icon
     <div class="feed-card-event-block">
       <div class="feed-card-event-block__left" id="activity-bluestore-details">
         <div class="text-lg f500 mb-3 word-br" id="activity-bluestore-title">

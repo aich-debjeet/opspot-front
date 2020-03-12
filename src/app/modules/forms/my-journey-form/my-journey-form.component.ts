@@ -8,6 +8,7 @@ import { Client } from '../../../services/api/client';
 
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { SpecialHashtg } from '../../../helpers/special-hashtag';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-my-journey-form',
@@ -35,7 +36,8 @@ export class MyJourneyFormComponent implements OnInit {
     public client: Client,
     public upload: Upload,
     public attachment: AttachmentService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService) {
     this.opspot = window.Opspot;
     this.cards = [];
   }
@@ -74,7 +76,10 @@ export class MyJourneyFormComponent implements OnInit {
           /**
            * temporary fix for video
            */
-          if (obj['imageLink'] == null) {
+          // if (obj['imageLink'] == null) {
+          //   obj['imageLink'] = 'assets/videos/video_thumbnail.png'
+          // }
+          if(obj['imageLink'].includes("data:video/")){
             obj['imageLink'] = 'assets/videos/video_thumbnail.png'
           }
           this.cards.push(obj);
@@ -92,7 +97,7 @@ export class MyJourneyFormComponent implements OnInit {
 
   post() {
     if (this.meta.message.length <= 0 && this.attachment.has()) {
-      alert('What have You Created today?');
+      this.toastr.error("Error! You cannot post an empty post.");
       return;
     }
 

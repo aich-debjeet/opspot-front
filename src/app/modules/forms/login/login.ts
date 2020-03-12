@@ -5,6 +5,7 @@ import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-password.component';
 import { MessengerEncryptionService } from '../../messenger/encryption/encryption.service';
+import { AESEncryptServiceService } from '../../../services/aesencrypt-service.service'
 
 
 
@@ -38,7 +39,8 @@ export class LoginForm {
     public client: Client,
     fb: FormBuilder,
     private zone: NgZone,
-    public encryption: MessengerEncryptionService
+    public encryption: MessengerEncryptionService,
+    private _AESEncryptService: AESEncryptServiceService
   ) {
     this.form = fb.group({
       username: ['', Validators.required],
@@ -64,6 +66,7 @@ export class LoginForm {
     this.errorMessage = '';
     this.invalidUser = false;
     this.inProgress = true;
+    // this.client.post('api/v1/authenticate', { username: this._AESEncryptService.encrypt(this.form.value.username.trim()), password: this._AESEncryptService.encrypt(this.form.value.password.trim())})
     this.client.post('api/v1/authenticate', { username: this.form.value.username.trim(), password: this.form.value.password })
       .then((data: any) => {
         // @abhijeet-aeione TODO: added tmp work around to disable encryption

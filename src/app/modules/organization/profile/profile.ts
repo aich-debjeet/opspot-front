@@ -26,7 +26,7 @@ import { Location } from '@angular/common';
 
 export class OrganizationProfile {
 
-  
+
   // dev: boolean = false;
   guid;
   filter = 'activity';
@@ -53,10 +53,10 @@ export class OrganizationProfile {
   socketRoomName: string;
   newConversationMessages: boolean = false;
 
-  inviteToggle:boolean=false;
-  memberToggle:boolean=false;
+  inviteToggle: boolean = false;
+  memberToggle: boolean = false;
   membersMobile;
-  memberSrc=`${this.opspot.cdn_url}icon/`
+  memberSrc = `${this.opspot.cdn_url}icon/`
   @ViewChild('feed') private feed: OrganizationProfileFeed;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
@@ -92,13 +92,13 @@ export class OrganizationProfile {
     this.detectConversationsState();
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {
-       this.loadMembers(params['guid'])
+        this.loadMembers(params['guid'])
 
         let changed = params['guid'] !== this.guid;
 
         this.guid = params['guid'];
         this.postMeta.container_guid = this.guid;
-        
+
         if (changed) {
           this.organization = void 0;
 
@@ -138,7 +138,7 @@ export class OrganizationProfile {
       this.reviewCountLoad();
     }, 120 * 1000);
 
-    this.videoChatActiveSubscription = this.videochat.activate$.subscribe(next => window.scrollTo(0, 0));    
+    this.videoChatActiveSubscription = this.videochat.activate$.subscribe(next => window.scrollTo(0, 0));
   }
 
   setFilter(url: string) {
@@ -162,7 +162,7 @@ export class OrganizationProfile {
       this.queryParamsSubscripton.unsubscribe();
 
     if (this.videoChatActiveSubscription)
-      this.videoChatActiveSubscription.unsubscribe(); 
+      this.videoChatActiveSubscription.unsubscribe();
 
     if (this.updateMarkersSubscription)
       this.updateMarkersSubscription.unsubscribe();
@@ -181,7 +181,7 @@ export class OrganizationProfile {
     this.organization = null;
 
     // Load organization
-    try { 
+    try {
       this.organization = await this.service.load(this.guid);
 
     } catch (e) {
@@ -195,8 +195,8 @@ export class OrganizationProfile {
     this.updateMarkersSubscription = this.updateMarkers.getByEntityGuid(this.guid).subscribe(marker => {
       if (!marker)
         return;
-        
-      let hasMarker = 
+
+      let hasMarker =
         (marker.read_timestamp < marker.updated_timestamp)
         && (marker.entity_guid == this.organization.guid)
         && (marker.marker != 'gathering-heartbeat');
@@ -278,7 +278,9 @@ export class OrganizationProfile {
     this.service.upload({
       guid: this.organization.guid,
       banner_position: file.top
-    }, { banner: file.file });
+    }, { banner: file.file }).then((res: any) => {
+      window.location.reload();
+    });
 
     this.organization.banner = true;
   }
@@ -286,7 +288,9 @@ export class OrganizationProfile {
   upload_avatar(file: any) {
     this.service.upload({
       guid: this.organization.guid
-    }, { avatar: file });
+    }, { avatar: file }).then((res: any) => {
+      window.location.reload();
+    });
   }
 
   change_membership(membership: any) {
@@ -297,11 +301,11 @@ export class OrganizationProfile {
     }
   }
 
-//   canDeactivate() {
-//     if (!this.feed)
-//       return true;
-//     return this.feed.canDeactivate();
-//   }
+  //   canDeactivate() {
+  //     if (!this.feed)
+  //       return true;
+  //     return this.feed.canDeactivate();
+  //   }
 
   joinCommentsSocketRoom(keepAlive: boolean = false) {
     if (!keepAlive && this.socketRoomName) {
@@ -422,46 +426,46 @@ export class OrganizationProfile {
     this.cd.detectChanges();
   }
 
-  organizationCount(e){
-   this.totalMembers=e
+  organizationCount(e) {
+    this.totalMembers = e
   }
 
-  openInvite(){
-  if(window.innerWidth>785){
-    this.inviteToggle=!this.inviteToggle;
-     }else{
-       this.router.navigate([`/organization/${this.guid}/invite`])
-     } 
-  }
-   
-  showMembers(){
-    if(window.innerWidth>785){
-   this.memberToggle=!this.memberToggle;
-    }else{
-      this.router.navigate([`/organization/${this.guid}/members`])
-    } 
-  }
- 
- async loadMembers(guid){
-    let endpoint = `api/v3/organizations/membership/${guid}`
-    let  params = { limit: 4, offset: this.offset };
-     let members= await this.client.get(endpoint, params)
-    //  console.log(members)
-     this.membersMobile=members['members']
+  openInvite() {
+    if (window.innerWidth > 785) {
+      this.inviteToggle = !this.inviteToggle;
+    } else {
+      this.router.navigate([`/organization/${this.guid}/invite`])
     }
+  }
 
-  
-    groupCount(e){
-      this.totalMembers=e
-      //  console.log("total: ", this.totalMembers);
-      
-     }
+  showMembers() {
+    if (window.innerWidth > 785) {
+      this.memberToggle = !this.memberToggle;
+    } else {
+      this.router.navigate([`/organization/${this.guid}/members`])
+    }
+  }
 
-     goBack(){
-      this._location.back()
-     }
-   
-    
+  async loadMembers(guid) {
+    let endpoint = `api/v3/organizations/membership/${guid}`
+    let params = { limit: 4, offset: this.offset };
+    let members = await this.client.get(endpoint, params)
+    //  console.log(members)
+    this.membersMobile = members['members']
+  }
+
+
+  groupCount(e) {
+    this.totalMembers = e
+    //  console.log("total: ", this.totalMembers);
+
+  }
+
+  goBack() {
+    this._location.back()
+  }
+
+
   // showGathering1(){
   //  this.showGathering = true;
   // }

@@ -5,6 +5,7 @@ import { GroupsService } from '../groups-service';
 @Component({
   selector: 'opspot-groups-card-user-actions-button',
   inputs: ['group', 'user'],
+  outputs: ['_remove: remove'],
   template: `
   <button class="icon-more-vertical btnDefault" id="card-user-action-menu" *ngIf="(group['is:owner'] || group['is:admin']) || (group['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
 
@@ -14,12 +15,12 @@ import { GroupsService } from '../groups-service';
     <li class="mdl-menu__item" id="card-user-action-remove-from-group"
       *ngIf="(group['is:owner'] || group['is:moderator'] || group['is:admin']) && !(user['is:owner']||user['is:moderator']) && user['is:member']"
       (click)="removePrompt()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_FROM_GROUP">
-      Remove from Group
+      Remove from Community
     </li>
     <li class="mdl-menu__item" id="card-user-action-re-invite-to-group"
       *ngIf="(group['is:owner'] || group['is:admin'] ||  group['is:moderator']) && !user['is:member'] && !wasReInvited"
       (click)="reInvite()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REINVITE">
-      Re-invite to Group
+      Re-invite to Community
     </li>
     <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin'] || group['is:moderator']) && wasReInvited" id="card-user-action-invited">
       <span class="opspot-menu-info-item" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__INVITED">Invited</span>
@@ -99,6 +100,8 @@ export class GroupsCardUserActionsButton {
   wasReInvited: boolean = false;
 
   showMenu: boolean = false;
+  _remove: EventEmitter<any> = new EventEmitter();
+
 
   constructor(public service: GroupsService) {
   }
@@ -147,6 +150,7 @@ export class GroupsCardUserActionsButton {
     });
 
     this.showMenu = false;
+    this._remove.next(this.user);
   }
 
   reInvite() {
@@ -185,6 +189,8 @@ export class GroupsCardUserActionsButton {
       });
 
     this.showMenu = false;
+
+
   }
 
   /**

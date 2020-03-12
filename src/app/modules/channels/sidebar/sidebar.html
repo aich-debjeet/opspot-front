@@ -17,6 +17,9 @@
       </opspot-button-user-dropdown>
       <span class="text-md grey" id="sidebar-avatar-user-name">@{{user.username}}</span>
     </div>
+    <div class="o-prof-skills">
+      <a *ngFor="let tag of opspot?.tags" class="o-community-skills__tag">#{{tag}}</a>
+    </div>
     <!-- <div class="m-channel--username">
     <h2><span>@</span>{{user.username}}</h2>
   </div> -->
@@ -232,14 +235,14 @@
       </li>
       <li class="o-bio-info__item m-t-9">
         <div class="o-bio-info-left" id="sidebar-height">
-          <div class="text-sm grey o-gender-title">Height(in cm)</div>
+          <div class="text-sm grey o-gender-title" [hidden]="!user.height && !isOwner()">Height(in cm)</div>
           <div class="text-md o-gender-value" *ngIf="isOwner() && !user.height">
             <a class="primary" [routerLink]="['/profile/about']" id="sidebar-add-height">Select</a>
           </div>
           <span class="text-md float-left" id="sidebar-user-height">{{user.height}}</span>
         </div>
         <div class="o-bio-info-right" id="sidebar-weight">
-          <div class="text-sm grey o-dob-title">Weight(in Kg)</div>
+          <div class="text-sm grey o-dob-title" [hidden]="!user.weight && !isOwner()">Weight(in Kg)</div>
           <div class="text-md o-dob-value" *ngIf="isOwner() && !user.weight">
             <a class="primary" [routerLink]="['/profile/about']" id="sidebar-add-weight">Select</a>
           </div>
@@ -248,7 +251,7 @@
       </li>
       <li class="o-bio-info__item m-t-9">
         <div class="o-bio-language">
-          <div class="text-sm grey w100" id="sidebar-languages">Languages Known</div>
+          <div class="text-sm grey w100" id="sidebar-languages" [hidden]="!user?.about?.languages && !isOwner()">Languages Known</div>
           <div class="text-md w100" *ngIf="isOwner() && !user?.about?.languages">
             <a [routerLink]="['/profile/about']" class="primary" id="sidebar-add-languages">Add Language</a>
           </div>
