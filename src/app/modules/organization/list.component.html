@@ -1,31 +1,30 @@
 <div class="container">
         <div class="o-community-landing-block">
           <div class="o-community-landing-block__mob-header">
-            <h4 class="f500">Communities</h4>
-            <a routerLink="/groups/create" *ngIf="session.isLoggedIn()" class="text-lg primary f500">Create</a>
+            <h4 class="f500">Organization</h4>
+            <a routerLink="/organization/create" *ngIf="session.isLoggedIn()" class="text-lg primary f500">Create</a>
           </div>
-          <!-- <div class="o-community-landing-block__mob-tab">
+          <div class="o-community-landing-block__mob-tab">
             <div class="o-cmnity-landing-block">
               <div class="o-cmnity-landing-block__tab">
                 <div class="tabs-cmnity-landing">
                   <ul class="tabs-list cmnity-landing-tabs">
                     <li [class.active]="showMyCommunities == false"><a (click)="communityTabsToggle()">Discover</a></li>
-                    <li [class.active]="showMyCommunities == true"><a (click)="communityTabsToggle()">My Communities</a></li>
+                    <li [class.active]="showMyCommunities == true"><a (click)="communityTabsToggle()">My Organization</a></li>
                   </ul>
                 </div>
               </div>
             </div>
-          </div> -->
-      
+          </div>
           <div class="o-community-landing-block__sidebar hidden-mob">
-            <h4 class="f500" id="list-communities-header">Communities</h4>
-            <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn()"
-              routerLink="/groups/create">Create Community</button>
-            <div class="text-lg f500 mb-17" id="list-communities-manage">Communities you manage</div>
+            <h4 class="f500" id="list-communities-header">Organization</h4>
+            <!-- <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn()"
+              routerLink="/organization/create">Create Community</button> -->
+            <div class="text-lg f500 mb-17" id="list-communities-manage">Organizations you manage</div>
             <div *ngFor="let entity of entities">
-              <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='community'" 
+              <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='organization'" 
                 id="list-community-manage-list"
-                [routerLink]="['/groups/profile', entity.guid]">
+                [routerLink]="['/organization/profile', entity.guid]">
                 <div class="o-community-landing-block-manage__avatar">
                   <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="">
                 </div>
@@ -35,12 +34,12 @@
               </div>
             </div>
             <div class="o-community-landing-block-your">
-              <div class="text-lg f500 mb-17" id="list-community-header">Communities you’re in</div>
+              <div class="text-lg f500 mb-17" id="list-community-header">Organizations you’re in</div>
               <div *ngFor="let entity of entities">
                 <div class="o-community-landing-block-manage"
                   id="list-community-joined"
-                  *ngIf="entity['is:member'] && entity['entity_type']=='community'"
-                  [routerLink]="['/groups/profile', entity.guid]">
+                  *ngIf="entity['is:member'] && entity['entity_type']=='organization'"
+                  [routerLink]="['/organization/profile', entity.guid]">
                   <div class="o-community-landing-block-manage__avatar">
                     <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="">
                   </div>
@@ -51,31 +50,29 @@
               </div>
             </div>
           </div>
-      
-          <div class="o-community-landing-block__main">
+          <div class="o-community-landing-block__main" *ngIf="!showMyCommunities">
             <div class="o-cmnity-landing-tab-content">
               <div class="tabs-cmnity-landing">
                 <div id="discover" class="tab active">
                   <div class="o-community-landing-block-design">
-                    <!-- <m-groups--tile *ngFor="let entity of entities" class="o-community-main-card" [entity]="entity"></m-groups--tile> -->
+                    <m-organization--tile *ngFor="let entity of entities" class="o-community-main-card" [entity]="entity"></m-organization--tile>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- <div class="o-community-landing-block-design" *ngIf="showMyCommunities">
+          <div class="o-community-landing-block-design" *ngIf="showMyCommunities">
             <div id="communities" class="tab" *ngFor="let entity of entities">
-              <m-groups--tile *ngIf="entity['is:member'] && entity['is:creator'] && entity['entity_type']=='community'"
-                [entity]="entity" class="o-community-main-card"></m-groups--tile>
+              <m-organization--tile *ngIf="entity['is:member'] && entity['is:creator'] && entity['entity_type']=='organization'"
+                [entity]="entity" class="o-community-main-card"></m-organization--tile>
             </div>
-          </div> -->
+          </div>
         </div>
         <infinite-scroll
          distance="25%"
          (load)="load()"
          [moreData]="moreData"
-         [inProgress]="inProgress"
-        >
+         [inProgress]="inProgress">
         </infinite-scroll>
       </div>
       

@@ -33,9 +33,11 @@ const routes: Routes = [
   },
   { path: 'organization/create', component: OrganizationCreator },
   { path: 'organization/edit/:guid', component: OrganizationCreator, canDeactivate: [CanDeactivateGroupService] },
-  { path: 'organization/:guid/members', component:OrganizationMobileMembers},
-  { path: 'organization/:guid/invite', component:OrganizationMobileInvite},
-];
+  { path: 'organization/:guid/members', component: OrganizationMobileMembers },
+  { path: 'organization/:guid/invite', component: OrganizationMobileInvite },
+  { path: 'organization/:filter', component: OrganizationListComponent },
+  { path: 'organization', redirectTo: 'organization/all', pathMatch: 'full' }
+]
 
 @NgModule({
   imports: [
@@ -55,9 +57,9 @@ const routes: Routes = [
     OrganizationProfileMembersInvite,
     OrganizationCardUserActionsButton,
     OrganizationProfileMembers,
-    OrganizationProfileFeed, 
+    OrganizationProfileFeed,
     OrganizationSettingButton,
-    OrganizationMobileInvite,  
+    OrganizationMobileInvite,
     OrganizationTileComponent,
     OrganizationMobileMembers,
     OrganizationListComponent
@@ -69,8 +71,8 @@ const routes: Routes = [
     OrganizationProfileMembersInvite,
     OrganizationCardUserActionsButton,
     OrganizationProfileMembers,
-    OrganizationProfileFeed,    
-    OrganizationSettingButton,   
+    OrganizationProfileFeed,
+    OrganizationSettingButton,
     OrganizationTileComponent,
     OrganizationListComponent
   ],

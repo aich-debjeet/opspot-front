@@ -30,6 +30,8 @@ export class OrganizationListComponent {
   rating: number = 1;
   preventHashtagOverflow: boolean = false;
   ownerGuid: any;
+  showMyCommunities: boolean = false;
+
 
   constructor(
     public client: Client,
@@ -61,7 +63,7 @@ export class OrganizationListComponent {
 
         if (this.session.isLoggedIn())
           this.rating = this.session.getLoggedInUser().boost_rating;
-          this.ownerGuid = this.session.getLoggedInUser().guid;
+        this.ownerGuid = this.session.getLoggedInUser().guid;
 
         this.load(true);
       }
@@ -78,9 +80,6 @@ export class OrganizationListComponent {
     this.all = all;
     this.load(true);
   }
-
-
-
 
   load(refresh: boolean = false) {
 
@@ -100,23 +99,24 @@ export class OrganizationListComponent {
         if (!this.session.isLoggedIn()) {
           this.router.navigate(['/login']);
         }
-        endpoint = `api/v2/entities/suggested/groups`;
+        endpoint = `api/v2/entities/suggested/organizations`;
         if (this.all)
           endpoint += '/all';
         key = 'entities';
         break;
       case 'suggested':
-        endpoint = `api/v2/entities/suggested/groups`;
+        endpoint = `api/v2/entities/suggested/organizations`;
         key = 'entities';
         break;
       default:
         //@gayatri  this route need to check and have to make it dynamic
-        endpoint = `api/v1/groups/${this.filter}/` + this.ownerGuid;
-        key = 'groups';
-        if (this.all)
-          this.router.navigate(['/groups/top']);
+        endpoint = `api/v3/organizations/${this.filter}/` + this.ownerGuid;
+        key = 'organizations';
         break;
     }
+
+    // endpoint = `api/v3/organizations/all`;
+    // key = 'organizations';
 
     this.inProgress = true;
     this.client.get(endpoint, {
@@ -180,6 +180,14 @@ export class OrganizationListComponent {
         this.load(true); //refresh list
       },
     }).present();
+  }
+
+  communityTabsToggle() {
+    if (this.showMyCommunities) {
+      this.showMyCommunities = false;
+    } else {
+      this.showMyCommunities = true;
+    }
   }
 
 }
