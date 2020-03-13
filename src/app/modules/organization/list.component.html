@@ -2,7 +2,7 @@
         <div class="o-community-landing-block">
           <div class="o-community-landing-block__mob-header">
             <h4 class="f500">Organization</h4>
-            <a routerLink="/organization/create" *ngIf="session.isLoggedIn()" class="text-lg primary f500">Create</a>
+            <a routerLink="/organization/create" *ngIf="session.isLoggedIn() && !organization" class="text-lg primary f500">Create</a>
           </div>
           <div class="o-community-landing-block__mob-tab">
             <div class="o-cmnity-landing-block">
@@ -18,8 +18,11 @@
           </div>
           <div class="o-community-landing-block__sidebar hidden-mob">
             <h4 class="f500" id="list-communities-header">Organization</h4>
-            <!-- <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn()"
-              routerLink="/organization/create">Create Community</button> -->
+            <!-- *ngIf="!showCreateButton" -->
+            <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn() && !organization"
+              routerLink="/organization/create">Create Organization</button>
+            <!-- <div class="text-lg f500 mb-17" id="list-communities-manage" *ngIf="organization" 
+            [routerLink]="['/organization/profile', organization.guid,  'feed']" >{{organization.name}}</div> -->
             <div class="text-lg f500 mb-17" id="list-communities-manage">Organizations you manage</div>
             <div *ngFor="let entity of entities">
               <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='organization'" 

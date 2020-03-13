@@ -31,6 +31,7 @@ export class OrganizationListComponent {
   preventHashtagOverflow: boolean = false;
   ownerGuid: any;
   showMyCommunities: boolean = false;
+  organization  = "";
 
 
   constructor(
@@ -49,6 +50,7 @@ export class OrganizationListComponent {
     // this.context.set('group');
     this.opspot = window.Opspot;
     this.detectWidth();
+    this.getUsersOrganization();
 
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['filter']) {
@@ -126,13 +128,16 @@ export class OrganizationListComponent {
     })
       .then((response: OpspotGroupListResponse) => {
 
-        if (!response[key] || response[key].length === 0) {
-          this.moreData = false;
-          this.inProgress = false;
-          if (this.filter == 'top')
-            this.openHashtagsSelector();
-          return false;
-        }
+        // if (response['has-owned-organization']){
+        //    this.showCreateButton = false;
+        // }
+          if (!response[key] || response[key].length === 0) {
+            this.moreData = false;
+            this.inProgress = false;
+            if (this.filter == 'top')
+              this.openHashtagsSelector();
+            return false;
+          }
 
         if (refresh) {
           this.entities = response[key];
@@ -188,6 +193,23 @@ export class OrganizationListComponent {
     } else {
       this.showMyCommunities = true;
     }
+  }
+  
+  getUsersOrganization() {
+    let ownerGuid = this.session.getLoggedInUser().guid;
+
+    this.client.get(`api/v3/organizations/owner/` + ownerGuid, {
+      limit: 12,
+      offset: '',
+      rating: 1
+    })
+      .then((response) => {
+        if(response && response['organizations']) {
+          this.organization = response['organizations'][0];
+        }
+      })
+      .catch((e) => { });
+
   }
 
 }
