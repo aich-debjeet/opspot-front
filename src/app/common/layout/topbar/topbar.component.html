@@ -115,17 +115,16 @@
                   <span>Admin</span>
                 </a>
               </li>
-              <li [routerLink]="['/organization/create']" class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="!organization">
+              <!-- <li [routerLink]="['/organization/create']" class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="!organization">
                 <a id="topbar-dropdown-create-organization">
-                  <!-- <i class="material-icons">trending_up</i> -->
                   <span>Create Organization</span>
                 </a>
-              </li>
+              </li> -->
               <!-- <div *ngFor="let organization of entities"> -->
-                <li [routerLink]="['/organization/profile', organization.guid,  'feed']" class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="organization">
+                <li [routerLink]="['/organization/all']" class="m-dropdownList__item" (click)="profileMenu.value = false">
                   <a id="topbar-dropdown-organizationname">
                     <!-- <i class="material-icons">trending_up</i> -->
-                    <span>{{organization.name}}</span>
+                    <span>Organization</span>
                   </a>
                 </li>
               <!-- </div> -->
