@@ -4,7 +4,7 @@
   (load)="prepend($event)" 
   [containerGuid]="organization.guid"
   [accessId]="organization.guid" 
-  *ngIf="filter == 'activity' && organization['is:owner']"
+  *ngIf="filter == 'activity' && (organization['is:owner'] || organization['is:editor']"
   [showSpecialHashtags]='true'>
   </opspot-newsfeed-poster>
 
@@ -15,7 +15,7 @@
 
   <!-- <a class="mdl-shadow--4dp mdl-color--blue-grey-50 mdl-color-text--blue-grey-500 m-newsfeed-message"
       routerLink="review"
-      *ngIf="filter == 'activity' && (organization['is:owner']||organization['is:moderator']) && organization['adminqueue:count']"
+      *ngIf="filter == 'activity' && (organization['is:owner']||organization['is:editor']) && organization['adminqueue:count']"
     >
       <i class="material-icons">rate_review</i>
       {{ organization['adminqueue:count'] }} new {{ organization['adminqueue:count'] === 1 ? 'post' : 'posts' }} in review queue
@@ -24,7 +24,7 @@
 
     <opspot-activity 
     *ngFor="let activity of pinned" [object]="activity"
-    [canDelete]="organization['is:owner'] || organization['is:moderator']" 
+    [canDelete]="organization['is:owner'] || organization['is:editor']" 
     (delete)="delete(a)"
     [showRatingToggle]="true" 
     class="mdl-card item">
@@ -33,7 +33,7 @@
     <opspot-activity 
     *ngFor="let a of activity; let i = index" 
     class="mdl-card item" [object]="a"
-    [canDelete]="organization['is:owner'] || organization['is:moderator']" 
+    [canDelete]="organization['is:owner'] || organization['is:editor']" 
     (delete)="delete(a)"
     [hideTabs]="filter == 'review'">
     <!-- <li post-menu class="mdl-menu__item" *ngIf="organization['is:owner']" (click)="removePrompt(a?.ownerObj)"
