@@ -19,7 +19,7 @@
           <div class="o-community-landing-block__sidebar hidden-mob">
             <h4 class="f500" id="list-communities-header">Organization</h4>
             <!-- *ngIf="!showCreateButton" -->
-            <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn() && !organization"
+            <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn() && !organization && !inProgress"
               routerLink="/organization/create">Create Organization</button>
             <!-- <div class="text-lg f500 mb-17" id="list-communities-manage" *ngIf="organization" 
             [routerLink]="['/organization/profile', organization.guid,  'feed']" >{{organization.name}}</div> -->

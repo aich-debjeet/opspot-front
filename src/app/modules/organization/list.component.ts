@@ -196,6 +196,7 @@ export class OrganizationListComponent {
   }
   
   getUsersOrganization() {
+    this.inProgress = true;
     let ownerGuid = this.session.getLoggedInUser().guid;
 
     this.client.get(`api/v3/organizations/owner/` + ownerGuid, {
@@ -207,6 +208,7 @@ export class OrganizationListComponent {
         if(response && response['organizations']) {
           this.organization = response['organizations'][0];
         }
+        this.inProgress = false
       })
       .catch((e) => { });
 
