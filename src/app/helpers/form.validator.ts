@@ -57,7 +57,7 @@ export class FormValidator {
         // let passwordRegex = /((^[0-9]+[a-z]+)|(^[a-z]+[0-9]+))+[0-9a-z]+$/i
         // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
         // const passwordRegex = /^(?=.{8,})/;
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})(\S*$)/;
         if (!passwordRegex.test(password)) {
             return { invalidPassword: true };
         }
