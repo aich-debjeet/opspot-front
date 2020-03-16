@@ -11,7 +11,7 @@ import { OrganizationService } from '../organization-service';
 
   <ul class="opspot-dropdown-menu" [hidden]="!showMenu">
     <li class="mdl-menu__item" id="card-user-action-remove-from-organization"
-      *ngIf="(organization['is:owner'] || organization['is:moderator']) && !(user['is:owner']||user['is:moderator']) && user['is:member']"
+      *ngIf="(organization['is:owner'] || organization['is:editor']) && !(user['is:owner']||user['is:editor']) && user['is:member']"
       (click)="removePrompt()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_FROM_GROUP">
       Remove from Organization
     </li>
@@ -50,7 +50,7 @@ import { OrganizationService } from '../organization-service';
     </li>
     <li class="mdl-menu__item" id="card-user-action-organization-remove-as-moderator"
       *ngIf="organization['is:owner'] && user['is:editor'] && user['is:member']"
-      (click)="revokeModerator()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_AS_MODERATOR">
+      (click)="revokeEditor()" i18n="@@GROUPS__PROFILE__CARD_USER_ACTIONS__REMOVE_AS_MODERATOR">
       Remove as Editor
     </li>
   </ul>
@@ -59,7 +59,7 @@ import { OrganizationService } from '../organization-service';
   <m-modal [open]="kickPrompt">
       <div class="mdl-card__supporting-text">
         <p i18n="@@GROUPS__REMOVE_X_FROM_Y_CONFIRM">Are you sure you want to remove {{ user.username }} from {{ organization.name }}?</p>
-        <p><input type="checkbox" #ban> <ng-container i18n="@@M__COMMON__BAN_PERMANENTLY">Ban permanently</ng-container></p>
+        <!-- <p><input type="checkbox" #ban> <ng-container i18n="@@M__COMMON__BAN_PERMANENTLY">Ban permanently</ng-container></p> -->
       </div>
       <div class="opspot-modal-dialog-actions">
         <button (click)="kick(ban.checked)" id="card-user-action-organization-confirm-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
