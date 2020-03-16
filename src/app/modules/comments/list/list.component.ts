@@ -88,9 +88,13 @@ export class CommentsListComponent {
 
   set _object(value: any) {
     this.object = value;
+    console.log('this.object',this.object)
     this.guid = this.object.guid;
-    if (this.object.entity_guid)
-      this.guid = this.object.entity_guid;
+    /**
+     * temporary for score. needs to be rearranged
+     */
+    // if (this.object.entity_guid)
+    //   this.guid = this.object.entity_guid;
     this.parent = this.object;
   }
 
@@ -280,7 +284,9 @@ export class CommentsListComponent {
   }
 
   listen() {
+    console.log('socket calling')
     this.socketSubscriptions.comment = this.sockets.subscribe('comment', (data) => {
+      console.log(data)
       const entity_guid = data[0];
       const owner_guid = data[1];
       const guid = data[2];
