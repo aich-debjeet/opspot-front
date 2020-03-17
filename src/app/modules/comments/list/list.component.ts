@@ -89,8 +89,8 @@ export class CommentsListComponent {
   set _object(value: any) {
     this.object = value;
     this.guid = this.object.guid;
-    if (this.object.entity_guid)
-      this.guid = this.object.entity_guid;
+    // if (this.object.entity_guid)
+    //   this.guid = this.object.entity_guid;
     this.parent = this.object;
   }
 
