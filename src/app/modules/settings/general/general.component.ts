@@ -31,7 +31,7 @@ export class SettingsGeneralComponent {
   email: string;
   phone: string;
   mature: boolean = false;
-  portfolio: boolean = false;
+  portfolio: boolean;
   enabled_mails: boolean = true;
 
   password: string='';
@@ -113,6 +113,7 @@ export class SettingsGeneralComponent {
 
     this.client.get('api/v1/settings/' + this.guid)
       .then((response: any) => {
+        this.portfolio = !!+response['channel']['portfolio_visiblity'];
         // this.email = response.channel.email;
         this.mature = !!parseInt(response.channel.mature, 10);
         this.enabled_mails = !parseInt(response.channel.disabled_emails, 10);
