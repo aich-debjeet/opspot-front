@@ -46,7 +46,7 @@ export class TopbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUsersOrganization();
+    // this.getUsersOrganization();
     this.loadLoggedInUser();
 
     this.session.isLoggedIn(async(is) => {
@@ -57,7 +57,7 @@ export class TopbarComponent implements OnInit {
       if (e.component && e.action) {
         if (e.component === 'TopbarComponent') {
           if (e.action === 'orgCreated' || e.action === 'orgDeleted') {
-            this.getUsersOrganization();
+            // this.getUsersOrganization();
           }
         }
       }
