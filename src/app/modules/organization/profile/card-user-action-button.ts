@@ -108,6 +108,8 @@ export class OrganizationCardUserActionsButton {
   wasReInvited: boolean = false;
 
   showMenu: boolean = false;
+  _remove: EventEmitter<any> = new EventEmitter();
+
 
   constructor(public service: OrganizationService) {
   }
@@ -150,6 +152,7 @@ export class OrganizationCardUserActionsButton {
       this.user['is:banned'] = done && ban;
 
       this.kickPrompt = !done;
+      this._remove.next(this.user);
       this.changeCounter('members:count', -1);
     });
 
