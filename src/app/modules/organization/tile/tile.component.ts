@@ -6,12 +6,17 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'm-organization--tile',
   templateUrl: 'tile.component.html',
+  // inputs: ['object']
 })
 
 export class OrganizationTileComponent {
 
   opspot = window.Opspot;
   @Input() entity;
+  organization1: any;
+  members: any;
+
+
 
   constructor(
     public session: Session,
@@ -20,6 +25,16 @@ export class OrganizationTileComponent {
   ) { }
 
   ngOnInit() { }
+
+  @Input('object') set object(value: any) {
+    if (!value) return;
+    this.organization1 = value;
+  }
+
+  // @Input('subscribers') set subscribers(value: any) {
+  //   if (!value) return;
+  //   this.members = value;
+  // }
 
   trigger(entity) {
     this.router.navigate(['organization', 'profile', entity.guid]);
@@ -45,5 +60,16 @@ export class OrganizationTileComponent {
         this.entity['is:awaiting'] = !done;
       });
   }
+
+  // remove(member) {
+  //   console.log("in delete: ");
+  //   let i: any;
+  //   for (i in this.members) {
+  //     if (this.members[i] === member) {
+  //       this.members.splice(i, 1);
+  //       break;
+  //     }
+  //   }
+  // }
 
 }
