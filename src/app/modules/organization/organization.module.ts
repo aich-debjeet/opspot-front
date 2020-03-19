@@ -20,6 +20,7 @@ import { OrganizationSettingButton } from './profile/organization-setting-button
 import { OrganizationMobileInvite } from './profile/members/organizationmobileinvite/organizationmobileinvite.component';
 import { OrganizationMobileMembers } from './profile/members/organization-mobile-members/organization-mobile-members';
 import { OrganizationListComponent } from './list.component';
+import { OrganizationAllMembers } from './profile/list.subscribers';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
   { path: 'organization/:guid/members', component: OrganizationMobileMembers },
   { path: 'organization/:guid/invite', component: OrganizationMobileInvite },
   { path: 'organization/:filter', component: OrganizationListComponent },
-  { path: 'organization', redirectTo: 'organization/all', pathMatch: 'full' }
+  { path: 'organization', redirectTo: 'organization/all', pathMatch: 'full' },
+  { path: 'organization/all-subscribers/:guid', component: OrganizationAllMembers },
 ]
 
 @NgModule({
@@ -62,7 +64,8 @@ const routes: Routes = [
     OrganizationMobileInvite,
     OrganizationTileComponent,
     OrganizationMobileMembers,
-    OrganizationListComponent
+    OrganizationListComponent,
+    OrganizationAllMembers
   ],
   exports: [
     OrganizationProfile,
