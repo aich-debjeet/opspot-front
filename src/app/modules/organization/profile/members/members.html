@@ -25,7 +25,8 @@
         <app-appuser [object]="member">
             <opspot-organization-card-user-actions-button style="position: relative;"
                 *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid" [organization]="organization"
-                [user]="member"></opspot-organization-card-user-actions-button>
+                [user]="member" (remove)="remove(member)"
+                ></opspot-organization-card-user-actions-button>
         </app-appuser>
     </li>
 </ul>
