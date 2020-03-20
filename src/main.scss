@@ -26223,12 +26223,23 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
   }
 }
 
+.organization-card{
+  .btnDefault{
+    border:none;
+    background:transparent;
+    color:#fff;
+ }
+ .btnDefault:focus{
+   outline:none !important;
+ }
+}
+
 .btnDefault{
-   border:none;
-   background:transparent;
+  border:none;
+  background:transparent;
 }
 .btnDefault:focus{
-  outline:none !important;
+ outline:none !important;
 }
 
 // @TODO gayatri style added beacuase of the changes in the thumbs.ts @gayatri
@@ -27884,11 +27895,4 @@ ng-otp-input {
   margin: 0px auto;
   justify-content: center;
 }
-
-opspot-organization-card-user-actions-button >
-  button
-    .icon-more-verticle
-    .btndefault{
-      color: #FFF;
-    }
   
