@@ -59,7 +59,7 @@
         <a *ngFor="let tag of user.tags" class="o-prof-skills__tag">{{tag}}</a>
       </ng-container>
     </div>
-    <div class="o-prof-portfolio">
+    <div class="o-prof-portfolio" *ngIf="!userPortfolioVisiblity() || isOwner()">
       <a [routerLink]="['/', 'portfolio', user.username]" class="btn btn-outline-primary btn-sm"
         id="sidebar-portfolio">Portfolio</a>
     </div>

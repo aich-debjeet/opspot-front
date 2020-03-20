@@ -22,7 +22,7 @@
                  <input type="password" id="privacy-security-new-password" formControlName="newPassword" class="form-control form-control-lg">
                  <div *ngIf="!form.controls['newPassword'].valid && formSubmitted" class="error text-sm">
                     <div *ngIf="form.controls['newPassword'].errors.required">New Password is required</div>
-                    <div *ngIf="form.controls['newPassword'].errors.invalidPassword">Password needs to be at least eight characters, one uppercase letter and one number</div>
+                    <div *ngIf="form.controls['newPassword'].errors.invalidPassword">Password needs to be at least eight characters, one uppercase letter, one number and no spaces</div>
                 </div>
               </div>
               <div class="form-group o-settings-width padng-btm1">
