@@ -26225,7 +26225,7 @@ button.btn.btn-primary.btn-sm.disabled.paywall-icon {
 
 .btnDefault{
    border:none;
-   background:#fff;
+   background:transparent;
 }
 .btnDefault:focus{
   outline:none !important;
@@ -27884,3 +27884,11 @@ ng-otp-input {
   margin: 0px auto;
   justify-content: center;
 }
+
+opspot-organization-card-user-actions-button >
+  button
+    .icon-more-verticle
+    .btndefault{
+      color: #FFF;
+    }
+  

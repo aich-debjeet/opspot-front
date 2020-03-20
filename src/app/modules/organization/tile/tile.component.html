@@ -32,10 +32,10 @@
   </div>
   <div class="o-community-card" *ngIf="entity && organization1 && entity['entity_type'] !== 'organization'" >
     <div class="o-community-card-section mr-6">
-        <opspot-organization-card-user-actions-button style="position: relative;"
+      <div class="o-community-card-cover">
+          <opspot-organization-card-user-actions-button style="position: absolute; right: 0px; bottom: 0px;"
                 *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != entity?.guid"
                 [organization]="organization1" [user]="entity"></opspot-organization-card-user-actions-button>
-      <div class="o-community-card-cover">
         <img *ngIf='entity?.banner != "" '
           [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
         <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">

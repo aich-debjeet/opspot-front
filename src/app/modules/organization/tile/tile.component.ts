@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'm-organization--tile',
   templateUrl: 'tile.component.html',
+  styleUrls: ['tile.component.scss']
   // inputs: ['object']
 })
 
