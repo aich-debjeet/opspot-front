@@ -84,7 +84,7 @@
       <ul class="nav-icon-list">
         <li class="nav-icon__item">
           <div class="m-topbar--account" #profileMenu>
-            <a class="" id="topbar-dropdown" (click)="profileMenu.value = !profileMenu.value ;">
+            <a class="" id="topbar-dropdown" (click)="profileMenu.value = !profileMenu.value">
               <img alt="menu"
                 src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/" />
             </a>
@@ -115,17 +115,16 @@
                   <span>Admin</span>
                 </a>
               </li>
-              <li [routerLink]="['/organization/create']" class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="!organization">
+              <!-- <li [routerLink]="['/organization/create']" class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="!organization">
                 <a id="topbar-dropdown-create-organization">
-                  <!-- <i class="material-icons">trending_up</i> -->
                   <span>Create Organization</span>
                 </a>
-              </li>
+              </li> -->
               <!-- <div *ngFor="let organization of entities"> -->
-                <li [routerLink]="['/organization/profile', organization.guid,  'feed']" class="m-dropdownList__item" (click)="profileMenu.value = false" *ngIf="organization">
+                <li [routerLink]="['/organization/all']" class="m-dropdownList__item" (click)="profileMenu.value = false">
                   <a id="topbar-dropdown-organizationname">
                     <!-- <i class="material-icons">trending_up</i> -->
-                    <span>{{organization.name}}</span>
+                    <span>Organization</span>
                   </a>
                 </li>
               <!-- </div> -->
@@ -333,18 +332,18 @@
               <div class="app-nav-link__text">Boost Console</div>
             </a>
           </li>
-          <li class="app-nav-link_-item" *ngIf="!organization">
-            <a [routerLink]="['/organization/create']" (click)='closeNav()'>
+          <li class="app-nav-link_-item">
+            <a [routerLink]="['/organization/all']" (click)='closeNav()'>
               <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
               <div class="app-nav-link__text">Organization</div>
             </a>
           </li>
-          <li class="app-nav-link_-item" *ngIf="organization">
+          <!-- <li class="app-nav-link_-item" *ngIf="organization">
             <a [routerLink]="['/organization/profile', organization.guid,  'feed']" (click)='closeNav()'>
               <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/organization.svg" alt=""></div>
               <div class="app-nav-link__text">{{organization.name}}</div>
             </a>
-          </li>
+          </li> -->
           <li class="app-nav-link_-item">
             <a [routerLink]="['/event/create']" (click)='closeNav()'>
               <div class="app-nav-link__ico"><i class="icon-calendar"></i></div>

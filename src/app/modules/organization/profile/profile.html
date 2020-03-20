@@ -104,7 +104,7 @@
                             <div class="text-lg f500" id="profile-organization-invite-members">
                                 Organization Subscribers
                             </div>
-                            <span *ngIf="organization && (organization['is:owner'] || organization['is:admin'])" (click)="openInvite()" style="font-size: 24px !important; cursor: pointer;"
+                            <span *ngIf="organization && (organization['is:owner'] || organization['is:editor'])" (click)="openInvite()" style="font-size: 24px !important; cursor: pointer;"
                                 class="icon-plus-circle primary" id="profile-organization-invite-icon">
                             </span>
                         </div>

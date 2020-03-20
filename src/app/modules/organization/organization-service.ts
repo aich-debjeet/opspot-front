@@ -31,7 +31,7 @@ export class OrganizationService {
     return this.clientService.get(`${this.base}organization/${guid}`)
       .then((response: any) => {
         // console.log("Response: ", response);
-        
+
         if (response.organization) {
           this.group.next(response.organization);
           return response.organization;
@@ -103,7 +103,7 @@ export class OrganizationService {
         if (response.done) {
           return true;
         }
-       //  @gayatri need to check backend error quick handle for time sake in front
+        //  @gayatri need to check backend error quick handle for time sake in front
         return true;
         // throw response.error ? response.error : 'Internal error';
       });
@@ -223,8 +223,28 @@ export class OrganizationService {
       });
   }
 
+  grantEditor(group: any, user: string) {
+    return this.clientService.put(`${this.base}management/${group.guid}/${user}/editor`)
+      .then((response: any) => {
+        return !!response.done;
+      })
+      .catch(e => {
+        return false;
+      });
+  }
+
   revokeModerator(group: any, user: string) {
     return this.clientService.delete(`${this.base}management/${group.guid}/${user}/moderator`)
+      .then((response: any) => {
+        return !response.done;
+      })
+      .catch(e => {
+        return true;
+      });
+  }
+
+  revokeEditor(group: any, user: string) {
+    return this.clientService.delete(`${this.base}management/${group.guid}/${user}/editor`)
       .then((response: any) => {
         return !response.done;
       })
