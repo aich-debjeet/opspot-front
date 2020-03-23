@@ -159,7 +159,7 @@ export class OrganizationProfileFeed {
             if (this.organization.pinned_posts && this.organization.pinned_posts.indexOf(entity.guid) >= 0) {
               entity.pinned = true;
             }
-            if (!(this.organization['is:moderator'] || this.organization['is:owner'])) {
+            if (!(this.organization['is:editor'] || this.organization['is:owner'])) {
               entity.dontPin = true;
             }
             return entity;

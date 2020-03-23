@@ -42,7 +42,6 @@ export class ChannelSidebar {
     if (!value)
       return;
     this.user = value;
-    // console.log('user details', this.user)
     this.user['contributeType'] = 'contribute';
   }
 
@@ -176,6 +175,10 @@ export class ChannelSidebar {
     } catch (e) {
       this.user.bookmark = !this.user.bookmark;
     }
+  }
+
+  userPortfolioVisiblity(){
+    return !!+this.user['portfolio_visiblity'];
   }
 
 }

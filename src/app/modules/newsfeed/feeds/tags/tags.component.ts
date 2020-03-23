@@ -36,6 +36,7 @@ export class NewsfeedTagsComponent implements OnDestroy {
 
     this.title.setTitle('Newsfeed');
     this.paramsSubscription = this.route.params.subscribe(params => {
+      console.log(params)
       if (params['tag']) {
         this.tag = params['tag'];
       } else {
@@ -73,7 +74,7 @@ export class NewsfeedTagsComponent implements OnDestroy {
     };
 
     try {
-      const response: any = await this.client.get('api/v2/entities/suggested/activities', data);
+      const response: any = await this.client.get('api/v2/feeds/global/top/activities', data);
 
       if (!response.entities || !response.entities.length) {
         this.moreData = false;

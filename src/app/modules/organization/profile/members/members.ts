@@ -74,7 +74,7 @@ opspot = window.Opspot;
     // TODO: [emi] Send this via API
     this.canInvite = false;    
     if(this.organization){
-    if (this.organization['is:owner']) {
+    if (this.organization['is:owner'] || this.organization['is:editor']) {
       this.canInvite = true;
     } else if (this.organization.membership === 2 && this.organization['is:member']) {
       this.canInvite = true;
@@ -137,6 +137,16 @@ opspot = window.Opspot;
     this.searchDelayTimer = setTimeout(() => {
       this.load(true);
     }, 300);
+  }
+
+  remove(member) {
+    let i: any;
+    for (i in this.members) {
+      if (this.members[i] === member) {
+        this.members.splice(i, 1);
+        break;
+      }
+    }
   }
 
 }
