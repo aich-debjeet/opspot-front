@@ -1,41 +1,51 @@
-  <div class="o-community-landing-block-design__item" *ngIf="entity && entity['entity_type']=='organization'">
-    <div class="o-community-card">
-      <div class="o-community-card-section mr-6">
-        <div class="o-community-card-cover">
-          <img *ngIf='entity?.banner != "" '
-            [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
-          <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
-        </div>
-        <div class="o-community-card-profile">
-          <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="cover">
-        </div>
-        <div class="o-community-card-header" id="tile-entity-name">
-          <div class="f500 text-lg word-br elipse elipse--w-130">{{entity.name}}</div>
-        </div>
-        <div class="o-community-card-skills" *ngIf="entity?.tags.length > 0; else emptyTag">
-          <a *ngFor="let tag of entity?.tags | slice:0:3" class="o-community-card-skills__tag">{{tag}}</a>
-        </div>
-        <ng-template #emptyTag>
-          <p class="o-community-card-skills">
-            <a class="o-community-card-skills__tag" style="background: transparent">&nbsp;</a>
-          </p>
-        </ng-template>
-        <div class="o-community-card-action">
-          <!-- <opspot-groups-join-button *ngIf="(!entity['is:member'] && entity.membership === 2) && !entity['is:awaiting']"
-            [group]="entity">
-          </opspot-groups-join-button>
-          <button type="button" id="tile-join-button" *ngIf="(!entity['is:member'] && entity.membership !== 2) && !entity['is:awaiting']"
-            class="btn btn-primary btn-sm" (click)='trigger(entity)'>Join</button>
-          <button *ngIf="entity['is:member']" id="tile-open-button" class="btn btn-primary btn-sm" i18n="@@GROUPS__TILE__OPEN_ACTION"
-            (click)='trigger(entity)'>
-            Open
-          </button> -->
-          <button type="button" id="tile-join-button" class="btn btn-primary btn-sm" (click)='trigger(entity)'>Open</button>
-          <button class="btn btn-primary btn-sm" id="tile-cancel-button" *ngIf="entity['is:awaiting']" (click)="cancelRequest()"
-            i18n="@@GROUPS__TILE__OPEN_ACTION">
-            Cancel
-          </button>
-        </div>
+<div class="o-community-landing-block-design__item">
+  <div class="o-community-card" *ngIf="entity && entity['entity_type']=='organization'">
+    <div class="o-community-card-section mr-6">
+      <div class="o-community-card-cover">
+        <img *ngIf='entity?.banner != "" '
+          [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
+        <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
+      </div>
+      <div class="o-community-card-profile">
+        <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="cover">
+      </div>
+      <div class="o-community-card-header" id="tile-entity-name">
+        <div class="f500 text-lg word-br elipse elipse--w-130">{{entity.name}}</div>
+      </div>
+      <div class="o-community-card-skills" *ngIf="entity?.tags.length > 0; else emptyTag">
+        <a *ngFor="let tag of entity?.tags | slice:0:3" class="o-community-card-skills__tag">{{tag}}</a>
+      </div>
+      <ng-template #emptyTag>
+        <p class="o-community-card-skills">
+          <a class="o-community-card-skills__tag" style="background: transparent">&nbsp;</a>
+        </p>
+      </ng-template>
+      <div class="o-community-card-action">
+        <button type="button" id="tile-join-button" class="btn btn-primary btn-sm"
+          (click)='trigger(entity)'>Open</button>
+        <button class="btn btn-primary btn-sm" id="tile-cancel-button" *ngIf="entity['is:awaiting']"
+          (click)="cancelRequest()" i18n="@@GROUPS__TILE__OPEN_ACTION">
+          Cancel
+        </button>
       </div>
     </div>
   </div>
+  <div class="o-community-card" *ngIf="entity && organization1 && entity['entity_type'] !== 'organization'" >
+    <div class="o-community-card-section mr-6">
+      <div class="o-community-card-cover">
+          <opspot-organization-card-user-actions-button style="position: absolute; right: 0px; bottom: 0px;"
+                *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != entity?.guid"
+                [organization]="organization1" [user]="entity" class="organization-card"></opspot-organization-card-user-actions-button>
+        <img *ngIf='entity?.banner != "" '
+          [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
+        <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
+      </div>
+      <div class="o-community-card-profile">
+        <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="cover">
+      </div>
+      <div class="o-community-card-header" id="tile-entity-name">
+        <div class="f500 text-lg word-br elipse elipse--w-130">{{entity.name}}</div>
+      </div>
+    </div>
+  </div>
+</div>

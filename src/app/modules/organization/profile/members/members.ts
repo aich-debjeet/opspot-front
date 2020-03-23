@@ -139,4 +139,14 @@ opspot = window.Opspot;
     }, 300);
   }
 
+  remove(member) {
+    let i: any;
+    for (i in this.members) {
+      if (this.members[i] === member) {
+        this.members.splice(i, 1);
+        break;
+      }
+    }
+  }
+
 }

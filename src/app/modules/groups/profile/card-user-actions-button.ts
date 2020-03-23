@@ -48,7 +48,7 @@ import { GroupsService } from '../groups-service';
   </ul>
   <div class="opspot-bg-overlay" (click)="toggleMenu($event)" [hidden]="!showMenu"></div>
 
-  <m-modal [open]="kickPrompt">
+  <m-modal [open]="kickPrompt" (closed)="kickPrompt =false">
       <div class="delete-confirmation-wrapper">
       <div class="mdl-card__supporting-text">
         <p i18n="@@GROUPS__REMOVE_X_FROM_Y_CONFIRM" class="m-modal-confirm-body text-lg">Are you sure you want to remove {{ user.username }} from {{ group.name }}?</p>
