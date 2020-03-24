@@ -6,7 +6,7 @@ import { Client } from '../../../../services/api';
 import { Session } from '../../../../services/session';
 import { PosterComponent } from '../../../newsfeed/poster/poster.component';
 import { Subscription } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 interface OpspotGroupResponse {
   group: OpspotGroup;
@@ -51,29 +51,52 @@ export class GroupsProfileFeed {
   @ViewChild('poster') private poster: PosterComponent;
 
   constructor(
-    public session: Session, 
-    public client: Client, 
-    public service: GroupsService, 
-    private route: ActivatedRoute) { }
+    public session: Session,
+    public client: Client,
+    public service: GroupsService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
-    this.$group = this.service.$group.subscribe((group) => {
-      this.group = group;
-      if (this.group)
-        this.guid = group.guid;
+    // this.$group = this.service.$group.subscribe((group) => {
+    //   this.group = group;
+    //   console.log('group', group);
+    //   if (this.group)
+    //     this.guid = group.guid;
+    // });
+
+    /** this is the temporary fix for the newsfeed in community @Debjeet need to look into this */
+    this.paramsSubscription = this.route.parent.params.subscribe(params => {
+      this.guid = params["guid"];
+      this.getCommunity(this.guid);
     });
 
     this.paramsSubscription = this.route.params.subscribe(params => {
       this.filter = params['filter'] ? params['filter'] : 'activity';
-
-      this.load(true);
-      this.setUpPoll();
+      if (this.group) {
+        this.load(true);
+        this.setUpPoll();
+      }
     });
+  }
+
+  async getCommunity(guid) {
+    try {
+      let community = await this.service.load(guid);
+      this.group = community;
+      if (this.group) {
+        this.guid = this.group.guid;
+      }
+    } catch (e) {
+      // this.error = e.message;
+      return;
+    }
   }
 
   setUpPoll() {
     this.pollingTimer = setInterval(() => {
-      this.client.get('api/v1/newsfeed/container/' + this.guid, { offset: this.pollingOffset, count: true })
+      this.client.get('api/v1/newsfeed/container/' + this.guid, { offset: this.pollingOffset, count: true }, { cache: true })
         .then((response: any) => {
           if (typeof response.count === 'undefined') {
             return;
@@ -91,7 +114,7 @@ export class GroupsProfileFeed {
   }
 
   ngOnDestroy() {
-    this.$group.unsubscribe();
+    // this.$group.unsubscribe();
     clearInterval(this.pollingTimer);
     this.paramsSubscription.unsubscribe();
   }
@@ -237,7 +260,6 @@ export class GroupsProfileFeed {
    * Load a groups newsfeed
    */
   load(refresh: boolean = false) {
-
     if (!this.group)
       return;
 
