@@ -1,4 +1,4 @@
-<ng-container *ngIf="group">
+<ng-container *ngIf="group && session.isLoggedIn()>
   <opspot-newsfeed-poster 
   #poster 
   (load)="prepend($event)" 
