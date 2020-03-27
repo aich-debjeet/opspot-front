@@ -102,6 +102,7 @@ export class PostFormComponent {
   }
 
   onMessageChange($event) {
+    console.log($event)
     this.errorMessage = '';
     this.meta.message = $event;
 
@@ -263,11 +264,17 @@ export class PostFormComponent {
       });
   }
 
-  getPostPreview(message) {
-    if (!message.value) {
-      return;
-    }
-    this.attachment.preview(message.value);
+  getPostPreview(e: any) {
+    let text;
+    if (e.clipboardData && e.clipboardData.getData) {
+      text = e.clipboardData.getData('text/plain');
+    } else {
+        if (!e.target.value) {
+          return;
+        }
+        text = e.target.value;
+      }
+    this.attachment.preview(text);
   }
 
   async findTrendingHashtags(searchText: string) {

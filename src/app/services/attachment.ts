@@ -288,6 +288,7 @@ export class AttachmentService {
   }
 
   preview(content: string, detectChangesFn?: Function) {
+    console.log('content',content)
     let match = content.match(/(\b(https?|ftp|file):\/\/[^\s\]\)]+)/ig),
       url;
 
