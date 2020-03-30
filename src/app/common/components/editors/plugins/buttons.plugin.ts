@@ -63,7 +63,7 @@ export class ButtonsPlugin {
     const div = document.createElement('div');
     div.classList.add('medium-insert-buttons');
     div.setAttribute('contenteditable', 'false');
-    div.setAttribute('spellcheck', 'false');
+    div.setAttribute('spellcheck', 'true');
     div.style.display = 'none';
     div.addEventListener('selectstart', this.disableSelection.bind(this));
     div.addEventListener('mousedown', this.disableSelection.bind(this));
