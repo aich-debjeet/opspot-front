@@ -86,8 +86,8 @@
       <!--community join notification(pending)-->
       <ng-template ngSwitchCase="group_join_request">
         <a [routerLink]="['/groups/profile', notification.params.group.guid]">
-            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited" *ngIf="notification.params.group.group_privacy == 'Closed'">{{notification.params.from_username}} wants to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
-            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited" *ngIf="notification.params.group.group_privacy == 'Open'">{{notification.params.from_username}} has joined <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
+            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited" *ngIf="notification.params.group.membership == 0">{{notification.params.from_username}} wants to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
+            <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited" *ngIf="notification.params.group.membership != 0">{{notification.params.from_username}} has joined <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
         </a>
       </ng-template>
 
