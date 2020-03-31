@@ -50,7 +50,7 @@ export class MobileMembersComponent implements OnInit {
     if (this.searchDelayTimer) {
       clearTimeout(this.searchDelayTimer);
     }
-    // this.$group.unsubscribe();
+    this.$group.unsubscribe();
   }
 
 
@@ -67,7 +67,7 @@ export class MobileMembersComponent implements OnInit {
     // TODO: [emi] Send this via API
     this.canInvite = false;
 
-    if (this.group || this.group['is:owner'] || this.group['is:admin']) {
+    if (this.group['is:owner'] || this.group['is:admin']) {
       this.canInvite = true;
     } else if (this.group.membership === 2 && this.group['is:member']) {
       this.canInvite = true;
@@ -84,9 +84,6 @@ export class MobileMembersComponent implements OnInit {
     this.inProgress = true;
     this.httpSubscription = this.client.get(endpoint, params)
       .subscribe((response: any) => {
-        if (response.total) {
-          // this.totalGroup.emit(response.total)
-        }
         if (!response.members) {
           this.moreData = false;
           this.inProgress = false;
@@ -134,15 +131,11 @@ export class MobileMembersComponent implements OnInit {
     try {
       let group = await this.service.load(guid)
       this.group = group
-      // this.$group = this.service.$group.subscribe((group) => {
-      //   this.group = group;
-      //   this.load(true);
-      //   this.el.nativeElement.scrollIntoView();
-      // });
-      if (this.group) {
+      this.$group = this.service.$group.subscribe((group) => {
+        this.group = group;
         this.load(true);
         this.el.nativeElement.scrollIntoView();
-      }
+      });
     }
     catch (e) {
       console.log(e)

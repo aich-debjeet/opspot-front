@@ -22,7 +22,7 @@
       <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn()"
         routerLink="/groups/create">Create Community</button>
       <div class="text-lg f500 mb-17" id="list-communities-manage">Communities you manage</div>
-      <div *ngFor="let entity of myCommunities">
+      <div *ngFor="let entity of entities">
         <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='community'" 
           id="list-community-manage-list"
           [routerLink]="['/groups/profile', entity.guid]">
@@ -34,16 +34,9 @@
           </div>
         </div>
       </div>
-      <!-- <infinite-scroll
-        distance="25%"
-        (load)="loadMyCommunities()"
-        [moreData]="moreData"
-        [inProgress]="inProgress"
-      >
-      </infinite-scroll> -->
       <div class="o-community-landing-block-your">
         <div class="text-lg f500 mb-17" id="list-community-header">Communities you’re in</div>
-        <div *ngFor="let entity of memberCommunities">
+        <div *ngFor="let entity of entities">
           <div class="o-community-landing-block-manage"
             id="list-community-joined"
             *ngIf="entity['is:member'] && entity['entity_type']=='community'"
@@ -78,7 +71,7 @@
       </div>
     </div>
     <div class="o-community-landing-block-design" *ngIf="showMyCommunities">
-      <div id="communities" class="tab" *ngFor="let entity of myCommunities">
+      <div id="communities" class="tab" *ngFor="let entity of entities">
         <m-groups--tile *ngIf="entity['is:member'] && entity['is:creator'] && entity['entity_type']=='community'"
           [entity]="entity" class="o-community-main-card"></m-groups--tile>
       </div>

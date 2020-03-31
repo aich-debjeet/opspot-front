@@ -25,8 +25,6 @@ export class GroupsListComponent {
   all: boolean = false;
   offset: string = '';
   entities: Array<any> = [];
-  myCommunities: Array<any> = [];
-  memberCommunities: Array<any> = [];
   filter: string = 'top';
   paramsSubscription: Subscription;
   rating: number = 1;
@@ -62,15 +60,12 @@ export class GroupsListComponent {
         this.inProgress = false;
         this.moreData = true;
         this.entities = [];
-        this.myCommunities = [];
 
         if (this.session.isLoggedIn())
           this.rating = this.session.getLoggedInUser().boost_rating;
-        this.ownerGuid = this.session.getLoggedInUser().guid;
+          this.ownerGuid = this.session.getLoggedInUser().guid;
 
         this.load(true);
-        this.loadMyCommunities(true);
-        this.loadMemberCommunities(true);
       }
     });
   }
@@ -166,101 +161,6 @@ export class GroupsListComponent {
         this.inProgress = false;
       });
   }
-
-  loadMyCommunities(refresh: boolean = false) {
-
-    // if (this.inProgress)
-    //   return;
-
-    if (refresh) {
-      this.offset = '';
-      this.myCommunities = [];
-      this.moreData = true;
-    }
-
-    let endpoint, key;
-    endpoint = `api/v1/groups/owner/` + this.ownerGuid;
-    key = 'groups';
-
-    this.inProgress = true;
-    this.client.get(endpoint, {
-      limit: 12,
-      offset: this.offset,
-      rating: this.rating
-    })
-      .then((response: OpspotGroupListResponse) => {
-
-        if (!response[key] || response[key].length === 0) {
-          this.moreData = false;
-          this.inProgress = false;
-        }
-
-        if (refresh) {
-          this.myCommunities = response[key];
-        } else {
-          if (this.offset)
-            response[key].shift();
-          this.myCommunities.push(...response[key]);
-        }
-
-        this.offset = response['load-next'];
-        if (!this.offset) {
-          this.moreData = false;
-        }
-        this.inProgress = false;
-      })
-      .catch((e) => {
-        this.inProgress = false;
-      });
-  }
-
-  loadMemberCommunities(refresh: boolean = false) {
-
-    // if (this.inProgress)
-    //   return;
-
-    if (refresh) {
-      this.offset = '';
-      this.memberCommunities = [];
-      this.moreData = true;
-    }
-
-    let endpoint, key;
-    endpoint = `api/v1/groups/member/` + this.ownerGuid;
-    key = 'groups';
-
-    this.inProgress = true;
-    this.client.get(endpoint, {
-      limit: 12,
-      offset: this.offset,
-      rating: this.rating
-    })
-      .then((response: OpspotGroupListResponse) => {
-
-        if (!response[key] || response[key].length === 0) {
-          this.moreData = false;
-          this.inProgress = false;
-        }
-
-        if (refresh) {
-          this.memberCommunities = response[key];
-        } else {
-          if (this.offset)
-            response[key].shift();
-          this.memberCommunities.push(...response[key]);
-        }
-
-        this.offset = response['load-next'];
-        if (!this.offset) {
-          this.moreData = false;
-        }
-        this.inProgress = false;
-      })
-      .catch((e) => {
-        this.inProgress = false;
-      });
-  }
-
 
   reloadTopFeed() {
     this.load(true);

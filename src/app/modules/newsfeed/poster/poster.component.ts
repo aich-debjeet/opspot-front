@@ -13,7 +13,7 @@ import { remove as _remove, findIndex as _findIndex } from 'lodash';
 @Component({
   moduleId: module.id,
   selector: 'opspot-newsfeed-poster',
-  inputs: ['_container_guid: containerGuid', '_showSpecialHashtags:showSpecialHashtags', 'accessId', 'message', 'title'],
+  inputs: ['_container_guid: containerGuid', 'accessId', 'message', 'title'],
   outputs: ['load'],
   providers: [
     {
@@ -25,7 +25,7 @@ import { remove as _remove, findIndex as _findIndex } from 'lodash';
   templateUrl: 'poster.component.html'
 })
 export class PosterComponent {
-  // @Input() showSpecialHashtags: boolean;
+  @Input() showSpecialHashtags: boolean;
   display: string = '';
   startDate: string;
   content = '';
@@ -54,9 +54,8 @@ export class PosterComponent {
   isNSFW: boolean = false;
   displayPaywal: boolean = false;
   defaultCoins: string = '';
-  specialHashtags: boolean = false;
   menuOptions: Array<string> = ['create-showtimez', 'create-opportunity', 'create-the-bluestore', 'create-portfolio', 'create-my-journey'];
-  // menuOptions: Array<string> = ['create-showtimez', 'create-opportunity'];
+
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
   constructor(
@@ -69,15 +68,7 @@ export class PosterComponent {
     this.opspot = window.Opspot;
     this.cards = [];
   }
-  ngOnInit() { }
-
-  set _showSpecialHashtags(value: boolean) {
-    this.specialHashtags = value;
-    if (this.specialHashtags) {
-      this.menuOptions = this.menuOptions.slice(0,3);
-    }
-  }
-
+  ngOnInit() {}
 
   set _container_guid(guid: any) {
     this.attachment.setContainer(guid);
@@ -244,12 +235,12 @@ export class PosterComponent {
 
     this.errorMessage = '';
 
-    this.attachment.remove(imageId, file)
+    this.attachment.remove(imageId,file)
       .then(guid => {
         this.inProgress = false;
         this.canPost = true;
         file.value = '';
-        this.cards = _remove(this.cards, function (n) {
+        this.cards = _remove(this.cards, function(n) {
           return n.guid !== guid;
         });
       })
