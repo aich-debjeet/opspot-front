@@ -12,7 +12,8 @@
                     name="message"
                     placeholder="What have you created today?"
                     [ngModel]="meta.message"
-                    (keyup)="getPostPreview(message)"
+                    (keyup)="getPostPreview($event)"
+                    (paste)="getPostPreview($event)"
                     (ngModelChange)="onMessageChange($event)"
                     [autoGrow]
                     autofocus

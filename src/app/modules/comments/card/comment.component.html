@@ -3,7 +3,7 @@
 >
   <div class="opspot-avatar" [hovercard]="comment.ownerObj.guid">
     <a [routerLink]="['/', comment.ownerObj.username]" id="comment-replied-userimage">
-      <img src="{{opspot.cdn_url}}icon/{{comment.ownerObj.guid}}/" class="mdl-shadow--2dp"/>
+      <img src="{{opspot.cdn_url}}icon/{{comment.ownerObj.guid}}/medium/{{comment.ownerObj.icontime}}" class="mdl-shadow--2dp"/>
       <!-- {{opspot.cdn_url}}icon/{{comment.ownerObj.guid}}/small/{{comment.ownerObj.icontime}} -->
     </a>
   </div>

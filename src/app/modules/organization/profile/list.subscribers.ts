@@ -69,7 +69,6 @@ export class OrganizationAllMembers {
     try {
     let organization = await this.service.load(guid);
     this.organization = organization;
-      console.log("nggrg: ", this.organization);
       if (this.organization) {
         this.load();
       }
