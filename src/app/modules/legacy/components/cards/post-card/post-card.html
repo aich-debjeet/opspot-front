@@ -1,5 +1,5 @@
-<div class="o-explore-card" *ngIf="entity" [routerLink]="routerlink">
-  <div class="o-explore-card__media">
+<div class="o-explore-card" *ngIf="entity">
+  <div class="o-explore-card__media" [routerLink]="routerlink">
     <div class="o-explore-media-img" *ngIf="entity?.custom_data && entity?.custom_data.length> 0 && entity?.custom_data[0]?.entity_type === 'image'" >
       <a>
         <img [src]="entity?.custom_data[0]?.src" alt="media">
