@@ -92,7 +92,7 @@ opspot = window.Opspot;
     this.httpSubscription = this.client.get(endpoint, params)
       .subscribe((response: any) => {
         if(response.total){
-          this.totalOrganization.emit(response.members.length)
+          this.totalOrganization.emit(response.total)
         }
         if (!response.members) {
           this.moreData = false;
