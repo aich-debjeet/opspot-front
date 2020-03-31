@@ -58,7 +58,7 @@ export class GroupsProfileFeed {
     private router: Router,
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     // this.$group = this.service.$group.subscribe((group) => {
     //   this.group = group;
     //   console.log('group', group);
@@ -87,6 +87,8 @@ export class GroupsProfileFeed {
       this.group = community;
       if (this.group) {
         this.guid = this.group.guid;
+          this.load(true);
+          this.setUpPoll();
       }
     } catch (e) {
       // this.error = e.message;
@@ -384,5 +386,4 @@ export class GroupsProfileFeed {
   }
 
 }
-
 
