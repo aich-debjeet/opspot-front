@@ -102,7 +102,6 @@ export class PostFormComponent {
   }
 
   onMessageChange($event) {
-    console.log($event)
     this.errorMessage = '';
     this.meta.message = $event;
 
