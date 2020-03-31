@@ -51,33 +51,54 @@ export class OrganizationProfileFeed {
   @ViewChild('poster') private poster: PosterComponent;
 
   constructor(
-    public session: Session, 
-    public client: Client, 
-    public service: OrganizationService, 
+    public session: Session,
+    public client: Client,
+    public service: OrganizationService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.$organization = this.service.$group.subscribe((org) => {
-      // console.log("OrganizationFeed org: ", org);
-      this.organization = org;
-      // if (this.organization) {
-      //   this.guid = org.guid;
-      // }
-      // console.log("Org:", org);
+    // this.$organization = this.service.$group.subscribe((org) => {
+    //   // console.log("OrganizationFeed org: ", org);
+    //   this.organization = org;
+    //   // if (this.organization) {
+    //   //   this.guid = org.guid;
+    //   // }
+    //   // console.log("Org:", org);
 
-      if (org && org.guid) {
-        this.guid = org.guid;
-        this.load(true);
-        this.setUpPoll();
-      }
+    //   if (org && org.guid) {
+    //     this.guid = org.guid;
+    //     this.load(true);
+    //     this.setUpPoll();
+    //   }
+    // });
+
+    this.paramsSubscription = this.route.parent.params.subscribe(params => {
+      this.guid = params["guid"];
+      this.getOrganization(this.guid);
     });
 
     this.paramsSubscription = this.route.params.subscribe(params => {
       this.filter = params['filter'] ? params['filter'] : 'activity';
-
-      this.load(true);
-      this.setUpPoll();
+      if (this.organization) {
+        this.load(true);
+        this.setUpPoll();
+      }
     });
+  }
+
+  async getOrganization(guid) {
+    try {
+      let organization = await this.service.load(guid);
+      this.organization = organization;
+      if (this.organization) {
+        this.guid = this.organization.guid;
+        this.load(true);
+        this.setUpPoll();
+      }
+    } catch (e) {
+      // this.error = e.message;
+      return;
+    }
   }
 
   setUpPoll() {
@@ -100,7 +121,7 @@ export class OrganizationProfileFeed {
   }
 
   ngOnDestroy() {
-    this.$organization.unsubscribe();
+    // this.$organization.unsubscribe();
     clearInterval(this.pollingTimer);
     this.paramsSubscription.unsubscribe();
   }
