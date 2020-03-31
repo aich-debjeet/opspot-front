@@ -95,7 +95,6 @@ export class CommentComponent implements OnChanges {
     if (!value)
       return;
     this.comment = value;
-    console.log('comment', this.comment)
     this.attachment.load(this.comment);
 
     this.isTranslatable = this.translationService.isTranslatable(this.comment);
