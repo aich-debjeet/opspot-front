@@ -28,6 +28,7 @@
         *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid && !member['is:owner']"
         [group]="group"
         [user]="member"
+        (remove)="remove(member)"
         ></opspot-groups-card-user-actions-button>
     </app-appuser>
     </li>   
