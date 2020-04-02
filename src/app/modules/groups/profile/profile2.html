@@ -126,11 +126,16 @@
                             class="icon-plus-circle primary" id="profile2-icon-plus-circle">
                         </span>
                     </div>
-                    <opspot-groups-profile-members
+                    <m-group--member-previews
+                        [group]="group"
+                        (totalGroup)="groupCount($event)"
+                    >
+                    </m-group--member-previews>
+                    <!-- <opspot-groups-profile-members
                         [group]="group"
                         (totalGroup)="groupCount($event)"
                         [frmGroup]="true"
-                    ></opspot-groups-profile-members>
+                    ></opspot-groups-profile-members> -->
                 </div>
             </div>
         </div>
