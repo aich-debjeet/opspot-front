@@ -55,7 +55,7 @@
 						</m-video>
 					</div>
 					<div class="o-posts-inner-page-myjourney-padding">
-						<div class="feed-media post-view-style" *ngIf="marketplace?.custom_data.length <= 5">
+						<div class="feed-media post-view-style" *ngIf="marketplace?.custom_data.length > 1 && marketplace?.custom_data.length <= 5">
 							<a *ngFor="let media of marketplace?.custom_data; let i = index;" class="feed-media__link">
 								<img *ngIf="media.entity_type !== 'video'" [src]="media.src" alt=""
 									class="feed-media__img" (click)="showImage(i)">
