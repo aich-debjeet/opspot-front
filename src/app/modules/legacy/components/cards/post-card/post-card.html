@@ -1,22 +1,22 @@
 <div class="o-explore-card" *ngIf="entity">
-  <div class="o-explore-card__media" [routerLink]="routerlink">
+  <div class="o-explore-card__media">
     <div class="o-explore-media-img" *ngIf="entity?.custom_data && entity?.custom_data.length> 0 && entity?.custom_data[0]?.entity_type === 'image'" >
-      <a>
+      <a [routerLink]="routerlink">
         <img [src]="entity?.custom_data[0]?.src" alt="media">
       </a>
     </div>
-    <div class="o-explore-media-img" *ngIf="entity?.custom_data === false" >
-      <a>
+    <div class="o-explore-media-img" *ngIf="entity?.entity_type === 'blog' && entity?.custom_data === false" >
+      <a target="_blank" [href]="routerlink">
         <img [src]="entity?.thumbnail_src" alt="media">
       </a>
     </div>
     <div class="o-explore-media-img o-explore-media-img-oberlay" *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'video'">
-      <a>
+      <a [routerLink]="routerlink">
         <img [src]="entity?.custom_data[0]?.thumbnail_src" alt="media">
       </a>
     </div>
     <div class="o-explore-media-img" *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'audio'">
-      <a>
+      <a [routerLink]="routerlink">
         <img src="assets/videos/video_thumbnail.png" alt="media">
       </a>
     </div>
