@@ -22,6 +22,7 @@ import { OrganizationMobileMembers } from './profile/members/organization-mobile
 import { OrganizationListComponent } from './list.component';
 import { OrganizationAllMembers } from './profile/list.subscribers';
 import { OrganizationMemberPreviews } from './profile/member-previews/member-previews.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 const routes: Routes = [
   {
@@ -52,6 +53,7 @@ const routes: Routes = [
     LegacyModule,
     PosterModule,
     HashtagsModule,
+    InfiniteScrollModule
   ],
   declarations: [
     OrganizationProfile,
