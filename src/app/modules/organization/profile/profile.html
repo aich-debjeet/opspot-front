@@ -109,8 +109,8 @@
                                 class="icon-plus-circle primary" id="profile-organization-invite-icon">
                             </span>
                         </div>
-                        <opspot-organization-profile-members [organization]="organization" (totalOrganization)="groupCount($event)" [frmGroup]="true">
-                        </opspot-organization-profile-members>
+                        <opspot-organization--member-previews [organization]="organization" (totalOrganization)="groupCount($event)">
+                        </opspot-organization--member-previews>
                     </div>
                 </div>
             </div>
