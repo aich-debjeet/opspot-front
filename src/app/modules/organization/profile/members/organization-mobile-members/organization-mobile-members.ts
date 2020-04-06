@@ -146,4 +146,14 @@ export class OrganizationMobileMembers implements OnInit {
   goBack() {
     this._location.back()
   }
+
+  remove(member) {
+    let i: any;
+    for (i in this.members) {
+      if (this.members[i] === member) {
+        this.members.splice(i, 1);
+        break;
+      }
+    }
+  }
 }

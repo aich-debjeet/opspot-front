@@ -32,6 +32,7 @@
           *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid"
           [organization]="organization"
           [user]="member"
+          (remove)="remove(member)"
           ></opspot-organization-card-user-actions-button>
       </app-appuser>
       </li>   
