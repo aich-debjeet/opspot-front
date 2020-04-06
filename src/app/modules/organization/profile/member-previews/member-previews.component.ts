@@ -32,8 +32,6 @@ export class OrganizationMemberPreviews {
   }
 
   set _organization(value: any) {
-    console.log("dfnskj");
-    
     this.organization = value;
     this.load();
   }
@@ -41,16 +39,10 @@ export class OrganizationMemberPreviews {
   async load() {
     this.inProgress = true;
     try {
-        console.log("before call");
-        
       let response: any = await this.client.get(`api/v3/organizations/membership/${this.organization.guid}`, { limit: 12 });
       if (response.total) {
         this.totalOrganization.emit(response.total)
       }
-      console.log("after call");
-      
-      console.log("Res: ",response);
-      
       if (!response.members) {
         return false;
       }
