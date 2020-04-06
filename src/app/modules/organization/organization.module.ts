@@ -21,6 +21,7 @@ import { OrganizationMobileInvite } from './profile/members/organizationmobilein
 import { OrganizationMobileMembers } from './profile/members/organization-mobile-members/organization-mobile-members';
 import { OrganizationListComponent } from './list.component';
 import { OrganizationAllMembers } from './profile/list.subscribers';
+import { OrganizationMemberPreviews } from './profile/member-previews/member-previews.component';
 
 const routes: Routes = [
   {
@@ -50,7 +51,7 @@ const routes: Routes = [
     CommonModule,
     LegacyModule,
     PosterModule,
-    HashtagsModule
+    HashtagsModule,
   ],
   declarations: [
     OrganizationProfile,
@@ -65,7 +66,8 @@ const routes: Routes = [
     OrganizationTileComponent,
     OrganizationMobileMembers,
     OrganizationListComponent,
-    OrganizationAllMembers
+    OrganizationAllMembers,
+    OrganizationMemberPreviews
   ],
   exports: [
     OrganizationProfile,

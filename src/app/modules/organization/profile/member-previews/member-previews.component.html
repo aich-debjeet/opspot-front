@@ -1,0 +1,19 @@
+<ul class="o-community-members-list scrollbar scrollbar-default">
+    <li class="o-community-members-list__user-list" *ngFor="let member of members | slice: 0:5">
+      <app-appuser [object]="member">
+        <opspot-organization-card-user-actions-button 
+          style="position: relative;"
+          *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid && !member['is:owner']"
+          [organization]="organization" 
+          [user]="member" 
+          (remove)="remove(member)"
+        >
+        </opspot-organization-card-user-actions-button>
+      </app-appuser>
+    </li>
+</ul>
+<a class="caption-bold primary members-seeall" (click)="showMembers()" *ngIf="members.length > 5">See All</a>
+<m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle" (closed)="memberToggle = false">
+    <opspot-organization-profile-members [organization]="organization"></opspot-organization-profile-members>
+</m-modal>
+  
