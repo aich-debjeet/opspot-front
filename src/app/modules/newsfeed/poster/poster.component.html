@@ -130,7 +130,7 @@
                 </div> -->
             <m-post-menu [iconType]="'arrow'" [options]="menuOptions" [user]="opspot.user"
                 (optionSelected)="menuOptionSelected($event)"></m-post-menu>
-            <div class="text-md primary f500 o-create-post-write-blog" [routerLink]="['/blog/edit/new']" id="poster-write-blog">Write Blog</div>
+            <div class="text-md primary f500 o-create-post-write-blog" [routerLink]="['/blog/edit/new']" id="poster-write-blog" *ngIf="!specialHashtags">Write Blog</div>
             <div class="close" (click)="close()"><i class="icon-x" id="poster-exit"></i></div>
         </div>
         <!-- <form (submit)="post()">
