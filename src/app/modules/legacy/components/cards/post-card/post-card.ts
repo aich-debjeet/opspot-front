@@ -19,12 +19,15 @@ export class PostCard implements OnInit {
     this.commentsCount = this.entity['comments:count'];
     
     if(this.entity){
+      console.log(this.entity)
       if(this.entity.entity_type === 'event'){
         this.routerlink = '/event/' + this.entity.guid;
       }else if(this.entity.entity_type === 'opportunity'){
         this.routerlink = '/opportunity/' + this.entity.guid;
       }else if(this.entity.entity_type === 'item'){
         this.routerlink = '/item/' + this.entity.guid;
+      }else if(this.entity.entity_type === 'blog'){
+        this.routerlink =  this.entity.perma_url;
       }else{
         this.routerlink = '/media/' + this.entity.guid;
       }

@@ -11,7 +11,7 @@
         <div class="o-suggestion__name caption-bold" [routerLink]="['/', user?.username]">{{ user?.name }}</div>
         <div class="text-md grey">@{{ user?.username }}</div>
         <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
-        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="remove(suggestion)"></opspot-button-subscribe>
+        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)"></opspot-button-subscribe>
     </div>
 
     <div *ngSwitchCase="'portfolio'">

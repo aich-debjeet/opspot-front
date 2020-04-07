@@ -15,12 +15,15 @@ export class OpspotVideoDirectHttpPlayer implements OnInit, OnDestroy, OpspotPla
 
   @Input() muted: boolean = false;
   @Input() poster: string = '';
-  @Input() autoplay: boolean = false;
-
+  
+  autoplay: boolean = false;
+  @Input('autoplay') set _autoplay(autoplay: boolean){
+    this.autoplay = autoplay;
+  }
+  
   src: string;
   @Input('src') set _src(src: string) {
     this.src = src;
-
     const player = this.getPlayer();
 
     if (player) {

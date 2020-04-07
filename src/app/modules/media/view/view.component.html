@@ -255,7 +255,7 @@ opspot-button-remind{
           <div class="media-wrapper" *ngIf="!entity.paywall || editing">
             <div class="o-post-inner-page-myjourney-image">
               <img [src]="largeImage" alt="" *ngIf="!showVideo && !showAudio">
-              <m-video *ngIf="showVideo && !showAudio" style="background:#000;" [muted]="false" [poster]="videoData.thumbnail_src"
+              <m-video *ngIf="showVideo && !showAudio" style="background:#000;" [muted]="false" [poster]="videoData.thumbnail_src" [autoplay]="true"
                 [src]="[{ 'res': '360', 'uri': 'api/v1/media/' + videoData.guid + '/play', 'type': 'video/mp4' }]"
                 [guid]="videoData.guid" [torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
                 <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
