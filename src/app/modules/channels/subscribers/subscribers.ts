@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
@@ -18,6 +18,7 @@ export class ChannelSubscribers {
   offset: string = '';
   moreData: boolean = true;
   inProgress: boolean = false;
+  @Output() followingStatus: EventEmitter<any> = new EventEmitter();
 
   constructor(public session: Session, public client: Client) {
   }
@@ -48,6 +49,10 @@ export class ChannelSubscribers {
       .catch((e) => {
         this.inProgress = false;
       });
+  }
+
+  updateCount(event){
+    this.followingStatus.next(event);
   }
 
 }

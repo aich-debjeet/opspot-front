@@ -110,6 +110,14 @@ export class ChannelComponent {
     });
   }
 
+  statusFollowing(payload: string){
+    if(payload === 'follow'){
+      this.user = { ...this.user, subscriptions_count: this.user.subscriptions_count+1 };
+    } else if(payload === 'unFollow') {
+      this.user = { ...this.user, subscriptions_count: this.user.subscriptions_count-1 };
+    }
+  }
+
   load() {
     this.error = '';
 
