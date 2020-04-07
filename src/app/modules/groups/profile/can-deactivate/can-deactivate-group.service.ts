@@ -16,7 +16,7 @@ export class CanDeactivateGroupService implements CanDeactivate<GroupsProfile> {
   ): Observable<boolean> | Promise<boolean> | boolean {
     return new Promise((resolve, reject) => {
       if (this.videochatService.isActive) {
-        resolve(confirm("Are you sure you want to leave the gathering?"));
+        resolve(confirm("Are you sure you want to leave the group video chat?"));
       } else {
         resolve(true);
       }
