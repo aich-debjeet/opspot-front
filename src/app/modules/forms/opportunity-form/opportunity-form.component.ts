@@ -33,7 +33,8 @@ export class OpportunityFormComponent implements OnInit {
     access_id: 2,
     published: 1,
     location: null,
-    attachment_guid: ''
+    attachment_guid: '',
+    container_guid: ''
   };
 
   opportunity: any;
@@ -138,6 +139,8 @@ export class OpportunityFormComponent implements OnInit {
     this.reqBody.description = value.opportunityDescription;
     this.reqBody.location = value.opportunityLocation;
     this.reqBody.category = value.category;
+    this.reqBody.container_guid = data.container_guid;
+
 
     if (this.opportunityForm.valid && this.reqBody.attachment_guid != '') {
       let endpoint = 'api/v3/opportunity';
