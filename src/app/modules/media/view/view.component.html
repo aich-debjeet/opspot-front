@@ -266,7 +266,7 @@ opspot-button-remind{
               <!-- <m-audio style="width: 100%" *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio> -->
             </div>
             <div class="o-posts-inner-page-myjourney-padding">
-              <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length <= 5">
+              <div class="feed-media post-view-style" *ngIf="entity?.custom_data?.length > 1 && entity?.custom_data?.length <= 5">
                 <div *ngFor="let media of entity?.custom_data; let i = index;">
                   <a class="feed-media__link" id="view-media-link">
                     <img *ngIf="media.entity_type !== 'video' && media.entity_type !== 'audio'" [src]="media.src" alt="" class="feed-media__img"
