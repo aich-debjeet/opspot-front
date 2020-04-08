@@ -93,9 +93,11 @@ export class PrivacySecurityComponent implements OnInit {
           this.toastr.success('You have successfully changed your password.', '', {
             timeOut: 3000
           });
+          this.incorrectPassword = false;
           this.form.reset();
         }
       }).catch(e=> {
+        this.inProgress = false;
         if(e.status === 'error'){
           this.incorrectPassword = true;
         }
