@@ -46,10 +46,6 @@ export class OpportunityComponent implements OnInit {
       }
     });
     this.onScroll();
-    console.log("nddkld",this.inProgress);
-    console.log("djsfds", this.error);
-    
-    
   }
 
   // activity: any;
@@ -82,8 +78,6 @@ export class OpportunityComponent implements OnInit {
   remindOpen = false;
   remindMessage = '';
 
-
-
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'share', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
   menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
 
@@ -96,10 +90,8 @@ export class OpportunityComponent implements OnInit {
     this.client.get('api/v1/newsfeed/single/' + this.guid)
       .then((data: any) => {
         if (data.activity) {
-          
-          this.opportunity = data.activity;// user obj for reach out
-          console.log("mdfnkf: ", this.opportunity);
 
+          this.opportunity = data.activity;// user obj for reach out
           this.user = data.activity.ownerObj;
           this.reachoutMessage += data.activity['perma_url'];
 
