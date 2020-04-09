@@ -1,4 +1,7 @@
-<section class="o-post-inner-sec" [hidden]="inProgress">
+<div [hidden]="marketplace || error" style="width:100%; text-align:center; ">
+	<div class="mdl-spinner mdl-js-spinner is-active" [mdl] style="margin: 16px auto;"></div>
+</div>
+<section class="o-post-inner-sec" *ngIf="marketplace">
 	<div class="container">
 		<div class="o-posts-inner-page o-post-inner-profile-head">
 			<div class="o-posts-inner-page__left">
