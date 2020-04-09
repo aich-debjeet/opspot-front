@@ -22,7 +22,7 @@
         {{title}} 
         <ng-container [ngSwitch]="postType">
             <ng-template ngSwitchCase="repost">
-               <a class="grey-dark f500 text-md hash-tag">
+               <a class="grey-dark f500 text-md hash-tag" style="cursor: default">
                   {{hashtag}}
                 </a>
                 <span *ngIf="entity && entity?.deleted" class="delete_post">This post is deleted</span>
@@ -33,10 +33,16 @@
                 </a>
             </ng-template>
             <ng-template ngSwitchDefault>
-                <a [routerLink]="['/', parentRoute, this.entity.guid]" class="grey-dark f500 text-md hash-tag">
+                <a [routerLink]="['/', parentRoute, this.entity.guid]" class="grey-dark f500 text-md hash-tag" [class.disabled]="entity?.custom_data == false ? true : null">
                     {{hashtag}}
                 </a>
             </ng-template>
         </ng-container>
     </span>
 </div>
+<style>
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+}
+</style>

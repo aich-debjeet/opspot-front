@@ -7,7 +7,10 @@
     </div>
 </div><!-- without nav header end -->
 
-<div class="o-events-inner-sec" [hidden]="inProgress">
+<div [hidden]="bigEvent || error" style="width:100%; text-align:center; ">
+	<div class="mdl-spinner mdl-js-spinner is-active" [mdl] style="margin: 16px auto;"></div>
+</div>
+<div class="o-events-inner-sec" *ngIf="bigEvent">
     <div class="container">
         <div class="o-big-events-inner-block">
             <div class="o-big-events-inner-block__main">

@@ -112,6 +112,7 @@ export class ShowtimezComponent implements OnInit {
       })
       .catch((e) => {
         this.inProgress = false;
+        this.error = 'Sorry, there was problem.';
       });
   }
 
