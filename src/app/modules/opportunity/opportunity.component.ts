@@ -46,6 +46,10 @@ export class OpportunityComponent implements OnInit {
       }
     });
     this.onScroll();
+    console.log("nddkld",this.inProgress);
+    console.log("djsfds", this.error);
+    
+    
   }
 
   // activity: any;
@@ -92,7 +96,10 @@ export class OpportunityComponent implements OnInit {
     this.client.get('api/v1/newsfeed/single/' + this.guid)
       .then((data: any) => {
         if (data.activity) {
+          
           this.opportunity = data.activity;// user obj for reach out
+          console.log("mdfnkf: ", this.opportunity);
+
           this.user = data.activity.ownerObj;
           this.reachoutMessage += data.activity['perma_url'];
 
@@ -112,6 +119,7 @@ export class OpportunityComponent implements OnInit {
       })
       .catch((e) => {
         this.inProgress = false;
+        this.error = 'Sorry, there was problem.';
       });
   }
 
