@@ -34,7 +34,8 @@ export class BlueStoreFormComponent implements OnInit {
     currency: 'INR',
     access_id: 2,
     published: 1,
-    attachment_guid: []
+    attachment_guid: [],
+    container_guid: ''
   };
 
   blueStoreForm: FormGroup;
@@ -278,7 +279,9 @@ export class BlueStoreFormComponent implements OnInit {
     this.reqBody.description = this.blueStoreForm.value.blueStoreDescription;
     this.reqBody.price = this.blueStoreForm.value.blueStorePrice;
     this.reqBody.item_count = this.blueStoreForm.value.blueStoreUnits;
-    this.reqBody.currency = this.blueStoreForm.value.blueStoreCurrency
+    this.reqBody.currency = this.blueStoreForm.value.blueStoreCurrency;
+    this.reqBody.container_guid = data.container_guid;
+
 
     if (this.blueStoreForm.valid) {
       let endpoint = 'api/v3/marketplace';
