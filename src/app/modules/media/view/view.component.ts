@@ -34,7 +34,7 @@ export class MediaViewComponent {
 
   opspot = window.Opspot;
   guid: string;
-  entity: any = {};
+  entity: any;
   inProgress: boolean = true;
   error: string = '';
   deleteToggle: boolean = false;
@@ -142,13 +142,12 @@ export class MediaViewComponent {
 
   load(refresh: boolean = false) {
     if (refresh) {
-      this.entity = {};
+      // this.entity = {};
       this.detectChanges();
     }
     this.inProgress = true;
     this.client.get('api/v1/newsfeed/single/' + this.guid, { children: false })
       .then((response: any) => {
-        this.inProgress = false;
         // if (response.activity.type !== 'object') {
         //   return;
         // }
@@ -182,7 +181,7 @@ export class MediaViewComponent {
         this.isTranslatable = (
           this.translationService.isTranslatable(this.entity)
         );
-
+        this.inProgress = false;
         this.detectChanges();
       })
       .catch((e) => {
