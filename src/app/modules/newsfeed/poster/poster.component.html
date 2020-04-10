@@ -110,7 +110,7 @@
 
 <div *ngIf="staticBoard">
     <div class="o-create-post" *ngIf="display == 'default'">
-        <div class="o-create-post-head o-create-post-head--border"  *ngIf="!showSpecialHashtags">
+        <div class="o-create-post-head o-create-post-head--border">
             <div class="o-create-post__title text-lg f500">Create a post
                 <!-- <span class="icon-box-design" #postType>
                         <span class="icon-chevron-down" (click)="postType.value = !postType.value">
@@ -130,7 +130,7 @@
                 </div> -->
             <m-post-menu [iconType]="'arrow'" [options]="menuOptions" [user]="opspot.user"
                 (optionSelected)="menuOptionSelected($event)"></m-post-menu>
-            <div class="text-md primary f500 o-create-post-write-blog" [routerLink]="['/blog/edit/new']" id="poster-write-blog">Write Blog</div>
+            <div class="text-md primary f500 o-create-post-write-blog" [routerLink]="['/blog/edit/new']" id="poster-write-blog" *ngIf="!specialHashtags">Write Blog</div>
             <div class="close" (click)="close()"><i class="icon-x" id="poster-exit"></i></div>
         </div>
         <!-- <form (submit)="post()">

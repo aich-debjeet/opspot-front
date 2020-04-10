@@ -1,13 +1,18 @@
-<ul class="m-groupMemberPreviews__list">
-  <li class="m-groupMemberPreviews__member" *ngFor="let member of members">
-    <a [routerLink]="['/', member.username]">
-      <img [src]="opspot.cdn_url + 'icon/' + member.guid + '/small'" />
-    </a>
-  </li>
-  <li class="m-groupMemberPreviews__member--count" routerLink="members">
-    <span *ngIf="count > 0">
-      +{{count | abbr:0 }} Member<ng-container *ngIf="count > 1">s</ng-container>
-    </span>
-    <span *ngIf="count <= 0">+ Members</span>
+<ul class="o-community-members-list scrollbar scrollbar-default">
+  <li class="o-community-members-list__user-list" *ngFor="let member of members | slice: 0:5">
+    <app-appuser [object]="member">
+      <opspot-groups-card-user-actions-button 
+        style="position: relative;"
+        *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid && !member['is:owner']"
+        [group]="group" 
+        [user]="member" 
+        (remove)="remove(member)"
+      >
+      </opspot-groups-card-user-actions-button>
+    </app-appuser>
   </li>
 </ul>
+<a class="caption-bold primary members-seeall" (click)="showMembers()" *ngIf="members.length > 5">See All</a>
+<m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle" (closed)="memberToggle = false">
+  <opspot-groups-profile-members [group]="group"></opspot-groups-profile-members>
+</m-modal>

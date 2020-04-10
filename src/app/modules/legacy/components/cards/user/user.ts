@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 import { Session } from '../../../../../services/session';
 import { Client } from '../../../../../services/api';
@@ -21,6 +21,8 @@ export class UserCard implements OnInit {
   subscriptionCount = 0;
   subscriberCount = 0;
 
+  @Output() update: EventEmitter<any> = new EventEmitter();
+
   constructor(
     public session: Session,
     public client: Client
@@ -42,5 +44,11 @@ export class UserCard implements OnInit {
           // console.log(err);
         });
     }
+  }
+
+  subscribeCountUpdate(event: any){
+    if(event){
+      this.update.next('follow');
+    } else this.update.next('unFollow');
   }
 }

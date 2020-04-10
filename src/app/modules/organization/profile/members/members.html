@@ -3,6 +3,22 @@
     input:focus {
         box-shadow: none;
     }
+    .scroll-div {
+    height: 300px;
+    overflow-y: scroll;
+    padding-bottom: 100px;
+  }
+  .m-infinite-scroll-manual {
+    padding: 8px;
+    display: block;
+    width: auto;
+    margin: auto;
+    max-width: 200px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
 </style>
 
 <div *ngIf="!frmGroup">
@@ -12,24 +28,41 @@
         </div>
     </div>
     <div class="form-group form-group--member-search" #el>
-        <input type="text" name="q" [(ngModel)]="q" (keyup)="search(q)" placeholder="Search Members"
+        <input 
+            type="text" 
+            name="q" 
+            [(ngModel)]="q" 
+            (keyup)="search(q)" 
+            placeholder="Search Members"
             i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__SEARCH_PLACEHOLDER"
-            class="form-control form-control-lg bg-grey-light " style="border: 0px;
-        margin: 30px 0px 0px;
-        padding: 1.3rem 0.85rem; box-shadow: none;" />
+            class="form-control form-control-lg bg-grey-light " 
+            style="border: 0px;
+            margin: 30px 0px 0px;
+            padding: 1.3rem 0.85rem; box-shadow: none;" />
         <i class="icon-search" style="position: absolute; top: 9px; right: 12px;"></i>
     </div>
 </div>
-<ul class="o-community-members-list scrollbar scrollbar-default" *ngFor="let member of members">
-    <li class="o-community-members-list__user-list">
-        <app-appuser [object]="member">
-            <opspot-organization-card-user-actions-button style="position: relative;"
-                *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid" [organization]="organization"
-                [user]="member" (remove)="remove(member)"
-                ></opspot-organization-card-user-actions-button>
-        </app-appuser>
+<div 
+    class="scroll-div" 
+    infiniteScroll 
+    [infiniteScrollDistance]="2" 
+    [infiniteScrollThrottle]="50" 
+    (scrolled)="load()"
+    [scrollWindow]="false">
+  <ul class="o-community-members-list scrollbar scrollbar-default">
+    <li class="o-community-members-list__user-list" *ngFor="let member of members">
+      <app-appuser [object]="member">
+        <opspot-organization-card-user-actions-button 
+            style="position: relative;"
+            *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != member.guid" 
+            [organization]="organization"
+            [user]="member" 
+            (remove)="remove(member)"
+        ></opspot-organization-card-user-actions-button>
+      </app-appuser>
     </li>
-</ul>
-
-<infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress">
-</infinite-scroll>
+  </ul>
+</div>
+<div class="m-infinite-scroll-manual " id="infinite-scroll-nothing-more-to-load" [hidden]="moreData">
+  <ng-container i18n="@@COMMON__INFINITE_SCROLL__NOTHING_MORE">Nothing more to load</ng-container>
+</div>

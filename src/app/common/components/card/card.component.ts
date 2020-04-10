@@ -7,7 +7,10 @@ import {
   Type,
   ChangeDetectorRef,
   ComponentRef,
-  ElementRef
+  ElementRef,
+  Output,
+  EventEmitter,
+  OnDestroy
 } from '@angular/core';
 
 import { DynamicHostDirective } from '../../directives/dynamic-host.directive';
@@ -26,7 +29,7 @@ import { BlogCard } from '../../../modules/blogs/card/card';
     <ng-template dynamic-host></ng-template>
   `
 })
-export class OpspotCard implements AfterViewInit {
+export class OpspotCard implements AfterViewInit, OnDestroy {
   @ViewChild(DynamicHostDirective) cardHost: DynamicHostDirective;
 
   object: any = {};
@@ -42,6 +45,7 @@ export class OpspotCard implements AfterViewInit {
   private initialized: boolean = false;
 
   @Input() cardType: string;
+  @Output() count : EventEmitter<any> = new EventEmitter();
 
   constructor(
     private _componentFactoryResolver: ComponentFactoryResolver
@@ -145,6 +149,9 @@ export class OpspotCard implements AfterViewInit {
 
       if (this.cardType === 'user2') {
         this.componentInstance.cardType = this.cardType;
+        this.componentInstance.update.subscribe(count => {
+          this.count.next(count);
+        })
       }
     }
 
@@ -158,5 +165,9 @@ export class OpspotCard implements AfterViewInit {
 
     // @note: find a better way (when Angular implements one)
     this.anchorRef.nativeElement.nextSibling.className = this.cssClasses;
+  }
+
+  ngOnDestroy(){
+    this.componentRef.destroy();
   }
 }

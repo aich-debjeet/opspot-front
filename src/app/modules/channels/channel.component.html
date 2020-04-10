@@ -96,7 +96,7 @@
         </div>
       </div>
 
-      <m-channel--subscriptions [channel]="user" class="mdl-grid"></m-channel--subscriptions>
+      <m-channel--subscriptions [channel]="user" class="mdl-grid" (followingStatus)="statusFollowing($event)"></m-channel--subscriptions>
 
     </section>
 
@@ -114,7 +114,7 @@
         </div>
       </div>
 
-      <m-channel--subscribers [channel]="user" class="mdl-grid"></m-channel--subscribers>
+      <m-channel--subscribers [channel]="user" class="mdl-grid" (followingStatus)="statusFollowing($event)"></m-channel--subscribers>
 
     </section>
 

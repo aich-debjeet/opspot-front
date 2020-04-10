@@ -54,7 +54,7 @@ export class SubscribeButton {
     }
 
     this._user.subscribed = true;
-    this.onSubscribed.next();
+    this.onSubscribed.next(this._user.subscribed);
     
     this.client.post('api/v1/subscribe/' + this._user.guid, {})
       .then((response: any) => {
@@ -74,6 +74,7 @@ export class SubscribeButton {
     e.preventDefault();
     e.stopPropagation();
     this._user.subscribed = false;
+    this.onSubscribed.next(this._user.subscribed);
     this.client.delete('api/v1/subscribe/' + this._user.guid, {})
       .then((response: any) => {
         this._user.subscribed = false;

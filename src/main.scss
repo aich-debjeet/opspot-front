@@ -14925,8 +14925,8 @@ m-video--volume-slider {
   m-video--volume-slider .m-video--volume-control {
     display: none;
     bottom: 32px;
-    left: calc(50% - 20px);
-    background-color: rgba(0, 0, 0, 0.4);
+    left: calc(50% - 52px);
+    // background-color: rgba(0, 0, 0, 0.4);
     z-index: 1;
     width: 40px;
     height: 80px;

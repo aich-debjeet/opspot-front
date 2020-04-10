@@ -4,6 +4,7 @@ import { OrganizationService } from '../organization-service';
 @Component({
   selector: 'opspot-organization-card-user-actions-button',
   inputs: ['organization', 'user'],
+  outputs: ['_remove: remove'],
   template: `
   <button class="icon-more-vertical btnDefault" id="card-user-action-button" *ngIf="organization['is:owner'] || (organization['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
 
@@ -152,11 +153,12 @@ export class OrganizationCardUserActionsButton {
       this.user['is:banned'] = done && ban;
 
       this.kickPrompt = !done;
-      this._remove.next(this.user);
       this.changeCounter('members:count', -1);
     });
 
     this.showMenu = false;
+    this._remove.next(this.user);
+
   }
 
   reInvite() {

@@ -4,21 +4,21 @@ import { Client } from '../../../../services/api';
 import { Session } from '../../../../services/session';
 
 @Component({
-  selector: 'm-group--member-previews',
+  selector: 'opspot-organization--member-previews',
   templateUrl: 'member-previews.component.html',
-  inputs: ['_group : group'],
+  inputs: ['_organization : organization'],
   styleUrls: ['member-previews.component.scss']
 })
 
-export class GroupMemberPreviews {
+export class OrganizationMemberPreviews {
 
   members: Array<any> = [];
   count: Number = 0;
   inProgress: boolean = false;
   opspot = window.Opspot;
-  group: any;
+  organization: any;
   memberToggle: boolean = false;
-  @Output() totalGroup: EventEmitter<any> = new EventEmitter()
+  @Output() totalOrganization: EventEmitter<any> = new EventEmitter()
 
 
   constructor(private client: Client,
@@ -31,17 +31,17 @@ export class GroupMemberPreviews {
   ngOnInit() {
   }
 
-  set _group(value: any) {
-    this.group = value;
+  set _organization(value: any) {
+    this.organization = value;
     this.load();
   }
 
   async load() {
     this.inProgress = true;
     try {
-      let response: any = await this.client.get(`api/v1/groups/membership/${this.group.guid}`, { limit: 12 });
+      let response: any = await this.client.get(`api/v3/organizations/membership/${this.organization.guid}`, { limit: 12 });
       if (response.total) {
-        this.totalGroup.emit(response.total)
+        this.totalOrganization.emit(response.total)
       }
       if (!response.members) {
         return false;
@@ -60,7 +60,7 @@ export class GroupMemberPreviews {
     if (window.innerWidth > 785) {
       this.memberToggle = !this.memberToggle;
     } else {
-      this.router.navigate([`/groups/${this.group.guid}/members`])
+      this.router.navigate([`/organizations/${this.organization.guid}/members`])
     }
   }
 

@@ -15,13 +15,13 @@ import { Session } from '../../../../services/session';
 
 export class OrganizationProfileMembers {
 
-opspot = window.Opspot;
-@ViewChild('el') el;
+  opspot = window.Opspot;
+  @ViewChild('el') el;
 
   organization: any;
   $organization;
-  @Input()frmGroup;
-  @Output()totalOrganization:EventEmitter<any>=new EventEmitter()
+  @Input() frmGroup;
+  @Output() totalOrganization: EventEmitter<any> = new EventEmitter()
 
   invitees: any = [];
   members: Array<any> = [];
@@ -72,53 +72,53 @@ opspot = window.Opspot;
     }
 
     // TODO: [emi] Send this via API
-    this.canInvite = false;    
-    if(this.organization){
-    if (this.organization['is:owner'] || this.organization['is:editor']) {
-      this.canInvite = true;
-    } else if (this.organization.membership === 2 && this.organization['is:member']) {
-      this.canInvite = true;
-    }
+    this.canInvite = false;
+    if (this.organization) {
+      if (this.organization['is:owner'] || this.organization['is:editor']) {
+        this.canInvite = true;
+      } else if (this.organization.membership === 2 && this.organization['is:member']) {
+        this.canInvite = true;
+      }
 
-    let endpoint = `api/v3/organizations/membership/${this.organization.guid}`,
-      params: { limit, offset, q?: string } = { limit: 12, offset: this.offset };
+      let endpoint = `api/v3/organizations/membership/${this.organization.guid}`,
+        params: { limit, offset, q?: string } = { limit: 12, offset: this.offset };
 
-    if (this.q) {
-      endpoint = `${endpoint}/search`;
-      params.q = this.q; 
-    }
+      if (this.q) {
+        endpoint = `${endpoint}/search`;
+        params.q = this.q;
+      }
 
-    this.inProgress = true;
-    this.httpSubscription = this.client.get(endpoint, params)
-      .subscribe((response: any) => {
-        if(response.total){
-          this.totalOrganization.emit(response.total)
-        }
-        if (!response.members) {
-          this.moreData = false;
+      this.inProgress = true;
+      this.httpSubscription = this.client.get(endpoint, params)
+        .subscribe((response: any) => {
+          if (response.total) {
+            this.totalOrganization.emit(response.total)
+          }
+          if (!response.members) {
+            this.moreData = false;
+            this.inProgress = false;
+            return false;
+          }
+
+          if (refresh) {
+            this.members = response.members;
+          } else {
+            this.members = this.members.concat(response.members);
+          }
+
+          if (response['load-next']) {
+            this.offset = response['load-next'];
+          } else {
+            this.moreData = false;
+          }
+
           this.inProgress = false;
-          return false;
-        }
-
-        if (refresh) {
-          this.members = response.members;
-        } else {
-          this.members = this.members.concat(response.members);
-        }
-
-        if (response['load-next']) {
-          this.offset = response['load-next'];
-        } else {
-          this.moreData = false;
-        }
-
-        this.inProgress = false;
 
         }, (err) => {
-            this.inProgress = false;
+          this.inProgress = false;
         });
+    }
   }
-}
 
   invite(user: any) {
     for (let i of this.invitees) {
@@ -132,7 +132,6 @@ opspot = window.Opspot;
     if (this.searchDelayTimer) {
       clearTimeout(this.searchDelayTimer);
     }
-
     this.q = q;
     this.searchDelayTimer = setTimeout(() => {
       this.load(true);

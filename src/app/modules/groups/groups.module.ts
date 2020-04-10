@@ -32,6 +32,8 @@ import { MobileInviteComponent } from './profile/members/mobile-invite/mobile-in
 import { VideoChatComponent } from '../videochat/videochat.component';
 import { GroupJoinRequestComponent } from './group-join-request/group-join-request.component';
 import { GroupsProfileConversationMobile } from './profile/mobile-conversation/mobile-conversation';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 const routes: Routes = [
   { path: 'groups/profile/:guid', component: GroupsProfile, canDeactivate: [CanDeactivateGroupService], children: [
@@ -68,6 +70,7 @@ const routes: Routes = [
     HashtagsModule,
     TextInputAutocompleteModule,
     VideoChatModule,
+    InfiniteScrollModule
   ],
   declarations: [
     GroupsListComponent,
