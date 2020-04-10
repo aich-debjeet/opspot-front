@@ -14777,7 +14777,15 @@ m-video {
   position: relative;
   display: block; }
   m-video video {
-    width: 100%; }
+    width: 100%;
+    position: relative;
+    height: 100%;
+    max-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    min-height: 500px; }
   m-video .m-video--player {
     display: block; }
   m-video .opspot-video-bar-min {
