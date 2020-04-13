@@ -6917,7 +6917,14 @@ opspot-capture {
 m-login {
   display: block;
   background: #FFF; }
-
+app-ricky-kej {  display: block;
+  // background: rgb(255, 255, 255);
+  margin-top: -60px !important;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+    margin-top: -100px !important;
+      }
+}
+  
 .m-login {
   margin: 100px auto;
   display: -webkit-flex;
@@ -12141,7 +12148,13 @@ m-groups--profile .m-group__grid header {
         .m-overlay-modal--report .m-overlay-modal--close i {
           font-size: 24px !important; }
       
-
+.m-overlay-modal--brodcast-time{
+  background-color: white;
+  padding: 58px 94px;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+    padding: 56px 45px;
+      }
+}
 .m-hashtags-selector--modal {
   font-weight: 400;
   max-width: 900px;

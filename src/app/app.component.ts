@@ -58,7 +58,7 @@ export class Opspot {
     this.routerSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        if (event.url === '/' || event.url === '/login') {
+        if (event.url === '/' || event.url === '/login' || event.url === '/rickyKej') {
           this.showTopbar = false;
         } else {
           this.showTopbar = true;
