@@ -1,0 +1,67 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+$poppins : 'Poppins', sans-serif;
+$dmserifdisplay : 'DM Serif Display', serif;
+$dmseriftext : 'DM Serif Text', serif;
+
+.popup-trigger {
+}
+
+
+.popup-container {
+  top: 5%;
+  text-align: center;
+}
+
+//   brodcasting timings
+
+.brodcasting-timings{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @include mq($from: $mobile_sm, $until: $tablet) {
+      flex-direction: column;
+  }
+}
+.brodcasting-timings-blocks{
+  width: 100%;
+  max-width: 368px;
+  border: 1px solid #979797;
+  border-radius: 4px;
+  overflow: hidden;
+  &__title{
+      width: 100%;
+      color: #FFFFFF;
+      font-family: $poppins;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 25px;
+      background: #000F20;
+      padding: 17px;
+  }
+}
+.brodcasting-timings-list{
+  width: 100%;
+  &__item{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0px 47px;
+      &:nth-child(2n){
+          background-color: rgba(79,89,104,0.1);
+      }
+      span{
+          color: #000F20;
+          font-family: Poppins;
+          font-size: 16px;
+          letter-spacing: 0;
+          line-height: 44px;
+          &:nth-child(2){
+              text-align: right;
+          }
+      }
+  }
+}
