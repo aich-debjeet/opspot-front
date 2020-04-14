@@ -260,7 +260,7 @@ $dmseriftext : 'DM Serif Text', serif;
 }
 .event-about-content{
     width: 100%;
-    height: 100%;
+    // height: 100%;
     min-height: 112px;
     max-width: 887px;
     color: #FFFFFF;
@@ -280,7 +280,7 @@ $dmseriftext : 'DM Serif Text', serif;
 
 .event-partner{
     width: 100%;
-    padding-top: 120px;
+    padding-top: 50px;
 }
 .event-partner-logos{
     width: 100%;
@@ -300,103 +300,6 @@ $dmseriftext : 'DM Serif Text', serif;
         }
     }
 }
-// .wwf-logo{
-//     width: 119px;
-//     height: 119px;
-//     background: url(/assets/rickykej/logo/wwfgrey.png) no-repeat;
-//     background-size: contain;
-//     &:hover{
-//         background: url(/assets/rickykej/logo/wwfcolor.png) no-repeat;
-//         background-size: contain;
-//     }
-// }
-// .unccd-logo{
-//     width: 297px;
-//     height: 119px;
-//     background: url(/assets/rickykej/logo/unccdgrey.png) no-repeat;
-//     background-size: contain;
-//     &:hover{
-//         background: url(/assets/rickykej/logo/unccdcolor.png) no-repeat;
-//         background-size: contain;
-//     }
-// }
-// .mgiep-logo{
-//     width: 297px;
-//     height: 119px;
-//     background: url(/assets/rickykej/logo/mgiepgrey.png) no-repeat;
-//     background-size: contain;
-//     &:hover{
-//         background: url(/assets/rickykej/logo/mgiepcolor.png) no-repeat;
-//         background-size: contain;
-//     }
-// }
-// .kindness-logo{
-//     width: 297px;
-//     height: 119px;
-//     background: url(/assets/rickykej/logo/kindnessgrey.png) no-repeat;
-//     background-size: contain;
-//     &:hover{
-//         background: url(/assets/rickykej/logo/kindnesscolor.png) no-repeat;
-//         background-size: contain;
-//     }
-// }
-// .earthday-logo{
-//     width: 297px;
-//     height: 144px;
-//     background: url(/assets/rickykej/logo/earthgrey.png) no-repeat;
-//     &:hover{
-//         background: url(/assets/rickykej/logo/earthcolor.png) no-repeat;
-//     }
-// }
-// .uncc-logo{
-//     width: 297px;
-//     height: 119px;
-//     background: url(/assets/rickykej/logo/unccdgrey.png) no-repeat;
-//     &:hover{
-//         background: url(/assets/rickykej/logo/unccdcolor.png) no-repeat;
-//     }
-// }
-
-// .spykke-logo{
-//     width: 176px;
-//     height: 119px;
-//     background: url(/assets/rickykej/logo/spykkegrey.png) no-repeat;
-//     background-size: contain;
-//     &:hover{
-//         background: url(/assets/rickykej/logo/spykkecolor.png) no-repeat;
-//         background-size: contain;
-//     }
-// }
-// .isha-logo{
-//     width: 176px;
-//     height: 119px;
-//     background: url(/assets/rickykej/logo/ishagrey.png) no-repeat;
-//     background-size: contain;
-//     &:hover{
-//         background: url(/assets/rickykej/logo/ishacolor.png) no-repeat;
-//         background-size: contain;
-//     }
-// }
-// .pvr-logo{
-//     width: 176px;
-//     height: 119px;
-//     background: url(/assets/rickykej/logo/pvrgrey.png) no-repeat;
-//     background-size: contain;
-//     &:hover{
-//         background: url(/assets/rickykej/logo/pvrcolor.png) no-repeat;
-//         background-size: contain;
-//     }
-// }
-// .paytm-logo{
-//     width: 176px;
-//     height: 119px;
-//     background: url(/assets/rickykej/logo/paytmgrey.png) no-repeat;
-//     background-size: contain;
-//     &:hover{
-//         background: url(/assets/rickykej/logo/paytmcolor.png) no-repeat;
-//         background-size: contain;
-//     }
-// }
 
 .outreach-partner-container{
     width: 100%;
