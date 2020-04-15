@@ -36,7 +36,6 @@
     "braintree-web": "3.41.0",
     "core-js": "~2.6.2",
     "croppie": "^2.6.4",
-    "crypto-js": "^4.0.0",
     "dart-sass": "^1.21.0",
     "ethjs": "~0.4.0",
     "ethjs-account": "^0.1.4",

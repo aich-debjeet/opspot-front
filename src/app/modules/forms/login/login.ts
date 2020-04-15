@@ -5,7 +5,7 @@ import { Client } from '../../../services/api';
 import { Session } from '../../../services/session';
 import { ForgotPasswordComponent } from '../../auth/forgot-password/forgot-password.component';
 import { MessengerEncryptionService } from '../../messenger/encryption/encryption.service';
-import { AESEncryptServiceService } from '../../../services/aesencrypt-service.service'
+// import { AESEncryptServiceService } from '../../../services/aesencrypt-service.service'
 
 
 
@@ -40,7 +40,7 @@ export class LoginForm {
     fb: FormBuilder,
     private zone: NgZone,
     public encryption: MessengerEncryptionService,
-    private _AESEncryptService: AESEncryptServiceService
+    // private _AESEncryptService: AESEncryptServiceService
   ) {
     this.form = fb.group({
       username: ['', Validators.required],
