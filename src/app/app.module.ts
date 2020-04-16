@@ -70,7 +70,7 @@ import { BluestoreModule } from './modules/bluestore/bluestore.module';
 import { ShowtimezModule } from './modules/showtimez/showtimez.module';
 import { ExploreModule } from './modules/explore/explore.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
-import { BigEventModule } from './modules/big-event/big-event.module';
+// import { BigEventModule } from './modules/big-event/big-event.module';
 
 
 
@@ -142,7 +142,7 @@ import { BigEventModule } from './modules/big-event/big-event.module';
     ShowtimezModule,
     ExploreModule,
     PortfolioModule,
-    BigEventModule,
+    // BigEventModule,
     OrganizationModule
   ],
   providers: [

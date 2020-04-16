@@ -72,6 +72,10 @@ export const OpspotAppRoutes: Routes = [
     loadChildren: './modules/static/static.module#StaticModule'
   },
   {
+    path:'event',
+    loadChildren:'./modules/big-event/big-event.module#BigEventModule'
+  },
+  {
     path: ':username/:filter',
     component: ChannelComponent
   },
