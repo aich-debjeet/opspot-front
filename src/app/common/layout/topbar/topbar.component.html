@@ -218,16 +218,16 @@
                 </a>
               </li>
               <li class="m-dropdownList__item" (click)="createMenu.value = false">
-                <a [routerLink]="['/event/create']" id="topbar-create-event">
+                <a [routerLink]="['/event/create/event']" id="topbar-create-event">
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>Create Event</span>
                 </a>
               </li>
               <li class="m-dropdownList__item" (click)="createMenu.value = false" *ngIf="session.isAdmin()">
-                <a [routerLink]="['/event/create']" id="topbar-create-event">
+                <a [routerLink]="['/event/create/enrollment']" id="topbar-create-event">
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>Create Enrollment</span>
-                </a>
+                </a>  
               </li>
             </ul>
             <div class="opspot-bg-overlay" (click)="createMenu.value = !createMenu.value" [hidden]="!createMenu.value"></div>

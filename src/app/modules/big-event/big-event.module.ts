@@ -25,9 +25,8 @@ import { WalletModule } from '../wallet/wallet.module';
 
 // TODO @gayatri: handle all other requests
 const bigeventRoutes: Routes = [
-  
   {
-    path: 'create',
+    path: 'create/:type',
     component: BigEventCreate,
   },
   {
