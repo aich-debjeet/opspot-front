@@ -101,7 +101,7 @@ $dmseriftext : 'DM Serif Text', serif;
         align-items: center;
         position: unset;
         margin-top: 149px;
-	}
+    }
 }
 .hero-text-style{
     color: #FFFFFF;
@@ -154,11 +154,10 @@ $dmseriftext : 'DM Serif Text', serif;
     line-height: 48px;
 }
 .watch-now-btn{
-    width: 222px;
-    padding: 22px 28px;
+    padding: 15px 24px;
     border: 1px solid #FFDB25;
     color: #FFDB25;
-    font-family: $poppins;
+    font-family: "Poppins", sans-serif;
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 0;
