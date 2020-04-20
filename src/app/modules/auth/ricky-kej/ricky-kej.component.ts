@@ -8,8 +8,9 @@ import { BrodcastComponent } from './brodcast/brodcast.component';
   styleUrls: ['./ricky-kej.component.scss']
 })
 export class RickyKejComponent implements OnInit, AfterContentInit {
-  tab: string ='home';
+  tab: string = 'home';
   opened: boolean = false;
+  display: string = '';
   constructor(
     private overlayModal: OverlayModalService
   ) { }
@@ -17,9 +18,9 @@ export class RickyKejComponent implements OnInit, AfterContentInit {
   ngOnInit() {
   }
 
-  scrollToElement($element, s:string): void {
-    this.tab= s;
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+  scrollToElement($element, s: string): void {
+    this.tab = s;
+    $element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
   }
   ngAfterContentInit() {
     (() => {
@@ -33,9 +34,18 @@ export class RickyKejComponent implements OnInit, AfterContentInit {
       });
     })()
   }
-  open(){
-    this.overlayModal.create(BrodcastComponent,{},{
+  open() {
+    this.overlayModal.create(BrodcastComponent, {}, {
       class: 'm-overlay-modal--brodcast-time',
     }).present();
+  }
+  showContent(text: string) {
+    if(this.display != '') {
+      if(this.display == text){
+        this.display = '';
+        return;
+      } else this.display = text;
+    }
+    this.display = text;
   }
 }

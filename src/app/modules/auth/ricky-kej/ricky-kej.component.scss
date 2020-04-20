@@ -661,11 +661,21 @@ $dmseriftext : 'DM Serif Text', serif;
     margin: 0px auto;
 }
 
+.live-streaming-handle-subtitle{	
+    color: #FFFFFF;	
+    font-family: $poppins!important;	
+    font-size: 24px;	
+    font-weight: 600;	
+    letter-spacing: 0;	
+    line-height: 35px;	
+    margin-top:100px;	
+}	
+
 
 .accordion {
     width: 100%;
     background-color: #000e20;
-    padding-top: 128px;
+    padding-top: 40px;
 }
 .accordion .accordion-head {
     height: 89px;
@@ -694,14 +704,17 @@ $dmseriftext : 'DM Serif Text', serif;
 .accordion .accordion-body {
     padding: 27px 119px 27px 82px;
     height: auto;
-    display: none;
+    display: block;
     background: rgba($color: #4E5968, $alpha: 0.2);
     cursor: default;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        padding: 27px 50px 27px 50px;
+    }
 }
 .arrow {
     float: left;
     width: 8px;
-    height: 16px;
+    // height: 16px;
     transition: .25s;
     -webkit-transition: .25s;
     -moz-transition: .25s;
@@ -709,13 +722,13 @@ $dmseriftext : 'DM Serif Text', serif;
     -o-transition: .25s;
     transform: translate(0px, 0px);
     .icon-chevron-down{
-        display: none;
+        display: block;
     }
 }
-.accordion-head.open .arrow {
+.accordion-head .arrow {
     // transform: rotate(90deg);
     .icon-chevron-right{
-        display: none;
+        display: block;
     }
     .icon-chevron-down{
         display: block;
@@ -733,12 +746,13 @@ $dmseriftext : 'DM Serif Text', serif;
 }
 .brand-title{
     color: #FFFFFF;
-    font-family: Poppins;
-    font-size: 20px;
+    font-family: $poppins!important;
+    font-size: 18px;
     font-weight: 600;
     letter-spacing: 0;
-    line-height: 30px;
-    text-align: center;
+    line-height: 27px;
+    margin-left: 40px;
+    text-transform: uppercase;
 }
 .link-share-btn-block{
     width: 100%;
@@ -748,6 +762,8 @@ $dmseriftext : 'DM Serif Text', serif;
     flex-wrap: wrap;
     justify-content: space-between;
     &__item{
-
+        &:nth-child(5){
+            margin-top: 27px;
+        }
     }
 }
