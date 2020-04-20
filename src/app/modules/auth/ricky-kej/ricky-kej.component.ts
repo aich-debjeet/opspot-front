@@ -40,8 +40,12 @@ export class RickyKejComponent implements OnInit, AfterContentInit {
     }).present();
   }
   showContent(text: string) {
-    console.log(text);
-    // if(this.display !== '') this.display = '';
+    if(this.display != '') {
+      if(this.display == text){
+        this.display = '';
+        return;
+      } else this.display = text;
+    }
     this.display = text;
   }
 }

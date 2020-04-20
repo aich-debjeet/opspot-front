@@ -377,8 +377,8 @@
 			<h1 class="primary-title">Live Streaming Handles</h1>
 			<div class="live-streaming-handle-subtitle">Goodwill Partners</div>
 			<div class="accordion">
-				<div class="accordion-head">
-					<div class="arrow down" > <i class="icon-chevron-right" (click)="showContent('onePageSpotlight')" *ngIf="display != 'onePageSpotlight'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'onePageSpotlight'"></i> </div>
+				<div class="accordion-head" (click)="showContent('onePageSpotlight')">
+					<div class="arrow down" > <i class="icon-chevron-right"  *ngIf="display != 'onePageSpotlight'"></i> <i class="icon-chevron-down"  *ngIf="display == 'onePageSpotlight'"></i> </div>
 					<!-- <div class="brand-logo"><img src="assets/rickykej/logo/wwf-white.png" alt=""></div> -->
 					<div class="brand-title">ONE PAGE SPOTLIGHT</div>
 				</div>
@@ -399,8 +399,8 @@
 
 				<!-- 1st end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"><i class="icon-chevron-right" (click)="showContent('WWF')" *ngIf="display != 'WWF'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'WWF'"></i> </div>
+				<div class="accordion-head" (click)="showContent('WWF')">
+					<div class="arrow down"><i class="icon-chevron-right"  *ngIf="display != 'WWF'"></i> <i class="icon-chevron-down" *ngIf="display == 'WWF'"></i> </div>
 					<div class="brand-title">WWF </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'WWF'">
@@ -416,8 +416,8 @@
 
 				<!-- 2nd end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('WWF INDIA')" *ngIf="display != 'WWF INDIA'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'WWF INDIA'"></i> </div>
+				<div class="accordion-head" (click)="showContent('WWF INDIA')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'WWF INDIA'"></i> <i class="icon-chevron-down" *ngIf="display == 'WWF INDIA'"></i> </div>
 					<div class="brand-title">WWF INDIA </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'WWF INDIA'">
@@ -437,8 +437,8 @@
 
 				<!-- 3rd end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('UNCCD')" *ngIf="display != 'UNCCD'"></i> <i class="icon-chevron-down"  (click)="showContent('')" *ngIf="display == 'UNCCD'"></i> </div>
+				<div class="accordion-head" (click)="showContent('UNCCD')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'UNCCD'"></i> <i class="icon-chevron-down"   *ngIf="display == 'UNCCD'"></i> </div>
 					<div class="brand-title">UNCCD </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'UNCCD'">
@@ -457,8 +457,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('UNICEF')" *ngIf="display != 'UNICEF'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'UNICEF'"></i> </div>
+				<div class="accordion-head" (click)="showContent('UNICEF')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'UNICEF'"></i> <i class="icon-chevron-down"  *ngIf="display == 'UNICEF'"></i> </div>
 					<div class="brand-title">UNICEF </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'UNICEF'">
@@ -478,8 +478,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('UNFCCC')" *ngIf="display != 'UNFCCC'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'UNFCCC'"></i> </div>
+				<div class="accordion-head" (click)="showContent('UNFCCC')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'UNFCCC'"></i> <i class="icon-chevron-down"  *ngIf="display == 'UNFCCC'"></i> </div>
 					<div class="brand-title">UNFCCC </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'UNFCCC'">
@@ -495,8 +495,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('UNESCO MGIEP')" *ngIf="display != 'UNESCO MGIEP'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'UNESCO MGIEP'"></i> </div>
+				<div class="accordion-head" (click)="showContent('UNESCO MGIEP')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'UNESCO MGIEP'"></i> <i class="icon-chevron-down"  *ngIf="display == 'UNESCO MGIEP'"></i> </div>
 					<div class="brand-title">UNESCO MGIEP </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'UNESCO MGIEP'">
@@ -516,8 +516,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('EARTH DAY NETWORK')" *ngIf="display != 'EARTH DAY NETWORK'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'EARTH DAY NETWORK'"></i> </div>
+				<div class="accordion-head" (click)="showContent('EARTH DAY NETWORK')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'EARTH DAY NETWORK'"></i> <i class="icon-chevron-down"  *ngIf="display == 'EARTH DAY NETWORK'"></i> </div>
 					<div class="brand-title">EARTH DAY NETWORK </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'EARTH DAY NETWORK'">
@@ -537,8 +537,8 @@
 
 			<div class="live-streaming-handle-subtitle">Outreach Partners</div>
 			<div class="accordion">
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('SPYKKE')" *ngIf="display != 'SPYKKE'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'SPYKKE'"></i> </div>
+				<div class="accordion-head" (click)="showContent('SPYKKE')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'SPYKKE'"></i> <i class="icon-chevron-down"  *ngIf="display == 'SPYKKE'"></i> </div>
 					<!-- <div class="brand-logo"><img src="assets/rickykej/logo/wwf-white.png" alt=""></div> -->
 					<div class="brand-title">SPYKKE</div>
 				</div>
@@ -559,8 +559,8 @@
 
 				<!-- 1st end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('ISHA')" *ngIf="display != 'ISHA'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'ISHA'"></i> </div>
+				<div class="accordion-head" (click)="showContent('ISHA')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'ISHA'"></i> <i class="icon-chevron-down"  *ngIf="display == 'ISHA'"></i> </div>
 					<div class="brand-title">ISHA</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'ISHA'">
@@ -579,8 +579,8 @@
 
 				<!-- 2nd end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('PVR CINEMAS')" *ngIf="display != 'PVR CINEMAS'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'PVR CINEMAS'"></i> </div>
+				<div class="accordion-head" (click)="showContent('PVR CINEMAS')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'PVR CINEMAS'"></i> <i class="icon-chevron-down"  *ngIf="display == 'PVR CINEMAS'"></i> </div>
 					<div class="brand-title">PVR CINEMAS</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'PVR CINEMAS'">
@@ -601,8 +601,8 @@
 
 				<!-- 3rd end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('PAYTM INSIDER')" *ngIf="display != 'PAYTM INSIDER'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'PAYTM INSIDER'"></i> </div>
+				<div class="accordion-head" (click)="showContent('PAYTM INSIDER')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'PAYTM INSIDER'"></i> <i class="icon-chevron-down"  *ngIf="display == 'PAYTM INSIDER'"></i> </div>
 					<div class="brand-title">PAYTM INSIDER</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'PAYTM INSIDER'">
@@ -618,8 +618,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('JUST DIAL')" *ngIf="display != 'JUST DIAL'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'JUST DIAL'"></i> </div>
+				<div class="accordion-head" (click)="showContent('JUST DIAL')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'JUST DIAL'"></i> <i class="icon-chevron-down"  *ngIf="display == 'JUST DIAL'"></i> </div>
 					<div class="brand-title">JUST DIAL</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'JUST DIAL'">
@@ -639,8 +639,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('LAHARI MUSIC')" *ngIf="display != 'LAHARI MUSIC'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'LAHARI MUSIC'"></i> </div>
+				<div class="accordion-head" (click)="showContent('LAHARI MUSIC')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'LAHARI MUSIC'"></i> <i class="icon-chevron-down"  *ngIf="display == 'LAHARI MUSIC'"></i> </div>
 					<div class="brand-title">LAHARI MUSIC</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'LAHARI MUSIC'">
@@ -657,8 +657,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('AQUARIUM BY THE BAY')" *ngIf="display != 'AQUARIUM BY THE BAY'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'AQUARIUM BY THE BAY'"></i> </div>
+				<div class="accordion-head" (click)="showContent('AQUARIUM BY THE BAY')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'AQUARIUM BY THE BAY'"></i> <i class="icon-chevron-down"  *ngIf="display == 'AQUARIUM BY THE BAY'"></i> </div>
 					<div class="brand-title">AQUARIUM BY THE BAY </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'AQUARIUM BY THE BAY'">
@@ -670,8 +670,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('EROS NOW')" *ngIf="display != 'EROS NOW'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'EROS NOW'"></i> </div>
+				<div class="accordion-head" (click)="showContent('EROS NOW')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'EROS NOW'"></i> <i class="icon-chevron-down"  *ngIf="display == 'EROS NOW'"></i> </div>
 					<div class="brand-title">EROS NOW</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'EROS NOW'">
@@ -697,8 +697,8 @@
 
 			<div class="live-streaming-handle-subtitle">Friends of concert </div>
 			<div class="accordion">
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('UNESCO India')" *ngIf="display != 'UNESCO India'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'UNESCO India'"></i> </div>
+				<div class="accordion-head" (click)="showContent('UNESCO India')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'UNESCO India'"></i> <i class="icon-chevron-down"  *ngIf="display == 'UNESCO India'"></i> </div>
 					<!-- <div class="brand-logo"><img src="assets/rickykej/logo/wwf-white.png" alt=""></div> -->
 					<div class="brand-title">UNESCO India</div>
 				</div>
@@ -713,8 +713,8 @@
 
 				<!-- 1st end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('United Nations india')" *ngIf="display != 'United Nations india'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'United Nations india'"></i> </div>
+				<div class="accordion-head" (click)="showContent('United Nations india')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'United Nations india'"></i> <i class="icon-chevron-down"  *ngIf="display == 'United Nations india'"></i> </div>
 					<div class="brand-title">United Nations india </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'United Nations india'">
@@ -726,8 +726,8 @@
 
 				<!-- 2nd end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Teamwork arts')" *ngIf="display != 'Teamwork arts'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Teamwork arts'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Teamwork arts')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Teamwork arts'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Teamwork arts'"></i> </div>
 					<div class="brand-title">Teamwork arts </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Teamwork arts'">
@@ -740,8 +740,8 @@
 
 				<!-- 3rd end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('UNHCR India')" *ngIf="display != 'UNHCR India'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'UNHCR India'"></i> </div>
+				<div class="accordion-head" (click)="showContent('UNHCR India')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'UNHCR India'"></i> <i class="icon-chevron-down"  *ngIf="display == 'UNHCR India'"></i> </div>
 					<div class="brand-title">UNHCR India </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'UNHCR India'">
@@ -760,8 +760,8 @@
 
 			<div class="live-streaming-handle-subtitle">Artist / Musicians / Performers </div>
 			<div class="accordion">
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Ricky Kej')" *ngIf="display != 'Ricky Kej'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Ricky Kej'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Ricky Kej')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Ricky Kej'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Ricky Kej'"></i> </div>
 					<!-- <div class="brand-logo"><img src="assets/rickykej/logo/wwf-white.png" alt=""></div> -->
 					<div class="brand-title">Ricky Kej </div>
 				</div>
@@ -782,8 +782,8 @@
 
 				<!-- 1st end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Wouter Kellerman')" *ngIf="display != 'Wouter Kellerman'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Wouter Kellerman'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Wouter Kellerman')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Wouter Kellerman'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Wouter Kellerman'"></i> </div>
 					<div class="brand-title">Wouter Kellerman</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Wouter Kellerman'">
@@ -803,8 +803,8 @@
 
 				<!-- 2nd end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Vilas Nayak')" *ngIf="display != 'Vilas Nayak'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Vilas Nayak'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Vilas Nayak')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Vilas Nayak'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Vilas Nayak'"></i> </div>
 					<div class="brand-title">Vilas Nayak</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Vilas Nayak'">
@@ -819,8 +819,8 @@
 
 				<!-- 3rd end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Varijashree')" *ngIf="display != 'Varijashree'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Varijashree'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Varijashree')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Varijashree'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Varijashree'"></i> </div>
 					<div class="brand-title">Varijashree</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Varijashree'">
@@ -833,8 +833,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Vijayaa shanker')" *ngIf="display != 'Vijayaa shanker'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Vijayaa shanker'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Vijayaa shanker')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Vijayaa shanker'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Vijayaa shanker'"></i> </div>
 					<div class="brand-title">Vijayaa shanker</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Vijayaa shanker'">
@@ -848,8 +848,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Laura Dickinson')" *ngIf="display != 'Laura Dickinson'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Laura Dickinson'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Laura Dickinson')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Laura Dickinson'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Laura Dickinson'"></i> </div>
 					<div class="brand-title">Laura Dickinson</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Laura Dickinson'">
@@ -863,8 +863,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Vishwa Mohan Bhatt')" *ngIf="display != 'Vishwa Mohan Bhatt'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Vishwa Mohan Bhatt'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Vishwa Mohan Bhatt')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Vishwa Mohan Bhatt'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Vishwa Mohan Bhatt'"></i> </div>
 					<div class="brand-title">Vishwa Mohan Bhatt</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Vishwa Mohan Bhatt'">
@@ -877,8 +877,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Baaba Maal')" *ngIf="display != 'Baaba Maal'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Baaba Maal'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Baaba Maal')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Baaba Maal'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Baaba Maal'"></i> </div>
 					<div class="brand-title">Baaba Maal</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Baaba Maal'">
@@ -890,8 +890,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Lonnie Park')" *ngIf="display != 'Lonnie Park'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Lonnie Park'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Lonnie Park')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Lonnie Park'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Lonnie Park'"></i> </div>
 					<div class="brand-title">Lonnie Park</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Lonnie Park'">
@@ -904,8 +904,8 @@
 
 				<!--  end/////// -->
 
-				<div class="accordion-head">
-					<div class="arrow down"> <i class="icon-chevron-right" (click)="showContent('Beethoven Pastoral Project')" *ngIf="display != 'Beethoven Pastoral Project'"></i> <i class="icon-chevron-down" (click)="showContent('')" *ngIf="display == 'Beethoven Pastoral Project'"></i> </div>
+				<div class="accordion-head" (click)="showContent('Beethoven Pastoral Project')">
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Beethoven Pastoral Project'"></i> <i class="icon-chevron-down"  *ngIf="display == 'Beethoven Pastoral Project'"></i> </div>
 					<div class="brand-title">Beethoven Pastoral Project</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Beethoven Pastoral Project'">
