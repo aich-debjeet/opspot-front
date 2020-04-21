@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="218px" height="50px" viewBox="0 0 218 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="46px" height="46px" viewBox="0 0 46 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
     <title>51910A67-5CA1-499A-A7A6-98CECDF16222</title>
     <desc>Created with sketchtool.</desc>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Concert-V1---Dark-Gold---updated" transform="translate(-235.000000, -5743.000000)">
-            <g id="Group-20-Copy" transform="translate(235.000000, 5743.000000)">
-                <rect id="Rectangle" fill="#30A26E" x="0" y="0" width="218" height="50" rx="4"></rect>
-                <g id="Group-27" transform="translate(28.000000, 15.000000)" fill="#FFFFFF">
-                    <g id="Group-14" transform="translate(36.000000, 0.000000)" font-family="Poppins-Regular, Poppins" font-size="14" font-weight="normal">
-                        <text id="Watch-on-OTT-Site">
-                            <tspan x="0" y="15">Watch on OTT Site</tspan>
-                        </text>
-                    </g>
-                    <g id="iconmonstr-television-17" fill-rule="nonzero">
-                        <path d="M13.112,4 L16,0.625 L15.219,0 L12,3.75 L8.781,0 L8,0.625 L10.888,4 L0,4 L0,20 L24,20 L24,4 L13.112,4 Z M21,18 L3,18 L3,6 L21,6 L21,18 Z M9,16 L9,8 L16,12 L9,16 Z" id="Shape"></path>
+        <g id="Concert-V1---Dark-Gold---updated" transform="translate(-453.000000, -5663.000000)">
+            <g id="Group-29" transform="translate(229.000000, 5612.000000)">
+                <g id="Group-28" transform="translate(0.000000, 51.000000)">
+                    <g id="Group-20-Copy" transform="translate(224.000000, 0.000000)">
+                        <rect id="Rectangle" fill="#30A26E" x="0" y="0" width="46" height="46" rx="4"></rect>
+                        <g id="Group-27" transform="translate(11.000000, 13.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                            <g id="iconmonstr-television-17">
+                                <path d="M13.112,4 L16,0.625 L15.219,0 L12,3.75 L8.781,0 L8,0.625 L10.888,4 L0,4 L0,20 L24,20 L24,4 L13.112,4 Z M21,18 L3,18 L3,6 L21,6 L21,18 Z M9,16 L9,8 L16,12 L9,16 Z" id="Shape"></path>
+                            </g>
+                        </g>
                     </g>
                 </g>
             </g>
