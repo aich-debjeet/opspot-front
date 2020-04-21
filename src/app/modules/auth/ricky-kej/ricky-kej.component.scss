@@ -702,7 +702,7 @@ $dmseriftext : 'DM Serif Text', serif;
     filter: alpha(opacity=80);
 }
 .accordion .accordion-body {
-    padding: 27px 119px 27px 82px;
+    padding: 63px 76px 57px 76px;
     height: auto;
     display: block;
     background: rgba($color: #4E5968, $alpha: 0.2);
@@ -760,10 +760,129 @@ $dmseriftext : 'DM Serif Text', serif;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    padding: 26px 0px 44px 0px;
     &__item{
+        margin-right: 10px;
         &:nth-child(5){
-            margin-top: 27px;
+            margin-top: 0px;
         }
     }
+}
+
+.grid-live-stream {	
+    width: 100%;	
+    display: flex;	
+    flex-direction: row;	
+    flex-wrap: wrap;	
+}	
+  	
+.item {	
+    background-color: transparent;	
+    width: 100%;	
+    max-width: 311px;	
+    min-height: 141px;	
+    @include mq($from: $mobile_sm, $until: $desktop_md) {	
+        border: none!important;	
+        max-width: 100%;	
+	}	
+    &:nth-child(2){	
+        border: 1px solid #4F5968;	
+        border-top: 0px;	
+        border-bottom: 0px;	
+        max-width: 355px;	
+        padding-left: 44px;	
+        @include mq($from: $mobile_sm, $until: $desktop_md) {	
+            padding: 0px;	
+        }	
+    }	
+    &:nth-child(3){	
+        padding-left: 43px;	
+        @include mq($from: $mobile_sm, $until: $desktop_md) {	
+            padding: 0px;	
+        }	
+    }	
+    &:nth-child(4){	
+        border: 1px solid #4F5968;	
+        border-left: 0px;	
+        border-right: 0px;	
+        padding-top: 32px;	
+    }	
+    &:nth-child(5){	
+        border: 1px solid #4F5968;	
+        max-width: 355px;	
+        padding-left: 44px;	
+        padding-top: 32px;	
+        @include mq($from: $mobile_sm, $until: $desktop_md) {	
+            padding-left: 0px;	
+        }	
+    }	
+    &:nth-child(6){	
+        border: 1px solid #4F5968;	
+        border-left: 0px;	
+        border-right: 0px;	
+        padding-left: 43px;	
+        padding-top: 32px;	
+        @include mq($from: $mobile_sm, $until: $desktop_md) {	
+            padding-left: 0px;	
+        }	
+    }	
+    &:nth-child(7){	
+        padding-top: 32px;	
+    }	
+    &:nth-child(8){	
+        border: 1px solid #4F5968;	
+        border-top: 0px;	
+        border-bottom: 0px;	
+        max-width: 355px;	
+        padding-left: 44px;	
+        padding-top: 32px;	
+        @include mq($from: $mobile_sm, $until: $desktop_md) {	
+            padding-left: 0px;	
+        }	
+    }	
+    &:nth-child(9){	
+        padding-left: 43px;	
+        padding-top: 32px;	
+        @include mq($from: $mobile_sm, $until: $desktop_md) {	
+            padding-left: 0px;	
+        }	
+    }	
+    &:nth-child(10){	
+        border: 1px solid #4F5968;	
+        border-left: 0px;	
+        border-right: 0px;	
+        padding-top: 32px;	
+        border-bottom: 0px;	
+    }	
+    &:nth-child(11){	
+        border: 1px solid #4F5968;	
+        max-width: 355px;	
+        padding-left: 44px;	
+        padding-top: 32px;	
+        border-bottom: 0px;	
+        @include mq($from: $mobile_sm, $until: $desktop_md) {	
+            padding-left: 0px;	
+        }	
+    }	
+    &:nth-child(12){	
+        border: 1px solid #4F5968;	
+        border-left: 0px;	
+        border-right: 0px;	
+        padding-left: 43px;	
+        padding-top: 32px;	
+        border-bottom: 0px;	
+    }	
+    .item-title{	
+        color: #FFFFFF;	
+        font-family: Poppins;	
+        font-size: 18px;	
+        font-weight: 600;	
+        letter-spacing: 0;	
+        line-height: 27px;	
+    }	
+}	
+.hidden-under-desktopmd{	
+	@include mq($from: $mobile_sm, $until: $wide_lg) {	
+		display: none!important;	
+	}	
 }
