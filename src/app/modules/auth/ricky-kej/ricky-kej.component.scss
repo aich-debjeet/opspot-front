@@ -241,6 +241,9 @@ $dmseriftext : 'DM Serif Text', serif;
     width: 100%;
     display: flex;
     justify-content: center;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        display: table;
+    }
     margin: 91px 0px;
 }
 .event-video-block{
