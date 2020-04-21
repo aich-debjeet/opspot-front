@@ -62,3 +62,22 @@
 .w-label100{
 	width: 100px;
 }
+.border-left{	
+	border-left: 1px solid $grey-light!important;	
+}	
+.underline{	
+	text-decoration: underline!important;	
+}	
+// icon font sizes	
+.f-15{	
+	font-size: 15px!important;	
+}	
+.f-18{	
+	font-size: 18px!important;	
+}	
+.f-8{	
+	font-size: 8px!important;	
+}	
+.is-visible{	
+	overflow: visible;	
+}
