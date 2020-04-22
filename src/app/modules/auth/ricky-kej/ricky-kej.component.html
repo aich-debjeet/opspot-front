@@ -19,8 +19,11 @@
 					<span>Ricky Kej LIVE</span>
 					<span> at <img class="ops-logo-event" src="assets/ops_logo_white.png" alt=""></span>
 				</div>
-				<!-- <a href="javascript:void(0)" class="watch-now-btn"><img src="assets/rickykej/play.svg" alt=""> Watch Now</a> -->
-				<a routerLink="/login" class="watch-now-btn"> REGISTER</a>
+				<div class="btn-block-hero">
+					<a routerLink="/login" class="watch-now-btn"> REGISTER</a>
+					<a (click)="scrollToElement(Live, 'Live')" class="watch-now-btn2"><img
+							src="assets/rickykej/play.svg" alt=""> WATCH NOW</a>
+				</div>
 				<a (click)="open()" class="brodcasting info popup-trigger">View Broadcast Timings</a>
 			</div>
 		</div><!-- event hero end -->
@@ -35,11 +38,11 @@
 			</div>
 		</div>
 	</section>
-	<section #About id="about" class="event-about">
-		<h1 class="primary-title">About Ricky Kej LIVE</h1>
+	<section #Live id="live">
+		<h1 class="primary-title">Ricky Kej LIVE</h1>
 		<div class="event-video">
 			<div class="event-video-block">
-				<iframe src="https://www.youtube.com/embed/CXwLhMA7NSE" frameborder="0"
+				<iframe src="https://www.youtube.com/embed/Imc7PvutNng" frameborder="0"
 					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen></iframe>
 			</div>
@@ -141,9 +144,9 @@
 					<div class="sponsor-title">Streaming Partner </div>
 					<img src="assets/rickykej/logo/lahari-color.png" style="max-width:89px" alt="">
 				</div>
-				<div class="outreach-partner-logos__item">	
-					<div class="sponsor-title">OTT Partner  </div>	
-					<img src="assets/rickykej/logo/airtel-xstream-color.png" style="max-width:165px" alt="">	
+				<div class="outreach-partner-logos__item">
+					<div class="sponsor-title">OTT Partner </div>
+					<img src="assets/rickykej/logo/airtel-xstream-color.png" style="max-width:165px" alt="">
 				</div>
 			</div>
 			<div class="outreach-partner-logos" style="justify-content:center;">
@@ -381,7 +384,8 @@
 			<h1 class="primary-title">Live Streaming Handles</h1>
 			<div class="accordion">
 				<div class="accordion-head" (click)="showContent('Goodwill Partners')">
-					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Goodwill Partners'"></i> <i class="icon-chevron-down" *ngIf="display == 'Goodwill Partners'"></i> </div>
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Goodwill Partners'"></i>
+						<i class="icon-chevron-down" *ngIf="display == 'Goodwill Partners'"></i> </div>
 					<!-- <div class="brand-logo"><img src="assets/rickykej/logo/wwf-white.png" alt=""></div> -->
 					<div class="brand-title">Goodwill Partners</div>
 				</div>
@@ -499,7 +503,8 @@
 				<!-- 1st end/////// -->
 
 				<div class="accordion-head" (click)="showContent('Out Reach Partners')">
-					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Out Reach Partners'"></i> <i class="icon-chevron-down" *ngIf="display == 'Out Reach Partners'"></i> </div>
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Out Reach Partners'"></i>
+						<i class="icon-chevron-down" *ngIf="display == 'Out Reach Partners'"></i> </div>
 					<div class="brand-title">Out Reach Partners </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Out Reach Partners'">
@@ -618,7 +623,8 @@
 				<!-- 2nd end/////// -->
 
 				<div class="accordion-head" (click)="showContent('Friends of Concert')">
-					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Friends of Concert'"></i> <i class="icon-chevron-down" *ngIf="display == 'Friends of Concert'"></i> </div>
+					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Friends of Concert'"></i>
+						<i class="icon-chevron-down" *ngIf="display == 'Friends of Concert'"></i> </div>
 					<div class="brand-title">Friends of Concert </div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Friends of Concert'">
@@ -682,7 +688,9 @@
 				<!-- 3rd end/////// -->
 
 				<div class="accordion-head" (click)="showContent('Artist / Musician / Performers')">
-					<div class="arrow down"> <i class="icon-chevron-right" *ngIf="display != 'Artist / Musician / Performers'"></i> <i class="icon-chevron-down" *ngIf="display == 'Artist / Musician / Performers'"></i> </div>
+					<div class="arrow down"> <i class="icon-chevron-right"
+							*ngIf="display != 'Artist / Musician / Performers'"></i> <i class="icon-chevron-down"
+							*ngIf="display == 'Artist / Musician / Performers'"></i> </div>
 					<div class="brand-title">Artist / Musician / Performers</div>
 				</div>
 				<div class="accordion-body" *ngIf="display == 'Artist / Musician / Performers'">
@@ -805,7 +813,9 @@
 
 			</div>
 		</div>
+	</section>
 
+	<section #About id="about" class="event-about">
 		<div class="event-ops-discrptn">
 			<div class="event-dis-ops-logo">
 				<img src="assets/ops_logo_white.png" alt="">
