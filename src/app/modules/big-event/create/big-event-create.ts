@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./big-event-create.scss']
 })
 export class BigEventCreate implements OnInit {
-
+  eventType: string = '';
   constructor(
     public title: OpspotTitle,
     public router: Router,
@@ -21,6 +21,7 @@ export class BigEventCreate implements OnInit {
     this.route.params.subscribe(params => {
       if (params['type']) {
         console.log(params['type']);
+        this.eventType = params['type'];
       }
     });
   }
