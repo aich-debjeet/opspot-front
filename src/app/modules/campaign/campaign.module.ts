@@ -10,8 +10,8 @@ import { EnrolmentInvoiceComponent } from './invoice/invoice.component';
 
 const routes: Route[] = [
   // to be redirected to the active campaign
-  { path: '', redirectTo: 'enrolment', pathMatch: 'full' },
-  { path: 'enrolment', component: EnrolmentViewComponent },
+  // { path: '', redirectTo: 'enrolment', pathMatch: 'full' },
+  { path: ':guid', component: EnrolmentViewComponent },
   { path: 'invoice/:campaignGuid/:enrollGuid', component: EnrolmentInvoiceComponent },
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
 ];
