@@ -123,7 +123,8 @@
                             Community Members
                         </div>
                         <span (click)="openInvite()" style="font-size: 24px !important; cursor: pointer;"
-                            class="icon-plus-circle primary" id="profile2-icon-plus-circle">
+                            class="icon-plus-circle primary" id="profile2-icon-plus-circle"
+                            *ngIf="group &&(group['is:owner'] || group['is:admin'])">
                         </span>
                     </div>
                     <m-group--member-previews

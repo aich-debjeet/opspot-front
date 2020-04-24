@@ -19,6 +19,7 @@ export class Remind {
   activity: any;
   @Input() boosted: boolean = false;
   hideTabs: boolean;
+  routerLink1 = '';
 
   events: EventEmitter<any>;
   eventsSubscription: any;
@@ -65,17 +66,26 @@ export class Remind {
     this.activity.boosted = this.boosted;
 
     if (
-      this.activity.custom_type == 'batch' 
-      && this.activity.custom_data 
+      this.activity.custom_type == 'batch'
+      && this.activity.custom_data
       && this.activity.custom_data[0].src
     ) {
       this.activity.custom_data[0].src = this.activity.custom_data[0].src.replace(this.opspot.site_url, this.opspot.cdn_url);
     }
+    if (this.activity.entity_type == 'event') {
+      if (this.activity.end_time_date) {
+        this.routerLink1 = '/event';
+      } else {
+        this.routerLink1 = '/showtimez'
+      }
+    }
+
+
   }
 
   getOwnerIconTime() {
     let session = this.session.getLoggedInUser();
-    if(session && session.guid === this.activity.ownerObj.guid) {
+    if (session && session.guid === this.activity.ownerObj.guid) {
       return session.icontime;
     } else {
       return this.activity.ownerObj.icontime;
