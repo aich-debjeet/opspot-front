@@ -13,9 +13,6 @@ import { LogoutComponent } from './logout.component';
 import { RegisterComponent } from './register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { RickyKejComponent } from './ricky-kej/ricky-kej.component';
-import { BrodcastComponent } from './ricky-kej/brodcast/brodcast.component';
-
 
 
 const routes: Routes = [
@@ -26,7 +23,6 @@ const routes: Routes = [
   { path: 'register', redirectTo: 'login' },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path:'about', component: AboutUsComponent},
-  { path: 'rickyKej', component: RickyKejComponent}
 ];
 
 @NgModule({
@@ -45,8 +41,6 @@ const routes: Routes = [
     LogoutComponent,
     RegisterComponent,
     AboutUsComponent,
-    RickyKejComponent,
-    BrodcastComponent,
     // ForgotPasswordComponent,
   ],
   entryComponents: [
@@ -54,7 +48,6 @@ const routes: Routes = [
     LogoutComponent,
     RegisterComponent,
     AboutUsComponent,
-    BrodcastComponent
     // ForgotPasswordComponent,
   ],exports:[
     LoginComponent,
