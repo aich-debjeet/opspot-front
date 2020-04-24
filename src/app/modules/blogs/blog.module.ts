@@ -34,6 +34,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'edit/:guid', pathMatch: 'full' },
       { path: 'edit/:guid', component: BlogEdit},
+      { path: 'edit/:guid/:groupGuid', component: BlogEdit},
       { path: 'owner', component: BlogAllComponent }
     ]
   },
