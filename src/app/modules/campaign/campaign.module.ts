@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule as NgCommonModule } from '@angular/common';
 import { Route, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '../../common/common.module';
 
 import { CampaignComponent } from './campaign.component';
 import { EnrolmentViewComponent } from './view/view.component';
 import { EnrolmentFormComponent } from './form/form.component';
 import { EnrolmentInvoiceComponent } from './invoice/invoice.component';
+import { NotificationModule } from '../notifications/notification.module';
 
 const routes: Route[] = [
   // to be redirected to the active campaign
@@ -25,8 +27,10 @@ const routes: Route[] = [
   ],
   imports: [
     FormsModule,
+    NgCommonModule,
     CommonModule,
     ReactiveFormsModule,
+    NotificationModule,
     RouterModule.forChild(routes)
   ]
 })

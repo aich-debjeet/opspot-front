@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Client } from '../../../services/api/client';
 import { OpspotTitle } from '../../../services/ux/title';
@@ -17,21 +17,43 @@ export class EnrolmentViewComponent implements OnInit {
   enrolmentDetails: any;
   formData: any;
   enrollmentDetails:any;
+  eventGuid: string;
+  private sub: any;
 
   constructor(
     public client: Client,
     public router: Router,
+    private route: ActivatedRoute,
     public title: OpspotTitle,
     private http: HttpClient,
     private elementRef: ElementRef
-  ) { }
+  ) {
+    this.sub = this.route.params.subscribe(params => {
+      console.log(params);
+      if(params['guid']){
+        this.loadDetails(params['guid']);
+      }
+   });
+   console.log(this.route);
+  
+  }
 
+  loadDetails(guid: string){
+    this.client.get('api/v3/event/' + guid)
+    .then((response: any)=>{
+      console.log(response);
+      if(response.status == 'success' && response['event']){
+        console.log(response['event']);
+        this.enrolmentDetails = response['event'];
+      }
+    });
+  }
   ngOnInit() {
     const location = window.location.href;
     const a = document.createElement('script');
     a.src = 'https://js.instamojo.com/v1/checkout.js';
     this.elementRef.nativeElement.appendChild(a);
-    this.load();
+    // this.load();
     this.title.setTitle('Enrolment');
   }
 
