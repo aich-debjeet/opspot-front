@@ -16,9 +16,9 @@ export class EnrolmentInvoiceComponent implements OnInit {
 
   ngOnInit() {
     this.paramsSubscription = this.route.params.subscribe(params => {
-      this.client.get(`api/v3/campaign/enrolment/${params['campaignGuid']}/${params['enrollGuid']}`)
+      this.client.get(`api/v3/event/enrollment/${params['campaignGuid']}/${params['enrollGuid']}`)
       .then((data:any)=>{
-        // console.log(data)
+        console.log(data)
         this.enrolledData = data.enrolment; 
       })
       .catch((e)=>{

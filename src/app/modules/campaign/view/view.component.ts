@@ -74,9 +74,9 @@ export class EnrolmentViewComponent implements OnInit {
   }
 
   proceedPayment(enrollDetails: any) {
+    console.log('form data =', enrollDetails);
     this.enrollmentDetails = enrollDetails;
     this.formData = this.enrollmentDetails.form;
-    // console.log('form data =', this.enrollmentDetails);
     this.payment();
   }
 
@@ -87,12 +87,12 @@ export class EnrolmentViewComponent implements OnInit {
   payment() {
     const formData = new FormData();
     formData.append('amount', environment.campaigns.enrolment.fee.amount.toString());
-    formData.append('purpose', environment.campaigns.enrolment.fee.purpose);
+    formData.append('purpose', 'enrollment');
     formData.append('buyer_name', this.formData.fullname);
     formData.append('email', this.formData.email);
     formData.append('phone', this.formData.phone_no);
     formData.append('redirect_url', window.Opspot.site_url + 'campaign/invoice/'+ this.enrollmentDetails.campaignGuid + '/' + this.enrollmentDetails.enrollGuid);
-    formData.append('enrolment_id', this.enrollmentDetails.enrollGuid);
+    formData.append('purpose_guid', this.enrollmentDetails.enrollGuid);
 
     this.http.post<any>('api/v3/payment/instamojo', formData).subscribe(
       (res) => {
@@ -101,7 +101,7 @@ export class EnrolmentViewComponent implements OnInit {
         s.innerHTML = "Instamojo.open('" + res.longurl + "');";
         this.elementRef.nativeElement.appendChild(s);
       }, (err) => {
-        // console.log(err);
+        console.log(err);
       }
     );
   }

@@ -137,7 +137,7 @@
                   </div><!--left ends-->
                   <div class="o-enrolment-block__right">
                       <div class="o-entrolment-form">
-                        <app-enrolment-form (done)="proceedPayment($event)"></app-enrolment-form>
+                        <app-enrolment-form (done)="proceedPayment($event)" [guid]="enrolmentDetails?.guid"></app-enrolment-form>
                       </div><!--form ends-->
                   </div><!--right ends-->
               </div><!--block ends-->
