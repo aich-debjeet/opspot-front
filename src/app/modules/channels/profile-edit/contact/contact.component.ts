@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContactComponent implements OnInit {
   activeUser = window.Opspot.user;
+  wrongWebsite : boolean = false;
   inProgress:boolean = false;
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
@@ -78,6 +79,13 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
+    const regex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/ ;
+    if(this.model.website.length > 0){
+      if(!regex.test(this.model.website)){
+        this.wrongWebsite = true;
+        return
+      } else this.wrongWebsite = false;
+    }
     this.inProgress = true;
     const contact = {
       contact_details: {
