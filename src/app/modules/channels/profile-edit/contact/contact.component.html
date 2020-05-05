@@ -180,8 +180,9 @@
             </div>
             <div class="o-prof-edit-single-item">
                 <div class="form-group w-lg">
-                    <input type="text" id="contact-website" [(ngModel)]="model.website" name="website"
+                    <input type="url" id="contact-website" [(ngModel)]="model.website" name="website"
                         class="form-control form-control-lg">
+                        <p class="error text-sm" *ngIf="wrongWebsite">Must be a valid url</p>
                 </div>
                 <div class="pos">
                     <div class="o-prof-edit-privacy hidden-mob" (click)="toggleWebsite=!toggleWebsite">
