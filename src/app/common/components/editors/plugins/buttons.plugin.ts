@@ -11,7 +11,8 @@ export class ButtonsPlugin {
     },
     enabled: true,
     uploadFunction: () => {
-    }
+    },
+    updateBlog: () => {}
   };
   base: Editor;
   window;
@@ -53,7 +54,6 @@ export class ButtonsPlugin {
   public events() {
     this.$element.addEventListener('keyup', this.toggleButtons.bind(this));
     this.$element.addEventListener('click', this.toggleButtons.bind(this));
-
     window.addEventListener('resize', this.positionButtons.bind(this));
   }
 
@@ -471,16 +471,17 @@ export class ButtonsPlugin {
       }));
     };
     reader.readAsDataURL(file);
-
+console.log('file ready to be uploaded')
 
     this.options.uploadFunction(fileInput).then((result) => {
+      console.log(result);
       this.window.dispatchEvent(new CustomEvent('attachment-upload-finished', {
         detail: {
           timestamp: timestamp,
           guid: result
         }
       }));
-    });
+    }).then(() => this.options.updateBlog());
   }
 
   /**

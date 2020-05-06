@@ -179,11 +179,12 @@
       <button type="submit" id="preview-publish" class="btn btn-primary btn-sm"
         [disabled]="!canSave || pendingUploads.length !== 0 || !validThreshold"
         i18n="@@BLOGS__EDIT__PUBLISH_ACTION">Preview and Publish</button>
+        <span class="text-md grey" [hidden]="!inProgress">Draft saved</span>
     </div>
     <opspot-textarea name="title" id="edit-title" [(mModel)]="blog.title" class="o-blog-content" placeholder="Title"
-      i18n-placeholder="@@BLOGS__EDIT__TITLE_PLACEHOLDER"></opspot-textarea>
+      i18n-placeholder="@@BLOGS__EDIT__TITLE_PLACEHOLDER" (mModelChange)="autoSave()"></opspot-textarea>
     <m-inline-editor name="description" id="edit-write-some-content" [(ngModel)]="blog.description" placeholder="Go ahead and write some content!"
-      i18n-placeholder="@@BLOGS__EDIT__INLINE_EDITOR_PLACEHOLDER" #inlineEditor></m-inline-editor>
+      i18n-placeholder="@@BLOGS__EDIT__INLINE_EDITOR_PLACEHOLDER" (draft)="autoSave()" #inlineEditor></m-inline-editor>
   </form>
 </div>
 

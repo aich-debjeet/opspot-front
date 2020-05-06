@@ -41,6 +41,9 @@ export class Textarea implements OnChanges {
   @Input('disabled') disabled: boolean = false;
   @Input('placeholder') placeholder: string = '';
 
+  typingTimer;//timer identifier
+  doneTypingInterval = 5000;
+  
   getControlText(): string {
     return this.editorControl.nativeElement.innerText;
   }
@@ -59,7 +62,12 @@ export class Textarea implements OnChanges {
   }
 
   change() {
-    this.update.emit(this.getControlText());
+    clearTimeout(this.typingTimer)
+    if(this.getControlText()){
+      this.typingTimer = setTimeout(() => {
+        this.update.emit(this.getControlText())
+      }, this.doneTypingInterval);
+    }
   }
 
   paste(e: any) {
@@ -77,6 +85,7 @@ export class Textarea implements OnChanges {
   }
 
   ngOnChanges(changes: any) {
+    console.log(changes)
     if (
       changes.model &&
       this.getControlText() !== changes.model.currentValue &&

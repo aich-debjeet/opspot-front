@@ -130,6 +130,19 @@ export class BlogEdit {
       }
     });
   }
+  autoSave() {
+    console.log('trigger events');
+      this.inProgress = true;
+      this.client.post('api/v1/blog/' + this.guid, this.blog)
+      .then((resp: any) => {
+        console.log(resp);
+        this.inProgress = false;
+        if(this.guid === 'new'){
+          this.guid = resp['guid'];
+          this.blog.guid = resp['guid'];
+        }
+      })
+  }
 
   ngOnDestroy() {
     if (this.paramsSubscription) {
