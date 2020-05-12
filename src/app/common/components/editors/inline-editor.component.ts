@@ -60,7 +60,7 @@ export class InlineEditorComponent implements ControlValueAccessor, OnInit, OnDe
       'audio': `<i class="icon-mic"></i>`,
     },
     placeholder: 'Upload your video/audio or external URL link',
-    uploadFunction: this.attachment.upload.bind(this.attachment),
+    uploadFunction: this.attachment.uploadMultiple.bind(this.attachment),
     updateBlog: this.keyUp.bind(this)
   });
   private images = new EmbedImage({
@@ -208,8 +208,6 @@ console.log(this.host.nativeElement, options)
   }
 
   keyUp(e) {
-    console.log(e)
-    console.log(this.host.nativeElement.innerText);
     clearTimeout(this.typingTimer)
     if(this.host.nativeElement.innerText){
       this.typingTimer = setTimeout(() => {
