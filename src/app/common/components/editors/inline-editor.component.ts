@@ -59,7 +59,7 @@ export class InlineEditorComponent implements ControlValueAccessor, OnInit, OnDe
       'videos': `<i class="icon-video"></i>`,
       'audio': `<i class="icon-mic"></i>`,
     },
-    placeholder: 'Upload your video/audio or external URL link',
+    placeholder: 'Upload your video/audio or external URL link and press Enter',
     uploadFunction: this.attachment.uploadMultiple.bind(this.attachment),
     updateBlog: this.keyUp.bind(this)
   });
