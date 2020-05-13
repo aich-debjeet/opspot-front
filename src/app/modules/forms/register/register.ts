@@ -349,7 +349,7 @@ export class RegisterForm {
     this.resending = true;
     const data = {
       number: this.removeOperators(this.form.value.mobileNumber.internationalNumber),
-      retry: true,
+      retry: false,
       country_code: this.countryCode
     };
     this.service.getOtp(data).then((data: any) => {

@@ -284,7 +284,7 @@ export class ForgotPasswordComponent {
   resendOtp() {
     this.resending = true;
     const data = ({
-      retry: true,
+      retry: false,
       key: "phone_number",
       value: this.mobile
     });
