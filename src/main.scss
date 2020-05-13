@@ -3295,19 +3295,19 @@ m-inline-editor .m-blog--image {
     .medium-editor-insert-plugin .medium-insert-buttons button {
       display: block;
       cursor: pointer;
-      color: #bbb;
+      color: #263238;
       background: #fff;
       width: 32px;
       height: 32px;
       box-sizing: border-box;
       border-radius: 20px;
-      border: 1px solid #ddd;
+      border: 2px solid #263238;
       line-height: 30px;
       text-align: center;
       padding: 0;
       font-family: Arial; }
     .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-show {
-      font-size: 25px;
+      font-size: 24px;
       -webkit-transform: rotate(0);
               transform: rotate(0);
       transition: -webkit-transform 100ms;
@@ -3336,7 +3336,8 @@ m-inline-editor .m-blog--image {
         margin: 0 5px; }
         .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons li i {
           vertical-align: middle;
-          font-size: 20px; }
+          font-size: 20px;
+          color:#263238 }
     .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons-show {
       display: block; }
 

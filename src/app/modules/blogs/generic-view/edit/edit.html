@@ -176,10 +176,10 @@
           Error: {{error}}
         </h1>
       </ng-container>
+      <span class="text-md grey align" [hidden]="!inProgress">Saved as a draft</span>
       <button type="submit" id="preview-publish" class="btn btn-primary btn-sm"
         [disabled]="!canSave || pendingUploads.length !== 0 || !validThreshold"
         i18n="@@BLOGS__EDIT__PUBLISH_ACTION">Preview and Publish</button>
-        <span class="text-md grey" [hidden]="!inProgress">Draft saved</span>
     </div>
     <opspot-textarea name="title" id="edit-title" [(mModel)]="blog.title" class="o-blog-content" placeholder="Title"
       i18n-placeholder="@@BLOGS__EDIT__TITLE_PLACEHOLDER" (mModelChange)="autoSave()"></opspot-textarea>
