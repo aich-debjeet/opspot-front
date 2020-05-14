@@ -77,7 +77,7 @@
                   (onTranslate)="translateToggle = false"
                   (onTranslateError)="translateToggle = false" #translate
                 ></m-translate>
-                <div class="text-md white-space word-break" *ngIf="opportunity?.blurb">
+                <div class="text-md white-space word-br" *ngIf="opportunity?.blurb">
                   <span [innerHtml]="opportunity?.blurb | safe"></span>
                 </div>
               </div>

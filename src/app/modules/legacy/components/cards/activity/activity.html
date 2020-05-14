@@ -68,7 +68,7 @@
       <!-- <i class="material-icons m-material-icons-inline">explicit</i> -->
     </a>
 
-    <span class="m-mature-message-content" id="activity-text" style="word-break: break-all"
+    <span class="m-mature-message-content word-br" id="activity-text"
       [innerHtml]="activity.message | tags"
       [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"
       (click)="activity.mature && !activity.mature_visibility ? activity.mature_visibility = !activity.mature_visibility : null"
