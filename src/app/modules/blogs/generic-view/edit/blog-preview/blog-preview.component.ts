@@ -21,6 +21,9 @@ export class BlogPreviewComponent implements OnInit {
   blogSkills: any[] = [];
   error: string = '';
   inProgress: boolean = false;
+  defaultCoins: number;
+  displayPaywal: boolean = false;
+  meta: any;
 
   @Input('object') set data(object) {
     this.blog = object ? object.blog : null;
@@ -91,7 +94,13 @@ export class BlogPreviewComponent implements OnInit {
   }
 
   createEditBlog() {
-    const blog = Object.assign({}, this.blog);
+    if (this.defaultCoins) {
+        this.blog.wire_threshold = {
+        min: this.defaultCoins,
+        type: 'tokens',
+      };
+    }
+    let blog = Object.assign({}, this.blog);
     blog.mature = blog.mature ? 1 : 0;
     blog.monetization = blog.monetization ? 1 : 0;
     blog.monetized = blog.monetized ? 1 : 0;
@@ -145,6 +154,14 @@ export class BlogPreviewComponent implements OnInit {
    */
   closeModal() {
     this.overlayModal.dismiss();
+  }
+
+  displayPaywall() {
+    if (this.displayPaywal) {
+      this.displayPaywal = false;
+    } else {
+      this.displayPaywal = true;
+    }
   }
 
 }
