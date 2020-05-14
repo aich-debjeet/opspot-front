@@ -11,7 +11,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
   moduleId: module.id,
   selector: 'm-channel--sidebar',
   inputs: ['_user: user', 'editing', 'displayBookmark'],
-  outputs: [ '_deleteBookmark: deleteBookmark'],
+  outputs: ['_deleteBookmark: deleteBookmark'],
   templateUrl: 'sidebar.html',
   styleUrls: ['./sidebar.scss']
 })
@@ -32,6 +32,7 @@ export class ChannelSidebar {
   onboardingProgress: number = -1;
   profEdit = true;
   sidebarMsg = true;
+  pattern = /^((http|https|ftp):\/\/)/;
   @Output() changeEditing = new EventEmitter<boolean>();
   _deleteBookmark: EventEmitter<any> = new EventEmitter();
 
@@ -42,6 +43,9 @@ export class ChannelSidebar {
     if (!value)
       return;
     this.user = value;
+    if (!this.pattern.test(this.user['website']) && this.user['website']) {
+      this.user = { ...this.user, website: `https://${this.user['website']}` };
+    }
     this.user['contributeType'] = 'contribute';
   }
 
@@ -177,7 +181,7 @@ export class ChannelSidebar {
     }
   }
 
-  userPortfolioVisiblity(){
+  userPortfolioVisiblity() {
     return !!+this.user['portfolio_visiblity'];
   }
 

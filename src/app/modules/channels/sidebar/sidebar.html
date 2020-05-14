@@ -228,10 +228,11 @@
       </li>
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-globe"></i></span>
-        <span class="text-md float-left" *ngIf="isOwner() && !user.website" [routerLink]="['/profile/contact']">
-          <a class="primary" id="sidebar-add-website">Add Website</a>
+        <span class="text-md float-left">
+          <a class="primary" id="sidebar-add-website" *ngIf="isOwner() && !user.website" [routerLink]="['/profile/contact']">Add Website</a>
+          <a class="text-md float-left" id="sidebar-website" target="_blank" [href]="user.website" *ngIf="user.website">{{user.website}}</a>
         </span>
-        <span class="text-md float-left" id="sidebar-website">{{user.website}}</span>
+        <!-- <span class="text-md float-left" id="sidebar-website">{{user.website}}</span> -->
       </li>
       <li class="o-bio-info__item m-t-9">
         <div class="o-bio-info-left" id="sidebar-height">
