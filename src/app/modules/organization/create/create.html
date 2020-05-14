@@ -24,7 +24,7 @@
         <div class="o-create-organisation-header">
             <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage" [croperType]="'circle'" (imgResult)="crop($event)">
             </app-image-croper>
-            <h4 id="create-organization">{{editOrganization?"Edit":"Create"}} a Organization</h4>
+            <h4 id="create-organization">{{editOrganization?"Edit":"Create"}} an Organization</h4>
             <!-- <div class="text-md grey">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
                 ligula eget dolor. Aenean massa. Cum sociis natoque penatibus.
@@ -32,18 +32,18 @@
         </div>
         <div class="o-create-organisation-content__form">
             <div class="form-group">
-                <label>Organization Name</label>
+                <label>Name</label>
                 <input [(ngModel)]="organization.name" id="create-organization-name" type="text" class="form-control form-control-lg">
             </div>
             <div class="form-group">
-                <label>Organization Type</label>
+                <label>Type</label>
                 <select class="form-control form-control-lg" id="create-organization-type" [(ngModel)]="organization.category">
                         <option value="" id="create-organization-select-type" disabled selected>Select Type</option>
                         <option *ngFor = "let type of organizationTypeList" id="create-organization-type-value" [value]="type.value">{{ type.label}}</option>       
                 </select>
             </div>
             <div class="form-group">
-                <label>Add Services</label>
+                <label>Add Skills</label>
                 <app-skills [(inputTagsValue)]=organization.tags></app-skills>
                 <div class="grey text-sm paddng-top">Use a comma to separate skills, or choose from the list.</div>
             </div>

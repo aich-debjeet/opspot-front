@@ -52,10 +52,10 @@ import { GroupsService } from '../groups-service';
       <div class="delete-confirmation-wrapper">
       <div class="mdl-card__supporting-text">
         <p i18n="@@GROUPS__REMOVE_X_FROM_Y_CONFIRM" class="m-modal-confirm-body text-lg">Are you sure you want to remove {{ user.username }} from {{ group.name }}?</p>
-        <p><input type="checkbox" #ban> <ng-container i18n="@@M__COMMON__BAN_PERMANENTLY">Ban permanently</ng-container></p>
+        <!-- <p><input type="checkbox" #ban> <ng-container i18n="@@M__COMMON__BAN_PERMANENTLY">Ban permanently</ng-container></p> -->
       </div>
       <div class="opspot-modal-dialog-actions">
-        <button (click)="kick(ban.checked)" id="card-user-action-confirm" class="btn btn-primary">
+        <button (click)="kick()" id="card-user-action-confirm" class="btn btn-primary">
           <ng-container i18n="@@M__ACTION__CONFIRM">Confirm</ng-container>
         </button>
         <button (click)="cancelRemove()" id="card-user-action-cancel" class="btn btn-outline-primary">
@@ -130,20 +130,22 @@ export class GroupsCardUserActionsButton {
     this.kickPrompt = false;
   }
 
-  kick(ban: boolean = false) {
+  kick() {
     let action;
 
     this.kickPrompt = false;
 
-    if (ban) {
-      action = this.service.ban(this.group, this.user.guid);
-    } else {
-      action = this.service.kick(this.group, this.user.guid);
-    }
+    // if (ban) {
+    //   action = this.service.ban(this.group, this.user.guid);
+    // } else {
+    //   action = this.service.kick(this.group, this.user.guid);
+    // }
+
+    action = this.service.kick(this.group, this.user.guid);
 
     action.then((done: boolean) => {
       this.user['is:member'] = !done;
-      this.user['is:banned'] = done && ban;
+      // this.user['is:banned'] = done && ban;
 
       this.kickPrompt = !done;
       this.changeCounter('members:count', -1);

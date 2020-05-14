@@ -29,6 +29,7 @@ export class BlogEdit {
   opspot = window.Opspot;
   open: boolean = false;
   guid: string;
+  container_guid: string;
   blog: any = {
     guid: 'new',
     title: '',
@@ -47,7 +48,8 @@ export class BlogEdit {
       description: '',
       author: ''
     },
-    slug: ''
+    slug: '',
+    container_guid: ''
   };
   banner: any;
   banner_top: number = 0;
@@ -91,37 +93,40 @@ export class BlogEdit {
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {
         this.guid = params['guid'];
-
-        this.blog = {
-          guid: 'new',
+      }
+      if (params['groupGuid']) {
+        this.container_guid = params['groupGuid'];
+      }
+      this.blog = {
+        guid: 'new',
+        title: '',
+        description: '<p><br></p>',
+        access_id: 2,
+        category: '',
+        license: '',
+        fileKey: 'header',
+        mature: 0,
+        monetized: 0,
+        published: 0,
+        wire_threshold: null,
+        custom_meta: {
           title: '',
-          description: '<p><br></p>',
-          access_id: 2,
-          category: '',
-          license: '',
-          fileKey: 'header',
-          mature: 0,
-          monetized: 0,
-          published: 0,
-          wire_threshold: null,
-          custom_meta: {
-            title: '',
-            description: '',
-            author: ''
-          },
-          slug: '',
-          tags: [],
-        };
+          description: '',
+          author: ''
+        },
+        slug: '',
+        tags: [],
+        container_guid: this.container_guid
+      };
 
-        this.banner = void 0;
-        this.banner_top = 0;
-        this.banner_prompt = false;
-        this.editing = true;
-        this.canSave = true;
+      this.banner = void 0;
+      this.banner_top = 0;
+      this.banner_prompt = false;
+      this.editing = true;
+      this.canSave = true;
 
-        if (this.guid !== 'new') {
-          this.load();
-        }
+      if (this.guid !== 'new') {
+        this.load();
       }
     });
   }
@@ -340,7 +345,7 @@ export class BlogEdit {
   //       this.inProgress = false;
   //     });
   // }
- 
+
   // entityGuid(guid: string){
   //   this.selectedGuid = guid;
   // }

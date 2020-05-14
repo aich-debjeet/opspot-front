@@ -96,7 +96,7 @@ export class MyJourneyFormComponent implements OnInit {
   }
 
   post() {
-    if (this.meta.message.length <= 0 && this.attachment.has()) {
+    if (!this.attachment.hasAttachment()) {
       this.toastr.error("Error! You cannot post an empty post.");
       return;
     }
