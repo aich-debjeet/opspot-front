@@ -32,6 +32,14 @@ export class AdminInteractions {
       title: 'Referrals',
       metric: 'referral'
     },
+    {
+      title: 'Sign Up',
+      metric: 'signup'
+    },
+    {
+      title: 'Login',
+      metric: 'login'
+    }
   ];
 
   startDate: string;
@@ -45,7 +53,7 @@ export class AdminInteractions {
     d.setHours(23, 59, 59);
     this.endDate = d.toISOString();
 
-    d.setDate(d.getDate() -1)
+    d.setDate(d.getDate() - 1)
     d.setHours(0, 0, 0);
     this.startDate = d.toISOString();
   }
