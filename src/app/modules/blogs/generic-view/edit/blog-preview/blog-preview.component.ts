@@ -95,10 +95,9 @@ export class BlogPreviewComponent implements OnInit {
 
   createEditBlog() {
     if (this.defaultCoins) {
-        this.blog.wire_threshold = {
-        min: this.defaultCoins,
-        type: 'tokens',
-      };
+      this.blog.wire_threshold = true
+      this.blog.min = this.defaultCoins;
+      this.blog.type ='tokens';
     }
     let blog = Object.assign({}, this.blog);
     blog.mature = blog.mature ? 1 : 0;
