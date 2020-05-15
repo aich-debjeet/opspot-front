@@ -39,6 +39,7 @@ export class RegisterForm {
   fbForm: FormGroup;
   opspot = window.Opspot;
   resending = false;
+  showTimer = false;
 
   @Output() done: EventEmitter<any> = new EventEmitter();
 
@@ -134,6 +135,7 @@ export class RegisterForm {
         this.noViewOtp = false;
         this.invalidNumberLength = false;
         localStorage.setItem('phone-verification-secret', res.secret);
+        this.timer1(120);
       })
       .catch((e) => {
         if (e.status === 'error') {
@@ -349,11 +351,12 @@ export class RegisterForm {
     this.resending = true;
     const data = {
       number: this.removeOperators(this.form.value.mobileNumber.internationalNumber),
-      retry: true,
+      retry: false,
       country_code: this.countryCode
     };
     this.service.getOtp(data).then((data: any) => {
       localStorage.setItem('phone-verification-secret', data.secret);
+      this.timer1(120);
       // this.inProgress = false;
     })
       .catch((e) => {
@@ -369,5 +372,30 @@ export class RegisterForm {
       this.resending = false;
     }, 1500);
   }
+
+  timerOn = true;
+  m: any;
+  s: any;
+  timer1(remaining) {
+    this.showTimer = true;
+    document.getElementById("timer").style.visibility = "visible";
+    this.m = Math.floor(remaining / 60);
+    this.s = remaining % 60;
+
+    this.m = this.m < 10 ? '0' + this.m : this.m;
+    this.s = this.s < 10 ? '0' + this.s : this.s;
+
+    document.getElementById('timer').innerHTML = this.m + ':' + this.s;
+
+    remaining -= 1;
+
+    if (remaining >= 0 && this.timerOn) {
+      setTimeout(() => this.timer1(remaining), 1000)
+    } else {
+      document.getElementById("timer").style.visibility = "hidden";
+      this.showTimer = false;
+    }
+  }
+
 
 }
