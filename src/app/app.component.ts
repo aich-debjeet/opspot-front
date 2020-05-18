@@ -60,8 +60,10 @@ export class Opspot {
       .subscribe((event: NavigationEnd) => {
         if (event.url === '/' || event.url === '/login') {
           this.showTopbar = false;
+          this.showTOSModal = false;
         } else {
           this.showTopbar = true;
+          this.showTOSModal = true;
         }
       });
 
