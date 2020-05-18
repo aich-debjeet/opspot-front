@@ -58,8 +58,6 @@ export class PosterComponent {
   menuOptions: Array<string> = ['create-showtimez', 'create-opportunity', 'create-the-bluestore', 'create-portfolio', 'create-my-journey'];
   // menuOptions: Array<string> = ['create-showtimez', 'create-opportunity'];
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
-  groupGuid: string = '';
-  routeLink: string = '/blog/edit/new';
 
   constructor(
     public session: Session,
@@ -76,18 +74,12 @@ export class PosterComponent {
   set _showSpecialHashtags(value: boolean) {
     this.specialHashtags = value;
     if (this.specialHashtags) {
-      this.menuOptions = this.menuOptions.slice(0, 3);
+      this.menuOptions = this.menuOptions.slice(0,3);
     }
   }
 
   set _container_guid(guid: any) {
     this.attachment.setContainer(guid);
-    this.groupGuid = guid;
-    if (this.groupGuid) {
-      this.routeLink = '/blog/edit/new/' + this.groupGuid;
-    } else {
-      this.routeLink = '/blog/edit/new';
-    }
   }
 
   set accessId(access_id: any) {
