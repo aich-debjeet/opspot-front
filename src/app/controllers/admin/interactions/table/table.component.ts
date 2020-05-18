@@ -15,8 +15,8 @@ import { Client } from '../../../../services/api/client';
           @{{item.user.username}}
         </td>
         <td *ngIf = "metric.metric !== 'signup' && metric.metric !== 'login'">{{item.value}}</td>
-        <td *ngIf = "metric.metric == 'signup'">{{item.user.username}}</td>
-        <td *ngIf = "metric.metric == 'login'">{{item.user.email}}</td>
+        <td *ngIf = "metric.metric == 'signup'">{{item.user?.phone}}</td>
+        <td *ngIf = "metric.metric == 'login'">{{item.user?.email}}</td>
       </tr>
 
       <tr *ngIf="data[type].length === 0 && !inProgress">
