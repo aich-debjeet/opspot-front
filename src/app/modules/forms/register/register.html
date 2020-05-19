@@ -50,7 +50,7 @@
                   (onInputChange)="onOtpChange($event)"
                   [config]="otpConfig"
                 ></ng-otp-input>
-                <div [hidden]="enterOtpError" class="line-err">
+                <div [hidden]="enterOtpError" id="error-display" class="line-err">
                   Please enter the Otp
                 </div>
               </div>

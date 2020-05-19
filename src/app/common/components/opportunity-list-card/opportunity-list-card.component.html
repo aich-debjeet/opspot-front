@@ -9,7 +9,7 @@
                     <img *ngIf="opportunity?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/ops_icon.png'">
                 </div>
                 <div class="o-opportunities-info">
-                    <div class="text-md f500 elipse elipse--w-130">{{opportunity.title}}</div>
+                    <div class="text-md f500 elipse elipse--w-130" id="oppotunity_widget_opportunity_name">{{opportunity.title}}</div>
                     <div class="text-sm elipse elipse--w-130">{{opportunity.location}}</div>
                 </div>
             </a>

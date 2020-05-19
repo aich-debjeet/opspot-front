@@ -130,7 +130,7 @@
         <h2 class="f500">{{blog.title}}</h2>
       </div>
       <!--title ends-->
-      <header *ngIf="blog"
+      <header *ngIf="blog" id="nsfw_media_post_blanket"
         [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(blog), 'm-mature-content-shown': attachment.isForcefullyShown(blog) }">
         <div class="m-mature-overlay" (click)="blog.mature_visibility = !blog.mature_visibility">
           <span class="m-mature-overlay-note">

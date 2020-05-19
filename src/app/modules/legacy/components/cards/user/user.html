@@ -5,11 +5,11 @@
             <!-- <i class="material-icons o-fontRemove close-btn" (click)="remove()">close</i> -->
         </div>
         <!-- <a [routerLink]="['/', user?.username]" class="demo"></a> -->
-        <div class="o-suggestion__avatar" [routerLink]="['/', user?.username]"
+        <div class="o-suggestion__avatar" id="suggested_user_profile_image" [routerLink]="['/', user?.username]"
             [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + user?.guid + ')'" alt="">
         </div>
-        <div class="o-suggestion__name caption-bold" [routerLink]="['/', user?.username]">{{ user?.name }}</div>
-        <div class="text-md grey">@{{ user?.username }}</div>
+        <div class="o-suggestion__name caption-bold" id="suggested_user_profile_name" [routerLink]="['/', user?.username]">{{ user?.name }}</div>
+        <div class="text-md grey" id="suggested_user_username">@{{ user?.username }}</div>
         <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
         <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid"></opspot-button-subscribe>
     </div>

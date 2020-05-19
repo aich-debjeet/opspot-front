@@ -13,7 +13,7 @@
     </ng-template>
   </div>
   <div class="body">
-    <a *ngIf="activity.containerObj && activity.containerObj.type == 'organization'; else usersLabel" class="o-avatar__name" id="activity-username" [routerLink]="['/organization/profile/', activity.containerObj.guid]">
+    <a *ngIf="activity.containerObj && activity.containerObj.type == 'organization'; else usersLabel" id="activity_user_name" class="o-avatar__name" id="activity-username" [routerLink]="['/organization/profile/', activity.containerObj.guid]">
       <strong title={{activity.containerObj.name}} id="activity-owner-obj-name">{{activity.containerObj.name}}</strong>
       <m-channel--badges class="m-channel--badges-activity" [user]="activity.containerObj" badges="[ 'verified' ]">
       </m-channel--badges>
@@ -100,6 +100,7 @@
 
   <!-- Rich content -->
   <div class="m-rich-embed"
+  id="nsfw_media_post_blanket"
     *ngIf="activity.perma_url && activity.title && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
@@ -114,7 +115,7 @@
   <!-- Album post-->
   <div *ngIf="activity.entity_type === 'album' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'">
     <div
-      class="feed-media" *ngIf="activity?.custom_data && activity?.custom_data.length > 1" [routerLink]="['/media', activity.guid]"
+      class="feed-media" id="nsfw_media_post_blanket" *ngIf="activity?.custom_data && activity?.custom_data.length > 1" [routerLink]="['/media', activity.guid]"
       [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link" id="activity-posts">
         <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
@@ -132,7 +133,7 @@
         </div>
       </a>
     </div>
-    <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type == 'video'"
+    <div id="nsfw_media_post_blanket" *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type == 'video'"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }" [routerLink]="['/media', activity.guid]">
       <m-video width="100%" height="300px" style="background:#000;" [muted]="false"
       [poster]="activity.custom_data[0].thumbnail_src"
@@ -142,12 +143,12 @@
       <video-ads [player]="player" *ngIf="activity.monetized"></video-ads>
       </m-video>
     </div>
-    <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type == 'audio'" [routerLink]="['/media', activity.guid]" class="audio-background-cover"
+    <div id="nsfw_media_post_blanket" *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type == 'audio'" [routerLink]="['/media', activity.guid]" id="audio_post" class="audio-background-cover"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
       <m-audio [src]="'api/v1/media/' + activity.custom_data[0].guid + '/play'" style="width: 100%;"></m-audio>
       <!-- <m-audio [src]="'https://ops-audio-01.s3.amazonaws.com/' + activity.custom_data[0].guid + '/128.mp3'"></m-audio> -->
     </div>
-    <div *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type != 'audio' && activity?.custom_data[0].entity_type != 'video'
+    <div id="nsfw_media_post_blanket" *ngIf="activity?.custom_data && activity?.custom_data.length == 1 && activity?.custom_data[0].entity_type != 'audio' && activity?.custom_data[0].entity_type != 'video'
       &&  activity?.custom_data[0].entity_type == 'image' " [routerLink]="['/media', activity.guid]"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
       <img [src]="activity?.custom_data[0]?.src" alt="" class="feed-media__img" (error)="activity.custom_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">    
@@ -298,7 +299,7 @@
       (click)="activity.title = titleEdit.value; save();" i18n="@@M__ACTION__SAVE">Save</button>
   </div>
 
-  <div class="item item-image item-image-video m-activity--video" 
+  <div class="item item-image item-image-video m-activity--video" id="nsfw_media_post_blanket"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
     *ngIf="activity.custom_type == 'video'" [routerLink]="['/media', activity.guid]">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
@@ -318,7 +319,7 @@
   </div>
 
   <!-- Images -->
-  <div class="item item-image allow-select m-activity--image 123"
+  <div class="item item-image allow-select m-activity--image 123" id="nsfw_media_post_blanket"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
     *ngIf="activity.thumbnail_src && !activity.perma_url">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
@@ -334,7 +335,7 @@
   </div>
 
   <!-- Custom type:: batch -->
-  <div class="item item-image allow-select"
+  <div class="item item-image allow-select" id="nsfw_media_post_blanket"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
     *ngIf="activity.custom_type == 'batch' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
