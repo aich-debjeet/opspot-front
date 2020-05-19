@@ -59,7 +59,7 @@
 
   <!-- Messages -->
   <!-- <div m-read-more> -->
-  <div class="mdl-card__supporting-text message m-mature-message text-md grey-darker"
+  <div m-read-more class="mdl-card__supporting-text message m-mature-message text-md grey-darker"
     [class.m-activity--message-remind]="activity.remind_object"
     [hidden]="!activity.message || editing">
     <a class="m-mature-text-toggle" (click)="activity.mature_visibility = !activity.mature_visibility"
@@ -73,7 +73,7 @@
       [ngClass]="{ 'm-mature-text': attachment.shouldBeBlurred(activity) }"
       (click)="activity.mature && !activity.mature_visibility ? activity.mature_visibility = !activity.mature_visibility : null"
     ></span>
-    <!-- <m-read-more--button></m-read-more--button> -->
+    <m-read-more--button></m-read-more--button>
   </div>
 
   <m-translate
