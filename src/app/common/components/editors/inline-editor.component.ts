@@ -7,7 +7,9 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  ViewChild
+  ViewChild,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EmbedImage } from './plugins/embed-image.plugin';
@@ -29,7 +31,8 @@ export const MEDIUM_EDITOR_VALUE_ACCESSOR: any = {
   <div #host></div>
   `,
   host: {
-    'change': 'propagateChange($event.target.value)'
+    'change': 'propagateChange($event.target.value)',
+    '(keyup)': 'keyUp($event)',
   },
   providers: [MEDIUM_EDITOR_VALUE_ACCESSOR]
 })
@@ -40,10 +43,15 @@ export class InlineEditorComponent implements ControlValueAccessor, OnInit, OnDe
   editor: MediumEditor;
   @ViewChild('host') host: any;
 
+  typingTimer;//timer identifier
+  doneTypingInterval = 5000;
+
   @Input() reset() {
     this.editor.setContent('');
     this.ngOnChanges('');
   }
+
+  @Output() draft: EventEmitter<any> = new EventEmitter();
 
   private buttons = new ButtonsPlugin({
     addons: {
@@ -51,8 +59,9 @@ export class InlineEditorComponent implements ControlValueAccessor, OnInit, OnDe
       'videos': `<i class="icon-video"></i>`,
       'audio': `<i class="icon-mic"></i>`,
     },
-    placeholder: 'Upload your video/audio or external URL link',
-    uploadFunction: this.attachment.upload.bind(this.attachment)
+    placeholder: 'Upload your video/audio or external URL link and press Enter',
+    uploadFunction: this.attachment.uploadMultiple.bind(this.attachment),
+    updateBlog: this.keyUp.bind(this)
   });
   private images = new EmbedImage({
     buttonText: `<i class="icon-image"></i>`,
@@ -196,5 +205,14 @@ console.log(this.host.nativeElement, options)
   }
 
   registerOnTouched(fn: any) {
+  }
+
+  keyUp(e) {
+    clearTimeout(this.typingTimer)
+    if(this.host.nativeElement.innerText){
+      this.typingTimer = setTimeout(() => {
+        this.draft.emit()
+      }, this.doneTypingInterval);
+    }
   }
 }

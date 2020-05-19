@@ -41,16 +41,18 @@
               </div>
             </div>
 
-            <div [hidden]="noViewOtp" class="o-otp">
-              <div class="o-otp__title text-md">Enter OTP<a class="primary" id="registration-resend" (click)="resendOtp()" *ngIf="!resending">Resend OTP</a>
-                <a class="primary" id="registration-resend" *ngIf="resending">Resending the OTP</a>
+            <div [hidden]="noViewOtp" class="o-otp"> 
+              <div class="o-otp__title text-md">Enter OTP
+                <a *ngIf = "!showTimer" class="primary" id="registration-resend" (click)="resendOtp()">Resend OTP</a>
+                <a id="timer" class="primary"></a> 
+                <!-- <a class="primary" id="registration-resend" *ngIf="resending">Resending the OTP</a> -->
               </div>
               <div class="otp">
                 <ng-otp-input
                   (onInputChange)="onOtpChange($event)"
                   [config]="otpConfig"
                 ></ng-otp-input>
-                <div [hidden]="enterOtpError" class="line-err">
+                <div [hidden]="enterOtpError" id="error-display" class="line-err">
                   Please enter the Otp
                 </div>
               </div>

@@ -1,3 +1,6 @@
+@import "node_modules/sass-mq/_mq";
+@import "src/assets/helpers/variables";
+
 m-inline-editor {
 
   .material-icons.file-upload::before {
@@ -13,17 +16,26 @@ m-inline-editor {
   }
 
   .m-blog--image {
-    position: relative;
-    .m-blog--image--in-progress-overlay {
-      position: absolute;
-      height: 100%;
-      width: calc(100% + 200px);
-      max-width: initial;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: rgba(255, 255, 255, 0.8);
+    display:flex;
+    justify-content: space-between;
+    margin:32px 0 8px;
+    @include mq($from:$mobile_sm, $until:$desktop_sm){
+        flex-direction: column;
+        .display{
+            margin-bottom: 15px;
+        }
     }
+    // position: relative;
+    // .m-blog--image--in-progress-overlay {
+    //   position: absolute;
+    //   height: 100%;
+    //   width: calc(100% + 200px);
+    //   max-width: initial;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   background-color: rgba(255, 255, 255, 0.8);
+    // }
 
     .medium-insert-image-active {
       border: 2px solid #2196F3;
@@ -325,10 +337,12 @@ m-inline-editor {
 }
 
 .medium-editor-element img {
-  max-width: initial;
-  height: auto;
-  width: calc(100% + 200px);
-  margin: 0 -100px;
+  height: 200px;
+  width: 213px;
+    @include mq($from:$mobile_sm, $until:$desktop_sm){
+      width:100%;
+      height: 240px;
+  }
 }
 
 .medium-insert-embeds {

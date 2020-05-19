@@ -131,7 +131,6 @@ export class AttachmentService {
       this.xhr.abort();
     }
     this.xhr = new XMLHttpRequest();
-
     return this.checkFileType(file)
       .then(() => {
         // Upload and return the GUID
@@ -139,6 +138,32 @@ export class AttachmentService {
           this.attachment.progress = progress;
         }, this.xhr);
       })
+      .then((response: any) => {
+        this.meta.attachment_guid.push(response.guid ? response.guid : null);
+  
+        if (!this.meta.attachment_guid) {
+          throw 'No GUID';
+        }
+        return Promise.resolve(response.guid ? response.guid : null);
+      })
+      .catch(e => {
+        this.meta.attachment_guid = null;
+        this.attachment.progress = 0;
+        this.attachment.preview = null;
+
+        return Promise.reject(e);
+      });
+  }
+
+  uploadMultiple(file){
+    if (!file) {
+      return Promise.reject(null);
+    }
+    this.xhr = new XMLHttpRequest();
+    // Upload and return the GUID
+    return this.uploadService.post('api/v1/media', [file], this.meta, (progress) => {
+      this.attachment.progress = progress;
+    }, this.xhr)
       .then((response: any) => {
         this.meta.attachment_guid.push(response.guid ? response.guid : null);
   

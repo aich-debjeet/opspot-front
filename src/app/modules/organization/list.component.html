@@ -41,7 +41,7 @@
               <div *ngFor="let entity of entities">
                 <div class="o-community-landing-block-manage"
                   id="list-community-joined"
-                  *ngIf="entity['is:member'] && entity['entity_type']=='organization'"
+                  *ngIf="entity['is:member'] && !entity['is:owner'] && entity['entity_type']=='organization'"
                   [routerLink]="['/organization/profile', entity.guid]">
                   <div class="o-community-landing-block-manage__avatar">
                     <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="">

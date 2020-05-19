@@ -52,11 +52,13 @@ export class ForgotPasswordComponent {
 
   paramsSubscription: Subscription;
   mobilenumber;
-  
+
   otpConfig = {
     allowNumbersOnly: true,
     length: 6
   };
+
+  showTimer = false;
 
   constructor(
     public client: Client,
@@ -90,7 +92,7 @@ export class ForgotPasswordComponent {
     this.buildForm('password');
     this.code = code;
     // console.log("this.code: ",this.code);
-    
+
   }
 
   ngOnDestroy() {
@@ -118,7 +120,7 @@ export class ForgotPasswordComponent {
     } else if (val === 'password') {
       this.updatePasswordForm = this.formBuilder.group({
         newPassword: ['', [Validators.required, FormValidator.checkPassword]],
-        confirmPassword: ['',Validators.required]
+        confirmPassword: ['', Validators.required]
       }, { validators: FormValidator.passwordConfirmcheck });
     }
   }
@@ -190,7 +192,11 @@ export class ForgotPasswordComponent {
           //localStorage.setItem('phone-verification-secret', data.secret);
           this.inProgress = false;
           this.step = 2;
+
           this.buildForm('otp');
+          setTimeout(() => this.timer1(120), 1000)
+          this.timer1(120);
+
         })
         .catch((e) => {
           this.inProgress = false;
@@ -284,7 +290,7 @@ export class ForgotPasswordComponent {
   resendOtp() {
     this.resending = true;
     const data = ({
-      retry: true,
+      retry: false,
       key: "phone_number",
       value: this.mobile
     });
@@ -292,6 +298,7 @@ export class ForgotPasswordComponent {
       //localStorage.setItem('phone-verification-secret', data.secret);
       this.secret = data.secret;
       this.inProgress = false;
+      this.timer1(120);
     })
       .catch((e) => {
         this.inProgress = false;
@@ -333,7 +340,7 @@ export class ForgotPasswordComponent {
         password: this.password,
         code: this.code,
         username: this.username
-      }) 
+      })
       this.forgotpasswordservice.reset(data)
         .then((response: any) => {
           this.session.logout();
@@ -346,11 +353,11 @@ export class ForgotPasswordComponent {
             this.router.navigate(['/login']);
           }, 2000);
         });
-     // this.router.navigate(['/login']);
+      // this.router.navigate(['/login']);
     }
   }
 
-  goHome(){
+  goHome() {
     this.router.navigateByUrl('/login');
   }
 
@@ -362,4 +369,28 @@ export class ForgotPasswordComponent {
       this.invalidOtp = true;
     }
   }
+
+  timerOn = true;
+  m: any;
+  s: any;
+  timer1(remaining) {
+    this.showTimer = true;
+    document.getElementById("timer").style.visibility = "visible";
+    this.m = Math.floor(remaining / 60);
+    this.s = remaining % 60;
+
+    this.m = this.m < 10 ? '0' + this.m : this.m;
+    this.s = this.s < 10 ? '0' + this.s : this.s;
+
+    document.getElementById('timer').innerHTML = this.m + ':' + this.s;
+    remaining -= 1;
+
+    if (remaining >= 0 && this.timerOn) {
+      setTimeout(() => this.timer1(remaining), 1000)
+    } else {
+      document.getElementById("timer").style.visibility = "hidden";
+      this.showTimer = false;
+    }
+  }
+
 }

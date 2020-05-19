@@ -263,7 +263,7 @@ opspot-button-remind{
                 [guid]="videoData.guid" [torrent]="[{ res: '360', key: videoData.guid + '/360.mp4' }]" #player>
                 <video-ads [player]="player" *ngIf="entity?.monetized"></video-ads>
               </m-video>
-              <div *ngIf="showAudio && !showVideo" class="audio-background-cover">
+              <div *ngIf="showAudio && !showVideo" id="audio_post" class="audio-background-cover">
                 <m-audio style="width:100%" [src]="'api/v1/media/' + videoData.guid + '/play'"></m-audio>
               </div>
               <!-- <m-audio style="width: 100%" *ngIf="showAudio && !showVideo" [src]="'https://ops-audio-01.s3.amazonaws.com/'  + videoData?.guid + '/128.mp3'"></m-audio> -->
@@ -313,7 +313,7 @@ opspot-button-remind{
                 (onTranslateError)="translateToggle = false" 
                 #translate>
               </m-translate>
-              <div class="text-md white-space word-break">{{ entity?.message}}</div>
+              <div class="text-md white-space word-br">{{ entity?.message}}</div>
               <div class="opspot-editable-container"
                   *ngIf="editing">
                   <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->

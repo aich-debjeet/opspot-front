@@ -11,7 +11,7 @@
   <span class="icon-chevron-down" id="post-menu-dropdown"></span>
 </span>
 
-<ul class="opspot-dropdown-menu" [class.center-dropdown]="iconType == 'arrow'" [hidden]="!opened">
+<ul class="opspot-dropdown-menu" id="hashtags_option_list" [class.center-dropdown]="iconType == 'arrow'" [hidden]="!opened">
   <!-- SPECIAL HASHTAGS -->
   <li class="mdl-menu__item" id="post-menu-showtimez"
     *ngIf="options.indexOf('create-showtimez') !== -1"
