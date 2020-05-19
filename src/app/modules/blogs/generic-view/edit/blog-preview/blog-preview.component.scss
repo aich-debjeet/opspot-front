@@ -210,6 +210,8 @@
 .o-blog-preview-button-set{
     margin-top:54px;
     float: right;
+    display:flex;
+    position: relative;
     @include mq($from:$mobile_sm, $until:$desktop_sm){
         float: inherit;
         position: absolute;
@@ -232,4 +234,82 @@
     .o-blog-preview-publish-body-mob{
         padding:24px 21px 23px 14px;
     }
+}
+.o-blog-preview-post{
+    padding: 8px 10px;
+    width: 100%;
+    min-width: 103px;
+    border: 1px solid rgba(144, 164, 174, 0.2);
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    margin-right: 14px;
+    display: flex;
+    align-items: center;
+    @include mq($from:$mobile_sm, $until:$desktop_sm){
+        margin-bottom: 42px;
+        padding: 10px 10px;
+        position: relative; 
+    }
+    &__icon{
+        .icon-users{
+            color: #000000;
+            font-size: 13px;
+            margin-right: 7px;
+        }
+    }
+    &__dropdown{
+        .icon-chevron-down{
+            float: right;
+            font-size: 17px;
+            color: #000000;
+            margin-left: 5px;
+            @include mq($from:$mobile_sm, $until:$desktop_sm){
+                position: absolute;
+                right:10px;
+                top:15px;
+            }
+        }
+    }
+}
+
+//post footer
+.o-blog-preview-post-footer{
+    top: 52px;
+    position: absolute;
+    width: 197px;
+    border: 1px solid #ECEFF1;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 10px 0 rgba(144, 164, 174, 0.16), 0 1px 12px 0 rgba(144, 164, 174, 0.18), 0 3px 5px 0 rgba(144, 164, 174, 0.2);
+    @include mq($from:$mobile_sm, $until:$desktop_sm){
+        display: none;
+    }
+    &__paywall{
+        border: 1px solid #ECEFF1;
+        border-radius: 0 0 4px 4px;
+        background-color: #F7F9FA;
+        padding: 16px 12px;
+    }
+    .paywall-coins {
+        display: flex;
+        margin-top: 10px;
+        input {
+            width: 111px;
+            border: 1px solid rgba(144, 164, 174, 0.2);
+            border-radius: 4px;
+            padding: 0 11px;
+            margin-right:8px;
+        }
+        input:focus{
+            outline:none;
+        }
+        ::placeholder{
+            color:$grey;
+            font-size: 11px;
+        }
+        .post-btn{
+            padding: 5px 16px;
+        }
+    }
+        
 }

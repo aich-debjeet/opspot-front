@@ -42,7 +42,7 @@ export class BlogEdit {
     mature: 0,
     monetized: 0,
     published: 0,
-    wire_threshold: null,
+    wire_threshold: false,
     custom_meta: {
       title: '',
       description: '',
@@ -108,7 +108,7 @@ export class BlogEdit {
         mature: 0,
         monetized: 0,
         published: 0,
-        wire_threshold: null,
+        wire_threshold: false,
         custom_meta: {
           title: '',
           description: '',
@@ -129,6 +129,19 @@ export class BlogEdit {
         this.load();
       }
     });
+  }
+  autoSave() {
+    console.log('trigger events');
+      this.inProgress = true;
+      this.client.post('api/v1/blog/' + this.guid, this.blog)
+      .then((resp: any) => {
+        console.log(resp);
+        this.inProgress = false;
+        if(this.guid === 'new'){
+          this.guid = resp['guid'];
+          this.blog.guid = resp['guid'];
+        }
+      })
   }
 
   ngOnDestroy() {
