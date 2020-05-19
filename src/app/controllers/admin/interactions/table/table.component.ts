@@ -14,7 +14,9 @@ import { Client } from '../../../../services/api/client';
           <img class="m-admin--interactions--avatar" src="/icon/{{item.user.guid}}/medium/{{item.user.icontime}}">
           @{{item.user.username}}
         </td>
-        <td>{{item.value}}</td>
+        <td *ngIf = "metric.metric !== 'signup' && metric.metric !== 'login'">{{item.value}}</td>
+        <td *ngIf = "metric.metric == 'signup'">{{item.user?.phone}}</td>
+        <td *ngIf = "metric.metric == 'login'">{{item.user?.email}}</td>
       </tr>
 
       <tr *ngIf="data[type].length === 0 && !inProgress">

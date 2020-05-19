@@ -83,8 +83,26 @@
                       </ng-container>
                 </div>
                 <div class="o-blog-preview-button-set">
-                    <button type="button" id="blog-review-cancel" class="btn btn-primary btn-lg mrgr15" (click)="closeModal()">Cancel</button>
+                    <!-- <button type="button" id="blog-review-cancel" class="btn btn-primary btn-lg mrgr15" (click)="closeModal()">Cancel</button> --><!--not there in the design-->
+                    <div class="o-blog-preview-post">
+                        <span class="o-blog-preview-post__icon"><span class="icon-users"></span></span>
+                        <span class="text-md f500" *ngIf="!defaultCoins">Pay Per Post</span>
+                        <span class="text-md f500" *ngIf="defaultCoins">{{defaultCoins}} Pay Per Post</span>
+                        <a (click)="displayPaywall()" class="o-create-post-right__dropdown">
+                            <span class="icon-chevron-down" id="post-form-set-paywall-icon"></span>
+                        </a>
+                    </div>
                     <button type="submit" id="blog-review-publish" (click)="blog.published = 1;createEditBlog()" class="btn btn-primary btn-lg" [disabled]="inProgress">Publish Now</button>
+                    <div class="o-blog-preview-post-footer" [hidden]="!displayPaywal">
+                        <div class="o-blog-preview-post-footer__paywall">
+                            <div class="text-sm grey">Visible to supporter who send over</div>
+                            <div class="paywall-coins">
+                                <input type="number" name="coins" [(ngModel)]="defaultCoins"
+                                placeholder="0 Coins">
+                                <button type="button" class="btn btn-primary btn-sm post-btn" (click)="displayPaywall()" [disabled]="!defaultCoins">Add</button><!--for event page-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--right ends-->

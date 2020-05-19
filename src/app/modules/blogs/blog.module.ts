@@ -35,7 +35,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'edit/:guid', pathMatch: 'full' },
       { path: 'edit/:guid', component: BlogEdit},
       { path: 'edit/:guid/:groupGuid', component: BlogEdit},
-      { path: 'owner', component: BlogAllComponent }
+      { path: ':status', component: BlogAllComponent },
+      // { path: 'published', component: BlogAllComponent }
     ]
   },
   // { path: 'blog/:filter', component: BlogListComponent },
