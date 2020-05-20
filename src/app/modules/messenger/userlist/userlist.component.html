@@ -1,6 +1,6 @@
 
 <div class="m-messenger--userlist m-messenger--dockpane" [class.m-messenger--dockpane-open]="userListToggle">
-  <div class="m-messenger--dockpane-tab" (click)="toggle()">
+  <div class="m-messenger--dockpane-tab" id="messanger_pop_up" (click)="toggle()">
     <div class="m-messenger--dockpane-tab-title"><i class="material-icons">chat_bubble</i><span i18n="@@MESSENGER__USERLIST__MESSENGER_TITLE">Messenger</span></div>
     <div class="m-messenger--dockpane-tab-actions" (click)="$event.stopPropagation()">
       <!-- <i class="material-icons"
@@ -44,7 +44,7 @@
       (click)="openConversation(conversation)">
         <!-- This is currently only configured for one-on-one chat -->
         <img [src]="opspot.cdn_url + 'icon/' + conversation.participants[0].guid" class="mdl-shadow--2dp">
-        <span class="m-conversation-label">{{conversation.username}}</span>
+        <span class="m-conversation-label" id="messanger_popup_lists">{{conversation.username}}</span>
         <span class="m-conversation-icons">
           <span class="m-conversation-new mdl-color--green" [hidden]="!conversation.unread"></span>
           <span class="m-conversation-online mdl-color--blue" [hidden]="!conversation.online"></span>
@@ -57,7 +57,7 @@
 
     </div>
 
-    <div class="m-messenger--userlist-search" [hidden]="opened_ribbon">
+    <div class="m-messenger--userlist-search" id="messanger_popup_search" [hidden]="opened_ribbon">
       <i class="material-icons">search</i>
       <input type="text" placeholder="Search" i18n-placeholder="@@MESSENGER__USERLIST__SEARCH_PH" #q (keyup)="search(q);">
     </div>

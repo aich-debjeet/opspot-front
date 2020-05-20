@@ -2,7 +2,7 @@
   [class.m-messenger--dockpane-open]="open"
   [@attentionNeeded]="attentionNeededTrigger"
 >
-  <div class="m-messenger--dockpane-tab" (click)="toggle()">
+  <div class="m-messenger--dockpane-tab" id="messanger_pop_up" (click)="toggle()">
     <div class="m-messenger--dockpane-tab-title"><i class="material-icons">chat_bubble</i><span i18n="@@MESSENGER__SETUP__MESSENGER_TITLE">Messenger</span></div>
     <div class="m-messenger--dockpane-tab-actions" (click)="$event.stopPropagation()" *ngIf="encryption.isSetup()">
       <i class="material-icons"
