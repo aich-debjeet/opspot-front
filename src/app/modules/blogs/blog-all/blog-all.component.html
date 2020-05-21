@@ -1,6 +1,6 @@
 <div id="myBlogs" class="tab active">
   <div class="blogs-action-filter">
-    <form>
+    <!-- <form>
       <div class="form-group">
         <select class="form-control form-control-sm" id="blog-all-selector" (change)="onChange($event.target.value)">
           <option value="MyBlogs" selected id="blog-all-my-blogs">My Blogs</option>
@@ -8,8 +8,14 @@
           <option value="Published" id="blog-all-published-blog">Published Blogs</option>
         </select>
       </div>
-    </form>
+    </form> -->
   </div>
   <app-blog-view [entity]="entity" *ngFor="let entity of filteredArray; let i = index"
     (deletedBlog)="deleteBlog($event)"></app-blog-view>
+    <infinite-scroll
+    distance="25%"
+    (load)="loadMyBlogs()"
+    [moreData]="moreData"
+    [inProgress]="inProgress">
+</infinite-scroll>
 </div>

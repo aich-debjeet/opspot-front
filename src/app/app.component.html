@@ -31,7 +31,8 @@
 <!-- <m--blockchain--transaction-overlay *ngIf="opspot.LoggedIn" ></m--blockchain--transaction-overlay> -->
 <!-- <m-modal--tos-updated *ngIf="session.isLoggedIn()"></m-modal--tos-updated> -->
 
-<m-modal-signup-on-scroll></m-modal-signup-on-scroll>
+<!--temp fix to disable opening of signup modal on landing page.-->
+<m-modal-signup-on-scroll *ngIf="showTOSModal"></m-modal-signup-on-scroll>
 
 <m-channel--onboarding *ngIf="showOnboarding"></m-channel--onboarding>
 

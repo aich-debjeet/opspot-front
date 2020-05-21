@@ -44,7 +44,7 @@
                     <div class="fileUpload-preview-new mr-9" *ngFor="let image of cards">
                         <a class="fileUpload-preview-new-close" (click)="removeAttachment(file,image.guid)" id="portfolio-remove-image"><i
                                 class="ico-x white"></i></a>
-                        <a class="o-create-post-filled-avatar" href="javascript:void(0)">
+                        <a class="o-create-post-filled-avatar" id="upload_thumbnail" href="javascript:void(0)">
                             <img [src]="image.imageLink" alt="">
                         </a>
                     </div>

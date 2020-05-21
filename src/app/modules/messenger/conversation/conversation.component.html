@@ -1,5 +1,6 @@
 <div class="m-messenger--conversation m-messenger--dockpane mdl-shadow--4dp" [class.m-messenger--dockpane-open]="conversation.open">
   <div class="m-messenger--dockpane-tab"
+  id="messanger_pop_up"
     [class.mdl-color--amber]="conversation.unread"
     (click)="dockpanes.toggle(conversation); initialLoad()">
     <div class="m-messenger--dockpane-tab-title">

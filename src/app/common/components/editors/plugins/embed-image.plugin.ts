@@ -181,12 +181,13 @@ export class EmbedImage {
     this.window.addEventListener('attachment-preview-loaded', (event: CustomEvent) => {
       let $place = this.$element.querySelector('.medium-insert-active');
       // console.log('place', $place)
+      console.log(event)
       this.insertHTML(event.detail.src, $place, event.detail.timestamp);
     });
 
     this.window.addEventListener('attachment-upload-finished', (event: CustomEvent) => {
       const imgClass: string = 'medium-image-preview-' + event.detail.timestamp;
-
+console.log(event)
       const image: HTMLImageElement = this.$element.querySelector('.' + imgClass);
 
       const overlay = image.parentElement.querySelector('.m-blog--image--in-progress-overlay');

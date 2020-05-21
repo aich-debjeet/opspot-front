@@ -11,7 +11,8 @@ export class ButtonsPlugin {
     },
     enabled: true,
     uploadFunction: () => {
-    }
+    },
+    updateBlog: () => {}
   };
   base: Editor;
   window;
@@ -53,7 +54,6 @@ export class ButtonsPlugin {
   public events() {
     this.$element.addEventListener('keyup', this.toggleButtons.bind(this));
     this.$element.addEventListener('click', this.toggleButtons.bind(this));
-
     window.addEventListener('resize', this.positionButtons.bind(this));
   }
 
@@ -99,6 +99,7 @@ export class ButtonsPlugin {
 
     const fileInput: HTMLInputElement = document.createElement('input');
     fileInput.setAttribute('type', 'file');
+    fileInput.setAttribute('multiple', '');
     fileInput.classList.add('medium-media-file-input');
     fileInput.style.display = 'none';
     fileInput.addEventListener('change', this.uploadFile.bind(this));
@@ -453,34 +454,81 @@ export class ButtonsPlugin {
     fileInput.click();
   }
 
-  private uploadFile() {
-    const fileInput = this.$element.querySelector('.medium-media-file-input');
+/**
+ * minds way of uploading one file
+ * @param target 
+ * @param link 
+ */
+  // private uploadFile() {
+  //   const fileInput = this.$element.querySelector('.medium-media-file-input');
 
-    const file = fileInput ? fileInput.files[0]: null;
+  //   const file = fileInput ? fileInput.files[0]: null;
 
-    let reader = new FileReader();
+  //   let reader = new FileReader();
 
+  //   const timestamp = Date.now().toString();
+
+  //   reader.onloadend = () => {
+  //     this.window.dispatchEvent(new CustomEvent('attachment-preview-loaded', {
+  //       detail: {
+  //         timestamp: timestamp,
+  //         src: reader.result
+  //       }
+  //     }));
+  //   };
+  //   reader.readAsDataURL(file);
+
+  //   this.options.uploadFunction(fileInput).then((result) => {
+  //     console.log(result);
+  //     this.window.dispatchEvent(new CustomEvent('attachment-upload-finished', {
+  //       detail: {
+  //         timestamp: timestamp,
+  //         guid: result
+  //       }
+  //     }));
+  //   }).then(() => this.options.updateBlog());
+  // }
+
+
+  /**
+   * ops way of uploading multiple image files for blogs
+   * @param target 
+   * @param link 
+   */
+  private uploadFile(e){
+    console.log(e)
+    const files = e.target.files;
     const timestamp = Date.now().toString();
-
-    reader.onloadend = () => {
-      this.window.dispatchEvent(new CustomEvent('attachment-preview-loaded', {
-        detail: {
-          timestamp: timestamp,
-          src: reader.result
+    Object.keys(files).forEach(i => {
+      const reader = new FileReader();
+      const file = files[i];
+      reader.onloadend = () => {
+        this.window.dispatchEvent(new CustomEvent('attachment-preview-loaded', {
+          detail: {
+            timestamp: timestamp,
+            src: reader.result
+          }
+        }))
+      }
+      reader.readAsDataURL(file)
+      this.options.uploadFunction(file).then((result) => {
+        console.log(result);
+        if(result){
+          this.window.dispatchEvent(new CustomEvent('attachment-upload-finished', {
+            detail: {
+              timestamp: timestamp,
+              guid: result
+            }
+          }));
         }
-      }));
-    };
-    reader.readAsDataURL(file);
-
-
-    this.options.uploadFunction(fileInput).then((result) => {
-      this.window.dispatchEvent(new CustomEvent('attachment-upload-finished', {
-        detail: {
-          timestamp: timestamp,
-          guid: result
-        }
-      }));
-    });
+        // this.window.dispatchEvent(new CustomEvent('attachment-upload-finished', {
+        //   detail: {
+        //     timestamp: timestamp,
+        //     guid: result
+        //   }
+        // }));
+      }).then(() => this.options.updateBlog());
+    })
   }
 
   /**
