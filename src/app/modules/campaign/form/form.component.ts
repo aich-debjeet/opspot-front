@@ -104,7 +104,7 @@ export class EnrolmentFormComponent implements OnInit {
       'comment': this.form.value.comments,
       'attachment_guid': this.attachment_guid,
       'payment_status': 'Pending',
-      "total_amount_paid":1200,
+      "total_amount_paid":2420,
     }
     console.log(formData);
 

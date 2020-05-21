@@ -16,7 +16,7 @@ export class EnrolmentViewComponent implements OnInit {
   inProgress: boolean = false;
   enrolmentDetails: any;
   formData: any;
-  enrollmentDetails:any;
+  enrollmentDetails: any;
   eventGuid: string;
   private sub: any;
 
@@ -30,23 +30,23 @@ export class EnrolmentViewComponent implements OnInit {
   ) {
     this.sub = this.route.params.subscribe(params => {
       console.log(params);
-      if(params['guid']){
+      if (params['guid']) {
         this.loadDetails(params['guid']);
       }
-   });
-   console.log(this.route);
-  
+    });
+    console.log(this.route);
+
   }
 
-  loadDetails(guid: string){
+  loadDetails(guid: string) {
     this.client.get('api/v3/event/' + guid)
-    .then((response: any)=>{
-      console.log(response);
-      if(response.status == 'success' && response['event']){
-        console.log(response['event']);
-        this.enrolmentDetails = response['event'];
-      }
-    });
+      .then((response: any) => {
+        console.log(response);
+        if (response.status == 'success' && response['event']) {
+          console.log(response['event']);
+          this.enrolmentDetails = response['event'];
+        }
+      });
   }
   ngOnInit() {
     const location = window.location.href;
@@ -85,25 +85,61 @@ export class EnrolmentViewComponent implements OnInit {
   }
 
   payment() {
-    const formData = new FormData();
-    formData.append('amount', environment.campaigns.enrolment.fee.amount.toString());
-    formData.append('purpose', 'enrollment');
-    formData.append('buyer_name', this.formData.fullname);
-    formData.append('email', this.formData.email);
-    formData.append('phone', this.formData.phone_no);
-    formData.append('redirect_url', window.Opspot.site_url + 'campaign/invoice/'+ this.enrollmentDetails.campaignGuid + '/' + this.enrollmentDetails.enrollGuid);
-    formData.append('purpose_guid', this.enrollmentDetails.enrollGuid);
+    // const formData = new FormData();
+    // formData.append('amount', environment.campaigns.enrolment.fee.amount.toString());
+    // formData.append('purpose', 'enrollment');
+    // formData.append('buyer_name', this.formData.fullname);
+    // formData.append('email', this.formData.email);
+    // formData.append('phone', this.formData.phone_no);
+    // formData.append('redirect_url', window.Opspot.site_url + 'campaign/invoice/'+ this.enrollmentDetails.campaignGuid + '/' + this.enrollmentDetails.enrollGuid);
+    // formData.append('purpose_guid', this.enrollmentDetails.enrollGuid);
 
-    this.http.post<any>('api/v3/payment/instamojo', formData).subscribe(
-      (res) => {
+    // this.http.post<any>('api/v3/payment/instamojo', formData).subscribe(
+    //   (res) => {
+    //     const s = document.createElement('script');
+    //     s.type = 'text/javascript';
+    //     s.innerHTML = "Instamojo.open('" + res.longurl + "');";
+    //     this.elementRef.nativeElement.appendChild(s);
+    //   }, (err) => {
+    //     console.log(err);
+    //   }
+    // );
+
+    const form_fees = environment.campaigns.enrolment.fee.amount;
+    const total_amount = form_fees + (form_fees * 0.18) + (form_fees * 0.03);
+    var formData = {
+      'amount': total_amount.toString(),
+      'purpose': 'enrollment',
+      'buyer_name': this.formData.fullname,
+      'email': this.formData.email,
+      'phone': this.formData.phone_no,
+      'redirect_url': window.Opspot.site_url + 'campaign/invoice/' + this.enrollmentDetails.campaignGuid + '/' + this.enrollmentDetails.enrollGuid,
+      'purpose_guid': this.enrollmentDetails.enrollGuid,
+      'custom_data': {
+        'taxes': {
+          'gst': '18%',
+          'ops_service_fee': '3%'
+        },
+        'total_amount': total_amount.toString(),
+      }
+    }
+    this.client.post('api/v3/payment/instamojo', formData
+    )
+      .then((res: any) => {
+        console.log("Response: ", res);
         const s = document.createElement('script');
         s.type = 'text/javascript';
         s.innerHTML = "Instamojo.open('" + res.longurl + "');";
         this.elementRef.nativeElement.appendChild(s);
-      }, (err) => {
-        console.log(err);
-      }
-    );
+      })
+      .catch((e) => {
+        console.log(e);
+        const s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.innerHTML = "Instamojo.open('" + e.longurl + "');";
+        this.elementRef.nativeElement.appendChild(s);
+        // alert(e.message);
+      });
   }
 
 }
