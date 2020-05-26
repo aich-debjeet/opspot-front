@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class EnrolmentInvoiceComponent implements OnInit {
   paramsSubscription: Subscription;
   enrolledData: any;
+  taxData: any;
   constructor(public route: ActivatedRoute, public client: Client) { }
 
   ngOnInit() {
@@ -19,7 +20,8 @@ export class EnrolmentInvoiceComponent implements OnInit {
       this.client.get(`api/v3/event/enrollment/${params['campaignGuid']}/${params['enrollGuid']}`)
       .then((data:any)=>{
         console.log(data)
-        this.enrolledData = data.enrolment; 
+        this.enrolledData = data.enrollment; 
+        this.taxData = data.taxes;
       })
       .catch((e)=>{
         // console.log(e);
