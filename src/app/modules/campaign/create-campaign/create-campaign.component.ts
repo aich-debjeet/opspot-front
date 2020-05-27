@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormValidator } from '../../../helpers/form.validator';
+import { OpspotTitle } from '../../../services/ux/title';
 
 @Component({
   selector: 'app-create-campaign',
@@ -9,7 +10,8 @@ import { FormValidator } from '../../../helpers/form.validator';
 })
 export class CreateCampaignComponent implements OnInit {
   campaignForm : FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private title: OpspotTitle) {
+    this.title.setTitle('Campaign-Enrollment');
    }
 
   ngOnInit() {
