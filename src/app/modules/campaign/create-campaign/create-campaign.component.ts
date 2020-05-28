@@ -15,23 +15,27 @@ export class CreateCampaignComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.createForm();
   }
   createForm(){
   this.campaignForm = this.fb.group({
-    eventTitle: ['', [Validators.required]],
-      eventDesc: ['', [Validators.required]],
-      eventType: ['', [Validators.required]],
-      eventCategory: ['', [Validators.required]],
-      eventLocation: ['', [Validators.required]],
-      eventStartDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
-      eventEndDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
-      eventStartTime: ['', [Validators.required]],
-      eventEndTime: ['', [Validators.required]],
-      enrollmentStartDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
-      enrollmentEndDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
-      enrollmentStartTime: ['', [Validators.required]],
-      enrollmentEndTime: ['', [Validators.required]],
-      eventCoverImage: ['', []]
+      campaignTitle: ['', [Validators.required]],
+      campaignDesc: ['', [Validators.required]],
+      campaignLoc: ['', [Validators.required]],
+      enrollStartDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
+      enrollEndDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
+      enrollStartTime: ['', [Validators.required]],
+      enrollEndTime: ['', [Validators.required]],
+      enrollCoverImage: ['', []],
+      gender: ['',[Validators.required]],
+      refreshmentMaterials: ['',[Validators.required]],
+      gallery: [''],
+      orgName: ['', [Validators.required]],
+      orgAbout: ['', [Validators.required]],
+      orgPic: ['', [Validators.required]],
+      allowContact: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      duration: ['', [Validators.required]]
   });
   }
 }
