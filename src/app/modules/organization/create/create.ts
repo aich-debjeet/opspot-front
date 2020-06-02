@@ -167,6 +167,11 @@ export class OrganizationCreator {
   }
 
  ngOnInit(){
+
+  if (!this.session.isLoggedIn()) {
+    this.router.navigate(['/login']);
+  }
+  
   this.route.params.subscribe(params=>{
    if(params['guid']){
      this.load(params['guid'])
