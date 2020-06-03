@@ -11,10 +11,16 @@
           </div><!--header ends-->                    
           <div class="o-create-enrollment-content__form" [formGroup]="campaignForm">
                 <div class="o-enrollment-cover-image">
-                    <div class="fileUpload">
+                    <div class="fileUpload" [hidden]="previewCover">
                         <span class="icon-plus"></span>
-                        <input type="file" name="cover image" class="upload" formControlName="enrollCoverImage">
+                        <input type="file" name="cover image" class="upload" #file (change)="uploadAttachment($event)" formControlName="enrollCoverImage">
                         <div class="text-md grey mt15">Add Cover Image</div>
+                    </div>
+                    <div class="fileUpload" [hidden]="!previewCover">
+                        <a class="fileUpload-close-temp" (click)="removeAttachment()" id="big-event-event-remove-image">
+                            <i class="icon-x"></i>
+                        </a>
+                        <img [src]="imgSrc" alt="">
                     </div><!--file upload ends-->   
                 </div><!--cover image ends--> 
                 <div class="form-group">
@@ -80,13 +86,13 @@
                     <div class="o-enrollment-profile-picture">
                         <div class="fileUpload mr10">
                             <span class="icon-plus"></span>
-                            <input type="file" name="cover image" class="upload" formControlName="gallery">
+                            <input type="file" name="cover image" #fileGallery class="upload" formControlName="gallery" (change)="uploadGalleryAttachment($event)">
                         </div><!--file upload ends-->
-                        <!-- <div class="fileUpload-preview">
-                            <a class="o-enrollment-image" href="#">
-                                <img src="assets/demo/m3.jpg" alt="">
-                            </a>
-                        </div> -->
+                        <div class="fileUpload-preview" *ngFor="let image of cards">
+                            <a class="fileUpload-close-temp" (click)="removeGalleryAttachment(image)"><i
+                                class="icon-x"></i></a>
+                                <img [src]="image.src" alt="">
+                        </div>
                         <!--file preview ends-->
                     </div>                     
                 </div><!--Profile Picture ends-->

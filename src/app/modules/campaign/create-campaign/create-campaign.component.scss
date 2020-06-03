@@ -125,6 +125,11 @@
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+    img{
+        width:118px;
+        height: 118px;
+        object-fit: cover;
+    }
     @include mq($from:$mobile_sm, $until:$desktop_sm){
         display: flex;
     }
@@ -137,13 +142,13 @@
     .fileUpload, .fileUpload-preview{
       width:118px;
     }
-    .o-enrollment-image{
-        img{
-            width:118px;
-            height: 118px;
-            object-fit: cover;
-        }
-    }
+    // .o-enrollment-image{
+    //     img{
+    //         width:118px;
+    //         height: 118px;
+    //         object-fit: cover;
+    //     }
+    // }
     .mr4{
         margin-right:4px
     } 
@@ -225,6 +230,13 @@
     .fileUpload input.upload, .fileUpload-preview input.upload{
         width:100%;
         height: 100%;
+    }
+    .fileUpload-preview {
+        img{
+            width:118px;
+            height: 118px;
+            object-fit: cover;
+        }
     }
     .o-cover-edit{
         bottom: 87px;
