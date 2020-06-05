@@ -28,7 +28,6 @@ export class BigEventForm implements OnInit {
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   // coverImageUploadError: boolean = false;
   lable = 'Create';
-  type = 'Event';
 
   coverImage = '';
   bigEvent: any;
@@ -63,18 +62,15 @@ export class BigEventForm implements OnInit {
     location: null,
     start_time_date: null,
     end_time_date: null,
-    // enrollment_start_date: null,
-    // enrollment_end_date: null,
     attachment_guid: '',
     access_id: 2,
     published: 1
   };
+
   @Input('object') set data(object) {
-    console.log(object)
-    this.bigEvent = object.data;
+    this.bigEvent = object;
     if (this.bigEvent) {
-      this.lable = "Update";
-      this.type = object.type;
+      this.lable = "Update"
       this.bigEventGuid = this.bigEvent['entity_guid'];
       if (this.bigEvent['start_time_date']) {
         var date = new Date(parseInt(this.bigEvent['start_time_date']));
@@ -94,11 +90,7 @@ export class BigEventForm implements OnInit {
       }
       this.buildForm(this.bigEvent, this.start_date, this.start_time, this.end_date, this.end_time);
     } else {
-      this.type = object.type;
-      if (this.type == 'event')
-        this.buildForm();
-      else if (this.type == 'enrollment')
-        this.buildEnrollForm();
+      this.buildForm();
     }
   }
 
@@ -145,24 +137,7 @@ export class BigEventForm implements OnInit {
       })
     }
   }
-  buildEnrollForm() {
-    this.eventForm = this.formBuilder.group({
-      eventTitle: ['', [Validators.required]],
-      eventDesc: ['', [Validators.required]],
-      eventType: ['', [Validators.required]],
-      eventCategory: ['', [Validators.required]],
-      eventLocation: ['', [Validators.required]],
-      eventStartDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
-      eventEndDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
-      eventStartTime: ['', [Validators.required]],
-      eventEndTime: ['', [Validators.required]],
-      enrollmentStartDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
-      enrollmentEndDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
-      enrollmentStartTime: ['', [Validators.required]],
-      enrollmentEndTime: ['', [Validators.required]],
-      eventCoverImage: ['', []]
-    })
-  }
+
 
   changeRegex(e) {
     if (e.target.value.charAt(0) == '2') {
@@ -286,20 +261,16 @@ export class BigEventForm implements OnInit {
       return;
     }
 
-    var startTime = this.convertDateToMillis(this.eventForm.value.eventStartDate, this.eventForm.value.eventStartTime);
-    var endTime = this.convertDateToMillis(this.eventForm.value.eventEndDate, this.eventForm.value.eventEndTime);
-    let enrollStartTime = this.convertDateToMillis(this.eventForm.value.enrollmentStartDate, this.eventForm.value.enrollmentStartTime);
-    let enrollEndTime = this.convertDateToMillis(this.eventForm.value.enrollmentEndDate, this.eventForm.value.enrollmentEndTime);
+    var startTime = this.convertDateToMillis(this.eventForm.value.eventStartDate, this.eventForm.value.eventStartTime)
+    var endTime = this.convertDateToMillis(this.eventForm.value.eventEndDate, this.eventForm.value.eventEndTime)
 
     this.reqBody.title = this.eventForm.value.eventTitle;
     this.reqBody.description = this.eventForm.value.eventDesc;
-    this.reqBody.event_type = (this.type == 'enrollment') ? 'Premium' : this.eventForm.value.eventType;
+    this.reqBody.event_type = this.eventForm.value.eventType;
     this.reqBody.category = this.eventForm.value.eventCategory;
     this.reqBody.location = this.eventForm.value.eventLocation;
     this.reqBody.start_time_date = startTime.getTime();
     this.reqBody.end_time_date = endTime.getTime();
-    // this.reqBody.enrollment_start_date = enrollStartTime.getTime();
-    // this.reqBody.enrollment_end_date = enrollEndTime.getTime();
 
     if (this.eventForm.valid && this.reqBody.attachment_guid != '' && this.reqBody.start_time_date != '' && this.reqBody.end_time_date != '') {
 
@@ -312,9 +283,7 @@ export class BigEventForm implements OnInit {
       this.client.post(endpoint, this.reqBody)
         .then((resp: any) => {
           if (resp && resp.activity && resp.activity['guid'] != '') {
-            if (resp.activity['event_type'] == 'Premium')
-              this.router.navigate(['/campaign/' + resp.activity['entity_guid']]);
-            else this.router.navigate(['/event/' + resp.activity['guid']]);
+            this.router.navigate(['/event/' + resp.activity['guid']]);
           }
           this.eventSubmitted = false;
           this.inProgress = false;
