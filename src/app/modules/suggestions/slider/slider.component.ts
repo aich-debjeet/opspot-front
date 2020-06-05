@@ -59,7 +59,7 @@ export class SuggestionsSlider {
 
   async load() {
     this.inProgress = true;
-    let limit: number = 2;
+    let limit: number = 12;
 
     if (this.suggestions.length) {
       limit = 1;
@@ -93,6 +93,8 @@ export class SuggestionsSlider {
   }
 
   remove(suggestion) {
+    console.log("adfffref");
+    
     this.suggestions.splice(this.suggestions.indexOf(suggestion), 1);
 
     // load more

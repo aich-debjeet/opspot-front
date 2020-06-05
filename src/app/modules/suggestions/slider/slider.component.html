@@ -3,13 +3,9 @@
     <ngx-slick-carousel class="carousel" 
            #slickModal="slick-carousel" 
            [config]="slideConfig"
-           (init)="slickInit($event)"
-           (breakpoint)="breakpoint($event)" 
-           (afterChange)="afterChange($event)" 
-           (beforeChange)="beforeChange($event)"
     >
         <div ngxSlickItem *ngFor="let user of suggestions">
-            <opspot-card-user [cardType]="'user2'" [object]="user.entity"></opspot-card-user>
+            <opspot-card-user [cardType]="'user3'" [object]="user.entity" (remove)="remove()"></opspot-card-user>
         </div>
     </ngx-slick-carousel>
     <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
