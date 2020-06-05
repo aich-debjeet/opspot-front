@@ -1,3 +1,146 @@
-<p>
-  edit-campaign works!
-</p>
+<div class="container hidden-above-tablet o-create-organisation-mob-header">
+  <div class="without-nav-header o-reg-skill-mob-header">
+      <a href="home.html"><i class="icon-arrow-left"></i> </a>
+      <div class="without-nav-header__title caption-bold f500 text-left-search-filter">Create an Enrollment</div>
+  </div>
+</div><!-- without nav header end -->
+<div class="o-create-enrollment">
+  <div class="o-create-enrollment-content">
+        <div class="o-create-enrollment-header">
+              <h4 class="f500">Create an Enrollment</h4>
+        </div><!--header ends-->                    
+        <div class="o-create-enrollment-content__form" [formGroup]="campaignForm">
+              <div class="o-enrollment-cover-image">
+                  <div class="fileUpload" [hidden]="previewCover">
+                      <span class="icon-plus"></span>
+                      <input type="file" name="cover image" class="upload" #file (change)="uploadAttachment($event)" formControlName="enrollCoverImage">
+                      <div class="text-md grey mt15">Add Cover Image</div>
+                  </div>
+                  <div class="fileUpload" [hidden]="!previewCover">
+                      <a class="fileUpload-close-temp" (click)="removeAttachment()" id="big-event-event-remove-image">
+                          <i class="icon-x"></i>
+                      </a>
+                      <img [src]="imgSrc" alt="">
+                  </div><!--file upload ends-->   
+              </div><!--cover image ends--> 
+              <div class="form-group">
+                  <label>Enrollment Name</label>
+                  <input type="text" name="Enrollment Name" class="form-control form-control-lg" formControlName="campaignTitle">
+              </div><!--Enrollment Name ends-->
+              <div class="o-create-enrollment-row">
+                  <div class="form-group mr11">
+                      <label>From Date</label>
+                      <input type="text" name="From Date" class="form-control form-control-lg" formControlName="enrollStartDate">
+                  </div><!--From Date ends-->
+                  <div class="form-group">
+                      <label>To Date</label>
+                      <input type="text" name="To Date" class="form-control form-control-lg" formControlName="enrollEndDate">
+                  </div><!--To Date ends-->
+              </div><!--row ends-->
+              <div class="o-create-enrollment-row">
+                  <div class="form-group mr11">
+                      <label>From Time</label>
+                      <input type="text" name="From Time" class="form-control form-control-lg" formControlName="enrollStartTime">
+                  </div><!--From Time ends-->
+                  <div class="form-group">
+                      <label>To Time</label>
+                      <input type="text" name="   To Time" class="form-control form-control-lg" formControlName="enrollEndTime">
+                  </div><!--To Time ends-->
+              </div><!--row ends--> 
+              <div class="o-create-enrollment-row">
+                  <div class="form-group mr11 select-enrollment">
+                      <label>Duration</label>
+                      <select class="form-control form-control-lg" name="Duration" formControlName="duration">
+                          <option selected="selected" disabled class="grey">Select</option>
+                          <option>Option 2</option>
+                          <option>Option 3</option>
+                          <option>Option 4</option>
+                          <option>Option 5</option>
+                      </select>
+                  </div><!--Duration ends-->
+                  <div class="form-group select-enrollment">
+                      <label>Allow Gender</label>
+                      <select class="form-control form-control-lg" name="Allow Gender" formControlName="gender">
+                          <option selected="selected" disabled>Select</option>
+                          <option>Option 2</option>
+                          <option>Option 3</option>
+                          <option>Option 4</option>
+                          <option>Option 5</option>
+                      </select>
+                  </div><!--Allow Gender ends-->
+              </div><!--row ends--> 
+              <div class="form-group">
+                  <label>Includes<a class="icon-info o-enrollment-icon"></a></label>
+                  <input type="text" name="Includes" class="form-control form-control-lg" formControlName="refreshmentMaterials">
+              </div><!--Includes ends-->
+              <div class="form-group">
+                  <label>Price</label>
+                  <input type="text" name="Price" class="form-control form-control-lg" formControlName="price">
+              </div><!--Price ends-->    
+              <div class="form-group">
+                  <label>What you will do? (Description) <span class="text-sm grey description-width">21/300</span></label>
+                  <textarea class="form-control" name="Description" rows="5" formControlName="campaignDesc"></textarea>
+              </div><!--Description ends-->
+              <div class="form-group">
+                  <label>Add up to 10 images for gallery</label>
+                  <div class="o-enrollment-profile-picture">
+                      <div class="fileUpload mr10">
+                          <span class="icon-plus"></span>
+                          <input type="file" name="cover image" #fileGallery class="upload" formControlName="gallery" (change)="uploadGalleryAttachment($event)">
+                      </div><!--file upload ends-->
+                      <div class="fileUpload-preview" *ngFor="let image of cards">
+                          <a class="fileUpload-close-temp" (click)="removeGalleryAttachment(image)"><i
+                              class="icon-x"></i></a>
+                              <img [src]="image.src" alt="">
+                      </div>
+                      <!--file preview ends-->
+                  </div>                     
+              </div><!--Profile Picture ends-->
+              <div class="form-group">
+                  <label>Location</label>
+                  <input type="text" name="Location" class="form-control form-control-lg" formControlName="campaignLoc">
+              </div><!--Location ends-->
+              <div class="form-group">
+                  <label>Organiser Name</label>
+                  <input type="text" name="Organiser Name" class="form-control form-control-lg" formControlName="orgName">
+              </div><!--Organiser Name ends-->    
+              <div class="form-group">
+                  <label>About Organiser <span class="text-sm grey description-width">21/300</span></label>
+                  <textarea class="form-control" name="About Organiser" rows="5" formControlName="orgAbout"></textarea>
+              </div><!--About Organiser ends-->
+              <div class="form-group">
+                  <label>Add Organiser Photo</label>
+                  <div class="o-enrollment-profile-picture">
+                      <div class="fileUpload mr10">
+                          <span class="icon-plus"></span>
+                          <input type="file" name="cover image" class="upload" formControlName="orgPic">
+                      </div><!--file upload ends-->
+                      <!-- <div class="fileUpload-preview">
+                          <a class="o-enrollment-image" href="#">
+                              <img src="assets/demo/m3.jpg" alt="">
+                          </a>
+                      </div> -->
+                      <!--file preview ends-->
+                  </div>                     
+              </div><!--Profile Picture ends-->
+              <div class="o-enrollment-radiobtn">
+                  <label>Allow Organiser Contact</label>
+                  <div class="o-create-enrollment-row">
+                      <div class="radiobutton form-group o-enrollment-radiobtn__button mr11">
+                      <input type="radio" name="allowContact" id="radio_1" checked formControlName="allowContact">
+                      <label for="radio_1">Yes</label>
+                      </div>
+                      <div class="radiobutton form-group o-enrollment-radiobtn__button">
+                      <input type="radio" name="allowContact" id="radio_2" formControlName="allowContact">
+                      <label for="radio_2">No</label>
+                      </div>
+                  </div>
+              </div>
+              <div class="o-create-enrollment-action">
+                      <button type="button" class="btn btn-primary mr-18">Create</button>
+                  <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
+              </div><!--Button action ends-->
+        </div>
+  </div>
+</div><!--Main community ends-->
+

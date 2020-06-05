@@ -20,7 +20,7 @@ export class CreateCampaignComponent implements OnInit {
   @ViewChild('file') coverFile: ElementRef;
   @ViewChild('fileGallery') fileGallery: ElementRef;
   
-  constructor(private fb: FormBuilder, private title: OpspotTitle, private attachment: AttachmentService,) {
+  constructor(private fb: FormBuilder, private title: OpspotTitle, private attachment: AttachmentService) {
     this.title.setTitle('Campaign-Enrollment');
    }
 
