@@ -43,7 +43,7 @@ export class CreateCampaignComponent implements OnInit {
       orgName: ['', [Validators.required]],
       orgAbout: ['', [Validators.required]],
       orgPic: ['', [Validators.required]],
-      allowContact: ['', [Validators.required]],
+      // allowContact: ['', [Validators.required]],
       price: ['', [Validators.required]],
       duration: ['', [Validators.required]]
   });
