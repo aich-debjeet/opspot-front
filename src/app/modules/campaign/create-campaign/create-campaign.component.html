@@ -113,7 +113,13 @@
                     <div class="o-enrollment-profile-picture">
                         <div class="fileUpload mr10">
                             <span class="icon-plus"></span>
-                            <input type="file" name="cover image" class="upload" formControlName="orgPic">
+                            <input type="file" name="cover image" class="upload" #organizationPic formControlName="orgPic" (change)="uploadOrgAttachment($event)">
+                        </div>
+                        <div class="fileUpload-preview-organiser" [hidden]="!orgImgSrc">
+                            <a class="o-enrollment-image" href="#">
+                                <img [src]="orgImgSrc" alt="">
+                            </a>
+                            <a class="o-image-edit" (click)="removeOrgAttachment()"><i class="icon-edit-profile"></i></a>
                         </div><!--file upload ends-->
                         <!-- <div class="fileUpload-preview">
                             <a class="o-enrollment-image" href="#">

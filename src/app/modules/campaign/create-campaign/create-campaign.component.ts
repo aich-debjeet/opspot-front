@@ -13,12 +13,15 @@ import { remove as _remove, findIndex as _findIndex } from 'lodash';
 export class CreateCampaignComponent implements OnInit {
   campaignForm : FormGroup;
   imgSrc: '';
+  orgImgSrc: '';
   previewCover: boolean = false;
   cards = [];
   bannerGuid: string;
+  orgImgGuid: string;
 
   @ViewChild('file') coverFile: ElementRef;
   @ViewChild('fileGallery') fileGallery: ElementRef;
+  @ViewChild('organizationPic') organizationPic: ElementRef;
   
   constructor(private fb: FormBuilder, private title: OpspotTitle, private attachment: AttachmentService) {
     this.title.setTitle('Campaign-Enrollment');
@@ -61,6 +64,24 @@ export class CreateCampaignComponent implements OnInit {
       }
     })
 
+  }
+
+  uploadOrgAttachment(event){
+    console.log('firing',this.organizationPic, event, this.organizationPic.nativeElement);
+    this.attachment.upload(this.organizationPic.nativeElement)
+    .then(guid => {
+      console.log(guid);
+      if(guid){
+        this.orgImgGuid = guid;
+        this.orgImgSrc = this.attachment.getPreview();
+      }
+    })
+  }
+  removeOrgAttachment(){
+    this.attachment.remove(this.orgImgGuid,this.organizationPic.nativeElement).then(guid => {
+      this.organizationPic.nativeElement.value = "";
+      this.orgImgSrc = "";
+    }).catch(e =>{});
   }
 
   removeAttachment() {
