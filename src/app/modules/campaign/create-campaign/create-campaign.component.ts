@@ -19,6 +19,9 @@ export class CreateCampaignComponent implements OnInit {
   bannerGuid: string;
   orgImgGuid: string;
 
+  public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
+  public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+
   @ViewChild('file') coverFile: ElementRef;
   @ViewChild('fileGallery') fileGallery: ElementRef;
   @ViewChild('organizationPic') organizationPic: ElementRef;
@@ -39,10 +42,10 @@ export class CreateCampaignComponent implements OnInit {
       enrollEndDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
       enrollStartTime: ['', [Validators.required]],
       enrollEndTime: ['', [Validators.required]],
-      enrollCoverImage: ['', []],
+      enrollCoverImage: ['', [Validators.required]],
       gender: ['',[Validators.required]],
       refreshmentMaterials: ['',[Validators.required]],
-      gallery: [''],
+      gallery: ['',[Validators.required]],
       orgName: ['', [Validators.required]],
       orgAbout: ['', [Validators.required]],
       orgPic: ['', [Validators.required]],
@@ -125,4 +128,5 @@ export class CreateCampaignComponent implements OnInit {
       .catch(e => {
       });
   }
+  submit(){}
 }

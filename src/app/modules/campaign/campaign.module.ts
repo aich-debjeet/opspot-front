@@ -12,6 +12,8 @@ import { NotificationModule } from '../notifications/notification.module';
 import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
 import { EditCampaignComponent } from './edit-campaign/edit-campaign.component';
 
+import { TextMaskModule } from 'angular2-text-mask';
+
 const routes: Route[] = [
   // to be redirected to the active campaign
   // { path: '', redirectTo: 'enrolment', pathMatch: 'full' },
@@ -37,6 +39,7 @@ const routes: Route[] = [
     CommonModule,
     ReactiveFormsModule,
     NotificationModule,
+    TextMaskModule,
     RouterModule.forChild(routes)
   ]
 })
