@@ -32,6 +32,8 @@ export class OrganizationListComponent {
   ownerGuid: any;
   showMyCommunities: boolean = false;
   organization  = "";
+  memberOrganizations: Array<any> = [];
+
 
 
   constructor(
@@ -68,6 +70,7 @@ export class OrganizationListComponent {
         this.ownerGuid = this.session.getLoggedInUser().guid;
 
         this.load(true);
+        this.loadMemberOrganizations(true);
       }
     });
   }
@@ -146,6 +149,54 @@ export class OrganizationListComponent {
             response[key].shift();
 
           this.entities.push(...response[key]);
+        }
+
+        this.offset = response['load-next'];
+        if (!this.offset) {
+          this.moreData = false;
+        }
+        this.inProgress = false;
+      })
+      .catch((e) => {
+        this.inProgress = false;
+      });
+  }
+
+
+  loadMemberOrganizations(refresh: boolean = false) {
+
+    // if (this.inProgress)
+    //   return;
+
+    if (refresh) {
+      this.offset = '';
+      this.memberOrganizations = [];
+      this.moreData = true;
+    }
+
+    let endpoint, key;
+    endpoint = `api/v3/organizations/member/` + this.ownerGuid;
+    key = 'organizations';
+
+    this.inProgress = true;
+    this.client.get(endpoint, {
+      limit: 12,
+      offset: this.offset,
+      rating: this.rating
+    })
+      .then((response: OpspotGroupListResponse) => {
+
+        if (!response[key] || response[key].length === 0) {
+          this.moreData = false;
+          this.inProgress = false;
+        }
+
+        if (refresh) {
+          this.memberOrganizations = response[key];
+        } else {
+          if (this.offset)
+            response[key].shift();
+          this.memberOrganizations.push(...response[key]);
         }
 
         this.offset = response['load-next'];
