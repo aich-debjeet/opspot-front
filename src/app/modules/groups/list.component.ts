@@ -21,9 +21,15 @@ export class GroupsListComponent {
   opspot;
 
   moreData: boolean = true;
+  moreData1: boolean = true;
+  moreData2: boolean = true;
+  offset: string = '';
+  offset1: string = '';
+  offset2: string = '';
+
+
   inProgress: boolean = false;
   all: boolean = false;
-  offset: string = '';
   entities: Array<any> = [];
   myCommunities: Array<any> = [];
   memberCommunities: Array<any> = [];
@@ -97,9 +103,10 @@ export class GroupsListComponent {
 
   load(refresh: boolean = false) {
 
-    if (this.inProgress)
-      return;
+    // if (this.inProgress)
+    //   return;
 
+    console.log("rgnkg: ", refresh);
     if (refresh) {
       this.offset = '';
       this.entities = [];
@@ -124,7 +131,7 @@ export class GroupsListComponent {
         break;
       default:
         //@gayatri  this route need to check and have to make it dynamic
-        endpoint = `api/v1/groups/${this.filter}/` + this.ownerGuid;
+        endpoint = `api/v1/groups/${this.all}/` + this.ownerGuid;
         key = 'groups';
         if (this.all)
           this.router.navigate(['/groups/top']);
@@ -146,6 +153,9 @@ export class GroupsListComponent {
             this.openHashtagsSelector();
           return false;
         }
+        console.log("dvhdfhf", refresh);
+        console.log("offset: ", this.offset);
+
 
         if (refresh) {
           this.entities = response[key];
@@ -169,13 +179,13 @@ export class GroupsListComponent {
 
   loadMyCommunities(refresh: boolean = false) {
 
-    // if (this.inProgress)
-    //   return;
+    if (this.inProgress)
+      return;
 
     if (refresh) {
-      this.offset = '';
+      this.offset1 = '';
       this.myCommunities = [];
-      this.moreData = true;
+      this.moreData1 = true;
     }
 
     let endpoint, key;
@@ -185,32 +195,32 @@ export class GroupsListComponent {
     this.inProgress = true;
     this.client.get(endpoint, {
       limit: 12,
-      offset: this.offset,
+      offset1: this.offset1,
       rating: this.rating
     })
       .then((response: OpspotGroupListResponse) => {
 
         if (!response[key] || response[key].length === 0) {
-          this.moreData = false;
-          this.inProgress = false;
+          this.moreData1 = false;
+          // this.inProgress = false;
         }
 
         if (refresh) {
           this.myCommunities = response[key];
         } else {
-          if (this.offset)
+          if (this.offset1)
             response[key].shift();
           this.myCommunities.push(...response[key]);
         }
 
-        this.offset = response['load-next'];
-        if (!this.offset) {
-          this.moreData = false;
+        this.offset1 = response['load-next'];
+        if (!this.offset1) {
+          this.moreData1 = false;
         }
-        this.inProgress = false;
+        // this.inProgress = false;
       })
       .catch((e) => {
-        this.inProgress = false;
+        // this.inProgress = false;
       });
   }
 
@@ -220,9 +230,9 @@ export class GroupsListComponent {
     //   return;
 
     if (refresh) {
-      this.offset = '';
+      this.offset2 = '';
       this.memberCommunities = [];
-      this.moreData = true;
+      this.moreData2 = true;
     }
 
     let endpoint, key;
@@ -232,27 +242,27 @@ export class GroupsListComponent {
     this.inProgress = true;
     this.client.get(endpoint, {
       limit: 12,
-      offset: this.offset,
+      offset2: this.offset2,
       rating: this.rating
     })
       .then((response: OpspotGroupListResponse) => {
 
         if (!response[key] || response[key].length === 0) {
-          this.moreData = false;
+          this.moreData2 = false;
           this.inProgress = false;
         }
 
         if (refresh) {
           this.memberCommunities = response[key];
         } else {
-          if (this.offset)
+          if (this.offset2)
             response[key].shift();
           this.memberCommunities.push(...response[key]);
         }
 
-        this.offset = response['load-next'];
-        if (!this.offset) {
-          this.moreData = false;
+        this.offset2 = response['load-next'];
+        if (!this.offset2) {
+          this.moreData2 = false;
         }
         this.inProgress = false;
       })
@@ -260,7 +270,6 @@ export class GroupsListComponent {
         this.inProgress = false;
       });
   }
-
 
   reloadTopFeed() {
     this.load(true);
