@@ -106,7 +106,6 @@ export class GroupsListComponent {
     // if (this.inProgress)
     //   return;
 
-    console.log("rgnkg: ", refresh);
     if (refresh) {
       this.offset = '';
       this.entities = [];
@@ -153,10 +152,7 @@ export class GroupsListComponent {
             this.openHashtagsSelector();
           return false;
         }
-        console.log("dvhdfhf", refresh);
-        console.log("offset: ", this.offset);
-
-
+     
         if (refresh) {
           this.entities = response[key];
         } else {
