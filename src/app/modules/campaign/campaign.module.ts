@@ -11,7 +11,7 @@ import { EnrolmentInvoiceComponent } from './invoice/invoice.component';
 import { NotificationModule } from '../notifications/notification.module';
 import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
 import { EditCampaignComponent } from './edit-campaign/edit-campaign.component';
-
+import { TagInputModule } from 'ngx-chips';
 import { TextMaskModule } from 'angular2-text-mask';
 
 const routes: Route[] = [
@@ -40,6 +40,7 @@ const routes: Route[] = [
     ReactiveFormsModule,
     NotificationModule,
     TextMaskModule,
+    TagInputModule,
     RouterModule.forChild(routes)
   ]
 })

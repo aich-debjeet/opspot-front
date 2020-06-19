@@ -9,11 +9,11 @@
           <div class="o-create-enrollment-header">
                 <h4 class="f500">Create an Enrollment</h4>
           </div><!--header ends-->                    
-          <div class="o-create-enrollment-content__form" (ngSubmit)="submit()" [formGroup]="campaignForm">
+          <form class="o-create-enrollment-content__form" (ngSubmit)="onSubmit()" [formGroup]="campaignForm">
                 <div class="o-enrollment-cover-image">
                     <div class="fileUpload" [hidden]="previewCover">
                         <span class="icon-plus"></span>
-                        <input type="file" name="cover image" class="upload" #file (change)="uploadAttachment($event)" formControlName="enrollCoverImage">
+                        <input type="file" name="cover image" class="upload" #file accept="image/jpg, image/jpeg, image/png" (change)="uploadAttachment($event)" formControlName="enrollCoverImage">
                         <div class="text-md grey mt15">Add Cover Image</div>
                     </div>
                     <div class="fileUpload" [hidden]="!previewCover">
@@ -70,7 +70,7 @@
                     </div><!--To Time ends-->
                 </div><!--row ends--> 
                 <div class="o-create-enrollment-row">
-                    <div class="form-group mr11 select-enrollment">
+                    <!-- <div class="form-group mr11 select-enrollment">
                         <label>Duration</label>
                         <select class="form-control form-control-lg" name="Duration" formControlName="duration">
                             <option selected="selected" disabled class="grey">Select</option>
@@ -82,15 +82,14 @@
                         <div class="error text-sm" *ngIf="campaignForm.get('duration').invalid && (campaignForm.get('duration').dirty || campaignForm.get('duration').touched)">
                             <p *ngIf="campaignForm.get('duration').errors?.required">Duration of the event is mandatory.</p>
                         </div>
-                    </div><!--Duration ends-->
+                    </div>Duration ends -->
                     <div class="form-group select-enrollment">
                         <label>Allow Gender</label>
                         <select class="form-control form-control-lg" name="Allow Gender" formControlName="gender">
                             <option selected="selected" disabled>Select</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Others</option>
                         </select>
                         <div class="error text-sm" *ngIf="campaignForm.get('gender').invalid && (campaignForm.get('gender').dirty || campaignForm.get('gender').touched)">
                             <p *ngIf="campaignForm.get('gender').errors?.required">Gender is required</p>
@@ -123,7 +122,7 @@
                     <div class="o-enrollment-profile-picture">
                         <div class="fileUpload mr10">
                             <span class="icon-plus"></span>
-                            <input type="file" name="cover image" #fileGallery class="upload" formControlName="gallery" (change)="uploadGalleryAttachment($event)">
+                            <input type="file" name="cover image" #fileGallery class="upload" accept="image/jpg, image/jpeg, image/png" formControlName="gallery" (change)="uploadGalleryAttachment($event)">
                         </div><!--file upload ends-->
                         <div class="fileUpload-preview" *ngFor="let image of cards">
                             <a class="fileUpload-close-temp" (click)="removeGalleryAttachment(image)"><i
@@ -162,7 +161,7 @@
                     <div class="o-enrollment-profile-picture">
                         <div class="fileUpload mr10">
                             <span class="icon-plus"></span>
-                            <input type="file" name="cover image" class="upload" #organizationPic formControlName="orgPic" (change)="uploadOrgAttachment($event)">
+                            <input type="file" name="cover image" class="upload" accept="image/jpg, image/jpeg, image/png" #organizationPic formControlName="orgPic" (change)="uploadOrgAttachment($event)">
                         </div>
                         <div class="fileUpload-preview-organiser" [hidden]="!orgImgSrc">
                             <a class="o-enrollment-image" href="#">
@@ -194,11 +193,21 @@
                         </div>
                     </div>
                 </div> -->
+                <!-- <div class="form-group">
+                    <label for="jury">Add Jury Members</label>
+                    <tag-input [maxItems]=5 required style="border:1px solid #959595; border-radius:4px " theme='minimal' placeholder="Add Jury members" secondaryPlaceholder="Add Jury members" [onlyFromAutocomplete]="true">
+                        <tag-input-dropdown [autocompleteObservable]="requestAutocompleteItems">
+                            <ng-template let-item="juryList" let-index="index">
+                                ({{ index }}) {{ juryList.username }}
+                            </ng-template>
+                        </tag-input-dropdown>
+                    </tag-input>
+                </div> -->
                 <div class="o-create-enrollment-action">
-                    <button type="submit" class="btn btn-primary mr-18">Create</button>
+                    <button type="submit" class="btn btn-primary mr-18" [disabled]="!campaignForm.valid">Create</button>
                     <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
                 </div><!--Button action ends-->
-          </div>
+            </form>
     </div>
 </div><!--Main community ends-->
 

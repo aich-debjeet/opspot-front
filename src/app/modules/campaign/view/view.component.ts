@@ -13,6 +13,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class EnrolmentViewComponent implements OnInit {
 
+  opspot = window.Opspot;
   inProgress: boolean = false;
   enrolmentDetails: any;
   formData: any;
@@ -57,21 +58,21 @@ export class EnrolmentViewComponent implements OnInit {
     this.title.setTitle('Enrolment');
   }
 
-  load() {
-    if (this.inProgress)
-      return false;
+  // load() {
+  //   if (this.inProgress)
+  //     return false;
 
-    this.inProgress = true;
+  //   this.inProgress = true;
 
-    this.client.get('api/v3/campaign/enrolment')
-      .then((data: any) => {
-        // console.log('campaign dta',data)
-        this.enrolmentDetails = data;
-      })
-      .catch((e) => {
-        this.inProgress = false;
-      });
-  }
+  //   this.client.get('api/v3/campaign/enrolment')
+  //     .then((data: any) => {
+  //       // console.log('campaign dta',data)
+  //       this.enrolmentDetails = data;
+  //     })
+  //     .catch((e) => {
+  //       this.inProgress = false;
+  //     });
+  // }
 
   proceedPayment(enrollDetails: any) {
     console.log('form data =', enrollDetails);
