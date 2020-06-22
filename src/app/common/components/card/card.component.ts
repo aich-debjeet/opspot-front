@@ -168,6 +168,7 @@ export class OpspotCard implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.componentRef.destroy();
+    if(this.componentRef !== undefined)
+      this.componentRef.destroy();
   }
 }
