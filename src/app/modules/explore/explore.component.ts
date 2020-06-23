@@ -212,6 +212,7 @@ export class ExploreComponent implements OnInit {
           hashtags: this.ref,
           period: '12h',
           all: '',
+          purpose: 'explore',
           query: this.q,
           nsfw: '',
           sync: '1',
