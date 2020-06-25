@@ -5822,6 +5822,22 @@ m-topbar {
   left: 0;
   padding: 42px 16px 16px;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 50%); }
+  .m-read-less--button {
+    text-align: left;
+    position: absolute; 
+    bottom: 0; 
+    width: 100%; 
+    left: 0; 
+    padding: 42px 16px 0px;
+  }
+  .m-read-less--button > span {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Roboto';
+  }
   .m-read-more--button > span {
     font-weight: 800;
     text-transform: uppercase;
