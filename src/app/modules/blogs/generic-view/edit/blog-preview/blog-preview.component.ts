@@ -97,7 +97,7 @@ export class BlogPreviewComponent implements OnInit {
   // closed(message) {
   //   // this.paywalMessage = message;
   //   // console.log("this: ", this.paywalMessage);
-    
+
   //   this.displayPaywal = false;
   // }
 
@@ -169,6 +169,14 @@ export class BlogPreviewComponent implements OnInit {
       this.displayPaywal = false;
     } else {
       this.displayPaywal = true;
+    }
+  }
+
+  limit(e) {
+    let max_chars = 3;
+
+    if (e.target.value.length >= max_chars) {
+      e.preventDefault();
     }
   }
 
