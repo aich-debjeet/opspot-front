@@ -70,7 +70,8 @@ import { PaywallMessageComponent } from './post-form/paywall-message.component';
     BlueStoreFormComponent,
     PortfolioFormComponent,
     MyJourneyFormComponent,
-    PostFormComponent
+    PostFormComponent,
+    PaywallMessageComponent
   ],
   entryComponents: [
     OpportunityFormComponent,
