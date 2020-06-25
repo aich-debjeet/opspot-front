@@ -71,7 +71,7 @@ import { PaywallMessageComponent } from './post-form/paywall-message.component';
     PortfolioFormComponent,
     MyJourneyFormComponent,
     PostFormComponent,
-    PaywallMessageComponent
+    // PaywallMessageComponent
   ],
   entryComponents: [
     OpportunityFormComponent,
