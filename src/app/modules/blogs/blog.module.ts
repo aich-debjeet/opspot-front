@@ -25,7 +25,7 @@ import { GenericViewComponent } from './generic-view/generic-view.component';
 // import { ModalsModule } from '../modals/modals.module';
 import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
 import { TagInputModule } from 'ngx-chips';
-import { OpspotFormsModule } from '../forms/forms.module';
+// import { OpspotFormsModule } from '../forms/forms.module';
 
 
 const routes: Routes = [
@@ -62,8 +62,8 @@ const routes: Routes = [
     WireModule,
     HashtagsModule,
     ShareMenuModule,
-    TagInputModule,
-    OpspotFormsModule
+    TagInputModule
+    // OpspotFormsModule
   ],
   declarations: [
     BlogView,
