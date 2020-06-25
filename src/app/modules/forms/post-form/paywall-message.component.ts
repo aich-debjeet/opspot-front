@@ -20,7 +20,7 @@ export class PaywallMessageComponent implements OnInit {
     this.message = object ? object.message : null;
   }
 
-  @Output() closed: EventEmitter<any> = new EventEmitter();
+  // @Output() closed: EventEmitter<any> = new EventEmitter();
 
 
   constructor() { }
@@ -35,7 +35,7 @@ export class PaywallMessageComponent implements OnInit {
         message: this.message
       });
     }
-    this.closed.emit();
+    // this.closed.emit();
   }
 
   limit(e) {
