@@ -11,7 +11,7 @@ import { PostMenuModule } from '../../common/components/post-menu/post-menu.modu
 
 
 import { BlogListComponent, BlogViewInfinite } from './list.component';
-import {BlogEdit} from './generic-view/edit/edit';
+import { BlogEdit } from './generic-view/edit/edit';
 import { BlogCard } from './card/card';
 import { BlogView } from './view/view';
 import { BlogTileComponent } from './tile/tile.component';
@@ -25,6 +25,8 @@ import { GenericViewComponent } from './generic-view/generic-view.component';
 // import { ModalsModule } from '../modals/modals.module';
 import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
 import { TagInputModule } from 'ngx-chips';
+import { OpspotFormsModule } from '../forms/forms.module';
+
 
 const routes: Routes = [
   { path: 'blog/view/:guid/:title', component: BlogViewInfinite },
@@ -33,8 +35,8 @@ const routes: Routes = [
     path: 'blog', component: GenericViewComponent,
     children: [
       { path: '', redirectTo: 'edit/:guid', pathMatch: 'full' },
-      { path: 'edit/:guid', component: BlogEdit},
-      { path: 'edit/:guid/:groupGuid', component: BlogEdit},
+      { path: 'edit/:guid', component: BlogEdit },
+      { path: 'edit/:guid/:groupGuid', component: BlogEdit },
       { path: ':status', component: BlogAllComponent },
       // { path: 'published', component: BlogAllComponent }
     ]
@@ -61,6 +63,7 @@ const routes: Routes = [
     HashtagsModule,
     ShareMenuModule,
     TagInputModule,
+    OpspotFormsModule
   ],
   declarations: [
     BlogView,
