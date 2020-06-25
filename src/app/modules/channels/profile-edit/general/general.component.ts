@@ -1,4 +1,4 @@
-import { Component, OnInit,EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { TopbarHashtagsService } from '../../../hashtags/service/topbar.service';
 import { Client } from '../../../../services/api/client';
 import { Router } from '@angular/router';
@@ -18,9 +18,9 @@ export class GeneralComponent implements OnInit {
     fullName: '',
     skills: []
   };
-  inProgress:boolean = false;
+  inProgress: boolean = false;
   reqName: boolean = false;
-  
+
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -33,7 +33,7 @@ export class GeneralComponent implements OnInit {
   }
 
   onSubmit(e) {
-    if(!e.valid){
+    if (!e.valid) {
       this.reqName = true;
       return;
     }
@@ -46,7 +46,10 @@ export class GeneralComponent implements OnInit {
         skills: skills ? skills : []
       }
     };
-    this.client.post('api/v1/entities/general_info', info).then((res:any) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    user.name = info.general_info.full_name;
+    localStorage.setItem('user', JSON.stringify(user));
+    this.client.post('api/v1/entities/general_info', info).then((res: any) => {
       // this.router.navigate(['/profile/about']);
       if (res.status === 'success' && res.entities == true) {
         this.client.get('api/v2/onboarding/progress').then((response: any) => {
@@ -102,7 +105,7 @@ export class GeneralComponent implements OnInit {
       timeOut: 3000
     });
   }
-  showFailure(){
+  showFailure() {
     this.toastr.error('Profile could not be updated', '', {
       timeOut: 3000
     });
