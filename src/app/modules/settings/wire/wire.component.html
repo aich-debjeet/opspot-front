@@ -64,7 +64,7 @@
             (keyup)="exclusive.saved = false; updatePreviewEntity()">
             </textarea>
         </div>
-        <div class="fileUpload">
+        <div class="fileUpload" id="fileUpload">
           <span class="icon-plus f500"></span><span class="text-md grey">Background image</span>
           <input type="file" accept="image/jpg, image/jpeg, image/png" id="file" class="upload" #backgroundFile name="preview" (change)="updatePreview(backgroundFile)"/>
         </div>

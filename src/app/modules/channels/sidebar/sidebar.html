@@ -2,10 +2,10 @@
   <div class="o-card o-prof-info o-prof-info--radius o-prof-info--shadow">
     <button class="mdl-button m-pin-button mdl-button--icon o-prof-info__bookmark mdl-color-text--blue-grey-300"
       id="profile-bookmark" (click)="togglePin(user)" *ngIf="session.getLoggedInUser().guid != user.guid">
-      <m-tooltip icon="turned_in" *ngIf="user.bookmark">
+      <m-tooltip icon="turned_in" name="turned_in" *ngIf="user.bookmark">
         This profile is Bookmarked
       </m-tooltip>
-      <m-tooltip *ngIf="!user.bookmark" icon="turned_in_not">
+      <m-tooltip *ngIf="!user.bookmark" icon="turned_in_not" name="turned_in_not">
         Bookmark
       </m-tooltip>
     </button>

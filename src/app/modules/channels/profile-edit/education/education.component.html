@@ -4,7 +4,7 @@
         <a class="btn btn-outline-primary btn-block showSingle" id="education-add-education"
             (click)="addWork=!addWork; addWorkMove();">ADD EDUCATION</a>
         <div class="o-prof-edit-wea">
-            <div class="o-wea-block" *ngFor="let work of work.education; let i=index;">
+            <div class="o-wea-block" id="education-block" *ngFor="let work of work.education; let i=index;">
                 <div class="o-wea-logo"><img src="assets/Education.jpg" alt=""></div>
                 <div class="o-wea-info" id="eduaction-details">
                     <div class="caption-bold" id="eduaction-feild-of-study">{{work.field_of_study}}</div>
@@ -13,9 +13,9 @@
                     <div class="text-md grey" id="eduaction-date-month">{{work.start_date}} -
                         {{work.end_date?work.end_date:'Present'}}</div>
                 </div>
-                <div class="o-wea-edit"><a (click)="update(i)" id="work-update-icon"><i
+                <div class="o-wea-edit"><a (click)="update(i)" id="education-update-icon"><i
                             class="icon-edit-profile"></i></a>
-                    <a class="fileUpload-close-temp" (click)="remove(i)" id="work-remove-image">
+                    <a class="fileUpload-close-temp" (click)="remove(i)" id="education-remove-image">
                         <i class="icon-x"></i>
                     </a></div>
             </div>

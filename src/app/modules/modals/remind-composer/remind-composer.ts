@@ -32,7 +32,7 @@ import { ActivityPreview } from '../../legacy/components/cards/activity/preview'
 
       <!-- <ng-template dynamic-host></ng-template> -->
 
-      <div class="o-repost">
+      <div class="o-repost" name="repost-popup">
         <div class="o-repost-header">
             <div class="caption-regular f500" id="repost-timeline">Repost on your timeline</div>
             <!-- <a class="close"><i class="icon-x"></i></a> -->

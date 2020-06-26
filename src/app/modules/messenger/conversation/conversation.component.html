@@ -112,6 +112,7 @@
       <textarea placeholder="Send a message..."
       i18n-placeholder="@@MESSENGER__CONVERSATION__SEND_A_MESSAGE"
       name="message"
+      id="message"
       [(ngModel)]="message"
       [disabled]="blockingActionInProgress"
       (keydown.enter)="send($event); emoji.close()"
@@ -121,7 +122,7 @@
       maxlength="180"
       rows="1"></textarea>
       <i class="material-icons mdl-color-text--blue-grey-600" (emoji)="message = message + $event.character" #emoji="emoji">mood</i>
-      <i class="material-icons mdl-color-text--blue-grey-600" (click)="send($event); emoji.close()">send_arrow</i>
+      <i class="material-icons mdl-color-text--blue-grey-600" id="send_button" (click)="send($event); emoji.close()">send_arrow</i>
       <opspot-emoji [localDirective]="emoji"></opspot-emoji>
     </div>
   </div>
