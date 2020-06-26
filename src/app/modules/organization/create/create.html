@@ -54,7 +54,7 @@
             <div class="form-group">
                 <label>Profile Picture</label>
                 <div class="o-community-profile-picture">
-                    <div class="fileUpload" *ngIf="!editOrganization">
+                    <div class="fileUpload" id="fileUpload" *ngIf="!editOrganization">
                         <span *ngIf="!croppieImage&&!editOrganization" class="icon-plus"></span>
                         <input type="file" accept="image/jpg, image/jpeg, image/png" id="create-organization-file" #editImgcomp  onclick="this.value = null"
                         (change)="add($event)"
@@ -78,7 +78,7 @@
                 <div class="text-sm grey">The dimensions for profile picture is 1545px x 1024px </div>
             </div>
             <div class="o-create-organisation-action">
-                <button type="button" id="create-organization-create-button" class="btn btn-primary btn-lg mr-18" (click)="save($event)" [disabled]="!(organization.name && organization.location && organization.category) || inProgress">{{editOrganization?"Update":"Create"}}</button>
+                <button type="button" id="create-organization-create-button" class="btn btn-primary btn-lg mr-18" (click)="save($event)" [disabled]="inProgress">{{editOrganization?"Update":"Create"}}</button>
                 <button type="button" id="create-organization-cancel-button" class="btn btn-outline-primary btn-lg" (click)="organizationReset()">Cancel</button>
                 <!-- <button (click)="navEvent()">Nav Event</button> -->
             </div>

@@ -20,6 +20,9 @@ export class PaywallMessageComponent implements OnInit {
     this.message = object ? object.message : null;
   }
 
+  // @Output() closed: EventEmitter<any> = new EventEmitter();
+
+
   constructor() { }
 
   ngOnInit() {
@@ -32,7 +35,9 @@ export class PaywallMessageComponent implements OnInit {
         message: this.message
       });
     }
+    // this.closed.emit();
   }
+
   limit(e) {
     let max_chars = 3;
 

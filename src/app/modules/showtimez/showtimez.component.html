@@ -26,10 +26,10 @@
               <button type="button" class="btn btn-primary btn-sm btn-boost" *ngIf="session.getLoggedInUser().guid == showTimez?.owner_guid" 
                 (click)="showBoost()" id="showtimez-boost">Boost</button>
               <a class="head-action__link" (click)="togglePin()" id="showtimez-bookmark">
-                <m-tooltip icon="turned_in" *ngIf="showTimez?.bookmark">
+                <m-tooltip icon="turned_in" name="turned_in" *ngIf="showTimez?.bookmark">
                   Bookmarked
                 </m-tooltip>
-                <m-tooltip *ngIf="!showTimez?.bookmark" icon="turned_in_not">
+                <m-tooltip *ngIf="!showTimez?.bookmark" name="turned_in_not" icon="turned_in_not">
                   Bookmark
                 </m-tooltip>
               </a>

@@ -102,7 +102,7 @@
                       src="{{opspot.cdn_url}}icon/{{session.getLoggedInUser().guid}}/medium/{{session.getLoggedInUser().icontime}}/"
                       alt="profile-image" class="profile-image">
                   </div>
-                  <div class="o-prof-avatar-name__block">
+                  <div class="o-prof-avatar-name__block" id="topbar-dropdown-full-name">
                     <div class="text-lg f500">{{ session.getLoggedInUser().name | truncate:[15, '...'] }}</div>
                     <a class="text-sm primary" id="topbar-dropdown-view-Profile">View Profile</a>
                   </div>
@@ -211,13 +211,13 @@
               <img src="assets/svg/create.svg" alt="">
             </a>
             <ul class="m-dropdown__list" [hidden]="!createMenu.value">
-              <li class="m-dropdownList__item" (click)="createMenu.value = false">
+              <li class="m-dropdownList__item" (click)="createMenu.value = false" id="create-community">
                 <a [routerLink]="['/groups/create']" id="topbar-create-Community">
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>Create Community</span>
                 </a>
               </li>
-              <li class="m-dropdownList__item" (click)="createMenu.value = false">
+              <li class="m-dropdownList__item" (click)="createMenu.value = false" id="create-event">
                 <a [routerLink]="['/event/create']" id="topbar-create-event">
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>Create Event</span>
@@ -289,7 +289,7 @@
             </a>
           </li>
           <li class="app-nav-link_-item">
-            <a [routerLink]="['wallet/tokens/contributions']" (click)='closeNav()'>
+            <a [routerLink]="['wallet/tokens/overview']" (click)='closeNav()'>
               <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/wallet.svg" alt=""></div>
               <div class="app-nav-link__text">Wallet</div>
             </a>

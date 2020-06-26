@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="o-create-myjourney-fileupload" *ngIf="attachment.meta.attachment_guid.length == 0">
-                <div class="fileUpload">
+                <div class="fileUpload" id="fileUpload">
                     <span class="icon-paperclip-2"></span>
                     <input type="file" accept="video/mp4, video/mov" id="file" #file class="upload"
                         name="attachment" (change)="uploadAttachment(file, $event)" />
@@ -34,7 +34,7 @@
                 <div class="fileUpload-preview-new mr-9" *ngFor="let video of cards">
                     <a class="fileUpload-preview-new-close" id="myjourney-remove-attachment" (click)="removeAttachment(file,video.guid)"><i
                             class="ico-x white"></i></a>
-                    <a class="o-create-myjourney-filled-avatar" href="javascript:void(0)">
+                    <a class="o-create-myjourney-filled-avatar" id="o-create-myjourney-filled-avatar" href="javascript:void(0)">
                         <img [src]="video.imageLink" alt="">
                     </a>
                 </div>

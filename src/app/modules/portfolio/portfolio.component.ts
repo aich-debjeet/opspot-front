@@ -26,6 +26,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     // TODO @abhijeet check for all valid request params
     hashtags: '',
     period: '12h',
+    purpose: 'portfolio',
     all: '',
     query: this.q,
     nsfw: '',

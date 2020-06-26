@@ -7,7 +7,7 @@ import { Component, EventEmitter } from '@angular/core';
   outputs: ['added'],
   template: `
   <div class="opspot-banner" *ngIf="!editing">
-    <div class="opspot-banner-img m-banner--img-cover" [style.backgroundImage]="src ? 'url(' + src + ')' : null"></div>
+    <div class="opspot-banner-img m-banner--img-cover" id="banners-cover-image" [style.backgroundImage]="src ? 'url(' + src + ')' : null"></div>
     <div class="opspot-banner-overlay"></div>
   </div>
   <div *ngIf="editing" class="opspot-banner opspot-banner-editing m-banner--img-cover" [style.backgroundImage]="src ? 'url(' + src + ')' : null">

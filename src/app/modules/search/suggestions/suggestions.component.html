@@ -9,18 +9,18 @@
 }
 </style>
 
-<div class="m-search-bar-suggestions-list" [hidden]="disabled || !active" (mousedown)="mousedown($event)" *ngIf="session.isLoggedIn()">
+<div class="m-search-bar-suggestions-list" id="suggestion-search_list" [hidden]="disabled || !active" (mousedown)="mousedown($event)" *ngIf="session.isLoggedIn()">
   <ng-container *ngIf="!q">
     <ng-container *ngFor="let suggestion of recent">
       <a class="m-search-bar-suggestions-suggestion"
         *ngIf="suggestion.type == 'user'"
         [routerLink]="['/', suggestion.username]">
-        <img src="icon/{{suggestion.guid}}/" class="imgHeight"/> <span class="userSuggestion">@{{suggestion.username}}</span>
+        <img src="icon/{{suggestion.guid}}/" class="imgHeight"/> <span class="userSuggestion" id="suggestion-username">@{{suggestion.username}}</span>
       </a>
       <a class="m-search-bar-suggestions-suggestion"
         *ngIf="suggestion.type == 'group'"
         [routerLink]="['/groups/profile/', suggestion.guid]">
-        <img src="fs/v1/avatars/{{suggestion.guid}}/" class="imgHeight" /> {{suggestion.name}}
+        <img src="fs/v1/avatars/{{suggestion.guid}}/" class="imgHeight" id="suggestion-name" /> {{suggestion.name}}
       </a>
     </ng-container>
   </ng-container>
@@ -29,7 +29,7 @@
     <a class="m-search-bar-suggestions-suggestion"
       *ngFor="let suggestion of suggestions"
       [routerLink]="['/', suggestion.username]">
-      <img src="icon/{{suggestion.guid}}/" class="imgHeight"/> <span class="userSuggestion">@{{suggestion.username}}</span>
+      <img src="icon/{{suggestion.guid}}/" class="imgHeight"/> <span class="userSuggestion" id="suggestion-username1">@{{suggestion.username}}</span>
     </a>
   </ng-container>
 

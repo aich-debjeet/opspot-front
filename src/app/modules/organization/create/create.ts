@@ -10,6 +10,7 @@ import {Location} from '@angular/common';
 import { ORGANIZATION_TYPE} from '../../../services/list-options';
 import { OrganizationService } from '../organization-service';
 import { CommonEventsService } from '../../../services/common-events.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -62,7 +63,8 @@ export class OrganizationCreator {
     public title: OpspotTitle ,
     public route:ActivatedRoute,
     private _location: Location,
-    public commService: CommonEventsService
+    public commService: CommonEventsService,
+    private toastr: ToastrService
     ) {
     this.title.setTitle('Create Organization');
   }
@@ -103,6 +105,7 @@ export class OrganizationCreator {
   save(e) {
 
     if (!(this.organization.name && this.organization.location && this.organization.category)) {
+      this.toastr.error('Error! Please fill the required fields');
       return;
     }
 
@@ -167,6 +170,11 @@ export class OrganizationCreator {
   }
 
  ngOnInit(){
+
+  if (!this.session.isLoggedIn()) {
+    this.router.navigate(['/login']);
+  }
+  
   this.route.params.subscribe(params=>{
    if(params['guid']){
      this.load(params['guid'])
