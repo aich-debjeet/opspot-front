@@ -24,6 +24,7 @@ export class BlogPreviewComponent implements OnInit {
   defaultCoins: number;
   displayPaywal: boolean = false;
   meta: any;
+  message = '';
 
   @Input('object') set data(object) {
     this.blog = object ? object.blog : null;
@@ -34,17 +35,17 @@ export class BlogPreviewComponent implements OnInit {
     this.skillsAlter(skills);
   }
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
-  constructor(public upload: Upload, public router: Router, public client: Client, private overlayModal: OverlayModalService,private service: TopbarHashtagsService,) {
+  constructor(public upload: Upload, public router: Router, public client: Client, private overlayModal: OverlayModalService, private service: TopbarHashtagsService, ) {
     this.banner = void 0;
     this.banner_top = 0;
     this.banner_prompt = false;
   }
 
   ngOnInit() {
-   this.getTopHashtags();
+    this.getTopHashtags();
   }
 
-  async getTopHashtags(){
+  async getTopHashtags() {
     const res = await this.service.load(50);
     res.map(a => {
       this.skillData.push(a.value);
@@ -65,7 +66,7 @@ export class BlogPreviewComponent implements OnInit {
 
   onTagsRemoved(tags: Tag[]) {
   }
-  onItemAdded(e){
+  onItemAdded(e) {
     const skills = this.blogSkills.map(e => e.value);
     this.blog.tags = skills;
 
@@ -93,11 +94,19 @@ export class BlogPreviewComponent implements OnInit {
     });
   }
 
+  // closed(message) {
+  //   // this.paywalMessage = message;
+  //   // console.log("this: ", this.paywalMessage);
+
+  //   this.displayPaywal = false;
+  // }
+
   createEditBlog() {
     if (this.defaultCoins) {
       this.blog.wire_threshold = true
       this.blog.min = this.defaultCoins;
-      this.blog.type ='tokens';
+      this.blog.type = 'tokens';
+      this.blog.message = this.message;
     }
     let blog = Object.assign({}, this.blog);
     blog.mature = blog.mature ? 1 : 0;
@@ -105,7 +114,7 @@ export class BlogPreviewComponent implements OnInit {
     blog.monetized = blog.monetized ? 1 : 0;
 
     this.check_for_banner().then(() => {
-      if(this.error != 'undefined') this.error ='';
+      if (this.error != 'undefined') this.error = '';
       this.inProgress = true;
       this.upload.post('api/v1/blog/' + this.guid, [this.banner], blog)
         .then((response: any) => {
@@ -121,24 +130,24 @@ export class BlogPreviewComponent implements OnInit {
     })
       .catch(() => {
         this.error = '';
-        if(blog.published != 0){
+        if (blog.published != 0) {
           this.error = 'error:no-banner';
           return false;
         } else {
           this.inProgress = true;
           this.client.post('api/v1/blog/' + this.guid, this.blog)
-          .then((response: any) => {
-            if (response.guid) {
-              this.overlayModal.dismiss();
-              this.router.navigate(response.route ? ['/' + response.route] : ['/blog/view', response.guid]);
-            }
-            this.inProgress = false;
-            // this.canSave = true;
-          })
-          .catch((e) => {
-            this.inProgress = false;
-            // this.canSave = true;
-          });
+            .then((response: any) => {
+              if (response.guid) {
+                this.overlayModal.dismiss();
+                this.router.navigate(response.route ? ['/' + response.route] : ['/blog/view', response.guid]);
+              }
+              this.inProgress = false;
+              // this.canSave = true;
+            })
+            .catch((e) => {
+              this.inProgress = false;
+              // this.canSave = true;
+            });
         }
       });
   }
@@ -146,7 +155,7 @@ export class BlogPreviewComponent implements OnInit {
   /**
    * fix: AOT
    */
-  detect() {}
+  detect() { }
 
   /**
    * close modal
@@ -160,6 +169,14 @@ export class BlogPreviewComponent implements OnInit {
       this.displayPaywal = false;
     } else {
       this.displayPaywal = true;
+    }
+  }
+
+  limit(e) {
+    let max_chars = 3;
+
+    if (e.target.value.length >= max_chars) {
+      e.preventDefault();
     }
   }
 

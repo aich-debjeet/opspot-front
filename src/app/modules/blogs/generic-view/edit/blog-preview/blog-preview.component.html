@@ -94,15 +94,30 @@
                     </div>
                     <button type="submit" id="blog-review-publish" (click)="blog.published = 1;createEditBlog()" class="btn btn-primary btn-lg" [disabled]="inProgress">Publish Now</button>
                     <div class="o-blog-preview-post-footer" [hidden]="!displayPaywal">
-                        <div class="o-blog-preview-post-footer__paywall">
+                        <!-- <div class="o-blog-preview-post-footer__paywall">
                             <div class="text-sm grey">Visible to supporter who send over</div>
                             <div class="paywall-coins">
                                 <input type="number" name="coins" [(ngModel)]="defaultCoins"
                                 placeholder="0 Coins">
-                                <button type="button" class="btn btn-primary btn-sm post-btn" (click)="displayPaywall()" [disabled]="!defaultCoins">Add</button><!--for event page-->
+                                <button type="button" class="btn btn-primary btn-sm post-btn" (click)="displayPaywall()" [disabled]="!defaultCoins">Add</button>
+                            </div>
+                        </div> -->
+                        <div class="paywall-wrapper">
+                            <p class="paywall-coins-text">Coins required to unlock this post</p>
+                            <div class="paywall-coins">
+                                <input type="number" name="coins" [(ngModel)]="defaultCoins" maxlength="3" (keypress)=limit($event) placeholder="0 Coins" id="post-set-coins">
+                            </div>
+                            <p class="paywall-coins-text m-t-20">Description</p>
+                            <div class="paywall-coins">
+                                <textarea name="message" id="post-set-coins" maxlength="120" [(ngModel)]="message"></textarea>
+                            </div>
+                            <div class="m-t-20">
+                                <button type="button" class="btn btn-primary btn-sm" (click)="displayPaywall()" id="post-coins-add" [disabled]="!defaultCoins">Add</button>
                             </div>
                         </div>
+                        <!-- <app-paywall-message [hidden]="!displayPaywal" (closed)="closed()"></app-paywall-message> -->
                     </div>
+                   
                 </div>
             </div>
             <!--right ends-->
@@ -110,3 +125,22 @@
     </form>
 </div>
 <!--blog preview popup ends-->
+
+<style>
+    .paywall-wrapper {
+        margin: 30px;
+    }
+    .paywall-wrapper p {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .paywall-wrapper textarea {
+        width: 100%;
+        outline: none;
+        resize: none;
+        height: 150px;
+    }
+    .m-t-20 {
+        margin-top: 20px;
+    }
+</style>
