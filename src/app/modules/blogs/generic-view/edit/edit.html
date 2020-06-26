@@ -157,7 +157,7 @@
   <form (submit)="save()" *ngIf="blog.guid" class="blog-create-form">
     <div class="o-blog-preview-btn-block ">
       <ng-container *ngIf="error" [ngSwitch]="error">
-        <h1 class="edit-error"
+        <h1 class="edit-error" id="title_error"
           i18n="@@BLOGS__EDIT__NO_TITLE_ERROR"
           *ngSwitchCase="'error:no-title'"
         >

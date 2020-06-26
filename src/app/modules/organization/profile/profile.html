@@ -67,10 +67,10 @@
                             </opspot-avatar>
                             <!-- <a class="o-community-img-edit"><i class="icon-edit-profile"></i></a> -->
                         </div>
-                        <div class="o-community-name">
-                            <h5 class="f700 word-br" id="profile-organization-name">{{organization?.name}}</h5>
+                        <div class="o-community-name" id="profile-organization-name">
+                            <h5 class="f700 word-br" >{{organization?.name}}</h5>
                         </div>
-                        <div class="o-community-skills" *ngIf="!editing && organization?.tags">
+                        <div class="o-community-skills" id="skills" *ngIf="!editing && organization?.tags">
                             <a *ngFor="let tag of organization?.tags" href="" class="o-community-skills__tag">#{{tag}}</a>
                         </div>
                         <opspot-organization-join-button style="margin-bottom: 6px;" [group]="organization"

@@ -15,7 +15,7 @@
     </div>
 
     <div *ngSwitchCase="'portfolio'">
-        <div class="o-prof-info">
+        <div class="o-prof-info" id="user_profile_widget">
             <a [routerLink]="['/', user.username]">
                 <div class="o-avatar-lg" id="user-profile-image">
                     <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" />

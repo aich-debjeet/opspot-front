@@ -54,7 +54,7 @@
             <div class="form-group">
                 <label>Profile Picture</label>
                 <div class="o-community-profile-picture">
-                    <div class="fileUpload" *ngIf="!editOrganization">
+                    <div class="fileUpload" id="fileUpload" *ngIf="!editOrganization">
                         <span *ngIf="!croppieImage&&!editOrganization" class="icon-plus"></span>
                         <input type="file" accept="image/jpg, image/jpeg, image/png" id="create-organization-file" #editImgcomp  onclick="this.value = null"
                         (change)="add($event)"
