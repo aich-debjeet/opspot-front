@@ -149,7 +149,7 @@
         <div class="o-blog-inner-page-header">
           <div class="o-blog-inner-page-header__info">
             <a class="o-avatar">
-              <img src="{{opspot.cdn_url}}icon/{{blog.ownerObj.guid}}/">
+              <img [src]="opspot.cdn_url + 'icon/' + blog?.ownerObj?.guid + '/' + getOwnerIconTime()">
             </a>
             <!--avatar ends-->
             <div class="o-user-info">
