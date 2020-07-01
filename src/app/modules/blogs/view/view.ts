@@ -193,4 +193,13 @@ export class BlogView {
       });
   }
 
+  getOwnerIconTime() {
+    let session = this.session.getLoggedInUser();
+    if (session && session.guid === this.blog.ownerObj.guid) {
+      return session.icontime;
+    } else {
+      return this.blog.ownerObj.icontime;
+    }
+  }
+
 }

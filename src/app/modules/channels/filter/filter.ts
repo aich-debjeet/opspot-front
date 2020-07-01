@@ -91,7 +91,9 @@ export class ChannelFilterComponent {
     this.inProgress = true;
 
     params.offset = this.offset;
-
+    if (this.filter == 'blogs') {
+      this.filter = this.filter + '/published';
+    }
     this.client
       .get(`api/v2/feeds/container/${this.user.guid}/${this.filter}`, params)
       .then((data: OpspotActivityObject) => {
