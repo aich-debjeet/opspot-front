@@ -208,11 +208,11 @@ console.log(this.host.nativeElement, options)
   }
 
   keyUp(e) {
-    clearTimeout(this.typingTimer)
+    // clearTimeout(this.typingTimer)
     if(this.host.nativeElement.innerText){
-      this.typingTimer = setTimeout(() => {
+    //   this.typingTimer = setTimeout(() => {
         this.draft.emit()
-      }, this.doneTypingInterval);
+    //   }, this.doneTypingInterval);
     }
   }
 }

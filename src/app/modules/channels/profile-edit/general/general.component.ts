@@ -3,6 +3,7 @@ import { TopbarHashtagsService } from '../../../hashtags/service/topbar.service'
 import { Client } from '../../../../services/api/client';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Session } from '../../../../services/session';
 
 @Component({
   selector: 'app-general',
@@ -27,7 +28,8 @@ export class GeneralComponent implements OnInit {
     private service: TopbarHashtagsService,
     private client: Client,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public session: Session,
   ) {
     this.load();
   }
@@ -46,9 +48,6 @@ export class GeneralComponent implements OnInit {
         skills: skills ? skills : []
       }
     };
-    const user = JSON.parse(localStorage.getItem('user'));
-    user.name = info.general_info.full_name;
-    localStorage.setItem('user', JSON.stringify(user));
     this.client.post('api/v1/entities/general_info', info).then((res: any) => {
       // this.router.navigate(['/profile/about']);
       if (res.status === 'success' && res.entities == true) {
@@ -56,6 +55,8 @@ export class GeneralComponent implements OnInit {
           this.showSuccess();
           this.inProgress = false;
           this.updatePercentage.emit(response.rating);
+          const user = { ...window.Opspot.user, name: info.general_info.full_name }
+          this.session.login(user);
         });
       }
     }).catch((e) => {
