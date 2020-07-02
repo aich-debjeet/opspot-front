@@ -17,7 +17,7 @@
                 <div class="o-crete-myjourney-userinfo__mesaage">
                     <textarea type="text" id="message" #message name="message" placeholder="What have you created today?"
                         [ngModel]="meta.message" (ngModelChange)="onMessageChange($event)"
-                        (keyup)="getPostPreview(message);"></textarea>
+                        (keyup)="getPostPreview(message);" [autoGrow]></textarea>
                 </div>
             </div>
             <div class="o-create-myjourney-fileupload" *ngIf="attachment.meta.attachment_guid.length == 0">
