@@ -59,7 +59,7 @@ export class SuggestionsSlider {
 
   async load() {
     this.inProgress = true;
-    let limit: number = 12;
+    let limit: number = 3;
 
     if (this.suggestions.length) {
       limit = 1;
