@@ -4,7 +4,7 @@
         <a class="btn btn-outline-primary btn-block showSingle" (click)="addWork=!addWork; addWorkMove();"
             id="work-add-work-experience">ADD WORK EXPERIENCE</a>
         <div class="o-prof-edit-wea">
-            <div class="o-wea-block" *ngFor="let work of work.work_experience; let i=index;">
+            <div class="o-wea-block" id="work-component-work-block" *ngFor="let work of work.work_experience; let i=index;">
                 <div class="o-wea-logo"><img src="assets/Work.jpg" alt=""></div>
                 <div class="o-wea-info">
                     <div class="caption-bold" id="work-designation">{{work.designation}}</div>
@@ -90,7 +90,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select class="form-control" name="endYear" [(ngModel)]="model.endYear">
+                                <select class="form-control" id="work-end-year-selector" name="endYear" [(ngModel)]="model.endYear">
                                     <option [value]="Year" id="work-end-year" selected disabled hidden>Year</option>
                                     <option *ngFor="let year of dateOfBirth.year" id="work-end-year1" [value]="year">
                                         {{year}}</option>

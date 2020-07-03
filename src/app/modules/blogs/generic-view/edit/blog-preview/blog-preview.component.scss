@@ -274,9 +274,11 @@
 
 //post footer
 .o-blog-preview-post-footer{
+    width: 100%;
+    max-width: 300px;
     top: 52px;
     position: absolute;
-    width: 197px;
+    // width: 197px;
     border: 1px solid #ECEFF1;
     border-radius: 4px;
     background-color: #FFFFFF;

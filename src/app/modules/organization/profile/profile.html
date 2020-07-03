@@ -67,10 +67,10 @@
                             </opspot-avatar>
                             <!-- <a class="o-community-img-edit"><i class="icon-edit-profile"></i></a> -->
                         </div>
-                        <div class="o-community-name">
-                            <h5 class="f700 word-br" id="profile-organization-name">{{organization?.name}}</h5>
+                        <div class="o-community-name" id="profile-organization-name">
+                            <h5 class="f700 word-br" >{{organization?.name}}</h5>
                         </div>
-                        <div class="o-community-skills" *ngIf="!editing && organization?.tags">
+                        <div class="o-community-skills" id="skills" *ngIf="!editing && organization?.tags">
                             <a *ngFor="let tag of organization?.tags" href="" class="o-community-skills__tag">#{{tag}}</a>
                         </div>
                         <opspot-organization-join-button style="margin-bottom: 6px;" [group]="organization"
@@ -114,7 +114,7 @@
                 </div>
             </div>
             <div class="o-center-block">
-                <div class=" hidden-under-tablet" style="width:100%; height: 187px; margin-bottom:9px;">
+                <div class=" hidden-under-tablet" style="width:100%; height: 187px; margin-bottom:15px;">
                     <app-group-banner [object]="organization" [editMode]="editing" [top]="organization?.banner_position" [done]="editDone"
                         (added)="add_banner($event)"></app-group-banner>
                     <div class="text-sm grey">The dimensions for cover image is 2764px x 1843px </div>

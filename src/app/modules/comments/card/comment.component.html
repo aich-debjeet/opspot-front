@@ -81,6 +81,7 @@
         <!-- Rich content -->
         <div class="m-rich-embed m-border cf"
         id="nsfw_media_post_blanket"
+        name="nsfw_media_post_blanket"
         *ngIf="comment.perma_url && comment.title"
         [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(comment), 'm-mature-content-shown': attachment.isForcefullyShown(comment) }"
         >
@@ -101,6 +102,7 @@
         <!-- Custom type ::  video -->
         <div class="item item-image item-image-video"
         id="nsfw_media_post_blanket"
+        name="nsfw_media_post_blanket"
         [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(comment), 'm-mature-content-shown': attachment.isForcefullyShown(comment) }"
         *ngIf="comment.custom_type == 'video'"
         >
@@ -130,6 +132,7 @@
         <!-- Custom type:: batch -->
         <div class="item item-image allow-select"
         id="nsfw_media_post_blanket"
+        name="nsfw_media_post_blanket"
         [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(comment), 'm-mature-content-shown': attachment.isForcefullyShown(comment) }"
         *ngIf="!editing && comment.custom_type == 'batch'"
         >

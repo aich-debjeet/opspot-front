@@ -11,8 +11,8 @@
         </div>
         <!--token discription end-->
         
-        <div class="o-token-purchase">
-            <input type="range" min="1" max="99" step="1" value="1" data-orientation="vertical" [(ngModel)]="tokens"
+        <div class="o-token-purchase" id="spotcoins-token-purchase">
+            <input type="range" id="spotcoins-range" min="1" max="99" step="1" value="1" data-orientation="vertical" [(ngModel)]="tokens"
                 #tokenInput>
             <input type="number" id="spotcoins-buy-coins" class="o-token-action-input" maxlength="2" min="1" max="99" 
                 (keypress)=limit($event) [(ngModel)]="tokens" #tokenInput>
@@ -21,13 +21,13 @@
             <div class="o-purchase-detail__title">Purchase Details</div>
             <div class="o-purchase-detail__body">
                 <div class="o-purchase-count">
-                    <span class="text-md">{{tokens}} coins</span>
+                    <span class="text-md" id="spotcoins-tokens">{{tokens}} coins</span>
                     <!-- <span class="text-sm grey text-right">GST 6%</span> -->
                 </div>
                 <div class="o-purchase-token-price">
                     <span class="text-md"><label for="">₹</label> {{amount}}</span>
                     <!-- <span class="text-md"><label for="">₹</label> 5.00</span> -->
-                    <span class="o-purchase-token-price__total"><label for="">₹</label> {{amount}}</span>
+                    <span class="o-purchase-token-price__total" id="spotcoins-amount"><label for="">₹</label> {{amount}}</span>
                 </div>
             </div>
         </div>

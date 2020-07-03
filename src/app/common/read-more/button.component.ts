@@ -7,6 +7,9 @@ import { ReadMoreDirective } from './read-more.directive';
     <div class="m-read-more--button" *ngIf="content && content.expandable">
       <span class="mdl-color-text--blue-grey-500" (click)="content.expand()" i18n="@@COMMON__READ_MORE__ACTION">Read more</span>
     </div>
+    <div class="m-read-less--button" *ngIf="content && !content.expandable">
+      <span class="mdl-color-text--blue-grey-500" (click)="content.collapse()" i18n="@@COMMON__READ_MORE__ACTION">Read Less</span>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -15,7 +18,9 @@ export class ReadMoreButtonComponent {
 
   content: ReadMoreDirective;
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(private cd: ChangeDetectorRef) { 
+    
+  }
 
   detectChanges() {
     setTimeout(() => {

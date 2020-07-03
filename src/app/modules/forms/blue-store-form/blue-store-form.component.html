@@ -14,13 +14,13 @@
             <div class="form-group">
                 <label>Add Image or Video</label>
                 <div class="o-create-blue-store-cover-image">
-                    <div class="fileUpload">
+                    <div class="fileUpload" id="fileUpload">
                         <span class="icon-plus"></span>
                         <input type="file" accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov" id="file" #file class="upload" name="attachment"
                             (change)="uploadAttachment(file, $event)" />
                     </div>
                     <div class="fileUpload-preview ml-18" *ngFor="let image of cards">
-                        <a class="o-create-blue-store-cover-image__avatar">
+                        <a class="o-create-blue-store-cover-image__avatar" id="o-create-blue-store-cover-image__avatar">
                             <a class="fileUpload-close-temp z-index-2" (click)="removeAttachment(file,image.guid)"><i
                                     class="icon-x" id="bluestore-remove-attachment"></i></a>
                             <img [src]="checkForSrc(image)" alt="">
@@ -67,7 +67,7 @@
                         <div class="o-opportunity-country-code">
                             <!-- <span class="o-opportunity-country-code__flag"><img src="assets/svg/in.png" alt=""></span> 
                             <span class="o-opportunity-country-code__text text-md">IND</span> -->
-                            <select class="form-control form-control-lg"  formControlName="blueStoreCurrency">
+                            <select class="form-control form-control-lg" id="currency-type"  formControlName="blueStoreCurrency">
                                 <option value="INR" selected>INR</option>
                                 <option *ngFor="let type of currencyList"  value="{{ type.value }}">{{ type.value}}
                                 </option>

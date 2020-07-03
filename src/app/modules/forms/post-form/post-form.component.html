@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="o-create-post-fileupload" *ngIf="!attachment.isRich() && cards.length == 0">
-            <div class="fileUpload">
+            <div class="fileUpload" id="fileUpload">
                 <span class="icon-paperclip-2"></span>
                 <input type="file"  id="file" #file class="upload" name="attachment" accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov, audio/mp3"
                     (change)="uploadAttachment(file, $event)" />
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="o-create-post-filled-fileupload" *ngIf="cards.length > 0">
-            <div class="fileUpload">
+            <div class="fileUpload" id="fileUpload">
                 <span class="icon-plus"></span>
                 <input type="file" id="file" #file class="upload" name="attachment" accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov, audio/mp3"
                     (change)="uploadAttachment(file, $event)" />
@@ -87,7 +87,7 @@
                         </div>
                         <div class="text-sm grey m-t-10" id="post-form-paywall-message">Paywall message</div>
                         <div class="paywall-coins">
-                            <textarea name="paywallMessage" id="post-set-coins" maxlength="120" [(ngModel)]="paywallMessage"></textarea>
+                            <textarea name="paywallMessage" id="post-set-coins-message" maxlength="120" [(ngModel)]="paywallMessage"></textarea>
                         </div>
                         <div class="m-t-10">
                             <button type="button" class="btn btn-primary btn-sm disabled" (click)="displayPaywall()" id="post-coins-add">Add</button>
