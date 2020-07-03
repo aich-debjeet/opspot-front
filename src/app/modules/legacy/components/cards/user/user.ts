@@ -57,7 +57,7 @@ export class UserCard implements OnInit {
     } else this.update.next('unFollow');
   }
 
-  removeUser(e: any) {
-    this.remove.next();
+  removeUser(user: any) {
+    this.remove.next(user);
   }
 }

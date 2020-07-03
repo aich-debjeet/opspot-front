@@ -13,9 +13,10 @@
         <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
         <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid"></opspot-button-subscribe>
     </div>
-    <div *ngSwitchCase="'user3'" class="o-card o-suggestion float-left slide">
+    <div *ngSwitchCase="'user3'" class="o-card o-suggestion float-left">
         <div class="o-suggestion__top-bar">
-            <i class="material-icons o-fontRemove close-btn" (click)="removeUser()">close</i>
+            <!-- <i class="material-icons o-fontRemove close-btn" (click)="removeUser()">close</i> -->
+            <div class="close" (click)="removeUser(user)"><i class="icon-x"></i></div>
         </div>
         <!-- <a [routerLink]="['/', user?.username]" class="demo"></a> -->
         <div class="o-suggestion__avatar" id="suggested_user_profile_image" [routerLink]="['/', user?.username]"
