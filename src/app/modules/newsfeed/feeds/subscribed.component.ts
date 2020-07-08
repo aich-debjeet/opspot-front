@@ -101,8 +101,9 @@ export class NewsfeedSubscribedComponent {
       this.offset = '';
       this.moreData = true;
       this.newsfeed = [];
+      this.prepended = [];
     }
-
+    
     this.inProgress = true;
 
     this.client.get('api/v4/newsfeed', { activity_type: this.filter, limit: 12, offset: this.offset })
