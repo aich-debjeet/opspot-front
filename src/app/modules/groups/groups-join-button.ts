@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { GroupsService } from './groups-service';
 import { Session } from '../../services/session';
 import { LoginReferrerService } from '../../services/login-referrer.service';
+import { OverlayModalService } from '../../services/ux/overlay-modal';
 
 @Component({
   selector: 'opspot-groups-join-button',
@@ -49,6 +50,7 @@ export class GroupsJoinButton {
     public service: GroupsService,
     private router: Router,
     private loginReferrer: LoginReferrerService,
+    private overlayModal: OverlayModalService
   ) {
     this.opspot = window.Opspot;
   }
@@ -98,6 +100,7 @@ export class GroupsJoinButton {
         }
         this.membership.next({});
         this.group['is:awaiting'] = true;
+        this.overlayModal.dismiss();
       })
       .catch(e => {
         let error = e.error;
