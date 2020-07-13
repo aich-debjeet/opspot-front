@@ -20,11 +20,12 @@ export class MyjourneyWidgetComponent implements OnInit {
 
   params: any = {
     // TODO @abhijeet check for all valid request params
-    taxonomies: 'activity',
+    // taxonomies: 'activity',
     offset: '',
     limit: 12,
-    rating: 2,
-    q: ''
+    // rating: 2,
+    // q: ''
+    activity_type: 'myjourney'
   };
 
   constructor(
@@ -41,13 +42,13 @@ export class MyjourneyWidgetComponent implements OnInit {
       return false;
     }
 
-    this.params.q = SpecialHashtg.concat('myjourney', this.user.username)
+    // this.params.q = SpecialHashtg.concat('myjourney', this.user.username)
     this.inProgress = true;
 
-    this.client.get('api/v2/search', this.params)
+    this.client.get('api/v4/newsfeed/personal', this.params)
       .then((resp: any) => {
-        if (resp && resp.entities) {
-          this.entities = resp.entities;
+        if (resp && resp.activity) {
+          this.entities = resp.activity;
         }
         this.inProgress = false;
       })
