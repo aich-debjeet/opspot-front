@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class OPSPedia {
 
-  base: string = 'http://lookup.dbpedia.org/api/search/';
+  // base: string = 'http://lookup.dbpedia.org/api/search/';
+  base: string = 'https://zapdos.opsplt.com/_query/api/v1/textdata/';
 
   constructor(public http: HttpClient) { }
 
