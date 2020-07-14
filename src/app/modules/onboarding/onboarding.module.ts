@@ -73,6 +73,7 @@ import { ProfessionsOnboardingComponent } from './channel/professions/profession
     GroupsOnboardingComponent,
     ChannelSetupOnboardingComponent,
     TokenRewardsOnboardingComponent,
+    ProfessionsOnboardingComponent
   ],
 })
 export class OnboardingModule {
