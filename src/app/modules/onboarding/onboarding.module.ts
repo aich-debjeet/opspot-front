@@ -23,6 +23,7 @@ import { TokenRewardsOnboardingComponent } from "./channel/rewards/rewards.compo
 import { Client } from "../../services/api/client";
 import { SuggestionsModule } from "../suggestions/suggestions.module";
 import { Session } from "../../services/session";
+import { ProfessionsOnboardingComponent } from './channel/professions/professions.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { Session } from "../../services/session";
     GroupsOnboardingComponent,
     ChannelSetupOnboardingComponent,
     TokenRewardsOnboardingComponent,
+    ProfessionsOnboardingComponent,
   ],
   providers: [
     OnboardingService,
