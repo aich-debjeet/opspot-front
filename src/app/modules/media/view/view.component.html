@@ -273,12 +273,12 @@ opspot-button-remind{
                 <div *ngFor="let media of entity?.custom_data; let i = index;">
                   <a class="feed-media__link" id="view-media-link">
                     <img *ngIf="media.entity_type !== 'video' && media.entity_type !== 'audio'" [src]="media.src" alt="" class="feed-media__img"
-                      (click)="showImage(i)">
+                      (click)="updateMediaDisplay(i, media)">
                     <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
-                    <img *ngIf="media.entity_type === 'audio'" src="assets/audiops.jpg" alt="" class="feed-media__img" (click)="showImage(i,media)">
-                    <div class="feed-media-overlay" *ngIf="media.entity_type === 'video' || media.entity_type === 'audio'" (click)="showImage(i,media)">
-                      <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
-                    </div>
+                    <img *ngIf="media.entity_type === 'audio'" src="assets/audiops.jpg" alt="" class="feed-media__img">
+                    <span class="feed-media-overlay" *ngIf="media.entity_type === 'video' || media.entity_type === 'audio'" (click)="updateMediaDisplay(i, media)">
+                      <span class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></span>
+                    </span>
                   </a>
                 </div>
               </div>
@@ -287,18 +287,18 @@ opspot-button-remind{
                 <ngx-slick-carousel class="carousel feed-media post-view-style" #slickModal="slick-carousel"
                   [config]="slideConfig" (init)="slickInit($event)" (breakpoint)="breakpoint($event)"
                   (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
-                  <div ngxSlickItem *ngFor="let media of entity?.custom_data; let i = index;" class="slide">
+                  <div ngxSlickItem *ngFor="let media of entity?.custom_data; let i = index; trackBy: _trackBy;" class="slide">
                     <a class="feed-media__link">
                       <!-- <div class="full-h-v set-bg mar-20" [style.backgroundImage]="'url(' + media.src + ')'"></div> -->
                       <!-- <img [src]="media.src" alt="" class="feed-media__img"
                         (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'"> -->
                       <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type != 'video'  && media.entity_type !== 'audio'"
-                        (click)="showImage(i)">
-                      <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img" (click)="showImage(i,media)">
-                      <img *ngIf="media.entity_type === 'audio'" src="assets/audiops.jpg" alt="" class="feed-media__img" (click)="showImage(i,media)">
-                      <div class="feed-media-overlay" *ngIf="media.entity_type === 'video' || media.entity_type === 'audio'">
-                        <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
-                      </div>
+                        (click)="updateMediaDisplay(i, media)">
+                      <img *ngIf="media.entity_type === 'video'" [src]="media.thumbnail_src" alt="" class="feed-media__img">
+                      <img *ngIf="media.entity_type === 'audio'" src="assets/audiops.jpg" alt="" class="feed-media__img">
+                      <span class="feed-media-overlay" *ngIf="media.entity_type === 'video' || media.entity_type === 'audio'" (click)="updateMediaDisplay(i, media)">
+                        <span class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></span>
+                      </span>
                     </a>
                   </div>
                 </ngx-slick-carousel>

@@ -14,6 +14,7 @@ import { PostFormComponent } from '../../forms/post-form/post-form.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { BoostCreatorComponent } from '../../boost/creator/creator.component';
 import { TranslationService } from '../../../services/translation';
+import { find as _find } from 'lodash';
 
 @Component({
   moduleId: module.id,
@@ -316,6 +317,17 @@ export class MediaViewComponent {
   //     this.largeImage = this.entity.custom_data[i].src;
   //   }
   // }
+
+  updateMediaDisplay(currentIndex, data){
+    if(currentIndex != 0){
+      let foundObject = _find(this.entity.custom_data, function(e) {
+        return e.guid === data.guid;
+      });
+      if(foundObject) {
+        this.entity.custom_data.splice(0, 0, this.entity.custom_data.splice(currentIndex, 1)[0]);
+      }
+    }
+  }
 
   async togglePin() {
     this.entity.bookmark = !this.entity.bookmark;
