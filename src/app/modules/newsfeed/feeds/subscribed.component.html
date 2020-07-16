@@ -1,6 +1,19 @@
 <div class="m-border mdl-color--green mdl-color-text--white m-newsfeed-boost-promo" *ngIf="newUserPromo">
     <i class="material-icons">trending_up</i> <ng-container i18n="@@OPSPOT__NEWSFEED__200_FREE_VIEWS">Have 200 free views on us. Hit post to be boosted.</ng-container>
 </div>
+
+<div class="o-home-filter-tab">
+  <div class="tabs">
+      <ul class="tabs-list">
+          <li [class.active]="isActive('all')"><a (click)="load(true, 'all')" ><span class="home-tab-icon home-tab-icon--allpost"><i class="icon-trello"></i>  </span> <span> All Post</span>  </a></li>
+          <li [class.active]="isActive('marketplace')"><a (click)="load(true, 'marketplace')"><span class="home-tab-icon"><i class="icon-shopping-cart"></i>  </span> <span> Blue Store</span> </a></li>
+          <li [class.active]="isActive('opportunity')"><a (click)="load(true, 'opportunity')"><span class="home-tab-icon"><i class="icon-briefcase"></i>  </span> <span> Opportunities</span> </a></li>
+          <li [class.active]="isActive('event')"><a (click)="load(true, 'event')"><span class="home-tab-icon"><i class="icon-calendar"></i>  </span> <span> Showtimez</span> </a></li>
+          <li [class.active]="isActive('blog')"><a (click)="load(true, 'blog')"><span class="home-tab-icon"><i class="icon-file-text"></i>  </span> <span> Blogs</span> </a></li>
+      </ul>    
+  </div>
+</div>
+
 <opspot-newsfeed-poster (load)="prepend($event)" [message]="message" #poster></opspot-newsfeed-poster>
 <div class="opspot-list">
   <opspot-activity *ngFor="let preActivity of prepended" [object]="preActivity" [boostToggle]="preActivity.boostToggle" (delete)="delete(preActivity)" [showRatingToggle]="true" class="mdl-card m-border item"></opspot-activity>
@@ -9,7 +22,7 @@
   <opspot-activity *ngFor="let activity of newsfeed" [object]="activity" [boostToggle]="activity.boostToggle" (delete)="delete(activity)" [showRatingToggle]="true" class="mdl-card m-border item"></opspot-activity>
   <infinite-scroll
     distance="25%"
-    (load)="load()"
+    (load)="load(false, filter)"
     [moreData]="moreData"
     [inProgress]="inProgress">
   </infinite-scroll>
