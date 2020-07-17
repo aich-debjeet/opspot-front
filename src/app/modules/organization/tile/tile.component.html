@@ -23,11 +23,11 @@
       <div class="o-community-card-dis text-sm word-br">{{entity?.brief_description | truncate:[65, '...']}}</div>
       <div class="o-community-card-action">
         <button type="button" id="tile-join-button" class="btn btn-primary btn-sm"
-          (click)='trigger(entity)'>Open</button>
-        <button class="btn btn-primary btn-sm" id="tile-cancel-button" *ngIf="entity['is:awaiting']"
+          (click)='trigger(entity)'>Explore</button>
+        <!-- <button class="btn btn-primary btn-sm" id="tile-cancel-button" *ngIf="entity['is:awaiting']"
           (click)="cancelRequest()" i18n="@@GROUPS__TILE__OPEN_ACTION">
           Cancel
-        </button>
+        </button> -->
       </div>
     </div>
   </div>

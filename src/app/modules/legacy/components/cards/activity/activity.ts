@@ -130,8 +130,8 @@ export class Activity {
       this.reachoutMessage += value['perma_url'];
     }
 
-
-    this.activity.url = window.Opspot.site_url + 'newsfeed/' + value.guid;
+//to display preview while sharing on fb
+    this.activity.url = window.Opspot.site_url + 'media/' + value.guid;
 
     if (
       this.activity.custom_type == 'batch'
