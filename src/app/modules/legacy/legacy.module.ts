@@ -44,6 +44,8 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 import { AppuserComponent } from './components/appuser/appuser.component';
 import { GroupBannerComponent } from './components/group-banner/group-banner.component';
 import { OpspotFormsModule } from '../forms/forms.module';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // import { SlickCarouselModule } from 'ngx-slick-carousel';
 // import { PostCard } from './components/cards/post-card/post-card';
 
@@ -68,7 +70,8 @@ import { OpspotFormsModule } from '../forms/forms.module';
     CommentsModule,
     TextInputAutocompleteModule,
     OpspotFormsModule,
-    MessengerModule
+    MessengerModule,
+    InfiniteScrollModule
     // SlickCarouselModule
   ],
   declarations: [
@@ -98,6 +101,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
     AppuserComponent,
 
     GroupBannerComponent,
+    UserListComponent,
     
     // PostCard,
 
@@ -126,6 +130,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
     CarouselComponent,
     AppuserComponent,
     GroupBannerComponent,
+    UserListComponent,
     // SlickCarouselModule
     // PostCard
   ],
@@ -139,6 +144,7 @@ import { OpspotFormsModule } from '../forms/forms.module';
     UserCard,
     // SlickCarouselModule,
     BoostButton,
+    UserListComponent,
   ]
 })
 export class LegacyModule {

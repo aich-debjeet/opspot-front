@@ -1,0 +1,36 @@
+<div class="o-post-liked-members-popup">
+  <div class="o-post-liked-members-popup-body">
+    <div class="o-post-liked-members-popup-body__title">
+      <div class="text-h3">
+        {{totalLikes}} likes
+      </div>
+    </div>
+    <!--title ends-->
+    <ul class="o-post-liked-members-popup-list scrollbar scrollbar-default" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="load()"
+    [scrollWindow]="false">
+      <li class="o-post-liked-members-popup-list__user-list" *ngFor="let list of likeList">
+        <div class="o-post-liked-members-popup-info">
+          <div class="o-post-liked-members-popup-info__prof">
+            <div class="mr-12 o-post-liked-members-popup-info__avatar">
+              <img [src]="opspot.cdn_url + 'icon/' + list?.guid + '/medium/' + list?.icontime" alt="">
+            </div>
+            <div id="username" class="caption-bold">
+              {{list.name}}
+            </div>
+          </div>
+          <!--prof ends-->
+          <div class="o-post-liked-members-popup-info__action">
+            <opspot-button-subscribe class="follow-btn" [user]="list" *ngIf="list.guid != session.getLoggedInUser().guid"></opspot-button-subscribe>
+          </div>
+          <!--action ends-->
+        </div>
+        <!--info ends-->
+      </li><!-- user list end-->
+    </ul><!-- members list end -->
+  </div>
+  <!--body ends-->
+</div>
+<div class="m-infinite-scroll-manual " id="infinite-scroll-nothing-more-to-load" [hidden]="moreData">
+  <ng-container i18n="@@COMMON__INFINITE_SCROLL__NOTHING_MORE">Nothing more to load</ng-container>
+</div>
+<!--reg-skill ends-->
