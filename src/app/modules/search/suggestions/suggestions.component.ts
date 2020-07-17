@@ -66,11 +66,11 @@ export class SearchBarSuggestionsComponent {
 
       try {
         // TODO: little ugly here
-        const pediaResponse = await this.opsPedia.get('PrefixSearch', {
-          MaxHits: 1,
-          QueryString: value
+        const pediaResponse = await this.opsPedia.get('default', {
+          limit: 2,
+          q: value
         });
-        this.pediaAutocomplete = pediaResponse['results'];
+        this.pediaAutocomplete = pediaResponse['records'];
 
       } catch(e) {
         console.error(e);
