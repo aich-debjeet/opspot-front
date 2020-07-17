@@ -96,6 +96,7 @@ import { MyjourneyListCardComponent } from './components/myjourney-list-card/myj
 import { BoostPostCard } from '../modules/legacy/components/cards/boost-post-card/boost-post-card';
 import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
 import { PostCardTitle } from '../modules/legacy/components/cards/post-title-card/post-tile-card';
+import { NoRightClickDirective } from './directives/no-right-click.directive';
 
 @NgModule({
   imports: [
@@ -192,7 +193,8 @@ import { PostCardTitle } from '../modules/legacy/components/cards/post-title-car
     MyjourneyWidgetComponent,
     ActivityWidgetComponent,
     MyjourneyListCardComponent,
-    CapitalizeFirstPipePipe
+    CapitalizeFirstPipePipe,
+    NoRightClickDirective
   ],
   exports: [
     OPSPOT_PIPES,
@@ -231,7 +233,7 @@ import { PostCardTitle } from '../modules/legacy/components/cards/post-title-car
     CaptchaComponent,
     Textarea,
     InlineEditorComponent,
-
+    NoRightClickDirective,
     DynamicHostDirective,
     OpspotCard,
     OpspotButton,

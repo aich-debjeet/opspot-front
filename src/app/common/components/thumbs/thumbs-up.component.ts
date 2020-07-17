@@ -4,6 +4,8 @@ import { Session } from '../../../services/session';
 import { Client } from '../../../services/api';
 import { WalletService } from '../../../services/wallet';
 import { SignupModalService } from '../../../modules/modals/signup/service';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { UserListComponent } from '../../../modules/legacy/components/user-list/user-list.component';
 
 
 @Component({
@@ -12,9 +14,9 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- TODO @gayatri: check if can reuse the markup -->
-    <a *ngIf="!large" class="o-actions__link" (click)="thumb()" id="like" >
-      <i class='spot-ico' [ngClass]="{'icon-heart_active': has(),'icon-heart':!has() }"></i>
-      <span class="o-action-count text-sm grey" id="like-count" *ngIf="object['thumbs:up:count'] > -1"><span>{{object['thumbs:up:count'] | number}}</span></span>
+    <a *ngIf="!large" class="o-actions__link" id="like">
+      <i class='spot-ico' (click)="thumb()" [ngClass]="{'icon-heart_active': has(),'icon-heart':!has() }"></i>
+      <span class="o-action-count text-sm grey" id="like-count" (click)="openList()" *ngIf="object['thumbs:up:count'] > -1"><span>{{object['thumbs:up:count'] | number}}</span></span>
     </a>
     <div *ngIf="large" class="spot-ico-block" (click)="thumb()">
     <i class='spot-ico' [ngClass]="{'icon-heart_active': has(),'icon-heart':!has() }" id="like">
@@ -31,7 +33,7 @@ import { SignupModalService } from '../../../modules/modals/signup/service';
       }
       .spot-ico{
         font-size:19px !important;
-        margin-right:16px;
+        margin-right:0px;
       }
       .spot-ico-block{
         display:flex;
@@ -59,7 +61,8 @@ export class ThumbsUpButton implements DoCheck, OnChanges {
     public client: Client,
     public wallet: WalletService,
     private modal: SignupModalService,
-    private cd: ChangeDetectorRef,  
+    private cd: ChangeDetectorRef,
+    private overlayModal: OverlayModalService,
   ) {
   }
 
@@ -115,5 +118,12 @@ export class ThumbsUpButton implements DoCheck, OnChanges {
     if (this.changesDetected) {
       this.cd.detectChanges();
     }
+  }
+  openList(){
+    console.log('open list');
+    this.overlayModal.create(UserListComponent, this.object.guid, {
+      class: 'm-overlay-modal--list-display m-overlay-modal--medium-report',
+    })
+      .present();
   }
 }

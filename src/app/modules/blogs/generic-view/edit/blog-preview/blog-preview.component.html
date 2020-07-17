@@ -6,7 +6,7 @@
                     <div class="text-lg" id="blog-preview-title">
                         Blog Preview
                     </div>
-                    <button type="submit" id="blog-preview-draft" (click)="blog.published = 0; createEditBlog()" class="btn btn-outline-primary btn-xs drft-btn" [disabled]="inProgress">Draft</button>
+                    <button type="submit" id="blog-preview-draft"  class="btn btn-outline-primary btn-xs drft-btn" [disabled]="inProgress">Draft</button>
                 </div>
                 <div class="o-blog-preview-cover">
                     <opspot-banner [object]="blog" [src]="blog.thumbnail_src" [done]="banner_prompt">

@@ -1,27 +1,23 @@
-<!-- <div class="o-card o-card-suggestion" >
-    <div class="text-md f500">{{ title }}</div>
-    <ngx-slick-carousel class="carousel" 
+<div class="o-card o-card-suggestion" [hidden]="!suggestions.length">
+    <div class="text-md f500">Suggestions for you</div>
+    <ngx-slick-carousel class="carousel" style="display: grid" 
            #slickModal="slick-carousel" 
            [config]="slideConfig"
-           (init)="slickInit($event)"
-           (breakpoint)="breakpoint($event)" 
-           (afterChange)="afterChange($event)" 
-           (beforeChange)="beforeChange($event)"
     >
         <div ngxSlickItem *ngFor="let user of suggestions">
-            <opspot-card-user [cardType]="'user2'" [object]="user.entity"></opspot-card-user>
+            <opspot-card-user [cardType]="'user3'" [object]="user.entity" (remove)="pass($event)"></opspot-card-user>
         </div>
     </ngx-slick-carousel>
-    <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
-    <button class="btn-next" (click)="slickModal.slickNext()">next</button>
-</div> -->
+    <!-- <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
+    <button class="btn-next" (click)="slickModal.slickNext()">next</button> -->
+</div>
 
-<div class="o-card o-card-suggestion" id="suggested_widget" *ngIf= "suggestions && suggestions.length > 0" >
+<!-- <div class="o-card o-card-suggestion" id="suggested_widget" *ngIf= "suggestions && suggestions.length > 0" >
     <div class="text-md f500 p-b-10">Suggestions for you</div>
     <div class="wrapper">
         <opspot-card *ngFor="let user of suggestions" class="suggestion-card" [cardType]="'user2'" [object]="user.entity"></opspot-card>
     </div>
-</div>
+</div> -->
 
 <style>
 
