@@ -29,11 +29,9 @@ export class UserListComponent implements OnInit {
     this.load()
   }
   load() {
-    console.log(this.activityGuid)
     this.offset = this.likeList.length ? this.offset + 10 : 0;
     this.client.get('api/v1/votes/' + this.activityGuid + '/list', { limit: 10, offset: this.offset })
       .then((response:any) => {
-        console.log(response);
         this.totalLikes = response['count'];
         if (response['list'].length > 0) {
           for (let activity of response.list) {
@@ -41,7 +39,6 @@ export class UserListComponent implements OnInit {
           }
           // this.likeList.push(response['list']);
           // this.likeList = response['list'];
-          console.log(this.likeList);
         } else {
           this.moreData = false;
         }
