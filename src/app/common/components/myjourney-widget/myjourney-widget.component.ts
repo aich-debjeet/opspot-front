@@ -45,7 +45,7 @@ export class MyjourneyWidgetComponent implements OnInit {
     // this.params.q = SpecialHashtg.concat('myjourney', this.user.username)
     this.inProgress = true;
 
-    this.client.get('api/v4/newsfeed/personal', this.params)
+    this.client.get('api/v4/newsfeed/personal/' + this.user.guid , this.params)
       .then((resp: any) => {
         if (resp && resp.activity) {
           this.entities = resp.activity;
