@@ -1,55 +1,38 @@
 <div class="o-reg-proffession">
-  <div class="close">
-      <i class="icon-x"></i>
-  </div><!-- close end -->
-  <div class="o-reg-proffession-body">
-      <div class="o-reg-proffession-body__title">
-          <div class="text-h3 f500">
-              Choose your profession here
-          </div>
-          <div class="text-md o-reg-proffession-body__padng">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-              Aenean commodo ligula eget dolor.
-          </div>
-      </div><!--title ends-->
-      <div class="o-reg-proffession-body__list">
-          <div id="proffessionTextarea" class="o-reg-proffession-textarea o-reg-proffession-textarea--flex" contenteditable="true">
-              <span class="proffession-tag">
-                  <div class="proffession-tag__name">Designer</div>
-                  <a href="#" class="profession-tag-delete"><i class="icon-x-circle"></i></a>
-              </span>
-              <span class="proffession-tag">
-                  <div class="proffession-tag__name">Designer</div>
-                  <a href="#" class="profession-tag-delete"><i class="icon-x-circle"></i></a>
-              </span>
-              Type Profession
-
-              <div id="proffessionDropdown" class="proffession-list">
-                  <ul class="proffession">
-                      <li class="proffession__item">
-                          Designer
-                      </li>
-                      <li class="proffession__item">
-                          Designer
-                      </li>
-                      <li class="proffession__item">
-                          Designer
-                      </li>
-                      <li class="proffession__item">
-                          Designer
-                      </li>
-                  </ul>
-              </div>
-          </div>
-          
-      </div><!--list ends-->
-      <div class="o-reg-proffession-continue">
-          <button id="proffessionContinue" class="o-reg-proffession-continue__btn">Continue</button>
-      </div><!--continue ends-->
-      <div class="o-reg-proffession-skip">
-          <a class="text-md grey">
-              skip
-          </a>
-      </div>
-  </div><!--body ends-->
-</div><!--reg-skill ends-->
+    <!-- <div class="close">
+        <i class="icon-x"></i>
+    </div> -->
+    <div class="o-reg-proffession-body">
+        <div class="o-reg-proffession-body__title">
+            <div class="text-h3 f500">
+                Choose your profession here
+            </div>
+            <div class="text-md o-reg-proffession-body__padng">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                Aenean commodo ligula eget dolor.
+            </div>
+        </div>
+            <tag-input 
+                required 
+                style="border:1px solid #959595;" 
+                [(ngModel)]='model.professions'
+                name="skills"
+                theme='minimal'>
+            <tag-input-dropdown 
+                [showDropdownIfEmpty]="true" 
+                [minimumTextLength]=5 
+                [autocompleteItems]="data"
+                [zIndex]=999999999999
+                >
+            </tag-input-dropdown>
+            </tag-input>
+            <div class="o-reg-proffession-continue">
+                <button id="proffessionContinue" class="o-reg-proffession-continue__btn" (click)="onSubmit()">Continue</button>
+            </div>
+            <!-- <div class="o-reg-proffession-skip">
+                <a class="text-md grey" (click)="close()">
+                    skip
+                </a>
+            </div> -->
+    </div>
+</div>
