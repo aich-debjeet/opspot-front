@@ -24,6 +24,7 @@ import { Client } from "../../services/api/client";
 import { SuggestionsModule } from "../suggestions/suggestions.module";
 import { Session } from "../../services/session";
 import { ProfessionsOnboardingComponent } from './channel/professions/professions.component';
+import { TagInputModule } from 'ngx-chips';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ProfessionsOnboardingComponent } from './channel/professions/profession
     TokenOnboardingModule,
     MessengerModule,
     SuggestionsModule,
+    TagInputModule
   ],
   declarations: [
     OnboardingCardComponent,
