@@ -7,6 +7,7 @@ import { EventEmitter } from '@angular/core';
 import { Client } from '../../../services/api/client';
 import { Session } from '../../../services/session';
 import { ProfessionsOnboardingComponent } from './professions/professions.component';
+import { GroupsOnboardingComponent } from './groups/groups.component';
 
 export class ChannelOnboardingService {
 
