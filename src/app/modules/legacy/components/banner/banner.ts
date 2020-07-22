@@ -41,7 +41,8 @@ import { Component, EventEmitter } from '@angular/core';
           <button i18n="@@M__ACTION__CANCEL" id="banner-cancel-button">Cancel</button>
         </span>
       </div>
-      <input type="file" accept="image/jpg, image/jpeg, image/png" id="file" (change)="add($event)" [hidden]="file" />
+      <input type="file" accept="image/jpg, image/jpeg, image/png" id="file" (change)="fileChangeEvent($event)" [hidden]="file" />
+      <app-ngx-img-cropper [open]="open" [imageChangedEvent]="imageChangedEvent" (croppedImage)="imageCropped($event)" (closed)=close()></app-ngx-img-cropper>
   </div>
   <style>
     .overlay i {
@@ -72,6 +73,9 @@ export class OpspotBanner {
   added: EventEmitter<any> = new EventEmitter();
   // removed: EventEmitter<any> = new EventEmitter();
   overlay: any; // @todo: ??
+  open: boolean = false;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
 
   set _object(value: any) {
     if (!value)
@@ -105,7 +109,7 @@ export class OpspotBanner {
 
     var element: any = e.target ? e.target : e.srcElement;
     this.file = element ? element.files[0] : null;
-
+    this.open = true;
     /**
      * Set a live preview
      */
@@ -118,6 +122,15 @@ export class OpspotBanner {
     element.value = '';
   }
 
+  fileChangeEvent(event: any): void {
+    this.open = true;
+    this.imageChangedEvent = event;
+  }
+
+  imageCropped(event: any) {
+    console.log(event)
+    this.src = event;
+  }
   cancel() {
     this.file = null;
   }
