@@ -26,8 +26,9 @@ export class ProfessionsOnboardingComponent implements OnInit {
     this.load()
   }
 
-  ngOnInit() {
+  ngOnInit() {    
   }
+
 
   async load() {
     this.client.get('api/v4/professions/suggested', {
@@ -39,11 +40,8 @@ export class ProfessionsOnboardingComponent implements OnInit {
   }
 
   onSubmit() {
-    const professions = this.model.professions.map(el => el.value);
-    console.log("Professions: ", professions);
-    console.log("Length: ", professions.length);
-
-
+    let professions = this.model.professions.map(el => el.value);
+   
     if (professions.length == 0) {
       this.toastr.error('Please add atleast one profession');
       return;
@@ -55,14 +53,15 @@ export class ProfessionsOnboardingComponent implements OnInit {
 
     this.inProgress = true;
 
-    this.client.post('api/v4/professions/user', reqBody).then((response: any) => {
-      console.log("mgbjrke: ", response);
-      this.onClose.emit();
-      this.inProgress = false;
-
-    })
+    this.client.post('api/v4/professions/user', reqBody)
+      .then((response: any) => {
+        this.onClose.emit();
+        this.inProgress = false;
+        this.model.professions = [];
+      })
       .catch((e) => {
         this.inProgress = false;
+        this.model.professions = [];
       });
   }
 
