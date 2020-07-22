@@ -8,26 +8,29 @@
                 Choose your profession here
             </div>
             <div class="text-md o-reg-proffession-body__padng">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                Aenean commodo ligula eget dolor.
+                Based on the profession selected, you will get recommendations on people, 
+                and organizations to follow.     
             </div>
         </div>
-            <tag-input 
-                required 
-                style="border:1px solid #959595;" 
-                [(ngModel)]='model.professions'
-                name="skills"
-                theme='minimal'>
-            <tag-input-dropdown 
-                [showDropdownIfEmpty]="true" 
-                [minimumTextLength]=5 
-                [autocompleteItems]="data"
-                [zIndex]=999999999999
-                >
-            </tag-input-dropdown>
-            </tag-input>
-            <div class="o-reg-proffession-continue">
-                <button id="proffessionContinue" class="o-reg-proffession-continue__btn" (click)="onSubmit()">Continue</button>
+        <div class="o-reg-proffession-body__list">
+            <div id="proffessionTextarea" class="o-reg-proffession-textarea o-reg-proffession-textarea--flex">
+                <tag-input 
+                    [(ngModel)]='model.professions'
+                    name="skills"
+                    theme='minimal'>
+                <tag-input-dropdown 
+                    [showDropdownIfEmpty]="true" 
+                    [minimumTextLength]=5 
+                    [limitItemsTo]=5
+                    [autocompleteItems]="data"
+                    [zIndex]=999999999999
+                    >
+                </tag-input-dropdown>
+                </tag-input>
+            </div>
+        </div>
+            <div class="o-reg-proffession-continue" style="margin-bottom: 20px;">
+                <button id="proffessionContinue" class="o-reg-proffession-continue__btn" (click)="onSubmit()" [hidden]="inProgress">Continue</button>
             </div>
             <!-- <div class="o-reg-proffession-skip">
                 <a class="text-md grey" (click)="close()">

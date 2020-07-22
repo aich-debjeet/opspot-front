@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Client } from '../../../../services/api/client';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'onboarding-professions',
@@ -9,7 +10,7 @@ import { Client } from '../../../../services/api/client';
 export class ProfessionsOnboardingComponent implements OnInit {
 
   static items = ['suggested_professions'];
-  static canSkip: boolean = false;
+  static canSkip: boolean = true;
   data: any = [];
   inProgress: boolean = false;
   model = {
@@ -19,7 +20,9 @@ export class ProfessionsOnboardingComponent implements OnInit {
 
 
 
-  constructor(private client: Client) {
+  constructor(
+    private client: Client,
+    private toastr: ToastrService) {
     this.load()
   }
 
@@ -32,23 +35,35 @@ export class ProfessionsOnboardingComponent implements OnInit {
     }).then((response: any) => {
       if (response.professions)
         this.data = response.professions;
-      console.log("this.data: ", this.data);
-
     })
   }
 
   onSubmit() {
-    this.inProgress = true;
     const professions = this.model.professions.map(el => el.value);
-    const reqBody = {
+    console.log("Professions: ", professions);
+    console.log("Length: ", professions.length);
+
+
+    if (professions.length == 0) {
+      this.toastr.error('Please add atleast one profession');
+      return;
+    }
+
+    let reqBody = {
       professions: professions ? professions : []
     }
 
-    console.log("this.professions", reqBody);
+    this.inProgress = true;
 
     this.client.post('api/v4/professions/user', reqBody).then((response: any) => {
+      console.log("mgbjrke: ", response);
+      this.onClose.emit();
+      this.inProgress = false;
 
     })
+      .catch((e) => {
+        this.inProgress = false;
+      });
   }
 
   close() {
