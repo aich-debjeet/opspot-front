@@ -15,6 +15,7 @@
           (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" 
           [containWithinAspectRatio]="false"
           [transform]="transform"
+          format="png,jpeg,jpg"
           (cropperReady)="cropperReady($event)" (loadImageFailed)="loadImageFailed()"></image-cropper>
       </div>
       <div class="o-profile-crop-footer">
