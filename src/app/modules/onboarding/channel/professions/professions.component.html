@@ -30,7 +30,8 @@
             </div>
         </div>
             <div class="o-reg-proffession-continue" style="margin-bottom: 20px;">
-                <button id="proffessionContinue" class="o-reg-proffession-continue__btn" (click)="onSubmit()" [hidden]="inProgress">Continue</button>
+                <button id="proffessionContinue" class="o-reg-proffession-continue__btn btn btn-primary btn-lg" (click)="onSubmit()"
+                 [disabled]="model.professions.length == 0 || inProgress">Continue</button>
             </div>
             <!-- <div class="o-reg-proffession-skip">
                 <a class="text-md grey" (click)="close()">
