@@ -33,6 +33,7 @@ export class NgxImgCropperComponent implements OnInit {
   imageCropped(event: ImageCroppedEvent) {
     console.log(event)
     this.croppedImage = event.base64;
+    this._croppedImage.next(this.croppedImage);
   }
   imageLoaded() {
     // show cropper
@@ -42,7 +43,6 @@ export class NgxImgCropperComponent implements OnInit {
     // show message
   }
   close() {
-    this.open = false;
     this.closed.emit()
   }
 
@@ -67,7 +67,7 @@ export class NgxImgCropperComponent implements OnInit {
     console.log('Cropper ready', sourceImageDimensions);
   }
   crop(){
-    this.open=false;
     this._croppedImage.next(this.croppedImage);
+    this.closed.emit()
   }
 }
