@@ -3556,8 +3556,8 @@ m-modal .m-modal-container {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  min-width: 50%;
-  min-height: 50%;
+  // min-width: 50%;
+  // min-height: 50%;
   z-index: 9999999999; }
     @media screen and (max-width: 768px) {
     m-modal .m-modal-container {
