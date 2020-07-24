@@ -1,4 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
+import { base64ToFile } from 'ngx-image-cropper';
 
 @Component({
   selector: 'opspot-banner',
@@ -95,7 +96,6 @@ export class OpspotBanner {
   }
 
   set _editMode(value: boolean) {
-    console.log(value)
     this.editing = value;
   }
 
@@ -123,23 +123,16 @@ export class OpspotBanner {
   // }
 
   fileChangeEvent(event: any): void {
-    console.log(event)
     if (!this.editing)
     return;
-
-    var element: any = event.target ? event.target : event.srcElement;
-    this.file = element ? element.files[0] : null;
 
     this.open = true;
     this.imageChangedEvent = event;
   }
 
   imageCropped(event: any) {
-    console.log(event)
     this.src = event;
-
-    var reader = new FileReader();
-    reader.readAsDataURL(this.file);
+    this.file = base64ToFile(this.src);
   }
   cancel() {
     this.file = null;

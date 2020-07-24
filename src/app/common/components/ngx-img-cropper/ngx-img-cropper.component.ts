@@ -66,8 +66,8 @@ export class NgxImgCropperComponent implements OnInit {
   cropperReady(sourceImageDimensions: Dimensions) {
     console.log('Cropper ready', sourceImageDimensions);
   }
-  crop(){
-    this._croppedImage.next(this.croppedImage);
-    this.closed.emit()
-  }
+  // crop(){
+  //   this._croppedImage.next(this.croppedImage);
+  //   this.closed.emit()
+  // }
 }
