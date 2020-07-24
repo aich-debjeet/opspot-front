@@ -42,8 +42,9 @@ export class ProfessionsOnboardingComponent implements OnInit {
   onSubmit() {
     let professions = this.model.professions.map(el => el.value);
    
-    if (professions.length == 0) {
-      this.toastr.error('Please add atleast one profession');
+    if (professions.length > 3) {
+      // this.toastr.error('You can add maximum 3 professions');
+      alert("You can add maximum 3 professions'")
       return;
     }
 
