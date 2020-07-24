@@ -24,7 +24,7 @@ import { Component, EventEmitter } from '@angular/core';
               <i class="white icon-plus-circle" (click)="chooseFile()"></i>
               <!--<i class="white icon-minus-circle" (click)="remove()"></i>-->
               <p class="white text-lg">Add Cover Picture</p>
-              <p class="white text-lg">Recommended size 2000px &times; 1125px (Ratio 16:9)</p>
+              <p class="white text-lg">Recommended size 2000px &times; 1125px (Ratio 4:3)</p>
               <p class="white text-lg">Recommended image formats are .jpg, .jpeg and .png</p>
           </div>
       </div>
@@ -95,6 +95,7 @@ export class OpspotBanner {
   }
 
   set _editMode(value: boolean) {
+    console.log(value)
     this.editing = value;
   }
 
@@ -103,26 +104,32 @@ export class OpspotBanner {
     fileSelector.click();
   }
 
-  add(e) {
-    if (!this.editing)
-      return;
+  // add(e) {
+  //   if (!this.editing)
+  //     return;
 
-    var element: any = e.target ? e.target : e.srcElement;
-    this.file = element ? element.files[0] : null;
-    this.open = true;
-    /**
-     * Set a live preview
-     */
-    var reader = new FileReader();
-    reader.onloadend = () => {
-      this.src = typeof reader.result === 'string' ? reader.result : reader.result.toString();
-    };
-    reader.readAsDataURL(this.file);
+  //   var element: any = e.target ? e.target : e.srcElement;
+  //   this.file = element ? element.files[0] : null;
+  //   /**
+  //    * Set a live preview
+  //    */
+  //   var reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     this.src = typeof reader.result === 'string' ? reader.result : reader.result.toString();
+  //   };
+  //   reader.readAsDataURL(this.file);
 
-    element.value = '';
-  }
+  //   element.value = '';
+  // }
 
   fileChangeEvent(event: any): void {
+    console.log(event)
+    if (!this.editing)
+    return;
+
+    var element: any = event.target ? event.target : event.srcElement;
+    this.file = element ? element.files[0] : null;
+
     this.open = true;
     this.imageChangedEvent = event;
   }
@@ -130,6 +137,9 @@ export class OpspotBanner {
   imageCropped(event: any) {
     console.log(event)
     this.src = event;
+
+    var reader = new FileReader();
+    reader.readAsDataURL(this.file);
   }
   cancel() {
     this.file = null;
@@ -165,7 +175,6 @@ export class OpspotBanner {
     e.target.parentNode.parentNode.getElementsByTagName('input')[0].click();
   }
   close() {
-    console.log('closing modal')
     this.open = false;
   }
 }
