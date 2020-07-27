@@ -1,0 +1,111 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+.o-home-filter-tab{
+    width:100%;
+    box-sizing: border-box;
+    min-height: 72px;
+    border: 1px solid #ECEFF1;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    margin-bottom: 6px;
+    padding: 0px 24px;
+    .tabs{
+        width:100%;
+        height:auto;
+        margin:0 auto;
+    }
+    
+    /* tab list item */
+    .tabs .tabs-list{
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        border-bottom: 0px solid #dde4e8;
+        display: flex;
+        margin-bottom: 0px;
+        justify-content: space-between;
+        @include mq($from: $mobile_sm, $until: $tablet) {
+            justify-content: center;
+        }
+    }
+    .tabs .tabs-list li{
+        float:left;
+        margin:0px;
+        margin: 15px 12px 0px;
+        text-align: center;
+        background-color:transparent;
+    }
+    .tabs .tabs-list li:hover{
+        cursor:pointer;
+    }
+    .tabs .tabs-list li a{
+        text-decoration: none;
+        padding:0px 8px 8px;
+        color:$grey;
+        font-size: 13px;	
+        font-weight: 500;	
+        line-height: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: $grey;
+        .home-tab-icon{
+            width: 16px;
+            margin-bottom: 7px;
+            &--allpost{
+                transform: rotate(-90deg)            ;
+                -webkit-transform: rotate(-90deg)            ;
+                -moz-transform: rotate(-90deg)            ;
+                -ms-transform: rotate(-90deg)            ;
+                -o-transform: rotate(-90deg)            ;
+}
+            i{
+                font-size: 18px;
+            }
+        }
+    }
+    
+    /* Tab content section */
+    .tabs .tab{
+        display:none;
+        width: 100%;
+        min-height: 250px;
+        height: auto;
+        border-radius: 0px;
+        padding: 0;
+        background-color: transparent;
+        clear: both;
+    }
+    
+    /* When active state */
+    .active{
+        display:block !important;
+    }
+    .tabs .tabs-list li.active{
+        color: $primary!important;
+        border-bottom: 2px solid $primary; 
+    }
+    li.active a{
+        color: $primary!important;
+        .home-tab-icon{
+            width: 16px;
+            margin-bottom: 7px;
+            i{
+                font-size: 16px;
+                color: $primary!important;
+            }
+        }
+    }
+    
+    /* media query */
+    @media screen and (max-width:360px){
+        .tabs{
+            margin:0;
+            width:96%;
+        }
+        .tabs .tabs-list li{
+            width:80px;
+        }
+    }
+}

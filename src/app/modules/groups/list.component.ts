@@ -175,8 +175,8 @@ export class GroupsListComponent {
 
   loadMyCommunities(refresh: boolean = false) {
 
-    if (this.inProgress)
-      return;
+    // if (this.inProgress)
+    //   return;
 
     if (refresh) {
       this.offset1 = '';
