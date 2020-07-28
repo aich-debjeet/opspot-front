@@ -18,6 +18,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-16x16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="google-site-verification" content="4e3-srEQdyDsdQQS2UO4dh9TTFgN6FioY-vmKmUxJhs">
+    <meta name="google-site-verification" content="t9kPyE7765gdvY_fy3oxN4H9MzMDU_PRqYmBVfcytx0" />
     
     <?php
       foreach($meta as $name => $content){
