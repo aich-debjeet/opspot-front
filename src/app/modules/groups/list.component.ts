@@ -130,7 +130,7 @@ export class GroupsListComponent {
         break;
       default:
         //@gayatri  this route need to check and have to make it dynamic
-        endpoint = `api/v1/groups/${this.all}/` + this.ownerGuid;
+        endpoint = `api/v1/groups/all/` + this.ownerGuid;
         key = 'groups';
         if (this.all)
           this.router.navigate(['/groups/top']);
