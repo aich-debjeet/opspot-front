@@ -130,7 +130,7 @@ export class GroupsListComponent {
         break;
       default:
         //@gayatri  this route need to check and have to make it dynamic
-        endpoint = `api/v1/groups/${this.all}/` + this.ownerGuid;
+        endpoint = `api/v1/groups/all/` + this.ownerGuid;
         key = 'groups';
         if (this.all)
           this.router.navigate(['/groups/top']);
@@ -175,8 +175,8 @@ export class GroupsListComponent {
 
   loadMyCommunities(refresh: boolean = false) {
 
-    if (this.inProgress)
-      return;
+    // if (this.inProgress)
+    //   return;
 
     if (refresh) {
       this.offset1 = '';
@@ -191,7 +191,7 @@ export class GroupsListComponent {
     this.inProgress = true;
     this.client.get(endpoint, {
       limit: 12,
-      offset1: this.offset1,
+      offset: this.offset1,
       rating: this.rating
     })
       .then((response: OpspotGroupListResponse) => {
@@ -238,7 +238,7 @@ export class GroupsListComponent {
     this.inProgress = true;
     this.client.get(endpoint, {
       limit: 12,
-      offset2: this.offset2,
+      offset: this.offset2,
       rating: this.rating
     })
       .then((response: OpspotGroupListResponse) => {

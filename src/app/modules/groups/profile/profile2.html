@@ -86,7 +86,7 @@
                     </div>
                     <!-- <m-videochat></m-videochat> -->
                     <div class="o-community-gathering-block">
-                        <a (click)="videochat.activate(group); showGathering1()" *ngIf="!group?.videoChatDisabled"
+                        <a (click)="goToUrl(); showGathering1()" *ngIf="!group?.videoChatDisabled"
                             class="o-community-gathering" id="profile2-group-gathering"><i class="icon-video"></i> <span
                                 class="text-sm f500 primary">Group Video Chat</span></a>
                         <!-- class="text-sm f500 primary" routerLink = 'groups/gathering'>Gathering</span></a> -->

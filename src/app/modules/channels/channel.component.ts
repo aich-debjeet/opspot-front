@@ -111,9 +111,9 @@ export class ChannelComponent {
   }
 
   statusFollowing(payload: string){
-    if(payload === 'follow'){
+    if(payload === 'follow' && this.isOwner()){
       this.user = { ...this.user, subscriptions_count: this.user.subscriptions_count+1 };
-    } else if(payload === 'unFollow') {
+    } else if(payload === 'unFollow' && this.isOwner()) {
       this.user = { ...this.user, subscriptions_count: this.user.subscriptions_count-1 };
     }
   }

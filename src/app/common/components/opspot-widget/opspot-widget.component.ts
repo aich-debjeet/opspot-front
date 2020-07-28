@@ -52,7 +52,7 @@ export class OpspotWidgetComponent implements OnInit {
       if (this.user !== "") {
         this.reqType = this.user.username + "'s " + 'Journey'
       }
-      endPoint = `api/v4/newsfeed/container/` + this.user.guid
+      endPoint = `api/v4/newsfeed/personal/` + this.user.guid
       params = {
         activity_type: 'myjourney',
         offset: '',

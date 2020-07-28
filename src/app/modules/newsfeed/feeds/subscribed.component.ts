@@ -15,7 +15,8 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   selector: 'm-newsfeed--subscribed',
-  templateUrl: 'subscribed.component.html'
+  templateUrl: 'subscribed.component.html',
+  styleUrls: ['subscribed.component.scss']
 })
 
 export class NewsfeedSubscribedComponent {
