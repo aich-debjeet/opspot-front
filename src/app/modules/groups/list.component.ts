@@ -191,7 +191,7 @@ export class GroupsListComponent {
     this.inProgress = true;
     this.client.get(endpoint, {
       limit: 12,
-      offset1: this.offset1,
+      offset: this.offset1,
       rating: this.rating
     })
       .then((response: OpspotGroupListResponse) => {
@@ -238,7 +238,7 @@ export class GroupsListComponent {
     this.inProgress = true;
     this.client.get(endpoint, {
       limit: 12,
-      offset2: this.offset2,
+      offset: this.offset2,
       rating: this.rating
     })
       .then((response: OpspotGroupListResponse) => {
