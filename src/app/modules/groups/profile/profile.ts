@@ -1,4 +1,4 @@
-import { Component, ViewChild, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef, HostListener, Inject } from '@angular/core';
 import { ActivatedRoute, ChildActivationEnd, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { GroupsService } from '../groups-service';
@@ -13,6 +13,7 @@ import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.comp
 import { VideoChatService } from '../../videochat/videochat.service';
 import { UpdateMarkersService } from '../../../common/services/update-markers.service';
 import { filter } from "rxjs/operators";
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'm-groups--profile',
@@ -74,6 +75,7 @@ export class GroupsProfile {
     public videochat: VideoChatService,
     private cd: ChangeDetectorRef,
     private updateMarkers: UpdateMarkersService,
+    @Inject(DOCUMENT) private document: Document
     // private _location: Location
   ) { }
 
@@ -249,6 +251,9 @@ export class GroupsProfile {
     this.editDone = true;
     this.detectChanges();
   }
+  goToUrl(): void {
+    this.document.location.href = 'https://meet.opsplt.com';
+}
 
   toggleEdit() {
     this.editing = !this.editing;
