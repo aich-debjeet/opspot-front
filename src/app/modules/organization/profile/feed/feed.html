@@ -3,7 +3,7 @@
   #poster 
   (load)="prepend($event)" 
   [containerGuid]="organization.guid"
-  [accessId]="organization.guid" 
+  [accessId]="organization.membership" 
   *ngIf="filter == 'activity' && (organization['is:owner'] || organization['is:editor'])"
   [showSpecialHashtags]='true'>
   </opspot-newsfeed-poster>
