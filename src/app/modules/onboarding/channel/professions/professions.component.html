@@ -1,0 +1,43 @@
+<div class="o-reg-proffession">
+    <!-- <div class="close">
+        <i class="icon-x"></i>
+    </div> -->
+    <div class="o-reg-proffession-body">
+        <div class="o-reg-proffession-body__title">
+            <div class="text-h3 f500">
+                Choose your profession here
+            </div>
+            <div class="text-md o-reg-proffession-body__padng">
+                Add your profession below (Maximum 3)<br>
+                Based on the profession selected, you will get recommendations on people, 
+                and organizations to follow.     
+            </div>
+        </div>
+        <div class="o-reg-proffession-body__list">
+            <div id="proffessionTextarea" class="o-reg-proffession-textarea o-reg-proffession-textarea--flex">
+                <tag-input 
+                    [(ngModel)]='model.professions'
+                    name="skills"
+                    theme='minimal'>
+                <tag-input-dropdown 
+                    [showDropdownIfEmpty]="true" 
+                    [minimumTextLength]=5 
+                    [limitItemsTo]=5
+                    [autocompleteItems]="data"
+                    [zIndex]=999999999999
+                    >
+                </tag-input-dropdown>
+                </tag-input>
+            </div>
+        </div>
+            <div class="o-reg-proffession-continue" style="margin-bottom: 20px;">
+                <button id="proffessionContinue" class="o-reg-proffession-continue__btn btn btn-primary btn-lg" (click)="onSubmit()"
+                 [disabled]="model.professions.length == 0 || inProgress">Continue</button>
+            </div>
+            <!-- <div class="o-reg-proffession-skip">
+                <a class="text-md grey" (click)="close()">
+                    skip
+                </a>
+            </div> -->
+    </div>
+</div>
