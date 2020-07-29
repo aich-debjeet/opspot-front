@@ -71,7 +71,7 @@
                             <h5 class="f700 word-br" >{{organization?.name}}</h5>
                         </div>
                         <div class="o-community-skills" id="skills" *ngIf="!editing && organization?.tags">
-                            <a *ngFor="let tag of organization?.tags" href="" class="o-community-skills__tag">#{{tag}}</a>
+                            <a *ngFor="let tag of organization?.tags" class="o-community-skills__tag">#{{tag}}</a>
                         </div>
                         <opspot-organization-join-button style="margin-bottom: 6px;" [group]="organization"
                             (membership)="change_membership($event)"
