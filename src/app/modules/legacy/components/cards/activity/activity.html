@@ -14,7 +14,8 @@
   </div>
   <div class="body">
     <a *ngIf="activity.containerObj && activity.containerObj.type == 'organization'; else usersLabel" id="activity_user_name" class="o-avatar__name" id="activity-username" [routerLink]="['/organization/profile/', activity.containerObj.guid]">
-      <strong title={{activity.containerObj.name}} id="activity-owner-obj-name">{{activity.containerObj.name}}</strong>
+      <!-- <strong title={{activity.containerObj.name}} id="activity-owner-obj-name">{{activity.containerObj.name}}</strong> -->
+      <opspot-post-title-card [entity]="activity"></opspot-post-title-card>
       <m-channel--badges class="m-channel--badges-activity" [user]="activity.containerObj" badges="[ 'verified' ]">
       </m-channel--badges>
     </a>
