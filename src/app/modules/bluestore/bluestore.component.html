@@ -19,6 +19,10 @@
 									created a <a class="grey-dark f500" id="#bluestore-post">#TheBlueStore</a>
 								</span>
 							</div>
+							<a *ngIf="marketplace?.containerObj && marketplace?.containerObj.type == 'group'"
+							[routerLink]="['/groups/profile', marketplace?.containerObj.guid]" class="mdl-color-text--blue-grey-300">
+							<strong id="activity-owner-container-name">Posted in "{{marketplace?.containerObj.name}}"</strong>
+							</a>
 							<div class="grey m-l-8 o-posts-tym" *ngIf="marketplace?.time_created">
 								<span>{{marketplace?.time_created * 1000 | date:'medium'}}</span>
 								<!-- <span class="o-posts-public-private" *ngIf="isTranslatable"
