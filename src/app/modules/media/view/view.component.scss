@@ -190,7 +190,7 @@ i.arrow-icons {
         max-width: 100%;
       max-height: 500px;
         @include mq($from: $mobile_sm, $until: $desktop_sm) {
-            height: 250px;
+            min-height: 250px;
         }
     }
     &__title{
