@@ -189,7 +189,7 @@ export class GroupsListComponent {
     endpoint = `api/v1/groups/owner/` + this.ownerGuid;
     key = 'groups';
 
-    this.inProgress = true;
+    // this.inProgress = true;
     this.client.get(endpoint, {
       limit: 12,
       offset: this.offset1,
@@ -199,6 +199,7 @@ export class GroupsListComponent {
 
         if (!response[key] || response[key].length === 0) {
           // this.inProgress = false;
+          this.moreData1 = false;
         }
 
         if (refresh) {
@@ -227,6 +228,7 @@ export class GroupsListComponent {
     if (refresh) {
       this.offset2 = '';
       this.memberCommunities = [];
+      this.moreData2 = true;
     }
 
     let endpoint, key;
