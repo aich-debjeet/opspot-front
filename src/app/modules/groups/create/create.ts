@@ -117,7 +117,7 @@ export class GroupsCreator {
         })
           .then(() => {
             this.inProgress = false;
-            this.router.navigate(['/groups/profile', guid]);
+            this.router.navigate(['/groups',this.group.name ,'profile', guid]);
           });
       })
       .catch(e => {

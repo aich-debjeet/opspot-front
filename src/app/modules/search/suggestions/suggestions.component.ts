@@ -59,6 +59,7 @@ export class SearchBarSuggestionsComponent {
           limit: 4
         });
         this.suggestions = response.entities;
+        console.log(this.suggestions);
       } catch (e) {
         console.error(e);
         this.suggestions = [];

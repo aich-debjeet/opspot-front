@@ -27,7 +27,7 @@
     
       <!-- group inivite -->
       <ng-template ngSwitchCase="group_invite">
-        <a *ngIf="notification?.params?.group?.guid" [routerLink]="['/groups/profile', notification.params.group.guid]">
+        <a *ngIf="notification?.params?.group?.guid" [routerLink]="['/groups',notification.params.group.name,'profile', notification.params.group.guid]">
             <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">{{notification.params.user}} invited you to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
         </a>
         <!-- organization inivite TODO @debjeet: add i18n for this -->
@@ -38,7 +38,7 @@
     
       <!-- group kick -->
       <ng-template ngSwitchCase="group_kick">
-        <a [routerLink]="['/groups/profile', notification.params.group.guid]">
+        <a [routerLink]="['/groups',notification.params.group.name,'profile', notification.params.group.guid]">
             <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_KICK" id="notification-kicked">You were kicked off from <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
         </a>
       </ng-template>
@@ -85,7 +85,7 @@
 
       <!--community join notification(pending)-->
       <ng-template ngSwitchCase="group_join_request">
-        <a *ngIf="notification?.params?.group?.guid" [routerLink]="['/groups/profile', notification.params.group.guid]">
+        <a *ngIf="notification?.params?.group?.guid" [routerLink]="['/groups',notification.params.group.name,'profile', notification.params.group.guid]">
             <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited" *ngIf="notification.params.group.membership == 0">{{notification.params.from_username}} wants to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
             <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited" *ngIf="notification.params.group.membership != 0">{{notification.params.from_username}} has joined <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
         </a>
@@ -95,19 +95,19 @@
       </ng-template>
 
       <ng-template ngSwitchCase="group_join_accept">
-        <a [routerLink]="['/groups/profile', notification.params.group.guid]">
+        <a [routerLink]="['/groups',notification.params.group.name,'profile', notification.params.group.guid]">
             <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">{{notification.params.from_username}} has accepted your request to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}}</span></p>
         </a>
       </ng-template>
 
       <ng-template ngSwitchCase="create_admin_group">
-        <a [routerLink]="['/groups/profile', notification.entity.guid]">
+        <a [routerLink]="['/groups',notification.entity.name,'profile', notification.entity.guid]">
             <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited" *ngIf="notification.entity['is:admin']">You have been made admin to the group <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.entity.name}}</span></p>
         </a>
       </ng-template>
 
       <ng-template ngSwitchCase="group_join_reject">
-        <a [routerLink]="['/groups/profile', notification.params.group.guid]">
+        <a [routerLink]="['/groups',notification.params.group.name,'profile', notification.params.group.guid]">
             <p i18n="@@NOTIFICATIONS__NOTIFICATION__GROUP_INVITE" id="notification-invited">Your request to join <span class="pseudo-link mdl-color-text--blue-grey-400">{{notification.params.group.name}} has been rejected</span></p>
         </a>
       </ng-template>
@@ -165,7 +165,7 @@
           <div *ngIf="notification.entityObj.type == 'group'">
             <div>
               <a
-                  [routerLink]="['/groups/profile', notification.entityObj.guid]"
+                  [routerLink]="['/groups',notification.entityObj.name,'profile', notification.entityObj.guid]"
                   [queryParams]="{ comment_guid: notification.params?.parent_path == '0:0:0' ? notification.params?.comment_guid : null }">
                 <p>
                 <ng-container i18n="@@NOTIFICATIONS__NOTIFICATION__REPLIED_TO_GROUP_CONVERSATION" 
@@ -217,7 +217,7 @@
               </p>
             </a>
     
-            <a [routerLink]="['/groups/profile', notification.entityObj.entity_guid, 'conversation']" *ngIf="notification.params?.parent?.type == 'group'">
+            <a [routerLink]="['/groups', notification.entityObj.name, 'profile', notification.entityObj.entity_guid, 'conversation']" *ngIf="notification.params?.parent?.type == 'group'">
               <p i18n="@@NOTIFICATIONS__NOTIFICATION__LIKE__VOTED_UP_CONVERSATION">
                 <span class="pseudo-link mdl-color-text--blue-grey-400" >{{notification.fromObj.name}}</span> liked your message in
                 <span class="pseudo-link mdl-color-text--blue-grey-400">{{ notification.params.parent.name }}</span>'s conversation
@@ -263,7 +263,7 @@
               </p>
             </a>
     
-            <a [routerLink]="['/groups/profile', notification.entityObj.entity_guid, 'conversation']" *ngIf="notification.params?.parent?.type == 'group'">
+            <a [routerLink]="['/groups', notification.entityObj.name, 'profile', notification.entityObj.entity_guid, 'conversation']" *ngIf="notification.params?.parent?.type == 'group'">
               <p i18n="@@NOTIFICATIONS__NOTIFICATION__DOWNVOTE__VOTED_DOWN_CONVERSATION">
                 <span class="pseudo-link mdl-color-text--blue-grey-400" >{{notification.fromObj.name}}</span> down voted your message in
                 <span class="pseudo-link mdl-color-text--blue-grey-400">{{ notification.params.parent.name }}</span>'s conversation
@@ -326,7 +326,7 @@
             </a>
     
             <a 
-              [routerLink]="['/groups/profile', notification.params?.parent?.guid, 'feed']"
+              [routerLink]="['/groups', notification.params?.parent?.name ,'profile', notification.params?.parent?.guid, 'feed']"
               [queryParams]="{ comment_guid: notification.entityObj.parent_path === '0:0:0' ? notification.entityObj._guid : null }"
               *ngIf="notification.params?.parent?.type == 'group'"
               >

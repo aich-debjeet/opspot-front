@@ -36,7 +36,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 const routes: Routes = [
-  { path: 'groups/profile/:guid', component: GroupsProfile, canDeactivate: [CanDeactivateGroupService], children: [
+  { path: 'groups/:commName/profile/:guid', component: GroupsProfile, canDeactivate: [CanDeactivateGroupService], children: [
       { path: '', redirectTo: 'feed', pathMatch: 'full' },
       { path: 'feed/:filter', component: GroupsProfileFeed }, 
       { path: 'feed', component: GroupsProfileFeed },
