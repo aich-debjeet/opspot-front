@@ -104,8 +104,8 @@ export class GroupsListComponent {
 
   load(refresh: boolean = false) {
 
-    // if (this.inProgress)
-    //   return;
+    if (this.inProgress)
+      return;
 
     if (refresh) {
       this.offset = '';
@@ -244,7 +244,7 @@ export class GroupsListComponent {
       .then((response: OpspotGroupListResponse) => {
 
         if (!response[key] || response[key].length === 0) {
-          this.inProgress = false;
+          // this.inProgress = false;
           this.moreData2 = false;
         }
 
