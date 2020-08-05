@@ -21,7 +21,7 @@
       <h4 class="f500" id="list-communities-header">Communities</h4>
       <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn()"
         routerLink="/groups/create">Create Community</button>
-      <div class="o-community-manage-block" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMemberCommunities()"
+      <div class="o-community-manage-block" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMyCommunities()"
       [scrollWindow]="false">
       <div class="text-lg f500 mb-17" id="list-communities-manage">Communities you manage</div>
       <div *ngFor="let entity of myCommunities">
