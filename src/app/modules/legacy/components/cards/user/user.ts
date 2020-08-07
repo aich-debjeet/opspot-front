@@ -32,10 +32,10 @@ export class UserCard implements OnInit {
   set object(value: any) {
     this.user = value;
     this.bannerSrc = `${this.opspot.cdn_url}fs/v1/banners/${this.user.guid}/fat/${this.user.icontime}`;
-    // if(this.user){
-    //   this.subscriptionCount= this.user.subscriptions_count;
-    //   this.subscriberCount = this.user.subscribers_count;
-    // }
+    if(this.user.guid != this.session.getLoggedInUser().guid){
+      this.subscriptionCount= this.user.subscriptions_count;
+      this.subscriberCount = this.user.subscribers_count;
+    }
   }
 
   ngOnInit() {
