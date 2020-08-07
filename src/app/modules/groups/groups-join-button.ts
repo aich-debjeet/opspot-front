@@ -83,7 +83,7 @@ export class GroupsJoinButton {
   join() {
     if (!this.session.isLoggedIn()) {
       //this.showModal = true;
-      this.loginReferrer.register(`/groups/profile/${this.group.guid}/feed?join=true`);
+      this.loginReferrer.register(`/groups/${this.group.name}/profile/${this.group.guid}/feed?join=true`);
       this.router.navigate(['/login']);
       return;
     }

@@ -214,9 +214,10 @@
     position: relative;
     @include mq($from:$mobile_sm, $until:$desktop_sm){
         float: inherit;
-        position: absolute;
-        bottom: -36px;
+        bottom: 20px;
         margin-bottom: 20px;
+        flex-direction: row;
+        align-items: center;
     }
     .mrgr15{
         margin-right:15px;
@@ -246,7 +247,7 @@
     display: flex;
     align-items: center;
     @include mq($from:$mobile_sm, $until:$desktop_sm){
-        margin-bottom: 42px;
+        
         padding: 10px 10px;
         position: relative; 
     }
@@ -284,7 +285,8 @@
     background-color: #FFFFFF;
     box-shadow: 0 6px 10px 0 rgba(144, 164, 174, 0.16), 0 1px 12px 0 rgba(144, 164, 174, 0.18), 0 3px 5px 0 rgba(144, 164, 174, 0.2);
     @include mq($from:$mobile_sm, $until:$desktop_sm){
-        display: none;
+        display: block;
+        margin-bottom: 30px;
     }
     &__paywall{
         border: 1px solid #ECEFF1;

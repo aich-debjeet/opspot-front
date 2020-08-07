@@ -17,6 +17,7 @@ export class NotificationComponent {
   constructor(public session: Session) { }
 
   set _notification(value: any) {
+    console.log(value)
     this.notification = value;
     // console.log(this.notification)
   }

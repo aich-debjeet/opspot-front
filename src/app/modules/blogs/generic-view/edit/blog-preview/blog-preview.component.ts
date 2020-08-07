@@ -31,7 +31,6 @@ export class BlogPreviewComponent implements OnInit {
     this.guid = object ? object.guid : null;
     let skills = object ? object.blog.tags : null;
     skills = skills.filter(el => !!el);
-    console.log(this.blog);
     this.skillsAlter(skills);
   }
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
@@ -130,7 +129,7 @@ export class BlogPreviewComponent implements OnInit {
     })
       .catch(() => {
         this.error = '';
-        if (blog.published != 0) {
+        if (blog.published != 0 && !this.blog.thumbnail_src.length) {
           this.error = 'error:no-banner';
           return false;
         } else {

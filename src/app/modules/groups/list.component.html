@@ -25,7 +25,7 @@
       <div *ngFor="let entity of myCommunities">
         <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='community'" 
           id="list-community-manage-list"
-          [routerLink]="['/groups/profile', entity.guid]">
+          [routerLink]="['/groups',entity.name,'profile', entity.guid]">
           <div class="o-community-landing-block-manage__avatar">
             <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="">
           </div>
@@ -47,7 +47,7 @@
           <div class="o-community-landing-block-manage"
             id="list-community-joined"
             *ngIf="entity['is:member'] && !(entity['is:owner'] || entity['is:admin']) && entity['entity_type']=='community'"
-            [routerLink]="['/groups/profile', entity.guid]">
+            [routerLink]="['/groups',entity.name,'profile', entity.guid]">
             <div class="o-community-landing-block-manage__avatar">
               <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="">
             </div>

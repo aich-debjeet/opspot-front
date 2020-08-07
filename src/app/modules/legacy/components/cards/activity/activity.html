@@ -27,7 +27,7 @@
       <!-- </a> -->
     </ng-template>
     <a *ngIf="activity.containerObj && activity.containerObj.type == 'group'"
-      [routerLink]="['/groups/profile', activity.containerObj.guid]" class="mdl-color-text--blue-grey-300">
+      [routerLink]="['/groups',activity.containerObj.name,'profile', activity.containerObj.guid]" class="mdl-color-text--blue-grey-300">
       <strong id="activity-owner-container-name">Posted in "{{activity.containerObj.name}}"</strong>
     </a>
     <div class="grey m-l-8 o-posts-tym"

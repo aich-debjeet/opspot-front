@@ -2704,7 +2704,8 @@ opspot-button {
 
 opspot-card {
   display: block;
-  background: #ffffff; }
+  // background: #ffffff; 
+}
 
 m-categories--selected {
   display: -webkit-flex;
@@ -23637,7 +23638,8 @@ input[type="number"] {
   background-color: green !important; }
 
 .mdl-card {
-  z-index: initial; }
+  z-index: initial;
+  margin: 0px 6px 6px 0px; }
   .mdl-card .mdl-card__supporting-text {
     -webkit-font-smoothing: antialiased; }
   .mdl-card:not(.mdl-cell) {

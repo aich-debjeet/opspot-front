@@ -111,6 +111,7 @@ export class BlogEdit {
         mature: 0,
         monetized: 0,
         published: 0,
+        thumbnail_src:'',
         wire_threshold: false,
         custom_meta: {
           title: '',
