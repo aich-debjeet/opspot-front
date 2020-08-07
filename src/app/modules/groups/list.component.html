@@ -21,6 +21,8 @@
       <h4 class="f500" id="list-communities-header">Communities</h4>
       <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn()"
         routerLink="/groups/create">Create Community</button>
+      <div class="o-community-manage-block" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMyCommunities()"
+      [scrollWindow]="false">
       <div class="text-lg f500 mb-17" id="list-communities-manage">Communities you manage</div>
       <div *ngFor="let entity of myCommunities">
         <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='community'" 
@@ -34,14 +36,14 @@
           </div>
         </div>
       </div>
-      <!-- <infinite-scroll
-        distance="25%"
-        (load)="loadMyCommunities()"
-        [moreData]="moreData"
-        [inProgress]="inProgress"
-      >
-      </infinite-scroll> -->
-      <div class="o-community-landing-block-your">
+      </div>
+      <div class="m-infinite-scroll-manual"
+          id="infinite-scroll-nothing-more-to-load"
+          [hidden]="moreData1">
+          <ng-container i18n="@@COMMON__INFINITE_SCROLL__NOTHING_MORE">Nothing more to load</ng-container>
+      </div>
+      <div class="o-community-landing-block-your" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMemberCommunities()"
+        [scrollWindow]="false">
         <div class="text-lg f500 mb-17" id="list-community-header">Communities you’re in</div>
         <div *ngFor="let entity of memberCommunities">
           <div class="o-community-landing-block-manage"
@@ -57,6 +59,11 @@
           </div>
         </div>
       </div>
+      <div class="m-infinite-scroll-manual"
+          id="infinite-scroll-nothing-more-to-load"
+          [hidden]="moreData2">
+          <ng-container i18n="@@COMMON__INFINITE_SCROLL__NOTHING_MORE">Nothing more to load</ng-container>
+      </div>      
     </div>
 
     <div class="o-community-landing-block__main" *ngIf="!showMyCommunities">
@@ -65,13 +72,6 @@
           <div id="discover" class="tab active">
             <div class="o-community-landing-block-design">
               <m-groups--tile *ngFor="let entity of entities" class="o-community-main-card" [entity]="entity"></m-groups--tile>
-              <!-- <infinite-scroll
-              distance="25%"
-              (load)="load()"
-              [moreData]="moreData"
-              [inProgress]="inProgress"
-            >
-            </infinite-scroll> -->
             </div>
           </div>
         </div>
@@ -82,13 +82,6 @@
         <m-groups--tile *ngIf="entity['is:member'] && entity['is:creator'] && entity['entity_type']=='community'"
           [entity]="entity" class="o-community-main-card"></m-groups--tile>
       </div>
-      <!-- <infinite-scroll
-        distance="25%"
-        (load)="load()"
-        [moreData]="moreData"
-        [inProgress]="inProgress"
-      >
-      </infinite-scroll> -->
     </div>
   </div>
   <infinite-scroll

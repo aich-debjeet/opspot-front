@@ -225,6 +225,10 @@ opspot-button-remind{
                 </span>
               </div> -->
               <opspot-post-title-card [entity]="entity"></opspot-post-title-card>
+              <a *ngIf="entity?.containerObj && entity?.containerObj.type == 'group'"
+                [routerLink]="['/groups/profile', entity?.containerObj.guid]" class="mdl-color-text--blue-grey-300">
+                <strong id="activity-owner-container-name">Posted in "{{entity?.containerObj.name}}"</strong>
+              </a>
               <div class="grey m-l-8 o-posts-tym">
                 <span>{{entity?.time_created * 1000 | date:'medium'}}</span>
                 <!-- <span class="o-posts-public-private"><i class="icon-public"></i></span> -->

@@ -13,7 +13,8 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
 
 @Component({
   selector: 'm-groups--list',
-  templateUrl: 'list.component.html'
+  templateUrl: 'list.component.html',
+  styleUrls: ['./list.component.scss']
 })
 
 export class GroupsListComponent {
@@ -103,8 +104,8 @@ export class GroupsListComponent {
 
   load(refresh: boolean = false) {
 
-    // if (this.inProgress)
-    //   return;
+    if (this.inProgress)
+      return;
 
     if (refresh) {
       this.offset = '';
@@ -188,7 +189,7 @@ export class GroupsListComponent {
     endpoint = `api/v1/groups/owner/` + this.ownerGuid;
     key = 'groups';
 
-    this.inProgress = true;
+    // this.inProgress = true;
     this.client.get(endpoint, {
       limit: 12,
       offset: this.offset1,
@@ -197,8 +198,8 @@ export class GroupsListComponent {
       .then((response: OpspotGroupListResponse) => {
 
         if (!response[key] || response[key].length === 0) {
-          this.moreData1 = false;
           // this.inProgress = false;
+          this.moreData1 = false;
         }
 
         if (refresh) {
@@ -221,7 +222,6 @@ export class GroupsListComponent {
   }
 
   loadMemberCommunities(refresh: boolean = false) {
-
     // if (this.inProgress)
     //   return;
 
@@ -235,17 +235,17 @@ export class GroupsListComponent {
     endpoint = `api/v1/groups/member/` + this.ownerGuid;
     key = 'groups';
 
-    this.inProgress = true;
+    // this.inProgress = true;
     this.client.get(endpoint, {
-      limit: 12,
+      limit: 12, 
       offset: this.offset2,
       rating: this.rating
     })
       .then((response: OpspotGroupListResponse) => {
 
         if (!response[key] || response[key].length === 0) {
+          // this.inProgress = false;
           this.moreData2 = false;
-          this.inProgress = false;
         }
 
         if (refresh) {
@@ -260,10 +260,10 @@ export class GroupsListComponent {
         if (!this.offset2) {
           this.moreData2 = false;
         }
-        this.inProgress = false;
+        // this.inProgress = false;
       })
       .catch((e) => {
-        this.inProgress = false;
+        // this.inProgress = false;
       });
   }
 

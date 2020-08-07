@@ -18,6 +18,10 @@
                   [routerLink]="['/', opportunity?.ownerObj?.username]">{{opportunity?.ownerObj?.name}}</a>
                   created an <a class="grey-dark f500" id="opportunity">#Opportunity</a></span>
               </div>
+              <a *ngIf="opportunity?.containerObj && opportunity?.containerObj.type == 'group'"
+                [routerLink]="['/groups/profile', opportunity?.containerObj.guid]" class="mdl-color-text--blue-grey-300">
+                <strong id="activity-owner-container-name">Posted in "{{opportunity?.containerObj.name}}"</strong>
+              </a>
               <div class="grey m-l-8 o-posts-tym">
                 <span>{{opportunity?.time_created * 1000 | date:'medium'}}</span>
                 <!-- <span class="o-posts-public-private"><i
