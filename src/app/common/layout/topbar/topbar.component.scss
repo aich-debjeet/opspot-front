@@ -315,6 +315,7 @@ header {
   border-bottom: 1px solid #eceff1;
 }
 .app-nav-head__info {
+  word-break: break-word;
   float: left;
   margin-left: 13px;
   width: calc(100% - 54px);
