@@ -66,7 +66,7 @@ export class BlogEdit {
   access = ACCESS;
   paramsSubscription: Subscription;
   typingTimer;//timer identifier
-  doneTypingInterval = 5000;
+  doneTypingInterval = 2000;
 
   @ViewChild('inlineEditor') inlineEditor: InlineEditorComponent;
   @ViewChild('thresholdInput') thresholdInput: WireThresholdInputComponent;
@@ -149,12 +149,13 @@ export class BlogEdit {
   // }
 
   autoSave() {
+    this.canSave = false;
     clearTimeout(this.typingTimer)
     this.typingTimer = setTimeout(() => {
       this.inProgress = true;
       this.client.post('api/v1/blog/' + this.guid, this.blog)
         .then((resp: any) => {
-          console.log(resp);
+          this.canSave = true;
           this.inProgress = false;
           if (this.guid === 'new') {
             this.guid = resp['guid'];
