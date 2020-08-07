@@ -31,7 +31,7 @@ export class GroupsCreator {
     membership: 2,
     tags: [],
     invitees: '',
-    moderated: false,
+    moderated: 0,
     default_view: 0,
     entity_type: 'community'
   };
@@ -95,8 +95,9 @@ export class GroupsCreator {
     this.group.invitees = this.invitees.map((user) => {
       return user.guid;
     });
+    console.log("this: ", this.group.moderated);
 
-    if (this.group.moderated === false) {
+    if (this.group.moderated === 0 || this.group.moderated === false) {
       this.group.moderated = 0;
     } else {
       this.group.moderated = 1;
@@ -117,7 +118,7 @@ export class GroupsCreator {
         })
           .then(() => {
             this.inProgress = false;
-            this.router.navigate(['/groups/profile', guid]);
+            this.router.navigate(['/groups',this.group.name ,'profile', guid]);
           });
       })
       .catch(e => {

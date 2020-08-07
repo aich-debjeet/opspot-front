@@ -10,12 +10,12 @@
     [scrollWindow]="false">
       <li class="o-post-liked-members-popup-list__user-list" *ngFor="let list of likeList">
         <div class="o-post-liked-members-popup-info">
-          <div class="o-post-liked-members-popup-info__prof">
+          <div class="o-post-liked-members-popup-info__prof" [routerLink]="['/', list.username]">
             <div class="mr-12 o-post-liked-members-popup-info__avatar">
               <img [src]="opspot.cdn_url + 'icon/' + list?.guid + '/medium/' + list?.icontime" alt="">
             </div>
             <div id="username" class="caption-bold">
-              {{list.name}}
+              {{list.name | truncate:[20, '...']}}
             </div>
           </div>
           <!--prof ends-->

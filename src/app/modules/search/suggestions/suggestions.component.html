@@ -20,7 +20,7 @@
           id="suggestion-username">@{{suggestion.username}}</span>
       </a>
       <a class="m-search-bar-suggestions-suggestion" *ngIf="suggestion.type == 'group'"
-        [routerLink]="['/groups/profile/', suggestion.guid]">
+        [routerLink]="['/groups',suggestion.name, 'profile', suggestion.guid]">
         <img src="fs/v1/avatars/{{suggestion.guid}}/" class="imgHeight" id="suggestion-name" /> {{suggestion.name}}
       </a>
     </ng-container>

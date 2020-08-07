@@ -269,7 +269,7 @@
         <a [routerLink]="['/',user.username]" class="o-avatar"><img
             src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt=""></a>
         <div class="app-nav-head__info">
-          <a class="grey-dark app-nav-head__name">{{user.name}}</a>
+          <a class="grey-dark app-nav-head__name">{{user.name | truncate:[20, '...']}}</a>
           <a [routerLink]="['/',user.username]" (click)='closeNav()' class="text-sm primary">View Profile</a>
         </div>
       </div>

@@ -44,7 +44,7 @@ export class GroupsTileComponent {
   trigger(entity) {
     if (entity && (entity.membership !== 2)) {
       if (entity['is:member']) {
-        this.router.navigateByUrl('/groups/profile/' + entity.guid);
+        this.router.navigateByUrl(`/groups/${entity.name}/profile/${entity.guid}`);
       } else {
         this.overlayModal.create(GroupJoinRequestComponent, this.entity, {
           class: 'm-overlay-modal--report m-overlay-modal--medium-groupjoin',
@@ -52,7 +52,7 @@ export class GroupsTileComponent {
         ).present();
       }
     } else {
-      this.router.navigateByUrl('/groups/profile/' + entity.guid);
+      this.router.navigateByUrl(`/groups/${entity.name}/profile/${entity.guid}`);
     }
   }
 

@@ -63,7 +63,7 @@
 
 .o-suggestion{
     position: relative;
-    width: 168px;
+    width: -webkit-fill-available;
     display: flex;
     align-items: center;
     flex-direction: column;

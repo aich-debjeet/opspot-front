@@ -2704,7 +2704,8 @@ opspot-button {
 
 opspot-card {
   display: block;
-  background: #ffffff; }
+  // background: #ffffff; 
+}
 
 m-categories--selected {
   display: -webkit-flex;
@@ -7898,7 +7899,7 @@ opspot-blog-edit {
     margin-bottom: 0.5em;
     font-weight: 400;
     font-style: normal;
-    font-size: 21px;
+    font-size: 40px;
     line-height: 1.58;
     letter-spacing: 0.5px;
     letter-spacing: -.003em;
@@ -14058,7 +14059,7 @@ opspot-activity.mdl-card, opspot-activity, opspot-activity-preview {
       margin: 8px 0;
       padding: 0;
       line-height: 1.25;
-      word-break: break-all; }
+      word-break: break-word; }
     opspot-activity.mdl-card .m-rich-embed .meta p.m-url, opspot-activity .m-rich-embed .meta p.m-url, opspot-activity-preview .m-rich-embed .meta p.m-url {
       white-space: nowrap;
       max-width: 240px; }
@@ -17723,7 +17724,7 @@ m-notifications--topbar-toggle .counter {
   cursor: default; }
 
 m-notifications--topbar-toggle .m-notifications--topbar-toggle--icon--active::after {
-  background: #4690DF;
+  background: #FF0000;
   border-radius: 50%;
   display: block;
   height: 8px;
@@ -23637,7 +23638,8 @@ input[type="number"] {
   background-color: green !important; }
 
 .mdl-card {
-  z-index: initial; }
+  z-index: initial;
+  margin: 0px 6px 6px 0px; }
   .mdl-card .mdl-card__supporting-text {
     -webkit-font-smoothing: antialiased; }
   .mdl-card:not(.mdl-cell) {

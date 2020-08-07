@@ -9,7 +9,7 @@
     border-radius: 4px;
     background-color: #FFFFFF;
     margin-bottom: 6px;
-    padding: 0px 24px;
+    padding: 0px 5px;
     .tabs{
         width:100%;
         height:auto;
@@ -26,7 +26,7 @@
         margin-bottom: 0px;
         justify-content: space-between;
         @include mq($from: $mobile_sm, $until: $tablet) {
-            justify-content: center;
+            
         }
     }
     .tabs .tabs-list li{
@@ -63,6 +63,9 @@
             i{
                 font-size: 18px;
             }
+        }
+        .text-content{
+            width: max-content;
         }
     }
     

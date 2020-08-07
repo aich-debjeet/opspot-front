@@ -14,7 +14,8 @@
   </div>
   <div class="body">
     <a *ngIf="activity.containerObj && activity.containerObj.type == 'organization'; else usersLabel" id="activity_user_name" class="o-avatar__name" id="activity-username" [routerLink]="['/organization/profile/', activity.containerObj.guid]">
-      <strong title={{activity.containerObj.name}} id="activity-owner-obj-name">{{activity.containerObj.name}}</strong>
+      <!-- <strong title={{activity.containerObj.name}} id="activity-owner-obj-name">{{activity.containerObj.name}}</strong> -->
+      <opspot-post-title-card [entity]="activity"></opspot-post-title-card>
       <m-channel--badges class="m-channel--badges-activity" [user]="activity.containerObj" badges="[ 'verified' ]">
       </m-channel--badges>
     </a>
@@ -27,7 +28,7 @@
       <!-- </a> -->
     </ng-template>
     <a *ngIf="activity.containerObj && activity.containerObj.type == 'group'"
-      [routerLink]="['/groups/profile', activity.containerObj.guid]" class="mdl-color-text--blue-grey-300">
+      [routerLink]="['/groups',activity.containerObj.name,'profile', activity.containerObj.guid]" class="mdl-color-text--blue-grey-300">
       <strong id="activity-owner-container-name">Posted in "{{activity.containerObj.name}}"</strong>
     </a>
     <div class="grey m-l-8 o-posts-tym"
