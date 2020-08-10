@@ -70,6 +70,7 @@ export class NewsfeedTagsComponent implements OnDestroy {
     const data = {
       hashtag: this.tag,
       limit: 12,
+      purpose: 'hashtag',
       offset: this.offset,
     };
 

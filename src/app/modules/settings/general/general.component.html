@@ -264,14 +264,14 @@
               <label class="radio-label radio-label--flex">
                   <input type="radio" name="rd" id="rd1" value="1" (click)="setOption('delete')">
                   <div class="radio-widget"></div>
-                  <div class="text-lg f500">Delete Account</div>
-                  <div class="text-md grey">Deleting your account is permanent</div>
+                  <div class="text-lg f500" id="general-delete-account">Delete Account</div>
+                  <div class="text-md grey" id="general-deleting-account">Deleting your account is permanent</div>
               </label>
               <label class="radio-label radio-label--flex">
                   <input type="radio" name="rd" id="rd2" value="2" (click)="setOption('deactivate')">
                   <div class="radio-widget"></div>
-                  <div class="text-lg f500">Deactivate Account</div>
-                  <div class="text-md grey">Deactivating your account <br>can be temporary</div>
+                  <div class="text-lg f500" id="general-deactivate-account">Deactivate Account</div>
+                  <div class="text-md grey" id="general-deactivating-account">Deactivating your account <br>can be temporary</div>
               </label>
           </div>
           <div id="deactivate" class="o-settings-delete-account" *ngIf="deactivateOptions">
@@ -281,7 +281,7 @@
             <div class="text-md">
               Please provide a reason. It’ll help us make One Page Spotlight better
               </div>
-              <label class="c-checkbox" *ngFor = "let reason of deleteAccountOption">{{reason.description}}
+              <label class="c-checkbox" id="general-component-checkbox" *ngFor = "let reason of deleteAccountOption">{{reason.description}}
                   <input type="checkbox" id="general-checkbox" checked [(ngModel)]="reason.checked" (change)="updateCheckedOptions(reason, $event)">
                   <span class="checkmark"></span>
               </label>

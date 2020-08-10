@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
             overflow:hidden;
         }
         .word-break {
-            word-break: break-all;
+            word-break: break-word;
         }
         `
     ]

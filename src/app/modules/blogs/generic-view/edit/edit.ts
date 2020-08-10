@@ -65,6 +65,9 @@ export class BlogEdit {
   licenses = LICENSES;
   access = ACCESS;
   paramsSubscription: Subscription;
+  typingTimer;//timer identifier
+  doneTypingInterval = 2000;
+
   @ViewChild('inlineEditor') inlineEditor: InlineEditorComponent;
   @ViewChild('thresholdInput') thresholdInput: WireThresholdInputComponent;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
@@ -108,6 +111,7 @@ export class BlogEdit {
         mature: 0,
         monetized: 0,
         published: 0,
+        thumbnail_src:'',
         wire_threshold: false,
         custom_meta: {
           title: '',
@@ -130,18 +134,35 @@ export class BlogEdit {
       }
     });
   }
+  // autoSave() {
+  //   console.log('trigger events');
+  //   this.inProgress = true;
+  //   this.client.post('api/v1/blog/' + this.guid, this.blog)
+  //     .then((resp: any) => {
+  //       console.log(resp);
+  //       this.inProgress = false;
+  //       if (this.guid === 'new') {
+  //         this.guid = resp['guid'];
+  //         this.blog.guid = resp['guid'];
+  //       }
+  //     })
+  // }
+
   autoSave() {
-    console.log('trigger events');
+    this.canSave = false;
+    clearTimeout(this.typingTimer)
+    this.typingTimer = setTimeout(() => {
       this.inProgress = true;
       this.client.post('api/v1/blog/' + this.guid, this.blog)
-      .then((resp: any) => {
-        console.log(resp);
-        this.inProgress = false;
-        if(this.guid === 'new'){
-          this.guid = resp['guid'];
-          this.blog.guid = resp['guid'];
-        }
-      })
+        .then((resp: any) => {
+          this.canSave = true;
+          this.inProgress = false;
+          if (this.guid === 'new') {
+            this.guid = resp['guid'];
+            this.blog.guid = resp['guid'];
+          }
+        })
+    }, this.doneTypingInterval);
   }
 
   ngOnDestroy() {

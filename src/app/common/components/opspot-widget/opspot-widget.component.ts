@@ -30,38 +30,42 @@ export class OpspotWidgetComponent implements OnInit {
     this.geteData();
   }
 
-  params: any = {
-    // TODO @abhijeet check for all valid request params
-    taxonomies: 'activity',
-    offset: '',
-    limit: 4,
-    rating: 2,
-    q: ''
-  };
+
 
 
   geteData() {
     // console.log('Widget geteData()');
     // this.inProgress = true;
     let ownerGuid = this.session.getLoggedInUser().guid;
-    let endPoint;
+    let endPoint, params, key;
     if (this.entityType === 'opportunity') {
       this.reqType = 'opportunities';
+      key = 'entities';
       endPoint = `api/v2/feeds/container/${ownerGuid}/${this.reqType}?limit=3&sync=&as_activities=&force_public=1`
+      params = {};
     } else if (this.entityType === 'event') {
       this.reqType = 'events';
+      key = 'entities'
       endPoint = `api/v2/feeds/container/${ownerGuid}/${this.reqType}?limit=3&sync=&as_activities=&force_public=1`
+      params = {};
     } else {
       if (this.user !== "") {
         this.reqType = this.user.username + "'s " + 'Journey'
-        this.params.q = SpecialHashtg.concat('myjourney',this.user.username)
       }
-      endPoint = `api/v2/search`
+      endPoint = `api/v4/newsfeed/personal/` + this.user.guid
+      params = {
+        activity_type: 'myjourney',
+        offset: '',
+        limit: 12,
+        // rating: 2,
+        // q: ''
+      };
+      key = 'activity'
     }
-    this.client.get(endPoint, this.params)
+    this.client.get(endPoint, params)
       .then((data: any) => {
-        if (data && data.entities) {
-          this.entities = data.entities;
+        if (data && data[key]) {
+          this.entities = data[key];
         }
         this.inProgress = false;
       })

@@ -17,6 +17,10 @@
                   <a class="o-avatar__name" [routerLink]="['/', showTimez?.ownerObj?.username]">{{showTimez?.ownerObj?.name}}</a>
                   created a <a class="grey-dark f500" id="showtimez">#Showtimez</a></span>
               </div>
+              <a *ngIf="showTimez?.containerObj && showTimez?.containerObj.type == 'group'"
+              [routerLink]="['/groups/profile', showTimez?.containerObj.guid]" class="mdl-color-text--blue-grey-300">
+              <strong id="activity-owner-container-name">Posted in "{{showTimez?.containerObj.name}}"</strong>
+              </a>
               <div class="grey m-l-8 o-posts-tym" *ngIf="showTimez?.time_created">
                 <span>{{showTimez?.time_created * 1000 | date:'medium'}}</span>
                 <!-- <span class="o-posts-public-private"><i class="icon-public"></i></span> -->
@@ -26,10 +30,10 @@
               <button type="button" class="btn btn-primary btn-sm btn-boost" *ngIf="session.getLoggedInUser().guid == showTimez?.owner_guid" 
                 (click)="showBoost()" id="showtimez-boost">Boost</button>
               <a class="head-action__link" (click)="togglePin()" id="showtimez-bookmark">
-                <m-tooltip icon="turned_in" *ngIf="showTimez?.bookmark">
+                <m-tooltip icon="turned_in" name="turned_in" *ngIf="showTimez?.bookmark">
                   Bookmarked
                 </m-tooltip>
-                <m-tooltip *ngIf="!showTimez?.bookmark" icon="turned_in_not">
+                <m-tooltip *ngIf="!showTimez?.bookmark" name="turned_in_not" icon="turned_in_not">
                   Bookmark
                 </m-tooltip>
               </a>

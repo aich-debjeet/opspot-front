@@ -22,19 +22,19 @@
         </ng-template> -->
         <div class="o-community-card-dis text-sm word-br">{{entity?.brief_description | truncate:[65, '...']}}</div>
         <div class="o-community-card-action">
-          <opspot-groups-join-button *ngIf="(!entity['is:member'] && entity.membership === 2) && !entity['is:awaiting']"
+          <!-- <opspot-groups-join-button *ngIf="(!entity['is:member'] && entity.membership === 2) && !entity['is:awaiting']"
             [group]="entity">
-          </opspot-groups-join-button>
-          <button type="button" id="tile-join-button" *ngIf="(!entity['is:member'] && entity.membership !== 2) && !entity['is:awaiting']"
-            class="btn btn-primary btn-sm" (click)='trigger(entity)'>Join</button>
-          <button *ngIf="entity['is:member']" id="tile-open-button" class="btn btn-primary btn-sm" i18n="@@GROUPS__TILE__OPEN_ACTION"
+          </opspot-groups-join-button> -->
+          <button type="button" id="tile-join-button"
+            class="btn btn-primary btn-sm" (click)='trigger(entity)'>Explore</button>
+          <!-- <button *ngIf="entity['is:member']" id="tile-open-button" class="btn btn-primary btn-sm" i18n="@@GROUPS__TILE__OPEN_ACTION"
             (click)='trigger(entity)'>
             Open
-          </button>
-          <button class="btn btn-primary btn-sm" id="tile-cancel-button" *ngIf="entity['is:awaiting']" (click)="cancelRequest()"
+          </button> -->
+          <!-- <button class="btn btn-primary btn-sm" id="tile-cancel-button" *ngIf="entity['is:awaiting']" (click)="cancelRequest()"
             i18n="@@GROUPS__TILE__OPEN_ACTION">
             Cancel
-          </button>
+          </button> -->
         </div>
       </div>
     </div>

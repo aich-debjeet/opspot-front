@@ -26,7 +26,7 @@
             </div>
             <div class="o-prof-edit-dob">
                 <div class="form-group w-sm">
-                    <input type="text" class="form-control form-control-lg" name="dob" [(ngModel)]="model.dob" [bsValue]="model.dob" bsDatepicker placement="bottom" [bsConfig]="bsConfig">
+                    <input type="text" id="about-dob" class="form-control form-control-lg" name="dob" [(ngModel)]="model.dob" [bsValue]="model.dob" bsDatepicker placement="bottom" [bsConfig]="bsConfig">
                 </div>
                 <!-- <div class="pos">
                     <div class="o-prof-edit-privacy hidden-desktop"
@@ -69,7 +69,7 @@
             <div class="form-group w-xl">
                 <label>Languages Known</label>
                 <!-- <input type="text" class="form-control form-control-lg" placeholder=""> -->
-                <tag-input [maxItems]=5 required style="border:1px solid #959595; border-radius:4px " [(ngModel)]='model.languages' #languages="ngModel" required name="languages" theme='minimal'>
+                <tag-input [maxItems]=5 required style="border:1px solid #959595; border-radius:4px " id="about-language" [(ngModel)]='model.languages' #languages="ngModel" required name="languages" theme='minimal'>
                     <tag-input-dropdown [minimumTextLength]=3 [autocompleteItems]="data">
                     </tag-input-dropdown>
                 </tag-input>
@@ -87,20 +87,20 @@
                     <input maxlength="5" id="about-component-weight" [(ngModel)]="model.weight" name="weight" class="form-control form-control-lg" type="number">
                 </div>
                 <div class="pos">
-                    <div class="o-prof-edit-privacy"
+                    <div class="o-prof-edit-privacy" id="about-privacy"
                         (click)="toggleHeight = !toggleHeight">
                         <div [ngSwitch]="privacy.height">
                             <div *ngSwitchCase="'Follower'">
-                            <div class="text-md primary w-label100">Visible to people who follows you</div>
+                            <div class="text-md primary w-label100"id="about-privacy-people-who-follows-you">Visible to people who follows you</div>
                             </div>
                             <div *ngSwitchCase="'Following'">
-                            <div class="text-md primary w-label100">Visible to people you follow</div>
+                            <div class="text-md primary w-label100" id="about-privacy-people-you-follow">Visible to people you follow</div>
                             </div>
                             <div *ngSwitchCase="'Everyone'">
-                            <div class="text-md primary w-label100">Visible to everyone</div>
+                            <div class="text-md primary w-label100" id="about-privacy-visible-everyone">Visible to everyone</div>
                             </div>
                             <div *ngSwitchCase="'Onlyme'">
-                            <div class="text-md primary w-label100">Visible to only me</div>
+                            <div class="text-md primary w-label100" id="about-privacy-visible-only-me">Visible to only me</div>
                             </div>
                         </div>
                     </div>

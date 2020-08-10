@@ -18,6 +18,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo Opspot\Core\Config::_()->get('cdn_assets_url') ?>assets/logos/ops-16x16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="google-site-verification" content="4e3-srEQdyDsdQQS2UO4dh9TTFgN6FioY-vmKmUxJhs">
+    <meta name="google-site-verification" content="t9kPyE7765gdvY_fy3oxN4H9MzMDU_PRqYmBVfcytx0" />
+    <!--fb instant articles-->
+	  <meta property="fb:pages" content="322930081558507" />
     
     <?php
       foreach($meta as $name => $content){
@@ -61,15 +64,16 @@
       })(window, document, 'script', 'dataLayer', 'GTM-NNB24M3');
     </script>
 		<!-- End Google Tag Manager -->
-	
-	
-		<!-- Google Tag Manager (noscript) -->
-		<noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NNB24M3" height="0" width="0"
-        style="display:none;visibility:hidden">
-      </iframe>
-    </noscript>
-		<!-- End Google Tag Manager (noscript) -->
+	<!-- Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+					new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-WPNT8F6');</script>
+	<!-- End Google Tag Manager -->
 
   </head>
   <body>
@@ -89,6 +93,14 @@
         </m-app>
     <?php endif; ?>
 
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NNB24M3" height="0" width="0"
+          style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WPNT8F6"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
 
       <script>
       // Fixes undefined module function in SystemJS bundle

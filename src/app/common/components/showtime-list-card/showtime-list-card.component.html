@@ -1,4 +1,4 @@
-<div>
+<div id="event-widget">
     <ul class="o-trending-post">
         <li class="o-trending-post__item">
             <a [routerLink]="['/event', event?.guid]">
@@ -9,9 +9,9 @@
                     <img *ngIf="event?.custom_data.length == 0" [src]="opspot.cdn_assets_url + 'assets/ops_icon.png'">
                 </div>
                 <div class="o-trending-post__info">
-                    <div class="text-md f500 elipse elipse--w-130">{{event?.title}}</div>
+                    <div class="text-md f500 elipse elipse--w-130" id="event_widget_event_title">{{event?.title}}</div>
                     <div class="text-sm m-t-6 elipse elipse--w-160">
-                        <span class="o-event-date">{{event?.start_time_date | date:'MMM d'}}</span>{{event?.location}}
+                        <span class="o-event-date" id="event_widget_event-location">{{event?.start_time_date | date:'MMM d'}}</span>{{event?.location}}
                     </div>
                 </div>
             </a>

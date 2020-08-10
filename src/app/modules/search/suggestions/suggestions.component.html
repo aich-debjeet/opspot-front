@@ -1,62 +1,66 @@
 <style>
-.userSuggestion{
-  position: relative;
-  top: -12px;
-}
-.imgHeight{
-  height: 40px;
-  width: 40px;
-}
+  .userSuggestion {
+    position: relative;
+    top: -12px;
+  }
+
+  .imgHeight {
+    height: 40px;
+    width: 40px;
+  }
 </style>
 
-<div class="m-search-bar-suggestions-list" [hidden]="disabled || !active" (mousedown)="mousedown($event)" *ngIf="session.isLoggedIn()">
+<div class="m-search-bar-suggestions-list" id="suggestion-search_list" [hidden]="disabled || !active"
+  (mousedown)="mousedown($event)" *ngIf="session.isLoggedIn()">
   <ng-container *ngIf="!q">
     <ng-container *ngFor="let suggestion of recent">
-      <a class="m-search-bar-suggestions-suggestion"
-        *ngIf="suggestion.type == 'user'"
+      <a class="m-search-bar-suggestions-suggestion" *ngIf="suggestion.type == 'user'"
         [routerLink]="['/', suggestion.username]">
-        <img src="icon/{{suggestion.guid}}/" class="imgHeight"/> <span class="userSuggestion">@{{suggestion.username}}</span>
+        <img src="icon/{{suggestion.guid}}/" class="imgHeight" /> <span class="userSuggestion"
+          id="suggestion-username">@{{suggestion.username}}</span>
       </a>
-      <a class="m-search-bar-suggestions-suggestion"
-        *ngIf="suggestion.type == 'group'"
-        [routerLink]="['/groups/profile/', suggestion.guid]">
-        <img src="fs/v1/avatars/{{suggestion.guid}}/" class="imgHeight" /> {{suggestion.name}}
+      <a class="m-search-bar-suggestions-suggestion" *ngIf="suggestion.type == 'group'"
+        [routerLink]="['/groups',suggestion.name, 'profile', suggestion.guid]">
+        <img src="fs/v1/avatars/{{suggestion.guid}}/" class="imgHeight" id="suggestion-name" /> {{suggestion.name}}
       </a>
     </ng-container>
   </ng-container>
 
   <ng-container *ngIf="q">
-    <a class="m-search-bar-suggestions-suggestion"
-      *ngFor="let suggestion of suggestions"
+    <a class="m-search-bar-suggestions-suggestion" *ngFor="let suggestion of suggestions"
       [routerLink]="['/', suggestion.username]">
-      <img src="icon/{{suggestion.guid}}/" class="imgHeight"/> <span class="userSuggestion">@{{suggestion.username}}</span>
+      <img src="icon/{{suggestion.guid}}/" class="imgHeight" /> <span class="userSuggestion"
+        id="suggestion-username1">@{{suggestion.username}}</span>
     </a>
   </ng-container>
 
   <ng-container *ngIf="q && currentContext">
     <a class="m-search-bar-suggestions-suggestion m-search-bar-suggestions-context" *ngIf="currentContext.entity"
-      [routerLink]="[ '/search', { q: q, ref: 'top-suggestion-id', type: currentContext.product, id: currentContext.entity.id } ]"
-    >
+      [routerLink]="[ '/search', { q: q, ref: 'top-suggestion-id', type: currentContext.product, id: currentContext.entity.id } ]">
       <b i18n="@@SEARCH_CONTEXT_COLON">Search {{ currentContext.entity.label }}:</b> <span>{{ q }}</span>
     </a>
 
     <a class="m-search-bar-suggestions-suggestion m-search-bar-suggestions-context" *ngIf="currentContext.product"
-      [routerLink]="[ '/search', { q: q, ref: 'top-suggestion', type: currentContext.product } ]"
-    >
+      [routerLink]="[ '/search', { q: q, ref: 'top-suggestion', type: currentContext.product } ]">
       <b i18n="@@SEARCH_CONTEXT_COLON">Search {{ currentContext.label }}:</b> <span>{{ q }}</span>
     </a>
   </ng-container>
 
-  <a class="m-search-bar-suggestions-suggestion m-search-bar-suggestions-context" *ngIf="q"
-    [routerLink]="[ '/search', { q: q, ref: 'top' } ]"
-  >
+  <a class="m-search-bar-suggestions-suggestion m-search-bar-suggestions-context"
+    style="display: flex; flex-direction: row;" *ngIf="q" [routerLink]="[ '/search', { q: q, ref: 'top' } ]">
     <b i18n="@@SEARCH__SUGGESTIONS__OPSPOT_CONTEXT_LABEL">Search One Page Spotlight:</b> <span>{{ q }}</span>
   </a>
 
-  <a class="m-search-bar-suggestions-suggestion m-search-bar-suggestions-context" *ngIf="q && pediaAutocomplete?.length > 0"
-    [href]="pediaAutocomplete[0]?.uri" target="_blank"
-  >
-    <b>OPS Pedia Result:</b>
-    <span>{{pediaAutocomplete[0].description}}</span>
-  </a>
+  <div *ngIf="q && pediaAutocomplete?.length > 0">
+    <a class="m-search-bar-suggestions-suggestion m-search-bar-suggestions-context"
+      style="display: flex; flex-direction: row;" *ngFor="let pedia of pediaAutocomplete">
+      <div class="search-title" style="width:25%">
+        <b>OPS Pedia Result:</b>
+      </div>
+      <div class="search-title-result">
+        <span>{{pedia.title}}</span><br>
+        <span>{{pedia.summary}}</span>
+      </div>
+    </a>
+  </div>
 </div>

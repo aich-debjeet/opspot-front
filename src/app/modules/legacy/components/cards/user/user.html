@@ -1,21 +1,35 @@
 <div [ngSwitch]="cardType">
 
-    <div *ngSwitchCase="'user2'" class="o-card o-suggestion float-left slide">
+    <div *ngSwitchCase="'user2'" class="o-card o-suggestion float-left slide" style="width: 100% !important; margin: 0px !important;">
         <div class="o-suggestion__top-bar">
-            <!-- <i class="material-icons o-fontRemove close-btn" (click)="remove()">close</i> -->
+            <!-- <i class="material-icons o-fontRemove close-btn" (click)="removeUser()">close</i> -->
         </div>
         <!-- <a [routerLink]="['/', user?.username]" class="demo"></a> -->
         <div class="o-suggestion__avatar" id="suggested_user_profile_image" [routerLink]="['/', user?.username]"
             [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + user?.guid + ')'" alt="">
         </div>
-        <div class="o-suggestion__name caption-bold" id="suggested_user_profile_name" [routerLink]="['/', user?.username]">{{ user?.name }}</div>
-        <div class="text-md grey" id="suggested_user_username">@{{ user?.username }}</div>
+        <div class="o-suggestion__name caption-bold" id="suggested_user_profile_name" [routerLink]="['/', user?.username]">{{ user?.name | truncate:[15, '...'] }}</div>
+        <div class="text-md grey mr-bt" id="suggested_user_username">@{{ user?.username | truncate:[15, '...'] }}</div>
+        <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
+        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid"></opspot-button-subscribe>
+    </div>
+    <div *ngSwitchCase="'user3'" class="o-card o-suggestion float-left">
+        <div class="o-suggestion__top-bar">
+            <!-- <i class="material-icons o-fontRemove close-btn" (click)="removeUser()">close</i> -->
+            <div class="close" (click)="removeUser(user)"><i class="icon-x"></i></div>
+        </div>
+        <!-- <a [routerLink]="['/', user?.username]" class="demo"></a> -->
+        <div class="o-suggestion__avatar" id="suggested_user_profile_image" [routerLink]="['/', user?.username]"
+            [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + user?.guid + '/medium/' + user.icontime + ')'" alt="">
+        </div>
+        <div class="o-suggestion__name caption-bold" id="suggested_user_profile_name" [routerLink]="['/', user?.username]">{{ user?.name | truncate:[15, '...'] }}</div>
+        <div class="text-md grey" id="suggested_user_username">@{{ user?.username | truncate:[15, '...'] }}</div>
         <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
         <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid"></opspot-button-subscribe>
     </div>
 
     <div *ngSwitchCase="'portfolio'">
-        <div class="o-prof-info">
+        <div class="o-prof-info" id="user_profile_widget">
             <a [routerLink]="['/', user.username]">
                 <div class="o-avatar-lg" id="user-profile-image">
                     <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" />
@@ -192,5 +206,8 @@
 .o-prof-activity a {
     flex: 1;
     text-align: center;
+}
+.mr-bt {
+    margin-bottom: 5px;
 }
 </style>

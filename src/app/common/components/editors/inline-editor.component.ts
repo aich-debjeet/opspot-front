@@ -59,7 +59,7 @@ export class InlineEditorComponent implements ControlValueAccessor, OnInit, OnDe
       'videos': `<i class="icon-video"></i>`,
       'audio': `<i class="icon-mic"></i>`,
     },
-    placeholder: 'Upload your video/audio or external URL link and press Enter',
+    placeholder: 'Add external URL link and press Enter',
     uploadFunction: this.attachment.uploadMultiple.bind(this.attachment),
     updateBlog: this.keyUp.bind(this)
   });
@@ -208,11 +208,11 @@ console.log(this.host.nativeElement, options)
   }
 
   keyUp(e) {
-    clearTimeout(this.typingTimer)
+    // clearTimeout(this.typingTimer)
     if(this.host.nativeElement.innerText){
-      this.typingTimer = setTimeout(() => {
+    //   this.typingTimer = setTimeout(() => {
         this.draft.emit()
-      }, this.doneTypingInterval);
+    //   }, this.doneTypingInterval);
     }
   }
 }

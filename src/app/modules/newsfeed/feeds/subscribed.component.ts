@@ -15,12 +15,13 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   selector: 'm-newsfeed--subscribed',
-  templateUrl: 'subscribed.component.html'
+  templateUrl: 'subscribed.component.html',
+  styleUrls: ['subscribed.component.scss']
 })
 
 export class NewsfeedSubscribedComponent {
 
-  newsfeed: Array<Object>;
+  newsfeed: Array<Object> = [];
   prepended: Array<any> = [];
   offset: string = '';
   showBoostRotator: boolean = true;
@@ -43,6 +44,8 @@ export class NewsfeedSubscribedComponent {
 
   paramsSubscription: Subscription;
 
+  filter: any = '';
+
   @ViewChild('poster') private poster: PosterComponent;
 
   constructor(
@@ -61,7 +64,7 @@ export class NewsfeedSubscribedComponent {
   }
 
   ngOnInit() {
-    this.load();
+    this.load(true, 'all');
     this.opspot = window.Opspot;
 
     this.paramsSubscription = this.route.params.subscribe(params => {
@@ -90,31 +93,39 @@ export class NewsfeedSubscribedComponent {
   /**
    * Load newsfeed
    */
-  load(refresh: boolean = false) {
+  load(refresh: boolean = false, filter?: string) {
+    this.filter = filter
     if (this.inProgress)
       return false;
 
     if (refresh) {
       this.offset = '';
+      this.moreData = true;
+      this.newsfeed = [];
+      this.prepended = [];
     }
-
+    
     this.inProgress = true;
 
-    this.client.get('api/v1/newsfeed', { limit: 12, offset: this.offset }, { cache: true })
+    this.client.get('api/v4/newsfeed', { activity_type: this.filter, limit: 12, offset: this.offset })
       .then((data: OpspotActivityObject) => {
-        // console.log(data)
         if (!data.activity) {
+
           this.moreData = false;
           this.inProgress = false;
+          // this.newsfeed = [];
           return false;
         }
         if (this.newsfeed && !refresh) {
           this.newsfeed = this.newsfeed.concat(data.activity);
         } else {
+
           this.newsfeed = data.activity;
         }
         this.offset = data['load-next'];
+
         this.inProgress = false;
+        this.filter = filter
       })
       .catch((e) => {
         this.inProgress = false;
@@ -167,6 +178,14 @@ export class NewsfeedSubscribedComponent {
 
     return true;
   }
+
+  isActive(filter: string) {
+    if (this.filter === filter) {
+      return true;
+    }
+    return false;
+  }
+
 
 }
 

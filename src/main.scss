@@ -2227,6 +2227,10 @@ select.form-control-lg:not([size]):not([multiple]),
   src: local("Roboto Bold"), local("Roboto-Bold"), url("https://ops.doesntexist.com/assets/fonts/roboto/medium-latin.woff") format("woff");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 
+  @font-face {
+    font-family: 'Material Icons';
+    font-display: block;
+  }
 h1, h2, h3, h4 {
   font-family: 'Roboto';
   -webkit-font-smoothing: antialiased;
@@ -2700,7 +2704,8 @@ opspot-button {
 
 opspot-card {
   display: block;
-  background: #ffffff; }
+  // background: #ffffff; 
+}
 
 m-categories--selected {
   display: -webkit-flex;
@@ -5822,6 +5827,22 @@ m-topbar {
   left: 0;
   padding: 42px 16px 16px;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 50%); }
+  .m-read-less--button {
+    text-align: left;
+    position: absolute; 
+    bottom: 0; 
+    width: 100%; 
+    left: 0; 
+    padding: 42px 16px 0px;
+  }
+  .m-read-less--button > span {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Roboto';
+  }
   .m-read-more--button > span {
     font-weight: 800;
     text-transform: uppercase;
@@ -7878,7 +7899,7 @@ opspot-blog-edit {
     margin-bottom: 0.5em;
     font-weight: 400;
     font-style: normal;
-    font-size: 21px;
+    font-size: 40px;
     line-height: 1.58;
     letter-spacing: 0.5px;
     letter-spacing: -.003em;
@@ -12160,6 +12181,10 @@ m-groups--profile .m-group__grid header {
     .m-overlay-modal--hashtag-selector .m-overlay-modal--close i {
       font-size: 24px !important; }
 
+.m-overlay-modal--list-display {
+  padding: 0px;
+  background-color: white;
+}
 .m-overlay-modal--report {
   padding: 0px;
   background-color: white; }
@@ -14034,7 +14059,7 @@ opspot-activity.mdl-card, opspot-activity, opspot-activity-preview {
       margin: 8px 0;
       padding: 0;
       line-height: 1.25;
-      word-break: break-all; }
+      word-break: break-word; }
     opspot-activity.mdl-card .m-rich-embed .meta p.m-url, opspot-activity .m-rich-embed .meta p.m-url, opspot-activity-preview .m-rich-embed .meta p.m-url {
       white-space: nowrap;
       max-width: 240px; }
@@ -17699,7 +17724,7 @@ m-notifications--topbar-toggle .counter {
   cursor: default; }
 
 m-notifications--topbar-toggle .m-notifications--topbar-toggle--icon--active::after {
-  background: #4690DF;
+  background: #FF0000;
   border-radius: 50%;
   display: block;
   height: 8px;
@@ -23613,7 +23638,8 @@ input[type="number"] {
   background-color: green !important; }
 
 .mdl-card {
-  z-index: initial; }
+  z-index: initial;
+  margin: 0px 6px 6px 0px; }
   .mdl-card .mdl-card__supporting-text {
     -webkit-font-smoothing: antialiased; }
   .mdl-card:not(.mdl-cell) {

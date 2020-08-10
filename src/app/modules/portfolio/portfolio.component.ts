@@ -24,14 +24,16 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   entities: Array<Object>;
   requestParams = {
     // TODO @abhijeet check for all valid request params
-    hashtags: '',
-    period: '12h',
-    all: '',
-    query: this.q,
-    nsfw: '',
-    sync: '1',
-    as_activities: '1',
-    from_timestamp: '',
+    // hashtags: '',
+    // period: '12h',
+    // purpose: 'portfolio',
+    // all: '',
+    // query: this.q,
+    // nsfw: '',
+    // sync: '1',
+    // as_activities: '1',
+    // from_timestamp: '',
+    activity_type: 'portfolio',
     limit: 24,
     offset: this.offset
   };
@@ -52,7 +54,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe((params) => {
       this.username = params['username'];
-      this.requestParams.hashtags = SpecialHashtg.concat('portfolio', params['username'])
+      // this.requestParams.hashtags = SpecialHashtg.concat('portfolio', params['username'])
       this.loadProfileInfo();
     });
   }
@@ -96,18 +98,19 @@ export class PortfolioComponent implements OnInit, OnDestroy {
       this.requestParams.offset = '';
     }
     this.inProgress = true;
-    this.client.get(`api/v2/feeds/global/top/${this.type}`, this.requestParams)
+    // this.client.get(`api/v2/feeds/global/top/${this.type}`, this.requestParams)
+    this.client.get(`api/v4/newsfeed/personal/` + this.channel.guid, this.requestParams)
       .then((data: any) => {
         const respData: any = data;
-        if (!respData.entities || respData.entities.length == 0) {
+        if (!respData.activity || respData.activity.length == 0) {
           this.moreData = false;
           this.inProgress = false;
           return false;
         }
         if (this.filteredArray && !refresh) {
-          this.filteredArray = this.entities = this.entities.concat(respData.entities);
+          this.filteredArray = this.entities = this.entities.concat(respData.activity);
         } else {
-          this.filteredArray = this.entities = respData.entities;
+          this.filteredArray = this.entities = respData.activity;
         }
         this.moreData = true;
 

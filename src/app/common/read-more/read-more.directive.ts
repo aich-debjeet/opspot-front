@@ -38,6 +38,12 @@ export class ReadMoreDirective {
     this.detectChanges();
   }
 
+  collapse(){
+    this._element.style.maxHeight = this.maxHeightAllowed + 'px';
+    this.expandable = true;
+    this.detectChanges();
+  }
+
   detectChanges() {
     this.cd.markForCheck();
     this.cd.detectChanges();

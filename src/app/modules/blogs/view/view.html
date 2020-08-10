@@ -130,7 +130,7 @@
         <h2 class="f500">{{blog.title}}</h2>
       </div>
       <!--title ends-->
-      <header *ngIf="blog" id="nsfw_media_post_blanket"
+      <header *ngIf="blog" id="nsfw_media_post_blanket" name="nsfw_media_post_blanket"
         [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(blog), 'm-mature-content-shown': attachment.isForcefullyShown(blog) }">
         <div class="m-mature-overlay" (click)="blog.mature_visibility = !blog.mature_visibility">
           <span class="m-mature-overlay-note">
@@ -149,7 +149,7 @@
         <div class="o-blog-inner-page-header">
           <div class="o-blog-inner-page-header__info">
             <a class="o-avatar">
-              <img src="{{opspot.cdn_url}}icon/{{blog.ownerObj.guid}}/">
+              <img [src]="opspot.cdn_url + 'icon/' + blog?.ownerObj?.guid + '/' + getOwnerIconTime()">
             </a>
             <!--avatar ends-->
             <div class="o-user-info">

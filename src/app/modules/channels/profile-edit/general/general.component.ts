@@ -1,8 +1,9 @@
-import { Component, OnInit,EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { TopbarHashtagsService } from '../../../hashtags/service/topbar.service';
 import { Client } from '../../../../services/api/client';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Session } from '../../../../services/session';
 
 @Component({
   selector: 'app-general',
@@ -18,22 +19,23 @@ export class GeneralComponent implements OnInit {
     fullName: '',
     skills: []
   };
-  inProgress:boolean = false;
+  inProgress: boolean = false;
   reqName: boolean = false;
-  
+
   @Output() updatePercentage: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private service: TopbarHashtagsService,
     private client: Client,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public session: Session,
   ) {
     this.load();
   }
 
   onSubmit(e) {
-    if(!e.valid){
+    if (!e.valid) {
       this.reqName = true;
       return;
     }
@@ -46,13 +48,15 @@ export class GeneralComponent implements OnInit {
         skills: skills ? skills : []
       }
     };
-    this.client.post('api/v1/entities/general_info', info).then((res:any) => {
+    this.client.post('api/v1/entities/general_info', info).then((res: any) => {
       // this.router.navigate(['/profile/about']);
       if (res.status === 'success' && res.entities == true) {
         this.client.get('api/v2/onboarding/progress').then((response: any) => {
           this.showSuccess();
           this.inProgress = false;
           this.updatePercentage.emit(response.rating);
+          const user = { ...window.Opspot.user, name: info.general_info.full_name }
+          this.session.login(user);
         });
       }
     }).catch((e) => {
@@ -102,7 +106,7 @@ export class GeneralComponent implements OnInit {
       timeOut: 3000
     });
   }
-  showFailure(){
+  showFailure() {
     this.toastr.error('Profile could not be updated', '', {
       timeOut: 3000
     });

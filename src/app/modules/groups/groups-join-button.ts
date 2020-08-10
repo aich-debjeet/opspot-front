@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { GroupsService } from './groups-service';
 import { Session } from '../../services/session';
 import { LoginReferrerService } from '../../services/login-referrer.service';
+import { OverlayModalService } from '../../services/ux/overlay-modal';
 
 @Component({
   selector: 'opspot-groups-join-button',
@@ -13,7 +14,8 @@ import { LoginReferrerService } from '../../services/login-referrer.service';
       *ngIf="!group['is:banned'] && !group['is:awaiting']
         && !group['is:invited'] && !group['is:member']"
         (click)="join()" i18n="@@GROUPS__JOIN_BUTTON__JOIN_ACTION">
-      <ng-container *ngIf="!inProgress">Join</ng-container>
+      <ng-container *ngIf="!inProgress && group.membership === 2">Join</ng-container>
+      <ng-container *ngIf="!inProgress && group.membership !== 2">Send Request</ng-container>
       <ng-container *ngIf="inProgress">Joining</ng-container>
     </button>
     <span *ngIf="group['is:invited'] &amp;&amp; !group['is:member']">
@@ -21,7 +23,7 @@ import { LoginReferrerService } from '../../services/login-referrer.service';
       <button class="m-btn m-btn--slim m-btn--action" id="group-decline" (click)="decline()" i18n="@@GROUPS__JOIN_BUTTON__DECLINE_ACTION">Decline</button>
     </span>
     <button class="btn btn-primary btn-sm" id="group-leave" *ngIf="group['is:member']" (click)="leave()" i18n="@@GROUPS__JOIN_BUTTON__LEAVE_ACTION">Leave</button>
-    <button class="btn btn-primary btn-sm" id="group-cancel" *ngIf="group['is:awaiting']" (click)="cancelRequest()" i18n="@@GROUPS__JOIN_BUTTON__CANCEL_REQ_ACTION">Cancel</button>
+    <button class="btn btn-primary btn-sm" id="group-cancel" *ngIf="group['is:awaiting']" (click)="cancelRequest()" i18n="@@GROUPS__JOIN_BUTTON__CANCEL_REQ_ACTION">Cancel Request</button>
     <m-modal-signup-on-action
       [open]="showModal"
       (closed)="join(); showModal = false;"
@@ -48,6 +50,7 @@ export class GroupsJoinButton {
     public service: GroupsService,
     private router: Router,
     private loginReferrer: LoginReferrerService,
+    private overlayModal: OverlayModalService
   ) {
     this.opspot = window.Opspot;
   }
@@ -80,7 +83,7 @@ export class GroupsJoinButton {
   join() {
     if (!this.session.isLoggedIn()) {
       //this.showModal = true;
-      this.loginReferrer.register(`/groups/profile/${this.group.guid}/feed?join=true`);
+      this.loginReferrer.register(`/groups/${this.group.name}/profile/${this.group.guid}/feed?join=true`);
       this.router.navigate(['/login']);
       return;
     }
@@ -97,6 +100,7 @@ export class GroupsJoinButton {
         }
         this.membership.next({});
         this.group['is:awaiting'] = true;
+        this.overlayModal.dismiss();
       })
       .catch(e => {
         let error = e.error;

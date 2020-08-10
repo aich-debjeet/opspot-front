@@ -29,19 +29,20 @@
                 </div>
                 <div class="pos">
                     <div class=" o-prof-edit-privacy Eternity hidden-mob "
+                          id="contact-component-privacy"
                         (click)="toggleLocation=!toggleLocation">
                         <div [ngSwitch]="privacy.location">
                             <div *ngSwitchCase="'Follower'">
-                              <div class="text-md primary w-label100">Visible to people who follows you</div>
+                              <div class="text-md primary w-label100" id="contact-people-who-follows-you">Visible to people who follows you</div>
                             </div>
                             <div *ngSwitchCase="'Following'">
-                              <div class="text-md primary w-label100">Visible to people you follow</div>
+                              <div class="text-md primary w-label100" id="contact-people-you-follow">Visible to people you follow</div>
                             </div>
                             <div *ngSwitchCase="'Everyone'">
-                              <div class="text-md primary w-label100">Visible to everyone</div>
+                              <div class="text-md primary w-label100" id="contact-visible-to-everyone">Visible to everyone</div>
                             </div>
                             <div *ngSwitchCase="'Onlyme'">
-                              <div class="text-md primary w-label100">Visible to only me</div>
+                              <div class="text-md primary w-label100" id="contact-visible-only-me">Visible to only me</div>
                             </div>
                         </div>
                     </div>
@@ -58,16 +59,16 @@
                     id="contact-privacy-email-everyone" (click)="toggleEmail=!toggleEmail">
                     <div [ngSwitch]="privacy.email">
                         <div *ngSwitchCase="'Follower'">
-                          <div class="text-md primary w-label100">Visible to people who follows you</div>
+                          <div class="text-md primary w-label100" id="contact-privacy-email-follows-you">Visible to people who follows you</div>
                         </div>
                         <div *ngSwitchCase="'Following'">
-                          <div class="text-md primary w-label100">Visible to people you follow</div>
+                          <div class="text-md primary w-label100" id="contact-privacy-email-you-follow">Visible to people you follow</div>
                         </div>
                         <div *ngSwitchCase="'Everyone'">
-                          <div class="text-md primary w-label100">Visible to everyone</div>
+                          <div class="text-md primary w-label100" id="contact-privacy-email-to-everyone">Visible to everyone</div>
                         </div>
                         <div *ngSwitchCase="'Onlyme'">
-                          <div class="text-md primary w-label100">Visible to only me</div>
+                          <div class="text-md primary w-label100" id="contact-privacy-email-only-me">Visible to only me</div>
                         </div>
                     </div>
                 </div>
@@ -83,16 +84,16 @@
                         id="contact-email-privacy">
                         <div [ngSwitch]="privacy.email">
                             <div *ngSwitchCase="'Follower'">
-                              <div class="text-md primary w-label100">Visible to people who follows you</div>
+                              <div class="text-md primary w-label100" id="contact-email-privacy-who-follows-you">Visible to people who follows you</div>
                             </div>
                             <div *ngSwitchCase="'Following'">
-                              <div class="text-md primary w-label100">Visible to people you follow</div>
+                              <div class="text-md primary w-label100" id="contact-email-privacy-you-follow">Visible to people you follow</div>
                             </div>
                             <div *ngSwitchCase="'Everyone'">
-                              <div class="text-md primary w-label100">Visible to everyone</div>
+                              <div class="text-md primary w-label100" id="contact-email-privacy-to-everyone">Visible to everyone</div>
                             </div>
                             <div *ngSwitchCase="'Onlyme'">
-                              <div class="text-md primary w-label100">Visible to only me</div>
+                              <div class="text-md primary w-label100" id="contact-email-privacy-to-only-me">Visible to only me</div>
                             </div>
                         </div>
                     </div>
@@ -108,16 +109,16 @@
                     id="contact-privacy-phone-everyone" (click)="togglePhone=!togglePhone">Visible to {{privacy.phone}}
                     <div [ngSwitch]="privacy.phone">
                         <div *ngSwitchCase="'Follower'">
-                          <div class="text-md primary w-label100">Visible to people who follows you</div>
+                          <div class="text-md primary w-label100" id="contact-privacy-phone-visible-to-who-follows-you">Visible to people who follows you</div>
                         </div>
                         <div *ngSwitchCase="'Following'">
-                          <div class="text-md primary w-label100">Visible to people you follow</div>
+                          <div class="text-md primary w-label100" id="contact-privacy-phone-visible-to-you-follow">Visible to people you follow</div>
                         </div>
                         <div *ngSwitchCase="'Everyone'">
-                          <div class="text-md primary w-label100">Visible to everyone</div>
+                          <div class="text-md primary w-label100" id="contact-privacy-phone-visible-everyone">Visible to everyone</div>
                         </div>
                         <div *ngSwitchCase="'Onlyme'">
-                          <div class="text-md primary w-label100">Visible to only me</div>
+                          <div class="text-md primary w-label100" id="contact-privacy-phone-visible-to-only-me">Visible to only me</div>
                         </div>
                     </div>
                 </div>
@@ -138,16 +139,16 @@
                         (click)="togglePhone=!togglePhone">
                         <div [ngSwitch]="privacy.phone">
                             <div *ngSwitchCase="'Follower'">
-                              <div class="text-md primary w-label100">Visible to people who follows you</div>
+                              <div class="text-md primary w-label100" id="contact-phone-privacy-visible-to-people-who-follows-you">Visible to people who follows you</div>
                             </div>
                             <div *ngSwitchCase="'Following'">
-                              <div class="text-md primary w-label100">Visible to people you follow</div>
+                              <div class="text-md primary w-label100" id="contact-phone-privacy-visible-to-people-you-follow">Visible to people you follow</div>
                             </div>
                             <div *ngSwitchCase="'Everyone'">
-                              <div class="text-md primary w-label100">Visible to everyone</div>
+                              <div class="text-md primary w-label100" id="contact-phone-privacy-visible-to-everyone">Visible to everyone</div>
                             </div>
                             <div *ngSwitchCase="'Onlyme'">
-                              <div class="text-md primary w-label100">Visible to only me</div>
+                              <div class="text-md primary w-label100" id="contact-phone-privacy-visible-to-only-me">Visible to only me</div>
                             </div>
                         </div>
                     </div>
@@ -188,16 +189,16 @@
                     <div class="o-prof-edit-privacy hidden-mob" (click)="toggleWebsite=!toggleWebsite">
                         <div [ngSwitch]="privacy.website">
                             <div *ngSwitchCase="'Follower'">
-                              <div class="text-md primary w-label100">Visible to people who follows you</div>
+                              <div class="text-md primary w-label100" id="contact-website-who-follows-you">Visible to people who follows you</div>
                             </div>
                             <div *ngSwitchCase="'Following'">
-                              <div class="text-md primary w-label100">Visible to people you follow</div>
+                              <div class="text-md primary w-label100" id="contact-website-you-follow">Visible to people you follow</div>
                             </div>
                             <div *ngSwitchCase="'Everyone'">
-                              <div class="text-md primary w-label100">Visible to everyone</div>
+                              <div class="text-md primary w-label100" id="contact-website-to-everyone">Visible to everyone</div>
                             </div>
                             <div *ngSwitchCase="'Onlyme'">
-                              <div class="text-md primary w-label100">Visible to only me</div>
+                              <div class="text-md primary w-label100" id="contact-website-only-me">Visible to only me</div>
                             </div>
                         </div>
                     </div>
