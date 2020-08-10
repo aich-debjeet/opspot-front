@@ -97,6 +97,7 @@ export class ChannelFilterComponent {
     this.client
       .get(`api/v2/feeds/container/${this.user.guid}/${this.filter}`, params)
       .then((data: OpspotActivityObject) => {
+      
         if (!data.entities) {
           this.moreData = false;
           this.inProgress = false;
