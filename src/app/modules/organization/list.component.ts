@@ -33,6 +33,10 @@ export class OrganizationListComponent {
   showMyCommunities: boolean = false;
   organization  = "";
   memberOrganizations: Array<any> = [];
+  offset2: string = '';
+  moreData2: boolean = true;
+
+
 
 
 
@@ -169,44 +173,44 @@ export class OrganizationListComponent {
     //   return;
 
     if (refresh) {
-      this.offset = '';
+      this.offset2 = '';
       this.memberOrganizations = [];
-      this.moreData = true;
+      // this.moreData = true;
     }
 
     let endpoint, key;
     endpoint = `api/v3/organizations/member/` + this.ownerGuid;
     key = 'organizations';
 
-    this.inProgress = true;
+    // this.inProgress = true;
     this.client.get(endpoint, {
       limit: 12,
-      offset: this.offset,
+      offset: this.offset2,
       rating: this.rating
     })
       .then((response: OpspotGroupListResponse) => {
 
         if (!response[key] || response[key].length === 0) {
-          this.moreData = false;
-          this.inProgress = false;
+          this.moreData2 = false;
+          // this.inProgress = false;
         }
 
         if (refresh) {
           this.memberOrganizations = response[key];
         } else {
-          if (this.offset)
+          if (this.offset2)
             response[key].shift();
           this.memberOrganizations.push(...response[key]);
         }
 
-        this.offset = response['load-next'];
+        this.offset2 = response['load-next'];
         if (!this.offset) {
-          this.moreData = false;
+          this.moreData2 = false;
         }
-        this.inProgress = false;
+        // this.inProgress = false;
       })
       .catch((e) => {
-        this.inProgress = false;
+        // this.inProgress = false;
       });
   }
 
