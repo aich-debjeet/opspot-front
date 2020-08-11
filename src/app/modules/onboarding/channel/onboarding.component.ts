@@ -17,12 +17,12 @@ import { Modal } from "../../../common/components/modal/modal.component";
     >
       <ng-template dynamic-host></ng-template>
 
-      <div class="m-channelOnboarding__buttons" *ngIf="service.currentSlide > 0">
-        <div class="m-channelOnboarding__previous" (click)="service.previous()">
+      <div class="m-channelOnboarding__buttons" *ngIf="service.currentSlide >= 0">
+        <div class="m-channelOnboarding__previous" *ngIf="service.currentSlide > 0" (click)="service.previous()">
           Previous
         </div>
         <div class="m-channelOnboarding__next" *ngIf="service.currentSlide +1 < service.slides.length"
-             (click)="service.next()">
+             (click)="service.forwardSlide()">
           Next
         </div>
         <div class="m-channelOnboarding__next" *ngIf="service.currentSlide +1 === service.slides.length"

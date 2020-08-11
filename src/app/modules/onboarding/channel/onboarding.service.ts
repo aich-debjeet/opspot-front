@@ -13,12 +13,12 @@ export class ChannelOnboardingService {
 
   slides = [
     // WelcomeOnboardingComponent,
+    ProfessionsOnboardingComponent,
     TopicsOnboardingComponent,
     // SubscriptionsOnboardingComponent,
     // GroupsOnboardingComponent,
     // ChannelSetupOnboardingComponent,
     // TokenRewardsOnboardingComponent,
-    ProfessionsOnboardingComponent
 
   ];
 
@@ -62,7 +62,6 @@ export class ChannelOnboardingService {
 
     try {
       const response: any = await this.client.get('api/v2/onboarding/progress');
-     
       this.completedPercentage = response.completed_items.length * 100 / response.all_items.length;
       this.completedItems = response.completed_items;
       
@@ -111,6 +110,16 @@ export class ChannelOnboardingService {
     this.onSlideChanged.emit(this.currentSlide);
   }
 
+  forwardSlide (){
+    if (this.currentSlide + 1 >= this.slides.length) {
+      this.completed = true;
+      this.currentSlide = 0;
+      this.onClose.next(true);
+      return;
+    }
+    this.onSlideChanged.emit(this.currentSlide++);
+  }
+
   next() {
     if (this.currentSlide + 1 >= this.slides.length) {
       this.completed = true;
@@ -124,12 +133,10 @@ export class ChannelOnboardingService {
       this.currentSlide++;
     } else {
       // here we just go to the next slide with incomplete stuff
-      const i = this.currentSlide + 1;
+      const i = this.currentSlide ;
 
       this.pendingItems = [];
-
       const items: Array<string> = (<any>this.slides[i]).items;
-
       for (let item of items) {
         if (!this.completedItems.includes(item)) {
           this.pendingItems.push(item);
@@ -143,7 +150,6 @@ export class ChannelOnboardingService {
         this.next();
       }
     }
-
     this.onSlideChanged.emit(this.currentSlide);
   }
 
