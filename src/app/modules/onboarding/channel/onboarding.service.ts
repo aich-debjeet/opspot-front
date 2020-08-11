@@ -13,8 +13,8 @@ export class ChannelOnboardingService {
 
   slides = [
     // WelcomeOnboardingComponent,
-    ProfessionsOnboardingComponent,
     TopicsOnboardingComponent,
+    ProfessionsOnboardingComponent,
     // SubscriptionsOnboardingComponent,
     // GroupsOnboardingComponent,
     // ChannelSetupOnboardingComponent,
