@@ -15,10 +15,14 @@ export class GeneralComponent implements OnInit {
   activeUser = window.Opspot.user;
   items;
   data = [];
+  allProfessions = [];
   model = {
     fullName: '',
-    skills: []
+    skills: [],
   };
+  professionsModel = {
+    professions: []
+  }
   inProgress: boolean = false;
   reqName: boolean = false;
 
@@ -32,6 +36,7 @@ export class GeneralComponent implements OnInit {
     public session: Session,
   ) {
     this.load();
+    this.loadProfessions();
   }
 
   onSubmit(e) {
@@ -40,12 +45,24 @@ export class GeneralComponent implements OnInit {
       return;
     }
     this.reqName = false;
-    this.inProgress = true;
+    const professions = this.professionsModel.professions.map(el => el.value);
+    if(professions.length == 0) {
+      this.toastr.error("Please add ateast one profession");
+      return;
+    }
+    if(professions.length > 3){
+      this.toastr.error("You can add maximum three professions");
+      return;
+    }
     const skills = this.model.skills.map(el => el.value);
+
+    this.inProgress = true;
+    
     const info = {
       general_info: {
         full_name: this.model.fullName,
-        skills: skills ? skills : []
+        skills: skills ? skills : [],
+        professions: professions ? professions : []
       }
     };
     this.client.post('api/v1/entities/general_info', info).then((res: any) => {
@@ -74,6 +91,15 @@ export class GeneralComponent implements OnInit {
     });
   }
 
+  async loadProfessions() {
+    this.client.get('api/v4/professions/suggested', {
+      limit: 50
+    }).then((response: any) => {
+      if (response.professions)
+        this.allProfessions = response.professions;
+    })
+  }
+
   async getInfo() {
     let res = await this.client.get('api/v1/channel/me');
     res = res['channel'];
@@ -88,12 +114,24 @@ export class GeneralComponent implements OnInit {
         skills = skills.filter(el => !!el);
         this.skillsAlter(skills);
       }
+      if (res['general_info']['professions']) {
+        let professions = res['general_info']['professions'];
+        professions = professions.filter(el => !!el);
+        this.professionsAlter(professions);
+      }
+
     }
   }
 
   skillsAlter(skills: any[]) {
     for (let i = skills.length; i--;) {
       this.model.skills.push({ display: skills[i], value: skills[i] });
+    }
+  }
+
+  professionsAlter(professions: any[]) {
+    for (let i = professions.length; i--;) {
+      this.professionsModel.professions.push({ display: professions[i], value: professions[i] });
     }
   }
 
