@@ -16,12 +16,14 @@
         <div class="o-reg-proffession-body__list">
             <div id="proffessionTextarea" class="o-reg-proffession-textarea o-reg-proffession-textarea--flex">
                 <tag-input 
+                    [maxItems]=3
                     [(ngModel)]='model.professions'
                     name="skills"
                     theme='minimal'>
                 <tag-input-dropdown 
-                    [showDropdownIfEmpty]="true" 
-                    [minimumTextLength]=5 
+                    [showDropdownIfEmpty]="true"
+                    [keepOpen]="false"
+                    [minimumTextLength]=3
                     [limitItemsTo]=5
                     [autocompleteItems]="data"
                     [zIndex]=999999999999
