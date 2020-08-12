@@ -37,7 +37,6 @@ export class ContactComponent implements OnInit {
   phoneNumber;
 
   model: any = {
-    secondary_phone: []
   };
 
   showSecMobNumber = false;
@@ -111,8 +110,12 @@ export class ContactComponent implements OnInit {
     }
 
     let mobileArray = [];
-    if(this.model.secondary_phone)
-    mobileArray.push(this.model.secondary_phone)
+    let mobile;
+    if(this.model.secondary_phone){
+      mobile = this.removeOperators(this.model.secondary_phone.toString());
+      mobileArray.push(mobile);
+    }
+    
 
     this.inProgress = true;
     const contact = {
@@ -161,5 +164,9 @@ export class ContactComponent implements OnInit {
     // this.secondaryMobileNumbers.push({
     //   secMobileNumber: '',    
     // });
+  }
+
+  removeOperators(numb) {
+    return numb.replace(/\s/g, '').replace('+', '').replace('-', '');
   }
 }
