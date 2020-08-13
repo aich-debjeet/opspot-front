@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterContentInit,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Navigation as NavigationService } from '../../services/navigation';
@@ -9,11 +9,12 @@ import { LoginReferrerService } from '../../services/login-referrer.service';
 
 @Component({
   selector: 'm-homepage',
-  templateUrl: 'homepage.component.html'
+  templateUrl: 'homepage.component.html',
+  styleUrls: ['homepage.component.scss']
 })
 
-export class HomepageComponent {
-
+export class HomepageComponent implements OnInit,AfterContentInit {
+  tab: string ='home';
   videos: Array<any> = [];
   blogs: Array<any> = [];
   channels: Array<any> = [];
@@ -40,7 +41,7 @@ export class HomepageComponent {
     private loginReferrer: LoginReferrerService,
     public session: Session
   ) {
-    this.title.setTitle('Home');
+    this.title.setTitle('Saptarang');
     this.loadStream();
     
     if (this.session.isLoggedIn()) {
@@ -51,6 +52,27 @@ export class HomepageComponent {
     if (/iP(hone|od)/.test(window.navigator.userAgent)) {
       this.flags.canPlayInlineVideos = false;
     }
+  }
+  
+  ngOnInit() {
+  }
+
+  ngAfterContentInit() {
+    (() => {
+      let nav = document.getElementById('top-menu');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 1.5) {
+          nav.classList.add("sticky");
+        } else {
+          nav.classList.remove("sticky");
+        }
+      });
+    })()
+  }
+
+  scrollToElement($element, s:string): void {
+    this.tab= s;
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
   loadStream(refresh: boolean = false) {
