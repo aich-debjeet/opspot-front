@@ -13,7 +13,7 @@
         <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
         <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid; else emptyTag"></opspot-button-subscribe>
         <ng-template #emptyTag>
-            <span class="" style="background: transparent;">&nbsp;
+            <span class="" style="background: transparent; height: 22px;">&nbsp;
             </span>
         </ng-template>
     </div>
@@ -31,7 +31,7 @@
         <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
         <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid; else emptyTag"></opspot-button-subscribe>
         <ng-template #emptyTag>
-            <span class="" style="background: transparent;">&nbsp;
+            <span class="" style="background: transparent; height: 22px;">&nbsp;
             </span>
         </ng-template>
     </div>
