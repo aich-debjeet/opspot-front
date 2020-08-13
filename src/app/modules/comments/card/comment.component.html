@@ -11,7 +11,7 @@
     <div class="m-comment__bubble">
       <div class="m-commentBubble__username" id="comment-details">
         <a [routerLink]="['/', comment.ownerObj.username]">
-          <span title="{{comment.ownerObj.name}}" id="comment-name">{{comment.ownerObj.name}}</span>
+          <span title="{{comment.ownerObj.name}}" id="comment-name">{{comment.ownerObj.name | truncate:[20, '...']}}</span>
           <m-channel--badges class="m-channel--badges-activity" [user]="comment.ownerObj" badges="[ 'verified' ]"></m-channel--badges>
         </a>
       </div>
