@@ -158,6 +158,61 @@
 
             </div>
             <!--phone number end-->
+          
+            <div style="padding-top: 9px;" >
+            <div class="o-prof-edit-item__title" *ngIf="showSecMobNumber">Secondary Phone Number 
+              <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop" (click)="toggleSecondaryphone=!toggleSecondaryphone">
+                <div [ngSwitch]="privacy.secondary_phone">
+                  <div *ngSwitchCase="'Follower'">
+                    <div class="text-md primary w-label100">Visible to people who follows you</div>
+                  </div>
+                  <div *ngSwitchCase="'Following'">
+                    <div class="text-md primary w-label100">Visible to people you follow</div>
+                  </div>
+                  <div *ngSwitchCase="'Everyone'">
+                    <div class="text-md primary w-label100">Visible to everyone</div>
+                  </div>
+                  <div *ngSwitchCase="'Onlyme'">
+                    <div class="text-md primary w-label100">Visible to only me</div>
+                  </div>
+              </div>
+              </div><!--privacy end-->
+            </div>
+          </div>
+                <div class="o-prof-edit-single-item o-prof-edit-single-item--phone">
+                    <div class="o-phone" *ngIf="showSecMobNumber"> 
+                        <div class="o-phone__number">
+                            <div class="form-group w-sm">
+                              <input type="number" id="contact-phone-readonly" name="phoneNumber1" 
+                              class="form-control form-control-lg" [(ngModel)] = "model.secondary_phone">
+                            </div>
+                            <div class="pos">
+                            <div class="o-prof-edit-privacy text-md primary hidden-mob" (click)="toggleSecondaryphone=!toggleSecondaryphone">
+                              <div [ngSwitch]="privacy.secondary_phone">                              
+                              <div *ngSwitchCase="'Follower'">
+                                <div class="text-md primary w-label100">Visible to people who follows you</div>
+                              </div>
+                              <div *ngSwitchCase="'Following'">
+                                <div class="text-md primary w-label100">Visible to people you follow</div>
+                              </div>
+                              <div *ngSwitchCase="'Everyone'">
+                                <div class="text-md primary w-label100">Visible to everyone</div>
+                              </div>
+                              <div *ngSwitchCase="'Onlyme'">
+                                <div class="text-md primary w-label100">Visible to only me</div>
+                              </div>
+                            </div>
+                            </div>
+                            <app-user-privacy (privacyChange)="changePrivacy($event,'secondary_phone')" [inPrivacy]="privacy.secondary_phone"
+                              [toggleClass]="toggleSecondaryphone" class="privacy"></app-user-privacy>
+                          </div>
+                        </div>  
+                              <div class="text-sm grey">Please enter mobile number along with the country code. </div>
+
+
+                    </div>
+                    <button type="button" class="btn btn-outline-primary btn-block" (click)="addMobileNumbers()" *ngIf="!showSecMobNumber">Add Phone number</button>
+              </div><!--phone number end-->
 
             <div class="o-prof-edit-item__title">
                 Website <div class="o-prof-edit-privacy Eternity hidden-desktop"

@@ -2402,7 +2402,12 @@ blockquote:after {
  */
 html, body {
   font-family: 'Roboto', Helvetica, sans-serif !important; }
-
+m-blog-view p{
+  font-size: 20px !important;
+}
+app-blog-preview p{
+  font-size: 20px !important;
+}
 m-app .initial-loading {
   width: 100%; }
 
