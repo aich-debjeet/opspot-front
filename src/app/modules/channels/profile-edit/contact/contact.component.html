@@ -186,7 +186,7 @@
                               <input type="number" id="contact-phone-readonly" name="phoneNumber1" 
                               class="form-control form-control-lg" [(ngModel)] = "model.secondary_phone">
                             </div>
-                            <!-- <div class="pos"> -->
+                            <div class="pos">
                             <div class="o-prof-edit-privacy text-md primary hidden-mob" (click)="toggleSecondaryphone=!toggleSecondaryphone">
                               <div [ngSwitch]="privacy.secondary_phone">                              
                               <div *ngSwitchCase="'Follower'">
@@ -205,7 +205,7 @@
                             </div>
                             <app-user-privacy (privacyChange)="changePrivacy($event,'secondary_phone')" [inPrivacy]="privacy.secondary_phone"
                               [toggleClass]="toggleSecondaryphone" class="privacy"></app-user-privacy>
-                          <!-- </div> -->
+                          </div>
                         </div>  
                               <div class="text-sm grey">Please enter mobile number along with the country code. </div>
 
