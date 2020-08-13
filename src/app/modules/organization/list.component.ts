@@ -13,7 +13,8 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
 
 @Component({
   selector: 'm-organization--list',
-  templateUrl: 'list.component.html'
+  templateUrl: 'list.component.html',
+  styleUrls:['./list.components.scss']
 })
 
 export class OrganizationListComponent {
