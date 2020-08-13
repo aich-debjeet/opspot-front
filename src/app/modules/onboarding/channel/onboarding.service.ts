@@ -1,21 +1,25 @@
 // import { WelcomeOnboardingComponent } from './welcome/welcome.component';
 import { TopicsOnboardingComponent } from './topics/topics.component';
-// import { SubscriptionsOnboardingComponent } from './subscriptions/subscriptions.component';
+import { SubscriptionsOnboardingComponent } from './subscriptions/subscriptions.component';
 // import { ChannelSetupOnboardingComponent } from './channel/channel.component';
 // import { TokenRewardsOnboardingComponent } from './rewards/rewards.component';
 import { EventEmitter } from '@angular/core';
 import { Client } from '../../../services/api/client';
 import { Session } from '../../../services/session';
+import { ProfessionsOnboardingComponent } from './professions/professions.component';
+import { GroupsOnboardingComponent } from './groups/groups.component';
 
 export class ChannelOnboardingService {
 
   slides = [
     // WelcomeOnboardingComponent,
     TopicsOnboardingComponent,
+    ProfessionsOnboardingComponent,
     // SubscriptionsOnboardingComponent,
     // GroupsOnboardingComponent,
     // ChannelSetupOnboardingComponent,
     // TokenRewardsOnboardingComponent,
+
   ];
 
   currentSlide: number = 0;
@@ -39,8 +43,8 @@ export class ChannelOnboardingService {
   }
 
   constructor(
-      private client: Client,
-      private session: Session,
+    private client: Client,
+    private session: Session,
   ) {
     this.session.userEmitter.subscribe((v) => {
       if (!v) {
@@ -51,15 +55,16 @@ export class ChannelOnboardingService {
   }
 
   async checkProgress() {
+    
     if (!this.session.isLoggedIn()) {
       return;
     }
 
     try {
       const response: any = await this.client.get('api/v2/onboarding/progress');
-
       this.completedPercentage = response.completed_items.length * 100 / response.all_items.length;
       this.completedItems = response.completed_items;
+      
       this.showOnboarding = response.show_onboarding;
     } catch (e) {
       console.error(e);
@@ -105,6 +110,16 @@ export class ChannelOnboardingService {
     this.onSlideChanged.emit(this.currentSlide);
   }
 
+  forwardSlide (){
+    if (this.currentSlide + 1 >= this.slides.length) {
+      this.completed = true;
+      this.currentSlide = 0;
+      this.onClose.next(true);
+      return;
+    }
+    this.onSlideChanged.emit(this.currentSlide++);
+  }
+
   next() {
     if (this.currentSlide + 1 >= this.slides.length) {
       this.completed = true;
@@ -118,12 +133,10 @@ export class ChannelOnboardingService {
       this.currentSlide++;
     } else {
       // here we just go to the next slide with incomplete stuff
-      const i = this.currentSlide + 1;
+      const i = this.currentSlide ;
 
       this.pendingItems = [];
-
       const items: Array<string> = (<any>this.slides[i]).items;
-
       for (let item of items) {
         if (!this.completedItems.includes(item)) {
           this.pendingItems.push(item);
@@ -137,7 +150,6 @@ export class ChannelOnboardingService {
         this.next();
       }
     }
-
     this.onSlideChanged.emit(this.currentSlide);
   }
 

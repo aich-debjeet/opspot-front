@@ -84,8 +84,7 @@ export class ChannelFeedComponent {
     this.inProgress = true;
 
     params.offset = this.offset;
-    
-    this.client.get('api/v1/newsfeed/personal/' + this.user.guid, params, { cache: true })
+    this.client.get('api/v4/newsfeed/personal/' + this.user.guid, params, { cache: true })
       .then((data: OpspotActivityObject) => {
         if (!data.activity) {
           this.moreData = false;

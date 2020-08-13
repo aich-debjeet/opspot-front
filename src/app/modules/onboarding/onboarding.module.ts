@@ -23,6 +23,8 @@ import { TokenRewardsOnboardingComponent } from "./channel/rewards/rewards.compo
 import { Client } from "../../services/api/client";
 import { SuggestionsModule } from "../suggestions/suggestions.module";
 import { Session } from "../../services/session";
+import { ProfessionsOnboardingComponent } from './channel/professions/professions.component';
+import { TagInputModule } from 'ngx-chips';
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { Session } from "../../services/session";
     TokenOnboardingModule,
     MessengerModule,
     SuggestionsModule,
+    TagInputModule
   ],
   declarations: [
     OnboardingCardComponent,
@@ -47,6 +50,7 @@ import { Session } from "../../services/session";
     GroupsOnboardingComponent,
     ChannelSetupOnboardingComponent,
     TokenRewardsOnboardingComponent,
+    ProfessionsOnboardingComponent,
   ],
   providers: [
     OnboardingService,
@@ -71,6 +75,7 @@ import { Session } from "../../services/session";
     GroupsOnboardingComponent,
     ChannelSetupOnboardingComponent,
     TokenRewardsOnboardingComponent,
+    ProfessionsOnboardingComponent
   ],
 })
 export class OnboardingModule {

@@ -187,8 +187,19 @@
         align-items: center;
         flex-direction: row;
     }
+    &--phone{
+        flex-direction: column;
+        align-items: baseline;
+        .btn-block {
+            display: block;
+            width: 273px;
+            margin-bottom: 12px;
+            @include mq($from: $mobile_sm, $until: $tablet) {
+                width: 100%!important;
+            }
+        }
+    }
 }
-
 // general
 
 .o-prof-general{
@@ -206,6 +217,22 @@
     @include mq($from: $mobile_sm, $until: $desktop_sm) {
         width: 100%;
     }
+}
+.o-prof-edit-profession{
+    height: 46px;	
+    width: 496px;	
+    border: 1px solid #90A4AE;	
+    border-radius: 4px;
+    resize: none;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+    }
+    .o-profession-tag{
+        padding: 2px 8px;
+    }
+}
+textarea:focus{
+    outline: none;
 }
 .o-prof-edit-skill{
     height: 153px;	
