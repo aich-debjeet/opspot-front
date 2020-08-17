@@ -232,6 +232,10 @@
         </span>
         <span class="text-md float-left" id="sidebar-phone-number">{{user.phone}}</span>
       </li>
+      <li class="o-bio-info__item" *ngIf="user?.secondary_phone?.length > 0">
+        <span class="o-bio-info_ico"><i class="icon-phone"></i></span>
+        <span class="text-md float-left" id="sidebar-phone-number" *ngFor="let num of user?.secondary_phone">{{num}}</span>
+      </li>
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-globe"></i></span>
         <span class="text-md float-left">
