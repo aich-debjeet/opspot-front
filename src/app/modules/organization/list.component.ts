@@ -34,6 +34,7 @@ export class OrganizationListComponent {
   showMyCommunities: boolean = false;
   organization  = "";
   memberOrganizations: Array<any> = [];
+  myOrganizations: Array<any> = [];
   offset2: string = '';
   moreData2: boolean = true;
 
@@ -263,6 +264,7 @@ export class OrganizationListComponent {
       .then((response) => {
         if(response && response['organizations']) {
           this.organization = response['organizations'][0];
+          this.myOrganizations = response['organizations'];
         }
         this.inProgress = false
       })
