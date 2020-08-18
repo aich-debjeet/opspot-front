@@ -11,7 +11,11 @@
         <div class="o-suggestion__name caption-bold" id="suggested_user_profile_name" [routerLink]="['/', user?.username]">{{ user?.name | truncate:[15, '...'] }}</div>
         <div class="text-md grey mr-bt" id="suggested_user_username">@{{ user?.username | truncate:[15, '...'] }}</div>
         <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
-        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid"></opspot-button-subscribe>
+        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid; else emptyTag"></opspot-button-subscribe>
+        <ng-template #emptyTag>
+            <span class="" style="background: transparent; height: 22px;">&nbsp;
+            </span>
+        </ng-template>
     </div>
     <div *ngSwitchCase="'user3'" class="o-card o-suggestion float-left">
         <div class="o-suggestion__top-bar">
@@ -25,7 +29,11 @@
         <div class="o-suggestion__name caption-bold" id="suggested_user_profile_name" [routerLink]="['/', user?.username]">{{ user?.name | truncate:[15, '...'] }}</div>
         <div class="text-md grey" id="suggested_user_username">@{{ user?.username | truncate:[15, '...'] }}</div>
         <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
-        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid"></opspot-button-subscribe>
+        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid; else emptyTag"></opspot-button-subscribe>
+        <ng-template #emptyTag>
+            <span class="" style="background: transparent; height: 22px;">&nbsp;
+            </span>
+        </ng-template>
     </div>
 
     <div *ngSwitchCase="'portfolio'">
