@@ -1,30 +1,24 @@
-<style>
+<!-- <style>
   input:focus{
     box-shadow: none ;
   }
   ::ng-deep .bg-grey-light{ 
     background-color: #ECEFF1
+    
             }
+  
+  .scroll-div {
+    height: 300px;
+    overflow-y: scroll;
+    padding-bottom: 100px;
+  }
   </style>
-  <!-- <div class="o-community-member-popup">
-  <div class="o-community-member-popup-body"> -->
   <div class="o-community-member-popup-body__title">
     <h3  *ngIf="!mobileView" id="invite-invite-members-group" class="text-h3" i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__NAME_TITLE">
       <ng-container *ngIf="group">Add members to {{ group.name }}</ng-container>
       <ng-container *ngIf="!group">Invite</ng-container>
       <span class="m-layout--spacer"></span>
-      <!-- <a routerLink="../requests" class="selected">
-        Requests
-        <ng-container *ngIf="group['requests:count']">({{group['requests:count']}})</ng-container>
-      </a> -->
     </h3>
-    
-    <!-- <ul class="m-groupMemberInvite__instructions">
-      <li i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_ONLY_SUBSCRIBERS">You can only invite users who are your subscribers</li>
-      <li i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_NOTIFICATION_INFO">They will receive a notification to confirm they want to be a member of this group</li>
-      <li *ngIf="group" [hidden]="!group['is:owner']" i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_BAN_REINVITE">If the user was banned from the group, inviting them will lift the ban</li>
-    </ul>
-     -->
     <div [hidden]="!inviteInProgress">
       <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" width="width: 100%;" [mdl]></div>
       <div class="mdl-card__supporting-text">
@@ -40,7 +34,9 @@
       margin: 30px 0px 0px;
       padding: 1.3rem 0.85rem; box-shadow: none;"
        type="text" name="q" [(ngModel)]="q" (keyup)="search(q)" placeholder="Search Members" i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__INVITE__SEARCH_PLACEHOLDER" />
-      <ul class="o-community-members-list scrollbar scrollbar-default" [hidden]="users.length == 0 || !searching">
+       <div class="scroll-div" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="load()"
+       [scrollWindow]="false">
+       <ul class="o-community-members-list scrollbar scrollbar-default">
         <li *ngFor="let user of users" (click)="invite(user);" class="o-community-members-list__user-list">
           <div class="o-community-members-list__user-list">
             <div class="o-community-members-info">
@@ -59,7 +55,166 @@
           </div>     
         </li>
       </ul>
+      </div>
     </div>  
-  </div>
-<!-- </div>
-</div> -->
+  </div> -->
+
+  <div class="o-invite-to-community-popup">
+    
+    <div class="o-invite-to-community-popup-body">
+        <div class="o-invite-to-community-popup-body__title">
+            <div class="text-h3">
+                Invite to community
+            </div>
+        </div><!--title ends-->
+        <div class="o-invite-to-community-popup-body__description">
+            <div class="text-md grey">
+                But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain as born
+            </div>
+        </div><!--description ends-->
+
+        <!--tab starts-->
+        <div class="invite-community-tabbedPanels">
+            <ul class="tabs">
+             <li><a href="#Followers" class="bordertbl">Followers</a></li>
+             <li><a href="#Emailaddress" class="borderlr0">Email Address</a></li>
+             <li><a href="#Phonenumber" class="bordertbr">Phone Number</a></li>
+            </ul><!--tabs ends-->               
+           <div class="invite-community-panelContainer">
+                <div id="Followers" class="invite-community-panel">
+                    <div class="form-group c-form_righticon-md">
+                            <input type="text" class="form-control form-control-lg bg-grey-light" placeholder="Search">
+                            <a><i class="icon-search"></i></a>
+                    </div><!--search bar ends-->
+                    <ul class="o-invite-to-community-list scrollbar scrollbar-default">
+                        <li class="o-invite-to-community-list__user-list">
+                            <div class="o-invite-to-community-info">
+                                <div class="o-invite-to-community-info-prof">
+                                    <div class="o-invite-to-community-info-prof__avatar o-avatar-md">
+                                        <img src="assets/demo/avatar.png" alt="">
+                                    </div>
+                                    <div id="username" class="caption-bold">
+                                        Devansh Rathore
+                                    </div>
+                                </div>
+                                <div class="o-invite-to-community-info__option">
+                                    <a href="#">
+                                    <i class="icon-plus-circle invite-community-icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li><!-- user list end-->
+                        <li class="o-invite-to-community-list__user-list">
+                            <div class="o-invite-to-community-info">
+                                <div class="o-invite-to-community-info-prof">
+                                    <div class="o-invite-to-community-info-prof__avatar o-avatar-md">
+                                        <img src="assets/demo/avatar.png" alt="">
+                                    </div>
+                                    <div id="username" class="caption-bold">
+                                        Devansh Rathore
+                                    </div>
+                                </div>
+                                <div class="o-invite-to-community-info__option">
+                                    <a href="#" class="invite-community-icon-select">
+                                    <i class="icon-check invite-community-icon-select__icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li><!-- user list end-->
+                        <li class="o-invite-to-community-list__user-list">
+                            <div class="o-invite-to-community-info">
+                                <div class="o-invite-to-community-info-prof">
+                                    <div class="o-invite-to-community-info-prof__avatar o-avatar-md">
+                                        <img src="assets/demo/avatar.png" alt="">
+                                    </div>
+                                    <div id="username" class="caption-bold">
+                                        Devansh Rathore
+                                    </div>
+                                </div>
+                                <div class="o-invite-to-community-info__option">
+                                    <a href="#">
+                                    <i class="icon-plus-circle invite-community-icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li><!-- user list end-->
+                        <li class="o-invite-to-community-list__user-list">
+                            <div class="o-invite-to-community-info">
+                                <div class="o-invite-to-community-info-prof">
+                                    <div class="o-invite-to-community-info-prof__avatar o-avatar-md">
+                                        <img src="assets/demo/avatar.png" alt="">
+                                    </div>
+                                    <div id="username" class="caption-bold">
+                                        Devansh Rathore
+                                    </div>
+                                </div>
+                                <div class="o-invite-to-community-info__option">
+                                    <a href="#">
+                                    <i class="icon-plus-circle invite-community-icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li><!-- user list end-->
+                        <li class="o-invite-to-community-list__user-list">
+                            <div class="o-invite-to-community-info">
+                                <div class="o-invite-to-community-info-prof">
+                                    <div class="o-invite-to-community-info-prof__avatar o-avatar-md">
+                                        <img src="assets/demo/avatar.png" alt="">
+                                    </div>
+                                    <div id="username" class="caption-bold">
+                                        Devansh Rathore
+                                    </div>
+                                </div>
+                                <div class="o-invite-to-community-info__option">
+                                    <a href="#">
+                                    <i class="icon-plus-circle invite-community-icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li><!-- user list end-->
+                    </ul><!-- members list end -->
+                    <div class="invite-community-button">
+                        <button type="button" class="btn btn-primary btn-block invite-community-button__send">Send Invite</button>
+                    </div><!--button ends-->
+                </div>  <!-- end Followers -->
+                <!--Email starts-->
+                <!-- <div id="Emailaddress" class="invite-community-panel">
+                    <div class="invite-community-email">
+                        <textarea class="form-control" name="Description" rows="" spellcheck="false" placeholder="Type email address and use spacebar to separate it"></textarea>
+                        
+                        <div class="text-md invite-community-email__syc">
+                            Or Sync Email addresses
+                        </div>
+                    </div> 
+                    <div class="invite-community-email-media">
+                        <a class="invite-community-email-media__social">
+                            <img src="assets/community/Google__G__Logo.svg" class="mr8">Google 
+                        </a>
+                        <a class="invite-community-email-media__social">
+                            <img src="assets/community/Yahoo!_icon.svg" class="mr8">Yahoo 
+                        </a>
+                        <a class="invite-community-email-media__social">
+                            <img src="assets/community/Apple_logo_black.svg" class="mr8">iCloud  
+                        </a>
+                        <a class="invite-community-email-media__social">
+                            <img src="assets/community/email.svg" class="mr8">Others 
+                        </a>
+                    </div> 
+                    <div class="invite-community-button">
+                        <button type="button" class="btn btn-primary btn-block invite-community-button__send disabled">Send Invite</button>
+                    </div>                    
+                </div> -->
+                <!--Email ends--> 
+                <!-- <div id="Phonenumber" class="invite-community-panel">
+                    <div class="invite-community-phonenumber">
+                        <textarea class="form-control" name="Description" rows="10" spellcheck="false" placeholder="Type phone number like (91) 9898989898 & use comma to separate it"></textarea>
+                        
+                    </div>
+                    <div class="invite-community-button mt58">
+                        <button type="button" class="btn btn-primary btn-block invite-community-button__send disabled">Send Invite</button>
+                    </div> 
+                </div>   -->
+           </div>
+        </div> 
+        </div>
+        </div>
