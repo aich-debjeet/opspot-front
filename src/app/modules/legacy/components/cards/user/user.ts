@@ -7,7 +7,8 @@ import { Client } from '../../../../../services/api';
   moduleId: module.id,
   selector: 'opspot-card-user',
   inputs: ['object', 'avatarSize', 'cardType'],
-  templateUrl: 'user.html'
+  templateUrl: 'user.html',
+  styleUrls:['./user.scss']
 })
 
 export class UserCard implements OnInit {
