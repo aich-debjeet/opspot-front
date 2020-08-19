@@ -76,12 +76,12 @@
         <!--tab starts-->
         <div class="invite-community-tabbedPanels">
             <ul class="tabs">
-             <li><a href="#Followers" class="bordertbl">Followers</a></li>
-             <li><a href="#Emailaddress" class="borderlr0">Email Address</a></li>
-             <li><a href="#Phonenumber" class="bordertbr">Phone Number</a></li>
+             <li><a [class.active]="isActive('followers')" (click)="switchTabs('followers')" class="bordertbl">Followers</a></li>
+             <li><a [class.active]="isActive('emails')" (click)="switchTabs('emails')" class="borderlr0">Email Address</a></li>
+             <li><a [class.active]="isActive('phones')" (click)="switchTabs('phones')" class="bordertbr">Phone Number</a></li>
             </ul><!--tabs ends-->               
            <div class="invite-community-panelContainer">
-                <div id="Followers" class="invite-community-panel">
+                <div id="Followers" class="invite-community-panel" *ngIf="filter === 'followers'">
                     <div class="form-group c-form_righticon-md">
                             <input type="text" class="form-control form-control-lg bg-grey-light" placeholder="Search">
                             <a><i class="icon-search"></i></a>
@@ -178,7 +178,7 @@
                     </div><!--button ends-->
                 </div>  <!-- end Followers -->
                 <!--Email starts-->
-                <!-- <div id="Emailaddress" class="invite-community-panel">
+                <div id="Emailaddress" class="invite-community-panel"  *ngIf="filter === 'emails'">
                     <div class="invite-community-email">
                         <textarea class="form-control" name="Description" rows="" spellcheck="false" placeholder="Type email address and use spacebar to separate it"></textarea>
                         
@@ -203,9 +203,9 @@
                     <div class="invite-community-button">
                         <button type="button" class="btn btn-primary btn-block invite-community-button__send disabled">Send Invite</button>
                     </div>                    
-                </div> -->
+                </div>
                 <!--Email ends--> 
-                <!-- <div id="Phonenumber" class="invite-community-panel">
+                <div id="Phonenumber" class="invite-community-panel"  *ngIf="filter === 'phones'">
                     <div class="invite-community-phonenumber">
                         <textarea class="form-control" name="Description" rows="10" spellcheck="false" placeholder="Type phone number like (91) 9898989898 & use comma to separate it"></textarea>
                         
@@ -213,7 +213,7 @@
                     <div class="invite-community-button mt58">
                         <button type="button" class="btn btn-primary btn-block invite-community-button__send disabled">Send Invite</button>
                     </div> 
-                </div>   -->
+                </div>  
            </div>
         </div> 
         </div>

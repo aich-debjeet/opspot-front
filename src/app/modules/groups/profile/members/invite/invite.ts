@@ -16,7 +16,7 @@ import { Session } from '../../../../../services/session';
   templateUrl: 'invite.html'
 })
 
-export class GroupsProfileMembersInvite implements OnInit{
+export class GroupsProfileMembersInvite implements OnInit {
 
   opspot = window.Opspot;
 
@@ -39,14 +39,16 @@ export class GroupsProfileMembersInvite implements OnInit{
   inProgress: boolean = false;
   moreData: boolean = true;
 
-  httpSubscription
+  httpSubscription;
+
+  filter: any = "followers";
 
   constructor(
     public client: OpspotHttpClient,
     public service: GroupsService,
     private toastr: ToastrService,
     public session: Session,
-    ) {
+  ) {
     if (window.innerWidth < 775) { this.mobileView = true; }
   }
 
@@ -54,7 +56,7 @@ export class GroupsProfileMembersInvite implements OnInit{
     this.group = value;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.load(true);
   }
   invite(user) {
@@ -149,7 +151,7 @@ export class GroupsProfileMembersInvite implements OnInit{
         }
 
         if (refresh) {
-          this.users = response[key];          
+          this.users = response[key];
         } else {
           this.users = this.users.concat(response[key]);
         }
@@ -167,5 +169,15 @@ export class GroupsProfileMembersInvite implements OnInit{
       });
   }
 
+  switchTabs(filter) {
+   this.filter = filter;
+  }
+
+  isActive(filter: string) {
+    if (this.filter === filter) {
+      return true;
+    }
+    return false;
+  }
 }
 
