@@ -102,7 +102,7 @@
         <div class="o-portfolio-right hidden-under-tablet">
             <div class="o-portfolio-buttonset">
                 <button type="button" class="btn btn-primary btn-sm btn--prof"
-                    *ngIf="user.guid == session.getLoggedInUser().guid; else otherUser">Add Work</button>
+                    *ngIf="user.guid == session.getLoggedInUser().guid; else otherUser" (click)="showPortfolio()">Add Work</button>
                 <ng-template #otherUser>
                     <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button>
                     <button type="button" class="btn btn-outline-primary btn-sm btn--prof">Network</button> -->

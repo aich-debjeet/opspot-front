@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Session } from '../../../../../services/session';
 import { Client } from '../../../../../services/api';
+import { OverlayModalService } from '../../../../../services/ux/overlay-modal';
+import { PortfolioFormComponent } from '../../../../forms/portfolio-form/portfolio-form.component';
 
 @Component({
   moduleId: module.id,
@@ -28,7 +30,8 @@ export class UserCard implements OnInit {
 
   constructor(
     public session: Session,
-    public client: Client
+    public client: Client,
+    public overlayModal: OverlayModalService,
   ) { }
 
   set object(value: any) {
@@ -62,5 +65,14 @@ export class UserCard implements OnInit {
 
   removeUser(user: any) {
     this.remove.next(user);
+  }
+  showPortfolio(){
+    this.overlayModal.create(PortfolioFormComponent, '', {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+      // listen to the update callback
+      onUpdate: (payload: any) => {
+        // make update to local var
+      }
+    }).present();
   }
 }
