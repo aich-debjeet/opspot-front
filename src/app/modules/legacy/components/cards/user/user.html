@@ -57,8 +57,19 @@
             </div>
             <!--profile-->
             <div class="o-portfolio-buttonset hidden-above-tablet">
-                <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button>
-                <button type="button" class="btn btn-outline-primary btn-sm btn--prof">Network</button>
+                <button type="button" class="btn btn-primary btn-sm btn--prof"
+                    *ngIf="user.guid == session.getLoggedInUser().guid; else otherUser">Add Work</button>
+                <ng-template #otherUser>
+                    <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm btn--prof">Network</button> -->
+                    <opspot-button-subscribe [sideBar]="sidebarMsg" [user]="user" class="btn-restructure"
+                        *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != user.guid && !user.blocked ">
+                    </opspot-button-subscribe>
+                    <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button> -->
+                    <!-- <button type="button" class="btn btn-outline-primary btn-sm btn--prof" id="sidebar-network">Network</button> -->
+                    <m-messenger--channel-button *ngIf="user.subscribed && session.getLoggedInUser().guid != user.guid"
+                        [user]="user" [label]="'Network'" [theme]="'secondary'"></m-messenger--channel-button>
+                </ng-template>
             </div>
             <!--button ends-->
             <div class="o-portfolio-followers hidden-under-tablet">
@@ -75,12 +86,8 @@
                     {{subscriptionCount?subscriptionCount:0}} <br><span class="text-sm grey">Following</span></div>
             </div>
             <!--followers ends-->
-            <div class="o-portfolio-skill hidden-above-tablet">
-                <a href="" class="o-portfolio-skill__tag">Photography</a>
-                <a href="" class="o-portfolio-skill__tag">Design</a>
-                <a href="" class="o-portfolio-skill__tag">Portrait</a>
-                <a href="" class="o-portfolio-skill__tag">Landscape</a>
-                <a href="" class="o-portfolio-skill__tag">Candid</a>
+            <div class="o-portfolio-skill hidden-above-tablet" [hidden]="!user?.general_info?.skills">
+                <a class="o-portfolio-skill__tag" *ngFor="let skills of user?.general_info?.skills">{{skills}}</a>
             </div>
             <!--skill ends-->
             <div class="o-portfolio-description" [hidden]="!user?.about?.description">
@@ -94,16 +101,23 @@
         <!--left ends-->
         <div class="o-portfolio-right hidden-under-tablet">
             <div class="o-portfolio-buttonset">
-                <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button>
-                <button type="button" class="btn btn-outline-primary btn-sm btn--prof">Network</button>
+                <button type="button" class="btn btn-primary btn-sm btn--prof"
+                    *ngIf="user.guid == session.getLoggedInUser().guid; else otherUser">Add Work</button>
+                <ng-template #otherUser>
+                    <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm btn--prof">Network</button> -->
+                    <opspot-button-subscribe [sideBar]="sidebarMsg" [user]="user" class="btn-restructure"
+                        *ngIf="session.isLoggedIn() && !user.blocked ">
+                    </opspot-button-subscribe>
+                    <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button> -->
+                    <!-- <button type="button" class="btn btn-outline-primary btn-sm btn--prof" id="sidebar-network">Network</button> -->
+                    <m-messenger--channel-button *ngIf="user.subscribed"
+                        [user]="user" [label]="'Network'" [theme]="'secondary'"></m-messenger--channel-button>
+                </ng-template>
             </div>
             <!--button ends-->
-            <div class="o-portfolio-skill">
-                <a href="" class="o-portfolio-skill__tag">Photography</a>
-                <a href="" class="o-portfolio-skill__tag">Design</a>
-                <a href="" class="o-portfolio-skill__tag">Portrait</a>
-                <a href="" class="o-portfolio-skill__tag">Landscape</a>
-                <a href="" class="o-portfolio-skill__tag">Candid</a>
+            <div class="o-portfolio-skill" [hidden]="!user?.general_info?.skills">
+                <a class="o-portfolio-skill__tag" *ngFor="let skills of user?.general_info?.skills">{{skills}}</a>
             </div>
             <!--skill ends-->
         </div>

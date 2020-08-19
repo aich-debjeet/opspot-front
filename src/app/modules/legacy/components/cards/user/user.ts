@@ -21,6 +21,7 @@ export class UserCard implements OnInit {
   offset: string = '';
   subscriptionCount = 0;
   subscriberCount = 0;
+  sidebarMsg = true;
 
   @Output() update: EventEmitter<any> = new EventEmitter();
   @Output() remove: EventEmitter<any> = new EventEmitter();
@@ -31,6 +32,7 @@ export class UserCard implements OnInit {
   ) { }
 
   set object(value: any) {
+    console.log('Portfolio',value)
     this.user = value;
     this.bannerSrc = `${this.opspot.cdn_url}fs/v1/banners/${this.user.guid}/fat/${this.user.icontime}`;
     if(this.user.guid != this.session.getLoggedInUser().guid){

@@ -141,6 +141,10 @@
     max-width:225px;
 }
 .o-portfolio-buttonset{
+    .btn-restructure{
+        position: unset !important;
+        margin: unset !important;
+    }
     @include mq($until:$tablet){
         text-align: center;
         margin: 17px 0 24px;
