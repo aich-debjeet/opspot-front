@@ -83,7 +83,11 @@
            <div class="invite-community-panelContainer">
                 <div id="Followers" class="invite-community-panel" *ngIf="filter === 'followers'">
                     <div class="form-group c-form_righticon-md">
-                            <input type="text" class="form-control form-control-lg bg-grey-light" placeholder="Search">
+                            <!-- <input type="text" class="form-control form-control-lg bg-grey-light" placeholder="Search"> -->
+                            <input
+                                id="invite-search-members"
+                                class="form-control form-control-lg bg-grey-light"
+                                type="text" name="q" [(ngModel)]="q" (keyup)="search(q)" placeholder="Search Members" i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__INVITE__SEARCH_PLACEHOLDER" />
                             <a><i class="icon-search"></i></a>
                     </div><!--search bar ends-->
                     <ul class="o-invite-to-community-list scrollbar scrollbar-default">
