@@ -27,6 +27,7 @@ export class UserCard implements OnInit {
 
   @Output() update: EventEmitter<any> = new EventEmitter();
   @Output() remove: EventEmitter<any> = new EventEmitter();
+  @Output() activityResp: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public session: Session,
@@ -72,6 +73,8 @@ export class UserCard implements OnInit {
       // listen to the update callback
       onUpdate: (payload: any) => {
         // make update to local var
+        this.activityResp.emit(payload)
+        this.overlayModal.dismiss();
       }
     }).present();
   }

@@ -2,7 +2,7 @@
     <!-- <div class="o-book-blocks"> -->
     <!-- <div class="o-book-left-block"> -->
     <div class="o-portfolio-title-mob hidden-above-tablet">Portfolio</div>
-    <opspot-card-user *ngIf="channel" [cardType]="'portfolio'" [object]="channel" class="">
+    <opspot-card-user *ngIf="channel" [cardType]="'portfolio'" [object]="channel" (activityResp)="appendData($event)" class="">
     </opspot-card-user>
     <!-- </div> -->
     <!-- <div class="o-book-right-block"> -->
