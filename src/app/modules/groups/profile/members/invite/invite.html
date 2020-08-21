@@ -82,6 +82,30 @@
  ::ng-deep .inputresponsive {
      margin: 30px 0px 0px;
  }
+
+ ::ng-deep .invite-community-icon-select {
+    background: #0288D1;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ ::ng-deep .invite-community-icon-select__icon {
+    font-size: 15px;
+    color: #fff;
+}
+
+::ng-deep .invite-community-icon {
+    font-size: 30px;
+    color: #0288D1;
+}
+
+::ng-deep .icon-check:before {
+  content: "\e930";
+}
   </style>
 
   <!-- <div class="o-invite-to-community-popup">
@@ -121,8 +145,9 @@
                     <div class="scroll-div" >
                     <ul class="o-invite-to-community-list scrollbar scrollbar-default" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="load()"
                     [scrollWindow]="false">
-                        <li class="o-invite-to-community-list__user-list" *ngFor="let user of users">
-                            <div class="o-invite-to-community-info">
+                        <div *ngFor="let user of users; let x = index">
+                        <li class="o-invite-to-community-list__user-list"> 
+                            <div class="o-invite-to-community-info" >
                                 <div class="o-invite-to-community-info-prof">
                                     <div class="o-invite-to-community-info-prof__avatar o-avatar-md">
                                         <img src="{{opspot.cdn_url}}icon/{{user.guid}}/small/{{user.icontime}}" />           
@@ -132,16 +157,23 @@
                                     </div>
                                 </div>
                                 <div class="o-invite-to-community-info__option">
-                                    <a href="#">
+                                    <!-- <a (click)="toggle(x)">
+                                    <i [ngClass]="{'icon-plus-circle invite-community-icon': !colapse[x], 'icon-check invite-community-icon-select__icon': colapse[x] }"></i>
+                                    </a> -->
+                                    <a (click)="toggle(x, user)" *ngIf="!colapse[x]">
                                     <i class="icon-plus-circle invite-community-icon"></i>
+                                    </a>
+                                    <a *ngIf="colapse[x]" class="invite-community-icon-select" (click)="toggle(x,user)" >
+                                        <i class="icon-check invite-community-icon-select__icon"></i>
                                     </a>
                                 </div>
                             </div>
-                        </li><!-- user list end-->                 
+                        </li><!-- user list end-->      
+                      </div>           
                     </ul><!-- members list end -->
                     </div>
                     <div class="invite-community-button">
-                        <button type="button" class="btn btn-primary btn-block invite-community-button__send">Send Invite</button>
+                        <button type="button" class="btn btn-primary btn-block invite-community-button__send" (click) = "sendInvite()">Send Invite</button>
                     </div><!--button ends-->
                 </div>  <!-- end Followers -->
                 <!--Email starts-->
