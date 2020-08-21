@@ -137,11 +137,11 @@ export class GroupsProfileMembersInvite implements OnInit {
     }
 
     var key = "users";
-    let endpoint = `api/v1/subscribe/subscriptions/${this.session.getLoggedInUser().guid}`,
+    let endpoint = `api/v1/groups/suggestion/subscribers/${this.group.guid}`,
       params: { limit, offset, q?: string } = { limit: 12, offset: this.offset };
 
     if (this.q) {
-      endpoint = `api/v2/search/suggest/user`;
+      endpoint = `api/v1/groups/suggestion/search/${this.group.guid}`;
       params.q = this.q;
       key = "entities"
     }
@@ -202,7 +202,6 @@ export class GroupsProfileMembersInvite implements OnInit {
   }
 
   sendInvite() {
-    console.log('dfbjf: ', this.inviteArrray);
     this.invite();
   }
 }
