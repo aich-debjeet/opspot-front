@@ -43,6 +43,12 @@ export class GroupsProfileMembersInvite implements OnInit {
 
   filter: any = "followers";
 
+  inviteArrray: Array<any> = [];
+
+  colapse: boolean[] = [false];
+
+
+
   constructor(
     public client: OpspotHttpClient,
     public service: GroupsService,
@@ -59,14 +65,14 @@ export class GroupsProfileMembersInvite implements OnInit {
   ngOnInit() {
     this.load(true);
   }
-  invite(user) {
+  invite() {
     // if (!user.subscriber) {
     //   this.toastr.error('You can only invite users who are subscribed to you');
     //   //  alert('You can only invite users who are subscribed to you');
     //   return;
     // }
 
-    this.invited.next(user);
+    // this.invited.next(user);
 
     this.q = '';
     this.users = [];
@@ -77,7 +83,7 @@ export class GroupsProfileMembersInvite implements OnInit {
     this.inviteLastUser = '';
     this.inviteError = '';
 
-    this.service.invite(this.group, user)
+    this.service.invite(this.group, this.inviteArrray)
       .then(() => {
         this.inviteInProgress = false;
       })
@@ -136,7 +142,7 @@ export class GroupsProfileMembersInvite implements OnInit {
 
     if (this.q) {
       endpoint = `api/v2/search/suggest/user`;
-      params.q = query;
+      params.q = this.q;
       key = "entities"
     }
 
@@ -170,7 +176,7 @@ export class GroupsProfileMembersInvite implements OnInit {
   }
 
   switchTabs(filter) {
-   this.filter = filter;
+    this.filter = filter;
   }
 
   isActive(filter: string) {
@@ -178,6 +184,26 @@ export class GroupsProfileMembersInvite implements OnInit {
       return true;
     }
     return false;
+  }
+
+  toggle(id, user) {
+    if (!this.colapse[id]) {
+      this.colapse[id] = true;
+      if (!(this.inviteArrray.includes(user.guid)))
+        this.inviteArrray.push(user.guid)
+    }
+    else {
+      this.colapse[id] = !this.colapse[id];
+      var index = this.inviteArrray.indexOf(user.guid);
+      if (index > -1) {
+        this.inviteArrray.splice(index, 1);
+      }
+    }
+  }
+
+  sendInvite() {
+    console.log('dfbjf: ', this.inviteArrray);
+    this.invite();
   }
 }
 
