@@ -103,7 +103,7 @@
                         </a>
                     </div>
                     <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle" (closed)="inviteToggle = false">
-                        <opspot-groups-profile-members-invite [group]="group">
+                        <opspot-groups-profile-members-invite *ngIf="group" [group]="group">
                         </opspot-groups-profile-members-invite>
                     </m-modal>
                     <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle" (closed)="memberToggle = false">
