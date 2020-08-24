@@ -145,7 +145,7 @@
                     <ul class="o-invite-to-community-list scrollbar scrollbar-default" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="load()"
                     [scrollWindow]="false">
                         <div *ngFor="let user of users; let x = index">
-                        <li class="o-invite-to-community-list__user-list"> 
+                        <li class="o-invite-to-community-list__user-list" *ngIf="!user.is_invited"> 
                             <div class="o-invite-to-community-info" >
                                 <div class="o-invite-to-community-info-prof">
                                     <div class="o-invite-to-community-info-prof__avatar o-avatar-md">
@@ -171,7 +171,8 @@
                       </div>           
                     </ul><!-- members list end -->
                     <div class="invite-community-button">
-                        <button type="button" class="btn btn-primary btn-block invite-community-button__send" (click) = "sendInvite()">Send Invite</button>
+                        <button type="button" class="btn btn-primary btn-block invite-community-button__send" 
+                        [disabled]="inviteArrray.length == 0" (click) = "sendInvite()">Send Invite</button>
                     </div><!--button ends-->
                 </div>  <!-- end Followers -->
                 <!--Email starts-->
