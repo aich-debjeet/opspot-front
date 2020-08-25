@@ -21,6 +21,11 @@ export class PortfolioFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
+  _opts: any;
+  set opts(opts: any) {
+    this._opts = opts;
+  }
+  
   opspot;
   cards = [];
   meta: any = {
@@ -120,6 +125,10 @@ export class PortfolioFormComponent implements OnInit {
         this.attachment.reset();
         this.resetMeta();
         // this.meta = { wire_threshold: null };
+        if (this._opts && this._opts.onUpdate) {
+          this._opts.onUpdate(data);
+          // close modal
+        }
         this.inProgress = false;
         this.changeToDefault();
         this.cards = [];

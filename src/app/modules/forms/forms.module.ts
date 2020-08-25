@@ -78,7 +78,8 @@ import { PaywallMessageComponent } from './post-form/paywall-message.component';
     BlueStoreFormComponent,
     ShowtimezFormComponent,
     PostFormComponent,
-    PaywallMessageComponent
+    PaywallMessageComponent,
+    PortfolioFormComponent
   ]
 })
 export class OpspotFormsModule {

@@ -140,6 +140,9 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     this.reset();
     this.searchMore(true);
   }
+  appendData(event: any){
+    this.filteredArray= [...this.filteredArray, event['activity']];
+  }
 
   reset() {
     this.filteredArray = [];
