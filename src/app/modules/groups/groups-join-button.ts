@@ -19,8 +19,8 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
       <ng-container *ngIf="inProgress">Joining</ng-container>
     </button>
     <span *ngIf="group['is:invited'] &amp;&amp; !group['is:member']">
-      <button class="m-btn m-btn--slim m-btn--action" id="group-accept" (click)="accept()" i18n="@@M__ACTION__ACCEPT">Accept</button>
-      <button class="m-btn m-btn--slim m-btn--action" id="group-decline" (click)="decline()" i18n="@@GROUPS__JOIN_BUTTON__DECLINE_ACTION">Decline</button>
+      <button class="btn btn-primary btn-sm mr-rt" id="group-accept" (click)="accept()" i18n="@@M__ACTION__ACCEPT">Accept</button>
+      <button class="btn btn-primary btn-sm" id="group-decline" (click)="decline()" i18n="@@GROUPS__JOIN_BUTTON__DECLINE_ACTION">Decline</button>
     </span>
     <button class="btn btn-primary btn-sm" id="group-leave" *ngIf="group['is:member']" (click)="leave()" i18n="@@GROUPS__JOIN_BUTTON__LEAVE_ACTION">Leave</button>
     <button class="btn btn-primary btn-sm" id="group-cancel" *ngIf="group['is:awaiting']" (click)="cancelRequest()" i18n="@@GROUPS__JOIN_BUTTON__CANCEL_REQ_ACTION">Cancel Request</button>
@@ -32,6 +32,12 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
       [overrideOnboarding]="true"
       *ngIf="!session.isLoggedIn()">
     </m-modal-signup-on-action>
+
+    <style>
+    .mr-rt {
+      margin-right: 5px;
+    }
+    </style>
   `
 })
 
@@ -114,7 +120,7 @@ export class GroupsJoinButton {
           default:
             error = e.error;
             console.log("error: ", error);
-            
+
             break;
         }
         this.group['is:member'] = false;
@@ -185,6 +191,8 @@ export class GroupsJoinButton {
         this.group['is:member'] = false;
         this.group['is:invited'] = !done;
       });
+
+    this.router.navigate(['/groups/members']);
   }
 
 }
