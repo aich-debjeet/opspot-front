@@ -119,8 +119,11 @@
             </div>
         </div><!--title ends-->
         <div class="o-invite-to-community-popup-body__description">
-            <div class="text-md grey">
-                But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain as born
+            <div class="text-md grey" *ngIf="filter === 'followers'">
+              Participate in fan discussions, watch online events, and hold group chats.
+            </div>
+            <div class="text-md grey" *ngIf="filter === 'emails'">
+              Type multiple email id's separated by a comma
             </div>
         </div><!--description ends-->
         </div>
