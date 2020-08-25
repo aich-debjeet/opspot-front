@@ -128,8 +128,8 @@
         <div class="invite-community-tabbedPanels">
             <ul class="tabs" [class.tabresponsive]="!mobileView">
              <li><a [class.active]="isActive('followers')" (click)="switchTabs('followers')" class="bordertbl">Followers</a></li>
-             <li><a [class.active]="isActive('emails')" (click)="switchTabs('emails')" class="borderlr0">Email Address</a></li>
-             <li><a [class.active]="isActive('phones')" (click)="switchTabs('phones')" class="bordertbr">Phone Number</a></li>
+             <li><a [class.active]="isActive('emails')" (click)="switchTabs('emails')" class="bordertbr">Email Address</a></li>
+             <!-- <li><a [class.active]="isActive('phones')" (click)="switchTabs('phones')" class="bordertbr">Phone Number</a></li> -->
             </ul><!--tabs ends-->               
            <div class="invite-community-panelContainer">
                 <div id="Followers" class="invite-community-panel" *ngIf="filter === 'followers'">
@@ -211,7 +211,7 @@
                         </a>
                     </div>  -->
                     <div class="invite-community-button">
-                        <button type="button" class="btn btn-primary btn-block invite-community-button__send disabled" (click) = "sendInvite()">Send Invite</button>
+                        <button type="button" class="btn btn-primary btn-block invite-community-button__send" (click) = "sendInvite()">Send Invite</button>
                     </div>                    
                 </div>
                 <!--Email ends--> 
