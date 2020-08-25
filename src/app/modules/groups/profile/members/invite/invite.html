@@ -172,19 +172,31 @@
                     </ul><!-- members list end -->
                     <div class="invite-community-button">
                         <button type="button" class="btn btn-primary btn-block invite-community-button__send" 
-                        [disabled]="inviteArrray.length == 0" (click) = "sendInvite()">Send Invite</button>
+                        [disabled]="inviteArrray.length == 0" (click) = "invite()">Send Invite</button>
                     </div><!--button ends-->
                 </div>  <!-- end Followers -->
                 <!--Email starts-->
                 <div id="Emailaddress" class="invite-community-panel"  *ngIf="filter === 'emails'">
                     <div class="invite-community-email">
-                        <textarea class="form-control" name="Description" rows="" spellcheck="false" placeholder="Type email address and use spacebar to separate it"></textarea>
-                        
-                        <div class="text-md invite-community-email__syc">
+                        <!-- <textarea class="form-control" name="Description" rows="" spellcheck="false" placeholder="Type email address and use spacebar to separate it"></textarea> -->
+                        <tag-input
+                        [maxItems]=maxItems required
+                        [(ngModel)]='emails'
+                        placeholder="Type email address and use spacebar to separate it"
+                        style="border: 1px solid #90A4AE;
+                        margin: 30px 0px 20px;
+                        resize: none;
+                        padding: 20px 19px;
+                        font-size: 14px;
+                        height: 100%;"
+                        theme='minimal'
+                        [addOnBlur]="true"
+                      ></tag-input>
+                        <!-- <div class="text-md invite-community-email__syc">
                             Or Sync Email addresses
-                        </div>
+                        </div> -->
                     </div> 
-                    <div class="invite-community-email-media">
+                    <!-- <div class="invite-community-email-media">
                         <a class="invite-community-email-media__social">
                             <img src="assets/svg/google-logo.svg" class="mr8">Google 
                         </a>
@@ -197,13 +209,13 @@
                         <a class="invite-community-email-media__social">
                             <img src="assets/svg/email-logo.svg" class="mr8">Others 
                         </a>
-                    </div> 
+                    </div>  -->
                     <div class="invite-community-button">
-                        <button type="button" class="btn btn-primary btn-block invite-community-button__send disabled">Send Invite</button>
+                        <button type="button" class="btn btn-primary btn-block invite-community-button__send disabled" (click) = "sendInvite()">Send Invite</button>
                     </div>                    
                 </div>
                 <!--Email ends--> 
-                <div id="Phonenumber" class="invite-community-panel"  *ngIf="filter === 'phones'">
+                <!-- <div id="Phonenumber" class="invite-community-panel"  *ngIf="filter === 'phones'">
                     <div class="invite-community-phonenumber">
                         <textarea class="form-control" name="Description" rows="10" spellcheck="false" placeholder="Type phone number like (91) 9898989898 & use comma to separate it"></textarea>
                         
@@ -211,7 +223,7 @@
                     <div class="invite-community-button mt58">
                         <button type="button" class="btn btn-primary btn-block invite-community-button__send disabled">Send Invite</button>
                     </div> 
-                </div>  
+                </div>   -->
            </div>
         </div> 
         <!-- </div>

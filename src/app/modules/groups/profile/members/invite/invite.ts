@@ -46,6 +46,8 @@ export class GroupsProfileMembersInvite implements OnInit {
   inviteArrray: Array<any> = [];
 
   colapse: boolean[] = [false];
+  emails: any[];
+
 
 
 
@@ -201,8 +203,27 @@ export class GroupsProfileMembersInvite implements OnInit {
     }
   }
 
+  // sendInvite() {
+  //   this.invite();
+  // }
+
   sendInvite() {
-    this.invite();
+    if (!this.emails) {
+      this.toastr.error('Please enter your friends email ids');
+      return;
+    }
+    const emails = this.emails.map(el => el.value);
+    this.inProgress = true;
+    this.client.post('api/v1/groups/invitations/viaemail', emails)
+      .subscribe((response: any) => {
+        this.inProgress = false;
+        if (response.status === 'success') {
+          this.toastr.success('Invitations sent');
+          this.emails = [];
+        } else {
+          this.toastr.error('Something went wrong');
+        }
+      });
   }
 }
 

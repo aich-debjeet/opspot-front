@@ -33,6 +33,7 @@ import { VideoChatComponent } from '../videochat/videochat.component';
 import { GroupJoinRequestComponent } from './group-join-request/group-join-request.component';
 import { GroupsProfileConversationMobile } from './profile/mobile-conversation/mobile-conversation';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TagInputModule } from 'ngx-chips';
 
 
 const routes: Routes = [
@@ -70,7 +71,8 @@ const routes: Routes = [
     HashtagsModule,
     TextInputAutocompleteModule,
     VideoChatModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    TagInputModule
   ],
   declarations: [
     GroupsListComponent,
