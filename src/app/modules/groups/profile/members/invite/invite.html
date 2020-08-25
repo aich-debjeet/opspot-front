@@ -145,7 +145,7 @@
                     <ul class="o-invite-to-community-list scrollbar scrollbar-default" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="load()"
                     [scrollWindow]="false">
                         <div *ngFor="let user of users; let x = index">
-                        <li class="o-invite-to-community-list__user-list" *ngIf="!user.is_invited"> 
+                        <li class="o-invite-to-community-list__user-list"> 
                             <div class="o-invite-to-community-info" >
                                 <div class="o-invite-to-community-info-prof">
                                     <div class="o-invite-to-community-info-prof__avatar o-avatar-md">
@@ -185,7 +185,7 @@
                         placeholder="Type email address and use spacebar to separate it"
                         style="border: 1px solid #90A4AE;
                         margin: 30px 0px 20px;
-                        resize: none;
+                        resize: none; 
                         padding: 20px 19px;
                         font-size: 14px;
                         height: 100%;"

@@ -88,14 +88,18 @@ export class GroupsProfileMembersInvite implements OnInit {
     this.service.invite(this.group, this.inviteArrray)
       .then(() => {
         this.inviteInProgress = false;
+        // this.toastr.success('Invitations sent');
+        // this.inviteArrray = [];
       })
       .catch(e => {
         this.inviteInProgress = false;
         this.inviteError = e;
+        // this.toastr.error('Something went wrong');
       });
   }
 
   search(q) {
+    // this.colapse = [false];
     if (this.timeout)
       clearTimeout(this.timeout);
 
@@ -129,6 +133,8 @@ export class GroupsProfileMembersInvite implements OnInit {
   }
 
   load(refresh: boolean = false, query = null) {
+    // this.colapse = [false];
+
     if (this.httpSubscription)
       this.httpSubscription.unsubscribe();
 
@@ -203,10 +209,6 @@ export class GroupsProfileMembersInvite implements OnInit {
     }
   }
 
-  // sendInvite() {
-  //   this.invite();
-  // }
-
   sendInvite() {
     if (!this.emails) {
       this.toastr.error('Please enter your friends email ids');
@@ -214,7 +216,7 @@ export class GroupsProfileMembersInvite implements OnInit {
     }
     const emails = this.emails.map(el => el.value);
     this.inProgress = true;
-    this.client.post('api/v1/groups/invitations/viaemail', emails)
+    this.client.post(`api/v1/groups/invitations/viaemail/${this.group.guid}`, emails)
       .subscribe((response: any) => {
         this.inProgress = false;
         if (response.status === 'success') {
