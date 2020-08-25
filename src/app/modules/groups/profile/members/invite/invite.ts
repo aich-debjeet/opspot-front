@@ -133,7 +133,7 @@ export class GroupsProfileMembersInvite implements OnInit {
   }
 
   load(refresh: boolean = false, query = null) {
-    // this.colapse = [false];
+    this.colapse = [false];
 
     if (this.httpSubscription)
       this.httpSubscription.unsubscribe();
