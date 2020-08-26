@@ -71,6 +71,7 @@ import { ShowtimezModule } from './modules/showtimez/showtimez.module';
 import { ExploreModule } from './modules/explore/explore.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { BigEventModule } from './modules/big-event/big-event.module';
+import { PediaModule } from './modules/pedia/pedia.module';
 
 
 
@@ -143,7 +144,8 @@ import { BigEventModule } from './modules/big-event/big-event.module';
     ExploreModule,
     PortfolioModule,
     BigEventModule,
-    OrganizationModule
+    OrganizationModule,
+    PediaModule
   ],
   providers: [
     OpspotAppRoutingProviders,
