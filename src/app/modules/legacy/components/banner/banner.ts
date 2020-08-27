@@ -1,4 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
+import { base64ToFile } from 'ngx-image-cropper';
 
 @Component({
   selector: 'opspot-banner',
@@ -24,7 +25,7 @@ import { Component, EventEmitter } from '@angular/core';
               <i class="white icon-plus-circle" (click)="chooseFile()"></i>
               <!--<i class="white icon-minus-circle" (click)="remove()"></i>-->
               <p class="white text-lg">Add Cover Picture</p>
-              <p class="white text-lg">Recommended size 2000px &times; 1125px (Ratio 16:9)</p>
+              <p class="white text-lg">Recommended size 2000px &times; 1125px (Ratio 4:3)</p>
               <p class="white text-lg">Recommended image formats are .jpg, .jpeg and .png</p>
           </div>
       </div>
@@ -41,7 +42,8 @@ import { Component, EventEmitter } from '@angular/core';
           <button i18n="@@M__ACTION__CANCEL" id="banner-cancel-button">Cancel</button>
         </span>
       </div>
-      <input type="file" accept="image/jpg, image/jpeg, image/png" id="file" (change)="add($event)" [hidden]="file" />
+      <input type="file" accept="image/jpg, image/jpeg, image/png" id="file" (change)="fileChangeEvent($event)" [hidden]="file" />
+      <app-ngx-img-cropper [open]="open" [imageChangedEvent]="imageChangedEvent" (croppedImage)="imageCropped($event)" (closed)=close()></app-ngx-img-cropper>
   </div>
   <style>
     .overlay i {
@@ -72,6 +74,9 @@ export class OpspotBanner {
   added: EventEmitter<any> = new EventEmitter();
   // removed: EventEmitter<any> = new EventEmitter();
   overlay: any; // @todo: ??
+  open: boolean = false;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
 
   set _object(value: any) {
     if (!value)
@@ -99,25 +104,36 @@ export class OpspotBanner {
     fileSelector.click();
   }
 
-  add(e) {
+  // add(e) {
+  //   if (!this.editing)
+  //     return;
+
+  //   var element: any = e.target ? e.target : e.srcElement;
+  //   this.file = element ? element.files[0] : null;
+  //   /**
+  //    * Set a live preview
+  //    */
+  //   var reader = new FileReader();
+  //   reader.onloadend = () => {
+  //     this.src = typeof reader.result === 'string' ? reader.result : reader.result.toString();
+  //   };
+  //   reader.readAsDataURL(this.file);
+
+  //   element.value = '';
+  // }
+
+  fileChangeEvent(event: any): void {
     if (!this.editing)
-      return;
+    return;
 
-    var element: any = e.target ? e.target : e.srcElement;
-    this.file = element ? element.files[0] : null;
-
-    /**
-     * Set a live preview
-     */
-    var reader = new FileReader();
-    reader.onloadend = () => {
-      this.src = typeof reader.result === 'string' ? reader.result : reader.result.toString();
-    };
-    reader.readAsDataURL(this.file);
-
-    element.value = '';
+    this.open = true;
+    this.imageChangedEvent = event;
   }
 
+  imageCropped(event: any) {
+    this.src = event;
+    this.file = base64ToFile(this.src);
+  }
   cancel() {
     this.file = null;
   }
@@ -150,5 +166,8 @@ export class OpspotBanner {
 
   onClick(e) {
     e.target.parentNode.parentNode.getElementsByTagName('input')[0].click();
+  }
+  close() {
+    this.open = false;
   }
 }
