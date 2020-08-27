@@ -79,9 +79,10 @@ export class ChannelFilterComponent {
     let params: any = {
       limit: 12,
       offset: '',
-      sync: 1,
-      as_activities: 0,
-      container_guid: this.user.guid
+      // sync: 1,
+      // as_activities: 0,
+      // container_guid: this.user.guid
+      activity_type: this.filter
     };
 
     if (!this.offset && this.user.pinned_posts.length > 0) {
@@ -91,24 +92,25 @@ export class ChannelFilterComponent {
     this.inProgress = true;
 
     params.offset = this.offset;
-    if (this.filter == 'blogs') {
-      this.filter = this.filter + '/published';
-    }
+    // if (this.filter == 'blogs') {
+    //   this.filter = this.filter + '/published';
+    // }
     this.client
-      .get(`api/v2/feeds/container/${this.user.guid}/${this.filter}`, params)
+      .get(`api/v4/newsfeed/container/${this.user.guid}`, params)
+      // .get(`api/v2/feeds/container/${this.user.guid}/${this.filter}`, params)
       .then((data: OpspotActivityObject) => {
-      
-        if (!data.entities) {
+        
+        if (!data.activity) {
           this.moreData = false;
           this.inProgress = false;
           return false;
         }
         if (this.feed && !refresh) {
-          for (let activity of data.entities) {
+          for (let activity of data.activity) {
             this.feed.push(activity);
           }
         } else {
-          this.feed = this.filterPinned(data.entities);
+          this.feed = this.filterPinned(data.activity);
           this.pinned = data.pinned;
         }
         this.offset = data['load-next'];
