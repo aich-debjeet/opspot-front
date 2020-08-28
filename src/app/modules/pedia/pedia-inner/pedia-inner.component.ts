@@ -12,6 +12,8 @@ export class PediaInnerComponent implements OnInit {
   props: string = "descriptions|info|sitelinks";
   uniqId: string = '';
   htmlToAdd: any;
+  title: string;
+  desc: string;
   // wikiApi = `https://www.wikidata.org/w/api.php`;
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +24,8 @@ export class PediaInnerComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       console.log('params', params['info']);
-      if (params['info']) {
+      if (params['info'] && params['title']) {
+        this.title = params['title']
         this.uniqId = params['info'];
         this.getDetails(this.uniqId);
       }
@@ -31,7 +34,7 @@ export class PediaInnerComponent implements OnInit {
 
   async getDetails(id: string) {
     try {
-      const response = await this.pediaService.get('', {
+      const response = await this.pediaService.get('wikidata', {
         action: 'wbgetentities',
         sites: 'enwiki',
         ids: id,
@@ -39,10 +42,11 @@ export class PediaInnerComponent implements OnInit {
         languages: 'en',
         format: 'json'
       });
-      this.htmlToAdd = response;
-      console.log('response', response)
+      this.desc = response['data']['entities'][id]['descriptions']['en']['value'];
     }
     catch (e) {
+      if(this.desc)
+      this.desc='';
       console.log('error', e)
     }
   }

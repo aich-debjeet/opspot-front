@@ -4,7 +4,7 @@ import { PediaInnerComponent } from './pedia-inner/pedia-inner.component';
 
 const routes: Routes = [
   {
-    path:'pedia/:info', component: PediaInnerComponent
+    path:'pedia/:title/:info', component: PediaInnerComponent
   }
 ];
 

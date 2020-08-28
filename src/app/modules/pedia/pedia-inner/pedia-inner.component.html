@@ -1,9 +1,37 @@
 <section class="o-pedia-inner-page-sec">
     <div class="container">
-       <div class="o-pedia-inner-page-body">
-            <div class="o-pedia-inner-page-bolck" [innerHtml]="htmlToAdd | safe">
-            </div><!--block ends-->
-       </div> <!--body ends-->
-    </div><!--container ends-->
-</section><!--pedia sec ends-->
-
+        <div class="o-pedia-inner-page-body">
+            <div class="o-pedia-inner-page-bolck" *ngIf="desc; else noData">
+                <div class="o-pedia-inner-page-bolck__left">
+                    <div class="o-pedia-inner-page-avatar">
+                        <img src="assets/avatars/default-large.png">
+                    </div>
+                    <!--avatar ends-->
+                    <div class="text-lg f500 primary">Personal Information</div>
+                    <div class="o-pedia-inner-page-info text-md">
+                        <div class="f500">Full Name</div>
+                        <div>{{title}}</div>
+                    </div>
+                    <!--info ends-->
+                </div>
+                <div class="o-pedia-inner-page-bolck__right">
+                    <h3 class="f700">{{title}}</h3>
+                    <p class="ptb9 mt9 text-md">
+                        {{desc}}
+                    </p>
+                </div>
+            </div>
+            <ng-template #noData>
+                <div class="o-pedia-inner-page-bolck__right">
+                    <p class="ptb9 mt9 text-md">
+                        Sorry, we could not gather any Information for you.
+                    </p>
+                </div>
+            </ng-template>
+            <!--block ends-->
+        </div>
+        <!--body ends-->
+    </div>
+    <!--container ends-->
+</section>
+<!--pedia sec ends-->

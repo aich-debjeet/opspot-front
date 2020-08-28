@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 //   providedIn: 'root'
 // })
 export class InnerPediaService {
-  base: string = 'https://www.onepagespotlight.com/w/api.php'
+  base: string = 'https://www.onepagespotlight.com/api/v3/'
   static _(http: HttpClient) {
     return new InnerPediaService(http);
   }
