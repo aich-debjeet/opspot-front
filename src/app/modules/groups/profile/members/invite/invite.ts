@@ -89,17 +89,19 @@ export class GroupsProfileMembersInvite implements OnInit {
       .then(() => {
         this.inviteInProgress = false;
         // this.toastr.success('Invitations sent');
-        // this.inviteArrray = [];
+        this.inviteArrray = [];
       })
       .catch(e => {
         this.inviteInProgress = false;
         this.inviteError = e;
+        this.inviteArrray = [];
+
         // this.toastr.error('Something went wrong');
       });
   }
 
   search(q) {
-    // this.colapse = [false];
+    this.colapse = [false];
     if (this.timeout)
       clearTimeout(this.timeout);
 
@@ -133,7 +135,7 @@ export class GroupsProfileMembersInvite implements OnInit {
   }
 
   load(refresh: boolean = false, query = null) {
-    this.colapse = [false];
+    // this.colapse = [false];
 
     if (this.httpSubscription)
       this.httpSubscription.unsubscribe();
