@@ -2,12 +2,15 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Session } from '../../../../../services/session';
 import { Client } from '../../../../../services/api';
+import { OverlayModalService } from '../../../../../services/ux/overlay-modal';
+import { PortfolioFormComponent } from '../../../../forms/portfolio-form/portfolio-form.component';
 
 @Component({
   moduleId: module.id,
   selector: 'opspot-card-user',
   inputs: ['object', 'avatarSize', 'cardType'],
-  templateUrl: 'user.html'
+  templateUrl: 'user.html',
+  styleUrls:['./user.scss']
 })
 
 export class UserCard implements OnInit {
@@ -20,13 +23,16 @@ export class UserCard implements OnInit {
   offset: string = '';
   subscriptionCount = 0;
   subscriberCount = 0;
+  sidebarMsg = true;
 
   @Output() update: EventEmitter<any> = new EventEmitter();
   @Output() remove: EventEmitter<any> = new EventEmitter();
+  @Output() activityResp: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public session: Session,
-    public client: Client
+    public client: Client,
+    public overlayModal: OverlayModalService,
   ) { }
 
   set object(value: any) {
@@ -59,5 +65,16 @@ export class UserCard implements OnInit {
 
   removeUser(user: any) {
     this.remove.next(user);
+  }
+  showPortfolio(){
+    this.overlayModal.create(PortfolioFormComponent, '', {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+      // listen to the update callback
+      onUpdate: (payload: any) => {
+        // make update to local var
+        this.activityResp.emit(payload)
+        this.overlayModal.dismiss();
+      }
+    }).present();
   }
 }

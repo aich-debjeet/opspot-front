@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { base64ToFile } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-group-banner',
@@ -23,6 +24,8 @@ export class GroupBannerComponent {
   open: boolean = false;
   croppieImage;
   added: EventEmitter<any> = new EventEmitter();
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
 
 
   @ViewChild('fileInput') fileInput: ElementRef
@@ -84,9 +87,24 @@ export class GroupBannerComponent {
   // fix: AOT
   // TODO @shashi: complete this feature
   close() {
-
+    this.open = false;
+    this.added.next({
+      index: this.index,
+      file: this.file,
+      top: this.top
+    });
+    this.file = null;
   }
 
+  imageCropped(event: any) {
+    this.src = event;
+    this.file = base64ToFile(this.src);
+  }
+
+  fileChangeEvent(event: any): void {
+    this.open = true;
+    this.imageChangedEvent = event;
+  }
   openConversation() {
     this.router.navigate([`groups/${this.object.guid}/conversation`])
   }

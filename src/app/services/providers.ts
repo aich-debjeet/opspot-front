@@ -38,12 +38,18 @@ import { TimeDiffService } from './timediff.service';
 import { UpdateMarkersService } from '../common/services/update-markers.service';
 import { HttpClient } from "@angular/common/http";
 import { CommonEventsService } from './common-events.service';
+import { InnerPediaService } from './inner-pedia.service';
 
 export const OPSPOT_PROVIDERS : any[] = [
    {
      provide: ScrollService,
      useFactory: ScrollService._,
      deps: []
+   },
+   {
+     provide: InnerPediaService,
+     useFactory: InnerPediaService._,
+     deps: [HttpClient]
    },
    {
      provide: SocketsService,

@@ -59,10 +59,10 @@
         <ul class="tabs-list">
           <li [class.active]="isActive('feed')"><a [routerLink]="['/', user.username, 'feed']" id="channel-feed-tab">Feed</a></li>
           <!-- <li><a [routerLink]="['/', user.username, 'groups']">Community</a></li> -->
-          <li [class.active]="isActive('events')"><a [routerLink]="['/', user.username, 'events']" id="channel-event-showtimez-tab">Event/Showtimez</a></li>
-          <li [class.active]="isActive('opportunities')"><a [routerLink]="['/', user.username, 'opportunities']" id="channel-opportunity-tab">Opportunity</a></li>
-          <li [class.active]="isActive('marketplaces')"><a [routerLink]="['/', user.username, 'marketplaces']" id="channel-thebluestore-tab">TheBlueStore</a></li>
-          <li [class.active]="isActive('blogs')"><a [routerLink]="['/', user.username, 'blogs']" id="channel-blog-tab">Blog</a></li>
+          <li [class.active]="isActive('event')"><a [routerLink]="['/', user.username, 'event']" id="channel-event-showtimez-tab">Event/Showtimez</a></li>
+          <li [class.active]="isActive('opportunity')"><a [routerLink]="['/', user.username, 'opportunity']" id="channel-opportunity-tab">Opportunity</a></li>
+          <li [class.active]="isActive('marketplace')"><a [routerLink]="['/', user.username, 'marketplace']" id="channel-thebluestore-tab">TheBlueStore</a></li>
+          <li [class.active]="isActive('blog')"><a [routerLink]="['/', user.username, 'blog']" id="channel-blog-tab">Blog</a></li>
         </ul>
       </div>
       <m-channel--feed [user]="user" *ngIf="filter === 'feed'" #feed></m-channel--feed>

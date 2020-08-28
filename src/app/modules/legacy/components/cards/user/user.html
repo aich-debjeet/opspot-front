@@ -1,6 +1,7 @@
 <div [ngSwitch]="cardType">
 
-    <div *ngSwitchCase="'user2'" class="o-card o-suggestion float-left slide" style="width: 100% !important; margin: 0px !important;">
+    <div *ngSwitchCase="'user2'" class="o-card o-suggestion float-left slide"
+        style="width: 100% !important; margin: 0px !important;">
         <div class="o-suggestion__top-bar">
             <!-- <i class="material-icons o-fontRemove close-btn" (click)="removeUser()">close</i> -->
         </div>
@@ -8,10 +9,16 @@
         <div class="o-suggestion__avatar" id="suggested_user_profile_image" [routerLink]="['/', user?.username]"
             [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + user?.guid + ')'" alt="">
         </div>
-        <div class="o-suggestion__name caption-bold" id="suggested_user_profile_name" [routerLink]="['/', user?.username]">{{ user?.name | truncate:[15, '...'] }}</div>
+        <div class="o-suggestion__name caption-bold" id="suggested_user_profile_name"
+            [routerLink]="['/', user?.username]">{{ user?.name | truncate:[15, '...'] }}</div>
         <div class="text-md grey mr-bt" id="suggested_user_username">@{{ user?.username | truncate:[15, '...'] }}</div>
         <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
-        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid"></opspot-button-subscribe>
+        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)"
+            *ngIf="user.guid != session.getLoggedInUser().guid; else emptyTag"></opspot-button-subscribe>
+        <ng-template #emptyTag>
+            <span class="" style="background: transparent; height: 22px;">&nbsp;
+            </span>
+        </ng-template>
     </div>
     <div *ngSwitchCase="'user3'" class="o-card o-suggestion float-left">
         <div class="o-suggestion__top-bar">
@@ -20,60 +27,101 @@
         </div>
         <!-- <a [routerLink]="['/', user?.username]" class="demo"></a> -->
         <div class="o-suggestion__avatar" id="suggested_user_profile_image" [routerLink]="['/', user?.username]"
-            [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + user?.guid + '/medium/' + user.icontime + ')'" alt="">
+            [style.background-image]="'url(' + opspot.cdn_url + '/icon/' + user?.guid + '/medium/' + user.icontime + ')'"
+            alt="">
         </div>
-        <div class="o-suggestion__name caption-bold" id="suggested_user_profile_name" [routerLink]="['/', user?.username]">{{ user?.name | truncate:[15, '...'] }}</div>
+        <div class="o-suggestion__name caption-bold" id="suggested_user_profile_name"
+            [routerLink]="['/', user?.username]">{{ user?.name | truncate:[15, '...'] }}</div>
         <div class="text-md grey" id="suggested_user_username">@{{ user?.username | truncate:[15, '...'] }}</div>
         <!-- <div class="o-suggestion__info text-sm grey">{{ user?.merchant?.exclusive?.intro }}</div> -->
-        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)" *ngIf="user.guid != session.getLoggedInUser().guid"></opspot-button-subscribe>
+        <opspot-button-subscribe class="follow-btn" [user]="user" (subscribed)="subscribeCountUpdate($event)"
+            *ngIf="user.guid != session.getLoggedInUser().guid; else emptyTag"></opspot-button-subscribe>
+        <ng-template #emptyTag>
+            <span class="" style="background: transparent; height: 22px;">&nbsp;
+            </span>
+        </ng-template>
     </div>
 
-    <div *ngSwitchCase="'portfolio'">
-        <div class="o-prof-info" id="user_profile_widget">
-            <a [routerLink]="['/', user.username]">
-                <div class="o-avatar-lg" id="user-profile-image">
+    <div class="o-portfolio-info" *ngSwitchCase="'portfolio'">
+        <div class="o-portfolio-left">
+            <div class="o-portfolio-profile" [routerLink]="['/', user.username]">
+                <div class="o-portfolio-profile__avatar">
                     <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" />
                 </div>
-            </a>
-            <div class="o-prof-name" id="user-profile-details" [routerLink]="['/', user.username]">
-                <div class="caption-bold f700 w-b-a" id="user-profile-name">{{user.name}}</div>
-                <span class="text-md grey cursor-pointer" id="user-profile-account">@{{user.username}}</span>
+                <!--avatar ends-->
+                <div class="o-portfolio-profile__details">
+                    <h4 class="f500">{{user.name}}</h4>
+                    <span class="text-md grey">@{{user.username}}</span>
+                </div>
+                <!--details ends-->
             </div>
-            <div class="o-prof-activity" id="user-profile-activity">
-                <a [routerLink]="['/', user.username, 'subscribers']" id="user-profile-follower-details">
-                    <div class="caption-bold f700" id="user-profile-follower-count">{{subscriberCount?subscriberCount:0}}</div>
-                    <div class="text-sm grey">Followers</div>
-                </a>
-                <a [routerLink]="['/', user.username, 'subscriptions']" id="user-profile-following-details">
-                    <div class="caption-bold f700" id="user-profile-following-count">{{subscriptionCount?subscriptionCount:0}}</div>
-                    <div class="text-sm grey">Following</div>
-                </a>
+            <!--profile-->
+            <div class="o-portfolio-buttonset hidden-above-tablet">
+                <button type="button" class="btn btn-primary btn-sm btn--prof"
+                    *ngIf="user.guid == session.getLoggedInUser().guid; else otherUser">Add Work</button>
+                <ng-template #otherUser>
+                    <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm btn--prof">Network</button> -->
+                    <opspot-button-subscribe [sideBar]="sidebarMsg" [user]="user" class="btn-restructure"
+                        *ngIf="session.isLoggedIn() && session.getLoggedInUser().guid != user.guid && !user.blocked ">
+                    </opspot-button-subscribe>
+                    <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button> -->
+                    <!-- <button type="button" class="btn btn-outline-primary btn-sm btn--prof" id="sidebar-network">Network</button> -->
+                    <m-messenger--channel-button *ngIf="user.subscribed && session.getLoggedInUser().guid != user.guid"
+                        [user]="user" [label]="'Network'" [theme]="'secondary'"></m-messenger--channel-button>
+                </ng-template>
             </div>
-            <br>
-            <span [hidden]="!user?.about?.description" class="text-md word-br" id="sidebar-user-description">
-                <span class="o-bio__title caption-medium t-a-l" id="sidebar-about-user">About: </span>
-                {{user.about.description}}
-            </span>
-            <br>
-            <ul class="o-bio__info">
-              <li class="o-bio-info__item" [hidden]="user?.location">
-                <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
-                <span class="text-md float-left" id="sidebar-location">{{user.location | titlecase}}</span>
-              </li>
-              <li class="o-bio-info__item" [hidden]="!user?.email">
-                <span class="o-bio-info_ico"><i class="icon-mail"></i></span>
-                <span class="text-md float-left" id="sidebar-email">{{user.email}}</span>
-              </li>
-              <li class="o-bio-info__item" [hidden]="!user?.phone">
-                <span class="o-bio-info_ico"><i class="icon-phone"></i></span>
-                <span class="text-md float-left" id="sidebar-phone-number">{{user.phone}}</span>
-              </li>
-              <li class="o-bio-info__item" [hidden]="!user?.website">
-                <span class="o-bio-info_ico"><i class="icon-globe"></i></span>
-                <span class="text-md float-left" id="sidebar-website">{{user.website}}</span>
-              </li>
-            </ul>
+            <!--button ends-->
+            <div class="o-portfolio-followers hidden-under-tablet">
+                <div class="text-md f500 mr-25" [routerLink]="['/', user.username, 'subscribers']">
+                    {{subscriberCount?subscriberCount:0}} Followers</div>
+                <div class="text-md f500" [routerLink]="['/', user.username, 'subscriptions']">
+                    {{subscriptionCount?subscriptionCount:0}} Following</div>
+            </div>
+            <!--followers ends-->
+            <div class="o-portfolio-followers-mob hidden-above-tablet">
+                <div class="text-lg f500 mr-25 lh-20" [routerLink]="['/', user.username, 'subscribers']">
+                    {{subscriberCount?subscriberCount:0}} <br><span class="text-sm grey">Followers</span></div>
+                <div class="text-lg f500 lh-20" [routerLink]="['/', user.username, 'subscriptions']">
+                    {{subscriptionCount?subscriptionCount:0}} <br><span class="text-sm grey">Following</span></div>
+            </div>
+            <!--followers ends-->
+            <div class="o-portfolio-skill hidden-above-tablet" [hidden]="!user?.general_info?.skills">
+                <a class="o-portfolio-skill__tag" *ngFor="let skills of user?.general_info?.skills">{{skills}}</a>
+            </div>
+            <!--skill ends-->
+            <div class="o-portfolio-description" [hidden]="!user?.about?.description">
+                <div class="text-md">
+                    <div class="text-lg f500 hidden-above-tablet mb-10">About {{user.name}}</div>
+                    {{user.about.description}}
+                </div>
+            </div>
+            <!--description ends-->
         </div>
+        <!--left ends-->
+        <div class="o-portfolio-right hidden-under-tablet">
+            <div class="o-portfolio-buttonset">
+                <button type="button" class="btn btn-primary btn-sm btn--prof"
+                    *ngIf="user.guid == session.getLoggedInUser().guid; else otherUser" (click)="showPortfolio()">Add Work</button>
+                <ng-template #otherUser>
+                    <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm btn--prof">Network</button> -->
+                    <opspot-button-subscribe [sideBar]="sidebarMsg" [user]="user" class="btn-restructure"
+                        *ngIf="session.isLoggedIn() && !user.blocked ">
+                    </opspot-button-subscribe>
+                    <!-- <button type="button" class="btn btn-primary btn-sm btn--prof">Follow</button> -->
+                    <!-- <button type="button" class="btn btn-outline-primary btn-sm btn--prof" id="sidebar-network">Network</button> -->
+                    <m-messenger--channel-button *ngIf="user.subscribed"
+                        [user]="user" [label]="'Network'" [theme]="'secondary'"></m-messenger--channel-button>
+                </ng-template>
+            </div>
+            <!--button ends-->
+            <div class="o-portfolio-skill" [hidden]="!user?.general_info?.skills">
+                <a class="o-portfolio-skill__tag" *ngFor="let skills of user?.general_info?.skills">{{skills}}</a>
+            </div>
+            <!--skill ends-->
+        </div>
+        <!--right ends-->
     </div>
 
     <div *ngSwitchDefault>
@@ -82,7 +130,7 @@
                 <div class="m-card--user--banner--img" [ngStyle]="{'background-image': 'url(' + bannerSrc + ')'}"></div>
                 <div class="opspot-banner-overlay"></div>
             </div>
-        
+
             <a [routerLink]="['/', user.username]" class="mdl-card__supporting-text opspot-usercard-block">
                 <div class="avatar">
                     <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" />
@@ -91,7 +139,7 @@
                 <div class="body">
                     <h3>{{user.name}}</h3>
                     <span>@{{user.username}}</span>
-        
+
                     <!-- <div class="m-usercard-bio">
                     <div class="m-usercard-bio-location" [hidden]="!user.city">
                         <i class="material-icons mdl-color-text--blue-grey-400">location_city</i>
@@ -104,7 +152,7 @@
                     </div> -->
                 </div>
             </a>
-        
+
             <!-- <div class="opspot-tabs mdl-tabs__tab-bar" *ngIf="user.subscribed">
                 <a class="mdl-tabs__tab mdl-color-text--blue-grey-500 1" [routerLink]="['/', user.username, 'subscribers']">
                     <span i18n="@@M__COMMON__SUBSCRIBERS">Subscribers</span>
@@ -119,14 +167,14 @@
                     <b>{{user.impressions?user.impressions:'0' | abbr:0}}</b>
                 </a>
             </div> -->
-        
+
             <opspot-button-subscribe [user]="user"></opspot-button-subscribe>
             <!-- <opspot-button-boost [object]="user" *ngIf="user.guid == session.getLoggedInUser().guid"></opspot-button-boost> -->
             <!-- <div class="opspot-usercard-buttons" [ngClass]="{ 'has-feature-button': session.isAdmin() }">
                 <ng-content select="[buttons]"></ng-content>
             </div> -->
         </ng-template>
-        
+
         <div class="o-prof-info" *ngIf="user.guid == session.getLoggedInUser().guid; else otherUser">
             <a [routerLink]="['/', user.username]">
                 <div class="o-avatar-lg" id="user-profile-image">
@@ -139,15 +187,18 @@
             </div>
             <div class="o-prof-activity" id="user-profile-activity">
                 <a [routerLink]="['/', user.username, 'subscribers']" id="user-profile-follower-details">
-                    <div class="caption-bold f700" id="user-profile-follower-count">{{subscriberCount?subscriberCount:0}}</div>
+                    <div class="caption-bold f700" id="user-profile-follower-count">
+                        {{subscriberCount?subscriberCount:0}}</div>
                     <div class="text-sm grey">Followers</div>
                 </a>
                 <a [routerLink]="['/', user.username, 'subscriptions']" id="user-profile-following-details">
-                    <div class="caption-bold f700" id="user-profile-following-count">{{subscriptionCount?subscriptionCount:0}}</div>
+                    <div class="caption-bold f700" id="user-profile-following-count">
+                        {{subscriptionCount?subscriptionCount:0}}</div>
                     <div class="text-sm grey">Following</div>
                 </a>
                 <a [routerLink]="['/', user.username, 'feed']" id="user-profile-view-details">
-                    <div class="caption-bold f700" id="user-profile-view-count">{{user.post_count?user.post_count:0 | abbr:0}}</div>
+                    <div class="caption-bold f700" id="user-profile-view-count">
+                        {{user.post_count?user.post_count:0 | abbr:0}}</div>
                     <div class="text-sm grey">Posts</div>
                 </a>
             </div>
@@ -155,59 +206,3 @@
     </div>
 
 </div>
-
-<style>
-.t-a-l {
-    text-align: left;
-}
-.follow-btn {
-    position: relative;
-    margin: auto;
-}
-.o-prof-info {
-    width: 100%;
-    background: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 23px;
-    border: 1px solid #ECEFF1;
-}
-.o-avatar-lg {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    overflow: hidden;
-    float: left;
-}
-.o-prof-name {
-    text-align: center;
-    margin-top: 9px;
-}
-.o-prof-activity {
-    width: 100%;
-    display: flex;
-    margin-top: 18px;
-}
-.o-prof-activity a div {
-    width: 100%;
-    text-align: center;
-}
-.caption-bold {
-    color: #263238;
-    font-size: 15px;
-    line-height: 20px;
-    font-weight: 500;
-}
-.f700 {
-    font-weight: 700 !important;
-}
-.o-prof-activity a {
-    flex: 1;
-    text-align: center;
-}
-.mr-bt {
-    margin-bottom: 5px;
-}
-</style>

@@ -3,6 +3,7 @@ import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMasonryModule } from 'ngx-masonry';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { OPSPOT_PIPES } from './pipes/pipes';
 
@@ -97,6 +98,7 @@ import { BoostPostCard } from '../modules/legacy/components/cards/boost-post-car
 import { CapitalizeFirstPipePipe } from './pipes/capitalize-first-pipe.pipe';
 import { PostCardTitle } from '../modules/legacy/components/cards/post-title-card/post-tile-card';
 import { NoRightClickDirective } from './directives/no-right-click.directive';
+import { NgxImgCropperComponent } from './components/ngx-img-cropper/ngx-img-cropper.component';
 
 @NgModule({
   imports: [
@@ -106,7 +108,8 @@ import { NoRightClickDirective } from './directives/no-right-click.directive';
     ReactiveFormsModule,
     NgxCroppieModule,
     NgxMasonryModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    ImageCropperModule
   ],
   declarations: [
     OPSPOT_PIPES,
@@ -194,7 +197,8 @@ import { NoRightClickDirective } from './directives/no-right-click.directive';
     ActivityWidgetComponent,
     MyjourneyListCardComponent,
     CapitalizeFirstPipePipe,
-    NoRightClickDirective
+    NoRightClickDirective,
+    NgxImgCropperComponent
   ],
   exports: [
     OPSPOT_PIPES,
@@ -280,7 +284,8 @@ import { NoRightClickDirective } from './directives/no-right-click.directive';
     MasonryContainerComponent,
     MyjourneyWidgetComponent,
     ActivityWidgetComponent,
-    MyjourneyListCardComponent
+    MyjourneyListCardComponent,
+    NgxImgCropperComponent
     
   ],
   providers: [

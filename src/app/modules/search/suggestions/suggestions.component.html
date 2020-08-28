@@ -52,7 +52,7 @@
   </a>
 
   <div *ngIf="q && pediaAutocomplete?.length > 0">
-    <a class="m-search-bar-suggestions-suggestion m-search-bar-suggestions-context"
+    <a [routerLink]="['pedia', pedia.unique_id]" class="m-search-bar-suggestions-suggestion m-search-bar-suggestions-context"
       style="display: flex; flex-direction: row;" *ngFor="let pedia of pediaAutocomplete">
       <div class="search-title" style="width:25%">
         <b>OPS Pedia Result:</b>
