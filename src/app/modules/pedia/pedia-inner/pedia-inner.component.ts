@@ -9,11 +9,13 @@ import { InnerPediaService } from '../../../services/inner-pedia.service';
   styleUrls: ['./pedia-inner.component.scss']
 })
 export class PediaInnerComponent implements OnInit {
-  props: string = "descriptions|info|sitelinks";
+  props: string = "aliases|claims|datatype|descriptions|info|labels|sitelinks";
   uniqId: string = '';
   htmlToAdd: any;
   title: string;
   desc: string;
+  detailedDesc: any;
+  imgStr: string;
   // wikiApi = `https://www.wikidata.org/w/api.php`;
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +29,7 @@ export class PediaInnerComponent implements OnInit {
       if (params['info'] && params['title']) {
         this.title = params['title']
         this.uniqId = params['info'];
-        this.getDetails(this.uniqId);
+        this.getDetails(this.uniqId).then(()=> this.getDetailsWiki(this.title));
       }
     })
   }
@@ -43,12 +45,31 @@ export class PediaInnerComponent implements OnInit {
         format: 'json'
       });
       this.desc = response['data']['entities'][id]['descriptions']['en']['value'];
+      if(response['data']['entities'][id]['claims']['P18']){
+        this.imgStr = response['data']['entities'][id]['claims']['P18'][0]['mainsnak']['datavalue'].value.split(' ').join('_');
+      }
     }
     catch (e) {
       if(this.desc)
       this.desc='';
-      console.log('error', e)
     }
   }
 
+  async getDetailsWiki(title: string){
+    try {
+      const response = await this.pediaService.get('wikidata', {
+        action: 'query',
+        list: 'search',
+        srsearch: title,
+        format: 'json'
+      });
+      if(response['data']['query']['search']){
+        this.detailedDesc = response['data']['query']['search'];
+      }
+    }
+    catch (e) {
+      if(this.desc)
+      this.desc='';
+    }
+  }
 }
