@@ -148,7 +148,7 @@
                     <ul class="o-invite-to-community-list scrollbar scrollbar-default" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="load()"
                     [scrollWindow]="false">
                         <div *ngFor="let user of users; let x = index">
-                        <li class="o-invite-to-community-list__user-list"> 
+                        <li class="o-invite-to-community-list__user-list" *ngIf="!user.is_invited"> 
                             <div class="o-invite-to-community-info" >
                                 <div class="o-invite-to-community-info-prof">
                                     <div class="o-invite-to-community-info-prof__avatar o-avatar-md">

@@ -77,7 +77,13 @@ export class GroupsProfileMembersInvite implements OnInit {
     // this.invited.next(user);
 
     this.q = '';
-    this.users = [];
+    // this.users = [];
+    this.colapse = [false];
+    this.users = this.users.filter((item) => {
+      return !this.inviteArrray.includes(item.guid); 
+    })
+   
+    
     if (!this.group) {
       return;
     }
@@ -90,12 +96,13 @@ export class GroupsProfileMembersInvite implements OnInit {
         this.inviteInProgress = false;
         // this.toastr.success('Invitations sent');
         this.inviteArrray = [];
+        this.colapse = [false];
       })
       .catch(e => {
         this.inviteInProgress = false;
         this.inviteError = e;
         this.inviteArrray = [];
-
+        this.colapse = [false];
         // this.toastr.error('Something went wrong');
       });
   }
