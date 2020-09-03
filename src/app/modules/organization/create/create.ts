@@ -39,7 +39,7 @@ export class OrganizationCreator {
   avatar: any = false;
   organization: any = {
     name: '',
-    description: '',
+    briefdescription: '',
     membership: 2,
     tags: [],
     invitees: '',
@@ -104,7 +104,7 @@ export class OrganizationCreator {
 
   save(e) {
 
-    if (!(this.organization.name && this.organization.location && this.organization.category && this.organization.description)) {
+    if (!(this.organization.name && this.organization.location && this.organization.category && this.organization.briefdescription)) {
       this.toastr.error('Error! Please fill the required fields');
       return;
     }
