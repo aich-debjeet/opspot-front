@@ -19,12 +19,12 @@ import { CroppieOptions, ResultOptions, CropData } from 'croppie';
     <input *ngIf="editing" type="file" accept="image/jpg, image/jpeg, image/png" #file (change)="add($event)"/>
   </div>
   <div *ngIf="proEdit" class="o-prof-img-block">
-    <div class="o-avatar-xl o-avatar-xl--prof" [style.background-image]="'url(' + src + ')'" >
+    <div class="o-avatar-xl o-avatar-xl--prof org" [style.background-image]="'url(' + src + ')'" [ngClass]="{ 'org': object.type === 'organization' }">
       <img *ngIf="!src" src="{{opspot.cdn_assets_url}}assets/avatars/blue/default-large.png" class="mdl-shadow--4dp" />
-      <a *ngIf="opspot.user.guid === object.guid || groupProfile || object['is:owner'] || object['is:admin']" class="o-prof-img-edit" (click)="openFileSelect()" id="avatar-image-edit"><i class="icon-edit-profile"></i></a>
+      <a *ngIf="opspot.user.guid === object.guid || groupProfile || object['is:owner'] || object['is:admin']" class="o-prof-img-edit" [ngClass]="{ 'org-pro-image': object.type === 'organization' }" (click)="openFileSelect()" id="avatar-image-edit"><i class="icon-edit-profile"></i></a>
     </div>
     <input  style="display:none" id="onfile" type="file"  accept=".jpg, .jpeg, .png" #file (change)="add($event)"/>
-    <app-image-croper *ngIf="open" [open]="open" (closed)=close() [croppieImage]="croppieImage" [croperType]="'circle'" (imgResult)="newImageResultFromCroppie($event)">
+    <app-image-croper *ngIf="open" [open]="open" (closed)=close() [croppieImage]="croppieImage" [croperType]="cropType" (imgResult)="newImageResultFromCroppie($event)">
     </app-image-croper>
   </div>
 
@@ -78,6 +78,15 @@ import { CroppieOptions, ResultOptions, CropData } from 'croppie';
   ::ng-deep .cr-slider-wrap{
     text-align:center
   }
+
+  ::ng-deep .org {
+    border-radius: 4px !important;
+  } 
+  ::ng-deep .org-pro-image {
+    bottom: -5px !important;
+    right: -5px !important;
+  }
+
   </style>
 `
 })
@@ -102,6 +111,7 @@ export class OpspotAvatar {
   uploadImg;
   @Output() closed: EventEmitter<any> = new EventEmitter();
   @Input() groupProfile;
+  cropType = 'circle';
 
   public get croppieOptions(): CroppieOptions {
     const opts: CroppieOptions = {};
@@ -133,9 +143,15 @@ export class OpspotAvatar {
 
     value.icontime = value.icontime ? value.icontime : '';
     this.object = value;
+    console.log("this.object:", this.object);
+    
     this.src = `${this.opspot.cdn_url}fs/v1/avatars/${this.object.guid}/medium/${this.object.icontime}`;
     if (this.object.type === 'user')
       this.src = `${this.opspot.cdn_url}icon/${this.object.guid}/medium/${this.object.icontime}`;
+
+    if(this.object.type === 'organization') {
+      this.cropType = 'square';
+    }
   }
 
   set _src(value: any) {
@@ -192,4 +208,8 @@ export class OpspotAvatar {
     document.getElementById('onfile').click()
   }
 
+  getClasses(){
+    if(this.object.type === 'organization')
+      return {'org': true}
+  }
 }
