@@ -21,7 +21,8 @@ import { Location } from '@angular/common';
 
 @Component({
   selector: 'm-organization--profile',
-  templateUrl: 'profile.html'
+  templateUrl: 'profile.html',
+  styleUrls: [ './profile.scss' ]
 })
 
 export class OrganizationProfile {
