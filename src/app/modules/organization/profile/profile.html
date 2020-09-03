@@ -172,7 +172,7 @@
                                 <a class="o-organisation-skills__tag" *ngFor="let tag of organization?.tags">{{tag}}</a>
                             </div>
                             <div class="o-organisation-gathering-block">
-                                <button type="button" class="btn btn-outline-primary btn-sm">Edit Organisation</button>
+                                <button type="button" class="btn btn-outline-primary btn-sm" (click)="toggleEdit()">Edit Organisation</button>
                             </div>
                             <div class="o-organisation-members-top">
                                 <div class="o-organisation-members-top__count">
@@ -182,9 +182,14 @@
                             </div><!-- organisation members end-->
                             <div class="o-organisation-discrptn">
                                 <div class="text-md">
-                                    But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain as born
-                                </div>
-                                <a href="#" class="">see more</a>
+                                    <a *ngIf="(organization?.briefdescription ? organization?.briefdescription.length<30:true); else readMore">
+                                        {{organization?.briefdescription}} </a>
+                                    <ng-template #readMore>
+                                        <read-more>
+                                            {{organization?.briefdescription}}
+                                        </read-more>
+                                    </ng-template>
+                                </div>        
                             </div>
                         </div><!--organisation info block end--> 
                         <div class="o-cards o-organisation-subscribers hidden-under-tablet">
