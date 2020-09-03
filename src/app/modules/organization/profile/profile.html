@@ -1,4 +1,4 @@
-<!-- <style>
+<style>
         ::ng-deep .memberToggle .m-modal-container {
             width: 543px !important;
             min-width: 0;
@@ -26,7 +26,7 @@
             position: sticky;
             top: 60px;
         }
-    </style> -->
+    </style>
     
     <!-- <div class="container hidden-above-tablet">
         <div class="without-nav-header">
@@ -137,10 +137,11 @@
                             
                         </div>
                     </div> -->
+                    <!-- <div class="o-cover o-cover--organisation hidden-above-tablet"> -->
                     <app-group-banner class="o-cover o-cover--community hidden-above-tablet" [object]="organization"
                         [editMode]="editing" [top]="organization?.banner_position" [done]="editDone" (added)="add_banner($event)">
                     </app-group-banner>
-    
+                    <!-- </div> -->
                     <div class="o-card o-organisation-info o-organisation-info--radius o-organisation-info--shadow">
                             <!-- <a class="o-organisation-info-option"><i class="icon-more-vertical f-15"></i></a> -->
                             <div class="o-organisation-option-drop">
@@ -180,6 +181,13 @@
                                     <div class="text-sm grey">Subscribers</div>
                                 </div>
                             </div><!-- organisation members end-->
+                            <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle" (closed)="inviteToggle = false">
+                                <opspot-organization-profile-members-invite [organization]="organization">
+                                </opspot-organization-profile-members-invite>
+                            </m-modal>
+                            <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle" (closed)="memberToggle = false">
+                                <opspot-organization-profile-members [organization]="organization" (totalOrganization)="groupCount($event)"></opspot-organization-profile-members>
+                            </m-modal> 
                             <div class="o-organisation-discrptn">
                                 <div class="text-md">
                                     <a *ngIf="(organization?.briefdescription ? organization?.briefdescription.length<30:true); else readMore">
@@ -197,10 +205,10 @@
                                 <div class="text-lg f500">
                                     Subscribers
                                 </div> 
-                                <span class="icon-plus-circle primary">            
+                                <span class="icon-plus-circle primary" *ngIf="organization && (organization['is:owner'] || organization['is:editor'])" (click)="openInvite()">            
                                 </span>
                             </div><!-- header end -->
-                            <ul class="o-organisation-subscribers-list scrollbar scrollbar-default">
+                            <!-- <ul class="o-organisation-subscribers-list scrollbar scrollbar-default">
                               <li class="o-organisation-subscribers-list__user-list">
                                   <div class="o-organisation-subscribers-info">
                                       <div class="o-organisation-subscribers-info-prof">
@@ -218,159 +226,20 @@
                                         </a>
                                       </div>
                                   </div>
-                              </li><!-- user list end-->
-                              <li class="o-organisation-subscribers-list__user-list">
-                                  <div class="o-organisation-subscribers-info">
-                                      <div class="o-organisation-subscribers-info-prof">
-                                        <div class="o-organisation-subscribers-info-prof__avatar o-avatar-md">
-                                            <img src="assets/demo/avatar.png" alt="">
-                                        </div>
-                                        <div id="username" class="text-md">
-                                            Devansh Rathore
-                                        </div>
-                                      </div>
-                                      <div class="o-organisation-subscribers-info__option">
-                                        <button type="button" class="btn btn-outline-primary btn-xs disabled">Editor</button>
-                                        <a href="#">
-                                          <i class="icon-more-vertical"></i>
-                                        </a>
-                                        <!-- <div onclick="myFunction()" class="o-subscribers-option-drop__btn head-action__link"><i class="icon-more-vertical f-15"></i> </div>
-                                        <div id="o-subscribers-option-dropdown" class="o-subscribers-option-drop__block">
-                                            <a href="#">comming ..</a>
-                                        </div> -->
-                                      </div>
-                                  </div>
-                              </li><!-- user list end-->
-                              <li class="o-organisation-subscribers-list__user-list">
-                                  <div class="o-organisation-subscribers-info">
-                                      <div class="o-organisation-subscribers-info-prof">
-                                        <div class="o-organisation-subscribers-info-prof__avatar o-avatar-md">
-                                            <img src="assets/demo/avatar.png" alt="">
-                                        </div>
-                                        <div id="username" class="text-md">
-                                            Devansh Rathore
-                                        </div>
-                                      </div>
-                                      <div class="o-organisation-subscribers-info__option">
-                                        <a href="#">
-                                          <i class="icon-more-vertical"></i>
-                                        </a>
-                                      </div>
-                                  </div>
-                              </li><!-- user list end-->
-                              <li class="o-organisation-subscribers-list__user-list">
-                                  <div class="o-organisation-subscribers-info">
-                                      <div class="o-organisation-subscribers-info-prof">
-                                        <div class="o-organisation-subscribers-info-prof__avatar o-avatar-md">
-                                            <img src="assets/demo/avatar.png" alt="">
-                                        </div>
-                                        <div id="username" class="text-md">
-                                            Devansh Rathore
-                                        </div>
-                                      </div>
-                                      <div class="o-organisation-subscribers-info__option">
-                                        <a href="#">
-                                          <i class="icon-more-vertical"></i>
-                                        </a>
-                                      </div>
-                                  </div>
-                              </li><!-- user list end-->
-                              <li class="o-organisation-subscribers-list__user-list">
-                                  <div class="o-organisation-subscribers-info">
-                                      <div class="o-organisation-subscribers-info-prof">
-                                        <div class="o-organisation-subscribers-info-prof__avatar o-avatar-md">
-                                            <img src="assets/demo/avatar.png" alt="">
-                                        </div>
-                                        <div id="username" class="text-md">
-                                            Devansh Rathore
-                                        </div>
-                                      </div>
-                                      <div class="o-organisation-subscribers-info__option">
-                                        <a href="#">
-                                          <i class="icon-more-vertical"></i>
-                                        </a>
-                                      </div>
-                                  </div>
-                              </li><!-- user list end-->
-                              <li class="o-organisation-subscribers-list__user-list">
-                                  <div class="o-organisation-subscribers-info">
-                                      <div class="o-organisation-subscribers-info-prof">
-                                        <div class="o-organisation-subscribers-info-prof__avatar o-avatar-md">
-                                            <img src="assets/demo/avatar.png" alt="">
-                                        </div>
-                                        <div id="username" class="text-md">
-                                            Devansh Rathore
-                                        </div>
-                                      </div>
-                                      <div class="o-organisation-subscribers-info__option">
-                                        <a href="#">
-                                          <i class="icon-more-vertical"></i>
-                                        </a>
-                                      </div>
-                                  </div>
-                              </li><!-- user list end-->
-                              <li class="o-organisation-subscribers-list__user-list">
-                                  <div class="o-organisation-subscribers-info">
-                                      <div class="o-organisation-subscribers-info-prof">
-                                        <div class="o-organisation-subscribers-info-prof__avatar o-avatar-md">
-                                            <img src="assets/demo/avatar.png" alt="">
-                                        </div>
-                                        <div id="username" class="text-md">
-                                            Devansh Rathore
-                                        </div>
-                                      </div>
-                                      <div class="o-organisation-subscribers-info__option">
-                                        <a href="#">
-                                          <i class="icon-more-vertical"></i>
-                                        </a>
-                                      </div>
-                                  </div>
-                              </li><!-- user list end-->
-                              <li class="o-organisation-subscribers-list__user-list">
-                                  <div class="o-organisation-subscribers-info">
-                                      <div class="o-organisation-subscribers-info-prof">
-                                        <div class="o-organisation-subscribers-info-prof__avatar o-avatar-md">
-                                            <img src="assets/demo/avatar.png" alt="">
-                                        </div>
-                                        <div id="username" class="text-md">
-                                            Devansh Rathore
-                                        </div>
-                                      </div>
-                                      <div class="o-organisation-subscribers-info__option">
-                                        <a href="#">
-                                          <i class="icon-more-vertical"></i>
-                                        </a>
-                                      </div>
-                                  </div>
-                              </li><!-- user list end-->
-                              <li class="o-organisation-subscribers-list__user-list">
-                                  <div class="o-organisation-subscribers-info">
-                                      <div class="o-organisation-subscribers-info-prof">
-                                        <div class="o-organisation-subscribers-info-prof__avatar o-avatar-md">
-                                            <img src="assets/demo/avatar.png" alt="">
-                                        </div>
-                                        <div id="username" class="text-md">
-                                            Devansh Rathore
-                                        </div>
-                                      </div>
-                                      <div class="o-organisation-subscribers-info__option">
-                                        <a href="#">
-                                          <i class="icon-more-vertical"></i>
-                                        </a>
-                                      </div>
-                                  </div>
-                              </li><!-- user list end-->
-                            </ul><!-- subscribers list end -->
-                            <a href="community_member_popup.html" class="text-md primary subscribers-seeall">See All</a>
+                              </li>   
+                            </ul> -->
+                            <opspot-organization--member-previews [organization]="organization" (totalOrganization)="groupCount($event)">
+                            </opspot-organization--member-previews>
                           </div>                   
                 </div><!--left block end-->
                  <div class="o-right-block--organisation">
                     <!-- <div class="o-cover o-cover--organisation hidden-under-tablet m-b-13" style="background:url(assets/demo/m2.jpg) no-repeat; background-size: cover; background-position: left;">
                         <div class="o-cover__overlay"><a class="white text-lg" href="#"><i class="icon-plus-circle"></i> Add Cover Picture</a></div>
                     </div> -->
+                    <div class=" hidden-under-tablet m-b-13 m-l-10">
                     <app-group-banner [object]="organization" [editMode]="editing" [top]="organization?.banner_position" [done]="editDone"
                         (added)="add_banner($event)"></app-group-banner>
-                    <div class="text-sm grey">The dimensions for cover image is 2764px x 1843px </div>
+                    </div>
                     <div class="o-organisation-members-top o-organisation-members-top--mob hidden-above-tablet">
                             <div class="text-lg f500 primary"><u>Add Talent</u></div>
                     </div><!--members top ends-->
