@@ -2,8 +2,8 @@
     <ngx-slick-carousel class="carousel o-explore-tag tag-slik" #slickModal="slick-carousel" [config]="slideConfig"
         (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
         (beforeChange)="beforeChange($event)">
-        <div ngxSlickItem *ngFor="let tags of hashtags; let i = index;" id="explore-skill-type" class="slide o-tag">
-            <a (click)="switchCategoryType(tags.value)" class="">{{tags.value}}</a>
+        <div ngxSlickItem *ngFor="let tags of _exploreTabList; let i = index;" id="explore-skill-type" class="slide o-tag">
+            <a (click)="switchCategoryType(tags)" class="">{{tags}}</a>
         </div>
     </ngx-slick-carousel>
     <!-- <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
@@ -13,7 +13,10 @@
 <section class="o-explore-content-sec">
     <div class="container">
         <div class="o-explore-action">
-            <div class="o-explore-action__filter">
+            <div class="o-explore-action__title">
+                <h4 class="f700">{{_activeFilter}}</h4>
+              </div>
+            <!-- <div class="o-explore-action__filter">
                 <form>
                     <div class="form-group" >
                         <select class="form-control" id="explore-media-type" (change)="onChange($event.target.value)">
@@ -22,13 +25,10 @@
                             <option value="audios" id="explore-audio">Audios</option>
                             <option value="videos" id="explore-video">Videos</option>
                             <option value="blogs" id="explore-blog">Blogs</option>
-                            <!-- <option value="opportunities" id="explore-opportunitie">Opportunities</option>
-                            <option value="marketplaces" id="explore-marketplaces">The Blue Store</option>
-                            <option value="events" id="explore-events">Showtimez</option> -->
                         </select>
                     </div>
                 </form>
-            </div>
+            </div> -->
             <div class="o-explore-action__search">
                 <div class="form-group c-form_righticon-lg">
                     <input type="text" id="explore-search" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q"

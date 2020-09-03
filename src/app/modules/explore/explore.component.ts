@@ -16,6 +16,7 @@ export class ExploreComponent implements OnInit {
   exploreArray = [];
   filteredArray = [];
   hashtags: [];
+  _exploreTabList: Array<string> = ['IN the Spotlight', 'My Journey', 'Community', 'Organization', 'Blue Store', 'Showtimez', 'Events'];
   paramsSubscription: Subscription;
   q: string = '';
   type: string = '';
@@ -24,6 +25,7 @@ export class ExploreComponent implements OnInit {
   inProgress: boolean = false;
   moreData: boolean = true;
   ref: string = '';
+  _activeFilter = 'IN the Spotlight';
 
   slideConfig = {
     slidesToShow: 8,
@@ -102,18 +104,18 @@ export class ExploreComponent implements OnInit {
 
   async ngOnInit() {
     this.title.setTitle('Explore');
-    await this.load();
+    // await this.load();
   }
 
   // load hashtags
-  async load() {
-    try {
-      this.hashtags = await this.service.load(20);
-      // console.log(this.hashtags);
-    } catch (e) {
-      // console.log(e);
-    }
-  }
+  // async load() {
+  //   try {
+  //     this.hashtags = await this.service.load(20);
+  //     // console.log(this.hashtags);
+  //   } catch (e) {
+  //     // console.log(e);
+  //   }
+  // }
 
   switchCategoryType(sType: string) {
     console.log(sType);
