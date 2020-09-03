@@ -68,7 +68,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
 import { BluestoreModule } from './modules/bluestore/bluestore.module';
 import { ShowtimezModule } from './modules/showtimez/showtimez.module';
-import { ExploreModule } from './modules/explore/explore.module';
+// import { ExploreModule } from './modules/explore/explore.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { BigEventModule } from './modules/big-event/big-event.module';
 import { PediaModule } from './modules/pedia/pedia.module';
@@ -141,7 +141,7 @@ import { PediaModule } from './modules/pedia/pedia.module';
     TextMaskModule,
     BluestoreModule,
     ShowtimezModule,
-    ExploreModule,
+    // ExploreModule,
     PortfolioModule,
     BigEventModule,
     OrganizationModule,

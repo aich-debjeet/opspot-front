@@ -6,9 +6,10 @@ import { CommonModule } from '../../common/common.module';
 import { ExploreComponent } from './explore.component';
 import { FormsModule } from '@angular/forms';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import {NotificationModule} from '../notifications/notification.module'
 
 const exploreRoutes: Routes = [
-  { path: 'explore', component: ExploreComponent }
+  { path: '', component: ExploreComponent }
 ];
 
 @NgModule({
@@ -16,11 +17,15 @@ const exploreRoutes: Routes = [
     NgCommonModule,
     RouterModule.forChild(exploreRoutes),
     CommonModule,
+    NotificationModule,
     FormsModule,
-    SlickCarouselModule
+    SlickCarouselModule,
   ],
   declarations: [ExploreComponent],
   providers: [],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  exports: [
+    ExploreComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ExploreModule {}
