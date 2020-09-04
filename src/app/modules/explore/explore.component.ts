@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
 import { OpspotTitle } from '../../services/ux/title';
+import { OverlayModalService } from '../../services/ux/overlay-modal';
+import { InTheSpotlightComponent } from '../forms/in-the-spotlight/in-the-spotlight.component';
 
 @Component({
   selector: 'app-explore',
@@ -72,6 +74,7 @@ export class ExploreComponent implements OnInit {
     public client: Client,
     public session: Session,
     public title: OpspotTitle,
+    public overlayModal: OverlayModalService,
   ) {
     this.paramsSubscription = this.route.queryParams.subscribe(params => {
       if (typeof params['q'] !== 'undefined') {
@@ -311,5 +314,15 @@ export class ExploreComponent implements OnInit {
   beforeChange(e) {
     // console.log('beforeChange');
   }
-  _createSpotlight(){}
+  _createSpotlight(){
+    this.overlayModal.create(InTheSpotlightComponent, '', {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+      // listen to the update callback
+      onUpdate: (payload: any) => {
+        // make update to local var
+        // this.activityResp.emit(payload)
+        // this.overlayModal.dismiss();
+      }
+    }).present();
+  }
 }
