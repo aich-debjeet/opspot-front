@@ -23,6 +23,8 @@ import { OrganizationListComponent } from './list.component';
 import { OrganizationAllMembers } from './profile/list.subscribers';
 import { OrganizationMemberPreviews } from './profile/member-previews/member-previews.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TagInputModule } from 'ngx-chips';
+
 
 const routes: Routes = [
   {
@@ -53,7 +55,8 @@ const routes: Routes = [
     LegacyModule,
     PosterModule,
     HashtagsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    TagInputModule
   ],
   declarations: [
     OrganizationProfile,

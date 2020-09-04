@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
     input:focus{
       box-shadow: none ;
     }
@@ -6,25 +6,13 @@
       background-color: #ECEFF1
               }
     </style>
-    <!-- <div class="o-community-member-popup">
-    <div class="o-community-member-popup-body"> -->
+    
     <div class="o-community-member-popup-body__title">
       <h3  *ngIf="!mobileView" class="text-h3" i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__NAME_TITLE" id="invite-to-orgnization">
         <ng-container *ngIf="organization">Invite friends to {{ organization.name }}</ng-container>
         <ng-container *ngIf="!organization">Invite</ng-container>
         <span class="m-layout--spacer"></span>
-        <!-- <a routerLink="../requests" class="selected">
-          Requests
-          <ng-container *ngIf="organization['requests:count']">({{organization['requests:count']}})</ng-container>
-        </a> -->
       </h3>
-      
-      <!-- <ul class="m-groupMemberInvite__instructions">
-        <li i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_ONLY_SUBSCRIBERS">You can only invite users who are your subscribers</li>
-        <li i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_NOTIFICATION_INFO">They will receive a notification to confirm they want to be a member of this group</li>
-        <li *ngIf="group" [hidden]="!group['is:owner']" i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_BAN_REINVITE">If the user was banned from the group, inviting them will lift the ban</li>
-      </ul>
-       -->
       <div [hidden]="!inviteInProgress">
         <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" width="width: 100%;" [mdl]></div>
         <div class="mdl-card__supporting-text">
@@ -61,5 +49,138 @@
         </ul>
       </div>  
     </div>
-  <!-- </div>
-  </div> -->
+   -->
+
+   <style>
+    input:focus {
+      box-shadow: none ;
+    }
+
+    ::ng-deep .bg-grey-light { 
+      background-color: #ECEFF1
+    }
+    
+    ::ng-deep .icon-search {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      line-height: 20px;
+      font-size: 15px;
+   }
+  
+    ::ng-deep .tabresponsive {
+     display: unset !important;
+   }
+
+    ::ng-deep .inputresponsive {
+       margin: 30px 0px 0px;
+   }
+  </style>
+
+   
+        <div class="o-invite-to-organisation-popup-body__title">
+            <div class="text-h3">
+                Invite to Organisation
+            </div>
+        </div><!--title ends-->
+        <div class="o-invite-to-organisation-popup-body__description">
+            <div class="text-md grey">
+                But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain as born
+            </div>
+        </div><!--description ends-->
+
+        <!--tab starts-->
+        <div class="invite-organisation-tabbedPanels">
+            <ul class="tabs">
+             <li><a [class.active]="isActive('followers')" (click)="switchTabs('followers')" class="bordertbl">Followers</a></li>
+             <li><a [class.active]="isActive('emails')" (click)="switchTabs('emails')" class="bordertbr">Email Address </a></li>
+             <!-- <li><a href="#Phonenumber" class="bordertbr">Phone Number</a></li> -->
+            </ul><!--tabs ends-->               
+           <div class="invite-organisation-panelContainer">
+                <div id="Followers" class="invite-organisation-panel" *ngIf="filter === 'followers'">
+                    <div class="form-group c-form_righticon-md o-invite-to-organisation-popup-search" >
+                            <!-- <input type="text" class="form-control form-control-lg bg-grey-light" placeholder="Search">
+                            <a><i class="icon-search"></i></a> -->
+                            <input
+                                id="invite-search-members"
+                                class="form-control form-control-lg bg-grey-light"
+                                type="text" name="q" [(ngModel)]="q" (keyup)="search(q)" placeholder="Search Members" i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__INVITE__SEARCH_PLACEHOLDER"
+                                style="border: 0px;box-shadow: none;" [class.inputresponsive]="!mobileView" />
+                            <a><i class="icon-search"></i></a>
+                    </div><!--search bar ends-->
+                    <ul class="o-invite-to-organisation-list scrollbar scrollbar-default">
+                      <div *ngFor="let user of users; let x = index">
+                        <li class="o-invite-to-organisation-list__user-list" (click)="invite(user);">
+                            <div class="o-invite-to-organisation-info">
+                                <div class="o-invite-to-organisation-info-prof">
+                                    <div class="o-invite-to-organisation-info-prof__avatar o-avatar-md">
+                                        <img src="assets/demo/avatar.png" alt="">
+                                    </div>
+                                    <div id="username" class="caption-bold">
+                                      @{{user.username}}
+                                    </div>
+                                </div>
+                                <div class="o-invite-to-organisation-info__option">
+                                  <a (click)="toggle(x, user)" *ngIf="!colapse[x]">
+                                    <i class="icon-plus-circle invite-community-icon"></i>
+                                  </a>
+                                  <a *ngIf="colapse[x]" class="invite-community-icon-select" (click)="toggle(x,user)" >
+                                      <i class="icon-check invite-community-icon-select__icon"></i>
+                                  </a>
+                                </div>
+                            </div>
+                        </li><!-- user list end-->
+                      </div>
+                    </ul><!-- members list end -->
+                    <div class="invite-organisation-button">
+                        <button type="button" class="btn btn-primary btn-block invite-organisation-button__send">Send Invite</button>
+                    </div>
+                </div>
+                <div id="Emailaddress" class="invite-organisation-panel" *ngIf="filter === 'emails'">
+                    <div class="invite-organisation-email">
+                        <!-- <textarea class="form-control" name="Description" rows="5" spellcheck="false" placeholder="Type email address and use spacebar to separate it"></textarea> -->
+                        <tag-input
+                        [maxItems]=maxItems required
+                        [(ngModel)]='emails'
+                        placeholder="Type email address and use spacebar to separate it"
+                        style="border: 1px solid #90A4AE;
+                        margin: 30px 0px 20px;
+                        resize: none; 
+                        padding: 20px 19px;
+                        font-size: 14px;
+                        height: 100%;"
+                        theme='minimal'
+                        [addOnBlur]="true"
+                      ></tag-input>
+                        <!-- <div class="text-md invite-organisation-email__syc">
+                            Or Sync Email addresses
+                        </div> -->
+                    </div>
+                    <!-- <div class="invite-organisation-email-media">
+                        <a class="invite-organisation-email-media__social">
+                            <img src="assets/community/Google__G__Logo.svg" class="mr8">Google 
+                        </a>
+                        <a class="invite-organisation-email-media__social">
+                            <img src="assets/community/Yahoo!_icon.svg" class="mr8">Yahoo 
+                        </a>
+                        <a class="invite-organisation-email-media__social">
+                            <img src="assets/community/Apple_logo_black.svg" class="mr8">iCloud  
+                        </a>
+                        <a class="invite-organisation-email-media__social">
+                            <img src="assets/community/email.svg" class="mr8">Others 
+                        </a>
+                    </div> -->
+                    <div class="invite-organisation-button">
+                        <button type="button" class="btn btn-primary btn-block invite-organisation-button__send disabled">Send Invite</button>
+                    </div>                    
+                </div> 
+                <!-- <div id="Phonenumber" class="invite-organisation-panel">
+                    <div class="invite-organisation-phonenumber">
+                        <textarea class="form-control" name="Description" rows="10" spellcheck="false" placeholder="Type phone number like (91) 9898989898 & use comma to separate it"></textarea>
+                    </div>
+                    <div class="invite-organisation-button mt58">
+                        <button type="button" class="btn btn-primary btn-block invite-organisation-button__send disabled">Send Invite</button>
+                    </div> 
+                </div>  -->
+           </div>
+        </div> 
