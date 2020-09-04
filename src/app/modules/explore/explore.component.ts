@@ -311,4 +311,5 @@ export class ExploreComponent implements OnInit {
   beforeChange(e) {
     // console.log('beforeChange');
   }
+  _createSpotlight(){}
 }

@@ -29,11 +29,16 @@
                     </div>
                 </form>
             </div> -->
-            <div class="o-explore-action__search">
-                <div class="form-group c-form_righticon-lg">
-                    <input type="text" id="explore-search" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q"
-                        name="q" autocomplete="off" #searchInput>
-                    <span class="c-svg_eye"><i class="icon-search" id="explore-search-icon"></i></span>
+            <div class="o-explore-action-admin__right">
+                <div class="o-explore-action-admin__create" *ngIf="session.isAdmin()">
+                    <button type="button" class="btn btn-outline-primary btn-lg" (click)="_createSpotlight()">Create IN the Spotlight</button>
+                </div><!--create ends-->
+                <div class="o-explore-action-admin__search">
+                    <div class="form-group c-form_righticon-lg">
+                        <input type="text" id="explore-search" class="form-control form-control-lg" placeholder="Search Post" [(ngModel)]="q"
+                            name="q" autocomplete="off" #searchInput>
+                        <span class="c-svg_eye"><i class="icon-search" id="explore-search-icon"></i></span>
+                    </div>
                 </div>
             </div>
         </div>
