@@ -146,7 +146,7 @@
                         </div>
                     </div> -->
                     <!-- <div class="o-cover o-cover--organisation hidden-above-tablet"> -->
-                    <app-group-banner class="o-cover o-cover--community hidden-above-tablet" [object]="organization"
+                    <app-group-banner *ngIf="organization" class="o-cover o-cover--community hidden-above-tablet" [object]="organization"
                         [editMode]="editing" [top]="organization?.banner_position" [done]="editDone" (added)="add_banner($event)">
                     </app-group-banner>
                     <!-- </div> -->
@@ -181,7 +181,7 @@
                                 <a class="o-organisation-skills__tag" *ngFor="let tag of organization?.tags">{{tag}}</a>
                             </div>
                             <div class="o-organisation-gathering-block">
-                                <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="organization['is:owner']" (click)="toggleEdit()">Edit Organisation</button>
+                                <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="organization && organization['is:owner']" (click)="toggleEdit()">Edit Organisation</button>
                             </div>
                             <opspot-organization-join-button style="margin-bottom: 6px;" [group]="organization"
                                 (membership)="change_membership($event)"
@@ -249,7 +249,7 @@
                         <div class="o-cover__overlay"><a class="white text-lg" href="#"><i class="icon-plus-circle"></i> Add Cover Picture</a></div>
                     </div> -->
                     <div class=" hidden-under-tablet m-b-13 m-l-10">
-                    <app-group-banner [object]="organization" [editMode]="editing" [top]="organization?.banner_position" [done]="editDone"
+                    <app-group-banner *ngIf="organization" [object]="organization" [editMode]="editing" [top]="organization?.banner_position" [done]="editDone"
                         (added)="add_banner($event)"></app-group-banner>
                     </div>
                     <div class="o-organisation-members-top o-organisation-members-top--mob hidden-above-tablet">
