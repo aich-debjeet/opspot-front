@@ -26,6 +26,7 @@ const exploreRoutes: Routes = [
   exports: [
     ExploreComponent
   ],
+  entryComponents: [ExploreComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ExploreModule {}

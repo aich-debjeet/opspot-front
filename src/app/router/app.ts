@@ -70,7 +70,7 @@ export const OpspotAppRoutes: Routes = [
   },
   {
     path:'explore',
-    loadChildren: '../modules/explore/explore.module#ExploreModule'
+    loadChildren: './modules/explore/explore.module#ExploreModule'
   },
   {
     path: 'static',
