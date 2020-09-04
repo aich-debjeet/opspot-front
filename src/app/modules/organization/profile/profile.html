@@ -126,7 +126,15 @@
             <div class="without-nav-header__title caption-bold f500 center">Organisation</div>
         </div>
     </div><!-- without nav header end -->
-    
+    <div [hidden]="organization || error" style="width:100%; text-align:center; ">
+        <div class="mdl-spinner mdl-js-spinner is-active" [mdl] style="margin: 16px auto;"></div>
+    </div>
+    <div class="m-error-splash" *ngIf="error && !organization">
+        <img [src]="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+        <h3 class="mdl-color-text--red-300">{{error}}</h3>
+        <span class="mdl-color-text--blue-grey-300">Check the url is correct</span>
+        <router-outlet></router-outlet>
+    </div>
     <div class="o-organisation-sec">
         <div class="container">
             <div class="o-blocks o-blocks--flex">
@@ -245,13 +253,14 @@
                     </div><!--members top ends-->
                     <div class="o-right-block--organisation__items">
                         <div class="o-center-block">
-                            <div class="o-empty-post">
+                            <!-- <div class="o-empty-post">
                                 <div class="o-empty-post__img">
                                     <img src="assets/profile/emptypost.svg" alt="empty">
                                 </div>
                                 <div class="o-empty-post__text caption-medium f400">No post added yet</div>
                                 <a href="#" class="btn btn-primary btn-lg organisation-admin-empty-btn mrorganisationb40">Create Post</a>
-                            </div>
+                            </div> -->
+                            <router-outlet></router-outlet>
                         </div><!--center block end-->
             
                         <div class="o-right-block hidden-mob">
