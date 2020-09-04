@@ -97,7 +97,7 @@ export class ExploreComponent implements OnInit {
       this.inProgress = false;
       this.offset = '';
       this.reset();
-      this.searchMore(true);
+      this.searchMore(true, this._activeFilter);
       // this.triggerSearchApi();
     });
   }
@@ -119,14 +119,15 @@ export class ExploreComponent implements OnInit {
 
   switchCategoryType(sType: string) {
     console.log(sType);
-    this.ref = sType;
-    this.router.navigate(['/explore'], {
-      queryParams: {
-        q: this.q,
-        type: `${this.type}`,
-        ref: `${this.ref}`
-      }
-    });
+    this._activeFilter = sType;
+    this.searchMore(true,this._activeFilter)
+    // this.router.navigate(['/explore'], {
+    //   queryParams: {
+    //     q: this.q,
+    //     type: `${this.type}`,
+    //     ref: `${this.ref}`
+    //   }
+    // });
   }
 
   /**
@@ -199,7 +200,7 @@ export class ExploreComponent implements OnInit {
     });
   }
 
-  async searchMore(refresh: boolean = false) {
+  async searchMore(refresh: boolean = false, filter: string) {
     if (this.inProgress) {
       return;
     }
@@ -209,18 +210,10 @@ export class ExploreComponent implements OnInit {
     this.inProgress = true;
     this.client
       .get(
-        `api/v2/feeds/global/top/${this.type}`,
+        `api/v4/newsfeed/explore`,
         {
-          hashtags: this.ref,
-          period: '12h',
-          all: '',
-          purpose: 'explore',
-          query: this.q,
-          nsfw: '',
-          sync: '1',
-          as_activities: '1',
-          from_timestamp: '',
-          limit: 24,
+          activity_type: filter,
+          limit: 12,
           offset: this.offset
         },
         { cache: true }
@@ -249,6 +242,56 @@ export class ExploreComponent implements OnInit {
         this.inProgress = false;
       });
   }
+  // async searchMore(refresh: boolean = false) {
+  //   if (this.inProgress) {
+  //     return;
+  //   }
+  //   if (refresh) {
+  //     this.offset = '';
+  //   }
+  //   this.inProgress = true;
+  //   this.client
+  //     .get(
+  //       `api/v2/feeds/global/top/${this.type}`,
+  //       {
+  //         hashtags: this.ref,
+  //         period: '12h',
+  //         all: '',
+  //         purpose: 'explore',
+  //         query: this.q,
+  //         nsfw: '',
+  //         sync: '1',
+  //         as_activities: '1',
+  //         from_timestamp: '',
+  //         limit: 24,
+  //         offset: this.offset
+  //       },
+  //       { cache: true }
+  //     )
+  //     .then((data: any) => {
+  //       let respData: any = data;
+  //       if (respData.entities.length === 0) {
+  //         this.moreData = false;
+  //         this.inProgress = false;
+  //         return false;
+  //       }
+  //       if (this.filteredArray && !refresh) {
+  //         // console.log('added data');
+  //         this.filteredArray = this.exploreArray = this.exploreArray.concat(
+  //           respData.entities
+  //         );
+  //       } else {
+  //         // console.log('added new data');
+  //         this.filteredArray = this.exploreArray = respData.entities;
+  //       }
+  //       this.moreData = true;
+  //       this.offset = respData['load-next'];
+  //       this.inProgress = false;
+  //     })
+  //     .catch(e => {
+  //       this.inProgress = false;
+  //     });
+  // }
   reset() {
     // console.log(this.exploreArray);
     this.filteredArray = this.exploreArray = [];

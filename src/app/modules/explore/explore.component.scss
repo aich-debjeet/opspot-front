@@ -119,23 +119,42 @@
 
 // media css
 .o-explore-media-part{
+    @include mq($until:$tablet){
+        margin:0px 15px;
+    }
+    &__subtitle{
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        margin-bottom: 20px;
+    }
     &__row{
         display: -ms-flexbox;
         display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        padding: 0 4px;
-        @include mq($until:$tablet){
-            display:grid;
-            padding: 0;
+        -ms-flex-wrap:wrap!important;
+        flex-wrap: wrap!important;
+        padding: 0 0px!important;
+        .mr18{
+            margin-right:18px;
+            @include mq($until:$tablet){
+                margin-right:15px;
+            }
+        }
+        @include mq($until:$desktop_lg){
+            width: 100%;
+            display: flex;
+            overflow: scroll;
+            flex-wrap: nowrap!important;
         }
     }
     &__coloumn{
         flex: 25%;
-        max-width: 25%;
+        max-width: 23%;
         width:100%;
-        padding: 0 4px;
-        @include mq($until:$tablet){
+        padding: 0 0px!important;
+        margin-bottom: 20px;
+        @include mq($until:$desktop_lg){
+            width: 281px;
             flex: 100%;
             max-width: 100%;
         }
