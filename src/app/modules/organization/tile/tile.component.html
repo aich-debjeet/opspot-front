@@ -7,7 +7,7 @@
         <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
       </div>
       <div class="o-community-card-profile" (click)="trigger(entity)">
-        <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" class="org-profile" alt="cover">
+        <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" class="org-profile" alt="cover" (click)="trigger(entity)">
       </div>
       <div class="o-community-card-header" id="tile-entity-name">
         <div class="f500 text-lg word-br elipse elipse--w-130">{{entity.name}}</div>
@@ -22,7 +22,7 @@
           </opspot-organization-join-button>
       </div>
       <div class="o-organisation-card-knowmore">
-        <a href="#" class="primary text-sm">Know more</a>
+        <a (click)="triggerPopup()" class="primary text-sm">Know more</a>
       </div>
     </div>
   </div>

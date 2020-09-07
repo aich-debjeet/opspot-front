@@ -24,6 +24,7 @@ import { OrganizationAllMembers } from './profile/list.subscribers';
 import { OrganizationMemberPreviews } from './profile/member-previews/member-previews.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TagInputModule } from 'ngx-chips';
+import { OrganizationJoinRequestComponent } from './group-join-request/organization-join-request.component';
 
 
 const routes: Routes = [
@@ -72,7 +73,8 @@ const routes: Routes = [
     OrganizationMobileMembers,
     OrganizationListComponent,
     OrganizationAllMembers,
-    OrganizationMemberPreviews
+    OrganizationMemberPreviews,
+    OrganizationJoinRequestComponent
   ],
   exports: [
     OrganizationProfile,
@@ -86,7 +88,9 @@ const routes: Routes = [
     OrganizationTileComponent,
     OrganizationListComponent
   ],
-  entryComponents: [],
+  entryComponents: [
+    OrganizationJoinRequestComponent
+  ],
   providers: [
     CanDeactivateGroupService
   ]
