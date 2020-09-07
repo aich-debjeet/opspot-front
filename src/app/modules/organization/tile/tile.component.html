@@ -10,7 +10,7 @@
         <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" class="org-profile" alt="cover" (click)="trigger(entity)">
       </div>
       <div class="o-community-card-header" id="tile-entity-name">
-        <div class="f500 text-lg word-br elipse elipse--w-130">{{entity.name}}</div>
+        <div class="f500 text-lg word-br elipse elipse--w-130" (click)="trigger(entity)">{{entity.name}}</div>
       </div>
       <div class="o-community-card-dis text-sm word-br">{{entity?.brief_description | truncate:[65, '...']}}</div>
       <div class="o-community-card-action">
