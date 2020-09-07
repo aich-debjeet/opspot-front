@@ -18,18 +18,15 @@
           </div>
           <div class="o-community-landing-block__sidebar hidden-mob">
             <h4 class="f500" id="list-communities-header">Organization</h4>
-            <!-- *ngIf="!showCreateButton" -->
             <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn() && !organization && !inProgress"
-              routerLink="/organization/create">Create Organization</button>
-            <!-- <div class="text-lg f500 mb-17" id="list-communities-manage" *ngIf="organization" 
-            [routerLink]="['/organization/profile', organization.guid,  'feed']" >{{organization.name}}</div> -->            
+              routerLink="/organization/create">Create Organization</button>            
             <div class="text-lg f500 mb-17" id="list-communities-manage">Organizations you manage</div>
             <div *ngFor="let entity of myOrganizations">
               <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='organization'" 
                 id="list-community-manage-list"
                 [routerLink]="['/organization/profile', entity.guid]">
                 <div class="o-community-landing-block-manage__avatar">
-                  <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="">
+                  <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="" class="org-profile">
                 </div>
                 <div class="text-md f500 word-br elipse elipse--w-130">
                   {{entity.name}}
@@ -45,7 +42,7 @@
                   *ngIf="entity['is:member'] && !entity['is:owner'] && entity['entity_type']=='organization'"
                   [routerLink]="['/organization/profile', entity.guid]">
                   <div class="o-community-landing-block-manage__avatar">
-                    <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="">
+                    <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="" class="org-profile">
                   </div>
                   <div class="text-md f500 word-br elipse elipse--w-130">
                     {{entity.name}}
@@ -84,5 +81,13 @@
          [inProgress]="inProgress">
         </infinite-scroll>
       </div>
+
+      <style>
+        .org-profile {
+          border-radius: 4px !important;
+        }
+      </style>
       
       
+
+       
