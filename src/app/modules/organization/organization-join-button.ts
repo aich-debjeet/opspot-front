@@ -130,7 +130,7 @@ export class OrganizationJoinButton {
         this.membership.next({
           member: false
         });
-        this.router.navigate(['/']);
+        this.router.navigate(['/organization/all']);
       })
       .catch(e => {
         this.group['is:member'] = true;

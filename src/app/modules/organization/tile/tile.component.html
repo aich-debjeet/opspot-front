@@ -6,7 +6,7 @@
           [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
         <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
       </div>
-      <div class="o-community-card-profile">
+      <div class="o-community-card-profile" (click)="trigger(entity)">
         <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" class="org-profile" alt="cover">
       </div>
       <div class="o-community-card-header" id="tile-entity-name">
@@ -14,8 +14,15 @@
       </div>
       <div class="o-community-card-dis text-sm word-br">{{entity?.brief_description | truncate:[65, '...']}}</div>
       <div class="o-community-card-action">
-        <button type="button" id="tile-join-button" class="btn btn-primary btn-sm"
-          (click)='trigger(entity)'>Explore</button>
+        <!-- <button type="button" id="tile-join-button" class="btn btn-primary btn-sm"
+          (click)='trigger(entity)'>Explore</button> -->
+          <opspot-organization-join-button [group]="entity"
+                                (membership)="change_membership($event)"
+                                *ngIf="entity && (!entity['is:creator'] || (session.isAdmin()) && !entity['is:invited'])">
+          </opspot-organization-join-button>
+      </div>
+      <div class="o-organisation-card-knowmore">
+        <a href="#" class="primary text-sm">Know more</a>
       </div>
     </div>
   </div>
