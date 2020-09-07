@@ -18,9 +18,13 @@
           </div>
           <div class="o-community-landing-block__sidebar hidden-mob">
             <h4 class="f500" id="list-communities-header">Organization</h4>
+            <div class="o-organisation-landing-block__shrtdescn grey text-md">
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+              Aenean commodo ligula eget dolor. 
+            </div>
             <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn() && !organization && !inProgress"
               routerLink="/organization/create">Create Organization</button>            
-            <div class="text-lg f500 mb-17" id="list-communities-manage">Organizations you manage</div>
+            <div class="text-lg f500 mb-17" id="list-communities-manage">Organisation you created</div>
             <div *ngFor="let entity of myOrganizations">
               <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='organization'" 
                 id="list-community-manage-list"
@@ -35,7 +39,7 @@
             </div>
             <div class="o-community-landing-block-your" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMemberOrganizations()"
             [scrollWindow]="false">
-              <div class="text-lg f500 mb-17" id="list-community-header">Organizations you’re in</div>
+              <div class="text-lg f500 mb-17" id="list-community-header">Organisation you subscribed</div>
               <div *ngFor="let entity of memberOrganizations">
                 <div class="o-community-landing-block-manage"
                   id="list-community-joined"
