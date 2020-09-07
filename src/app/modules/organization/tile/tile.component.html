@@ -18,8 +18,12 @@
           (click)='trigger(entity)'>Explore</button> -->
           <opspot-organization-join-button [group]="entity"
                                 (membership)="change_membership($event)"
-                                *ngIf="entity && (!entity['is:creator'] || (session.isAdmin()) && !entity['is:invited'])">
-          </opspot-organization-join-button>
+                                *ngIf="entity && (!entity['is:creator'] || (session.isAdmin()) && !entity['is:invited']); else emptyTag">
+          </opspot-organization-join-button>  
+          <ng-template #emptyTag>
+            <span class="o-community-card-action" style="background: transparent; height: 34px; display: inline-block;">&nbsp;
+            </span>
+          </ng-template>  
       </div>
       <div class="o-organisation-card-knowmore">
         <a (click)="triggerPopup()" class="primary text-sm">Know more</a>
