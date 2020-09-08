@@ -5,7 +5,7 @@
         </div>
     </div>
     <!--boost head end-->
-    <form (ngSubmit)="register()" [formGroup]="spotlighForm">
+    <form (ngSubmit)="postSpotlight()" [formGroup]="spotlighForm">
         <div class="o-create-spotlight-body o-create-spotlight-body--flex">
             <div class="form-group">
                 <label>Title</label>
@@ -52,7 +52,7 @@
         </div>
         <!--body ends-->
         <div class="o-create-spotlight-footer">
-            <button type="button" class="btn btn-primary btn-sm" [disabled]="!spotlighForm.valid">Post</button>
+            <button type="submit" class="btn btn-primary btn-sm" [disabled]="!spotlighForm.valid">Post</button>
             <!--for event page-->
         </div>
     </form>

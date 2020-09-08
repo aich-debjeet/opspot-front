@@ -3,6 +3,7 @@ import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { AttachmentService } from '../../../services/attachment';
 import { Upload } from '../../../services/api/upload';
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
+import { Client } from '../../../services/api/client';
 
 @Component({
   selector: 'app-in-the-spotlight',
@@ -13,8 +14,9 @@ export class InTheSpotlightComponent implements OnInit {
 spotlighForm: FormGroup;
 cards = [];
   constructor(private fb: FormBuilder,
-    public upload: Upload,
-    public attachment: AttachmentService) {
+    private client: Client,
+    private upload: Upload,
+    private attachment: AttachmentService) {
     this.createSpotlight(fb);
    }
 
@@ -53,6 +55,7 @@ cards = [];
   }
   addAttachment(obj) {
     this.cards.push(obj);
+    console.log('this.cards',this.cards)
   }
   checkForSrc(object) {
     if (object && object.entity_type === 'video') {
@@ -87,5 +90,17 @@ cards = [];
         // this.inProgress = false;
         // this.canPost = true;
       });
+  }
+  postSpotlight(){
+    if(!this.spotlighForm.valid)
+    return
+    const payload:{} = {
+      title: this.spotlighForm.value.title,
+      description:this.spotlighForm.value.description,
+      attachment_guid: this.cards.map(a => a.guid).toString()
+    }
+    this.client.post('api/v4/admin/inthespotlight',payload).then((response)=>{
+      console.log('promise fulfilled', response)
+    }).catch()
   }
 }
