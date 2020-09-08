@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { AttachmentService } from '../../../services/attachment';
+import { Upload } from '../../../services/api/upload';
+import { remove as _remove, findIndex as _findIndex } from 'lodash';
 
 @Component({
   selector: 'app-in-the-spotlight',
@@ -6,10 +10,82 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./in-the-spotlight.component.scss']
 })
 export class InTheSpotlightComponent implements OnInit {
-
-  constructor() { }
+spotlighForm: FormGroup;
+cards = [];
+  constructor(private fb: FormBuilder,
+    public upload: Upload,
+    public attachment: AttachmentService) {
+    this.createSpotlight(fb);
+   }
 
   ngOnInit() {
   }
-
+  createSpotlight(formInstance: FormBuilder){
+    this.spotlighForm = formInstance.group({
+      title:['', Validators.required],
+      description:['', Validators.required],
+      media:['', Validators.required]
+    })
+  }
+  uploadAttachment(file: HTMLInputElement, event) {
+    if (file.value) { // this prevents IE from executing this code twice
+      
+      this.attachment.upload(file)
+        .then(guid => {
+          console.log(guid)
+          let obj = {};
+          obj['guid'] = guid;
+          obj['src'] = this.attachment.getPreview();
+          this.addAttachment(obj);
+          // if (this.attachment.isPendingDelete()) {
+          //   this.removeAttachment(file);
+          // }
+          
+          file.value = null;
+        })
+        .catch(e => {
+          if (e && e.message) {
+          }
+          file.value = null;
+          this.attachment.reset();
+        });
+    }
+  }
+  addAttachment(obj) {
+    this.cards.push(obj);
+  }
+  checkForSrc(object) {
+    if (object && object.entity_type === 'video') {
+      return object.thumbnail_src;
+    } else {
+      return object.src;
+    }
+  }
+  removeAttachment(file: HTMLInputElement, imageId: string) {
+    // if (this.inProgress) {
+    //   this.attachment.abort();
+    //   this.canPost = true;
+    //   this.inProgress = false;
+    //   this.errorMessage = '';
+    //   return;
+    // }
+    console.log('cards', this.cards)
+    // if we're not uploading a file right now
+    this.attachment.setPendingDelete(false);
+    this.attachment.remove(imageId, file)
+      .then(guid => {
+        console.log('guid',guid)
+        file.value = '';
+        this.spotlighForm.get('media').setValue('');
+        console.log('card deleting', this.cards)
+        this.cards = _remove(this.cards, function (n) {
+          return n.guid !== guid;
+        });
+      })
+      .catch(e => {
+        // console.error(e);
+        // this.inProgress = false;
+        // this.canPost = true;
+      });
+  }
 }
