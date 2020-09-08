@@ -181,7 +181,7 @@
                                 <a class="o-organisation-skills__tag" *ngFor="let tag of organization?.tags">{{tag}}</a>
                             </div>
                             <div class="o-organisation-gathering-block">
-                                <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="organization && organization['is:owner']" (click)="toggleEdit()">Edit Organisation</button>
+                                <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="organization && organization['is:owner']" (click)="toggleEdit()">Edit Organization</button>
                             </div>
                             <opspot-organization-join-button style="margin-bottom: 6px;" [group]="organization"
                                 (membership)="change_membership($event)"
