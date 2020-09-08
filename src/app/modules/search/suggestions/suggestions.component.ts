@@ -68,7 +68,7 @@ export class SearchBarSuggestionsComponent {
       try {
         // TODO: little ugly here
         const pediaResponse = await this.opsPedia.get('default', {
-          limit: 2,
+          limit: 5,
           q: value
         });
         this.pediaAutocomplete = pediaResponse['records'];

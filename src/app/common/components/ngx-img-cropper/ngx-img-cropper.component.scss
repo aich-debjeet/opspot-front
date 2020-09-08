@@ -1,0 +1,133 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+    
+    .o-profile-crop{
+    width: 792px;
+    border-radius: 4px;
+    background-color: $white;
+    .without-nav-header{
+    display: flex;
+    justify-content: space-between;
+    }
+}
+
+@media (max-width:768px){
+    .o-profile-crop{
+    width: 100%;
+    }
+
+    .o-profile-crop-body {
+        height: 100% !important;
+        width: 100% !important ;
+    }
+    input[type="range"]{
+        width:78%!important
+    }
+
+}
+.o-profile-crop-head{
+    width: 100%;
+    // padding:18px 27px;
+    position: relative;
+    &__title{
+    font-size:20px;
+    i{
+       margin-right:24px; 
+    }
+    }
+}
+//footer style
+.o-profile-crop-footer{
+    display: flex;
+    justify-content:center;
+    width:100%;
+    padding:27px 18px;
+    align-items: center;
+    &__icon1 i{
+     font-size: 20px;
+     margin-right:27px;
+    }
+    &__icon2 i{
+        font-size: 21px !important; 
+        margin-left:27px;  
+    }
+    button {
+        position: unset !important;
+        float: right;
+    }
+}
+.o-profile-crop-body{
+    // height: 636px;  
+    // width: 792px;   
+    background-color: #263238;
+}   
+
+//range 
+input[type="range"] { 
+    margin: auto !important;
+    -webkit-appearance: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+    height: 8px !important;
+    width: 404px;
+    cursor: pointer !important;
+    border-radius: 5px !important; /* iOS */
+}
+
+::-webkit-slider-runnable-track {
+  background-color: #E6E6E6 !important;
+}
+input[type="range"]:focus{
+    outline: none !important;
+}
+
+::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    width:20px !important;
+    height: 20px !important;
+    border-radius:50% !important;
+    background: white !important;
+    box-shadow: -100vw 0 0 100vw #0288D1 !important;
+}
+
+::-moz-range-track {
+    height: 40px !important;
+    background: #ddd !important;
+}
+
+::-moz-range-thumb {
+    background: $white !important;
+    height: 20px !important;
+    width: 20px !important;
+    border: 1px solid #999 !important;
+    border-radius: 0 !important;
+    border-radius:50% !important;
+    box-shadow: -404px 0 0 404px dodgerblue !important;
+    box-sizing: border-box !important;
+}
+
+::-ms-fill-lower { 
+    background: dodgerblue;
+}
+
+::-ms-thumb { 
+    background: #fff;
+    border: 1px solid #999;
+    height: 40px;
+    width: 20px;
+    box-sizing: border-box;
+}
+.o-profile-crop-footer_rangeslider{
+    width: 404px;
+}
+
+
+
+
+// modal style
+
+m-modal .m-modal-container{
+    height: unset!important;
+    min-height: unset!important;
+}

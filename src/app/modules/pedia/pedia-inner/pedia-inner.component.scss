@@ -1,0 +1,171 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+//section style
+.o-pedia-inner-page-sec{
+    width: 100%;
+    float: left;
+    background: #fafafa;
+    // min-height: 200vh;
+}
+
+//body style
+.o-pedia-inner-page-body{
+    max-width:1069px;
+    width:100%;
+    overflow: hidden;
+    margin: 0px auto;
+    background: #fff;
+    // height: 200vh;
+    .pt20b9{
+        padding:20px 0px 9px;
+    }
+    .ptb9{
+        padding:9px 0px 9px;
+    }
+    .mt9{
+        margin-top:9px;
+    }
+    .centr{
+        margin-left: 310px;
+    }
+}
+
+//block style
+.o-pedia-inner-page-bolck{
+    padding: 31px 48px 32px 32px;
+    display: flex;
+    &__left{
+        width:243px;
+        margin-right: 38px;
+    }
+    &__right{
+        width:709px;
+    }
+}
+
+//avatar style
+.o-pedia-inner-page-avatar{
+    margin-bottom:19px;
+    img{
+        max-width: 243px;
+        width: 100%;
+        height: 302px;
+        object-fit: cover;
+        border-radius: 4px;
+        border: 1px solid #ECEFF1;
+    }
+}
+
+//info style
+.o-pedia-inner-page-info{
+    padding:9px 0;
+}
+
+//Mob responsive style
+@include mq($until:$tablet){
+    .o-pedia-inner-page-mob-header{
+        width: 100%;
+        float: left;
+        box-shadow: 0 6px 10px 0 rgba(144, 164, 174, 0.16), 0 1px 12px 0 rgba(144, 164, 174, 0.18), 0 3px 5px 0 rgba(144, 164, 174, 0.2);
+        margin: 0px 0px 12px 0px !important;
+        background: #fff;
+        display: flex;
+        justify-content: space-between;
+        &__icon{
+            color:#263238!important;
+            font-size: 18px!important;
+        }
+    }
+    .o-pedia-inner-page-sec{
+        width: initial;
+    }
+    // .o-pedia-inner-page-mob-body{
+    //     height: 400vh;
+    // }
+    .o-pedia-inner-page-mob-profile{
+        background:#fff;
+        border: 1px solid #ECEFF1;
+        border-radius: 4px;
+        margin: 0px 15px 15px;
+        padding: 20px 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &__avatar{
+            margin: 20px 0px;
+            img{
+                width: 135px;
+                height: 175px;
+                border-radius: 4px;
+                object-fit: cover;
+            
+            }
+        }
+    }
+    .o-pedia-inner-page-mob-details{
+        .ptb9{
+            padding:9px 0px;
+        }
+    }
+    //tab style
+    .o-pedia-block {
+        width: 100%;
+        margin: 0px auto 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &__tab{
+            width: 100%;
+            border-bottom: 1px solid #ECEFF1;
+            background: #FFFFFF;
+        }
+    }
+    .tabs-pedia {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        position: relative;
+        .tabs-list {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            flex-direction: row;
+            max-width: 360px;
+            overflow-y: scroll;
+            white-space: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            li.active{
+                border-left: 0px;
+                border-bottom: 3px solid #0288D1!important;
+                background: transparent;
+            }
+            li{
+                float: left;
+                padding: 15px 0px;
+                margin: 0px 15px;
+                text-align: left;
+                background-color: transparent;
+                border-bottom: 4px solid #fff;
+                // width: max-content;
+            }
+        }
+        .tab{
+            display: none;
+            width: 100%;
+            min-height: 250px;
+            height: auto;
+            border-radius: 0px;
+            padding: 0;
+            background-color: transparent;
+            clear: both;
+        }
+    }
+    .o-pedia-content-background {
+        background: #fff;
+        display: flex;
+        padding: 20px 15px;
+    }
+}

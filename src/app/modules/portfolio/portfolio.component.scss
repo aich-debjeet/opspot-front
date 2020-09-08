@@ -1,17 +1,17 @@
 @import "src/assets/helpers/variables";
 @import "node_modules/sass-mq/_mq";
 
-.o-book-blocks{
-    @include mq($from: $mobile_sm, $until: $tablet) {
-        flex-direction: column;
-        position: relative;
-    }
-}
-.o-book-left-block{
-    @include mq($from: $mobile_sm, $until: $tablet) {
-        width: 100%;
-    }
-}
+// .o-book-blocks{
+//     @include mq($from: $mobile_sm, $until: $tablet) {
+//         flex-direction: column;
+//         position: relative;
+//     }
+// }
+// .o-book-left-block{
+//     @include mq($from: $mobile_sm, $until: $tablet) {
+//         width: 100%;
+//     }
+// }
 
 // // for tag
 // .o-portfolio-tag-sec{
@@ -199,3 +199,33 @@
 //         padding: 0px 15px 18px 15px;
 //     }
 // }
+
+//info style
+.o-portfolio-info{
+    border: 1px solid #ECEFF1;
+    border-radius: 4px;
+    background-color: $white;
+    padding:32px 40px;
+    margin: 0px 4px 15px;
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+    @include mq($until:$tablet){
+        flex-direction: column;
+        padding: 23px 26px 33px;
+        margin: 14px 15px 10px;
+        width:initial;
+    }
+}
+  
+
+
+
+//responsive 
+@include mq($until:$tablet){
+    .o-portfolio-title-mob{
+        font-size: 24px;
+        font-weight: 300;
+        margin:10px 0px 0px 21px;
+    }
+}

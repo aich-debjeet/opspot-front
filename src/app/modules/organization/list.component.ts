@@ -13,7 +13,8 @@ import { OverlayModalService } from '../../services/ux/overlay-modal';
 
 @Component({
   selector: 'm-organization--list',
-  templateUrl: 'list.component.html'
+  templateUrl: 'list.component.html',
+  styleUrls:['./list.components.scss']
 })
 
 export class OrganizationListComponent {
@@ -33,6 +34,11 @@ export class OrganizationListComponent {
   showMyCommunities: boolean = false;
   organization  = "";
   memberOrganizations: Array<any> = [];
+  myOrganizations: Array<any> = [];
+  offset2: string = '';
+  moreData2: boolean = true;
+
+
 
 
 
@@ -169,44 +175,44 @@ export class OrganizationListComponent {
     //   return;
 
     if (refresh) {
-      this.offset = '';
+      this.offset2 = '';
       this.memberOrganizations = [];
-      this.moreData = true;
+      // this.moreData = true;
     }
 
     let endpoint, key;
     endpoint = `api/v3/organizations/member/` + this.ownerGuid;
     key = 'organizations';
 
-    this.inProgress = true;
+    // this.inProgress = true;
     this.client.get(endpoint, {
       limit: 12,
-      offset: this.offset,
+      offset: this.offset2,
       rating: this.rating
     })
       .then((response: OpspotGroupListResponse) => {
 
         if (!response[key] || response[key].length === 0) {
-          this.moreData = false;
-          this.inProgress = false;
+          this.moreData2 = false;
+          // this.inProgress = false;
         }
 
         if (refresh) {
           this.memberOrganizations = response[key];
         } else {
-          if (this.offset)
+          if (this.offset2)
             response[key].shift();
           this.memberOrganizations.push(...response[key]);
         }
 
-        this.offset = response['load-next'];
+        this.offset2 = response['load-next'];
         if (!this.offset) {
-          this.moreData = false;
+          this.moreData2 = false;
         }
-        this.inProgress = false;
+        // this.inProgress = false;
       })
       .catch((e) => {
-        this.inProgress = false;
+        // this.inProgress = false;
       });
   }
 
@@ -258,6 +264,7 @@ export class OrganizationListComponent {
       .then((response) => {
         if(response && response['organizations']) {
           this.organization = response['organizations'][0];
+          this.myOrganizations = response['organizations'];
         }
         this.inProgress = false
       })

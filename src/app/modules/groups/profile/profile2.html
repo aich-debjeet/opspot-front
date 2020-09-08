@@ -12,7 +12,7 @@
     }
 
     ::ng-deep .inviteToggle .m-modal-container {
-        width: 543px !important;
+        width: 556px !important;
         min-width: 0;
         min-height: 0;
     }
@@ -20,12 +20,21 @@
     ::ng-deep .inviteToggle .mdl-card {
         padding: 46px 40px !important;
         border-radius: 4px !important;
+        margin: 0px !important;
     }
 
     .sticky-wrapper {
         position: sticky;
         top: 60px;
     }
+
+    ::ng-deep .bg-grey-light {
+    background-color: #ECEFF1 !important;    
+}
+
+  ::ng-deep opspot-groups-profile-members-invite span {
+  padding: 0px !important;
+}
 </style>
 
 <div class="container hidden-above-tablet">
@@ -98,7 +107,7 @@
                         </a>
                     </div>
                     <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle" (closed)="inviteToggle = false">
-                        <opspot-groups-profile-members-invite [group]="group">
+                        <opspot-groups-profile-members-invite *ngIf="group" [group]="group">
                         </opspot-groups-profile-members-invite>
                     </m-modal>
                     <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle" (closed)="memberToggle = false">

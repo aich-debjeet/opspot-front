@@ -1,30 +1,24 @@
-<style>
+<!-- <style>
   input:focus{
     box-shadow: none ;
   }
   ::ng-deep .bg-grey-light{ 
     background-color: #ECEFF1
+    
             }
+  
+  .scroll-div {
+    height: 300px;
+    overflow-y: scroll;
+    padding-bottom: 100px;
+  }
   </style>
-  <!-- <div class="o-community-member-popup">
-  <div class="o-community-member-popup-body"> -->
   <div class="o-community-member-popup-body__title">
     <h3  *ngIf="!mobileView" id="invite-invite-members-group" class="text-h3" i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__NAME_TITLE">
       <ng-container *ngIf="group">Add members to {{ group.name }}</ng-container>
       <ng-container *ngIf="!group">Invite</ng-container>
       <span class="m-layout--spacer"></span>
-      <!-- <a routerLink="../requests" class="selected">
-        Requests
-        <ng-container *ngIf="group['requests:count']">({{group['requests:count']}})</ng-container>
-      </a> -->
     </h3>
-    
-    <!-- <ul class="m-groupMemberInvite__instructions">
-      <li i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_ONLY_SUBSCRIBERS">You can only invite users who are your subscribers</li>
-      <li i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_NOTIFICATION_INFO">They will receive a notification to confirm they want to be a member of this group</li>
-      <li *ngIf="group" [hidden]="!group['is:owner']" i18n="@@GROUPS__PROFILE__MEMBERS__INVITE__ITEM_BAN_REINVITE">If the user was banned from the group, inviting them will lift the ban</li>
-    </ul>
-     -->
     <div [hidden]="!inviteInProgress">
       <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" width="width: 100%;" [mdl]></div>
       <div class="mdl-card__supporting-text">
@@ -40,7 +34,9 @@
       margin: 30px 0px 0px;
       padding: 1.3rem 0.85rem; box-shadow: none;"
        type="text" name="q" [(ngModel)]="q" (keyup)="search(q)" placeholder="Search Members" i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__INVITE__SEARCH_PLACEHOLDER" />
-      <ul class="o-community-members-list scrollbar scrollbar-default" [hidden]="users.length == 0 || !searching">
+       <div class="scroll-div" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="load()"
+       [scrollWindow]="false">
+       <ul class="o-community-members-list scrollbar scrollbar-default">
         <li *ngFor="let user of users" (click)="invite(user);" class="o-community-members-list__user-list">
           <div class="o-community-members-list__user-list">
             <div class="o-community-members-info">
@@ -59,7 +55,179 @@
           </div>     
         </li>
       </ul>
+      </div>
     </div>  
-  </div>
-<!-- </div>
-</div> -->
+  </div> -->
+
+   <style>
+  input:focus{
+    box-shadow: none ;
+  }
+  ::ng-deep .bg-grey-light{ 
+    background-color: #ECEFF1
+    
+    }
+  
+  ::ng-deep .icon-search {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    line-height: 20px;
+    font-size: 15px;
+ }
+
+ ::ng-deep .tabresponsive {
+   display: unset !important;
+ }
+ ::ng-deep .inputresponsive {
+     margin: 30px 0px 0px;
+ }
+
+ ::ng-deep .invite-community-icon-select {
+    background: #0288D1;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ ::ng-deep .invite-community-icon-select__icon {
+    font-size: 15px;
+    color: #fff;
+}
+
+::ng-deep .invite-community-icon {
+    font-size: 30px;
+    color: #0288D1;
+}
+
+::ng-deep .icon-check:before {
+  content: "\e930";
+}
+  </style>
+
+  <!-- <div class="o-invite-to-community-popup">
+    
+    <div class="o-invite-to-community-popup-body"> -->
+        
+        <div *ngIf="!mobileView">
+        <div class="o-invite-to-community-popup-body__title">
+            <div class="text-h3">
+                Invite people to join the community
+            </div>
+        </div><!--title ends-->
+        <div class="o-invite-to-community-popup-body__description">
+            <div class="text-md grey" *ngIf="filter === 'followers'">
+              Participate in fan discussions, watch online events, and hold group chats.
+            </div>
+            <div class="text-md grey" *ngIf="filter === 'emails'">
+              Type multiple email id's separated by a comma
+            </div>
+        </div><!--description ends-->
+        </div>
+        <!--tab starts-->
+        <div class="invite-community-tabbedPanels">
+            <ul class="tabs" [class.tabresponsive]="!mobileView">
+             <li><a [class.active]="isActive('followers')" (click)="switchTabs('followers')" class="bordertbl">Followers</a></li>
+             <li><a [class.active]="isActive('emails')" (click)="switchTabs('emails')" class="bordertbr">Email Address</a></li>
+             <!-- <li><a [class.active]="isActive('phones')" (click)="switchTabs('phones')" class="bordertbr">Phone Number</a></li> -->
+            </ul><!--tabs ends-->               
+           <div class="invite-community-panelContainer">
+                <div id="Followers" class="invite-community-panel" *ngIf="filter === 'followers'">
+                    <div class="form-group c-form_righticon-md">
+                            <!-- <input type="text" class="form-control form-control-lg bg-grey-light" placeholder="Search"> -->
+                            <input
+                                id="invite-search-members"
+                                class="form-control form-control-lg bg-grey-light"
+                                type="text" name="q" [(ngModel)]="q" (keyup)="search(q)" placeholder="Search Members" i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__INVITE__SEARCH_PLACEHOLDER"
+                                style="border: 0px;box-shadow: none;" [class.inputresponsive]="!mobileView" />
+                            <a><i class="icon-search"></i></a>
+                    </div><!--search bar ends-->
+                    <ul class="o-invite-to-community-list scrollbar scrollbar-default" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="load()"
+                    [scrollWindow]="false">
+                        <div *ngFor="let user of users; let x = index">
+                        <li class="o-invite-to-community-list__user-list" *ngIf="!user.is_invited"> 
+                            <div class="o-invite-to-community-info" >
+                                <div class="o-invite-to-community-info-prof">
+                                    <div class="o-invite-to-community-info-prof__avatar o-avatar-md">
+                                        <img src="{{opspot.cdn_url}}icon/{{user.guid}}/small/{{user.icontime}}" />           
+                                    </div>
+                                    <div id="username" class="caption-bold">
+                                        {{user.name}}
+                                    </div>
+                                </div>
+                                <div class="o-invite-to-community-info__option">
+                                    <!-- <a (click)="toggle(x)">
+                                    <i [ngClass]="{'icon-plus-circle invite-community-icon': !colapse[x], 'icon-check invite-community-icon-select__icon': colapse[x] }"></i>
+                                    </a> -->
+                                    <a (click)="toggle(x, user)" *ngIf="!colapse[x]">
+                                    <i class="icon-plus-circle invite-community-icon"></i>
+                                    </a>
+                                    <a *ngIf="colapse[x]" class="invite-community-icon-select" (click)="toggle(x,user)" >
+                                        <i class="icon-check invite-community-icon-select__icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li><!-- user list end-->      
+                      </div>           
+                    </ul><!-- members list end -->
+                    <div class="invite-community-button">
+                        <button type="button" class="btn btn-primary btn-block invite-community-button__send" 
+                        [disabled]="inviteArrray.length == 0" (click) = "invite()">Send Invite</button>
+                    </div><!--button ends-->
+                </div>  <!-- end Followers -->
+                <!--Email starts-->
+                <div id="Emailaddress" class="invite-community-panel"  *ngIf="filter === 'emails'">
+                    <div class="invite-community-email">
+                        <!-- <textarea class="form-control" name="Description" rows="" spellcheck="false" placeholder="Type email address and use spacebar to separate it"></textarea> -->
+                        <tag-input
+                        [maxItems]=maxItems required
+                        [(ngModel)]='emails'
+                        placeholder="Type email address and use spacebar to separate it"
+                        style="border: 1px solid #90A4AE;
+                        margin: 30px 0px 20px;
+                        resize: none; 
+                        padding: 20px 19px;
+                        font-size: 14px;
+                        height: 100%;"
+                        theme='minimal'
+                        [addOnBlur]="true"
+                      ></tag-input>
+                        <!-- <div class="text-md invite-community-email__syc">
+                            Or Sync Email addresses
+                        </div> -->
+                    </div> 
+                    <!-- <div class="invite-community-email-media">
+                        <a class="invite-community-email-media__social">
+                            <img src="assets/svg/google-logo.svg" class="mr8">Google 
+                        </a>
+                        <a class="invite-community-email-media__social">
+                            <img src="assets/svg/yahoo-logo.svg" class="mr8">Yahoo 
+                        </a>
+                        <a class="invite-community-email-media__social">
+                            <img src="assets/svg/apple-logo-black.svg" class="mr8">iCloud  
+                        </a>
+                        <a class="invite-community-email-media__social">
+                            <img src="assets/svg/email-logo.svg" class="mr8">Others 
+                        </a>
+                    </div>  -->
+                    <div class="invite-community-button">
+                        <button type="button" class="btn btn-primary btn-block invite-community-button__send" (click) = "sendInvite()">Send Invite</button>
+                    </div>                    
+                </div>
+                <!--Email ends--> 
+                <!-- <div id="Phonenumber" class="invite-community-panel"  *ngIf="filter === 'phones'">
+                    <div class="invite-community-phonenumber">
+                        <textarea class="form-control" name="Description" rows="10" spellcheck="false" placeholder="Type phone number like (91) 9898989898 & use comma to separate it"></textarea>
+                        
+                    </div>
+                    <div class="invite-community-button mt58">
+                        <button type="button" class="btn btn-primary btn-block invite-community-button__send disabled">Send Invite</button>
+                    </div> 
+                </div>   -->
+           </div>
+        </div> 
+        <!-- </div>
+        </div> -->

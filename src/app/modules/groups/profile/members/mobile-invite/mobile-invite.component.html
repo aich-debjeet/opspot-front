@@ -1,10 +1,10 @@
 <div class="container hidden-above-tablet">
   <div class="without-nav-header o-reg-skill-mob-header">
     <a (click)="goBack()"><i class="icon-arrow-left"></i> </a>
-    <div class="without-nav-header__title caption-bold f500">Add Members</div>
+    <div class="without-nav-header__title caption-bold f500">Invite people to join the community</div>
   </div>
 </div>
 <div class="container" style="padding:12px !important;">
-  <opspot-groups-profile-members-invite [group]="group">
+  <opspot-groups-profile-members-invite *ngIf = "group" [group]="group">
   </opspot-groups-profile-members-invite>
 </div>

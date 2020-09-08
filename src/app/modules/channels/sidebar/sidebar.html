@@ -21,7 +21,7 @@
       <a *ngFor="let tag of user?.general_info?.skills" class="o-community-skills__tag word-br">#{{tag}}</a>
     </div> -->
     <div class="show-proffession">
-      <a href="" class="o-prof-prof-name black" *ngFor="let profession of user?.general_info?.professions">{{profession}}</a>
+      <a class="o-prof-prof-name black" *ngFor="let profession of user?.general_info?.professions">{{profession}}</a>
     </div>
     <!-- <div class="m-channel--username">
     <h2><span>@</span>{{user.username}}</h2>
@@ -231,6 +231,10 @@
           <a class="primary" id="sidebar-add-email">Add Number</a>
         </span>
         <span class="text-md float-left" id="sidebar-phone-number">{{user.phone}}</span>
+      </li>
+      <li class="o-bio-info__item" *ngIf="user?.secondary_phone?.length > 0">
+        <span class="o-bio-info_ico"><i class="icon-phone"></i></span>
+        <span class="text-md float-left" id="sidebar-phone-number" *ngFor="let num of user?.secondary_phone">{{num}}</span>
       </li>
       <li class="o-bio-info__item">
         <span class="o-bio-info_ico"><i class="icon-globe"></i></span>

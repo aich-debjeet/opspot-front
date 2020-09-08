@@ -1,0 +1,36 @@
+<m-modal [open]="open" (closed)="close()">
+  <!-- <button (click)="crop()"> Apply crop</button> -->
+  <div class="this-is-for-priview">
+    <div class="o-profile-crop">
+      <div class="o-profile-crop-head">
+        <div class="without-nav-header o-reg-skill-mob-header">
+
+          <div class="o-profile-crop-head__title" id="image-croper-title"><a id="image-croper-icon-arrow-left"><i
+                class="icon-arrow-left" (click)="close()"></i></a>Edit Cover Image</div>
+        </div>
+      </div>
+      <!--profile crop head end-->
+      <div class="o-profile-crop-body">
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+          (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" 
+          [containWithinAspectRatio]="false"
+          [transform]="transform"
+          format="png,jpeg,jpg"
+          (cropperReady)="cropperReady($event)" (loadImageFailed)="loadImageFailed()"></image-cropper>
+      </div>
+      <div class="o-profile-crop-footer">
+        <button class="button" (click)="zoomOut()">Zoom -</button>
+        <button class="button" (click)="zoomIn()">Zoom +</button>
+        <!-- <button class="btn btn-primary btn-sm" (click)="crop()" id="image-croper-apply-button">Apply</button> -->
+
+        <!-- <div class="o-profile-crop-footer_rangeslider">
+          
+        </div> -->
+        <!-- <div class="o-profile-crop-footer__icon2">
+          <i class="icon-image"></i>
+        </div> -->
+      </div>
+      <!--footer ends-->
+    </div>
+  </div>
+</m-modal>

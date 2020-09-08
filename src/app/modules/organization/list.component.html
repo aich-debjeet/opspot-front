@@ -22,9 +22,9 @@
             <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn() && !organization && !inProgress"
               routerLink="/organization/create">Create Organization</button>
             <!-- <div class="text-lg f500 mb-17" id="list-communities-manage" *ngIf="organization" 
-            [routerLink]="['/organization/profile', organization.guid,  'feed']" >{{organization.name}}</div> -->
+            [routerLink]="['/organization/profile', organization.guid,  'feed']" >{{organization.name}}</div> -->            
             <div class="text-lg f500 mb-17" id="list-communities-manage">Organizations you manage</div>
-            <div *ngFor="let entity of entities">
+            <div *ngFor="let entity of myOrganizations">
               <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='organization'" 
                 id="list-community-manage-list"
                 [routerLink]="['/organization/profile', entity.guid]">
@@ -36,7 +36,8 @@
                 </div>
               </div>
             </div>
-            <div class="o-community-landing-block-your">
+            <div class="o-community-landing-block-your" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMemberOrganizations()"
+            [scrollWindow]="false">
               <div class="text-lg f500 mb-17" id="list-community-header">Organizations you’re in</div>
               <div *ngFor="let entity of memberOrganizations">
                 <div class="o-community-landing-block-manage"
@@ -52,6 +53,11 @@
                 </div>
               </div>
             </div>
+            <div class="m-infinite-scroll-manual"
+                id="infinite-scroll-nothing-more-to-load"
+                [hidden]="moreData2">
+              <ng-container i18n="@@COMMON__INFINITE_SCROLL__NOTHING_MORE">Nothing more to load</ng-container>
+            </div>            
           </div>
           <div class="o-community-landing-block__main" *ngIf="!showMyCommunities">
             <div class="o-cmnity-landing-tab-content">
@@ -65,7 +71,7 @@
             </div>
           </div>
           <div class="o-community-landing-block-design" *ngIf="showMyCommunities">
-            <div id="communities" class="tab" *ngFor="let entity of entities">
+            <div id="communities" class="tab" *ngFor="let entity of myOrganizations">
               <m-organization--tile *ngIf="entity['is:member'] && entity['is:creator'] && entity['entity_type']=='organization'"
                 [entity]="entity" class="o-community-main-card"></m-organization--tile>
             </div>

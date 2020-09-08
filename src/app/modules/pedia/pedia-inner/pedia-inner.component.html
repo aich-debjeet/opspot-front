@@ -1,0 +1,43 @@
+<section class="o-pedia-inner-page-sec">
+    <div class="container">
+        <div class="o-pedia-inner-page-body">
+            <div class="o-pedia-inner-page-bolck" *ngIf="desc; else noData">
+                <div class="o-pedia-inner-page-bolck__left">
+                    <div class="o-pedia-inner-page-avatar">
+                        <img src="assets/avatars/default-large.png" *ngIf="!imgStr">
+                        <img [src]="'http://commons.wikimedia.org/wiki/Special:FilePath/' + imgStr" *ngIf="imgStr" alt="">
+                    </div>
+                    <!--avatar ends-->
+                    <div class="text-lg f500 primary">Personal Information</div>
+                    <div class="o-pedia-inner-page-info text-md">
+                        <div class="f500">Full Name</div>
+                        <div>{{title}}</div>
+                    </div>
+                    <!--info ends-->
+                </div>
+                <div class="o-pedia-inner-page-bolck__right">
+                    <h3 class="f700">{{title}}</h3>
+                    <p class="ptb9 mt9 text-md">
+                        {{desc}}
+                    </p>
+                    <ng-container *ngFor="let info of detailedDesc">
+                        <p class="ptb9 mt9 text-md" *ngIf="info.title != uniqId" [innerHtml]="info.snippet | safe">
+                            
+                        </p>
+                    </ng-container>
+                </div>
+            </div>
+            <ng-template #noData>
+                <div class="o-pedia-inner-page-bolck__right">
+                    <p class="ptb9 mt9 text-md centr">
+                        Sorry, we could not gather any Information for you.
+                    </p>
+                </div>
+            </ng-template>
+            <!--block ends-->
+        </div>
+        <!--body ends-->
+    </div>
+    <!--container ends-->
+</section>
+<!--pedia sec ends-->
