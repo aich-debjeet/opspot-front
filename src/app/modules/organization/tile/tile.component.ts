@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Session } from '../../../services/session';
 import { OrganizationService } from '../organization-service';
 import { Router } from '@angular/router';
-import { OrganizationJoinRequestComponent } from '../group-join-request/organization-join-request.component';
+import { OrganizationJoinRequestComponent } from '../organizations-join-request/organization-join-request.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
