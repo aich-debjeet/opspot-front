@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormValidator } from '../../../helpers/form.validator';
 import { OpspotTitle } from '../../../services/ux/title';
@@ -6,8 +6,10 @@ import { AttachmentService } from '../../../services/attachment';
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { Client, Upload } from '../../../services/api';
 import { from as fromPromise, Observable } from 'rxjs';
-import {mergeMap} from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-create-campaign',
@@ -36,8 +38,9 @@ export class CreateCampaignComponent implements OnInit {
   @ViewChild('file') coverFile: ElementRef;
   @ViewChild('fileGallery') fileGallery: ElementRef;
   @ViewChild('organizationPic') organizationPic: ElementRef;
+  data: any;
 
-  constructor(private fb: FormBuilder, private title: OpspotTitle, private attachment: AttachmentService, public client: Client,public router: Router ) {
+  constructor(private fb: FormBuilder, private title: OpspotTitle, private attachment: AttachmentService, public client: Client, public router: Router) {
     this.title.setTitle('Campaign-Enrollment');
   }
 
@@ -133,7 +136,7 @@ export class CreateCampaignComponent implements OnInit {
         this.cards = _remove(this.cards, function (n) {
           return n.guid != guid;
         });
-        this.coverGuids = _remove(this.coverGuids, function(n) {
+        this.coverGuids = _remove(this.coverGuids, function (n) {
           console.log(n);
           return n != guid;
         })
@@ -141,13 +144,16 @@ export class CreateCampaignComponent implements OnInit {
           this.fileGallery.nativeElement.value = ""; //to empty the input placeholder
           this.campaignForm.get('gallery').setValue(null);
         }
-      }).then(()=>{})
+      }).then(() => { })
       .catch(e => {
       });
   }
   onSubmit() {
     console.log('submitted')
     console.warn(this.campaignForm.valid);
+
+    var startTime = this.convertDateToMillis(this.campaignForm.value.enrollStartDate, this.campaignForm.value.enrollStartTime)
+    var endTime = this.convertDateToMillis(this.campaignForm.value.enrollEndDate, this.campaignForm.value.enrollEndTime)
     if (this.campaignForm.valid) {
       let reqBody = {};
       reqBody = {
@@ -155,16 +161,16 @@ export class CreateCampaignComponent implements OnInit {
         description: this.campaignForm.value.campaignDesc,
         event_type: 'Premium',
         location: this.campaignForm.value.campaignLoc,
-        start_time_date: this.campaignForm.value.enrollStartDate,
-        end_time_date: this.campaignForm.value.enrollStartDate,
+        start_time_date: startTime.getTime(),
+        end_time_date: endTime.getTime(),
         attachment_guid: this.coverGuids,
         enrollment_fees: this.campaignForm.value.price,
         brevarges: this.campaignForm.value.refreshmentMaterials,
-        allowed_gender:this.campaignForm.value.gender,
+        allowed_gender: this.campaignForm.value.gender,
         access_id: 2,
         published: 1,
         attachment_license: '',
-        cover_attachment_guid: this.bannerGuid ? this.bannerGuid: '',
+        cover_attachment_guid: this.bannerGuid ? this.bannerGuid : '',
         organiser_name: this.campaignForm.value.orgName,
         organiser_about: this.campaignForm.value.orgAbout,
         organiser_attachment_guid: this.orgImgGuid ? this.orgImgGuid : '',
@@ -183,6 +189,37 @@ export class CreateCampaignComponent implements OnInit {
         });
     }
   }
+
+
+
+  formatTime(inputTime) {
+    var timeString = inputTime;
+    var H = +timeString.substr(0, 2);
+    var h = H % 12 || 12;
+    var ampm = (H < 12 || H === 24) ? "AM" : "PM";
+    return timeString = h + timeString.substr(2, 3) + ampm;
+  }
+
+  convertDateToMillis(inputDate, inputTime) {
+    if (inputTime) {
+      var timeString = this.formatTime(inputTime)
+      const d = moment(inputDate.split('-').reverse().join('-')).format('L'); // d = "12/12/2017" 
+      var myDate = new Date(d);
+      var timeReg = /(\d+)\:(\d+)(\w+)/;
+      if (timeString) {
+        var parts = timeString.match(timeReg);
+      }
+      var hours = /am/i.test(parts[3]) ?
+        function (am) { return am < 12 ? am : 0 }(parseInt(parts[1], 10)) :
+        function (pm) { return pm < 12 ? pm + 12 : 12 }(parseInt(parts[1], 10));
+      var minutes = parseInt(parts[2], 10);
+      var date = new Date(myDate.getTime());
+      date.setHours(hours);
+      date.setMinutes(minutes);
+      return date;
+    }
+  }
+}
   // searchUser(event) {
   //   console.log(event)
   //   if (this.valueTimeout) {
@@ -209,8 +246,8 @@ export class CreateCampaignComponent implements OnInit {
   //     q: event,
   //     limit: 5
   //   })).mergeMap('',)
-    
-    
+
+
   //   // this.client.get('api/v2/search/suggest', {
   //   //   q: text,
   //   //   limit: 5
@@ -221,4 +258,6 @@ export class CreateCampaignComponent implements OnInit {
   //   //     .get(url)
   //   //     .map((data: any) => data.items.map(item => item.full_name));
   // };
-}
+  // }
+
+
