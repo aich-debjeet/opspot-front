@@ -123,7 +123,7 @@
     <div class="container hidden-above-tablet">
         <div class="without-nav-header organisation-admin-main-title">
             <a href="#"><i class="icon-arrow-left"></i> </a>
-            <div class="without-nav-header__title caption-bold f500 center">Organisation</div>
+            <div class="without-nav-header__title caption-bold f500 center">Organization</div>
         </div>
     </div><!-- without nav header end -->
     <div [hidden]="organization || error" style="width:100%; text-align:center; ">
@@ -188,8 +188,8 @@
                                 *ngIf="organization && (!organization['is:creator'] || (session.isAdmin()) && !organization['is:invited'])">
                             </opspot-organization-join-button>
                             <div class="o-organisation-members-top">
-                                <div class="o-organisation-members-top__count">
-                                    <div class="caption-bold">205</div>
+                                <div class="o-organisation-members-top__count" (click)="showMembers()">
+                                    <div class="caption-bold">{{totalMembers|abbr}}</div>
                                     <div class="text-sm grey">Subscribers</div>
                                 </div>
                             </div><!-- organisation members end-->
