@@ -24,7 +24,7 @@
             </div>
             <button type="button" id="list-create-community" class="btn btn-primary btn-block" *ngIf="session.isLoggedIn() && !organization && !inProgress"
               routerLink="/organization/create">Create Organization</button>            
-            <div class="text-lg f500 mb-17" id="list-communities-manage">Organisation you created</div>
+            <div class="text-lg f500 mb-17" id="list-communities-manage">Organization you created</div>
             <div *ngFor="let entity of myOrganizations">
               <div class="o-community-landing-block-manage" *ngIf="(entity['is:creator'] || entity['is:admin']) && entity['entity_type']=='organization'" 
                 id="list-community-manage-list"
@@ -39,7 +39,7 @@
             </div>
             <div class="o-community-landing-block-your" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="loadMemberOrganizations()"
             [scrollWindow]="false">
-              <div class="text-lg f500 mb-17" id="list-community-header">Organisation you subscribed</div>
+              <div class="text-lg f500 mb-17" id="list-community-header">Organization you subscribed</div>
               <div *ngFor="let entity of memberOrganizations">
                 <div class="o-community-landing-block-manage"
                   id="list-community-joined"
