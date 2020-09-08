@@ -56,11 +56,15 @@ export class OrganizationTileComponent {
     // }
   }
 
-  triggerPopup(){
-    this.overlayModal.create(OrganizationJoinRequestComponent, this.entity, {
-            class: 'm-overlay-modal--report m-overlay-modal--medium-groupjoin',
-          }
-          ).present();
+  triggerPopup() {    
+    if (window.innerWidth > 785) {
+      this.overlayModal.create(OrganizationJoinRequestComponent, this.entity, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-groupjoin',
+      }
+      ).present();
+    } else {
+      this.router.navigate(['organization', 'card', this.entity.guid]);
+    }
   }
 
   cancelRequest() {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-organization-join-request',
@@ -10,6 +11,7 @@ export class OrganizationJoinRequestComponent implements OnInit {
 
   constructor(
     private overlayModal: OverlayModalService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -28,7 +30,11 @@ export class OrganizationJoinRequestComponent implements OnInit {
   }
 
   dismiss() {
-    this.overlayModal.dismiss();
+    if (window.innerWidth > 785) {
+      this.overlayModal.dismiss();
+    } else {
+      this.router.navigate(['organization', 'all']);
+    }
   }
 
 }
