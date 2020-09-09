@@ -17,7 +17,6 @@
         <!-- <button type="button" id="tile-join-button" class="btn btn-primary btn-sm"
           (click)='trigger(entity)'>Explore</button> -->
           <opspot-organization-join-button [group]="entity"
-                                (membership)="change_membership($event)"
                                 *ngIf="entity && (!entity['is:creator'] || (session.isAdmin()) && !entity['is:invited']); else emptyTag">
           </opspot-organization-join-button>  
           <ng-template #emptyTag>
