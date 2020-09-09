@@ -319,9 +319,8 @@ export class ExploreComponent implements OnInit {
       class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
       // listen to the update callback
       onUpdate: (payload: any) => {
-        // make update to local var
-        // this.activityResp.emit(payload)
-        // this.overlayModal.dismiss();
+        this.exploreArray.unshift(payload);
+        this.overlayModal.dismiss();
       }
     }).present();
   }

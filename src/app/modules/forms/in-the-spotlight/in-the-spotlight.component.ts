@@ -13,6 +13,11 @@ import { Client } from '../../../services/api/client';
 export class InTheSpotlightComponent implements OnInit {
 spotlighForm: FormGroup;
 cards = [];
+inProgress:boolean = false;
+_opts: any;
+  set opts(opts: any) {
+    this._opts = opts;
+  }
   constructor(private fb: FormBuilder,
     private client: Client,
     private upload: Upload,
@@ -31,7 +36,7 @@ cards = [];
   }
   uploadAttachment(file: HTMLInputElement, event) {
     if (file.value) { // this prevents IE from executing this code twice
-      
+      this.inProgress = true;
       this.attachment.upload(file)
         .then(guid => {
           console.log(guid)
@@ -39,6 +44,7 @@ cards = [];
           obj['guid'] = guid;
           obj['src'] = this.attachment.getPreview();
           this.addAttachment(obj);
+          this.inProgress = false;
           // if (this.attachment.isPendingDelete()) {
           //   this.removeAttachment(file);
           // }
@@ -46,6 +52,7 @@ cards = [];
           file.value = null;
         })
         .catch(e => {
+          this.inProgress = false;
           if (e && e.message) {
           }
           file.value = null;
@@ -65,18 +72,18 @@ cards = [];
     }
   }
   removeAttachment(file: HTMLInputElement, imageId: string) {
-    // if (this.inProgress) {
-    //   this.attachment.abort();
-    //   this.canPost = true;
-    //   this.inProgress = false;
-    //   this.errorMessage = '';
-    //   return;
-    // }
+    if (this.inProgress) {
+      this.attachment.abort();
+      this.inProgress = false;
+      return;
+    }
+    this.inProgress = true;
     console.log('cards', this.cards)
     // if we're not uploading a file right now
     this.attachment.setPendingDelete(false);
     this.attachment.remove(imageId, file)
       .then(guid => {
+        this.inProgress = false;
         console.log('guid',guid)
         file.value = '';
         this.spotlighForm.get('media').setValue('');
@@ -87,7 +94,7 @@ cards = [];
       })
       .catch(e => {
         // console.error(e);
-        // this.inProgress = false;
+        this.inProgress = false;
         // this.canPost = true;
       });
   }
@@ -101,6 +108,15 @@ cards = [];
     }
     this.client.post('api/v4/admin/inthespotlight',payload).then((response)=>{
       console.log('promise fulfilled', response)
-    }).catch()
+      if(response['status'] == 'success'){
+        if (this._opts && this._opts.onUpdate) {
+          this._opts.onUpdate(response['activity']);
+          // close modal
+        }
+      }
+    }).catch(e => {
+      console.log(e);
+      alert(e.message);
+    });
   }
 }

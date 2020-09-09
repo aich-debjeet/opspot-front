@@ -46,13 +46,17 @@
                         </div>
                     </section>
                 </div>
-                <div class="text-sm grey mt10">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>
             </div>
             <!--image upload-->
         </div>
         <!--body ends-->
+        <div *ngIf="inProgress" class="mdl-progress mdl-progress__indeterminate initial-loading is-upgraded">
+            <div class="progressbar bar bar1" style="width: 0%;"></div>
+            <div class="bufferbar bar bar2" style="width: 100%;"></div>
+            <div class="auxbar bar bar3" style="width: 0%;"></div>
+        </div>
         <div class="o-create-spotlight-footer">
-            <button type="submit" class="btn btn-primary btn-sm" [disabled]="!spotlighForm.valid">Post</button>
+            <button type="submit" class="btn btn-primary btn-sm" [disabled]="!spotlighForm.valid || inProgress">Post</button>
             <!--for event page-->
         </div>
     </form>
