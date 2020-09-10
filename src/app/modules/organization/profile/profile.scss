@@ -2,6 +2,14 @@
 
 @import "node_modules/sass-mq/_mq";
 
+// files included are :
+// 1. organisation subscriber 
+// 2. organization profile info 
+// 
+
+
+
+// organisation prof info style
 
 // organisation prof info style
 
@@ -18,6 +26,9 @@
     @include mq($from: $mobile_sm, $until: $tablet) {
         position: unset;
         padding: 42px 23px 23px;
+        .mrt0{
+            margin-top:0px;
+        }
     }
     &--radius{
         border-radius: 4px;
@@ -27,7 +38,13 @@
     //     box-shadow: 0 6px 10px 0 rgba(144,164,174,0.16), 0 1px 12px 0 rgba(144,164,174,0.18), 0 3px 5px 0 rgba(144,164,174,0.2);
     // }
 }
-
+//subscribe button style
+.o-organisation-gathering-block{
+    .btn-lg{
+        padding: 4px 27px;
+        font-size: 11px;
+    }
+}
 //avatar style
 .o-avatar-xl--organisation{
     width: 91px;
@@ -195,20 +212,20 @@
         z-index: 1;
     }
 }
-.o-organisation-add-members-mob{
-    height: 30px;	
-    width: 30px;	
-    border: 1px solid $primary;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    i{
-        font-size: 13px;
-        color: $primary;
-    }
-}
+// .o-organisation-add-members-mob{
+//     height: 30px;	
+//     width: 30px;	
+//     border: 1px solid $primary;
+//     border-radius: 50%;
+//     overflow: hidden;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     i{
+//         font-size: 13px;
+//         color: $primary;
+//     }
+// }
 
 // discription
 
@@ -269,68 +286,69 @@
 
 .show {display: block;}
 
+// organization profile info end
 
 //organization admin empty view
 
-//button style
-.organisation-admin-empty-btn{
-    margin-top:30px!important;
-    padding:9px 55px!important;
-}
+// //button style
+// .organisation-admin-empty-btn{
+//     margin-top:30px!important;
+//     padding:9px 55px!important;
+// }
 
-//avatar style
-.organisation-admin-empty-avatar{
-    background-color: #ECEFF1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+// //avatar style
+// .organisation-admin-empty-avatar{
+//     background-color: #ECEFF1;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
 
-//add icon style
-.o-organisation-admin-add-img{
-    box-sizing: border-box;
-    height: 30px;
-    width: 30px;
-    i{
-        color: $primary;
-        font-size: 30px;
-    }   
-}
+// //add icon style
+// .o-organisation-admin-add-img{
+//     box-sizing: border-box;
+//     height: 30px;
+//     width: 30px;
+//     i{
+//         color: $primary;
+//         font-size: 30px;
+//     }   
+// }
 
-//right block style
-.organisation-admin-empty-right{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    height: 471px;
-    width: 265px;
-    border: 1px solid #ECEFF1;
-    border-radius: 4px;
-    background-color: #FFFFFF;
-    &__text{
-        margin:24px 0px;
-    }
-    &__btn{
-        button{
-            padding:8px 24px;
-        }
-    }
-}
+// //right block style
+// .organisation-admin-empty-right{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     box-sizing: border-box;
+//     height: 471px;
+//     width: 265px;
+//     border: 1px solid #ECEFF1;
+//     border-radius: 4px;
+//     background-color: #FFFFFF;
+//     &__text{
+//         margin:24px 0px;
+//     }
+//     &__btn{
+//         button{
+//             padding:8px 24px;
+//         }
+//     }
+// }
     
-//responsive style
-@include mq($until:$tablet){
-   .o-cover-edit-mob{
-        i{
-            color:#fff;
-            font-size: 22px;
-        }
-    }
-    .mrorganisationb40{
-        margin-bottom: 40px
-    }
-}
+// //responsive style
+// @include mq($until:$tablet){
+//    .o-cover-edit-mob{
+//         i{
+//             color:#fff;
+//             font-size: 22px;
+//         }
+//     }
+//     .mrorganisationb40{
+//         margin-bottom: 40px
+//     }
+// }
 
 
 .o-organisation-subscribers{
@@ -454,211 +472,228 @@ a{
     padding: 10px 0px;
 }
 
+
+
 //organisation scss
-// organisation style
 
-.o-organisation-sec{
-    width: 100%;
-    float: left;
-    background-color: #FAFAFA;
-    min-height: 100vh;
-    .m-b-13{
-        margin-bottom: 13px;
-    }
-}
+// .o-organisation-sec{
+//     width: 100%;
+//     float: left;
+//     background-color: #FAFAFA;
+//     min-height: 100vh;
+//     .m-b-13{
+//         margin-bottom: 13px;
+//     }
+// }
 
-//block style
-.o-right-block--organisation{
-    flex: 1;
-    order: 2;
-    overflow: hidden;
-    &__items{
-        display:flex;
-    }
-}
+// //block style
+// .o-right-block--organisation{
+//     flex: 1;
+//     order: 2;
+//     overflow: hidden;
+//     &__items{
+//         display:flex;
+//     }
+// }
 
-// reiview count
+// // reiview count
 
-.review-count{
-    background: $grey;
-    padding: 1.5px 6px;
-    border-radius: 2px;
-    overflow: hidden;
-    margin-left: 8px;
-}
-.tabs-organisation .tabs-list li.active .review-count{
-    background: $primary;
-}
-//cover style
-.o-cover--organisation {
-    top: 0px !important;
-    height: 187px !important;
-    border-radius: 4px !important;
-    overflow: hidden;
-    position: relative;
-    margin-left: 10px;
-    @include mq($from: $mobile_sm, $until: $tablet) {
-        margin-left:0px;
-        height: 110px!important;
-    }
-}
+// .review-count{
+//     background: $grey;
+//     padding: 1.5px 6px;
+//     border-radius: 2px;
+//     overflow: hidden;
+//     margin-left: 8px;
+// }
+// .tabs-organisation .tabs-list li.active .review-count{
+//     background: $primary;
+// }
+// //cover style
+// .o-cover--organisation {
+//     top: 0px !important;
+//     height: 187px !important;
+//     border-radius: 4px !important;
+//     overflow: hidden;
+//     position: relative;
+//     margin-left: 10px;
+//     @include mq($from: $mobile_sm, $until: $tablet) {
+//         margin-left:0px;
+//         height: 110px!important;
+//     }
+// }
 
-//request tab style
-.o-organisation-admin-request{
-    width: 100%;
-    border: 1px solid #ECEFF1;
-    border-radius: 4px;
-    margin-bottom: 6px;
-    float: left;
-    background: #FFFFFF;
-    padding: 10px 17px;
-}
+// //request tab style
+// .o-organisation-admin-request{
+//     width: 100%;
+//     border: 1px solid #ECEFF1;
+//     border-radius: 4px;
+//     margin-bottom: 6px;
+//     float: left;
+//     background: #FFFFFF;
+//     padding: 10px 17px;
+// }
 
-.o-organisation-admin-request-block{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-.o-organisation-admin-request-block-info{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 6px 0px;
-    &__avatar{
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        overflow: hidden;
-        img{
-            width:100%;
-        }
-    }
-    &__info {
-        margin-left: 7px;
-    }
-}
-.o-organisation-admin-request-mr14{
-    margin-right:14px;
-}
-.o-organisation-admin-request-line{
-    border-bottom: 1px solid #ECEFF1;
-    margin: 5px 0 5px;
-}
+// .o-organisation-admin-request-block{
+//     width: 100%;
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+//     justify-content: space-between;
+// }
+// .o-organisation-admin-request-block-info{
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+//     justify-content: flex-start;
+//     margin: 6px 0px;
+//     &__avatar{
+//         width: 40px;
+//         height: 40px;
+//         border-radius: 50%;
+//         overflow: hidden;
+//         img{
+//             width:100%;
+//         }
+//     }
+//     &__info {
+//         margin-left: 7px;
+//     }
+// }
+// .o-organisation-admin-request-mr14{
+//     margin-right:14px;
+// }
+// .o-organisation-admin-request-line{
+//     border-bottom: 1px solid #ECEFF1;
+//     margin: 5px 0 5px;
+// }
 
-//responsive style
-@include mq($from: $mobile_sm, $until: $tablet) {
-    .o-left-block--organisation{
-        width:100%!important
-    }
-    .organisation-admin-main-title{
-        .without-nav-header__title{
-            margin-left:0px!important;
-        }
-    }
-//members top style
-    .o-organisation-members-top {
-        width: 100%;
-        margin-top: 15px; 
-        &__count{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column; 
-        }
-        &__count-mob{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: row;
-            margin-left: 20px;
-            .m-l-r-6 {
-                margin: 0px 6px; 
-            }
-        }
-    }
-    .o-organisation-members-top--mob {
-        margin: 3px 0px 11px !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        background: #fff;
-        padding: 15px 0px;
-    }
+// //responsive style
+// @include mq($from: $mobile_sm, $until: $tablet) {
+//     .o-left-block--organisation{
+//         width:100%!important
+//     }
+//     .organisation-admin-main-title{
+//         .without-nav-header__title{
+//             margin-left:0px!important;
+//         }
+//     }
+// //members top style
+//     .o-organisation-members-top {
+//         width: 100%;
+//         margin-top: 15px; 
+//         &__count{
+//             width: 100%;
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             flex-direction: column; 
+//         }
+//         &__count-mob{
+//             display: flex;
+//             justify-content: center;
+//             align-items: center;
+//             flex-direction: row;
+//             margin-left: 20px;
+//             .m-l-r-6 {
+//                 margin: 0px 6px; 
+//             }
+//         }
+//     }
+//     .o-organisation-members-top--mob {
+//         margin: 3px 0px 11px !important;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         flex-direction: row;
+//         background: #fff;
+//         padding: 15px 0px;
+//     }
   
-  .o-organisation-members-list-mob-single {
-        width: 30px;
-        height: 30px;
-        border: 1px solid #FFFFFF;
-        border-radius: 50%;
-        overflow: hidden; 
-        img{
-            width: 100%;
-        }
-        :nth-child(1){
-            z-index: 3;
-        }
-        :nth-child(2) {
-            margin-left: -10px;
-            z-index: 2; 
-        }
-        :nth-child(3) {
-            margin-left: -10px;
-            z-index: 1; 
-        }
-    }
-  
-  .o-organisation-add-members-mob {
-        height: 30px;
-        width: 30px;
-        border: 1px solid #0288D1;
-        border-radius: 50%;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center; 
-        i{
-            font-size: 13px;
-            color: #0288D1; 
-        }
-    }
-    //write style
-    .o-organisation-write-mob{
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        box-sizing: border-box;
-        border: 1px solid #ECEFF1;
-        border-radius: 4px;
-        background:#fff;
-        padding: 10px 15px;
-        margin-bottom:6px;
-        &__avatar{
-            img{
-                height: 40px;
-                width: 40px;
-                border-radius: 50%;
-            }
-        }
-        &__status{
-            margin: 10px 0px 0px 11px;
-            textarea{
-                overflow: hidden;
-                width: 100%;
-                font-size: 14px;
-                line-height: 16px;
-                border: none;
-                font-family: "Roboto", sans-serif !important;
-                resize: none;
-            }
-        }
-    }
-}
+//   .o-organisation-members-list-mob-single {
+//         width: 30px;
+//         height: 30px;
+//         border: 1px solid #FFFFFF;
+//         border-radius: 50%;
+//         overflow: hidden; 
+//         img{
+//             width: 100%;
+//         }
+//         :nth-child(1){
+//             z-index: 3;
+//         }
+//         :nth-child(2) {
+//             margin-left: -10px;
+//             z-index: 2; 
+//         }
+//         :nth-child(3) {
+//             margin-left: -10px;
+//             z-index: 1; 
+//         }
+//     }
 
+//     .o-organisation-members-list-mob-single--talent {
+//         width: 31px;
+//         height: 31px;
+//         border: 1px solid #FFFFFF;
+//         border-radius: 8px;
+//         overflow: hidden; 
+//         margin-right: 6px;
+//         margin-top:12px;
+//         img{
+//             width: 100%;
+//         }
+//     }
+    
+  
+//   .o-organisation-add-members-mob {
+//         height: 100%;
+//         width: 100%;
+//         border: 1px solid #0288D1;
+//         border-radius: 50%;
+//         overflow: hidden;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center; 
+//         // i{
+//         //     font-size: 13px;
+//         //     color: #0288D1; 
+//         // }
+//         margin-top: 17px;
+//     }
+//     //write style
+//     .o-organisation-write-mob{
+//         display: flex;
+//         justify-content: center;
+//         align-content: center;
+//         box-sizing: border-box;
+//         border: 1px solid #ECEFF1;
+//         border-radius: 4px;
+//         background:#fff;
+//         padding: 10px 15px;
+//         margin-bottom:6px;
+//         &__avatar{
+//             img{
+//                 height: 40px;
+//                 width: 40px;
+//                 border-radius: 50%;
+//             }
+//         }
+//         &__status{
+//             margin: 10px 0px 0px 11px;
+//             textarea{
+//                 overflow: hidden;
+//                 width: 100%;
+//                 font-size: 14px;
+//                 line-height: 16px;
+//                 border: none;
+//                 font-family: "Roboto", sans-serif !important;
+//                 resize: none;
+//             }
+//         }
+//     }
+// }
+
+//organization.scss end
 
 
 
