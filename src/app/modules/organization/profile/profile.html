@@ -194,7 +194,7 @@
                                 </div>
                             </div><!-- organisation members end-->
                             <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle" (closed)="inviteToggle = false">
-                                <opspot-organization-profile-members-invite [organization]="organization">
+                                <opspot-organization-profile-members-invite [organization]="organization" *ngIf="organization">
                                 </opspot-organization-profile-members-invite>
                             </m-modal>
                             <m-modal [open]="memberToggle" [allowClose]="true" class="memberToggle" (closed)="memberToggle = false">

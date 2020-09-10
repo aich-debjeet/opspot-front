@@ -75,6 +75,26 @@
     ::ng-deep .inputresponsive {
        margin: 30px 0px 0px;
    }
+
+   ::ng-deep .invite-community-icon {
+    font-size: 30px;
+    color: #0288D1;
+  }
+
+  ::ng-deep .invite-community-icon-select {
+    background: #0288D1;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ::ng-deep .invite-community-icon-select__icon {
+    font-size: 15px;
+    color: #fff;
+  }
   </style>
 
    
@@ -110,14 +130,14 @@
                     </div><!--search bar ends-->
                     <ul class="o-invite-to-organisation-list scrollbar scrollbar-default">
                       <div *ngFor="let user of users; let x = index">
-                        <li class="o-invite-to-organisation-list__user-list" (click)="invite(user);">
+                        <li class="o-invite-to-organisation-list__user-list">
                             <div class="o-invite-to-organisation-info">
                                 <div class="o-invite-to-organisation-info-prof">
                                     <div class="o-invite-to-organisation-info-prof__avatar o-avatar-md">
-                                        <img src="assets/demo/avatar.png" alt="">
+                                        <img src="{{opspot.cdn_url}}icon/{{user.guid}}/small/{{user.icontime}}" alt="">
                                     </div>
                                     <div id="username" class="caption-bold">
-                                      @{{user.username}}
+                                      {{user.username}}
                                     </div>
                                 </div>
                                 <div class="o-invite-to-organisation-info__option">
@@ -133,7 +153,7 @@
                       </div>
                     </ul><!-- members list end -->
                     <div class="invite-organisation-button">
-                        <button type="button" class="btn btn-primary btn-block invite-organisation-button__send">Send Invite</button>
+                        <button type="button" class="btn btn-primary btn-block invite-organisation-button__send" (click)="invite()">Send Invite</button>
                     </div>
                 </div>
                 <div id="Emailaddress" class="invite-organisation-panel" *ngIf="filter === 'emails'">
@@ -171,7 +191,8 @@
                         </a>
                     </div> -->
                     <div class="invite-organisation-button">
-                        <button type="button" class="btn btn-primary btn-block invite-organisation-button__send disabled">Send Invite</button>
+                        <button type="button" class="btn btn-primary btn-block invite-organisation-button__send disabled" 
+                        (click)="sendInvite()">Send Invite</button>
                     </div>                    
                 </div> 
                 <!-- <div id="Phonenumber" class="invite-organisation-panel">
