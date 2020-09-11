@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Session } from '../../../../../services/session';
+import { Router } from '@angular/router';
+import { OverlayModalService } from '../../../../../services/ux/overlay-modal';
+import { GroupJoinRequestComponent } from '../../../../groups/group-join-request/group-join-request.component';
 
 @Component({
   selector: 'opspot-post-card',
@@ -15,6 +18,7 @@ export class PostCard implements OnInit {
   routerlink: any;
 
   set _entity(value) {
+    console.log('value', value)
     this.entity = value;
     this.commentsCount = this.entity['comments:count'];
 
@@ -37,9 +41,32 @@ export class PostCard implements OnInit {
     }
   }
 
+  trigger(entity) {
+    console.log(entity)
+    if (entity['entity_type'] == 'organization') {
+      this.router.navigate(['organization', 'profile', entity.guid]);
+    }
+    else if (entity['entity_type'] == 'community') {
+      if (entity && (entity.membership !== 2)) {
+        if (entity['is:member']) {
+          this.router.navigateByUrl(`/groups/${entity.name}/profile/${entity.guid}`);
+        } else {
+          this.overlayModal.create(GroupJoinRequestComponent, this.entity, {
+            class: 'm-overlay-modal--report m-overlay-modal--medium-groupjoin',
+          }
+          ).present();
+        }
+      } else {
+        this.router.navigateByUrl(`/groups/${entity.name}/profile/${entity.guid}`);
+      }
+    }
+  }
+
 
   constructor(
     public session: Session,
+    private router: Router,
+    private overlayModal: OverlayModalService,
   ) { }
 
   ngOnInit() {

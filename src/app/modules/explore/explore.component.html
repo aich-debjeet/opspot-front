@@ -3,7 +3,7 @@
         (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
         (beforeChange)="beforeChange($event)">
         <div ngxSlickItem *ngFor="let tags of _exploreTabList; let i = index;" id="explore-skill-type" class="slide o-tag">
-            <a (click)="switchCategoryType(tags)" class="">{{tags}}</a>
+            <a (click)="switchCategoryType(tags.id,tags.val)" class="">{{tags.id}}</a>
         </div>
     </ngx-slick-carousel>
     <!-- <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>

@@ -180,3 +180,30 @@
         }
     }
 }
+.o-community-landing-block-design{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    &__item{
+        width:257px;
+        @include mq($from:$tablet, $until:$desktop-sm){
+            width:240px;
+        }
+        @include mq($from:$mobile-sm, $until:$tablet){
+            width:100%;
+        }
+    }
+    .mlr13{
+        margin:0 13px;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            margin:0 0px;
+        }
+    }
+    .mr-6{
+        margin-right: 0px;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            margin-right: 15px;
+            margin-left:15px;
+        }
+    }
+}

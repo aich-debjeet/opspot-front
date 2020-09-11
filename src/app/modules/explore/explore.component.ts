@@ -18,7 +18,7 @@ export class ExploreComponent implements OnInit {
   exploreArray = [];
   filteredArray = [];
   hashtags: [];
-  _exploreTabList: Array<string> = ['IN the Spotlight', 'My Journey', 'Community', 'Organization', 'Blue Store', 'Showtimez', 'Events'];
+  _exploreTabList: Array<any> = [{ id: 'IN the Spotlight', val: 'inthespotlight' }, { id: 'My Journey', val: 'myjourney' }, { id: 'Community', val: 'group' }, { id: 'Organization', val: 'organization' }, { id: 'Blue Store', val: 'marketplace' }, { id: 'Showtimez/Events', val: 'event' }];
   paramsSubscription: Subscription;
   q: string = '';
   type: string = '';
@@ -100,7 +100,7 @@ export class ExploreComponent implements OnInit {
       this.inProgress = false;
       this.offset = '';
       this.reset();
-      this.searchMore(true, this._activeFilter);
+      this.searchMore(true, this._exploreTabList[0].val);
       // this.triggerSearchApi();
     });
   }
@@ -120,10 +120,10 @@ export class ExploreComponent implements OnInit {
   //   }
   // }
 
-  switchCategoryType(sType: string) {
-    console.log(sType);
-    this._activeFilter = sType;
-    this.searchMore(true,this._activeFilter)
+  switchCategoryType(property: string,value: string) {
+    console.log(property, value)
+    this._activeFilter = property;
+    this.searchMore(true, value)
     // this.router.navigate(['/explore'], {
     //   queryParams: {
     //     q: this.q,
@@ -168,28 +168,28 @@ export class ExploreComponent implements OnInit {
   // keyup event for search
   keyup(e) {
     // if (e.keyCode === 13) {
-      // console.log(this.q);
-      // this.search();
-      if (!this.filteredArray || !this.q) {
-        return (this.filteredArray = this.exploreArray);
-      }
-      // filter items array, items which match and return true will be
-      // kept, false will be filtered out
-      //   console.log('Before filter',this.filteredArray)
-      // this.filteredArray = this.exploreArray.filter((item) => item.message.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1);
-      // console.log('After Filter',this.filteredArray)
-      const matchFound = this.exploreArray.find(item => item.message.toString().toLowerCase().indexOf(this.q.toLowerCase()) !== -1);
-      if (matchFound) {
-        // console.log('Before filter', this.filteredArray)
-        this.filteredArray = this.exploreArray.filter(
-          item =>
-            item.message
-              .toString()
-              .toLowerCase()
-              .indexOf(this.q.toLowerCase()) !== -1
-        );
-        // console.log('After filter', this.filteredArray)
-      }
+    // console.log(this.q);
+    // this.search();
+    if (!this.filteredArray || !this.q) {
+      return (this.filteredArray = this.exploreArray);
+    }
+    // filter items array, items which match and return true will be
+    // kept, false will be filtered out
+    //   console.log('Before filter',this.filteredArray)
+    // this.filteredArray = this.exploreArray.filter((item) => item.message.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1);
+    // console.log('After Filter',this.filteredArray)
+    const matchFound = this.exploreArray.find(item => item.message.toString().toLowerCase().indexOf(this.q.toLowerCase()) !== -1);
+    if (matchFound) {
+      // console.log('Before filter', this.filteredArray)
+      this.filteredArray = this.exploreArray.filter(
+        item =>
+          item.message
+            .toString()
+            .toLowerCase()
+            .indexOf(this.q.toLowerCase()) !== -1
+      );
+      // console.log('After filter', this.filteredArray)
+    }
     // }
   }
 
@@ -204,18 +204,24 @@ export class ExploreComponent implements OnInit {
   }
 
   async searchMore(refresh: boolean = false, filter: string) {
+    let _entityType = 'activity';
     if (this.inProgress) {
       return;
     }
     if (refresh) {
       this.offset = '';
+      this.exploreArray.length = 0;
+      this.filteredArray.length = 0;
+    }
+    if (filter == 'group' || filter == 'organization') {
+      _entityType = filter;
     }
     this.inProgress = true;
     this.client
       .get(
-        `api/v4/newsfeed/explore`,
+        `api/v3/explore/${_entityType}`,
         {
-          activity_type: filter,
+          activity_type: _entityType == 'activity' ? filter : '',
           limit: 12,
           offset: this.offset
         },
@@ -223,25 +229,45 @@ export class ExploreComponent implements OnInit {
       )
       .then((data: any) => {
         let respData: any = data;
-        if (respData.entities.length === 0) {
+        if ((respData.hasOwnProperty('activity') && respData['activity'].length == 0) || (respData.hasOwnProperty('groups') && respData['groups'].length == 0) || (respData.hasOwnProperty('organizations') && respData['organizations'].length == 0)) {
           this.moreData = false;
           this.inProgress = false;
           return false;
-        }
-        if (this.filteredArray && !refresh) {
-          // console.log('added data');
-          this.filteredArray = this.exploreArray = this.exploreArray.concat(
-            respData.entities
-          );
         } else {
-          // console.log('added new data');
-          this.filteredArray = this.exploreArray = respData.entities;
+          if (this.filteredArray && !refresh) {
+            if (respData['activity']) {
+              this.exploreArray.push(respData.activity);
+              this.filteredArray = this.exploreArray;
+            }
+            else if (respData['groups']) {
+              this.exploreArray.push(respData.groups);
+              this.filteredArray = this.exploreArray;
+            }
+            else if (respData['organizations']) {
+              this.exploreArray.push(respData.organizations);
+              this.filteredArray = this.exploreArray;
+            }
+          } else {
+            if (respData['activity']) {
+              this.exploreArray.push(...respData.activity);
+              this.filteredArray = this.exploreArray;
+            }
+            if (respData['groups']) {
+              this.exploreArray.push(...respData.groups);
+              this.filteredArray = this.exploreArray;
+            }
+            if (respData['organizations']) {
+              this.exploreArray.push(...respData.organizations);
+              this.filteredArray = this.exploreArray;
+            }
+          }
+          this.moreData = true;
+          this.offset = respData['load-next'];
+          this.inProgress = false;
         }
-        this.moreData = true;
-        this.offset = respData['load-next'];
-        this.inProgress = false;
       })
       .catch(e => {
+        console.error(e)
         this.inProgress = false;
       });
   }
@@ -314,7 +340,7 @@ export class ExploreComponent implements OnInit {
   beforeChange(e) {
     // console.log('beforeChange');
   }
-  _createSpotlight(){
+  _createSpotlight() {
     this.overlayModal.create(InTheSpotlightComponent, '', {
       class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
       // listen to the update callback
