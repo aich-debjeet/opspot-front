@@ -1,0 +1,130 @@
+@import "src/assets/helpers/variables";
+
+@import "node_modules/sass-mq/_mq";
+
+//join request css
+.o-organisation-card-popup{
+    width: 546px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    padding:21px 18px 47px 17px; 
+    position: relative;
+}
+
+// cover image style
+.o-organisation-card-popup-cover {
+    img{
+    height: 187px;
+    object-fit: cover;
+    width: 100%;
+    }
+}
+
+//profile image style
+.o-organisation-card-popup-profile {
+    display: flex;
+    justify-content: center;
+    img{
+        height: 144px;	
+        width: 144px;	
+        border: 4px solid $white;
+        border-radius: 8px;
+        position: absolute;
+        margin-top: -85px;
+    }
+}
+
+//header style
+.o-organisation-card-popup-header{
+    text-align: center;
+    position: relative;
+    padding: 65px 0 7px;
+}
+
+//shortdescription style
+.o-organisation-card-popup-shortdescription{
+    text-align: center;
+    padding: 0px 114px 8px;
+    @include mq($until:$tablet){
+        padding: 0px 40px;
+    }
+}
+
+//description style
+.o-organisation-card-popup-description{
+    text-align: center;
+    padding: 8px 63px 0px;
+    @include mq($until:$tablet){
+        padding:0px 22px 0px 30px;
+        margin-top:18px;
+    }
+    a{
+        text-decoration: underline !important;
+        text-align: center;
+    }
+}
+
+//action style
+.o-organisation-card-popup-subscribebtn{
+    text-align: center;
+    margin:37px 0px 23px;
+    @include mq($until:$tablet){
+        padding:0px;
+    }
+    button{
+       padding: 9px 44px;
+       line-height:18px;
+    }
+}
+
+//cancel style
+.o-organisation-card-popup-cancelbtn{
+    text-align: center;
+}
+//responsive style
+@include mq($until:$tablet){
+    .o-organisation-card-popup{
+        width:100%;
+        height: calc(110vh - 123px);
+        padding:0;
+    }
+    .o-organisation-card-popup-mob{
+        bottom: 0;
+        position: absolute;
+        margin-bottom: 19px;
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .o-organisation-card-popup-profile img {
+        height: 92px;
+        width: 92px;
+        margin-top: -45px;
+    }
+    .o-organisation-card-popup-cover img{
+        height: 110px;
+    }
+    .o-organisation-card-popup-header{
+        padding: 50px 0 3px;
+        h3{
+            font-size: 16px;
+            line-height: 21px;
+        }
+    }
+    .o-organisation-card-popup-skills{
+        padding: 0px 63px;
+        flex-wrap: wrap;
+    }
+    .o-organisation-card-popup-mob button:nth-child(1){
+        margin-right: 16px;
+    } 
+    .o-organisation-card-popup-mob button{
+        padding: 10px 46px;
+    }
+    .o-organisation-card-popup-memmbers-count {
+        margin: 17px 0 17px;
+    }
+}

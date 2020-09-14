@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { OrganizationService } from './organization-service';
 import { Session } from '../../services/session';
 import { LoginReferrerService } from '../../services/login-referrer.service';
+import { CommonEventsService } from '../../services/common-events.service';
 
 @Component({
   selector: 'opspot-organization-join-button',
@@ -48,6 +49,7 @@ export class OrganizationJoinButton {
     public service: OrganizationService,
     private router: Router,
     private loginReferrer: LoginReferrerService,
+    private commService: CommonEventsService
   ) {
     this.opspot = window.Opspot;
   }
@@ -93,6 +95,8 @@ export class OrganizationJoinButton {
           this.membership.next({
             member: true
           });
+          this.navUpdateOrg();
+
           return;
         }
         this.membership.next({});
@@ -110,7 +114,6 @@ export class OrganizationJoinButton {
           default:
             error = e.error;
             console.log("error: ", error);
-            
             break;
         }
         this.group['is:member'] = false;
@@ -130,7 +133,8 @@ export class OrganizationJoinButton {
         this.membership.next({
           member: false
         });
-        this.router.navigate(['/']);
+        this.navUpdateOrg();
+        this.router.navigate(['/organization/all']);
       })
       .catch(e => {
         this.group['is:member'] = true;
@@ -182,5 +186,13 @@ export class OrganizationJoinButton {
         this.group['is:invited'] = !done;
       });
   }
+
+  navUpdateOrg() {
+    this.commService.trigger({
+      component: 'OrganizationListComponent',
+      action: 'orgUpdate'
+    });
+   }
+
 
 }

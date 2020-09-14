@@ -23,6 +23,10 @@ import { OrganizationListComponent } from './list.component';
 import { OrganizationAllMembers } from './profile/list.subscribers';
 import { OrganizationMemberPreviews } from './profile/member-previews/member-previews.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TagInputModule } from 'ngx-chips';
+import { OrganizationJoinRequestComponent } from './organizations-join-request/organization-join-request.component';
+import { OrganizationJoinRequestMobile } from './organizations-join-request-mobile/organization-join-request-mobile';
+
 
 const routes: Routes = [
   {
@@ -41,6 +45,7 @@ const routes: Routes = [
   { path: 'organization/:filter', component: OrganizationListComponent },
   { path: 'organization', redirectTo: 'organization/all', pathMatch: 'full' },
   { path: 'organization/all-subscribers/:guid', component: OrganizationAllMembers },
+  { path: 'organization/card/:guid', component: OrganizationJoinRequestMobile }
 ]
 
 @NgModule({
@@ -53,7 +58,8 @@ const routes: Routes = [
     LegacyModule,
     PosterModule,
     HashtagsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    TagInputModule
   ],
   declarations: [
     OrganizationProfile,
@@ -69,7 +75,9 @@ const routes: Routes = [
     OrganizationMobileMembers,
     OrganizationListComponent,
     OrganizationAllMembers,
-    OrganizationMemberPreviews
+    OrganizationMemberPreviews,
+    OrganizationJoinRequestComponent,
+    OrganizationJoinRequestMobile
   ],
   exports: [
     OrganizationProfile,
@@ -83,7 +91,9 @@ const routes: Routes = [
     OrganizationTileComponent,
     OrganizationListComponent
   ],
-  entryComponents: [],
+  entryComponents: [
+    OrganizationJoinRequestComponent
+  ],
   providers: [
     CanDeactivateGroupService
   ]

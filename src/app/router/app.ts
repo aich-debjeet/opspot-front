@@ -21,6 +21,7 @@ import { ContactComponent } from '../modules/channels/profile-edit/contact/conta
 import { EducationComponent } from '../modules/channels/profile-edit/education/education.component';
 import { AwardsComponent } from '../modules/channels/profile-edit/awards/awards.component';
 
+
 export const OpspotAppRoutes: Routes = [
   { path: 'capture', redirectTo: 'media/images/suggested' },
 
@@ -66,6 +67,10 @@ export const OpspotAppRoutes: Routes = [
   {
     path: 'campaign',
     loadChildren: './modules/campaign/campaign.module#CampaignModule'
+  },
+  {
+    path:'explore',
+    loadChildren: './modules/explore/explore.module#ExploreModule'
   },
   {
     path: 'static',

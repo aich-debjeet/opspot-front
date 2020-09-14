@@ -267,7 +267,7 @@ export class OrganizationService {
   }
 
   invite(group: any, invitee: any) {
-    return this.clientService.put(`${this.base}invitations/${group.guid}`, { guid: invitee.guid })
+    return this.clientService.put(`${this.base}invitations/${group.guid}`, { guids: invitee })
       .then((response: any) => {
         if (response.done) {
           return true;

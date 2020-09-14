@@ -1,4 +1,113 @@
-//community css
+// //community css
+// .o-create-organisation{
+//     background-color: #FAFAFA;
+//     min-height: 100vh;
+//     width: 100%;
+//     display: flex;
+//     justify-content: center;
+//     @include mq($from:$mobile_sm, $until:$desktop_sm){
+//         background-color: $white;
+//     }
+//         textarea{
+//             resize:none;
+//         }
+// }
+// //heder css
+// .o-create-organisation-header{
+//  padding:20px 0;
+//   @include mq( $until:$desktop_sm){
+//     padding:20px 15px;
+//   }
+//   h4{
+//   margin-bottom: 5px;
+//   }
+// }
+// // form css
+// .o-create-organisation-content{
+//     max-width: 655px;
+//     width: 100%;
+//     @include mq( $until:$desktop_sm){
+//       max-width: 100%;  
+//     }
+//     &__form{
+//         border-radius: 4px;	
+//         background-color: #FFFFFF;
+//         padding:29px 38px 39px 36px;
+//         @include mq($from:$mobile_sm, $until:$desktop_sm){
+//             padding:15px;
+//         }
+//         .paddng-top{
+//             padding-top:8px;
+//         }
+//     }
+//     .select-organisation{
+//         position: relative;
+//         :after{
+//             content: "\e933";
+//             position: absolute;
+//             font-family: 'icomoon' !important;
+//             font-style: normal;
+//             font-weight: normal;
+//             font-variant: normal;
+//             text-transform: none;
+//             line-height: 1;
+//             font-size: 24px;
+//             color: #90A4AE;
+//             -webkit-font-smoothing: antialiased;
+//             -moz-osx-font-smoothing: grayscale;
+//             right: 15px;
+//             z-index: 0;
+//             top: 42px;  
+//         }
+//         select{
+//             -webkit-appearance: none;
+//             -moz-appearance: none;
+//             appearance: none;
+//         }
+//     }
+//     .all-service-option{
+//         background:#ECEFF1;
+//         padding:8px 8px;
+//         width:135px;
+//         margin-top:20px;
+//         .icon-x{
+//             font-size:9px;
+//             border:1px solid $grey;
+//             border-radius:50%;
+//             padding: 2px;
+//             margin-left:15px;
+
+//         }
+//     }
+// }
+
+// //action
+// .o-create-organisation-action{
+//     button{
+//         padding: 8px 15px;
+//         width:146px;
+//         text-align: center;
+//     }
+//     .mr-18{
+//         margin-right:18px;
+//     }
+// }
+// //responsive style
+// @include mq($from:$mobile_sm, $until:$desktop_sm){
+//     .o-create-organisation{
+//         .mbr-10{
+//             margin-bottom: 10px;
+//         }
+//     }
+//     .o-create-organisation-action{
+//         display:flex;
+//         margin-top: 29px;
+//     }
+// }
+
+ // as per updated design
+
+ //community css
 .o-create-organisation{
     background-color: #FAFAFA;
     min-height: 100vh;
@@ -24,7 +133,7 @@
 }
 // form css
 .o-create-organisation-content{
-    max-width: 655px;
+    max-width: 527px;
     width: 100%;
     @include mq( $until:$desktop_sm){
       max-width: 100%;  
@@ -38,6 +147,10 @@
         }
         .paddng-top{
             padding-top:8px;
+        }
+        .description-width{
+            position: absolute;
+            right:0;
         }
     }
     .select-organisation{

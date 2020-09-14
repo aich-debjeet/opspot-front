@@ -10,6 +10,7 @@ import { OpspotGroupListResponse } from '../../interfaces/responses';
 import { ContextService } from '../../services/context.service';
 import { HashtagsSelectorModalComponent } from '../hashtags/hashtag-selector-modal/hashtags-selector.component';
 import { OverlayModalService } from '../../services/ux/overlay-modal';
+import { CommonEventsService } from '../../services/common-events.service';
 
 @Component({
   selector: 'm-organization--list',
@@ -37,6 +38,7 @@ export class OrganizationListComponent {
   myOrganizations: Array<any> = [];
   offset2: string = '';
   moreData2: boolean = true;
+  commService$: Subscription;
 
 
 
@@ -50,7 +52,9 @@ export class OrganizationListComponent {
     // private context: ContextService,
     public session: Session,
     private overlayModal: OverlayModalService,
+    private commService: CommonEventsService
   ) {
+
   }
 
   ngOnInit() {
@@ -79,12 +83,25 @@ export class OrganizationListComponent {
         this.loadMemberOrganizations(true);
       }
     });
+
+    this.commService$ = this.commService.listen().subscribe((e: any) => {
+      if (e.component && e.action) {
+        if (e.component === 'OrganizationListComponent') {
+          if (e.action === 'orgUpdate') {
+            // this.getUsersOrganization();
+            this.loadMemberOrganizations(true);
+          }
+        }
+      }
+    });
   }
 
   ngOnDestroy() {
     if (this.paramsSubscription) {
       this.paramsSubscription.unsubscribe();
     }
+
+    this.commService$.unsubscribe();
   }
 
   reloadTags(all: boolean) {
