@@ -100,12 +100,12 @@
    
         <div class="o-invite-to-organisation-popup-body__title">
             <div class="text-h3">
-                Invite to Organisation
+                Invite to an Organization
             </div>
         </div><!--title ends-->
         <div class="o-invite-to-organisation-popup-body__description">
-            <div class="text-md grey">
-                But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain as born
+            <div class="text-md grey" *ngIf="filter === 'emails'">
+              Please put the email address in the below textbox followed by enter/return        
             </div>
         </div><!--description ends-->
 
@@ -153,7 +153,7 @@
                       </div>
                     </ul><!-- members list end -->
                     <div class="invite-organisation-button">
-                        <button type="button" class="btn btn-primary btn-block invite-organisation-button__send" (click)="invite()">Send Invite</button>
+                        <button type="button" class="btn btn-primary btn-block invite-organisation-button__send" (click)="invite()" [disabled]="inviteArrray.length == 0">Send Invite</button>
                     </div>
                 </div>
                 <div id="Emailaddress" class="invite-organisation-panel" *ngIf="filter === 'emails'">
@@ -163,6 +163,7 @@
                         [maxItems]=maxItems required
                         [(ngModel)]='emails'
                         placeholder="Type email address and use spacebar to separate it"
+                        secondaryPlaceholder="Add email address"
                         style="border: 1px solid #90A4AE;
                         margin: 30px 0px 20px;
                         resize: none; 

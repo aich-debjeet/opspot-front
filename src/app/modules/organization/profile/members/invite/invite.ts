@@ -149,8 +149,6 @@ export class OrganizationProfileMembersInvite {
         } else {
           this.users = this.users.concat(response[key]);
         }
-        console.log("vffdFF: ", this.users);
-
         if (response['load-next']) {
           this.offset = response['load-next'];
         } else {
