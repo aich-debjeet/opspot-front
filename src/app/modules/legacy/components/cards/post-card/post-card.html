@@ -58,6 +58,7 @@
       || entity?.entity_type === 'video' || entity?.entity_type === 'album'">{{entity?.message}}</div>
       <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'event' || entity?.entity_type === 'item'
        || entity?.entity_type === 'opportunity'">{{entity?.blurb}}</div>
+       <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'inthespotlight' && entity?.custom_type === 'batch'">{{entity?.title}}</div>
       <div class="o-media-hashtag" *ngIf="entity?.tags?.length > 0">
         <a class="text-md primary" *ngFor="let tags of entity?.tags "> {{tags}} </a>
       </div><!-- hashtag end -->
