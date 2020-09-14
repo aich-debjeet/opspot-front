@@ -48,7 +48,7 @@
                 <div>Trending {{_activeFilter}}</div>
             </div>
             <opspot-masonry-container [entities]="filteredArray" class="explore-container"></opspot-masonry-container>
-            <infinite-scroll distance="25%" (load)="searchMore()" [moreData]="moreData" [inProgress]="inProgress">
+            <infinite-scroll distance="25%" (load)="searchMore(false,_loadMoreFilter)" [moreData]="moreData" [inProgress]="inProgress">
             </infinite-scroll>
         </div>
         <!--media section-->

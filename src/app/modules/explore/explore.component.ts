@@ -28,6 +28,7 @@ export class ExploreComponent implements OnInit {
   moreData: boolean = true;
   ref: string = '';
   _activeFilter = 'IN the Spotlight';
+  _loadMoreFilter = 'inthespotlight';
 
   slideConfig = {
     slidesToShow: 8,
@@ -123,6 +124,7 @@ export class ExploreComponent implements OnInit {
   switchCategoryType(property: string,value: string) {
     console.log(property, value)
     this._activeFilter = property;
+    this._loadMoreFilter = value;
     this.searchMore(true, value)
     // this.router.navigate(['/explore'], {
     //   queryParams: {
@@ -213,8 +215,11 @@ export class ExploreComponent implements OnInit {
       this.exploreArray.length = 0;
       this.filteredArray.length = 0;
     }
-    if (filter == 'group' || filter == 'organization') {
-      _entityType = filter;
+    if (filter == 'Organization' || filter == 'organization') {
+      _entityType = 'organization';
+    }
+    if(filter == 'Community' || filter == 'group'){
+      _entityType = 'group';
     }
     this.inProgress = true;
     this.client
@@ -236,15 +241,15 @@ export class ExploreComponent implements OnInit {
         } else {
           if (this.filteredArray && !refresh) {
             if (respData['activity']) {
-              this.exploreArray.push(respData.activity);
+              this.exploreArray.push(...respData.activity);
               this.filteredArray = this.exploreArray;
             }
             else if (respData['groups']) {
-              this.exploreArray.push(respData.groups);
+              this.exploreArray.push(...respData.groups);
               this.filteredArray = this.exploreArray;
             }
             else if (respData['organizations']) {
-              this.exploreArray.push(respData.organizations);
+              this.exploreArray.push(...respData.organizations);
               this.filteredArray = this.exploreArray;
             }
           } else {
