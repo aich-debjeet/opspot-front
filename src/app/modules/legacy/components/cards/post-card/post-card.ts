@@ -18,7 +18,6 @@ export class PostCard implements OnInit {
   routerlink: any;
 
   set _entity(value) {
-    console.log('value', value)
     this.entity = value;
     this.commentsCount = this.entity['comments:count'];
 
