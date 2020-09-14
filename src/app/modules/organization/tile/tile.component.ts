@@ -2,11 +2,13 @@ import { Component, Input } from '@angular/core';
 import { Session } from '../../../services/session';
 import { OrganizationService } from '../organization-service';
 import { Router } from '@angular/router';
+import { OrganizationJoinRequestComponent } from '../organizations-join-request/organization-join-request.component';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   selector: 'm-organization--tile',
   templateUrl: 'tile.component.html',
-  styleUrls: ['tile.component.scss']
+  styleUrls: ['./tile.component.scss']
   // inputs: ['object']
 })
 
@@ -22,7 +24,8 @@ export class OrganizationTileComponent {
   constructor(
     public session: Session,
     public service: OrganizationService,
-    private router: Router
+    private router: Router,
+    private overlayModal: OverlayModalService,
   ) { }
 
   ngOnInit() { }
@@ -51,6 +54,17 @@ export class OrganizationTileComponent {
     // } else {
     //   this.router.navigateByUrl('/groups/profile/' + entity.guid);
     // }
+  }
+
+  triggerPopup() {    
+    if (window.innerWidth > 785) {
+      this.overlayModal.create(OrganizationJoinRequestComponent, this.entity, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-groupjoin',
+      }
+      ).present();
+    } else {
+      this.router.navigate(['organization', 'card', this.entity.guid]);
+    }
   }
 
   cancelRequest() {

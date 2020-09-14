@@ -39,7 +39,7 @@ export class OrganizationCreator {
   avatar: any = false;
   organization: any = {
     name: '',
-    description: '',
+    briefdescription: '',
     membership: 2,
     tags: [],
     invitees: '',
@@ -104,7 +104,7 @@ export class OrganizationCreator {
 
   save(e) {
 
-    if (!(this.organization.name && this.organization.location && this.organization.category)) {
+    if (!(this.organization.name && this.organization.location && this.organization.category && this.organization.briefdescription)) {
       this.toastr.error('Error! Please fill the required fields');
       return;
     }
@@ -193,20 +193,20 @@ export class OrganizationCreator {
   this.open=false;
   }
 
-  crop(e){
-    this.avatar=e;
-    let reader=new FileReader()
-    reader.onload=()=>{
-       this.cropedImg=reader.result;
-    }
-    reader.readAsDataURL(e)
-    this.organization=this.organization
-    this.open=false;
-  }
+//   crop(e){
+//     this.avatar=e;
+//     let reader=new FileReader()
+//     reader.onload=()=>{
+//        this.cropedImg=reader.result;
+//     }
+//     reader.readAsDataURL(e)
+//     this.organization=this.organization
+//     this.open=false;
+//   }
 
- openCropper(){
- this.editImgcomp.nativeElement.click() 
- }
+//  openCropper(){
+//  this.editImgcomp.nativeElement.click() 
+//  }
 
  async load(guid){
    try{

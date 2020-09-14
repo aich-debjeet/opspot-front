@@ -19,16 +19,12 @@
         display: none !important;
     }      
 </style>
-<div class="o-create-organisation">
+<!-- <div class="o-create-organisation">
     <div class="o-create-organisation-content">
         <div class="o-create-organisation-header">
             <app-image-croper [open]="open" (closed)=close() [croppieImage]="croppieImage" [croperType]="'circle'" (imgResult)="crop($event)">
             </app-image-croper>
             <h4 id="create-organization">{{editOrganization?"Edit":"Create"}} an Organization</h4>
-            <!-- <div class="text-md grey">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus.
-            </div> -->
         </div>
         <div class="o-create-organisation-content__form">
             <div class="form-group">
@@ -72,18 +68,64 @@
                             <img [src]="cropedImg" alt="">
                         </a>
                     </div>
-                    <!--file upload ends-->
-                    <!--file preview ends-->
                 </div>
                 <div class="text-sm grey">The dimensions for profile picture is 1545px x 1024px </div>
             </div>
             <div class="o-create-organisation-action">
                 <button type="button" id="create-organization-create-button" class="btn btn-primary btn-lg mr-18" (click)="save($event)" [disabled]="inProgress">{{editOrganization?"Update":"Create"}}</button>
                 <button type="button" id="create-organization-cancel-button" class="btn btn-outline-primary btn-lg" (click)="organizationReset()">Cancel</button>
-                <!-- <button (click)="navEvent()">Nav Event</button> -->
             </div>
-            <!--Button action ends-->
         </div>
     </div>
+</div> -->
+<div class="container bg-white hidden-above-tablet">
+    <div class="without-nav-header">
+        <a routerLink=".."><i class="icon-arrow-left"></i> </a>
+        <div class="without-nav-header__title caption-bold f500">{{editCommunity?"Edit":"Create"}} an Organization</div>
+    </div>
 </div>
-<!--Main community ends-->
+<div class="o-create-organisation">
+    <div class="o-create-organisation-content">
+          <div class="o-create-organisation-header">
+                <h4>{{editOrganization?"Edit":"Create"}} an Organization</h4>
+                <!-- <div class="text-md grey">
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                  ligula eget dolor. Aenean massa. Cum sociis natoque penatibus.
+                </div> -->
+          </div><!--header ends-->
+          <div class="o-create-organisation-content__form">
+                <div class="form-group">
+                    <label>Organization Name</label>
+                    <input type="text" id="Organisation Name" class="form-control form-control-lg" [(ngModel)]="organization.name">
+                </div><!--organisation Name ends-->
+                <div class="form-group select-organisation">
+                    <label>Organization Type</label>
+                    <select class="form-control form-control-lg" id="Organisation Type" [(ngModel)]="organization.category">
+                        <option value="" id="create-organization-select-type" disabled selected>Select Type</option>
+                        <option *ngFor = "let type of organizationTypeList" id="create-organization-type-value" [value]="type.value">{{ type.label}}</option>
+                    </select>
+                </div><!--Organisation Type ends-->
+                <div class="form-group">
+                    <label>Services(#Hashtags)</label>
+                    <!-- <textarea class="form-control" id="Services(#Hashtags)" rows="5" ></textarea> -->
+                    <app-skills [(inputTagsValue)]=organization.tags></app-skills>
+                    <div class="grey text-sm paddng-top">Use a comma to separate skills, or choose from the list.</div>
+                </div><!--Add Services ends-->
+                <div class="form-group">
+                    <label>About Organization <span class="text-sm grey brief_description-width">21/300</span></label>
+                    <textarea class="form-control" id="About Organisation" rows="5" spellcheck="false" [(ngModel)]="organization.briefdescription"></textarea>
+                    <!-- <div class="all-service-option">
+                            Photography <a class="icon-x"></a>
+                    </div> -->
+                </div><!--about organisation ends-->
+                <div class="form-group">
+                    <label>Organization Location</label>
+                    <input type="text" name="Organisation Location" class="form-control form-control-lg" [(ngModel)]="organization.location">
+                </div><!--Location ends-->
+                <div class="o-create-organisation-action">
+                        <button type="button" class="btn btn-primary mr-18" (click)="save($event)" [disabled]="inProgress">{{editOrganization?"Update":"Create"}}</button>
+                    <button type="button" class="btn btn-outline-primary btn-lg" (click)="organizationReset()">Cancel</button>
+                </div><!--Button action ends-->
+          </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<!-- <div class="o-community-join-request">
+    <div class="o-community-join-request-cover">
+        <img *ngIf='entity?.banner != "" '
+            [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
+        <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
+    </div>
+    <div class="o-community-join-request-profile">
+        <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="cover">
+    </div>
+    <div class="o-community-join-request-header">
+        <h3 class="f500">{{entity?.name}}</h3>
+    </div>
+    <div class="o-community-join-request-skills" *ngIf="entity?.tags">
+        <a *ngFor="let tag of entity?.tags" class="o-community-join-request-skills__tag">{{tag}}</a>
+    </div>
+    <div class="o-community-join-request-memmbers-count">
+        <h4 class="f500">{{memberCount}}</h4>
+        <div class="text-lg grey">Members</div>
+    </div>
+    <div class="o-community-join-request-action">
+        <opspot-groups-join-button [group]="entity">
+        </opspot-groups-join-button>
+    </div>
+</div> -->
+    <div class="container hidden-above-tablet">
+        <div class="without-nav-header organisation-admin-main-title">
+            <a (click)="backClicked()"><i class="icon-arrow-left"></i> </a>
+            <div class="without-nav-header__title caption-bold f500 center">Organization</div>
+        </div>
+    </div><!-- without nav header end -->
+    <!-- <div class="o-organisation-card-popup">
+            <div class="o-organisation-card-popup-cover">
+                <img *ngIf='entity?.banner != "" '
+                [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
+                <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
+            </div>
+            <div class="o-organisation-card-popup-profile">
+                <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large" alt="cover">
+            </div>
+            <div class="o-organisation-card-popup-header">
+                <h3 class="f500">{{entity?.name}}</h3>
+            </div>
+            <div class="o-organisation-card-popup-shortdescription">
+                <span class="text-md grey">{{entity?.category}} {{entity?.location}}</span>
+            </div>
+            <div class="o-organisation-card-popup-description">
+                <div class="text-md">
+                    {{entity?.briefdescription | truncate:[100, '...']}}
+                </div>
+            </div>
+            <div class="o-organisation-card-popup-mob">
+                <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
+                <opspot-organization-join-button [group]="entity"
+                *ngIf="entity && (!entity['is:creator']  && !entity['is:invited'])">
+                </opspot-organization-join-button>             
+            </div>
+        </div> -->
+    <app-organization-join-request *ngIf="entity" [object]="entity"></app-organization-join-request>

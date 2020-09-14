@@ -21,7 +21,8 @@ import { Location } from '@angular/common';
 
 @Component({
   selector: 'm-organization--profile',
-  templateUrl: 'profile.html'
+  templateUrl: 'profile.html',
+  styleUrls: [ './profile.scss' ]
 })
 
 export class OrganizationProfile {
@@ -266,13 +267,13 @@ export class OrganizationProfile {
     this.detectChanges();
   }
 
-  toggleEdit() {
-    this.editing = !this.editing;
+  // toggleEdit() {
+  //   this.editing = !this.editing;
 
-    if (this.editing) {
-      this.editDone = false;
-    }
-  }
+  //   if (this.editing) {
+  //     this.editDone = false;
+  //   }
+  // }
 
   add_banner(file: any) {
     this.service.upload({
@@ -465,7 +466,9 @@ export class OrganizationProfile {
     this._location.back()
   }
 
-
+  toggleEdit() {
+    this.router.navigate([`/organization/edit/${this.organization.guid}`])
+  }
   // showGathering1(){
   //  this.showGathering = true;
   // }

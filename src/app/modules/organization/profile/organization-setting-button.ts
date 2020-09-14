@@ -17,10 +17,10 @@ import { CommonEventsService } from '../../../services/common-events.service';
 
     <ul class="opspot-dropdown-menu" [hidden]="!showMenu" >
       <!-- owner functions -->
-      <li class="mdl-menu__item" *ngIf="organization['is:owner']" (click)="toggleEdit()">
+      <!-- <li class="mdl-menu__item" *ngIf="organization['is:owner']" (click)="toggleEdit()">
           <ng-container *ngIf="!editing">Edit</ng-container>
           <ng-container *ngIf="editing">Save</ng-container>
-      </li>
+      </li> -->
 
       <!-- Member functions -->
       <li class="mdl-menu__item" [hidden]="organization['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS" id="organization-setting-disable-notification">Disable Notifications</li>

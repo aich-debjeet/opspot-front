@@ -42,6 +42,8 @@
 @import "src/assets/scss/components/communities-card";
 @import "src/assets/scss/components/create-organization";
 @import "src/assets/scss/components/_invite-to-community-popup.scss";
+@import "src/assets/scss/components/organization.scss";
+@import "src/assets/scss/components/_organization-admin-empty.scss";
 
 
 
@@ -23646,7 +23648,7 @@ input[type="number"] {
 
 .mdl-card {
   z-index: initial;
-  margin: 0px 6px 6px 0px; }
+  margin: 0px 0px 6px 0px; }
   .mdl-card .mdl-card__supporting-text {
     -webkit-font-smoothing: antialiased; }
   .mdl-card:not(.mdl-cell) {

@@ -1,85 +1,225 @@
-.m-groups--tile{
-  background: #FFF;
-  padding: 0;
+// .m-groups--tile{
+//   background: #FFF;
+//   padding: 0;
+//   position: relative;
+
+//   .m-groups--tile-banner{
+//     width: 100%;
+//     height: 150px;
+//     position: absolute;
+//     z-index: 1;
+//     background: #444;
+
+//     .m-groups--tile-banner-img {
+//       background-size: cover;
+//       width: 100%;
+//       height: 100%;
+//     }
+//   }
+
+//   .m-groups--tile-block {
+//     margin-top: 75px;
+//     position: relative;
+//     z-index: 2;
+//     display: block;
+//     text-align: center;
+//     text-decoration: none;
+
+//     h3 {
+//       font-weight: 600;
+//       font-size: 24px;
+//       line-height: 24px;
+//       color: #444;
+//       margin: 16px 0 8px 0;
+//       padding: 0 16px;
+//     }
+//     span {
+//       text-transform: uppercase;
+//       font-family: Roboto;
+//       letter-spacing: 0.25px;
+//       color: #666;
+//     }
+//   }
+  
+//   img {
+//     width: 150px;
+//     height: 150px;
+//     border-radius: 50%;
+//     border: 1px solid #EEE;
+//   }
+
+//   .m-groups--tile-buttons {
+//     text-align: center;
+//     padding: 16px;
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+//     justify-content: center;
+
+//     > * {
+//       margin: 0 4px;
+//     }
+//   }
+  
+
+// }
+
+// .m-groupTile--hasUpdates .body span {
+//   position: relative; 
+  
+//   &:after {
+//     background: #4690DF;
+//     border-radius: 50%;
+//     display: block;
+//     height: 8px;
+//     width: 8px;
+//     content: "";
+//     position: absolute;
+//     top: -2px;
+//     right: -12px;
+//   }
+// }
+
+// .o-community-card-cover{
+//   position: relative;
+// }
+
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+//main css
+.o-organisation-card{
+  display: flex;
+  width: 100%;
+  margin-bottom: 13px;
+  .mr-6{
+      margin-right: 6px;
+  }
+}
+
+//join request css
+.o-organisation-card-section{
+  // width: 258px;
+  width:100%;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  border: 1px solid #ECEFF1;
+  padding-bottom:28px;
+}
+
+// cover image style
+.o-organisation-card-cover {
+  img{
+  height: 81px;
+  object-fit: cover;
+  width: 100%;
+  }
+}
+
+//knowmore style
+.o-organisation-card-knowmore{
+  text-align: center;
+  margin-top: 16px;
+  a{
+      text-decoration: underline!important;
+  }
+}
+
+//profile image style
+.o-organisation-card-profile {
+  display: flex;
+  justify-content: center;
+  img{
+      height: 77px;	
+      width: 77px;	
+      border: 1px solid $white;
+      border-radius:8px;
+      // position: absolute;
+      margin-top: -45px;
+  }
+}
+
+//header style
+.o-organisation-card-header{
+  text-align: center;
   position: relative;
-
-  .m-groups--tile-banner{
-    width: 100%;
-    height: 150px;
-    position: absolute;
-    z-index: 1;
-    background: #444;
-
-    .m-groups--tile-banner-img {
-      background-size: cover;
-      width: 100%;
-      height: 100%;
-    }
+  // padding: 40px 0 10px;
+  padding: 10px 0 10px;
+}
+//skills style
+.o-organisation-card-dis{
+  min-height: 50px;
+  max-height: 50px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  padding: 0px 22px;
+  text-align: center;
+  @include mq($from: $mobile_sm, $until: $desktop_sm) {
+      flex-wrap: wrap;
   }
-
-  .m-groups--tile-block {
-    margin-top: 75px;
-    position: relative;
-    z-index: 2;
-    display: block;
-    text-align: center;
-    text-decoration: none;
-
-    h3 {
-      font-weight: 600;
-      font-size: 24px;
-      line-height: 24px;
-      color: #444;
-      margin: 16px 0 8px 0;
-      padding: 0 16px;
-    }
-    span {
-      text-transform: uppercase;
-      font-family: Roboto;
-      letter-spacing: 0.25px;
-      color: #666;
-    }
-  }
-  
-  img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 1px solid #EEE;
-  }
-
-  .m-groups--tile-buttons {
-    text-align: center;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-    > * {
-      margin: 0 4px;
-    }
-  }
-  
+  // &__tag{
+  //     border-radius: 2px;
+  //     background-color: #ECEFF1;
+  //     color:$grey ;
+  //     font-size: 11px;
+  //     line-height: 13px;
+  //     padding: 4px 7px;
+  //     margin: 3px; 
+  // }
 
 }
 
-.m-groupTile--hasUpdates .body span {
-  position: relative; 
-  
-  &:after {
-    background: #4690DF;
-    border-radius: 50%;
-    display: block;
-    height: 8px;
-    width: 8px;
-    content: "";
-    position: absolute;
-    top: -2px;
-    right: -12px;
+//action style
+.o-organisation-card-action{
+  text-align: center;
+  button{
+      padding: 5px 30px;
+      line-height: 22px;
   }
 }
 
-.o-community-card-cover{
-  position: relative;
+//responsive style
+@include mq($until:$tablet){
+  .o-organisation-join-request{
+      width:100%;
+      height: calc(110vh - 123px);
+      padding:0;
+  }
+  .o-organisation-join-request-action{
+      bottom: 0;
+      position: absolute;
+      margin-bottom: 19px;
+  }
+  .o-organisation-join-request-profile img {
+      height: 92px;
+      width: 92px;
+      margin-top: -45px;
+  }
+  .o-organisation-join-request-cover img{
+      height: 110px;
+  }
+  .o-organisation-join-request-header{
+      padding:60px 0 18px; 
+  }
+  .o-organisation-join-request-skills{
+      padding: 0px 63px;
+      flex-wrap: wrap;
+  }
+  .o-organisation-join-request-action button:nth-child(1){
+      margin-right: 16px;
+  } 
+  .o-organisation-join-request-action button{
+      padding: 10px 46px;
+  }
+  .o-organisation-join-request-memmbers-count {
+      margin: 17px 0 17px;
+  }
+
+  .o-organisation-card-knowmore {
+    text-align: center;
+    margin-top: 16px;
+}
 }
