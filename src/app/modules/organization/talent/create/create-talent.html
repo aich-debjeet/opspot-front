@@ -1,4 +1,4 @@
-<div class="o-create-talent">
+<div class="o-create-talent" [hidden]="!showDesktop && showMobile">
     <div class="o-create-talent-head o-create-talent-head--border">
         <div class="o-create-talent__title text-lg f500">Create 
             <a class="o-create-dropdown-style">
@@ -23,15 +23,15 @@
             <div class="o-create-talent-cover-image">
                
                 <div class="fileUpload-preview-talent ml-25" *ngFor="let image of cards">
-                    <div class="o-create-talent-cover-image__avatar" href="#">
+                    <div class="o-create-talent-cover-image__avatar">
                         <img [src]="image.src" alt="">
                     </div>
                     <a class="o-create-talent-cover-image__close" (click)="removeAttachment(file, image.guid)"><i class="icon-x"></i></a>
                 </div><!--file preview ends--> 
                 <div class="fileUpload ml-25">
                     <span class="icon-plus"></span>
-                    <input type="file"accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov" id="file" #file class="upload" name="attachment"
-                    (change)="uploadAttachment(file, $event)" />
+                    <input type="file"accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov" id="file" #file1 class="upload" name="attachment"
+                    (change)="uploadAttachment(file1, $event)" />
                 </div><!--file upload ends-->
             </div>
             <div class="text-sm grey mt10">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>                     
@@ -39,6 +39,48 @@
     </form>
     </div><!--body ends-->
     <div class="o-create-talent-footer">
-        <button type="button" class="btn btn-primary btn-sm disabled" (click)="create()">Post</button><!--for event page-->
+        <button type="button" class="btn btn-primary btn-sm" (click)="create()" [disabled]="inProgress">Post</button><!--for event page-->
     </div>
 </div>
+
+<div [hidden]= "showDesktop && !showMobile">
+<div class="container hidden-above-tablet o-create-talent-mob-header">
+    <div class="without-nav-header o-reg-skill-mob-header">
+        <a href="organisation_admin.html"><i class="icon-arrow-left"></i> </a>
+        <div class="without-nav-header__title caption-bold f500">Create  <a class="o-create-dropdown-style">
+                <a class="text-lg primary f500">#Talent<a class="icon-chevron-down"></a></a>
+            </a>
+        </div>
+        <button class="primary greycaption-bold f500" (click)="create()"  [disabled]="inProgress">Post</button>
+    </div>
+  </div>
+  <div class="o-create-talent-mob">
+    <form [formGroup]="createTalentForm">
+        <div class="form-group">
+                <label>Talent Profile</label>
+                <input type="text" id="Talent Profile Mobile" placeholder="Type Talent Name" class="form-control form-control-lg"
+                formControlName="title">
+        </div>
+        <div class="form-group">
+            <label>Description<span class="text-sm grey description-width">21/300</span></label>
+            <textarea class="form-control" id="Description Mobile" rows="5" formControlName="description"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Add Media</label>
+            <div class="o-create-talent-cover-image">
+                <div class="fileUpload-preview-talent ml-25" *ngFor="let image of cards">
+                    <div class="o-create-talent-cover-image__avatar" href="#">
+                        <img [src]="image.src" alt="">
+                    </div>
+                    <a class="o-create-talent-cover-image__close" (click)="removeAttachment(file, image.guid)"><i class="icon-x"></i></a>
+                </div> 
+                <div class="fileUpload ml-25">
+                    <span class="icon-plus"></span>
+                    <input type="file" accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov" id="file1" #file class="upload" name="attachment1"
+                    (change)="uploadAttachment(file, $event)" />
+                </div>
+            </div>                 
+        </div>
+    </form>
+  </div>
+  </div>

@@ -4,6 +4,8 @@ import { AttachmentService } from '../../../../services/attachment';
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { OverlayModalService } from '../../../../services/ux/overlay-modal';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OrganizationService } from '../../organization-service';
 
 @Component({
     selector: 'app-create-talent',
@@ -23,6 +25,12 @@ export class CreateTalent implements OnInit {
         wire_threshold: null
     };
     createTalentForm: FormGroup;
+    showDesktop: boolean;
+    showMobile: boolean;
+    _opts: any;
+    set opts(opts: any) {
+        this._opts = opts;
+    }
 
 
     @Input('object') set data(object) {
@@ -50,7 +58,10 @@ export class CreateTalent implements OnInit {
         private client: Client,
         public attachment: AttachmentService,
         public formBuilder: FormBuilder,
-        private overlayMOdal: OverlayModalService
+        private overlayModal: OverlayModalService,
+        public route: ActivatedRoute,
+        private service: OrganizationService,
+        private router: Router
 
     ) {
         this.createTalentForm = this.formBuilder.group({
@@ -60,6 +71,24 @@ export class CreateTalent implements OnInit {
     }
 
     ngOnInit() {
+        if (window.innerWidth > 785) {
+            this.showDesktop = true;
+            this.showMobile = false;
+        } else {
+            this.showDesktop = false;
+            this.showMobile = true;
+            this.route.params.subscribe(params => {
+                if (params['guid']) {
+                    this.load(params['guid'])
+                }
+            })
+        }
+    }
+
+    async load(guid) {
+        let organization = await this.service.load(guid)
+        if (organization)
+            this.organization_guid = organization.guid;
     }
 
     uploadAttachment(file: HTMLInputElement, event) {
@@ -122,6 +151,8 @@ export class CreateTalent implements OnInit {
 
 
     create() {
+        this.inProgress = true;
+
         let data = Object.assign(this.meta, this.attachment.exportMeta());
         // console.log("data: ", data);
 
@@ -140,14 +171,19 @@ export class CreateTalent implements OnInit {
         this.reqBody.description = this.createTalentForm.value.description;
         this.client.post('api/v3/organizations/organization/talent', this.reqBody)
             .then((res) => {
-                console.log("Resp: ", res);
+                this.inProgress = false;
+                if (this._opts && this._opts.onUpdate) {
+                    this._opts.onUpdate(res);
+                    // close modal
+                }
                 this.closeModal();
+                this.router.navigate(['/organization/profile', this.organization_guid, 'feed'])
             })
     }
 
     closeModal() {
         this.overlayModal.dismiss();
-      }
+    }
 
 }
 
