@@ -275,6 +275,109 @@
     </div>
   </div>
 
+  <!-- <div class="o-card feed"> -->
+    <!-- <div class="feed-head">
+        <a class="o-avatar"><img src="assets/demo/amzon-icon.png" alt=""></a>
+        <div class="o-avatar__info">
+            <div class="o-avatar-det-block">
+                <span class="text-md grey o-posts-det"><a class="o-avatar__name">Amazon</a>
+                added a talent</span>
+            </div>
+            <div class="grey m-l-8 o-posts-tym"><span>2m ago</span> <span class="o-posts-public-private"><i class="icon-public"></i></span></div>
+        </div>
+        <div class="o-feed-head-action">
+            <a href="#" class="head-action__link" alt="bookmark">
+                <div class="o-sprite-icon o-sprite-icon--bookmark spot-animation">
+                    <a id="btn_bookmark" class="sprite-btn sprite-btn--style">
+                        <span aria-label="like" class="bookmark-outline "></span>
+                    </a>
+                </div>
+            </a>
+            <div class="o-option-drop">
+                <div onclick="myFunction()" class="o-option-drop__btn head-action__link"><img src="assets/svg/more-horizontal.svg" alt="" class="head-action__icon"></div>
+                <div id="o-option-dropdown" class="o-option-drop__block">
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="feed-card-talent-block" *ngIf="activity.entity_type === 'talent' && activity.entity_type !== 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'">
+        <div class="feed-card-talent-block__title">
+            <h4 class="f500">Talent Alert</h4>
+        </div><!--title ends-->
+        <div class="feed-card-talent-block__avatar">
+            <img src="assets/demo/avatar.png" alt="">
+        </div><!--avatar ends-->
+        <div class="feed-card-talent-block__info">
+            <div class="caption-bold">Mariana Dickey</div>
+            <div class="text-md grey">@marian</div>
+        </div><!--info ends-->
+        <div class="feed-card-talent-block__btn">
+            <button type="button" class="btn btn-primary btn-sm">Reach Out</button>
+        </div><!--btn ends-->
+        <div class="feed-card-talent-block__discription">
+            <p class="text-md grey-darker">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                Aenean commodo ligula eget dolor. Aenean massa. 
+                Cum sociis natoque penatibus et magnis.
+            </p>
+        </div><!-- discription ends-->
+    </div><!--talent block ends-->
+    <div class="feed-media" *ngIf="activity.entity_type === 'talent' && activity.entity_type !== 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'">
+        <a class="feed-media__link"><img src="assets/demo/m1.jpg" alt="" class="feed-media__img"></a>
+        <a class="feed-media__link">
+            <img src="assets/demo/yellowback.png" alt="" class="feed-media__img">
+            <!-- <div class="feed-media-overlay">
+                <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+            </div> -->
+        </a>
+        <a class="feed-media__link">
+            <img src="assets/demo/m3.jpg" alt="" class="feed-media__img">
+            <div class="feed-media-overlay"><h3 class="white">+2</h3></div>
+        </a>
+    </div><!--feed media end-->
+    <!-- <div class="o-actions">
+        <div href="#" class="o-actions__link" onclick="myFunction()" alt="like">
+            <div id="spot-bouncing" class="o-sprite-icon">
+                <a id="btn_new" class="sprite-btn sprite-btn--style">
+                    <span aria-label="like" class="spot-outline"></span>
+                </a>
+            </div>
+            <span class="o-action-count text-sm grey">
+                <span>12k</span>
+            </span>
+        </div>
+        <a href="#" class="o-actions__link" alt="message">
+            <i class="icon-message-square f-15"></i>
+            <span class="o-action-count text-sm grey">
+                <span>43</span>
+            </span>
+        </a>
+        <a href="#" class="o-actions__link" alt="views">
+            <i class="icon-eye f-15"></i>
+            <span class="o-action-count text-sm grey">
+                <span>2k</span> 
+            </span>
+        </a>
+        <a href="#" class="o-actions__link" alt="share">
+            <i class="icon-share-2 f-15"></i>
+            <span class="o-action-count text-sm grey">
+                <span>56</span> 
+            </span>
+        </a>
+    </div>
+    <div class="o-comments-compose">
+        <div class="o-avatar-sm">
+            <img src="assets/demo/avatar.png" alt="">
+        </div>    
+        <div class="o-comments-composer">
+            <textarea rows="1" placeholder="Write a comment"></textarea>
+        </div>
+    </div> -->
+<!-- </div> -->
+
+
   <div class="mdl-card__supporting-text message" [hidden]="!activity.title || activity.perma_url || editing"
     [innerHtml]="activity.title | tags"></div>
 
