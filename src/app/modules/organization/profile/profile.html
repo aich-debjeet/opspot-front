@@ -267,7 +267,7 @@
                             <span class="o-organisation-members-list-mob-single--talent"><img src="assets/demo/avatar.png" alt=""></span>
                             <span class="text-sm m-l-r-6 grey">+4</span>
                         </a>
-                        <a class="o-organisation-add-members-mob f500 text-md primary"><u>Add Talents</u></a>
+                        <a class="o-organisation-add-members-mob f500 text-md primary" (click)="createTalent()"><u>Add Talents</u></a>
                     </div><!--members-top ends-->
                     <div class="o-right-block--organisation__items">
                         <div class="o-center-block">
@@ -281,8 +281,8 @@
                             <router-outlet></router-outlet>
                         </div><!--center block end-->
             
-                        <div class="o-right-block hidden-mob">
-                            <div class="organisation-admin-empty-right">
+                         <div class="o-right-block hidden-mob">
+                            <!-- <div class="organisation-admin-empty-right">
                                 <div class="organisation-admin-empty-right__avatar">
                                     <img src="assets/profile/emptytalent.svg" alt="empty">
                                 </div>
@@ -291,8 +291,181 @@
                                     <button type="button" class="btn btn-outline-primary btn-md">Create Talent</button>
                                     <div>Upcoming.....</div>
                                 </div>
+                            </div> -->
+
+                            <div class="o-cards o-organisation-talents hidden-under-tablet">
+                            <div class="o-organisation-talents__header">
+                                <div class="text-lg f500">
+                                    Talents
+                                </div> 
+                                <span class="icon-plus-circle primary" (click)="createTalent()">            
+                                </span>
+                            </div><!-- header end -->
+                            <ul class="o-organisation-talents-list scrollbar scrollbar-default">
+                                <li class="o-organisation-talents-list__user-list">
+                                    <div class="o-organisation-talents-info">
+                                        <div class="o-organisation-talents-info-prof">
+                                          <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
+                                              <img src="assets/demo/avatar.png" alt="">
+                                          </div>
+                                          <div id="username" class="text-md">
+                                              Devansh Rathore
+                                          </div>
+                                        </div>
+                                        <div class="o-organisation-talents-info__option">
+                                          <!-- <button type="button" class="btn btn-outline-primary btn-xs disabled">admin</button> -->
+                                          <a href="#">
+                                            <i class="icon-more-vertical"></i>
+                                          </a>
+                                        </div>
+                                    </div>
+                                </li><!-- user list end-->
+                                <li class="o-organisation-talents-list__user-list">
+                                    <div class="o-organisation-talents-info">
+                                        <div class="o-organisation-talents-info-prof">
+                                          <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
+                                              <img src="assets/demo/avatar.png" alt="">
+                                          </div>
+                                          <div id="username" class="text-md">
+                                              Devansh Rathore
+                                          </div>
+                                        </div>
+                                        <div class="o-organisation-talents-info__option">
+                                          <a href="#">
+                                            <i class="icon-more-vertical"></i>
+                                          </a>
+                                          <!-- <div onclick="myFunction()" class="o-talents-option-drop__btn head-action__link"><i class="icon-more-vertical f-15"></i> </div>
+                                          <div id="o-talents-option-dropdown" class="o-talents-option-drop__block">
+                                              <a href="#">comming ..</a>
+                                          </div> -->
+                                        </div>
+                                    </div>
+                                </li><!-- user list end-->
+                                <li class="o-organisation-talents-list__user-list">
+                                    <div class="o-organisation-talents-info">
+                                        <div class="o-organisation-talents-info-prof">
+                                          <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
+                                              <img src="assets/demo/avatar.png" alt="">
+                                          </div>
+                                          <div id="username" class="text-md">
+                                              Devansh Rathore
+                                          </div>
+                                        </div>
+                                        <div class="o-organisation-talents-info__option">
+                                          <a href="#">
+                                            <i class="icon-more-vertical"></i>
+                                          </a>
+                                        </div>
+                                    </div>
+                                </li><!-- user list end-->
+                                <li class="o-organisation-talents-list__user-list">
+                                    <div class="o-organisation-talents-info">
+                                        <div class="o-organisation-talents-info-prof">
+                                          <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
+                                              <img src="assets/demo/avatar.png" alt="">
+                                          </div>
+                                          <div id="username" class="text-md">
+                                              Devansh Rathore
+                                          </div>
+                                        </div>
+                                        <div class="o-organisation-talents-info__option">
+                                          <a href="#">
+                                            <i class="icon-more-vertical"></i>
+                                          </a>
+                                        </div>
+                                    </div>
+                                </li><!-- user list end-->
+                                <li class="o-organisation-talents-list__user-list">
+                                    <div class="o-organisation-talents-info">
+                                        <div class="o-organisation-talents-info-prof">
+                                          <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
+                                              <img src="assets/demo/avatar.png" alt="">
+                                          </div>
+                                          <div id="username" class="text-md">
+                                              Devansh Rathore
+                                          </div>
+                                        </div>
+                                        <div class="o-organisation-talents-info__option">
+                                          <a href="#">
+                                            <i class="icon-more-vertical"></i>
+                                          </a>
+                                        </div>
+                                    </div>
+                                </li><!-- user list end-->
+                                <li class="o-organisation-talents-list__user-list">
+                                    <div class="o-organisation-talents-info">
+                                        <div class="o-organisation-talents-info-prof">
+                                          <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
+                                              <img src="assets/demo/avatar.png" alt="">
+                                          </div>
+                                          <div id="username" class="text-md">
+                                              Devansh Rathore
+                                          </div>
+                                        </div>
+                                        <div class="o-organisation-talents-info__option">
+                                          <a href="#">
+                                            <i class="icon-more-vertical"></i>
+                                          </a>
+                                        </div>
+                                    </div>
+                                </li><!-- user list end-->
+                                <li class="o-organisation-talents-list__user-list">
+                                    <div class="o-organisation-talents-info">
+                                        <div class="o-organisation-talents-info-prof">
+                                          <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
+                                              <img src="assets/demo/avatar.png" alt="">
+                                          </div>
+                                          <div id="username" class="text-md">
+                                              Devansh Rathore
+                                          </div>
+                                        </div>
+                                        <div class="o-organisation-talents-info__option">
+                                          <a href="#">
+                                            <i class="icon-more-vertical"></i>
+                                          </a>
+                                        </div>
+                                    </div>
+                                </li><!-- user list end-->
+                                <li class="o-organisation-talents-list__user-list">
+                                    <div class="o-organisation-talents-info">
+                                        <div class="o-organisation-talents-info-prof">
+                                          <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
+                                              <img src="assets/demo/avatar.png" alt="">
+                                          </div>
+                                          <div id="username" class="text-md">
+                                              Devansh Rathore
+                                          </div>
+                                        </div>
+                                        <div class="o-organisation-talents-info__option">
+                                          <a href="#">
+                                            <i class="icon-more-vertical"></i>
+                                          </a>
+                                        </div>
+                                    </div>
+                                </li><!-- user list end-->
+                                <li class="o-organisation-talents-list__user-list">
+                                    <div class="o-organisation-talents-info">
+                                        <div class="o-organisation-talents-info-prof">
+                                          <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
+                                              <img src="assets/demo/avatar.png" alt="">
+                                          </div>
+                                          <div id="username" class="text-md">
+                                              Devansh Rathore
+                                          </div>
+                                        </div>
+                                        <div class="o-organisation-talents-info__option">
+                                          <a href="#">
+                                            <i class="icon-more-vertical"></i>
+                                          </a>
+                                        </div>
+                                    </div>
+                                </li><!-- user list end-->
+                              </ul><!-- talents list end -->
+                              <a href="community_member_popup.html" class="text-md primary talents-seeall">See All</a>
                             </div>
-                        </div><!--right block end-->
+                        </div>
+
+                        
                     </div><!--items ends-->
                 </div><!--right block ends-->
             </div><!--o-blocks ends-->

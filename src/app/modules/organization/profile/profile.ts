@@ -18,11 +18,14 @@ import { VideoChatService } from '../../videochat/videochat.service';
 import { UpdateMarkersService } from '../../../common/services/update-markers.service';
 import { filter } from "rxjs/operators";
 import { Location } from '@angular/common';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { CreateTalent } from '../talent/create/create-talent';
+import { CommonEventsService } from '../../../services/common-events.service';
 
 @Component({
   selector: 'm-organization--profile',
   templateUrl: 'profile.html',
-  styleUrls: [ './profile.scss' ]
+  styleUrls: ['./profile.scss']
 })
 
 export class OrganizationProfile {
@@ -61,6 +64,7 @@ export class OrganizationProfile {
   @ViewChild('feed') private feed: OrganizationProfileFeed;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
+
   private reviewCountInterval: any;
   private socketSubscription: any;
   private videoChatActiveSubscription;
@@ -81,7 +85,9 @@ export class OrganizationProfile {
     public videochat: VideoChatService,
     private cd: ChangeDetectorRef,
     private updateMarkers: UpdateMarkersService,
-    private _location: Location
+    private _location: Location,
+    private overlayModal: OverlayModalService,
+    private commService: CommonEventsService
 
     // private _location: Location
   ) { }
@@ -476,4 +482,32 @@ export class OrganizationProfile {
   // backClicked() {
   //   this.showGathering = false;
   // }
+  createTalent() {
+    if (window.innerWidth > 785) {
+      this.overlayModal.create(CreateTalent, this.organization, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+
+        onUpdate: (payload: any) => {
+          // make update to local var
+          // this.activityResp.emit(payload);
+          console.log("Payload: ", payload);
+          this.appendTalent(payload);
+
+        }
+      }
+      )
+        .present();
+    } else {
+      this.router.navigate([`/organization/talent/${this.organization.guid}`])
+    }
+  }
+
+  appendTalent(payload) {
+    console.log('trigger');
+    this.commService.trigger({
+      component: 'OrganizationProfileFeed',
+      action: 'appendTalent',
+      data: payload
+    });
+  }
 }
