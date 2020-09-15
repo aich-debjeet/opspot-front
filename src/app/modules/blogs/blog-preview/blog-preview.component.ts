@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { HashtagsSelectorComponent } from '../../../../hashtags/selector/selector.component';
-import { TopbarHashtagsService } from '../../../../hashtags/service/topbar.service';
-import { Tag } from '../../../../hashtags/types/tag';
-import { Client, Upload } from '../../../../../services/api';
+import { HashtagsSelectorComponent } from '../../hashtags/selector/selector.component';
+import { TopbarHashtagsService } from '../../hashtags/service/topbar.service';
+import { Tag } from '../../hashtags/types/tag';
+import { Client, Upload } from '../../../services/api';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OverlayModalService } from '../../../../../services/ux/overlay-modal';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   selector: 'app-blog-preview',
