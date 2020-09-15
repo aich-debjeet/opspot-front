@@ -26,6 +26,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TagInputModule } from 'ngx-chips';
 import { OrganizationJoinRequestComponent } from './organizations-join-request/organization-join-request.component';
 import { OrganizationJoinRequestMobile } from './organizations-join-request-mobile/organization-join-request-mobile';
+import { CreateTalent } from './talent/create/create-talent';
+// import { CreateTalentMobileComponent } from './talent/create/create-talent-mobile/create-talent-mobile.component';
 
 
 const routes: Routes = [
@@ -45,7 +47,9 @@ const routes: Routes = [
   { path: 'organization/:filter', component: OrganizationListComponent },
   { path: 'organization', redirectTo: 'organization/all', pathMatch: 'full' },
   { path: 'organization/all-subscribers/:guid', component: OrganizationAllMembers },
-  { path: 'organization/card/:guid', component: OrganizationJoinRequestMobile }
+  { path: 'organization/card/:guid', component: OrganizationJoinRequestMobile },
+  { path: 'organization/talent/:guid', component: CreateTalent }
+
 ]
 
 @NgModule({
@@ -77,7 +81,8 @@ const routes: Routes = [
     OrganizationAllMembers,
     OrganizationMemberPreviews,
     OrganizationJoinRequestComponent,
-    OrganizationJoinRequestMobile
+    OrganizationJoinRequestMobile,
+    CreateTalent,
   ],
   exports: [
     OrganizationProfile,
@@ -92,7 +97,8 @@ const routes: Routes = [
     OrganizationListComponent
   ],
   entryComponents: [
-    OrganizationJoinRequestComponent
+    OrganizationJoinRequestComponent,
+    CreateTalent
   ],
   providers: [
     CanDeactivateGroupService
