@@ -1,0 +1,192 @@
+
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+
+.o-create-talent{
+    width: 525px;
+    border-radius: 4px;
+    background-color: $white;
+}
+.o-create-talent-head{
+    width: 100%;
+    padding:18px 27px;
+    position: relative;
+    background-color: rgba(235,239,242,0.4);
+        .close{
+        position: absolute;
+        top: 23px;
+        right: 24px;
+            i{
+            font-size:17px;
+            }
+        }
+    .icon-chevron-down{
+     vertical-align: middle;
+     line-height: 24px;
+    font-size: 15px;
+    color:$primary;
+    margin-left:6px;
+    }
+    .o-create-dropdown-style {
+        margin-left:0px;
+        vertical-align: middle;
+        .icon-x{
+            line-height: 24px;
+            font-size:12px;
+            margin-left:15px;
+        }
+    }
+}
+.o-create-talent-head--border{
+    border-bottom: 1px solid #ECEFF1;
+}
+.o-create-talent-body{
+    width: 100%;
+    padding: 18px 27px 20px;
+    textarea{
+        resize:none;
+        font-size:13px;
+        font-family: "Roboto", sans-serif !important;
+        padding: 0.6rem 0.75rem;
+    }
+    .description-width{
+        text-align: right;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+        position: absolute;
+        top: 5px;
+    }
+    ::placeholder{
+        color:$grey;
+    }
+    .form-group{
+        margin-bottom: 18px;
+    }
+}
+.o-create-talent-body--flex{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+//time date style
+
+
+// cover image style
+.o-create-talent-cover-image{
+    display:flex;
+    width:100%;
+    margin-bottom: 8px;
+    @include mq($from: $mobile_sm, $until:$mobile_lg ){
+        flex-direction: row;
+    }
+    .mt10{
+        margin-top:10px;
+    }
+    .ml-25{
+        margin-left:25px;
+        @include mq($from: $mobile_sm, $until:$mobile_lg ){
+            margin-top:0px;
+            margin-left: 9px;
+        }
+     }
+     &__close{
+        height: 22px;
+        width: 22px;
+        color: #fff;
+        position: absolute;
+        top: 8px;
+        right:-8px;
+        align-items: center;
+        border-radius: 50%;
+        justify-content: center;
+        display: flex;
+        background-color: rgba(40, 40, 40, 0.5);
+        i{
+            font-size: 12px;
+            color:#fff;
+        }
+     }
+    &__avatar{
+        img{
+            height: 118px;	
+            width: 118px;
+            object-fit: cover;
+        }
+    }
+}
+.o-create-talent-footer{
+    border-radius: 0 0 4px 4px;	
+    background-color: rgba(235,239,242,0.4);
+    padding: 10px 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    border: 1px solid #ECEFF1;
+    .btn-primary.disabled{
+        color: $grey!important;
+    }
+}
+
+//preview style
+.fileUpload-preview-talent {
+    height: 101px;
+    width: 101px;
+    border: 1px solid #F5F7F8;
+    border-radius: 4px;
+    position: relative;
+}
+//responsive style
+@include mq($from: $mobile_sm, $until:$mobile_lg ) {
+    .o-create-talent-mob{
+     padding: 16px 15px;   
+    }
+    .o-create-talent-mob-header{
+        .without-nav-header__title{
+            text-align: left;
+            padding-left: 18px;
+            margin-left:0px;
+                .icon-chevron-down{
+                line-height: 24px;
+                font-size: 15px;
+                color:$primary!important;
+                }
+        }
+        .icon-box-design{
+            margin-left: 9px;
+            height: 32px;	
+            width: 32px;	
+            border: 1px solid rgba(144,164,174,0.2);	
+            border-radius: 4px;	
+            background-color:$white;	
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+        }
+    }
+    .form-group{
+        margin-bottom: 18px;
+    }
+    .description-width{
+        text-align: right;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+        position: absolute;
+        top: 5px;
+    }
+}
+.o-create-talent-mob-header-below{
+    background-color: #ECEFF1;
+    padding: 14px 15px;
+    display: flex;
+    justify-content: space-between;
+    .icon-x{
+        font-size: 16px;
+        vertical-align: middle;
+    }
+}
+
