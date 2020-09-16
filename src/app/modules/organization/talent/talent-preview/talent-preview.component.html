@@ -1,0 +1,9 @@
+<ul class="o-organisation-talents-list scrollbar scrollbar-default">
+  <li class="o-organisation-talents-list__user-list" *ngFor="let talent of talents | slice: 0:5">
+    <opspot-talent-card [talent]="talent"></opspot-talent-card>
+  </li>
+</ul><!-- talents list end -->
+<a class="text-md primary talents-seeall" *ngIf="talents.length > 5" (click)="showTalents()">See All</a>
+<m-modal [open]="talentToggele" [allowClose]="true" (closed)="memberToggle = false">
+  <opspot-talent-list></opspot-talent-list>
+</m-modal>
