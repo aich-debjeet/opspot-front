@@ -102,7 +102,7 @@
   <!-- Rich content -->
   <div class="m-rich-embed"
   id="nsfw_media_post_blanket"
-    *ngIf="activity.perma_url && activity.title && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'"
+    *ngIf="activity.perma_url && activity.title && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album' && activity.entity_type !== 'talent'"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">

@@ -177,7 +177,7 @@ export class CreateTalent implements OnInit {
                     // close modal
                 }
                 this.closeModal();
-                this.router.navigate(['/organization/profile', this.organization_guid, 'feed'])
+                // this.router.navigate(['/organization/profile', this.organization_guid, 'feed'])
             })
     }
 

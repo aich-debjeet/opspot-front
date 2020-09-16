@@ -13,6 +13,7 @@ import { OpportunityFormComponent } from '../../../../../modules/forms/opportuni
 import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-form/blue-store-form.component';
 import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
 import { Router } from '@angular/router';
+import { CreateTalent } from '../../../../../modules/organization/talent/create/create-talent';
 
 @Component({
   moduleId: module.id,
@@ -130,7 +131,7 @@ export class Activity {
       this.reachoutMessage += value['perma_url'];
     }
 
-//to display preview while sharing on fb
+    //to display preview while sharing on fb
     this.activity.url = window.Opspot.site_url + 'media/' + value.guid;
 
     if (
@@ -328,6 +329,22 @@ export class Activity {
           onUpdate: (payload: any) => {
             // make update to local var
             this.udpateShowtime(payload);
+          }
+        }).present()
+      }
+
+    } else if (this.activity.entity_type === 'talent') {
+      if (this.activity.end_time_date) {
+        this.router.navigateByUrl('/event/edit/' + this.activity.guid)
+      } else {
+        this.overlayModal.create(CreateTalent, this.activity, {
+          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+          // listen to the update callback
+          onUpdate: (payload: any) => {
+            // make update to local var
+            console.log("PAYLOAD: ", payload);
+            
+            // this.udpateShowtime(payload);
           }
         }).present()
       }
