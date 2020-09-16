@@ -27,6 +27,9 @@ import { TagInputModule } from 'ngx-chips';
 import { OrganizationJoinRequestComponent } from './organizations-join-request/organization-join-request.component';
 import { OrganizationJoinRequestMobile } from './organizations-join-request-mobile/organization-join-request-mobile';
 import { CreateTalent } from './talent/create/create-talent';
+import { TalentPreviewComponent } from './talent/talent-preview/talent-preview.component';
+import { TalentCardComponent } from './talent/talent-card/talent-card.component';
+import { TalentListComponent } from './talent/talent-list/talent-list.component';
 // import { CreateTalentMobileComponent } from './talent/create/create-talent-mobile/create-talent-mobile.component';
 
 
@@ -83,6 +86,9 @@ const routes: Routes = [
     OrganizationJoinRequestComponent,
     OrganizationJoinRequestMobile,
     CreateTalent,
+    TalentPreviewComponent,
+    TalentCardComponent,
+    TalentListComponent,
   ],
   exports: [
     OrganizationProfile,
