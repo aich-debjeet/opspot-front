@@ -1,3 +1,47 @@
-<p>
-  talent-list works!
-</p>
+<div class="o-talent-member-popup">
+  <div class="close">
+      <i class="icon-x"></i>
+  </div><!-- close end -->
+  <div class="o-talent-member-popup-body">
+      <div class="o-talent-member-popup-body__title">
+          <div class="text-h3">
+              Talents
+          </div>
+      </div><!--title ends-->
+      <div class="form-group c-form_righticon-md">
+          <input type="text" class="form-control form-control-lg bg-grey-light" placeholder="Search Members">
+          <i class="icon-search"></i>
+      </div><!--search bar ends-->
+      <ul class="o-organisation-talent-members-list scrollbar scrollbar-default">
+          <li class="o-organisation-talent-members-list__user-list" *ngFor="let talent of talents">
+              <a class="o-organisation-talents-info">
+                  <!-- <div class="o-organisation-talents-info-prof">
+                    <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
+                        <img src="assets/demo/avatar.png" alt="">
+                    </div>
+                    <div id="username" class="text-md">
+                          Gregorio Meier
+                    </div>
+                  </div> -->
+                  <opspot-talent-card [talent]="talent"></opspot-talent-card>
+                  <div class="o-organisation-talents-info__option">
+                    
+                    <a href="#">
+                      <i class="icon-more-vertical"></i>
+                    </a>
+
+                    <!-- instead of this u can user your components -->
+                      <!-- <div class="o-option-drop">
+                          <div onclick="myFunction()" class="o-option-drop__btn head-action__link"><img src="assets/svg/more-horizontal.svg" alt="" class="head-action__icon"></div>
+                          <div id="o-option-dropdown" class="o-option-drop__block show">
+
+                              <a href="#">Remove Talents</a> /***** this option only show in admin view ***///
+
+                          </div>
+                      </div> -->
+                  </div>
+              </a>
+          </li><!-- user list end-->
+      </ul><!-- members list end -->
+  </div><!--body ends-->
+</div><!--o-talent-member-popup ends-->
