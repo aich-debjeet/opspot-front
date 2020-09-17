@@ -276,7 +276,7 @@ export class BlogEdit {
       //       this.canSave = true;
       //     });
       // });
-      this.router.navigate(['/blog/preview'])
+      this.router.navigate(['/blog/preview',this.guid])
     })
   }
 

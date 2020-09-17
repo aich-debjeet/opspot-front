@@ -5,6 +5,7 @@ import { Tag } from '../../hashtags/types/tag';
 import { Client, Upload } from '../../../services/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { OpspotBlogResponse } from '../../../interfaces/responses';
 
 @Component({
   selector: 'app-blog-preview',
@@ -26,25 +27,47 @@ export class BlogPreviewComponent implements OnInit {
   meta: any;
   message = '';
 
-  @Input('object') set data(object) {
-    this.blog = object ? object.blog : null;
-    this.guid = object ? object.guid : null;
-    let skills = object ? object.blog.tags : null;
-    skills = skills.filter(el => !!el);
-    this.skillsAlter(skills);
-  }
+  // @Input('object') set data(object) {
+  //   console.log('object', object)
+  //   this.blog = object ? object.blog : null;
+  //   this.guid = object ? object.guid : null;
+  //   let skills = object ? object.blog.tags : null;
+  //   skills = skills.filter(el => !!el);
+  //   this.skillsAlter(skills);
+  // }
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
-  constructor(public upload: Upload, public router: Router, public client: Client, private overlayModal: OverlayModalService, private service: TopbarHashtagsService, ) {
+  constructor(public upload: Upload, private router: Router, private route: ActivatedRoute, public client: Client, private overlayModal: OverlayModalService, private service: TopbarHashtagsService) {
+    console.log('printing',this)
     this.banner = void 0;
     this.banner_top = 0;
     this.banner_prompt = false;
   }
 
   ngOnInit() {
+    console.log('printing',this)
     this.getTopHashtags();
+    this.route.params.subscribe(params => {
+      let load = false;
+
+      if (params['guid']) {
+        console.log(params['guid'])
+        this.guid = params['guid'];
+
+        load = true;
+      }
+      if (load) {
+        this.load();
+        this.client.get('api/v1/blog/' + this.guid, {})
+        .then((response: OpspotBlogResponse) => {
+          console.log(response)
+          this.blog = response['blog'];
+        })
+      }
+    });
   }
 
   async getTopHashtags() {
+    console.log('inside function hashtags',this)
     const res = await this.service.load(50);
     res.map(a => {
       this.skillData.push(a.value);
@@ -164,6 +187,7 @@ export class BlogPreviewComponent implements OnInit {
   }
 
   displayPaywall() {
+    console.log('function display paywall',this)
     if (this.displayPaywal) {
       this.displayPaywal = false;
     } else {
@@ -179,4 +203,27 @@ export class BlogPreviewComponent implements OnInit {
     }
   }
 
+  load(refresh: boolean = false) {
+    if (this.inProgress) {
+      return false;
+    }
+    this.inProgress = true;
+    //console.log('grabbing ' + this.guid);
+    this.client.get('api/v1/blog/' + this.guid, {})
+      .then((response: OpspotBlogResponse) => {
+        console.log(response)
+        if (response.blog) {
+          this.blog = [response.blog];
+        } else if (this.blog.length === 0) {
+          this.error = 'Sorry, we couldn\'t load the blog';
+        }
+        this.inProgress = false;
+      })
+      .catch((e) => {
+        if (this.blog.length === 0) {
+          this.error = 'Sorry, there was a problem loading the blog';
+        }
+        this.inProgress = false;
+      });
+  }
 }

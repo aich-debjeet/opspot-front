@@ -31,7 +31,7 @@ import { TagInputModule } from 'ngx-chips';
 const routes: Routes = [
   { path: 'blog/view/:guid/:title', component: BlogViewInfinite },
   { path: 'blog/view/:guid', component: BlogViewInfinite },
-  { path: 'blog/preview', component: BlogPreviewComponent },
+  { path: 'blog/preview/:guid', component: BlogPreviewComponent },
   {
     path: 'blog', component: GenericViewComponent,
     children: [
