@@ -122,7 +122,7 @@
 
     <div class="container hidden-above-tablet">
         <div class="without-nav-header organisation-admin-main-title">
-            <a href="#"><i class="icon-arrow-left"></i> </a>
+            <a (click)="goBack()"><i class="icon-arrow-left"></i> </a>
             <div class="without-nav-header__title caption-bold f500 center">Organization</div>
         </div>
     </div><!-- without nav header end -->
@@ -198,7 +198,7 @@
                                     <span class="o-organisation-members-list-mob-single"><img [src]="memberSrc+member.guid" alt=""></span>
                                     <!-- <span class="text-sm m-l-r-6 grey">+4</span> -->
                                 </a>
-                                <a (click)="openInvite()" class="o-organisation-add-members-mob f500 text-md primary"><u>Add Subscribers</u></a>
+                                <a (click)="openInvite()" class="o-organisation-add-members-mob f500 text-md primary" *ngIf="organization && (organization['is:owner'] || organization['is:editor'])"><u>Add Subscribers</u></a>
                             </div><!--members-top ends-->
                             <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle" (closed)="inviteToggle = false">
                                 <opspot-organization-profile-members-invite [organization]="organization" *ngIf="organization">
@@ -267,7 +267,7 @@
                             <span class="o-organisation-members-list-mob-single--talent"><img src="assets/demo/avatar.png" alt=""></span>
                             <span class="text-sm m-l-r-6 grey">+4</span>
                         </a>
-                        <a class="o-organisation-add-members-mob f500 text-md primary" (click)="createTalent()"><u>Add Talents</u></a>
+                        <a class="o-organisation-add-members-mob f500 text-md primary" (click)="createTalent()" *ngIf="organization && (organization['is:owner'] || organization['is:editor'])"><u>Add Talents</u></a>
                     </div><!--members-top ends-->
                     <div class="o-right-block--organisation__items">
                         <div class="o-center-block">
@@ -298,7 +298,7 @@
                                 <div class="text-lg f500">
                                     Talents
                                 </div> 
-                                <span class="icon-plus-circle primary" (click)="createTalent()">            
+                                <span class="icon-plus-circle primary" (click)="createTalent()" *ngIf="organization && (organization['is:owner'] || organization['is:editor'])">            
                                 </span>
                             </div><!-- header end -->
                             <opspot-talent-preview [organization]="organization"></opspot-talent-preview>
