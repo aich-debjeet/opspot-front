@@ -60,6 +60,7 @@ export class OrganizationProfile {
   inviteToggle: boolean = false;
   memberToggle: boolean = false;
   membersMobile;
+  talentsMobile;
   memberSrc = `${this.opspot.cdn_url}icon/`
   @ViewChild('feed') private feed: OrganizationProfileFeed;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
@@ -100,6 +101,7 @@ export class OrganizationProfile {
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {
         this.loadMembers(params['guid'])
+        this.loadTalents(params['guid'])
 
         let changed = params['guid'] !== this.guid;
 
@@ -509,5 +511,13 @@ export class OrganizationProfile {
       action: 'appendTalent',
       data: payload
     });
+  }
+
+  async loadTalents(guid) {
+    let endpoint = `api/v3/organizations/organization/talent/${guid}/all`
+    let params = { limit: 4, offset: this.offset };
+    let talents = await this.client.get(endpoint, params)
+    //  console.log(members)
+    this.talentsMobile = talents['talents']
   }
 }

@@ -194,7 +194,7 @@
                                 </div>
                             </div><!-- organisation members end-->
                             <div class="o-organisation-members-top o-organisation-members-top--mob hidden-above-tablet">
-                                <a href="organisation.html" class="o-organisation-members-top__count-mob" *ngFor="let member of membersMobile">
+                                <a class="o-organisation-members-top__count-mob" *ngFor="let member of membersMobile">
                                     <span class="o-organisation-members-list-mob-single"><img [src]="memberSrc+member.guid" alt=""></span>
                                     <!-- <span class="text-sm m-l-r-6 grey">+4</span> -->
                                 </a>
@@ -261,11 +261,13 @@
                     </div>
                     <div class="o-organisation-members-top o-organisation-members-top--mob hidden-above-tablet">
                         <div class="text-lg f500 mrb12">Talents</div>
-                        <a href="organisation.html" class="o-organisation-members-top__count-mob">
+                        <a class="o-organisation-members-top__count-mob">
+                            <span class="o-organisation-members-list-mob-single--talent" *ngFor="let talent of talentsMobile"><img [src]="talent?.custom_data[0].src || talent?.custom_data[0].thumbnail_src" 
+                                (error)="talent?.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png' ||
+                                talent?.custom_data[0].thumbnail_src = opspot.cdn_assets_url + 'assets/ops_icon.png'" alt=""></span>
+                            <!-- <span class="o-organisation-members-list-mob-single--talent"><img src="assets/demo/avatar.png" alt=""></span>
                             <span class="o-organisation-members-list-mob-single--talent"><img src="assets/demo/avatar.png" alt=""></span>
-                            <span class="o-organisation-members-list-mob-single--talent"><img src="assets/demo/avatar.png" alt=""></span>
-                            <span class="o-organisation-members-list-mob-single--talent"><img src="assets/demo/avatar.png" alt=""></span>
-                            <span class="text-sm m-l-r-6 grey">+4</span>
+                            <span class="text-sm m-l-r-6 grey">+4</span> -->
                         </a>
                         <a class="o-organisation-add-members-mob f500 text-md primary" (click)="createTalent()" *ngIf="organization && (organization['is:owner'] || organization['is:editor'])"><u>Add Talents</u></a>
                     </div><!--members-top ends-->
