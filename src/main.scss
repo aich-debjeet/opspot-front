@@ -7780,10 +7780,10 @@ m-blog-view img.m--img-not-found, opspot-blog-edit img.m--img-not-found {
   background-size: contain;
 }
 
-m-blog-view img.display {
+m-blog-view img.display, opspot-blog-edit img.display {
   // width:100%;
-  width: 300px !important;
-  height: 300px !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 m-blog-view ul.m-blog--categories-list, opspot-blog-edit ul.m-blog--categories-list {
