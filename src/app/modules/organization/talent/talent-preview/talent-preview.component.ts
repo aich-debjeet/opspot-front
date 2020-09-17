@@ -11,7 +11,7 @@ export class TalentPreviewComponent implements OnInit {
 
   organization: any;
   inProgress = false;
-  talents: any;
+  talents: Array<any> = [];
   talentToggele = false;
 
   constructor(
