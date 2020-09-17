@@ -6,6 +6,8 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { OverlayModalService } from '../../../../services/ux/overlay-modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrganizationService } from '../../organization-service';
+import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-create-talent',
@@ -27,18 +29,16 @@ export class CreateTalent implements OnInit {
     createTalentForm: FormGroup;
     showDesktop: boolean;
     showMobile: boolean;
+    talentSubmitted: boolean = false;
     _opts: any;
     set opts(opts: any) {
         this._opts = opts;
     }
 
-
     @Input('object') set data(object) {
         this.organization = object;
         if (this.organization) {
             this.organization_guid = this.organization.guid;
-            console.log("nsdbjf: ", this.organization_guid);
-
         }
     }
 
@@ -61,12 +61,13 @@ export class CreateTalent implements OnInit {
         private overlayModal: OverlayModalService,
         public route: ActivatedRoute,
         private service: OrganizationService,
-        private router: Router
-
+        private router: Router,
+        private toastr: ToastrService,
+        private _location: Location
     ) {
         this.createTalentForm = this.formBuilder.group({
             title: ['', [Validators.required]],
-            description: ['', []]
+            description: ['', [Validators.required]]
         });
     }
 
@@ -99,6 +100,12 @@ export class CreateTalent implements OnInit {
                     let obj = {};
                     obj['guid'] = guid;
                     obj['src'] = this.attachment.getPreview();
+                    if (obj['src'].includes("data:audio/")) {
+                        obj['src'] = 'assets/videos/video_thumbnail.png'
+                    }
+                    if (obj['src'].includes("data:video/")) {
+                        obj['src'] = 'assets/videos/video_thumbnail.png'
+                    }
                     this.addAttachment(obj);
                     this.inProgress = false;
                     file.value = null;
@@ -114,9 +121,9 @@ export class CreateTalent implements OnInit {
     }
 
     addAttachment(obj) {
-        if (this.cards.length < 1) {
-            this.cards.push(obj);
-        }
+        // if (this.cards.length < 1) {
+        this.cards.push(obj);
+        // }
     }
 
     removeAttachment(file: HTMLInputElement, imageId: string) {
@@ -151,6 +158,7 @@ export class CreateTalent implements OnInit {
 
 
     create() {
+        this.talentSubmitted = true;
         this.inProgress = true;
 
         let data = Object.assign(this.meta, this.attachment.exportMeta());
@@ -169,20 +177,48 @@ export class CreateTalent implements OnInit {
         this.reqBody.container_guid = this.organization_guid;
         this.reqBody.title = this.createTalentForm.value.title;
         this.reqBody.description = this.createTalentForm.value.description;
-        this.client.post('api/v3/organizations/organization/talent', this.reqBody)
-            .then((res) => {
-                this.inProgress = false;
-                if (this._opts && this._opts.onUpdate) {
-                    this._opts.onUpdate(res);
-                    // close modal
-                }
-                this.closeModal();
-                // this.router.navigate(['/organization/profile', this.organization_guid, 'feed'])
-            })
+
+        if (this.reqBody.attachment_guid == '') {
+            this.toastr.error('Please upload logo');
+            return;
+            // this.imageUploadError = true;
+        }
+
+        if (this.createTalentForm.valid) {
+            this.client.post('api/v3/organizations/organization/talent', this.reqBody)
+                .then((res) => {
+                    this.inProgress = false;
+                    if (this._opts && this._opts.onUpdate) {
+                        this._opts.onUpdate(res);
+                        // close modal
+                    }
+                    this.closeModal();
+                    this.talentSubmitted = false;
+                    if (window.innerWidth < 785) {
+                        this.router.navigate(['/organization/profile', this.organization_guid, 'feed'])
+                    }
+                })
+                .catch(() => {
+                    this.talentSubmitted = false;
+                })
+        }
+
     }
 
     closeModal() {
         this.overlayModal.dismiss();
+    }
+
+    checkForSrc(object) {
+        if (object && object.entity_type === 'video') {
+            return object.thumbnail_src;
+        } else {
+            return object.src;
+        }
+    }
+
+    goBack() {
+        this._location.back()
     }
 
 }
