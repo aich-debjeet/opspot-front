@@ -24,8 +24,7 @@ import { base64ToFile } from 'ngx-image-cropper';
           <div class="text-lg">
               <i class="white icon-plus-circle" (click)="chooseFile()"></i>
               <!--<i class="white icon-minus-circle" (click)="remove()"></i>-->
-              <p class="white text-lg">Add Cover Picture</p>
-              <p class="white text-lg">Recommended size 2000px &times; 1125px (Ratio 4:3)</p>
+              <p class="white text-lg">Change cover image</p>
               <p class="white text-lg">Recommended image formats are .jpg, .jpeg and .png</p>
           </div>
       </div>

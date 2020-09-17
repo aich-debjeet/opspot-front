@@ -11,7 +11,7 @@
       </div>
       <!--profile crop head end-->
       <div class="o-profile-crop-body">
-        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="16/9"
           (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" 
           [containWithinAspectRatio]="false"
           [transform]="transform"
