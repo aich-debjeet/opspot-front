@@ -20,6 +20,7 @@ import { AboutComponent } from '../modules/channels/profile-edit/about/about.com
 import { ContactComponent } from '../modules/channels/profile-edit/contact/contact.component';
 import { EducationComponent } from '../modules/channels/profile-edit/education/education.component';
 import { AwardsComponent } from '../modules/channels/profile-edit/awards/awards.component';
+import { DataExtractionComponent } from '../modules/data-extraction/data-extraction.component';
 
 export const OpspotAppRoutes: Routes = [
   { path: 'capture', redirectTo: 'media/images/suggested' },
@@ -46,6 +47,7 @@ export const OpspotAppRoutes: Routes = [
   { path: 'p/:page', component: Pages },
 
   { path: 'claim-rewards/:uuid', component: RewardsComponent },
+  { path: 'dataextract', component: DataExtractionComponent },
   {
     path: 'profile',
     component: ProfileEditComponent,
@@ -79,7 +81,7 @@ export const OpspotAppRoutes: Routes = [
     path: ':username',
     component: ChannelComponent,
     canDeactivate: [CanDeactivateGuardService]
-  }
+  },
 ];
 
 export const OpspotAppRoutingProviders: any[] = [

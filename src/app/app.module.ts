@@ -72,6 +72,7 @@ import { ExploreModule } from './modules/explore/explore.module';
 import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { BigEventModule } from './modules/big-event/big-event.module';
 import { PediaModule } from './modules/pedia/pedia.module';
+import { DataExtractionComponent } from './modules/data-extraction/data-extraction.component';
 
 
 
@@ -81,7 +82,8 @@ import { PediaModule } from './modules/pedia/pedia.module';
     Opspot,
     OPSPOT_APP_ROUTING_DECLARATIONS,
     OPSPOT_DECLARATIONS,
-    OPSPOT_PLUGIN_DECLARATIONS
+    OPSPOT_PLUGIN_DECLARATIONS,
+    DataExtractionComponent
   ],
   imports: [
     BrowserModule,
