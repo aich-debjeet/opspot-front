@@ -1,10 +1,12 @@
 <div class="o-organisation-talents-info">
   <div class="o-organisation-talents-info-prof">
     <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
-      <img src="assets/demo/avatar.png" alt="">
+      <img [src]="talent?.custom_data[0].src || talent?.custom_data[0].thumbnail_src"
+      (error)="talent?.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png' ||
+       talent?.custom_data[0].thumbnail_src = opspot.cdn_assets_url + 'assets/ops_icon.png'" alt="">
     </div>
     <div id="username" class="text-md">
-      {{talent.title}}
+      {{talent?.title}}
     </div>
   </div>
   <div class="o-organisation-talents-info__option">
