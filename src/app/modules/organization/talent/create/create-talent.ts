@@ -16,7 +16,7 @@ import { Location } from '@angular/common';
 })
 export class CreateTalent implements OnInit {
 
-    organization: any;
+    inputData: any;
     organization_guid: any;
     inProgress = false;
     errorMessage = '';
@@ -35,13 +35,6 @@ export class CreateTalent implements OnInit {
         this._opts = opts;
     }
 
-    @Input('object') set data(object) {
-        this.organization = object;
-        if (this.organization) {
-            this.organization_guid = this.organization.guid;
-        }
-    }
-
     reqBody: any = {
         organisation_guid: '',
         title: '',
@@ -53,6 +46,26 @@ export class CreateTalent implements OnInit {
         //custom_type:talent
         attachment_guid: ''
     };
+
+    description = '';
+
+
+    @Input('object') set data(object) {
+        this.inputData = object;
+        console.log("mvnv: ", this.inputData);
+
+        if (this.inputData.type === "activity") {
+            this.organization_guid = this.inputData.container_guid;
+            this.buildForm(this.inputData)
+            this.cards = this.inputData['custom_data'];
+            this.inputData['custom_data'].forEach(image => {
+                this.attach_guid.push(image['guid']);
+            });
+        } else if (this.inputData.type === "organization") {
+            this.organization_guid = this.inputData.guid;
+            this.buildForm()
+        }
+    }
 
     constructor(
         private client: Client,
@@ -69,6 +82,23 @@ export class CreateTalent implements OnInit {
             title: ['', [Validators.required]],
             description: ['', [Validators.required]]
         });
+    }
+
+    buildForm(data?) {
+        if (data) {
+            if (data.briefdescription) {
+                this.description = data.briefdescription;
+            }
+            this.createTalentForm = this.formBuilder.group({
+                title: [data['title'] ? data['title'] : '', [Validators.required]],
+                description: [this.description ? this.description : '', [Validators.required]],
+            });
+        } else {
+            this.createTalentForm = this.formBuilder.group({
+                title: ['', [Validators.required]],
+                description: ['', [Validators.required]]
+            });
+        }
     }
 
     ngOnInit() {
@@ -159,7 +189,6 @@ export class CreateTalent implements OnInit {
 
     create() {
         this.talentSubmitted = true;
-        this.inProgress = true;
 
         let data = Object.assign(this.meta, this.attachment.exportMeta());
         // console.log("data: ", data);
@@ -184,8 +213,13 @@ export class CreateTalent implements OnInit {
             // this.imageUploadError = true;
         }
 
+        let endpoint = 'api/v3/organizations/organization/talent';
+        if (this.inputData.type === "activity") {
+            endpoint = 'api/v3/organizations/organization/talent/' + this.inputData.guid;
+        }
+        this.inProgress = true;
         if (this.createTalentForm.valid) {
-            this.client.post('api/v3/organizations/organization/talent', this.reqBody)
+            this.client.post(endpoint, this.reqBody)
                 .then((res) => {
                     this.inProgress = false;
                     if (this._opts && this._opts.onUpdate) {

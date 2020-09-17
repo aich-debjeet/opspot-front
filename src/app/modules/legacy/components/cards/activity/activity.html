@@ -308,7 +308,7 @@
             <h4 class="f500">Talent Alert</h4>
         </div><!--title ends-->
         <div class="feed-card-talent-block__avatar">
-            <img src="assets/demo/avatar.png" alt="">
+            <img *ngIf="activity?.custom_data" [src]="activity?.custom_data[0].src || activity?.custom_data[0].thumbnail_src" alt="">
         </div><!--avatar ends-->
         <div class="feed-card-talent-block__info">
             <div class="caption-bold">{{ activity.title}}</div>
@@ -324,7 +324,7 @@
         </div><!--btn ends-->
         <div class="feed-card-talent-block__discription">
             <p class="text-md grey-darker">
-              {{activity?.description | truncate:[100, '...']}}
+              {{activity?.briefdescription | truncate:[100, '...']}}
             </p>
         </div><!-- discription ends-->
     </div><!--talent block ends-->
