@@ -302,7 +302,8 @@
             </div>
         </div>
     </div> -->
-    <div class="feed-card-talent-block" *ngIf="activity.entity_type === 'talent' && activity.entity_type !== 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'">
+    <div *ngIf="activity.entity_type === 'talent' && activity.entity_type !== 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'">
+    <div class="feed-card-talent-block">
         <div class="feed-card-talent-block__title">
             <h4 class="f500">Talent Alert</h4>
         </div><!--title ends-->
@@ -310,33 +311,39 @@
             <img src="assets/demo/avatar.png" alt="">
         </div><!--avatar ends-->
         <div class="feed-card-talent-block__info">
-            <div class="caption-bold">Mariana Dickey</div>
+            <div class="caption-bold">{{ activity.title}}</div>
             <div class="text-md grey">@marian</div>
         </div><!--info ends-->
         <div class="feed-card-talent-block__btn">
-            <button type="button" class="btn btn-primary btn-sm">Reach Out</button>
+          <m-messenger--channel-button
+          *ngIf="session.getLoggedInUser().guid != activity.owner_guid"
+          [user]="activity.ownerObj"
+          [message]="reachoutMessage"
+          [label]="'Reach Out'"
+          ></m-messenger--channel-button>        
         </div><!--btn ends-->
         <div class="feed-card-talent-block__discription">
             <p class="text-md grey-darker">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                Aenean commodo ligula eget dolor. Aenean massa. 
-                Cum sociis natoque penatibus et magnis.
+              {{activity?.description | truncate:[100, '...']}}
             </p>
         </div><!-- discription ends-->
     </div><!--talent block ends-->
-    <div class="feed-media" *ngIf="activity.entity_type === 'talent' && activity.entity_type !== 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'">
-        <a class="feed-media__link"><img src="assets/demo/m1.jpg" alt="" class="feed-media__img"></a>
-        <a class="feed-media__link">
-            <img src="assets/demo/yellowback.png" alt="" class="feed-media__img">
-            <!-- <div class="feed-media-overlay">
-                <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
-            </div> -->
-        </a>
-        <a class="feed-media__link">
-            <img src="assets/demo/m3.jpg" alt="" class="feed-media__img">
-            <div class="feed-media-overlay"><h3 class="white">+2</h3></div>
-        </a>
-    </div><!--feed media end-->
+    <div [routerLink]="['/item', activity.guid]" class="feed-media" *ngIf="activity?.custom_data">
+      <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+        <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
+        <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
+          (error)="media.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+        <img [src]="media.thumbnail_src" alt="" class="feed-media__img" *ngIf="media.entity_type === 'video'"
+          (error)="media.thumbnail_src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
+        <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
+           <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+        </div>
+        <div *ngIf="i >= 2 && activity?.custom_data.length >= 4" class="feed-media-overlay">
+          <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
+        </div>
+      </a>
+    </div>
+    </div>
     <!-- <div class="o-actions">
         <div href="#" class="o-actions__link" onclick="myFunction()" alt="like">
             <div id="spot-bouncing" class="o-sprite-icon">
