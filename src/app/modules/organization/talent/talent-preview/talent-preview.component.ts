@@ -31,8 +31,6 @@ export class TalentPreviewComponent implements OnInit {
     try {
       let response: any = await this.client.get(`api/v3/organizations/organization/talent/${this.organization.guid}/all`, { offset: '', limit: 12 });
       if (response) {
-        console.log("bjvdv: ", response);
-
         this.talents = response.talents;
       }
       this.inProgress = false;

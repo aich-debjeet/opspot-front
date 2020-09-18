@@ -25,9 +25,6 @@ export class TalentListComponent implements OnInit {
   talents: Array<any> = [];
   q: string = '';
 
-
-
-  private lastQuery;
   private searchDelayTimer;
 
   httpSubscription;
@@ -75,8 +72,6 @@ export class TalentListComponent implements OnInit {
     this.inProgress = true;
     this.httpSubscription = this.client.get(endpoint, params)
       .subscribe((response: any) => {
-        console.log("vmfdngkjfg: ", response);
-
         if (!response.talents) {
           this.moreData = false;
           this.inProgress = false;
@@ -101,14 +96,6 @@ export class TalentListComponent implements OnInit {
         this.inProgress = false;
       });
   }
-
-  // invite(user: any) {
-  //   for (let i of this.invitees) {
-  //     if (i.guid === user.guid)
-  //       return;
-  //   }
-  //   this.invitees.push(user);
-  // }
 
   search(q) {
     if (this.searchDelayTimer) {
