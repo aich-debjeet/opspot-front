@@ -52,9 +52,7 @@ export class CreateTalent implements OnInit {
 
     @Input('object') set data(object) {
         this.inputData = object;
-        console.log("mvnv: ", this.inputData);
-
-        if (this.inputData.type === "activity") {
+        if (this.inputData['entity_type'] === "talent") {
             this.organization_guid = this.inputData.container_guid;
             this.buildForm(this.inputData)
             this.cards = this.inputData['custom_data'];
@@ -86,8 +84,8 @@ export class CreateTalent implements OnInit {
 
     buildForm(data?) {
         if (data) {
-            if (data.briefdescription) {
-                this.description = data.briefdescription;
+            if (data.blurb) {
+                this.description = data.blurb;
             }
             this.createTalentForm = this.formBuilder.group({
                 title: [data['title'] ? data['title'] : '', [Validators.required]],
@@ -214,8 +212,8 @@ export class CreateTalent implements OnInit {
         }
 
         let endpoint = 'api/v3/organizations/organization/talent';
-        if (this.inputData.type === "activity") {
-            endpoint = 'api/v3/organizations/organization/talent/' + this.inputData.guid;
+        if (this.inputData.entity_type === "talent") {
+            endpoint = 'api/v3/organizations/organization/talent/' + this.inputData.entity_guid;
         }
         this.inProgress = true;
         if (this.createTalentForm.valid) {
@@ -223,7 +221,7 @@ export class CreateTalent implements OnInit {
                 .then((res) => {
                     this.inProgress = false;
                     if (this._opts && this._opts.onUpdate) {
-                        this._opts.onUpdate(res);
+                        this._opts.onUpdate(this.reqBody);
                         // close modal
                     }
                     this.closeModal();
@@ -234,6 +232,7 @@ export class CreateTalent implements OnInit {
                 })
                 .catch(() => {
                     this.talentSubmitted = false;
+                    this.closeModal();
                 })
         }
 

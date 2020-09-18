@@ -342,8 +342,7 @@ export class Activity {
           // listen to the update callback
           onUpdate: (payload: any) => {
             // make update to local var
-            console.log("PAYLOAD: ", payload);
-            
+            this.udpateTalent(payload);
             // this.udpateShowtime(payload);
           }
         }).present()
@@ -393,6 +392,14 @@ export class Activity {
     //   this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
     // }
     // trigger component observe new changes
+    this.detectChanges();
+  }
+
+  udpateTalent(data: any) {    
+    this.activity.blurb = data.description;
+    //this.activity.attachmentguid = data.attachment_guid;
+    this.activity.title = data.title;
+    
     this.detectChanges();
   }
 
