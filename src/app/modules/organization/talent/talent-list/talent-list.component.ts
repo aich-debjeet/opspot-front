@@ -33,7 +33,6 @@ export class TalentListComponent implements OnInit {
     public session: Session,
     public client: OpspotHttpClient,
     public service: OrganizationService) {
-
   }
 
   set _organization(value: any) {
