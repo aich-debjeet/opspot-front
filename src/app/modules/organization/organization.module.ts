@@ -30,6 +30,7 @@ import { CreateTalent } from './talent/create/create-talent';
 import { TalentPreviewComponent } from './talent/talent-preview/talent-preview.component';
 import { TalentCardComponent } from './talent/talent-card/talent-card.component';
 import { TalentListComponent } from './talent/talent-list/talent-list.component';
+import { TalentactionbuttonComponent } from './talent/talent-action-button/talent-action-button.component';
 // import { CreateTalentMobileComponent } from './talent/create/create-talent-mobile/create-talent-mobile.component';
 
 
@@ -89,6 +90,7 @@ const routes: Routes = [
     TalentPreviewComponent,
     TalentCardComponent,
     TalentListComponent,
+    TalentactionbuttonComponent,
   ],
   exports: [
     OrganizationProfile,
