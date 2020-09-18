@@ -64,7 +64,7 @@ export class TalentListComponent implements OnInit {
       params: { limit, offset, q?: string } = { limit: 12, offset: this.offset };
 
     if (this.q) {
-      endpoint = `${endpoint}/search`;
+      endpoint = `api/v3/organizations/organization/talent/${this.organization.guid}/search`;
       params.q = this.q;
     }
 
