@@ -149,10 +149,12 @@ export class BlogEdit {
   // }
 
   autoSave() {
+    console.log('hitting autosave')
     this.canSave = false;
-    this.inProgress = true;
+    // this.inProgress = true;
     clearTimeout(this.typingTimer)
     this.typingTimer = setTimeout(() => {
+      this.inProgress = true;
       this.client.post('api/v1/blog/' + this.guid, this.blog)
         .then((resp: any) => {
           this.canSave = true;

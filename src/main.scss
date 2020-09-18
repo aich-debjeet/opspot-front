@@ -7704,9 +7704,10 @@ m-blockchain--wallet-selector {
   overflow: visible;
   width: 100%;
   height: auto; }
-  .m-blog header opspot-banner .opspot-banner {
-    max-height: 60vh;
-    height: 60vh; }
+  // .m-blog header opspot-banner .opspot-banner {
+  //   max-height: 60vh;
+  //   height: 60vh;
+  //  }
     @media screen and (max-width: 720px) {
       .m-blog header opspot-banner .opspot-banner {
         height: 25vh; } }
