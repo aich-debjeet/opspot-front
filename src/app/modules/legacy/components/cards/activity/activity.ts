@@ -18,9 +18,7 @@ import { CreateTalent } from '../../../../../modules/organization/talent/create/
 @Component({
   moduleId: module.id,
   selector: 'opspot-activity',
-  host: {
-
-  },
+  host: {},
   inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle'],
   outputs: ['_delete: delete', 'commentsOpened', 'onViewed', '_deleteBookmark: deleteBookmark'],
   templateUrl: 'activity.html',
@@ -93,7 +91,8 @@ export class Activity {
     public translationService: TranslationService,
     private overlayModal: OverlayModalService,
     private cd: ChangeDetectorRef,
-    private router: Router) {
+    private router: Router,
+  ) {
     this.element = _element.nativeElement;
     this.isVisible();
   }
@@ -332,20 +331,26 @@ export class Activity {
           }
         }).present()
       }
-
     } else if (this.activity.entity_type === 'talent') {
       if (this.activity.end_time_date) {
         this.router.navigateByUrl('/event/edit/' + this.activity.guid)
       } else {
-        this.overlayModal.create(CreateTalent, this.activity, {
-          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
-          // listen to the update callback
-          onUpdate: (payload: any) => {
-            // make update to local var
-            this.udpateTalent(payload);
-            // this.udpateShowtime(payload);
-          }
-        }).present()
+        if (window.innerWidth > 785) {
+          this.overlayModal.create(CreateTalent, this.activity, {
+            class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+            // listen to the update callback
+            onUpdate: (payload: any) => {
+              // make update to local var
+              this.udpateTalent(payload);
+              // this.udpateShowtime(payload);
+            }
+          }).present()
+        } else {
+          // this.navUpdateOrg(this.activity);
+          // const navData: NavigationExtras = { state: this.activity };
+          this.router.navigate([`/organization/${this.activity.containerObj.guid}/talent/edit/${this.activity.entity_guid}`]);
+        }
+
       }
 
     }
@@ -395,11 +400,11 @@ export class Activity {
     this.detectChanges();
   }
 
-  udpateTalent(data: any) {    
+  udpateTalent(data: any) {
     this.activity.blurb = data.description;
     //this.activity.attachmentguid = data.attachment_guid;
     this.activity.title = data.title;
-    
+
     this.detectChanges();
   }
 

@@ -31,6 +31,7 @@ import { TalentPreviewComponent } from './talent/talent-preview/talent-preview.c
 import { TalentCardComponent } from './talent/talent-card/talent-card.component';
 import { TalentListComponent } from './talent/talent-list/talent-list.component';
 import { TalentactionbuttonComponent } from './talent/talent-action-button/talent-action-button.component';
+import { EditTalentComponent } from './talent/edit-talent/edit-talent.component';
 // import { CreateTalentMobileComponent } from './talent/create/create-talent-mobile/create-talent-mobile.component';
 
 
@@ -42,6 +43,8 @@ const routes: Routes = [
       { path: 'feed', component: OrganizationProfileFeed },
       { path: 'activity', redirectTo: 'feed' },
       { path: 'members', component: OrganizationProfileMembers },
+      // { path: 'talent', component: CreateTalent },
+
     ],
   },
   { path: 'organization/create', component: OrganizationCreator },
@@ -52,7 +55,8 @@ const routes: Routes = [
   { path: 'organization', redirectTo: 'organization/all', pathMatch: 'full' },
   { path: 'organization/all-subscribers/:guid', component: OrganizationAllMembers },
   { path: 'organization/card/:guid', component: OrganizationJoinRequestMobile },
-  { path: 'organization/talent/:guid', component: CreateTalent }
+  { path: 'organization/:guid/talent', component: CreateTalent },
+  { path: 'organization/:guid/talent/edit/:talentGuid', component: EditTalentComponent }
 
 ]
 
@@ -91,6 +95,7 @@ const routes: Routes = [
     TalentCardComponent,
     TalentListComponent,
     TalentactionbuttonComponent,
+    EditTalentComponent,
   ],
   exports: [
     OrganizationProfile,

@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 @Component({
     selector: 'app-create-talent',
     templateUrl: './create-talent.html',
-    styleUrls: ['./create-talent.scss']
+    styleUrls: ['./create-talent.scss'],
 })
 export class CreateTalent implements OnInit {
 
@@ -49,19 +49,27 @@ export class CreateTalent implements OnInit {
 
     description = '';
 
-
     @Input('object') set data(object) {
         this.inputData = object;
         if (this.inputData['entity_type'] === "talent") {
+            // this.buildForm(this.inputData);
+            if (this.inputData['blurb']) {
+                this.description = this.inputData['blurb']
+            } else if (this.inputData['description']) {
+                this.description = this.inputData['description']
+            }
+            this.createTalentForm.patchValue({
+                'title': this.inputData['title'],
+                'description': this.description,
+            });
             this.organization_guid = this.inputData.container_guid;
-            this.buildForm(this.inputData)
             this.cards = this.inputData['custom_data'];
             this.inputData['custom_data'].forEach(image => {
                 this.attach_guid.push(image['guid']);
             });
-        } else if (this.inputData.type === "organization") {
+        } else if (this.inputData['entity_type'] === "organization") {
             this.organization_guid = this.inputData.guid;
-            this.buildForm()
+            // this.buildForm();
         }
     }
 
@@ -74,29 +82,32 @@ export class CreateTalent implements OnInit {
         private service: OrganizationService,
         private router: Router,
         private toastr: ToastrService,
-        private _location: Location
+        private _location: Location,
     ) {
+        this.buildForm();
+    }
+
+    buildForm() {
         this.createTalentForm = this.formBuilder.group({
             title: ['', [Validators.required]],
             description: ['', [Validators.required]]
         });
-    }
-
-    buildForm(data?) {
-        if (data) {
-            if (data.blurb) {
-                this.description = data.blurb;
-            }
-            this.createTalentForm = this.formBuilder.group({
-                title: [data['title'] ? data['title'] : '', [Validators.required]],
-                description: [this.description ? this.description : '', [Validators.required]],
-            });
-        } else {
-            this.createTalentForm = this.formBuilder.group({
-                title: ['', [Validators.required]],
-                description: ['', [Validators.required]]
-            });
-        }
+        // if (data) {
+        //     if (data.blurb) {
+        //         this.description = data.blurb;
+        //     } else if (data.description) {
+        //         this.description = data.description
+        //     }
+        //     this.createTalentForm = this.formBuilder.group({
+        //         title: [data['title'] ? data['title'] : '', [Validators.required]],
+        //         description: [this.description ? this.description : '', [Validators.required]],
+        //     });
+        // } else {
+        //     this.createTalentForm = this.formBuilder.group({
+        //         title: ['', [Validators.required]],
+        //         description: ['', [Validators.required]]
+        //     });
+        // }
     }
 
     ngOnInit() {
@@ -108,9 +119,9 @@ export class CreateTalent implements OnInit {
             this.showMobile = true;
             this.route.params.subscribe(params => {
                 if (params['guid']) {
-                    this.load(params['guid'])
+                    this.load(params['guid']);
                 }
-            })
+            });
         }
     }
 
@@ -206,14 +217,16 @@ export class CreateTalent implements OnInit {
         this.reqBody.description = this.createTalentForm.value.description;
 
         if (this.reqBody.attachment_guid == '') {
-            this.toastr.error('Please upload logo');
-            return;
+            return this.toastr.error('Please upload logo');
             // this.imageUploadError = true;
         }
 
         let endpoint = 'api/v3/organizations/organization/talent';
-        if (this.inputData.entity_type === "talent") {
+
+        if (this.inputData.type === "activity" && this.inputData.entity_type === "talent") {
             endpoint = 'api/v3/organizations/organization/talent/' + this.inputData.entity_guid;
+        } else if (this.inputData.type === "object" && this.inputData.entity_type === "talent") { //since not proper response this is done
+            endpoint = 'api/v3/organizations/organization/talent/' + this.inputData.guid;
         }
         this.inProgress = true;
         if (this.createTalentForm.valid) {
@@ -251,7 +264,7 @@ export class CreateTalent implements OnInit {
     }
 
     goBack() {
-        this._location.back()
+        this._location.back();
     }
 
 }

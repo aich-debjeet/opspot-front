@@ -500,7 +500,7 @@ export class OrganizationProfile {
       )
         .present();
     } else {
-      this.router.navigate([`/organization/talent/${this.organization.guid}`])
+      this.router.navigate([`/organization/${this.organization.guid}/talent`])
     }
   }
 
