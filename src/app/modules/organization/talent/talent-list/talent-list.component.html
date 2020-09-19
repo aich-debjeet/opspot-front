@@ -1,7 +1,7 @@
 <div class="o-talent-member-popup">
-  <div class="close">
+  <!-- <div class="close">
     <i class="icon-x"></i>
-  </div><!-- close end -->
+  </div> -->
   <div class="o-talent-member-popup-body">
     <div class="o-talent-member-popup-body__title">
       <div class="text-h3">
@@ -24,7 +24,7 @@
       (scrolled)="load()" [scrollWindow]="false">
       <ul class="o-organisation-talent-members-list scrollbar scrollbar-default">
         <li class="o-organisation-talent-members-list__user-list" *ngFor="let talent of talents">
-          <a class="o-organisation-talents-info">
+          <!-- <a class="o-organisation-talents-info"> -->
             <!-- <div class="o-organisation-talents-info-prof">
                     <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
                         <img src="assets/demo/avatar.png" alt="">
@@ -33,8 +33,9 @@
                           Gregorio Meier
                     </div>
                   </div> -->
-            <opspot-talent-card [talent]="talent"></opspot-talent-card>
-            <app-talent-action-button style="position: relative;"></app-talent-action-button>
+            <opspot-talent-card [talent]="talent">
+              <app-talent-action-button style="position: relative;" [talent]="talent" (remove)="remove(talent)"></app-talent-action-button>
+            </opspot-talent-card>
             <!-- <div class="o-organisation-talents-info__option">
                     
                     <a href="#">
@@ -51,7 +52,7 @@
                           </div>
                       </div> -->
             <!-- </div> -->
-          </a>
+          <!-- </a> -->
         </li><!-- user list end-->
       </ul><!-- members list end -->
     </div>
