@@ -492,8 +492,7 @@ export class OrganizationProfile {
         onUpdate: (payload: any) => {
           // make update to local var
           // this.activityResp.emit(payload);
-          console.log("Payload: ", payload);
-          this.appendTalent(payload);
+          this.appendTalent();
 
         }
       }
@@ -504,12 +503,11 @@ export class OrganizationProfile {
     }
   }
 
-  appendTalent(payload) {
-    console.log('trigger');
+  appendTalent() {
+    // console.log('trigger');
     this.commService.trigger({
       component: 'OrganizationProfileFeed',
-      action: 'appendTalent',
-      data: payload
+      action: 'appendTalent'
     });
   }
 

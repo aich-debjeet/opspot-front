@@ -92,9 +92,7 @@ export class OrganizationProfileFeed {
       if (e.component && e.action) {
         if (e.component === 'OrganizationProfileFeed') {
           if (e.action === 'appendTalent') {
-            if (e.data.activity) {
-              this.prepend(e.data.activity);
-            }
+            this.load(true);
           }
         }
       }
