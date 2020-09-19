@@ -223,15 +223,16 @@ export class CreateTalent implements OnInit {
 
         let endpoint = 'api/v3/organizations/organization/talent';
 
-        if (this.inputData.type === "activity" && this.inputData.entity_type === "talent") {
+        if (this.inputData && this.inputData.type === "activity" && this.inputData.entity_type === "talent") {
             endpoint = 'api/v3/organizations/organization/talent/' + this.inputData.entity_guid;
-        } else if (this.inputData.type === "object" && this.inputData.entity_type === "talent") { //since not proper response this is done
+        } else if (this.inputData && this.inputData.type === "object" && this.inputData.entity_type === "talent") { //since not proper response this is done
             endpoint = 'api/v3/organizations/organization/talent/' + this.inputData.guid;
         }
         this.inProgress = true;
         if (this.createTalentForm.valid) {
             this.client.post(endpoint, this.reqBody)
                 .then((res) => {
+                    this.attachment.reset();
                     this.inProgress = false;
                     if (this._opts && this._opts.onUpdate) {
                         this._opts.onUpdate(this.reqBody);
