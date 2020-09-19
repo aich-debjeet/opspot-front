@@ -106,6 +106,16 @@ export class TalentListComponent implements OnInit {
     }, 300);
   }
 
+  remove(talent) {
+    let i: any;
+    for (i in this.talents) {
+      if (this.talents[i] === talent) {
+        this.talents.splice(i, 1);
+        break;
+      }
+    }
+  }
+
 
 
 }

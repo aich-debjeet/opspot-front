@@ -43,4 +43,14 @@ export class TalentPreviewComponent implements OnInit {
     this.talentToggele = !this.talentToggele;
   }
 
+  remove(talent) {
+    let i: any;
+    for (i in this.talents) {
+      if (this.talents[i] === talent) {
+        this.talents.splice(i, 1);
+        break;
+      }
+    }
+  }
+
 }
