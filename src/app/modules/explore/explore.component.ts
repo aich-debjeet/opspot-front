@@ -233,30 +233,25 @@ export class ExploreComponent implements OnInit {
           if (this.filteredArray && !refresh) {
             if (respData['activity']) {
               this.exploreArray.push(...respData.activity);
-              this.filteredArray = this.exploreArray;
             }
             else if (respData['groups']) {
               this.exploreArray.push(...respData.groups);
-              this.filteredArray = this.exploreArray;
             }
             else if (respData['organizations']) {
               this.exploreArray.push(...respData.organizations);
-              this.filteredArray = this.exploreArray;
             }
           } else {
             if (respData['activity']) {
               this.exploreArray.push(...respData.activity);
-              this.filteredArray = this.exploreArray;
             }
             if (respData['groups']) {
               this.exploreArray.push(...respData.groups);
-              this.filteredArray = this.exploreArray;
             }
             if (respData['organizations']) {
               this.exploreArray.push(...respData.organizations);
-              this.filteredArray = this.exploreArray;
             }
           }
+          this.filteredArray = this.exploreArray;
           this.moreData = true;
           this.offset = respData['load-next'];
           this.inProgress = false;
