@@ -32,6 +32,16 @@ import { TalentCardComponent } from './talent/talent-card/talent-card.component'
 import { TalentListComponent } from './talent/talent-list/talent-list.component';
 import { TalentactionbuttonComponent } from './talent/talent-action-button/talent-action-button.component';
 import { EditTalentComponent } from './talent/edit-talent/edit-talent.component';
+import { ViewTalentComponent } from './talent/view-talent/view-talent.component';
+import { MessengerModule } from '../messenger/messenger.module';
+import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
+import { PostMenuModule } from '../../common/components/post-menu/post-menu.module';
+import { VideoModule } from '../media/components/video/video.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { WireModule } from '../wire/wire.module';
+import { CommentsModule } from '../comments/comments.module';
+
+
 // import { CreateTalentMobileComponent } from './talent/create/create-talent-mobile/create-talent-mobile.component';
 
 
@@ -56,7 +66,8 @@ const routes: Routes = [
   { path: 'organization/all-subscribers/:guid', component: OrganizationAllMembers },
   { path: 'organization/card/:guid', component: OrganizationJoinRequestMobile },
   { path: 'organization/:guid/talent', component: CreateTalent },
-  { path: 'organization/:guid/talent/edit/:talentGuid', component: EditTalentComponent }
+  { path: 'organization/:guid/talent/edit/:talentGuid', component: EditTalentComponent },
+  { path: 'organization/:guid/talent/view/:talentGuid', component: ViewTalentComponent }
 
 ]
 
@@ -71,7 +82,14 @@ const routes: Routes = [
     PosterModule,
     HashtagsModule,
     InfiniteScrollModule,
-    TagInputModule
+    TagInputModule,
+    ShareMenuModule,
+    MessengerModule,
+    PostMenuModule,
+    VideoModule,
+    SlickCarouselModule,
+    WireModule,
+    CommentsModule
   ],
   declarations: [
     OrganizationProfile,
@@ -96,6 +114,7 @@ const routes: Routes = [
     TalentListComponent,
     TalentactionbuttonComponent,
     EditTalentComponent,
+    ViewTalentComponent,
   ],
   exports: [
     OrganizationProfile,
