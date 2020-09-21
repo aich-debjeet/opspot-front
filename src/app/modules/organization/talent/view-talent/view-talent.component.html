@@ -68,9 +68,7 @@
                           ></m-messenger--channel-button>
                       </div><!--btn ends-->
                       <div class="feed-card-talent-block__discription">
-                          <p class="text-md grey-darker">
-                              {{ talent.description}}
-                          </p>
+                          <p [innerHtml]="talent?.description | safe"></p>
                       </div><!-- discription ends-->
                   </div><!--talent block ends-->
                   <div class="o-talent-inner-page-image">
