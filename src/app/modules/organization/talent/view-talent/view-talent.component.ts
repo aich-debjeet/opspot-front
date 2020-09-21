@@ -157,7 +157,7 @@ export class ViewTalentComponent implements OnInit {
   }
 
   editOptions() {
-    if (this.talent) {
+    if (this.talent && window.innerWidth > 785) {
       this.overlayModal.create(CreateTalent, this.talent, {
         class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
         // listen to the update callback
@@ -167,6 +167,8 @@ export class ViewTalentComponent implements OnInit {
           this.udpateTalent(payload);
         }
       }).present();
+    } else {
+      this.router.navigate([`/organization/${this.talent.containerObj.guid}/talent/edit/${this.talent.guid}`]);
     }
   }
 
