@@ -122,11 +122,13 @@
                     </div>
                   </div>
                   <div class="o-posts-inner-page-action">
+                    <div class="o-posts-inner-page-action__details">
                     <div class="text-sm grey" id="bluestore-liked">{{count}} liked this post</div>
                     <div class="text-sm grey m-16" id="bluestore-shared">{{talent?.reminds}} shared this post</div>
                     <div class="text-sm grey m-16" *ngIf="talent?.wire_totals" id="bluestore-contributed">
                       {{talent?.wire_totals.tokens | token:18 | abbr}} contributed this post</div>
                     <div class="text-sm grey m-16" id="bluestore-viewed">{{talent?.impressions}} viewed this post</div>
+                    </div>
                       <div class="o-posts-inner-page-action__icons">
                         <button type="button" class="btn btn-outline-primary btn-block btn-boost-mob-c" *ngIf="session.getLoggedInUser().guid == talent?.owner_obj?.guid" 
                         (click)="showBoost()" id="bluestore-boost">Boost</button>
@@ -164,9 +166,9 @@
                   </opspot-comments>    
               </div>
           </div><!-- left block end -->
-          <!-- <div class="o-talent-inner-right-block">
-              {% include components/organisation_talents.html %}
-          </div> -->
+          <div class="o-talent-inner-right-block">
+            <opspot-talent-preview *ngIf="organization" [organization]="organization"></opspot-talent-preview>
+          </div>
       </div><!-- main block end -->
   </div><!-- container end -->
 </section>

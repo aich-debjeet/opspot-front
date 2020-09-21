@@ -9,6 +9,7 @@ import { Session } from '../../../../services/session';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { CreateTalent } from '../create/create-talent';
 import { BoostCreatorComponent } from '../../../boost/creator/creator.component';
+import { OrganizationService } from '../../organization-service';
 
 
 @Component({
@@ -44,6 +45,7 @@ export class ViewTalentComponent implements OnInit {
   showVideo = false;
   videoData: any;
   error: string = '';
+  organization: any;
 
 
   constructor(
@@ -54,7 +56,8 @@ export class ViewTalentComponent implements OnInit {
     public overlayModal: OverlayModalService,
     private router: Router,
     public translationService: TranslationService,
-    public scroll: ScrollService
+    public scroll: ScrollService,
+    private service: OrganizationService,
 
   ) { }
 
@@ -64,9 +67,16 @@ export class ViewTalentComponent implements OnInit {
         this.orgGuid = params.get('guid');
         this.talentGuid = params.get('talentGuid');
         this.load();
+        this.loadOrg(this.orgGuid);
       }
     });
     this.onScroll();
+  }
+
+  async loadOrg(guid) {
+    let organization = await this.service.load(guid)
+    if (organization)
+      this.organization = organization;
   }
 
   load() {
