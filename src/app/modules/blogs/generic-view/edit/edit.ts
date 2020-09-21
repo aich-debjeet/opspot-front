@@ -12,7 +12,7 @@ import { WireThresholdInputComponent } from '../../../wire/threshold-input/thres
 import { HashtagsSelectorComponent } from '../../../hashtags/selector/selector.component';
 import { Tag } from '../../../hashtags/types/tag';
 import { OverlayModalService } from '../../../../services/ux/overlay-modal';
-import { BlogPreviewComponent } from './blog-preview/blog-preview.component';
+import { BlogPreviewComponent } from '../../blog-preview/blog-preview.component';
 
 @Component({
   moduleId: module.id,
@@ -149,10 +149,12 @@ export class BlogEdit {
   // }
 
   autoSave() {
+    console.log('hitting autosave')
     this.canSave = false;
-    this.inProgress = true;
+    // this.inProgress = true;
     clearTimeout(this.typingTimer)
     this.typingTimer = setTimeout(() => {
+      this.inProgress = true;
       this.client.post('api/v1/blog/' + this.guid, this.blog)
         .then((resp: any) => {
           this.canSave = true;
@@ -249,7 +251,7 @@ export class BlogEdit {
       // this.inProgress = true;
       // this.canSave = false;
 
-      this.overlayModal.create(BlogPreviewComponent, { blog: this.blog, guid: this.guid }, { class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium-extra-large' }).present();
+      // this.overlayModal.create(BlogPreviewComponent, { blog: this.blog, guid: this.guid }, { class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium-extra-large' }).present();
       // this.check_for_banner().then(() => {
       //   this.upload.post('api/v1/blog/' + this.guid, [this.banner], blog)
       //     .then((response: any) => {
@@ -276,6 +278,7 @@ export class BlogEdit {
       //       this.canSave = true;
       //     });
       // });
+      this.router.navigate(['/blog/preview',this.guid])
     })
   }
 
