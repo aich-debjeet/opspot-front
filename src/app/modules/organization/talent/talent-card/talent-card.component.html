@@ -2,9 +2,10 @@
   <div class="o-organisation-talents-info-prof">
     <div class="o-organisation-talents-info-prof__avatar o-avatar-md">
       <img [src]="talent?.custom_data[0].src || talent?.custom_data[0].thumbnail_src" (error)="talent?.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png' ||
-       talent?.custom_data[0].thumbnail_src = opspot.cdn_assets_url + 'assets/ops_icon.png'" alt="">
+       talent?.custom_data[0].thumbnail_src = opspot.cdn_assets_url + 'assets/ops_icon.png'" alt=""
+       [routerLink]="['/organization', talent?.container_obj?.guid, 'talent', 'view', talent.guid ]">
     </div>
-    <div id="username" class="text-md">
+    <div id="username" class="text-md" [routerLink]="['/organization', talent?.container_obj?.guid, 'talent', 'view', talent.activity_guid ]">
       {{talent?.title}}
     </div>
   </div>
