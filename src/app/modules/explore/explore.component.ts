@@ -218,7 +218,7 @@ export class ExploreComponent implements OnInit {
         `api/v3/explore/${_entityType}`,
         {
           activity_type: _entityType == 'activity' ? filter : '',
-          limit: 12,
+          limit: 50,
           offset: this.offset
         },
         { cache: true }
