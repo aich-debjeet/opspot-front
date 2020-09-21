@@ -42,10 +42,10 @@ export class EditTalentComponent implements OnInit {
   }
 
   load() {
-    this.client.get('api/v3/organizations/organization/talent/' + this.orgGuid + '/single/' + this.talentGuid)
+    this.client.get('api/v1/newsfeed/single/' + this.talentGuid)
       .then((data: any) => {
-        if (data.talent) {
-          this.talent = data.talent;
+        if (data.activity) {
+          this.talent = data.activity;
         }
         this.inProgress = false;
         this.detectChanges();

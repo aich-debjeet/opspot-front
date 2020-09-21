@@ -65,7 +65,7 @@ export class CreateTalent implements OnInit {
                 'title': this.inputData['title'],
                 'description': this.description,
             });
-            this.organization_guid = this.inputData.container_guid;
+            this.organization_guid = this.inputData.containerObj.guid;
             this.cards = this.inputData['custom_data'];
             this.inputData['custom_data'].forEach(image => {
                 this.attach_guid.push(image['guid']);
