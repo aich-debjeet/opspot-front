@@ -4,14 +4,14 @@
           <div class="o-talent-inner-left-block">
               <div class="o-card feed">
                   <div class="feed-head">
-                      <a class="o-avatar" *ngIf="talent && talent?.container_obj && talent?.container_obj.type == 'organization'"  
-                      [routerLink]="['/organization/profile/', talent?.container_obj?.guid]">
-                      <img [src]="opspot.cdn_url + 'icon/' + talent?.container_obj?.guid + '/medium/' + getOwnerIconTime()" alt=""></a>
+                      <a class="o-avatar" *ngIf="talent && talent?.containerObj && talent?.containerObj.type == 'organization'"  
+                      [routerLink]="['/organization/profile/', talent?.containerObj?.guid]">
+                      <img [src]="opspot.cdn_url + 'icon/' + talent?.containerObj?.guid + '/medium/' + getOwnerIconTime()" alt=""></a>
                       <div class="o-avatar__info o-talent-inner-avatar-info">
                           <div class="o-avatar-det-block">
                               <span class="text-md grey o-posts-det">
-                                <a class="o-avatar__name" *ngIf="talent.container_obj && talent.container_obj.type == 'organization'" 
-                                [routerLink]="['/organization/profile/', talent?.container_obj?.guid]">{{ talent.container_obj.name }}</a>
+                                <a class="o-avatar__name" *ngIf="talent.containerObj && talent.containerObj.type == 'organization'" 
+                                [routerLink]="['/organization/profile/', talent?.containerObj?.guid]">{{ talent.containerObj.name }}</a>
                               added a talent</span>
                           </div>
                           <div class="grey m-l-8 o-posts-tym" *ngIf="talent?.time_created">
@@ -29,7 +29,7 @@
                                   </a>
                               </div>
                           </a> -->
-                          <button type="button" class="btn btn-primary btn-sm btn-boost" *ngIf="session.getLoggedInUser().guid == talent?.owner_obj?.guid" 
+                          <button type="button" class="btn btn-primary btn-sm btn-boost" *ngIf="session.getLoggedInUser().guid == talent?.ownerObj?.guid" 
 								            (click)="showBoost()" id="bluestore-boost">Boost</button>
                           <a class="head-action__link" (click)="togglePin()">
                             <m-tooltip icon="turned_in" *ngIf="talent?.bookmark" name="turned_in">
@@ -61,14 +61,14 @@
                       <div class="feed-card-talent-block__btn">
                           <!-- <button type="button" class="btn btn-primary btn-sm">Reach Out</button> -->
                           <m-messenger--channel-button
-                            *ngIf="session.getLoggedInUser().guid != talent?.owner_obj?.guid"
+                            *ngIf="session.getLoggedInUser().guid != talent?.ownerObj?.guid"
                             [user]="user"
                             [message]="reachoutMessage"
                             [label]="'Reach Out'"
                           ></m-messenger--channel-button>
                       </div><!--btn ends-->
                       <div class="feed-card-talent-block__discription">
-                          <p [innerHtml]="talent?.description | safe"></p>
+                          <p [innerHtml]="talent?.blurb | safe"></p>
                       </div><!-- discription ends-->
                   </div><!--talent block ends-->
                   <div class="o-talent-inner-page-image">
@@ -128,7 +128,7 @@
                     <div class="text-sm grey m-16" id="bluestore-viewed">{{talent?.impressions}} viewed this post</div>
                     </div>
                       <div class="o-posts-inner-page-action__icons">
-                        <button type="button" class="btn btn-outline-primary btn-block btn-boost-mob-c" *ngIf="session.getLoggedInUser().guid == talent?.owner_obj?.guid" 
+                        <button type="button" class="btn btn-outline-primary btn-block btn-boost-mob-c" *ngIf="session.getLoggedInUser().guid == talent?.ownerObj?.guid" 
                         (click)="showBoost()" id="bluestore-boost">Boost</button>
                         <a class="icon-posts-box">
                           <opspot-button-thumbs-up *ngIf="talent" (liked)="liked($event)" [large]="'true'"
@@ -137,13 +137,13 @@
                         <a class="icon-posts-box">
                           <!-- <opspot-button-remind *ngIf="talent" [object]="talent" [large]="'true'">
                           </opspot-button-remind> -->
-                          <!-- <m-modal-remind-composer *ngIf="remindOpen"
+                          <m-modal-remind-composer *ngIf="remindOpen"
                           [object]="talent?.remind_object ? talent?.remind_object : talent"
                           [open]="true"
                           [default]="remindMessage"
                           (closed)="remindOpen = false"
                           (post)="remindPost($event)"
-                          ></m-modal-remind-composer> -->
+                          ></m-modal-remind-composer>
                           <m-share-menu
                           [entity]="talent"
                           [options]="menuOptions"
@@ -151,7 +151,7 @@
                           [large]=true
                           ></m-share-menu>
                         </a>
-                        <a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != talent?.owner_obj.guid">
+                        <a class="icon-posts-box" *ngIf="session.getLoggedInUser().guid != talent?.ownerObj.guid">
                           <m-wire-button
                             [object]="talent?.remind_object ? talent?.remind_object : talent"
                             (done)="wireSubmitted($event)" [large]="true">

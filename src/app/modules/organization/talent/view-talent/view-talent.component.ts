@@ -85,13 +85,13 @@ export class ViewTalentComponent implements OnInit {
 
     this.inProgress = true;
 
-    this.client.get('api/v3/organizations/organization/talent/' + this.orgGuid + '/single/' + this.talentGuid)
+    this.client.get('api/v1/newsfeed/single/' + this.talentGuid)
       .then((data: any) => {
-        if (data.talent) {
-          this.talent = data.talent;
+        if (data.activity) {
+          this.talent = data.activity;
           // // user obj for reach out
-          this.user = data.talent.owner_obj;
-          this.reachoutMessage += data.talent['perma_url'];
+          this.user = data.activity.ownerObj;
+          this.reachoutMessage += data.activity['perma_url'];
 
           // this.talent.url = window.Opspot.site_url + 'item/' + this.talent.guid;
 
@@ -102,8 +102,11 @@ export class ViewTalentComponent implements OnInit {
           }
           this.count = this.talent['thumbs:up:count'];
 
-          if (data.talent.owner_obj) {
-            this.talent['ownerObj'] = data.talent.owner_obj;
+          if (data.activity.ownerObj) {
+            this.talent['ownerObj'] = data.activity.ownerObj;
+          }
+          if (data.activity.containerObj) {
+            this.talent['containerObj'] = data.activity.containerObj;
           }
           this.inProgress = false;
         }
@@ -121,7 +124,7 @@ export class ViewTalentComponent implements OnInit {
 
   getOwnerIconTime() {
     let session = this.session.getLoggedInUser();
-    if (session && session.guid === this.talent.owner_obj.guid) {
+    if (session && session.guid === this.talent.ownerObj.guid) {
       return session.icontime;
     } else {
       return this.talent.ownerObj.icontime;

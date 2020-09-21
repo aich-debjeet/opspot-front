@@ -40,6 +40,8 @@ import { VideoModule } from '../media/components/video/video.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { WireModule } from '../wire/wire.module';
 import { CommentsModule } from '../comments/comments.module';
+import { ModalsModule } from '../modals/modals.module';
+
 
 
 // import { CreateTalentMobileComponent } from './talent/create/create-talent-mobile/create-talent-mobile.component';
@@ -89,7 +91,8 @@ const routes: Routes = [
     VideoModule,
     SlickCarouselModule,
     WireModule,
-    CommentsModule
+    CommentsModule,
+    ModalsModule
   ],
   declarations: [
     OrganizationProfile,
