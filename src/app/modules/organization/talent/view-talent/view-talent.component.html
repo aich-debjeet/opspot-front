@@ -4,10 +4,10 @@
           <div class="o-talent-inner-left-block">
               <div class="o-card feed">
                   <div class="feed-head">
-                      <a class="o-avatar" *ngIf="talent && talent?.container_obj && talent?.container_obj.type == 'organization'" 
-                      [routerLink]="['/organization/profile/', talent.container_obj.guid]">
+                      <a class="o-avatar" *ngIf="talent && talent?.container_obj && talent?.container_obj.type == 'organization'"  
+                      [routerLink]="['/organization/profile/', talent?.container_obj?.guid]">
                       <img [src]="opspot.cdn_url + 'icon/' + talent?.container_obj?.guid + '/medium/' + getOwnerIconTime()" alt=""></a>
-                      <div class="o-avatar__info">
+                      <div class="o-avatar__info o-talent-inner-avatar-info">
                           <div class="o-avatar-det-block">
                               <span class="text-md grey o-posts-det">
                                 <a class="o-avatar__name" *ngIf="talent.container_obj && talent.container_obj.type == 'organization'" 
@@ -21,7 +21,7 @@
                             </span> -->
                           </div>                      
                         </div><!--avatar info end-->
-                      <div class="o-feed-head-action o-post-inner-profile-button">
+                      <div class="o-feed-head-action o-talent-inner-head-action">
                           <!-- <a href="#" class="head-action__link" alt="bookmark">
                               <div class="o-sprite-icon o-sprite-icon--bookmark spot-animation">
                                   <a id="btn_bookmark" class="sprite-btn sprite-btn--style">

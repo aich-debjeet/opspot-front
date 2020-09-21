@@ -3,6 +3,17 @@
 
 @import "node_modules/sass-mq/_mq";
 
+.o-talent-inner-avatar-info{
+    width: calc(100% - 200px);
+}
+.o-talent-inner-head-action{
+    position: relative;
+    width: 150px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
 .o-talent-inner-main-block {
   width: 100%;
   max-width: 1070px;
