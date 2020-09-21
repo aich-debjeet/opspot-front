@@ -52,6 +52,9 @@ export class PostCardTitle implements OnInit {
     } else if (this.postType === 'portfolio') {
       this.title = 'created a';
       this.hashtag = '#Portfolio';
+    } else if (this.postType === 'talent') {
+      this.title = 'added a';
+      this.hashtag = 'Talent';
     } else if (this.postType === 'blog') {
       this.title = 'created a';
       this.hashtag = 'Blog';
