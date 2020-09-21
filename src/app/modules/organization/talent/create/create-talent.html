@@ -1,6 +1,6 @@
 <div class="o-create-talent" [hidden]="!showDesktop && showMobile">
     <div class="o-create-talent-head o-create-talent-head--border">
-        <div class="o-create-talent__title text-lg f500">Create 
+        <div class="o-create-talent__title text-lg f500">{{label}} 
             <a class="o-create-dropdown-style">
                 <span class="text-lg primary f500">#Talent<a class="icon-chevron-down"></a></span>
             </a>
@@ -55,7 +55,7 @@
 <div class="container hidden-above-tablet o-create-talent-mob-header">
     <div class="without-nav-header o-reg-skill-mob-header">
         <a (click)="goBack();"><i class="icon-arrow-left"></i> </a>
-        <div class="without-nav-header__title caption-bold f500">Create  <a class="o-create-dropdown-style">
+        <div class="without-nav-header__title caption-bold f500">{{label}}  <a class="o-create-dropdown-style">
                 <a class="text-lg primary f500">#Talent<a class="icon-chevron-down"></a></a>
             </a>
         </div>

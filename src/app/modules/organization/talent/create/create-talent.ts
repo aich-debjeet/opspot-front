@@ -48,11 +48,14 @@ export class CreateTalent implements OnInit {
     };
 
     description = '';
+    label = "Create";
+
 
     @Input('object') set data(object) {
         this.inputData = object;
         if (this.inputData['entity_type'] === "talent") {
             // this.buildForm(this.inputData);
+            this.label = "Edit";
             if (this.inputData['blurb']) {
                 this.description = this.inputData['blurb']
             } else if (this.inputData['description']) {
@@ -69,6 +72,7 @@ export class CreateTalent implements OnInit {
             });
         } else if (this.inputData['entity_type'] === "organization") {
             this.organization_guid = this.inputData.guid;
+            this.label = "Create"
             // this.buildForm();
         }
     }
