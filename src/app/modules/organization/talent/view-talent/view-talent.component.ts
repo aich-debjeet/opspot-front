@@ -46,6 +46,7 @@ export class ViewTalentComponent implements OnInit {
   videoData: any;
   error: string = '';
   organization: any;
+  showList: boolean = false;
 
 
   constructor(
@@ -62,6 +63,9 @@ export class ViewTalentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (window.innerWidth < 785) {
+      this.showList = true;
+    }
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid') && params.get('talentGuid')) {
         this.orgGuid = params.get('guid');
