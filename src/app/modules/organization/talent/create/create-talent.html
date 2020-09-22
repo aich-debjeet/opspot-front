@@ -42,7 +42,7 @@
                     (change)="uploadAttachment(file1, $event)" />
                 </div><!--file upload ends-->
             </div>
-            <div class="text-sm grey mt10">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>                     
+            <!-- <div class="text-sm grey mt10">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>                      -->
         </div><!--image upload-->
     </form>
     </div><!--body ends-->
@@ -91,7 +91,7 @@
                     <a class="o-create-talent-cover-image__close" (click)="removeAttachment(file, image.guid)"><i class="icon-x"></i></a>
                     <div class="talent-media-video" *ngIf="image.entity_type === 'video'"><img src="assets/svg/playfill.svg" alt=""></div>
                 </div> 
-                <div class="fileUpload ml-25">
+                <div class="fileUpload ml-25" *ngIf="this.cards.length < 4">
                     <span class="icon-plus"></span>
                     <input type="file" accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov" id="file1" #file class="upload" name="attachment1"
                     (change)="uploadAttachment(file, $event)" />
