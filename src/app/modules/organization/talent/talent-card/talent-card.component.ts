@@ -24,8 +24,8 @@ export class TalentCardComponent implements OnInit {
   }
 
   closeModal() {
-    this.router.navigate(['/organization', this.talent.container_obj.guid, 'talent', 'view', this.talent.guid]);
     this.overlayModal.dismiss();
+    this.router.navigate(['/organization', this.talent.container_obj.guid, 'talent', 'view', this.talent.guid]);
   }
 
 }
