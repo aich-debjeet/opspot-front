@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OverlayModalService } from '../../../../services/ux/overlay-modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'opspot-talent-card',
@@ -8,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TalentCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private overlayModal: OverlayModalService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -16,6 +21,11 @@ export class TalentCardComponent implements OnInit {
   talent: any;
   set _talent(value: any) {
     this.talent = value;
+  }
+
+  closeModal() {
+    this.router.navigate(['/organization', this.talent.container_obj.guid, 'talent', 'view', this.talent.guid]);
+    this.overlayModal.dismiss();
   }
 
 }
