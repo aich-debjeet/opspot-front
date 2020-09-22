@@ -26,6 +26,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 // import { AuthModule } from '../auth/auth.module';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { PaywallMessageComponent } from './post-form/paywall-message.component';
+import { InTheSpotlightComponent } from './in-the-spotlight/in-the-spotlight.component';
 
 @NgModule({
   imports: [
@@ -55,7 +56,8 @@ import { PaywallMessageComponent } from './post-form/paywall-message.component';
     PortfolioFormComponent,
     MyJourneyFormComponent,
     PostFormComponent,
-    PaywallMessageComponent
+    PaywallMessageComponent,
+    InTheSpotlightComponent
   ],
   exports: [
     LoginForm,
@@ -71,6 +73,7 @@ import { PaywallMessageComponent } from './post-form/paywall-message.component';
     PortfolioFormComponent,
     MyJourneyFormComponent,
     PostFormComponent,
+    InTheSpotlightComponent
     // PaywallMessageComponent
   ],
   entryComponents: [
@@ -79,7 +82,8 @@ import { PaywallMessageComponent } from './post-form/paywall-message.component';
     ShowtimezFormComponent,
     PostFormComponent,
     PaywallMessageComponent,
-    PortfolioFormComponent
+    PortfolioFormComponent,
+    InTheSpotlightComponent
   ]
 })
 export class OpspotFormsModule {

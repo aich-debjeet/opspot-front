@@ -1,0 +1,63 @@
+<div class="o-create-spotlight">
+    <div class="o-create-spotlight-head o-create-spotlight-head--border">
+        <div class="o-create-spotlight__title text-lg f500">
+            Create IN the Spotlight
+        </div>
+    </div>
+    <!--boost head end-->
+    <form (ngSubmit)="postSpotlight()" [formGroup]="spotlighForm">
+        <div class="o-create-spotlight-body o-create-spotlight-body--flex">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="Title" class="form-control form-control-lg" formControlName="title">
+                <div *ngIf="spotlighForm.controls['title'].touched && !spotlighForm.controls['title'].valid" class="error text-sm">
+                    <div *ngIf="spotlighForm.controls['title'].errors.required">
+                        Title is required
+                    </div>
+                </div>
+            </div>
+            <!--spotlight Profile ends-->
+            <div class="form-group">
+                <label>Description<span class="text-sm grey description-width">21/300</span></label>
+                <textarea class="form-control" id="Description" rows="5" formControlName="description"></textarea>
+                <div *ngIf="spotlighForm.controls['description'].touched && !spotlighForm.controls['description'].valid" class="error text-sm">
+                    <div *ngIf="spotlighForm.controls['description'].errors.required">
+                        Description is required
+                    </div>
+                </div>
+            </div>
+            <!--Event Description-->
+            <div class="form-group">
+                <label>Attach Media</label>
+                <div class="o-create-spotlight-cover-image">
+                    <div class="fileUpload" [hidden]="cards.length != 0">
+                        <span class="icon-plus"></span>
+                        <input type="file" class="upload" id="file" accept="image/jpg, image/jpeg, image/png" (change)="uploadAttachment(file, $event)" #file name="image upload" formControlName="media">
+                    </div>
+                    <!--file upload ends-->
+                    <section [hidden]="cards.length == 0">
+                        <div class="fileUpload-preview-spotlight" *ngFor="let image of cards">
+                            <div class="o-create-spotlight-cover-image__avatar">
+                                <img [src]="checkForSrc(image)" alt="">
+                            </div>
+                            <a class="o-create-spotlight-cover-image__edit" (click)="removeAttachment(file,image.guid)">
+                                <i class="icon-edit-profile"></i>
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!--image upload-->
+        </div>
+        <!--body ends-->
+        <div *ngIf="inProgress" class="mdl-progress mdl-progress__indeterminate initial-loading is-upgraded">
+            <div class="progressbar bar bar1" style="width: 0%;"></div>
+            <div class="bufferbar bar bar2" style="width: 100%;"></div>
+            <div class="auxbar bar bar3" style="width: 0%;"></div>
+        </div>
+        <div class="o-create-spotlight-footer">
+            <button type="submit" class="btn btn-primary btn-sm" [disabled]="!spotlighForm.valid || inProgress">Post</button>
+            <!--for event page-->
+        </div>
+    </form>
+</div>

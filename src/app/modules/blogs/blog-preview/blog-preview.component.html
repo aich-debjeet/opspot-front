@@ -1,0 +1,116 @@
+<form>
+    <div class="o-blog-preview-main">
+        <div class="o-blog-left-block">
+            <div class="o-blog-preview-title caption-bold">Blog Preview</div>
+            <div class="o-blog-preview-cover">
+                <opspot-banner [object]="blog" editMode="true" [src]="blog?.thumbnail_src" [done]="banner_prompt"
+                    (added)="add_banner($event)">
+                </opspot-banner>
+            </div>
+            <!--cover ends-->
+            <div style="width:100%; padding:8px; position:relative;">
+                <div class="o-blog-preview-body">
+                    <div class="o-blog-preview-content">
+                        {{blog?.title}}
+                    </div>
+                    <!--content ends-->
+                </div>
+            </div>
+            <!--body ends-->
+        </div>
+        <!--left ends-->
+        <div class="o-blog-right-block">
+            <div class="o-blog-preview-title o-blog-preview-title--right caption-bold">
+                Add Tags
+            </div>
+            <!--title ends-->
+            <div class="o-blog-preview-tag">
+                <!-- <m-hashtags-selector #hashtagsSelector [tags]="blog.tags.slice(0)" (tagsChange)="onTagsChange($event)"
+                        (tagsAdded)="onTagsAdded($event)" (tagsRemoved)="onTagsRemoved($event)"></m-hashtags-selector> -->
+                <!-- <div class="form-group form-gorup--general--textarea"> -->
+                <tag-input style="border:1px solid #959595; padding-bottom: 50px;" [(ngModel)]='blogSkills' name="d"
+                    theme='minimal' (onAdd)="onItemAdded($event)">
+                    <tag-input-dropdown [showDropdownIfEmpty]="false" [limitItemsTo]=5 [minimumTextLength]=3
+                        [zIndex]=999999999999 [autocompleteItems]="skillData"></tag-input-dropdown>
+                </tag-input>
+                <div class="w100 text-sm grey">Press enter/return to separate skill or choose from the list.</div>
+                <!-- </div> -->
+
+                <!-- <div class="text-sm grey">Use a comma to separate hashtags or choose from the list.</div> -->
+                <!--tag style-->
+                <!-- <div class="tag-style">
+                        <div class="text-md">
+                            Photography
+                        </div>
+                        <a class="#"><i class="icon-x tag-close"></i></a>
+                    </div> -->
+                <ng-container *ngIf="error" [ngSwitch]="error">
+                    <h1 class="edit-error" i18n="@@BLOGS__EDIT__NO_BANNER_ERROR" *ngSwitchCase="'error:no-banner'">
+                        Error: You must upload a banner before publishing a draft.
+                    </h1>
+                    <h1 class="edit-error" *ngSwitchDefault>
+                        Error: {{error}}
+                    </h1>
+                </ng-container>
+            </div>
+            <div class="o-blog-preview-button-set">
+                <!-- <button type="button" class="btn btn-primary btn-lg mrgr15">Cancel</button> -->
+                <div class="o-blog-preview-post">
+                    <span class="o-blog-preview-post__icon"><span class="icon-users"></span></span>
+                    <span class="text-md f500">{{defaultCoins}} Pay Per Post</span>
+                    <a (click)="displayPaywall()" class="o-create-post-right__dropdown">
+                        <span class="icon-chevron-down" id="post-form-set-paywall-icon"></span>
+                    </a>
+                </div>
+                <!--post ends-->
+                <div class="o-blog-preview-button-block">
+                    <button type="button" id="blog-review-publish" (click)="blog.published = 1;createEditBlog()"
+                        class="btn btn-primary btn-lg m-r-16" [disabled]="inProgress">Publish Now</button>
+                    <button type="button" id="blog-review-publish-later" (click)="blog.published = 0;createEditBlog()"
+                        class="btn btn-outline-primary btn-lg " [disabled]="inProgress">Publish Later</button>
+                </div>
+                <div class="o-blog-preview-post-footer" [hidden]="!displayPaywal">
+                    <div class="o-blog-preview-post-footer__paywall">
+                        <div class="text-sm grey">Visible to supporter who send over</div>
+                        <div class="paywall-coins">
+                            <input type="number" name="coins" [(ngModel)]="defaultCoins" maxlength="3" (keypress)=limit($event) placeholder="0 Coins" id="post-set-coins">
+                        </div>
+                        <p class="paywall-coins-text m-t-20">Description</p>
+                        <div class="paywall-coins">
+                            <textarea name="message" id="post-set-coins" maxlength="120" [(ngModel)]="message"></textarea>
+                        </div>
+                        <div class="m-t-20">
+                            <button type="button" class="btn btn-primary btn-sm" (click)="displayPaywall()"
+                                id="post-coins-add" [disabled]="!defaultCoins">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <!--footer-dropdown ends-->
+            </div>
+        </div>
+        <!--right ends-->
+    </div>
+</form>
+<!--blog preview popup ends-->
+
+<style>
+    .paywall-wrapper {
+        margin: 30px;
+    }
+
+    .paywall-wrapper p {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .paywall-wrapper textarea {
+        width: 100%;
+        outline: none;
+        resize: none;
+        height: 150px;
+    }
+
+    .m-t-20 {
+        margin-top: 20px;
+    }
+</style>

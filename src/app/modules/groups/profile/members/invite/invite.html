@@ -123,7 +123,7 @@
               Participate in fan discussions, watch online events, and hold group chats.
             </div>
             <div class="text-md grey" *ngIf="filter === 'emails'">
-              Type multiple email id's separated by a comma
+              Press enter after each email id to add more.
             </div>
         </div><!--description ends-->
         </div>
@@ -186,6 +186,7 @@
                         [maxItems]=maxItems required
                         [(ngModel)]='emails'
                         placeholder="Type email address and use spacebar to separate it"
+                        secondaryPlaceholder="Add email address"
                         style="border: 1px solid #90A4AE;
                         margin: 30px 0px 20px;
                         resize: none; 
