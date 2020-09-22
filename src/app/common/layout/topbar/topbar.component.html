@@ -53,18 +53,17 @@
 
   <!-- desktop:logged-in:top-navigation -->
   <div *ngIf="session.isLoggedIn()" class="nav-bar hidden-under-tablet">
-    
+
     <!-- desktop:logged-in:top-navigation:left -->
     <div class="nav-menu">
       <ul class="nav-list m-l-8">
         <li class="nav__item">
           <a class="nav__link nav__link--text" routerLink="/newsfeed"
-            routerLinkActive="m-topbar--navigation--item-active" title="Newsfeed"
-            i18n-title="@@M_TOPBAR_NEWSFEED" id="topbar-home">Home</a>
+            routerLinkActive="m-topbar--navigation--item-active" title="Newsfeed" i18n-title="@@M_TOPBAR_NEWSFEED"
+            id="topbar-home">Home</a>
         </li>
         <li class="nav__item">
-          <a class="nav__link nav__link--text" [routerLink]="['/explore']"
-            [queryParams]="{type:'activities',q:'', ref:''}" id="topbar-explore">Explore</a>
+          <a class="nav__link nav__link--text" [routerLink]="['/explore']" id="topbar-explore">Explore</a>
         </li>
         <li class="nav__item">
           <a class="nav__link nav__link--text" routerLink='/wallet/tokens/overview' id="topbar-wallet">Wallet</a>
@@ -95,7 +94,8 @@
                   <span>View Channel</span>
                 </a>
               </li> -->
-              <li [routerLink]="['/', session.getLoggedInUser().username]" class="m-dropdownList__item" (click)="profileMenu.value = false">
+              <li [routerLink]="['/', session.getLoggedInUser().username]" class="m-dropdownList__item"
+                (click)="profileMenu.value = false">
                 <div class="o-prof-avatar-name" id="topbar-dropdown-profile-details">
                   <div class="o-avatar">
                     <img
@@ -121,12 +121,12 @@
                 </a>
               </li> -->
               <!-- <div *ngFor="let organization of entities"> -->
-                <li [routerLink]="['/organization/all']" class="m-dropdownList__item" (click)="profileMenu.value = false">
-                  <a id="topbar-dropdown-organizationname">
-                    <!-- <i class="material-icons">trending_up</i> -->
-                    <span>Organization</span>
-                  </a>
-                </li>
+              <li [routerLink]="['/organization/all']" class="m-dropdownList__item" (click)="profileMenu.value = false">
+                <a id="topbar-dropdown-organizationname">
+                  <!-- <i class="material-icons">trending_up</i> -->
+                  <span>Organization</span>
+                </a>
+              </li>
               <!-- </div> -->
               <li [routerLink]="['/boost/console']" class="m-dropdownList__item" (click)="profileMenu.value = false">
                 <a id="topbar-dropdown-boostConsole">
@@ -201,7 +201,8 @@
                 </a>
               </li> -->
             </ul>
-            <div class="opspot-bg-overlay" (click)="profileMenu.value = !profileMenu.value" [hidden]="!profileMenu.value"></div>
+            <div class="opspot-bg-overlay" (click)="profileMenu.value = !profileMenu.value"
+              [hidden]="!profileMenu.value"></div>
           </div>
         </li>
 
@@ -230,7 +231,8 @@
                 </a>  
               </li>
             </ul>
-            <div class="opspot-bg-overlay" (click)="createMenu.value = !createMenu.value" [hidden]="!createMenu.value"></div>
+            <div class="opspot-bg-overlay" (click)="createMenu.value = !createMenu.value" [hidden]="!createMenu.value">
+            </div>
           </div>
         </li>
 
@@ -241,13 +243,13 @@
             <ng-content select="[icons]"></ng-content>
           </a>
         </li>
-        
+
         <li class="nav-icon__item">
           <a class="nav__ico" id="topbar-network" [routerLink]="['network']">
             <img src="assets/svg/mail.svg" alt="">
           </a>
         </li>
-        
+
         <li class="nav-icon__item">
           <a class="nav__ico" id="topbar-post" title="Blog" [routerLink]="['blog/edit/new']">
             <img src="assets/svg/create_post.svg" alt="">
@@ -269,8 +271,8 @@
       </a>
     </div>
     <div id="app-nav-block" class="hidden-above-tablet">
-      <div class="app-nav-block__close" id="app-nav-close" (click)="closeNav()"><img src="assets/svg/m_nav_ico/close.svg"
-          alt=""></div>
+      <div class="app-nav-block__close" id="app-nav-close" (click)="closeNav()"><img
+          src="assets/svg/m_nav_ico/close.svg" alt=""></div>
       <div class="app-nav-head">
         <a [routerLink]="['/',user.username]" class="o-avatar"><img
             src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt=""></a>
@@ -302,9 +304,9 @@
           </li>
           <li class="app-nav-link_-item">
             <a [routerLink]="['/notifications']" (click)='closeNav()'>
-                <div class="app-nav-link__ico"><i class="icon-bell"></i></div>
-                <div class="app-nav-link__text">Notification </div>
-                <!-- <span class="header-noti-count header-noti-count--mob">12</span> -->
+              <div class="app-nav-link__ico"><i class="icon-bell"></i></div>
+              <div class="app-nav-link__text">Notification </div>
+              <!-- <span class="header-noti-count header-noti-count--mob">12</span> -->
             </a>
           </li>
           <!-- <li class="app-nav-link_-item">
@@ -316,8 +318,8 @@
           </li> -->
           <li class="app-nav-link_-item">
             <a [routerLink]="['/', 'portfolio', user.username]" (click)='closeNav()'>
-                <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/portfolio.svg" alt=""></div>
-                <div class="app-nav-link__text">Portfolio </div>
+              <div class="app-nav-link__ico"><img src="assets/svg/m_nav_ico/portfolio.svg" alt=""></div>
+              <div class="app-nav-link__text">Portfolio </div>
             </a>
           </li>
           <li class="app-nav-link_-item">
@@ -370,8 +372,8 @@
           </li>
           <li class="app-nav-link_-item">
             <a [routerLink]="['/about']" (click)='closeNav()'>
-                <div class="app-nav-link__ico"><i class="icon-alert-circle"></i></div>
-                <div class="app-nav-link__text">About One Page Spotlight</div>
+              <div class="app-nav-link__ico"><i class="icon-alert-circle"></i></div>
+              <div class="app-nav-link__text">About One Page Spotlight</div>
             </a>
           </li>
           <li class="app-nav-link_-item">

@@ -42,6 +42,8 @@
 @import "src/assets/scss/components/communities-card";
 @import "src/assets/scss/components/create-organization";
 @import "src/assets/scss/components/_invite-to-community-popup.scss";
+@import "src/assets/scss/components/organization.scss";
+@import "src/assets/scss/components/_organization-admin-empty.scss";
 
 
 
@@ -7702,9 +7704,10 @@ m-blockchain--wallet-selector {
   overflow: visible;
   width: 100%;
   height: auto; }
-  .m-blog header opspot-banner .opspot-banner {
-    max-height: 60vh;
-    height: 60vh; }
+  // .m-blog header opspot-banner .opspot-banner {
+  //   max-height: 60vh;
+  //   height: 60vh;
+  //  }
     @media screen and (max-width: 720px) {
       .m-blog header opspot-banner .opspot-banner {
         height: 25vh; } }
@@ -7778,10 +7781,10 @@ m-blog-view img.m--img-not-found, opspot-blog-edit img.m--img-not-found {
   background-size: contain;
 }
 
-m-blog-view img.display {
+m-blog-view img.display, opspot-blog-edit img.display {
   // width:100%;
-  width: 300px !important;
-  height: 300px !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 m-blog-view ul.m-blog--categories-list, opspot-blog-edit ul.m-blog--categories-list {
@@ -7903,18 +7906,19 @@ opspot-blog-edit {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased; }
   opspot-blog-edit m-inline-editor, opspot-blog-edit m-inline-editor p {
-    margin-bottom: 0.5em;
+    // margin-bottom: 0.5em;
     font-weight: 400;
     font-style: normal;
-    font-size: 40px;
-    line-height: 1.58;
-    letter-spacing: 0.5px;
-    letter-spacing: -.003em;
+    font-size: 18px;
+    // line-height: 1.58;
+    // letter-spacing: 0.5px;
+    // letter-spacing: -.003em;
     font-family: 'Roboto';
-    color: rgba(0, 0, 0, 0.84);
-    margin-top: 29px;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased; }
+    color: #263238;
+    // margin-top: 29px;
+    // text-rendering: optimizeLegibility;
+    // -webkit-font-smoothing: antialiased;
+   }
     opspot-blog-edit m-inline-editor:first-of-type, opspot-blog-edit m-inline-editor p:first-of-type {
       margin-top: 0; }
   opspot-blog-edit .m-additional-block > * {
@@ -23646,7 +23650,7 @@ input[type="number"] {
 
 .mdl-card {
   z-index: initial;
-  margin: 0px 6px 6px 0px; }
+  margin: 0px 0px 6px 0px; }
   .mdl-card .mdl-card__supporting-text {
     -webkit-font-smoothing: antialiased; }
   .mdl-card:not(.mdl-cell) {

@@ -14,7 +14,7 @@
         height: 96px;
         content: ' ';
         z-index: 1;
-        background-image: linear-gradient(to left, rgba(250,0,0,0), rgba(250,250,250,1));
+        // background-image: linear-gradient(to left, rgba(250,0,0,0), rgba(250,250,250,1));
     }
     &:after {
         position: absolute;
@@ -24,7 +24,7 @@
         height: 96px;
         content: ' ';
         z-index: 1;
-        background-image: linear-gradient(to right, rgba(250,0,0,0), rgba(250,250,250,1));
+        // background-image: linear-gradient(to right, rgba(250,0,0,0), rgba(250,250,250,1));
     }
 }
 .o-explore-tag{
@@ -119,23 +119,42 @@
 
 // media css
 .o-explore-media-part{
+    @include mq($until:$tablet){
+        margin:0px 15px;
+    }
+    &__subtitle{
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+        margin-bottom: 20px;
+    }
     &__row{
         display: -ms-flexbox;
         display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        padding: 0 4px;
-        @include mq($until:$tablet){
-            display:grid;
-            padding: 0;
+        -ms-flex-wrap:wrap!important;
+        flex-wrap: wrap!important;
+        padding: 0 0px!important;
+        .mr18{
+            margin-right:18px;
+            @include mq($until:$tablet){
+                margin-right:15px;
+            }
+        }
+        @include mq($until:$desktop_lg){
+            width: 100%;
+            display: flex;
+            overflow: scroll;
+            flex-wrap: nowrap!important;
         }
     }
     &__coloumn{
         flex: 25%;
-        max-width: 25%;
+        max-width: 23%;
         width:100%;
-        padding: 0 4px;
-        @include mq($until:$tablet){
+        padding: 0 0px!important;
+        margin-bottom: 20px;
+        @include mq($until:$desktop_lg){
+            width: 281px;
             flex: 100%;
             max-width: 100%;
         }
@@ -181,3 +200,82 @@
 .slick-slide {
     height: 45px;
 }
+.o-explore-action-admin{
+    padding: 0px 0px!important;
+    margin: 0px 0px 20px!important;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include mq($until:$tablet){
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+    .form-group{
+        margin-bottom: 0px;
+    }
+    .form-control{
+        padding: 10px 16px;
+        height: 40px!important;
+        border: 1px solid #ECEFF1;
+        color: #263238;
+        font-size: 14px;
+        line-height: 20px;
+        font-family: Roboto;
+        @include mq($until:$tablet){
+            padding: 10px 20px; 
+        }
+        option{
+            padding: 10px 16px;
+            height: 40px!important;
+            color: #263238;
+        }
+    }
+    &__title{
+        @include mq($until:$tablet){
+            margin-left:15px;
+            margin-top:20px;
+        }
+    }
+    &__right{
+        display:flex;
+    }
+    &__create{
+        .btn-lg{
+            padding: 8px 55px;
+            margin-right: 19px;
+            @include mq($until:$tablet){
+                padding: 8px 53px; 
+                margin-left:15px;
+            }
+        }
+    }
+    &__search{ 
+        width: 254px;
+        @include mq($until:$tablet){
+            width: initial;
+            position: absolute;
+            right: 12px;
+        }
+        .form-group{
+            .form-control{
+                @include mq($until:$tablet){
+                    width: 40px;
+                    height: 40px;
+                    box-sizing: border-box;
+                    border-radius: 4px;
+                    background-color: white;
+                    -webkit-transition: width 0.4s ease-in-out;
+                    transition: width 0.4s ease-in-out;
+                    &:focus {
+                        max-width: 170px;
+                        width: auto;
+                    }
+                }
+            }
+            i{
+                font-size: 14px;
+            }
+        }
+    }
+} 

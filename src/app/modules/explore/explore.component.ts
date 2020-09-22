@@ -5,10 +5,12 @@ import { Subscription } from 'rxjs';
 import { Client } from '../../services/api';
 import { Session } from '../../services/session';
 import { OpspotTitle } from '../../services/ux/title';
+import { OverlayModalService } from '../../services/ux/overlay-modal';
+import { InTheSpotlightComponent } from '../forms/in-the-spotlight/in-the-spotlight.component';
 
 @Component({
   selector: 'app-explore',
-  host: { '(keyup)': 'keyup($event)' },
+  host: { '(keyup)': 'keyup_srch($event)' },
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.scss']
 })
@@ -16,6 +18,7 @@ export class ExploreComponent implements OnInit {
   exploreArray = [];
   filteredArray = [];
   hashtags: [];
+  _exploreTabList: Array<any> = [{ id: 'IN the Spotlight', val: 'inthespotlight' }, { id: 'My Journey', val: 'myjourney' }, { id: 'Community', val: 'group' }, { id: 'Organization', val: 'organization' }, { id: 'Blue Store', val: 'marketplace' }, { id: 'Showtimez/Events', val: 'event' }];
   paramsSubscription: Subscription;
   q: string = '';
   type: string = '';
@@ -24,6 +27,8 @@ export class ExploreComponent implements OnInit {
   inProgress: boolean = false;
   moreData: boolean = true;
   ref: string = '';
+  _activeFilter = 'IN the Spotlight';
+  _loadMoreFilter = 'inthespotlight';
 
   slideConfig = {
     slidesToShow: 8,
@@ -70,6 +75,7 @@ export class ExploreComponent implements OnInit {
     public client: Client,
     public session: Session,
     public title: OpspotTitle,
+    public overlayModal: OverlayModalService,
   ) {
     this.paramsSubscription = this.route.queryParams.subscribe(params => {
       if (typeof params['q'] !== 'undefined') {
@@ -95,36 +101,38 @@ export class ExploreComponent implements OnInit {
       this.inProgress = false;
       this.offset = '';
       this.reset();
-      this.searchMore(true);
+      this.searchMore(true, this._exploreTabList[0].val);
       // this.triggerSearchApi();
     });
   }
 
   async ngOnInit() {
     this.title.setTitle('Explore');
-    await this.load();
+    // await this.load();
   }
 
   // load hashtags
-  async load() {
-    try {
-      this.hashtags = await this.service.load(20);
-      // console.log(this.hashtags);
-    } catch (e) {
-      // console.log(e);
-    }
-  }
+  // async load() {
+  //   try {
+  //     this.hashtags = await this.service.load(20);
+  //     // console.log(this.hashtags);
+  //   } catch (e) {
+  //     // console.log(e);
+  //   }
+  // }
 
-  switchCategoryType(sType: string) {
-    console.log(sType);
-    this.ref = sType;
-    this.router.navigate(['/explore'], {
-      queryParams: {
-        q: this.q,
-        type: `${this.type}`,
-        ref: `${this.ref}`
-      }
-    });
+  switchCategoryType(property: string, value: string) {
+    console.log(property, value)
+    this._activeFilter = property;
+    this._loadMoreFilter = value;
+    this.searchMore(true, value)
+    // this.router.navigate(['/explore'], {
+    //   queryParams: {
+    //     q: this.q,
+    //     type: `${this.type}`,
+    //     ref: `${this.ref}`
+    //   }
+    // });
   }
 
   /**
@@ -159,32 +167,23 @@ export class ExploreComponent implements OnInit {
     });
   }
 
-  // keyup event for search
-  keyup(e) {
-    // if (e.keyCode === 13) {
-      // console.log(this.q);
-      // this.search();
-      if (!this.filteredArray || !this.q) {
-        return (this.filteredArray = this.exploreArray);
+
+  keyup_srch(eve: any) {
+    if (this.q.length == 0) {
+      this.filteredArray = this.exploreArray;
+    } else {
+      if (this._loadMoreFilter == 'inthespotlight') {
+        this.filteredArray = this.exploreArray.filter(item => item.title.toString().toLowerCase() == this.q.toString().toLowerCase())
       }
-      // filter items array, items which match and return true will be
-      // kept, false will be filtered out
-      //   console.log('Before filter',this.filteredArray)
-      // this.filteredArray = this.exploreArray.filter((item) => item.message.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1);
-      // console.log('After Filter',this.filteredArray)
-      const matchFound = this.exploreArray.find(item => item.message.toString().toLowerCase().indexOf(this.q.toLowerCase()) !== -1);
-      if (matchFound) {
-        // console.log('Before filter', this.filteredArray)
-        this.filteredArray = this.exploreArray.filter(
-          item =>
-            item.message
-              .toString()
-              .toLowerCase()
-              .indexOf(this.q.toLowerCase()) !== -1
-        );
-        // console.log('After filter', this.filteredArray)
+      else if (this._loadMoreFilter == 'group' || this._loadMoreFilter == 'organization') {
+        this.filteredArray = this.exploreArray.filter(item => item.name.toString().toLowerCase() == this.q.toString().toLowerCase())
+      } else if (this._loadMoreFilter == 'marketplace' || this._loadMoreFilter == 'event') {
+        this.filteredArray = this.exploreArray.filter(item => item.blurb.toString().toLowerCase() == this.q.toString().toLowerCase())
       }
-    // }
+      else {
+        this.filteredArray = this.exploreArray.filter(item => item.message.toString().toLowerCase() == this.q.toString().toLowerCase())
+      }
+    }
   }
 
   search() {
@@ -197,56 +196,122 @@ export class ExploreComponent implements OnInit {
     });
   }
 
-  async searchMore(refresh: boolean = false) {
+  async searchMore(refresh: boolean = false, filter: string) {
+    let _entityType = 'activity';
     if (this.inProgress) {
       return;
     }
     if (refresh) {
       this.offset = '';
+      this.exploreArray.length = 0;
+      this.filteredArray.length = 0;
+    }
+    if (filter == 'Organization' || filter == 'organization') {
+      _entityType = 'organization';
+    }
+    if (filter == 'Community' || filter == 'group') {
+      _entityType = 'group';
     }
     this.inProgress = true;
     this.client
       .get(
-        `api/v2/feeds/global/top/${this.type}`,
+        `api/v3/explore/${_entityType}`,
         {
-          hashtags: this.ref,
-          period: '12h',
-          all: '',
-          purpose: 'explore',
-          query: this.q,
-          nsfw: '',
-          sync: '1',
-          as_activities: '1',
-          from_timestamp: '',
-          limit: 24,
+          activity_type: _entityType == 'activity' ? filter : '',
+          limit: 50,
           offset: this.offset
         },
         { cache: true }
       )
       .then((data: any) => {
         let respData: any = data;
-        if (respData.entities.length === 0) {
+        if ((respData.hasOwnProperty('activity') && respData['activity'].length == 0) || (respData.hasOwnProperty('groups') && respData['groups'].length == 0) || (respData.hasOwnProperty('organizations') && respData['organizations'].length == 0)) {
           this.moreData = false;
           this.inProgress = false;
           return false;
-        }
-        if (this.filteredArray && !refresh) {
-          // console.log('added data');
-          this.filteredArray = this.exploreArray = this.exploreArray.concat(
-            respData.entities
-          );
         } else {
-          // console.log('added new data');
-          this.filteredArray = this.exploreArray = respData.entities;
+          if (this.filteredArray && !refresh) {
+            if (respData['activity']) {
+              this.exploreArray.push(...respData.activity);
+            }
+            else if (respData['groups']) {
+              this.exploreArray.push(...respData.groups);
+            }
+            else if (respData['organizations']) {
+              this.exploreArray.push(...respData.organizations);
+            }
+          } else {
+            if (respData['activity']) {
+              this.exploreArray.push(...respData.activity);
+            }
+            if (respData['groups']) {
+              this.exploreArray.push(...respData.groups);
+            }
+            if (respData['organizations']) {
+              this.exploreArray.push(...respData.organizations);
+            }
+          }
+          this.filteredArray = this.exploreArray;
+          this.moreData = true;
+          this.offset = respData['load-next'];
+          this.inProgress = false;
         }
-        this.moreData = true;
-        this.offset = respData['load-next'];
-        this.inProgress = false;
       })
       .catch(e => {
+        console.error(e)
         this.inProgress = false;
       });
   }
+  // async searchMore(refresh: boolean = false) {
+  //   if (this.inProgress) {
+  //     return;
+  //   }
+  //   if (refresh) {
+  //     this.offset = '';
+  //   }
+  //   this.inProgress = true;
+  //   this.client
+  //     .get(
+  //       `api/v2/feeds/global/top/${this.type}`,
+  //       {
+  //         hashtags: this.ref,
+  //         period: '12h',
+  //         all: '',
+  //         purpose: 'explore',
+  //         query: this.q,
+  //         nsfw: '',
+  //         sync: '1',
+  //         as_activities: '1',
+  //         from_timestamp: '',
+  //         limit: 24,
+  //         offset: this.offset
+  //       },
+  //       { cache: true }
+  //     )
+  //     .then((data: any) => {
+  //       let respData: any = data;
+  //       if (respData.entities.length === 0) {
+  //         this.moreData = false;
+  //         this.inProgress = false;
+  //         return false;
+  //       }
+  //       if (this.filteredArray && !refresh) {
+  //         // console.log('added data');
+  //         this.filteredArray = this.exploreArray = this.exploreArray.concat(
+  //           respData.entities
+  //         );
+  //       } else {
+  //         // console.log('added new data');
+  //         this.filteredArray = this.exploreArray = respData.entities;
+  //       }
+  //       this.moreData = true;
+  //       this.offset = respData['load-next'];
+  //       this.inProgress = false;
+  //     })
+  //     .catch(e => {
+  //       this.inProgress = false;
+  //     });
+  // }
   reset() {
     // console.log(this.exploreArray);
     this.filteredArray = this.exploreArray = [];
@@ -265,5 +330,15 @@ export class ExploreComponent implements OnInit {
 
   beforeChange(e) {
     // console.log('beforeChange');
+  }
+  _createSpotlight() {
+    this.overlayModal.create(InTheSpotlightComponent, '', {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+      // listen to the update callback
+      onUpdate: (payload: any) => {
+        this.exploreArray.unshift(payload);
+        this.overlayModal.dismiss();
+      }
+    }).present();
   }
 }

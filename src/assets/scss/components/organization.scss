@@ -1,0 +1,228 @@
+// organisation style
+
+.o-organisation-sec{
+    width: 100%;
+    float: left;
+    background-color: #FAFAFA;
+    min-height: 100vh;
+    .m-b-13{
+        margin-bottom: 13px;
+    }
+}
+
+//block style
+.o-right-block--organisation{
+    flex: 1;
+    order: 2;
+    overflow: hidden;
+    &__items{
+        display:flex;
+    }
+}
+
+
+// reiview count
+
+.review-count{
+    background: $grey;
+    padding: 1.5px 6px;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-left: 8px;
+}
+.tabs-organisation .tabs-list li.active .review-count{
+    background: $primary;
+}
+//cover style
+.o-cover--organisation {
+    top: 0px !important;
+    height: 187px !important;
+    border-radius: 4px !important;
+    overflow: hidden;
+    position: relative;
+    margin-left: 10px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        margin-left:0px;
+        height: 110px!important;
+    }
+}
+.o-cover-edit--organisation{
+    width:24px;
+    height:24px;
+    i{
+        font-size: 13px;
+    }
+}
+//cover overlay
+.o-cover--organisation-overlay{
+    background: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 83px;
+}
+//request tab style
+.o-organisation-admin-request{
+    width: 100%;
+    border: 1px solid #ECEFF1;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    float: left;
+    background: #FFFFFF;
+    padding: 10px 17px;
+}
+
+.o-organisation-admin-request-block{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.o-organisation-admin-request-block-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 6px 0px;
+    &__avatar{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        img{
+            width:100%;
+        }
+    }
+    &__info {
+        margin-left: 7px;
+    }
+}
+.o-organisation-admin-request-mr14{
+    margin-right:14px;
+}
+.o-organisation-admin-request-line{
+    border-bottom: 1px solid #ECEFF1;
+    margin: 5px 0 5px;
+}
+
+//responsive style
+@include mq($from: $mobile_sm, $until: $tablet) {
+    .o-left-block--organisation{
+        width:100%!important
+    }
+    .organisation-admin-main-title{
+        .without-nav-header__title{
+            margin-left:0px!important;
+        }
+    }
+//members top style
+    .o-organisation-members-top {
+        width: 100%;
+        margin-top: 15px; 
+        &__count{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; 
+        }
+        &__count-mob{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            // margin-left: 20px;
+            .m-l-r-6 {
+                margin: 0px 6px; 
+            }
+        }
+    }
+    .o-organisation-members-top--mob {
+        margin: 3px 0px 11px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #fff;
+        padding: 15px 0px;
+        .mrb12{
+            margin-bottom: 12px;
+        }
+    }
+  
+  .o-organisation-members-list-mob-single {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #FFFFFF;
+        border-radius: 50%;
+        overflow: hidden; 
+        img{
+            width: 100%;
+        }
+        :nth-child(1){
+            z-index: 3;
+        }
+        :nth-child(2) {
+            margin-left: -10px;
+            z-index: 2; 
+        }
+        :nth-child(3) {
+            margin-left: -10px;
+            z-index: 1; 
+        }
+    }
+    .o-organisation-members-list-mob-single--talent {
+        width: 31px;
+        height: 31px;
+        border: 1px solid #FFFFFF;
+        border-radius: 8px;
+        overflow: hidden; 
+        margin-right: 6px;
+        img{
+            width: 100%;
+        }
+    }
+  .o-organisation-add-members-mob {
+        height: 100%;
+        width:100%;
+        border: none;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        margin-top:17px;
+    }
+    //write style
+    .o-organisation-write-mob{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        box-sizing: border-box;
+        border: 1px solid #ECEFF1;
+        border-radius: 4px;
+        background:#fff;
+        padding: 10px 15px;
+        margin-bottom:6px;
+        &__avatar{
+            img{
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+            }
+        }
+        &__status{
+            margin: 10px 0px 0px 11px;
+            textarea{
+                overflow: hidden;
+                width: 100%;
+                font-size: 14px;
+                line-height: 16px;
+                border: none;
+                font-family: "Roboto", sans-serif !important;
+                resize: none;
+            }
+        }
+    }
+}

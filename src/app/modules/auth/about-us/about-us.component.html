@@ -1,122 +1,158 @@
 <section class="about-sec">
-  <div class="container">
-      <div class="about-block">
-          <div class="about-block__left ">
-              <div class="for-sticky">
-                  <ul class="about-menu hidden-under-tablet">
-                      <li class="about-menu__items" [ngClass]="{'about-menu__items--active': tab =='WhatIsOps'}">
-                          <a (click)="scrollToElement(whatIsOps, 'WhatIsOps')" class="about-menu__link">What is One Page Spotlight?</a>
+    <div class="container">
+        <div class="about-block">
+            <div class="about-block__left ">
+                <div class="for-sticky">
+                    <ul class="about-menu hidden-under-tablet">
+                        <li class="about-menu__items" [ngClass]="{'about-menu__items--active': tab =='WhatIsOps'}">
+                            <a (click)="scrollToElement(whatIsOps, 'WhatIsOps')" class="about-menu__link">What is One Page Spotlight?</a>
+                        </li>
+                        <li class="about-menu__items" [ngClass]="{'about-menu__items--active': tab =='uniqueAboutOps'}">
+                            <a (click)="scrollToElement(uniqueAboutOps,'uniqueAboutOps')" class="about-menu__link">Unique about One Page Spotlight</a>
+                        </li>
+                        <li class="about-menu__items" [ngClass]="{'about-menu__items--active': tab =='logStoryline'}">
+                            <a (click)="scrollToElement(logStoryline,'logStoryline')" class="about-menu__link">Logo Storyline</a>
+                        </li>
+                        <li class="about-menu__items" [ngClass]="{'about-menu__items--active': tab =='mediaKit'}">
+                          <a (click)="scrollToElement(mediaKit,'mediaKit')" class="about-menu__link">Media kit</a>
                       </li>
-                      <li class="about-menu__items" [ngClass]="{'about-menu__items--active': tab =='uniqueAboutOps'}">
-                          <a (click)="scrollToElement(uniqueAboutOps,'uniqueAboutOps')" class="about-menu__link">Unique about One Page Spotlight</a>
-                      </li>
-                      <li class="about-menu__items" [ngClass]="{'about-menu__items--active': tab =='logStoryline'}">
-                          <a (click)="scrollToElement(logStoryline,'logStoryline')" class="about-menu__link">Logo Storyline</a>
-                      </li>
-                  </ul>
-                  <div class="dropdown hidden-above-tablet">
-                      <button (click)="opened = !opened" class="dropbtn">Menu <span class="drop-arrow-ico"><i class="icon-chevron-down"></i></span></button>
-                      <div id="myDropdown" class="dropdown-content" *ngIf="opened">
-                          <a (click)="scrollToElement(whatIsOps, 'WhatIsOps')">What is One Page Spotlight?</a>
-                          <a (click)="scrollToElement(uniqueAboutOps,'uniqueAboutOps')">Unique about One Page Spotlight</a>
-                          <a (click)="scrollToElement(logStoryline,'logStoryline')">Logo Storyline</a>
-                      </div>
-                  </div>
-              </div>
-          </div><!-- left block end -->
-          <div class="about-block__right">
-              <div #whatIsOps id="what-is-ops" class="about-content-block about-content-block--p-b-41">
-                  <h5 class="primary">What is One Page Spotlight?</h5>
-                  <p class="text-md m-t-17">
-                      One Page Spotlight is a virtual platform for creators to create, connect and collaborate with fellow creators and organizations. With existing platforms, creators struggle to find the right audience and market as well as connect with the right organization and people. One Page Spotlight provides creators with an authentic ecosystem of collaborators, thereby empowering them to position themselves under the spotlight. 
-                  </p>
-                  <div class="about-content-img">
-                      <img src="{{opspot.cdn_assets_url}}assets/about/about.png" alt="about img">
-                  </div>
-
-                  <div class="caption-bold">Our Vision</div>
-                  <ul class="about-list-content">
-                      <li class="about-list-content__item">Empowering and enabling artists to inspire the world.</li>
-                  </ul><!-- our vision end -->
-
-                  <div class="caption-bold">Our Mission</div>
-                  <ul class="about-list-content">
-                      <li class="about-list-content__item">To provide a platform for creators to create, connect and collaborate.</li>
-                      <li class="about-list-content__item">To provide a platform for the artist community to grow.</li>
-                      <li class="about-list-content__item">To give creators more opportunities and empowering them to create more.</li>
-                  </ul>
-                  <div class="line"></div>
-              </div><!-- what is ops end -->
-
-              <div #uniqueAboutOps id="unique-about-ops" class="about-content-block about-content-block--p-b-41">
-                  <h5 class="primary">What is unique about One Page Spotlight?</h5>
-                  <p class="text-md  m-t-b-34">
-                      <!-- One Page Spotlight is a virtual platform for creators to create, connect and collaborate with fellow creators and organizations. With existing platforms, creators struggle to find the right audience and market as well as connect with the right organization and people. One Page Spotlight provides creators with an authentic ecosystem of collaborators, thereby empowering them to position themselves under the spotlight.  -->
-                  </p>
-                  <div class="caption-bold">Create a forum for creators</div>
-                  <p class="text-md m-t-b-34">
-                      One Page Spotlight provides an ecosystem for creators to provide them with exposure and opportunities. Passionate artists with unique and great talents go unnoticed, have little or no exposure to meet and collaborate with other artists or advance in their field of expertise. 
-                  </p>
-                  <div class="caption-bold">Build a community</div>
-                  <p class="text-md m-t-b-34">
-                          One Page Spotlight helps to create, connect and collaborate with fellow creators to grow together and share knowledge.
-                  </p>
-
-                  <div class="caption-bold">Something for Everyone</div>
-                  <p class="text-md m-t-b-34">
-                      One Page Spotlight has something for everyone - creators, critics, performers, beginners, professionals, amateurs, bloggers or art appreciators.
-                  </p>
-
-                  <div class="caption-bold">Commercializing the creation</div>
-                  <p class="text-md m-t-b-34">
-                      One Page Spotlight helps in commercializing what creators create and to bring out the entrepreneur inside the creator. 
-                  </p>
-
-                  <div class="caption-bold">Empowering creators</div>
-                  <p class="text-md m-t-b-34">
-                      One Page Spotlight provides a platform to encourage cross-industry collaboration with monetary benefits and value for self.
-                  </p>
-
-                  <div class="caption-bold">Global Collaboration</div>
-                  <p class="text-md m-t-b-34">
-                          One Page Spotlight helps in connecting and reaching out to creators beyond geographical borders and expertise.
-                  </p>
-
-                  <div class="line"></div>
-              </div><!-- unique about ops end-->
-
-              <div #logStoryline id="log-storyline" class="about-content-block about-content-block--p-b-41">
-                  <h5 class="primary">Logo Storyline</h5>
-                  <div class="about-logo">
-                      <img src="{{opspot.cdn_assets_url}}assets/ops_logo.png" alt="ops logo">
-                  </div>
-                  <p class="text-md m-t-b-34">
-                      One Page Spotlight logo is inspired by art and values associated with the creation of art.
-                  </p>
-                  <div class="caption-bold">The Colour Blue</div>
-                  <p class="text-md m-t-b-34">
-                      Blue is associated with the sea and the sky, which signifies freedom and imagination. It is the colour of trust, wisdom, confidence, and truth. Blue symbolizes stability, persistence, and patience which are the key factors required in the process of creating any masterpiece. 
-                  </p>
-
-                  <div class="caption-bold">The Colour Black</div>
-                  <p class="text-md m-t-b-34">
-                      Black stands for power and elegance, qualities that One Page Spotlight strives to pass on to the community of creators.
-                  </p>
-
-                  <div class="caption-bold">The Sphere Shape</div>
-                  <p class="text-md m-t-b-34">
-                      The sphere shape calls for immediate attention and represents totality.
-                  </p>
+                    </ul>
+                    <div class="dropdown hidden-above-tablet">
+                        <button (click)="opened = !opened" class="dropbtn">Menu <span class="drop-arrow-ico"><i class="icon-chevron-down"></i></span></button>
+                        <div id="myDropdown" class="dropdown-content" *ngIf="opened">
+                            <a (click)="scrollToElement(whatIsOps, 'WhatIsOps')">What is One Page Spotlight?</a>
+                            <a (click)="scrollToElement(uniqueAboutOps,'uniqueAboutOps')">Unique about One Page Spotlight</a>
+                            <a (click)="scrollToElement(logStoryline,'logStoryline')">Logo Storyline</a>
+                            <a (click)="scrollToElement(mediaKit,'mediaKit')">Media kit</a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- left block end -->
+            <div class="about-block__right">
+                <div #whatIsOps id="what-is-ops" class="about-content-block about-content-block--p-b-41">
+                    <h5 class="primary">What is One Page Spotlight?</h5>
+                    <p class="text-md m-t-17">
+                        One Page Spotlight is a virtual platform for creators to create, connect and collaborate with fellow creators and organizations. With existing platforms, creators struggle to find the right audience and market as well as connect with the right organization and people. One Page Spotlight provides creators with an authentic ecosystem of collaborators, thereby empowering them to position themselves under the spotlight. 
+                    </p>
+                    <div class="about-content-img">
+                        <img src="{{opspot.cdn_assets_url}}assets/about/about.png" alt="about img">
+                    </div>
+  
+                    <div class="caption-bold">Our Vision</div>
+                    <ul class="about-list-content">
+                        <li class="about-list-content__item">Empowering and enabling artists to inspire the world.</li>
+                    </ul><!-- our vision end -->
+  
+                    <div class="caption-bold">Our Mission</div>
+                    <ul class="about-list-content">
+                        <li class="about-list-content__item">To provide a platform for creators to create, connect and collaborate.</li>
+                        <li class="about-list-content__item">To provide a platform for the artist community to grow.</li>
+                        <li class="about-list-content__item">To give creators more opportunities and empowering them to create more.</li>
+                    </ul>
+                    <div class="line"></div>
+                </div><!-- what is ops end -->
+  
+                <div #uniqueAboutOps id="unique-about-ops" class="about-content-block about-content-block--p-b-41">
+                    <h5 class="primary">What is unique about One Page Spotlight?</h5>
+                    <p class="text-md  m-t-b-34">
+                        <!-- One Page Spotlight is a virtual platform for creators to create, connect and collaborate with fellow creators and organizations. With existing platforms, creators struggle to find the right audience and market as well as connect with the right organization and people. One Page Spotlight provides creators with an authentic ecosystem of collaborators, thereby empowering them to position themselves under the spotlight.  -->
+                    </p>
+                    <div class="caption-bold">Create a forum for creators</div>
+                    <p class="text-md m-t-b-34">
+                        One Page Spotlight provides an ecosystem for creators to provide them with exposure and opportunities. Passionate artists with unique and great talents go unnoticed, have little or no exposure to meet and collaborate with other artists or advance in their field of expertise. 
+                    </p>
+                    <div class="caption-bold">Build a community</div>
+                    <p class="text-md m-t-b-34">
+                            One Page Spotlight helps to create, connect and collaborate with fellow creators to grow together and share knowledge.
+                    </p>
+  
+                    <div class="caption-bold">Something for Everyone</div>
+                    <p class="text-md m-t-b-34">
+                        One Page Spotlight has something for everyone - creators, critics, performers, beginners, professionals, amateurs, bloggers or art appreciators.
+                    </p>
+  
+                    <div class="caption-bold">Commercializing the creation</div>
+                    <p class="text-md m-t-b-34">
+                        One Page Spotlight helps in commercializing what creators create and to bring out the entrepreneur inside the creator. 
+                    </p>
+  
+                    <div class="caption-bold">Empowering creators</div>
+                    <p class="text-md m-t-b-34">
+                        One Page Spotlight provides a platform to encourage cross-industry collaboration with monetary benefits and value for self.
+                    </p>
+  
+                    <div class="caption-bold">Global Collaboration</div>
+                    <p class="text-md m-t-b-34">
+                            One Page Spotlight helps in connecting and reaching out to creators beyond geographical borders and expertise.
+                    </p>
+  
+                    <div class="line"></div>
+                </div><!-- unique about ops end-->
+  
+                <div #logStoryline id="log-storyline" class="about-content-block about-content-block--p-b-41">
+                    <h5 class="primary">Logo Storyline</h5>
+                    <div class="about-logo">
+                        <img src="{{opspot.cdn_assets_url}}assets/ops_logo.png" alt="ops logo">
+                    </div>
+                    <p class="text-md m-t-b-34">
+                        One Page Spotlight logo is inspired by art and values associated with the creation of art.
+                    </p>
+                    <div class="caption-bold">The Colour Blue</div>
+                    <p class="text-md m-t-b-34">
+                        Blue is associated with the sea and the sky, which signifies freedom and imagination. It is the colour of trust, wisdom, confidence, and truth. Blue symbolizes stability, persistence, and patience which are the key factors required in the process of creating any masterpiece. 
+                    </p>
+  
+                    <div class="caption-bold">The Colour Black</div>
+                    <p class="text-md m-t-b-34">
+                        Black stands for power and elegance, qualities that One Page Spotlight strives to pass on to the community of creators.
+                    </p>
+  
+                    <div class="caption-bold">The Sphere Shape</div>
+                    <p class="text-md m-t-b-34">
+                        The sphere shape calls for immediate attention and represents totality.
+                    </p>
+                    
+                    <div class="caption-bold">The Montserrat Typeface</div>
+                    <div class="montserrat-text m-t-b-34">Montserrat</div>
+                    <p class="text-md m-t-b34 m-b-65">
+                        Montserrat, a geometrical sans-serif typeface designed by Julieta Ulanovsky. She was inspired by signage from her historical neighbourhood of  Buenos Aires, hugely influenced by art seen in the form of old posters, signage, and historical buildings.
+                    </p>
+  
+                    <div class="line"></div>
+                </div><!-- logo storyline end -->
+                <!-- <a target="_blank"  (click)="downloadPdf()">Download PDF</a> -->
+                <div #mediaKit id="media_kit" class="about-content-block about-content-block--p-b-41">
+                   <h5 class="primary">Media kit</h5>
+                    <div class="media-kit.svg">
+                      <img src="assets/media_kit/media-kit.svg"   alt="media-kit.svg" height=250 weight=250 >
+                     
+                    </div>
+                    
+        
+                    <a  (click)="downloadFile('/assets/media_kit/Exit%20Motion%20Logo.mp4')" >
+                    <a  (click)="downloadFile('/assets/media_kit/Intro Motion Logo.mp4')" >
+                    <a (click)="downloadFile('/assets/media_kit/guidelines.pdf')" >
+                    <a  (click)="downloadFile('/assets/media_kit/Negative Logo.png')" >
+                    <a  (click)="downloadFile('/assets/media_kit/Original Logo.png')" >
+                    <a  (click)="downloadFile('/assets/media_kit/Watermark Logo.png')" > 
+                        
+                        <div class="btn_media" >
+                        <i class="fa fa-arrow-circle-o-down fa-2x" aria-hidden="true"></i> &nbsp;  Download Media Kit</div>
+                     
+                    </a>
+                    </a>
+                    </a>
+                    </a>
+                    </a>
+                    </a>
+  
+  
                   
-                  <div class="caption-bold">The Montserrat Typeface</div>
-                  <div class="montserrat-text m-t-b-34">Montserrat</div>
-                  <p class="text-md m-t-b34 m-b-65">
-                      Montserrat, a geometrical sans-serif typeface designed by Julieta Ulanovsky. She was inspired by signage from her historical neighbourhood of  Buenos Aires, hugely influenced by art seen in the form of old posters, signage, and historical buildings.
-                  </p>
-              </div><!-- logo storyline end -->
-
-          </div><!-- right block end -->
-      </div>
-  </div>
-</section>
-
+                </div>
+  
+            </div><!-- right block end -->
+        </div>
+    </div>
+  </section>
+  
+  

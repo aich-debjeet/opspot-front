@@ -1,75 +1,103 @@
-<div class="o-explore-card" *ngIf="entity">
-  <div class="o-explore-card__media">
-    <div class="o-explore-media-img" *ngIf="entity?.custom_data && entity?.custom_data.length> 0 && entity?.custom_data[0]?.entity_type === 'image'" >
-      <a [routerLink]="routerlink">
-        <img [src]="entity?.custom_data[0]?.src" alt="media">
-      </a>
-    </div>
-    <div class="o-explore-media-img" *ngIf="entity?.entity_type === 'blog' && entity?.custom_data === false" >
-      <a target="_blank" [href]="routerlink">
-        <img [src]="entity?.thumbnail_src" alt="media">
-      </a>
-    </div>
-    <div class="o-explore-media-img o-explore-media-img-oberlay" *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'video'">
-      <a [routerLink]="routerlink" class=" o-explore-media-img-oberlay">
-        <img [src]="entity?.custom_data[0]?.thumbnail_src" alt="media">
-      </a>
-    </div>
-    <div class="o-explore-media-img" *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'audio'">
-      <a [routerLink]="routerlink">
-        <img src="assets/videos/video_thumbnail.png" alt="media">
-      </a>
-    </div>
-    <a class="o-explore-card-media-info">
-      <div class="o-explore-card-media-info__avatar">
-        <img src="{{opspot.cdn_url}}icon/{{entity.guid}}/medium/{{entity?.ownerObj?.icontime}}" alt="avatar">
+<div class="o-community-landing-block-design__item" *ngIf="entity && (entity['entity_type']=='community' || entity['entity_type']=='organization'); else activity">
+  <div class="o-community-card">
+    <div class="o-community-card-section mr-6">
+      <div class="o-community-card-cover">
+        <img *ngIf='entity?.banner != "" '
+          [src]="opspot.cdn_url + 'fs/v1/banners/' + entity.guid + '/fat/' + entity?.banner" alt="cover">
+        <img *ngIf='entity?.banner == "" ' src="assets/demo/m2.jpg" alt="cover">
       </div>
-      <div class="text-md white f500">{{entity?.ownerObj.username}}</div>
-    </a><!-- media info end -->
-  </div><!-- media end -->
-  <div class="o-explore-card__media-info">
-    <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'image' || entity?.entity_type === 'post'
-    || entity?.entity_type === 'video' || entity?.entity_type === 'album'">{{entity?.message}}</div>
-    <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'event' || entity?.entity_type === 'item'
-     || entity?.entity_type === 'opportunity'">{{entity?.blurb}}</div>
-    <div class="o-media-hashtag" *ngIf="entity?.tags?.length > 0">
-      <a class="text-md primary" *ngFor ="let tags of entity?.tags "> {{tags}} </a>
-    </div><!-- hashtag end -->
-    <div class="o-explore-card-action">
-      <div class="o-actions">
-          <opspot-button-thumbs-up [object]="entity"></opspot-button-thumbs-up>
-        <a class="o-actions__link" id="post-card-comment">
-          <i class="icon-message-square f-15"></i>
-          <span class="o-action-count text-sm grey" id="post-card-comment-count">
-            <span >{{commentsCount}}</span>
-          </span>
-        </a>
-        <a class="o-actions__link" alt="share" id="post-card-share">
-          <i class="icon-share-2 f-15"></i>
-          <span class="o-action-count text-sm grey" id="post-card-share-count">
-              <span>{{entity?.reminds}}</span> 
-          </span>
-        </a>
-        <!-- <opspot-button-comment [object]="entity"></opspot-button-comment> -->
-        <a class="o-actions__link" id="post-card-impressions">
-          <i class="icon-eye f-15"></i>
-          <span class="o-action-count text-sm grey" id="post-card-impression-count">
-            <span>{{ entity.impressions | number }}</span>
-          </span>
-        </a>
-        <!-- <opspot-button-remind [object]="entity"></opspot-button-remind> -->
-        <a class="o-actions__link o-actions__link--coin" id="post-card-contribute-icon">
-          <div class="tooltip_coin"><i class="icon-coins f-15"></i>
-            <span class="tooltip_coin__text">
-              <div class="float-left"><i class="icon-coins f-15"></i></div>
-              <div class="o-action-count text-sm grey float-left">
-                  <span *ngIf="entity.wire_totals">{{ entity.wire_totals.tokens | token:18 | abbr }}</span>
-              </div>
-            </span>
-          </div>
-        </a>
+      <div class="o-community-card-profile">
+        <img src="{{opspot.cdn_url}}fs/v1/avatars/{{entity.guid}}/large/{{entity?.icon_time}}" alt="cover">
       </div>
-      <!--explore action end-->
-    </div><!-- explore action block end -->
-  </div><!-- media info end -->
+      <div class="o-community-card-header" id="tile-entity-name">
+        <div class="f500 text-lg word-br elipse elipse--w-130">{{entity.name}}</div>
+      </div>
+      <div class="o-community-card-dis text-sm word-br">{{entity?.brief_description | truncate:[65, '...']}}</div>
+      <div class="o-community-card-action">
+        <button type="button" id="tile-join-button" class="btn btn-primary btn-sm"
+          (click)='trigger(entity)'>Explore</button>
+      </div>
+    </div>
+  </div>
 </div>
+<ng-template #activity>
+  <div class="o-explore-card" *ngIf="entity">
+    <div class="o-explore-card__media">
+      <div class="o-explore-media-img"
+        *ngIf="entity?.custom_data && entity?.custom_data.length> 0 && entity?.custom_data[0]?.entity_type === 'image'">
+        <a [routerLink]="routerlink">
+          <img [src]="entity?.custom_data[0]?.src" alt="media">
+        </a>
+      </div>
+      <div class="o-explore-media-img" *ngIf="entity?.entity_type === 'blog' && entity?.custom_data === false">
+        <a target="_blank" [href]="routerlink">
+          <img [src]="entity?.thumbnail_src" alt="media">
+        </a>
+      </div>
+      <div class="o-explore-media-img o-explore-media-img-oberlay"
+        *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'video'">
+        <a [routerLink]="routerlink" class=" o-explore-media-img-oberlay">
+          <img [src]="entity?.custom_data[0]?.thumbnail_src" alt="media">
+        </a>
+      </div>
+      <div class="o-explore-media-img"
+        *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'audio'">
+        <a [routerLink]="routerlink">
+          <img src="assets/videos/video_thumbnail.png" alt="media">
+        </a>
+      </div>
+      <a class="o-explore-card-media-info">
+        <div class="o-explore-card-media-info__avatar">
+          <img src="{{opspot.cdn_url}}icon/{{entity.guid}}/medium/{{entity?.ownerObj?.icontime}}" alt="avatar">
+        </div>
+        <div class="text-md white f500">{{entity?.ownerObj.username}}</div>
+      </a><!-- media info end -->
+    </div><!-- media end -->
+    <div class="o-explore-card__media-info">
+      <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'image' || entity?.entity_type === 'post'
+      || entity?.entity_type === 'video' || entity?.entity_type === 'album'">{{entity?.message}}</div>
+      <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'event' || entity?.entity_type === 'item'
+       || entity?.entity_type === 'opportunity'">{{entity?.blurb}}</div>
+       <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'inthespotlight' && entity?.custom_type === 'batch'">{{entity?.title}}</div>
+      <div class="o-media-hashtag" *ngIf="entity?.tags?.length > 0">
+        <a class="text-md primary" *ngFor="let tags of entity?.tags "> {{tags}} </a>
+      </div><!-- hashtag end -->
+      <div class="o-explore-card-action">
+        <div class="o-actions">
+          <opspot-button-thumbs-up [object]="entity"></opspot-button-thumbs-up>
+          <a class="o-actions__link" id="post-card-comment">
+            <i class="icon-message-square f-15"></i>
+            <span class="o-action-count text-sm grey" id="post-card-comment-count">
+              <span>{{commentsCount}}</span>
+            </span>
+          </a>
+          <a class="o-actions__link" alt="share" id="post-card-share">
+            <i class="icon-share-2 f-15"></i>
+            <span class="o-action-count text-sm grey" id="post-card-share-count">
+              <span>{{entity?.reminds}}</span>
+            </span>
+          </a>
+          <!-- <opspot-button-comment [object]="entity"></opspot-button-comment> -->
+          <a class="o-actions__link" id="post-card-impressions">
+            <i class="icon-eye f-15"></i>
+            <span class="o-action-count text-sm grey" id="post-card-impression-count">
+              <span>{{ entity.impressions | number }}</span>
+            </span>
+          </a>
+          <!-- <opspot-button-remind [object]="entity"></opspot-button-remind> -->
+          <a class="o-actions__link o-actions__link--coin" id="post-card-contribute-icon" [hidden]="entity?.entity_type == 'inthespotlight'">
+            <div class="tooltip_coin"><i class="icon-coins f-15"></i>
+              <span class="tooltip_coin__text">
+                <div class="float-left"><i class="icon-coins f-15"></i></div>
+                <div class="o-action-count text-sm grey float-left">
+                  <span *ngIf="entity.wire_totals">{{ entity.wire_totals.tokens | token:18 | abbr }}</span>
+                </div>
+              </span>
+            </div>
+          </a>
+        </div>
+        <!--explore action end-->
+      </div><!-- explore action block end -->
+    </div><!-- media info end -->
+  </div>
+</ng-template>
