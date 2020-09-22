@@ -1,7 +1,7 @@
 <ul class="o-organisation-talents-list scrollbar scrollbar-default">
   <li class="o-organisation-talents-list__user-list" *ngFor="let talent of talents | slice: 0:5">
     <opspot-talent-card [talent]="talent">
-      <app-talent-action-button style="position: relative;" [talent]="talent" (remove)="remove(talent)">
+      <app-talent-action-button style="position: relative;" [talent]="talent" [organization]="organization" (remove)="remove(talent)">
       </app-talent-action-button>
     </opspot-talent-card>
   </li>

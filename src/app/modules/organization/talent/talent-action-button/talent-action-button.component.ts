@@ -3,10 +3,10 @@ import { Client } from '../../../../services/api';
 
 @Component({
   selector: 'app-talent-action-button',
-  inputs: ['_talent : talent'],
+  inputs: ['_talent : talent', 'organization'],
   outputs: ['_remove: remove'],
   template: `
-  <button class="icon-more-vertical btnDefault" id="card-user-action-button" (click)="toggleMenu($event)">
+  <button class="icon-more-vertical btnDefault" id="card-user-action-button" *ngIf="organization['is:owner']" (click)="toggleMenu($event)">
 
   </button>
 
@@ -31,7 +31,8 @@ export class TalentactionbuttonComponent implements OnInit {
     this.talent = value;
   }
   _remove: EventEmitter<any> = new EventEmitter();
-
+  organization: any = {
+  };
 
   ngOnInit() {
   }
