@@ -71,6 +71,7 @@ export class OrganizationProfile {
   private videoChatActiveSubscription;
   private updateMarkersSubscription;
   // showGathering = false;
+  // talentsToggele = false;
 
 
   constructor(
@@ -493,7 +494,6 @@ export class OrganizationProfile {
           // make update to local var
           // this.activityResp.emit(payload);
           this.appendTalent();
-
         }
       }
       )
@@ -518,4 +518,10 @@ export class OrganizationProfile {
     //  console.log(members)
     this.talentsMobile = talents['talents']
   }
+
+  showTalents() {
+    this.router.navigate([`/organization/${this.organization.guid}/talent/members`])
+  }
+
+
 }

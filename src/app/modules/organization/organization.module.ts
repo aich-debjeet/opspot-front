@@ -41,6 +41,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { WireModule } from '../wire/wire.module';
 import { CommentsModule } from '../comments/comments.module';
 import { ModalsModule } from '../modals/modals.module';
+import { MobileTalentiListComponent } from './talent/mobile-talenti-list/mobile-talenti-list.component';
 
 
 
@@ -69,7 +70,9 @@ const routes: Routes = [
   { path: 'organization/card/:guid', component: OrganizationJoinRequestMobile },
   { path: 'organization/:guid/talent', component: CreateTalent },
   { path: 'organization/:guid/talent/edit/:talentGuid', component: EditTalentComponent },
-  { path: 'organization/:guid/talent/view/:talentGuid', component: ViewTalentComponent }
+  { path: 'organization/:guid/talent/view/:talentGuid', component: ViewTalentComponent },
+  { path: 'organization/:guid/talent/members', component: MobileTalentiListComponent },
+
 
 ]
 
@@ -118,6 +121,7 @@ const routes: Routes = [
     TalentactionbuttonComponent,
     EditTalentComponent,
     ViewTalentComponent,
+    MobileTalentiListComponent,
   ],
   exports: [
     OrganizationProfile,
