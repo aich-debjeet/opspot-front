@@ -33,7 +33,7 @@
                           Gregorio Meier
                     </div>
                   </div> -->
-            <opspot-talent-card [talent]="talent">
+            <opspot-talent-card [talent]="talent" style="width:100%;">
               <app-talent-action-button style="position: relative;" [talent]="talent" (remove)="remove(talent)" 
               [organization]="organization"></app-talent-action-button>
             </opspot-talent-card>
@@ -63,8 +63,24 @@
 <!--o-talent-member-popup ends-->
 
 <style>
+  input:focus {
+    box-shadow: none;
+  }
+
   .scroll-div {
-    overflow-y: scroll;
     height: 453px;
+    overflow-y: scroll;
+  }
+
+  .m-infinite-scroll-manual {
+    padding: 8px;
+    display: block;
+    width: auto;
+    margin: auto;
+    max-width: 200px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
   }
 </style>
