@@ -85,7 +85,7 @@
             </span>
           </a>
           <!-- <opspot-button-remind [object]="entity"></opspot-button-remind> -->
-          <a class="o-actions__link o-actions__link--coin" id="post-card-contribute-icon">
+          <a class="o-actions__link o-actions__link--coin" id="post-card-contribute-icon" [hidden]="entity?.entity_type == 'inthespotlight'">
             <div class="tooltip_coin"><i class="icon-coins f-15"></i>
               <span class="tooltip_coin__text">
                 <div class="float-left"><i class="icon-coins f-15"></i></div>
