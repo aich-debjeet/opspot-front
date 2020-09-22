@@ -1,119 +1,139 @@
+
 @import "src/assets/helpers/variables";
 
 @import "node_modules/sass-mq/_mq";
-
 //popup css
-.o-talent-member-popup {
+.o-talent-member-popup{
   width: 556px;
   border-radius: 4px;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   padding: 46px 40px;
   position: relative;
   @include mq($from: $mobile_sm, $until: $tablet) {
-    padding: 40px 15px;
+      padding: 40px 15px;
   }
-  .close {
-    position: absolute;
-    right: 22px;
-    top: 22px;
-  }
+      .close{
+          position: absolute;
+          right: 22px;
+          top: 22px;
+      }
 }
 //body css
-.o-talent-member-popup-body {
-  .form-control {
-    border: 0px;
-    margin: 30px 0px 0px;
+.o-talent-member-popup-body{
+  .form-control{
+      border:0px;
+      margin: 30px 0px 0px;
   }
-  .icon-search {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    line-height: 20px;
-    font-size: 15px;
+  .icon-search{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      line-height: 20px;
+      font-size: 15px;
   }
-  .form-group {
-    margin-bottom: 21px;
+  .form-group{
+      margin-bottom: 21px;
   }
-  .o-talent-members-list {
-    height: 300px;
-    overflow: scroll;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+  .o-talent-members-list{
+      height: 300px;
+      overflow: scroll;
+      &::-webkit-scrollbar { 
+          display: none; 
+      }
   }
-  .o-talent-members-info__option a {
-    margin-left: 15px;
+  .o-talent-members-info__option a{
+      margin-left: 15px;
   }
   .o-talent-members-info__option a i {
-    font-size: 20px;
+      font-size: 20px;
   }
-  .text-md {
-    font-size: 15px;
-    font-weight: 500;
+  .text-md{
+      font-size: 15px;
+      font-weight: 500;
   }
 }
 //responsive css for talent member popup
-@include mq($until: $tablet) {
-  .o-talent-member-popup-body {
-    padding: 16px 15px;
-    .form-control {
-      margin: 0px 0px;
-    }
-    .form-group {
+@include mq($until:$tablet){
+  .o-talent-member-popup-body{
+      padding: 16px 15px;
+      .form-control {
+          margin: 0px 0px;
+      }
+      .form-group{
       margin-bottom: 7px;
-    }
-    .o-talent-members-list {
-      height: calc(100vh - 123px);
-    }
-    .o-talent-members-info__option a {
-      margin-left: 10px;
-    }
+      }
+      .o-talent-members-list{
+          height: calc(100vh - 123px);
+      }
+      .o-talent-members-info__option a {
+          margin-left: 10px;
+      }
+  } 
+  .o-talent-list-mob-header {
+      border-radius: 0;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 6px 10px 0 rgba(144, 164, 174, 0.16), 0 1px 12px 0 rgba(144, 164, 174, 0.18), 0 3px 5px 0 rgba(144, 164, 174, 0.2);
+      .without-nav-header__title{
+          text-align: center;
+          margin-left:0;
+      }
   }
 }
 //responsive css for talent invite member popup
-@include mq($until: $tablet) {
-  .o-talent-invite-member-popup-mob {
-    .btn-sm {
-      padding: 3px 14px;
-      line-height: 14px;
-      background-color: #0288d1;
-      color: #fff;
-    }
+@include mq($until:$tablet){
+  .o-talent-invite-member-popup-mob{
+      .btn-sm{
+          padding: 3px 14px;
+          line-height: 14px;
+          background-color: #0288D1;
+          color: #fff;
+      }
   }
 }
 
-.o-organisation-talent-members-list {
+
+
+
+
+
+
+
+
+
+.o-organisation-talent-members-list{
   width: 100%;
   list-style: none;
-//   height: 453px;
-//   overflow-y: scroll;
+  height: 453px;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   &::-webkit-scrollbar {
-    width: 0.2em;
-    height: 83px;
+      width: .2em;
+      height: 83px;
   }
-
+  
   &::-webkit-scrollbar-track {
-    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background: white;
-    margin-left: 14px;
+      // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      background:white; 
+      margin-left:14px;
   }
-
+  
   &::-webkit-scrollbar-thumb {
-    background-color: $grey-light;
-    outline: 1px solid white;
-    margin-left: -20px;
+      background-color: $grey-light;
+      outline: 1px solid white;
+      margin-left:-20px;
   }
-  &__user-list {
-    width: 100%;
-    list-style-type: none;
-    margin: 9px 0px;
-    display: inline-block;
+  &__user-list{
+      width: 100%;
+      list-style-type: none;
+      margin: 9px 0px;
+      display: flex;
   }
 }
 
 //***********  user list style already in organization-talent.scss u can use the same otherwise u can take this
+
 
 // user list card
 
