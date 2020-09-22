@@ -7,6 +7,7 @@ import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 
 import { OrganizationService } from '../../organization-service';
+import { CommonEventsService } from '../../../../services/common-events.service';
 
 interface OpspotOrganizationResponse {
   organization: OpspotOrganization;
@@ -47,6 +48,7 @@ export class OrganizationProfileFeed {
   kickSuccess: boolean = false;
   kickUser: any;
   paramsSubscription: Subscription;
+  commService$: Subscription
 
   @ViewChild('poster') private poster: PosterComponent;
 
@@ -54,7 +56,8 @@ export class OrganizationProfileFeed {
     public session: Session,
     public client: Client,
     public service: OrganizationService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private commService: CommonEventsService) { }
 
   ngOnInit() {
     // this.$organization = this.service.$group.subscribe((org) => {
@@ -82,6 +85,16 @@ export class OrganizationProfileFeed {
       if (this.organization) {
         this.load(true);
         this.setUpPoll();
+      }
+    });
+
+    this.commService$ = this.commService.listen().subscribe((e: any) => {
+      if (e.component && e.action) {
+        if (e.component === 'OrganizationProfileFeed') {
+          if (e.action === 'appendTalent') {
+            this.load(true);
+          }
+        }
       }
     });
   }
@@ -124,6 +137,7 @@ export class OrganizationProfileFeed {
     // this.$organization.unsubscribe();
     clearInterval(this.pollingTimer);
     this.paramsSubscription.unsubscribe();
+    this.commService$.unsubscribe();
   }
 
   prepend(activity: any) {

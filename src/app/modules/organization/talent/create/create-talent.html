@@ -1,0 +1,103 @@
+<div class="o-create-talent" [hidden]="!showDesktop && showMobile">
+    <div class="o-create-talent-head o-create-talent-head--border">
+        <div class="o-create-talent__title text-lg f500">{{label}} 
+            <a class="o-create-dropdown-style">
+                <span class="text-lg primary f500">#Talent<a class="icon-chevron-down"></a></span>
+            </a>
+        </div>
+        <a class="close"><i class="icon-x"></i></a>
+    </div><!--boost head end-->
+    <div class="o-create-talent-body o-create-talent-body--flex">
+    <form [formGroup]="createTalentForm">
+        <div class="form-group">
+            <label>Talent Profile</label>
+            <input type="text" id="Talent Profile" placeholder="Type Talent Name" class="form-control form-control-lg"
+            formControlName="title">
+            <div class="error text-sm"
+                    *ngIf="talentSubmitted && createTalentForm.get('title').errors?.required">
+                    This is required
+            </div>
+        </div><!--Talent Profile ends-->
+        <div class="form-group">
+            <label>Description<span class="text-sm grey description-width">21/300</span></label>
+            <textarea class="form-control" id="Description" rows="5" formControlName="description"></textarea>
+            <div class="error text-sm"
+                    *ngIf="talentSubmitted && createTalentForm.get('description').errors?.required">
+                    This is required
+            </div>
+        </div><!--Event Description-->
+        <div class="form-group">
+            <label>Add Media</label>
+            <div class="o-create-talent-cover-image">
+                <div class="fileUpload-preview-talent ml-25" *ngFor="let image of cards">
+                    <div class="o-create-talent-cover-image__avatar">
+                        <img [src]="checkForSrc(image)" alt="">
+                    </div>
+                    <a class="o-create-talent-cover-image__close" (click)="removeAttachment(file, image.guid)"><i class="icon-x"></i></a>
+                    <div class="talent-media-video" *ngIf="image.entity_type === 'video'"><img src="assets/svg/playfill.svg" alt=""></div>
+                </div><!--file preview ends--> 
+                <div class="fileUpload ml-25" *ngIf="this.cards.length < 4">
+                    <span class="icon-plus"></span>
+                    <input type="file"accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov" id="file" #file1 class="upload" name="attachment"
+                    (change)="uploadAttachment(file1, $event)" />
+                </div><!--file upload ends-->
+            </div>
+            <!-- <div class="text-sm grey mt10">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>                      -->
+        </div><!--image upload-->
+    </form>
+    </div><!--body ends-->
+    <div class="o-create-talent-footer">
+        <button type="button" class="btn btn-primary btn-sm" (click)="create()" [disabled]="inProgress || !createTalentForm.valid">Post</button><!--for event page-->
+    </div>
+</div>
+
+<div [hidden]= "showDesktop && !showMobile">
+<div class="container hidden-above-tablet o-create-talent-mob-header">
+    <div class="without-nav-header o-reg-skill-mob-header">
+        <a (click)="goBack();"><i class="icon-arrow-left"></i> </a>
+        <div class="without-nav-header__title caption-bold f500">{{label}}  <a class="o-create-dropdown-style">
+                <a class="text-lg primary f500">#Talent<a class="icon-chevron-down"></a></a>
+            </a>
+        </div>
+        <a class="primary greycaption-bold f500" (click)="create()">Post</a>
+    </div>
+  </div>
+  <div class="o-create-talent-mob">
+    <form [formGroup]="createTalentForm">
+        <div class="form-group">
+                <label>Talent Profile</label>
+                <input type="text" id="Talent Profile Mobile" placeholder="Type Talent Name" class="form-control form-control-lg"
+                formControlName="title">
+                <div class="error text-sm"
+                    *ngIf="talentSubmitted && createTalentForm.get('title').errors?.required">
+                    This is required
+                </div>
+        </div>
+        <div class="form-group">
+            <label>Description<span class="text-sm grey description-width">21/300</span></label>
+            <textarea class="form-control" id="Description Mobile" rows="5" formControlName="description"></textarea>
+            <div class="error text-sm"
+                    *ngIf="talentSubmitted && createTalentForm.get('description').errors?.required">
+                    This is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Add Media</label>
+            <div class="o-create-talent-cover-image">
+                <div class="fileUpload-preview-talent ml-25" *ngFor="let image of cards">
+                    <div class="o-create-talent-cover-image__avatar">
+                        <img [src]="checkForSrc(image)" alt="">
+                    </div>
+                    <a class="o-create-talent-cover-image__close" (click)="removeAttachment(file, image.guid)"><i class="icon-x"></i></a>
+                    <div class="talent-media-video" *ngIf="image.entity_type === 'video'"><img src="assets/svg/playfill.svg" alt=""></div>
+                </div> 
+                <div class="fileUpload ml-25" *ngIf="this.cards.length < 4">
+                    <span class="icon-plus"></span>
+                    <input type="file" accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov" id="file1" #file class="upload" name="attachment1"
+                    (change)="uploadAttachment(file, $event)" />
+                </div>
+            </div>                 
+        </div>
+    </form>
+  </div>
+  </div>

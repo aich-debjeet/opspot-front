@@ -102,7 +102,7 @@
   <!-- Rich content -->
   <div class="m-rich-embed"
   id="nsfw_media_post_blanket"
-    *ngIf="activity.perma_url && activity.title && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'"
+    *ngIf="activity.perma_url && activity.title && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album' && activity.entity_type !== 'talent'"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
@@ -114,7 +114,7 @@
   </div>
 
   <!-- Album post-->
-  <div *ngIf="activity.entity_type === 'album' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'">
+  <div *ngIf="activity.entity_type === 'album' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event' && activity.entity_type !== 'talent'">
     <div
       class="feed-media" id="nsfw_media_post_blanket" *ngIf="activity?.custom_data && activity?.custom_data.length > 1" [routerLink]="['/media', activity.guid]"
       [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }">
@@ -157,7 +157,7 @@
   </div>
 
   <!-- opportunity -->
-  <div *ngIf="activity.entity_type === 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event' && activity.entity_type !== 'album'">
+  <div *ngIf="activity.entity_type === 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event' && activity.entity_type !== 'album' && activity.entity_type !== 'talent'">
     <div class="feed-card-opportunity-block" id="activity-opportunity-postcard">
       <div class="feed-card-opportunity-block__top">
         <!-- <div class="opportunity-image" [routerLink]="['/opportunity',activity.guid]" [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"> -->
@@ -196,7 +196,7 @@
   </div>
 
   <!--BlueStore-->
-  <div *ngIf="activity.entity_type === 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'">
+  <div *ngIf="activity.entity_type === 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'event'  && activity.entity_type !== 'album' && activity.entity_type !== 'talent'">
     <!-- <div [routerLink]="['/item', activity.guid]" class="feed-media" *ngIf="activity?.custom_data" id="activity-bluestore-postcard" [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"> -->
     <div [routerLink]="['/item', activity.guid]" class="feed-media" *ngIf="activity?.custom_data" id="activity-bluestore-postcard">
       <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
@@ -238,7 +238,7 @@
   </div>
 
   <!--Showtime-->
-  <div *ngIf="activity.entity_type === 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'">
+  <div *ngIf="activity.entity_type === 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album' && activity.entity_type !== 'talent'">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility"></div>
     <!-- <div [routerLink]="[routerLink1, activity.guid]" class="feed-media" [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"> -->
     <div [routerLink]="[routerLink1, activity.guid]" class="feed-media">
@@ -275,6 +275,118 @@
     </div>
   </div>
 
+  <!-- <div class="o-card feed"> -->
+    <!-- <div class="feed-head">
+        <a class="o-avatar"><img src="assets/demo/amzon-icon.png" alt=""></a>
+        <div class="o-avatar__info">
+            <div class="o-avatar-det-block">
+                <span class="text-md grey o-posts-det"><a class="o-avatar__name">Amazon</a>
+                added a talent</span>
+            </div>
+            <div class="grey m-l-8 o-posts-tym"><span>2m ago</span> <span class="o-posts-public-private"><i class="icon-public"></i></span></div>
+        </div>
+        <div class="o-feed-head-action">
+            <a href="#" class="head-action__link" alt="bookmark">
+                <div class="o-sprite-icon o-sprite-icon--bookmark spot-animation">
+                    <a id="btn_bookmark" class="sprite-btn sprite-btn--style">
+                        <span aria-label="like" class="bookmark-outline "></span>
+                    </a>
+                </div>
+            </a>
+            <div class="o-option-drop">
+                <div onclick="myFunction()" class="o-option-drop__btn head-action__link"><img src="assets/svg/more-horizontal.svg" alt="" class="head-action__icon"></div>
+                <div id="o-option-dropdown" class="o-option-drop__block">
+                    <a href="#">Edit</a>
+                    <a href="#">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div *ngIf="activity.entity_type === 'talent' && activity.entity_type !== 'event' && activity.entity_type !== 'item' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'album'">
+    <div class="feed-card-talent-block">
+        <div class="feed-card-talent-block__title">
+            <h4 class="f500">Talent Alert</h4>
+        </div><!--title ends-->
+        <div class="feed-card-talent-block__avatar">
+            <img *ngIf="activity?.custom_data" [src]="activity?.custom_data[0].src || activity?.custom_data[0].thumbnail_src" 
+            (error)="activity?.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png' ||
+            activity.custom_data[0].thumbnail_src = opspot.cdn_assets_url + 'assets/ops_icon.png'" alt="">
+        </div><!--avatar ends-->
+        <div class="feed-card-talent-block__info">
+            <div class="caption-bold">{{ activity.title}}</div>
+            <!-- <div class="text-md grey">@marian</div> -->
+        </div><!--info ends-->
+        <div class="feed-card-talent-block__btn">
+          <m-messenger--channel-button
+          *ngIf="session.getLoggedInUser().guid != activity.owner_guid"
+          [user]="activity.ownerObj"
+          [message]="reachoutMessage"
+          [label]="'Reach Out'"
+          ></m-messenger--channel-button>        
+        </div><!--btn ends-->
+        <div class="feed-card-talent-block__discription">
+            <p class="text-md grey-darker">
+              {{activity?.blurb | truncate:[100, '...']}}
+            </p>
+        </div><!-- discription ends-->
+    </div><!--talent block ends-->
+    <div [routerLink]="['/organization', activity?.containerObj?.guid, 'talent', 'view', activity.guid ]" class="feed-media" *ngIf="activity?.custom_data">
+      <a *ngFor="let media of activity.custom_data | slice:0:3; let i = index;" class="feed-media__link">
+        <!-- [style.backgroundImage]="'url(' + media.src + ')'" -->
+        <img [src]="media.src" alt="" class="feed-media__img" *ngIf="media.entity_type !== 'video'"
+          (error)="media.src = opspot.cdn_assets_url + 'assets/ops_icon.png'">
+        <img [src]="media.thumbnail_src" alt="" class="feed-media__img" *ngIf="media.entity_type === 'video'"
+          (error)="media.thumbnail_src = opspot.cdn_assets_url + 'assets/ops_icon.png'">
+        <div class="feed-media-overlay" *ngIf="media.entity_type === 'video'">
+           <div class="feed-media-video__icon"><img src="assets/svg/playfill.svg" alt=""></div>
+        </div>
+        <div *ngIf="i >= 2 && activity?.custom_data.length >= 4" class="feed-media-overlay">
+          <h3 class="white">+{{ activity.custom_data.length - 3}}</h3>
+        </div>
+      </a>
+    </div>
+    </div>
+    <!-- <div class="o-actions">
+        <div href="#" class="o-actions__link" onclick="myFunction()" alt="like">
+            <div id="spot-bouncing" class="o-sprite-icon">
+                <a id="btn_new" class="sprite-btn sprite-btn--style">
+                    <span aria-label="like" class="spot-outline"></span>
+                </a>
+            </div>
+            <span class="o-action-count text-sm grey">
+                <span>12k</span>
+            </span>
+        </div>
+        <a href="#" class="o-actions__link" alt="message">
+            <i class="icon-message-square f-15"></i>
+            <span class="o-action-count text-sm grey">
+                <span>43</span>
+            </span>
+        </a>
+        <a href="#" class="o-actions__link" alt="views">
+            <i class="icon-eye f-15"></i>
+            <span class="o-action-count text-sm grey">
+                <span>2k</span> 
+            </span>
+        </a>
+        <a href="#" class="o-actions__link" alt="share">
+            <i class="icon-share-2 f-15"></i>
+            <span class="o-action-count text-sm grey">
+                <span>56</span> 
+            </span>
+        </a>
+    </div>
+    <div class="o-comments-compose">
+        <div class="o-avatar-sm">
+            <img src="assets/demo/avatar.png" alt="">
+        </div>    
+        <div class="o-comments-composer">
+            <textarea rows="1" placeholder="Write a comment"></textarea>
+        </div>
+    </div> -->
+<!-- </div> -->
+
+
   <div class="mdl-card__supporting-text message" [hidden]="!activity.title || activity.perma_url || editing"
     [innerHtml]="activity.title | tags"></div>
 
@@ -288,7 +400,7 @@
   <!-- End translation -->
 
   <div class="opspot-editable-container"
-    *ngIf="editing && activity.custom_type && activity.title &&  activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'">
+    *ngIf="editing && activity.custom_type && activity.title &&  activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album' && activity.entity_type !== 'talent'">
     <!-- Please not the intentional single way binding for ngModel, we want to be able to cancel our changes -->
     <textarea class="mdl-card__supporting-text message" name="title" [ngModel]="activity.title" #titleEdit
       [autoGrow]></textarea>
@@ -338,7 +450,7 @@
   <!-- Custom type:: batch -->
   <div class="item item-image allow-select" id="nsfw_media_post_blanket"
     [ngClass]="{ 'm-mature-content': attachment.shouldBeBlurred(activity), 'm-mature-content-shown': attachment.isForcefullyShown(activity) }"
-    *ngIf="activity.custom_type == 'batch' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album'">
+    *ngIf="activity.custom_type == 'batch' && activity.entity_type !== 'opportunity' && activity.entity_type !== 'item' && activity.entity_type !== 'event'  && activity.entity_type !== 'album' && activity.entity_type !== 'talent'">
     <div class="m-mature-overlay" (click)="activity.mature_visibility = !activity.mature_visibility">
       <span class="m-mature-overlay-note">
         <!-- <i class="material-icons" title="Mature content" i18n-title="@@M__COMMON__MATURE_CONTENT">explicit</i> -->

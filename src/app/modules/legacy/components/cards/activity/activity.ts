@@ -13,13 +13,12 @@ import { OpportunityFormComponent } from '../../../../../modules/forms/opportuni
 import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-form/blue-store-form.component';
 import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
 import { Router } from '@angular/router';
+import { CreateTalent } from '../../../../../modules/organization/talent/create/create-talent';
 
 @Component({
   moduleId: module.id,
   selector: 'opspot-activity',
-  host: {
-
-  },
+  host: {},
   inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle'],
   outputs: ['_delete: delete', 'commentsOpened', 'onViewed', '_deleteBookmark: deleteBookmark'],
   templateUrl: 'activity.html',
@@ -92,7 +91,8 @@ export class Activity {
     public translationService: TranslationService,
     private overlayModal: OverlayModalService,
     private cd: ChangeDetectorRef,
-    private router: Router) {
+    private router: Router,
+  ) {
     this.element = _element.nativeElement;
     this.isVisible();
   }
@@ -130,7 +130,7 @@ export class Activity {
       this.reachoutMessage += value['perma_url'];
     }
 
-//to display preview while sharing on fb
+    //to display preview while sharing on fb
     this.activity.url = window.Opspot.site_url + 'media/' + value.guid;
 
     if (
@@ -331,7 +331,22 @@ export class Activity {
           }
         }).present()
       }
-
+    } else if (this.activity.entity_type === 'talent') {
+      if (window.innerWidth > 785) {
+        this.overlayModal.create(CreateTalent, this.activity, {
+          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+          // listen to the update callback
+          onUpdate: (payload: any) => {
+            // make update to local var
+            this.udpateTalent(payload);
+            // this.udpateShowtime(payload);
+          }
+        }).present()
+      } else {
+        // this.navUpdateOrg(this.activity);
+        // const navData: NavigationExtras = { state: this.activity };
+        this.router.navigate([`/organization/${this.activity.containerObj.guid}/talent/edit/${this.activity.guid}`]);
+      }
     }
     else {
       this.editing = true;
@@ -376,6 +391,14 @@ export class Activity {
     //   this.activity.custom_data[0].src = this.opspot.cdn_assets_url + 'assets/logos/logo.svg'
     // }
     // trigger component observe new changes
+    this.detectChanges();
+  }
+
+  udpateTalent(data: any) {
+    this.activity.blurb = data.description;
+    //this.activity.attachmentguid = data.attachment_guid;
+    this.activity.title = data.title;
+
     this.detectChanges();
   }
 

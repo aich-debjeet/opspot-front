@@ -26,6 +26,26 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { TagInputModule } from 'ngx-chips';
 import { OrganizationJoinRequestComponent } from './organizations-join-request/organization-join-request.component';
 import { OrganizationJoinRequestMobile } from './organizations-join-request-mobile/organization-join-request-mobile';
+import { CreateTalent } from './talent/create/create-talent';
+import { TalentPreviewComponent } from './talent/talent-preview/talent-preview.component';
+import { TalentCardComponent } from './talent/talent-card/talent-card.component';
+import { TalentListComponent } from './talent/talent-list/talent-list.component';
+import { TalentactionbuttonComponent } from './talent/talent-action-button/talent-action-button.component';
+import { EditTalentComponent } from './talent/edit-talent/edit-talent.component';
+import { ViewTalentComponent } from './talent/view-talent/view-talent.component';
+import { MessengerModule } from '../messenger/messenger.module';
+import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
+import { PostMenuModule } from '../../common/components/post-menu/post-menu.module';
+import { VideoModule } from '../media/components/video/video.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { WireModule } from '../wire/wire.module';
+import { CommentsModule } from '../comments/comments.module';
+import { ModalsModule } from '../modals/modals.module';
+import { MobileTalentiListComponent } from './talent/mobile-talenti-list/mobile-talenti-list.component';
+
+
+
+// import { CreateTalentMobileComponent } from './talent/create/create-talent-mobile/create-talent-mobile.component';
 
 
 const routes: Routes = [
@@ -36,6 +56,8 @@ const routes: Routes = [
       { path: 'feed', component: OrganizationProfileFeed },
       { path: 'activity', redirectTo: 'feed' },
       { path: 'members', component: OrganizationProfileMembers },
+      // { path: 'talent', component: CreateTalent },
+
     ],
   },
   { path: 'organization/create', component: OrganizationCreator },
@@ -45,7 +67,13 @@ const routes: Routes = [
   { path: 'organization/:filter', component: OrganizationListComponent },
   { path: 'organization', redirectTo: 'organization/all', pathMatch: 'full' },
   { path: 'organization/all-subscribers/:guid', component: OrganizationAllMembers },
-  { path: 'organization/card/:guid', component: OrganizationJoinRequestMobile }
+  { path: 'organization/card/:guid', component: OrganizationJoinRequestMobile },
+  { path: 'organization/:guid/talent', component: CreateTalent },
+  { path: 'organization/:guid/talent/edit/:talentGuid', component: EditTalentComponent },
+  { path: 'organization/:guid/talent/view/:talentGuid', component: ViewTalentComponent },
+  { path: 'organization/:guid/talent/members', component: MobileTalentiListComponent },
+
+
 ]
 
 @NgModule({
@@ -59,7 +87,15 @@ const routes: Routes = [
     PosterModule,
     HashtagsModule,
     InfiniteScrollModule,
-    TagInputModule
+    TagInputModule,
+    ShareMenuModule,
+    MessengerModule,
+    PostMenuModule,
+    VideoModule,
+    SlickCarouselModule,
+    WireModule,
+    CommentsModule,
+    ModalsModule
   ],
   declarations: [
     OrganizationProfile,
@@ -77,7 +113,15 @@ const routes: Routes = [
     OrganizationAllMembers,
     OrganizationMemberPreviews,
     OrganizationJoinRequestComponent,
-    OrganizationJoinRequestMobile
+    OrganizationJoinRequestMobile,
+    CreateTalent,
+    TalentPreviewComponent,
+    TalentCardComponent,
+    TalentListComponent,
+    TalentactionbuttonComponent,
+    EditTalentComponent,
+    ViewTalentComponent,
+    MobileTalentiListComponent,
   ],
   exports: [
     OrganizationProfile,
@@ -92,7 +136,8 @@ const routes: Routes = [
     OrganizationListComponent
   ],
   entryComponents: [
-    OrganizationJoinRequestComponent
+    OrganizationJoinRequestComponent,
+    CreateTalent
   ],
   providers: [
     CanDeactivateGroupService
