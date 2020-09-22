@@ -2,6 +2,16 @@
 @import "src/assets/helpers/variables";
 @import "node_modules/sass-mq/_mq";
 
+
+
+
+.btn_media{
+    padding-top: 20px;
+    padding-bottom: 80px;
+    float: left;
+    font-size: 15px;
+}
+
 .about-sec{
     width: 100%;
     min-height: 100vh;
@@ -201,3 +211,4 @@
           font-size: 20px;
       }
   }
+  

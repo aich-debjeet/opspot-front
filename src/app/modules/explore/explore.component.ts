@@ -10,7 +10,7 @@ import { InTheSpotlightComponent } from '../forms/in-the-spotlight/in-the-spotli
 
 @Component({
   selector: 'app-explore',
-  host: { '(keyup)': 'keyup($event)' },
+  host: { '(keyup)': 'keyup_srch($event)' },
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.scss']
 })
@@ -121,7 +121,7 @@ export class ExploreComponent implements OnInit {
   //   }
   // }
 
-  switchCategoryType(property: string,value: string) {
+  switchCategoryType(property: string, value: string) {
     console.log(property, value)
     this._activeFilter = property;
     this._loadMoreFilter = value;
@@ -167,32 +167,23 @@ export class ExploreComponent implements OnInit {
     });
   }
 
-  // keyup event for search
-  keyup(e) {
-    // if (e.keyCode === 13) {
-    // console.log(this.q);
-    // this.search();
-    if (!this.filteredArray || !this.q) {
-      return (this.filteredArray = this.exploreArray);
+
+  keyup_srch(eve: any) {
+    if (this.q.length == 0) {
+      this.filteredArray = this.exploreArray;
+    } else {
+      if (this._loadMoreFilter == 'inthespotlight') {
+        this.filteredArray = this.exploreArray.filter(item => item.title.toString().toLowerCase() == this.q.toString().toLowerCase())
+      }
+      else if (this._loadMoreFilter == 'group' || this._loadMoreFilter == 'organization') {
+        this.filteredArray = this.exploreArray.filter(item => item.name.toString().toLowerCase() == this.q.toString().toLowerCase())
+      } else if (this._loadMoreFilter == 'marketplace' || this._loadMoreFilter == 'event') {
+        this.filteredArray = this.exploreArray.filter(item => item.blurb.toString().toLowerCase() == this.q.toString().toLowerCase())
+      }
+      else {
+        this.filteredArray = this.exploreArray.filter(item => item.message.toString().toLowerCase() == this.q.toString().toLowerCase())
+      }
     }
-    // filter items array, items which match and return true will be
-    // kept, false will be filtered out
-    //   console.log('Before filter',this.filteredArray)
-    // this.filteredArray = this.exploreArray.filter((item) => item.message.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1);
-    // console.log('After Filter',this.filteredArray)
-    const matchFound = this.exploreArray.find(item => item.message.toString().toLowerCase().indexOf(this.q.toLowerCase()) !== -1);
-    if (matchFound) {
-      // console.log('Before filter', this.filteredArray)
-      this.filteredArray = this.exploreArray.filter(
-        item =>
-          item.message
-            .toString()
-            .toLowerCase()
-            .indexOf(this.q.toLowerCase()) !== -1
-      );
-      // console.log('After filter', this.filteredArray)
-    }
-    // }
   }
 
   search() {
@@ -218,7 +209,7 @@ export class ExploreComponent implements OnInit {
     if (filter == 'Organization' || filter == 'organization') {
       _entityType = 'organization';
     }
-    if(filter == 'Community' || filter == 'group'){
+    if (filter == 'Community' || filter == 'group') {
       _entityType = 'group';
     }
     this.inProgress = true;
@@ -227,7 +218,7 @@ export class ExploreComponent implements OnInit {
         `api/v3/explore/${_entityType}`,
         {
           activity_type: _entityType == 'activity' ? filter : '',
-          limit: 12,
+          limit: 50,
           offset: this.offset
         },
         { cache: true }
@@ -242,30 +233,25 @@ export class ExploreComponent implements OnInit {
           if (this.filteredArray && !refresh) {
             if (respData['activity']) {
               this.exploreArray.push(...respData.activity);
-              this.filteredArray = this.exploreArray;
             }
             else if (respData['groups']) {
               this.exploreArray.push(...respData.groups);
-              this.filteredArray = this.exploreArray;
             }
             else if (respData['organizations']) {
               this.exploreArray.push(...respData.organizations);
-              this.filteredArray = this.exploreArray;
             }
           } else {
             if (respData['activity']) {
               this.exploreArray.push(...respData.activity);
-              this.filteredArray = this.exploreArray;
             }
             if (respData['groups']) {
               this.exploreArray.push(...respData.groups);
-              this.filteredArray = this.exploreArray;
             }
             if (respData['organizations']) {
               this.exploreArray.push(...respData.organizations);
-              this.filteredArray = this.exploreArray;
             }
           }
+          this.filteredArray = this.exploreArray;
           this.moreData = true;
           this.offset = respData['load-next'];
           this.inProgress = false;

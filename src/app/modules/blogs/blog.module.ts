@@ -18,7 +18,7 @@ import { BlogTileComponent } from './tile/tile.component';
 import { WireModule } from '../wire/wire.module';
 import { CommentsModule } from '../comments/comments.module';
 import { HashtagsModule } from '../hashtags/hashtags.module';
-import { BlogPreviewComponent } from './generic-view/edit/blog-preview/blog-preview.component';
+import { BlogPreviewComponent } from './blog-preview/blog-preview.component';
 import { BlogViewComponent } from './blog-view/blog-view.component';
 import { BlogAllComponent } from './blog-all/blog-all.component';
 import { GenericViewComponent } from './generic-view/generic-view.component';
@@ -31,6 +31,7 @@ import { TagInputModule } from 'ngx-chips';
 const routes: Routes = [
   { path: 'blog/view/:guid/:title', component: BlogViewInfinite },
   { path: 'blog/view/:guid', component: BlogViewInfinite },
+  { path: 'blog/preview/:guid', component: BlogPreviewComponent },
   {
     path: 'blog', component: GenericViewComponent,
     children: [
@@ -87,7 +88,6 @@ const routes: Routes = [
   ],
   entryComponents: [
     BlogCard,
-    BlogPreviewComponent
   ]
 })
 export class BlogModule {
