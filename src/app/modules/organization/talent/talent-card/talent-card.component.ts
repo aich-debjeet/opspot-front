@@ -19,6 +19,8 @@ export class TalentCardComponent implements OnInit {
   }
 
   talent: any;
+  opspot = window.Opspot;
+
   set _talent(value: any) {
     this.talent = value;
   }
