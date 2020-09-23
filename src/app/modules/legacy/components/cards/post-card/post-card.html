@@ -40,6 +40,12 @@
           <img [src]="entity?.custom_data[0]?.thumbnail_src" alt="media">
         </a>
       </div>
+      <div class="o-explore-media-img o-explore-media-img-oberlay"
+        *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'video' && entity?.entity_type == 'inthespotlight'">
+        <a [routerLink]="routerlink" class=" o-explore-media-img-oberlay">
+          <img src="assets/videos/video_thumbnail.png" alt="media">
+        </a>
+      </div>
       <div class="o-explore-media-img"
         *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'audio'">
         <a [routerLink]="routerlink">
