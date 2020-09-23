@@ -65,8 +65,8 @@ _opts: any;
     console.log('this.cards',this.cards)
   }
   checkForSrc(object) {
-    if (object && object.entity_type === 'video') {
-      return object.thumbnail_src;
+    if (object && object['src'].includes("data:video/")) {
+      return object['src'] = 'assets/videos/video_thumbnail.png';
     } else {
       return object.src;
     }

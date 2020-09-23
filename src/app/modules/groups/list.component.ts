@@ -140,7 +140,7 @@ export class GroupsListComponent {
 
     this.inProgress = true;
     this.client.get(endpoint, {
-      limit: 12,
+      limit: 50,
       offset: this.offset,
       rating: this.rating
     })
