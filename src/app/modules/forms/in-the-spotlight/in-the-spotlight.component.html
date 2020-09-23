@@ -32,7 +32,7 @@
                 <div class="o-create-spotlight-cover-image">
                     <div class="fileUpload" [hidden]="cards.length != 0">
                         <span class="icon-plus"></span>
-                        <input type="file" class="upload" id="file" accept="image/jpg, image/jpeg, image/png" (change)="uploadAttachment(file, $event)" #file name="image upload" formControlName="media">
+                        <input type="file" class="upload" id="file" accept="image/jpg, image/jpeg, image/png, video/mp4, video/mov," (change)="uploadAttachment(file, $event)" #file name="image upload" formControlName="media">
                     </div>
                     <!--file upload ends-->
                     <section [hidden]="cards.length == 0">
