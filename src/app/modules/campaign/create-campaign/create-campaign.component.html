@@ -15,6 +15,9 @@
                         <span class="icon-plus"></span>
                         <input type="file" name="cover image" class="upload" #file accept="image/jpg, image/jpeg, image/png" (change)="uploadAttachment($event)" formControlName="enrollCoverImage">
                         <div class="text-md grey mt15">Add Cover Image</div>
+                        <div class="error text-sm" *ngIf="campaignForm.get('enrollCoverImage').invalid && (campaignForm.get('enrollCoverImage').dirty || campaignForm.get('enrollCoverImage').touched)">
+                            <p *ngIf="campaignForm.get('enrollCoverImage').errors?.required">Cover Image for this campaign is mandatory.</p>
+                        </div>
                     </div>
                     <div class="fileUpload" [hidden]="!previewCover">
                         <a class="fileUpload-close-temp" (click)="removeAttachment()" id="big-event-event-remove-image">
@@ -22,10 +25,8 @@
                         </a>
                         <img [src]="imgSrc" alt="">
                     </div><!--file upload ends--> 
-                    <div class="error text-sm" *ngIf="campaignForm.get('enrollCoverImage').invalid && (campaignForm.get('enrollCoverImage').dirty || campaignForm.get('enrollCoverImage').touched)">
-                        <p *ngIf="campaignForm.get('enrollCoverImage').errors?.required">Cover Image for this campaign is mandatory.</p>
-                    </div>  
-                </div><!--cover image ends--> 
+                      
+                </div><!--cover image ends-->
                 <div class="form-group">
                     <label>Enrollment Name</label>
                     <input type="text" name="Enrollment Name" class="form-control form-control-lg" formControlName="campaignTitle">
