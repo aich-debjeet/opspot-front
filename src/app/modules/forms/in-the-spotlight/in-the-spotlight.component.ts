@@ -103,8 +103,8 @@ _opts: any;
     return
     const payload:{} = {
       title: this.spotlighForm.value.title,
-      description:this.spotlighForm.value.description,
-      attachment_guid: this.cards.map(a => a.guid).toString()
+      message:this.spotlighForm.value.description,
+      attachment_guid: this.cards.map(a => a.guid)
     }
     this.client.post('api/v4/admin/inthespotlight',payload).then((response)=>{
       console.log('promise fulfilled', response)
