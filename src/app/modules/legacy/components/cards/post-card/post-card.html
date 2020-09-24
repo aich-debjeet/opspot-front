@@ -35,13 +35,13 @@
         </a>
       </div>
       <div class="o-explore-media-img o-explore-media-img-oberlay"
-        *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'video'">
+        *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'video' && entity?.activity_type != 'inthespotlight'">
         <a [routerLink]="routerlink" class=" o-explore-media-img-oberlay">
           <img [src]="entity?.custom_data[0]?.thumbnail_src" alt="media">
         </a>
       </div>
       <div class="o-explore-media-img o-explore-media-img-oberlay"
-        *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'video' && entity?.entity_type == 'inthespotlight'">
+        *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'video' && entity?.activity_type == 'inthespotlight'">
         <a [routerLink]="routerlink" class=" o-explore-media-img-oberlay">
           <img src="assets/videos/video_thumbnail.png" alt="media">
         </a>
@@ -64,7 +64,6 @@
       || entity?.entity_type === 'video' || entity?.entity_type === 'album'">{{entity?.message}}</div>
       <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'event' || entity?.entity_type === 'item'
        || entity?.entity_type === 'opportunity'">{{entity?.blurb}}</div>
-       <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'inthespotlight' && entity?.custom_type === 'batch'">{{entity?.title}}</div>
       <div class="o-media-hashtag" *ngIf="entity?.tags?.length > 0">
         <a class="text-md primary" *ngFor="let tags of entity?.tags "> {{tags}} </a>
       </div><!-- hashtag end -->
@@ -91,7 +90,7 @@
             </span>
           </a>
           <!-- <opspot-button-remind [object]="entity"></opspot-button-remind> -->
-          <a class="o-actions__link o-actions__link--coin" id="post-card-contribute-icon" [hidden]="entity?.entity_type == 'inthespotlight'">
+          <a class="o-actions__link o-actions__link--coin" id="post-card-contribute-icon" [hidden]="entity?.activity_type == 'inthespotlight'">
             <div class="tooltip_coin"><i class="icon-coins f-15"></i>
               <span class="tooltip_coin__text">
                 <div class="float-left"><i class="icon-coins f-15"></i></div>
