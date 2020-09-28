@@ -137,7 +137,8 @@ const routes: Routes = [
   ],
   entryComponents: [
     OrganizationJoinRequestComponent,
-    CreateTalent
+    CreateTalent,
+    TalentListComponent
   ],
   providers: [
     CanDeactivateGroupService

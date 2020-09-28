@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { OpspotHttpClient } from '../../../../common/api/client.service';
 import { OrganizationService } from '../../organization-service';
 import { Session } from '../../../../services/session';
@@ -7,7 +7,7 @@ import { Session } from '../../../../services/session';
   selector: 'opspot-talent-list',
   templateUrl: './talent-list.component.html',
   styleUrls: ['./talent-list.component.scss'],
-  inputs: ['_organization : organization'],
+  // inputs: ['_organization : organization'],
 })
 export class TalentListComponent implements OnInit {
 
@@ -35,8 +35,13 @@ export class TalentListComponent implements OnInit {
     public service: OrganizationService) {
   }
 
-  set _organization(value: any) {
-    this.organization = value;
+  // set _organization(value: any) {
+  //   this.organization = value;
+  //   this.load(true);
+  // }
+
+  @Input('object') set data(object) {
+    this.organization = object;
     this.load(true);
   }
 

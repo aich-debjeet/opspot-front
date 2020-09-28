@@ -6,7 +6,7 @@
     </opspot-talent-card>
   </li>
 </ul><!-- talents list end -->
-<a class="text-md primary talents-seeall" *ngIf="talents.length > 5" (click)="showTalents()">See All</a>
-<m-modal [open]="talentToggele" [allowClose]="true" (closed)="talentToggele = false">
+<a class="text-md primary talents-seeall"  (click)="showTalents()">See All</a>
+<!-- <m-modal [open]="talentToggele" [allowClose]="true" (closed)="talentToggele = false">
   <opspot-talent-list *ngIf="organization" [organization]="organization"></opspot-talent-list>
-</m-modal>
+</m-modal> -->
