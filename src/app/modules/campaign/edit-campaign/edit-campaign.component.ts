@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Client } from '../../../services/api/client';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -22,13 +22,17 @@ export class EditCampaignComponent implements OnInit {
   imgSrc: string;
   cards: Array<any>;
   orgImgSrc: string;
+  @ViewChild('file') coverFile: ElementRef;
+  @ViewChild('fileGallery') fileGallery: ElementRef;
+  @ViewChild('organizationPic') organizationPic: ElementRef;
 
   constructor(
     public client: Client,
     private route: ActivatedRoute,
     private fb: FormBuilder, private title: OpspotTitle, private attachment: AttachmentService,
   ) {
-    console.log('edit a campIGN')
+    console.log('edit a campIGN');
+    this.editForm();
   }
 
   ngOnInit() {
@@ -40,25 +44,47 @@ export class EditCampaignComponent implements OnInit {
   }
   editForm(data?) {
     console.log('form data', data)
-    this.campaignForm = this.fb.group({
-      campaignTitle: [data['title'] ? data['title'] : '', [Validators.required]],
-      campaignDesc: [data['description'] ? data['description'] : '', [Validators.required]],
-      campaignLoc: [data['location'] ? data['location'] : '', [Validators.required]],
-      enrollStartDate: [data['start_time_date'] ? this.date(data['start_time_date']) : '', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
-      enrollEndDate: [data['end_time_date'] ? this.date(data['end_time_date']) : '', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
-      enrollStartTime: [data['start_time_date'] ? this.time(data['start_time_date']) : '', [Validators.required]],
-      enrollEndTime: [data['end_time_date'] ? this.time(data['end_time_date']) : '', [Validators.required]],
-      enrollCoverImage: [data['cover_data'] ? this.setCover(data['cover_data'][0].src) : '', [Validators.required]],
-      gender: [data['allowed_gender'] ? data['allowed_gender'] : '', [Validators.required]],
-      refreshmentMaterials: [data['brevarges'] ? data['brevarges'] : '', [Validators.required]],
-      gallery: [data['custom_data'] ? this.setGallery(data['custom_data']) : '', [Validators.required]],
-      orgName: [data['organiser_name'] ? data['organiser_name'] : '', [Validators.required]],
-      orgAbout: [data['organiser_about'] ? data['organiser_about'] : '', [Validators.required]],
-      orgPic: [data['organiser_data'] ? this.setOrgPic(data['organiser_data']) : '', [Validators.required]],
-      // allowContact: ['', [Validators.required]],
-      price: [data['enrollment_fees'] ? data['enrollment_fees'] : '', [Validators.required]],
-      // duration: ['', [Validators.required]]
-    });
+    if (data != undefined) {
+      console.log('executing if');
+      this.campaignForm.patchValue({
+        campaignTitle: data['title'],
+        campaignDesc: data['description'],
+        campaignLoc: data['location'],
+        orgName: data['organiser_name'],
+        orgAbout: data['organiser_about'],
+        price: data['enrollment_fees'],
+        gender: data['allowed_gender'],
+        refreshmentMaterials: data['brevarges'],
+        enrollStartDate: this.date(data['start_time_date']),
+        enrollEndDate: this.date(data['end_time_date']),
+        enrollStartTime: this.time(data['start_time_date']),
+        enrollEndTime: this.time(data['end_time_date']),
+        enrollCoverImage: this.setCover(data['cover_data'][0].src),
+        gallery: this.setGallery(data['custom_data']),
+        orgPic: this.setOrgPic(data['organiser_data']),
+      });
+      console.log('form', this.campaignForm)
+    } else {
+      this.campaignForm = this.fb.group({
+        campaignTitle: ['', [Validators.required]],
+        campaignDesc: ['', [Validators.required]],
+        campaignLoc: ['', [Validators.required]],
+        enrollStartDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
+        enrollEndDate: ['', [Validators.required, FormValidator.validateDate, FormValidator.datevalidation]],
+        enrollStartTime: ['', [Validators.required]],
+        enrollEndTime: ['', [Validators.required]],
+        enrollCoverImage: ['', [Validators.required]],
+        gender: ['', [Validators.required]],
+        refreshmentMaterials: ['', [Validators.required]],
+        gallery: ['', [Validators.required]],
+        orgName: ['', [Validators.required]],
+        orgAbout: ['', [Validators.required]],
+        orgPic: ['', [Validators.required]],
+        // allowContact: ['', [Validators.required]],
+        price: ['', [Validators.required]],
+        // duration: ['', [Validators.required]]
+      });
+    }
   }
 
   date(dateString) {
@@ -81,6 +107,8 @@ export class EditCampaignComponent implements OnInit {
     this.orgImgSrc = data[0].src;
     return this.orgImgSrc;
   }
+
+  checkKey() { }
 
   loadCampaign(guid: string) {
     this.client.get('api/v3/event/' + guid)

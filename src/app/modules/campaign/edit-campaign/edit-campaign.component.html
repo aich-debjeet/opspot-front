@@ -1,5 +1,5 @@
 <div class="o-create-enrollment">
-    <div class="o-create-enrollment-content" *ngIf="displayForm">
+    <div class="o-create-enrollment-content">
         <div class="o-create-enrollment-header">
             <h4 class="f500">Edit an Enrollment</h4>
         </div>
@@ -128,7 +128,7 @@
                         <span class="icon-plus"></span>
                         <input type="file" name="cover image" class="upload" formControlName="orgPic">
                     </div>
-                    <div class="fileUpload-preview-organiser" [hidden]="orgImgSrc.length == 0">
+                    <div class="fileUpload-preview-organiser" [hidden]="orgImgSrc?.length == 0">
                         <a class="o-enrollment-image" href="javascript:void(0)">
                             <img [src]="orgImgSrc" alt="">
                         </a>
@@ -144,19 +144,6 @@
                 </div>
             </div>
             <!--Profile Picture ends-->
-            <!-- <div class="o-enrollment-radiobtn">
-                  <label>Allow Organiser Contact</label>
-                  <div class="o-create-enrollment-row">
-                      <div class="radiobutton form-group o-enrollment-radiobtn__button mr11">
-                      <input type="radio" name="allowContact" id="radio_1" checked formControlName="allowContact">
-                      <label for="radio_1">Yes</label>
-                      </div>
-                      <div class="radiobutton form-group o-enrollment-radiobtn__button">
-                      <input type="radio" name="allowContact" id="radio_2" formControlName="allowContact">
-                      <label for="radio_2">No</label>
-                      </div>
-                  </div>
-              </div> -->
             <div class="o-create-enrollment-action">
                 <button type="button" class="btn btn-primary mr-18">Create</button>
                 <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
