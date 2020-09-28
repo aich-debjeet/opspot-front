@@ -320,7 +320,7 @@ export class Activity {
     }
     else if (this.activity.entity_type === 'event') {
       if (this.activity.event_type === 'Premium') {
-        this.router.navigateByUrl('/campaign/edit/' + this.activity.guid)
+        this.router.navigateByUrl('/campaign/edit/' + this.activity.entity_guid)
       }
       else if (this.activity.end_time_date) {
         this.router.navigateByUrl('/event/edit/' + this.activity.guid)
