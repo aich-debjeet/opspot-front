@@ -40,6 +40,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { UserPrivacyComponent } from './profile-edit/user-privacy/user-privacy.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { ProjectsComponent } from './profile-edit/projects/projects.component';
 
 const routes: Routes = [
   { path: 'channels/:filter', component: ChannelsListComponent },
@@ -86,7 +87,8 @@ const routes: Routes = [
     WorkComponent,
     EducationComponent,
     AwardsComponent,
-    UserPrivacyComponent
+    UserPrivacyComponent,
+    ProjectsComponent
   ],
   exports: [
     ChannelModulesComponent,
