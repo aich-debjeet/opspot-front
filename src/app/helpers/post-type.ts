@@ -14,6 +14,8 @@ export default function getEntityType(entity) {
     postType = 'bluestore';
   } else if (entity.entity_type === 'blog') {
     postType = 'blog';
+  } else if (entity.entity_type === 'talent') {
+    postType = 'talent';
   } else if (entity.entity_type === 'post'
     || entity.entity_type === 'album'
     || entity.entity_type === 'video'

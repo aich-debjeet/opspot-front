@@ -1,0 +1,28 @@
+<div class="container hidden-above-tablet">
+  <div class="without-nav-header o-talent-list-mob-header">
+    <a (click)="goBack()"><i class="icon-arrow-left"></i> </a>
+    <div class="without-nav-header__title caption-bold f500">Talents</div>
+  </div>
+</div><!-- without nav header end -->
+<div class="o-talent-member-popup-body">
+  <div class="form-group c-form_righticon-md" #el>
+    <input type="text" name="q" [(ngModel)]="q" (keyup)="search(q)" placeholder="Search Talents"
+      i18n-placeholder="@@GROUPS__PROFILE__MEMBERS__SEARCH_PLACEHOLDER"
+      class="form-control form-control-lg bg-grey-light " style="border: 0px;
+            margin: 30px 0px 0px;
+            padding: 1.3rem 0.85rem; box-shadow: none;" />
+    <i class="icon-search" style="position: absolute; top: 9px; right: 12px;"></i>
+  </div>
+
+  <ul class="o-organisation-talent-members-list scrollbar scrollbar-default">
+    <li class="o-organisation-talent-members-list__user-list" *ngFor="let talent of talents">
+      <opspot-talent-card [talent]="talent" style="width: 100%;">
+        <app-talent-action-button style="position: relative;" [talent]="talent" (remove)="remove(talent)"
+          [organization]="organization"></app-talent-action-button>
+      </opspot-talent-card>
+    </li><!-- user list end-->
+  </ul><!-- members list end -->\
+  <infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress">
+  </infinite-scroll>
+</div>
+<!--body ends-->

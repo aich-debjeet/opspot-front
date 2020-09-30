@@ -65,8 +65,8 @@ _opts: any;
     console.log('this.cards',this.cards)
   }
   checkForSrc(object) {
-    if (object && object.entity_type === 'video') {
-      return object.thumbnail_src;
+    if (object && object['src'].includes("data:video/")) {
+      return object['src'] = 'assets/videos/video_thumbnail.png';
     } else {
       return object.src;
     }
@@ -103,8 +103,8 @@ _opts: any;
     return
     const payload:{} = {
       title: this.spotlighForm.value.title,
-      description:this.spotlighForm.value.description,
-      attachment_guid: this.cards.map(a => a.guid).toString()
+      message:this.spotlighForm.value.description,
+      attachment_guid: this.cards.map(a => a.guid)
     }
     this.client.post('api/v4/admin/inthespotlight',payload).then((response)=>{
       console.log('promise fulfilled', response)

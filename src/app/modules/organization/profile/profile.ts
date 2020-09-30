@@ -18,11 +18,14 @@ import { VideoChatService } from '../../videochat/videochat.service';
 import { UpdateMarkersService } from '../../../common/services/update-markers.service';
 import { filter } from "rxjs/operators";
 import { Location } from '@angular/common';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { CreateTalent } from '../talent/create/create-talent';
+import { CommonEventsService } from '../../../services/common-events.service';
 
 @Component({
   selector: 'm-organization--profile',
   templateUrl: 'profile.html',
-  styleUrls: [ './profile.scss' ]
+  styleUrls: ['./profile.scss']
 })
 
 export class OrganizationProfile {
@@ -57,15 +60,18 @@ export class OrganizationProfile {
   inviteToggle: boolean = false;
   memberToggle: boolean = false;
   membersMobile;
+  talentsMobile;
   memberSrc = `${this.opspot.cdn_url}icon/`
   @ViewChild('feed') private feed: OrganizationProfileFeed;
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
+
 
   private reviewCountInterval: any;
   private socketSubscription: any;
   private videoChatActiveSubscription;
   private updateMarkersSubscription;
   // showGathering = false;
+  // talentsToggele = false;
 
 
   constructor(
@@ -81,7 +87,9 @@ export class OrganizationProfile {
     public videochat: VideoChatService,
     private cd: ChangeDetectorRef,
     private updateMarkers: UpdateMarkersService,
-    private _location: Location
+    private _location: Location,
+    private overlayModal: OverlayModalService,
+    private commService: CommonEventsService
 
     // private _location: Location
   ) { }
@@ -94,6 +102,7 @@ export class OrganizationProfile {
     this.paramsSubscription = this.route.params.subscribe(params => {
       if (params['guid']) {
         this.loadMembers(params['guid'])
+        this.loadTalents(params['guid'])
 
         let changed = params['guid'] !== this.guid;
 
@@ -476,4 +485,43 @@ export class OrganizationProfile {
   // backClicked() {
   //   this.showGathering = false;
   // }
+  createTalent() {
+    if (window.innerWidth > 785) {
+      this.overlayModal.create(CreateTalent, this.organization, {
+        class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+
+        onUpdate: (payload: any) => {
+          // make update to local var
+          // this.activityResp.emit(payload);
+          this.appendTalent();
+        }
+      }
+      )
+        .present();
+    } else {
+      this.router.navigate([`/organization/${this.organization.guid}/talent`])
+    }
+  }
+
+  appendTalent() {
+    // console.log('trigger');
+    this.commService.trigger({
+      component: 'OrganizationProfileFeed',
+      action: 'appendTalent'
+    });
+  }
+
+  async loadTalents(guid) {
+    let endpoint = `api/v3/organizations/organization/talent/${guid}/all`
+    let params = { limit: 4, offset: this.offset };
+    let talents = await this.client.get(endpoint, params)
+    //  console.log(members)
+    this.talentsMobile = talents['talents']
+  }
+
+  showTalents() {
+    this.router.navigate([`/organization/${this.organization.guid}/talent/members`])
+  }
+
+
 }

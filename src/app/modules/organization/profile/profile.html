@@ -122,7 +122,7 @@
 
     <div class="container hidden-above-tablet">
         <div class="without-nav-header organisation-admin-main-title">
-            <a href="#"><i class="icon-arrow-left"></i> </a>
+            <a (click)="goBack()"><i class="icon-arrow-left"></i> </a>
             <div class="without-nav-header__title caption-bold f500 center">Organization</div>
         </div>
     </div><!-- without nav header end -->
@@ -194,11 +194,11 @@
                                 </div>
                             </div><!-- organisation members end-->
                             <div class="o-organisation-members-top o-organisation-members-top--mob hidden-above-tablet">
-                                <a href="organisation.html" class="o-organisation-members-top__count-mob" *ngFor="let member of membersMobile">
-                                    <span class="o-organisation-members-list-mob-single"><img [src]="memberSrc+member.guid" alt=""></span>
+                                <div class="o-organisation-members-top__count-mob">
+                                    <a class="o-organisation-members-list-mob-single" *ngFor="let member of membersMobile" (click)="showMembers()"><img [src]="memberSrc+member.guid" alt=""></a>
                                     <!-- <span class="text-sm m-l-r-6 grey">+4</span> -->
-                                </a>
-                                <a (click)="openInvite()" class="o-organisation-add-members-mob f500 text-md primary"><u>Add Subscribers</u></a>
+                                </div>
+                                <a (click)="openInvite()" class="o-organisation-add-members-mob f500 text-md primary" *ngIf="organization && (organization['is:owner'] || organization['is:editor'])"><u>Add Subscribers</u></a>
                             </div><!--members-top ends-->
                             <m-modal [open]="inviteToggle" [allowClose]="true" class="inviteToggle" (closed)="inviteToggle = false">
                                 <opspot-organization-profile-members-invite [organization]="organization" *ngIf="organization">
@@ -261,13 +261,18 @@
                     </div>
                     <div class="o-organisation-members-top o-organisation-members-top--mob hidden-above-tablet">
                         <div class="text-lg f500 mrb12">Talents</div>
-                        <a href="organisation.html" class="o-organisation-members-top__count-mob">
+                        <a class="o-organisation-members-top__count-mob" (click)="showTalents()">
+                            <span class="o-organisation-members-list-mob-single--talent" *ngFor="let talent of talentsMobile"><img [src]="talent?.custom_data[0].src || talent?.custom_data[0].thumbnail_src" 
+                                (error)="talent?.custom_data[0].src = opspot.cdn_assets_url + 'assets/ops_icon.png' ||
+                                talent?.custom_data[0].thumbnail_src = opspot.cdn_assets_url + 'assets/ops_icon.png'" alt=""></span>
+                            <!-- <span class="o-organisation-members-list-mob-single--talent"><img src="assets/demo/avatar.png" alt=""></span>
                             <span class="o-organisation-members-list-mob-single--talent"><img src="assets/demo/avatar.png" alt=""></span>
-                            <span class="o-organisation-members-list-mob-single--talent"><img src="assets/demo/avatar.png" alt=""></span>
-                            <span class="o-organisation-members-list-mob-single--talent"><img src="assets/demo/avatar.png" alt=""></span>
-                            <span class="text-sm m-l-r-6 grey">+4</span>
+                            <span class="text-sm m-l-r-6 grey">+4</span> -->
                         </a>
-                        <a class="o-organisation-add-members-mob f500 text-md primary"><u>Add Talents</u></a>
+                        <!-- <m-modal [open]="talentsToggele" [allowClose]="true" (closed)="talentsToggele = false">
+                            <opspot-talent-list *ngIf="organization" [organization]="organization"></opspot-talent-list>
+                        </m-modal> -->
+                        <a class="o-organisation-add-members-mob f500 text-md primary" (click)="createTalent()" *ngIf="organization && (organization['is:owner'] || organization['is:editor'])"><u>Add Talents</u></a>
                     </div><!--members-top ends-->
                     <div class="o-right-block--organisation__items">
                         <div class="o-center-block">
@@ -281,8 +286,8 @@
                             <router-outlet></router-outlet>
                         </div><!--center block end-->
             
-                        <div class="o-right-block hidden-mob">
-                            <div class="organisation-admin-empty-right">
+                         <div class="o-right-block hidden-mob">
+                            <!-- <div class="organisation-admin-empty-right">
                                 <div class="organisation-admin-empty-right__avatar">
                                     <img src="assets/profile/emptytalent.svg" alt="empty">
                                 </div>
@@ -291,8 +296,21 @@
                                     <button type="button" class="btn btn-outline-primary btn-md">Create Talent</button>
                                     <div>Upcoming.....</div>
                                 </div>
+                            </div> -->
+
+                            <div class="o-cards o-organisation-talents hidden-under-tablet">
+                            <div class="o-organisation-talents__header">
+                                <div class="text-lg f500">
+                                    Talents
+                                </div> 
+                                <span class="icon-plus-circle primary" (click)="createTalent()" *ngIf="organization && (organization['is:owner'] || organization['is:editor'])">            
+                                </span>
+                            </div><!-- header end -->
+                            <opspot-talent-preview [organization]="organization"></opspot-talent-preview>
                             </div>
-                        </div><!--right block end-->
+                        </div>
+
+                        
                     </div><!--items ends-->
                 </div><!--right block ends-->
             </div><!--o-blocks ends-->
