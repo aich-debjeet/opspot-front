@@ -23,8 +23,8 @@ import { CommonEventsService } from '../../../services/common-events.service';
       </li> -->
 
       <!-- Member functions -->
-      <li class="mdl-menu__item" [hidden]="organization['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS" id="organization-setting-disable-notification">Disable Notifications</li>
-      <li class="mdl-menu__item" [hidden]="!organization['is:muted']" (click)="unmute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__ENABLE_NOTIFICATIONS" id="organization-setting-enable-notification">Enable Notifications</li>
+      <!-- <li class="mdl-menu__item" [hidden]="organization['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS" id="organization-setting-disable-notification">Disable Notifications</li>
+      <li class="mdl-menu__item" [hidden]="!organization['is:muted']" (click)="unmute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__ENABLE_NOTIFICATIONS" id="organization-setting-enable-notification">Enable Notifications</li> -->
 
       <!-- admin functions -->
       <li class="mdl-menu__item" *ngIf="session.isAdmin() && !organization.mature" (click)="setExplicit(true)" i18n="@@M__ACTION__SET_EXPLICIT" id="organization-setting-set-explicit">Set Explicit</li>
