@@ -39,3 +39,26 @@
 .o-bio__title{
   word-break: break-word;
 }
+
+.o-edit {
+  position: absolute;
+  top: 20px;
+  right: 14px;
+ 
+}
+
+.o-prof-info .o-edit {
+  color: #0288D1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5px;
+ 
+}
+
+.o-prof-info .o-edit i {
+  color: #0288D1;
+  margin-right: 5px;
+  
+}
+
