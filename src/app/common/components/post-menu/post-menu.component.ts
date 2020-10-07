@@ -44,6 +44,7 @@ export class PostMenuComponent {
   @Output() optionSelected: EventEmitter<Option> = new EventEmitter<Option>();
   @Output() entityGuid: EventEmitter<Option> = new EventEmitter<Option>();
   @Input() canDelete: boolean = false;
+  @Input() canEdit: boolean = false;
   @Input() isTranslatable: boolean = false;
   @Input() askForCategoriesWhenFeaturing: boolean = false;
   @Input() user: any;
@@ -67,7 +68,7 @@ export class PostMenuComponent {
     public signupModal: SignupModalService
   ) {
     this.initCategories();
-    // console.log(this.entity,this.options)
+    console.log(this.canEdit)
   }
 
   initCategories() {

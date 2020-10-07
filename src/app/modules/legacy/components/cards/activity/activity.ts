@@ -19,7 +19,7 @@ import { CreateTalent } from '../../../../../modules/organization/talent/create/
   moduleId: module.id,
   selector: 'opspot-activity',
   host: {},
-  inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle'],
+  inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle', 'canEdit'],
   outputs: ['_delete: delete', 'commentsOpened', 'onViewed', '_deleteBookmark: deleteBookmark'],
   templateUrl: 'activity.html',
   styleUrls: ['./activity.component.scss'],
@@ -70,6 +70,7 @@ export class Activity {
 
   isTranslatable: boolean;
   canDelete: boolean = false;
+  canEdit: boolean = false;
   showRatingToggle: boolean = false;
   routerLink1 = "";
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
@@ -98,7 +99,10 @@ export class Activity {
   }
 
   ngOnInit() {
+    console.log("fnfsdrfr: ", this.canEdit);
+    
   }
+
 
   set object(value: any) {
     if (!value)

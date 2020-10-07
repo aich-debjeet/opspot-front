@@ -575,7 +575,7 @@
     (click)="translateToggle = true;">
     <i class="material-icons">public</i>
   </button> -->
-  <m-post-menu [entity]="activity" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
+  <m-post-menu [entity]="activity" [canDelete]="canDelete" [canEdit]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
     (optionSelected)="menuOptionSelected($event)">
     <ng-container post-menu>
       <ng-content select="[post-menu]"></ng-content>
