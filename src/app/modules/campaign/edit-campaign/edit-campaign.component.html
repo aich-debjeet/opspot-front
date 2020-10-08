@@ -4,13 +4,18 @@
             <h4 class="f500">Edit an Enrollment</h4>
         </div>
         <!--header ends-->
-        <div class="o-create-enrollment-content__form" [formGroup]="campaignForm">
+        <div class="o-create-enrollment-content__form" (ngSubmit)="onSubmit()" [formGroup]="campaignForm">
             <div class="o-enrollment-cover-image">
                 <div class="fileUpload" [hidden]="previewCover">
                     <span class="icon-plus"></span>
                     <input type="file" name="cover image" class="upload" #file (change)="uploadAttachment($event)"
                         formControlName="enrollCoverImage">
                     <div class="text-md grey mt15">Add Cover Image</div>
+                    <div class="error text-sm"
+                        *ngIf="campaignForm.get('enrollCoverImage').invalid && (campaignForm.get('enrollCoverImage').dirty || campaignForm.get('enrollCoverImage').touched)">
+                        <p *ngIf="campaignForm.get('enrollCoverImage').errors?.required">Cover Image for this campaign
+                            is mandatory.</p>
+                    </div>
                 </div>
                 <div class="fileUpload" [hidden]="!previewCover">
                     <a class="fileUpload-close-temp" (click)="removeAttachment()" id="big-event-event-remove-image">
@@ -25,6 +30,10 @@
                 <label>Enrollment Name</label>
                 <input type="text" name="Enrollment Name" class="form-control form-control-lg"
                     formControlName="campaignTitle">
+                <div class="error text-sm"
+                    *ngIf="campaignForm.get('campaignTitle').invalid && (campaignForm.get('campaignTitle').dirty || campaignForm.get('campaignTitle').touched)">
+                    <p *ngIf="campaignForm.get('campaignTitle').errors?.required">Title is required</p>
+                </div>
             </div>
             <!--Enrollment Name ends-->
             <div class="o-create-enrollment-row">
@@ -32,12 +41,27 @@
                     <label>From Date</label>
                     <input type="text" name="From Date" class="form-control form-control-lg"
                         formControlName="enrollStartDate">
+                    <div class="error text-sm"
+                        *ngIf="campaignForm.get('enrollStartDate').invalid && (campaignForm.get('enrollStartDate').dirty || campaignForm.get('enrollStartDate').touched)">
+                        <p *ngIf="campaignForm.get('enrollStartDate').errors?.required">Start date is required</p>
+                        <p
+                            *ngIf="campaignForm.get('enrollStartDate').errors?.invalidDate || campaignForm.get('enrollStartDate').errors?.oldate">
+                            Please choose a valid date</p>
+                    </div>
                 </div>
                 <!--From Date ends-->
                 <div class="form-group">
                     <label>To Date</label>
                     <input type="text" name="To Date" class="form-control form-control-lg"
                         formControlName="enrollEndDate">
+                    <div class="error text-sm"
+                        *ngIf="campaignForm.get('enrollEndDate').invalid && (campaignForm.get('enrollEndDate').dirty || campaignForm.get('enrollEndDate').touched)">
+                        <p *ngIf="campaignForm.get('enrollEndDate').errors?.required">End date is required</p>
+                        <p
+                            *ngIf="campaignForm.get('enrollEndDate').errors?.invalidDate || campaignForm.get('enrollEndDate').errors?.oldate">
+                            Please choose a valid date.
+                        </p>
+                    </div>
                 </div>
                 <!--To Date ends-->
             </div>
@@ -47,12 +71,20 @@
                     <label>From Time</label>
                     <input type="text" name="From Time" class="form-control form-control-lg"
                         formControlName="enrollStartTime">
+                    <div class="error text-sm"
+                        *ngIf="campaignForm.get('enrollStartTime').invalid && (campaignForm.get('enrollStartTime').dirty || campaignForm.get('enrollStartTime').touched)">
+                        <p *ngIf="campaignForm.get('enrollStartTime').errors?.required">Start Time is required</p>
+                    </div>
                 </div>
                 <!--From Time ends-->
                 <div class="form-group">
                     <label>To Time</label>
                     <input type="text" name="   To Time" class="form-control form-control-lg"
                         formControlName="enrollEndTime">
+                    <div class="error text-sm"
+                        *ngIf="campaignForm.get('enrollEndTime').invalid && (campaignForm.get('enrollEndTime').dirty || campaignForm.get('enrollEndTime').touched)">
+                        <p *ngIf="campaignForm.get('enrollEndTime').errors?.required">End Time is required</p>
+                    </div>
                 </div>
                 <!--To Time ends-->
             </div>
@@ -67,6 +99,10 @@
                         <option value="Female">Female</option>
                         <option value="Others">Others</option>
                     </select>
+                    <div class="error text-sm"
+                        *ngIf="campaignForm.get('gender').invalid && (campaignForm.get('gender').dirty || campaignForm.get('gender').touched)">
+                        <p *ngIf="campaignForm.get('gender').errors?.required">Gender is required</p>
+                    </div>
                 </div>
                 <!--Allow Gender ends-->
             </div>
@@ -75,17 +111,27 @@
                 <label>Includes<a class="icon-info o-enrollment-icon"></a></label>
                 <input type="text" name="Includes" class="form-control form-control-lg"
                     formControlName="refreshmentMaterials">
+                <div class="error text-sm"
+                    *ngIf="campaignForm.get('refreshmentMaterials').invalid && (campaignForm.get('refreshmentMaterials').dirty || campaignForm.get('refreshmentMaterials').touched)">
+                    <p *ngIf="campaignForm.get('refreshmentMaterials').errors?.required">required</p>
+                </div>
             </div>
             <!--Includes ends-->
             <div class="form-group">
                 <label>Price</label>
                 <input type="text" name="Price" class="form-control form-control-lg" formControlName="price">
+                <div class="error text-sm" *ngIf="campaignForm.get('price').invalid && (campaignForm.get('price').dirty || campaignForm.get('price').touched)">
+                    <p *ngIf="campaignForm.get('price').errors?.required">Price is required</p>
+                </div>
             </div>
             <!--Price ends-->
             <div class="form-group">
                 <label>What you will do? (Description) <span
                         class="text-sm grey description-width">21/300</span></label>
                 <textarea class="form-control" name="Description" rows="5" formControlName="campaignDesc"></textarea>
+                <div class="error text-sm" *ngIf="campaignForm.get('campaignDesc').invalid && (campaignForm.get('campaignDesc').dirty || campaignForm.get('campaignDesc').touched)">
+                    <p *ngIf="campaignForm.get('campaignDesc').errors?.required">Description is required</p>
+                </div>
             </div>
             <!--Description ends-->
             <div class="form-group">
@@ -94,11 +140,11 @@
                     <div class="fileUpload mr10">
                         <span class="icon-plus"></span>
                         <input type="file" name="cover image" #fileGallery class="upload" formControlName="gallery"
-                            (change)="uploadGalleryAttachment($event)">
+                            accept="image/jpg, image/jpeg, image/png" (change)="uploadGalleryAttachment($event)">
                     </div>
                     <!--file upload ends-->
                     <div class="fileUpload-preview" *ngFor="let image of cards">
-                        <a class="fileUpload-close-temp" (click)="removeGalleryAttachment(image)"><i
+                        <a class="fileUpload-close-temp" (click)="removeGalleryAttachment(image, cards)"><i
                                 class="icon-x"></i></a>
                         <img [src]="image.src" alt="">
                     </div>
@@ -109,16 +155,25 @@
             <div class="form-group">
                 <label>Location</label>
                 <input type="text" name="Location" class="form-control form-control-lg" formControlName="campaignLoc">
+                <div class="error text-sm" *ngIf="campaignForm.get('campaignLoc').invalid && (campaignForm.get('campaignLoc').dirty || campaignForm.get('campaignLoc').touched)">
+                    <p *ngIf="campaignForm.get('campaignLoc').errors?.required">Location is required</p>
+                </div>
             </div>
             <!--Location ends-->
             <div class="form-group">
                 <label>Organiser Name</label>
                 <input type="text" name="Organiser Name" class="form-control form-control-lg" formControlName="orgName">
+                <div class="error text-sm" *ngIf="campaignForm.get('orgName').invalid && (campaignForm.get('orgName').dirty || campaignForm.get('orgName').touched)">
+                    <p *ngIf="campaignForm.get('orgName').errors?.required">Organizer's name is required</p>
+                </div>
             </div>
             <!--Organiser Name ends-->
             <div class="form-group">
                 <label>About Organiser <span class="text-sm grey description-width">21/300</span></label>
                 <textarea class="form-control" name="About Organiser" rows="5" formControlName="orgAbout"></textarea>
+                <div class="error text-sm" *ngIf="campaignForm.get('orgAbout').invalid && (campaignForm.get('orgAbout').dirty || campaignForm.get('orgAbout').touched)">
+                    <p *ngIf="campaignForm.get('orgAbout').errors?.required">About the organizer is required</p>
+                </div>
             </div>
             <!--About Organiser ends-->
             <div class="form-group">
@@ -126,7 +181,8 @@
                 <div class="o-enrollment-profile-picture">
                     <div class="fileUpload mr10">
                         <span class="icon-plus"></span>
-                        <input type="file" name="cover image" class="upload" formControlName="orgPic">
+                        <input type="file" #organizationPic accept="image/jpg, image/jpeg, image/png" name="cover image"
+                            class="upload" formControlName="orgPic" (change)="uploadOrgAttachment($event)">
                     </div>
                     <div class="fileUpload-preview-organiser" [hidden]="orgImgSrc?.length == 0">
                         <a class="o-enrollment-image" href="javascript:void(0)">
@@ -141,11 +197,25 @@
                           </a>
                       </div> -->
                     <!--file preview ends-->
+                    <div class="error text-sm" *ngIf="campaignForm.get('orgPic').invalid && (campaignForm.get('orgPic').dirty || campaignForm.get('orgPic').touched)">
+                        <p *ngIf="campaignForm.get('orgPic').errors?.required">Organizer's pic is required</p>
+                    </div>
                 </div>
+            </div>
+            <div class="form-group">
+                <label>Jury list</label>
+                <tag-input style="border:1px solid #959595; padding-bottom: 50px;" [(ngModel)]="juryList"
+                    [ngModelOptions]="{standalone: true}" name="d" theme='minimal' [identifyBy]="'guid'"
+                    [displayBy]="'username'" (onTextChange)="onTextChange($event)" (onAdd)="onItemAdded($event)"
+                    onlyFromAutocomplete="true">
+                    <tag-input-dropdown [showDropdownIfEmpty]="true" [limitItemsTo]=10 [minimumTextLength]=4
+                        [autocompleteItems]="data"></tag-input-dropdown>
+                </tag-input>
+                <div class="w100 text-sm grey">Press enter/return to separate skill or choose from the list.</div>
             </div>
             <!--Profile Picture ends-->
             <div class="o-create-enrollment-action">
-                <button type="button" class="btn btn-primary mr-18">Create</button>
+                <button type="submit" class="btn btn-primary mr-18">Create</button>
                 <button type="button" class="btn btn-outline-primary btn-lg">Cancel</button>
             </div>
             <!--Button action ends-->

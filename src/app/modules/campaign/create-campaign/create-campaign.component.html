@@ -180,7 +180,12 @@
                             <p *ngIf="campaignForm.get('orgPic').errors?.required">Organizer's pic is required</p>
                         </div>
                     </div>                     
-                </div><!--Profile Picture ends-->
+                </div>
+                <div class="form-group">
+                    <label>Add Jury</label>
+                        <span class="icon-plus-circle primary" style="font-size: 24px !important; cursor: pointer; padding: 0px 0px 0px 6px;" (click)="openModal()"></span>
+                </div>
+                <!--Profile Picture ends-->
                 <!-- <div class="o-enrollment-radiobtn">
                     <label>Allow Organiser Contact</label>
                     <div class="o-create-enrollment-row">
@@ -211,5 +216,43 @@
             </form>
     </div>
 </div><!--Main community ends-->
+<m-modal [open]="true" (closed)="onModalClose()" *ngIf="displayList">
+    <div class="m-button-feature-modal">
+      <!-- <select [(ngModel)]="featuredCategory">
+        <option value="not-selected" i18n="@@COMMON__POST_MENU__SELECT_CATEGORY">-- SELECT A CATEGORY --</option>
+        <option *ngFor="let category of categories" [value]="category.id">{{category.label}}</option>
+      </select> -->
+  
+      <!-- <button class="mdl-button mdl-button--colored" (click)="feature()">Feature</button> -->
+      <div class="o-community-member-popup-body">
+        <div class="o-community-member-popup-body__title">
+            <div class="text-h3">
+                Add Jury Members
+            </div>
+        </div><!--title ends-->
+        <div class="form-group c-form_righticon-md">
+            <input type="text" class="form-control form-control-lg bg-grey-light" placeholder="Search Members">
+            <i class="icon-search"></i>
+        </div><!--search bar ends-->
+        <ul class="o-community-members-list scrollbar scrollbar-default">
+            <li class="o-community-members-list__user-list" *ngFor="let user of users">
+                <div class="o-community-members-info">
+                    <div class="o-community-members-info-prof">
+                        <div class="o-community-members-info-prof__avatar o-avatar-md">
+                            <img [src]="opspot.cdn_url + '/icon/' + user?.guid" alt="">
+                        </div>
+                        <div id="username" class="caption-bold">
+                            {{user.name}}
+                        </div>
+                    </div>
+                    <div class="o-community-members-info__option">
+                        <button type="button" class="btn btn-outline-primary btn-sm" (click)="invite(user?.guid)">Invite</button>
+                    </div>
+                </div>
+            </li><!-- user list end-->
+        </ul><!-- members list end -->
+    </div><!--body ends-->
+    </div>
+  </m-modal>
 
   

@@ -9,6 +9,8 @@ import { from as fromPromise, Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { Session } from '../../../services/session';
 
 
 @Component({
@@ -17,6 +19,8 @@ import * as moment from 'moment';
   styleUrls: ['./create-campaign.component.scss']
 })
 export class CreateCampaignComponent implements OnInit {
+  opspot = window.Opspot;
+  userGuid: string;
   campaignForm: FormGroup;
   imgSrc: '';
   orgImgSrc: '';
@@ -31,17 +35,20 @@ export class CreateCampaignComponent implements OnInit {
     message: '',
     wire_threshold: null
   };
-
+  offset: string = '';
+  users: Array<any>=[];
   public timeMask = [/[0-2]/, /\d/, ':', /[0-5]/, /\d/];
   public dateMask = [/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
-
+  inviteArray: Array<string> = [];
   @ViewChild('file') coverFile: ElementRef;
   @ViewChild('fileGallery') fileGallery: ElementRef;
   @ViewChild('organizationPic') organizationPic: ElementRef;
   data: any;
+  displayList: boolean = false;
 
-  constructor(private fb: FormBuilder, private title: OpspotTitle, private attachment: AttachmentService, public client: Client, public router: Router) {
+  constructor(private fb: FormBuilder, private title: OpspotTitle, private attachment: AttachmentService, public client: Client, public router: Router,private overlayModal: OverlayModalService,public session: Session) {
     this.title.setTitle('Campaign-Enrollment');
+    this.userGuid = session.getLoggedInUser().guid;
   }
 
   ngOnInit() {
@@ -165,6 +172,7 @@ export class CreateCampaignComponent implements OnInit {
         end_time_date: endTime.getTime(),
         attachment_guid: this.coverGuids,
         enrollment_fees: this.campaignForm.value.price,
+        juries: this.inviteArray,
         brevarges: this.campaignForm.value.refreshmentMaterials,
         allowed_gender: this.campaignForm.value.gender,
         access_id: 2,
@@ -190,7 +198,27 @@ export class CreateCampaignComponent implements OnInit {
     }
   }
 
+  openModal(){
+    // this.overlayModal.create(InviteJuryComponent,'',{
+    //   class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium',
+    // })
+    this.displayList= true;
+    this.client.get('api/v1/subscribe/subscribers/' + this.userGuid, { offset: this.offset,limit:10 })
+    .then((response: any) => {
+      if (response.users.length === 0) {
+        // this.moreData = false;
+        // this.inProgress = false;
+        return;
+      }
 
+      this.users = this.users.concat(response.users);
+      this.offset = response['load-next'];
+      // this.inProgress = false;
+    })
+    .catch((e) => {
+      // this.inProgress = false;
+    });
+  }
 
   formatTime(inputTime) {
     var timeString = inputTime;
@@ -198,6 +226,18 @@ export class CreateCampaignComponent implements OnInit {
     var h = H % 12 || 12;
     var ampm = (H < 12 || H === 24) ? "AM" : "PM";
     return timeString = h + timeString.substr(2, 3) + ampm;
+  }
+  invite(guid:string){
+    if(this.inviteArray.length == 0){
+      this.inviteArray.push(guid);
+    } else {
+      if(this.inviteArray.indexOf(guid) == -1){
+        this.inviteArray.push(guid);
+      }
+    }
+  }
+  onModalClose() {
+    this.displayList = false;
   }
 
   convertDateToMillis(inputDate, inputTime) {
