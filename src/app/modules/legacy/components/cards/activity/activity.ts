@@ -14,6 +14,7 @@ import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-
 import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
 import { Router } from '@angular/router';
 import { CreateTalent } from '../../../../../modules/organization/talent/create/create-talent';
+import { CommonEventsService } from '../../../../../services/common-events.service';
 
 @Component({
   moduleId: module.id,
@@ -93,14 +94,13 @@ export class Activity {
     private overlayModal: OverlayModalService,
     private cd: ChangeDetectorRef,
     private router: Router,
+    private commonService: CommonEventsService
   ) {
     this.element = _element.nativeElement;
     this.isVisible();
   }
 
   ngOnInit() {
-    console.log("fnfsdrfr: ", this.canEdit);
-    
   }
 
 
@@ -199,6 +199,9 @@ export class Activity {
           $event.completed.emit(0);
         }
         this._delete.next(this.activity);
+        if (this.activity.entity_type === 'talent') {
+          this.appendTalentList()
+        }
       })
       .catch(e => {
         if ($event.inProgress) {
@@ -206,6 +209,14 @@ export class Activity {
           $event.completed.emit(1);
         }
       });
+  }
+
+
+  appendTalentList() {
+    this.commonService.trigger({
+      component: 'OrganizationMemberPreviews',
+      action: 'appendTalentList'
+    });
   }
 
   openComments() {
