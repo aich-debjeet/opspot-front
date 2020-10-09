@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../../services/api';
+import { Subscription } from 'rxjs';
+import { CommonEventsService } from '../../../../services/common-events.service';
 
 @Component({
   selector: 'opspot-talent-preview',
@@ -13,18 +15,38 @@ export class TalentPreviewComponent implements OnInit {
   inProgress = false;
   talents: Array<any> = [];
   talentToggele = false;
+  commService$: Subscription;
+
 
   constructor(
-    private client: Client
+    private client: Client,
+    private commService: CommonEventsService
+
   ) { }
 
   ngOnInit() {
+    this.commService$ = this.commService.listen().subscribe((e: any) => {
+      if (e.component && e.action) {
+        if (e.component === 'OrganizationMemberPreviews') {
+          if (e.action === 'appendTalentList') {
+            this.load();
+          }
+        }
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.commService$.unsubscribe();
   }
 
   set _organization(value: any) {
     this.organization = value;
     this.load();
   }
+
+
+
 
   async load() {
     this.inProgress = true;

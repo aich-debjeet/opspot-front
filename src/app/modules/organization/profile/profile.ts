@@ -494,6 +494,7 @@ export class OrganizationProfile {
           // make update to local var
           // this.activityResp.emit(payload);
           this.appendTalent();
+          this.appendTalentList();
         }
       }
       )
@@ -508,6 +509,14 @@ export class OrganizationProfile {
     this.commService.trigger({
       component: 'OrganizationProfileFeed',
       action: 'appendTalent'
+    });
+  }
+
+  appendTalentList() {
+    // console.log('trigger');
+    this.commService.trigger({
+      component: 'OrganizationMemberPreviews',
+      action: 'appendTalentList'
     });
   }
 
