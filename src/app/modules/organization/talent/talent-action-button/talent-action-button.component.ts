@@ -49,11 +49,12 @@ export class TalentactionbuttonComponent implements OnInit {
   }
 
   remove() {
-    this.client.delete('api/v3/organizations/organization/talent/' + this.talent.guid)
+    this.client.delete('api/v1/newsfeed/' + this.talent.activity_guid)
       .then((data: any) => {
         this.showMenu = false;
         this._remove.next(this.talent);
         this.appendTalent();
+        this.appendTalentList();
       })
       .catch((e) => {
       });
@@ -64,6 +65,13 @@ export class TalentactionbuttonComponent implements OnInit {
     this.commService.trigger({
       component: 'OrganizationProfileFeed',
       action: 'appendTalent'
+    });
+  }
+
+  appendTalentList() {
+    this.commService.trigger({
+      component: 'OrganizationMemberPreviews',
+      action: 'appendTalentList'
     });
   }
 
