@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../../services/api';
 import { Subscription } from 'rxjs';
 import { CommonEventsService } from '../../../../services/common-events.service';
+import { OverlayModalService } from '../../../../services/ux/overlay-modal';
+import { TalentListComponent } from '../talent-list/talent-list.component';
 
 @Component({
   selector: 'opspot-talent-preview',
@@ -20,8 +22,9 @@ export class TalentPreviewComponent implements OnInit {
 
   constructor(
     private client: Client,
-    private commService: CommonEventsService
+    private commService: CommonEventsService,
 
+    private overlayModal: OverlayModalService
   ) { }
 
   ngOnInit() {
@@ -62,7 +65,10 @@ export class TalentPreviewComponent implements OnInit {
   }
 
   showTalents() {
-    this.talentToggele = !this.talentToggele;
+    // this.talentToggele = !this.talentToggele;
+    this.overlayModal.create(TalentListComponent, this.organization, {
+      class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium-talentlist',
+    }).present();
   }
 
   remove(talent) {
