@@ -106,9 +106,11 @@ export class ExploreComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
-    this.title.setTitle('Explore');
-    // await this.load();
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (params.filter)
+        this.switchCategoryType(params.filter);
+    })
   }
 
   // load hashtags
@@ -121,10 +123,11 @@ export class ExploreComponent implements OnInit {
   //   }
   // }
 
-  switchCategoryType(property: string, value: string) {
-    console.log(property, value)
+  switchCategoryType(value: string, property?: string) {
     this._activeFilter = property;
     this._loadMoreFilter = value;
+
+    // this.router.navigate(['explore', value])
     this.searchMore(true, value)
     // this.router.navigate(['/explore'], {
     //   queryParams: {
