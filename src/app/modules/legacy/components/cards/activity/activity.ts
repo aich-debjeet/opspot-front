@@ -14,12 +14,13 @@ import { BlueStoreFormComponent } from '../../../../../modules/forms/blue-store-
 import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-form/showtimez-form.component';
 import { Router } from '@angular/router';
 import { CreateTalent } from '../../../../../modules/organization/talent/create/create-talent';
+import { CommonEventsService } from '../../../../../services/common-events.service';
 
 @Component({
   moduleId: module.id,
   selector: 'opspot-activity',
   host: {},
-  inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle'],
+  inputs: ['object', 'commentsToggle', 'focusedCommentGuid', 'visible', 'canDelete', 'showRatingToggle', 'canEdit'],
   outputs: ['_delete: delete', 'commentsOpened', 'onViewed', '_deleteBookmark: deleteBookmark'],
   templateUrl: 'activity.html',
   styleUrls: ['./activity.component.scss'],
@@ -70,6 +71,7 @@ export class Activity {
 
   isTranslatable: boolean;
   canDelete: boolean = false;
+  canEdit: boolean = false;
   showRatingToggle: boolean = false;
   routerLink1 = "";
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
@@ -92,6 +94,7 @@ export class Activity {
     private overlayModal: OverlayModalService,
     private cd: ChangeDetectorRef,
     private router: Router,
+    private commonService: CommonEventsService
   ) {
     this.element = _element.nativeElement;
     this.isVisible();
@@ -99,6 +102,7 @@ export class Activity {
 
   ngOnInit() {
   }
+
 
   set object(value: any) {
     if (!value)
@@ -195,6 +199,9 @@ export class Activity {
           $event.completed.emit(0);
         }
         this._delete.next(this.activity);
+        if (this.activity.entity_type === 'talent') {
+          this.appendTalentList()
+        }
       })
       .catch(e => {
         if ($event.inProgress) {
@@ -202,6 +209,14 @@ export class Activity {
           $event.completed.emit(1);
         }
       });
+  }
+
+
+  appendTalentList() {
+    this.commonService.trigger({
+      component: 'OrganizationMemberPreviews',
+      action: 'appendTalentList'
+    });
   }
 
   openComments() {

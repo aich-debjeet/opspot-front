@@ -7,7 +7,7 @@ import { GroupsService } from '../groups-service';
   inputs: ['group', 'user'],
   outputs: ['_remove: remove'],
   template: `
-  <button class="icon-more-vertical btnDefault" id="card-user-action-menu" *ngIf="(group['is:owner'] || group['is:admin']) || (group['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
+  <button class="icon-more-vertical btnDefault" id="card-user-action-menu" *ngIf="(group['is:owner'] || group['is:admin']) || (group['is:moderator'] && !(user['is:owner']||user['is:moderator'] || user['is:admin']))" (click)="toggleMenu($event)">
 
   </button>
 

@@ -313,7 +313,7 @@
             activity.custom_data[0].thumbnail_src = opspot.cdn_assets_url + 'assets/ops_icon.png'" alt="">
         </div><!--avatar ends-->
         <div class="feed-card-talent-block__info">
-            <div class="caption-bold">{{ activity.title}}</div>
+            <div class="caption-bold word-br">{{ activity.title | truncate:[100, '...']}}</div>
             <!-- <div class="text-md grey">@marian</div> -->
         </div><!--info ends-->
         <div class="feed-card-talent-block__btn">
@@ -325,7 +325,7 @@
           ></m-messenger--channel-button>        
         </div><!--btn ends-->
         <div class="feed-card-talent-block__discription">
-            <p class="text-md grey-darker">
+            <p class="text-md grey-darker word-br">
               {{activity?.blurb | truncate:[100, '...']}}
             </p>
         </div><!-- discription ends-->
@@ -575,7 +575,7 @@
     (click)="translateToggle = true;">
     <i class="material-icons">public</i>
   </button> -->
-  <m-post-menu [entity]="activity" [canDelete]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
+  <m-post-menu [entity]="activity" [canDelete]="canDelete" [canEdit]="canDelete" [isTranslatable]="isTranslatable" [options]="menuOptions"
     (optionSelected)="menuOptionSelected($event)">
     <ng-container post-menu>
       <ng-content select="[post-menu]"></ng-content>

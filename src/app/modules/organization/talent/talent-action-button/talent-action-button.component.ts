@@ -1,12 +1,13 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Client } from '../../../../services/api';
+import { CommonEventsService } from '../../../../services/common-events.service';
 
 @Component({
   selector: 'app-talent-action-button',
   inputs: ['_talent : talent', 'organization'],
   outputs: ['_remove: remove'],
   template: `
-  <button class="icon-more-vertical btnDefault" id="card-user-action-button" *ngIf="organization['is:owner']" (click)="toggleMenu($event)">
+  <button class="icon-more-vertical btnDefault" id="card-user-action-button" *ngIf="organization['is:owner'] || organization['is:editor']" (click)="toggleMenu($event)">
 
   </button>
 
@@ -23,7 +24,8 @@ export class TalentactionbuttonComponent implements OnInit {
 
   showMenu = false;
   constructor(
-    private client: Client
+    private client: Client,
+    private commService: CommonEventsService
   ) { }
 
   talent: any;
@@ -47,13 +49,30 @@ export class TalentactionbuttonComponent implements OnInit {
   }
 
   remove() {
-    this.client.delete('api/v3/organizations/organization/talent/' + this.talent.guid)
+    this.client.delete('api/v1/newsfeed/' + this.talent.activity_guid)
       .then((data: any) => {
         this.showMenu = false;
         this._remove.next(this.talent);
+        this.appendTalent();
+        this.appendTalentList();
       })
       .catch((e) => {
       });
+  }
+
+  appendTalent() {
+    // console.log('trigger');
+    this.commService.trigger({
+      component: 'OrganizationProfileFeed',
+      action: 'appendTalent'
+    });
+  }
+
+  appendTalentList() {
+    this.commService.trigger({
+      component: 'OrganizationMemberPreviews',
+      action: 'appendTalentList'
+    });
   }
 
 

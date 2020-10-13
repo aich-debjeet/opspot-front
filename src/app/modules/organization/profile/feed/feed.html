@@ -25,6 +25,7 @@
     <opspot-activity 
     *ngFor="let activity of pinned" [object]="activity"
     [canDelete]="organization['is:owner'] || organization['is:editor']" 
+    [canEdit]="organization['is:owner'] || organization['is:editor']" 
     (delete)="delete(a)"
     [showRatingToggle]="true" 
     class="mdl-card item">
