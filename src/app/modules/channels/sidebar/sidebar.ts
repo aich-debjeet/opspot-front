@@ -7,6 +7,7 @@ import { ChannelOnboardingService } from "../../onboarding/channel/onboarding.se
 import { Storage } from '../../../services/storage';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
+
 @Component({
   moduleId: module.id,
   selector: 'm-channel--sidebar',
@@ -28,6 +29,7 @@ export class ChannelSidebar {
   searching;
   errorMessage: string = '';
   amountOfTags: number = 0;
+  rowLimit: number = 5;
   tooManyTags: boolean = false;
   onboardingProgress: number = -1;
   profEdit = true;
@@ -38,6 +40,7 @@ export class ChannelSidebar {
 
   //@todo make a re-usable city selection module to avoid duplication here
   cities: Array<any> = [];
+  
 
   set _user(value: any) {
     if (!value)
@@ -185,4 +188,9 @@ export class ChannelSidebar {
     return !!+this.user['portfolio_visiblity'];
   }
 
+  handleSeeMore () {
+    this.rowLimit= this.user.projects.length;
+    console.log(this.rowLimit);
+    
+  }
 }

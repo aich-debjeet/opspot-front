@@ -82,6 +82,7 @@ export interface OpspotUser {
   work_experience: any[];
   education: any[];
   awards: any[];
+  projects: any[];
 }
 
 export interface OpspotGroup {

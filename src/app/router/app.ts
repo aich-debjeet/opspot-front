@@ -21,6 +21,7 @@ import { ContactComponent } from '../modules/channels/profile-edit/contact/conta
 import { EducationComponent } from '../modules/channels/profile-edit/education/education.component';
 import { AwardsComponent } from '../modules/channels/profile-edit/awards/awards.component';
 import { DataExtractionComponent } from '../modules/data-extraction/data-extraction.component';
+import { ProjectsComponent } from '../modules/channels/profile-edit/projects/projects.component';
 
 
 export const OpspotAppRoutes: Routes = [
@@ -59,7 +60,8 @@ export const OpspotAppRoutes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'education', component: EducationComponent },
-      { path: 'awards', component: AwardsComponent }
+      { path: 'awards', component: AwardsComponent },
+      { path: 'projects', component: ProjectsComponent }
     ]
   },
   {
@@ -71,7 +73,7 @@ export const OpspotAppRoutes: Routes = [
     loadChildren: './modules/campaign/campaign.module#CampaignModule'
   },
   {
-    path:'explore',
+    path: 'explore',
     loadChildren: './modules/explore/explore.module#ExploreModule'
   },
   {
