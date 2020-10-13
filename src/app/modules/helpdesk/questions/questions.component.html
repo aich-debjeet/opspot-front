@@ -109,7 +109,13 @@
       <h2>{{question.question}}</h2>
       <p class="text-md" [innerHTML]="question.answer | safe">
       </p>
-      <h5 class="f500">Related articles</h5>
+      <h5 class="f500" *ngIf="isCommon">Watch Tutorial </h5>
+      <iframe *ngIf="question.category_uuid === 'a9bae4b8-2a54-457a-8485-49f16e7e948d'" width="560" height="315" src ="https://www.youtube.com/embed/feZUWIIFklU" frameborder="0" allowfullscreen></iframe>
+      <iframe *ngIf="question.category_uuid === '12dcae9d-eb37-42e5-bf3a-9d244987c4bf'" width="560" height="315" src ="https://www.youtube.com/embed/YefuqEqKWG8" frameborder="0" allowfullscreen></iframe>
+      <iframe *ngIf="question.category_uuid === 'd5221dc3-2ddc-4b83-bc19-225d56ce2dca'" width="560" height="315" src ="https://www.youtube.com/embed/TnhPWj_k8DA" frameborder="0" allowfullscreen></iframe>
+      <iframe *ngIf="question.category_uuid === 'b554a4ae-8fc7-46c0-bfbb-bd6698d89d92'" width="560" height="315" src ="https://www.youtube.com/embed/LmzPSsG7h7w" frameborder="0" allowfullscreen></iframe>
+      <iframe *ngIf="question.category_uuid === '1c39aaf1-21fc-4bcb-bce0-954f697d0e90'" width="560" height="315" src ="https://www.youtube.com/embed/3p8VrA_8WS4" frameborder="0" allowfullscreen></iframe> 
+    <h5 class="f500">Related articles</h5>
       <div class="o-help-inner-related-articles">
         <a [routerLink]="['/help/question', related.uuid]" class="o-help-inner-related-articles__link" *ngFor="let related of relatedQuestions">{{related.question}}</a>
         <!-- <m-helpdesk--questions--suggested type="category" [question]="question" *ngIf="question.category_uuid">
