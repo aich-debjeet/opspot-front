@@ -8,12 +8,15 @@
         </div><!-- without nav header end -->
         <div class="o-enrolment">
             <div class="o-enrolment-baner">
+                <a (click)="navigate(enrolmentDetails?.guid)">
+                    Dashboard
+                </a>
                 <img [src]="enrolmentDetails?.cover_data[0]?.src" (error)="enrolmentDetails.cover_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
             </div><!--banner ends-->
             <div class="o-enrolment-body">
               <div class="o-enrolment-title" id="en_header">
                 <h4 class="f500">{{enrolmentDetails?.title}}</h4>
-                <button type="button" onclick="shareDropdown()" class="btn btn-outline-primary o-enrolment-title__button" id="en_share">
+                <button type="button" class="btn btn-outline-primary o-enrolment-title__button" id="en_share">
                   <span class="icon-share-2 o-enrolment-title__icon"></span>Share
                 </button>
                 <div id="shareDropdown"  class="dropdown-content hide">

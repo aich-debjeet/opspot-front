@@ -13,15 +13,18 @@ import { CreateCampaignComponent } from './create-campaign/create-campaign.compo
 import { EditCampaignComponent } from './edit-campaign/edit-campaign.component';
 import { TagInputModule } from 'ngx-chips';
 import { TextMaskModule } from 'angular2-text-mask';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 const routes: Route[] = [
   // to be redirected to the active campaign
   // { path: '', redirectTo: 'enrolment', pathMatch: 'full' },
   { path: 'create', component: CreateCampaignComponent },
+  { path: 'dashboard/:guid', component: DashboardComponent },
   { path: 'edit/:guid', component: EditCampaignComponent },
   { path: ':guid', component: EnrolmentViewComponent },
   { path: 'invoice/:campaignGuid/:enrollGuid', component: EnrolmentInvoiceComponent },
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+  
 ];
 
 @NgModule({
@@ -32,6 +35,7 @@ const routes: Route[] = [
     EnrolmentInvoiceComponent,
     CreateCampaignComponent,
     EditCampaignComponent,
+    DashboardComponent,
   ],
   imports: [
     FormsModule,
@@ -41,7 +45,8 @@ const routes: Route[] = [
     NotificationModule,
     TextMaskModule,
     TagInputModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgxDatatableModule
   ]
 })
 export class CampaignModule { }

@@ -142,5 +142,10 @@ export class EnrolmentViewComponent implements OnInit {
         // alert(e.message);
       });
   }
+  navigate(guid: string){
+    console.log('hit');
+    this.router.navigate(['/campaign/dashboard', guid]);
+    
+  }
 
 }
