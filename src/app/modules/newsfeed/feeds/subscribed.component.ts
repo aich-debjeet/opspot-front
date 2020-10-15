@@ -22,6 +22,7 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 export class NewsfeedSubscribedComponent {
 
   newsfeed: Array<Object> = [];
+  enroll:any;
   prepended: Array<any> = [];
   offset: string = '';
   showBoostRotator: boolean = true;
@@ -118,9 +119,17 @@ export class NewsfeedSubscribedComponent {
         }
         if (this.newsfeed && !refresh) {
           this.newsfeed = this.newsfeed.concat(data.activity);
+          if(!this.enroll){}
+          this.enroll = this.newsfeed.find(data => data['event_type'] == 'Premium');
+          console.log('this.enroll',this.enroll);
+          
         } else {
 
           this.newsfeed = data.activity;
+          if(!this.enroll){
+            this.enroll = this.newsfeed.find(data => data['event_type'] == 'Premium');
+            console.log('this.enroll',this.enroll);
+          }
         }
         this.offset = data['load-next'];
 
