@@ -22,13 +22,14 @@ import { Session } from '../../../services/session';
       </li>
 
       <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && group.videoChatDisabled" (click)="toggleVideoChat(true)" id="group-settings-enable-gathering">Enable Gathering</li>
-      <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && !group.videoChatDisabled" (click)="toggleVideoChat(false)" id="group-settings-disable-gathering">Disable Gathering</li>
+      <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && !group.videoChatDisabled" (click)="toggleVideoChat(false)" id="group-settings-disable-gathering">Disable Group
+      Video Chat</li>
 
       <!-- <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && group.moderated" (click)="toggleModeration(false)" id="group-settings-disable-moderation">Disable moderation</li>
       <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && !group.moderated" (click)="toggleModeration(true)" id="group-settings-enable-moderation">Enable moderation</li> -->
 
       <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && !group.membership" (click)="togglePublic(true)" id="group-settings-make-public">Make public</li>
-      <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && group.membership" (click)="togglePublic(false)" id="group-settings-make-closed">Make closed</li>
+      <li class="mdl-menu__item" *ngIf="(group['is:owner'] || group['is:admin']) && group.membership" (click)="togglePublic(false)" id="group-settings-make-closed">Make private</li>
 
       <!-- Member functions -->
       <li class="mdl-menu__item" [hidden]="group['is:muted']" (click)="mute()" i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DISABLE_NOTIFICATIONS" id="group-settings-disable-notification">Disable Notifications</li>
