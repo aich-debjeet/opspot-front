@@ -16,7 +16,7 @@ export class EnrolmentFormComponent implements OnInit {
 
   @Output() done: EventEmitter<any> = new EventEmitter();
   @Input('guid') set _eventGuid(guid) {
-  this.eventGuid = guid;
+    this.eventGuid = guid;
   }
 
   fileName = '';
@@ -28,7 +28,7 @@ export class EnrolmentFormComponent implements OnInit {
   resumeUploadError = false;
   attach_guid = [];
   eventGuid: string;
-
+  fileUploaded: boolean = false;
   constructor(
     private fb: FormBuilder,
     private attachment: AttachmentService,
@@ -59,25 +59,21 @@ export class EnrolmentFormComponent implements OnInit {
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
-    // console.log("File", file.value);
-
     if (file.value) {
-    this.attachment.upload(file, this.attach_guid)
-      .then((response) => {
-        // console.log("Res: ", response);
-
-        this.attachment_guid = response;
-        file.value = null;
-      })
-      .catch(e => {
-        file.value = null;
-        this.attachment.reset();
-      });
+      this.attachment.upload(file, this.attach_guid)
+        .then((response) => {
+          this.fileUploaded = true;
+          this.attachment_guid = response;
+        })
+        .catch(e => {
+          file.value = null;
+          this.fileUploaded = false;
+          this.attachment.reset();
+        });
     }
   }
 
   submit() {
-    console.log(this.form)
     this.formSubmitted = true;
     // console.log("Attachment: ", this.attachment_guid);
 
@@ -104,18 +100,15 @@ export class EnrolmentFormComponent implements OnInit {
       'comment': this.form.value.comments,
       'attachment_guid': this.attachment_guid,
       'payment_status': 'Pending',
-      "total_amount_paid":2420,
+      "total_amount_paid": 2420,
     }
-    console.log(formData);
-
 
     if (this.form.valid && formData.attachment_guid != '') {
       let endpoint = 'api/v3/event/enrollment/' + this.eventGuid;
       this.client.post(endpoint, formData)
         .then((resp: any) => {
-          if(resp.status == 'success'){
-            console.log("Response: ", resp);
-            this.done.emit({form:formData, enrollGuid:resp.guid, campaignGuid:this.eventGuid });
+          if (resp.status == 'success') {
+            this.done.emit({ form: formData, enrollGuid: resp.guid, campaignGuid: this.eventGuid });
           }
 
         })

@@ -30,21 +30,17 @@ export class EnrolmentViewComponent implements OnInit {
     private elementRef: ElementRef
   ) {
     this.sub = this.route.params.subscribe(params => {
-      console.log(params);
       if (params['guid']) {
         this.loadDetails(params['guid']);
       }
     });
-    console.log(this.route);
 
   }
 
   loadDetails(guid: string) {
     this.client.get('api/v3/event/' + guid)
       .then((response: any) => {
-        console.log(response);
         if (response.status == 'success' && response['event']) {
-          console.log(response['event']);
           this.enrolmentDetails = response['event'];
         }
       });
@@ -75,7 +71,6 @@ export class EnrolmentViewComponent implements OnInit {
   // }
 
   proceedPayment(enrollDetails: any) {
-    console.log('form data =', enrollDetails);
     this.enrollmentDetails = enrollDetails;
     this.formData = this.enrollmentDetails.form;
     this.payment();
@@ -127,14 +122,12 @@ export class EnrolmentViewComponent implements OnInit {
     this.client.post('api/v3/payment/instamojo', formData
     )
       .then((res: any) => {
-        console.log("Response: ", res);
         const s = document.createElement('script');
         s.type = 'text/javascript';
         s.innerHTML = "Instamojo.open('" + res.longurl + "');";
         this.elementRef.nativeElement.appendChild(s);
       })
       .catch((e) => {
-        console.log(e);
         const s = document.createElement('script');
         s.type = 'text/javascript';
         s.innerHTML = "Instamojo.open('" + e.longurl + "');";
@@ -143,7 +136,6 @@ export class EnrolmentViewComponent implements OnInit {
       });
   }
   navigate(guid: string){
-    console.log('hit');
     this.router.navigate(['/campaign/dashboard', guid]);
     
   }

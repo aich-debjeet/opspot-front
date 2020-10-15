@@ -74,6 +74,7 @@
         (change)="uploadAttachment(file,$event)"
         formControlName="resume"
       >
+      <div [hidden]="!fileUploaded"> File uploaded </div>
     </div>
     <div class="error text-sm" *ngIf="resumeUploadError">
       This is required</div>

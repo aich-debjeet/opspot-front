@@ -38,8 +38,7 @@
               <div class="o-enrolment-block o-enrolment-marginb51">
                   <div class="o-enrolment-block__left"> 
                       <div class="text-lg grey">
-                          {{enrolmentDetails?.start_time_date }} - {{ enrolmentDetails?.end_time_date }}<br>
-                          10:00 AM - 04:00 PM
+                          {{enrolmentDetails?.start_time_date | date:'short' }} - {{ enrolmentDetails?.end_time_date | date:'short' }}<br>
                       </div>
                   </div><!--left ends-->
                   <div class="o-enrolment-block__right">
@@ -49,7 +48,7 @@
                                   Duration
                               </div>
                               <div class="text-lg f500">
-                                  {{enrolmentDetails?.duration}}
+                                  {{enrolmentDetails?.duration | date:'d'}}
                               </div>
                           </div><!--item ends-->
                           <div class="o-enrolment-info__item"> 
