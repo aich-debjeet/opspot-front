@@ -274,8 +274,6 @@ export class RegisterForm {
     for (let i: any = a; i >= ab; i--) {
       year.push(i)
     }
-    console.log(a);
-    console.log(year);
     const val = { date, month, year };
     return val;
   }

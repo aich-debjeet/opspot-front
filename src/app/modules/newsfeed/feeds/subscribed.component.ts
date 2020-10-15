@@ -121,14 +121,12 @@ export class NewsfeedSubscribedComponent {
           this.newsfeed = this.newsfeed.concat(data.activity);
           if(!this.enroll){}
           this.enroll = this.newsfeed.find(data => data['event_type'] == 'Premium');
-          console.log('this.enroll',this.enroll);
           
         } else {
 
           this.newsfeed = data.activity;
           if(!this.enroll){
             this.enroll = this.newsfeed.find(data => data['event_type'] == 'Premium');
-            console.log('this.enroll',this.enroll);
           }
         }
         this.offset = data['load-next'];
