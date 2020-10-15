@@ -61,7 +61,7 @@
     </div><!-- media end -->
     <div class="o-explore-card__media-info">
       <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'image' || entity?.entity_type === 'post'
-      || entity?.entity_type === 'video' || entity?.entity_type === 'album'">{{entity?.message}}</div>
+      || entity?.entity_type === 'video' || entity?.entity_type === 'album'">{{entity?.message || entity?.title}}</div>
       <div class="text-md f500 elipse elipse--w-130" *ngIf="entity?.entity_type === 'event' || entity?.entity_type === 'item'
        || entity?.entity_type === 'opportunity'">{{entity?.blurb}}</div>
       <div class="o-media-hashtag" *ngIf="entity?.tags?.length > 0">
