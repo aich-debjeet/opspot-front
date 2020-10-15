@@ -240,7 +240,7 @@ export class ExploreComponent implements OnInit {
           limit: 50,
           offset: this.offset
         },
-        { cache: true }
+        { cache: false }
       )
       .then((data: any) => {
         let respData: any = data;
