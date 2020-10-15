@@ -45,6 +45,7 @@ export class CreateCampaignComponent implements OnInit {
   @ViewChild('organizationPic') organizationPic: ElementRef;
   data: any;
   displayList: boolean = false;
+  userData: string;
 
   constructor(private fb: FormBuilder, private title: OpspotTitle, private attachment: AttachmentService, public client: Client, public router: Router,private overlayModal: OverlayModalService,public session: Session) {
     this.title.setTitle('Campaign-Enrollment');
@@ -203,21 +204,37 @@ export class CreateCampaignComponent implements OnInit {
     //   class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium',
     // })
     this.displayList= true;
-    this.client.get('api/v1/subscribe/subscribers/' + this.userGuid, { offset: this.offset,limit:10 })
-    .then((response: any) => {
-      if (response.users.length === 0) {
-        // this.moreData = false;
-        // this.inProgress = false;
-        return;
-      }
+    // this.client.get('api/v1/subscribe/subscribers/' + this.userGuid, { offset: this.offset,limit:10 })
+    // .then((response: any) => {
+    //   if (response.users.length === 0) {
+    //     // this.moreData = false;
+    //     // this.inProgress = false;
+    //     return;
+    //   }
 
-      this.users = this.users.concat(response.users);
-      this.offset = response['load-next'];
-      // this.inProgress = false;
-    })
-    .catch((e) => {
-      // this.inProgress = false;
-    });
+    //   this.users = this.users.concat(response.users);
+    //   this.offset = response['load-next'];
+    //   // this.inProgress = false;
+    // })
+    // .catch((e) => {
+    //   // this.inProgress = false;
+    // });
+  }
+  getUsers(event: any){
+    console.log("event", event);
+    if (event.length >= 4) {
+      this.client.get('api/v2/search', {
+        q: event,
+        container: '',
+        limit: 10,
+        rating: 2,
+        offset: ''
+      }).then((res) => {
+        this.users = res['entities'].map(val => val['ownerObj']);
+      }
+      );
+    }
+    
   }
 
   formatTime(inputTime) {

@@ -231,7 +231,7 @@
             </div>
         </div><!--title ends-->
         <div class="form-group c-form_righticon-md">
-            <input type="text" class="form-control form-control-lg bg-grey-light" placeholder="Search Members">
+            <input type="text" class="form-control form-control-lg bg-grey-light" [ngModel]="userData" (ngModelChange)="getUsers($event)" placeholder="Search Members">
             <i class="icon-search"></i>
         </div><!--search bar ends-->
         <ul class="o-community-members-list scrollbar scrollbar-default">
