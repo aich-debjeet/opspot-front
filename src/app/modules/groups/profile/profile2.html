@@ -164,7 +164,7 @@
                        <a id="profile2-group-review-queue"> Review queue<div class="review-count text-md white">{{ group['adminqueue:count'] }}</div></a>
                     </li>  
                     <li routerLinkActive="active" routerLink="requests" *ngIf="group && (group['is:owner'] || group['is:admin']) && group['membership'] !== 2">
-                        <a id="profile2-group-members-request"> Members Request</a>
+                        <a id="profile2-group-members-request">  Requests Pending</a>
                         <!-- <opspot-groups-profile-requests [group]="group"></opspot-groups-profile-requests> -->
                     </li>
                 </ul>

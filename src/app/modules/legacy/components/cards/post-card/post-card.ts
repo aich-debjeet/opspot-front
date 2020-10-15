@@ -24,7 +24,7 @@ export class PostCard implements OnInit {
     if (this.entity) {
       if (this.entity.entity_type === 'event') {
         if (this.entity.end_time_date) {
-          this.routerlink = '/event/' + this.entity.guid;
+          this.routerlink = '/event/view/' + this.entity.guid;
         } else {
           this.routerlink = '/showtimez/' + this.entity.guid;
         }

@@ -9,6 +9,10 @@
         Bookmark
       </m-tooltip>
     </button>
+    <div *ngIf="isOwner()">
+      <a class="o-edit"  [routerLink]="['/profile/general']">
+        <i class="icon-edit-profile f-15" >Edit</i></a>
+    </div>
     <opspot-avatar class="opAvatar" [object]="user" [profileEdit]='profEdit' [editMode]="editing"
       (added)="upload_avatar($event)"></opspot-avatar>
     <div class="o-prof-name">
@@ -316,6 +320,27 @@
         </div>
       </div>
     </div><!-- Award detail end-->
+    <div *ngIf="user?.projects?.length > 0" class="o-award">
+      <a *ngIf="isOwner()" id="sidebar-edit-award" class="o-edit" [routerLink]="['/profile/projects']"><i
+          class="icon-edit-profile f-15"></i></a>
+      <div class="o-award__title caption-medium">Projects</div>
+      <div *ngFor="let item of user?.projects; let i = index" class="o-award-info">
+        <ng-container *ngIf="i < rowLimit">
+          <div class="o-award-info__logo">
+            <img src="assets/Awards.jpg" alt="">
+          </div>
+          <div class="o-award-info__det" id="sidebar-award-widget">
+            <div><a class="text-md f500 word-br">{{ item?.Project_Title }}</a></div>
+            <!-- <div class="text-sm grey-dark word-br">{{ item?.Project_Description }}</div> -->
+            <div><span class="text-md float-left"
+            id="sidebar-languages-known">{{item?.Project_Description | truncate:[20, '...']}}</span></div>
+          
+          </div>  
+        </ng-container>
+    </div>
+    <div *ngIf="user?.projects.length > 5">
+      <a (click)="handleSeeMore()" [routerLink]="['/profile/projects']">See More</a></div>
+  </div><!-- Project detail end-->
   </div>
 
   <!-- <m-wire-channel #wire [(rewards)]="user.wire_rewards" [channel]="user" [editing]="editing"></m-wire-channel> -->

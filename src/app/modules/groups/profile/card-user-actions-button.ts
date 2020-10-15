@@ -7,7 +7,7 @@ import { GroupsService } from '../groups-service';
   inputs: ['group', 'user'],
   outputs: ['_remove: remove'],
   template: `
-  <button class="icon-more-vertical btnDefault" id="card-user-action-menu" *ngIf="(group['is:owner'] || group['is:admin']) || (group['is:moderator'] && !(user['is:owner']||user['is:moderator']))" (click)="toggleMenu($event)">
+  <button class="icon-more-vertical btnDefault" id="card-user-action-menu" *ngIf="(group['is:owner'] || group['is:admin']) || (group['is:moderator'] && !(user['is:owner']||user['is:moderator'] || user['is:admin']))" (click)="toggleMenu($event)">
 
   </button>
 
@@ -51,7 +51,7 @@ import { GroupsService } from '../groups-service';
   <m-modal [open]="kickPrompt" (closed)="kickPrompt =false">
       <div class="delete-confirmation-wrapper">
       <div class="mdl-card__supporting-text">
-        <p i18n="@@GROUPS__REMOVE_X_FROM_Y_CONFIRM" class="m-modal-confirm-body text-lg">Are you sure you want to remove {{ user.username }} from {{ group.name }}?</p>
+        <p i18n="@@GROUPS__REMOVE_X_FROM_Y_CONFIRM" class="m-modal-confirm-body text-lg">Are you sure you want to remove {{ user.username | truncate: [50, '...']}} from {{ group.name | truncate: [50, '...'] }}?</p>
         <!-- <p><input type="checkbox" #ban> <ng-container i18n="@@M__COMMON__BAN_PERMANENTLY">Ban permanently</ng-container></p> -->
       </div>
       <div class="opspot-modal-dialog-actions">

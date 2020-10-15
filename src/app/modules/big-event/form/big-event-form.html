@@ -27,10 +27,10 @@
                     </div>
                 </div>
                 <div class="o-create-big-event-row">
-                    <div class="form-group select-big-event mr13">
+                    <div class="form-group input-select mr13">
                         <label>Event Type</label>
                         <select class="form-control form-control-lg" id="big-event-event-type" formControlName="eventType">
-                            <option value="" disabled selected>Select Type</option>
+                            <option value="" selected>Select Type</option>
                             <option *ngFor="let type of eventTypeList" id="big-event-type" value="{{ type.value }}">{{ type.label}}</option>
                         </select>
                         <div class="error text-sm"
@@ -38,10 +38,10 @@
                             This is required
                         </div>
                     </div>
-                    <div class="form-group select-big-event">
+                    <div class="form-group input-select">
                         <label>Event Category</label>
                         <select class="form-control form-control-lg" id="big-event-event-category" formControlName="eventCategory">
-                            <option value="" disabled selected>Select Category</option>
+                            <option value="" selected>Select Category</option>
                             <option *ngFor="let type of eventCategoryList" id="big-event-event-category-type" value="{{ type.value }}">{{ type.label}}
                             </option>
                         </select>
@@ -133,7 +133,7 @@
                         </div>
                         <!--file preview ends-->
                     </div>
-                    <div class="grey text-sm paddng-top">The dimensions for cover image is 797px x 275px</div>
+                    <div class="grey text-sm paddng-top">The dimensions for cover image are 797px x 275px</div>
                     <div *ngIf="inProgress" class="mdl-progress mdl-progress__indeterminate initial-loading is-upgraded">
                         <div class="progressbar bar bar1" style="width: 0%;"></div>
                         <div class="bufferbar bar bar2" style="width: 100%;"></div>

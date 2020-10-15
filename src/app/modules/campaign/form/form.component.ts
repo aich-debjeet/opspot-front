@@ -1,9 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { environment } from '../../../../environments/environment';
 import { AttachmentService } from '../../../services/attachment';
-import { FormValidator } from '../../../helpers/form.validator'
+import { FormValidator } from '../../../helpers/form.validator';
 import { Client } from '../../../services/api';
 
 
@@ -15,6 +15,9 @@ import { Client } from '../../../services/api';
 export class EnrolmentFormComponent implements OnInit {
 
   @Output() done: EventEmitter<any> = new EventEmitter();
+  @Input('guid') set _eventGuid(guid) {
+    this.eventGuid = guid;
+  }
 
   fileName = '';
   form: FormGroup;
@@ -24,7 +27,8 @@ export class EnrolmentFormComponent implements OnInit {
   formSubmitted: boolean = false;
   resumeUploadError = false;
   attach_guid = [];
-
+  eventGuid: string;
+  fileUploaded: boolean = false;
   constructor(
     private fb: FormBuilder,
     private attachment: AttachmentService,
@@ -55,20 +59,17 @@ export class EnrolmentFormComponent implements OnInit {
   }
 
   uploadAttachment(file: HTMLInputElement, event) {
-    // console.log("File", file.value);
-
     if (file.value) {
-    this.attachment.upload(file, this.attach_guid)
-      .then((response) => {
-        // console.log("Res: ", response);
-
-        this.attachment_guid = response;
-        file.value = null;
-      })
-      .catch(e => {
-        file.value = null;
-        this.attachment.reset();
-      });
+      this.attachment.upload(file, this.attach_guid)
+        .then((response) => {
+          this.fileUploaded = true;
+          this.attachment_guid = response;
+        })
+        .catch(e => {
+          file.value = null;
+          this.fileUploaded = false;
+          this.attachment.reset();
+        });
     }
   }
 
@@ -97,19 +98,17 @@ export class EnrolmentFormComponent implements OnInit {
       'gender': this.form.value.gender,
       'opspot_link': this.form.value.porfolioLink,
       'comment': this.form.value.comments,
-      'attachment_guid': this.attachment_guid
+      'attachment_guid': this.attachment_guid,
+      'payment_status': 'Pending',
+      "total_amount_paid": 2420,
     }
-    // console.log(this.campaignGuid);
-
 
     if (this.form.valid && formData.attachment_guid != '') {
-      let endpoint = 'api/v3/campaign/enrolment/' + this.campaignGuid;
-
+      let endpoint = 'api/v3/event/enrollment/' + this.eventGuid;
       this.client.post(endpoint, formData)
         .then((resp: any) => {
-          if(resp.status == 'success'){
-            // console.log("Response: ", resp);
-            this.done.emit({form:formData, enrollGuid:resp.guid, campaignGuid:this.campaignGuid });
+          if (resp.status == 'success') {
+            this.done.emit({ form: formData, enrollGuid: resp.guid, campaignGuid: this.eventGuid });
           }
 
         })

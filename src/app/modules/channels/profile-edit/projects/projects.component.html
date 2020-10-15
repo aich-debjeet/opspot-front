@@ -1,0 +1,148 @@
+<div class="tab" style="display: block;">
+  <h5 class="o-prof-edit-title" *ngIf="!addWork" id="projects-title-header">Projects</h5>
+  <div class="o-prof-edit-block" *ngIf="!addWork">
+      <a class="btn btn-outline-primary btn-block showSingle" id="projects-add-projects"
+          (click)="addWork=!addWork; addWorkMove();"> ADD PROJECTS</a>
+      <div class="o-prof-edit-wea">
+          <div class="o-wea-block" id="projects-block" *ngFor="let item of work.projects; let i=index;">
+              <div class="o-wea-logo"><img src="assets/Education.jpg" alt=""></div>
+              <div class="o-wea-info">
+                  <div class="caption-bold" id="awards-award-title" (click)="handleSeeMore(item)">{{item.Project_Title}} </div>
+                  <div class="text-md grey-dark" id="awards-issuer-loaction" (click)="handleSeeMore(item)">
+                      <span>{{item.Project_Description | truncate:[77, '']}}</span>
+                      
+                      <!-- <a (click)="handleSeeMore(item)" class="seemore">see more</a> -->
+                      <!-- <ng-container
+						[ngTemplateOutlet]="projectDetails"
+						[ngTemplateOutletContext]="{item:item}">
+                     </ng-container>  -->
+                     <!-- <a *ngIf="(model?.Project_Description ? model?.Project_Description.length<30:true); else readMore">
+                        {{model?.Project_Description}} </a> 
+                        <ng-template #readMore>
+                            <read-more>
+                                {{model?.Project_Description}}
+                            </read-more>
+                        </ng-template>  -->
+                        
+             </div><a class="primary" (click)="handleSeeMore(item)" > See More</a>
+                  
+                   </div>
+              <div class="o-wea-edit"><a (click)="update(i)" id="projects-update-icon"><i
+                          class="icon-edit-profile"></i></a>
+                  <a class="fileUpload-close-temp" (click)="remove(i)" id="projects-remove-image">
+                      <i class="icon-x"></i>
+                  </a></div>
+          </div>
+      </div>
+  </div>
+
+  <div *ngIf="addWork" style="display: block;">
+      <h5 class="o-prof-edit-title workTitle">
+          <a (click)="goBack()" class="o-wea-back" target="2" id="projects-arrow-left">
+              <i class="icon-arrow-left"></i>
+          </a>Add Projects</h5>
+      <form #f="ngForm">
+          <div class="o-wea-add-block" style="padding-left: 12px;">
+              <input type="hidden" [(ngModel)]="model.index" [value]=model.index name="updateIndex">
+              <div class="o-wea-add-block__left o-wea-add-block__left--project">
+                  <div class="form-group w-xl">
+                      <label>Project Title <span>0/50</span></label>
+                      <input type="text" id="projects-title" #Project_Title="ngModel" required name="title"  
+                          [(ngModel)]="model.Project_Title" class="form-control form-control-lg" placeholder="" maxlength="50">
+                  </div>
+                  <!--designation end-->
+                  <div class="form-group w-xl">
+                      <label>Project Description  <span >0/1000</span></label>
+                     
+                      <textarea name="description"  #Project_Description ="ngModel"
+                      id="projects-component-description" [(ngModel)]="model.Project_Description" class="form-control form-control-lg"  maxlength="1000" > 
+                         
+                      </textarea>
+
+
+                    </div>     
+                 
+                  <!-- Project Description end-->
+                  <div class="form-group w-xl">
+                      <label>Project link</label>
+                      <input required type="text" id="projects-location" #Project_link="ngModel" name="location"
+                          [(ngModel)]="model.Project_link" class="form-control form-control-lg" placeholder="">
+
+                  </div>
+                  <!--Project link end-->
+                  <!-- <div class="o-toggle-check">
+                    <label>
+                        <input type="checkbox" (click)="toggleEndDate()" [(ngModel)]="model.present" name="present">
+                        <span class="text-md">I’m currently studing here</span>
+                    </label>
+                </div> -->
+                  <!-- toggle check end -->
+                  <!-- start date end -->
+                  <!-- <ng-template [ngIf]="!toggleEnd" >
+                <div class="o-prof-edit-item__title" >End Date</div>
+                <div class="o-wea-date">
+                    <div class="form-group">
+                        <select class="form-control" name="endMonth"  [(ngModel)]="model.endMonth" >
+                            <option [value]="Month" selected disabled hidden>Month</option>
+                            <option *ngFor="let month of dateOfBirth.month" [value]="month" placeholder="month"> {{month}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="endYear" [(ngModel)]="model.endYear" >
+                            <option [value]="Year" selected disabled hidden>Year</option>
+                            <option *ngFor="let year of dateOfBirth.year" [value]="year">{{year}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+               </ng-template> -->
+
+              </div>
+
+          </div>
+
+      </form>
+      <div class="o-toggle-check">
+         
+              <input type="checkbox" id="projects-show-on-profile" name="access" [(ngModel)]="model.access">
+            <label>
+                <span class="text-md">Show this projects on my profile</span>
+            </label>
+             
+         
+      </div>
+
+      
+      <p *ngIf="errWork&&submitted" class="error text-sm">Please add all the details</p>
+
+
+
+
+      <div class="o-prof-edit-actions" style="padding-left:12px; ">
+          <button type="button" id="projects-update-button" class="btn btn-primary btn-lg" (click)="onSubmit(f)"
+              [disabled]="inProgress">Save Changes</button>
+          <button type="button" id="projects-cancel-button" class="btn btn-outline-primary btn-lg btn--cancel "
+              [routerLink]="['/', activeUser?.username]">Cancel</button>
+      </div>
+  </div>
+</div>
+
+
+<m-modal [open]="popupToggle" [allowClose]="true" class="popupToggle" (closed)="popupToggle = false">
+    <div class="o-project-info-popup">
+        <div class="o-project-info-popup__header">
+            <h4>Projects</h4>
+        </div>
+         <div class="o-project-info-popup__body">
+            <h5 > {{modalVal.title}}</h5>
+            <div class="o-project-info-content text-md"  >
+                {{modalVal.desc }}
+           </div>
+            <div class="caption-bold ">
+                Project Link</div>
+            <a [href]="modalVal.link" target="_blank" class="o-project-link primary">
+                {{modalVal.link}}
+            </a>
+        </div>
+    </div>
+</m-modal>

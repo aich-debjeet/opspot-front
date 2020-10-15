@@ -41,7 +41,7 @@ export class HomepageComponent {
     public session: Session
   ) {
     this.title.setTitle('Home');
-    this.loadStream();
+    // this.loadStream();
     
     if (this.session.isLoggedIn()) {
       this.router.navigate(['/newsfeed']);
@@ -53,43 +53,43 @@ export class HomepageComponent {
     }
   }
 
-  loadStream(refresh: boolean = false) {
-    this.inProgress = true;
-    this.client.get('api/v1/newsfeed/featured', { limit: 24, offset: this.offset })
-      .then((response: any) => {
-        let col = 0;
-        for (let activity of response.activity) {
-          //split stream into 3 columns
-          if (col++ >= 3)
-            col = 1;
-          this.stream[col].push(activity);
-        }
-        this.offset = response['load-next'];
-        this.inProgress = false;
-      })
-      .catch(() => {
-        this.inProgress = false;
-      });
-  }
+  // loadStream(refresh: boolean = false) {
+  //   this.inProgress = true;
+  //   this.client.get('api/v1/newsfeed/featured', { limit: 24, offset: this.offset })
+  //     .then((response: any) => {
+  //       let col = 0;
+  //       for (let activity of response.activity) {
+  //         //split stream into 3 columns
+  //         if (col++ >= 3)
+  //           col = 1;
+  //         this.stream[col].push(activity);
+  //       }
+  //       this.offset = response['load-next'];
+  //       this.inProgress = false;
+  //     })
+  //     .catch(() => {
+  //       this.inProgress = false;
+  //     });
+  // }
 
-  loadVideos() {
-    this.client.get('api/v1/entities/featured/videos', { limit: 4 })
-      .then((response: any) => {
-        this.videos = response.entities;
-      });
-  }
+  // loadVideos() {
+  //   this.client.get('api/v1/entities/featured/videos', { limit: 4 })
+  //     .then((response: any) => {
+  //       this.videos = response.entities;
+  //     });
+  // }
 
-  loadBlogs() {
-    this.client.get('api/v1/blog/featured', { limit: 4 })
-      .then((response: any) => {
-        this.blogs = response.blogs;
-      });
-  }
+  // loadBlogs() {
+  //   this.client.get('api/v1/blog/featured', { limit: 4 })
+  //     .then((response: any) => {
+  //       this.blogs = response.blogs;
+  //     });
+  // }
 
-  registered() {
-    this.loginReferrer.navigate({
-      defaultUrl: '/' + this.session.getLoggedInUser().username + ';onboarding=1'
-    });
-  }
+  // registered() {
+  //   this.loginReferrer.navigate({
+  //     defaultUrl: '/' + this.session.getLoggedInUser().username + ';onboarding=1'
+  //   });
+  // }
 
 }

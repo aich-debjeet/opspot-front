@@ -6,10 +6,16 @@ import { CommonModule } from '../../common/common.module';
 import { ExploreComponent } from './explore.component';
 import { FormsModule } from '@angular/forms';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import {NotificationModule} from '../notifications/notification.module'
+import { NotificationModule } from '../notifications/notification.module'
 
 const exploreRoutes: Routes = [
-  { path: '', component: ExploreComponent }
+
+  {
+    path: 'explore', redirectTo: ':filter', pathMatch: 'full',
+  },
+  {
+    path: ':filter', component: ExploreComponent
+  }
 ];
 
 @NgModule({
@@ -29,4 +35,4 @@ const exploreRoutes: Routes = [
   entryComponents: [ExploreComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ExploreModule {}
+export class ExploreModule { }

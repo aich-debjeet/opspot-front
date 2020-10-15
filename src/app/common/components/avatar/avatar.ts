@@ -143,7 +143,6 @@ export class OpspotAvatar {
 
     value.icontime = value.icontime ? value.icontime : '';
     this.object = value;
-    console.log("this.object:", this.object);
     
     this.src = `${this.opspot.cdn_url}fs/v1/avatars/${this.object.guid}/medium/${this.object.icontime}`;
     if (this.object.type === 'user')

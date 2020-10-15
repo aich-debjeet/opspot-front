@@ -63,7 +63,7 @@
             id="topbar-home">Home</a>
         </li>
         <li class="nav__item">
-          <a class="nav__link nav__link--text" [routerLink]="['/explore']" id="topbar-explore">Explore</a>
+          <a class="nav__link nav__link--text" [routerLink]="['explore', 'inthespotlight']" id="topbar-explore">Explore</a>
         </li>
         <li class="nav__item">
           <a class="nav__link nav__link--text" routerLink='/wallet/tokens/overview' id="topbar-wallet">Wallet</a>
@@ -223,6 +223,12 @@
                   <!-- <i class="material-icons">trending_up</i> -->
                   <span>Create Event</span>
                 </a>
+              </li>
+              <li class="m-dropdownList__item" (click)="createMenu.value = false" *ngIf="session.isAdmin()">
+                <a [routerLink]="['/campaign/create']" id="topbar-create-event">
+                  <!-- <i class="material-icons">trending_up</i> -->
+                  <span>Create Enrollment</span>
+                </a>  
               </li>
             </ul>
             <div class="opspot-bg-overlay" (click)="createMenu.value = !createMenu.value" [hidden]="!createMenu.value">

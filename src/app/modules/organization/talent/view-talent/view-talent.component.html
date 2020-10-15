@@ -1,4 +1,4 @@
-<section class="o-post-inner-sec">
+<section class="o-post-inner-sec" *ngIf="talent">
   <div class="container">
       <div class="o-talent-inner-main-block">
           <div class="o-talent-inner-left-block">
@@ -58,7 +58,7 @@
                         talent?.custom_data[0].thumbnail_src = opspot.cdn_assets_url + 'assets/ops_icon.png'" alt="">
                       </div><!--avatar ends-->
                       <div class="feed-card-talent-block__info">
-                          <div class="caption-bold">{{ talent.title }}</div>
+                          <div class="caption-bold word-br">{{ talent.title }}</div>
                       </div><!--info ends-->
                       <div class="feed-card-talent-block__btn">
                           <!-- <button type="button" class="btn btn-primary btn-sm">Reach Out</button> -->

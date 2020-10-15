@@ -73,6 +73,8 @@ import { PortfolioModule } from './modules/portfolio/portfolio.module';
 import { BigEventModule } from './modules/big-event/big-event.module';
 import { PediaModule } from './modules/pedia/pedia.module';
 import { DataExtractionComponent } from './modules/data-extraction/data-extraction.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 
 
@@ -147,7 +149,8 @@ import { DataExtractionComponent } from './modules/data-extraction/data-extracti
     PortfolioModule,
     BigEventModule,
     OrganizationModule,
-    PediaModule
+    PediaModule,
+    NgxDatatableModule
   ],
   providers: [
     OpspotAppRoutingProviders,

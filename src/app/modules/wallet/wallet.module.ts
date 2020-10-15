@@ -22,7 +22,7 @@ import { WalletToggleComponent } from './toggle.component';
 import { WalletFlyoutComponent } from './flyout/flyout.component';
 import { WalletTokensComponent } from './tokens/tokens.component';
 import { WalletPointsComponent } from './points/points.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WalletTokenSettingsComponent } from './tokens/settings/settings.component';
 import { WalletTokenTransactionsComponent } from './tokens/transactions/transactions.component';
 import { WalletTokenContributionsComponent } from './tokens/contributions/contributions.component';
@@ -83,7 +83,7 @@ const walletRoutes : Routes = [
 @NgModule({
   imports: [
     NgCommonModule,
-    BrowserAnimationsModule,
+    // BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

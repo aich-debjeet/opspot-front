@@ -3,7 +3,7 @@
         (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
         (beforeChange)="beforeChange($event)">
         <div ngxSlickItem *ngFor="let tags of _exploreTabList; let i = index;" id="explore-skill-type" class="slide o-tag">
-            <a (click)="switchCategoryType(tags.id,tags.val)" class="">{{tags.id}}</a>
+            <a [routerLink]="['/', 'explore', tags.val]" class="">{{tags.id}}</a>
         </div>
     </ngx-slick-carousel>
     <!-- <button class="btn-prev" (click)="slickModal.slickPrev()">prev</button>
@@ -44,8 +44,8 @@
         </div>
         <!--filter and search section-->
         <div class="o-explore-media-part">
-            <div class="o-explore-media-part__subtitle">
-                <div>Trending {{_activeFilter}}</div>
+            <div class="o-explore-media-part__subtitle" *ngIf="_loadMoreFilter == 'inthespotlight'">
+                <div> Trending {{_activeFilter}}</div>
             </div>
             <opspot-masonry-container [entities]="filteredArray" class="explore-container"></opspot-masonry-container>
             <infinite-scroll distance="25%" (load)="searchMore(false,_loadMoreFilter)" [moreData]="moreData" [inProgress]="inProgress">

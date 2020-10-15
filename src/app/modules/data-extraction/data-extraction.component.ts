@@ -17,7 +17,6 @@ export class DataExtractionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("URL: ", this.url);
 
     // this.load()
   }
@@ -31,7 +30,6 @@ export class DataExtractionComponent implements OnInit {
             for (let i = 0; i < this.resData.length; i++) {
               this.data += this.resData[i] + '\n';
             }
-          console.log("jkvjf", this.resData);
 
         }
       })

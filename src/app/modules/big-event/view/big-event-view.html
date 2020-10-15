@@ -63,7 +63,9 @@
                         ></m-messenger--channel-button>
                     </div><!-- info action end -->
                     <div class="o-big-events-inner-info__action" *ngIf="bigEvent && bigEvent?.guid && session.getLoggedInUser().guid == bigEvent?.owner_guid">
-                        <button type="button" class="btn btn-primary btn-lg mar-l-5" [routerLink]="['/event/edit/' + bigEvent?.guid]">Edit</button>
+                        <!-- {{entity_type}} -->
+                        <button type="button" class="btn btn-primary btn-lg mar-l-5" (click)="navToUpdate()" >Edit</button>
+                        
                         <button type="button" class="btn btn-primary btn-lg" (click)="showBoost()">Boost</button>
                     </div><!-- info action end -->
                 </div><!-- big events inner info end -->

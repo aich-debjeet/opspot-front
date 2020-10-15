@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../../services/api';
+import { Subscription } from 'rxjs';
+import { CommonEventsService } from '../../../../services/common-events.service';
+import { OverlayModalService } from '../../../../services/ux/overlay-modal';
+import { TalentListComponent } from '../talent-list/talent-list.component';
 
 @Component({
   selector: 'opspot-talent-preview',
@@ -13,18 +17,39 @@ export class TalentPreviewComponent implements OnInit {
   inProgress = false;
   talents: Array<any> = [];
   talentToggele = false;
+  commService$: Subscription;
+
 
   constructor(
-    private client: Client
+    private client: Client,
+    private commService: CommonEventsService,
+
+    private overlayModal: OverlayModalService
   ) { }
 
   ngOnInit() {
+    this.commService$ = this.commService.listen().subscribe((e: any) => {
+      if (e.component && e.action) {
+        if (e.component === 'OrganizationMemberPreviews') {
+          if (e.action === 'appendTalentList') {
+            this.load();
+          }
+        }
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.commService$.unsubscribe();
   }
 
   set _organization(value: any) {
     this.organization = value;
     this.load();
   }
+
+
+
 
   async load() {
     this.inProgress = true;
@@ -40,7 +65,10 @@ export class TalentPreviewComponent implements OnInit {
   }
 
   showTalents() {
-    this.talentToggele = !this.talentToggele;
+    // this.talentToggele = !this.talentToggele;
+    this.overlayModal.create(TalentListComponent, this.organization, {
+      class: 'm-overlay-modal--hashtag-selector m-overlay-modal--medium-talentlist',
+    }).present();
   }
 
   remove(talent) {

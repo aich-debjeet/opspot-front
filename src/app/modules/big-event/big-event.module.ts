@@ -17,22 +17,25 @@ import { CommentsModule } from '../comments/comments.module';
 import { ShareMenuModule } from '../../common/components/share-menu/share-menu.module';
 import { TranslateModule } from '../translate/translate.module';
 import { MessengerModule } from '../messenger/messenger.module';
+import { NotificationModule } from '../notifications/notification.module';
+import { WalletModule } from '../wallet/wallet.module';
 
 
 
 
 // TODO @gayatri: handle all other requests
 const bigeventRoutes: Routes = [
+  
   {
-    path: 'event/create',
+    path: 'create',
     component: BigEventCreate,
   },
   {
-    path: 'event/edit/:guid',
+    path: 'edit/:guid',
     component: BigEventEdit,
   },
   {
-    path: 'event/:guid',
+    path: 'view/:guid',
     component: BigEventView,
   }
   // {
@@ -51,6 +54,7 @@ const bigeventRoutes: Routes = [
   imports: [
     CommonModule,
     NgCommonModule,
+    NotificationModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(bigeventRoutes),
@@ -63,7 +67,8 @@ const bigeventRoutes: Routes = [
     CommentsModule,
     ShareMenuModule,
     TranslateModule,
-    MessengerModule
+    MessengerModule,
+    WalletModule
   ]
 })
 export class BigEventModule { }
