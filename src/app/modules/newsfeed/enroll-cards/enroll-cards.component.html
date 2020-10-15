@@ -1,0 +1,12 @@
+<div class="c-block">
+  <div class="o-card feed">
+    <h3 class="f400">{{dispalyEnroll.title}}</h3>
+    <div class="feed-media-ad">
+      <a class="feed-media-ad__link" [routerLink]="['/campaign',dispalyEnroll.entity_guid]">
+        <img src="{{dispalyEnroll.custom_data[0].src}}" class="feed-media-ad__img" alt="enrollment">
+        <button type="button" class="btn btn-primary enroll">Enroll here</button>
+      </a>
+    </div>
+    <!--feed media end-->
+  </div><!-- ad_post end -->
+</div>

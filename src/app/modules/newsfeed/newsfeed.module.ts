@@ -24,6 +24,7 @@ import { PosterModule } from './poster/poster.module';
 import { CommentsModule } from '../comments/comments.module';
 import { HashtagsModule } from '../hashtags/hashtags.module';
 import { NewsfeedTagsComponent } from './feeds/tags/tags.component';
+import { EnrollCardsComponent } from './enroll-cards/enroll-cards.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,7 @@ const routes: Routes = [
     NewsfeedSubscribedComponent,
     NewsfeedBoostComponent,
     NewsfeedTagsComponent,
+    EnrollCardsComponent,
   ],
   providers: [
     NewsfeedService,

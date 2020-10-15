@@ -22,10 +22,10 @@
             </div>
             <div class="o-enrolment-block o-enrolment-block--gap">
                 <div class="o-enrolment-block__left"> 
-                    <h4>Enroled to</h4>
+                    <h4>Enrolled to</h4>
                 </div><!--left ends-->
                 <div class="o-enrolment-block__right">
-                    <h4 class="f500">{{enrolledData?.campaign?.title}}</h4>
+                    <h4 class="f500">{{enrolledData?.event?.title}}</h4>
                     <div class="o-enrolment-margin18 o-enrolment-f17">{{enrolledData?.time_created * 1000 | date:'medium'}}</div>
                     <div class="grey o-enrolment-f17 o-enrolment-lh30">{{enrolledData?.location}}</div>
                 </div><!--right ends-->
@@ -39,19 +39,19 @@
                     <table class="o-enrolment-f17 o-enrolment-table">
                         <tr>
                             <td class="grey">Enrolment Amount</td>
-                            <td class="grey">₹ 233.00</td>
+                            <td class="grey">₹ {{enrolledData?.event?.enrollment_fees}}</td>
                         </tr>
                         <tr>
                             <td class="grey">OPS Service Fee</td>
-                            <td class="grey">₹ 20.00</td>
+                            <td class="grey">{{taxData?.ops_service_fee}}</td>
                         </tr>
                         <tr>
                             <td class="grey">GST</td>
-                            <td class="grey">₹ 40.00</td>
+                            <td class="grey">{{taxData?.gst}}</td>
                         </tr>
                         <tr>
                             <td class="f500">Total</td>
-                            <td class="f500">₹ 293.00</td>
+                            <td class="f500">₹ {{enrolledData?.total_amount_paid}}</td>
                         </tr>
                     </table>
                 </div><!--right ends-->

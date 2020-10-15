@@ -334,6 +334,24 @@ export class Activity {
       }).present()
     }
     else if (this.activity.entity_type === 'event') {
+      if (this.activity.event_type === 'Premium') {
+        this.router.navigateByUrl('/campaign/edit/' + this.activity.entity_guid)
+      }
+      else if (this.activity.end_time_date) {
+        this.router.navigateByUrl('/event/edit/' + this.activity.guid)
+      } else {
+        this.overlayModal.create(ShowtimezFormComponent, this.activity, {
+          class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+          // listen to the update callback
+          onUpdate: (payload: any) => {
+            // make update to local var
+            this.udpateShowtime(payload);
+          }
+        }).present()
+      }
+
+    }
+    else if (this.activity.entity_type === 'event') {
       if (this.activity.end_time_date) {
         this.router.navigateByUrl('/event/edit/' + this.activity.guid)
       } else {

@@ -31,7 +31,9 @@
               "node_modules/croppie/croppie.css",
               "node_modules/swiper/dist/css/swiper.css",
               "node_modules/slick-carousel/slick/slick.scss",
-              "node_modules/slick-carousel/slick/slick-theme.scss"
+              "node_modules/slick-carousel/slick/slick-theme.scss",
+              "./node_modules/@swimlane/ngx-datatable/index.scss",
+              "./node_modules/@swimlane/ngx-datatable/themes/material.scss"
             ],
             "scripts": [
               "node_modules/material-design-lite/dist/material.min.js",

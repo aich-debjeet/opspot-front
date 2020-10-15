@@ -8,12 +8,16 @@
         </div><!-- without nav header end -->
         <div class="o-enrolment">
             <div class="o-enrolment-baner">
-                <img src="assets/enrolment/enrolment-banner.jpg">
+                <img [src]="enrolmentDetails?.cover_data[0]?.src" (error)="enrolmentDetails.cover_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
             </div><!--banner ends-->
             <div class="o-enrolment-body">
               <div class="o-enrolment-title" id="en_header">
-                <h4 class="f500">Bangalore Fashion Week</h4>
-                <button type="button" onclick="shareDropdown()" class="btn btn-outline-primary o-enrolment-title__button" id="en_share">
+                <h4 class="f500">{{enrolmentDetails?.title}}</h4>
+                <button type="button" (click)="navigate(enrolmentDetails?.guid)" *ngIf="opspot.Admin" class="btn btn-outline-primary o-enrolment-title__button">
+                    Dashboard
+                  </button>
+                
+                <button type="button" class="btn btn-outline-primary" id="en_share">
                   <span class="icon-share-2 o-enrolment-title__icon"></span>Share
                 </button>
                 <div id="shareDropdown"  class="dropdown-content hide">
@@ -34,8 +38,7 @@
               <div class="o-enrolment-block o-enrolment-marginb51">
                   <div class="o-enrolment-block__left"> 
                       <div class="text-lg grey">
-                          22 Jan 2020 - 28 Jan 2020<br>
-                          10:00 AM - 04:00 PM
+                          {{enrolmentDetails?.start_time_date | date:'short' }} - {{ enrolmentDetails?.end_time_date | date:'short' }}<br>
                       </div>
                   </div><!--left ends-->
                   <div class="o-enrolment-block__right">
@@ -45,7 +48,7 @@
                                   Duration
                               </div>
                               <div class="text-lg f500">
-                                  6 Hours
+                                  {{enrolmentDetails?.duration | date:'d'}}
                               </div>
                           </div><!--item ends-->
                           <div class="o-enrolment-info__item"> 
@@ -53,7 +56,7 @@
                                     Gender
                                 </div>
                                 <div class="text-lg f500">
-                                    All
+                                    {{enrolmentDetails?.allowed_gender}}
                                 </div>
                           </div><!--item ends-->
                           <div class="o-enrolment-info__item"> 
@@ -61,7 +64,7 @@
                                     Includes
                                 </div>
                                 <div class="text-lg f500">
-                                    Snacks
+                                    {{enrolmentDetails?.brevarges}}
                                 </div>
                           </div><!--item ends-->
                           <div class="o-enrolment-info__item"> 
@@ -69,7 +72,7 @@
                                     Price
                                 </div>
                                 <div class="text-lg f500">
-                                    ₹ 3000.00
+                                    ₹ {{enrolmentDetails?.enrollment_fees}}
                                 </div>
                           </div><!--item ends-->
                       </div><!--info ends-->
@@ -80,19 +83,7 @@
                       <h4>What you will do?</h4>
                   </div><!--left ends-->
                   <div class="o-enrolment-block__right">
-                    <p class="o-enrolment-marginb25 text-md">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. 
-                      Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus 
-                      mus.  Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa 
-                      quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, 
-                      rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. 
-                      Integer tincidunt.</p>
-  
-                      <p class="text-md">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. 
-                      Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                       Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis 
-                       enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus 
-                       ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer 
-                       tincidunt.</p>
+                    <p class="o-enrolment-marginb25 text-md" [innerHtml]="enrolmentDetails?.description | tags"></p>
                   </div><!--right ends-->
               </div><!--block ends-->
               <div class="o-enrolment-block o-enrolment-marginb51">
@@ -100,21 +91,21 @@
                       <h4>Gallery</h4>
                   </div><!--left ends-->
                   <div class="o-enrolment-block__right o-enrolment-block-gallery">
-                      <img class="fs-gal" src="assets/enrolment/gallery-1.jpg"  data-url="assets/enrolment/gallery-1.jpg" /><!-- Alt tags can be used to display info in the gallery viewer. -->
-                      <img class="fs-gal" src="assets/enrolment/gallery-2.jpg"  data-url="assets/enrolment/gallery-2.jpg" /><!-- The title tag can be used as well. -->
+                      <img class="fs-gal" [src]="img.src" (error)="img.src = opspot.cdn_assets_url + 'assets/logos/logo.svg'" *ngFor="let img of enrolmentDetails?.custom_data">
+                      <!-- <img class="fs-gal" src="assets/enrolment/gallery-2.jpg"  data-url="assets/enrolment/gallery-2.jpg" />
                       <img class="fs-gal" src="assets/enrolment/gallery-3.jpg" data-url="assets/enrolment/gallery-3.jpg" />
                       <img class="fs-gal" src="assets/enrolment/gallery-4.jpg" data-url="assets/enrolment/gallery-4.jpg" />
-                      <img class="fs-gal" src="assets/enrolment/gallery-5.jpg"  data-url="assets/enrolment/gallery-5.jpg" /><!-- The title tag can be used as well. -->
+                      <img class="fs-gal" src="assets/enrolment/gallery-5.jpg"  data-url="assets/enrolment/gallery-5.jpg" />
                       <img class="fs-gal" src="assets/enrolment/gallery-6.jpg" data-url="assets/enrolment/gallery-6.jpg" />
-                      <img class="fs-gal" src="assets/enrolment/gallery-7.jpg" data-url="assets/enrolment/gallery-7.jpg" />
+                      <img class="fs-gal" src="assets/enrolment/gallery-7.jpg" data-url="assets/enrolment/gallery-7.jpg" /> -->
   
                       <!-- Full screen gallery. -->
-                      <div class="fs-gal-view">
+                      <!-- <div class="fs-gal-view">
                           <img class="fs-gal-prev fs-gal-nav" src="assets/enrolment/prev.svg" alt="Previous picture" title="Previous picture" />
                           <img class="fs-gal-next fs-gal-nav" src="assets/enrolment/next.svg" alt="Next picture" title="Next picture" />
                           <img class="fs-gal-close" src="assets/enrolment/close.svg" alt="Close gallery" title="Close gallery" />
                           <img class="fs-gal-main" src="" alt="" />
-                      </div>
+                      </div> -->
                   </div><!--right ends-->
               </div><!--block ends-->
               <div class="o-enrolment-block o-enrolment-marginb51">
@@ -124,15 +115,13 @@
                   <div class="o-enrolment-block__right">
                       <div class="o-enrolment-organiser">
                           <div class="o-enrolment-organiser__avatar">
-                              <img src="assets/demo/avatar.png">
+                              <img [src]="enrolmentDetails?.organiser_data[0]?.src" (error)="enrolmentDetails.organiser_data[0].src = opspot.cdn_assets_url + 'assets/logos/logo.svg'">
                           </div><!--avatar ends-->
                           <div class="o-enrolment-organiser__title">
-                              <h4>Maria Johnson</h4>
+                              <h4>{{enrolmentDetails?.owner_obj?.name}}</h4>
                           </div><!--title ends-->
-                          <p class="text-md">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. 
-                          Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                          Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
-                          <button type="button" class="btn btn-outline-primary btn-lg o-enrolment-organiser__button" id="en_organiser">Contact Organiser</button>
+                          <p class="text-md" [innerHtml]="enrolmentDetails?.owner_obj?.about?.description | tags"></p>
+                          <!-- <button type="button" class="btn btn-outline-primary btn-lg o-enrolment-organiser__button" id="en_organiser">Contact Organiser</button> -->
                       </div> <!--organisation ends--> 
                   </div><!--right ends-->
               </div><!--block ends-->
@@ -141,8 +130,8 @@
                       <h4>Location</h4>
                   </div><!--left ends-->
                   <div class="o-enrolment-block__right">
-                      <div class="text-md o-enrolment-marginb25">46/1, Cobalt Building, Church St, Haridevpur, Shanthala Nagar, Ashok Nagar, Bengaluru, Karnataka 560001</div>
-                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15551.578684586897!2d77.59631589802174!3d12.978588157239418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae167c7ba9de6b%3A0x7ccd21aeaf2063d0!2sChurch%20Street%20Social!5e0!3m2!1sen!2sin!4v1577183301377!5m2!1sen!2sin" width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                      <div class="text-md o-enrolment-marginb25">{{enrolmentDetails?.location}}</div>
+                      <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15551.578684586897!2d77.59631589802174!3d12.978588157239418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae167c7ba9de6b%3A0x7ccd21aeaf2063d0!2sChurch%20Street%20Social!5e0!3m2!1sen!2sin!4v1577183301377!5m2!1sen!2sin" width="100%" height="250" frameborder="0" style="border:0;" allowfullscreen=""></iframe> -->
                     </div><!--right ends-->
               </div><!--block ends-->
               <div class="o-enrolment-block">
@@ -151,7 +140,7 @@
                   </div><!--left ends-->
                   <div class="o-enrolment-block__right">
                       <div class="o-entrolment-form">
-                        <app-enrolment-form (done)="proceedPayment($event)"></app-enrolment-form>
+                        <app-enrolment-form (done)="proceedPayment($event)" [guid]="enrolmentDetails?.guid"></app-enrolment-form>
                       </div><!--form ends-->
                   </div><!--right ends-->
               </div><!--block ends-->

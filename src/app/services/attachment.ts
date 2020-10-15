@@ -113,6 +113,7 @@ export class AttachmentService {
   }
 
   upload(fileInput: HTMLInputElement, guidArray?) {
+    console.log(fileInput,guidArray)
     if (guidArray && guidArray.length > 0) {
       this.meta.attachment_guid = guidArray
     }

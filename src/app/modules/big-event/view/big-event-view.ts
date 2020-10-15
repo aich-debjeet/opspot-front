@@ -66,6 +66,7 @@ export class BigEventView implements OnInit {
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
         this.entity_guid = params.get('guid');
+        console.log( this.entity_guid)
         this.load();
       }
     });
@@ -224,7 +225,14 @@ export class BigEventView implements OnInit {
     this.paramsSubscription.unsubscribe();
   }
 
+  navToUpdate(){
+    if(this.bigEvent['event_type']== "Premium"){
+      this.router.navigate(['/campaign/edit/' , this.bigEvent.entity_guid]);
+    }
+    else{
+      this.router.navigate(['/event/edit/',this.bigEvent.entity_guid]);
+    }
+    
 
-
-
+  }
 }
