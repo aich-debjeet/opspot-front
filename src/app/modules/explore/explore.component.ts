@@ -101,15 +101,30 @@ export class ExploreComponent implements OnInit {
       this.inProgress = false;
       this.offset = '';
       this.reset();
-      this.searchMore(true, this._exploreTabList[0].val);
+      // this.searchMore(true, this._exploreTabList[0].val);
       // this.triggerSearchApi();
     });
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      if (params.filter)
-        this.switchCategoryType(params.filter);
+      let property;
+      if (params.filter) {
+        if (params.filter == 'inthespotlight') {
+          property = 'IN the Spotlight';
+        } else if (params.filter == 'myjourney') {
+          property = 'My Journey';
+        } else if (params.filter == 'group') {
+          property = 'Community';
+        } else if (params.filter == 'organization') {
+          property = 'Organization';
+        } else if (params.filter == 'marketplace') {
+          property = 'Blue Store';
+        } else if (params.filter == 'event') {
+          property = 'Showtimez/Events';
+        }
+        this.switchCategoryType(params.filter, property);
+      }
     })
   }
 
@@ -199,7 +214,8 @@ export class ExploreComponent implements OnInit {
     });
   }
 
-  async searchMore(refresh: boolean = false, filter: string) {
+
+  searchMore(refresh: boolean = false, filter: string) {
     let _entityType = 'activity';
     if (this.inProgress) {
       return;
