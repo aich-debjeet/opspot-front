@@ -7,9 +7,10 @@
           <div class="o-wea-block" id="projects-block" *ngFor="let item of work.projects; let i=index;">
               <div class="o-wea-logo"><img src="assets/Education.jpg" alt=""></div>
               <div class="o-wea-info">
-                  <div class="caption-bold" id="awards-award-title">{{item.Project_Title}}</div>
-                  <div class="caption-bold " id="awards-issuer-loaction">
-                      {{item.Project_Description }} 
+                  <div class="caption-bold" id="awards-award-title" (click)="handleSeeMore(item)">{{item.Project_Title}} </div>
+                  <div class="text-md grey-dark" id="awards-issuer-loaction" (click)="handleSeeMore(item)">
+                      <span>{{item.Project_Description | truncate:[77, '']}}</span>
+                      
                       <!-- <a (click)="handleSeeMore(item)" class="seemore">see more</a> -->
                       <!-- <ng-container
 						[ngTemplateOutlet]="projectDetails"
@@ -23,7 +24,7 @@
                             </read-more>
                         </ng-template>  -->
                         
-             </div><a (click)="handleSeeMore(item)" >see more</a>
+             </div><a class="primary" (click)="handleSeeMore(item)" > See More</a>
                   
                    </div>
               <div class="o-wea-edit"><a (click)="update(i)" id="projects-update-icon"><i
@@ -43,17 +44,18 @@
       <form #f="ngForm">
           <div class="o-wea-add-block" style="padding-left: 12px;">
               <input type="hidden" [(ngModel)]="model.index" [value]=model.index name="updateIndex">
-              <div class="o-wea-add-block__left">
-                  <div class="form-group w-lg">
-                      <label>Project Title</label>
-                      <input type="text" id="projects-title" #Project_Title="ngModel" required name="title"
-                          [(ngModel)]="model.Project_Title" class="form-control form-control-lg" placeholder="">
+              <div class="o-wea-add-block__left o-wea-add-block__left--project">
+                  <div class="form-group w-xl">
+                      <label>Project Title <span>0/50</span></label>
+                      <input type="text" id="projects-title" #Project_Title="ngModel" required name="title"  
+                          [(ngModel)]="model.Project_Title" class="form-control form-control-lg" placeholder="" maxlength="50">
                   </div>
                   <!--designation end-->
-                  <div class="o-wea-info1">
-                      <label>Project Description</label>
+                  <div class="form-group w-xl">
+                      <label>Project Description  <span >0/1000</span></label>
+                     
                       <textarea name="description"  #Project_Description ="ngModel"
-                      id="projects-component-description" [(ngModel)]="model.Project_Description" class="text-md grey-dark " placeholder="Description goes here"> 
+                      id="projects-component-description" [(ngModel)]="model.Project_Description" class="form-control form-control-lg"  maxlength="1000" > 
                          
                       </textarea>
 
@@ -61,7 +63,7 @@
                     </div>     
                  
                   <!-- Project Description end-->
-                  <div class="form-group w-lg">
+                  <div class="form-group w-xl">
                       <label>Project link</label>
                       <input required type="text" id="projects-location" #Project_link="ngModel" name="location"
                           [(ngModel)]="model.Project_link" class="form-control form-control-lg" placeholder="">
@@ -101,10 +103,13 @@
 
       </form>
       <div class="o-toggle-check">
-          <label>
+         
               <input type="checkbox" id="projects-show-on-profile" name="access" [(ngModel)]="model.access">
-              <span class="show" >Show this projects on my profile</span>
-          </label>
+            <label>
+                <span class="text-md">Show this projects on my profile</span>
+            </label>
+             
+         
       </div>
 
       

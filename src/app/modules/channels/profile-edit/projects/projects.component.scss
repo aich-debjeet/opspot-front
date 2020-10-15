@@ -49,29 +49,28 @@
     @media (min-width: 20em) and (max-width: 30em) {
       .text-lg {
         font-size: 13px; } }
-
+        
 .caption-bold {
-    font-size: 15px;
-    line-height: 28px;
-    height: 20px;
-    overflow: hidden;   
-}
+            color: #263238;
+            font-size: 15px;
+            line-height: 20px;
+            font-weight: 500;
+        }
 
-
-.o-wea-info1{
+// .o-wea-info1{
     
-    margin-left: 0px !important;
-    margin-bottom: 25px;
-    width: calc(100% - 100px);
+//     margin-left: 0px !important;
+//     margin-bottom: 25px;
+//     width: calc(100% - 100px);
 
-}
+// }
 
 
-.o-project-link {
-    margin-top: 13px;
-    padding-bottom: 20px;
-    display: block;
-}
+// .o-project-link {
+//     margin-top: 13px;
+//     padding-bottom: 20px;
+//     display: block;
+// }
 
 .o-project-info-popup__body{
     padding-bottom: 10px;
@@ -105,9 +104,9 @@
     flex-direction: column;
     background: #fff;
 }
-#projects-component-description{
-    height: 100px;
-}
+// #projects-component-description{
+//     height: 100px;
+// }
 
 .text-md {
     color: #263238;
@@ -141,3 +140,4 @@ h4 {
     border-radius: 4px;
     
 }
+

@@ -141,7 +141,7 @@ export class ProjectsComponent  implements OnInit {
   remove(index) {
     let deletedAwards = _.pullAt(this.work.projects, [index]);
     this.client
-      .post('api/v1/entities/projects', this.work)
+      .post('api/v4/entities/projects', this.work)
       .then((res: any) => {
         if (res.status === 'success' && res.entities == true) {
           this.client.get('api/v2/onboarding/progress').then((response: any) => {
