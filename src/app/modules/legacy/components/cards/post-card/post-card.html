@@ -43,7 +43,7 @@
       <div class="o-explore-media-img o-explore-media-img-oberlay"
         *ngIf="entity?.custom_data && entity?.custom_data.length > 0 && entity?.custom_data[0]?.entity_type === 'video' && entity?.activity_type == 'inthespotlight'">
         <a [routerLink]="routerlink" class=" o-explore-media-img-oberlay">
-          <img src="assets/videos/video_thumbnail.png" alt="media">
+          <img [src]="entity?.custom_data[0]? entity?.custom_data[0].thumbnail_src: ''" (error)="entity.custom_data[0].thumbnail_src = opspot.cdn_assets_url + 'assets/ops_icon.png'" alt="media">
         </a>
       </div>
       <div class="o-explore-media-img"
