@@ -45,12 +45,12 @@
                         <a class="#"><i class="icon-x tag-close"></i></a>
                     </div> -->
                 <ng-container *ngIf="error" [ngSwitch]="error">
-                    <h1 class="edit-error" i18n="@@BLOGS__EDIT__NO_BANNER_ERROR" *ngSwitchCase="'error:no-banner'">
+                    <div class="edit-error" i18n="@@BLOGS__EDIT__NO_BANNER_ERROR" *ngSwitchCase="'error:no-banner'">
                         Error: You must upload a banner before publishing a draft.
-                    </h1>
-                    <h1 class="edit-error" *ngSwitchDefault>
+                    </div>
+                    <div class="edit-error" *ngSwitchDefault>
                         Error: {{error}}
-                    </h1>
+                    </div>
                 </ng-container>
             </div>
             <div class="o-blog-preview-button-set">
