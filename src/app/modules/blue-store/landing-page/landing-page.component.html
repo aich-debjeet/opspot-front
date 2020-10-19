@@ -1,3 +1,114 @@
-<p>
-  landing-page works!
-</p>
+<div class="o-bluestore-fleamarket-sec">
+  <div class="container">
+      <div class="o-bluestore-fleamarket-block">
+          <div class="o-bluestore-fleamarket-block__sidebar">
+              <h3 class="f700">{{defaultOption}}</h3>
+              <div class="o-bluestore-fleamarket-block__shrtdescn grey text-md">
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                  Aenean commodo ligula eget dolor. 
+              </div><!--shrtdescn ends-->
+              <div class="o-bluestore-fleamarket-options">
+                  <ul class="o-bluestore-fleamarket-options__block">
+                      <li class="text-md " [class.option-selected] ="defaultOption == 'BlueStore'" (click)="changeMarketType('BlueStore')"><i class="icon-shopping-bag"></i> BlueStore</li>
+                      <li class="text-md" [class.option-selected] ="defaultOption == 'Flea Market'" (click)="changeMarketType('Flea Market')"><i class="icon-shopping-bag"></i> Flea Market</li>
+                  </ul>
+              </div><!--options ends-->
+              <div class="o-bluestore-fleamarket-options">
+                  <ul class="o-bluestore-fleamarket-options__block">
+                      <button type="button" class="btn btn-primary btn-block">Create an item for sale or rent</button>
+                      <li class="text-md"><i class="icon-grid"></i> My Sales Board</li>
+                  </ul>
+              </div><!--options ends-->
+              <div class="o-bluestore-fleamarket-options hidden">
+                  <div class="o-bluestore-fleamarket-options__location text-md">
+                          <i class="icon-map-pin"></i>Bangalore, KA
+                  </div>
+              </div><!--options ends-->
+              <!-- <div class="o-bluestore-fleamarket-categories">
+                  <div class="text-lg f500 o-bluestore-fleamarket-categories__title">
+                      Shop by Categories
+                  </div>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item option-selected">
+                      Browse All
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                      Art Supplies
+                  </a>
+              </div> -->
+          </div>
+          <!-- <div class="o-bluestore-fleamarket-block__main">
+              <div class="o-cover o-cover--bluestore-fleamarket hidden-under-tablet" style="background:url(assets/demo/m2.jpg) no-repeat; background-size: cover; background-position: left;">
+              </div>
+              <div class="o-bluestore-fleamarket-products">
+                  <h4 class="f500">BlueStore > All Products</h4>
+                  <div class="form-group o-bluestore-fleamarket-products__search">
+                      <input type="text" class="form-control" placeholder="Search Product">
+                      <span class="icon-search"></span>
+                  </div>
+              </div>
+              <ul class="o-bluestore-fleamarket-products-list">
+                  <li class="o-bluestore-fleamarket-products-list__item">
+                      {% include components/bluestore_card.html %}
+                  </li>
+                  <li class="o-bluestore-fleamarket-products-list__item">
+                      {% include components/bluestore_card.html %}
+                  </li>
+                  <li class="o-bluestore-fleamarket-products-list__item">
+                      {% include components/bluestore_card.html %}
+                  </li>
+                  <li class="o-bluestore-fleamarket-products-list__item">
+                      {% include components/bluestore_card.html %}
+                  </li>
+                  <li class="o-bluestore-fleamarket-products-list__item">
+                      {% include components/bluestore_card.html %}
+                  </li>
+                  <li class="o-bluestore-fleamarket-products-list__item">
+                      {% include components/bluestore_card.html %}
+                  </li>
+                  <li class="o-bluestore-fleamarket-products-list__item">
+                      {% include components/bluestore_card.html %}
+                  </li>
+                  <li class="o-bluestore-fleamarket-products-list__item">
+                      {% include components/bluestore_card.html %}
+                  </li>
+                  <li class="o-bluestore-fleamarket-products-list__item">
+                      {% include components/bluestore_card.html %}
+                  </li>
+              </ul>
+          </div> -->
+      </div><!--organisation main block ends-->
+  </div><!--container ends-->
+</div><!--sec ends-->

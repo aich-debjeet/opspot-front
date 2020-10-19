@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
-
-  constructor() { }
+defaultOption: string;
+  constructor() { 
+    this.defaultOption = 'BlueStore'
+  }
 
   ngOnInit() {
+  }
+
+  changeMarketType(type: string){
+    this.defaultOption = type;
   }
 
 }
