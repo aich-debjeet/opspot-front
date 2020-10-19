@@ -85,6 +85,10 @@ export const OpspotAppRoutes: Routes = [
     loadChildren:'./modules/big-event/big-event.module#BigEventModule'
   },
   {
+    path:'bluestore',
+    loadChildren:'./modules/blue-store/blue-store.module#BlueStoreModule'
+  },
+  {
     path: ':username/:filter',
     component: ChannelComponent
   },
