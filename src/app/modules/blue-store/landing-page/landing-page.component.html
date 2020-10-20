@@ -24,50 +24,80 @@
                           <i class="icon-map-pin"></i>Bangalore, KA
                   </div>
               </div><!--options ends-->
-              <!-- <div class="o-bluestore-fleamarket-categories">
+              <div class="o-bluestore-fleamarket-categories">
                   <div class="text-lg f500 o-bluestore-fleamarket-categories__title">
                       Shop by Categories
                   </div>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item option-selected">
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'all',type:defaultOption}" class="o-bluestore-fleamarket-categories__item option-selected">
                       Browse All
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
+                  <a [routerLink]="['marketLists']"  [queryParams]="{category_name:'artSupplies',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
                       Art Supplies
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'homeDecor',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Home Décor
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'workshops',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Workshops
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'theatre&plays',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Theatre & Plays
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'fashion',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Fashion
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'crockery&kitchen',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Crockerty & Kitchen
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'stockkFootage',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Stock Footage
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'arts&crafts',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Arts & Crafts
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'AR&VR',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    AR & VR 
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'toys&Entertainement',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Toys & Entertainment
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'jewellery',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Jewellery
                   </a>
-                  <a href="#" class="o-bluestore-fleamarket-categories__item">
-                      Art Supplies
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'book&stationary',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Books & Stationary
                   </a>
-              </div> -->
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'leather',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Leather
+                  </a>
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'antiques&Collectibles',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Antiques & Collectibles
+                  </a>
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'weddingParty',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Wedding & Party
+                  </a>
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'artProducts&safety',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Art Products - Safety
+                  </a>
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'paintings',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Paintings
+                  </a>
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'music',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Music
+                  </a>
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'sound&Lighting',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Sound & Lighting
+                  </a>
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'digitalArt',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Digital Art
+                  </a>
+                  <a [routerLink]="['marketLists']" [queryParams]="{category_name:'other',type:defaultOption}" class="o-bluestore-fleamarket-categories__item">
+                    Other
+                  </a>
+              </div>
+          </div>
+          <div class="o-bluestore-fleamarket-block__main">
+            <router-outlet></router-outlet>
           </div>
           <!-- <div class="o-bluestore-fleamarket-block__main">
               <div class="o-cover o-cover--bluestore-fleamarket hidden-under-tablet" style="background:url(assets/demo/m2.jpg) no-repeat; background-size: cover; background-position: left;">
