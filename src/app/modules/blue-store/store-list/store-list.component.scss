@@ -79,6 +79,15 @@
         }
     }
 }
+///cover style
+.o-cover--bluestore-fleamarket {
+    top: 0px !important;
+    height: 187px !important;
+    width:796px;
+    border-radius: 4px !important;
+    overflow: hidden;
+    position: relative;
+}
 .o-bluestore-fleamarket-products{
     display: flex;
     justify-content: space-between;
