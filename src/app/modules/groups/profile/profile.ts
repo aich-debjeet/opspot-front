@@ -253,7 +253,7 @@ export class GroupsProfile {
   }
   goToUrl(): void {
     this.document.location.href = 'https://meet.opsplt.com';
-}
+  }
 
   toggleEdit() {
     this.editing = !this.editing;
@@ -434,7 +434,7 @@ export class GroupsProfile {
 
   async loadMembers(guid) {
     let endpoint = `api/v1/groups/membership/${guid}`
-    let params = { limit: 4, offset: this.offset };
+    let params = { limit: 12, offset: this.offset };
     let members = await this.client.get(endpoint, params)
     this.membersMobile = members['members']
   }

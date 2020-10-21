@@ -87,10 +87,11 @@
                         *ngIf="(group && (!group['is:creator'] || (session.isAdmin()) && !group['is:invited']))">
                     </opspot-groups-join-button>
                     <div class="o-community-members-top o-community-members-top--mob hidden-above-tablet">
-                        <a class="o-community-members-top__count-mob" *ngFor="let member of membersMobile">
+                        <a class="o-community-members-top__count-mob" *ngFor="let member of membersMobile | slice : 0:3 " (click)="showMembers()">
                             <span class="o-community-members-list-mob-single"><img [src]="memberSrc+member.guid"
                                     alt=""></span>
                         </a>
+                        <a class="text-sm m-l-r-6 grey" *ngIf="totalMembers > 3">+{{totalMembers - 3|abbr}}</a>
                         <a (click)="openInvite()" class="o-community-add-members-mob"><i class="icon-plus"></i></a>
                     </div>
                     <!-- <m-videochat></m-videochat> -->
