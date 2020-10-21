@@ -17,20 +17,20 @@
       <a class="m-search-bar-suggestions-suggestion" *ngIf="suggestion.type == 'user'"
         [routerLink]="['/', suggestion.username]">
         <img src="icon/{{suggestion.guid}}/" class="imgHeight" /> <span class="userSuggestion"
-          id="suggestion-username">@{{suggestion.username}}</span>
+          id="suggestion-username">@{{suggestion.username | truncate:[15, '...']}}</span>
       </a>
       <a class="m-search-bar-suggestions-suggestion" *ngIf="suggestion.type == 'group'"
         [routerLink]="['/groups',suggestion.name, 'profile', suggestion.guid]">
-        <img src="fs/v1/avatars/{{suggestion.guid}}/" class="imgHeight" id="suggestion-name" /> {{suggestion.name}}
+        <img src="fs/v1/avatars/{{suggestion.guid}}/" class="imgHeight" id="suggestion-name" /> {{suggestion.name | truncate:[15, '...']}}
       </a>
     </ng-container>
   </ng-container>
 
   <ng-container *ngIf="q">
-    <a class="m-search-bar-suggestions-suggestion" *ngFor="let suggestion of suggestions"
+    <a class="m-search-bar-suggestions-suggestion" *ngFor="let suggestion of suggestions"j
       [routerLink]="['/', suggestion.username]">
       <img src="icon/{{suggestion.guid}}/" class="imgHeight" /> <span class="userSuggestion"
-        id="suggestion-username1">@{{suggestion.username}}</span>
+        id="suggestion-username1">@{{suggestion.username | truncate:[15, '...']}}</span>
     </a>
   </ng-container>
 
