@@ -37,7 +37,7 @@ export class BlueStoreFormComponent implements OnInit {
     published: 1,
     attachment_guid: [],
     container_guid: '',
-    category_name:'',
+    category:'',
     location: '',
     sale_price:''
   };
@@ -291,7 +291,7 @@ export class BlueStoreFormComponent implements OnInit {
     this.reqBody.item_count = this.blueStoreForm.value.blueStoreUnits;
     this.reqBody.currency = this.blueStoreForm.value.blueStoreCurrency;
     this.reqBody.container_guid = data.container_guid;
-    this.reqBody.category_name = this.blueStoreForm.value.blueStoreCategory;
+    this.reqBody.category = this.blueStoreForm.value.blueStoreCategory;
     this.reqBody.location = this.blueStoreForm.value.blueStoreLocation;
     this.reqBody.sale_price = this.blueStoreForm.value.blueStoreSalePrice;
 
