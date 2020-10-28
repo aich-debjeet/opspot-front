@@ -8,3 +8,22 @@
     <span class="icon-search"></span>
   </div>
 </div>
+<ul class="o-bluestore-fleamarket-products-list">
+  <li class="o-bluestore-fleamarket-products-list__item" *ngFor="let card of cards">
+    <div class="o-card c-bfstore">
+
+      <div class="c-bfstore-cover">
+        <img src="{{card.custom_data[0].src}}" alt="" class="c-bfstore-cover__media">
+      </div>
+
+      <div class="c-bfstore-info">
+        <p class="c-bfstore-info__head caption-bold">{{card.title}}</p>
+        <div class="c-bfstore-info__price text-md">
+          <span class="grey mr-15"><s><span>&#8377;</span> {{card.price}}</s></span>
+          <span class="grey-dark"><span>&#8377;</span> {{card.sale_price}}</span>
+        </div>
+        <div class="c-bfstore-info__location text-md"><i class="icon-map-pin grey-dark"></i> {{card.location}}</div>
+      </div>
+    </div>
+  </li>
+</ul>
