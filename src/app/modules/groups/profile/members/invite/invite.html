@@ -151,10 +151,10 @@
                         <li class="o-invite-to-community-list__user-list" *ngIf="!user.is_invited"> 
                             <div class="o-invite-to-community-info" >
                                 <div class="o-invite-to-community-info-prof">
-                                    <div class="o-invite-to-community-info-prof__avatar o-avatar-md">
+                                    <div class="o-invite-to-community-info-prof__avatar o-avatar-md" [routerLink]="['/', user.username]">
                                         <img src="{{opspot.cdn_url}}icon/{{user.guid}}/small/{{user.icontime}}" />           
                                     </div>
-                                    <div id="username" class="caption-bold">
+                                    <div id="username" class="caption-bold" [routerLink]="['/', user.username]">
                                         {{user.name}}
                                     </div>
                                 </div>

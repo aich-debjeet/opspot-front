@@ -324,19 +324,21 @@
       <a *ngIf="isOwner()" id="sidebar-edit-award" class="o-edit" [routerLink]="['/profile/projects']"><i
           class="icon-edit-profile f-15"></i></a>
       <div class="o-award__title caption-medium">Projects</div>
-      <div *ngFor="let item of user?.projects; let i = index" class="o-award-info">
-        <ng-container *ngIf="i < rowLimit">
-          <div class="o-award-info__logo">
-            <img src="assets/Awards.jpg" alt="">
-          </div>
-          <div class="o-award-info__det" id="sidebar-award-widget">
-            <div><a class="text-md f500 word-br">{{ item?.Project_Title }}</a></div>
-            <!-- <div class="text-sm grey-dark word-br">{{ item?.Project_Description }}</div> -->
-            <div><span class="text-md float-left"
-            id="sidebar-languages-known">{{item?.Project_Description | truncate:[20, '...']}}</span></div>
-          
-          </div>  
-        </ng-container>
+      <div *ngFor="let item of projects; let i = index"  class="o-award-info">
+        <ng-container *ngIf="i < rowLimit" >
+           <div class="o-award-info__logo">
+              <img src="assets/Awards.jpg" alt="">
+            </div>
+            <div class="o-award-info__det" id="sidebar-award-widget" >
+              <div><a class="text-md f500 word-br">{{ item?.Project_Title | truncate:[20, '...']}}</a></div>
+              <!-- <div class="text-sm grey-dark word-br">{{ item?.Project_Description }}</div> -->
+              <div><span class="text-md float-left"
+              id="sidebar-languages-known">{{item?.Project_Description | truncate:[20, '...']}}</span></div>
+            </div>  
+          </ng-container>
+    
+
+    
     </div>
     <div *ngIf="user?.projects.length > 5">
       <a (click)="handleSeeMore()" [routerLink]="['/profile/projects']">See More</a></div>

@@ -241,3 +241,28 @@ export const REPORT_ACTIONS = {
    'spam': 'Marked as Spam',
    'delete': 'Deleted'
 };
+
+
+export const BLUESTORE_CATEGORY: Array<string> = [
+   'Art Supplies',
+   'Home Décor',
+   'Workshops',
+   'Theatre & Plays',
+   'Fashion',
+   'Crockerty & Kitchen',
+   'Stock Footage',
+   'Arts & Crafts',
+   'AR & VR',
+   'Toys & Entertainment',
+   'Jewellery',
+   'Books & Stationary',
+   'Leather',
+   'Antiques & Collectibles',
+   'Wedding & Party',
+   'Art Products - Safety',
+   'Paintings',
+   'Music',
+   'Sound & Lighting',
+   'Digital Art',
+   'Other'
+]

@@ -1,0 +1,137 @@
+<div class="o-bluestore-fleamarket-sec">
+  <div class="container">
+    <div class="o-bluestore-fleamarket-block">
+      <div class="o-bluestore-fleamarket-block__sidebar">
+        <h3 class="f700">{{defaultOption}}</h3>
+        <!-- <div class="o-bluestore-fleamarket-block__shrtdescn grey text-md">
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+          Aenean commodo ligula eget dolor.
+        </div> -->
+        <!--shrtdescn ends-->
+        <div class="o-bluestore-fleamarket-options">
+          <ul class="o-bluestore-fleamarket-options__block">
+            <li class="text-md " [class.option-selected]="defaultOption == 'BlueStore'"
+              (click)="changeMarketType('BlueStore')" [routerLink]="['/bluestore']"><i class="icon-shopping-bag"></i> BlueStore</li>
+            <!-- <li class="text-md" [class.option-selected] ="defaultOption == 'Flea Market'" (click)="changeMarketType('Flea Market')"><i class="icon-shopping-bag"></i> Flea Market</li> -->
+          </ul>
+        </div>
+        <!--options ends-->
+        <div class="o-bluestore-fleamarket-options">
+          <ul class="o-bluestore-fleamarket-options__block">
+            <button type="button" (click)="openBlustoreForm()"class="btn btn-primary btn-block">Create an item for sale or rent</button>
+            <li class="text-md" [class.option-selected]="defaultOption == 'salesBoard'"  [routerLink]="['marketLists']" [queryParams]="{type:'My Sales Board'}" (click)="changeMarketType('salesBoard')"><i class="icon-grid"></i> My Sales Board</li>
+          </ul>
+        </div>
+        <!--options ends-->
+        <div class="o-bluestore-fleamarket-options hidden">
+          <div class="o-bluestore-fleamarket-options__location text-md">
+            <i class="icon-map-pin"></i>Bangalore, KA
+          </div>
+        </div>
+        <!--options ends-->
+        <div class="o-bluestore-fleamarket-categories" [hidden]="defaultOption == 'salesBoard'">
+          <div class="text-lg f500 o-bluestore-fleamarket-categories__title">
+            Shop by Categories
+          </div>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'all',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item ">
+            Browse All
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Art Supplies',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Art Supplies
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Home Decor',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Home Décor
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Workshops',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Workshops
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Theatre & Plays',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Theatre & Plays
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Fashion',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Fashion
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Crockery & kitchen',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Crockerty & Kitchen
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Stock Footage',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Stock Footage
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Arts & Crafts',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Arts & Crafts
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'AR & VR',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            AR & VR
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Toys & Entertainement',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Toys & Entertainment
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Jewellery',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Jewellery
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Book & Stationary',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Books & Stationary
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Leather',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Leather
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Antiques & Collectibles',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Antiques & Collectibles
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Wedding & Party',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Wedding & Party
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Art Products-Safety',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Art Products - Safety
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Paintings',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Paintings
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Music',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Music
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Sound & Lighting',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Sound & Lighting
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Digital Art',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Digital Art
+          </a>
+          <a [routerLink]="['marketLists']" routerLinkActive="option-selected" [queryParams]="{category_name:'Other',type:defaultOption}"
+            class="o-bluestore-fleamarket-categories__item">
+            Other
+          </a>
+        </div>
+      </div>
+      <div class="o-bluestore-fleamarket-block__main">
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+      </div>
+    </div>
+    <!--organisation main block ends-->
+    <infinite-scroll distance="25%" (load)="load()" [moreData]="moreData" [inProgress]="inProgress">
+    </infinite-scroll>
+  </div>
+  <!--container ends-->
+
+</div>
+<!--sec ends-->

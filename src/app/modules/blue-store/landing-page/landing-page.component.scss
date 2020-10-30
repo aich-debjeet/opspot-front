@@ -1,0 +1,232 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+.o-bluestore-fleamarket-sec{
+    width: 100%;
+    float: left;
+    background-color: #FAFAFA;
+    // height: 150vh;
+    @include mq($from:$mobile-sm, $until:$desktop-sm){
+        background-color: $white;
+    }
+}
+
+///cover style
+.o-cover--bluestore-fleamarket {
+    top: 0px !important;
+    height: 187px !important;
+    width:796px;
+    border-radius: 4px !important;
+    overflow: hidden;
+    position: relative;
+}
+
+//options style
+.o-bluestore-fleamarket-options{
+    margin-top:11px;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #ECEFF1;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    &__block{
+        list-style: none;
+        li{
+            padding:12px 10px;
+            i{
+                color: #000000;
+                font-size:15px;
+                margin-right:16px;
+            }
+        }
+        .option-selected, li:hover{
+            border-radius: 4px;
+            background-color: rgba(2,136,209,0.05);
+            font-weight: 500;
+            color: $primary!important;
+            cursor: pointer;
+            i{
+                color: $primary!important;
+            }
+        }
+    }
+    &__location{
+        padding:6px 10px;
+        i{
+            color: #000000;
+            font-size:15px;
+            margin-right:16px;
+        }
+    }
+}
+
+
+//categories style
+.o-bluestore-fleamarket-categories{
+    border: 1px solid #ECEFF1;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    padding:18px 12px;
+    margin-top: 11px;
+    height: 499px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        width: .2em;
+        height: 83px;
+    }
+    &::-webkit-scrollbar-track {
+        background:white; 
+        margin-left:14px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $grey-light;
+        outline: 1px solid white;
+        margin-left:-20px;
+    }
+    &__title{
+        margin:0px 0px 10px 8px;
+    }
+    &__item{
+        display: block;
+        padding:12px;
+        &:hover{
+            color: $primary;
+            font-weight: 500;
+            border-radius: 4px;
+            background-color: rgba(2,136,209,0.05);
+        }
+    }
+    .option-selected{
+        color: $primary;
+        font-weight: 500;
+        border-radius: 4px;
+        background-color: rgba(2,136,209,0.05);
+    }
+}
+
+//block style
+.o-bluestore-fleamarket-block{
+    width: 100%;
+    max-width: 1070px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    @include mq($from:$mobile-sm, $until:$desktop-sm){
+        flex-direction: column;
+    }
+    &__mob-header{
+        display:none;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            display:flex;
+            justify-content: space-between;
+            padding: 8px 20px 16px;
+            border-bottom: 1px solid #ECEFF1;
+
+        }
+    }
+    &__mob-tab{
+        display:none;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            display:block;
+        } 
+    }
+    &__sidebar{
+        width: 265px;
+        padding: 15px 10px;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            width:100%;
+        }
+        button{
+            padding:8px 0px;
+            margin:4px 0 8px;
+        }
+        .mb-17{
+            margin-bottom: 15px;
+        }
+    }
+    &__shrtdescn{
+        margin-top:9px;
+        padding-bottom: 15px;
+        width:232px;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            width:100%;
+        }
+    }
+    &__main{
+        width: calc(100% - 265px);
+        margin-left: 8px;
+        padding-top: 8px;
+        overflow-y: overlay;
+        &::-webkit-scrollbar {
+            width: .2em;
+            height: 83px;
+        }
+        &::-webkit-scrollbar-track {
+            background:white; 
+            margin-left:14px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-light;
+            outline: 1px solid white;
+            margin-left:-20px;
+        }
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            width:100%;
+            margin:0 10px;
+            padding-top: 4px;
+            background-color: #FAFAFA;
+        }
+        .o-cmnity-landing-tab-content{
+            width:100%;
+        }
+    }
+}
+
+//products style
+.o-bluestore-fleamarket-products{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:13px 0px 9px;
+    @include mq($from:$mobile-sm, $until:$desktop-sm){
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .form-group{
+        margin-bottom: 0px!important;
+    }
+    &__search{
+        ::placeholder{
+            color: #90A4AE;
+            font-family: Roboto!important;
+            font-size: 14px;
+        }
+        .form-control{
+            padding:9px 15px;
+            border: 1px solid #ECEFF1;
+            border-radius: 4px;
+            background-color: #FFFFFF;
+            width: 258px;
+        }
+        span{
+            position: absolute;
+            top: 13px;
+            right: 20px;
+            font-size: 14px;
+        }
+    }
+}
+
+//product list style
+.o-bluestore-fleamarket-products-list{
+    display:flex;
+    flex-wrap: wrap;
+    &__item{
+        list-style-type: none;
+        margin-right: 11px;
+        &:nth-child(3n) { 
+            margin-right: 0px;
+        }
+    }
+}

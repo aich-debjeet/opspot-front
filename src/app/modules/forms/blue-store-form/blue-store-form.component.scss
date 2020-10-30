@@ -1,0 +1,31 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+
+    .select-bluestore{
+        position: relative;
+        width:100%;
+        :after{
+            content: "\e933";
+            position: absolute;
+            font-family: 'icomoon' !important;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            font-size: 17px;
+            color: #90A4AE;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            right: 15px;
+            z-index: 0;
+            top: 42px;  
+        }
+        select{
+            height:41px!important;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+    }

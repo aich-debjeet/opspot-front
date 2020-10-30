@@ -1,0 +1,177 @@
+@import "src/assets/helpers/variables";
+@import "node_modules/sass-mq/_mq";
+
+//block style
+.o-bluestore-fleamarket-block{
+    width: 100%;
+    max-width: 1070px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    @include mq($from:$mobile-sm, $until:$desktop-sm){
+        flex-direction: column;
+    }
+    &__mob-header{
+        display:none;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            display:flex;
+            justify-content: space-between;
+            padding: 8px 20px 16px;
+            border-bottom: 1px solid #ECEFF1;
+
+        }
+    }
+    &__mob-tab{
+        display:none;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            display:block;
+        } 
+    }
+    &__sidebar{
+        width: 265px;
+        padding: 15px 10px;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            width:100%;
+        }
+        button{
+            padding:8px 0px;
+            margin:4px 0 8px;
+        }
+        .mb-17{
+            margin-bottom: 15px;
+        }
+    }
+    &__shrtdescn{
+        margin-top:9px;
+        padding-bottom: 15px;
+        width:232px;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            width:100%;
+        }
+    }
+    &__main{
+        width: calc(100% - 265px);
+        margin-left: 8px;
+        padding-top: 8px;
+        overflow-y: overlay;
+        &::-webkit-scrollbar {
+            width: .2em;
+            height: 83px;
+        }
+        &::-webkit-scrollbar-track {
+            background:white; 
+            margin-left:14px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $grey-light;
+            outline: 1px solid white;
+            margin-left:-20px;
+        }
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            width:100%;
+            margin:0 10px;
+            padding-top: 4px;
+            background-color: #FAFAFA;
+        }
+        .o-cmnity-landing-tab-content{
+            width:100%;
+        }
+    }
+}
+///cover style
+.o-cover--bluestore-fleamarket {
+    top: 0px !important;
+    height: 187px !important;
+    width:796px;
+    border-radius: 4px !important;
+    overflow: hidden;
+    position: relative;
+}
+.o-bluestore-fleamarket-products{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:13px 0px 9px;
+    @include mq($from:$mobile-sm, $until:$desktop-sm){
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .form-group{
+        margin-bottom: 0px!important;
+    }
+    &__search{
+        ::placeholder{
+            color: #90A4AE;
+            font-family: Roboto!important;
+            font-size: 14px;
+        }
+        .form-control{
+            padding:9px 15px;
+            border: 1px solid #ECEFF1;
+            border-radius: 4px;
+            background-color: #FFFFFF;
+            width: 258px;
+        }
+        span{
+            position: absolute;
+            top: 13px;
+            right: 20px;
+            font-size: 14px;
+        }
+    }
+}
+
+//product list style
+.o-bluestore-fleamarket-products-list{
+    display:flex;
+    flex-wrap: wrap;
+    &__item{
+        list-style-type: none;
+        margin-right: 11px;
+        &:nth-child(3n) { 
+            margin-right: 0px;
+        }
+    }
+}
+// Bluestore and flea market card scss file
+.c-bfstore{
+    height: auto;
+    width: 258px;
+    background:#fff;
+ }
+ .c-bfstore-cover{
+     &__media{
+         height:149px;
+         width: 100%;        
+     }
+ }
+ .c-bfstore-info{
+     padding: 10px 14px;
+     &__price{
+         padding: 10px 0;
+         .mr-15{
+             margin-right: 15px;
+         }
+     }
+     &__location{
+         padding: 18px 0 0 0;
+         display: flex;
+         align-items: center;
+         i{
+             margin-right: 8px;
+             font-size: 18px;
+         }
+ 
+     }
+ }
+ 
+ //sales card style
+ .bluestore-sales-card-button{
+     display: flex;
+     justify-content: space-between;
+     margin-top:21px;
+     button{
+         padding:4px 20px;
+     }
+ }
