@@ -9,46 +9,50 @@ import { BlueStoreFormComponent } from '../../forms/blue-store-form/blue-store-f
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
-defaultOption: string;
-moreData: boolean = true;
-inProgress: boolean = false;
-offset: string;
+  defaultOption: string;
+  moreData: boolean = true;
+  inProgress: boolean = false;
+  offset: string;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     public overlayModal: OverlayModalService,
-  ) { 
+  ) {
     this.defaultOption = 'BlueStore'
   }
 
   ngOnInit() {
   }
 
-  changeMarketType(type: string){
+  changeMarketType(type: string) {
     this.defaultOption = type;
   }
 
-  onActivate(event){
-    console.log(event);
-    event.off.subscribe((data)=> {
-      console.log(data);
-      if(data){
+  onActivate(event) {
+    event.off.subscribe((data) => {
+      if (data) {
         this.offset = data;
       } else this.offset = '';
-      
+    })
+    event.mreData.subscribe((data) => {
+      this.moreData = data;
+    })
+    event.inProg.subscribe((data) => {
+      console.log('inProgress', data)
+      this.inProgress = data;
     })
   }
-  load(){
-    this.router.navigate([],{ queryParams: { offset: this.offset }, queryParamsHandling: 'merge' })
-    
+  load() {
+    this.router.navigate([], { queryParams: { offset: this.offset }, queryParamsHandling: 'merge' })
+
   }
-  openBlustoreForm(){
+  openBlustoreForm() {
     this.overlayModal.create(BlueStoreFormComponent, '', {
       class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
       // listen to the update callback
       onUpdate: (payload: any) => {
-        if(payload)
-        this.overlayModal.dismiss();
+        if (payload)
+          this.overlayModal.dismiss();
       }
     }).present();
   }
