@@ -15,8 +15,10 @@ interface ModalVal {
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent  implements OnInit {
+export class ProjectsComponent implements OnInit {
   activeUser = window.Opspot.user;
+  titleCharCount:number =0;
+  descCharCount:number=0;
   toggleEnd = false;
   model: any = {};
   modalVal = {
@@ -24,6 +26,7 @@ export class ProjectsComponent  implements OnInit {
     desc: '',
     link: '',
   };
+  
   submitted = false;
   dateOfBirth;
 
@@ -49,6 +52,7 @@ export class ProjectsComponent  implements OnInit {
   // }
 
   onSubmit(e) {
+    
     this.submitted = true;
     if (!e.valid) {
       this.errWork = true;
@@ -69,6 +73,8 @@ export class ProjectsComponent  implements OnInit {
     // }
 
     // if (e.valid) {
+
+   
     this.inProgress = true;
     this.errWork = false;
     let work = {
@@ -82,6 +88,9 @@ export class ProjectsComponent  implements OnInit {
       // 'end_date':this.model.endYear?this.model.endMonth+'-'+this.model.endYear:''
     };
     if (isNaN(this.model.index)) {
+
+
+      console.log(work);
       this.work.projects.push(work);
     } else {
       this.work.projects[this.model.index] = work;
@@ -89,6 +98,7 @@ export class ProjectsComponent  implements OnInit {
     this.client
       .post('api/v4/entities/projects', this.work)
       .then((res: any) => {
+      
         this.addWork = false;
         if (res.status === 'success' && res.entities == true) {
           this.client.get('api/v2/onboarding/progress').then((response: any) => {
@@ -111,7 +121,7 @@ export class ProjectsComponent  implements OnInit {
     console.log(res);
     res = res['channel'];
     if (res['projects']) {
-      
+
       this.work.projects = res['projects'];
     }
   }
@@ -120,9 +130,11 @@ export class ProjectsComponent  implements OnInit {
     this.addWork = true;
     this.model.index = index;
     let data = this.work.projects[index];
-    this.model.Project_Title=data.Project_Title;
+    this.model.Project_Title = data.Project_Title;
     this.model.Project_Description = data.Project_Description;
-    this.model.Project_link=data.Project_link;
+    this.model.Project_link = data.Project_link;
+    this.titleCharCount=data.Project_Title.length;
+    this.descCharCount =data.Project_Description.length;
     // this.model.issuer = data.issuer;
     // this.model.strtYear = data.issue_period.split('-')[1];
     // this.model.strtMonth = data.issue_period.split('-')[0];
@@ -167,13 +179,13 @@ export class ProjectsComponent  implements OnInit {
       timeOut: 3000
     });
   }
-  showFailure(){
+  showFailure() {
     this.toastr.error('Profile could not be updated', '', {
       timeOut: 3000
     });
   }
 
-  public handleSeeMore (item) {
+  public handleSeeMore(item) {
     this.popupToggle = !this.popupToggle;
     console.log(item);
     this.modalVal.title = item.Project_Title;
@@ -181,4 +193,14 @@ export class ProjectsComponent  implements OnInit {
     this.modalVal.link = item.Project_link;
     console.log(this.modalVal);
   }
+
+  countChar(data) {
+    if(data.target.name === "title"){
+      this.titleCharCount = data.target.value.length;
+    }else if(data.target.name === "description"){
+      this.descCharCount = data.target.value.length;
+    }
+
+  }
+
 }

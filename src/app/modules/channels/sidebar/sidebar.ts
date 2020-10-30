@@ -6,6 +6,7 @@ import { Tag } from '../../hashtags/types/tag';
 import { ChannelOnboardingService } from "../../onboarding/channel/onboarding.service";
 import { Storage } from '../../../services/storage';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import * as _ from 'lodash';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class ChannelSidebar {
   onboardingProgress: number = -1;
   profEdit = true;
   sidebarMsg = true;
+  projects = [];
   pattern = /^((http|https|ftp):\/\/)/;
   @Output() changeEditing = new EventEmitter<boolean>();
   _deleteBookmark: EventEmitter<any> = new EventEmitter();
@@ -50,7 +52,17 @@ export class ChannelSidebar {
       this.user = { ...this.user, website: `https://${this.user['website']}` };
     }
     this.user['contributeType'] = 'contribute';
-  }
+    console.log(this.user.projects);
+    if (this.user.projects) {
+      this.projects = [];
+      this.user.projects.forEach(item => {
+        if (item.access) {
+          this.projects.push(item);
+        }
+      })
+    }
+    console.log(this.projects);
+;  }
 
   constructor(
     public client: Client,
