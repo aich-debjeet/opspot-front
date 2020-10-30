@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { BlueStoreFormComponent } from '../../forms/blue-store-form/blue-store-form.component';
@@ -8,7 +8,7 @@ import { BlueStoreFormComponent } from '../../forms/blue-store-form/blue-store-f
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent implements OnInit,AfterViewChecked {
   defaultOption: string;
   moreData: boolean = true;
   inProgress: boolean = false;
@@ -17,12 +17,16 @@ export class LandingPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public overlayModal: OverlayModalService,
+    private cd: ChangeDetectorRef
   ) {
     this.defaultOption = 'BlueStore'
   }
 
   ngOnInit() {
   }
+  ngAfterViewChecked() {
+    this.cd.detectChanges();
+}
 
   changeMarketType(type: string) {
     this.defaultOption = type;
