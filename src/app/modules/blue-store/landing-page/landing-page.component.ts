@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { BlueStoreFormComponent } from '../../forms/blue-store-form/blue-store-form.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -14,6 +16,7 @@ offset: string;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    public overlayModal: OverlayModalService,
   ) { 
     this.defaultOption = 'BlueStore'
   }
@@ -36,9 +39,18 @@ offset: string;
     })
   }
   load(){
-    console.log('loading');
     this.router.navigate([],{ queryParams: { offset: this.offset }, queryParamsHandling: 'merge' })
     
+  }
+  openBlustoreForm(){
+    this.overlayModal.create(BlueStoreFormComponent, '', {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+      // listen to the update callback
+      onUpdate: (payload: any) => {
+        if(payload)
+        this.overlayModal.dismiss();
+      }
+    }).present();
   }
 
 }

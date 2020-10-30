@@ -12,7 +12,7 @@ import { Client } from '../../../services/api/client';
 export class StoreListComponent implements OnInit {
   category: string;
   market: string;
-  cards: Object[];
+  cards: Object[]=[];
   offset: string= '';
   limit = 10;
 
