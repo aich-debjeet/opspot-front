@@ -5,7 +5,7 @@
   <h4 class="f500" [hidden]="market == 'My Sales Board'">{{market}} > {{category}}</h4>
   <h4 class="f500" [hidden]="market != 'My Sales Board'">{{market}}</h4>
   <div class="form-group o-bluestore-fleamarket-products__search">
-    <input type="text" class="form-control" placeholder="Search Product">
+    <input type="text" class="form-control" placeholder="Search Product" [(ngModel)]="q" name="q" autocomplete="off" #searchInput>
     <span class="icon-search"></span>
   </div>
 </div>

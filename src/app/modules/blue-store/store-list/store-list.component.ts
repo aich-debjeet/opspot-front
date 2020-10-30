@@ -8,6 +8,9 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   selector: 'app-store-list',
+  host: {
+    '(keyup)': 'keyup($event)'
+  },
   templateUrl: './store-list.component.html',
   styleUrls: ['./store-list.component.scss']
 })
@@ -18,6 +21,8 @@ export class StoreListComponent implements OnInit {
   cards: Object[]=[];
   offset: string= '';
   limit = 10;
+  q: string = '';
+  copiedRef=[];
 
   @Output() off: EventEmitter<any> = new EventEmitter();
   constructor(private route: ActivatedRoute,
@@ -48,7 +53,8 @@ export class StoreListComponent implements OnInit {
     this.client.get('api/v3/marketplace/category',{category_name:this.category, limit: this.limit, offset:this.offset}).then(response => {
       console.log('response', response);
       if(response['activity']){
-        this.cards.push(...response['activity']) ;          
+        this.cards.push(...response['activity']) ;
+        this.copiedRef = this.cards;        
       }
       if(response['load-next']){
         this.off.emit(response['load-next'])
@@ -65,7 +71,8 @@ export class StoreListComponent implements OnInit {
     this.client.get(`api/v3/marketplace/single/${this.userGuid}`,{limit: this.limit, offset:this.offset}).then(response => {
       console.log('response', response);
       if(response['activity']){
-        this.cards.push(...response['activity']) ;          
+        this.cards.push(...response['activity']) 
+        this.copiedRef = this.cards;  ;          
       }
       if(response['load-next']){
         this.off.emit(response['load-next'])
@@ -86,6 +93,17 @@ export class StoreListComponent implements OnInit {
         this.overlayModal.dismiss();
       }
     }).present();
+  }
+
+  keyup(e) {
+    if (e.keyCode === 13) {
+      if (!this.cards || !this.q) {
+        return this.cards=this.copiedRef;
+      }
+      if (this.cards.find((item: any) => item.title.toString().toLowerCase() === this.q.toLowerCase())) {
+        this.cards = this.cards.filter((item: any) => item.title.toString().toLowerCase().indexOf((this.q).toLowerCase()) !== -1)
+      }
+    }
   }
 
 }
