@@ -140,4 +140,26 @@ h4 {
     border-radius: 4px;
     
 }
+input.ng-touched.ng-invalid, .input-project {
+    border-width: normal;
+    border-color: red;
+}
+
+// input.ng-touched.ng-valid{
+//     border-color:blue;
+
+// }
+.error.ng-touched{
+    color: red;
+    border-color: red;
+}
+
+
+textarea.ng-touched.ng-invalid, .textarea-project{
+    border-width: normal;
+    border-color: red;
+}
+
+
+
 
