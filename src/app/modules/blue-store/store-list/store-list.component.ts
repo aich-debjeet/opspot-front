@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client } from '../../../services/api/client';
+import { BlueStoreFormComponent } from '../../forms/blue-store-form/blue-store-form.component';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
   
 
 
@@ -19,6 +21,7 @@ export class StoreListComponent implements OnInit {
 
   @Output() off: EventEmitter<any> = new EventEmitter();
   constructor(private route: ActivatedRoute,
+    public overlayModal: OverlayModalService,
     private client: Client) { }
 
   ngOnInit() {
@@ -72,6 +75,17 @@ export class StoreListComponent implements OnInit {
 
       
     })
+  }
+
+  openEditBluestore(entity){
+    this.overlayModal.create(BlueStoreFormComponent, entity, {
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+      // listen to the update callback
+      onUpdate: (payload: any) => {
+        if(payload)
+        this.overlayModal.dismiss();
+      }
+    }).present();
   }
 
 }

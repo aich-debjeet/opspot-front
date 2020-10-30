@@ -23,6 +23,10 @@
           <span class="grey-dark"><span>&#8377;</span> {{card.sale_price}}</span>
         </div>
         <div class="c-bfstore-info__location text-md"><i class="icon-map-pin grey-dark"></i> {{card.location}}</div>
+        <div class="bluestore-sales-card-button">
+          <!-- <button type="button" class="btn btn-outline-primary btn-sm">Mark as Sold</button> -->
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="openEditBluestore(card)">Edit Product</button>
+      </div>
       </div>
     </div>
   </li>
