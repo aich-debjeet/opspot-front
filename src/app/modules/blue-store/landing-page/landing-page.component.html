@@ -11,7 +11,7 @@
         <div class="o-bluestore-fleamarket-options">
           <ul class="o-bluestore-fleamarket-options__block">
             <li class="text-md " [class.option-selected]="defaultOption == 'BlueStore'"
-              (click)="changeMarketType('BlueStore')"><i class="icon-shopping-bag"></i> BlueStore</li>
+              (click)="changeMarketType('BlueStore')" [routerLink]="['/bluestore']"><i class="icon-shopping-bag"></i> BlueStore</li>
             <!-- <li class="text-md" [class.option-selected] ="defaultOption == 'Flea Market'" (click)="changeMarketType('Flea Market')"><i class="icon-shopping-bag"></i> Flea Market</li> -->
           </ul>
         </div>
@@ -19,7 +19,7 @@
         <div class="o-bluestore-fleamarket-options">
           <ul class="o-bluestore-fleamarket-options__block">
             <button type="button" (click)="openBlustoreForm()"class="btn btn-primary btn-block">Create an item for sale or rent</button>
-            <li class="text-md"><i class="icon-grid"></i> My Sales Board</li>
+            <li class="text-md" [class.option-selected]="defaultOption == 'salesBoard'"  [routerLink]="['marketLists']" [queryParams]="{type:'My Sales Board'}" (click)="changeMarketType('salesBoard')"><i class="icon-grid"></i> My Sales Board</li>
           </ul>
         </div>
         <!--options ends-->
@@ -29,7 +29,7 @@
           </div>
         </div>
         <!--options ends-->
-        <div class="o-bluestore-fleamarket-categories">
+        <div class="o-bluestore-fleamarket-categories" [hidden]="defaultOption == 'salesBoard'">
           <div class="text-lg f500 o-bluestore-fleamarket-categories__title">
             Shop by Categories
           </div>
