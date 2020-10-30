@@ -33,7 +33,6 @@ export class StoreListComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      console.log('params', params);
       this.category = params['category_name'];
       this.market = params['type'];
       this.mreData.emit(true);

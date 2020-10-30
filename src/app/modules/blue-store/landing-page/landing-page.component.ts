@@ -38,7 +38,6 @@ export class LandingPageComponent implements OnInit {
       this.moreData = data;
     })
     event.inProg.subscribe((data) => {
-      console.log('inProgress', data)
       this.inProgress = data;
     })
   }
