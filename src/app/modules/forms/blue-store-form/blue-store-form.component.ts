@@ -7,6 +7,7 @@ import { Client } from '../../../services/api/client';
 import { remove as _remove, findIndex as _findIndex } from 'lodash';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
 import { CURRENCY } from '../../../services/list-options';
+import { BLUESTORE_CATEGORY } from '../../../services/list-options';
 import getViewPageLink from '../../../helpers/get-viewage-link';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -35,7 +36,10 @@ export class BlueStoreFormComponent implements OnInit {
     access_id: 2,
     published: 1,
     attachment_guid: [],
-    container_guid: ''
+    container_guid: '',
+    category:'',
+    location: '',
+    sale_price:''
   };
 
   blueStoreForm: FormGroup;
@@ -59,6 +63,7 @@ export class BlueStoreFormComponent implements OnInit {
   errorMessage = '';
   currencyList = CURRENCY;
   navigationUrl = '';
+  categoryList: string[] = BLUESTORE_CATEGORY;
 
   constructor(
     public session: Session,
@@ -100,7 +105,10 @@ export class BlueStoreFormComponent implements OnInit {
         blueStoreDescription: [this.description ? this.description : '', [Validators.required]],
         blueStoreUnits: [data['item_count'] ? data['item_count'] : '', [Validators.required, Validators.min(1)]],
         blueStoreCurrency: [data['currency'] ? data['currency'] : '', [Validators.required]],
-        blueStorePrice: [data['price'] ? data['price'] : '', [Validators.required, Validators.min(1)]]
+        blueStorePrice: [data['price'] ? data['price'] : '', [Validators.required, Validators.min(1)]],
+        blueStoreLocation:[data['location'] ? data['location'] : '', Validators.required],
+        blueStoreCategory: [data['category_name'] ? data['category_name'] : '', Validators.required],
+        blueStoreSalePrice: [data['sale_price'] ? data['category_name'] : '', [Validators.required,Validators.min(1)]]
       });
     } else {
       this.blueStoreForm = this.formBuilder.group({
@@ -108,7 +116,10 @@ export class BlueStoreFormComponent implements OnInit {
         blueStoreDescription: ['', [Validators.required]],
         blueStoreUnits: ['', [Validators.required, Validators.min(1)]],
         blueStoreCurrency: ['INR', [Validators.required]],
-        blueStorePrice: ['', [Validators.required, Validators.min(1)]]
+        blueStorePrice: ['', [Validators.required, Validators.min(1)]],
+        blueStoreLocation:['', Validators.required],
+        blueStoreCategory: ['', Validators.required],
+        blueStoreSalePrice: ['', [Validators.required,Validators.min(1)]]
       });
     }
   }
@@ -281,6 +292,9 @@ export class BlueStoreFormComponent implements OnInit {
     this.reqBody.item_count = this.blueStoreForm.value.blueStoreUnits;
     this.reqBody.currency = this.blueStoreForm.value.blueStoreCurrency;
     this.reqBody.container_guid = data.container_guid;
+    this.reqBody.category = this.blueStoreForm.value.blueStoreCategory;
+    this.reqBody.location = this.blueStoreForm.value.blueStoreLocation;
+    this.reqBody.sale_price = this.blueStoreForm.value.blueStoreSalePrice;
 
 
     if (this.blueStoreForm.valid) {
