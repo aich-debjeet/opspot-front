@@ -10,6 +10,7 @@ import { Client } from '../../../services/api/client';
   styleUrls: ['./store-list.component.scss']
 })
 export class StoreListComponent implements OnInit {
+  userGuid= window.Opspot.user.guid;
   category: string;
   market: string;
   cards: Object[]=[];
@@ -25,11 +26,17 @@ export class StoreListComponent implements OnInit {
       console.log('params', params);
       this.category = params['category_name'];
       this.market = params['type'];
-      if(params['offset']){
-        this.offset = params['offset'];
-      } else this.offset='';
+      this.offset = params['offset'] ? params['offset']: ''
+      
+      // if(params['offset']){
+      //   this.offset = params['offset'];
+      // } else this.offset='';
 
-      this.load()
+      if(params['type'] == 'My Sales Board'){
+        this.loadSales();
+      } else {
+        this.load()
+      }
 
     })
   }
@@ -49,6 +56,22 @@ export class StoreListComponent implements OnInit {
       
     })
     
+  }
+
+  loadSales(){
+    this.client.get(`api/v3/marketplace/single/${this.userGuid}`,{limit: this.limit, offset:this.offset}).then(response => {
+      console.log('response', response);
+      if(response['activity']){
+        this.cards.push(...response['activity']) ;          
+      }
+      if(response['load-next']){
+        this.off.emit(response['load-next'])
+      } else {
+        this.off.emit('')
+      }
+
+      
+    })
   }
 
 }
