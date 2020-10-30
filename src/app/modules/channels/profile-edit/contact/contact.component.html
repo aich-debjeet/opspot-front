@@ -4,7 +4,7 @@
         <div class="o-prof-edit-contact">
             <div class="o-prof-edit-item__title">
                 Location <div class="o-prof-edit-privacy Eternity hidden-desktop"
-                    (click)="toggleLocation=!toggleLocation">
+                    (click)="handleClick('location')">
                     <div [ngSwitch]="privacy.location">
                         <div *ngSwitchCase="'Follower'">
                           <div class="text-md primary w-label100">Visible to people who follows you</div>
@@ -30,7 +30,7 @@
                 <div class="pos">
                     <div class=" o-prof-edit-privacy Eternity hidden-mob "
                           id="contact-component-privacy"
-                        (click)="toggleLocation=!toggleLocation">
+                        (click)="handleClick('location')">
                         <div [ngSwitch]="privacy.location">
                             <div *ngSwitchCase="'Follower'">
                               <div class="text-md primary w-label100" id="contact-people-who-follows-you">Visible to people who follows you</div>
@@ -56,7 +56,7 @@
             <div class="o-prof-edit-item__title">
                 Email 
                 <div class="o-prof-edit-privacy Eternity hidden-desktop"
-                    id="contact-privacy-email-everyone" (click)="toggleEmail=!toggleEmail">
+                    id="contact-privacy-email-everyone" (click)="handleClick('email')">Visible to {{privacy.email}}
                     <div [ngSwitch]="privacy.email">
                         <div *ngSwitchCase="'Follower'">
                           <div class="text-md primary w-label100" id="contact-privacy-email-follows-you">Visible to people who follows you</div>
@@ -80,7 +80,7 @@
                         [(ngModel)]="model.email" name="email" readonly="readonly">
                 </div>
                 <div class="pos">
-                    <div class="o-prof-edit-privacy hidden-mob" (click)="toggleEmail=!toggleEmail"
+                    <div class="o-prof-edit-privacy hidden-mob" (click)="handleClick('email')"
                         id="contact-email-privacy">
                         <div [ngSwitch]="privacy.email">
                             <div *ngSwitchCase="'Follower'">
@@ -106,7 +106,7 @@
 
             <div class="o-prof-edit-item__title">
                 Phone Number <div class="o-prof-edit-privacy Eternity hidden-desktop"
-                    id="contact-privacy-phone-everyone" (click)="togglePhone=!togglePhone">Visible to {{privacy.phone}}
+                    id="contact-privacy-phone-everyone" (click)="handleClick('phone')">Visible to {{privacy.phone}}
                     <div [ngSwitch]="privacy.phone">
                         <div *ngSwitchCase="'Follower'">
                           <div class="text-md primary w-label100" id="contact-privacy-phone-visible-to-who-follows-you">Visible to people who follows you</div>
@@ -136,7 +136,7 @@
                 </div>
                 <div class="pos">
                     <div class="o-prof-edit-privacy hidden-mob" id="contact-phone-privacy"
-                        (click)="togglePhone=!togglePhone">
+                    (click)="handleClick('phone')">
                         <div [ngSwitch]="privacy.phone">
                             <div *ngSwitchCase="'Follower'">
                               <div class="text-md primary w-label100" id="contact-phone-privacy-visible-to-people-who-follows-you">Visible to people who follows you</div>
@@ -161,7 +161,7 @@
           
             <div style="padding-top: 9px;" >
             <div class="o-prof-edit-item__title" *ngIf="showSecMobNumber">Secondary Phone Number 
-              <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop" (click)="toggleSecondaryphone=!toggleSecondaryphone">
+              <div class="o-prof-edit-privacy Eternity text-md primary hidden-desktop" (click)="handleClick('secondary_phone')">
                 <div [ngSwitch]="privacy.secondary_phone">
                   <div *ngSwitchCase="'Follower'">
                     <div class="text-md primary w-label100">Visible to people who follows you</div>
@@ -187,7 +187,7 @@
                               class="form-control form-control-lg" [(ngModel)] = "model.secondary_phone">
                             </div>
                             <div class="pos">
-                            <div class="o-prof-edit-privacy text-md primary hidden-mob" (click)="toggleSecondaryphone=!toggleSecondaryphone">
+                            <div class="o-prof-edit-privacy text-md primary hidden-mob" (click)="handleClick('secondary_phone')">
                               <div [ngSwitch]="privacy.secondary_phone">                              
                               <div *ngSwitchCase="'Follower'">
                                 <div class="text-md primary w-label100">Visible to people who follows you</div>
@@ -216,7 +216,7 @@
 
             <div class="o-prof-edit-item__title">
                 Website <div class="o-prof-edit-privacy Eternity hidden-desktop"
-                    (click)="toggleWebsite=!toggleWebsite">
+                    (click)="handleClick('website')">
                     <div [ngSwitch]="privacy.website">
                         <div *ngSwitchCase="'Follower'">
                           <div class="text-md primary w-label100">Visible to people who follows you</div>
@@ -241,7 +241,7 @@
                         <p class="error text-sm" *ngIf="wrongWebsite">Must be a valid url</p>
                 </div>
                 <div class="pos">
-                    <div class="o-prof-edit-privacy hidden-mob" (click)="toggleWebsite=!toggleWebsite">
+                    <div class="o-prof-edit-privacy hidden-mob" (click)="handleClick('website')">
                         <div [ngSwitch]="privacy.website">
                             <div *ngSwitchCase="'Follower'">
                               <div class="text-md primary w-label100" id="contact-website-who-follows-you">Visible to people who follows you</div>

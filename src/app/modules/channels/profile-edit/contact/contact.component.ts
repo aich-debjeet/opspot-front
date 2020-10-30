@@ -78,6 +78,54 @@ export class ContactComponent implements OnInit {
     }
   }
 
+  handleClick (param) {
+    console.log(param);
+    switch (param) {
+      case 'location':
+        this.toggleEmail= false;
+        this.togglePhone  = false;
+        this.toggleWebsite = false;
+        this.toggleSecondaryphone = false;
+        this.toggleLocation = !this.toggleLocation;
+        break;
+
+      case 'email':
+        this.toggleLocation = false;
+        this.togglePhone  = false;
+        this.toggleWebsite = false;
+        this.toggleSecondaryphone = false;        
+        this.toggleEmail = !this.toggleEmail;
+        // console.log('inside mail');
+        break;
+
+      case 'phone':
+        this.toggleLocation = false;
+        this.toggleEmail= false;
+        this.toggleWebsite = false;
+        this.toggleSecondaryphone = false;        
+        this.togglePhone = !this.togglePhone;
+        // console.log('inside phone');
+        break;
+
+      case 'website':
+        this.toggleLocation = false;
+        this.toggleEmail= false;
+        this.togglePhone  = false;
+        this.toggleSecondaryphone = false;        
+        this.toggleWebsite = !this.toggleWebsite;
+        break;
+
+      case 'secondary_phone':
+        this.toggleLocation = false;
+        this.toggleEmail= false;
+        this.togglePhone  = false;
+        this.toggleWebsite = false;        
+        this.toggleSecondaryphone = !this.toggleSecondaryphone;
+        break;
+    }
+  
+  }
+
   async load() {
     let res = await this.client.get('api/v1/channel/me');
     let response: any = res['channel'];
