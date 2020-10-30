@@ -59,7 +59,6 @@ export class StoreListComponent implements OnInit {
   load() {
     this.inProg.emit(true);
     this.client.get('api/v3/marketplace/category', { category_name: this.category, limit: this.limit, offset: this.offset }).then(response => {
-      console.log('response', response);
       if (!response['activity'].length) {
         this.inProg.emit(false);
         this.mreData.emit(false);
@@ -85,7 +84,6 @@ export class StoreListComponent implements OnInit {
   loadSales() {
     this.inProg.emit(true);
     this.client.get(`api/v3/marketplace/single/${this.userGuid}`, { limit: this.limit, offset: this.offset }).then(response => {
-      console.log('response', response);
       if (!response['activity']) {
         this.inProg.emit(false);
         this.mreData.emit(false);
