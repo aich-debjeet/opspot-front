@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SponsoredPostComponent} from '../../forms/sponsored-post/sponsored-post.component';
+import { OverlayModalService } from '../../../services/ux/overlay-modal';
 
 @Component({
   selector: 'app-sponsored-lists',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SponsoredListsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private overlayModal: OverlayModalService,
+  ) { }
 
   ngOnInit() {
   }
+  createSponsored(){
+    
+    this.overlayModal.create(SponsoredPostComponent, '',{
+      class: 'm-overlay-modal--report m-overlay-modal--medium-hashtagforms',
+      // listen to the update callback
+      // onUpdate: (payload: any) => {
+      //   if (payload)
+      //     this.overlayModal.dismiss();
+      // }
+    }).present();
 
+  }
 }

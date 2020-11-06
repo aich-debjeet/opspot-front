@@ -1,3 +1,33 @@
-<p>
-  sponsored-lists works!
-</p>
+<!-- 
+    css path  : _sass/pages/_sponsored-post.scss
+	component : components/sponsored_post_card.html
+	written by : shilpa
+-->
+
+<section class="o-sponsored-post-sec">
+    <div class="o-sponsored-post-container">
+        <div class="o-sponsored-post-header">
+             <div class="o-sponsored-post-header-left">
+                 <h3 class="f700">Sponsored Posts</h3>
+                 <a class="text-lg primary hidden-above-tablet f500">Create</a>
+             </div><!--left ends-->
+             <div class="o-sponsored-post-header-right">
+                <div class="o-sponsored-post-header-right__dropdown">
+                    <div class="form-group select-sponsored-post">
+                        <label>
+                            <select class="form-control">
+                                <option>Recently Uploaded</option>
+                                <option>By Relevance</option>
+                            </select>
+                        </label>
+                    </div>
+                </div><!--dropsown ends-->
+                <div class="o-sponsored-post-header-right__button hidden-under-tablet">
+                    <button type="button" class="btn btn-primary btn-block" (click)="createSponsored()">Create a Sponsored Post</button>
+                </div><!--button ends-->
+             </div><!--right ends-->
+        </div><!--header ends-->
+        <div class="o-sponsored-post-body"> 
+        </div><!--body ends-->
+    </div><!--container ends-->
+</section>

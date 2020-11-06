@@ -1,0 +1,53 @@
+<div class="this-is-for-priview">
+  <div class="o-create-sponsored-post">
+    <div class="o-create-sponsored-post-head o-create-sponsored-post-head--border">
+      <div class="o-create-talent__title text-lg f500">
+        Create Sponsored Post
+      </div>
+    </div>
+    <!--boost head end-->
+    <form [formGroup]="sponsoredForm" (ngSubmit)="onSubmit()">
+      <div class="o-create-sponsored-post-body o-create-sponsored-post-body--flex">
+        <div class="form-group">
+          <label>Profile Link</label>
+          <input type="text" id="Profile Link" class="form-control form-control-lg" formControlName="profileLink">
+        </div>
+        <!--Profile Link ends-->
+        <div class="form-group">
+          <label>Description<span class="text-sm grey description-width">21/300</span></label>
+          <textarea class="form-control" id="Description" rows="5" formControlName="description"></textarea>
+        </div>
+        <!--Event Description-->
+        <div class="form-group">
+          <label>Embedded Link</label>
+          <input type="text" id="Embedded Link" class="form-control form-control-lg" formControlName="embedlink">
+        </div>
+        <!--Embedded Link ends-->
+        <div class="form-group">
+          <label>Post Sequence ID</label>
+          <input type="text" id="Post Sequence ID" class="form-control form-control-lg" formControlName="postSequence">
+        </div>
+        <!--Post Sequence ID ends-->
+        <div class="form-group">
+          <label>Upload Media</label>
+          <div class="o-create-sponsored-post-cover-image">
+            <div class="fileUpload">
+              <span class="icon-plus"></span>
+              <input type="file" class="upload" name="image upload" formControlName="media">
+            </div>
+            <!--file upload ends-->
+          </div>
+          <!--cover image ends-->
+          <div class="text-sm grey mt7">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </div>
+        </div>
+        <!--image upload-->
+      </div>
+      <!--body ends-->
+      <div class="o-create-sponsored-post-footer">
+        <button type="submit" class="btn btn-primary btn-sm" [disabled]="!sponsoredForm.valid">Post</button>
+        <!--for event page-->
+      </div>
+      <!--footer ends-->
+    </form>
+  </div>
+</div>
