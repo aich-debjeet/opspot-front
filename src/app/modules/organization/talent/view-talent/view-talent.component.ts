@@ -208,7 +208,7 @@ export class ViewTalentComponent implements OnInit {
     if ($event.inProgress) {
       $event.inProgress.emit(true);
     }
-    this.client.delete(`api/v3/organizations/organization/talent/${this.talent.guid}`)
+    this.client.delete(`api/v1/newsfeed/${this.talent.guid}`)
       .then((response: any) => {
         this.router.navigate([`newsfeed/subscribed`]);
       })
