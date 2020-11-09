@@ -28,7 +28,8 @@ type Option =
   | 'create-opportunity'
   | 'create-the-bluestore'
   | 'create-portfolio'
-  | 'create-my-journey';
+  | 'create-my-journey'
+  | 'sponsored';
 
 @Component({
   moduleId: module.id,
@@ -330,4 +331,5 @@ export class PostMenuComponent {
     }
     return false;
   }
+  makeSponsored(){}
 }
