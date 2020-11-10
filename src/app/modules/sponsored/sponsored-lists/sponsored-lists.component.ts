@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {SponsoredPostComponent} from '../../forms/sponsored-post/sponsored-post.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { Client } from '../../../services/api/client';
+import { Session } from '../../../services/session';
 
 @Component({
   selector: 'app-sponsored-lists',
@@ -8,12 +10,14 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
   styleUrls: ['./sponsored-lists.component.scss']
 })
 export class SponsoredListsComponent implements OnInit {
-
+advertisements: Array<Object>;
   constructor(
     private overlayModal: OverlayModalService,
+    private client: Client,
   ) { }
 
   ngOnInit() {
+    this.getAdvertisements();
   }
   createSponsored(){
     
@@ -26,5 +30,16 @@ export class SponsoredListsComponent implements OnInit {
       // }
     }).present();
 
+  }
+
+  getAdvertisements(){
+    this.client.get('api/v3/marketing/advertise',{limit:10, offset:''}).then((res)=>{
+      this.advertisements= res['advertises'].filter((data)=> {
+        if(data['activity'])
+        return data;
+      }).map((data)=> data['activity']);
+      console.log('this.advertisements',this.advertisements)
+    })
+      .catch((e)=> console.log(e))
   }
 }
