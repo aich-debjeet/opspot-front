@@ -142,4 +142,16 @@ export class AboutComponent implements OnInit {
       timeOut: 3000
     });
   }
+
+  keyPressAlphaNumeric(event) {
+
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]*$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
 }

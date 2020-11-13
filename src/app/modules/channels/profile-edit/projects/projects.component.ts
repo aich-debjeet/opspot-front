@@ -157,11 +157,18 @@ export class ProjectsComponent implements OnInit {
       .then((res: any) => {
         if (res.status === 'success' && res.entities == true) {
           this.client.get('api/v2/onboarding/progress').then((response: any) => {
-            this.showSuccess();
+            this.showDelete();
             this.updatePercentage.emit(response.rating);
           });
         }
       });
+  }
+
+  showDelete() {
+    this.toastr.success('You have successfully deleted your profile', '', {
+      timeOut: 3000
+      
+    });
   }
 
   goBack() {
