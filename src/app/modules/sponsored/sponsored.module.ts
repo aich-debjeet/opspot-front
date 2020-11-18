@@ -7,6 +7,7 @@ import { NotificationModule } from '../notifications/notification.module';
 import { LegacyModule } from '../legacy/legacy.module';
 import { WalletModule } from '../wallet/wallet.module';
 import {WireModule} from '../wire/wire.module';
+import { PostMenuModule } from '../../common/components/post-menu/post-menu.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {WireModule} from '../wire/wire.module';
     NotificationModule,
     LegacyModule,
     WalletModule,
-    WireModule
+    WireModule,
+    PostMenuModule
     
   ]
 })

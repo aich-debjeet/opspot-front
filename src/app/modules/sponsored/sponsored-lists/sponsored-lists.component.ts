@@ -11,6 +11,7 @@ import { Session } from '../../../services/session';
 })
 export class SponsoredListsComponent implements OnInit {
 advertisements: Array<Object>;
+menuOptions: Array<string> = ['delete'];
   constructor(
     private overlayModal: OverlayModalService,
     private client: Client,
@@ -34,11 +35,7 @@ advertisements: Array<Object>;
 
   getAdvertisements(){
     this.client.get('api/v3/marketing/advertise',{limit:10, offset:''}).then((res)=>{
-      this.advertisements= res['advertises'].filter((data)=> {
-        if(data['activity'])
-        return data;
-      }).map((data)=> data['activity']);
-      console.log('this.advertisements',this.advertisements)
+      this.advertisements= res['advertises']
     })
       .catch((e)=> console.log(e))
   }

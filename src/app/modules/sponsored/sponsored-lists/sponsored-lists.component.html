@@ -9,10 +9,10 @@
         <div class="o-sponsored-post-header">
             <div class="o-sponsored-post-header-left">
                 <h3 class="f700">Sponsored Posts</h3>
-                <a class="text-lg primary hidden-above-tablet f500">Create</a>
+                <!-- <a class="text-lg primary hidden-above-tablet f500">Create</a> -->
             </div>
             <!--left ends-->
-            <div class="o-sponsored-post-header-right">
+            <!-- <div class="o-sponsored-post-header-right">
                 <div class="o-sponsored-post-header-right__dropdown">
                     <div class="form-group select-sponsored-post">
                         <label>
@@ -23,20 +23,17 @@
                         </label>
                     </div>
                 </div>
-                <!--dropsown ends-->
                 <div class="o-sponsored-post-header-right__button hidden-under-tablet">
                     <button type="button" class="btn btn-primary btn-block" (click)="createSponsored()">Create a
                         Sponsored Post</button>
                 </div>
-                <!--button ends-->
-            </div>
-            <!--right ends-->
+            </div> -->
         </div>
         <!--header ends-->
         <div class="o-sponsored-post-body">
             <div class="c-sponsored-post-card" *ngFor="let advt of advertisements">
                 <a href="sponsored_inner_page.html" class="c-sponsored-post-card-left-avatar">
-                    <img [src]="advt?.custom_data[0].src">
+                    <img [src]="advt?.custom_data[0]?.src">
                 </a>
                 <!--avatar ends-->
                 <div class="c-sponsored-post-card-right">
@@ -54,9 +51,9 @@
                             </a>
                         </div>
                         <!--info ends-->
-                        <a class="c-sponsored-post-card-right-header__icon">
+                        <!-- <a class="c-sponsored-post-card-right-header__icon">
                             <i class="icon-more-horizontal"></i>
-                        </a>
+                        </a> -->
                         <!--icon ends-->
                         <!--dropdown options-->
                         <!-- <ul class="c-sponsored-post-card-right-dropdown">
@@ -68,6 +65,13 @@
                             </li>
                         </ul> -->
                         <!--dropdown ends-->
+                        <m-post-menu *ngIf="advt" [entity]="advt" [canDelete]="canDelete"
+                            [isTranslatable]="isTranslatable" [options]="menuOptions"
+                            (optionSelected)="menuOptionSelected($event)">
+                            <ng-container post-menu>
+                                <ng-content select="[post-menu]"></ng-content>
+                            </ng-container>
+                        </m-post-menu>
                     </div>
                     <!--header ends-->
                     <div class="text-md">
@@ -83,8 +87,7 @@
                                     <span>{{advt?.impressions | number}}</span>
                                 </span>
                             </a>
-                            <m-wire-button
-                                [object]="advt?.remind_object ? advt?.remind_object : advt"
+                            <m-wire-button [object]="advt?.remind_object ? advt?.remind_object : advt"
                                 (done)="wireSubmitted($event)" [large]="false">
                             </m-wire-button>
                             <!-- <a href="#" class="c-sponsored-post-card-right-actions__link" alt="coins">
@@ -96,7 +99,7 @@
                         </div>
                         <!--list ends-->
                         <div class="text-sm grey c-sponsored-post-card-right-actions__sequence">
-                            Post Sequence ID: 34
+                            Post Sequence ID: {{advt?.id?.$oid}}
                         </div>
                         <!--sequence ends-->
                     </div>
