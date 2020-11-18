@@ -22,13 +22,15 @@ import { OverlayModalService } from '../../../services/ux/overlay-modal';
 export class NewsfeedSubscribedComponent {
 
   newsfeed: Array<Object> = [];
-  enroll:any;
+  enroll: any;
   prepended: Array<any> = [];
   offset: string = '';
   showBoostRotator: boolean = true;
   inProgress: boolean = false;
   moreData: boolean = true;
   opspot;
+  globalIndex = 3;
+  advtOffset: string = '';
 
   attachment_preview;
 
@@ -66,6 +68,7 @@ export class NewsfeedSubscribedComponent {
 
   ngOnInit() {
     this.load(true, 'all');
+    // this.loadAdvertizes();
     this.opspot = window.Opspot;
 
     this.paramsSubscription = this.route.params.subscribe(params => {
@@ -105,7 +108,7 @@ export class NewsfeedSubscribedComponent {
       this.newsfeed = [];
       this.prepended = [];
     }
-    
+
     this.inProgress = true;
 
     this.client.get('api/v4/newsfeed', { activity_type: this.filter, limit: 12, offset: this.offset })
@@ -119,13 +122,15 @@ export class NewsfeedSubscribedComponent {
         }
         if (this.newsfeed && !refresh) {
           this.newsfeed = this.newsfeed.concat(data.activity);
-          if(!this.enroll){}
+
+          if (!this.enroll) { }
           this.enroll = this.newsfeed.find(data => data['event_type'] == 'Premium');
-          
+
         } else {
 
           this.newsfeed = data.activity;
-          if(!this.enroll){
+
+          if (!this.enroll) {
             this.enroll = this.newsfeed.find(data => data['event_type'] == 'Premium');
           }
         }
@@ -133,10 +138,37 @@ export class NewsfeedSubscribedComponent {
 
         this.inProgress = false;
         this.filter = filter
+      }).then(() => {
+        this.loadAdvertizes()
       })
       .catch((e) => {
         this.inProgress = false;
       });
+  }
+
+  async loadAdvertizes() {
+    try {
+      const response: any = await this.client.get('api/v3/marketing/advertise', { limit: 3, offset: this.advtOffset });
+      if (response['advertises'] && response['advertises'].length) {
+        // console.log()
+        // this.newsfeed.splice(i, 0, response['advertises'][0]);
+        this.advtOffset = response['load-next'];
+        // console.log(this.newsfeed)
+        for (let i = this.globalIndex; i <= this.newsfeed.length; i += 4) {
+          let j = 0;
+          if (j < response['advertises'].length)
+            this.newsfeed.splice(i, 0, response['advertises'][j])
+          j = j + 1;
+          this.globalIndex = i;
+        }
+
+      }
+
+    }
+    catch (e) {
+      console.log(e);
+
+    }
   }
 
   prepend(activity: any) {

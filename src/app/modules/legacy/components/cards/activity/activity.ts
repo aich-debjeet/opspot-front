@@ -108,6 +108,7 @@ export class Activity {
     if (!value)
       return;
     this.activity = value;
+    console.log(this.activity);
 
     // if (this.activity) {
     //   this.postType = getEntityType(this.activity);
