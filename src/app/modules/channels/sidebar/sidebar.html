@@ -287,7 +287,7 @@
           <img src="assets/Work.jpg" alt="">
         </div>
         <div class="o-work-info__det" id="sidebar-work-widget">
-          <a class="text-md f500 word-br">{{ work?.designation }}</a>
+          <a class="text-md f500 word-br">{{ work?.designation | truncate:[20, '...']}}</a>
           <div class="text-sm grey-dark word-br">{{ work?.company_name }} - {{ work?.location }}</div>
         </div>
       </div>
@@ -301,7 +301,7 @@
           <img src="assets/Education.jpg" alt="">
         </div>
         <div class="o-education-info__det" id="sidebar-education-widget">
-          <a class="text-md f500 word-br">{{ education?.field_of_study }}</a>
+          <a class="text-md f500 word-br">{{ education?.field_of_study | truncate:[20, '...']}}</a>
           <div class="text-sm grey-dark word-br">{{ education?.university }} - {{ education?.location }}</div>
         </div>
       </div>
@@ -315,7 +315,7 @@
           <img src="assets/Awards.jpg" alt="">
         </div>
         <div class="o-award-info__det" id="sidebar-award-widget">
-          <a class="text-md f500 word-br">{{ award?.title }}</a>
+          <a class="text-md f500 word-br">{{ award?.title | truncate:[20, '...'] }}</a>
           <div class="text-sm grey-dark word-br">{{ award?.issuer }} - {{ award?.location }}</div>
         </div>
       </div>

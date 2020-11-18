@@ -7,7 +7,7 @@
             <div class="o-wea-block" id="work-component-work-block" *ngFor="let work of work.work_experience; let i=index;">
                 <div class="o-wea-logo"><img src="assets/Work.jpg" alt=""></div>
                 <div class="o-wea-info">
-                    <div class="caption-bold" id="work-designation">{{work.designation}}</div>
+                    <div class="caption-bold" id="work-designation">{{work.designation | truncate:[20, '...']}}</div>
                     <div class="caption-bold f400" id="work-company-name">{{work.company_name}} - {{work.location}}
                     </div>
                     <div class="text-md grey" id="work-month">{{work.start_date}} -
