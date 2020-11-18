@@ -34,6 +34,9 @@
     <div class="grey m-l-8 o-posts-tym"
       *ngIf="activity.guid && !activity.remind_object">
       <span id="activity-time">{{activity.time_created * 1000 | date:'medium'}}</span>
+      <span class="o-posts-sponsored" *ngIf="activity?.type == 'advertise'">
+        Sponsored
+      </span>
       <!-- <span class="o-posts-public-private"><i class="icon-public"></i></span> -->
       <span *ngIf="activity.edited" id="activity-edited" class="m-edited-text" i18n="@@M__COMMON__EDITED">edited</span>
       <div class="mdl-card__supporting-text is-boosted" *ngIf="boosted">
@@ -44,13 +47,16 @@
     <div class="grey m-l-8 o-posts-tym"
       *ngIf="!activity.guid && activity.entity_guid && !activity.remind_object">
       <span>{{activity.time_created * 1000 | date:'medium'}}</span>
+      <span class="o-posts-sponsored" *ngIf="activity?.type == 'advertise'">
+        Sponsored
+      </span>
       <!-- <span class="o-posts-public-private"><i class="icon-public"></i></span> -->
       <span *ngIf="activity.edited" class="m-edited-text" i18n="@@M__COMMON__EDITED">edited</span>
       <div class="mdl-card__supporting-text is-boosted" *ngIf="boosted">
         <i class="material-icons">trending_up</i>
         <a i18n="@@OPSPOT__CARDS__ACTIVITY__BOOSTED_LABEL" id="activity-boosted">Boosted</a>
       </div>
-    </div>
+    </div>    
   </div>
 </div>
 
