@@ -39,4 +39,25 @@ menuOptions: Array<string> = ['delete'];
     })
       .catch((e)=> console.log(e))
   }
+  menuOptionSelected(option: string, id?) {
+    switch (option) {
+      case 'delete':
+        this.delete(id);
+        break;
+    }
+  }
+
+  delete(id){
+    console.log(id);
+    this.client.delete(`api/v3/marketing/advertise/${id}`)
+    .then((resp)=>{
+      console.log(resp);
+      if(resp['status'] == 'success'){
+        if(this.advertisements.findIndex((element)=> element['id']['$oid'] == id) != -1){
+          this.advertisements.splice(this.advertisements.findIndex((element)=> element['id']['$oid'] == id), 1);
+        }
+      }
+    })
+    .catch((e)=> alert(e.message))
+  }
 }

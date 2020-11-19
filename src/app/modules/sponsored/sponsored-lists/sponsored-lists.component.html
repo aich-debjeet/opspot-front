@@ -67,7 +67,7 @@
                         <!--dropdown ends-->
                         <m-post-menu *ngIf="advt" [entity]="advt" [canDelete]="canDelete"
                             [isTranslatable]="isTranslatable" [options]="menuOptions"
-                            (optionSelected)="menuOptionSelected($event)">
+                            (optionSelected)="menuOptionSelected($event,advt?.id?.$oid)">
                             <ng-container post-menu>
                                 <ng-content select="[post-menu]"></ng-content>
                             </ng-container>
