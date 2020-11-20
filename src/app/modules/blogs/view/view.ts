@@ -41,7 +41,7 @@ export class BlogView {
   sidebarMsg = true;
   scroll_listener;
 
-  menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'subscribe', 'set-explicit', 'remove-explicit', 'rating'];
+  menuOptions: Array<string> = ['edit', 'follow', 'feature', 'delete', 'report', 'subscribe', 'set-explicit', 'remove-explicit', 'rating', 'sponsored'];
 
   @ViewChild('lockScreen', { read: ElementRef }) lockScreen;
   remindOpen = false;

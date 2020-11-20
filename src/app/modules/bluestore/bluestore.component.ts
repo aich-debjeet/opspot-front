@@ -41,7 +41,7 @@ export class BluestoreComponent implements OnInit {
   @Input() focusedCommentGuid: string;
   remindOpen = false;
   remindMessage = '';
-  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating', 'sponsored'];
   showVideo = false;
   videoData: any;
   error: string = '';

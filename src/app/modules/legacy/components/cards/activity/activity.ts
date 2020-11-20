@@ -75,7 +75,7 @@ export class Activity {
   showRatingToggle: boolean = false;
   routerLink1 = "";
   private defaultMenuOptions: Array<string> = ['edit', 'translate', 'mute', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
-  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'set-explicit', 'block', 'rating','sponsored'];
 
   @ViewChild('player') player: OpspotVideoComponent;
 
@@ -108,6 +108,7 @@ export class Activity {
     if (!value)
       return;
     this.activity = value;
+    console.log(this.activity);
 
     // if (this.activity) {
     //   this.postType = getEntityType(this.activity);

@@ -39,7 +39,7 @@ export class BigEventView implements OnInit {
   isLocked = false;
   error: string = '';
 
-  menuOptions: Array<string> = ['translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating'];
+  menuOptions: Array<string> = ['translate', 'follow', 'feature', 'delete', 'report', 'block', 'rating','sponsored'];
   childEventsEmitter: EventEmitter<any> = new EventEmitter();
   @Input() focusedCommentGuid: string;
   translateEvent: EventEmitter<any> = new EventEmitter();
