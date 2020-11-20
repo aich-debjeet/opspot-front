@@ -64,23 +64,23 @@
 <div class="container m-t-70">
   <div class="o-blocks o-blocks--flex">
 
-      <div class="o-left-block hidden-under-tablet">
+    <div class="o-left-block hidden-under-tablet">
 
-        <div class="sticky-widget">
-          <opspot-card-user *ngIf="session.isLoggedIn()" [object]="session.getLoggedInUser()" ></opspot-card-user>
+      <div class="sticky-widget">
+        <opspot-card-user *ngIf="session.isLoggedIn()" [object]="session.getLoggedInUser()"></opspot-card-user>
 
-          <ul class="o-side-menu">
-              <li class="o-side-menu__list">
-                  <a routerLink='/groups/members' id="newsfeed-community" class="o-side-menu__link">
-                      <div class="o-side-menu__icon">
-                          <img src="assets/svg/briefcase.svg" alt="">
-                      </div>
-                      <div class="o-side-menu__name text-md" >Communities</div>
-                      <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
-                      <!-- <div class="o-side-menu__count white text-sm">15k</div> -->
-                  </a>
-              </li>
-              <!-- <li class="o-side-menu__list">
+        <ul class="o-side-menu">
+          <li class="o-side-menu__list">
+            <a routerLink='/groups/members' id="newsfeed-community" class="o-side-menu__link">
+              <div class="o-side-menu__icon">
+                <img src="assets/svg/briefcase.svg" alt="">
+              </div>
+              <div class="o-side-menu__name text-md">Communities</div>
+              <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
+              <!-- <div class="o-side-menu__count white text-sm">15k</div> -->
+            </a>
+          </li>
+          <!-- <li class="o-side-menu__list">
                   <a href="#" id="newsfeed-event" class="o-side-menu__link">
                       <div class="o-side-menu__icon">
                           <img src="assets/svg/calendar.svg" alt="">
@@ -89,29 +89,38 @@
                       <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
                   </a>
               </li> -->
-              <li class="o-side-menu__list">
-                <a routerLink="/bookmark" id="newsfeed-bookmark"  class="o-side-menu__link">
-                    <div class="o-side-menu__icon" style="margin-left: -4px;color:#7c868b9e;" >
-                        <!-- <img src="assets/svg/calendar.svg" alt=""> -->
-                        <i class="material-icons" class="material-icons">turned_in_not</i>
-                    </div>
-                    <div class="o-side-menu__name text-md">Bookmarks</div>
-                    <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
-                    <!-- <div class="o-side-menu__count white text-sm"></div> -->
-                </a>
-            </li>
-            <li class="o-side-menu__list">
-              <a routerLink="/bluestore" id="newsfeed-bluestore"  class="o-side-menu__link">
-                  <div class="o-side-menu__icon" style="margin-left: -4px;color:#7c868b9e;" >
-                      <!-- <img src="assets/svg/calendar.svg" alt=""> -->
-                      <i class="material-icons" class="material-icons">turned_in_not</i>
-                  </div>
-                  <div class="o-side-menu__name text-md">Bluestore</div>
-                  <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
-                  <!-- <div class="o-side-menu__count white text-sm"></div> -->
-              </a>
+          <li class="o-side-menu__list">
+            <a routerLink="/bookmark" id="newsfeed-bookmark" class="o-side-menu__link">
+              <div class="o-side-menu__icon" style="margin-left: -4px;color:#7c868b9e;">
+                <!-- <img src="assets/svg/calendar.svg" alt=""> -->
+                <i class="material-icons" class="material-icons">turned_in_not</i>
+              </div>
+              <div class="o-side-menu__name text-md">Bookmarks</div>
+              <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
+              <!-- <div class="o-side-menu__count white text-sm"></div> -->
+            </a>
           </li>
-            <!-- <li class="o-side-menu__list">
+          <li class="o-side-menu__list">
+            <a routerLink="/bluestore" id="newsfeed-bluestore" class="o-side-menu__link">
+              <div class="o-side-menu__icon" style="margin-left: -4px;color:#7c868b9e;">
+                <!-- <img src="assets/svg/calendar.svg" alt=""> -->
+                <i class="icon-shopping-bag"></i>
+              </div>
+              <div class="o-side-menu__name text-md">Bluestore</div>
+              <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
+              <!-- <div class="o-side-menu__count white text-sm"></div> -->
+            </a>
+          </li>
+          <li class="o-side-menu__list" *ngIf="opspot?.Admin">
+            <a routerLink="/sponsored" id="newsfeed-bluestore" class="o-side-menu__link">
+              <div class="o-side-menu__icon" style="margin-left: -4px;color:#7c868b9e;">
+                <img src="assets/sponsored/sponsord.svg" alt="">
+              </div>
+              <div class="o-side-menu__name text-md">Sponsored Posts</div>
+              <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
+            </a>
+          </li>
+          <!-- <li class="o-side-menu__list">
               <a routerLink="/campaign" id="newsfeed-bookmark" class="o-side-menu__link">
                   <div class="o-side-menu__icon" style="margin-left: -4px;color:#7c868b9e;" >
                       <i class="material-icons" class="material-icons">event_note</i>
@@ -120,79 +129,80 @@
                   <div class="o-side-menu__arrow"><img src="assets/svg/arrow-right.svg" alt=""></div>
               </a>
             </li> -->
-          </ul>
-          <ul class="o-inner-footer">
-              <li class="o-footer-link__item">
-                <a [routerLink]="['/about']" id="newsfeed-about" class="text-sm">About Us</a>
-              </li>
-              <li class="o-footer-link__item">
-                <a [routerLink]="['/help']" id="newsfeed-help" class="text-sm">Help</a>
-              </li>
-              <li class="o-footer-link__item">
-                <a href="javascript:void(0)" id="newsfeed-careers" class="text-sm">Careers</a>
-              </li>
-              <li class="o-footer-link__item">
-                <a [routerLink]="['/static/privacy-policy']" id="newsfeed-privacy" class="text-sm">Privacy</a>
-              </li>
-              <li class="o-footer-link__item">
-                <a [routerLink]="['/static/terms']" id="newsfeed-terms" class="text-sm">Terms</a>
-              </li>
-          </ul>
-  
-          <div class="opspot-spacer opspot-spacer-2x"></div>
-  
-          <div class="mdl-card mdl-color--white m-border" *ngIf="false">
-            <m-tagcloud></m-tagcloud>
-          </div>
-  
-          <div class="opspot-spacer opspot-spacer-2x"></div>
-  
-          <div class="m-newsfeed--dynamic-siderbar" *ngIf="!showRightSidebar">
-            <opspot-widget [entityType]="'opportunity'"></opspot-widget>
-            <opspot-widget [entityType]="'event'"></opspot-widget>
-            <!-- <m-ads-boost limit="8"></m-ads-boost>
-            <div class="opspot-spacer opspot-spacer-2x"></div> -->
-          </div>
-  
-          <div class="m-newsfeed-footer">
-            <ul class="m-footer-nav m-footer-nav-inline">
-              <li *ngFor="let page of navigation.getItems('footer')" class="m-footer-nav-item">
-                <a *ngIf="page.path && page.path.indexOf('p/') > -1" [routerLink]="['/' + page.path]">{{page.title}}</a>
-                <a *ngIf="page.path.indexOf('p/') < 0" [href]="page.path" target="_blank">{{page.title}}</a>
-              </li>
-            </ul>
-            <span class="copyright mdl-color-text--blue-grey-700" i18n="@@M__COMMON__COPYRIGHT_YEAR">&#169; One Page Spotlight {{'2020'}}</span>
-          </div>
+        </ul>
+        <ul class="o-inner-footer">
+          <li class="o-footer-link__item">
+            <a [routerLink]="['/about']" id="newsfeed-about" class="text-sm">About Us</a>
+          </li>
+          <li class="o-footer-link__item">
+            <a [routerLink]="['/help']" id="newsfeed-help" class="text-sm">Help</a>
+          </li>
+          <li class="o-footer-link__item">
+            <a href="javascript:void(0)" id="newsfeed-careers" class="text-sm">Careers</a>
+          </li>
+          <li class="o-footer-link__item">
+            <a [routerLink]="['/static/privacy-policy']" id="newsfeed-privacy" class="text-sm">Privacy</a>
+          </li>
+          <li class="o-footer-link__item">
+            <a [routerLink]="['/static/terms']" id="newsfeed-terms" class="text-sm">Terms</a>
+          </li>
+        </ul>
+
+        <div class="opspot-spacer opspot-spacer-2x"></div>
+
+        <div class="mdl-card mdl-color--white m-border" *ngIf="false">
+          <m-tagcloud></m-tagcloud>
         </div>
 
-      </div>
+        <div class="opspot-spacer opspot-spacer-2x"></div>
 
-      <div class="o-center-block"  [ngClass]="{ 'm-newsfeed--logged-out' : !session.getLoggedInUser()}">
-
-        <router-outlet></router-outlet>
-
-      </div>
-
-      <div class="o-right-block hidden-mob" *ngIf="showRightSidebar">
-
-        <div class="sticky-widget">
-          <!-- <ng-container *mIfFeature="'suggested-users'">
-            <m-suggestions__sidebar></m-suggestions__sidebar>
-          </ng-container> -->
-          <!-- <m-ads-boost limit="8" *ngIf="!(session.getLoggedInUser().plus && session.getLoggedInUser().disabled_boost)"></m-ads-boost>
-          <div class="opspot-spacer opspot-spacer-2x"></div> -->
+        <div class="m-newsfeed--dynamic-siderbar" *ngIf="!showRightSidebar">
           <opspot-widget [entityType]="'opportunity'"></opspot-widget>
           <opspot-widget [entityType]="'event'"></opspot-widget>
+          <!-- <m-ads-boost limit="8"></m-ads-boost>
+            <div class="opspot-spacer opspot-spacer-2x"></div> -->
         </div>
-        
+
+        <div class="m-newsfeed-footer">
+          <ul class="m-footer-nav m-footer-nav-inline">
+            <li *ngFor="let page of navigation.getItems('footer')" class="m-footer-nav-item">
+              <a *ngIf="page.path && page.path.indexOf('p/') > -1" [routerLink]="['/' + page.path]">{{page.title}}</a>
+              <a *ngIf="page.path.indexOf('p/') < 0" [href]="page.path" target="_blank">{{page.title}}</a>
+            </li>
+          </ul>
+          <span class="copyright mdl-color-text--blue-grey-700" i18n="@@M__COMMON__COPYRIGHT_YEAR">&#169; One Page
+            Spotlight {{'2020'}}</span>
+        </div>
       </div>
+
+    </div>
+
+    <div class="o-center-block" [ngClass]="{ 'm-newsfeed--logged-out' : !session.getLoggedInUser()}">
+
+      <router-outlet></router-outlet>
+
+    </div>
+
+    <div class="o-right-block hidden-mob" *ngIf="showRightSidebar">
+
+      <div class="sticky-widget">
+        <!-- <ng-container *mIfFeature="'suggested-users'">
+            <m-suggestions__sidebar></m-suggestions__sidebar>
+          </ng-container> -->
+        <!-- <m-ads-boost limit="8" *ngIf="!(session.getLoggedInUser().plus && session.getLoggedInUser().disabled_boost)"></m-ads-boost>
+          <div class="opspot-spacer opspot-spacer-2x"></div> -->
+        <opspot-widget [entityType]="'opportunity'"></opspot-widget>
+        <opspot-widget [entityType]="'event'"></opspot-widget>
+      </div>
+
+    </div>
 
   </div>
 </div>
 
 <style>
-.sticky-widget {
-  position: sticky;
-  top: 70px;
-}
+  .sticky-widget {
+    position: sticky;
+    top: 70px;
+  }
 </style>

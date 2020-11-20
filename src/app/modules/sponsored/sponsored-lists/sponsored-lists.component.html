@@ -1,0 +1,115 @@
+<!-- 
+    css path  : _sass/pages/_sponsored-post.scss
+	component : components/sponsored_post_card.html
+	written by : shilpa
+-->
+
+<section class="o-sponsored-post-sec">
+    <div class="o-sponsored-post-container">
+        <div class="o-sponsored-post-header">
+            <div class="o-sponsored-post-header-left">
+                <h3 class="f700">Sponsored Posts</h3>
+                <!-- <a class="text-lg primary hidden-above-tablet f500">Create</a> -->
+            </div>
+            <!--left ends-->
+            <!-- <div class="o-sponsored-post-header-right">
+                <div class="o-sponsored-post-header-right__dropdown">
+                    <div class="form-group select-sponsored-post">
+                        <label>
+                            <select class="form-control">
+                                <option>Recently Uploaded</option>
+                                <option>By Relevance</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="o-sponsored-post-header-right__button hidden-under-tablet">
+                    <button type="button" class="btn btn-primary btn-block" (click)="createSponsored()">Create a
+                        Sponsored Post</button>
+                </div>
+            </div> -->
+        </div>
+        <!--header ends-->
+        <div class="o-sponsored-post-body">
+            <div class="c-sponsored-post-card" *ngFor="let advt of advertisements">
+                <a href="sponsored_inner_page.html" class="c-sponsored-post-card-left-avatar">
+                    <img [src]="advt?.custom_data[0]?.src">
+                </a>
+                <!--avatar ends-->
+                <div class="c-sponsored-post-card-right">
+                    <div class="c-sponsored-post-card-right-header">
+                        <div class="c-sponsored-post-card-right-header__avatar">
+                            <img src="assets/demo/avatar.png">
+                        </div>
+                        <!--avatar ends-->
+                        <div class="c-sponsored-post-card-right-header__info">
+                            <a class="text-md f500">
+                                {{advt?.ownerObj?.name}}
+                            </a>
+                            <a class="text-sm grey">
+                                @{{advt?.ownerObj?.username}}
+                            </a>
+                        </div>
+                        <!--info ends-->
+                        <!-- <a class="c-sponsored-post-card-right-header__icon">
+                            <i class="icon-more-horizontal"></i>
+                        </a> -->
+                        <!--icon ends-->
+                        <!--dropdown options-->
+                        <!-- <ul class="c-sponsored-post-card-right-dropdown">
+                            <li class="c-sponsored-post-card-right-dropdown__item text-md">
+                                Edit
+                            </li>
+                            <li class="c-sponsored-post-card-right-dropdown__item text-md">
+                                Delete
+                            </li>
+                        </ul> -->
+                        <!--dropdown ends-->
+                        <m-post-menu *ngIf="advt" [entity]="advt" [canDelete]="canDelete"
+                            [isTranslatable]="isTranslatable" [options]="menuOptions"
+                            (optionSelected)="menuOptionSelected($event,advt?.id?.$oid)">
+                            <ng-container post-menu>
+                                <ng-content select="[post-menu]"></ng-content>
+                            </ng-container>
+                        </m-post-menu>
+                    </div>
+                    <!--header ends-->
+                    <div class="text-md">
+                        {{advt?.title}}
+                    </div>
+                    <div class="c-sponsored-post-card-right-actions">
+                        <div class="c-sponsored-post-card-right-actions__list">
+                            <opspot-button-thumbs-up [object]="advt"></opspot-button-thumbs-up>
+                            <opspot-button-comment [object]="advt"></opspot-button-comment>
+                            <a href="#" class="c-sponsored-post-card-right-actions__link" alt="views">
+                                <i class="icon-eye f-15"></i>
+                                <span class="c-sponsored-post-card-right-actions__count text-sm grey">
+                                    <span>{{advt?.impressions | number}}</span>
+                                </span>
+                            </a>
+                            <m-wire-button [object]="advt?.remind_object ? advt?.remind_object : advt"
+                                (done)="wireSubmitted($event)" [large]="false">
+                            </m-wire-button>
+                            <!-- <a href="#" class="c-sponsored-post-card-right-actions__link" alt="coins">
+                                <i class="icon-coins f-15"></i>
+                                <span class="c-sponsored-post-card-right-actions__count text-sm grey">
+                                    <span>22</span>
+                                </span>
+                            </a> -->
+                        </div>
+                        <!--list ends-->
+                        <div class="text-sm grey c-sponsored-post-card-right-actions__sequence">
+                            Post Sequence ID: {{advt?.id?.$oid}}
+                        </div>
+                        <!--sequence ends-->
+                    </div>
+                    <!--actions-->
+                </div>
+                <!--right ends-->
+            </div>
+            <!--card ends-->
+        </div>
+        <!--body ends-->
+    </div>
+    <!--container ends-->
+</section>

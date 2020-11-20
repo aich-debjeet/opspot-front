@@ -69,7 +69,7 @@
             <div class="form-group w-xl">
                 <label>Languages Known</label>
                 <!-- <input type="text" class="form-control form-control-lg" placeholder=""> -->
-                <tag-input [maxItems]=5 required style="border:1px solid #959595; border-radius:4px " id="about-language" [(ngModel)]='model.languages' #languages="ngModel" required name="languages" theme='minimal'>
+                <tag-input (keypress)="keyPressAlphaNumeric($event)" [maxItems]=5 required pattern="[a-zA-Z][a-zA-Z ]+" style="border:1px solid #959595; border-radius:4px " id="about-language" [(ngModel)]='model.languages' #languages="ngModel" required name="languages" theme='minimal'>
                     <tag-input-dropdown [minimumTextLength]=3 [autocompleteItems]="data">
                     </tag-input-dropdown>
                 </tag-input>
@@ -126,7 +126,7 @@
             </div> -->
 
             <!-- height and weight mobile end -->
-            <p *ngIf="aboutError.dob" class="error text-sm" id="about-component-age-error">The age must be atleast 10</p>
+            <p *ngIf="aboutError.dob" class="error text-sm" id="about-component-age-error">The age must be atleast 16</p>
             <p *ngIf="aboutError.dobInvalid" class="error text-sm" id="about-component-date-error">Please select a Valid Date</p>
             <!-- <p *ngIf="!gender.valid&&submitted" class="error text-sm" id="about-component-gender-error">Please select a gender</p> -->
             <!-- <p *ngIf="!languages.valid&&submitted" class="error text-sm" id="about-component-langauge-error">Please add atleast one language </p> -->

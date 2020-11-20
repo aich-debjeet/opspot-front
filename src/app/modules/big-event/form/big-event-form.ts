@@ -29,6 +29,8 @@ export class BigEventForm implements OnInit {
   // coverImageUploadError: boolean = false;
   lable = 'Create';
 
+  descCharCount:number=0;
+
   coverImage = '';
   bigEvent: any;
   bigEventGuid: any;
@@ -299,6 +301,12 @@ export class BigEventForm implements OnInit {
 
   backClicked() {
     this._location.back();
+  }
+
+  countChar(data) {
+    if(data.target.name === "description"){
+      this.descCharCount = data.target.value.length;
+    }
   }
 
 }

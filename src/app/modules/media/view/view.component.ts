@@ -44,7 +44,7 @@ export class MediaViewComponent {
   count: any;
   largeImage: string;
   editing: boolean = false;
-  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'rating'];
+  menuOptions: Array<string> = ['edit', 'translate', 'follow', 'feature', 'delete', 'report', 'rating','sponsored'];
   paramsSubscription: Subscription;
   queryParamsSubscription$: Subscription;
   focusedCommentGuid: string = '';

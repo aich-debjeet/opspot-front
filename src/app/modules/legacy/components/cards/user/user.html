@@ -50,7 +50,7 @@
                 </div>
                 <!--avatar ends-->
                 <div class="o-portfolio-profile__details">
-                    <h4 class="f500">{{user.name}}</h4>
+                    <h4 class="f500">{{user.name | truncate:[30, '...']}}</h4>
                     <span class="text-md grey">@{{user.username}}</span>
                 </div>
                 <!--details ends-->

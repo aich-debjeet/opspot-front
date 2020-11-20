@@ -23,6 +23,8 @@ export class BlueStoreFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
+  descCharCount:number=0;
+
   _opts: any;
   set opts(opts: any) {
     this._opts = opts;
@@ -37,9 +39,9 @@ export class BlueStoreFormComponent implements OnInit {
     published: 1,
     attachment_guid: [],
     container_guid: '',
-    category:'',
+    category: '',
     location: '',
-    sale_price:''
+    sale_price: ''
   };
 
   blueStoreForm: FormGroup;
@@ -106,9 +108,9 @@ export class BlueStoreFormComponent implements OnInit {
         blueStoreUnits: [data['item_count'] ? data['item_count'] : '', [Validators.required, Validators.min(1)]],
         blueStoreCurrency: [data['currency'] ? data['currency'] : '', [Validators.required]],
         blueStorePrice: [data['price'] ? data['price'] : '', [Validators.required, Validators.min(1)]],
-        blueStoreLocation:[data['location'] ? data['location'] : '', Validators.required],
+        blueStoreLocation: [data['location'] ? data['location'] : '', Validators.required],
         blueStoreCategory: [data['category_name'] ? data['category_name'] : '', Validators.required],
-        blueStoreSalePrice: [data['sale_price'] ? data['category_name'] : '', [Validators.required,Validators.min(1)]]
+        blueStoreSalePrice: [data['sale_price'] ? data['category_name'] : '', [Validators.required, Validators.min(1)]]
       });
     } else {
       this.blueStoreForm = this.formBuilder.group({
@@ -117,9 +119,9 @@ export class BlueStoreFormComponent implements OnInit {
         blueStoreUnits: ['', [Validators.required, Validators.min(1)]],
         blueStoreCurrency: ['INR', [Validators.required]],
         blueStorePrice: ['', [Validators.required, Validators.min(1)]],
-        blueStoreLocation:['', Validators.required],
+        blueStoreLocation: ['', Validators.required],
         blueStoreCategory: ['', Validators.required],
-        blueStoreSalePrice: ['', [Validators.required,Validators.min(1)]]
+        blueStoreSalePrice: ['', [Validators.required, Validators.min(1)]]
       });
     }
   }
@@ -146,10 +148,10 @@ export class BlueStoreFormComponent implements OnInit {
           // if (obj['src'] == null) {
           //   obj['src'] = 'assets/videos/video_thumbnail.png'
           // }
-          if(obj['src'].includes("data:audio/")){
+          if (obj['src'].includes("data:audio/")) {
             obj['src'] = 'assets/videos/video_thumbnail.png'
           }
-          if(obj['src'].includes("data:video/")){
+          if (obj['src'].includes("data:video/")) {
             obj['src'] = 'assets/videos/video_thumbnail.png'
           }
           this.addAttachment(obj);
@@ -291,10 +293,16 @@ export class BlueStoreFormComponent implements OnInit {
     this.reqBody.price = this.blueStoreForm.value.blueStorePrice;
     this.reqBody.item_count = this.blueStoreForm.value.blueStoreUnits;
     this.reqBody.currency = this.blueStoreForm.value.blueStoreCurrency;
-    this.reqBody.container_guid = data.container_guid;
+    // this.reqBody.container_guid = data.container_guid;
     this.reqBody.category = this.blueStoreForm.value.blueStoreCategory;
     this.reqBody.location = this.blueStoreForm.value.blueStoreLocation;
     this.reqBody.sale_price = this.blueStoreForm.value.blueStoreSalePrice;
+
+    if (this.bluestoreGuid) {
+      this.reqBody.container_guid = this.bluestore.container_guid;
+    } else {
+      this.reqBody.container_guid = data.container_guid;
+    }
 
 
     if (this.blueStoreForm.valid) {
@@ -341,6 +349,12 @@ export class BlueStoreFormComponent implements OnInit {
       return object.thumbnail_src;
     } else {
       return object.src;
+    }
+  }
+
+  countChar(data) {
+    if(data.target.name === "description"){
+      this.descCharCount = data.target.value.length;
     }
   }
 }

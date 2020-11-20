@@ -24,6 +24,8 @@ export class ShowtimezFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
+  descCharCount:number=0;
+
   _opts: any;
   set opts(opts: any) {
     this._opts = opts;
@@ -236,7 +238,7 @@ export class ShowtimezFormComponent implements OnInit {
     this.eventSubmitted = true;
     var startTime = this.convertDateToMillis(this.showTimezForm.value.eventdate, this.showTimezForm.value.eventTime)
     let data = Object.assign(this.meta, this.attachment.exportMeta());
-  
+
     if (data.attachment_guid.length > 0) {
       this.reqBody.attachment_guid = data.attachment_guid;
     } else if (this.attach_guid.length === 1) {
@@ -253,7 +255,12 @@ export class ShowtimezFormComponent implements OnInit {
     this.reqBody.description = this.showTimezForm.value.eventDescription;
     this.reqBody.location = this.showTimezForm.value.eventsLocation;
     this.reqBody.start_time_date = startTime.getTime();
-    this.reqBody.container_guid = data.container_guid;
+
+    if (this.eventGuid) {
+      this.reqBody.container_guid = this.event.container_guid;
+    } else {
+      this.reqBody.container_guid = data.container_guid;
+    }
 
     if (this.showTimezForm.valid && this.reqBody.attachment_guid != '') {
       let endpoint = 'api/v3/event';
@@ -308,5 +315,13 @@ export class ShowtimezFormComponent implements OnInit {
   closeModal() {
     this.overlayModal.dismiss();
   }
+
+
+  countChar(data) {
+    if(data.target.name === "description"){
+      this.descCharCount = data.target.value.length;
+    }
+  }
+  
 
 }

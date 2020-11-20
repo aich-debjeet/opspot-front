@@ -19,9 +19,9 @@
                 <!--Event Title Name ends-->
                 <div class="form-group">
                     <label>Event Description 
-                        <!-- <span class="text-sm grey description-width">21/300</span> -->
+                        <span class="text-sm grey description-width">{{eventForm.get('eventDesc').value.length}}/300</span>
                     </label>
-                    <textarea class="form-control" id="big-event-description" rows="5" formControlName="eventDesc"></textarea>
+                    <textarea class="form-control" id="big-event-description" rows="5" formControlName="eventDesc" maxlength="300" (keyup)="countChar($event)"></textarea>
                     <div class="error text-sm" *ngIf="eventSubmitted && eventForm.get('eventDesc').errors?.required">
                         This is required
                     </div>

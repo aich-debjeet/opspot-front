@@ -21,6 +21,8 @@ export class OpportunityFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
+  descCharCount:number=0;
+
   _opts: any;
   set opts(opts: any) {
     this._opts = opts;
@@ -139,7 +141,12 @@ export class OpportunityFormComponent implements OnInit {
     this.reqBody.description = value.opportunityDescription;
     this.reqBody.location = value.opportunityLocation;
     this.reqBody.category = value.category;
-    this.reqBody.container_guid = data.container_guid;
+
+    if (this.oppGuid) {
+      this.reqBody.container_guid = this.opportunity.container_guid;
+    } else {
+      this.reqBody.container_guid = data.container_guid;
+    }
 
 
     if (this.opportunityForm.valid && this.reqBody.attachment_guid != '') {
@@ -241,6 +248,12 @@ export class OpportunityFormComponent implements OnInit {
 
   closeModal() {
     this.overlayModal.dismiss();
+  }
+
+  countChar(data) {
+    if(data.target.name === "description"){
+      this.descCharCount = data.target.value.length;
+    }
   }
 
   //just for refrence

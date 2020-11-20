@@ -31,6 +31,7 @@ export class OrganizationCreator {
   open=false;
   editOrganization;
   organizationTypeList = ORGANIZATION_TYPE;
+  descCharCount:number=0;
 
   //
   @ViewChild('editImgcomp')editImgcomp:ElementRef;
@@ -236,6 +237,12 @@ export class OrganizationCreator {
     action: 'orgCreated'
   });
  }
+
+ countChar(data) {
+  if(data.target.name === "description"){
+    this.descCharCount = data.target.value.length;
+  }
+}
 
 }
 

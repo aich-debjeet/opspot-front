@@ -87,7 +87,9 @@ export class AboutComponent implements OnInit {
       this.aboutError.dobInvalid = true;
       return;
     }
-    if (new Date().getFullYear() - new Date(this.model.dob).getFullYear() < 10) {
+    if ((new Date().getFullYear() - new Date(this.model.dob).getFullYear() <= 16) &&
+        (new Date().getMonth() <= new Date(this.model.dob).getMonth()) &&
+        (new Date().getDate() < new Date(this.model.dob).getDate())) {
       this.aboutError.dob = true;
       return;
     }
@@ -141,5 +143,17 @@ export class AboutComponent implements OnInit {
     this.toastr.error('Profile could not be updated', '', {
       timeOut: 3000
     });
+  }
+
+  keyPressAlphaNumeric(event) {
+
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/^[a-zA-Z ]*$/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
   }
 }

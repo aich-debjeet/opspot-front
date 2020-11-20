@@ -89,6 +89,10 @@ export const OpspotAppRoutes: Routes = [
     loadChildren:'./modules/blue-store/blue-store.module#BlueStoreModule'
   },
   {
+    path:'sponsored',
+    loadChildren:'./modules/sponsored/sponsored.module#SponsoredModule'
+  },
+  {
     path: ':username/:filter',
     component: ChannelComponent
   },

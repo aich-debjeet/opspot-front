@@ -28,7 +28,8 @@ type Option =
   | 'create-opportunity'
   | 'create-the-bluestore'
   | 'create-portfolio'
-  | 'create-my-journey';
+  | 'create-my-journey'
+  | 'sponsored';
 
 @Component({
   moduleId: module.id,
@@ -329,5 +330,13 @@ export class PostMenuComponent {
       return true;
     }
     return false;
+  }
+  makeSponsored(){
+    this.client.post(`api/v3/marketing/advertise`,{activity_guid:this.entity.guid, rank:1}).then((res)=>{
+      // this.selectOption('sponsored');
+    })
+    .catch((e)=>{
+      console.log(e)
+    })
   }
 }
