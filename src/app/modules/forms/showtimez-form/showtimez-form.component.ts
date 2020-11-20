@@ -24,6 +24,8 @@ export class ShowtimezFormComponent implements OnInit {
   @Output() Close: EventEmitter<any> = new EventEmitter<any>();
   @Output() load: EventEmitter<any> = new EventEmitter<any>();
 
+  descCharCount:number=0;
+
   _opts: any;
   set opts(opts: any) {
     this._opts = opts;
@@ -313,5 +315,13 @@ export class ShowtimezFormComponent implements OnInit {
   closeModal() {
     this.overlayModal.dismiss();
   }
+
+
+  countChar(data) {
+    if(data.target.name === "description"){
+      this.descCharCount = data.target.value.length;
+    }
+  }
+  
 
 }

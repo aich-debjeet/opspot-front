@@ -21,9 +21,9 @@
             <!--Event Title-->
             <div class="form-group">
                 <label>Description
-                    <!-- <span class="text-sm grey description-width">21/300</span> -->
+                    <span class="text-sm grey description-width">{{showTimezForm.get('eventDescription').value.length}}/300</span>
                 </label>
-                <textarea class="form-control" id="showtimez-description" rows="5" formControlName="eventDescription"></textarea>
+                <textarea class="form-control" name="description" id="showtimez-description" rows="5" formControlName="eventDescription" maxlength="300" (keyup)="countChar($event)" ></textarea>
                 <div class="error text-sm"
                     *ngIf="eventSubmitted && showTimezForm.get('eventDescription').errors?.required">
                     This is required</div>

@@ -44,10 +44,10 @@
             </div>
             <div class="form-group">
                 <label>Description
-                    <!-- <span class="text-sm grey description-width">21/300</span> -->
+                    <span class="text-sm grey description-width">{{blueStoreForm.get('blueStoreDescription').value.length}}/300</span>
                 </label>
                 <textarea class="form-control" id="bluestore-description" rows="5"
-                    formControlName="blueStoreDescription"></textarea>
+                    formControlName="blueStoreDescription" maxlength="300" (keyup)="countChar($event)"></textarea>
                 <div class="error text-sm"
                     *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreDescription').errors?.required">
                     This is required</div>
