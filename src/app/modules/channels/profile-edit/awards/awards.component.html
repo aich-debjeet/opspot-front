@@ -7,7 +7,7 @@
             <div class="o-wea-block" id="awards-block" *ngFor="let work of work.awards; let i=index;">
                 <div class="o-wea-logo"><img src="assets/Education.jpg" alt=""></div>
                 <div class="o-wea-info">
-                    <div class="caption-bold" id="awards-award-title">{{work.title}}</div>
+                    <div class="caption-bold" id="awards-award-title">{{work.title | truncate:[20, '...']}}</div>
                     <div class="caption-bold f400" id="awards-issuer-loaction">{{work.issuer}} - {{work.location}}</div>
                     <div class="text-md grey" id="awards-issue-period">{{work.issue_period}} </div>
                 </div>
