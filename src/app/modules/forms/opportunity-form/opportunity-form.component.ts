@@ -139,7 +139,12 @@ export class OpportunityFormComponent implements OnInit {
     this.reqBody.description = value.opportunityDescription;
     this.reqBody.location = value.opportunityLocation;
     this.reqBody.category = value.category;
-    this.reqBody.container_guid = data.container_guid;
+
+    if (this.oppGuid) {
+      this.reqBody.container_guid = this.opportunity.container_guid;
+    } else {
+      this.reqBody.container_guid = data.container_guid;
+    }
 
 
     if (this.opportunityForm.valid && this.reqBody.attachment_guid != '') {
