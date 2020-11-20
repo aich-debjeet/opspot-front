@@ -333,7 +333,7 @@ export class PostMenuComponent {
   }
   makeSponsored(){
     this.client.post(`api/v3/marketing/advertise`,{activity_guid:this.entity.guid, rank:1}).then((res)=>{
-      this.selectOption('sponsored');
+      // this.selectOption('sponsored');
     })
     .catch((e)=>{
       console.log(e)

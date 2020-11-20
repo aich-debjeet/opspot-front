@@ -31,6 +31,7 @@ export class NewsfeedSubscribedComponent {
   opspot;
   globalIndex = 3;
   advtOffset: string = '';
+  advertizementsArray: Array<object> = [];
 
   attachment_preview;
 
@@ -150,15 +151,14 @@ export class NewsfeedSubscribedComponent {
     try {
       const response: any = await this.client.get('api/v3/marketing/advertise', { limit: 3, offset: this.advtOffset });
       if (response['advertises'] && response['advertises'].length) {
-        // console.log()
-        // this.newsfeed.splice(i, 0, response['advertises'][0]);
         this.advtOffset = response['load-next'];
-        // console.log(this.newsfeed)
+        this.advertizementsArray = this.advertizementsArray.concat(response['advertises'])
+        console.log('printin',this.advertizementsArray)
         for (let i = this.globalIndex; i <= this.newsfeed.length; i += 4) {
           let j = 0;
-          if (j < response['advertises'].length)
-            this.newsfeed.splice(i, 0, response['advertises'][j])
-          j = j + 1;
+          if (j < this.advertizementsArray.length)
+            this.newsfeed.splice(i, 0, this.advertizementsArray.shift())
+          // j = j + 1;
           this.globalIndex = i;
         }
 
