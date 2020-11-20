@@ -41,7 +41,7 @@
                           </a>
                           <m-post-menu *ngIf="talent" [entity]="talent" [canDelete]="canDelete"
                               [isTranslatable]="isTranslatable" [options]="menuOptions"
-                              (optionSelected)="menuOptionSelected($event)">
+                              (optionSelected)="menuOptionSelected($event)" [canEdit]="organization['is:owner'] || organization['is:editor']">
                               <ng-container post-menu>
                                 <ng-content select="[post-menu]"></ng-content>
                               </ng-container>

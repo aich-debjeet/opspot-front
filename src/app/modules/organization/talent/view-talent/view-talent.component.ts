@@ -34,7 +34,7 @@ export class ViewTalentComponent implements OnInit {
   translateEvent: EventEmitter<any> = new EventEmitter();
   isLocked = false;
   paramsSubscription: Subscription;
-  reachoutMessage = 'I am interested in: ';
+  reachoutMessage = '';
   user: any;
   showBoostOptions: boolean = false;
   // private _showBoostMenuOptions: boolean = false;
@@ -95,7 +95,7 @@ export class ViewTalentComponent implements OnInit {
           this.talent = data.activity;
           // // user obj for reach out
           this.user = data.activity.ownerObj;
-          this.reachoutMessage += data.activity['perma_url'];
+          this.reachoutMessage = 'I am interested in: ' +  data.activity['perma_url'];
 
           // this.talent.url = window.Opspot.site_url + 'item/' + this.talent.guid;
 
@@ -208,7 +208,7 @@ export class ViewTalentComponent implements OnInit {
     if ($event.inProgress) {
       $event.inProgress.emit(true);
     }
-    this.client.delete(`api/v3/organizations/organization/talent/${this.talent.guid}`)
+    this.client.delete(`api/v1/newsfeed/${this.talent.guid}`)
       .then((response: any) => {
         this.router.navigate([`newsfeed/subscribed`]);
       })
