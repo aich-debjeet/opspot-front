@@ -108,12 +108,14 @@ export class Activity {
     if (!value)
       return;
     this.activity = value;
-    console.log(this.activity);
-
     // if (this.activity) {
     //   this.postType = getEntityType(this.activity);
     // }
     // user obj for reach out
+    if(value['type']== 'advertise'){
+      this.canDelete = false;
+      this.menuOptions.splice(this.menuOptions.indexOf('delete'), 1);
+    }
     if (value['entity_type'] &&
       (value['entity_type'] == 'opportunity'
         || value['entity_type'] == 'event'
