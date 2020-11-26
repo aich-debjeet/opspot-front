@@ -1,92 +1,102 @@
-<button class="mdl-button opspot-more mdl-button--icon" id="post-menu"
-  (click)="cardMenuHandler()"
-  *ngIf="iconType === ''"
->
+<button class="mdl-button opspot-more mdl-button--icon" id="post-menu" (click)="cardMenuHandler()"
+  *ngIf="iconType === ''">
   <i class="icon-more-horizontal"></i>
 </button>
 
-<span class="icon-box-design"
-  *ngIf="iconType === 'arrow'"
-  (click)="cardMenuHandler()">
+<span class="icon-box-design" *ngIf="iconType === 'arrow'" (click)="cardMenuHandler()">
   <span class="icon-chevron-down" id="post-menu-dropdown"></span>
 </span>
 
-<ul class="opspot-dropdown-menu" id="hashtags_option_list" [class.center-dropdown]="iconType == 'arrow'" [hidden]="!opened">
+<ul class="opspot-dropdown-menu" id="hashtags_option_list" [class.center-dropdown]="iconType == 'arrow'"
+  [hidden]="!opened">
   <!-- SPECIAL HASHTAGS -->
-  <li class="mdl-menu__item" id="post-menu-showtimez"
-    *ngIf="options.indexOf('create-showtimez') !== -1"
-    (click)="selectOption('create-showtimez')"
-    i18n="@@M__ACTION__CREATE_SHOWTIMEZ"
-  >On #Showtimez</li>
+  <li class="mdl-menu__item" id="post-menu-showtimez" *ngIf="options.indexOf('create-showtimez') !== -1"
+    (click)="selectOption('create-showtimez')" i18n="@@M__ACTION__CREATE_SHOWTIMEZ">On #Showtimez</li>
 
-  <li class="mdl-menu__item" id="post-menu-opportunity"
-    *ngIf="options.indexOf('create-opportunity') !== -1"
-    (click)="selectOption('create-opportunity')"
-    i18n="@@M__ACTION__CREATE_OPPORTUNITY"
-  >On #Opportunity</li>
+  <li class="mdl-menu__item" id="post-menu-opportunity" *ngIf="options.indexOf('create-opportunity') !== -1"
+    (click)="selectOption('create-opportunity')" i18n="@@M__ACTION__CREATE_OPPORTUNITY">On #Opportunity</li>
 
-  <li class="mdl-menu__item" id="post-menu-the-bluestore"
-    *ngIf="options.indexOf('create-the-bluestore') !== -1"
-    (click)="selectOption('create-the-bluestore')"
-    i18n="@@M__ACTION__CREATE_BLUE_STORE"
-  >On #TheBlueStore</li>
+  <li class="mdl-menu__item" id="post-menu-the-bluestore" *ngIf="options.indexOf('create-the-bluestore') !== -1"
+    (click)="selectOption('create-the-bluestore')" i18n="@@M__ACTION__CREATE_BLUE_STORE">On #TheBlueStore</li>
 
-  <li class="mdl-menu__item" id="post-menu-portfolio"
-    *ngIf="options.indexOf('create-portfolio') !== -1"
-    (click)="selectOption('create-portfolio')"
-    i18n="@@M__ACTION__CREATE_PORTFOLIO"
-  >On #Portfolio</li>
+  <li class="mdl-menu__item" id="post-menu-portfolio" *ngIf="options.indexOf('create-portfolio') !== -1"
+    (click)="selectOption('create-portfolio')" i18n="@@M__ACTION__CREATE_PORTFOLIO">On #Portfolio</li>
 
-  <li class="mdl-menu__item" id="post-menu-my-journey"
-    *ngIf="options.indexOf('create-my-journey') !== -1"
-    (click)="selectOption('create-my-journey')"
-    i18n="@@M__ACTION__CREATE_MY_JOURNEY"
-  >On #MyJourney</li>
+  <li class="mdl-menu__item" id="post-menu-my-journey" *ngIf="options.indexOf('create-my-journey') !== -1"
+    (click)="selectOption('create-my-journey')" i18n="@@M__ACTION__CREATE_MY_JOURNEY">On #MyJourney</li>
   <!-- SPECIAL HASHTAGS -->
-  
-  <li class="mdl-menu__item" *ngIf="(options.indexOf('edit') !== -1 && entity.owner_guid == session.getLoggedInUser().guid || session.isAdmin() || canEdit) && entity?.type != 'advertise'" (click)="selectOption('edit')" i18n="@@M__ACTION__EDIT" id="post-menu-edit">Edit</li>
-  <li class="mdl-menu__item" *ngIf="options.indexOf('sponsored') !== -1 && session.isAdmin()" (click)="makeSponsored()" i18n="@@M__ACTION__EDIT" id="post-menu-edit">Mark as Sponsored</li>
-  <li class="mdl-menu__item" *ngIf="options.indexOf('share') !== -1" (click)="share()" i18n="@@M__ACTION__SHARE" id="post-menu-share">Share</li>
-  <li class="mdl-menu__item" *ngIf="options.indexOf('translate') !== -1  && isTranslatable" (click)="selectOption('translate')" i18n="@@M__ACTION__TRANSLATE" id="post-menu-translate">Translate</li>
+
+  <li class="mdl-menu__item"
+    *ngIf="(options.indexOf('edit') !== -1 && entity.owner_guid == session.getLoggedInUser().guid || session.isAdmin() || canEdit) && entity?.type != 'advertise'"
+    (click)="selectOption('edit')" i18n="@@M__ACTION__EDIT" id="post-menu-edit">Edit</li>
+  <li class="mdl-menu__item" *ngIf="options.indexOf('sponsored') !== -1 && session.isAdmin()"
+    (click)="madeSponsored = true" i18n="@@M__ACTION__EDIT" id="post-menu-edit">Mark as Sponsored</li>
+  <li class="mdl-menu__item" *ngIf="options.indexOf('share') !== -1" (click)="share()" i18n="@@M__ACTION__SHARE"
+    id="post-menu-share">Share</li>
+  <li class="mdl-menu__item" *ngIf="options.indexOf('translate') !== -1  && isTranslatable"
+    (click)="selectOption('translate')" i18n="@@M__ACTION__TRANSLATE" id="post-menu-translate">Translate</li>
   <!-- FEATURE -->
   <ng-container *ngIf="options.indexOf('feature') !== -1">
-    <li class="mdl-menu__item" *ngIf="!entity.featured && session.isAdmin()" (click)="feature()" i18n="@@M__ACTION__FEATURE" id="post-menu-feature">Feature</li>
-    <li class="mdl-menu__item" *ngIf="entity.featured && session.isAdmin()" (click)="unFeature()" i18n="@@COMMON__POST_MENU__UNFEATURE" id="post-menu-unfeature">un-Feature</li>
+    <li class="mdl-menu__item" *ngIf="!entity.featured && session.isAdmin()" (click)="feature()"
+      i18n="@@M__ACTION__FEATURE" id="post-menu-feature">Feature</li>
+    <li class="mdl-menu__item" *ngIf="entity.featured && session.isAdmin()" (click)="unFeature()"
+      i18n="@@COMMON__POST_MENU__UNFEATURE" id="post-menu-unfeature">un-Feature</li>
   </ng-container>
   <!-- MONETIZE -->
   <ng-container *ngIf="options.indexOf('monetize') !== -1">
-    <li class="mdl-menu__item" *ngIf="!entity.monetized && session.isAdmin()" (click)="monetize()" i18n="@@COMMON__POST_MENU__MONETIZE" id="post-menu-monetize">Monetize</li>
-    <li class="mdl-menu__item" *ngIf="entity.monetized && session.isAdmin()" (click)="unMonetize()" i18n="@@COMMON__POST_MENU__UNMONETIZE" id="post-menu-unmonetize">un-Monetize</li>
+    <li class="mdl-menu__item" *ngIf="!entity.monetized && session.isAdmin()" (click)="monetize()"
+      i18n="@@COMMON__POST_MENU__MONETIZE" id="post-menu-monetize">Monetize</li>
+    <li class="mdl-menu__item" *ngIf="entity.monetized && session.isAdmin()" (click)="unMonetize()"
+      i18n="@@COMMON__POST_MENU__UNMONETIZE" id="post-menu-unmonetize">un-Monetize</li>
   </ng-container>
   <!-- SUBSCRIBE -->
   <ng-container *ngIf="options.indexOf('subscribe') !== -1">
-    <li class="mdl-menu__item" *ngIf="((entity.type === 'user' && !entity.subscribed && session.getLoggedInUser().guid !== entity.guid) || (entity.type !== 'user' && !entity.ownerObj.subscribed && entity.ownerObj.guid !== session.getLoggedInUser().guid))" (click)="subscribe()" i18n="@@M__ACTION__SUBSCRIBE" id="post-menu-subscribe">Subscribe</li>
-    <li class="mdl-menu__item" *ngIf="((entity.type === 'user' && entity.subscribed && session.getLoggedInUser().guid !== entity.guid) || (entity.type !== 'user' && entity.ownerObj.subscribed && entity.ownerObj.guid !== session.getLoggedInUser().guid))" (click)="unSubscribe()" i18n="@@COMMON__POST_MENU__UNSUBSCRIBE" id="post-menu-unsubscribe">Unsubscribe</li>
+    <li class="mdl-menu__item"
+      *ngIf="((entity.type === 'user' && !entity.subscribed && session.getLoggedInUser().guid !== entity.guid) || (entity.type !== 'user' && !entity.ownerObj.subscribed && entity.ownerObj.guid !== session.getLoggedInUser().guid))"
+      (click)="subscribe()" i18n="@@M__ACTION__SUBSCRIBE" id="post-menu-subscribe">Subscribe</li>
+    <li class="mdl-menu__item"
+      *ngIf="((entity.type === 'user' && entity.subscribed && session.getLoggedInUser().guid !== entity.guid) || (entity.type !== 'user' && entity.ownerObj.subscribed && entity.ownerObj.guid !== session.getLoggedInUser().guid))"
+      (click)="unSubscribe()" i18n="@@COMMON__POST_MENU__UNSUBSCRIBE" id="post-menu-unsubscribe">Unsubscribe</li>
   </ng-container>
   <!-- DELETE -->
-  <li class="mdl-menu__item" *ngIf="options.indexOf('delete') !== -1 && entity.owner_guid == session.getLoggedInUser().guid || session.isAdmin() || canDelete" (click)="deleteToggle = true" i18n="@@M__ACTION__DELETE" id="post-menu-delete">Delete</li>
+  <li class="mdl-menu__item"
+    *ngIf="options.indexOf('delete') !== -1 && entity.owner_guid == session.getLoggedInUser().guid || session.isAdmin() || canDelete"
+    (click)="deleteToggle = true" i18n="@@M__ACTION__DELETE" id="post-menu-delete">Delete</li>
   <!-- REPORT -->
-  <li class="mdl-menu__item" *ngIf="options.indexOf('report') !== -1 && entity.owner_guid != session.getLoggedInUser().guid" (click)="report()" i18n="Report as notify something@@M__ACTION__REPORT" id="post-menu-report">Report</li>
+  <li class="mdl-menu__item"
+    *ngIf="options.indexOf('report') !== -1 && entity.owner_guid != session.getLoggedInUser().guid" (click)="report()"
+    i18n="Report as notify something@@M__ACTION__REPORT" id="post-menu-report">Report</li>
   <!-- NOTIFICATIONS -->
   <ng-container *ngIf="options.indexOf('follow') !== -1">
-    <li class="mdl-menu__item" *ngIf="!asyncFollow" disabled i18n="@@COMMON__POST_MENU__FOLLOW_NOTIFICATIONS" id="post-menu-follow-post-1">Follow post</li>
-    <li class="mdl-menu__item" *ngIf="asyncFollow && entity['is:following']" (click)="unfollow()" i18n="@@COMMON__POST_MENU__UNFOLLOW_NOTIFICATIONS" id="post-menu-unfollow-post">Unfollow post</li>
-    <li class="mdl-menu__item" *ngIf="asyncFollow && !entity['is:following']" (click)="follow()" i18n="@@COMMON__POST_MENU__FOLLOW_NOTIFICATIONS" id="post-menu-follow-post">Follow post</li>
+    <li class="mdl-menu__item" *ngIf="!asyncFollow" disabled i18n="@@COMMON__POST_MENU__FOLLOW_NOTIFICATIONS"
+      id="post-menu-follow-post-1">Follow post</li>
+    <li class="mdl-menu__item" *ngIf="asyncFollow && entity['is:following']" (click)="unfollow()"
+      i18n="@@COMMON__POST_MENU__UNFOLLOW_NOTIFICATIONS" id="post-menu-unfollow-post">Unfollow post</li>
+    <li class="mdl-menu__item" *ngIf="asyncFollow && !entity['is:following']" (click)="follow()"
+      i18n="@@COMMON__POST_MENU__FOLLOW_NOTIFICATIONS" id="post-menu-follow-post">Follow post</li>
   </ng-container>
   <!-- BLOCK -->
   <ng-container *ngIf="options.indexOf('block') !== -1 && entity.ownerObj.guid != session.getLoggedInUser().guid ">
-    <li class="mdl-menu__item"  *ngIf="asyncBlockInProgress" disabled i18n="@@COMMON__POST_MENU__BLOCK_AND_UNBLOCK" id="post-menu-block-unlock">Block/Unblock</li>
-    <li class="mdl-menu__item" *ngIf="!asyncBlockInProgress && !asyncBlock" (click)="block()" i18n="@@COMMON__POST_MENU__BLOCK" id="post-menu-block-user">Block user</li>
-    <li class="mdl-menu__item" *ngIf="!asyncBlockInProgress && asyncBlock" (click)="unBlock()" i18n="@@COMMON__POST_MENU__UNBLOCK" id="post-menu-unblock-user">Unblock user</li>
+    <li class="mdl-menu__item" *ngIf="asyncBlockInProgress" disabled i18n="@@COMMON__POST_MENU__BLOCK_AND_UNBLOCK"
+      id="post-menu-block-unlock">Block/Unblock</li>
+    <li class="mdl-menu__item" *ngIf="!asyncBlockInProgress && !asyncBlock" (click)="block()"
+      i18n="@@COMMON__POST_MENU__BLOCK" id="post-menu-block-user">Block user</li>
+    <li class="mdl-menu__item" *ngIf="!asyncBlockInProgress && asyncBlock" (click)="unBlock()"
+      i18n="@@COMMON__POST_MENU__UNBLOCK" id="post-menu-unblock-user">Unblock user</li>
   </ng-container>
   <!-- ADMIN EDIT FLAGS -->
-  <ng-container *ngIf="!skipRestictedFlag(entity) && options.indexOf('set-explicit') !== -1 && (entity.owner_guid == session.getLoggedInUser().guid || session.isAdmin())">
-    <li class="mdl-menu__item" [hidden]="entity.mature" (click)="setExplicit(true)" i18n="@@COMMON__POST_MENU__SET_AS_EXPLICIT" id="post-menu-set-explicit">Set as restricted</li>
-    <li class="mdl-menu__item" [hidden]="!entity.mature" (click)="setExplicit(false)" i18n="@@COMMON__POST_MENU__REMOVE_EXPLICIT" id="post-menu-remove-explicit">Remove restricted</li>
+  <ng-container
+    *ngIf="!skipRestictedFlag(entity) && options.indexOf('set-explicit') !== -1 && (entity.owner_guid == session.getLoggedInUser().guid || session.isAdmin())">
+    <li class="mdl-menu__item" [hidden]="entity.mature" (click)="setExplicit(true)"
+      i18n="@@COMMON__POST_MENU__SET_AS_EXPLICIT" id="post-menu-set-explicit">Set as restricted</li>
+    <li class="mdl-menu__item" [hidden]="!entity.mature" (click)="setExplicit(false)"
+      i18n="@@COMMON__POST_MENU__REMOVE_EXPLICIT" id="post-menu-remove-explicit">Remove restricted</li>
   </ng-container>
   <ng-container *ngIf="options.indexOf('rating') !== -1 && session.isAdmin()">
-    <li class="mdl-menu__item" [hidden]="entity.rating === 1" (click)="setRating(1)" i18n="@@COMMON__POST_MENU__MARK_AS_SAFE" id="post-menu-safe">Mark as Safe</li>
-    <li class="mdl-menu__item" [hidden]="entity.rating === 2" (click)="setRating(2)" i18n="@@COMMON__POST_MENU__MARK_AS_OPEN" id="post-menu-open">Mark as Open</li>
+    <li class="mdl-menu__item" [hidden]="entity.rating === 1" (click)="setRating(1)"
+      i18n="@@COMMON__POST_MENU__MARK_AS_SAFE" id="post-menu-safe">Mark as Safe</li>
+    <li class="mdl-menu__item" [hidden]="entity.rating === 2" (click)="setRating(2)"
+      i18n="@@COMMON__POST_MENU__MARK_AS_OPEN" id="post-menu-open">Mark as Open</li>
   </ng-container>
   <!-- INJECTED POST ACTIONS -->
   <div (click)="opened = false">
@@ -95,21 +105,17 @@
 </ul>
 <div class="opspot-bg-overlay" (click)="opened = false" [hidden]="!opened"></div>
 
-<m-modal-share *ngIf="shareToggle" [open]="true" (closed)="shareToggle = false; opened = false;" [url]="entity.url" [embed]="entity"></m-modal-share>
-<m-modal-confirm *ngIf="deleteToggle"
-  [open]="true"
-  [closeAfterAction]=true
-  (closed)="deleteToggle = false"
-  (actioned)="delete()"
-  yesButton="Yes"
-  noButton="No"
-  i18n-yesButton="@@M__COMMON__DELETE_PERMANENTLY"
->
+<m-modal-share *ngIf="shareToggle" [open]="true" (closed)="shareToggle = false; opened = false;" [url]="entity.url"
+  [embed]="entity"></m-modal-share>
+<m-modal-confirm *ngIf="deleteToggle" [open]="true" [closeAfterAction]=true (closed)="deleteToggle = false"
+  (actioned)="delete()" yesButton="Yes" noButton="No" i18n-yesButton="@@M__COMMON__DELETE_PERMANENTLY">
   <p confirm-message class="text-lg o-delete__content">
-    <ng-container i18n="@@COMMON__POST_MENU__DELETE_MODAL_MESSAGE">Are you sure you want to delete this post?</ng-container>
+    <ng-container i18n="@@COMMON__POST_MENU__DELETE_MODAL_MESSAGE">Are you sure you want to delete this post?
+    </ng-container>
     <span *ngIf="entity.entity_guid && (entity.custom_type == 'batch' || entity.custom_type == 'video')">
       <br><br>
-      <b i18n="@@COMMON__POST_MENU__DELETE_MODAL_ATTACHMENT_MESSAGE">This action will also delete the attached media from your gallery.</b>
+      <b i18n="@@COMMON__POST_MENU__DELETE_MODAL_ATTACHMENT_MESSAGE">This action will also delete the attached media
+        from your gallery.</b>
     </span>
   </p>
   <p confirm-success-message>
@@ -127,10 +133,19 @@
     <button class="mdl-button mdl-button--colored" (click)="feature()">Feature</button>
   </div>
 </m-modal>
+<m-modal [open]="true" (closed)="onModalClose()" *ngIf="madeSponsored">
+  <div class="m-button-feature-modal" [ngStyle]="{'width': '400px', 'margin-top':'30px', 'padding': '0px 20px 0px 20px'}">
+    <div class="form-group">
+      <label>Embedded Link</label>
+      <input type="text" id="Embedded Link" [(ngModel)]="sponsoredLink" class="form-control form-control-lg">
+    </div>
+    <button class="mdl-button mdl-button--colored" (click)="makeSponsored()">Make Sponsored</button>
+  </div>
+</m-modal>
 
 <style>
-.center-dropdown {
-  top: auto;
-  left: 9px;
-}
+  .center-dropdown {
+    top: auto;
+    left: 9px;
+  }
 </style>
