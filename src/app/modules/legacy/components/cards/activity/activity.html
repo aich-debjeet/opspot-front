@@ -391,6 +391,19 @@
         </div>
     </div> -->
 <!-- </div> -->
+<div class="feed-card-sponsored-block" *ngIf="activity?.type == 'advertise'">
+  <div class="feed-card-sponsored-block__left">
+      <div class="text-lg f500 mb-3">
+          {{activity?.ownerObj?.name}}
+      </div>
+      <!-- <div class="text-md">
+          The European languages are members of the same family. Their separate existence is a myth.
+      </div> -->
+  </div>
+  <div class="feed-card-sponsored-block__right">
+      <a href="{{activity?.embedded_link}}" target="_blank" class="btn btn-primary btn-lg">Learn more</a>
+  </div>
+</div>
 
 
   <div class="mdl-card__supporting-text message" [hidden]="!activity.title || activity.perma_url || editing"

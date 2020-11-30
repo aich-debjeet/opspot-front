@@ -60,6 +60,8 @@ export class PostMenuComponent {
   deleteToggle: boolean = false;
   featureToggle: boolean = false;
   categories: Array<any> = [];
+  madeSponsored: boolean = false;
+  sponsoredLink: string="";
 
   constructor(
     public session: Session,
@@ -310,6 +312,8 @@ export class PostMenuComponent {
 
   onModalClose() {
     this.featureToggle = false;
+    if(this.madeSponsored)
+    this.madeSponsored =false;
   }
 
   detectChanges() {
@@ -332,8 +336,11 @@ export class PostMenuComponent {
     return false;
   }
   makeSponsored(){
-    this.client.post(`api/v3/marketing/advertise`,{activity_guid:this.entity.guid, rank:1}).then((res)=>{
+    this.client.post(`api/v3/marketing/advertise`,{activity_guid:this.entity.guid, rank:1, 'embedded_link':this.sponsoredLink}).then((res)=>{
       // this.selectOption('sponsored');
+      if(res['status'] =='success')
+      this.madeSponsored =false;
+      this.detectChanges();
     })
     .catch((e)=>{
       console.log(e)

@@ -183,6 +183,43 @@ opspot-groups-profile-feed .m-pin-button {
     background-color: $grey-light;
     margin-left: 10px;
 }
+//feed sponsored block style
+.feed-card-sponsored-block{
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(2,136,209,0.03);
+  padding:19px 17px;
+  border-top: 1px solid #ECEFF1;
+  border-bottom: 1px solid #ECEFF1;
+  @include mq($from: $mobile_sm, $until: $desktop_sm) {
+      border-top: 0px solid #ECEFF1;
+      border-bottom: 0px solid #ECEFF1;
+  }
+  &__left{
+      width: 307px;
+      @include mq($from: $mobile_sm, $until: $desktop_sm) {
+          width:100%;
+          margin-right: 31px;
+      }
+      .mb-3{
+          margin-bottom:3px;
+      }
+      .text-rate{
+          font-weight: 500;
+          font-size:20px;
+          margin-top: 13px;
+      }
+  }
+  &__right{
+      .btn-lg{
+          padding: 8px 20px;
+          @include mq($from: $mobile_sm, $until: $desktop_sm) {
+              font-size: 11px;
+              padding: 4px 8px;
+          }
+      }
+  }
+}
 
 // //discription
 
