@@ -112,7 +112,7 @@ export class Activity {
     //   this.postType = getEntityType(this.activity);
     // }
     // user obj for reach out
-    if(value['type']== 'advertise'){
+    if(value['type']== 'advertise' || value['advertised']){
       this.canDelete = false;
       this.menuOptions.splice(this.menuOptions.indexOf('delete'), 1);
     }
