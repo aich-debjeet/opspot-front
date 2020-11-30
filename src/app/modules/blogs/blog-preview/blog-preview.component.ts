@@ -37,14 +37,12 @@ export class BlogPreviewComponent implements OnInit {
   // }
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
   constructor(public upload: Upload, private router: Router, private route: ActivatedRoute, public client: Client, private overlayModal: OverlayModalService, private service: TopbarHashtagsService) {
-    console.log('printing',this)
     this.banner = void 0;
     this.banner_top = 0;
     this.banner_prompt = false;
   }
 
   ngOnInit() {
-    console.log('printing',this)
     this.getTopHashtags();
     this.route.params.subscribe(params => {
       let load = false;
