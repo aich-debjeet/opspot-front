@@ -153,7 +153,6 @@ export class NewsfeedSubscribedComponent {
       if (response['advertises'] && response['advertises'].length) {
         this.advtOffset = response['load-next'];
         this.advertizementsArray = this.advertizementsArray.concat(response['advertises'])
-        console.log('printin',this.advertizementsArray)
         for (let i = this.globalIndex; i <= this.newsfeed.length; i += 4) {
           let j = 0;
           if (j < this.advertizementsArray.length)
