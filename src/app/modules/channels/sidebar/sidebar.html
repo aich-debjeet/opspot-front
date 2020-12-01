@@ -215,21 +215,21 @@
     </span>
     <span class="text-md word-br" id="sidebar-user-description">{{user?.about?.description}}</span>
     <ul class="o-bio__info">
-      <li class="o-bio-info__item">
+      <li class="o-bio-info__item" *ngIf="user.location">
         <span class="o-bio-info_ico"><i class="icon-map-pin"></i></span>
         <span class="text-md float-left" *ngIf="isOwner() && !user.location" [routerLink]="['/profile/contact']">
           <a class="primary" id="sidebar-add-location">Add Location</a>
         </span>
         <span class="text-md float-left" id="sidebar-location">{{user.location | titlecase}}</span>
       </li>
-      <li class="o-bio-info__item">
+      <li class="o-bio-info__item" *ngIf="user.email" >
         <span class="o-bio-info_ico"><i class="icon-mail"></i></span>
         <span class="text-md float-left" *ngIf="isOwner() && !user.email" [routerLink]="['/profile/contact']">
           <a class="primary" id="sidebar-add-email">Add Email</a>
         </span>
         <span class="text-md float-left" id="sidebar-email">{{user.email}}</span>
       </li>
-      <li class="o-bio-info__item">
+      <li class="o-bio-info__item" *ngIf="user.phone">
         <span class="o-bio-info_ico"><i class="icon-phone"></i></span>
         <span class="text-md float-left" *ngIf="isOwner() && !user.phone" [routerLink]="['/profile/contact']">
           <a class="primary" id="sidebar-add-email">Add Number</a>
@@ -240,7 +240,7 @@
         <span class="o-bio-info_ico"><i class="icon-phone"></i></span>
         <span class="text-md float-left" id="sidebar-phone-number" *ngFor="let num of user?.secondary_phone">{{num}}</span>
       </li>
-      <li class="o-bio-info__item">
+      <li class="o-bio-info__item" *ngIf="user.website">
         <span class="o-bio-info_ico"><i class="icon-globe"></i></span>
         <span class="text-md float-left">
           <a class="primary" id="sidebar-add-website" *ngIf="isOwner() && !user.website" [routerLink]="['/profile/contact']">Add Website</a>
