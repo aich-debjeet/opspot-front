@@ -112,4 +112,6 @@
         <!--body ends-->
     </div>
     <!--container ends-->
+    <infinite-scroll distance="25%" (load)="getAdvertisements()" [moreData]="moreData" [inProgress]="inProgress">
+    </infinite-scroll>
 </section>
