@@ -11,11 +11,13 @@ import { Session } from '../../../services/session';
 })
 export class SponsoredListsComponent implements OnInit {
   advertisements: Array<Object>;
+  opspot: any = window.Opspot;
   offset: string = '';
   inProgress: boolean = false;
   moreData: boolean = true;
   menuOptions: Array<string> = ['delete'];
   constructor(
+    public session: Session,
     private overlayModal: OverlayModalService,
     private client: Client,
   ) { }
