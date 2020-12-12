@@ -268,6 +268,17 @@ export class GroupsService {
       });
   }
 
+  getRequestCount(guid: any): Promise<number> {
+    return this.clientService.get(`${this.base}review/${guid}/count`)
+      .then((response: any) => {
+        if (typeof response['request:count'] !== 'undefined') {
+          return parseInt(response['requests:count'], 10);
+        }
+        return response;
+        throw 'E_COUNT';
+      });
+  }
+
   setExplicit(guid: any, value: boolean): Promise<boolean> {
     return this.clientService.post(`api/v1/entities/explicit/${guid}`, { value })
       .then((response: any) => {

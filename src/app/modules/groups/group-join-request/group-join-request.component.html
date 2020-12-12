@@ -9,7 +9,7 @@
     </div>
     <!--frofile ends-->
     <div class="o-community-join-request-header">
-        <h3 class="f500">{{entity?.name}}</h3>
+        <h3 class="f500">{{entity?.name | truncate: [20, '...']}}</h3>
     </div>
     <!--header ends-->
     <div class="o-community-join-request-skills" *ngIf="entity?.tags">
