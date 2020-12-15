@@ -14,6 +14,7 @@ import { Storage } from '../../services/storage';
 import { ContextService } from '../../services/context.service';
 import { PosterComponent } from './poster/poster.component';
 import { NewsfeedService } from './services/newsfeed.service';
+import { OpspotChannelResponse } from '../../interfaces/responses';
 
 @Component({
   selector: 'm-newsfeed',
@@ -108,6 +109,7 @@ export class NewsfeedComponent {
       // this.load();
       //this.setUpPoll();
       this.opspot = window.Opspot;
+      this.getAdminDetails();
     }
 
     this.paramsSubscription = this.route.params.subscribe(params => {
@@ -128,6 +130,13 @@ export class NewsfeedComponent {
 
     this.context.set('activity');
     this.detectWidth();
+  }
+//get Admin Details for respective environments
+  getAdminDetails(){
+    this.client.get('api/v1/channel/onepagespotlight',{})
+    .then((data: OpspotChannelResponse)=>{
+      this.storage.set('admin', JSON.stringify(data.channel));
+    })
   }
 
   setUpPoll() {
