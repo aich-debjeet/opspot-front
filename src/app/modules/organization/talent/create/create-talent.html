@@ -19,8 +19,8 @@
             </div>
         </div><!--Talent Profile ends-->
         <div class="form-group">
-            <label>Description<span class="text-sm grey description-width">21/300</span></label>
-            <textarea class="form-control" id="Description" rows="5" formControlName="description"></textarea>
+            <label>Description<span class="text-sm grey description-width">{{createTalentForm.get('description').value.length}}/300</span></label>
+            <textarea class="form-control" id="Description" rows="5" formControlName="description" maxlength="300" (keyup)="countChar($event)"></textarea>
             <div class="error text-sm"
                     *ngIf="talentSubmitted && createTalentForm.get('description').errors?.required">
                     This is required
@@ -74,8 +74,8 @@
                 </div>
         </div>
         <div class="form-group">
-            <label>Description<span class="text-sm grey description-width">21/300</span></label>
-            <textarea class="form-control" id="Description Mobile" rows="5" formControlName="description"></textarea>
+            <label>Description<span class="text-sm grey description-width">0/300</span></label>
+            <textarea class="form-control" id="Description Mobile" rows="5" formControlName="description" ></textarea>
             <div class="error text-sm"
                     *ngIf="talentSubmitted && createTalentForm.get('description').errors?.required">
                     This is required
