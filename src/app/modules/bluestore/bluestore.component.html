@@ -124,7 +124,7 @@
 							<div class="feed-card-event-block__right ">
 								<m-messenger--channel-button
 									*ngIf="session.getLoggedInUser().guid != marketplace?.owner_guid"
-									[user]="user"
+									[user]="admin"
 									[message]="reachoutMessage"
 									[label]="'Reach Out'"
 								></m-messenger--channel-button>

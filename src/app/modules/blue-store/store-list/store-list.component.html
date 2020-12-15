@@ -11,7 +11,7 @@
 </div>
 <ul class="o-bluestore-fleamarket-products-list">
   <li class="o-bluestore-fleamarket-products-list__item" *ngFor="let card of cards">
-    <div class="o-card c-bfstore">
+    <div class="o-card c-bfstore" [routerLink]="['/item', card.guid]">
 
       <div class="c-bfstore-cover">
         <img src="{{card.custom_data[0].src}}" alt="" class="c-bfstore-cover__media">
