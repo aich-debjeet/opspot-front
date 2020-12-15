@@ -11,6 +11,9 @@ import * as _ from 'lodash';
 })
 export class WorkComponent implements OnInit {
   toggleEnd = false;
+  CharCount:number =0;
+  desiCharCount:number=0;
+  locCount:number=0;
   model: any = {};
   submitted = false;
   dateOfBirth;
@@ -127,6 +130,9 @@ export class WorkComponent implements OnInit {
     this.model.company = data.company_name;
     this.model.strtYear = data.start_date.split('-')[1];
     this.model.strtMonth = data.start_date.split('-')[0];
+    this.CharCount=data.company_name.length;
+    this.desiCharCount =data.designation.length;
+    this.locCount=data.location.length;
     if (data.end_date) {
       this.toggleEnd = false;
       this.model.endYear = data.end_date.split('-')[1];
@@ -184,4 +190,16 @@ export class WorkComponent implements OnInit {
       timeOut: 3000
     });
   }
+  countChar(data) {
+    if(data.target.name === "designation"){
+      this.desiCharCount = data.target.value.length;
+    }else if(data.target.name === "company"){
+      this.CharCount = data.target.value.length;
+    }else if(data.target.name === "location"){
+      this.locCount = data.target.value.length;
+    }
+
+  }
+  
 }
+

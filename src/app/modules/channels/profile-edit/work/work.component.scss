@@ -11,3 +11,24 @@
     top: 0px;
     right: 20px;
 }
+
+input.ng-touched.ng-invalid, .input-work{
+    border-width: normal;
+    border-color: red;
+}
+
+.error.ng-touched{
+    color: red;
+    border-color: red;
+}
+select.ng-touched.ng-invalid{
+    border-width: normal;
+    border-color: red;
+
+}
+
+
+textarea.ng-touched.ng-invalid, .textarea-project{
+    border-width: normal;
+    border-color: red;
+}
