@@ -10,6 +10,10 @@ import * as _ from 'lodash';
   styleUrls: ['./education.component.scss']
 })
 export class EducationComponent implements OnInit {
+
+  FieldCharCount:number=0;
+  UniversityCharCount:number=0;
+  locationCharCount:number=0;
   toggleEnd = false;
   model: any = {};
   submitted = false;
@@ -126,6 +130,9 @@ export class EducationComponent implements OnInit {
     this.model.university = data.university;
     this.model.strtYear = data.start_date.split('-')[1];
     this.model.strtMonth = data.start_date.split('-')[0];
+    this.FieldCharCount=data.field_of_study.length;
+    this.UniversityCharCount =data.university.length;
+    this.locationCharCount=data.location.length;
     // this.model.access = data.access ? data.access : false;
     if (data.end_date) {
       this.toggleEnd = false;
@@ -182,4 +189,17 @@ export class EducationComponent implements OnInit {
       timeOut: 3000
     });
   }
+
+  countChar(data) {
+    if(data.target.name === "field"){
+      this.FieldCharCount = data.target.value.length;
+    }else if(data.target.name === "university"){
+      this.UniversityCharCount = data.target.value.length;
+    }
+    else if(data.target.name === "location"){
+      this.locationCharCount = data.target.value.length;
+    }
+
+  }
+
 }

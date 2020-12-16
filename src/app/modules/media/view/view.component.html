@@ -399,5 +399,6 @@ opspot-button-remind{
 <div class="m-error-splash" *ngIf="error && !inProgress">
   <img [src]="opspot.cdn_assets_url + 'assets/logos/logo.svg'">
   <h3 class="mdl-color-text--red-300">{{error}}</h3>
-  <span class="mdl-color-text--blue-grey-300" i18n="@@OPSPOT__MEDIA__ENTITY_NOT_EXISTS">The post may not exist</span>
+  <!-- <span class="mdl-color-text--blue-grey-300" i18n="@@OPSPOT__MEDIA__ENTITY_NOT_EXISTS">The post may not exist</span> -->
+  <div><a class="btn btn-outline-primary btn-sm btn-click" [routerLink]="['/']">Click here</a></div>
 </div>
