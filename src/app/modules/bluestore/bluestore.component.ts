@@ -8,6 +8,7 @@ import { TranslationService } from '../../services/translation';
 import { ScrollService } from '../../services/ux/scroll';
 import { Subscription } from 'rxjs';
 import { BoostCreatorComponent } from '../boost/creator/creator.component';
+import { Storage } from '../../services/storage';
 
 
 
@@ -45,6 +46,7 @@ export class BluestoreComponent implements OnInit {
   showVideo = false;
   videoData: any;
   error: string = '';
+  admin:any;
 
 
   constructor(
@@ -55,11 +57,13 @@ export class BluestoreComponent implements OnInit {
     public overlayModal: OverlayModalService,
     private router: Router,
     public translationService: TranslationService,
-    public scroll: ScrollService
+    public scroll: ScrollService,
+    private storage: Storage,
 
   ) { }
 
   ngOnInit() {
+    this.admin = JSON.parse(this.storage.get('admin'));
     this.paramsSubscription = this.route.paramMap.subscribe(params => {
       if (params.get('guid')) {
         this.guid = params.get('guid');

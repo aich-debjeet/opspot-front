@@ -235,7 +235,7 @@
       <div class="feed-card-event-block__right ">
         <m-messenger--channel-button
           *ngIf="session.getLoggedInUser().guid != activity.owner_guid"
-          [user]="activity.ownerObj"
+          [user]="admin"
           [message]="reachoutMessage"
           [label]="'Reach Out'"
         ></m-messenger--channel-button>
