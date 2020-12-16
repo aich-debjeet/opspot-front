@@ -15,6 +15,7 @@ import { ShowtimezFormComponent } from '../../../../../modules/forms/showtimez-f
 import { Router } from '@angular/router';
 import { CreateTalent } from '../../../../../modules/organization/talent/create/create-talent';
 import { CommonEventsService } from '../../../../../services/common-events.service';
+import { Storage } from '../../../../../services/storage';
 
 @Component({
   moduleId: module.id,
@@ -56,6 +57,7 @@ export class Activity {
   visible: boolean = false;
   remindOpen = false;
   remindMessage = '';
+  admin: any;
 
   editing: boolean = false;
   @Input() hideTabs: boolean;
@@ -85,6 +87,7 @@ export class Activity {
 
   constructor(
     public session: Session,
+    private storage: Storage,
     public client: Client,
     public scroll: ScrollService,
     public newsfeedService: NewsfeedService,
@@ -101,6 +104,7 @@ export class Activity {
   }
 
   ngOnInit() {
+    this.admin = JSON.parse(this.storage.get('admin'))
   }
 
 

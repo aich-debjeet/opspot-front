@@ -4,6 +4,7 @@ import { GroupsService } from '../../groups-service';
 
 import { Client } from '../../../../services/api';
 import { Session } from '../../../../services/session';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -24,7 +25,7 @@ export class GroupsProfileRequests {
   inProgress: boolean = false;
   moreData: boolean = true;
 
-  constructor(public session: Session, public client: Client, public service: GroupsService) {
+  constructor(public session: Session, public client: Client, public service: GroupsService,private router: Router) {
 
   }
 
@@ -74,12 +75,18 @@ export class GroupsProfileRequests {
         this.changeCounter('requests:count', -1);
       });
   }
+  reload(group:any){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/groups',group.name,'profile',group.guid]);
+  }
 
   reject(user: any, index: number) {
     this.service.rejectRequest(this.group, user.guid)
       .then(() => {
         this.users.splice(index, 1);
         this.changeCounter('requests:count', -1);
+        this.reload(this.group)
       });
 
   }

@@ -62,6 +62,14 @@ export class ViewTalentComponent implements OnInit {
 
   ) { }
 
+  public get canEdit() {
+    if (this.organization && (this.organization['is:owner'] || this.organization['is:editor'])) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   ngOnInit() {
     // if (window.innerWidth < 785) {
     //   this.showList = true;

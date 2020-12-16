@@ -2,7 +2,7 @@
     <h5 class="o-prof-edit-title" *ngIf="!addWork" id="education-details-tittle">Education</h5>
     <div class="o-prof-edit-block" *ngIf="!addWork">
         <a class="btn btn-outline-primary btn-block showSingle" id="education-add-education"
-            (click)="addWork=!addWork; addWorkMove();">ADD EDUCATION</a>
+            (click)="addWork=!addWork; addWorkMove();FieldCharCount=0;UniversityCharCount =0;locCharCount=0">ADD EDUCATION</a>
         <div class="o-prof-edit-wea">
             <div class="o-wea-block" id="education-block" *ngFor="let work of work.education; let i=index;">
                 <div class="o-wea-logo"><img src="assets/Education.jpg" alt=""></div>
@@ -32,22 +32,25 @@
                 <input type="hidden" [(ngModel)]="model.index" [value]=model.index name="updateIndex">
                 <div class="o-wea-add-block__left">
                     <div class="form-group w-lg">
-                        <label>Field of Study</label>
+                        <label>Field of Study <span >{{FieldCharCount }}/20</span></label>
                         <input type="text" id="eduaction-field-of-study" #field="ngModel" required name="field"
-                            [(ngModel)]="model.field" class="form-control form-control-lg" placeholder="">
+                            [(ngModel)]="model.field" class="form-control form-control-lg ng-untouched ng-pristine ng-invalid " [ngClass]="{'input-education': (field.invalid && submitted) }" maxlength="20" (keyup)="countChar($event)" placeholder="">
+                            <span *ngIf="field.invalid&&submitted" class="error"> **This field is required</span>
                     </div>
                     <!--designation end-->
                     <div class="form-group w-lg">
-                        <label>University</label>
+                        <label>University<span >{{UniversityCharCount }}/20</span></label>
                         <input #university="ngModel" id="eduaction-university-name" required name="university"
-                            [(ngModel)]="model.university" type="text" class="form-control form-control-lg"
+                            [(ngModel)]="model.university" type="text" [ngClass]="{'input-education': (university.invalid && submitted) }" class="form-control form-control-lg ng-untouched ng-pristine ng-invalid"  maxlength="20" (keyup)="countChar($event)"
                             placeholder="">
+                            <span *ngIf="university.invalid&&submitted" class="error"> **This field is required</span>
                     </div>
                     <!--company name end-->
                     <div class="form-group w-lg">
-                        <label>Location</label>
+                        <label>Location<span >{{locationCharCount}}/20</span></label>
                         <input required type="text" id="education-lacoation" #location="ngModel" name="location"
-                            [(ngModel)]="model.location" class="form-control form-control-lg" placeholder="">
+                            [(ngModel)]="model.location" [ngClass]="{'input-education': (location.invalid && submitted) }" class="form-control form-control-lg ng-untouched ng-pristine ng-invalid"  maxlength="20" (keyup)="countChar($event)"  placeholder="">
+                            <span *ngIf="location.invalid&&submitted" class="error"> **This field is required</span>
 
                     </div>
                     <!--location end-->
@@ -62,20 +65,22 @@
                     <div class="o-wea-date">
                         <div class="form-group">
                             <select class="form-control" id="education-start-month-selector" name="strtMonth"
-                                #strtMonth="ngModel" required [(ngModel)]="model.strtMonth">
+                                #strtMonth="ngModel" required [(ngModel)]="model.strtMonth" [ngClass]="{'input-education': (strtMonth.invalid && submitted) }" class="form-control form-control-lg ng-untouched ng-pristine ng-invalid">
                                 <option [value]="Month" id="education-start-month" selected disabled hidden>Month
                                 </option>
                                 <option *ngFor="let month of dateOfBirth.month" id="education-start-month1"
                                     [value]="month" placeholder="month"> {{month}}</option>
                             </select>
+                            <span *ngIf="strtMonth.invalid&&submitted" class="error"> **This field is required</span>
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="education-start-year-selector" name="strtYear"
-                                #strtYear="ngModel" required [(ngModel)]="model.strtYear">
+                                #strtYear="ngModel" required [(ngModel)]="model.strtYear" [ngClass]="{'input-education': (strtYear.invalid && submitted) }" class="form-control form-control-lg ng-untouched ng-pristine ng-invalid">
                                 <option [value]="Year" id="education-start-year" selected disabled hidden>Year</option>
                                 <option *ngFor="let year of dateOfBirth.year" id="education-start-year1" [value]="year">
                                     {{year}}</option>
                             </select>
+                            
                         </div>
                         <!-- <div class="text-md o-to">to</div> -->
                     </div><!-- start date end -->
@@ -84,16 +89,17 @@
                         <div class="o-wea-date">
                             <div class="form-group">
                                 <select class="form-control" id="education-end-month-selector" name="endMonth"
-                                    [(ngModel)]="model.endMonth">
+                                    [(ngModel)]="model.endMonth" #endMonth="ngModel" required [ngClass]="{'input-education': (endMonth.invalid && submitted) }" class="form-control form-control-lg ng-untouched ng-pristine ng-invalid">
                                     <option [value]="Month" id="education-end-month" selected disabled hidden>Month
                                     </option>
                                     <option *ngFor="let month of dateOfBirth.month" id="education-end-month1"
                                         [value]="month" placeholder="month"> {{month}}</option>
                                 </select>
+                                <span *ngIf="endMonth.invalid&&submitted" class="error"> **This field is required</span>
                             </div>
                             <div class="form-group">
                                 <select class="form-control" id="education-end-year-selector" name="endYear"
-                                    [(ngModel)]="model.endYear">
+                                    [(ngModel)]="model.endYear"  #endYear="ngModel" required [ngClass]="{'input-education': (endYear.invalid && submitted) }" class="form-control form-control-lg ng-untouched ng-pristine ng-invalid">
                                     <option [value]="Year" id="education-end-year" selected disabled hidden>Year
                                     </option>
                                     <option *ngFor="let year of dateOfBirth.year" id="education-end-year1"

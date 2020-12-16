@@ -314,6 +314,7 @@ export class GroupsProfileFeed {
     }
 
     this.activity.splice(index, 1);
+    this.reload(this.group)
 
     try {
       await this.client.put(`api/v1/groups/review/${this.group.guid}/${activity.guid}`);
@@ -324,12 +325,19 @@ export class GroupsProfileFeed {
     }
   }
 
+  reload(group:any){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/groups',group.name,'profile',group.guid]);
+  }
+
   async reject(activity, index: number) {
     if (!activity) {
       return;
     }
 
     this.activity.splice(index, 1);
+    this.reload(this.group)
 
     try {
       await this.client.delete(`api/v1/groups/review/${this.group.guid}/${activity.guid}`);

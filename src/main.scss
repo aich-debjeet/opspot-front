@@ -9919,7 +9919,8 @@ m-channel--modules .opspot-channel-media-sidebard img {
 
 @media screen and (max-width: 600px) {
   m-messenger--channel-button {
-    display: none; } }
+    // display: none;
+     } }
 
 .m-channels--tile {
   background: #FFF;

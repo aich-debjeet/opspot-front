@@ -145,7 +145,22 @@ export class MessengerConversation {
         this.blocked = !!response.blocked;
         this.unavailable = !!response.unavailable;
         this.invitable = response.invitable || null;
-      })
+      }).then(()=>{
+        if(window.innerWidth<800){
+        console.log('insied');
+        let newLength = this.messages.push({ // Optimistic
+          optimisticGuess: true,
+          owner: this.session.getLoggedInUser(),
+          message: this.message,
+          time_created: Math.floor(Date.now() / 1000)
+        }), currentIndex = newLength - 1;
+    
+        this.client.post('api/v2/messenger/conversations/' + this.conversation.guid, {
+          message: this.message,
+          encrypt: true,
+          tabId: this.tabId
+        })
+      }})
       .catch(() => {
         this.inProgress = false;
       });

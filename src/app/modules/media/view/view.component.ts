@@ -187,7 +187,7 @@ export class MediaViewComponent {
       })
       .catch((e) => {
         this.inProgress = false;
-        this.error = 'Sorry, there was problem.';
+        this.error = 'Please sign-up.';
       });
   }
 
