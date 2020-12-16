@@ -1,5 +1,5 @@
 <div class="o-cover o-cover--bluestore-fleamarket hidden-under-tablet" [hidden]="market == 'My Sales Board'"
-  style="background:url(assets/demo/Banner-02.jpg) no-repeat; background-size: cover; background-position: left;">
+  style="background:url(assets/demo/cover.jpg) no-repeat; background-size: cover; background-position: left;">
 </div>
 <div class="o-bluestore-fleamarket-products">
   <h4 class="f500" [hidden]="market == 'My Sales Board'">{{market}} > {{category}}</h4>
@@ -26,7 +26,7 @@
         <div class="c-bfstore-info__location text-md"><i class="icon-map-pin grey-dark"></i> {{card.location}}</div>
         <div class="bluestore-sales-card-button">
           <!-- <button type="button" class="btn btn-outline-primary btn-sm">Mark as Sold</button> -->
-          <button type="button" class="btn btn-outline-primary btn-sm" (click)="openEditBluestore(card)">Edit Product</button>
+          <!-- <button type="button" class="btn btn-outline-primary btn-sm" (click)="openEditBluestore(card)" *ngIf="session.getLoggedInUser().guid != card?.owner_guid">Edit Product</button> -->
       </div>
       </div>
     </div>
