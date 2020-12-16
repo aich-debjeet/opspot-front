@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Client } from '../../../services/api/client';
 import { BlueStoreFormComponent } from '../../forms/blue-store-form/blue-store-form.component';
 import { OverlayModalService } from '../../../services/ux/overlay-modal';
+import { Session } from '../../../services/session';
 
 
 
@@ -29,6 +30,7 @@ export class StoreListComponent implements OnInit {
   @Output() inProg: EventEmitter<any> = new EventEmitter();
   constructor(private route: ActivatedRoute,
     public overlayModal: OverlayModalService,
+    public session: Session,
     private client: Client) { }
 
   ngOnInit() {
@@ -77,6 +79,7 @@ export class StoreListComponent implements OnInit {
       .catch((e) => {
         this.inProg.emit(false);
       });
+      console.log(this.cards)
 
   }
 
