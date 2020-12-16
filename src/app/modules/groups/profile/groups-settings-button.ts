@@ -46,7 +46,7 @@ import { Session } from '../../../services/session';
     <m-modal [open]="(group['is:owner'] || group['is:admin']) && isGoingToBeDeleted" (closed)="isGoingToBeDeleted = false">
     <div class="delete-confirmation-wrapper">
       <div class="mdl-card__supporting-text">
-        <p i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP_CONFIRM" class="m-modal-confirm-body text-lg">Are you sure you want to delete {{ group.name }}? This action cannot be undone.</p>
+        <p i18n="@@GROUPS__PROFILE__GROUP_SETTINGS_BTN__DELETE_GROUP_CONFIRM" class="m-modal-confirm-body text-lg">Are you sure you want to delete {{ group.name | truncate: [50, '...']}}? This action cannot be undone.</p>
       </div>
       <div class="mdl-card__actions">
         <button (click)="delete()" class="btn btn-primary" id="group-confirm-button">

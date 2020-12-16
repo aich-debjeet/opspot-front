@@ -56,6 +56,7 @@ export class GroupsProfile {
   @ViewChild('hashtagsSelector') hashtagsSelector: HashtagsSelectorComponent;
 
   private reviewCountInterval: any;
+  private requestCountInterval: any;
   private socketSubscription: any;
   private videoChatActiveSubscription;
   private updateMarkersSubscription;
@@ -131,6 +132,10 @@ export class GroupsProfile {
       this.reviewCountLoad();
     }, 120 * 1000);
 
+    this.requestCountInterval = setInterval(() => {
+      this.requestCountLoad();
+    }, 120 * 1000);
+
     this.videoChatActiveSubscription = this.videochat.activate$.subscribe(next => window.scrollTo(0, 0));
   }
 
@@ -165,6 +170,10 @@ export class GroupsProfile {
 
     if (this.reviewCountInterval) {
       clearInterval(this.reviewCountInterval);
+    }
+
+    if (this.requestCountInterval) {
+      clearInterval(this.requestCountInterval);
     }
   }
 
@@ -218,6 +227,18 @@ export class GroupsProfile {
     } catch (e) {
     }
     this.group['adminqueue:count'] = count;
+  }
+
+  async requestCountLoad() {
+    if (!this.guid || !this.session.isLoggedIn()) {
+      return;
+    }
+    let count = 0;
+    try {
+      count = await this.service.getRequestCount(this.guid);
+    } catch (e) {
+    }
+    this.group['requests:count'] = count;
   }
 
   addRecent() {

@@ -16,6 +16,7 @@ import { Location } from '@angular/common';
 })
 export class CreateTalent implements OnInit {
 
+    descCharCount:number=0;
     inputData: any;
     organization_guid: any;
     inProgress = false;
@@ -272,7 +273,14 @@ export class CreateTalent implements OnInit {
         this._location.back();
     }
 
-}
+    countChar(data) {
+        if(data.target.name === "description"){
+          this.descCharCount = data.target.value.length;
+        }
+      }
+    }
+
+
 
 
 // organisation_guid: 1135543634117005324

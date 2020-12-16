@@ -3,8 +3,8 @@
       <div class="o-community-members-info-prof__avatar o-avatar-md">
           <img src="{{opspot.cdn_url}}icon/{{user.guid}}/{{avatarSize}}/{{user.icontime}}" alt="img">
       </div>
-      <div  id="username"  class="caption-bold elipse elipse--w-130">
-          {{user.name}}
+      <div  id="username"  class="caption-bold elipse elipse--w-104">
+          {{user.name| truncate: [8, '...']}}
       </div>
     </div>
     <div class="o-community-members-info__option">
@@ -12,7 +12,7 @@
       <button *ngIf="user['is:owner']" id="appuser-admin" type="button" class="btn btn-outline-primary btn-xs disabled">owner</button>
       <button *ngIf="user['is:editor']" id="appuser-admin" type="button" class="btn btn-outline-primary btn-xs disabled">editor</button>
       <button *ngIf="user['is:moderator']" id="appuser-admin" type="button" class="btn btn-outline-primary btn-xs disabled">moderator</button>
-      <a>
+      <a class="icon-member">
      <ng-content></ng-content>
       </a>
     </div>
