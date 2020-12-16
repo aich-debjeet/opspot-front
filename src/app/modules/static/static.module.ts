@@ -9,6 +9,7 @@ import { CopyrightPolicyComponent } from './copyright-policy/copyright-policy.co
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermUseComponent } from './term-use/term-use.component';
 import { EnrollmentTermsComponent } from './enrollment-terms/enrollment-terms.component';
+import { BluestoreTermsComponent } from './bluestore-terms/bluestore-terms.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'terms' },
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'cookie-policy', component: CookiePolicyComponent },
       { path: 'copyright-policy', component: CopyrightPolicyComponent },
       { path: 'enrollment', component: EnrollmentTermsComponent},
+      { path: 'terms_blue', component:BluestoreTermsComponent},
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
       { path: 'terms', component: TermUseComponent },
     ]
@@ -35,7 +37,8 @@ export const routes: Routes = [
     CopyrightPolicyComponent,
     PrivacyPolicyComponent,
     TermUseComponent,
-    EnrollmentTermsComponent
+    EnrollmentTermsComponent,
+    BluestoreTermsComponent
   ],
   imports: [
     CommonModule,
