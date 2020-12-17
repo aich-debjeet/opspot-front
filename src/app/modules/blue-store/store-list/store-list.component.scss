@@ -94,8 +94,9 @@
     align-items: center;
     margin:13px 0px 9px;
     @include mq($from:$mobile-sm, $until:$desktop-sm){
-        flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        justify-content: space-between;
+        margin:6px 0px 8px;
     }
     .form-group{
         margin-bottom: 0px!important;
@@ -112,12 +113,21 @@
             border-radius: 4px;
             background-color: #FFFFFF;
             width: 258px;
+            @include mq($from:$mobile-sm, $until:$desktop-sm){
+                width:41px;
+                padding: 6px 15px;
+                border: 1px solid #ECEFF1;
+            }
         }
         span{
             position: absolute;
             top: 13px;
             right: 20px;
             font-size: 14px;
+            @include mq($from:$mobile-sm, $until:$desktop-sm){
+                top:11px;
+                right:15px;
+            }
         }
     }
 }
@@ -129,6 +139,9 @@
     &__item{
         list-style-type: none;
         margin-right: 11px;
+        @include mq($from:$mobile-sm, $until:$desktop-sm){
+            margin-right:0px;
+        }
         &:nth-child(3n) { 
             margin-right: 0px;
         }
@@ -139,6 +152,9 @@
     height: auto;
     width: 258px;
     background:#fff;
+    @include mq($from:$mobile-sm, $until:$desktop-sm){
+       width:100%;
+   }
  }
  .c-bfstore-cover{
      &__media{
@@ -173,5 +189,8 @@
      margin-top:21px;
      button{
          padding:4px 20px;
+         @include mq($from:$mobile-sm, $until:$desktop-sm){
+            padding:5px 45px;
+        }
      }
  }
