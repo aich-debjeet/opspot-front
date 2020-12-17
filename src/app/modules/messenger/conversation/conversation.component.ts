@@ -9,6 +9,7 @@ import { MessengerEncryptionService } from '../encryption/encryption.service';
 
 import { MessengerConversationDockpanesService } from '../dockpanes/dockpanes.service';
 import { MessengerSounds } from '../sounds/service';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   moduleId: module.id,
@@ -71,6 +72,7 @@ export class MessengerConversation {
     private renderer: Renderer,
     public encryption: MessengerEncryptionService,
     public dockpanes: MessengerConversationDockpanesService,
+    private toastr: ToastrService
   ) {
     this.buildTabId();
   }
@@ -160,6 +162,7 @@ export class MessengerConversation {
           encrypt: true,
           tabId: this.tabId
         })
+        this.toastr.success('Thank you for your interest, our team will reach out to you soon .');
       }})
       .catch(() => {
         this.inProgress = false;
@@ -281,7 +284,7 @@ export class MessengerConversation {
       .catch(e => {
         console.error('Error while reading conversation', e);
       });
-
+      this.toastr.success('Thank you for your interest, our team will reach out to you soon .');
     this.message = '';
     this.scrollEmitter.next(true);
   }
