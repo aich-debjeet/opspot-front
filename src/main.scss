@@ -49,7 +49,13 @@
 @import "src/assets/scss/components/_organization_subscribers.scss";
 
 
+// @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto:wght@300;400;700&display=swap');
 
+// font-family: 'DM Serif Display', serif;
+// font-family: 'Roboto', sans-serif;
+$dmserifdisplay : 'DM Serif Display', serif;
+$roboto : 'Roboto', sans-serif;
+$poppins : 'Poppins', sans-serif;
 
 
 
@@ -27992,3 +27998,409 @@ ng-otp-input {
     text-align: center;
 }
   
+.main-sec-for-fleamarket{
+    width: 100%;
+    min-height: 100vh;
+    float: left;
+    margin-top: -61px;
+    section{
+        padding: 100px 0px;
+        display: flex;
+        justify-content: center;
+        @include mq($from: $mobile_sm, $until: $desktop_md) {
+            padding: 30px 30px;
+        }
+    }
+}
+.for-img{
+    width:100%;
+}
+.f-block{
+    width: 100%;
+    max-width: 1140px;
+}
+.f-primary-title{
+    width: 100%;
+    margin: 0px auto;
+    color: #102E65;
+    font-family: $dmserifdisplay!important;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 54px;
+    text-align: left;
+}
+.f-sub-title{
+    color: #102E65;
+    font-family: $roboto;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 26px;
+    margin-top: 30px;
+}
+.text-para{
+    color: #102E65;
+    font-family: $roboto;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 26px;
+}
+.f-sm-para{
+    color: #102E65;
+    font-family: $roboto;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px
+}
+.f-sm-title{
+    color: #102E65;
+    font-family: $roboto;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 0;
+    line-height: 26px;
+}
+
+// *************** top common style ************//
+
+// ops link
+
+.ops-link{
+    width: 290px;
+    float: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.ops-link-btn{
+    height: 43px;
+    width: 134px;
+    border: 1px solid #008FD0;
+    border-radius: 10px;
+    color: #008FD0;
+    font-family: $roboto!important;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &--bg{
+        background: #008FD0;
+        color: #fff!important;
+    }
+    &:hover, &:focus{
+        color: inherit;
+        outline: none;
+    }
+}
+
+
+.f-hero{
+    background: #EBEFF2;
+    width: 100%;
+    padding: 137px 150px 69px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.f-hero-cover{
+    width: 100%;
+    max-width: 1140px;
+    img{
+        width: 100%;
+    }
+}
+
+// about sec
+
+.f-about-sec{
+    width: 100%;
+}
+.f-about{
+    width: 100%;
+    max-width: 1140px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        flex-direction: column;
+    }
+    &__info{
+        width: 100%;
+        max-width: calc(100% - 570px);
+        @include mq($from: $mobile_sm, $until: $desktop_sm) {
+            max-width: 100%;
+        }
+        p{
+            padding: 30px 0px;
+        }
+    }
+    &__media{
+        width: 100%;
+        max-width: 454px;
+    }
+}
+
+// what u can find sec
+
+.f-u-can-find-sec{
+    width: 100%;
+    background: linear-gradient(135deg, #FDFDFF 0%, #F9FBFE 100%);
+}
+.f-card-block{
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+}
+.f-serv-card{
+    width: 100%;
+    min-height: 330px;
+    max-width: 255px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(150,161,182,0.5);
+    margin-right: 38px;
+    margin-top: 38px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        max-width: 100%;
+        margin-right: 0px;
+    }
+    @include mq($from: $tablet, $until: $desktop_md) {
+        max-width: 46%;
+        min-height: 430px;
+    }
+    &:nth-child(4){
+        margin-right: 0px;
+    }
+    &__media{
+        width: 100%;
+    }
+    &__info{
+        width: 100%;
+        padding: 25px 25px 25px 25px;
+        .f-sm-para{
+            margin-top: 10px;
+        }
+    }
+}
+
+
+// shedule sec
+
+.f-shedule-sec{
+    width: 100%;
+}
+.f-shedule-slider{
+    margin-top: 70px;
+}
+.f-shedule-card{
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 8px 0 rgba(150,161,182,0.5);
+    margin-bottom: 24px;
+    @include mq($from: $tablet, $until: $desktop_sm) {
+        flex-direction: column;
+        height: 240px;
+    }
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: column;
+        height: 330px;
+    }
+}
+.f-shedule-card-media{
+    width: 100%;
+    max-width: 293px;
+    background: rgba(232, 228, 228, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        display: none;
+    }
+    .for-ops-logo{
+        width: 180px;
+    }
+}
+.f-shedule-info{
+    width: calc(100% - 293px);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 24px 40px;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    &__date{
+        width: 100%;
+        color: #102E65;
+        font-family: $roboto!important;
+        font-size: 22px;
+        font-weight: 300;
+        letter-spacing: 0;
+        line-height: 34px;
+    }
+    &__event{
+        width: 100%;
+        color: #102E65;
+        font-family: $dmserifdisplay!important;
+        font-size: 26px;
+        letter-spacing: 0;
+        line-height: 26px;
+        margin: 12px 0px;
+
+    }
+    &__dis{
+        margin-top: 4px;
+        width: 100%;
+        color: #102E65;
+        font-family: $roboto!important;
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: 22px;
+    }
+    &__tag{
+        padding: 5px 24px;
+        border-radius: 6px;
+        background-color: rgba(13, 209, 0, 0.2);
+        color: #0B9C00;
+        font-family: $roboto!important;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 34px;
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        display: block;
+        @include mq($from: $mobile_sm, $until: $desktop) {
+            font-size: 13px;
+            padding: 2px 12px;
+        }
+    }
+}
+
+
+
+
+
+// footer style
+
+.f-ops-sec{
+    width: 100%;
+    background: linear-gradient(135deg, #FDFDFF 0%, #F9FBFE 100%);
+}
+
+.event-ops-discrptn{
+    max-width: 1133px;
+    width: 100%;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    padding-top: 82px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    .watch-now-btn{
+        text-align: center;
+        width: unset;
+        padding: 15px 40px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    a{
+        margin-top: 64px;
+    }
+}
+.event-dis-ops-logo{
+    width: 270px;
+    margin-bottom: 48px;
+    img{
+        width: 270px;
+    }
+}
+.event-dis-ops{
+    width: 100%;
+    max-width: 836px;
+    color: #102E65;
+    font-family: $poppins!important;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 28px;
+    text-align: center;
+    margin: 0px auto;
+}
+
+// footer
+
+.event-footer{
+    width: 100%;
+    margin-top: 0px;
+    background: linear-gradient(135deg, #FDFDFF 0%, #F9FBFE 100%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border:none!important;
+    padding: 10px 0px!important;
+    @include mq($from: $mobile_sm, $until: $desktop_sm) {
+        padding: 40px 30px!important;
+    }
+    .top-border{
+        width: 100%;
+        max-width: 1140px;
+        border-top: 1px solid rgba(38,38,38,0.1);
+    }
+}
+.event-footer-contianer{
+    max-width: 1130px;
+    width: 100%;
+    padding: 40px!important;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        flex-direction: column;
+        align-items: center;
+	}
+}
+.event-footer-copyright{
+    color: #7E8CA2;
+    font-family: $poppins!important;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 22px;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+        text-align: center;
+	}
+}
+.event-footer-social-icons{
+    display: flex;
+    flex-direction: row;
+    @include mq($from: $mobile_sm, $until: $tablet) {
+		margin-top: 20px;
+	}
+    &__item{
+        width: 24px;
+        height: 24px;
+        margin: 0px 10px;
+    }
+}
