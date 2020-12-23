@@ -56,7 +56,7 @@
                 <label>location
                     <!-- <span class="text-sm grey description-width">21/300</span> -->
                 </label>
-                <input class="form-control" id="bluestore-description" formControlName="blueStoreLocation">
+                <input class="form-control" id="bluestore-location" formControlName="blueStoreLocation">
                 <div class="error text-sm"
                     *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreLocation').errors?.required">
                     This is required</div>
@@ -64,8 +64,8 @@
             <div class="o-create-blue-store-unit-price">
                 <div class="form-group select-bluestore">
                     <label>Category</label>
-                    <select class="form-control form-control-lg" aria-placeholder="Select Category" formControlName="blueStoreCategory">
-                        <option value="" disabled>Select Category</option>
+                    <select class="form-control form-control-lg" id="Bluestore_Select_Category" aria-placeholder="Select Category" formControlName="blueStoreCategory">
+                        <option value="" disabled >Select Category</option>
                         <option value="{{list}}" *ngFor="let list of categoryList">{{list}}</option>
                     </select>
                 </div>
@@ -100,7 +100,7 @@
                 <!--Time Location-->
                 <div class="form-group ml-18">
                     <label>Regular Price</label>
-                    <input type="number" name="no of units" class="form-control form-control-lg"
+                    <input type="number" id="Bluestore_Regular_Price" name="no of units" class="form-control form-control-lg"
                         placeholder="Enter Price" formControlName="blueStorePrice">
                     <div class="error text-sm"
                         *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStorePrice').errors?.required">
@@ -112,7 +112,7 @@
                 <!--Date Location-->
                 <div class="form-group ml-18">
                     <label>Sale Price</label>
-                    <input type="number" name="no of units" class="form-control form-control-lg" formControlName="blueStoreSalePrice">
+                    <input type="number" id="Bluestore_Sale_Price" name="no of units" class="form-control form-control-lg" formControlName="blueStoreSalePrice">
                     <div class="error text-sm"
                         *ngIf="blueStoreSubmitted && blueStoreForm.get('blueStoreSalePrice').errors?.required">
                         This is required</div>

@@ -22,10 +22,13 @@
 
       <div class="c-bfstore-info">
         <p class="c-bfstore-info__head caption-bold">{{card.title}}</p>
-        <div class="c-bfstore-info__price text-md">
+        <div *ngIf="card.price && card.sale_price" class="c-bfstore-info__price text-md">
           <span class="grey mr-15"><s><span>&#8377;</span> {{card.price}}</s></span>
           <span class="grey-dark"><span>&#8377;</span> {{card.sale_price}}</span>
         </div>
+        <div *ngIf="card.price && !(card.sale_price)" class="c-bfstore-info__price text-md">
+          <span class="grey-dark"><span>&#8377;</span> {{card.price}}</span>
+          </div>
         <div class="c-bfstore-info__location text-md"><i class="icon-map-pin grey-dark"></i> {{card.location}}</div>
         <div class="bluestore-sales-card-button">
           <!-- <button type="button" class="btn btn-outline-primary btn-sm">Mark as Sold</button> -->

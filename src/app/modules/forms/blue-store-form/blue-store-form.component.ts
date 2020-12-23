@@ -110,7 +110,7 @@ export class BlueStoreFormComponent implements OnInit {
         blueStorePrice: [data['price'] ? data['price'] : '', [Validators.required, Validators.min(1)]],
         blueStoreLocation: [data['location'] ? data['location'] : '', Validators.required],
         blueStoreCategory: [data['category'] ? data['category'] : '', Validators.required],
-        blueStoreSalePrice: [data['sale_price'] ? data['sale_price'] : '', [Validators.required, Validators.min(1)]]
+        blueStoreSalePrice: [data['sale_price'] ? data['sale_price'] : '']
       });
     } else {
       this.blueStoreForm = this.formBuilder.group({
@@ -121,7 +121,7 @@ export class BlueStoreFormComponent implements OnInit {
         blueStorePrice: ['', [Validators.required, Validators.min(1)]],
         blueStoreLocation: ['', Validators.required],
         blueStoreCategory: ['', Validators.required],
-        blueStoreSalePrice: ['', [Validators.required, Validators.min(1)]]
+        blueStoreSalePrice: ['']
       });
     }
   }
