@@ -109,4 +109,399 @@
     </section>
 
 </div> -->
-<m-login *ngIf="!session.isLoggedIn()"></m-login>
+<!-- <m-login *ngIf="!session.isLoggedIn()"></m-login> -->
+
+<div class="main-sec-for-fleamarket" *ngIf="!session.isLoggedIn()">
+
+	<section class="f-hero">
+		
+		<div class="f-hero-cover">
+			<div class="ops-link">
+				<a routerLink="/login" class="ops-link-btn">Login</a>
+				<a routerLink="/login" class="ops-link-btn ops-link-btn--bg">Signup</a>
+			</div>
+		</div>
+		<div class="f-hero-cover">
+			<img class="for-img" src="assets/fleamarket/fleamarket_banner.png" alt="">
+		</div>
+	</section><!-- hero end -->
+
+	<section class="f-about-sec">
+		<div class="f-about">
+			<div class="f-about__info">
+				<h1 class="f-primary-title">Welcome to Bluestore - Art Nirbhar Bazaar</h1>
+				<p class="text-para">
+					<b>#Thebluestore</b> is your private shop on One Page Spotlight to list all your Art Products for sale to customers who are looking for you. TheBlueStore - Art Bazaar is a first of its kind virtual shopping festival where you search & discover art products and the artists behind them from across the country from niche to local discoveries. With a strong sentiment of Make In India, One Page Spotlight has endeavored to curate the best of the offerings
+from across 21 categories for you in these 28 days.
+				</p>
+			</div>
+			<div class="f-about__media">
+				<img class="for-img" src="assets/fleamarket/flea_abt.png" alt="">
+			</div>
+		</div>
+	</section><!-- about sec end -->
+
+	<section class="f-u-can-find-sec">
+		<div class="f-block">
+			<h1 class="f-primary-title">What you can find?</h1>
+			<h2 class="f-sub-title">For Buyers & Participants:</h2>
+			<div class="f-card-block">
+				<div class="f-serv-card">
+					<div class="f-serv-card__media">
+						<img src="assets/fleamarket/truemaster.png" alt="" class="for-img">
+					</div>
+					<div class="f-serv-card__info">
+						<div class="f-sm-title">True master - pieces</div>
+						<div class="f-sm-para">
+							Find exclusive original art
+							from celebrated
+							contemporary artists.
+						</div>
+					</div>
+				</div><!-- serv card end -->
+
+				<div class="f-serv-card">
+					<div class="f-serv-card__media">
+						<img src="assets/fleamarket/artproduct.png" alt="" class="for-img">
+					</div>
+					<div class="f-serv-card__info">
+						<div class="f-sm-title">Art Products</div>
+						<div class="f-sm-para">
+							21 categories – Jewellery,
+							Handicrafts & hand-made
+							products by Local artisans.
+						</div>
+					</div>
+				</div><!-- serv card art product end -->
+
+				<div class="f-serv-card">
+					<div class="f-serv-card__media">
+						<img src="assets/fleamarket/liveevents.png" alt="" class="for-img">
+					</div>
+					<div class="f-serv-card__info">
+						<div class="f-sm-title">Live events & Auction</div>
+						<div class="f-sm-para">
+							28 days of Art discussions,
+							live art sessions, round tables
+							discussions & Artist talks.
+						</div>
+					</div>
+				</div><!-- serv card live events and auction  end -->
+
+				<div class="f-serv-card">
+					<div class="f-serv-card__media">
+						<img src="assets/fleamarket/workshops.png" alt="" class="for-img">
+					</div>
+					<div class="f-serv-card__info">
+						<div class="f-sm-title">Workshops and Services</div>
+						<div class="f-sm-para">
+							Convert Art to art products,
+							DIY Festive Decorations,
+							Live Sketch Art.
+						</div>
+					</div>
+				</div><!-- serv card lworkshops  end -->
+			</div><!-- f card block end -->
+
+			<h2 class="f-sub-title">For Sellers:</h2>
+			<div class="f-card-block">
+				<div class="f-serv-card">
+					<div class="f-serv-card__media">
+						<img src="assets/fleamarket/artloversandcustomers.png" alt="" class="for-img">
+					</div>
+					<div class="f-serv-card__info">
+						<div class="f-sm-title">Art lovers and customers</div>
+						<div class="f-sm-para">
+							Shoppers from all over the country.
+						</div>
+					</div>
+				</div><!-- serv card Art lovers and customers end -->
+
+				<div class="f-serv-card">
+					<div class="f-serv-card__media">
+						<img src="assets/fleamarket/art buyers.png" alt="" class="for-img">
+					</div>
+					<div class="f-serv-card__info">
+						<div class="f-sm-title">Art buyers</div>
+						<div class="f-sm-para">
+							Spot to get noticed by Art
+							Galleries, Curators & Collectors
+							nationwide.
+						</div>
+					</div>
+				</div><!-- serv card Art buyers end -->
+
+				<div class="f-serv-card">
+					<div class="f-serv-card__media">
+						<img src="assets/fleamarket/homedecor.png" alt="" class="for-img">
+					</div>
+					<div class="f-serv-card__info">
+						<div class="f-sm-title">Home decor & Fashion</div>
+						<div class="f-sm-para">
+							Home furnishings, Decor, Jewellery, Gifting Brands.
+						</div>
+					</div>
+				</div><!-- serv card Home decor & Fashion  end -->
+
+				<div class="f-serv-card">
+					<div class="f-serv-card__media">
+						<img src="assets/fleamarket/corporatesandrealestates.png" alt="" class="for-img">
+					</div>
+					<div class="f-serv-card__info">
+						<div class="f-sm-title">Corporates & Real estates</div>
+						<div class="f-sm-para">
+							Builders. Architects, Home and Office Interior Designers.
+						</div>
+					</div>
+				</div><!-- serv card Corporates & Real estates  end -->
+			</div><!-- f card block end -->
+		</div>
+	</section><!--  u can find sec end -->
+
+	<section class="f-shedule-sec">
+		<div class="f-block">
+			<h1 class="f-primary-title">Art Nirbhar Bazaar Schedule</h1>
+			<div class="fleshedule f-shedule-slider">
+				<div class="f-shedule-card">
+					<div class="f-shedule-card-media">
+						<img class="for-img" src="assets/fleamarket/shedule/christmastree.png" alt="">
+					</div>
+					<div class="f-shedule-info">
+						<div class="f-shedule-info__date">
+								22nd Dec, 2020
+						</div>
+						<div class="f-shedule-info__event">
+								Christmas Tree Workshop
+						</div>
+						<div class="f-shedule-info__dis">
+								Learn to make your own X-Mas Tree.
+						</div>
+						<div class="f-shedule-info__tag">
+							Workshop
+						</div>
+					</div>
+				</div><!-- shedule card 1 end -->
+
+				<div class="f-shedule-card">
+					<div class="f-shedule-card-media">
+						<img class="for-img" src="assets/fleamarket/shedule/jewelery.png" alt="">
+					</div>
+					<div class="f-shedule-info">
+						<div class="f-shedule-info__date">
+								24th Dec, 2020
+						</div>
+						<div class="f-shedule-info__event">
+								Special Feature- Jewellery
+						</div>
+						<div class="f-shedule-info__dis">
+								Jewelry retailers talk about their collection, the market, One Page Spotlight & more.
+						</div>
+						<div class="f-shedule-info__tag">
+								Seller Roundtable
+						</div>
+					</div>
+				</div><!-- shedule card 2 end -->
+
+				<div class="f-shedule-card">
+					<div class="f-shedule-card-media">
+						<img class="for-img" src="assets/fleamarket/shedule/opslogo.png" alt="">
+					</div>
+					<div class="f-shedule-info">
+						<div class="f-shedule-info__date">
+								29th Dec 2020, 5th and 12th Jan 2021
+						</div>
+						<div class="f-shedule-info__event">
+								Tips from the One Page Spotlight Team
+						</div>
+						<div class="f-shedule-info__dis">
+								One Page Spotlight team helps sellers to build your ideal store - #thebluestore
+						</div>
+						<div class="f-shedule-info__tag">
+								Tuesdays with One Page Spotlight
+						</div>
+					</div>
+				</div><!-- shedule card 3 end -->
+
+				<div class="f-shedule-card">
+					<div class="f-shedule-card-media">
+						<img class="for-img" src="assets/fleamarket/shedule/revamphome.png" alt="">
+					</div>
+					<div class="f-shedule-info">
+						<div class="f-shedule-info__date">
+								1st Jan, 2021
+						</div>
+						<div class="f-shedule-info__event">
+								Goodbye 2020 - Revamp your home
+						</div>
+						<div class="f-shedule-info__dis">
+								Architects, Buyers & Sellers of Home Decor products talk about your 2021 home design.
+						</div>
+						<div class="f-shedule-info__tag">
+								Seller Roundtable
+						</div>
+					</div>
+				</div><!-- shedule card 4 end -->
+
+				<div class="f-shedule-card">
+					<div class="f-shedule-card-media">
+						<img class="for-img" src="assets/fleamarket/shedule/livesketching.png" alt="">
+					</div>
+					<div class="f-shedule-info">
+						<div class="f-shedule-info__date">
+								3rd Jan 2021
+						</div>
+						<div class="f-shedule-info__event">
+								LIVE Sketching
+						</div>
+						<div class="f-shedule-info__dis">
+								Limca Book Of Records winner makes your Caricature online. This sure promises to be fun!
+						</div>
+						<div class="f-shedule-info__tag">
+								Event
+						</div>
+					</div>
+				</div><!-- shedule card 5 end -->
+
+				<div class="f-shedule-card">
+					<div class="f-shedule-card-media">
+						<img class="for-img" src="assets/fleamarket/shedule/heartlandartisans.png" alt="">
+					</div>
+					<div class="f-shedule-info">
+						<div class="f-shedule-info__date">
+								9th Jan, 2021
+						</div>
+						<div class="f-shedule-info__event">
+								Special Feature - Heartland artisans
+						</div>
+						<div class="f-shedule-info__dis">
+								One Page Spotlight features Artisans from the heartland across the day!
+						</div>
+						<div class="f-shedule-info__tag">
+								Seller Roundtable
+						</div>
+					</div>
+				</div><!-- shedule card 6 end -->
+
+				<div class="f-shedule-card">
+					<div class="f-shedule-card-media">
+						<img class="for-img" src="assets/fleamarket/shedule/opslogo.png" alt="">
+					</div>
+					<div class="f-shedule-info">
+						<div class="f-shedule-info__date">
+								8th Jan 2021
+						</div>
+						<div class="f-shedule-info__event">
+								One Page Spotlight Team Speaks
+						</div>
+						<div class="f-shedule-info__dis">
+								One Page Spotlight Co-Founder Dr. Shilpa Ramesh Ramani speaks about Art Nirbhar Bazaar!
+						</div>
+						<div class="f-shedule-info__tag">
+								Founder Interview
+						</div>
+					</div>
+				</div><!-- shedule card 7 end -->
+
+				<div class="f-shedule-card">
+					<div class="f-shedule-card-media">
+						<img class="for-img" src="assets/fleamarket/shedule/museumsartgallery.png" alt="">
+					</div>
+					<div class="f-shedule-info">
+						<div class="f-shedule-info__date">
+								13th Jan, 2021
+						</div>
+						<div class="f-shedule-info__event">
+								Special feature - Museums and Art Galleries
+						</div>
+						<div class="f-shedule-info__dis">
+								Art Galleries, cafes and Museums come on the same stage to pick your art.
+						</div>
+						<div class="f-shedule-info__tag">
+								Seller Roundtable
+						</div>
+					</div>
+				</div><!-- shedule card 8 end -->
+
+				<div class="f-shedule-card">
+					<div class="f-shedule-card-media">
+						<img class="for-img" src="assets/fleamarket/shedule/spokenpoetry.png" alt="">
+					</div>
+					<div class="f-shedule-info">
+						<div class="f-shedule-info__date">
+								15th Jan 2021
+						</div>
+						<div class="f-shedule-info__event">
+								Spoken Poetry Workshop
+						</div>
+						<div class="f-shedule-info__dis">
+								Learn what it takes to be a Spoken Word Artist renowned Poet Shloka!
+						</div>
+						<div class="f-shedule-info__tag">
+								Workshop
+						</div>
+					</div>
+				</div><!-- shedule card 9 end -->
+
+				<div class="f-shedule-card">
+					<div class="f-shedule-card-media">
+						<img class="for-img" src="assets/fleamarket/shedule/artauction.png" alt="">
+					</div>
+					<div class="f-shedule-info">
+						<div class="f-shedule-info__date">
+								17th Jan 2021
+						</div>
+						<div class="f-shedule-info__event">
+								Art Auction
+						</div>
+						<div class="f-shedule-info__dis">
+								Bid to the works of Master Artists in an exclusive One Page Spotlight community!
+						</div>
+						<div class="f-shedule-info__tag">
+								Event
+						</div>
+					</div>
+				</div><!-- shedule card 10 end -->
+
+			</div>
+		</div>
+	</section>
+
+	<section class="f-ops-sec">
+		<div class="event-ops-discrptn">
+			<div class="event-dis-ops-logo">
+				<img src="assets/saptarang/ops_black.svg" alt="">
+			</div>
+			<div class="event-dis-ops">
+					<b>One Page Spotlight</b> is envisioned to be a social and professional networking platform
+					for the creative community across the globe. We desire to be a part of every creators journey as enablers to
+					Entertain and Inspire the World. Providing an unique platform beyond borders and connecting everyone
+					from the creative and entertainment industry to create, connect and collaborate for better and bigger,
+					is our vision for everyone.
+			</div>
+			<a routerLink="/login" class="ops-link-btn ops-link-btn--bg">Register</a>
+		</div>
+	</section>
+
+	<section class="event-footer">
+		<div class="top-border"></div>
+		<div class="event-footer-contianer">
+			<div class="event-footer-copyright">Copyright © 2020. One Page Spotlight All Rights Reserved </div>
+			<div class="event-footer-social-icons">
+				<a href="https://www.facebook.com/onepagespotlight/" target="_blank" class="event-footer-social-icons__item"><img src="assets/saptarang/social_media/fb.svg" alt=""></a>
+				<a href="https://twitter.com/1pagespotlight" target="_blank" class="event-footer-social-icons__item"><img src="assets/saptarang/social_media/tw.svg" alt=""></a>
+				<a href="https://www.instagram.com/onepagespotlight" target="_blank" class="event-footer-social-icons__item"><img src="assets/saptarang/social_media/in.svg" alt=""></a>
+				<a href="https://www.youtube.com/c/onepagespotlight" target="_blank" class="event-footer-social-icons__item"><img src="assets/saptarang/social_media/yt.svg" alt=""></a>
+				<a href="https://www.linkedin.com/company/one-page-spotlight/" target="_blank" class="event-footer-social-icons__item"><img src="assets/saptarang/social_media/ln.svg" alt=""></a>
+			</div>
+		</div>
+	</section>
+
+</div>
+
+
+
+
+
+
+
+

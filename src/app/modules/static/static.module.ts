@@ -10,6 +10,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { TermUseComponent } from './term-use/term-use.component';
 import { EnrollmentTermsComponent } from './enrollment-terms/enrollment-terms.component';
 import { BluestoreTermsComponent } from './bluestore-terms/bluestore-terms.component';
+import { ArtNirbharTermsComponent } from './art-nirbhar-terms/art-nirbhar-terms.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'terms' },
@@ -25,6 +26,7 @@ export const routes: Routes = [
       { path: 'terms_blue', component:BluestoreTermsComponent},
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
       { path: 'terms', component: TermUseComponent },
+      { path: 'terms_art', component: ArtNirbharTermsComponent },
     ]
   }
 ];
@@ -38,7 +40,8 @@ export const routes: Routes = [
     PrivacyPolicyComponent,
     TermUseComponent,
     EnrollmentTermsComponent,
-    BluestoreTermsComponent
+    BluestoreTermsComponent,
+    ArtNirbharTermsComponent
   ],
   imports: [
     CommonModule,

@@ -58,7 +58,6 @@ export class Opspot {
     this.routerSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        console.log(event);
         if (event.url === '/' || event.url === '/login' || event.url.includes('/login')) {
           this.showTopbar = false;
           this.showTOSModal = false;
@@ -73,7 +72,6 @@ export class Opspot {
       if (is) {
         this.showOnboarding = await this.onboardingService.showModal();
         if (this.opspot.user.language !== this.opspot.language) {
-          console.log('[app]:: language change', this.opspot.user.language, this.opspot.language);
           window.location.reload(true);
         }
       }
