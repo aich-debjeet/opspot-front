@@ -15,8 +15,19 @@
             <div class="o-avatar__info">
               <div class="o-avatar-det-block" id="opportunity-owner-details">
                 <span class="text-lg grey o-posts-det"><a class="o-avatar__name" 
-                  [routerLink]="['/', opportunity?.ownerObj?.username]">{{opportunity?.ownerObj?.name}}</a>
-                  created an <a class="grey-dark f500" id="opportunity">#Opportunity</a></span>
+                  *ngIf="opportunity?.containerObj && opportunity?.containerObj?.type == 'organization'; else usersName"
+                  [routerLink]="['/organization/profile', opportunity?.containerObj?.guid, 'feed']" >
+                  {{opportunity?.containerObj?.name| truncate:[20, '...']}}
+                </a>
+                created an <a class="grey-dark f500" id="opportunity">#Opportunity</a>
+                </span>
+                <ng-template #usersName>
+									<a class="o-avatar__name"
+                  [routerLink]="['/', opportunity?.ownerObj?.username]">
+                  {{opportunity?.ownerObj?.name}}
+                </a>
+                </ng-template>
+                  <!-- created an <a class="grey-dark f500" id="opportunity">#Opportunity</a></span> -->
               </div>
               <a *ngIf="opportunity?.containerObj && opportunity?.containerObj.type == 'group'"
                 [routerLink]="['/groups/profile', opportunity?.containerObj.guid]" class="mdl-color-text--blue-grey-300">

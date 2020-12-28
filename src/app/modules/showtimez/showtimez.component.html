@@ -13,9 +13,18 @@
                 alt=""></a>
             <div class="o-avatar__info">
               <div class="o-avatar-det-block">
-                <span class="text-lg grey o-posts-det" *ngIf="showTimez?.ownerObj?.name" id="showtimez-details">
-                  <a class="o-avatar__name" [routerLink]="['/', showTimez?.ownerObj?.username]">{{showTimez?.ownerObj?.name}}</a>
-                  created a <a class="grey-dark f500" id="showtimez">#Showtimez</a></span>
+                <span class="text-lg grey o-posts-det" id="showtimez-details">
+                  <a class="o-avatar__name"  *ngIf="showTimez?.containerObj && showTimez?.containerObj?.type == 'organization'; else usersName"
+                  [routerLink]="['/organization/profile', showTimez?.containerObj?.guid, 'feed']" >
+                  {{showTimez?.containerObj?.name| truncate:[20, '...']}}
+                </a> created a <a class="grey-dark f500" id="showtimez">#Showtimez</a>
+                </span>
+                <ng-template #usersName>
+									<a class="o-avatar__name" *ngIf="showTimez?.ownerObj?.name"
+                   [routerLink]="['/', showTimez?.ownerObj?.username]">
+                   {{showTimez?.ownerObj?.name | truncate:[20, '...']}}
+                 </a>
+                  </ng-template>
               </div>
               <a *ngIf="showTimez?.containerObj && showTimez?.containerObj.type == 'group'"
               [routerLink]="['/groups/profile', showTimez?.containerObj.guid]" class="mdl-color-text--blue-grey-300">
